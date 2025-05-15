@@ -14,7 +14,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class WikibaseClientTest extends ExtensionServicesTestBase {
 
-	protected string $className = WikibaseClient::class;
+	protected static string $className = WikibaseClient::class;
 
 	protected string $serviceNamePrefix = 'WikibaseClient.';
 
