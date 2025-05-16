@@ -112,7 +112,7 @@ class RequestBuilder {
 
 		let body = null;
 		switch ( this.headers[ 'content-type' ] ) {
-			case 'multipart/form-data':
+			case 'application/x-www-form-urlencoded':
 				body = new URLSearchParams( this.jsonBodyParams ).toString();
 				break;
 			case 'application/json':
