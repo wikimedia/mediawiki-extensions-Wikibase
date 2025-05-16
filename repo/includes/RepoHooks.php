@@ -32,10 +32,12 @@ use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Skin\Skin;
+use MediaWiki\Skins\Hook\SkinPageReadyConfigHook;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\Title\Title;
 use RuntimeException;
@@ -94,6 +96,7 @@ final class RepoHooks implements
 	ResourceLoaderRegisterModulesHook,
 	RevisionFromEditCompleteHook,
 	SidebarBeforeOutputHook,
+	SkinPageReadyConfigHook,
 	SkinTemplateNavigation__UniversalHook,
 	TitleGetRestrictionTypesHook,
 	UnitTestsListHook,
@@ -145,7 +148,6 @@ final class RepoHooks implements
 			if ( $skinName === 'vector-2022' ) {
 				if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
 					$out->addModules( 'vue' );
-					$out->addModules( 'wikibase.vector.scopedTypeaheadSearch' );
 					$out->addModuleStyles( 'wikibase.vector.scopedTypeaheadSearchStyles' );
 				} else {
 					$out->addModules( 'wikibase.vector.searchClient' );
@@ -1136,4 +1138,21 @@ final class RepoHooks implements
 			$vectorSearchConfig['highlightQuery'] = false;
 		}
 	}
+
+	/** @inheritDoc */
+	public function onSkinPageReadyConfig( Context $context, array &$config ) {
+		$settings = WikibaseRepo::getSettings();
+		if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) &&
+			$context->getSkin() === 'vector-2022'
+		) {
+			$config['search'] = true;
+			$config['searchModule'] = 'wikibase.vector.scopedTypeaheadSearch';
+			// Stop other hooks using this
+			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+			return false;
+		}
+		// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+		return true;
+	}
+
 }
