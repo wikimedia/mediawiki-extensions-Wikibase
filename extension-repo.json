@@ -59,6 +59,7 @@
 				"StatsFactory",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EntityIdHtmlLinkFormatterFactory",
+				"WikibaseRepo.EntityIdLabelFormatterFactory",
 				"WikibaseRepo.EntityIdParser"
 			]
 		},

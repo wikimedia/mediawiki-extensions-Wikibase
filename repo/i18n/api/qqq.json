@@ -347,8 +347,10 @@
 	"apihelp-wbformatentities-summary": "{{doc-apihelp-summary|wbformatentities}}",
 	"apihelp-wbformatentities-extended-description": "{{doc-apihelp-extended-description|wbformatentities}}",
 	"apihelp-wbformatentities-param-ids": "{{doc-apihelp-param|wbformatentities|ids}}",
+	"apihelp-wbformatentities-param-generate": "{{doc-apihelp-param|wbformatentities|generate}}",
 	"apihelp-wbformatentities-example-1": "{{doc-apihelp-example|wbformatentities}}",
 	"apihelp-wbformatentities-example-2": "{{doc-apihelp-example|wbformatentities}}",
 	"apihelp-wbformatentities-example-3": "{{doc-apihelp-example|wbformatentities}}",
-	"apihelp-wbformatentities-example-4": "{{doc-apihelp-example|wbformatentities}}"
+	"apihelp-wbformatentities-example-4": "{{doc-apihelp-example|wbformatentities}}",
+	"apihelp-wbformatentities-example-5": "{{doc-apihelp-example|wbformatentities}}"
 }

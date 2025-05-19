@@ -4,13 +4,16 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Api;
 
+use LogicException;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\EntityIdFormatterFactory;
+use Wikimedia\Assert\Assert;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\RemexHtml\HTMLData;
 use Wikimedia\RemexHtml\Serializer\HtmlFormatter;
@@ -36,7 +39,12 @@ class FormatEntities extends ApiBase {
 	/**
 	 * @var EntityIdFormatterFactory
 	 */
-	private $entityIdFormatterFactory;
+	private $entityIdHtmlFormatterFactory;
+
+	/**
+	 * @var EntityIdFormatterFactory
+	 */
+	private $entityIdTextFormatterFactory;
 
 	/**
 	 * @var ResultBuilder
@@ -57,15 +65,29 @@ class FormatEntities extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		EntityIdParser $entityIdParser,
-		EntityIdFormatterFactory $entityIdFormatterFactory,
+		EntityIdFormatterFactory $entityIdHtmlFormatterFactory,
+		EntityIdFormatterFactory $entityIdTextFormatterFactory,
 		ResultBuilder $resultBuilder,
 		ApiErrorReporter $errorReporter,
 		StatsFactory $statsFactory
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
+		$htmlFormat = $entityIdHtmlFormatterFactory->getOutputFormat();
+		Assert::parameter(
+			$htmlFormat === SnakFormatter::FORMAT_HTML,
+			'$entityIdHtmlFormatterFactory',
+			'must format to ' . SnakFormatter::FORMAT_HTML . ', not ' . $htmlFormat
+		);
+		$textFormat = $entityIdTextFormatterFactory->getOutputFormat();
+		Assert::parameter(
+			$textFormat === SnakFormatter::FORMAT_PLAIN,
+			'$entityIdTextFormatterFactory',
+			'must format to ' . SnakFormatter::FORMAT_PLAIN . ', not ' . $textFormat
+		);
 
 		$this->entityIdParser = $entityIdParser;
-		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
+		$this->entityIdHtmlFormatterFactory = $entityIdHtmlFormatterFactory;
+		$this->entityIdTextFormatterFactory = $entityIdTextFormatterFactory;
 		$this->resultBuilder = $resultBuilder;
 		$this->errorReporter = $errorReporter;
 		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
@@ -76,14 +98,16 @@ class FormatEntities extends ApiBase {
 		string $moduleName,
 		StatsFactory $statsFactory,
 		ApiHelperFactory $apiHelperFactory,
-		EntityIdFormatterFactory $entityIdFormatterFactory,
+		EntityIdFormatterFactory $entityIdHtmlFormatterFactory,
+		EntityIdFormatterFactory $entityIdTextFormatterFactory,
 		EntityIdParser $entityIdParser
 	): self {
 		return new self(
 			$apiMain,
 			$moduleName,
 			$entityIdParser,
-			$entityIdFormatterFactory,
+			$entityIdHtmlFormatterFactory,
+			$entityIdTextFormatterFactory,
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$statsFactory
@@ -94,9 +118,17 @@ class FormatEntities extends ApiBase {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$language = $this->getMain()->getLanguage();
-		$entityIdFormatter = $this->entityIdFormatterFactory->getEntityIdFormatter( $language );
-
 		$params = $this->extractRequestParams();
+
+		if ( $params['generate'] === SnakFormatter::FORMAT_HTML ) {
+			$entityIdFormatterFactory = $this->entityIdHtmlFormatterFactory;
+		} elseif ( $params['generate'] === SnakFormatter::FORMAT_PLAIN ) {
+			$entityIdFormatterFactory = $this->entityIdTextFormatterFactory;
+		} else {
+			throw new LogicException( 'Unexpected "generate" parameter value: ' . $params['generate'] );
+		}
+		$entityIdFormatter = $entityIdFormatterFactory->getEntityIdFormatter( $language );
+
 		$entityIds = $this->getEntityIdsFromIdParam( $params );
 
 		$metric = $this->statsFactory->getCounter( 'formatentities_entities_total' );
@@ -188,6 +220,14 @@ class FormatEntities extends ApiBase {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_ISMULTI => true,
 			],
+			'generate' => [
+				ParamValidator::PARAM_TYPE => [
+					SnakFormatter::FORMAT_PLAIN,
+					SnakFormatter::FORMAT_HTML,
+				],
+				ParamValidator::PARAM_DEFAULT => SnakFormatter::FORMAT_HTML,
+				ParamValidator::PARAM_REQUIRED => false,
+			],
 		];
 	}
 
@@ -209,6 +249,8 @@ class FormatEntities extends ApiBase {
 		$exampleMessages = array_merge( $exampleMessages, [
 			'action=wbformatentities&ids=Q2|Q3|Q4&uselang=fr'
 				=> 'apihelp-wbformatentities-example-4',
+			'action=wbformatentities&ids=Q2|Q3|Q4|P2&generate=text/plain'
+				=> 'apihelp-wbformatentities-example-5',
 		] );
 
 		return $exampleMessages;
