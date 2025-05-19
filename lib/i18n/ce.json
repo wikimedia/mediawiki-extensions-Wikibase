@@ -20,6 +20,7 @@
 	"wikibase-error-ui-no-external-page": "\"$1\" сайт тӀехь \"$2\" агӀо ца карийра.",
 	"wikibase-error-ui-edit-conflict": "Хийцамийн конфликт хилла. Дехар до, айхьа бина хийцамаш локалехь Ӏалашбе, агӀо карлайаьккхина, йуха Ӏалашйе.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (транслитераци)",
+	"wikibase-language-name-for-terms-mul": "массо а меттанашна лерина стандарт",
 	"wikibase-quantitydetails-amount": "ЖамӀан маьӀна",
 	"wikibase-quantitydetails-upperbound": "Лакхара доза",
 	"wikibase-quantitydetails-lowerbound": "Лахара доза",
