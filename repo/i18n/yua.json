@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"ProtoplasmaKid"
+			"ProtoplasmaKid",
+			"Juanchuy0"
 		]
 	},
-	"wikibase-edit": "útskina"
+	"wikibase-edit": "útskina",
+	"wikibase-add": "Ts'áaj",
+	"wikibase-sitelinks-special": "Uláak' kúuchilo'ob"
 }
