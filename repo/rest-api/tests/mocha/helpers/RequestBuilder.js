@@ -111,7 +111,8 @@ class RequestBuilder {
 		}
 
 		let body = null;
-		switch ( this.headers[ 'content-type' ] ) {
+		const contentType = this.headers[ 'content-type' ];
+		switch ( contentType ) {
 			case 'application/x-www-form-urlencoded':
 				body = new URLSearchParams( this.jsonBodyParams ).toString();
 				break;
@@ -119,6 +120,10 @@ class RequestBuilder {
 			case 'application/json-patch+json':
 				body = this.jsonBodyParams;
 				break;
+			case undefined:
+				break;
+			default:
+				throw new Error( `${this.constructor.name} doesn't support Content-Type '${contentType}'` );
 		}
 
 		for ( const setting in this.configOverrides ) {
