@@ -283,6 +283,7 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory",
 			"services": [
 				"JobQueueGroupFactory",
+				"TitleFactory",
 				"WikibaseClient.ClientDomainDbFactory",
 				"WikibaseClient.ItemAndPropertySource",
 				"WikibaseClient.NamespaceChecker",
@@ -303,10 +304,6 @@
 	"Hooks": {
 		"AbortEmailNotification": "Trivial",
 		"ArticleDeleteAfterSuccess": "DeletePageNoticeCreator",
-		"ArticleDeleteComplete": [
-			"UpdateRepo",
-			"DataUpdate"
-		],
 		"BeforeCreateEchoEvent": [
 			"EchoSetup"
 		],
@@ -340,6 +337,10 @@
 		"MaintenanceShellStart": "Trivial",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
 		"OutputPageParserOutput": [ "Sidebar", "LinkedDataSchemaGenerator" ],
+		"PageDeleteComplete": [
+			"UpdateRepo",
+			"DataUpdate"
+		],
 		"ParserCacheSaveComplete": "DataUpdate",
 		"ParserClearState": "Parser",
 		"ParserFirstCallInit": "ParserFunctionRegistrant",

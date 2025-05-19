@@ -4,18 +4,17 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\Content\Content;
 use MediaWiki\Hook\PageMoveCompleteHook;
 use MediaWiki\JobQueue\Exceptions\JobQueueError;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Logging\ManualLogEntry;
-use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
-use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\Hook\PageDeleteCompleteHook;
+use MediaWiki\Page\ProperPageIdentity;
+use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Title\Title;
-use MediaWiki\User\User;
+use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\NamespaceChecker;
@@ -37,12 +36,13 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteCompleteHook {
+class UpdateRepoHookHandler implements PageMoveCompleteHook, PageDeleteCompleteHook {
 
 	private NamespaceChecker $namespaceChecker;
 	private JobQueueGroupFactory $jobQueueGroupFactory;
 	private DatabaseEntitySource $entitySource;
 	private SiteLinkLookup $siteLinkLookup;
+	private TitleFactory $titleFactory;
 	private LoggerInterface $logger;
 	private ClientDomainDb $clientDb;
 	private string $siteGlobalID;
@@ -50,6 +50,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 
 	public static function factory(
 		JobQueueGroupFactory $jobQueueGroupFactory,
+		TitleFactory $titleFactory,
 		ClientDomainDbFactory $clientDomainDbFactory,
 		DatabaseEntitySource $entitySource,
 		NamespaceChecker $namespaceChecker,
@@ -59,6 +60,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		return new self(
 			$namespaceChecker,
 			$jobQueueGroupFactory,
+			$titleFactory,
 			$entitySource,
 			$store->getSiteLinkLookup(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
@@ -71,6 +73,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		JobQueueGroupFactory $jobQueueGroupFactory,
+		TitleFactory $titleFactory,
 		DatabaseEntitySource $entitySource,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
@@ -82,6 +85,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->entitySource = $entitySource;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->titleFactory = $titleFactory;
 		$this->logger = $logger;
 		$this->clientDb = $clientDb;
 
@@ -106,14 +110,14 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->clientDb,
 			$user,
 			$this->siteGlobalID,
-			Title::newFromLinkTarget( $title )
+			$this->titleFactory->newFromLinkTarget( $title )
 		);
 	}
 
 	private function makeMove(
 		UserIdentity $user,
 		LinkTarget $old,
-		Linktarget $new
+		LinkTarget $new
 	): UpdateRepoOnMove {
 		return new UpdateRepoOnMove(
 			$this->siteLinkLookup,
@@ -121,8 +125,8 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->clientDb,
 			$user,
 			$this->siteGlobalID,
-			Title::newFromLinkTarget( $old ),
-			Title::newFromLinkTarget( $new )
+			$this->titleFactory->newFromLinkTarget( $old ),
+			$this->titleFactory->newFromLinkTarget( $new )
 		);
 	}
 
@@ -165,33 +169,35 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	 * After a page has been deleted also update the item on the repo.
 	 * This only works if there's a user account with the same name on the repo.
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageDeleteComplete
 	 *
-	 * @param WikiPage $wikiPage WikiPage that was deleted
-	 * @param User $user User that deleted the article
-	 * @param string $reason Reason the article was deleted
-	 * @param int $id ID of the article that was deleted
-	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
+	 * @param ProperPageIdentity $page Page that was deleted.
+	 *    This object represents state before deletion (e.g. $page->exists() will return true).
+	 * @param Authority $deleter Who deleted the page
+	 * @param string $reason Reason the page was deleted
+	 * @param int $pageID ID of the page that was deleted
+	 * @param RevisionRecord $deletedRev Last revision of the deleted page
 	 * @param ManualLogEntry $logEntry ManualLogEntry used to record the deletion
 	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
-	 * @return bool|void True or no return value to continue or false to abort
+	 * @return true|void
 	 */
-	public function onArticleDeleteComplete(
-		$wikiPage,
-		$user,
-		$reason,
-		$id,
-		$content,
-		$logEntry,
-		$archivedRevisionCount
+	public function onPageDeleteComplete(
+		ProperPageIdentity $page,
+		Authority $deleter,
+		string $reason,
+		int $pageID,
+		RevisionRecord $deletedRev,
+		ManualLogEntry $logEntry,
+		int $archivedRevisionCount
 	) {
 		if ( !$this->propagateChangesToRepo ) {
 			return true;
 		}
+		$title = $this->titleFactory->newFromPageIdentity( $page );
 
-		$updateRepo = $this->makeDelete( $user, $wikiPage->getTitle() );
+		$updateRepo = $this->makeDelete( $deleter->getUser(), $title );
 
-		$this->applyUpdateRepo( $updateRepo, $wikiPage->getTitle() );
+		$this->applyUpdateRepo( $updateRepo, $title );
 
 		return true;
 	}

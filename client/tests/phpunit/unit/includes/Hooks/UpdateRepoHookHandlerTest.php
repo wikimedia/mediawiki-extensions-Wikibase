@@ -8,9 +8,11 @@ use MediaWiki\JobQueue\IJobSpecification;
 use MediaWiki\JobQueue\JobQueue;
 use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
-use MediaWiki\Page\WikiPage;
+use MediaWiki\Logging\ManualLogEntry;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -63,17 +65,19 @@ class UpdateRepoHookHandlerTest extends TestCase {
 			true,
 			$expectsSuccess ? 'UpdateRepoOnDelete' : null,
 			$propagateChangesToRepo,
-			$itemId
+			$itemId,
 		);
-		$title = $this->getTitle();
-
-		$wikiPage = $this->createMock( WikiPage::class );
-		$wikiPage->method( 'getTitle' )
-			->willReturn( $title );
 
 		$this->assertTrue(
-			$handler->onArticleDeleteComplete( $wikiPage, $this->createMock( User::class ),
-				null, null, null, null, null )
+			$handler->onPageDeleteComplete(
+				new PageIdentityValue( 1, 0, "something", false ),
+				$this->createMock( User::class ),
+				"some reason",
+				0,
+				$this->createMock( RevisionRecord::class ),
+				$this->createMock( ManualLogEntry::class ),
+				1
+			)
 		);
 	}
 
@@ -221,9 +225,15 @@ class UpdateRepoHookHandlerTest extends TestCase {
 		$clientDb->method( 'replication' )
 			->willReturn( $replicationWaiter );
 
+		$titleFactory = $this->createConfiguredMock( TitleFactory::class, [
+			'newFromPageIdentity' => $this->getTitle(),
+			'newFromLinkTarget' => $this->getTitle(),
+		] );
+
 		return new UpdateRepoHookHandler(
 			$namespaceChecker,
 			$jobQueueGroupFactory,
+			$titleFactory,
 			$entitySource,
 			$siteLinkLookup,
 			new NullLogger(),
