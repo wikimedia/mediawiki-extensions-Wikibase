@@ -1165,6 +1165,13 @@
 				"WikibaseRepo.EntityIdLookup"
 			]
 		},
+		"GetBetaFeaturePreferences": {
+			"class": "\\Wikibase\\Repo\\Hooks\\GetBetaFeaturePreferencesHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\GetBetaFeaturePreferencesHookHandler::factory",
+			"services": [
+				"WikibaseRepo.Settings"
+			]
+		},
 		"HtmlPageLinkRendererEnd": {
 			"class": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler::factory",
@@ -1286,6 +1293,7 @@
 		"DifferenceEngineViewHeader": "DifferenceEngineViewHeaderHookHandler",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "RepoHooks",
+		"GetBetaFeaturePreferences": "GetBetaFeaturePreferences",
 		"GetPreferences": "RepoHooks",
 		"HtmlPageLinkRendererEnd": "HtmlPageLinkRendererEnd",
 		"ImportHandleRevisionXMLTag": "RepoHooks",

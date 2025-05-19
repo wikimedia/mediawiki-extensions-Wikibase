@@ -464,4 +464,13 @@ return [
 	 * @see https://phabricator.wikimedia.org/T338483
 	 */
 	'tmpEnableScopedTypeaheadSearch' => false,
+
+	/**
+	 * @note This config option is primarily added for the Wikidata transition use-case
+	 * and must be considered temporary. It will be removed in the future with no warning.
+	 *
+	 * @var bool Whether to expose the new mobile editing experience as beta feature.
+	 * @see https://phabricator.wikimedia.org/T394292
+	 */
+	'tmpEnableMobileEditingUIBetaFeature' => false,
 ];
