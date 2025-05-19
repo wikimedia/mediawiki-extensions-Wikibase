@@ -6,8 +6,10 @@ namespace Wikibase\Repo\Tests\Hooks;
 use MediaWiki\JobQueue\IJobSpecification;
 use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\Logging\ManualLogEntry;
-use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\PageIdentityValue;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -61,21 +63,22 @@ class DeleteDispatcherTest extends TestCase {
 	) {
 		$entityIdLookup = $entityIdLookupFactory( $this );
 
-		$wikiPage = $this->createMock( WikiPage::class );
-		$wikiPage->method( 'getTitle' )
-			->willReturn( $title );
+		$titleFactory = $this->createConfiguredMock( TitleFactory::class, [
+			'newFromPageIdentity' => $title,
+		] );
 
 		$deleteDispatcher = new DeleteDispatcher(
 			$this->newJobQueueGroupNeverCalled(),
+			$titleFactory,
 			$entityIdLookup,
 			$clients
 		);
-		$status = $deleteDispatcher->onArticleDeleteComplete(
-			$wikiPage,
+		$status = $deleteDispatcher->onPageDeleteComplete(
+			new PageIdentityValue( 1, 0, "nothing", false ),
 			$this->createMock( User::class ),
 			"reason",
 			1,
-			null,
+			$this->createMock( RevisionRecord::class ),
 			$this->createMock( ManualLogEntry::class ),
 			$archivedRecordsCount
 		);
@@ -98,22 +101,26 @@ class DeleteDispatcherTest extends TestCase {
 			->with( $title )
 			->willReturn( $entityId );
 
-		$deleteDispatcher = new DeleteDispatcher( $jobQueueGroup, $entityIdLookup, self::LOCAL_CLIENT_DATABASES );
+		$titleFactory = $this->createConfiguredMock( TitleFactory::class, [
+			'newFromPageIdentity' => $title,
+		] );
 
-		$wikiPage = $this->createMock( WikiPage::class );
-
-		$wikiPage->method( 'getTitle' )
-			->willReturn( $title );
+		$deleteDispatcher = new DeleteDispatcher(
+			$jobQueueGroup,
+			$titleFactory,
+			$entityIdLookup,
+			self::LOCAL_CLIENT_DATABASES
+		);
 
 		$user = $this->createMock( User::class );
 		$logEntry = $this->createMock( ManualLogEntry::class );
 
-		$deleteDispatcher->onArticleDeleteComplete(
-			$wikiPage,
+		$deleteDispatcher->onPageDeleteComplete(
+			new PageIdentityValue( 1, 0, "nothing", false ),
 			$user,
 			"reason",
 			$id,
-			null,
+			$this->createMock( RevisionRecord::class ),
 			$logEntry,
 			$archivedRevisionCount
 		);

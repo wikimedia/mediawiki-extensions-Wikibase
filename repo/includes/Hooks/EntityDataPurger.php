@@ -5,22 +5,23 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Cache\HTMLCacheUpdater;
-use MediaWiki\Content\Content;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\Logging\ManualLogEntry;
-use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
-use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\Hook\PageDeleteCompleteHook;
+use MediaWiki\Page\ProperPageIdentity;
+use MediaWiki\Permissions\Authority;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
+use MediaWiki\Title\TitleFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDeleteCompleteHook {
+class EntityDataPurger implements ArticleRevisionVisibilitySetHook, PageDeleteCompleteHook {
 
 	/** @var EntityIdLookup */
 	private $entityIdLookup;
@@ -34,21 +35,27 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
 
+	/** @var TitleFactory */
+	private $titleFactory;
+
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
 		EntityDataUriManager $entityDataUriManager,
 		HTMLCacheUpdater $htmlCacheUpdater,
-		JobQueueGroup $jobQueueGroup
+		JobQueueGroup $jobQueueGroup,
+		TitleFactory $titleFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityDataUriManager = $entityDataUriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
 		$this->jobQueueGroup = $jobQueueGroup;
+		$this->titleFactory = $titleFactory;
 	}
 
 	public static function factory(
 		HTMLCacheUpdater $htmlCacheUpdater,
 		JobQueueGroup $jobQueueGroup,
+		TitleFactory $titleFactory,
 		EntityDataUriManager $entityDataUriManager,
 		EntityIdLookup $entityIdLookup
 	): self {
@@ -56,7 +63,8 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$jobQueueGroup
+			$jobQueueGroup,
+			$titleFactory
 		);
 	}
 
@@ -84,26 +92,17 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 		}
 	}
 
-	/**
-	 * @param WikiPage $wikiPage
-	 * @param User $user
-	 * @param string $reason
-	 * @param int $id
-	 * @param Content|null $content
-	 * @param ManualLogEntry $logEntry
-	 * @param int $archivedRevisionCount
-	 * @return bool|void
-	 */
-	public function onArticleDeleteComplete(
-		$wikiPage,
-		$user,
-		$reason,
-		$id,
-		$content,
-		$logEntry,
-		$archivedRevisionCount
+	/** @inheritDoc */
+	public function onPageDeleteComplete(
+		ProperPageIdentity $page,
+		Authority $deleter,
+		string $reason,
+		int $pageID,
+		RevisionRecord $deletedRev,
+		ManualLogEntry $logEntry,
+		int $archivedRevisionCount
 	) {
-		$title = $wikiPage->getTitle();
+		$title = $this->titleFactory->newFromPageIdentity( $page );
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
 		if ( !$entityId ) {
 			return;
@@ -112,7 +111,7 @@ class EntityDataPurger implements ArticleRevisionVisibilitySetHook, ArticleDelet
 		$this->jobQueueGroup->lazyPush( new JobSpecification( 'PurgeEntityData', [
 			'namespace' => $title->getNamespace(),
 			'title' => $title->getDBkey(),
-			'pageId' => $id,
+			'pageId' => $pageID,
 			'entityId' => $entityId->getSerialization(),
 		] ) );
 	}
