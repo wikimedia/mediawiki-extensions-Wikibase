@@ -6,7 +6,11 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\Logging\ManualLogEntry;
+use MediaWiki\Page\ProperPageIdentity;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Permissions\Authority;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
@@ -364,7 +368,15 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandler( $title, null, true, false );
-		$handler->onArticleDeleteComplete( null, null, null, $title->getArticleID(), null, null, null );
+		$handler->onPageDeleteComplete(
+			$this->createMock( ProperPageIdentity::class ),
+			$this->createMock( Authority::class ),
+			"no reason",
+			$title->getArticleID(),
+			$this->createMock( RevisionRecord::class ),
+			$this->createMock( ManualLogEntry::class ),
+			0
+		);
 	}
 
 }

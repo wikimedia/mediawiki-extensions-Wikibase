@@ -5,21 +5,21 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Hooks;
 
 use InvalidArgumentException;
-use MediaWiki\Content\Content;
 use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Deferred\LinksUpdate\LinksUpdate;
 use MediaWiki\Hook\LinksUpdateCompleteHook;
 use MediaWiki\Hook\ParserCacheSaveCompleteHook;
 use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\Logging\ManualLogEntry;
-use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
-use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\Hook\PageDeleteCompleteHook;
+use MediaWiki\Page\ProperPageIdentity;
 use MediaWiki\Parser\ParserCache;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Permissions\Authority;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
-use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
@@ -44,7 +44,7 @@ use Wikibase\Client\Usage\UsageLookup;
  */
 class DataUpdateHookHandler implements
 	LinksUpdateCompleteHook,
-	ArticleDeleteCompleteHook,
+	PageDeleteCompleteHook,
 	ParserCacheSaveCompleteHook
 {
 
@@ -100,23 +100,18 @@ class DataUpdateHookHandler implements
 		$this->logger = $logger ?: new NullLogger();
 	}
 
-	/**
-	 * Static handler for ArticleDeleteComplete
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
-	 *
-	 * @param WikiPage $wikiPage WikiPage that was deleted
-	 * @param User $user User that deleted the article
-	 * @param string $reason Reason the article was deleted
-	 * @param int $id ID of the article that was deleted
-	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
-	 * @param ManualLogEntry $logEntry ManualLogEntry used to record the deletion
-	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
-	 */
-	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id,
-		$content, $logEntry, $archivedRevisionCount
-	): void {
-		DeferredUpdates::addCallableUpdate( function () use ( $id ) {
-			$this->usageUpdater->pruneUsagesForPage( $id );
+	/** @inheritDoc */
+	public function onPageDeleteComplete(
+		ProperPageIdentity $page,
+		Authority $deleter,
+		string $reason,
+		int $pageID,
+		RevisionRecord $deletedRev,
+		ManualLogEntry $logEntry,
+		int $archivedRevisionCount
+	) {
+		DeferredUpdates::addCallableUpdate( function () use ( $pageID ) {
+			$this->usageUpdater->pruneUsagesForPage( $pageID );
 		} );
 	}
 
@@ -226,5 +221,4 @@ class DataUpdateHookHandler implements
 
 		return $reindexed;
 	}
-
 }
