@@ -4,7 +4,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\JobQueue\JobQueueGroup;
-use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Logging\ManualLogEntry;
+use MediaWiki\Page\Hook\PageDeleteCompleteHook;
+use MediaWiki\Page\ProperPageIdentity;
+use MediaWiki\Permissions\Authority;
+use MediaWiki\Revision\RevisionRecord;
+use TitleFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
@@ -15,7 +20,7 @@ use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
  *
  * @license GPL-2.0-or-later
  */
-class DeleteDispatcher implements ArticleDeleteCompleteHook {
+class DeleteDispatcher implements PageDeleteCompleteHook {
 
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
@@ -26,42 +31,56 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	/** @var array */
 	private $localClientDatabases;
 
+	/** @var TitleFactory */
+	private $titleFactory;
+
 	/**
 	 * @param JobQueueGroup $jobQueueGroup
+	 * @param TitleFactory $titleFactory
 	 * @param EntityIdLookup $entityIdLookup
 	 * @param array $localClientDatabases
 	 */
 	public function __construct(
 		JobQueueGroup $jobQueueGroup,
+		TitleFactory $titleFactory,
 		EntityIdLookup $entityIdLookup,
 		array $localClientDatabases
 	) {
 		$this->jobQueueGroup = $jobQueueGroup;
+		$this->titleFactory = $titleFactory;
 		$this->entityIdLookup = $entityIdLookup;
 		$this->localClientDatabases = $localClientDatabases;
 	}
 
 	public static function factory(
 		JobQueueGroup $jobQueueGroup,
+		TitleFactory $titleFactory,
 		EntityIdLookup $entityIdLookup,
 		SettingsArray $repoSettings
 	): self {
 		return new self(
 			$jobQueueGroup,
+			$titleFactory,
 			$entityIdLookup,
 			$repoSettings->getSetting( 'localClientDatabases' )
 		);
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id, $content, $logEntry, $archivedRevisionCount ) {
+	/** @inheritDoc */
+	public function onPageDeleteComplete(
+		ProperPageIdentity $page,
+		Authority $deleter,
+		string $reason,
+		int $pageID,
+		RevisionRecord $deletedRev,
+		ManualLogEntry $logEntry,
+		int $archivedRevisionCount
+	) {
 		if ( $archivedRevisionCount === 0 || !$this->localClientDatabases ) {
 			return true;
 		}
 
-		$title = $wikiPage->getTitle();
+		$title = $this->titleFactory->newFromPageIdentity( $page );
 
 		// Abort if not entityId
 		$entityId = $this->entityIdLookup->getEntityIdForTitle( $title );
@@ -70,12 +89,11 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		}
 
 		$jobParams = [
-			"pageId" => $id,
+			"pageId" => $pageID,
 			"archivedRevisionCount" => $archivedRevisionCount,
 		];
 		$job = new DispatchChangeDeletionNotificationJob( $title, $jobParams );
 
 		$this->jobQueueGroup->push( $job );
 	}
-
 }

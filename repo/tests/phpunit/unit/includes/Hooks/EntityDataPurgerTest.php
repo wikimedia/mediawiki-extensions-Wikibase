@@ -7,8 +7,13 @@ namespace Wikibase\Repo\Tests\Unit\Hooks;
 use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\JobQueue\IJobSpecification;
 use MediaWiki\JobQueue\JobQueueGroup;
+use MediaWiki\Logging\ManualLogEntry;
+use MediaWiki\Page\PageIdentityValue;
 use MediaWiki\Page\WikiPage;
+use MediaWiki\Permissions\Authority;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\Title\TitleFactory;
 use MediaWikiUnitTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -48,7 +53,8 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupNoop()
+			$this->mockJobQueueGroupNoop(),
+			$this->createMock( TitleFactory::class )
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
@@ -75,7 +81,8 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupNoop()
+			$this->mockJobQueueGroupNoop(),
+			$this->createMock( TitleFactory::class )
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1 ], [] );
@@ -109,7 +116,8 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$this->mockJobQueueGroupNoop()
+			$this->mockJobQueueGroupNoop(),
+			$this->createMock( TitleFactory::class )
 		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
@@ -117,6 +125,9 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 
 	public function testDeletionHandlerPushesJob() {
 		$title = Title::makeTitle( 0, 'Q123' );
+		$titleFactory = $this->createConfiguredMock( TitleFactory::class, [
+			 'newFromPageIdentity' => $title,
+		] );
 		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getTitle' )
 			->willReturn( $title );
@@ -144,16 +155,20 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 			$entityIdLookup,
 			$entityDataUriManager,
 			$htmlCacheUpdater,
-			$jobQueueGroup
+			$jobQueueGroup,
+			$titleFactory
 		);
 
-		$purger->onArticleDeleteComplete(
-			$wikiPage,
+		$purger->onPageDeleteComplete(
+			new PageIdentityValue( 1, 0, "nothing", false ),
 			// unused
-			null, null,
+			$this->createMock( Authority::class ),
+			"no reason",
 			123,
 			// unused
-			null, null, null
+			$this->createMock( RevisionRecord::class ),
+			$this->createMock( ManualLogEntry::class ),
+			1
 		);
 
 		$this->assertSame( 'PurgeEntityData', $actualJob->getType() );
