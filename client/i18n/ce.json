@@ -97,7 +97,7 @@
 	"wikibase-sitelinks-link-columnheading": "Йихкина агӀо",
 	"echo-category-title-wikibase-action": "{{grammar:genitive|{{WBREPONAME}}}} {{PLURAL:$1|тӀетасадалар}}",
 	"echo-pref-tooltip-wikibase-action": "Соьга хаам бе, цхьаммо {{GENDER:|аса кхоьллина}} агӀо {{grammar:genitive|{{WBREPONAME}}}} чуьра элементан тӀетесча.",
-	"notification-header-page-connection": "АгӀо <strong>$3</strong> {{GENDER:$2|тӀетесна}} {{PLURAL:$4|-1=a {{WBREPONAME}} |{{WBREPONAME}} $4}}, темица йогӀуш йолучунца.",
+	"notification-header-page-connection": "<strong>$3</strong> агӀо {{GENDER:$2|тӀетоьхна}} {{PLURAL:$4|-1=элементана {{grammar:genitive|{{WBREPONAME}}}}|элементана {{grammar:genitive|{{WBREPONAME}}}} $4}}, цу чохь бу цуьнан темаца боьзна хаамаш.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>, {{PLURAL:$4|кхин тӀе цхьа агӀо|$4 кхин тӀе агӀо|100=99+ кхин тӀе агӀо}} {{GENDER:$2|тӀетесна}} {{WBREPONAME}} элементаш тӀе, цигахь хила мега дийцарца богӀуш болу хаамаш.",
 	"notification-link-text-view-item": "{{GENDER:$1|Хьажа}} элемент",
 	"notification-subject-page-connection": "Ахьа «{{SITENAME}}» сайтан тӀехь {{GENDER:$3|кхоьллина агӀо}} {{GENDER:$2|тӀетесна}} {{WBREPONAME}} чуьра элементан",
@@ -115,6 +115,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ЧугӀо йа аккаунт кхолла",
 	"wikibase-client-data-bridge-license-heading": "Лелор а, лицензи а",
 	"wikibase-client-data-bridge-license-body": "<p>И маьӀна хийцаро иза хийцалур ду {{WBREPONAME}} чохь а, мега кхечу меттанийн викишкахь а хийцадала.</p>\n<p>\"{{int:$1}}\" тӀетаӀорца, хьо реза хуьйла [$2 лелоран билламашна], бехкам боцуш хьан къинхьегам арахеца реза хуьйла хьо [$3 $4] бух тӀехь.</p>",
+	"wikibase-client-data-bridge-bailout-heading": "Цуьнан метта ахь дан мегар ду хӀара:",
 	"wikibase-client-data-bridge-saving-error-heading": "Хийцамаш Ӏалашбан цало",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Тодаран девнаш карийна",
 	"wikibase-client-data-bridge-unknown-error-heading": "Цхьа хӀума нийса дац",
@@ -127,5 +128,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Ахьа авторизаци йина йац",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Системи чу а ца волуш зорба тоха",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Системи чу а ца волуш дӀаӀалашйан",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "ЧугӀо (керлачу вкладкехь схьайоьллу)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Кхин дӀа тайе"
 }

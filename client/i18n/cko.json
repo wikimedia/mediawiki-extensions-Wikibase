@@ -2,9 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Salifu Ramatu",
-			"Hasslaebetch"
+			"Hasslaebetch",
+			"Avenger",
+			"Biema",
+			"Nachim"
 		]
 	},
+	"wikibase-dataitem": "Deke",
+	"wikibase-editlinks": "Niɛniɛnu awɔrɛ",
+	"wikibase-addlinkstitle": "Fa aniɛ wura abeŋgu nu saasu",
+	"wikibase-linkitem-addlinks": "Buka saasum",
+	"wikibase-linkitem-title": "Saasu ni bue fɔfɔrɛ",
+	"wikibase-linkitem-linkpage": "Saasu ni bue",
+	"wikibase-linkitem-selectlink": "Jande yi awɔrɛ ni bue bo akoro ka a fa sa ahin bue n su",
 	"wikibase-linkitem-input-site": "Danfiɛ:",
 	"wikibase-linkitem-input-page": "Bue:",
 	"wikibase-rc-hide-wikidata-hide": "Fiɛ",
