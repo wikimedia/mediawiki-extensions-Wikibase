@@ -63,7 +63,7 @@ class WikibaseStatsTest extends WikibaseLibraryTestCase {
 
 	protected function assertPostConditions(): void {
 		// testLua runs the lua code in self::$moduleName
-		if ( strpos( $this->getName(), 'testLua' ) === false ) {
+		if ( $this->luaTestName === null ) {
 			parent::assertPostConditions();
 			return;
 		}

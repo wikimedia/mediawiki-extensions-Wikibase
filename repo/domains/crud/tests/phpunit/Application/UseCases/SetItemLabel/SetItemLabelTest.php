@@ -53,7 +53,7 @@ class SetItemLabelTest extends TestCase {
 		$newLabelText = 'New label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = "{$this->getName()} Comment";
+		$comment = 'testAddLabel Comment';
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->build() );
@@ -84,7 +84,7 @@ class SetItemLabelTest extends TestCase {
 		$updatedLabelText = 'Replaced label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = "{$this->getName()} Comment";
+		$comment = 'testReplaceLabel Comment';
 
 		$itemRepo = new InMemoryItemRepository();
 		$itemRepo->addItem( NewItem::withId( $itemId )->andLabel( $langCode, 'Label to replace' )->build() );
