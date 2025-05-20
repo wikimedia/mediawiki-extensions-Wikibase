@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCases\PatchSitelinks;
 
 use Generator;
-use Monolog\Test\TestCase;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;

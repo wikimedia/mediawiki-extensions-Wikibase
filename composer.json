@@ -30,7 +30,6 @@
 		"data-values/number": "^0.12.3 || ^0.13.0",
 		"data-values/time": "^1.1.2",
 		"data-values/serialization": "^1.2.5",
-		"monolog/monolog": "^2.0.0",
 		"diff/diff": "^3.2.0",
 		"wikimedia/at-ease": "^2.0.0 || ^3.0.0",
 		"wikimedia/purtle": "^2.0.0",
