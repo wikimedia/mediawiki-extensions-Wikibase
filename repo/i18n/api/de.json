@@ -224,10 +224,10 @@
 	"apihelp-wbsetsitelink-param-bot": "Markiert diese Bearbeitung als Bot. Diese URL-Markierung wird nur berücksichtigt, wenn der Benutzer der Gruppe „Bot“ angehört.",
 	"apihelp-wbsetsitelink-param-linksite": "Der Identifikator der Website, auf der sich die zu verlinkende Seite befindet.",
 	"apihelp-wbsetsitelink-example-4": "Entfernt den deutschen Websitelink von dem Objekt",
-	"apihelp-wbformatentities-summary": "Formatiert Objektkennungen nach HTML.",
+	"apihelp-wbformatentities-summary": "Formatiert Objektkennungen nach HTML oder einfachen Text.",
 	"apihelp-wbformatentities-extended-description": "Die Sprache kann mit dem globalen Parameter <var>uselang</var> angegeben werden.",
 	"apihelp-wbformatentities-param-ids": "Die zu formatierenden Objektkennungen.",
-	"apihelp-wbformatentities-example-1": "Formatiert eine einzelne Objektkennung.",
+	"apihelp-wbformatentities-example-1": "Formatiert eine einzelne Objektkennung in HTML",
 	"apihelp-wbformatentities-example-2": "Formatiert eine Objekt- und Eigenschaftskennung.",
 	"apihelp-wbformatentities-example-3": "Formatiert eine Objekt-, Eigenschafts- und Lexeme-Kennung.",
 	"apihelp-wbformatentities-example-4": "Formatiert drei Objektkennungen in Französisch."
