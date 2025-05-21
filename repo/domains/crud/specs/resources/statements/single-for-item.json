@@ -15,8 +15,8 @@
 		],
 		"responses": {
 			"200": {
-				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
-				"$ref": "./responses.json#/ItemStatement"
+				"$ref": "./responses.json#/ItemStatement",
+				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID."
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "./responses.json#/InvalidRetrieveItemStatementInput" },

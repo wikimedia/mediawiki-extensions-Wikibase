@@ -1,4 +1,48 @@
 {
+	"PropertyValueSchemaRequired": {
+		"properties": {
+			"property": {
+				"required": [ "id", "data_type" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		},
+		"required": [ "property", "value" ]
+	},
+
+	"StatementSchemaRequired": {
+		"allOf": [
+			{ "$ref": "#/PropertyValueSchemaRequired" },
+			{
+				"properties": {
+					"qualifiers": {
+						"items": { "$ref": "#/PropertyValueSchemaRequired" }
+					},
+					"references": {
+						"items": {
+							"properties": {
+								"hash": { "type": "string" },
+								"parts": {
+									"items": { "$ref": "#/PropertyValueSchemaRequired" }
+								}
+							},
+							"required": [ "hash", "parts" ]
+						}
+					}
+				},
+				"required": [ "id", "rank", "qualifiers", "references" ]
+			}
+		]
+	},
+
+	"StatementSchema": {
+		"allOf": [
+			{ "$ref": "../../global/schemas.json#/Statement" },
+			{ "$ref": "#/StatementSchemaRequired" }
+		]
+	},
+
 	"InvalidRetrieveStatementInput": {
 		"description": "The request cannot be processed",
 		"content": {
@@ -27,9 +71,7 @@
 					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
-					"cannot-modify-read-only-value": {
-						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
-					},
+					"cannot-modify-read-only-value": { "$ref": "../../global/examples.json#/CannotModifyReadOnlyValue" },
 					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" },
 					"referenced-resource-not-found": { "$ref": "../../global/examples.json#/ReferencedResourceNotFoundExample" }
 				}
@@ -209,12 +251,8 @@
 			"application/json": {
 				"schema": { "$ref": "../../global/response-parts.json#/Error" },
 				"examples": {
-					"invalid-path-parameter": {
-						"$ref": "../../global/examples.json#/InvalidPathParameterExample"
-					},
-					"item-statement-id-mismatch": {
-						"$ref": "../../global/examples.json#/ItemStatementIdMismatchExample"
-					}
+					"invalid-path-parameter": { "$ref": "../../global/examples.json#/InvalidPathParameterExample" },
+					"item-statement-id-mismatch": { "$ref": "../../global/examples.json#/ItemStatementIdMismatchExample" }
 				}
 			}
 		},
@@ -237,9 +275,7 @@
 					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
-					"cannot-modify-read-only-value": {
-						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
-					},
+					"cannot-modify-read-only-value": { "$ref": "../../global/examples.json#/CannotModifyReadOnlyValue" },
 					"referenced-resource-not-found": { "$ref": "../../global/examples.json#/ReferencedResourceNotFoundExample" },
 					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
 				}
@@ -400,9 +436,7 @@
 					"invalid-value": { "$ref": "../../global/examples.json#/InvalidValueExample" },
 					"missing-field": { "$ref": "../../global/examples.json#/MissingFieldExample" },
 					"value-too-long": { "$ref": "../../global/examples.json#/ValueTooLongExample" },
-					"cannot-modify-read-only-value": {
-						"$ref": "../../global/examples.json#/CannotModifyReadOnlyValue"
-					},
+					"cannot-modify-read-only-value": { "$ref": "../../global/examples.json#/CannotModifyReadOnlyValue" },
 					"referenced-resource-not-found": { "$ref": "../../global/examples.json#/ReferencedResourceNotFoundExample" },
 					"resource-too-large": { "$ref": "../../global/examples.json#/ResourceTooLargeExample" }
 				}
@@ -479,46 +513,5 @@
 				"example": "Statement deleted"
 			}
 		}
-	},
-	"StatementSchema": {
-		"allOf": [
-			{ "$ref": "../../global/schemas.json#/Statement" },
-			{ "$ref": "#/StatementSchemaRequired" }
-		]
-	},
-	"StatementSchemaRequired": {
-		"allOf": [
-			{ "$ref": "#/PropertyValueSchemaRequired" },
-			{
-				"properties": {
-					"qualifiers": {
-						"items": { "$ref": "#/PropertyValueSchemaRequired" }
-					},
-					"references": {
-						"items": {
-							"properties": {
-								"hash": { "type": "string" },
-								"parts": {
-									"items": { "$ref": "#/PropertyValueSchemaRequired" }
-								}
-							},
-							"required": [ "hash", "parts" ]
-						}
-					}
-				},
-				"required": [ "id", "rank", "qualifiers", "references" ]
-			}
-		]
-	},
-	"PropertyValueSchemaRequired": {
-		"properties": {
-			"property": {
-				"required": [ "id", "data_type" ]
-			},
-			"value": {
-				"required": [ "type" ]
-			}
-		},
-		"required": [ "property", "value" ]
 	}
 }

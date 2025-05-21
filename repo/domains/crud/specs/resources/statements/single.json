@@ -14,8 +14,8 @@
 		],
 		"responses": {
 			"200": {
-				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID.",
-				"$ref": "./responses.json#/ItemStatement"
+				"$ref": "./responses.json#/ItemStatement",
+				"description": "The requested Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID."
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"400": { "$ref": "./responses.json#/InvalidRetrieveStatementInput" },
@@ -38,8 +38,8 @@
 		"requestBody": { "$ref": "./requests.json#/ItemStatement" },
 		"responses": {
 			"200": {
-				"description": "A Wikibase Statement. Please note that the value of the ETag header field refers to the subject's revision ID.",
-				"$ref": "./responses.json#/ItemStatement"
+				"$ref": "./responses.json#/ItemStatement",
+				"description": "A Wikibase Statement. Please note that the value of the ETag header field refers to the subject's revision ID."
 			},
 			"400": { "$ref": "./responses.json#/InvalidReplaceStatementInput" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },
@@ -63,8 +63,8 @@
 		"requestBody": { "$ref": "./requests.json#/PatchItemStatement" },
 		"responses": {
 			"200": {
-				"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID.",
-				"$ref": "./responses.json#/ItemStatement"
+				"$ref": "./responses.json#/ItemStatement",
+				"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the subject's revision ID."
 			},
 			"400": { "$ref": "../../global/responses.json#/InvalidPatch" },
 			"403": { "$ref": "../../global/responses.json#/PermissionDenied" },

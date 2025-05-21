@@ -14,9 +14,7 @@
 			"labels": { "$ref": "#/Labels" },
 			"descriptions": { "$ref": "#/Descriptions" },
 			"aliases": { "$ref": "#/Aliases" },
-			"sitelinks": {
-				"$ref": "./schema-parts.json#/Sitelinks"
-			},
+			"sitelinks": { "$ref": "./schema-parts.json#/Sitelinks" },
 			"statements": {
 				"type": "object",
 				"additionalProperties": {
@@ -115,20 +113,18 @@
 					"qualifiers": {
 						"type": "array",
 						"items": { "$ref": "#/Qualifier" },
-						"default": [ ]
+						"default": []
 					},
 					"references": {
 						"type": "array",
 						"items": { "$ref": "#/Reference" },
-						"default": [ ]
+						"default": []
 					}
 				}
 			}
 		]
 	},
-	"Qualifier": {
-		"$ref": "./schema-parts.json#/PropertyValuePair"
-	},
+	"Qualifier": { "$ref": "./schema-parts.json#/PropertyValuePair" },
 	"Reference": {
 		"type": "object",
 		"properties": {

@@ -1,4 +1,57 @@
 {
+	"PropertyValuePairRequestRequired": {
+		"properties": {
+			"property": {
+				"required": [ "id" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		},
+		"required": [ "property", "value" ]
+	},
+
+	"StatementRequestRequired": {
+		"allOf": [
+			{ "$ref": "#/PropertyValuePairRequestRequired" },
+			{
+				"properties": {
+					"qualifiers": {
+						"items": { "$ref": "#/PropertyValuePairRequestRequired" }
+					},
+					"references": {
+						"items": {
+							"properties": {
+								"parts": {
+									"items": { "$ref": "#/PropertyValuePairRequestRequired" }
+								}
+							},
+							"required": [ "parts" ]
+						}
+					}
+				}
+			}
+		]
+	},
+
+	"StatementRequest": {
+		"allOf": [
+			{
+				"type": "object",
+				"properties": {
+					"statement": {
+						"allOf": [
+							{ "$ref": "../../global/schemas.json#/Statement" },
+							{ "$ref": "#/StatementRequestRequired" }
+						]
+					}
+				},
+				"required": [ "statement" ]
+			},
+			{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
+		]
+	},
+
 	"ItemStatement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,
@@ -54,7 +107,6 @@
 			}
 		}
 	},
-
 	"PropertyStatement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
 		"required": true,
@@ -89,60 +141,5 @@
 				"example": { "$ref": "./examples.json#/PatchPropertyStatementRequest" }
 			}
 		}
-	},
-
-	"StatementRequest": {
-		"allOf": [
-			{
-				"type": "object",
-				"properties": {
-					"statement": {
-						"allOf": [
-							{ "$ref": "../../global/schemas.json#/Statement" },
-							{ "$ref": "#/StatementRequestRequired" }
-						]
-					}
-				},
-				"required": [ "statement" ]
-			},
-			{ "$ref": "../../global/request-parts.json#/MediawikiEdit" }
-		]
-	},
-	"StatementRequestRequired": {
-		"allOf": [
-			{ "$ref": "#/PropertyValuePairRequestRequired" },
-			{
-				"properties": {
-					"qualifiers": {
-						"items": {
-							"$ref": "#/PropertyValuePairRequestRequired"
-						}
-					},
-					"references": {
-						"items": {
-							"properties": {
-								"parts": {
-									"items": {
-										"$ref": "#/PropertyValuePairRequestRequired"
-									}
-								}
-							},
-							"required": [ "parts" ]
-						}
-					}
-				}
-			}
-		]
-	},
-	"PropertyValuePairRequestRequired": {
-		"properties": {
-			"property": {
-				"required": [ "id" ]
-			},
-			"value": {
-				"required": [ "type" ]
-			}
-		},
-		"required": [ "property", "value" ]
 	}
 }

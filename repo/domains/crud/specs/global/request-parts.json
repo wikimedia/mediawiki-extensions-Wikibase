@@ -1,17 +1,12 @@
 {
-	"PatchRequest": {
-		"allOf": [
-			{ "$ref": "#/PatchDocument" },
-			{ "$ref": "#/MediawikiEdit" }
-		]
-	},
+
 	"MediawikiEdit": {
 		"type": "object",
 		"properties": {
 			"tags": {
 				"type": "array",
 				"items": { "type": "string" },
-				"default": [ ]
+				"default": []
 			},
 			"bot": {
 				"type": "boolean",
@@ -20,6 +15,7 @@
 			"comment": { "type": "string" }
 		}
 	},
+
 	"PatchDocument": {
 		"type": "object",
 		"properties": {
@@ -32,14 +28,7 @@
 						"op": {
 							"description": "The operation to perform",
 							"type": "string",
-							"enum": [
-								"add",
-								"copy",
-								"move",
-								"remove",
-								"replace",
-								"test"
-							]
+							"enum": [ "add", "copy", "move", "remove", "replace", "test" ]
 						},
 						"path": {
 							"description": "A JSON Pointer",
@@ -58,5 +47,13 @@
 			}
 		},
 		"required": [ "patch" ]
+	},
+
+	"PatchRequest": {
+		"allOf": [
+			{ "$ref": "#/PatchDocument" },
+			{ "$ref": "#/MediawikiEdit" }
+		]
 	}
+
 }

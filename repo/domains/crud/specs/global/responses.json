@@ -83,9 +83,7 @@
 			"application/json": {
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
-					"resource-not-found": {
-						"$ref": "./examples.json#/ResourceNotFoundExample"
-					}
+					"resource-not-found": { "$ref": "./examples.json#/ResourceNotFoundExample" }
 				}
 			}
 		},
@@ -349,16 +347,12 @@
 				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"patched-statement-group-property-id-mismatch": {
-						"$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample"
-					},
+					"patched-statement-group-property-id-mismatch": { "$ref": "./examples.json#/PatchedStatementGroupPropertyIdMismatchExample" },
 					"patch-result-referenced-resource-not-found": { "$ref": "./examples.json#/PatchResultResourceNotFoundExample" },
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-key": { "$ref": "./examples.json#/PatchResultInvalidKeyExample" },
 					"patch-result-value-too-long": { "$ref": "./examples.json#/PatchResultValueTooLongExample" },
-					"patch-result-modified-read-only-value": {
-						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
-					},
+					"patch-result-modified-read-only-value": { "$ref": "./examples.json#/PatchResultModifiedReadOnlyValue" },
 					"data-policy-violation": { "$ref": "./examples.json#/DataPolicyViolationExample" }
 				}
 			}
@@ -485,15 +479,11 @@
 		"description": "Applying the provided JSON Patch results in an invalid Statement",
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/Error"
-				},
+				"schema": { "$ref": "./response-parts.json#/Error" },
 				"examples": {
 					"patch-result-missing-field": { "$ref": "./examples.json#/PatchResultMissingFieldExample" },
 					"patch-result-invalid-value": { "$ref": "./examples.json#/PatchResultInvalidValueExample" },
-					"patch-result-modified-read-only-value": {
-						"$ref": "./examples.json#/PatchResultModifiedReadOnlyValue"
-					},
+					"patch-result-modified-read-only-value": { "$ref": "./examples.json#/PatchResultModifiedReadOnlyValue" },
 					"patch-result-referenced-resource-not-found": { "$ref": "./examples.json#/PatchResultResourceNotFoundExample" }
 				}
 			}
@@ -548,9 +538,7 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/ItemResponse"
-				},
+				"schema": { "$ref": "./response-parts.json#/ItemResponse" },
 				"example": {
 					"id": "Q24",
 					"type": "item",
@@ -728,9 +716,7 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./schemas.json#/Sitelink"
-				},
+				"schema": { "$ref": "./schemas.json#/Sitelink" },
 				"example": {
 					"title": "Jane Doe",
 					"badges": [],
@@ -759,9 +745,7 @@
 		},
 		"content": {
 			"application/json": {
-				"schema": {
-					"$ref": "./response-parts.json#/PropertyResponse"
-				},
+				"schema": { "$ref": "./response-parts.json#/PropertyResponse" },
 				"example": {
 					"id": "P694",
 					"type": "property",

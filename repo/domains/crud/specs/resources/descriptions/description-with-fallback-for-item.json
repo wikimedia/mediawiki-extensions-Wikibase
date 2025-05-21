@@ -15,8 +15,8 @@
 		],
 		"responses": {
 			"200": {
-				"description": "Item's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location.",
-				"$ref": "./responses.json#/ItemDescription"
+				"$ref": "./responses.json#/ItemDescription",
+				"description": "Item's description in a specific language. If a description only exists in a fallback language, the API returns a 307 status code and provides its location."
 			},
 			"304": { "$ref": "../../global/responses.json#/NotModified" },
 			"307": { "$ref": "./responses.json#/DescriptionMovedTemporarily" },

@@ -1,4 +1,46 @@
 {
+
+	"PropertyValueResponseRequired": {
+		"required": [ "property", "value" ],
+		"properties": {
+			"property": {
+				"required": [ "id", "data_type" ]
+			},
+			"value": {
+				"required": [ "type" ]
+			}
+		}
+	},
+
+	"QualifierResponseRequired": { "$ref": "#/PropertyValueResponseRequired" },
+
+	"ReferenceResponseRequired": {
+		"required": [ "hash", "parts" ],
+		"properties": {
+			"hash": { "type": "string" },
+			"parts": {
+				"items": { "$ref": "#/PropertyValueResponseRequired" }
+			}
+		}
+	},
+
+	"StatementResponseRequired": {
+		"allOf": [
+			{ "$ref": "#/PropertyValueResponseRequired" },
+			{
+				"required": [ "id", "rank", "qualifiers", "references" ],
+				"properties": {
+					"qualifiers": {
+						"items": { "$ref": "#/QualifierResponseRequired" }
+					},
+					"references": {
+						"items": { "$ref": "#/ReferenceResponseRequired" }
+					}
+				}
+			}
+		]
+	},
+
 	"ItemResponse": {
 		"allOf": [
 			{ "$ref": "./schemas.json#/Item" },
@@ -19,6 +61,7 @@
 			}
 		]
 	},
+
 	"PropertyResponse": {
 		"allOf": [
 			{ "$ref": "./schemas.json#/Property" },
@@ -34,6 +77,7 @@
 			}
 		]
 	},
+
 	"Error": {
 		"type": "object",
 		"properties": {
@@ -42,46 +86,6 @@
 			"context": { "type": "object" }
 		},
 		"required": [ "code", "message" ]
-	},
-	"StatementResponseRequired": {
-		"allOf": [
-			{ "$ref": "#/PropertyValueResponseRequired" },
-			{
-				"required": [ "id", "rank", "qualifiers", "references" ],
-				"properties": {
-					"qualifiers": {
-						"items": { "$ref": "#/QualifierResponseRequired" }
-					},
-					"references": {
-						"items": { "$ref": "#/ReferenceResponseRequired" }
-					}
-				}
-			}
-		]
-	},
-	"QualifierResponseRequired": {
-		"$ref": "#/PropertyValueResponseRequired"
-	},
-	"ReferenceResponseRequired": {
-		"required": [ "hash", "parts" ],
-		"properties": {
-			"hash": { "type": "string" },
-			"parts": {
-				"items": {
-					"$ref": "#/PropertyValueResponseRequired"
-				}
-			}
-		}
-	},
-	"PropertyValueResponseRequired": {
-		"required": [ "property", "value" ],
-		"properties": {
-			"property": {
-				"required": [ "id", "data_type" ]
-			},
-			"value": {
-				"required": [ "type" ]
-			}
-		}
 	}
+
 }
