@@ -82,10 +82,6 @@
 	</rule>
 	<rule ref="MediaWiki.Commenting.LicenseComment.LicenseTagNonFileComment">
 		<exclude-pattern>WikibaseLibraryTestCase\.php</exclude-pattern>
-		<exclude-pattern>DispatchingQueryBuilderTest\.php</exclude-pattern>
-	</rule>
-	<rule ref="MediaWiki.Commenting.PhpunitAnnotations.NotClassTrait">
-		<exclude-pattern>DispatchingQueryBuilderTest\.php</exclude-pattern>
 	</rule>
 	<rule ref="MediaWiki.Arrays.TrailingComma">
 		<properties>
