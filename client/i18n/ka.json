@@ -22,7 +22,7 @@
 	"wikibase-comment-sitelink-change": "ენის ბმული შეცვლილია $1-დან $2-ზე",
 	"wikibase-comment-sitelink-remove": "ენის ბმული წაშლილია: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ცვლილება|ცვლილება}}",
-	"wikibase-dataitem": "{{WBREPONAME}} ელემენტი",
+	"wikibase-dataitem": "{{GRAMMAR:ნათესაობითი|{{WBREPONAME}}}} ელემენტი",
 	"wikibase-editlinks": "ბმულების რედაქტირება",
 	"wikibase-editlinkstitle": "ენათშორისი ბმულების რედაქტირება",
 	"wikibase-addlinkstitle": "ენათშორისი ბმულების დამატება",

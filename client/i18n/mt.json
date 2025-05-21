@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Chrisportelli",
-			"Leli Forte"
+			"Leli Forte",
+			"ToniSant"
 		]
 	},
 	"wikibase-client-desc": "Klijent għall-estensjoni Wikibase",
@@ -11,6 +12,7 @@
 	"wikibase-dataitem": "Element ta' {{WBREPONAME}}",
 	"wikibase-editlinks": "Immodifika l-ħoloq",
 	"wikibase-editlinkstitle": "Immodifika l-ħoloq interlingwi",
+	"wikibase-addlinkstitle": "Żid ħoloq interlingwa",
 	"wikibase-linkitem-addlinks": "Żid ħoloq",
 	"wikibase-linkitem-title": "Orbot ma' paġna oħra",
 	"wikibase-linkitem-linkpage": "Orbot ma' paġna",
