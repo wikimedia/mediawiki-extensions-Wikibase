@@ -217,6 +217,9 @@ class ClientParserOutputDataUpdater {
 	}
 
 	public function updateFirstRevisionTimestampProperty( Title $title, ParserOutputProvider $parserOutputProvider ): void {
+		if ( !$title->canExist() ) {
+			return;
+		}
 		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
 		$timestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
 
