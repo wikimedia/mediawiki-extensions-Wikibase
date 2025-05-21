@@ -14,7 +14,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class WikibaseRepoTest extends ExtensionServicesTestBase {
 
-	protected string $className = WikibaseRepo::class;
+	protected static string $className = WikibaseRepo::class;
 
 	protected string $serviceNamePrefix = 'WikibaseRepo.';
 
