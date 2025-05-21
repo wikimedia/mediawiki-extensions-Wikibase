@@ -53,7 +53,7 @@ class SetPropertyLabelTest extends TestCase {
 		$newLabelText = 'New label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = "{$this->getName()} Comment";
+		$comment = 'testAddLabel Comment';
 		$property = new PropertyWriteModel( $propertyId, null, 'string' );
 
 		$propertyRepo = new InMemoryPropertyRepository();
@@ -85,7 +85,7 @@ class SetPropertyLabelTest extends TestCase {
 		$updatedLabelText = 'Replaced label';
 		$editTags = TestValidatingRequestDeserializer::ALLOWED_TAGS;
 		$isBot = false;
-		$comment = "{$this->getName()} Comment";
+		$comment = 'testReplaceLabel Comment';
 		$property = new PropertyWriteModel(
 			$propertyId,
 			new Fingerprint( new TermList( [ new Term( 'en', 'Label to replace' ) ] ) ),
