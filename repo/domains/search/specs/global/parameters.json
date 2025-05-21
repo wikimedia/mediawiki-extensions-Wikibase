@@ -20,7 +20,7 @@
 	"Limit": {
 		"in": "query",
 		"name": "limit",
-		"description": "The number of items to show in the results",
+		"description": "The maximum number of results to return",
 		"required": false,
 		"schema": {
 			"type": "integer",
