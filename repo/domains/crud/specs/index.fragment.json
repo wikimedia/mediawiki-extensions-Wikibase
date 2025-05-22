@@ -31,104 +31,40 @@
 				}
 			}
 		},
-		"/v1/entities/items": {
-			"$ref": "resources/items/list.json"
-		},
-		"/v1/entities/items/{item_id}": {
-			"$ref": "resources/items/single.json"
-		},
-		"/v1/entities/items/{item_id}/sitelinks": {
-			"$ref": "resources/sitelinks/list.json"
-		},
-		"/v1/entities/items/{item_id}/sitelinks/{site_id}": {
-			"$ref": "resources/sitelinks/single.json"
-		},
-		"/v1/entities/properties": {
-			"$ref": "resources/properties/list.json"
-		},
-		"/v1/entities/properties/{property_id}": {
-			"$ref": "resources/properties/single.json"
-		},
-		"/v1/entities/items/{item_id}/descriptions": {
-			"$ref": "resources/descriptions/list-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/descriptions": {
-			"$ref": "resources/descriptions/list-for-property.json"
-		},
-		"/v1/entities/items/{item_id}/descriptions/{language_code}": {
-			"$ref": "resources/descriptions/description-in-language-for-item.json"
-		},
-		"/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
-			"$ref": "resources/descriptions/description-with-fallback-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/descriptions/{language_code}": {
-			"$ref": "resources/descriptions/description-in-language-for-property.json"
-		},
-		"/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
-			"$ref": "resources/descriptions/description-with-fallback-for-property.json"
-		},
-		"/v1/entities/items/{item_id}/statements": {
-			"$ref": "resources/statements/list-for-item.json"
-		},
-		"/v1/entities/items/{item_id}/statements/{statement_id}": {
-			"$ref": "resources/statements/single-for-item.json"
-		},
-		"/v1/entities/items/{item_id}/labels": {
-			"$ref": "resources/labels/list-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/labels": {
-			"$ref": "resources/labels/list-for-property.json"
-		},
-		"/v1/entities/items/{item_id}/labels/{language_code}": {
-			"$ref": "resources/labels/label-in-language-for-item.json"
-		},
-		"/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
-			"$ref": "resources/labels/label-with-fallback-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/labels/{language_code}": {
-			"$ref": "resources/labels/label-in-language-for-property.json"
-		},
-		"/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
-			"$ref": "resources/labels/label-with-fallback-for-property.json"
-		},
-		"/v1/entities/items/{item_id}/aliases": {
-			"$ref": "resources/aliases/list-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/aliases": {
-			"$ref": "resources/aliases/list-for-property.json"
-		},
-		"/v1/entities/items/{item_id}/aliases/{language_code}": {
-			"$ref": "resources/aliases/aliases-in-language-for-item.json"
-		},
-		"/v1/entities/properties/{property_id}/aliases/{language_code}": {
-			"$ref": "resources/aliases/aliases-in-language-for-property.json"
-		},
-		"/v1/entities/properties/{property_id}/statements": {
-			"$ref": "resources/statements/list-for-property.json"
-		},
-		"/v1/entities/properties/{property_id}/statements/{statement_id}": {
-			"$ref": "resources/statements/single-for-property.json"
-		},
-		"/v1/statements/{statement_id}": {
-			"$ref": "resources/statements/single.json"
-		}
+		"/v1/entities/items": { "$ref": "resources/items/list.json" },
+		"/v1/entities/items/{item_id}": { "$ref": "resources/items/single.json" },
+		"/v1/entities/items/{item_id}/sitelinks": { "$ref": "resources/sitelinks/list.json" },
+		"/v1/entities/items/{item_id}/sitelinks/{site_id}": { "$ref": "resources/sitelinks/single.json" },
+		"/v1/entities/items/{item_id}/labels": { "$ref": "resources/labels/list-for-item.json" },
+		"/v1/entities/items/{item_id}/labels/{language_code}": { "$ref": "resources/labels/label-in-language-for-item.json" },
+		"/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": { "$ref": "resources/labels/label-with-fallback-for-item.json" },
+		"/v1/entities/items/{item_id}/descriptions": { "$ref": "resources/descriptions/list-for-item.json" },
+		"/v1/entities/items/{item_id}/descriptions/{language_code}": { "$ref": "resources/descriptions/description-in-language-for-item.json" },
+		"/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": { "$ref": "resources/descriptions/description-with-fallback-for-item.json" },
+		"/v1/entities/items/{item_id}/aliases": { "$ref": "resources/aliases/list-for-item.json" },
+		"/v1/entities/items/{item_id}/aliases/{language_code}": { "$ref": "resources/aliases/aliases-in-language-for-item.json" },
+		"/v1/entities/items/{item_id}/statements": { "$ref": "resources/statements/list-for-item.json" },
+		"/v1/entities/items/{item_id}/statements/{statement_id}": { "$ref": "resources/statements/single-for-item.json" },
+		"/v1/entities/properties": { "$ref": "resources/properties/list.json" },
+		"/v1/entities/properties/{property_id}": { "$ref": "resources/properties/single.json" },
+		"/v1/entities/properties/{property_id}/labels": { "$ref": "resources/labels/list-for-property.json" },
+		"/v1/entities/properties/{property_id}/labels/{language_code}": { "$ref": "resources/labels/label-in-language-for-property.json" },
+		"/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": { "$ref": "resources/labels/label-with-fallback-for-property.json" },
+		"/v1/entities/properties/{property_id}/descriptions": { "$ref": "resources/descriptions/list-for-property.json" },
+		"/v1/entities/properties/{property_id}/descriptions/{language_code}": { "$ref": "resources/descriptions/description-in-language-for-property.json" },
+		"/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": { "$ref": "resources/descriptions/description-with-fallback-for-property.json" },
+		"/v1/entities/properties/{property_id}/aliases": { "$ref": "resources/aliases/list-for-property.json" },
+		"/v1/entities/properties/{property_id}/aliases/{language_code}": { "$ref": "resources/aliases/aliases-in-language-for-property.json" },
+		"/v1/entities/properties/{property_id}/statements": { "$ref": "resources/statements/list-for-property.json" },
+		"/v1/entities/properties/{property_id}/statements/{statement_id}": { "$ref": "resources/statements/single-for-property.json" },
+		"/v1/statements/{statement_id}": { "$ref": "resources/statements/single.json" }
 	},
 	"components": {
-		"parameters": {
-			"$ref": "global/parameters.json"
-		},
-		"requestBodies": {
-			"$ref": "global/requests.json"
-		},
-		"responses": {
-			"$ref": "global/responses.json"
-		},
-		"schemas": {
-			"$ref": "global/schemas.json"
-		},
-		"examples": {
-			"$ref": "global/examples.json"
-		}
+		"parameters": { "$ref": "global/parameters.json" },
+		"requestBodies": { "$ref": "global/requests.json" },
+		"responses": { "$ref": "global/responses.json" },
+		"schemas": { "$ref": "global/schemas.json" },
+		"examples": { "$ref": "global/examples.json" }
 	},
 	"tags": { "$ref": "global/tags.json" }
 }
