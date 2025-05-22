@@ -107,7 +107,6 @@
 			if ( !mw.config.get( 'wbEnableMulLanguageCode' ) ) {
 				return;
 			}
-			// eslint-disable-next-line es-x/no-array-prototype-includes
 			if ( this._defaultLanguages.includes( 'mul' ) ) {
 				return;
 			}

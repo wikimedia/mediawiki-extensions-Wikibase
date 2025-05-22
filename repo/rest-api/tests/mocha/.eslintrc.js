@@ -7,6 +7,7 @@ module.exports = {
 	],
 	rules: {
 		"mocha/no-setup-in-describe": 0,
-		"mocha/no-skipped-tests": "error"
+		"mocha/no-skipped-tests": "error",
+		"n/no-missing-require": "off"
 	}
 };

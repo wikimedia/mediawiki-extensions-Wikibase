@@ -19,7 +19,6 @@
 		const getJson = api.get( data );
 
 		function getMatchText( { type, text, language }, labelText ) {
-			// eslint-disable-next-line es-x/no-array-prototype-includes
 			if ( [ 'alias', 'entityId' ].includes( type ) ) {
 				return mw.msg( 'parentheses', text );
 			}
@@ -40,7 +39,6 @@
 				url,
 				language: {
 					label: display.label ? display.label.language : undefined,
-					// eslint-disable-next-line es-x/no-array-prototype-includes
 					match: [ 'alias', 'label' ].includes( match.type ) ? match.language : undefined,
 					description: display.description ? display.description.language : undefined
 				}
