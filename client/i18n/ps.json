@@ -34,7 +34,7 @@
 	"wikibase-linkitem-failed-modify": "د مخونو وېبتړنه ترسره نشوه: په {{WBREPONAME}} کې د اړوند توکو يوځای کولو چاره نابريالۍ شوه.",
 	"wikibase-linkitem-title": "مخ سره تړل",
 	"wikibase-linkitem-linkpage": "مخ سره تړل",
-	"wikibase-linkitem-selectlink": "د دې مخ اړوند سکالو سره سم د ويکيډاټا يو بل وېبځی او يو بل مخ وټاکئ.",
+	"wikibase-linkitem-selectlink": "د دې مخ اړوند سکالو سره سم د ويکي‌اومتوک يو بل وېبځی او يو بل مخ وټاکئ.",
 	"wikibase-linkitem-input-site": "ژبه:",
 	"wikibase-linkitem-input-page": "مخ:",
 	"wikibase-linkitem-confirmitem-text": "هغه مخ چې تاسې ټاکلی له پخوا څخه [زموږ مرکزي اومتوک زېرمتون کې $1 يو توکي سره] اړوند شوی. لطفاً تاييد کړئ چې دا {{PLURAL:$2|مخ|مخونه}} چې لاندې ښودل {{PLURAL:$2|شوی|شوي}} هماغه {{PLURAL:$2|يو مخ دی|څو مخونه دي}} چې تاسې يې د دې مخ سره تړئ.",

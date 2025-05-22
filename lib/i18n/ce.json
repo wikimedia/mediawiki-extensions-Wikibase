@@ -95,6 +95,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|ТӀетоьхна йа дӀайаьккхина}} кхин тӀе цӀе ({{PLURAL:$1|синоним}}) [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|ТӀетоьхна}} кхин тӀе цӀе ({{PLURAL:$1|синоним}}) [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|ДӀайаьккхина}} кхин тӀе цӀе ({{PLURAL:$1|синоним}}) [$2]",
+	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|1=Керлайаьккхина синоним|Керлайаьккхина синонимаш}} {{PLURAL:$2|маттахь|меттанашкахь}}: [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Хийцина [$2] билгало, хаам а, псевдонимаш а",
 	"wikibase-entity-summary-wbsetsitelink-add": "[$2] тӀетоьхна хьажорг",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "ТӀетоьхна хьажорг веназаш йолу [$2]",
