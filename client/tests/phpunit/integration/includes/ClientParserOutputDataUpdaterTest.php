@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Unit;
 use MediaWiki\Content\Content;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use Psr\Log\LogLevel;
 use TestLogger;
@@ -22,9 +23,11 @@ use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -418,4 +421,62 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$parserOutputProvider->close();
 	}
 
+	public function testUpdateFirstRevisionTimestampProperty(): void {
+		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
+
+		$title = $this->createMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'canExist' )
+			->willReturn( true );
+
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->expects( $this->once() )
+			->method( 'getTimestamp' )
+			->willReturn( '20121026200049' );
+		$revisionLookup = $this->createMock( RevisionLookup::class );
+		$revisionLookup->expects( $this->once() )
+			->method( 'getFirstRevision' )
+			->with( $title )
+			->willReturn( $revision );
+
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
+			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityLookup::class ),
+			$this->newUsageAccumulatorFactory(),
+			'srwiki',
+			$revisionLookup,
+			$this->createMock( TermLookup::class )
+		);
+
+		$parserOutputDataUpdater->updateFirstRevisionTimestampProperty( $title, $parserOutputProvider );
+		$this->assertSame(
+			'20121026200049',
+			$parserOutput->getExtensionData( 'first_revision_timestamp' )
+		);
+	}
+
+	public function testUpdateFirstRevisionTimestampProperty_titleCantExist(): void {
+		$parserOutput = new ParserOutput();
+		$parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
+
+		$title = $title = $this->createMock( Title::class );
+		$title->expects( $this->once() )
+			->method( 'canExist' )
+			->willReturn( false );
+
+		$parserOutputDataUpdater = new ClientParserOutputDataUpdater(
+			$this->getOtherProjectsSidebarGeneratorFactory( [] ),
+			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityLookup::class ),
+			$this->newUsageAccumulatorFactory(),
+			'srwiki',
+			$this->createMock( RevisionLookup::class ),
+			$this->createMock( TermLookup::class )
+		);
+
+		$parserOutputDataUpdater->updateFirstRevisionTimestampProperty( $title, $parserOutputProvider );
+		$this->assertNull( $parserOutput->getExtensionData( 'first_revision_timestamp' ) );
+	}
 }
