@@ -4,6 +4,7 @@
 			"Aca",
 			"BadDog",
 			"Kizule",
+			"Milicevic01",
 			"Zenfiric",
 			"Zoranzoki21",
 			"Милан Јелисавчић"
@@ -27,7 +28,7 @@
 	"apihelp-query+wbsearch-param-limit": "Максимални број резултата",
 	"apihelp-query+wbsubscribers-param-limit": "Максимални број резултата",
 	"apihelp-wbsetdescription-param-language": "Језик описа",
-	"apihelp-wbformatentities-summary": "Форматира ID-ове ентитета у HTML.",
+	"apihelp-wbformatentities-summary": "Форматира ID-ове ентитета у HTML или обичан текст.",
 	"apihelp-wbformatentities-extended-description": "Језик може да буде наведен са глобалним параметром <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "ID-ови ентитета за форматирање"
 }

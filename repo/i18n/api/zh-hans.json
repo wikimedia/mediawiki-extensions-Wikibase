@@ -295,10 +295,10 @@
 	"apihelp-wbsetsitelink-example-6": "为ID为<samp>$1</samp>的项中至波兰语页面的链接更改徽章为两个指向ID为“Q2”和“Q149”的徽章，而不提供链接标题",
 	"apihelp-wbsetsitelink-example-7": "从带ID<samp>$1</samp>的项更改波兰语链接而不更改徽章",
 	"apihelp-wbsetsitelink-example-8": "从带ID<samp>$1</samp>的项更改波兰语链接，并移除它的所有徽章",
-	"apihelp-wbformatentities-summary": "将实体ID格式化为HTML。",
+	"apihelp-wbformatentities-summary": "将实体ID格式化为HTML或纯文本。",
 	"apihelp-wbformatentities-extended-description": "可以使用全局<var>uselang</var>参数指定语言。",
 	"apihelp-wbformatentities-param-ids": "要格式化的实体D。",
-	"apihelp-wbformatentities-example-1": "格式化单一项目ID。",
+	"apihelp-wbformatentities-example-1": "将单一项目ID格式化为HTML。",
 	"apihelp-wbformatentities-example-2": "格式化项目ID与属性ID。",
 	"apihelp-wbformatentities-example-3": "格式化项目ID、属性ID和词位ID。",
 	"apihelp-wbformatentities-example-4": "以法语格式化三个项目ID。"

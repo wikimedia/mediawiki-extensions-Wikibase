@@ -302,11 +302,13 @@
 	"apihelp-wbsetsitelink-example-6": "Cambia os distintivos da ligazón á páxina en polaco do elemento con identificador <samp>$1</samp> por dous distintivos apuntando ós elementos con identificadores \"Q2\" e \"Q149\" sen proporcionar o título da ligazón",
 	"apihelp-wbsetsitelink-example-7": "Cambia a ligazón á páxina en polaco do elemento con identificador <samp>$1</samp> sen cambiar os distintivos",
 	"apihelp-wbsetsitelink-example-8": "Cambia a ligazón á páxina en polaco do elemento con identificador <samp>$1</samp> e elimina todos os seus distintivos",
-	"apihelp-wbformatentities-summary": "Formata os identificadores de entidade en HTML.",
+	"apihelp-wbformatentities-summary": "Formata os identificadores de entidade en HTML ou texto sen formato.",
 	"apihelp-wbformatentities-extended-description": "A lingua pódese especificar co parámetro global <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "Os identificadores de entidades a formatar.",
-	"apihelp-wbformatentities-example-1": "Formatar un único identificador de elemento.",
+	"apihelp-wbformatentities-param-generate": "O formato de saída desexado a xerar.",
+	"apihelp-wbformatentities-example-1": "Formatar un único identificador de elemento en HTML.",
 	"apihelp-wbformatentities-example-2": "Formatar un identificador de elemento e un identificador de propiedade.",
 	"apihelp-wbformatentities-example-3": "Formatar un identificador de elemento, un identificador de propiedade e un identificador de lexema.",
-	"apihelp-wbformatentities-example-4": "Formatar tres identificadores de elemento en francés."
+	"apihelp-wbformatentities-example-4": "Formatar tres identificadores de elemento en francés.",
+	"apihelp-wbformatentities-example-5": "Formatar tres identificadores de elementos e un identificador de propiedade en texto sen formato."
 }

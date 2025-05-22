@@ -300,11 +300,13 @@
 	"apihelp-wbsetsitelink-example-6": "שינוי הסמלים עבור הקישור לדף פולני מהפריט עם המזהה <samp>$1</samp> לשני סמלים שמצביעים לפריטים עם המזהים \"Q2\" ו־\"Q149\" בלא אספקת כותרת הקישור",
 	"apihelp-wbsetsitelink-example-7": "שינוי הקישור לדף פולני מהפריט עם המזהה <samp>$1</samp> ללא שינוי הסמלים",
 	"apihelp-wbsetsitelink-example-8": "שינוי הקישור לדף הפולני מהפריט עם מזהה <samp>$1</samp> והסרת כל הסמלים",
-	"apihelp-wbformatentities-summary": "עיצוב מזהי ישות בתור HTML.",
+	"apihelp-wbformatentities-summary": "עיצוב מזהי ישות בתור HTML או טקסט רגיל.",
 	"apihelp-wbformatentities-extended-description": "אפשר להגדיר את השפה באמצעות הפרמטר הגלובלי <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "מזהי הישויות לעיצוב.",
-	"apihelp-wbformatentities-example-1": "עיצוב מזהה פריט בודד.",
+	"apihelp-wbformatentities-param-generate": "תסדיר הפלט המבוקש.",
+	"apihelp-wbformatentities-example-1": "עיצוב מזהה פריט בודד בתור HTML.",
 	"apihelp-wbformatentities-example-2": "עיצוב מזהה פריט ומזהה מאפיין.",
 	"apihelp-wbformatentities-example-3": "עיצוב מזהה פריט, מזהה מאפיין, ומזהה יחידה מילונית.",
-	"apihelp-wbformatentities-example-4": "עיצוב שלושה מזהי פריט בצרפתית."
+	"apihelp-wbformatentities-example-4": "עיצוב שלושה מזהי פריט בצרפתית.",
+	"apihelp-wbformatentities-example-5": "עיצוב שלושה מזהה פריטים ומזהה מאפיין בטקסט רגיל."
 }
