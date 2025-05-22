@@ -24,7 +24,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 
-	protected string $extensionJsonPath = __DIR__ . '/../../../../../extension-client.json';
+	protected static string $extensionJsonPath = __DIR__ . '/../../../../../extension-client.json';
 
 	protected ?string $serviceNamePrefix = 'WikibaseClient.';
 
@@ -35,7 +35,7 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 		$this->configureSiteGroup();
 	}
 
-	public function provideHookHandlerNames(): iterable {
+	public static function provideHookHandlerNames(): iterable {
 		$hookHandlerNames = parent::provideHookHandlerNames();
 		foreach ( $hookHandlerNames as $hookHandlerName ) {
 			if ( $hookHandlerName[0] === 'CirrusSearchAddQueryFeatures' &&
