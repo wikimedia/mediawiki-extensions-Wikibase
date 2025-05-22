@@ -211,33 +211,59 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				'isMobileView' => false,
 				'tmpMobileEditingUI' => false,
 				'expectedModules' => [ 'wikibase.ui.entityViewInit', 'wikibase.entityPage.entityLoaded' ],
+				'expectedModuleStyles' => [
+					'wikibase.desktop',
+					'wikibase.alltargets',
+					'jquery.wikibase.toolbar.styles',
+				],
 			],
 			'not mobile view, flag enabled' => [
 				'isMobileView' => false,
 				'tmpMobileEditingUI' => true,
 				'expectedModules' => [ 'wikibase.ui.entityViewInit', 'wikibase.entityPage.entityLoaded' ],
+				'expectedModuleStyles' => [
+					'wikibase.desktop',
+					'wikibase.alltargets',
+					'jquery.wikibase.toolbar.styles',
+				],
 			],
 			'mobile view, flag disabled' => [
 				'isMobileView' => true,
 				'tmpMobileEditingUI' => false,
 				'expectedModules' => [ 'wikibase.entityPage.entityLoaded' ],
+				'expectedModuleStyles' => [
+					'wikibase.alltargets',
+				],
 			],
 			'mobile view, flag enabled' => [
 				'isMobileView' => true,
 				'tmpMobileEditingUI' => true,
 				'expectedModules' => [ 'wikibase.entityPage.entityLoaded', 'wikibase.mobileUi.entityViewInit' ],
+				'expectedModuleStyles' => [
+					'wikibase.alltargets',
+					'wikibase.mobileUi.entityView.styles',
+				],
 			],
 		];
 	}
 
 	/** @dataProvider provideTestMobileEditingUI */
-	public function testMobileEditingUI( bool $isMobileView, bool $tmpMobileEditingUI, array $expectedModules ): void {
+	public function testMobileEditingUI(
+		bool $isMobileView,
+		bool $tmpMobileEditingUI,
+		array $expectedModules,
+		array $expectedModuleStyles
+	): void {
 		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
 		$parserOutput = $this->newEntityParserOutputGenerator( null, null, $isMobileView, $tmpMobileEditingUI )
 			->getParserOutput( $entityRevision, false );
 		$this->assertArrayEquals(
 			$expectedModules,
 			$parserOutput->getModules()
+		);
+		$this->assertArrayEquals(
+			$expectedModuleStyles,
+			$parserOutput->getModuleStyles()
 		);
 	}
 
