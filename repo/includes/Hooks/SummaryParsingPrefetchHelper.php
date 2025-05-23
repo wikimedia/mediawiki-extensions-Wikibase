@@ -32,7 +32,7 @@ class SummaryParsingPrefetchHelper {
 	 * Matching links to properties in in edit summaries, such as "[[Q23]]", "[[Property:P123]]"
 	 * or "[[wdbeta:Special:EntityPage/P123]]".
 	 */
-	public const ENTITY_ID_SUMMARY_REGEXP = '/\[\[(\S*)([PQ][1-9]\d*)\]\]/';
+	public const ENTITY_ID_SUMMARY_REGEXP = '/\[\[[^\[|\]]*(\b[PQ][1-9]\d{0,9})]]/';
 
 	/**
 	 * @param IResultWrapper|\stdClass[]|RevisionRecord[] $rows
@@ -64,13 +64,12 @@ class SummaryParsingPrefetchHelper {
 				continue;
 			}
 
-			$matches = [];
 			if ( !preg_match_all( self::ENTITY_ID_SUMMARY_REGEXP, $comment, $matches, PREG_PATTERN_ORDER ) ) {
 				continue;
 			}
-			foreach ( $matches[2] as $match ) {
+			foreach ( $matches[1] as $idSerialization ) {
 				try {
-					$entityIds[] = $this->entityIdParser->parse( $match );
+					$entityIds[] = $this->entityIdParser->parse( $idSerialization );
 				} catch ( EntityIdParsingException $ex ) {
 				}
 			}
