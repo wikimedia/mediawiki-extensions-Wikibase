@@ -552,5 +552,7 @@
 	"wikibase-scoped-search-search-entities": "Search entities",
 	"wikibase-scoped-search-search-entities-description": "Find different types of {{SITENAME}} entities",
 	"wikibase-scoped-search-item-scope-name": "Items",
-	"wikibase-scoped-search-property-scope-name": "Properties"
+	"wikibase-scoped-search-property-scope-name": "Properties",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Mobile Editing UI",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Enable the new, experimental mobile editing UI."
 }

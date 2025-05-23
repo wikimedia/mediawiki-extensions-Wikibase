@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Tests\ExtensionJsonTestBase;
 use ReflectionClass;
 use ReflectionMethod;
@@ -43,6 +44,17 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 	public function testTermboxFlag(): void {
 		TermboxFlag::getInstance();
 		$this->assertTrue( true );
+	}
+
+	public function provideHookHandlerNames(): iterable {
+		$hookHandlerNames = parent::provideHookHandlerNames();
+		foreach ( $hookHandlerNames as $hookHandlerName ) {
+			if ( $hookHandlerName[0] === 'GetBetaFeaturePreferences' &&
+				!ExtensionRegistry::getInstance()->isLoaded( 'BetaFeatures' ) ) {
+				continue;
+			}
+			yield $hookHandlerName;
+		}
 	}
 
 }
