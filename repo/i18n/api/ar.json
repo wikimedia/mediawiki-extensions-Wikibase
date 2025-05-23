@@ -309,11 +309,13 @@
 	"apihelp-wbsetsitelink-example-6": "غير الشارات للوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> لشاراتين تشيران للعنصرين بالرقمين \"Q2\" و \"Q149\" بدون توفير عنوان الوصلة",
 	"apihelp-wbsetsitelink-example-7": "غير الوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> بدون تغيير الشارات",
 	"apihelp-wbsetsitelink-example-8": "غير الوصلة للصفحة البولندية من العنصر بالرقم <samp>$1</samp> وأزل كل شاراته",
-	"apihelp-wbformatentities-summary": "ينظم معرفات الكيانات إلى HTML.",
+	"apihelp-wbformatentities-summary": "تنسيق معرفات الكيان إلى HTML أو نص عادي.",
 	"apihelp-wbformatentities-extended-description": "يمكن تحديد اللغة باستخدام الوسيط العالمي <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "معرفات الكيانات لتنسيقها.",
-	"apihelp-wbformatentities-example-1": "تنسيق معرف عنصر واحد.",
+	"apihelp-wbformatentities-param-generate": "تنسيق الإخراج المطلوب إنشاؤه.",
+	"apihelp-wbformatentities-example-1": "تنسيق معرف العنصر الواحد إلى HTML.",
 	"apihelp-wbformatentities-example-2": "تنسيق معرف عنصر ومعرف خاصية.",
 	"apihelp-wbformatentities-example-3": "تنسيق معرف عنصر ومعرف خاصية ومعرف مفردة.",
-	"apihelp-wbformatentities-example-4": "تنسيق معرفات ثلاثة عناصر بالفرنسية."
+	"apihelp-wbformatentities-example-4": "تنسيق معرفات ثلاثة عناصر بالفرنسية.",
+	"apihelp-wbformatentities-example-5": "تنسيق معرفات العناصر الثلاثة ومعرف الخاصية إلى نص عادي."
 }
