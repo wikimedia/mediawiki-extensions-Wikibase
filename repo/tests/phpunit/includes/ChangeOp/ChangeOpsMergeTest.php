@@ -52,13 +52,8 @@ class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $statementsMerger;
 
-	/**
-	 * @param string|null $name
-	 * @param array $data
-	 * @param string $dataName
-	 */
-	public function __construct( $name = null, array $data = [], $dataName = '' ) {
-		parent::__construct( $name, $data, $dataName );
+	protected function setUp(): void {
+		parent::setUp();
 
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 		$this->statementsMerger = $this->createMock( StatementsMerger::class );
