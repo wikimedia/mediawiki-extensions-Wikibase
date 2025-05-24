@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
-use MediaWiki\Hook\MagicWordwgVariableIDsHook;
+use MediaWiki\Hook\GetMagicVariableIDsHook;
 use MediaWiki\Hook\ParserGetVariableValueSwitchHook;
 use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
@@ -18,7 +18,7 @@ use Wikibase\Lib\SettingsArray;
  * @license GPL-2.0-or-later
  */
 class MagicWordHookHandler implements
-	MagicWordwgVariableIDsHook,
+	GetMagicVariableIDsHook,
 	ParserGetVariableValueSwitchHook,
 	ResourceLoaderJqueryMsgModuleMagicWordsHook
 {
@@ -35,15 +35,11 @@ class MagicWordHookHandler implements
 	/**
 	 * Register all magic words.
 	 *
-	 * @param string[] &$aCustomVariableIds
-	 *
-	 * @return bool
+	 * @param string[] &$variableIds
 	 */
-	public function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
-		$aCustomVariableIds[] = 'noexternallanglinks';
-		$aCustomVariableIds[] = 'wbreponame';
-
-		return true;
+	public function onGetMagicVariableIDs( &$variableIds ): void {
+		$variableIds[] = 'noexternallanglinks';
+		$variableIds[] = 'wbreponame';
 	}
 
 	/**
