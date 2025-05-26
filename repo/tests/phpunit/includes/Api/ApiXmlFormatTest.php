@@ -40,11 +40,9 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 	}
 
 	private function setupSiteLinkGroups() {
-		global $wgWBRepoSettings;
-
-		$customRepoSettings = $wgWBRepoSettings;
+		$customRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 		$customRepoSettings['siteLinkGroups'] = [ 'wikipedia' ];
-		$this->setMwGlobals( 'wgWBRepoSettings', $customRepoSettings );
+		$this->overrideConfigValue( 'WBRepoSettings', $customRepoSettings );
 	}
 
 	/**

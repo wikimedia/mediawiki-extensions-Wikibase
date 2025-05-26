@@ -7,6 +7,7 @@ use MediaWiki\CommentFormatter\CommentFormatter;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\MainConfigNames;
 use MediaWiki\RecentChanges\ChangesList;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Revision\RevisionRecord;
@@ -47,10 +48,10 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 		// these are required because MediaWiki\CommentFormatter\CommentFormatter is used in ChangeLineFormatter
 		// @todo eliminate Linker or at least use of Linker in Wikibase :)
-		$this->setMwGlobals( [
-			'wgScriptPath' => '',
-			'wgScript' => '/index.php',
-			'wgArticlePath' => '/wiki/$1',
+		$this->overrideConfigValues( [
+			MainConfigNames::ScriptPath => '',
+			MainConfigNames::Script => '/index.php',
+			MainConfigNames::ArticlePath => '/wiki/$1',
 		] );
 
 		$this->repoLinker = new RepoLinker(

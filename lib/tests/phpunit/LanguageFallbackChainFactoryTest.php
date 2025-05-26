@@ -71,9 +71,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @param string[] $disabledVariants
 	 */
 	private function setupDisabledVariants( array $disabledVariants ) {
-		$this->setMwGlobals( [
-			'wgDisabledVariants' => $disabledVariants,
-		] );
+		$this->overrideConfigValue( MainConfigNames::DisabledVariants, $disabledVariants );
 	}
 
 	private function getLanguageFallbackChainFactory( bool $includeMul = false ) {

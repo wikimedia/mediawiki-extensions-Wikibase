@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Actions;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\WikiPage;
@@ -176,21 +177,21 @@ class ViewEntityActionTest extends ActionTestCase {
 		$response->header( "HTTP/1.1 200 OK" ); // reset
 
 		// $wgSend404Code disabled -----
-		$this->setMwGlobals( 'wgSend404Code', false );
+		$this->overrideConfigValue( MainConfigNames::Send404Code, false );
 
 		$action->show();
 		$this->assertEquals( 200, $response->getStatusCode(), "response code" );
 		$this->assertStringContainsString( 'noarticletext', $action->getOutput()->getHTML(), "response HTML" );
 
 		// $wgSend404Code enabled -----
-		$this->setMwGlobals( 'wgSend404Code', true );
+		$this->overrideConfigValue( MainConfigNames::Send404Code, true );
 
 		$action->show();
 		$this->assertEquals( 404, $response->getStatusCode(), "response code" );
 	}
 
 	public function testLinkHeaders() {
-		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
 		$page = $this->getTestItemPage( 'Berlin' );
 		$itemId = $page->getTitle()->getText();
 		WikibaseRepo::getSettings()->setSetting( 'entityDataFormats', [ 'json', 'turtle', 'html' ] );

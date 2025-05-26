@@ -12,6 +12,7 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use MediaWiki\Language\Language;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
@@ -61,10 +62,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->setMwGlobals( [
-			'wgArticlePath' => '/wiki/$1',
-			'wgUseInstantCommons' => false,
-			'wgForeignFileRepos' => [],
+		$this->overrideConfigValues( [
+			MainConfigNames::ArticlePath => '/wiki/$1',
+			MainConfigNames::UseInstantCommons => false,
+			MainConfigNames::ForeignFileRepos => [],
 		] );
 	}
 

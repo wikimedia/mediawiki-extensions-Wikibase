@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\LinkedData;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
@@ -179,9 +180,9 @@ class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCacheableOrPotentiallyCachedUrls_withRevisionId() {
-		$this->setMwGlobals( [
-			'wgCanonicalServer' => 'http://canonical.test',
-			'wgInternalServer' => 'http://internal.test',
+		$this->overrideConfigValues( [
+			MainConfigNames::CanonicalServer => 'http://canonical.test',
+			MainConfigNames::InternalServer => 'http://internal.test',
 		] );
 		$uriManager = $this->makeUriManager();
 

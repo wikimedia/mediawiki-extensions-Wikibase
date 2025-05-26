@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -21,7 +22,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideBooleans */
 	public function testBuild( bool $publish, bool $taintedRefs ) {
-		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => $publish ] );
+		$this->overrideConfigValue( MainConfigNames::EditSubmitButtonLabelPublish, $publish );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
 		$url = 'https://creativecommons.org';

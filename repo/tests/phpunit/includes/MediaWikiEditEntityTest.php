@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Context\RequestContext;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -551,12 +552,10 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 	public function testAttemptSaveRateLimit( array $limits, array $groups, array $edits ) {
 		$repo = $this->getMockRepository();
 
-		$this->setMwGlobals( [
-			'wgRateLimits' => $limits,
-			'wgGroupPermissions' => [
-				'*' => [ 'edit' => true ],
-				'sysop' => [ 'noratelimit' => true ],
-			],
+		$this->overrideConfigValue( MainConfigNames::RateLimits, $limits );
+		$this->setGroupPermissions( [
+			'*' => [ 'edit' => true ],
+			'sysop' => [ 'noratelimit' => true ],
 		] );
 
 		$user = $this->getTestUser( $groups )->getUser();

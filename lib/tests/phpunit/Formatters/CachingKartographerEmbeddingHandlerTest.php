@@ -25,7 +25,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	protected function setUp(): void {
 		parent::setUp();
 		$this->markTestSkippedIfExtensionNotLoaded( 'Kartographer' );
-		$this->setMwGlobals( 'wgKartographerMapServer', 'http://192.0.2.0' );
+		$this->overrideConfigValue( 'KartographerMapServer', 'http://192.0.2.0' );
 	}
 
 	public function testGetHtml() {

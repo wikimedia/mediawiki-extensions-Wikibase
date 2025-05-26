@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\MainConfigNames;
 use SpecialPageTestBase;
 use Wikibase\Repo\Specials\SpecialMyLanguageFallbackChain;
 use Wikibase\Repo\WikibaseRepo;
@@ -31,11 +32,11 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 	}
 
 	public function testExecute() {
-		global $wgLanguageCode;
+		$languageCode = $this->getConfVar( MainConfigNames::LanguageCode );
 
-		[ $output ] = $this->executeSpecialPage( '', null, $wgLanguageCode );
+		[ $output ] = $this->executeSpecialPage( '', null, $languageCode );
 
-		$expectedString = $wgLanguageCode . ' - ';
+		$expectedString = $languageCode . ' - ';
 		$this->assertIsInt( stripos( $output, $expectedString ),
 			"Cannot find '$expectedString' in the list of fallback languages in '$output'." );
 	}

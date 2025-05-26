@@ -9,6 +9,7 @@ use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Exception\HttpError;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
@@ -75,7 +76,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->interfaceTitle = Title::makeTitle( NS_SPECIAL, 'EntityDataRequestHandlerTest' );
 		// ensure the namespace name doesn’t get translated
-		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
 
 		$this->obLevel = ob_get_level();
 
@@ -101,7 +102,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	protected function newHandler(): EntityDataRequestHandler {
-		global $wgScriptPath;
+		$scriptPath = $this->getConfVar( MainConfigNames::ScriptPath );
 
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
@@ -198,7 +199,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			$extensions,
 			[
 				// “Special” needs no translation because we override the content language
-				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
+				$scriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
 				'/{entity_id}.json&revision={revision_id}',
 			],
 			$entityTitleStoreLookup

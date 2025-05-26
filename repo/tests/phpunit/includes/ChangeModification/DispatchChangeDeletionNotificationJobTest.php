@@ -37,11 +37,10 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 
 		$this->expectedLocalClientWikis = [ 'dewiki', 'enwiki', 'poolwiki' ];
 
-		global $wgWBRepoSettings;
-		$newRepoSettings = $wgWBRepoSettings;
+		$newRepoSettings = $this->getConfVar( 'WBRepoSettings' );
 		$newRepoSettings['localClientDatabases'] = $this->expectedLocalClientWikis;
 		$newRepoSettings['deleteNotificationClientRCMaxAge'] = 1 * 24 * 3600; // (1 days)
-		$this->setMwGlobals( 'wgWBRepoSettings', $newRepoSettings );
+		$this->overrideConfigValue( 'WBRepoSettings', $newRepoSettings );
 	}
 
 	public function testShouldDispatchJobsForClientWikis() {
