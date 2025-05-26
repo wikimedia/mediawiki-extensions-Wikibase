@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Belkacem77"
+			"Belkacem77",
+			"ZiriSut"
 		]
 	},
 	"wikibase-edit": "ẓreg",
@@ -11,5 +12,6 @@
 	"wikibase-description-empty": "Ulac aglam d-ittunefken",
 	"wikibase-sitelinks-special": "Ismal-nniḍen",
 	"wikibase-statementview-rank-normal": "Adar amagnu",
-	"wikibase-pageinfo-subscription-none": "Ulac"
+	"wikibase-pageinfo-subscription-none": "Ulac",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Agrudem n useqdac n uẓrag n uziraz"
 }

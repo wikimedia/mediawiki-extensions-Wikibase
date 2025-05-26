@@ -533,5 +533,7 @@
 	"wikibase-scoped-search-search-entities": "Леха субъекташ",
 	"wikibase-scoped-search-search-entities-description": "{{SITENAME}} тайп-тайпана хӀуманаш лаха",
 	"wikibase-scoped-search-item-scope-name": "Элементаш",
-	"wikibase-scoped-search-property-scope-name": "Башхаллаш"
+	"wikibase-scoped-search-property-scope-name": "Башхаллаш",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Мобилан хийцамийн интерфейс UI",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Керла, экспериментан мобилан хийцамийн UI дӀахӀоттайе."
 }

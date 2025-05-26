@@ -299,10 +299,11 @@
 	"apihelp-wbsetsitelink-example-6": "Cambia le insignias pro le ligamine al pagina polonese ab le elemento con ID <samp>$1</samp> a duo insignias que puncta al elementos con IDs \"Q2\" e \"Q149\" sin fornir le titulo del ligamine.",
 	"apihelp-wbsetsitelink-example-7": "Cambiar le ligamine al pagina polonese ab le elemento con ID <samp>$1</samp> sin cambiar le insignias.",
 	"apihelp-wbsetsitelink-example-8": "Cambiar le ligamine al pagina polonese ab le elemento con ID <samp>$1</samp> e remover tote su insignias.",
-	"apihelp-wbformatentities-summary": "Formata identificatores de identitate in HTML.",
+	"apihelp-wbformatentities-summary": "Formata identificatores de identitate in HTML o in texto simple.",
 	"apihelp-wbformatentities-extended-description": "Le lingua pote esser specificate con le parametro global <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "Le IDs de entitate a formatar.",
-	"apihelp-wbformatentities-example-1": "Formatar un singule ID de elemento.",
+	"apihelp-wbformatentities-param-generate": "Le formato de sortita desirate a generar.",
+	"apihelp-wbformatentities-example-1": "Formatar un singule ID de elemento in HTML.",
 	"apihelp-wbformatentities-example-2": "Formatar un ID de elemento e un ID de proprietate.",
 	"apihelp-wbformatentities-example-3": "Formatar un ID de elemento, un ID de proprietate e un ID de lexema.",
 	"apihelp-wbformatentities-example-4": "Formatar tres IDs de elementos in francese."
