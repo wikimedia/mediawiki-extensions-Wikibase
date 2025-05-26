@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Belkacem77",
-			"YouvaDjouadi"
+			"YouvaDjouadi",
+			"ButterflyOfFire"
 		]
 	},
 	"tooltip-t-wikibase": "Aseɣwen ɣer uferdis n yifecka uqqinen",
@@ -10,6 +11,8 @@
 	"wikibase-dataitem": "Aferdis {{WBREPONAME}}",
 	"wikibase-editlinks": "Ẓreg iseɣwan",
 	"wikibase-editlinkstitle": "Ẓreg iseɣwan agerutlayanen",
+	"wikibase-linkitem-input-site": "Tutlayt",
+	"wikibase-linkitem-input-page": "Asebter :",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ffer",
 	"wikibase-rc-hide-wikidata-show": "Sken",

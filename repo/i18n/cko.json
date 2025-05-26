@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hasslaebetch"
+			"Hasslaebetch",
+			"Biema",
+			"Yaw-kan"
 		]
 	},
-	"wikibase-add": "bukasu"
+	"wikibase-edit": "Fura nu",
+	"wikibase-add": "bukasu",
+	"wikibase-sitelinks-special": "Bue nyiŋgam"
 }
