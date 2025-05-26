@@ -200,6 +200,13 @@
 				"WikibaseClient.Store"
 			]
 		},
+		"LabelDescriptionPrefetch": {
+			"class": "\\Wikibase\\Client\\Hooks\\LabelDescriptionPrefetchHookHandler",
+			"services": [
+				"WikibaseClient.LanguageFallbackChainFactory",
+				"WikibaseClient.TermBuffer"
+			]
+		},
 		"LinkerMakeExternal": {
 			"class": "\\Wikibase\\Client\\Hooks\\LinkerMakeExternalLinkHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\LinkerMakeExternalLinkHookHandler::factory",
@@ -327,6 +334,7 @@
 			"Trivial"
 		],
 		"ContentAlterParserOutput": "ParserOutputUpdate",
+		"ChangesListInitRows": "LabelDescriptionPrefetch",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPage",
 		"CirrusSearchAddQueryFeatures": "CirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "EchoGetBundleRulesHandler",

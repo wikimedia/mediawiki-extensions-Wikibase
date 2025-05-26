@@ -15,39 +15,43 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
 class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
-	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
 	private Language $contentLanguage;
 	private EntityIdParser $entityIdParser;
 	private bool $resolveWikibaseLabelsFlag;
 	private string $repoUrlHost;
 	private bool $isRepoEntityNamespaceMain;
-
 	private ClientEntityLinkFormatter $clientEntityLinkFormatter;
+	private FallbackLabelDescriptionLookup $labelDescriptionLookup;
+	private ?Title $currentPageTitle;
 
 	public function __construct(
 		Language $contentLanguage,
 		ClientEntityLinkFormatter $clientEntityLinkFormatter,
 		EntityIdParser $entityIdParser,
 		bool $isRepoEntityNamespaceMain,
-		FallbackLabelDescriptionLookupFactory $fallbackLabelFactory,
+		FallbackLabelDescriptionLookup $labelDescriptionLookup,
+		string $repoUrlHost,
 		bool $resolveWikibaseLabelsFlag,
-		string $repoUrlHost
+		?Title $title
 	) {
-		$this->labelDescriptionLookupFactory = $fallbackLabelFactory;
 		$this->contentLanguage = $contentLanguage;
 		$this->entityIdParser = $entityIdParser;
 		$this->isRepoEntityNamespaceMain = $isRepoEntityNamespaceMain;
 		$this->clientEntityLinkFormatter = $clientEntityLinkFormatter;
 		$this->resolveWikibaseLabelsFlag = $resolveWikibaseLabelsFlag;
 		$this->repoUrlHost = $repoUrlHost;
+		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->currentPageTitle = $title;
 	}
 
 	public static function factory(
@@ -55,20 +59,25 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		ClientEntityLinkFormatter $clientEntityLinkFormatter,
 		EntityIdParser $entityIdParser,
 		EntityNamespaceLookup $entityNamespaceLookup,
-		FallbackLabelDescriptionLookupFactory $fallbackLabelFactory,
+		FallbackLabelDescriptionLookupFactory $fallbackLabelDescriptionLookupFactory,
 		SettingsArray $settings
 	): self {
+		$context = RequestContext::getMain();
 		$resolveWikibaseLabelsFlag = $settings->getSetting( 'resolveWikibaseLabels' );
 		$repoUrlHost = parse_url( $settings->getSetting( 'repoUrl' ), PHP_URL_HOST );
+		$language = $context->getUser()->isSafeToLoad() ? $context->getLanguage() : $contentLanguage;
+		$terms = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
+		$labelDescriptionLookup = $fallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language, [], $terms );
 		$isRepoEntityNamespaceMain = $entityNamespaceLookup->isEntityNamespace( 0 );
 		return new self(
-			$contentLanguage,
+			$language,
 			$clientEntityLinkFormatter,
 			$entityIdParser,
 			$isRepoEntityNamespaceMain,
-			$fallbackLabelFactory,
+			$labelDescriptionLookup,
+			$repoUrlHost,
 			$resolveWikibaseLabelsFlag,
-			$repoUrlHost
+			$context->getTitle()
 		);
 	}
 
@@ -82,9 +91,9 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		return $parsedUrlHost === $this->repoUrlHost;
 	}
 
-	public function isRecentChangeOrWatchlist( Title $currentTitle ): bool {
-		return $currentTitle->isSpecialPage() &&
-		   ( $currentTitle->isSpecial( 'Recentchanges' ) || $currentTitle->isSpecial( 'Watchlist' ) );
+	public function isRecentChangeOrWatchlist(): bool {
+		return $this->currentPageTitle !== null && $this->currentPageTitle->isSpecialPage() &&
+			( $this->currentPageTitle->isSpecial( 'Recentchanges' ) || $this->currentPageTitle->isSpecial( 'Watchlist' ) );
 	}
 
 	/**
@@ -96,10 +105,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
 	public function onLinkerMakeExternalLink( &$url, &$text, &$link, &$attribs, $linkType ) {
-		$context = RequestContext::getMain();
-		$currentPageTitle = $context->getOutput()->getTitle();
-
-		if ( !$this->resolveWikibaseLabelsFlag || !$this->isRecentChangeOrWatchlist( $currentPageTitle ) || !$this->isRepoUrl( $url ) ) {
+		if ( !$this->resolveWikibaseLabelsFlag || !$this->isRecentChangeOrWatchlist() || !$this->isRepoUrl( $url ) ) {
 			return;
 		}
 
@@ -126,14 +132,9 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 			return;
 		}
 
-		$labelDescriptionLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$this->contentLanguage,
-			array_values( [ $parsedEntityId ] )
-		);
-
 		try {
-			$labelData = $this->termFallbackToTermData( $labelDescriptionLookup->getLabel( $parsedEntityId ) );
-			$descriptionData = $this->termFallbackToTermData( $labelDescriptionLookup->getDescription( $parsedEntityId ) );
+			$labelData = $this->termFallbackToTermData( $this->labelDescriptionLookup->getLabel( $parsedEntityId ) );
+			$descriptionData = $this->termFallbackToTermData( $this->labelDescriptionLookup->getDescription( $parsedEntityId ) );
 		} catch ( LabelDescriptionLookupException $err ) {
 			return;
 		}
