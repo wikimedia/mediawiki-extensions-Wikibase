@@ -56,7 +56,6 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 
 	protected function tearDown(): void {
 		$this->getSettings()->setSetting( 'allowEntityImport', $this->saveAllowImport );
-		Title::clearCaches();
 
 		parent::tearDown();
 	}
