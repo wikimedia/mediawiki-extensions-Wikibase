@@ -302,7 +302,6 @@
 		}
 	},
 	"Hooks": {
-		"AbortEmailNotification": "Trivial",
 		"ArticleDeleteAfterSuccess": "DeletePageNoticeCreator",
 		"BeforeCreateEchoEvent": [
 			"EchoSetup"
@@ -413,6 +412,11 @@
 		"ChangeDeletionNotification": "\\Wikibase\\Client\\ChangeModification\\ChangeDeletionNotificationJob::newFromGlobalState",
 		"wikibase-InjectRCRecords": "\\Wikibase\\Client\\Changes\\InjectRCRecordsJob::newFromGlobalState"
 	},
+	"NotificationMiddleware": [
+		{
+			"class": "Wikibase\\Client\\Notifications\\WikibaseWatchlistNotificationMiddleware"
+		}
+	],
 	"RecentChangesFlags": {
 		"wikibase-edit": {
 			"letter": "wikibase-rc-wikibase-edit-letter",
