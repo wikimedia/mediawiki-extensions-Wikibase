@@ -17,7 +17,8 @@
 			"נדב ס",
 			"ערן",
 			"פוילישער",
-			"שמזן"
+			"שמזן",
+			"מיכי י-ם"
 		]
 	},
 	"wikibase-desc": "מאגר נתונים מובְנים",
@@ -476,7 +477,7 @@
 	"wikibase-listdatavaluetypes-name-time": "זמן",
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "מזהה ישות ויקיבייס",
 	"wikibase-listdatavaluetypes-generalbody": "סוג הערך לסוג הנתונים הזה הוא <code>$1</code>.",
-	"wikibase-concept-uri": "כתובת URI לרעיון",
+	"wikibase-concept-uri": "כתובת URI לדף",
 	"wikibase-concept-uri-tooltip": "כתובת URI שמזהה את הרעיון שהפריט הזה מתאר",
 	"wikibase-pageimage-helptext": "התמונה לקוחה מתוך הקביעות על הפריט הזה. באפשרותך לשנות את התמונה באמצעות שינוי הקביעה.",
 	"datatypes-type-url": "URL",

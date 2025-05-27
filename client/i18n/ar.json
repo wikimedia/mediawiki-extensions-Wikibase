@@ -30,17 +30,18 @@
 			"ديفيد",
 			"زكريا",
 			"علاء",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Lolekek"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
 	"tooltip-t-wikibase": "الربط بعنصر مرتبط في مستودع البيانات",
 	"wikibase-after-page-move": "ينبغي أن يكون نقلك الآن [$1 منعكسا في وصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] قد أزيلت. نطلب منك التحقق من حدوث هذا.",
-	"wikibase-comment-add": "تم إنشاء عنصر {{WBREPONAME}}.",
+	"wikibase-comment-add": "أُنشئ عنصر {{WBREPONAME}}.",
 	"wikibase-comment-remove": "تم حذف عنصر {{WBREPONAME}} المرتبط. تمت إزالة وصلات اللغة.",
-	"wikibase-comment-linked": "تم ربط عنصر {{WBREPONAME}} مع هذه الصفحة.",
-	"wikibase-comment-unlink": "تم فصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. تمت إزالة وصلات اللغة.",
+	"wikibase-comment-linked": "رُبط عنصر {{WBREPONAME}} مع هذه الصفحة.",
+	"wikibase-comment-unlink": "فُصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. أزيلت وصلات اللغة.",
 	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "وصلة اللغة المضافة:$1",

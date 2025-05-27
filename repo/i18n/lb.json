@@ -227,7 +227,7 @@
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|Ausso|Aussoen}}, $2 {{PLURAL:$2|Säitelink|Säitelinken}}",
 	"wikibase-setlabel-introfull": "Dir gitt elo eng Etikett op $2 fir [[:$1]] an.",
 	"wikibase-setlabel-label": "Etikett:",
-	"wikibase-setlabel-submit": "D'Etikett festleeën",
+	"wikibase-setlabel-submit": "Etikett festleeën",
 	"special-setdescription": "Eng Beschreiwung fir d'Element/Eegenschaft festleeën",
 	"wikibase-setdescription-introfull": "Dir gitt elo eng Beschreiwung op $2 fir [[:$1]] an.",
 	"wikibase-setdescription-label": "Beschreiwung:",
