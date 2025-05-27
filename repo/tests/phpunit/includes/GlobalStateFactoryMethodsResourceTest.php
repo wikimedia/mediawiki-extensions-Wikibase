@@ -46,7 +46,7 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 		$this->assertTrue( true );
 	}
 
-	public function provideHookHandlerNames(): iterable {
+	public static function provideHookHandlerNames(): iterable {
 		$hookHandlerNames = parent::provideHookHandlerNames();
 		foreach ( $hookHandlerNames as $hookHandlerName ) {
 			if ( $hookHandlerName[0] === 'GetBetaFeaturePreferences' &&
