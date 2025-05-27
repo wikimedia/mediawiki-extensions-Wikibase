@@ -3,10 +3,13 @@
 		"authors": [
 			"Biema",
 			"Hasslaebetch",
+			"Nachim",
 			"Yaw-kan"
 		]
 	},
 	"wikibase-edit": "Fura nu",
 	"wikibase-add": "bukasu",
+	"wikibase-label-empty": "Kekerewa be wo má su.",
+	"wikibase-description-empty": "Kekerewa be wo má nu",
 	"wikibase-sitelinks-special": "Bue nyiŋgam"
 }
