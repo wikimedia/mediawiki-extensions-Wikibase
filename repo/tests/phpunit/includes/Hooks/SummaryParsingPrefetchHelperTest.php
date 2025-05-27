@@ -4,9 +4,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWiki\Revision\RevisionRecord;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Repo\Hooks\SummaryParsingPrefetchHelper;
 
@@ -19,12 +20,12 @@ use Wikibase\Repo\Hooks\SummaryParsingPrefetchHelper;
  */
 class SummaryParsingPrefetchHelperTest extends TestCase {
 
-	/** @var PrefetchingTermLookup */
-	private $prefetchingLookup;
+	/** @var TermBuffer&MockObject */
+	private $termBuffer;
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
+		$this->termBuffer = $this->createMock( TermBuffer::class );
 	}
 
 	/**
@@ -32,7 +33,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	 */
 	public function testPrefetchTermsForMentionedEntities( callable $rowsFactory, array $expected ) {
 		$rows = $rowsFactory( $this );
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$helper = new SummaryParsingPrefetchHelper( $this->termBuffer );
 
 		$expectedEntityIds = [];
 		$entityIdParser = new BasicEntityIdParser();
@@ -40,7 +41,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 			$expectedEntityIds[] = $entityIdParser->parse( $idSerialization );
 		}
 
-		$this->prefetchingLookup->expects( empty( $expectedEntityIds ) ? $this->never() : $this->once() )
+		$this->termBuffer->expects( $expectedEntityIds ? $this->once() : $this->never() )
 			->method( 'prefetchTerms' )
 			->with(
 				$expectedEntityIds,
@@ -56,14 +57,12 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 	 */
 	public function testShouldExtractProperties( callable $rowsFactory, array $expected ) {
 		$rows = $rowsFactory( $this );
-		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$helper = new SummaryParsingPrefetchHelper( $this->termBuffer );
 		$actualOutput = $helper->extractSummaryMentions( $rows );
 
 		$this->assertSameSize( $expected, $actualOutput );
 
-		$stringOutput = array_map( function ( $propId ) {
-			return $propId->getSerialization();
-		}, $actualOutput );
+		$stringOutput = array_map( fn ( $entityId ) => $entityId->getSerialization(), $actualOutput );
 
 		$this->assertSame( sort( $expected ), sort( $stringOutput ) );
 	}
@@ -75,7 +74,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 				[ 'P31' ],
 			],
 			'Links to main namespace' => [
-				fn () => [ (object)[ 'rev_comment_text' => '[[P11]] [[Q22]] [[P33]]' ] ],
+				fn () => [ (object)[ 'rev_comment_text' => '[[P11]] [[Q22]][[P33]]' ] ],
 				[ 'P11', 'Q22', 'P33' ],
 			],
 			'wdbeta:Special:EntityPage/P123' => [
@@ -88,7 +87,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 			'Some other comment not parsed as link' => [
 				fn () => [
 					(object)[ 'rev_comment_text' => 'Great update /P14 stockholm' ],
-					(object)[ 'rc_comment_text' => 'P31]]' ],
+					(object)[ 'rc_comment_text' => 'P31]] [[PP4]] [[unrelated|P5]] [[P10000000000]]' ],
 					(object)[ 'rc_comment_text' => '[P31:P31]' ],
 				],
 				[],
@@ -105,7 +104,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 		];
 	}
 
-	private function mockRevisionRecord( string $commentString ) {
+	private function mockRevisionRecord( string $commentString ): RevisionRecord {
 		$mock = $this->createMock( RevisionRecord::class );
 		$mock->method( 'getComment' )->willReturn( (object)[ 'text' => $commentString ] );
 		return $mock;
