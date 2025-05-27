@@ -57,9 +57,9 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 				'@' . implode( '.*',
 					[
 						'<b[^<>]*>[^<>]*\b5\b[^<>]*1[^<>]*</b>',
-						'<td[^<>]*>[^<>]*\b5\b[^<>]*</td>',
-						'<td[^<>]*>[^<>]*\b6\b[^<>]*</td>',
-						'<td[^<>]*>[^<>]*\b4\b[^<>]*</td>',
+						'<td[^<>]*>\s*5\s*</td>',
+						'<td[^<>]*>\s*6\s*</td>',
+						'<td[^<>]*>\s*4\s*</td>',
 						'<td[^<>]*>[^<>]*\b1\b[^<>]*</td>',
 					]
 				) . '@s',
@@ -100,7 +100,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 			],
 			'HTML injection' => [
 				QuantityValue::newFromNumber( '+5', '<a>m</a>', '+6', '+4' ),
-				'@\b5 &lt;a&gt;m&lt;/a&gt;@',
+				'@&lt;a&gt;m&lt;/a&gt;@',
 			],
 		];
 	}

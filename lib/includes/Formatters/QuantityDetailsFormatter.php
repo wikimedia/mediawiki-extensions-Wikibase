@@ -96,15 +96,14 @@ class QuantityDetailsFormatter implements ValueFormatter {
 			[ 'class' => 'wb-details wb-quantity-details' ] );
 
 		$html .= $this->renderLabelValuePair( 'amount',
-			$this->formatNumber( $value->getAmount(), $value->getUnit() ) );
+			$this->formatNumber( $value->getAmount() ) );
 		if ( $value instanceof QuantityValue ) {
 			$html .= $this->renderLabelValuePair( 'upperBound',
-				$this->formatNumber( $value->getUpperBound(), $value->getUnit() ) );
+				$this->formatNumber( $value->getUpperBound() ) );
 			$html .= $this->renderLabelValuePair( 'lowerBound',
-				$this->formatNumber( $value->getLowerBound(), $value->getUnit() ) );
+				$this->formatNumber( $value->getLowerBound() ) );
 		}
 		/**
-		 * @todo Display URIs to entities in the local repository as clickable labels.
 		 * @todo Display URIs that start with http:// or https:// as clickable links.
 		 * @todo Mark "unitless" units somehow, e.g. via CSS or with an appended message.
 		 * @see WikibaseValueFormatterBuilders::$unitOneUris
@@ -118,13 +117,12 @@ class QuantityDetailsFormatter implements ValueFormatter {
 
 	/**
 	 * @param DecimalValue $number
-	 * @param string $unit URI
 	 *
 	 * @return string HTML
 	 */
-	private function formatNumber( DecimalValue $number, $unit ) {
+	private function formatNumber( DecimalValue $number ): string {
 		return htmlspecialchars( $this->numberFormatter->format(
-			new UnboundedQuantityValue( $number, $unit )
+			new UnboundedQuantityValue( $number, '1' )
 		) );
 	}
 
