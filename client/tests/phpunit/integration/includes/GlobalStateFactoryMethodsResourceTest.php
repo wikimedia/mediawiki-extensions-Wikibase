@@ -28,6 +28,8 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 
 	protected ?string $serviceNamePrefix = 'WikibaseClient.';
 
+	protected static bool $requireHookHandlers = true;
+
 	protected function setUp(): void {
 		parent::setUp();
 
