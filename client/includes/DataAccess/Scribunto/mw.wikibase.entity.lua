@@ -248,21 +248,6 @@ function methodtable.getSitelink( entity, globalSiteId )
 	return sitelink.title
 end
 
--- @param {table} original
-local function deepCopyTable(original)
-    local copy = {}
-    for k, v in pairs(original) do
-        if type(v) == "table" then
-            -- Recursively copy tables
-            copy[k] = deepCopyTable(v)
-        else
-            -- Directly copy non-table values
-            copy[k] = v
-        end
-    end
-    return copy
-end
-
 -- @param {table} entity
 -- @param {string} propertyLabelOrId
 -- @param {string} funcName for error logging
@@ -281,8 +266,8 @@ local function getEntityStatements( entity, propertyLabelOrId, funcName )
 	end
 
 	if propertyId and entity.claims[propertyId] then
-		-- Create a deep copy of the statements table to prevent entity mutability.
-		return deepCopyTable(entity.claims[propertyId])
+		-- Create a deep copy of the table to prevent unexpected value changes (T270851).
+		return mw.clone(entity.claims[propertyId])
 	end
 
 	return {}
