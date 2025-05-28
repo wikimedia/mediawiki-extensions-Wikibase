@@ -320,7 +320,7 @@
 	"wikibase-mergeitems-toid": "統合先の ID",
 	"wikibase-mergeitems-submit": "項目を統合",
 	"wikibase-mergeitems-success": "$1は統合により$3へリダイレクトされました。",
-	"wikibase-itemmerge-redirect": "これらの項目はすでに統合されています。",
+	"wikibase-itemmerge-redirect": "これらの項目は既に統合されています。",
 	"wikibase-itemmerge-missing-parameter": "不完全な入力",
 	"wikibase-itemmerge-not-item": "指定したエンティティは項目ではありません。",
 	"wikibase-itemmerge-failed-save": "項目を保存できませんでした。",

@@ -2,9 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Hasslaebetch",
-			"Yaw-kan"
+			"Yaw-kan",
+			"Biema",
+			"Nachim"
 		]
 	},
 	"wikibase-edit": "Fura nu",
-	"wikibase-add": "bukasu"
+	"wikibase-add": "bukasu",
+	"wikibase-label-empty": "Kekerewa be wo má su.",
+	"wikibase-description-empty": "Kekerewa be wo má nu",
+	"wikibase-sitelinks-special": "Bue nyiŋgam"
 }
