@@ -7,7 +7,7 @@ const path = require( 'path' );
 function findSchemasFiles() {
 	const domainsPath = path.join( __dirname, '../../domains' );
 	if ( !fs.existsSync( domainsPath ) ) {
-		throw new Error( `Domains directory not found at: ${domainsPath}` );
+		throw new Error( `plugin-filter-schemas: Domains directory not found at: ${domainsPath}` );
 	}
 
 	const schemaFiles = [];
@@ -28,7 +28,7 @@ function findSchemasFiles() {
 
 				if ( stat.isDirectory() ) {
 					searchForSchemas( fullPath );
-				} else if ( item === 'schemas.json' ) {
+				} else if ( item === 'schemas.json' || item === 'schemas.js' ) {
 					schemaFiles.push( fullPath );
 				}
 			} );
@@ -38,7 +38,7 @@ function findSchemasFiles() {
 	} );
 
 	if ( schemaFiles.length === 0 ) {
-		throw new Error( 'No schemas.json file found in any specs directory' );
+		throw new Error( 'plugin-filter-schemas: No schemas.json or schemas.js file found in any specs directory' );
 	}
 
 	return schemaFiles;
@@ -49,7 +49,9 @@ function loadSchemas() {
 	const allSchemas = {};
 
 	schemaFiles.forEach( ( source ) => {
-		const schemas = JSON.parse( ( fs.readFileSync( source, 'utf8' ) ) );
+		// Ignore security rule - only runs in CI and `source` doesn't come from user input
+		// eslint-disable-next-line security/detect-non-literal-require
+		const schemas = require( source );
 		Object.assign( allSchemas, schemas );
 	} );
 
