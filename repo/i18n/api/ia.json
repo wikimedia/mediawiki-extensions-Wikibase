@@ -306,5 +306,6 @@
 	"apihelp-wbformatentities-example-1": "Formatar un singule ID de elemento in HTML.",
 	"apihelp-wbformatentities-example-2": "Formatar un ID de elemento e un ID de proprietate.",
 	"apihelp-wbformatentities-example-3": "Formatar un ID de elemento, un ID de proprietate e un ID de lexema.",
-	"apihelp-wbformatentities-example-4": "Formatar tres IDs de elementos in francese."
+	"apihelp-wbformatentities-example-4": "Formatar tres IDs de elementos in francese.",
+	"apihelp-wbformatentities-example-5": "Formatar tres identificatores de elemento e un identificator de proprietate in texto simple."
 }
