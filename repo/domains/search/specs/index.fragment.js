@@ -62,7 +62,7 @@ const openapi = {
 		}
 	},
 	"components": {
-		"parameters": require( './global/parameters' ),
+		"parameters": parameters.components,
 		"responses": require( './global/responses' ),
 	},
 };

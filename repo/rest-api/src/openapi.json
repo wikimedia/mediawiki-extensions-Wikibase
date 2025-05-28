@@ -33632,15 +33632,6 @@
         },
         "example": "Bearer mF_9.B5f-4.1JqM"
       },
-      "SearchQuery": {
-        "in": "query",
-        "name": "q",
-        "description": "The term to search labels by",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      },
       "SearchLanguage": {
         "in": "query",
         "name": "language",
