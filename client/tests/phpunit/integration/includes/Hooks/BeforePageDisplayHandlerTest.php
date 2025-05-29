@@ -293,7 +293,7 @@ class BeforePageDisplayHandlerTest extends MediaWikiIntegrationTestCase {
 		$noexternallanglinks = null
 	) {
 		$output = new OutputPage( $context );
-		$output->setLanguageLinks( $langLinks );
+		$output->addLanguageLinks( $langLinks );
 
 		if ( $prefixedId ) {
 			$output->setProperty( 'wikibase_item', $prefixedId );
