@@ -12059,40 +12059,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "aliases": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "aliases"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "tags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "default": []
-                      },
-                      "bot": {
-                        "type": "boolean",
-                        "default": false
-                      },
-                      "comment": {
-                        "type": "string"
-                      }
+                "type": "object",
+                "properties": {
+                  "aliases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "bot": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "comment": {
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "aliases"
                 ]
               },
               "example": {
@@ -25946,40 +25937,31 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "aliases": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        }
-                      }
-                    },
-                    "required": [
-                      "aliases"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "tags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "default": []
-                      },
-                      "bot": {
-                        "type": "boolean",
-                        "default": false
-                      },
-                      "comment": {
-                        "type": "string"
-                      }
+                "type": "object",
+                "properties": {
+                  "aliases": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
                     }
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "bot": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "comment": {
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "aliases"
                 ]
               },
               "example": {
