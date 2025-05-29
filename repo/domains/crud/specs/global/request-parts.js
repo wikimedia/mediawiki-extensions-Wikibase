@@ -16,7 +16,7 @@ const MediawikiEdit = {
 	}
 };
 
-const PatchDocument = {
+const PatchRequest = {
 	"type": "object",
 	"properties": {
 		"patch": {
@@ -44,16 +44,10 @@ const PatchDocument = {
 				},
 				"required": [ "op", "path" ]
 			}
-		}
+		},
+		...MediawikiEdit.properties,
 	},
 	"required": [ "patch" ]
-};
-
-const PatchRequest = {
-	"allOf": [
-		PatchDocument,
-		MediawikiEdit
-	]
 };
 
 module.exports = {
