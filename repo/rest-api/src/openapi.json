@@ -9445,37 +9445,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "description": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "description"
-                    ]
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
                   },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "tags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "default": []
-                      },
-                      "bot": {
-                        "type": "boolean",
-                        "default": false
-                      },
-                      "comment": {
-                        "type": "string"
-                      }
-                    }
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "bot": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "comment": {
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "description"
                 ]
               },
               "example": {
@@ -23366,37 +23357,28 @@
           "content": {
             "application/json": {
               "schema": {
-                "allOf": [
-                  {
-                    "type": "object",
-                    "properties": {
-                      "description": {
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "description"
-                    ]
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
                   },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "tags": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "default": []
-                      },
-                      "bot": {
-                        "type": "boolean",
-                        "default": false
-                      },
-                      "comment": {
-                        "type": "string"
-                      }
-                    }
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": []
+                  },
+                  "bot": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "comment": {
+                    "type": "string"
                   }
+                },
+                "required": [
+                  "description"
                 ]
               },
               "example": {
