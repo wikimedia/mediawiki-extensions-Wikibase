@@ -1,0 +1,12 @@
+'use strict';
+
+module.exports = {
+	"PatchItemExample": {
+		"patch": [
+			{ "op": "replace", "path": "/labels/en", "value": "Jane Doe" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "Update the English label"
+	}
+};

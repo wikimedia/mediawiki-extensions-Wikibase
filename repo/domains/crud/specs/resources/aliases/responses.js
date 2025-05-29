@@ -1,0 +1,116 @@
+'use strict';
+
+module.exports = {
+	"ItemAliases": {
+		"description": "Item's aliases by language",
+		"headers": {
+			"ETag": {
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"X-Authenticated-User": {
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/components/schemas/Aliases" },
+				"example": {
+					"en": [ "Jane M. Doe", "JD" ],
+					"ru": [ "Джейн М. Доу" ]
+				}
+			}
+		}
+	},
+	"PropertyAliases": {
+		"description": "Property's aliases by language",
+		"headers": {
+			"ETag": {
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"X-Authenticated-User": {
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": { "$ref": "#/components/schemas/Aliases" },
+				"example": {
+					"en": [ "is a", "is an" ],
+					"ru": [ "представляет собой", "является" ]
+				}
+			}
+		}
+	},
+	"ItemAliasesInLanguage": {
+		"description": "Item's aliases in a specific language",
+		"headers": {
+			"ETag": {
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"X-Authenticated-User": {
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"example": [ "Jane M. Doe", "JD" ]
+			}
+		}
+	},
+	"PropertyAliasesInLanguage": {
+		"description": "Property's aliases in a specific language",
+		"headers": {
+			"ETag": {
+				"description": "Last entity revision number",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"Last-Modified": {
+				"description": "Last modified date",
+				"schema": { "type": "string" },
+				"required": true
+			},
+			"X-Authenticated-User": {
+				"description": "Optional username of the user making the request",
+				"schema": { "type": "string" }
+			}
+		},
+		"content": {
+			"application/json": {
+				"schema": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"example": [ "is a", "is an" ]
+			}
+		}
+	}
+};
