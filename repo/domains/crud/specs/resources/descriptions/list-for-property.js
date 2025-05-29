@@ -17,20 +17,9 @@ const PatchPropertyDescriptionsRequest = {
 const PropertyDescriptionsResponse = {
 	"description": "Property's descriptions by language",
 	"headers": {
-		"ETag": {
-			"description": "Last entity revision number",
-			"schema": { "type": "string" },
-			"required": true
-		},
-		"Last-Modified": {
-			"description": "Last modified date",
-			"schema": { "type": "string" },
-			"required": true
-		},
-		"X-Authenticated-User": {
-			"description": "Optional username of the user making the request",
-			"schema": { "type": "string" }
-		}
+		"ETag": { "$ref": "#/components/headers/ETag" },
+		"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+		"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 	},
 	"content": {
 		"application/json": {

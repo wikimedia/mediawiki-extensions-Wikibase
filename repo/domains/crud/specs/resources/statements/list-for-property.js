@@ -42,25 +42,10 @@ module.exports = {
 			"201": {
 				"description": "The newly created Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID.",
 				"headers": {
-					"ETag": {
-						"description": "Last entity revision number",
-						"schema": { "type": "string" },
-						"required": true
-					},
-					"Last-Modified": {
-						"description": "Last modified date",
-						"schema": { "type": "string" },
-						"required": true
-					},
-					"Location": {
-						"description": "The URI of the newly created Statement",
-						"schema": { "type": "string" },
-						"required": true
-					},
-					"X-Authenticated-User": {
-						"description": "Optional username of the user making the request",
-						"schema": { "type": "string" }
-					}
+					"ETag": { "$ref": "#/components/headers/ETag" },
+					"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+					"Location": { "$ref": "#/components/headers/Location" },
+					"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 				},
 				"content": {
 					"application/json": {

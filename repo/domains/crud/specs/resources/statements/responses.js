@@ -114,20 +114,9 @@ module.exports = {
 	"ItemStatement": {
 		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Item's revision ID.",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -227,20 +216,9 @@ module.exports = {
 	"PropertyStatement": {
 		"description": "A Wikibase Statement. Please note that the value of the `ETag` header field refers to the Property's revision ID.",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -252,20 +230,9 @@ module.exports = {
 	"PropertyStatements": {
 		"description": "The Statements of a Property",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -388,15 +355,8 @@ module.exports = {
 	"StatementDeleted": {
 		"description": "The requested Statement was deleted",
 		"headers": {
-			"Content-Language": {
-				"description": "Language code of the language in which response is provided",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"Content-Language": { "$ref": "#/components/headers/Content-Language" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {

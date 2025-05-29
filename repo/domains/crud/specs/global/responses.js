@@ -526,20 +526,9 @@ module.exports = {
 	"Item": {
 		"description": "A single Wikibase Item",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -668,20 +657,9 @@ module.exports = {
 	"Sitelinks": {
 		"description": "A list of Sitelinks by Item id",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -704,20 +682,9 @@ module.exports = {
 	"Sitelink": {
 		"description": "A Sitelink by Item id",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -733,20 +700,9 @@ module.exports = {
 	"Property": {
 		"description": "A single Wikibase Property",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -798,11 +754,7 @@ module.exports = {
 	"NotModified": {
 		"description": "The specified resource has not been modified since last provided revision number or date",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" }
 		}
 	},
 	"MovedPermanently": {

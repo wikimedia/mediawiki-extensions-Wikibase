@@ -4,20 +4,9 @@ module.exports = {
 	"ItemDescription": {
 		"description": "Item's description in a specific language",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -29,20 +18,9 @@ module.exports = {
 	"PropertyDescription": {
 		"description": "Property's description in a specific language",
 		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"ETag": { "$ref": "#/components/headers/ETag" },
+			"Last-Modified": { "$ref": "#/components/headers/Last-Modified" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {
@@ -54,15 +32,8 @@ module.exports = {
 	"DescriptionDeleted": {
 		"description": "The description was deleted",
 		"headers": {
-			"Content-Language": {
-				"description": "Language code of the language in which response is provided",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
+			"Content-Language": { "$ref": "#/components/headers/Content-Language" },
+			"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 		},
 		"content": {
 			"application/json": {

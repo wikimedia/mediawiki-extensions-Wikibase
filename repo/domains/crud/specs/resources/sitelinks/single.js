@@ -142,15 +142,8 @@ module.exports = {
 			"200": {
 				"description": "The resource was deleted",
 				"headers": {
-					"Content-Language": {
-						"description": "Language code of the language in which response is provided",
-						"schema": { "type": "string" },
-						"required": true
-					},
-					"X-Authenticated-User": {
-						"description": "Optional username of the user making the request",
-						"schema": { "type": "string" }
-					}
+					"Content-Language": { "$ref": "#/components/headers/Content-Language" },
+					"X-Authenticated-User": { "$ref": "#/components/headers/X-Authenticated-User" }
 				},
 				"content": {
 					"application/json": {

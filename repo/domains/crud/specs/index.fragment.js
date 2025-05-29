@@ -65,6 +65,7 @@ const openapi = {
 		"parameters": require( './global/parameters' ),
 		"requestBodies": require( './global/requests' ),
 		"responses": require( './global/responses' ),
+		"headers": require( './global/headers' ),
 		"schemas": require( './global/schemas' ),
 		"examples": require( './global/examples' ),
 	},
