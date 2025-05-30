@@ -146,11 +146,11 @@ final class RepoHooks implements
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$skinName = $skin->getSkinName();
 			if ( $skinName === 'vector-2022' ) {
+				// IMPORTANT: Don't load Vue.js here as that would be a considerable amount of JS to pull on page load
+				// It will be lazy loaded by the search client via the SkinPageReadyConfig hook.
+				// See also onSkinPageReadyConfig() for further search setup.
 				if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) ) {
-					$out->addModules( 'vue' );
 					$out->addModuleStyles( 'wikibase.vector.scopedTypeaheadSearchStyles' );
-				} else {
-					$out->addModules( 'wikibase.vector.searchClient' );
 				}
 			} elseif ( $skinName !== 'minerva' ) {
 				// Minerva uses its own search widget.
@@ -1173,12 +1173,33 @@ final class RepoHooks implements
 	/** @inheritDoc */
 	public function onSkinPageReadyConfig( Context $context, array &$config ) {
 		$settings = WikibaseRepo::getSettings();
+
+		// Don't customize search on non-primary Wikibase repos
+		if ( $settings->getSetting( 'enableEntitySearchUI' ) !== true ) {
+			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+			return true;
+		}
+
+		$skin = $context->getSkin();
 		if ( $settings->getSetting( 'tmpEnableScopedTypeaheadSearch' ) &&
-			$context->getSkin() === 'vector-2022'
+			$skin === 'vector-2022'
 		) {
 			$config['search'] = true;
 			$config['searchModule'] = 'wikibase.vector.scopedTypeaheadSearch';
 			// Stop other hooks using this
+			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+			return false;
+		} elseif ( in_array( $skin, [ 'minerva' ] ) ) {
+			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
+			$typeaheadConfig = $mainConfig->get( 'MinervaTypeahead' );
+			$useTypeahead = $typeaheadConfig && $typeaheadConfig[ 'enabled' ];
+			if ( $useTypeahead ) {
+				$config['searchModule'] = 'wikibase.typeahead.search';
+				// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+				return false;
+			}
+		} elseif ( in_array( $skin, [ 'vector-2022' ] ) ) {
+			$config['searchModule'] = 'wikibase.typeahead.search';
 			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
 			return false;
 		}

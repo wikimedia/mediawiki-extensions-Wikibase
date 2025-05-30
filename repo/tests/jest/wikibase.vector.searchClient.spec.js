@@ -71,9 +71,7 @@ describe( 'Vector Search Client', () => {
 			},
 			fakeApiInstance
 		);
-		require( '../../resources/wikibase.vector.searchClient.js' );
-		expect( global.mw.config.set.mock.calls[ 0 ][ 0 ] ).toBe( 'wgVectorSearchClient' );
-		const vectorSearchClient = global.mw.config.set.mock.calls[ 0 ][ 1 ];
+		const vectorSearchClient = require( '../../resources/wikibase.typeahead.search/searchClient.js' );
 
 		const exampleSearchString = 'abc';
 		const vectorOffset = 20;
@@ -247,9 +245,7 @@ describe( 'Vector Search Client', () => {
 			},
 			fakeApiInstance
 		);
-		require( '../../resources/wikibase.vector.searchClient.js' );
-		expect( global.mw.config.set.mock.calls[ 0 ][ 0 ] ).toBe( 'wgVectorSearchClient' );
-		const vectorSearchClient = global.mw.config.set.mock.calls[ 0 ][ 1 ];
+		const vectorSearchClient = require( '../../resources/wikibase.typeahead.search/searchClient.js' );
 
 		const apiController = vectorSearchClient.fetchByTitle(
 			searchQuery,
