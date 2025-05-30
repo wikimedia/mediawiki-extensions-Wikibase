@@ -93,54 +93,43 @@ module.exports = {
 		"required": [ "title" ]
 	},
 	"Statement": {
-		"allOf": [
-			{
-				"type": "object",
-				"properties": {
-					"id": {
-						"description": "The globally unique identifier for this Statement",
-						"type": "string",
-						"readOnly": true
-					},
-					"rank": {
-						"description": "The rank of the Statement",
-						"type": "string",
-						"enum": [ "deprecated", "normal", "preferred" ],
-						"default": "normal"
-					}
-				}
-			},
-			schemaParts.PropertyValuePair,
-			{
-				"type": "object",
-				"properties": {
-					"qualifiers": {
-						"type": "array",
-						"items": { "$ref": "#/components/schemas/Qualifier" },
-						"default": []
-					},
-					"references": {
-						"type": "array",
-						"items": { "$ref": "#/components/schemas/Reference" },
-						"default": []
-					}
-				}
-			}
-		]
-	},
-	"Qualifier": schemaParts.PropertyValuePair,
-	"Reference": {
 		"type": "object",
 		"properties": {
-			"hash": {
-				"description": "Hash of the Reference",
+			"id": {
+				"description": "The globally unique identifier for this Statement",
 				"type": "string",
 				"readOnly": true
 			},
-			"parts": {
+			"rank": {
+				"description": "The rank of the Statement",
+				"type": "string",
+				"enum": [ "deprecated", "normal", "preferred" ],
+				"default": "normal"
+			},
+			...schemaParts.PropertyValuePair.properties,
+			"qualifiers": {
 				"type": "array",
 				"items": schemaParts.PropertyValuePair,
+				"default": []
+			},
+			"references": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+						"hash": {
+							"description": "Hash of the Reference",
+							"type": "string",
+							"readOnly": true
+						},
+						"parts": {
+							"type": "array",
+							"items": schemaParts.PropertyValuePair,
+						}
+					}
+				},
+				"default": []
 			}
 		}
-	}
+	},
 };
