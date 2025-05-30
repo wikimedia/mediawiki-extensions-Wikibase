@@ -1,7 +1,35 @@
 'use strict';
 
-const responses = require( './responses' );
 const requests = require( './requests' );
+
+const PropertyAliasesInLanguageResponse = {
+	"description": "Property's aliases in a specific language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": {
+				"type": "array",
+				"items": { "type": "string" }
+			},
+			"example": [ "is a", "is an" ]
+		}
+	}
+};
 
 module.exports = {
 	"get": {
@@ -18,7 +46,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.PropertyAliasesInLanguage,
+			"200": PropertyAliasesInLanguageResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"400": { "$ref": "#/components/responses/InvalidTermByLanguageInput" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
@@ -56,11 +84,11 @@ module.exports = {
 		},
 		"responses": {
 			"200": {
-				...responses.PropertyAliasesInLanguage,
+				...PropertyAliasesInLanguageResponse,
 				"description": "The updated list of aliases in a specific language"
 			},
 			"201": {
-				...responses.PropertyAliasesInLanguage,
+				...PropertyAliasesInLanguageResponse,
 				"description": "The newly created list of aliases in a specific language"
 			},
 			"304": { "$ref": "#/components/responses/NotModified" },

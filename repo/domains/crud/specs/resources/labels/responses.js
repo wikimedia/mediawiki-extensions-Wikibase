@@ -1,62 +1,6 @@
 'use strict';
 
 module.exports = {
-	"ItemLabels": {
-		"description": "Item's labels by language",
-		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "#/components/schemas/Labels" },
-				"example": {
-					"en": "Jane Doe",
-					"ru": "Джейн Доу"
-				}
-			}
-		}
-	},
-	"PropertyLabels": {
-		"description": "Property's labels by language",
-		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "#/components/schemas/Labels" },
-				"example": {
-					"en": "instance of",
-					"ru": "это частный случай понятия"
-				}
-			}
-		}
-	},
 	"ItemLabel": {
 		"description": "A label in a specific language",
 		"headers": {

@@ -1,8 +1,47 @@
 'use strict';
 
 const requestParts = require( '../../global/request-parts' );
-const responses = require( './responses' );
-const examples = require( './examples' );
+
+const PatchPropertyAliasesRequestContent = {
+	"schema": requestParts.PatchRequest,
+	"example": {
+		"patch": [
+			{ "op": "add", "path": "/en/-", "value": "is an" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "Add English alias"
+	}
+};
+
+const PropertyAliasesResponse = {
+	"description": "Property's aliases by language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": { "$ref": "#/components/schemas/Aliases" },
+			"example": {
+				"en": [ "is a", "is an" ],
+				"ru": [ "представляет собой", "является" ]
+			}
+		}
+	}
+};
 
 module.exports = {
 	"get": {
@@ -18,7 +57,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.PropertyAliases,
+			"200": PropertyAliasesResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"400": { "$ref": "#/components/responses/InvalidEntityIdInput" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
@@ -40,18 +79,12 @@ module.exports = {
 			"description": "Payload containing a JSON Patch document to be applied to a Property's aliases and edit metadata",
 			"required": true,
 			"content": {
-				"application/json-patch+json": {
-					"schema": requestParts.PatchRequest,
-					"example": examples.PatchPropertyAliases
-				},
-				"application/json": {
-					"schema": requestParts.PatchRequest,
-					"example": examples.PatchPropertyAliases
-				}
+				"application/json-patch+json": PatchPropertyAliasesRequestContent,
+				"application/json": PatchPropertyAliasesRequestContent
 			}
 		},
 		"responses": {
-			"200": responses.PropertyAliases,
+			"200": PropertyAliasesResponse,
 			"400": { "$ref": "#/components/responses/InvalidPatch" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },

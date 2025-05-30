@@ -56,6 +56,16 @@ const StatementRequest = {
 	]
 };
 
+const PatchItemStatementContent = {
+	"schema": requestParts.PatchRequest,
+	"example": examples.PatchItemStatementRequest,
+};
+
+const PatchPropertyStatementContent = {
+	"schema": requestParts.PatchRequest,
+	"example": examples.PatchPropertyStatementRequest,
+};
+
 module.exports = {
 	"ItemStatement": {
 		"description": "Payload containing a Wikibase Statement object and edit metadata",
@@ -102,14 +112,8 @@ module.exports = {
 		"description": "Payload containing a JSON Patch document to be applied to the Statement and edit metadata",
 		"required": true,
 		"content": {
-			"application/json-patch+json": {
-				"schema": requestParts.PatchRequest,
-				"example": examples.PatchItemStatementRequest
-			},
-			"application/json": {
-				"schema": requestParts.PatchRequest,
-				"example": examples.PatchItemStatementRequest
-			}
+			"application/json-patch+json": PatchItemStatementContent,
+			"application/json": PatchItemStatementContent,
 		}
 	},
 	"PropertyStatement": {
@@ -137,14 +141,8 @@ module.exports = {
 		"description": "Payload containing a JSON Patch document to be applied to the Statement and edit metadata",
 		"required": true,
 		"content": {
-			"application/json-patch+json": {
-				"schema": requestParts.PatchRequest,
-				"example": examples.PatchPropertyStatementRequest
-			},
-			"application/json": {
-				"schema": requestParts.PatchRequest,
-				"example": examples.PatchPropertyStatementRequest
-			}
+			"application/json-patch+json": PatchPropertyStatementContent,
+			"application/json": PatchPropertyStatementContent,
 		}
 	}
 };

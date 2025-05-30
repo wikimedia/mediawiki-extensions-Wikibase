@@ -1,6 +1,6 @@
 'use strict';
 
-const requests = require( './requests' );
+const requestParts = require( '../../global/request-parts' );
 const responses = require( './responses' );
 
 module.exports = {
@@ -39,7 +39,32 @@ module.exports = {
 			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
-		"requestBody": requests.PropertyLabel,
+		"requestBody": {
+			"description": "Payload containing a Property label in the specified language and edit metadata",
+			"required": true,
+			"content": {
+				"application/json": {
+					"schema": {
+						"allOf": [
+							{
+								"type": "object",
+								"properties": {
+									"label": { "type": "string" }
+								},
+								"required": [ "label" ]
+							},
+							requestParts.MediawikiEdit,
+						]
+					},
+					"example": {
+						"label": "instance of",
+						"tags": [],
+						"bot": false,
+						"comment": "Update the English label"
+					}
+				}
+			}
+		},
 		"responses": {
 			"200": {
 				...responses.PropertyLabel,

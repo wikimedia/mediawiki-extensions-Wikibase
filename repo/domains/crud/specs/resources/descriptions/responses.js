@@ -1,62 +1,6 @@
 'use strict';
 
 module.exports = {
-	"ItemDescriptions": {
-		"description": "Item's descriptions by language",
-		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "#/components/schemas/Descriptions" },
-				"example": {
-					"en": "famous person",
-					"ru": "известная личность"
-				}
-			}
-		}
-	},
-	"PropertyDescriptions": {
-		"description": "Property's descriptions by language",
-		"headers": {
-			"ETag": {
-				"description": "Last entity revision number",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"Last-Modified": {
-				"description": "Last modified date",
-				"schema": { "type": "string" },
-				"required": true
-			},
-			"X-Authenticated-User": {
-				"description": "Optional username of the user making the request",
-				"schema": { "type": "string" }
-			}
-		},
-		"content": {
-			"application/json": {
-				"schema": { "$ref": "#/components/schemas/Descriptions" },
-				"example": {
-					"en": "the subject is a concrete object (instance) of this class, category, or object group",
-					"ru": "данный элемент представляет собой конкретный объект (экземпляр / частный случай) класса, категории"
-				}
-			}
-		}
-	},
 	"ItemDescription": {
 		"description": "Item's description in a specific language",
 		"headers": {

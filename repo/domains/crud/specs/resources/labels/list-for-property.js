@@ -1,7 +1,47 @@
 'use strict';
 
-const requests = require( './requests' );
-const responses = require( './responses' );
+const requestParts = require( '../../global/request-parts' );
+
+const PropertyLabelsResponse = {
+	"description": "Property's labels by language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": { "$ref": "#/components/schemas/Labels" },
+			"example": {
+				"en": "instance of",
+				"ru": "это частный случай понятия"
+			}
+		}
+	}
+};
+
+const PatchPropertyLabelsRequestContent = {
+	"schema": requestParts.PatchRequest,
+	"example": {
+		"patch": [
+			{ "op": "replace", "path": "/en", "value": "instance of" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "replace English label"
+	},
+};
 
 module.exports = {
 	"get": {
@@ -17,7 +57,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.PropertyLabels,
+			"200": PropertyLabelsResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"400": { "$ref": "#/components/responses/InvalidEntityIdInput" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
@@ -35,9 +75,16 @@ module.exports = {
 			{ "$ref": "#/components/parameters/IfNoneMatch" },
 			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
 		],
-		"requestBody": requests.PatchPropertyLabels,
+		"requestBody": {
+			"description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+			"required": true,
+			"content": {
+				"application/json-patch+json": PatchPropertyLabelsRequestContent,
+				"application/json": PatchPropertyLabelsRequestContent
+			}
+		},
 		"responses": {
-			"200": responses.PropertyLabels,
+			"200": PropertyLabelsResponse,
 			"400": { "$ref": "#/components/responses/InvalidPatch" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },

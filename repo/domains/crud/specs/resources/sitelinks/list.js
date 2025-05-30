@@ -1,7 +1,19 @@
 'use strict';
 
-const requests = require( './requests' );
-const responses = require( './responses' );
+const requestParts = require( '../../global/request-parts' );
+const responseParts = require( '../../global/response-parts' );
+
+const PatchSitelinksRequest = {
+	schema: requestParts.PatchRequest,
+	example: {
+		patch: [
+			{ op: 'add', path: '/ruwiki/title', value: 'Джейн Доу' }
+		],
+		tags: [],
+		bot: false,
+		comment: 'Add sitelink to ruwiki'
+	}
+};
 
 module.exports = {
 	"get": {
@@ -36,7 +48,13 @@ module.exports = {
 			{ "$ref": "#/components/parameters/IfNoneMatch" },
 			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
 		],
-		"requestBody": requests.PatchSitelinks,
+		"requestBody": {
+			"required": true,
+			"content": {
+				"application/json-patch+json": PatchSitelinksRequest,
+				"application/json": PatchSitelinksRequest
+			}
+		},
 		"responses": {
 			"200": { "$ref": "#/components/responses/Sitelinks" },
 			"400": { "$ref": "#/components/responses/InvalidPatch" },
@@ -44,7 +62,29 @@ module.exports = {
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
 			"409": { "$ref": "#/components/responses/CannotApplyItemPatch" },
 			"412": { "$ref": "#/components/responses/PreconditionFailedError" },
-			"422": responses.InvalidPatchedItemSitelinks,
+			"422": {
+				"description": "Applying the provided JSON Patch results in invalid Sitelinks",
+				"content": {
+					"application/json": {
+						"schema": responseParts.ErrorSchema,
+						"examples": {
+							"patch-result-referenced-resource-not-found": { "$ref": "#/components/examples/PatchResultResourceNotFoundExample" },
+							"patch-result-invalid-value": { "$ref": "#/components/examples/PatchResultInvalidValueExample" },
+							"patch-result-missing-field": { "$ref": "#/components/examples/PatchResultMissingFieldExample" },
+							"patch-result-invalid-key": { "$ref": "#/components/examples/PatchResultInvalidKeyExample" },
+							"patch-result-modified-read-only-value": { "$ref": "#/components/examples/PatchResultModifiedReadOnlyValue" },
+							"data-policy-violation": { "$ref": "#/components/examples/DataPolicyViolationExample" }
+						}
+					}
+				},
+				"headers": {
+					"Content-Language": {
+						"description": "Language code of the language in which error message is provided",
+						"schema": { "type": "string" },
+						"required": true
+					}
+				}
+			},
 			"429": { "$ref": "#/components/responses/RequestLimitReached" },
 			"500": { "$ref": "#/components/responses/UnexpectedError" }
 		}

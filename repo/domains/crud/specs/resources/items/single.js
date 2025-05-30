@@ -1,7 +1,19 @@
 'use strict';
 
-const requests = require( './requests' );
-const responses = require( './responses' );
+const requestParts = require( '../../global/request-parts' );
+const responseParts = require( '../../global/response-parts' );
+
+const PatchItemRequestContent = {
+	"schema": requestParts.PatchRequest,
+	"example": {
+		"patch": [
+			{ "op": "replace", "path": "/labels/en", "value": "Jane Doe" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "Update the English label"
+	},
+};
 
 module.exports = {
 	"get": {
@@ -21,7 +33,25 @@ module.exports = {
 			"200": { "$ref": "#/components/responses/Item" },
 			"308": { "$ref": "#/components/responses/MovedPermanently" },
 			"304": { "$ref": "#/components/responses/NotModified" },
-			"400": responses.InvalidGetItemInput,
+			"400": {
+				"description": "The request cannot be processed",
+				"content": {
+					"application/json": {
+						"schema": responseParts.ErrorSchema,
+						"examples": {
+							"invalid-path-parameter": { "$ref": "#/components/examples/InvalidPathParameterExample" },
+							"invalid-query-parameter": { "$ref": "#/components/examples/InvalidQueryParameterExample" }
+						}
+					}
+				},
+				"headers": {
+					"Content-Language": {
+						"description": "Language code of the language in which error message is provided",
+						"schema": { "type": "string" },
+						"required": true
+					}
+				}
+			},
 			404: { "$ref": "#/components/responses/ResourceNotFound" },
 			412: { "$ref": "#/components/responses/PreconditionFailedError" },
 			500: { "$ref": "#/components/responses/UnexpectedError" }
@@ -37,7 +67,13 @@ module.exports = {
 			{ "$ref": "#/components/parameters/IfNoneMatch" },
 			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
 		],
-		"requestBody": requests.PatchItem,
+		"requestBody": {
+			"required": true,
+			"content": {
+				"application/json-patch+json": PatchItemRequestContent,
+				"application/json": PatchItemRequestContent
+			}
+		},
 		"responses": {
 			"200": { "$ref": "#/components/responses/Item" },
 			"400": { "$ref": "#/components/responses/InvalidPatch" },

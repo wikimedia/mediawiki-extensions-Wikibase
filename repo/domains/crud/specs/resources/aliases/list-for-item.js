@@ -1,8 +1,47 @@
 'use strict';
 
 const requestParts = require( '../../global/request-parts' );
-const responses = require( './responses' );
-const examples = require( './examples' );
+
+const PatchItemAliasesRequestContent = {
+	"schema": requestParts.PatchRequest,
+	"example": {
+		"patch": [
+			{ "op": "add", "path": "/en/-", "value": "JD" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "Add English alias"
+	}
+};
+
+const ItemAliasesResponse = {
+	"description": "Item's aliases by language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": { "$ref": "#/components/schemas/Aliases" },
+			"example": {
+				"en": [ "Jane M. Doe", "JD" ],
+				"ru": [ "Джейн М. Доу" ]
+			}
+		}
+	}
+};
 
 module.exports = {
 	"get": {
@@ -18,7 +57,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.ItemAliases,
+			"200": ItemAliasesResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"308": { "$ref": "#/components/responses/MovedPermanently" },
 			"400": { "$ref": "#/components/responses/InvalidEntityIdInput" },
@@ -41,18 +80,12 @@ module.exports = {
 			"description": "Payload containing a JSON Patch document to be applied to an Item's aliases and edit metadata",
 			"required": true,
 			"content": {
-				"application/json-patch+json": {
-					"schema": requestParts.PatchRequest,
-					"example": examples.PatchItemAliases
-				},
-				"application/json": {
-					"schema": requestParts.PatchRequest,
-					"example": examples.PatchItemAliases
-				},
+				"application/json-patch+json": PatchItemAliasesRequestContent,
+				"application/json": PatchItemAliasesRequestContent,
 			}
 		},
 		"responses": {
-			"200": responses.ItemAliases,
+			"200": ItemAliasesResponse,
 			"400": { "$ref": "#/components/responses/InvalidPatch" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },

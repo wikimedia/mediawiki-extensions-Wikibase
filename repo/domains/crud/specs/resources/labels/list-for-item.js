@@ -1,7 +1,47 @@
 'use strict';
 
-const responses = require( './responses' );
-const requests = require( './requests' );
+const requestParts = require( '../../global/request-parts' );
+
+const PatchItemLabelsRequestContent = {
+	"schema": requestParts.PatchRequest,
+	"example": {
+		"patch": [
+			{ "op": "replace", "path": "/en", "value": "Jane Doe" }
+		],
+		"tags": [],
+		"bot": false,
+		"comment": "replace English label"
+	},
+};
+
+const ItemLabelsResponse = {
+	"description": "Item's labels by language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": { "$ref": "#/components/schemas/Labels" },
+			"example": {
+				"en": "Jane Doe",
+				"ru": "Джейн Доу"
+			}
+		}
+	}
+};
 
 module.exports = {
 	"get": {
@@ -17,7 +57,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.ItemLabels,
+			"200": ItemLabelsResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"308": { "$ref": "#/components/responses/MovedPermanently" },
 			"400": { "$ref": "#/components/responses/InvalidEntityIdInput" },
@@ -36,9 +76,16 @@ module.exports = {
 			{ "$ref": "#/components/parameters/IfNoneMatch" },
 			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
 		],
-		"requestBody": requests.PatchItemLabels,
+		"requestBody": {
+			"description": "Payload containing a JSON Patch document to be applied to Labels and edit metadata",
+			"required": true,
+			"content": {
+				"application/json-patch+json": PatchItemLabelsRequestContent,
+				"application/json": PatchItemLabelsRequestContent,
+			}
+		},
 		"responses": {
-			"200": responses.ItemLabels,
+			"200": ItemLabelsResponse,
 			"400": { "$ref": "#/components/responses/InvalidPatch" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },

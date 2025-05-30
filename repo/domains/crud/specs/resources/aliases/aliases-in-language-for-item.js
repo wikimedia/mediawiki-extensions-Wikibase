@@ -1,7 +1,35 @@
 'use strict';
 
 const requests = require( './requests' );
-const responses = require( './responses' );
+
+const ItemAliasesInLanguageResponse = {
+	"description": "Item's aliases in a specific language",
+	"headers": {
+		"ETag": {
+			"description": "Last entity revision number",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"Last-Modified": {
+			"description": "Last modified date",
+			"schema": { "type": "string" },
+			"required": true
+		},
+		"X-Authenticated-User": {
+			"description": "Optional username of the user making the request",
+			"schema": { "type": "string" }
+		}
+	},
+	"content": {
+		"application/json": {
+			"schema": {
+				"type": "array",
+				"items": { "type": "string" }
+			},
+			"example": [ "Jane M. Doe", "JD" ]
+		}
+	}
+};
 
 module.exports = {
 	"get": {
@@ -18,7 +46,7 @@ module.exports = {
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
-			"200": responses.ItemAliasesInLanguage,
+			"200": ItemAliasesInLanguageResponse,
 			"304": { "$ref": "#/components/responses/NotModified" },
 			"308": { "$ref": "#/components/responses/MovedPermanently" },
 			"400": { "$ref": "#/components/responses/InvalidTermByLanguageInput" },
@@ -57,11 +85,11 @@ module.exports = {
 		},
 		"responses": {
 			"200": {
-				...responses.ItemAliasesInLanguage,
+				...ItemAliasesInLanguageResponse,
 				"description": "The updated list of aliases in a specific language",
 			},
 			"201": {
-				...responses.ItemAliasesInLanguage,
+				...ItemAliasesInLanguageResponse,
 				"description": "The newly created list of aliases in a specific language",
 			},
 			"304": { "$ref": "#/components/responses/NotModified" },
