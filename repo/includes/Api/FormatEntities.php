@@ -138,7 +138,9 @@ class FormatEntities extends ApiBase {
 
 		foreach ( $entityIds as $entityId ) {
 			$formatted = $entityIdFormatter->formatEntityId( $entityId );
-			$formatted = self::makeLinksAbsolute( $formatted );
+			if ( $params['generate'] === SnakFormatter::FORMAT_HTML ) {
+				$formatted = self::makeLinksAbsolute( $formatted );
+			}
 			$this->resultBuilder->setValue( $this->getModuleName(), $entityId->getSerialization(), $formatted );
 		}
 
