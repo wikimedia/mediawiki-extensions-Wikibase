@@ -962,14 +962,6 @@ final class RepoHooks implements
 				'packageFiles' => [
 					'resources/wikibase.mobileUi.entityViewInit.js',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
-					[
-						'name' => 'wikibase.mobileUi.icons.json',
-						'callback' => 'MediaWiki\\ResourceLoader\\CodexModule::getIcons',
-						'callbackParam' => [
-							'cdxIconDownTriangle',
-							'cdxIconEdit',
-						],
-					],
 				],
 				'dependencies' => [
 					'vue',

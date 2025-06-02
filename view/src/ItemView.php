@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\View\Template\TemplateFactory;
+use WMDE\VueJsTemplating\Templating;
 
 /**
  * Class for creating views for Item instances.
@@ -126,10 +127,19 @@ class ItemView extends EntityView {
 		$termsHtml = $this->getHtmlForTerms( $item );
 		$tocHtml = $this->templateFactory->render( 'wikibase-toc' );
 		$statementsHtml = $this->vueStatementsView ?
-			'<span id="mobile-ui-statements-view-placeholder">TODO: Add Vue Statements View</span>' :
+			$this->getVueStatementsHtml( $item ) :
 			$this->statementSectionsView->getHtml( $item->getStatements() );
 
 		return $termsHtml . $tocHtml . $statementsHtml;
+	}
+
+	/** @return string HTML */
+	private function getVueStatementsHtml( StatementListProvider $item ): string {
+		$templating = new Templating();
+		$template = file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' );
+
+		$rendered = $templating->render( $template, [] );
+		return "<div id='mobile-ui-statements-view-placeholder'>$rendered</div>";
 	}
 
 	/**
