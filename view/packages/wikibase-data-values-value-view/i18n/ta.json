@@ -1,9 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"ElangoRamanujam"
+			"ElangoRamanujam",
+			"Matrix"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" மதிப்புகளைக் கையாள்வது இன்னும் ஆதரிக்கப்படவில்லை.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" தரவு வகைக்கான மதிப்புகளைக் கையாள்வது இன்னும் ஆதரிக்கப்படவில்லை.",
+	"valueview-expert-emptyvalue-empty": "காலி",
+	"valueview-expert-globecoordinateinput-precision": "துல்லியம்:",
+	"valueview-expert-globecoordinateinput-nullprecision": "குறிப்பிடப்படாத",
+	"valueview-expert-globecoordinateinput-customprecision": "சிறப்பு ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "ஒரு ஆர்க்மினுட்டிற்கு (கோணம் நிமிடம்)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "ஒரு ஆர்க்செகண்டிற்கு (கோணம் இரண்டாவது)",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/10 வரை",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/100 வரை",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/1000  வரை",
+	"valueview-expert-timevalue-calendar-gregorian": "கிரிகோரியன்",
+	"valueview-expert-timevalue-calendar-julian": "ஜூலியன்",
+	"valueview-expert-timeinput-precision": "துல்லியம்:",
 	"valueview-expert-timeinput-precision-year1g": "பில்லியன் ஆண்டுகள்",
 	"valueview-expert-timeinput-precision-year100m": "நுாறு மில்லியன் ஆண்டுகள்",
 	"valueview-expert-timeinput-precision-year10m": "பத்து மில்லியன் ஆண்டுகள்",
@@ -11,9 +26,18 @@
 	"valueview-expert-timeinput-precision-year100k": "100,000 ஆண்டுகள்",
 	"valueview-expert-timeinput-precision-year10k": "10,000 ஆண்டுகள்",
 	"valueview-expert-timeinput-precision-year1k": "நுாற்றாண்டு",
+	"valueview-expert-timeinput-precision-year100": "நூற்றாண்டு",
+	"valueview-expert-timeinput-precision-year10": "பத்தாண்டு",
 	"valueview-expert-timeinput-precision-year": "ஆண்டு",
 	"valueview-expert-timeinput-precision-month": "மாதம்",
 	"valueview-expert-timeinput-precision-day": "நாள்",
 	"valueview-expert-timeinput-precision-hour": "மணி",
-	"valueview-expert-timeinput-precision-minute": "நிமிடம்"
+	"valueview-expert-timeinput-precision-minute": "நிமிடம்",
+	"valueview-expert-timeinput-precision-second": "வினாடி",
+	"valueview-expert-timeinput-calendar": "நாட்காட்டி:",
+	"valueview-expertextender-languageselector-label": "மொழி (கட்டாயமானது):",
+	"valueview-expertextender-unitsuggester-label": "அலகு (விரும்பினால்):",
+	"valueview-preview-label": "இவ்வாறு காண்பிக்கப்படும்:",
+	"valueview-preview-novalue": "செல்லுபடியாகும் மதிப்பு எதுவும் அங்கீகரிக்கப்படவில்லை.",
+	"valueview-listrotator-manually": "கைமுறையாக அமை"
 }
