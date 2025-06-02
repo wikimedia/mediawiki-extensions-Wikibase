@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"شاه زمان پټان"
 		]
 	},
 	"specialpages-group-wikibase": "ويکي بېز",
@@ -18,8 +19,8 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "ناجوت ارزښت",
 	"wikibase-snakview-snaktypeselector-novalue": "بې ارزښته",
 	"datatypes-type-quantity": "څومره والی",
-	"datatypes-type-monolingualtext": "څو ژبيز متن",
-	"datatypes-type-multilingualtext": "څو ژبيز متن",
+	"datatypes-type-monolingualtext": "څو ژبيز ليک",
+	"datatypes-type-multilingualtext": "څو ژبيز ليک",
 	"datatypes-type-number": "شمېره",
 	"datatypes-type-mediawiki-title": "مېډياويکي سرليک",
 	"datatypes-type-wikibase-item": "توکی",
