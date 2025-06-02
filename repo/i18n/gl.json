@@ -539,5 +539,7 @@
 	"wikibase-scoped-search-search-entities": "Procura entidades",
 	"wikibase-scoped-search-search-entities-description": "Atopa diferentes tipos de entidades de {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Elementos",
-	"wikibase-scoped-search-property-scope-name": "Propiedades"
+	"wikibase-scoped-search-property-scope-name": "Propiedades",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Interface de edición móbil",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Activa a nova interface experimental de edición móbil."
 }

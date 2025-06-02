@@ -15,6 +15,7 @@
 			"Hydra",
 			"Hzy980512",
 			"Impersonator 1",
+			"Kcx36",
 			"Key0121",
 			"Lakejason0",
 			"Li3939108",
@@ -563,5 +564,7 @@
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-failed-request-api-error-message": "因请求外联源wiki失败，此请求失败。",
 	"wikibase-scoped-search-item-scope-name": "项目",
-	"wikibase-scoped-search-property-scope-name": "属性"
+	"wikibase-scoped-search-property-scope-name": "属性",
+	"wikibase-mobile-editing-ui-beta-feature-message": "移动编辑用户界面",
+	"wikibase-mobile-editing-ui-beta-feature-description": "启用新的实验性移动编辑用户界面。"
 }

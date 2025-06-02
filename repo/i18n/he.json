@@ -545,5 +545,7 @@
 	"wikibase-scoped-search-search-entities": "חיפוש ישויות",
 	"wikibase-scoped-search-search-entities-description": "מציאת סוגים שונים של ישויות {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "פריטים",
-	"wikibase-scoped-search-property-scope-name": "מאפיינים"
+	"wikibase-scoped-search-property-scope-name": "מאפיינים",
+	"wikibase-mobile-editing-ui-beta-feature-message": "ממשק עריכה למכשירים ניידים",
+	"wikibase-mobile-editing-ui-beta-feature-description": "הפעלת ממשק העריכה החדש הניסיוני לעריכה בניידים"
 }
