@@ -34,10 +34,14 @@
 	"wikibase-rc-show-wikidata-pref": "Վերջին փոփոխություններում ցույց տալ {{grammar:genitive|{{WBREPONAME}}}} խմբագրումները",
 	"wikibase-rc-wikibase-edit-letter": "Դ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
+	"wikibase-unconnectedpages-submit": "Ցուցադրել էջեր",
+	"wikibase-entityusage-submit": "Ցուցադրել էջեր",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Նկարագրություն՝ $1",
 	"wikibase-otherprojects": "Այլ նախագծերում",
 	"wikibase-sitelinks-sitename-columnheading": "Լեզու",
 	"notification-header-page-connection": "<strong>$3</strong> էջը {{GENDER:$2|կապվել է}} {{PLURAL:$4|-1={{WBREPONAME}}ի տարրին|$4 {{WBREPONAME}}ի տարրին}}, որտեղ հավաքվում է թեմայի վերաբերյալ տեղեկատվությունը։",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> և {{PLURAL:$4|մեկ այլ էջ|$4 այլ էջեր|100=99+ այլ էջեր}} {{GENDER:$2|կապվեցին}} {{WBREPONAME}}ի տարրերին, որտեղ հավաքվում են թեմային վերաբերվող տվյալները։",
 	"wikibase-client-data-bridge-dialog-title": "Խմբագրել $1",
+	"wikibase-client-data-bridge-references-heading": "Ծանոթագրություններ",
 	"wikibase-client-data-bridge-error-go-back": "Հետ գնալ"
 }
