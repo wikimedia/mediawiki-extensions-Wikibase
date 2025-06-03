@@ -1,0 +1,67 @@
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-mex-statement {
+	border-color: @border-color-subtle;
+	border-width: 1px;
+	border-style: solid;
+	margin-top: 1em;
+
+	.mex-link {
+		.cdx-mixin-link();
+	}
+
+	.mex-link-heavy {
+		font-weight: 500;
+		font-size: 0.85rem;
+		.mex-link();
+	}
+
+	p {
+		padding-left: 1rem;
+	}
+
+	.wikibase-mex-statement-heading {
+		display: table;
+		background-color: @background-color-neutral;
+		width: 100%;
+
+		.wikibase-mex-statement-heading-row {
+			display: table-row;
+		}
+
+		.wikibase-mex-property-name {
+			display: table-cell;
+		}
+
+		.wikibase-mex-edit-link {
+			display: table-cell;
+			width: 1px;
+			white-space: nowrap;
+			padding-right: 1rem;
+
+			.cdx-icon {
+				vertical-align: inherit;
+			}
+		}
+	}
+
+	.wikibase-mex-snak-value {
+		p {
+			margin: 0.25rem 0 0.25rem 0;
+			padding-top: 0.5rem;
+		}
+	}
+
+	.wikibase-mex-references {
+		background-color: @background-color-neutral-subtle;
+
+		p {
+			padding-top: 0.5rem;
+			margin: 0;
+
+			.cdx-icon {
+				vertical-align: middle;
+			}
+		}
+	}
+}
