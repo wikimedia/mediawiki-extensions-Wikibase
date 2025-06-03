@@ -138,8 +138,31 @@ class ItemView extends EntityView {
 		$templating = new Templating();
 		$template = file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' );
 
-		$rendered = $templating->render( $template, [] );
-		return "<div id='mobile-ui-statements-view-placeholder'>$rendered</div>";
+		$rendered = '';
+
+		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
+		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
+			$statement = $item->getStatements()->getByPropertyId( $propertyId )->toArray()[ 0 ];
+			$mainSnak = $statement->getMainSnak();
+
+			// TODO: use Statement Serializer instead T396858
+			$renderedStatement = $templating->render(
+				$template,
+				[
+					'statement' => [
+						'mainsnak' => [
+							'property' => $mainSnak->getPropertyId()->getSerialization(),
+							'datavalue' => [ 'value' => 'value placeholder' ],
+						],
+						'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
+					],
+				]
+			);
+
+			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
+		}
+
+		return "<div id='wikibase-mex-statementgrouplistview'>$rendered</div>";
 	}
 
 	/**

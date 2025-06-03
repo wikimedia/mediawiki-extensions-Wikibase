@@ -969,6 +969,9 @@ final class RepoHooks implements
 					'wikibase',
 					'wikibase.mobileUi.entityView.styles',
 				],
+				'messages' => [
+					'wikibase-statementview-references-counter',
+				],
 			];
 		}
 

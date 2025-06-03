@@ -91,9 +91,9 @@ class ItemViewTest extends EntityViewTestCase {
 		$html = $output->getHtml();
 
 		if ( $vueStatementsExpected ) {
-			$this->assertStringContainsString( '<div class="wikibase-mex-statement">', $html );
+			$this->assertStringContainsString( 'wikibase-mex-statementgrouplistview', $html );
 		} else {
-			$this->assertStringNotContainsString( '<div class="wikibase-mex-statement">', $html );
+			$this->assertStringNotContainsString( 'wikibase-mex-statementgrouplistview', $html );
 		}
 	}
 
