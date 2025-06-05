@@ -529,5 +529,7 @@
 	"wikibase-scoped-search-search-entities": "Cercar entitates",
 	"wikibase-scoped-search-search-entities-description": "Trovar varie typos de entitates de {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Objectos",
-	"wikibase-scoped-search-property-scope-name": "Proprietates"
+	"wikibase-scoped-search-property-scope-name": "Proprietates",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Interfacie de modification pro apparatos mobile",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Activar le interfacie de modification nove e experimental pro apparatos mobile."
 }

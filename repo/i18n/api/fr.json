@@ -7,6 +7,7 @@
 			"Envlh",
 			"Gomoko",
 			"Guillom",
+			"JLTRY",
 			"Macofe",
 			"Mahabarata",
 			"McDutchie",
@@ -318,11 +319,13 @@
 	"apihelp-wbsetsitelink-example-6": "Changer les badges du lien vers la page polonaise à partir de l’élément ayant l’ID <samp>$1</samp> en deux badges pointant vers les articles ayant les Id « Q2 » et « Q149 » sans fournir de titre du lien",
 	"apihelp-wbsetsitelink-example-7": "Modifier le lien vers la page polonaise à partir de l’élément ayant l’ID <samp>$1</samp> sans changer les badges",
 	"apihelp-wbsetsitelink-example-8": "Modifier le lien vers la page polonaise depuis l’élément d’identifiant <samp>$1</samp> et supprimer tous ses badges",
-	"apihelp-wbformatentities-summary": "Met en forme les identifiants d’entité en HTML.",
+	"apihelp-wbformatentities-summary": "Met en forme les identifiants d’entité en HTML ou en texte brut.",
 	"apihelp-wbformatentities-extended-description": "La langue peut être spécifiée avec le paramètre global <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "Les identifiants d’entité à mettre en forme.",
-	"apihelp-wbformatentities-example-1": "Mettre en forme un unique identifiant d’élément.",
+	"apihelp-wbformatentities-param-generate": "Le format de sortie souhaité à générer.",
+	"apihelp-wbformatentities-example-1": "Formater un identifiant d'élément unique en HTML.",
 	"apihelp-wbformatentities-example-2": "Mettre en forme un identifiant d’élément et un identifiant de propriété.",
 	"apihelp-wbformatentities-example-3": "Mettre en forme un identifiant d’élément, un identifiant de propriété et un identifiant de lexème.",
-	"apihelp-wbformatentities-example-4": "Mettre en forme trois identifiants d’élément en français."
+	"apihelp-wbformatentities-example-4": "Mettre en forme trois identifiants d’élément en français.",
+	"apihelp-wbformatentities-example-5": "Formatez trois ID d'élément et un ID de propriété en texte brut."
 }
