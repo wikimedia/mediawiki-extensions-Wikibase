@@ -52,3 +52,4 @@ sftp-config.json
 # federated properties VM
 build/federated-properties/vagrant/.vagrant
 .vscode
+/.stylelintcache
