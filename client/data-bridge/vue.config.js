@@ -1,4 +1,3 @@
-const { BannerPlugin } = require( 'webpack' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 
 const filePrefix = 'data-bridge.';
@@ -40,14 +39,6 @@ module.exports = {
 				extractComments: false,
 			} ) ],
 		},
-		plugins: [
-			// /*@nomin*/ instructs ResourceLoader not to try to minify our resources –
-			// especially important for the modern bundle (ES6 syntax not supported by RL).
-			new BannerPlugin( {
-				banner: '/*!/*@nomin*/', // /*! to avoid comment being removed later
-				raw: true, // must contain *exactly* that string, see ResourceLoader::FILTER_NOMIN
-			} ),
-		],
 	} ),
 	chainWebpack: ( config ) => {
 		if ( process.env.NODE_ENV === 'production' ) {
