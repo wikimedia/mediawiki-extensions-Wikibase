@@ -5,11 +5,6 @@ const happyPathBuilders = require( '../helpers/happyPathRequestBuilders' );
 const extensionRepoConfig = require( '../../../../../../extension-repo.json' );
 
 describe( 'Route Coverage Tests', () => {
-	const EXCLUDED_ROUTES = [
-		'GET /v1/openapi.json',
-		'GET /v1/property-data-types'
-	];
-
 	const mockInputs = {
 		itemId: 'Q123',
 		propertyId: 'P123',
@@ -29,6 +24,8 @@ describe( 'Route Coverage Tests', () => {
 				method: route.method,
 				path: route.path.split( '/wikibase' )[ 1 ]
 			} )
+		).filter(
+			( route ) => route.path.startsWith( '/v1/entities' ) || route.path.startsWith( '/v1/statements' )
 		);
 	}
 
@@ -50,22 +47,20 @@ describe( 'Route Coverage Tests', () => {
 	}
 
 	it( 'should have all production routes covered in happy path builders', () => {
-		const productionRoutes = getAllProductionRoutes()
-			.map( ( route ) => routeToString( route ) )
-			.filter( ( route ) => !EXCLUDED_ROUTES.includes( route ) );
+		const productionRoutes = getAllProductionRoutes().map( routeToString );
+		const happyPathRoutes = getAllHappyPathRoutes().map( routeToString );
 
-		const happyPathRoutes = getAllHappyPathRoutes()
-			.map( ( route ) => routeToString( route ) );
+		assert.ok( productionRoutes.length > 0, 'No production routes found.' );
+		assert.ok( happyPathRoutes.length > 0, 'No happy path routes found.' );
 
 		const missingRoutes = productionRoutes.filter(
 			( route ) => !happyPathRoutes.includes( route )
 		);
 
-		if ( missingRoutes.length > 0 ) {
-			assert.fail(
-				`Found ${missingRoutes.length} production routes not covered in happy path builders:\n\n` +
-				missingRoutes.join( '\n' )
-			);
-		}
+		assert.ok(
+			!missingRoutes.length > 0,
+			`Found ${missingRoutes.length} production routes not covered in happy path builders:\n\n` +
+			missingRoutes.join( '\n' )
+		);
 	} );
 } );
