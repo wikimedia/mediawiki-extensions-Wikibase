@@ -31,7 +31,9 @@
 			"علاء",
 			"محمد أحمد عبد الفتاح",
 			"Hubaishan",
-			"Lolekek"
+			"Lolekek",
+			"123Rkhader",
+			"Mohammed Qays"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -39,10 +41,10 @@
 	"wikibase-after-page-move": "ينبغي أن يكون نقلك الآن [$1 منعكسا في وصلة لغة عنصر {{WBREPONAME}}]. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-after-page-delete": "ينبغي أن تكون الوصلة إلى هذه الصفحة من [$1 عنصر {{WBREPONAME}} المرتبط] قد أزيلت. نطلب منك التحقق من حدوث هذا.",
 	"wikibase-comment-add": "أُنشئ عنصر {{WBREPONAME}}.",
-	"wikibase-comment-remove": "تم حذف عنصر {{WBREPONAME}} المرتبط. تمت إزالة وصلات اللغة.",
+	"wikibase-comment-remove": "حُذف عنصر {{WBREPONAME}} المرتبط. أزيلت وصلات اللغة.",
 	"wikibase-comment-linked": "رُبط عنصر {{WBREPONAME}} مع هذه الصفحة.",
 	"wikibase-comment-unlink": "فُصل ارتباط هذه الصفحة من عنصر {{WBREPONAME}}. أزيلت وصلات اللغة.",
-	"wikibase-comment-restore": "تم استرجاع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
+	"wikibase-comment-restore": "أسترجع عنصر {{WBREPONAME}} المرتبط. وصلات اللغة أعيدت.",
 	"wikibase-comment-update": "تغيير عنصر {{WBREPONAME}}",
 	"wikibase-comment-sitelink-add": "وصلة اللغة المضافة:$1",
 	"wikibase-comment-sitelink-change": "تم تعديل وصلة اللغة من $1 إلى $2",
@@ -50,7 +52,7 @@
 	"wikibase-comment-multi": "{{PLURAL:$1|لا تعديلات|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
-	"wikibase-editlinkstitle": "تحرير الروابط ما بين اللغات",
+	"wikibase-editlinkstitle": "تعديل روابط الانتقال بين اللغات",
 	"wikibase-addlinkstitle": "إضافة وصلات بين اللغات",
 	"wikibase-linkitem-addlinks": "أضف وصلات",
 	"wikibase-linkitem-alreadylinked": "هذه الصفحة التي تريد ربطها مرتبطة بالفعل ب[$1 مادة] في المستودع المركزي للبيانات والتي يرتبط ب[[$2]] على هذا الموقع. بإمكان المواد إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.",
