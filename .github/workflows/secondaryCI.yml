@@ -1,7 +1,5 @@
 name: Wikibase Secondary CI
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
 env:
   COMPOSER_HOME: ${{ github.workspace }}/.composer
@@ -19,35 +17,35 @@ jobs:
             LANG: ru
             WB: both
             IPMASKING: enabled
-          php-versions: '7.4.32'
+          php-versions: '8.1.32'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: en
             WB: client
             IPMASKING: disabled
-          php-versions: '7.4.32'
+          php-versions: '8.1.32'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: repo
             IPMASKING: enabled
-          php-versions: '7.4.32'
+          php-versions: '8.1.32'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: ar
             WB: both
             IPMASKING: disabled
-          php-versions: '7.4.32'
+          php-versions: '8.1.32'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
             IPMASKING: enabled
-          php-versions: '7.4.32'
+          php-versions: '8.1.32'
     steps:
     - name: Checkout
       uses: actions/checkout@v3
