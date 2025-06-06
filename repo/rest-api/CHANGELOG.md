@@ -1,5 +1,11 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
+## Version 1.2
+
+* Added endpoint `GET /wikibase/v0/search/properties` ([T386377](https://phabricator.wikimedia.org/T386377))
+* Added endpoint `GET /wikibase/v0/search/items` ([T383132](https://phabricator.wikimedia.org/T383132))
+
+
 ## Version 1.1
 
 * Added endpoint `POST /wikibase/v1/entities/properties` ([T342992](https://phabricator.wikimedia.org/T342992))

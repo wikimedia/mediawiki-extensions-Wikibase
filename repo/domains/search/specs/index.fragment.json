@@ -2,7 +2,7 @@
 	"openapi": "3.1.0",
 	"info": {
 		"title": "Wikibase Search Domain REST API",
-		"version": "0.1",
+		"version": "0.2",
 		"description": "OpenAPI fragment of the Wikibase Search domain REST API"
 	},
 	"paths": {
@@ -10,8 +10,7 @@
 			"get": {
 				"operationId": "simpleItemSearch",
 				"tags": [ "item search" ],
-				"summary": "[WIP] Simple Item search by label and aliases",
-				"description": "This endpoint is currently in development and is not recommended for production use",
+				"summary": "Simple Item search by label and aliases",
 				"parameters": [
 					{
 						"$ref": "./global/parameters.json#/SearchQuery",
@@ -31,8 +30,7 @@
 			"get": {
 				"operationId": "simplePropertySearch",
 				"tags": [ "property search" ],
-				"summary": "[WIP] Simple Property search by label and aliases",
-				"description": "This endpoint is currently in development and is not recommended for production use",
+				"summary": "Simple Property search by label and aliases",
 				"parameters": [
 					{
 						"$ref": "./global/parameters.json#/SearchQuery",
