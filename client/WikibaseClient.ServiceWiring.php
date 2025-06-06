@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare( strict_types=1 );
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
@@ -27,6 +27,7 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
+use Wikibase\Client\Hooks\Formatter\ClientEntityLinkFormatter;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -138,7 +139,6 @@ use Wikibase\Lib\WikibaseSettings;
 
 /** @phpcs-require-sorted-array */
 return [
-
 	'WikibaseClient.AffectedPagesFinder' => function ( MediaWikiServices $services ): AffectedPagesFinder {
 		return new AffectedPagesFinder(
 			WikibaseClient::getStore( $services )->getUsageLookup(),
@@ -199,12 +199,18 @@ return [
 		);
 	},
 
-	'WikibaseClient.ClientDomainDbFactory' => function( MediaWikiServices $services ): ClientDomainDbFactory {
+	'WikibaseClient.ClientDomainDbFactory' => function ( MediaWikiServices $services ): ClientDomainDbFactory {
 		$lbFactory = $services->getDBLoadBalancerFactory();
 
 		return new ClientDomainDbFactory(
 			$lbFactory,
 			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+		);
+	},
+
+	'WikibaseClient.ClientEntityLinkFormatter' => function ( MediaWikiServices $services ): ClientEntityLinkFormatter {
+		return new ClientEntityLinkFormatter(
+			$services->getLanguageFactory()
 		);
 	},
 
@@ -672,7 +678,7 @@ return [
 			new EntitySourceLookup(
 				WikibaseClient::getEntitySourceDefinitions( $services ),
 				new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
+					->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) )
 			)
 		);
 	},
@@ -682,7 +688,7 @@ return [
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
 			WikibaseClient::getLogger( $services ),
-			fn () => new EntityRetrievingDataTypeLookup( WikibaseClient::getEntityLookup( $services ) )
+			fn() => new EntityRetrievingDataTypeLookup( WikibaseClient::getEntityLookup( $services ) )
 		);
 	},
 

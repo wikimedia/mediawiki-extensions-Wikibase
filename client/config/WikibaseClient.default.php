@@ -60,6 +60,10 @@ return call_user_func( function() {
 		// in the parser functions and via Lua.
 		// Allows users to split the ParserCache by user language.
 		'allowDataAccessInUserLanguage' => false,
+		// @see T393442: Temporary setting to allow controlled rollout.
+		// Displays links to Wikibase in Recent Changes and other change lists as labels,
+		// rather than the Qid or Pid. E.g. "instance of" instead of "Property:P31".
+		'resolveWikibaseLabels' => false,
 
 		/**
 		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all

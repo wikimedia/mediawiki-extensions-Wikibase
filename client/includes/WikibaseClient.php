@@ -15,6 +15,7 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
+use Wikibase\Client\Hooks\Formatter\ClientEntityLinkFormatter;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -506,6 +507,11 @@ final class WikibaseClient {
 	public static function getClientDomainDbFactory( ?ContainerInterface $services = null ): ClientDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.ClientDomainDbFactory' );
+	}
+
+	public static function getClientEntityLinkFormatter( ?ContainerInterface $services = null ): ClientEntityLinkFormatter {
+		return ( $services ?: MediaWikiServices::getInstance() )
+		->get( 'WikibaseClient.ClientEntityLinkFormatter' );
 	}
 
 	public static function getRepoDomainDbFactory( ?ContainerInterface $services = null ): RepoDomainDbFactory {
