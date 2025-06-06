@@ -937,7 +937,7 @@ final class RepoHooks implements
 				],
 				'messages' => [
 					'searchsuggest-search',
-					'vector-searchsuggest-containing',
+					'searchsuggest-containing-html',
 					'wikibase-scoped-search-search-entities',
 					'wikibase-scoped-search-search-entities-description',
 				],
