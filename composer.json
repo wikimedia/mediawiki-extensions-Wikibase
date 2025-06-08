@@ -21,7 +21,6 @@
 		"irc": "irc://irc.libera.chat/wikidata"
 	},
 	"require": {
-		"php": ">=7.4.3",
 		"composer/installers": "^1.0.1|^2",
 		"data-values/data-values": "^3.1.0",
 		"data-values/common": "^1.1.0",
