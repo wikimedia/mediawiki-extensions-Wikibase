@@ -532,6 +532,18 @@
 		"rcshowwikidata": 0,
 		"wlshowwikibase": 0
 	},
+	"attributes": {
+		"Scribunto": {
+			"ExtraLuaTitleAttributes": {
+				"shortDescription": {
+					"class": "\\Wikibase\\Client\\LuaShortDescriptionResolver",
+					"services": [
+						"WikibaseClient.DescriptionLookup"
+					]
+				}
+			}
+		}
+	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"load_composer_autoloader": true,
 	"DatabaseVirtualDomains": [
