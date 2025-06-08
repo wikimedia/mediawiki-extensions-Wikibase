@@ -79,10 +79,10 @@ class FormatEntitiesTest extends ApiTestCase {
 	}
 
 	public function testApiRequest_text() {
-		$item = NewItem::withLabel( 'en', 'test item' )->build();
+		$item = NewItem::withLabel( 'en', 'test & item' )->build();
 		$this->saveEntity( $item );
 		$itemId = $item->getId()->getSerialization();
-		$fingerprint = new Fingerprint( new TermList( [ new Term( 'en', 'test property' ) ] ) );
+		$fingerprint = new Fingerprint( new TermList( [ new Term( 'en', 'test & property' ) ] ) );
 		$property = new Property( null, $fingerprint, 'string' );
 		$this->saveEntity( $property );
 		$propertyId = $property->getId()->getSerialization();
@@ -98,10 +98,10 @@ class FormatEntitiesTest extends ApiTestCase {
 		$results = $resultArray['wbformatentities'];
 
 		$this->assertArrayHasKey( $itemId, $results );
-		$this->assertSame( 'test item', $results[$itemId] );
+		$this->assertSame( 'test & item', $results[$itemId] );
 
 		$this->assertArrayHasKey( $propertyId, $results );
-		$this->assertSame( 'test property', $results[$propertyId] );
+		$this->assertSame( 'test & property', $results[$propertyId] );
 	}
 
 	public function testApiRequest_noSuchEntity() {
