@@ -32,7 +32,8 @@
 			"FShbib",
 			"Hubaishan",
 			"Lolekek",
-			"Mohammed Qays"
+			"Mohammed Qays",
+			"123Rkhader"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -52,7 +53,7 @@
 	"wikibase-comment-multi": "{{PLURAL:$1|لا تعديلات|تعديل|تعديلين|$1 تعديلات|$1 تعديلاً|$1 تعديل}}",
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "عدل الوصلات",
-	"wikibase-editlinkstitle": "تعديل وصلات اللغات",
+	"wikibase-editlinkstitle": "تعديل روابط الانتقال بين اللغات",
 	"wikibase-addlinkstitle": "إضافة وصلات بين اللغات",
 	"wikibase-linkitem-addlinks": "أضف وصلات",
 	"wikibase-linkitem-alreadylinked": "هذه الصفحة التي تريد ربطها مرتبطة بالفعل ب[$1 مادة] في المستودع المركزي للبيانات والتي يرتبط ب[[$2]] على هذا الموقع. بإمكان المواد إلحاق صفحة واحدة فقط لكل موقع. الرجاء اختيار صفحة مختلفة للربط.",

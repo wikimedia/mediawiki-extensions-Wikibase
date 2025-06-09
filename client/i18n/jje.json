@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"고솜"
+			"고솜",
+			"Whatback11"
 		]
 	},
 	"tooltip-t-wikibase": "얼긴 데이터 갈무리광 항목으로의 링크",
@@ -9,6 +10,13 @@
 	"wikibase-dataitem": "{{WBREPONAME}}항목",
 	"wikibase-editlinks": "링크 바꼬기",
 	"wikibase-editlinkstitle": "말 ᄉᆞ시 링크 바꼬기",
+	"wikibase-addlinkstitle": "언어 세 사슬 추가",
+	"wikibase-linkitem-addlinks": "사슬 추가",
+	"wikibase-linkitem-title": "문세에 사슬돋지기",
+	"wikibase-linkitem-linkpage": "문서에 사슬돋지기",
+	"wikibase-linkitem-selectlink": "이 문로 사슬돋질 사이트영 문세를 고르닥ᄒᆞᆸ서",
+	"wikibase-linkitem-input-site": "언어",
+	"wikibase-linkitem-input-page": "문세:",
 	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
 	"wikibase-rc-hide-wikidata-hide": "곱지기",
 	"wikibase-rc-hide-wikidata-show": "베우기",
