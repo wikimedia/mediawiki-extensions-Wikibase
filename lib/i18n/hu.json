@@ -7,6 +7,7 @@
 			"Máté",
 			"Tacsipacsi",
 			"Tgr",
+			"Urbalazs",
 			"Wolf Rex"
 		]
 	},
@@ -22,6 +23,10 @@
 	"wikibase-error-remove-timeout": "Műszaki problémáink vannak. Kérjük, próbáld újra.",
 	"wikibase-error-ui-no-external-page": "„$2” lap nem található a(z) „$1” wikin.",
 	"wikibase-error-ui-edit-conflict": "Ugyanezt az értéket szerkesztették közben, így szerkesztési ütközés történt. Kérlek, töltsd újra a lapot.",
+	"wikibase-itemlink": "$1 $2",
+	"wikibase-itemlink-id-wrapper": "($1)",
+	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1: $2)",
+	"wikibase-itemlink-title": "$1 | $2",
 	"wikibase-language-fallback-transliteration-hint": "$1 (átírva)",
 	"wikibase-language-name-for-terms-mul": "alapértelmezett értékek (mul)",
 	"wikibase-quantitydetails-amount": "Mennyiség",

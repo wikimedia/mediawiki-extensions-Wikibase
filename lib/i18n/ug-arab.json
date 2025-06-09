@@ -7,6 +7,7 @@
 			"Zolgoyo"
 		]
 	},
+	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-sitelinks-wikipedia": "ۋىكىپېدىيە",
 	"datatypes-type-string": "تېكىست",
 	"datatypes-type-quantity": "سانى",

@@ -37,6 +37,7 @@
 	"wikibase-error-remove-timeout": "در حال حاضر با مشکلات فنیی‌ای روبه‌رو شده‌ایم. لطفاً دوباره تلاش کنید.",
 	"wikibase-error-ui-no-external-page": "صفحه $2\" در وب‌گاه \"$1\" پیدا نشد.",
 	"wikibase-error-ui-edit-conflict": "تعارض ویرایشی رخ داده است. خواهشمندیم تغییراتتان را به صورت محلی ذخیره کنید از نو صفحه بارگذاری و ذخیره کنید.",
+	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-language-fallback-transliteration-hint": "$1 (نویسه‌گردانی‌شده)",
 	"wikibase-language-name-for-terms-mul": "پیش‌فرض برای تمام زبان‌ها",
 	"wikibase-quantitydetails-amount": "مبلغ",
