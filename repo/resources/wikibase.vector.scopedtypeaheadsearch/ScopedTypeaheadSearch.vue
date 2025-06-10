@@ -34,7 +34,7 @@
 			>
 		</template>
 		<template #search-footer-text="{ searchQuery }">
-			<span v-i18n-html:vector-searchsuggest-containing="[ searchQuery ]"></span>
+			<span v-i18n-html:searchsuggest-containing-html="[ searchQuery ]"></span>
 		</template>
 	</cdx-typeahead-search>
 </template>
