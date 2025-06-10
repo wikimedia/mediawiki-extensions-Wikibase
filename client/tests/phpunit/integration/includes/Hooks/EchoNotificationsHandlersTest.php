@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Page\RedirectLookup;
-use MediaWiki\Title\Title;
 use MediaWiki\User\Options\UserOptionsManager;
 use MediaWiki\User\User;
 use MediaWiki\User\UserIdentityLookup;
@@ -163,7 +162,6 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 			$this->deletePage( $page );
 			$page->getTitle()->resetArticleID( false );
 		}
-		Title::clearCaches();
 	}
 
 	public static function localUserCreatedProvider() {
