@@ -6,10 +6,8 @@
 			"Chuvash2014"
 		]
 	},
-	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1: $2)",
-	"wikibase-itemlink-title": "$1 | $2",
 	"wikibase-sitelinks-wikipedia": "Википеди",
 	"version-wikibase": "Вики-база"
 }

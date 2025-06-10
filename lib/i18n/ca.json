@@ -24,7 +24,6 @@
 	"wikibase-error-remove-timeout": "Estem experimentant dificultats tècniques. Torneu-ho a provar.",
 	"wikibase-error-ui-no-external-page": "No s'ha trobat la pàgina «$2» a «$1».",
 	"wikibase-error-ui-edit-conflict": "S’ha produït un conflicte d’edició perquè el mateix valor s’ha modificat mentrestant. Recarregueu la pàgina.",
-	"wikibase-itemlink": "$1 $2",
 	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterat)",
 	"wikibase-language-name-for-terms-mul": "Per defecte en totes les llengües",
