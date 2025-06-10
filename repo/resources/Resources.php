@@ -286,9 +286,10 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.vector.searchClient' => $moduleTemplate + [
+		'wikibase.typeahead.search' => $moduleTemplate + [
 			'packageFiles' => [
-				'wikibase.vector.searchClient.js',
+				'wikibase.typeahead.search/init.js',
+				'wikibase.typeahead.search/searchClient.js',
 			],
 			'messages' => [
 				'parentheses',

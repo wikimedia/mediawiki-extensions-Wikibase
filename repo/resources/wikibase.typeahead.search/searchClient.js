@@ -58,5 +58,5 @@
 		loadMore: ( q, offset, limit = 10, _showDescription = true ) => fetchResults( q, limit, offset )
 	};
 
-	mw.config.set( 'wgVectorSearchClient', vectorSearchClient );
+	module.exports = vectorSearchClient;
 }( mw ) );
