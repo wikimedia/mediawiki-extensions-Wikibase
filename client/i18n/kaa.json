@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ajiniyaz Nurniyazov",
-			"Nurlan"
+			"Nurlan",
+			"Janabaevazizbek"
 		]
 	},
 	"tooltip-t-wikibase": "Baylanısqan Wikimaǵlıwmat bazası elementine silteme",
@@ -45,6 +46,7 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementi identifikatorı",
 	"wikibase-pageinfo-description-central": "Ortalıq sıpatlama",
 	"wikibase-pageinfo-entity-usage": "Bul bette paydalanılǵan {{WBREPONAME}} obyektleri",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Túsindirme: $1",
 	"wikibase-otherprojects": "Basqa joybarlarda",
 	"wikibase-sitelinks-sitename-columnheading": "Til",
 	"wikibase-sitelinks-link-columnheading": "Siltemelengen bet",
