@@ -49,6 +49,6 @@ module.exports = {
 			directory: __dirname,
 		},
 		compress: true,
-		port: 9000,
+		port: 7000,
 	},
 };
