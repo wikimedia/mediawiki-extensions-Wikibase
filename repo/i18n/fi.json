@@ -457,6 +457,8 @@
 	"special-setlabel-parameterized": "Aseta $1-nimi",
 	"special-setdescription-parameterized": "Aseta $1-kuvaus",
 	"special-setlabeldescriptionaliases-parameterized": "Aseta $1-nimi, -kuvaus ja -aliakset",
+	"wikibase-scoped-search-search-entities": "Hae entiteettejä",
+	"wikibase-scoped-search-search-entities-description": "Etsi erityyppisiä {{SITENAME}}-entiteettejä",
 	"wikibase-scoped-search-item-scope-name": "Kohteet",
 	"wikibase-scoped-search-property-scope-name": "Ominaisuudet"
 }

@@ -12,12 +12,14 @@
 			"Shanmugamp7",
 			"Siddhan",
 			"கலைவாணன்",
-			"மதனாஹரன்"
+			"மதனாஹரன்",
+			"Matrix"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",
 	"wikibase-editlinks": "தொடுப்புகளைத் தொகு",
 	"wikibase-editlinkstitle": "மொழியிடைத் தொடுப்புகளைத் தொகு",
+	"wikibase-addlinkstitle": "மொழியிடைத் தொடுப்புகளைத் தொகு",
 	"wikibase-linkitem-addlinks": "தொடுப்புகளைச் சேர்",
 	"wikibase-linkitem-title": "பக்கத்துடன் தொடு",
 	"wikibase-linkitem-linkpage": "பக்கத்துடன் தொடு",

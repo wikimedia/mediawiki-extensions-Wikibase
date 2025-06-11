@@ -22,7 +22,9 @@
 			"زكريا",
 			"سامي الرحيلي",
 			"محمد أحمد عبد الفتاح",
-			"مشعل الحربي"
+			"مشعل الحربي",
+			"123Rkhader",
+			"Mohammed Qays"
 		]
 	},
 	"specialpages-group-wikibase": "قاعدة الويكي",
@@ -143,8 +145,8 @@
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "غيّر {{PLURAL:$4|تصفية واحدة|$4 تصفيتين}} {{PLURAL:$3|للادعاء|للادعاءات}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "تغيير {{PLURAL:$4||مرجعًا|مرجعين| $4 مراجع|$4 مرجعاً|$4 مرجع}} لـ{{PLURAL:$3||ادعاء|ادعائين|$3 ادعاءات|$3 ادعاء}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "غيّر ترتيب {{PLURAL:$3||ادعاء|ادعائين|ادعاءات}}",
-	"wikibase-entity-summary-clientsitelink-update": "تم نقل الصفحة من [$3] إلى [$4]",
-	"wikibase-entity-summary-clientsitelink-remove": "تم حذف الصفحة من [$3]",
+	"wikibase-entity-summary-clientsitelink-update": "نُقلت الصفحة من [$3] إلى [$4]",
+	"wikibase-entity-summary-clientsitelink-remove": "حُذفت الصفحة من [$3]",
 	"wikibase-entity-summary-wbsetqualifier-add": "أضاف {{PLURAL:$1|تصفية|تصفيات}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "غيّر {{PLURAL:$1|تصفية|تصفيات}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "أزال {{PLURAL:$1|تصفية|تصفيات}}",

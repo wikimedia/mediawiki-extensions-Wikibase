@@ -6,13 +6,15 @@
 			"SHOTHA",
 			"Tokoko",
 			"Გიო ოქრო",
-			"Იო ოქრო"
+			"Იო ოქრო",
+			"Mehman97"
 		]
 	},
 	"wikibase-client-desc": "ვიკიბაზის გაფართოების კლიენტი",
 	"tooltip-t-wikibase": "მონაცემთა საცავის დაკავშირებული ელემენტის ბმული",
 	"wikibase-after-page-move": "გადარქმეულ გვერდზე ენის ბმულების გასასწორებლად, თქვენ აგრეთვე შეგიძლიათ [$1 განაახლოთ] ვიკიმონაცემების დაკავშირებული ელემენტი.",
 	"wikibase-after-page-delete": "თქვენ უნდა წაშალოთ აგრეთვე ბმული ამ გვერდზე [$1 თანმხლები ელემენტი {{GRAMMAR:genitive|{{WBREPONAME}}}}]დან ენათშორისი ბმულების მომსახურეობისათვის.",
+	"wikibase-comment-add": "{{WBREPONAME}}ს ელემენტი შეიქმნა.",
 	"wikibase-comment-remove": "ვიკიმონაცემების დაკავშირებული ელემენტი წაშლილია. ენის ბმულები წაშლია.",
 	"wikibase-comment-linked": "ვიკიმონაცემების ელემენტი დაკავშირდა ამ გვერდთან.",
 	"wikibase-comment-unlink": "ამ გვერდის კავშირი ვიკიმონაცემების ელემენტთან გაწყვეტილია. ენის ბმულები წაშლილია.",
@@ -68,7 +70,7 @@
 	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}}ს ობიექტები გამოყენებული ამ გვერდზე",
 	"wikibase-otherprojects": "სხვა პროექტებში",
 	"wikibase-otherprojects-beta-message": "სხვა პროექტების გვერდითი პანელი",
-	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს Wikidata-ის მონაცემების საფუძველზე.",
+	"wikibase-otherprojects-beta-description": "გვერდით პანელზე ამატებს განყოფილებას „{{int:wikibase-otherprojects}}“, რომელიც შეიცავს ფონდ ვიკიმედიის სხვა პროექტების ბმულებს ვიკიმონაცემების მონაცემის საფუძველზე.",
 	"wikibase-sitelinks-sitename-columnheading": "ენა",
 	"wikibase-sitelinks-link-columnheading": "დაკავშირებული გვერდი",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|კავშირი|კავშირები}} {{WBREPONAME}}ს გვერდთან",

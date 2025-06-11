@@ -78,5 +78,6 @@
 	"wikibase-otherprojects": "Dalam projek lain",
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-link-columnheading": "Halaman terpaut",
+	"notification-header-page-connection": "Laman <strong>$3</strong> telah {{GENDER:$2|disambungkan}} ke {{PLURAL:$4|-1=sebuah item {{WBREPONAME}}|item {{WBREPONAME}} $4}}, yang merupakan tempat data yang berkaitan dengan topik itu boleh dikumpulkan.",
 	"wikibase-client-data-bridge-error-reload-page": "Muat semula laman"
 }
