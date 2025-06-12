@@ -29,7 +29,7 @@ class SimpleItemSearchValidator {
 	 * @throws UseCaseError
 	 */
 	public function validate( SimpleItemSearchRequest $request ): void {
-		$validationError = $this->languageValidator->validate( $request->getLanguage() );
+		$validationError = $this->languageValidator->validate( $request->language );
 
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
@@ -44,14 +44,11 @@ class SimpleItemSearchValidator {
 	}
 
 	private function validateLimitAndOffset( SimpleItemSearchRequest $request ): void {
-		$limit = $request->getLimit();
-		$offset = $request->getOffset();
-
-		if ( $limit < 0 || $limit > self::MAX_LIMIT ) {
+		if ( $request->limit < 0 || $request->limit > self::MAX_LIMIT ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );
 		}
 
-		if ( $offset < 0 ) {
+		if ( $request->offset < 0 ) {
 			throw UseCaseError::invalidQueryParameter( self::OFFSET_QUERY_PARAM );
 		}
 	}

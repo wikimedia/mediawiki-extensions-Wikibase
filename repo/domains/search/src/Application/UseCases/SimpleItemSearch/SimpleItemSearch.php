@@ -27,16 +27,11 @@ class SimpleItemSearch {
 	public function execute( SimpleItemSearchRequest $itemRequest ): SimpleItemSearchResponse {
 		$this->validator->validate( $itemRequest );
 
-		$searchTerm = $itemRequest->getQuery();
-		$language = $itemRequest->getLanguage();
-		$limit = $itemRequest->getLimit();
-		$offset = $itemRequest->getOffset();
-
 		return new SimpleItemSearchResponse( $this->searchEngine->searchItemByLabel(
-			$searchTerm,
-			$language,
-			$limit,
-			$offset
+			$itemRequest->query,
+			$itemRequest->language,
+			$itemRequest->limit,
+			$itemRequest->offset
 		) );
 	}
 }
