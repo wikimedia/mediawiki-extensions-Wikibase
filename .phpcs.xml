@@ -35,6 +35,8 @@
 	</rule>
 	<rule ref="Generic.PHP.NoSilencedErrors.Discouraged">
 		<exclude-pattern>tests/phpunit/*</exclude-pattern>
+		<!-- For /lib/packages/*/tests/unit/**/*.php -->
+		<exclude-pattern>tests/unit/*</exclude-pattern>
 	</rule>
 
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
