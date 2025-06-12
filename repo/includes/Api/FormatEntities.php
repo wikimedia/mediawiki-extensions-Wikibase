@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use LogicException;
 use MediaWiki\Api\ApiBase;
 use MediaWiki\Api\ApiMain;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -171,7 +172,7 @@ class FormatEntities extends ApiBase {
 
 	/**
 	 * Make the `href=""` attributes of `<a>` elements in an HTML snippet absolute.
-	 * URLs are expanded using {@link wfExpandUrl}.
+	 * URLs are expanded using {@link \MediaWiki\Utils\UrlUtils::expand}.
 	 *
 	 * @param string $html
 	 * @return string
@@ -187,9 +188,11 @@ class FormatEntities extends ApiBase {
 					&& $node->name === 'a'
 					&& isset( $node->attrs['href'] )
 				) {
+					$urlUtils = MediaWikiServices::getInstance()->getUrlUtils();
+
 					$node = clone $node;
 					$node->attrs = clone $node->attrs;
-					$node->attrs['href'] = wfExpandUrl( $node->attrs['href'], PROTO_CANONICAL );
+					$node->attrs['href'] = $urlUtils->expand( $node->attrs['href'], PROTO_CANONICAL );
 				}
 				return parent::element( $parent, $node, $contents );
 			}

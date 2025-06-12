@@ -7,6 +7,7 @@ namespace Wikibase\Client\Hooks;
 use MediaWiki\FileRepo\File\File;
 use MediaWiki\Hook\SkinAfterBottomScriptsHook;
 use MediaWiki\Html\Html;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\Hook\OutputPageParserOutputHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Revision\RevisionLookup;
@@ -129,7 +130,8 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		}
 
 		if ( $imageFile ) {
-			$schema['image'] = wfExpandUrl( $imageFile->getUrl(), PROTO_CANONICAL );
+			$schema['image'] = MediaWikiServices::getInstance()->getUrlUtils()
+				->expand( $imageFile->getUrl(), PROTO_CANONICAL );
 		}
 
 		if ( $description ) {

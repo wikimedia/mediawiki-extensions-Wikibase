@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
@@ -144,7 +145,8 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 		[ , $response ] = $this->executeSpecialPage( $subPage );
 
 		$itemUrl = Title::newFromTextThrow( $itemId )->getFullURL();
-		$expectedUrl = wfExpandUrl( $itemUrl, PROTO_CURRENT );
+		$urlUtils = MediaWikiServices::getInstance()->getUrlUtils();
+		$expectedUrl = $urlUtils->expand( $itemUrl, PROTO_CURRENT );
 		$this->assertEquals( $expectedUrl, $response->getHeader( 'Location' ), 'Redirect' );
 	}
 
