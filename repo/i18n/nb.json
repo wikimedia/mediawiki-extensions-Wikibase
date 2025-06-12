@@ -431,7 +431,7 @@
 	"wikibase-conflict-patched": "Redigeringen ble lappet inn i den nyeste versjonen.",
 	"wikibase-save-unresolved-redirect": "Støtte på en uløst omdirigering fra $1 til $2 under forsøk på å lagre en endring.",
 	"wikibase-restoreold": "gjenopprett",
-	"wikibase-entity-summary-restore": "Gjenoppretter sideversjon [[Special:Permalink/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-restore": "Gjenoppretter sideversjon [[Special:Permalink/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskusjon]])",
 	"wikibase-entity-summary-undo": "Fjerner sideversjon [[Special:Diff/$3|$3]] av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskusjon]])",
 	"wikibase-no-direct-editing": "Direkteredigering er avslått i navnerommet $1",
 	"wikibase-noentity": "Denne entiteten finnes ikke.\nDu kan [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} søke i aktuelle logger]\nfor å finne ut hva som har skjedd.",

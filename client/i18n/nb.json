@@ -68,7 +68,7 @@
 	"wikibase-error-deserialize-error": "Klarte ikke å pakke ut data.",
 	"wikibase-error-serialize-error": "Serialisering av data mislyktes",
 	"wikibase-error-invalid-entity-id": "ID-en «$2» er ukjent for systemet. Bruk en gyldig entitets-ID.",
-	"wikibase-error-exceeded-entity-access-limit": "For mange {{WBREPONAME}}-elementer hentet.",
+	"wikibase-error-exceeded-entity-access-limit": "For mange {{WBREPONAME}}-elementer hentet. Antall innlastede elementer: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "For mange «mw.wikibase.getReferencedEntityId»-kall, opptil $2 {{PLURAL:$2|tillates}}.",
 	"unconnectedpages": "Sider som ikke er knyttet til elementer",
 	"unconnectedpages-summary": "Denne siden lister sider uten tilknyttet dataelement (i navnerom som støtter tilknyttede elementer).",
