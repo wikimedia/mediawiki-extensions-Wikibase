@@ -3,8 +3,7 @@
 		<div class="wikibase-mex-statement-heading">
 			<div class="wikibase-mex-statement-heading-row">
 				<div class="wikibase-mex-property-name">
-					<!-- TODO: Use the property label the link text, and correctly derive the URL (T396633, T396634) -->
-					<p><a :href="'/wiki/Property:' + statement.mainsnak.property" class="mex-link">{{ statement.mainsnak.property }}</a></p>
+					<p><a :href="propertyUrl" class="mex-link">{{ propertyLabel }}</a></p>
 				</div>
 				<div class="wikibase-mex-edit-link">
 					<span class="wikibase-mex-icon-edit-small"></span>
@@ -38,6 +37,18 @@ module.exports = exports = defineComponent( {
 		statement: {
 			type: Object,
 			required: true
+		}
+	},
+	computed: {
+		propertyUrl() {
+			const title = new mw.Title(
+				this.statement.mainsnak.property,
+				mw.config.get( 'wgNamespaceIds', {} ).property || 120 // TODO T396634
+			);
+			return title.getUrl();
+		},
+		propertyLabel() {
+			return this.statement.mainsnak.property; // TODO T396634
 		}
 	}
 } );

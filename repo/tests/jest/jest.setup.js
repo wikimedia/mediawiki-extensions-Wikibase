@@ -33,7 +33,13 @@ config.global.directives = {
 function ApiMock() {}
 ApiMock.prototype.get = jest.fn();
 
+function TitleMock() {}
+TitleMock.prototype.getMainText = jest.fn();
+TitleMock.prototype.getNameText = jest.fn();
+TitleMock.prototype.getUrl = jest.fn();
+
 global.mw = {
 	Api: ApiMock,
-	msg: jest.fn( ( key ) => key )
+	msg: jest.fn( ( key ) => key ),
+	Title: TitleMock
 };

@@ -9,6 +9,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use WMDE\VueJsTemplating\Templating;
 
@@ -156,6 +157,10 @@ class ItemView extends EntityView {
 						],
 						'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
 					],
+					'propertyUrl' => WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
+						->getTitleForId( $mainSnak->getPropertyId() )
+						->getLinkURL(),
+					'propertyLabel' => $mainSnak->getPropertyId()->getSerialization(), // TODO get label (T396633)
 				]
 			);
 
