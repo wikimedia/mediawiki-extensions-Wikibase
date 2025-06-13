@@ -229,14 +229,13 @@ class ItemDiffTest extends EntityDiffOldTestCase {
 	 * diffs for substructures even in recursive mode (bug 51363).
 	 */
 	public function testAtomicSubstructureWorkaround() {
-		$oldErrorLevel = error_reporting( E_USER_ERROR );
-
 		$atomicListDiff = new DiffOpChange(
 			[ 'a' => 'A', 'b' => 'B' ],
 			[ 'b' => 'B', 'a' => 'A' ]
 		);
 
-		$diff = new ItemDiff( [
+		// Ignore intentional warning for "Invalid substructure diff"
+		$diff = @new ItemDiff( [
 			'aliases' => $atomicListDiff,
 			'label' => $atomicListDiff,
 			'description' => $atomicListDiff,
@@ -249,8 +248,6 @@ class ItemDiffTest extends EntityDiffOldTestCase {
 		$this->assertInstanceOf( Diff::class, $diff->getDescriptionsDiff() );
 		$this->assertInstanceOf( Diff::class, $diff->getClaimsDiff() );
 		$this->assertInstanceOf( Diff::class, $diff->getSiteLinkDiff() );
-
-		error_reporting( $oldErrorLevel );
 	}
 
 }
