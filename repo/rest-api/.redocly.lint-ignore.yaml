@@ -5,7 +5,3 @@ specs/openapi-joined.json:
     - '#/paths/~1v1~1openapi.json/get/responses'
     - '#/paths/~1v1~1property-data-types/get/responses'
     - '#/paths/~1v0~1search~1items/get/responses'
-
-  # temporarily ignore
-  no-unused-components:
-    - '#/components/parameters/SearchQuery'
