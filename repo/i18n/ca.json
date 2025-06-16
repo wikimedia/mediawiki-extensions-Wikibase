@@ -177,8 +177,6 @@
 	"wikibase-validator-no-such-media": "El fitxer «$1» no existeix a [https://commons.wikimedia.org/ Wikimedia Commons].",
 	"wikibase-validator-page-not-exists": "La pàgina «$1» no existeix.",
 	"wikibase-validator-not-a-language": "«$1» no és un codi d'idioma conegut.",
-	"wikibase-itemlink": "$1 $2",
-	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-item-reference-edit-placeholder": "Introduïu un ID d'element. P. ex., Q10",
 	"wikibase-item-reference-edit-invalid-format": "L'ID de l'element introduït no té un format vàlid",
 	"wikibase-item-reference-edit-nonexistent-item": "No existeix cap element amb aquest ID",

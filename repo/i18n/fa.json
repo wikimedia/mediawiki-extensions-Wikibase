@@ -179,7 +179,6 @@
 	"wikibase-validator-no-such-media": "پرونده \"$1\" در [https://commons.wikimedia.org/ Wikimedia Commons] وجود ندارد.",
 	"wikibase-validator-page-not-exists": "صفحهٔ \"$1\" وجود ندارد.",
 	"wikibase-validator-not-a-language": "«$1» یک کد زبان شناخته شده نیست.",
-	"wikibase-itemlink-id-wrapper": "($1)",
 	"wikibase-item-reference-edit-placeholder": "شناسه آیتم را مثل Q10 وارد کنید",
 	"wikibase-item-reference-edit-invalid-format": "شناسهٔ آیتم واردشده قالب نامعتبری دارد",
 	"wikibase-item-reference-edit-nonexistent-item": "آیتم با این شناسه‌ وجود ندارد.",
