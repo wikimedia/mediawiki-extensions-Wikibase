@@ -105,5 +105,7 @@
 	"wikibase-newitem-fieldset": "Vytvoriť novú položku",
 	"wikibase-newentity-submit": "Vytvoriť",
 	"wikibase-modifyterm-language": "Kód jazyka:",
+	"wikibase-history-title-with-label": "História revízií položky „$2“ ($1)",
+	"wikibase-history-title-without-label": "História revízií položky ($1)",
 	"wikibase-listdatatypes-geo-shape-head": "Geografický tvar"
 }
