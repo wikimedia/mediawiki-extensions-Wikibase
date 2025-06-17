@@ -10,6 +10,19 @@
 			"Teslaton"
 		]
 	},
+	"wikibase-language-name-for-terms-mul": "predvolená hodnota pre všetky jazyky",
 	"wikibase-sitelinks-wikipedia": "Wikipédia",
-	"wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota"
+	"wikibase-snakview-snaktypeselector-somevalue": "neznáma hodnota",
+	"wikibase-entity-summary-wbsetitem": "Vytvorená nová položka",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Zmenený štítok, popis a/alebo alias v {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbsetreference-add": "Tvrdeniu bola pridaná referencia",
+	"wikibase-entity-summary-wbsetdescription-add": "Pridaný popis pre [$2]",
+	"wikibase-entity-summary-wbsetsitelink-add": "Pridaný odkaz na [$2]",
+	"wikibase-entity-summary-wbsetsitelink-remove": "Odstránený odkaz na [$2]",
+	"wikibase-entity-summary-wbcreateclaim-create": "Vytvorené tvrdenie",
+	"wikibase-item-summary-wbcreate-new": "Vytvorená nová položka",
+	"wikibase-item-summary-wbeditentity": "Vytvorená nová položka",
+	"wikibase-item-summary-wbeditentity-create": "Vytvorená nová položka",
+	"wikibase-item-summary-wbeditentity-create-item": "Vytvorená nová položka",
+	"wikibase-item-summary-wbeditentity-update": "Položka bola zmenená"
 }

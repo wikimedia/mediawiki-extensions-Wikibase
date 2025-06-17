@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"wikibase-edit": "اؠڈِٹ",
+	"wikibase-save": "مَحفوٗظ کٔرِو",
+	"wikibase-publish": "شایع",
+	"wikibase-cancel": "مَنسوٗخ",
+	"wikibase-add": "اِضافہٕ",
+	"wikibase-save-inprogress": "مَحفوٗظ کَرن...",
+	"wikibase-publish-inprogress": "شایع کَرن...",
+	"wikibase-remove-inprogress": "ہَٹاوَن...",
+	"wikibase-label-empty": "کانٛہہ تِہ نشانٛدٕہی چھنہٕ دِنہٕ آمٕژ",
+	"wikibase-description-empty": "کانٛہہ تِہ تفصیٖل چھنہٕ آمٕژ واضح کرنہٕ",
+	"wikibase-diffview-link-name": "ناو",
+	"wikibase-sitelink-site-edit-placeholder": "وِکی",
+	"wikibase-sitelink-page-edit-placeholder": "صَفہٕ",
+	"wikibase-sitelinks-special": "باقٕے وؠب سائٹ",
+	"wikibase-snakview-variations-somevalue-label": "نامَعلوم اَندراج",
+	"wikibase-snakview-variations-novalue-label": "نامَعلوم اَندراج",
+	"wikibase-itembytitle-lookup-site": "ویب سائٹ:",
+	"wikibase-itembytitle-lookup-page": "صَفہٕ:",
+	"wikibase-itemdisambiguation-lookup-language": "زَبان کوڑ:",
+	"wikibase-tainted-ref-popper-help-link-text": "مَدَتھ",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "مَنسوٗخ"
+}

@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sauit"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} элэмиэн",
+	"wikibase-editlinks": "Һигэлэри уларыт",
+	"wikibase-addlinkstitle": "Омук тыллар һигэлэрин эбии",
+	"wikibase-linkitem-addlinks": "Һигэни эп",
+	"wikibase-linkitem-title": "Һырайы кытта илбээ",
+	"wikibase-linkitem-linkpage": "Һырайы кытта илбээ",
+	"wikibase-linkitem-selectlink": "бу һырайга һигэни эбээри, наадалаак Һаайты уонна һырайы талын.",
+	"wikibase-linkitem-input-site": "Тыла:",
+	"wikibase-linkitem-input-page": "Һырай:",
+	"wikibase-rc-hide-wikidata-hide": "Кистээ",
+	"wikibase-rc-hide-wikidata-show": "Көллөр",
+	"wikibase-otherprojects": "Атын бырайыактарга"
+}

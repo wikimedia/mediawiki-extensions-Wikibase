@@ -8,7 +8,8 @@
 			"Jon Harald Søby",
 			"Kjetil r",
 			"Macofe",
-			"Ranveig"
+			"Ranveig",
+			"EdoAug"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -24,7 +25,7 @@
 	"wikibase-error-ui-no-external-page": "Siden «$2» ble ikke funnet på «$1».",
 	"wikibase-error-ui-edit-conflict": "Samme verdi ble redigert i mellomtiden, så en redigeringskonflikt oppsto. Oppdater siden.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (translitterert)",
-	"wikibase-language-name-for-terms-mul": "standardverdier for alle språk",
+	"wikibase-language-name-for-terms-mul": "standard for alle språk",
 	"wikibase-quantitydetails-amount": "Mengde",
 	"wikibase-quantitydetails-upperbound": "Øvre grense",
 	"wikibase-quantitydetails-lowerbound": "Nedre grense",

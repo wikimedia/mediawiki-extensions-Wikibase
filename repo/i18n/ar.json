@@ -39,7 +39,8 @@
 			"محمد أحمد عبد الفتاح",
 			"مشعل الحربي",
 			"Lolekek",
-			"XIDME"
+			"XIDME",
+			"Mohammed Qays"
 		]
 	},
 	"wikibase-desc": "مستودع بيانات مهيكلة",
@@ -50,7 +51,7 @@
 	"nstab-item": "عنصر",
 	"tooltip-ca-nstab-item": "اعرض العنصر",
 	"nstab-property": "خاصية",
-	"tooltip-ca-nstab-property": "اعرض الخاصية",
+	"tooltip-ca-nstab-property": "عرض الخاصية",
 	"nstab-query": "استعلام",
 	"tooltip-ca-nstab-query": "اعرض الاستعلام",
 	"wikibase-edit": "عدِّل",
@@ -119,7 +120,7 @@
 	"wikibase-statementsection-identifiers": "مُعرِّفات",
 	"wikibase-sitelinks": "وصلات الموقع",
 	"wikibase-sitelinkgroupview-input-help-message": "أضِف وصلة موقع عن طريق تحديد موقع وصفحة من ذلك الموقع، عدل أو أزل وصلات الموقع الموجودة.",
-	"wikibase-sitelinks-counter": "{{PLURAL:$1|0=لا وصلات|1=وصلة واحدة|2=وصلتان|3=$1 وصلات|11=$1 وصلة}}",
+	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|مدخلة|مدخلات}}",
 	"wikibase-sitelinks-empty": "لا ترتبط أي صفحات بهذا العنصر بعد.",
 	"wikibase-sitelinks-special": "مواقع أخرى",
 	"wikibase-badgeselector-badge-placeholder-title": "انقر لتعيين شارة.",
@@ -150,7 +151,7 @@
 	"wikibase-statementview-rank-tooltip-normal": "قيمة صحيحة، لكن ربما تكون تاريخية",
 	"wikibase-statementview-rank-deprecated": "ترتيب مُبطَل",
 	"wikibase-statementview-rank-tooltip-deprecated": "القيمة معروفة بأنها خاطئة لكن يشيع الاعتقاد بصحتها",
-	"wikibase-statementview-references-counter": "{{PLURAL:$1|0=لا مراجع|1=مرجع واحد|2=مرجعان|3=$1 مراجع|4=$1 مرجعا}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|مرجع|مراجع}}",
 	"wikibase-snakview-property-input-placeholder": "خاصية",
 	"wikibase-snakview-unsupportedsnaktype": "سناك من نمط «$1». لا تُدعَم معالجة هذا النوع من السناك بعد.",
 	"wikibase-snakview-choosesnaktype": "اختر نوع القيمة.",
