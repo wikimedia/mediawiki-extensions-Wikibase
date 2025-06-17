@@ -962,6 +962,7 @@ final class RepoHooks implements
 				'packageFiles' => [
 					'resources/wikibase.mobileUi.entityViewInit.js',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
+					'resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue',
 				],
 				'dependencies' => [
 					'vue',
