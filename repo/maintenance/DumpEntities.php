@@ -226,7 +226,15 @@ abstract class DumpEntities extends Maintenance {
 		$dumper->setBatchSize( $batchSize );
 
 		$db = WikibaseRepo::getRepoDomainDbFactory()->newRepoDb();
-		$dumper->setBatchCallback( [ $db, 'autoReconfigure' ] );
+		$dumper->setBatchCallback( function () use ( $db ) {
+			// Reconfigure the DB as needed, but not more than once per minute (T389199#10890818)
+			static $reconfigureNext = 0;
+
+			if ( $reconfigureNext < time() ) {
+				$db->autoReconfigure();
+				$reconfigureNext = time() + 60;
+			}
+		} );
 
 		$idStream = $this->makeIdStream( $entityTypes, $exceptionReporter );
 		AtEase::suppressWarnings();
