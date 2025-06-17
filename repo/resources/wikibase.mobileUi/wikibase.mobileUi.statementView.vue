@@ -2,7 +2,7 @@
 	<div class="wikibase-mex-statement">
 		<div class="wikibase-mex-statement-heading">
 			<div class="wikibase-mex-statement-heading-row">
-				<mex-property-name :url="propertyUrl" :label="propertyLabel"></mex-property-name>
+				<mex-property-name :property-id="statement.mainsnak.property"></mex-property-name>
 				<div class="wikibase-mex-edit-link">
 					<span class="wikibase-mex-icon-edit-small"></span>
 					<a href="#" class="mex-link-heavy">edit</a>
@@ -39,18 +39,6 @@ module.exports = exports = defineComponent( {
 		statement: {
 			type: Object,
 			required: true
-		}
-	},
-	computed: {
-		propertyUrl() {
-			const title = new mw.Title(
-				this.statement.mainsnak.property,
-				mw.config.get( 'wgNamespaceIds', {} ).property || 120 // TODO T396634
-			);
-			return title.getUrl();
-		},
-		propertyLabel() {
-			return this.statement.mainsnak.property; // TODO T396634
 		}
 	}
 } );
