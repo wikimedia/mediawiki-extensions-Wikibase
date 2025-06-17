@@ -2,9 +2,12 @@
 
 namespace Wikibase\View\Tests;
 
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\CacheableEntityTermsView;
@@ -78,7 +81,16 @@ class ItemViewTest extends EntityViewTestCase {
 			],
 			[
 				'viewFactory' => fn ( self $self ) => $self->newItemView( [], true ),
-				'item' => self::newEntityForStatements( [] ),
+				'item' => self::newEntityForStatements( [
+					new Statement( new PropertyValueSnak(
+						new NumericPropertyId( 'P1' ),
+						new StringValue( 'p1' )
+					) ),
+					new Statement( new PropertyValueSnak(
+						new NumericPropertyId( 'P2' ),
+						new StringValue( 'p2' )
+					) ),
+				] ),
 				'vueStatementsExpected' => true,
 			],
 		];
