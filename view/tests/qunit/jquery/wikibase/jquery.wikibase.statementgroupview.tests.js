@@ -197,6 +197,11 @@
 			statementgroupview.element.data( 'property-id' ),
 			'P1'
 		);
+
+		assert.strictEqual(
+			statementgroupview.element.attr( 'data-property-id' ),
+			'P1'
+		);
 	} );
 
 	QUnit.test( 'Given a value and a prefix, sets prefixed html id attribute on creation', ( assert ) => {
