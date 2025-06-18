@@ -93,6 +93,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Jazyk",
 	"wikibase-sitelinks-link-columnheading": "Prepojená stránka",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|prepojenie}} s {{GRAMMAR:7sg|{{WBREPONAME}}}}",
+	"echo-pref-tooltip-wikibase-action": "Upozornite ma, keď niekto prepojí stránku, ktorú som {{GENDER:|vytvoril|vytvorila|vytvoril(a)}}, s položkou na {{GRAMMAR:lokál|{{WBREPONAME}}}}.",
 	"notification-header-page-connection": "Stránka <strong>$3</strong> bola {{GENDER:$2|prepojená}} s položkou {{PLURAL:$4|-1=na {{GRAMMAR:6sg|{{WBREPONAME}}}}|$4 na {{GRAMMAR:6sg|{{WBREPONAME}}}}}}, ktorá obsahuje relevantné údaje súvisiace s jej témou.",
 	"notification-link-text-view-item": "{{GENDER:$1|Zobraziť}} položku",
 	"unresolved-property-category": "Stránky s nenájdenými vlastnosťami",
