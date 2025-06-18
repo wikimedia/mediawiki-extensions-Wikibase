@@ -50,7 +50,7 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$handler = new LoadExtensionSchemaUpdatesHookHandler();
 		$handler->onLoadExtensionSchemaUpdates( $dbUpdater );
 
-		$this->assertSame( [], $dbUpdater->getExtensionUpdates() );
+		$this->assertSame( [], $dbUpdater->extensionUpdates );
 	}
 
 	public function testOnLoadExtensionSchemaUpdates() {
@@ -74,9 +74,9 @@ class LoadExtensionSchemaUpdatesHookHandlerTest extends MediaWikiIntegrationTest
 		$handler = new LoadExtensionSchemaUpdatesHookHandler();
 		$handler->onLoadExtensionSchemaUpdates( $dbUpdater );
 
-		$this->assertCount( 1, $dbUpdater->getExtensionUpdates() );
+		$this->assertCount( 1, $dbUpdater->extensionUpdates );
 
-		$dbUpdater->runUpdates( $dbUpdater->getExtensionUpdates(), true );
+		$dbUpdater->runUpdates( $dbUpdater->extensionUpdates, true );
 
 		$this->newSelectQueryBuilder()
 			->select( [ 'pp_page', 'pp_propname', 'pp_value', 'pp_sortkey' ] )
