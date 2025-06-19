@@ -59,6 +59,27 @@ const openapi = {
 					"400": { "$ref": "#/components/responses/BadRequest" }
 				}
 			}
+		},
+		"/v0/suggest/items": {
+			"get": {
+				"operationId": "simpleItemSuggest",
+				"tags": [ "item search" ],
+				"summary": "[WIP] Simple Item search by prefix, for labels and aliases",
+				"description": "This endpoint is currently in development and is not recommended for production use.",
+				"parameters": [
+					{
+						...parameters.SearchQuery,
+						"example": "pota"
+					},
+					{ "$ref": "#/components/parameters/SearchLanguage" },
+					{ "$ref": "#/components/parameters/Limit" },
+					{ "$ref": "#/components/parameters/Offset" },
+				],
+				"responses": {
+					"200": { "$ref": "#/components/responses/SuggestItemSuccess" },
+					"400": { "$ref": "#/components/responses/BadRequest" }
+				}
+			}
 		}
 	},
 	"components": {
