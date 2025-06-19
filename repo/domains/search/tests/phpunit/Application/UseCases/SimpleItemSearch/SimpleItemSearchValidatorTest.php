@@ -41,7 +41,7 @@ class SimpleItemSearchValidatorTest extends TestCase {
 	 */
 	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
 		$this->newUseCaseValidator()
-			->validate( new SimpleItemSearchRequest( 'search term', 'en', null, null ) );
+			->validate( new SimpleItemSearchRequest( 'search term', 'en' ) );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {

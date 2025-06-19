@@ -43,8 +43,8 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 			$useCaseResponse = $this->useCase->execute( new SimpleItemSearchRequest(
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
 				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
-				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM],
-				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM]
+				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? SimpleItemSearchRequest::DEFAULT_LIMIT,
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? SimpleItemSearchRequest::DEFAULT_OFFSET
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
