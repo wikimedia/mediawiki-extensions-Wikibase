@@ -111,7 +111,7 @@
 		 * @param {string} propertyId
 		 */
 		_updatePropertyId: function ( propertyId ) {
-			this.element.data( 'property-id', propertyId );
+			this.element.attr( 'data-property-id', propertyId );
 		},
 
 		/**
