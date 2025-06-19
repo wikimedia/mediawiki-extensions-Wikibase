@@ -4,5 +4,9 @@
 			"Sauit"
 		]
 	},
-	"wikibase-edit": "уларыт"
+	"wikibase-edit": "уларыт",
+	"wikibase-add": "эп",
+	"wikibase-label-empty": "Аата бэриллибэтэк",
+	"wikibase-description-empty": "Ис коһоон бэриллибэтэк",
+	"wikibase-sitelinks-special": "Атын саайтар"
 }

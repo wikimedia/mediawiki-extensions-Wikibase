@@ -42,9 +42,11 @@
 	"wikibase-label-empty": "Menovka zatiaľ nebola definovaná",
 	"wikibase-label-edit-placeholder": "zadaj menovku",
 	"wikibase-label-edit-placeholder-language-aware": "zadajte štítok v jazyku $1",
+	"wikibase-label-edit-placeholder-mul": "zadajte predvolený štítok",
 	"wikibase-description-empty": "Popis zatiaľ nebol definovaný",
 	"wikibase-description-edit-placeholder": "zadaj popis",
 	"wikibase-description-edit-placeholder-language-aware": "zadajte popis v jazyku $1",
+	"wikibase-description-edit-placeholder-not-applicable": "nepoužiteľné",
 	"wikibase-aliases-edit-placeholder": "zadajte nejaké aliasy",
 	"wikibase-aliases-edit-placeholder-language-aware": "zadajte nejaké aliasy v jazyku $1",
 	"wikibase-aliases-edit-label": "Aliasy, oddelené zvislými čiarami:",
@@ -105,5 +107,7 @@
 	"wikibase-newitem-fieldset": "Vytvoriť novú položku",
 	"wikibase-newentity-submit": "Vytvoriť",
 	"wikibase-modifyterm-language": "Kód jazyka:",
+	"wikibase-history-title-with-label": "História revízií položky „$2“ ($1)",
+	"wikibase-history-title-without-label": "História revízií položky ($1)",
 	"wikibase-listdatatypes-geo-shape-head": "Geografický tvar"
 }
