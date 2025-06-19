@@ -3,6 +3,7 @@
 		"authors": [
 			"Ajiniyaz Nurniyazov",
 			"Inabat Allanova",
+			"Janabaevazizbek",
 			"Nurlan"
 		]
 	},
@@ -27,6 +28,8 @@
 	"wikibase-remove-inprogress": "Alıp taslanbaqta...",
 	"wikibase-statementlistview-add": "mánis qosıw",
 	"wikibase-statementlistview-add-tooltip": "Jańa mánis qosıw",
+	"wikibase-statementgrouplistview-add": "mánis qosıw",
+	"wikibase-statementgrouplistview-add-tooltip": "Jańa mánis qosıw",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Kóplew tillerde",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfiguraciyalaw",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Jáne tómendegishe belgili:",
