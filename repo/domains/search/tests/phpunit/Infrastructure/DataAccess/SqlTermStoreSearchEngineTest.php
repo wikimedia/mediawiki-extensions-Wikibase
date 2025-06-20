@@ -16,7 +16,6 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -39,19 +38,6 @@ use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
  */
 class SqlTermStoreSearchEngineTest extends TestCase {
 
-	private MatchingTermsLookup $matchingTermsLookup;
-	private TermRetriever $termRetriever;
-	private EntityLookup $entityLookup;
-	private TermLanguageFallbackChain $termLanguageFallbackChain;
-
-	protected function setUp(): void {
-		parent::setUp();
-		$this->matchingTermsLookup = $this->createStub( MatchingTermsLookup::class );
-		$this->termRetriever = $this->createStub( TermRetriever::class );
-		$this->entityLookup = $this->createStub( EntityLookup::class );
-		$this->termLanguageFallbackChain = new TermLanguageFallbackChain( [], new StaticContentLanguages( [] ) );
-	}
-
 	public function testGivenSearchResultForItemLabel(): void {
 		$searchTerm = 'potato';
 		$languageCode = 'en';
@@ -63,25 +49,26 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new MatchedData( TermTypes::TYPE_LABEL, 'en', 'potato' )
 		);
 
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->willReturn(
 				[ $this->newTermIndexEntry( TermTypes::TYPE_LABEL, new ItemId( 'Q123' ), 'en', 'potato' ) ]
 			);
 
-		$this->termRetriever = $this->createMock( TermRetriever::class );
+		$termRetriever = $this->createMock( TermRetriever::class );
 		// we will not call TermRetriever::getLabel() because the index entry is of type label already
-		$this->termRetriever->expects( $this->never() )
+		$termRetriever->expects( $this->never() )
 			->method( 'getLabel' );
-		$this->termRetriever->expects( $this->once() )
+		$termRetriever->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( 'Q123', $languageCode )
 			->willReturn( new Description( 'en', 'staple food' ) );
 
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchItemByLabel( $searchTerm, $languageCode, 10, 0 )
+			$this->newEngine( matchingTermsLookup: $matchingTermsLookup, termRetriever: $termRetriever )
+				->searchItemByLabel( $searchTerm, $languageCode, 10, 0 )
 		);
 	}
 
@@ -96,25 +83,26 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new MatchedData( TermTypes::TYPE_LABEL, 'en', 'instance of' )
 		);
 
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->willReturn(
 				[ $this->newTermIndexEntry( TermTypes::TYPE_LABEL, new NumericPropertyId( 'P123' ), 'en', 'instance of' ) ]
 			);
 
-		$this->termRetriever = $this->createMock( TermRetriever::class );
+		$termRetriever = $this->createMock( TermRetriever::class );
 		// we will not call TermRetriever::getLabel() because the index entry is of type label already
-		$this->termRetriever->expects( $this->never() )
+		$termRetriever->expects( $this->never() )
 			->method( 'getLabel' );
-		$this->termRetriever->expects( $this->once() )
+		$termRetriever->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( 'P123', $languageCode )
 			->willReturn( new Description( 'en', 'the class of which this subject is a particular example and member' ) );
 
 		$this->assertEquals(
 			new PropertySearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchPropertyByLabel( $searchTerm, $languageCode, 10, 0 )
+			$this->newEngine( matchingTermsLookup: $matchingTermsLookup, termRetriever: $termRetriever )
+				->searchPropertyByLabel( $searchTerm, $languageCode, 10, 0 )
 		);
 	}
 
@@ -129,26 +117,26 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new MatchedData( TermTypes::TYPE_ALIAS, 'en', 'spud' )
 		);
 
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->willReturn(
 				[ $this->newTermIndexEntry( TermTypes::TYPE_ALIAS, new ItemId( 'Q123' ), 'en', 'spud' ) ]
 			);
 
-		$this->termRetriever = $this->createMock( TermRetriever::class );
-		$this->termRetriever->expects( $this->once() )
+		$termRetriever = $this->createMock( TermRetriever::class );
+		$termRetriever->expects( $this->once() )
 			->method( 'getLabel' )
 			->with( 'Q123', $languageCode )
 			->willReturn( new Label( 'en', 'potato' ) );
-		$this->termRetriever->expects( $this->once() )
+		$termRetriever->expects( $this->once() )
 			->method( 'getDescription' )
 			->with( 'Q123', $languageCode )
 			->willReturn( new Description( 'en', 'staple food' ) );
 
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchItemByLabel(
+			$this->newEngine( matchingTermsLookup: $matchingTermsLookup, termRetriever: $termRetriever )->searchItemByLabel(
 				$searchTerm,
 				$languageCode,
 				10,
@@ -170,16 +158,14 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new MatchedData( 'entityId', null, "$itemId" )
 		);
 
-		$this->matchingTermsLookup = $this->createStub( MatchingTermsLookup::class );
-		$this->termRetriever = $this->createStub( TermRetriever::class );
-		$this->termLanguageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
-		$this->termLanguageFallbackChain->method( 'extractPreferredValue' )
+		$languageFallbackChain = $this->createStub( TermLanguageFallbackChain::class );
+		$languageFallbackChain->method( 'extractPreferredValue' )
 			->willReturnOnConsecutiveCalls(
 				[ 'language' => $languageCode, 'value' => $label ],
 				[ 'language' => $languageCode, 'value' => $description ]
 			);
 
-		$this->entityLookup = $this->newMockEntityLookup(
+		$entityLookup = $this->newMockEntityLookup(
 			$itemId,
 			NewItem::withId( "$itemId" )
 				->andLabel( $languageCode, $label )
@@ -189,7 +175,10 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new ItemSearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchItemByLabel( "$itemId", $languageCode, 10, 0 )
+			$this->newEngine(
+				languageFallbackChain: $languageFallbackChain,
+				entityLookup: $entityLookup
+			)->searchItemByLabel( "$itemId", $languageCode, 10, 0 )
 		);
 	}
 
@@ -197,9 +186,9 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$searchTerm = 'Q42';
 		$limit = 5;
 
-		$this->entityLookup = $this->newMockEntityLookup( new ItemId( 'Q42' ), NewItem::withId( 'Q42' )->build() );
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$entityLookup = $this->newMockEntityLookup( new ItemId( 'Q42' ), NewItem::withId( 'Q42' )->build() );
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with( $searchTerm,
 				Item::ENTITY_TYPE,
@@ -212,16 +201,20 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 				[ 'Q1', 'Q2', 'Q3', 'Q4' ]
 			) );
 
-		$this->assertCount( $limit, $this->newEngine()->searchItemByLabel( $searchTerm, 'en', $limit, 0 ) );
+		$this->assertCount(
+			$limit,
+			$this->newEngine( entityLookup: $entityLookup, matchingTermsLookup: $matchingTermsLookup )
+				->searchItemByLabel( $searchTerm, 'en', $limit, 0 )
+		);
 	}
 
 	public function testGivenItemIdResult_offsetIsAdjusted(): void {
 		$searchTerm = 'Q42';
 		$offset = 5;
 
-		$this->entityLookup = $this->newMockEntityLookup( new ItemId( 'Q42' ), NewItem::withId( 'Q42' )->build() );
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$entityLookup = $this->newMockEntityLookup( new ItemId( 'Q42' ), NewItem::withId( 'Q42' )->build() );
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with( $searchTerm,
 				Item::ENTITY_TYPE,
@@ -234,7 +227,11 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 				[ 'Q5', 'Q6', 'Q7', 'Q8', 'Q9' ]
 			) );
 
-		$this->assertCount( 5, $this->newEngine()->searchItemByLabel( $searchTerm, 'en', 5, $offset ) );
+		$this->assertCount(
+			5,
+			$this->newEngine( entityLookup: $entityLookup, matchingTermsLookup: $matchingTermsLookup )
+				->searchItemByLabel( $searchTerm, 'en', 5, $offset )
+		);
 	}
 
 	public function testGivenSearchResultForPropertyId(): void {
@@ -250,16 +247,14 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			new MatchedData( 'entityId', null, "$propertyId" )
 		);
 
-		$this->matchingTermsLookup = $this->createStub( MatchingTermsLookup::class );
-		$this->termRetriever = $this->createStub( TermRetriever::class );
-		$this->termLanguageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
-		$this->termLanguageFallbackChain->method( 'extractPreferredValue' )
+		$languageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
+		$languageFallbackChain->method( 'extractPreferredValue' )
 			->willReturnOnConsecutiveCalls(
 				[ 'language' => $languageCode, 'value' => $label ],
 				[ 'language' => $languageCode, 'value' => $description ]
 			);
 
-		$this->entityLookup = $this->newMockEntityLookup(
+		$entityLookup = $this->newMockEntityLookup(
 			$propertyId,
 			new Property(
 				$propertyId,
@@ -273,7 +268,8 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			new PropertySearchResults( $expectedSearchResult ),
-			$this->newEngine()->searchPropertyByLabel( "$propertyId", $languageCode, 10, 0 )
+			$this->newEngine( languageFallbackChain: $languageFallbackChain, entityLookup: $entityLookup )
+				->searchPropertyByLabel( "$propertyId", $languageCode, 10, 0 )
 		);
 	}
 
@@ -281,12 +277,12 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$searchTerm = 'P1';
 		$limit = 5;
 
-		$this->entityLookup = $this->newMockEntityLookup(
+		$entityLookup = $this->newMockEntityLookup(
 			new NumericPropertyId( 'P1' ),
 			new Property( new NumericPropertyId( 'P1' ), null, 'dataTypeId' )
 		);
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with( $searchTerm,
 				Property::ENTITY_TYPE,
@@ -299,19 +295,23 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 				[ 'P1', 'P2', 'P3', 'P4' ]
 			) );
 
-		$this->assertCount( $limit, $this->newEngine()->searchPropertyByLabel( $searchTerm, 'en', $limit, 0 ) );
+		$this->assertCount(
+			$limit,
+			$this->newEngine( entityLookup: $entityLookup, matchingTermsLookup: $matchingTermsLookup )
+				->searchPropertyByLabel( $searchTerm, 'en', $limit, 0 )
+		);
 	}
 
 	public function testGivenPropertyIdResult_offsetIsAdjusted(): void {
 		$searchTerm = 'P1';
 		$offset = 5;
 
-		$this->entityLookup = $this->newMockEntityLookup(
+		$entityLookup = $this->newMockEntityLookup(
 			new NumericPropertyId( 'P1' ),
 			new Property( new NumericPropertyId( 'P1' ), null, 'dataTypeId' )
 		);
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with( $searchTerm,
 				Property::ENTITY_TYPE,
@@ -324,7 +324,11 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 				[ 'P5', 'P6', 'P7', 'P8', 'P9' ]
 			) );
 
-		$this->assertCount( 5, $this->newEngine()->searchPropertyByLabel( $searchTerm, 'en', 5, $offset ) );
+		$this->assertCount(
+			5,
+			$this->newEngine( entityLookup: $entityLookup, matchingTermsLookup: $matchingTermsLookup )
+				->searchPropertyByLabel( $searchTerm, 'en', 5, $offset )
+		);
 	}
 
 	public function testResultPagination(): void {
@@ -335,8 +339,8 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			}
 		}
 
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->with(
 				'some query',
@@ -347,7 +351,8 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 			)
 			->willReturn( array_slice( $results, 2, 5 ) );
 
-		$searchResult = $this->newEngine()->searchItemByLabel( 'some query', 'en', 5, 2 );
+		$searchResult = $this->newEngine( matchingTermsLookup: $matchingTermsLookup )
+			->searchItemByLabel( 'some query', 'en', 5, 2 );
 		$this->assertCount( 5, $searchResult );
 		$this->assertEquals( new ItemId( 'Q3' ), $searchResult[0]->getItemId() );
 	}
@@ -356,20 +361,20 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		$searchTerm = 'potato';
 		$languageCode = 'en';
 
-		$this->matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
-		$this->matchingTermsLookup->expects( $this->once() )
+		$matchingTermsLookup = $this->createMock( MatchingTermsLookup::class );
+		$matchingTermsLookup->expects( $this->once() )
 			->method( 'getMatchingTerms' )
 			->willReturn( [] );
 
-		$this->termRetriever = $this->createMock( TermRetriever::class );
-		$this->termRetriever->expects( $this->never() )
+		$termRetriever = $this->createMock( TermRetriever::class );
+		$termRetriever->expects( $this->never() )
 			->method( 'getLabel' );
-		$this->termRetriever->expects( $this->never() )
+		$termRetriever->expects( $this->never() )
 			->method( 'getDescription' );
 
 		$this->assertEquals(
 			new ItemSearchResults(),
-			$this->newEngine()->searchItemByLabel(
+			$this->newEngine( matchingTermsLookup: $matchingTermsLookup, termRetriever: $termRetriever )->searchItemByLabel(
 				$searchTerm,
 				$languageCode,
 				5,
@@ -387,16 +392,21 @@ class SqlTermStoreSearchEngineTest extends TestCase {
 		] );
 	}
 
-	private function newEngine(): SqlTermStoreSearchEngine {
+	private function newEngine(
+		?MatchingTermsLookup $matchingTermsLookup = null,
+		?EntityLookup $entityLookup = null,
+		?TermRetriever $termRetriever = null,
+		?TermLanguageFallbackChain $languageFallbackChain = null
+	): SqlTermStoreSearchEngine {
 		$languageFallbackChainFactory = $this->createStub( LanguageFallbackChainFactory::class );
 		$languageFallbackChainFactory
 			->method( 'newFromLanguageCode' )
-			->willReturn( $this->termLanguageFallbackChain );
+			->willReturn( $languageFallbackChain ?? $this->createStub( TermLanguageFallbackChain::class ) );
 
 		return new SqlTermStoreSearchEngine(
-			$this->matchingTermsLookup,
-			$this->entityLookup,
-			$this->termRetriever,
+			$matchingTermsLookup ?? $this->createStub( MatchingTermsLookup::class ),
+			$entityLookup ?? $this->createStub( EntityLookup::class ),
+			$termRetriever ?? $this->createStub( TermRetriever::class ),
 			$languageFallbackChainFactory
 		);
 	}
