@@ -9,7 +9,7 @@ jest.mock(
 	{ virtual: true }
 );
 const ScopedTypeaheadSearch = require( '../../resources/wikibase.vector.scopedtypeaheadsearch/ScopedTypeaheadSearch.vue' );
-const { CdxSelect, CdxTypeaheadSearch } = require( '../../codex.js' );
+const { CdxSelect, CdxTypeaheadSearch, CdxButton } = require( '../../codex.js' );
 
 const { mount } = require( '@vue/test-utils' );
 
@@ -342,6 +342,10 @@ describe( 'ScopedTypeaheadSearch', () => {
 					[ 'Q666368', 'Q10406', 'Q43365', 'Q26198', 'Q1126556' ]
 				);
 			} );
+		} );
+
+		it( 'has a search button', () => {
+			expect( wrapper.findComponent( CdxButton ).exists() ).toBeTruthy();
 		} );
 	} );
 } );
