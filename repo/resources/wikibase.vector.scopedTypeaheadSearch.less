@@ -2,6 +2,11 @@
 
 .vector-search-box {
 	.vector-typeahead-search-container {
+		.vector-typeahead-search-wrapper {
+			display: flex;
+			flex-direction: row;
+		}
+
 		.cdx-button:enabled {
 			border-color: @border-color-base;
 		}
@@ -69,10 +74,7 @@
 
 		.cdx-typeahead-search {
 			width: 100%;
-
-			.cdx-search-input__text-input {
-				margin-top: 1px;
-			}
+			margin-left: -1px;
 		}
 	}
 }
