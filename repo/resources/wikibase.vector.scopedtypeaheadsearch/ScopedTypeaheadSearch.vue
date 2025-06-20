@@ -1,42 +1,46 @@
 <template>
-	<div class="vector-typeahead-search-scope-select">
-		<cdx-select
-			v-model:selected="selection"
-			:menu-items="menuItems"
-		></cdx-select>
+	<div class="vector-typeahead-search-wrapper">
+		<div class="vector-typeahead-search-scope-select">
+			<cdx-select
+				v-model:selected="selection"
+				:menu-items="menuItems"
+			></cdx-select>
+		</div>
+		<cdx-typeahead-search
+			id="searchform"
+			:use-button="true"
+			:button-label="$i18n( 'searchbutton' ).text()"
+			:form-action="baseUrl"
+			:search-results="searchResults"
+			:search-footer-url="searchFooterUrl"
+			:highlight-query="true"
+			:visible-item-limit="5"
+			:placeholder="$i18n( 'searchsuggest-search' ).text()"
+			@input="onInput"
+			@load-more="onLoadMore"
+		>
+			<template #default>
+				<input
+					type="hidden"
+					name="language"
+					:value="languageCode"
+				>
+				<input
+					type="hidden"
+					name="title"
+					value="Special:Search"
+				>
+				<input
+					type="hidden"
+					:name="searchNamespace"
+					value="1"
+				>
+			</template>
+			<template #search-footer-text="{ searchQuery }">
+				<span v-i18n-html:searchsuggest-containing-html="[ searchQuery ]"></span>
+			</template>
+		</cdx-typeahead-search>
 	</div>
-	<cdx-typeahead-search
-		id="searchform"
-		:form-action="baseUrl"
-		:search-results="searchResults"
-		:search-footer-url="searchFooterUrl"
-		:highlight-query="true"
-		:visible-item-limit="5"
-		:placeholder="$i18n( 'searchsuggest-search' ).text()"
-		@input="onInput"
-		@load-more="onLoadMore"
-	>
-		<template #default>
-			<input
-				type="hidden"
-				name="language"
-				:value="languageCode"
-			>
-			<input
-				type="hidden"
-				name="title"
-				value="Special:Search"
-			>
-			<input
-				type="hidden"
-				:name="searchNamespace"
-				value="1"
-			>
-		</template>
-		<template #search-footer-text="{ searchQuery }">
-			<span v-i18n-html:searchsuggest-containing-html="[ searchQuery ]"></span>
-		</template>
-	</cdx-typeahead-search>
 </template>
 
 <script>

@@ -936,6 +936,7 @@ final class RepoHooks implements
 					'vue',
 				],
 				'messages' => [
+					'searchbutton',
 					'searchsuggest-search',
 					'searchsuggest-containing-html',
 					'wikibase-scoped-search-search-entities',
