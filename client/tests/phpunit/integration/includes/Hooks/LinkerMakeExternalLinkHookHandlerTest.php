@@ -17,7 +17,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Hooks\LinkerMakeExternalLinkHookHandler
@@ -48,18 +47,14 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$title = $this->createMock( Title::class );
 		$title->method( 'isSpecialPage' )->willReturn( true );
 		$title->method( 'isSpecial' )->willReturnMap( [
-		   [ 'Watchlist', true ],
-		   [ 'Recentchanges', true ],
+			[ 'Watchlist', true ],
+			[ 'Recentchanges', true ],
 		] );
 		$this->context->setTitle( $title );
 		$this->isRepoEntityNamespaceMain = false;
 	}
 
 	private function getHookHandler(): LinkerMakeExternalLinkHookHandler {
-		$labelDescriptionLookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
-		$labelDescriptionLookupFactory->method( 'newLabelDescriptionLookup' )
-			->willReturn( $this->mockLookup );
-
 		$mockEnLanguage = $this->createMock( Language::class );
 		$mockEnLanguage->method( 'getCode' )->willReturn( 'en' );
 		$mockEnLanguage->method( 'getDirMark' )->willReturn( '' );
@@ -76,9 +71,10 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 			new ClientEntityLinkFormatter( $languageFactory ),
 			$this->mockParser,
 			$this->isRepoEntityNamespaceMain,
-			$labelDescriptionLookupFactory,
+			$this->mockLookup,
+			parse_url( $this->settings->getSetting( 'repoUrl' ), PHP_URL_HOST ),
 			$this->settings->getSetting( 'resolveWikibaseLabels' ),
-			parse_url( $this->settings->getSetting( 'repoUrl' ), PHP_URL_HOST )
+			$this->context->getTitle()
 		);
 	}
 
@@ -239,7 +235,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 			. 'instance of'
 			. '</span> <span class="wb-itemlink-id">(P31)</span></span>',
 			[],
-		'instance of | type to which this subject corresponds/belongs.',
+			'instance of | type to which this subject corresponds/belongs.',
 		];
 	}
 
