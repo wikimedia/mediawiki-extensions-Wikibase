@@ -4,11 +4,6 @@ const parameters = require( './global/parameters' );
 
 const openapi = {
 	"openapi": "3.1.0",
-	"info": {
-		"title": "Wikibase Search Domain REST API",
-		"version": "0.1",
-		"description": "OpenAPI fragment of the Wikibase Search domain REST API"
-	},
 	"tags": [
 		{
 			"name": "item search",
@@ -71,6 +66,7 @@ const openapi = {
 module.exports = { openapi };
 
 if ( require.main === module ) {
-	// if executed directly, print the definition
+	// If executed directly, output the OpenAPI fragment as JSON.
+	// This is used in the "spec:join" script to generate the full OpenAPI spec via Redocly
 	console.log( JSON.stringify( openapi, null, 2 ) ); // eslint-disable-line no-console
 }
