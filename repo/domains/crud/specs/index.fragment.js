@@ -2,11 +2,6 @@
 
 const openapi = {
 	"openapi": "3.1.0",
-	"info": {
-		"title": "Wikibase CRUD Domain REST API",
-		"version": "1.1",
-		"description": "OpenAPI fragment of the Wikibase CRUD domain REST API"
-	},
 	"paths": {
 		"/v1/property-data-types": {
 			"get": {
@@ -76,6 +71,7 @@ const openapi = {
 module.exports = { openapi };
 
 if ( require.main === module ) {
-	// if executed directly, print the definition
+	// If executed directly, output the OpenAPI fragment as JSON.
+	// This is used in the "spec:join" script to generate the full OpenAPI spec via Redocly
 	console.log( JSON.stringify( openapi, null, 2 ) ); // eslint-disable-line no-console
 }
