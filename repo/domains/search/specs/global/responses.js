@@ -83,5 +83,29 @@ module.exports = {
 				}
 			}
 		}
-	}
+	},
+	"SuggestItemSuccess": {
+		"description": "A list of search results",
+		"content": {
+			"application/json": {
+				"schema": schemaParts.SearchItemResultList,
+				"example": {
+					"results": [
+						{
+							"id": "Q456",
+							"display-label": { "language": "en", "value": "drinking water" },
+							"description": { "language": "en", "value": "water safe for consumption" },
+							"match": { "type": "alias", "language": "en", "text": "potable water" }
+						},
+						{
+							"id": "Q123",
+							"display-label": { "language": "en", "value": "potato" },
+							"description": { "language": "en", "value": "staple food" },
+							"match": { "type": "label", "language": "en", "text": "potato" }
+						}
+					]
+				}
+			}
+		}
+	},
 };

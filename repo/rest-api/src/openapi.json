@@ -33437,6 +33437,240 @@
           }
         }
       }
+    },
+    "/v0/suggest/items": {
+      "get": {
+        "operationId": "simpleItemSuggest",
+        "tags": [
+          "item search"
+        ],
+        "summary": "[WIP] Simple Item search by prefix, for labels and aliases",
+        "description": "This endpoint is currently in development and is not recommended for production use.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "The term to search labels by",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pota"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The language to search labels in",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2}[a-z0-9-]*$"
+            },
+            "example": "en"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 10
+            },
+            "example": 20
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "The index to start showing results from",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "example": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "pattern": "^Q[1-9]\\d{0,9}$"
+                          },
+                          "display-label": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
+                          },
+                          "description": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "language": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "language",
+                              "value"
+                            ]
+                          },
+                          "match": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "language": {
+                                "type": "string"
+                              },
+                              "text": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "type",
+                              "text"
+                            ]
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "display-label",
+                          "description",
+                          "match"
+                        ]
+                      }
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "results"
+                  ]
+                },
+                "example": {
+                  "results": [
+                    {
+                      "id": "Q456",
+                      "display-label": {
+                        "language": "en",
+                        "value": "drinking water"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "water safe for consumption"
+                      },
+                      "match": {
+                        "type": "alias",
+                        "language": "en",
+                        "text": "potable water"
+                      }
+                    },
+                    {
+                      "id": "Q123",
+                      "display-label": {
+                        "language": "en",
+                        "value": "potato"
+                      },
+                      "description": {
+                        "language": "en",
+                        "value": "staple food"
+                      },
+                      "match": {
+                        "type": "label",
+                        "language": "en",
+                        "text": "potato"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request cannot be processed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "message"
+                  ],
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "invalid-query-parameter": {
+                    "value": {
+                      "code": "invalid-query-parameter",
+                      "message": "Invalid query parameter: '{query_parameter}'",
+                      "context": {
+                        "parameter": "{query_parameter}"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Content-Language": {
+                "description": "Language code of the language in which error message is provided",
+                "schema": {
+                  "type": "string"
+                },
+                "required": true
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -36678,6 +36912,134 @@
                     "type": "label",
                     "language": "en",
                     "text": "taxon"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "SuggestItemSuccess": {
+        "description": "A list of search results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^Q[1-9]\\d{0,9}$"
+                      },
+                      "display-label": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "properties": {
+                          "language": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "language",
+                          "value"
+                        ]
+                      },
+                      "description": {
+                        "type": [
+                          "object",
+                          "null"
+                        ],
+                        "properties": {
+                          "language": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "language",
+                          "value"
+                        ]
+                      },
+                      "match": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "type": "string"
+                          },
+                          "text": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "type",
+                          "text"
+                        ]
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "id",
+                      "display-label",
+                      "description",
+                      "match"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "results"
+              ]
+            },
+            "example": {
+              "results": [
+                {
+                  "id": "Q456",
+                  "display-label": {
+                    "language": "en",
+                    "value": "drinking water"
+                  },
+                  "description": {
+                    "language": "en",
+                    "value": "water safe for consumption"
+                  },
+                  "match": {
+                    "type": "alias",
+                    "language": "en",
+                    "text": "potable water"
+                  }
+                },
+                {
+                  "id": "Q123",
+                  "display-label": {
+                    "language": "en",
+                    "value": "potato"
+                  },
+                  "description": {
+                    "language": "en",
+                    "value": "staple food"
+                  },
+                  "match": {
+                    "type": "label",
+                    "language": "en",
+                    "text": "potato"
                   }
                 }
               ]
