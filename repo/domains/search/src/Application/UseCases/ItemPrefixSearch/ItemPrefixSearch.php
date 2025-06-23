@@ -9,13 +9,15 @@ use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
  */
 class ItemPrefixSearch {
 
-	private ItemPrefixSearchEngine $searchEngine;
-
-	public function __construct( ItemPrefixSearchEngine $searchEngine ) {
-		$this->searchEngine = $searchEngine;
+	public function __construct(
+		private ItemPrefixSearchValidator $validator,
+		private ItemPrefixSearchEngine $searchEngine
+	) {
 	}
 
 	public function execute( ItemPrefixSearchRequest $itemRequest ): ItemPrefixSearchResponse {
+		$this->validator->validate( $itemRequest );
+
 		return new ItemPrefixSearchResponse( $this->searchEngine->suggestItems(
 			$itemRequest->query,
 			$itemRequest->language,

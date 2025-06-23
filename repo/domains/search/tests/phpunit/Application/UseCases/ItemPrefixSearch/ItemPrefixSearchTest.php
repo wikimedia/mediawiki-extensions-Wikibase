@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\ItemPrefixSear
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 
@@ -32,13 +34,36 @@ class ItemPrefixSearchTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedResults,
-			$this->newUseCase( $searchEngine )
-				->execute( new ItemPrefixSearchRequest( $query, $language, $limit, $offset ) )
+			$this->newUseCase(
+				$this->createStub( ItemPrefixSearchValidator::class ),
+				$searchEngine
+			)->execute( new ItemPrefixSearchRequest( $query, $language, $limit, $offset ) )
 				->getResults()
 		);
 	}
 
-	private function newUseCase( ItemPrefixSearchEngine $searchEngine ): ItemPrefixSearch {
-		return new ItemPrefixSearch( $searchEngine );
+	public function testValidatesTheRequest(): void {
+		$request = $this->createStub( ItemPrefixSearchRequest::class );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$validator = $this->createMock( ItemPrefixSearchValidator::class );
+		$validator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $request )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase( $validator, $this->createStub( ItemPrefixSearchEngine::class ) )->execute( $request );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	private function newUseCase(
+		ItemPrefixSearchValidator $validator,
+		ItemPrefixSearchEngine $searchEngine
+	): ItemPrefixSearch {
+		return new ItemPrefixSearch( $validator, $searchEngine );
 	}
 }

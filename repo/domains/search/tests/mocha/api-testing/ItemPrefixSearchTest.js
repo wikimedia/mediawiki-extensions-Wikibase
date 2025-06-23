@@ -18,6 +18,13 @@ function newSearchRequest( language, searchTerm ) {
 		.withQueryParam( 'q', searchTerm );
 }
 
+function assertValidError( response, statusCode, responseBodyErrorCode, context ) {
+	expect( response ).to.have.status( statusCode );
+	assert.header( response, 'Content-Language', 'en' );
+	assert.strictEqual( response.body.code, responseBodyErrorCode );
+	assert.deepStrictEqual( response.body.context, context );
+}
+
 describe( 'Item prefix search', () => {
 	let item1;
 	let itemWithoutDescription;
@@ -200,4 +207,48 @@ describe( 'Item prefix search', () => {
 			} );
 		} );
 	} );
+
+	describe( 'Item prefix 400 error response', () => {
+		it( 'invalid language code', async () => {
+			const response = await newSearchRequest( 'not_a_language', 'search term' )
+				.assertInvalidRequest()
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-query-parameter', { parameter: 'language' } );
+		} );
+
+		it( 'User-Agent empty', async () => {
+			const response = await newSearchRequest( 'en', 'search term' )
+				.withHeader( 'user-agent', '' )
+				.makeRequest();
+
+			expect( response ).to.have.status( 400 );
+			assert.strictEqual( response.body.code, 'missing-user-agent' );
+		} );
+
+		Object.entries( {
+			'invalid limit parameter - exceeds max limit 500': {
+				parameter: 'limit',
+				value: 501
+			},
+			'invalid limit parameter - negative limit': {
+				parameter: 'limit',
+				value: -1
+			},
+			'invalid offset parameter - negative offset': {
+				parameter: 'offset',
+				value: -2
+			}
+		} ).forEach( ( [ title, { parameter, value } ] ) => {
+			it( title, async () => {
+
+				const response = await newSearchRequest( 'en', 'search term' )
+					.withQueryParam( parameter, value )
+					.makeRequest();
+
+				assertValidError( response, 400, 'invalid-query-parameter', { parameter } );
+			} );
+		} );
+	} );
+
 } );
