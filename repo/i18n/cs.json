@@ -143,7 +143,7 @@
 	"wikibase-snakformat-invalid-value": "Neplatná hodnota.",
 	"wikibase-snakformat-propertynotfound": "Vlastnost nebyla nalezena.",
 	"wikibase-shortcopyrightwarning-minimal": "Kliknutím na „$1“ vyjadřujete souhlas s [[$2|podmínkami užití]].",
-	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrzujete souhlas s [[$2|podmínkami užití]] a neodvolatelně zveřejňujete svůj příspěvek za podmínek [$3 $4].",
+	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrzujete souhlas s [[$2|podmínkami užití]] a neodvolatelně zveřejňujete svůj příspěvek za podmínek [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-copyrighttooltip-acknowledge": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-entityselector-more": "více",
@@ -425,7 +425,7 @@
 	"wikibase-listdatatypes-quantity-head": "Množství",
 	"wikibase-listdatatypes-quantity-body": "Literálová datová položka pro množství vztahující se k nějaké dobře definované jednotce. Konkrétní jednotka je součástí zadávaných dat.\n* množství – implicitní část řetězce\n* jednotka – implicitní část řetězce, implicitní hodnotou je „1“\n* horní mez – horní mez množství\n* dolní mez – dolní mez množství",
 	"wikibase-listdatatypes-monolingualtext-head": "Jednojazyčný text",
-	"wikibase-listdatatypes-monolingualtext-body": "Literálová datová položka pro řetězec, který se nepřekládá do jiných jazyků. Tento typ řetězce se jednou definuje a používá napříč všemi jazyky. Typickým příkladem jsou zeměpisná jména v místním jazyce, nějaký typ identifikátoru, chemický vzorec či latinské vědecké jméno.\n* jazyk – explicitní hodnota určující jazyk textové části\n* hodnota – explicitní hodnota pro variantu řetězce v konkrétním jazyce",
+	"wikibase-listdatatypes-monolingualtext-body": "Literálová datová položka pro řetězec, který se nepřekládá do jiných jazyků. Tento typ řetězce se jednou definuje a používá napříč všemi jazyky. Typickými příklady jsou zeměpisná jména v místním jazyce, identifikátory různých typů, chemické vzorce či latinská vědecká jména.\n* jazyk – explicitní hodnota určující jazyk textové části\n* hodnota – explicitní hodnota pro variantu řetězce v konkrétním jazyce",
 	"wikibase-listdatatypes-multilingualtext-head": "Vícejazyčný text",
 	"wikibase-listdatatypes-multilingualtext-body": "Literálová datová položka pro řetězec, který je potřeba překládat do jiných jazyků. Typickým použitím je název celosvětově zajímavé entity, která má i cizí psané podoby. Ty se mohou lišit jazykem i písmem.\n* jazyk – explicitní hodnota pro identifikaci jazyka textové části\n* hodnota – explicitní hodnota pro variantu řetězce v konkrétním jazyce",
 	"wikibase-listdatatypes-string-head": "Řetězec",
@@ -495,5 +495,11 @@
 	"special-setlabel-parameterized": "Nastavit štítek pro $1",
 	"special-setdescription-parameterized": "Nastavit popis pro $1",
 	"special-setlabeldescriptionaliases-parameterized": "Nastavit štítek, popis a aliasy pro $1",
-	"wikibase-federated-properties-failed-request-api-error-message": "Tento požadavek selhal, protože se nezdařil požadavek na zdrojovou federovanou wiki."
+	"wikibase-federated-properties-failed-request-api-error-message": "Tento požadavek selhal, protože se nezdařil požadavek na zdrojovou federovanou wiki.",
+	"wikibase-scoped-search-search-entities": "Hledat entity",
+	"wikibase-scoped-search-search-entities-description": "Hledat různé typy entit na {{grammar:6sg|{{SITENAME}}}}",
+	"wikibase-scoped-search-item-scope-name": "Položky",
+	"wikibase-scoped-search-property-scope-name": "Vlastnosti",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Mobilní editační rozhraní",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Zapnout nové experimentální uživatelské rozhraní pro editování na mobilních zařízeních."
 }

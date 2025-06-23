@@ -23,6 +23,7 @@
 			"Simon Shek",
 			"Stevenliuyi",
 			"SunAfterRain",
+			"SupaplexTW",
 			"Tntchn",
 			"Translatealcd",
 			"Tranve",
@@ -559,5 +560,11 @@
 	"special-setlabeldescriptionaliases-parameterized": "設定$1標籤、描述與別名",
 	"special-parameterized-description-separator": "/",
 	"wikibase-federated-properties-federated-property-api-error-message": "您無法使用此 API 與聯合屬性進行互動。",
-	"wikibase-federated-properties-failed-request-api-error-message": "因對於聯合來源 wiki 的請求失敗，造成請求錯誤。"
+	"wikibase-federated-properties-failed-request-api-error-message": "因對於聯合來源 wiki 的請求失敗，造成請求錯誤。",
+	"wikibase-scoped-search-search-entities": "搜尋實體",
+	"wikibase-scoped-search-search-entities-description": "尋找不同類型的 {{SITENAME}} 實體",
+	"wikibase-scoped-search-item-scope-name": "項目",
+	"wikibase-scoped-search-property-scope-name": "屬性",
+	"wikibase-mobile-editing-ui-beta-feature-message": "行動編輯使用者介面",
+	"wikibase-mobile-editing-ui-beta-feature-description": "啟用新的實驗性行動編輯介面。"
 }
