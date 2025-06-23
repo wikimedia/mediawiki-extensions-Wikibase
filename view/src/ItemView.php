@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
-use WMDE\VueJsTemplating\Templating;
+use WMDE\VueJsTemplating\App;
 
 /**
  * Class for creating views for Item instances.
@@ -136,8 +136,15 @@ class ItemView extends EntityView {
 
 	/** @return string HTML */
 	private function getVueStatementsHtml( StatementListProvider $item ): string {
-		$templating = new Templating();
-		$template = file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' );
+		$app = new App( [] );
+		$app->registerComponentTemplate(
+			'mex-statement',
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' )
+		);
+		$app->registerComponentTemplate(
+			'mex-property-name',
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue' )
+		);
 
 		$rendered = '';
 
@@ -147,22 +154,19 @@ class ItemView extends EntityView {
 			$mainSnak = $statement->getMainSnak();
 
 			// TODO: use Statement Serializer instead T396858
-			$renderedStatement = $templating->render(
-				$template,
-				[
-					'statement' => [
-						'mainsnak' => [
-							'property' => $mainSnak->getPropertyId()->getSerialization(),
-							'datavalue' => [ 'value' => 'value placeholder' ],
-						],
-						'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
+			$renderedStatement = $app->renderComponent( 'mex-statement', [
+				'statement' => [
+					'mainsnak' => [
+						'property' => $mainSnak->getPropertyId()->getSerialization(),
+						'datavalue' => [ 'value' => 'value placeholder' ],
 					],
-					'propertyUrl' => WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
-						->getTitleForId( $mainSnak->getPropertyId() )
-						->getLinkURL(),
-					'propertyLabel' => $mainSnak->getPropertyId()->getSerialization(), // TODO get label (T396633)
-				]
-			);
+					'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
+				],
+				'propertyUrl' => WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
+					->getTitleForId( $mainSnak->getPropertyId() )
+					->getLinkURL(),
+				'propertyLabel' => $mainSnak->getPropertyId()->getSerialization(), // TODO get label (T396633)
+			] );
 
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}
