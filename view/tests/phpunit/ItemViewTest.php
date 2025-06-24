@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -123,6 +124,9 @@ class ItemViewTest extends EntityViewTestCase {
 
 		$termsView = $this->createMock( CacheableEntityTermsView::class );
 		$termsView->method( 'getPlaceholders' )->willReturn( $placeholders );
+		$propertyDataTypeLookup = $this->createConfiguredMock( PropertyDataTypeLookup::class, [
+			'getDataTypeIdForProperty' => 'string',
+		] );
 
 		return new ItemView(
 			$templateFactory,
@@ -133,6 +137,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->createMock( SiteLinksView::class ),
 			[],
 			$this->createMock( LocalizedTextProvider::class ),
+			$propertyDataTypeLookup,
 			$vueStatementsView
 		);
 	}

@@ -10,9 +10,15 @@
 			</div>
 		</div>
 		<!-- TODO: show all statements for this property T396637 -->
-		<div class="wikibase-mex-snak-value">
-			<p>{{ statement.mainsnak.datavalue.value }}</p>
-		</div>
+		<!-- TODO: support Javascript expressions instead of passing `is...` here T396855 -->
+		<mex-main-snak
+			:value="statement.mainsnak.datavalue.value"
+			:type="statement.mainsnak.datatype"
+			:isstring="statement.mainsnak.isstring"
+			:iscommonsmedia="statement.mainsnak.iscommonsmedia"
+			:isunknowntype="statement.mainsnak.isunknowntype"
+			:mediainfo="statement.mainsnak.mediainfo"
+		></mex-main-snak>
 		<div class="wikibase-mex-references">
 			<p>
 				<span class="wikibase-mex-icon-down-triangle-x-small"></span>
@@ -28,12 +34,14 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const MexPropertyName = require( './wikibase.mobileUi.propertyName.vue' );
+const MexMainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseMexStatement',
 	components: {
-		MexPropertyName
+		MexPropertyName,
+		MexMainSnak
 	},
 	props: {
 		statement: {

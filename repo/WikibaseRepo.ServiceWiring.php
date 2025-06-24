@@ -2145,10 +2145,11 @@ return [
 
 	'WikibaseRepo.ViewFactory' => function ( MediaWikiServices $services ): ViewFactory {
 		$settings = WikibaseRepo::getSettings( $services );
+		$propertyDataTypeLookup = WikibaseRepo::getPropertyDataTypeLookup( $services );
 
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			$settings->getSetting( 'statementSections' ),
-			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			$propertyDataTypeLookup,
 			WikibaseRepo::getStatementGuidParser( $services )
 		);
 
@@ -2172,6 +2173,7 @@ return [
 				WikibaseRepo::getSnakFormatterFactory( $services )
 			),
 			$statementGrouperBuilder->getStatementGrouper(),
+			$propertyDataTypeLookup,
 			$propertyOrderProvider,
 			$services->getSiteLookup(),
 			WikibaseRepo::getDataTypeFactory( $services ),

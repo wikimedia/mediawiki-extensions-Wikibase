@@ -5,6 +5,8 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -39,6 +41,11 @@ class ItemView extends EntityView {
 	private $siteLinkGroups;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
 	 * @var LocalizedTextProvider
 	 */
 	private $textProvider;
@@ -61,6 +68,7 @@ class ItemView extends EntityView {
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param bool $vueStatementsView
 	 */
 	public function __construct(
@@ -72,6 +80,7 @@ class ItemView extends EntityView {
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
 		bool $vueStatementsView
 	) {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
@@ -81,6 +90,7 @@ class ItemView extends EntityView {
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->textProvider = $textProvider;
 		$this->entityTermsView = $entityTermsView;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
@@ -134,6 +144,47 @@ class ItemView extends EntityView {
 		return $termsHtml . $tocHtml . $statementsHtml;
 	}
 
+	/**
+	 * @param Statement $statement
+	 * @param App $app
+	 * @return string HTML
+	 */
+	private function getVueStatementHtml( Statement $statement, App $app ): string {
+		$mainSnak = $statement->getMainSnak();
+		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
+		// TODO: use Statement Serializer to get the component data T396858
+		$value = 'value placeholder';
+		if ( $dataType === 'commonsMedia' ) {
+			$value = [
+				'src' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/' .
+						'd/d5/Rihanna-signature.svg/250px-Rihanna-signature.svg.png',
+				'altText' => 'Some alt text',
+				'filename' => 'Rihanna-signature.svg',
+				'widthPx' => 348,
+				'heightPx' => 178,
+				'fileSizeKb' => 9,
+			];
+		}
+
+		// TODO: use Statement Serializer instead T396858
+		return $app->renderComponent( 'mex-statement', [
+			'statement' => [
+				'mainsnak' => [
+					'property' => $mainSnak->getPropertyId()->getSerialization(),
+					'datavalue' => [ 'value' => $value ],
+					'datatype' => $dataType,
+					// When we have support for complex expressions we can remove these T396855
+					'isstring' => $dataType === 'string',
+					'iscommonsmedia' => $dataType === 'commonsMedia',
+					'isunknowntype' => !in_array( $dataType, [ 'string', 'commonsMedia' ] ),
+					// When we have support for passing real data, it will be unnecessary to pass this
+					'mediainfo' => $value,
+				],
+				'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
+			],
+		] );
+	}
+
 	/** @return string HTML */
 	private function getVueStatementsHtml( StatementListProvider $item ): string {
 		$app = new App( [] );
@@ -154,25 +205,17 @@ class ItemView extends EntityView {
 				return $data;
 			}
 		);
+		$app->registerComponentTemplate(
+			'mex-main-snak',
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' )
+		);
 
 		$rendered = '';
-
 		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
 		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
 			$statement = $item->getStatements()->getByPropertyId( $propertyId )->toArray()[ 0 ];
-			$mainSnak = $statement->getMainSnak();
 
-			// TODO: use Statement Serializer instead T396858
-			$renderedStatement = $app->renderComponent( 'mex-statement', [
-				'statement' => [
-					'mainsnak' => [
-						'property' => $mainSnak->getPropertyId()->getSerialization(),
-						'datavalue' => [ 'value' => 'value placeholder' ],
-					],
-					'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
-				],
-			] );
-
+			$renderedStatement = $this->getVueStatementHtml( $statement, $app );
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}
 

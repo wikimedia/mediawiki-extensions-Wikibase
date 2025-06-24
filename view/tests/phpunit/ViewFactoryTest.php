@@ -7,6 +7,7 @@ use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\HashSiteStore;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -75,6 +76,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$plainFactory ?: $this->getEntityIdFormatterFactory( SnakFormatter::FORMAT_PLAIN ),
 			$this->getSnakFormatterFactory(),
 			new NullStatementGrouper(),
+			$this->createMock( PropertyDataTypeLookup::class ),
 			$this->createMock( PropertyOrderProvider::class ),
 			new HashSiteStore(),
 			new DataTypeFactory( [] ),

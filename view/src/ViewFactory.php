@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Site\SiteLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
@@ -47,6 +48,11 @@ class ViewFactory {
 	 * @var StatementGrouper
 	 */
 	private $statementGrouper;
+
+	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
 
 	/**
 	 * @var PropertyOrderProvider
@@ -120,6 +126,7 @@ class ViewFactory {
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param StatementGrouper $statementGrouper
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param SiteLookup $siteLookup
 	 * @param DataTypeFactory $dataTypeFactory
@@ -142,6 +149,7 @@ class ViewFactory {
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
 		StatementGrouper $statementGrouper,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
 		PropertyOrderProvider $propertyOrderProvider,
 		SiteLookup $siteLookup,
 		DataTypeFactory $dataTypeFactory,
@@ -167,6 +175,7 @@ class ViewFactory {
 		$this->plainTextIdFormatterFactory = $plainTextIdFormatterFactory;
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->statementGrouper = $statementGrouper;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->siteLookup = $siteLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -246,6 +255,7 @@ class ViewFactory {
 			$siteLinksView,
 			$this->siteLinkGroups,
 			$textProvider,
+			$this->propertyDataTypeLookup,
 			$this->vueStatementsView
 		);
 	}
