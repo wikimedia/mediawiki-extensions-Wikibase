@@ -27,7 +27,8 @@
 			"Xiplus",
 			"Yfdyh000",
 			"一個正常人",
-			"乌拉跨氪"
+			"乌拉跨氪",
+			"SupaplexTW"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -125,6 +126,8 @@
 	"wikibase-sitelinks-link-columnheading": "已連結的頁面",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|連接}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "當有人將我{{GENDER:|建立的}}頁面連結到 {{WBREPONAME}} 項目時通知我。",
+	"exceeded-entity-limit-category": "有太多{{WBREPONAME}}項目連結的頁面",
+	"exceeded-entity-limit-category-desc": "這類別列出連結太多{{WBREPONAME}}實體的頁面。",
 	"notification-header-page-connection": "頁面<strong>$3</strong>{{GENDER:$2|已連結}}到{{PLURAL:$4|-1=一個{{WBREPONAME}}項目|{{WBREPONAME}}項目 $4}}，在那可收集與主題相關的資料。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>及{{PLURAL:$4|一個其它頁面|$4 個其它頁面|100=99+ 個其它頁面}}{{GENDER:$2|已連結}}到{{WBREPONAME}}項目，可收集相關主題的資料。",
 	"notification-link-text-view-item": "{{GENDER:$1|檢視}}項目",

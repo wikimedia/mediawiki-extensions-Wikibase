@@ -5,6 +5,7 @@
 			"Winston Sung"
 		]
 	},
+	"wikibase-desc": "Kiat-kò͘-hòa Chu-liāu Tû-chûn-khò͘",
 	"wikibase-entity": "Si̍t-thé",
 	"wikibase-entity-item": "Hāng-bo̍k",
 	"wikibase-entity-property": "Sio̍k-sèng",
@@ -20,6 +21,7 @@
 	"wikibase-publish": "hoat-piáu",
 	"wikibase-cancel": "chhú-siau",
 	"wikibase-add": "ka-thiam",
+	"wikibase-addqualifier": "ka-thiam hān-tēng-sû",
 	"wikibase-addreference": "ka-thiam chham-khó",
 	"wikibase-save-inprogress": "teh pó-chûn...",
 	"wikibase-publish-inprogress": "teh hoat-piáu...",

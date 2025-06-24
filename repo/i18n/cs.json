@@ -143,7 +143,7 @@
 	"wikibase-snakformat-invalid-value": "Neplatná hodnota.",
 	"wikibase-snakformat-propertynotfound": "Vlastnost nebyla nalezena.",
 	"wikibase-shortcopyrightwarning-minimal": "Kliknutím na „$1“ vyjadřujete souhlas s [[$2|podmínkami užití]].",
-	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrzujete souhlas s [[$2|podmínkami užití]] a neodvolatelně zveřejňujete svůj příspěvek za podmínek [$3 $4].",
+	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrzujete souhlas s [[$2|podmínkami užití]] a neodvolatelně zveřejňujete svůj příspěvek za podmínek [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-copyrighttooltip-acknowledge": "Přijímám tyto podmínky pro své budoucí editace. Tuto zprávu už příště nezobrazovat.",
 	"wikibase-entityselector-more": "více",

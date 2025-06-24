@@ -33,7 +33,8 @@
 			"Александр Сигачёв",
 			"Туллук",
 			"Умар",
-			"Amire80"
+			"Amire80",
+			"Borealex"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -70,6 +71,7 @@
 	"wikibase-linkitem-not-loggedin": "Чтобы воспользоваться этой функцией, вы должны быть авторизованы в этой вики и в [$1 центральном репозитории данных].",
 	"wikibase-linkitem-success-link": "Страницы были связаны. Вы можете найти элемент, содержащий связи, в нашем [$1 центральном хранилище данных].",
 	"limitreport-entityaccesscount": "Количество загруженных сущностей Викибазы",
+	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "Свойство «$1» не найдено",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Скрыть",
@@ -172,7 +174,7 @@
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Вместо этого вы можете сделать следующее:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Изменить значение на сайте {{WBREPONAME}}. Нажмите кнопку ниже, чтобы править значение напрямую (ссылка откроется в новой вкладке).",
-	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Изменить значение на сайте {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Изменить значение на сайте {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "В зависимости от используемого шаблона, возможно, удастся перезаписать значение локально с помощью [$1 редактора статей]. Если это вообще возможно, мы рекомендуем вам вместо этого добавить значение на сайте {{WBREPONAME}} с помощью кнопки выше.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Правка значения $1 в настоящее время не поддерживается",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "Тип данных свойства $1 на сайте {{WBREPONAME}} — $2. Правка этого типа данных в настоящее время не поддерживается.",
