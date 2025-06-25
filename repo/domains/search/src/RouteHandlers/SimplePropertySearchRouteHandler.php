@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
-use Exception;
-use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -48,8 +46,6 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
-		} catch ( Exception $e ) {
-			throw new HttpException( $e->getMessage() );
 		}
 
 		return $this->newSuccessResponse( $useCaseResponse );
