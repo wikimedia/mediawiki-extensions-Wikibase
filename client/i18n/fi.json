@@ -135,7 +135,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "Aiempi arvo oli aikaisemmin oikea, mutta on nyt vanhentunut.",
 	"wikibase-client-data-bridge-references-heading": "Lähteet",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Et ole kirjautunut sisään",
-	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Et ole kirjautunut sisään. Jos <strong>kirjaudut sisään</strong> tai <strong>luot käyttäjätunnukset</strong>, muokkauksesi yhdistetään käyttäjänimeesi ja saat paremman käyttökokemuksen.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Et ole kirjautunut sisään. Mikäli <strong>kirjaudut sisään</strong> tai <strong>luot tunnuksen</strong>, muokkauksesi yhdistetään käyttäjänimeesi ja saat paremman käyttökokemuksen.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Varoitus:</strong> Et ole kirjautunut sisään. IP-osoitteesi tulee näkymään julkisesti, jos teet muokkauksia. Mikäli <strong>kirjaudut sisään</strong> tai <strong>luot tunnuksen</strong>, muokkauksesi yhdistetään käyttäjänimeesi ja saat paremman käyttökokemuksen.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Muokkaa kirjautumatta sisään",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Kirjaudu sisään tai rekisteröidy",
