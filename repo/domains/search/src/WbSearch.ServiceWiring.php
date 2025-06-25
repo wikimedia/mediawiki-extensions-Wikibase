@@ -25,6 +25,7 @@ use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NotMulValidator;
 use Wikibase\Repo\Validators\TypeValidator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 use Wikibase\Search\Elastic\InLabelSearch;
 
 /** @phpcs-require-sorted-array */
@@ -44,7 +45,12 @@ return [
 	},
 
 	'WbSearch.ItemPrefixSearch' => function( MediaWikiServices $services ): ItemPrefixSearch {
-		return new ItemPrefixSearch( new EntitySearchHelperPrefixSearchEngine( WikibaseRepo::getEntitySearchHelper( $services ) ) );
+		return new ItemPrefixSearch( new EntitySearchHelperPrefixSearchEngine(
+			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
+			EntitySearchHelperFactory::newFromGlobalState(),
+			$services->getLanguageFactory(),
+			RequestContext::getMain()->getRequest()
+		) );
 	},
 
 	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
