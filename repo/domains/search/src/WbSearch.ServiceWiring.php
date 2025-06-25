@@ -5,11 +5,13 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
+use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchValidator;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
@@ -39,6 +41,10 @@ return [
 			WikibaseRepo::getContentModelMappings( $services ),
 			CirrusDebugOptions::fromRequest( RequestContext::getMain()->getRequest() )
 		) );
+	},
+
+	'WbSearch.ItemPrefixSearch' => function( MediaWikiServices $services ): ItemPrefixSearch {
+		return new ItemPrefixSearch( new EntitySearchHelperPrefixSearchEngine( WikibaseRepo::getEntitySearchHelper( $services ) ) );
 	},
 
 	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
