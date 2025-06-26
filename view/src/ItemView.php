@@ -143,7 +143,16 @@ class ItemView extends EntityView {
 		);
 		$app->registerComponentTemplate(
 			'mex-property-name',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue' )
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue' ),
+			function ( array $data ): array {
+				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject (T396633)
+					->parse( $data['propertyId'] );
+				$data['propertyUrl'] = WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
+					->getTitleForId( $propertyId )
+					->getLinkURL();
+				$data['propertyLabel'] = $propertyId->getSerialization(); // TODO get label (T396633)
+				return $data;
+			}
 		);
 
 		$rendered = '';
@@ -162,10 +171,6 @@ class ItemView extends EntityView {
 					],
 					'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
 				],
-				'propertyUrl' => WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
-					->getTitleForId( $mainSnak->getPropertyId() )
-					->getLinkURL(),
-				'propertyLabel' => $mainSnak->getPropertyId()->getSerialization(), // TODO get label (T396633)
 			] );
 
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";

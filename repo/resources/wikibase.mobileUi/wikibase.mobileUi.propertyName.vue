@@ -1,6 +1,6 @@
 <template>
 	<div class="wikibase-mex-property-name">
-		<p><a :href="url" class="mex-link">{{ label }}</a></p>
+		<p><a :href="propertyUrl" class="mex-link">{{ propertyLabel }}</a></p>
 	</div>
 </template>
 
@@ -11,13 +11,21 @@ const { defineComponent } = require( 'vue' );
 module.exports = exports = defineComponent( {
 	name: 'WikibaseMexPropertyName',
 	props: {
-		url: {
+		propertyId: {
 			type: String,
 			required: true
+		}
+	},
+	computed: {
+		propertyUrl() {
+			const title = new mw.Title(
+				this.propertyId,
+				mw.config.get( 'wgNamespaceIds', {} ).property || 120 // TODO T396634
+			);
+			return title.getUrl();
 		},
-		label: {
-			type: String,
-			required: true
+		propertyLabel() {
+			return this.propertyId; // TODO T396634
 		}
 	}
 } );
