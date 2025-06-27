@@ -17,10 +17,10 @@ class ItemPrefixSearch {
 
 	public function execute( ItemPrefixSearchRequest $itemRequest ): ItemPrefixSearchResponse {
 		return new ItemPrefixSearchResponse( $this->searchEngine->suggestItems(
-			$itemRequest->getQuery(),
-			$itemRequest->getLanguage(),
-			$itemRequest->getLimit(),
-			$itemRequest->getOffset()
+			$itemRequest->query,
+			$itemRequest->language,
+			$itemRequest->limit,
+			$itemRequest->offset
 		) );
 	}
 }
