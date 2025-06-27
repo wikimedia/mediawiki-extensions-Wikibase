@@ -2,30 +2,38 @@
 
 namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 
+use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
+use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine {
-	private EntitySearchHelper $entitySearchHelper;
-
-	public function __construct( EntitySearchHelper $entitySearchHelper ) {
-		$this->entitySearchHelper = $entitySearchHelper;
+	public function __construct(
+		// @phan-suppress-next-line PhanUndeclaredTypeParameter, PhanUndeclaredTypeProperty WikibaseCirrusSearch is ok here
+		private EntitySearchHelperFactory $searchHelperFactory,
+		private LanguageFactory $languageFactory,
+		private WebRequest $request
+	) {
 	}
 
 	public function suggestItems( string $searchTerm, string $languageCode, int $limit, int $offset ): ItemSearchResults {
 		$results = array_slice(
-			$this->entitySearchHelper->getRankedSearchResults(
+			// @phan-suppress-next-line PhanUndeclaredClassMethod
+			$this->searchHelperFactory->newItemSearchForResultLanguage(
+				$this->request,
+				$this->languageFactory->getLanguage( $languageCode )
+			)->getRankedSearchResults(
 				$searchTerm,
 				$languageCode,
 				Item::ENTITY_TYPE,
@@ -37,7 +45,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine {
 			$limit
 		);
 
-		return new ItemSearchResults( ...array_map( [ $this, 'convertResult' ], $results ) );
+		return new ItemSearchResults( ...array_map( $this->convertResult( ... ), $results ) );
 	}
 
 	private function convertResult( TermSearchResult $result ): ItemSearchResult {

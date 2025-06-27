@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 
 use Generator;
+use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\Request\WebRequest;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,6 +18,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
+use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @covers \Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine
@@ -24,6 +28,12 @@ use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPre
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
+
+	public static function setUpBeforeClass(): void {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
+			self::markTestSkipped( 'CirrusSearch needs to be enabled to run this test' );
+		}
+	}
 
 	/**
 	 * @dataProvider itemSearchResultsProvider
@@ -45,7 +55,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 
 			$this->assertEquals(
 				$expected,
-				( new EntitySearchHelperPrefixSearchEngine( $entitySearchHelper ) )->suggestItems( $searchTerm, $language, $limit, $offset )
+				$this->newSearchEngine( $entitySearchHelper )->suggestItems( $searchTerm, $language, $limit, $offset )
 			);
 	}
 
@@ -163,6 +173,18 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 			5,
 			5,
 		];
+	}
+
+	public function newSearchEngine( EntitySearchHelper $entitySearchHelper ): EntitySearchHelperPrefixSearchEngine {
+		$searchHelperFactory = $this->createMock( EntitySearchHelperFactory::class );
+		$searchHelperFactory->method( 'newItemSearchForResultLanguage' )
+			->willReturn( $entitySearchHelper );
+
+		return new EntitySearchHelperPrefixSearchEngine(
+			$searchHelperFactory,
+			$this->createStub( LanguageFactory::class ),
+			$this->createStub( WebRequest::class )
+		);
 	}
 
 }

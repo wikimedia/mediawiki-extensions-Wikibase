@@ -15,7 +15,6 @@ function newSearchRequest( language, searchTerm ) {
 	return new RequestBuilder()
 		.withRoute( 'GET', '/v0/suggest/items' )
 		.withQueryParam( 'language', language )
-		.withQueryParam( 'uselang', language ) // FIXME: will be removed in a follow-up
 		.withQueryParam( 'q', searchTerm );
 }
 
