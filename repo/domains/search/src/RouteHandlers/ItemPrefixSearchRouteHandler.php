@@ -8,6 +8,7 @@ use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchResponse;
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
@@ -34,12 +35,16 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase(): Response {
-		$useCaseResponse = $this->useCase->execute( new ItemPrefixSearchRequest(
-			$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
-			$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
-			$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_LIMIT,
-			$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_OFFSET
-		) );
+		try {
+			$useCaseResponse = $this->useCase->execute( new ItemPrefixSearchRequest(
+				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
+				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
+				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_LIMIT,
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_OFFSET
+			) );
+		} catch ( UseCaseError $e ) {
+			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
+		}
 
 		return $this->newSuccessResponse( $useCaseResponse );
 	}
@@ -52,6 +57,20 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 				json_encode( [ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ], JSON_UNESCAPED_SLASHES )
 			)
 		);
+
+		return $httpResponse;
+	}
+
+	private function newErrorResponse( string $code, string $message, ?array $context = null ): Response {
+		$httpResponse = new Response();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setHeader( 'Content-Language', 'en' );
+		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $code ) );
+		$httpResponse->setBody( new StringStream( json_encode(
+			// use array_filter to remove 'context' from array if $context is NULL
+			array_filter( [ 'code' => $code, 'message' => $message, 'context' => $context ] ),
+			JSON_UNESCAPED_SLASHES
+		) ) );
 
 		return $httpResponse;
 	}

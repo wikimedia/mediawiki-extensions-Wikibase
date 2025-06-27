@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
@@ -45,12 +46,15 @@ return [
 	},
 
 	'WbSearch.ItemPrefixSearch' => function( MediaWikiServices $services ): ItemPrefixSearch {
-		return new ItemPrefixSearch( new EntitySearchHelperPrefixSearchEngine(
+		return new ItemPrefixSearch(
+			new ItemPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
+			new EntitySearchHelperPrefixSearchEngine(
 			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
-			EntitySearchHelperFactory::newFromGlobalState(),
-			$services->getLanguageFactory(),
-			RequestContext::getMain()->getRequest()
-		) );
+				EntitySearchHelperFactory::newFromGlobalState(),
+				$services->getLanguageFactory(),
+				RequestContext::getMain()->getRequest()
+			)
+		);
 	},
 
 	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
