@@ -13,11 +13,7 @@ use MediaWiki\Output\OutputPage;
  */
 class OutputPageEditability {
 
-	/**
-	 * @param OutputPage $out
-	 * @return bool
-	 */
-	public function validate( OutputPage $out ) {
+	public function validate( OutputPage $out ): bool {
 		return $out->getAuthority()->probablyCan( 'edit', $out->getTitle() )
 			&& $this->isEditView( $out );
 	}
@@ -25,12 +21,8 @@ class OutputPageEditability {
 	/**
 	 * This is mostly a duplicate of
 	 * @see \Wikibase\Repo\Actions\ViewEntityAction::isEditable()
-	 *
-	 * @param OutputPage $out
-	 *
-	 * @return bool
 	 */
-	private function isEditView( OutputPage $out ) {
+	private function isEditView( OutputPage $out ): bool {
 		return $this->isLatestRevision( $out )
 			&& !$this->isDiff( $out )
 			&& !$out->isPrintable();

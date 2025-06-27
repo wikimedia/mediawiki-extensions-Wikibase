@@ -35,7 +35,6 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		/** @var MockObject $cache */
 		$this->cache = $this->createMock( CacheInterface::class );
 		// Cache is empty by default - returning default value
 		$this->cache->method( 'get' )->willReturnArgument( 1 );

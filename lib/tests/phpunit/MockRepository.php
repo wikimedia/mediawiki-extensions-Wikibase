@@ -60,7 +60,7 @@ class MockRepository implements
 	/**
 	 * Entity id serialization => array of [ EntityRevision, user name ]
 	 *
-	 * @var array[]
+	 * @var array<string,array<int,array{0:EntityRevision,1:string}>>
 	 */
 	private array $entities = [];
 

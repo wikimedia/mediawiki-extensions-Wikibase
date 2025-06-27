@@ -136,7 +136,6 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$moduleLists = $this->getModulesForVersionHash();
 		$namesByHash = [];
 
-		/** @var SitesModule[][] $moduleLists */
 		foreach ( $moduleLists as $name => $modules ) {
 			$hashes = [];
 			foreach ( $modules as $module ) {
@@ -224,7 +223,10 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	private function getModulesForVersionHash() {
+	/**
+	 * @return array<string,SitesModule[]>
+	 */
+	private function getModulesForVersionHash(): array {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'siteid' );
 		$site->setGroup( 'allowedgroup' );

@@ -19,8 +19,6 @@ use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 class ApiEntitySearchHelper implements EntitySearchHelper {
 
 	/**
-	 * @var int
-	 *
 	 * When making requests there is a risk of too many items being filtered out.
 	 * In order to work around this but not ending up making multiple requests,
 	 * for now each search limit will be multiplied using this variable.

@@ -37,7 +37,6 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	/**
 	 * Limit for id generation attempts that hit reserved ids.
 	 * We have not had any reserved ids in the past with anywhere near this number of sequential entity ids.
-	 * @var int
 	 */
 	private const MAX_ATTEMPTS = 10;
 
