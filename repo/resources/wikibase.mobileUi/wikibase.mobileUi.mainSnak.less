@@ -1,0 +1,46 @@
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-mex-media-value {
+	background-color: @background-color-neutral-subtle;
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	display: table;
+	width: 100%;
+
+	.wikibase-mex-media-value-row {
+		display: table-row;
+
+		.wikibase-mex-media-preview {
+			display: table-cell;
+
+			img {
+				max-height: 124px;
+				max-width: 124px;
+				margin: 0.5rem 0.5rem 0.75rem 1rem;
+				padding: 0.5rem;
+				background-color: @background-color-base;
+				float: right;
+			}
+		}
+
+		.wikibase-mex-media-info {
+			display: table-cell;
+			vertical-align: top;
+			padding: 0.8rem 0.5rem 0.5rem 0.5rem;
+
+			p {
+				margin-top: -0.3rem;
+				margin-bottom: 0;
+				padding-top: 0;
+				padding-bottom: 0;
+				padding-left: 0;
+				font-size: @font-size-small;
+
+				span {
+					vertical-align: bottom;
+					line-height: 1.6rem;
+				}
+			}
+		}
+	}
+}
