@@ -2173,6 +2173,7 @@ return [
 				WikibaseRepo::getSnakFormatterFactory( $services )
 			),
 			$statementGrouperBuilder->getStatementGrouper(),
+			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
 			$propertyDataTypeLookup,
 			$propertyOrderProvider,
 			$services->getSiteLookup(),

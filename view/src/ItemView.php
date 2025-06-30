@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
@@ -29,6 +30,11 @@ class ItemView extends EntityView {
 	 * @var StatementSectionsView
 	 */
 	private $statementSectionsView;
+
+	/**
+	 * @var SerializerFactory
+	 */
+	private $serializerFactory;
 
 	/**
 	 * @var SiteLinksView
@@ -64,6 +70,7 @@ class ItemView extends EntityView {
 	 * @param CacheableEntityTermsView $entityTermsView
 	 * @param LanguageDirectionalityLookup $languageDirectionalityLookup
 	 * @param StatementSectionsView $statementSectionsView
+	 * @param SerializerFactory $serializerFactory
 	 * @param string $languageCode
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
@@ -76,6 +83,7 @@ class ItemView extends EntityView {
 		CacheableEntityTermsView $entityTermsView,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		StatementSectionsView $statementSectionsView,
+		SerializerFactory $serializerFactory,
 		$languageCode,
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
@@ -86,6 +94,7 @@ class ItemView extends EntityView {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
 
 		$this->statementSectionsView = $statementSectionsView;
+		$this->serializerFactory = $serializerFactory;
 		$this->siteLinksView = $siteLinksView;
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->textProvider = $textProvider;
@@ -151,38 +160,13 @@ class ItemView extends EntityView {
 	 */
 	private function getVueStatementHtml( Statement $statement, App $app ): string {
 		$mainSnak = $statement->getMainSnak();
-		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
-		// TODO: use Statement Serializer to get the component data T396858
-		$value = 'value placeholder';
-		if ( $dataType === 'commonsMedia' ) {
-			$value = [
-				'src' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/' .
-						'd/d5/Rihanna-signature.svg/250px-Rihanna-signature.svg.png',
-				'altText' => 'Some alt text',
-				'filename' => 'Rihanna-signature.svg',
-				'widthPx' => 348,
-				'heightPx' => 178,
-				'fileSizeKb' => 9,
-			];
-		}
+		$statementSerializer = $this->serializerFactory->newStatementSerializer();
+		$statementData = $statementSerializer->serialize( $statement );
 
-		// TODO: use Statement Serializer instead T396858
-		return $app->renderComponent( 'mex-statement', [
-			'statement' => [
-				'mainsnak' => [
-					'property' => $mainSnak->getPropertyId()->getSerialization(),
-					'datavalue' => [ 'value' => $value ],
-					'datatype' => $dataType,
-					// When we have support for complex expressions we can remove these T396855
-					'isstring' => $dataType === 'string',
-					'iscommonsmedia' => $dataType === 'commonsMedia',
-					'isunknowntype' => !in_array( $dataType, [ 'string', 'commonsMedia' ] ),
-					// When we have support for passing real data, it will be unnecessary to pass this
-					'mediainfo' => $value,
-				],
-				'references' => iterator_to_array( $statement->getReferences()->getIterator() ),
-			],
-		] );
+		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
+		$statementData['mainsnak']['datatype'] = $dataType;
+
+		return $app->renderComponent( 'mex-statement', [ 'statement' => $statementData ] );
 	}
 
 	/** @return string HTML */
@@ -207,14 +191,30 @@ class ItemView extends EntityView {
 		);
 		$app->registerComponentTemplate(
 			'mex-main-snak',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' )
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' ),
+			function ( array $data ): array {
+				$data['loadedValue'] = $data['value'];
+				if ( $data['type'] === 'commonsMedia' ) {
+					// The CommonsInlineImageFormatter loads additional metadata about commonsMedia objects.
+					// We will need similar such functionality here - T398314
+					$data['loadedValue'] = [
+						'src' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/' .
+							'd/d5/Rihanna-signature.svg/250px-Rihanna-signature.svg.png',
+						'altText' => 'Some alt text',
+						'filename' => $data['value'],
+						'widthPx' => 348,
+						'heightPx' => 178,
+						'fileSizeKb' => 9,
+					];
+				}
+				return $data;
+			}
 		);
 
 		$rendered = '';
 		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
 		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
 			$statement = $item->getStatements()->getByPropertyId( $propertyId )->toArray()[ 0 ];
-
 			$renderedStatement = $this->getVueStatementHtml( $statement, $app );
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}

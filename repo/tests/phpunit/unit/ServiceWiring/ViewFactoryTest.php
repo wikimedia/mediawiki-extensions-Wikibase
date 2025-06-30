@@ -8,6 +8,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use ObjectCacheFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\Lib\DataTypeFactory;
@@ -46,6 +47,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			new InMemoryDataTypeLookup() );
 		$this->mockService( 'WikibaseRepo.StatementGuidParser',
 			new StatementGuidParser( new ItemIdParser() ) );
+		$this->mockService( 'WikibaseRepo.BaseDataModelSerializerFactory',
+			$this->createMock( SerializerFactory::class ) );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getWikiPageFactory' );
 		$titleFactory = $this->createMock( TitleFactory::class );

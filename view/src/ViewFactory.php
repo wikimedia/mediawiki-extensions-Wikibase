@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Site\SiteLookup;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
@@ -48,6 +49,11 @@ class ViewFactory {
 	 * @var StatementGrouper
 	 */
 	private $statementGrouper;
+
+	/**
+	 * @var SerializerFactory
+	 */
+	private $serializerFactory;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -126,6 +132,7 @@ class ViewFactory {
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
 	 * @param HtmlSnakFormatterFactory $htmlSnakFormatterFactory
 	 * @param StatementGrouper $statementGrouper
+	 * @param SerializerFactory $serializerFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param SiteLookup $siteLookup
@@ -149,6 +156,7 @@ class ViewFactory {
 		EntityIdFormatterFactory $plainTextIdFormatterFactory,
 		HtmlSnakFormatterFactory $htmlSnakFormatterFactory,
 		StatementGrouper $statementGrouper,
+		SerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		PropertyOrderProvider $propertyOrderProvider,
 		SiteLookup $siteLookup,
@@ -176,6 +184,7 @@ class ViewFactory {
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->statementGrouper = $statementGrouper;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->serializerFactory = $serializerFactory;
 		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->siteLookup = $siteLookup;
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -251,6 +260,7 @@ class ViewFactory {
 			$entityTermsView,
 			$this->languageDirectionalityLookup,
 			$statementSectionsView,
+			$this->serializerFactory,
 			$language->getCode(),
 			$siteLinksView,
 			$this->siteLinkGroups,

@@ -14,10 +14,6 @@
 		<mex-main-snak
 			:value="statement.mainsnak.datavalue.value"
 			:type="statement.mainsnak.datatype"
-			:isstring="statement.mainsnak.isstring"
-			:iscommonsmedia="statement.mainsnak.iscommonsmedia"
-			:isunknowntype="statement.mainsnak.isunknowntype"
-			:mediainfo="statement.mainsnak.mediainfo"
 		></mex-main-snak>
 		<div class="wikibase-mex-references">
 			<p>

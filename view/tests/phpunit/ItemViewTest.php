@@ -2,11 +2,13 @@
 
 namespace Wikibase\View\Tests;
 
+use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -133,6 +135,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$termsView,
 			$this->createMock( LanguageDirectionalityLookup::class ),
 			$this->createMock( StatementSectionsView::class ),
+			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
 			'en',
 			$this->createMock( SiteLinksView::class ),
 			[],
