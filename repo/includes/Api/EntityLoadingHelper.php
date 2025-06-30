@@ -274,7 +274,7 @@ class EntityLoadingHelper {
 		if ( !$revision ) {
 			return false;
 		}
-		$revisionTitle = $this->titleFactory->newFromLinkTarget( $revision->getPageAsLinkTarget() );
+		$revisionTitle = $this->titleFactory->newFromPageIdentity( $revision->getPage() );
 		$entityTitle = $this->entityTitleStoreLookup->getTitleForId( $entityId );
 		// Note: The $entityTitle may have a fragment!
 		// Title::equals() is the method that ignores it, which we want.

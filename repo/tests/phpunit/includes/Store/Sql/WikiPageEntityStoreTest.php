@@ -399,7 +399,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$revisionRecord = $revisionLookup->getRevisionById( $redirectRevId );
 
 		$this->assertTrue(
-			Title::newFromLinkTarget( $revisionRecord->getPageAsLinkTarget() )->isRedirect(),
+			Title::newFromPageIdentity( $revisionRecord->getPage() )->isRedirect(),
 			'Title::isRedirect'
 		);
 
@@ -427,7 +427,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$revisionRecord = $revisionLookup->getRevisionById( $r1->getRevisionId() );
 
 		$this->assertFalse(
-			Title::newFromLinkTarget( $revisionRecord->getPageAsLinkTarget() )->isRedirect(),
+			Title::newFromPageIdentity( $revisionRecord->getPage() )->isRedirect(),
 			'Title::isRedirect'
 		);
 		$this->assertFalse(
