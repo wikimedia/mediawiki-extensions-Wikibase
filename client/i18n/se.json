@@ -38,7 +38,7 @@
 	"wikibase-linkitem-input-site": "Giella:",
 	"wikibase-linkitem-input-page": "Siidu:",
 	"wikibase-linkitem-confirmitem-text": "Siidu man leat válljen, lea juo liŋkejuvvon ovtta [$1 elementtii min guovddáš diehtoregisttarii]. Duođaš ahte {{PLURAL:$2|siidu|siiddut}}, čájehuvvon dás vulobealde, lea(t) {{PLURAL:dat|dat}} man/maid don áiggut liŋket dán siidui.",
-	"wikibase-linkitem-confirmitem-button": "Duođaš",
+	"wikibase-linkitem-confirmitem-button": "Nanne",
 	"wikibase-linkitem-not-loggedin-title": "Don fertet leat čálihuvvon sisa",
 	"wikibase-linkitem-not-loggedin": "Don fertet leat čálihuvvon sisa dán wikii, ja [$1 guovddáš diehtoregistarii] vai sáhtát geavahit dán doaimma.",
 	"wikibase-linkitem-success-link": "Siidu lea laktašuvvan. Sáhtát gávdnat elemeantta neahttasiidoliŋkkain min [$1 guovddáš diehtoguovddážis].",
