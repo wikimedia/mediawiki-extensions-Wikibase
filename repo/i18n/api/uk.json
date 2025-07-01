@@ -303,10 +303,10 @@
 	"apihelp-wbsetsitelink-example-6": "Змінити значки для посилання на сторінку в польській Вікіпедії з елемента з ідентифікатором <samp>$1</samp> на два значки, що вказують на елементи з ідентифікаторами «Q2» та «Q149» без вказування назви посилання",
 	"apihelp-wbsetsitelink-example-7": "Змінити посилання на сторінку в польській Вікіпедії з елемента з ідентифікатором <samp>$1</samp> без зміни значків",
 	"apihelp-wbsetsitelink-example-8": "Змінити посилання на сторінку в польській Вікіпедії з елемента з ідентифікатором <samp>$1</samp>, і вилучити всі його значки",
-	"apihelp-wbformatentities-summary": "Форматує ID сутностей у HTML.",
+	"apihelp-wbformatentities-summary": "Форматує ID сутностей у HTML або простим текстом.",
 	"apihelp-wbformatentities-extended-description": "Мову можна задати глобальним параметром <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "ID сутностей для форматування",
-	"apihelp-wbformatentities-example-1": "Форматувати ідентифікатор окремого елемента.",
+	"apihelp-wbformatentities-example-1": "Форматувати ідентифікатор окремого елемента в HTML.",
 	"apihelp-wbformatentities-example-2": "Форматувати ідентифікатори елемента і властивості.",
 	"apihelp-wbformatentities-example-3": "Форматувати ідентифікатори елемента, властивості та лексеми.",
 	"apihelp-wbformatentities-example-4": "Формувати три ідентифікатори елемента французькою мовою."
