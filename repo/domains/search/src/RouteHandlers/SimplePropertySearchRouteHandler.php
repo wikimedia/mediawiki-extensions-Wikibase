@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
+use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -11,6 +12,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\Simpl
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -19,17 +21,27 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class SimplePropertySearchRouteHandler extends SimpleHandler {
 
+	use CirrusSearchEnabledTrait;
+
 	private const SEARCH_QUERY_PARAM = 'q';
 	private const LANGUAGE_QUERY_PARAM = 'language';
 	private const LIMIT_QUERY_PARAM = 'limit';
 	private const OFFSET_QUERY_PARAM = 'offset';
 
-	private SimplePropertySearch $useCase;
-	private MiddlewareHandler $middlewareHandler;
+	public function __construct(
+		private SimplePropertySearch $useCase,
+		private MiddlewareHandler $middlewareHandler,
+		private ResponseFactory $responseFactory
+	) {
+	}
 
-	public function __construct( SimplePropertySearch $useCase, MiddlewareHandler $middlewareHandler ) {
-		$this->useCase = $useCase;
-		$this->middlewareHandler = $middlewareHandler;
+	public static function factory(): Handler {
+		return self::isCirrusSearchEnabled()
+			? new self(
+				WbSearch::getSimplePropertySearch(),
+				WbSearch::getMiddlewareHandler(),
+				new ResponseFactory()
+			) : new RestfulSearchNotAvailableRouteHandler();
 	}
 
 	public function run(): Response {
@@ -45,7 +57,7 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM]
 			) );
 		} catch ( UseCaseError $e ) {
-			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
+			return $this->responseFactory->newUseCaseErrorResponse( $e );
 		}
 
 		return $this->newSuccessResponse( $useCaseResponse );
@@ -59,20 +71,6 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 				json_encode( [ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ], JSON_UNESCAPED_SLASHES )
 			)
 		);
-
-		return $httpResponse;
-	}
-
-	private function newErrorResponse( string $code, string $message, ?array $context = null ): Response {
-		$httpResponse = new Response();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $code ) );
-		$httpResponse->setBody( new StringStream( json_encode(
-			// use array_filter to remove 'context' from array if $context is NULL
-			array_filter( [ 'code' => $code, 'message' => $message, 'context' => $context ] ),
-			JSON_UNESCAPED_SLASHES
-		) ) );
 
 		return $httpResponse;
 	}

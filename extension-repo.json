@@ -643,14 +643,12 @@
 		{
 			"path": "/wikibase/v0/search/items",
 			"method": "GET",
-			"class": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler",
-			"services": [ "WbSearch.SimpleItemSearch", "WbSearch.MiddlewareHandler" ]
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
 		},
 		{
 			"path": "/wikibase/v0/search/properties",
 			"method": "GET",
-			"class": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler",
-			"services": [ "WbSearch.SimplePropertySearch", "WbSearch.MiddlewareHandler" ]
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler::factory"
 		}
 	],
 	"SpecialPages": {

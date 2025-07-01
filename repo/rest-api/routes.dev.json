@@ -2,7 +2,6 @@
 	{
 		"path": "/wikibase/v0/suggest/items",
 		"method": "GET",
-		"class": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\ItemPrefixSearchRouteHandler",
-		"services": [ "WbSearch.ItemPrefixSearch", "WbSearch.MiddlewareHandler" ]
+		"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\ItemPrefixSearchRouteHandler::factory"
 	}
 ]

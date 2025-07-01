@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Domains\Search;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use Psr\Container\ContainerInterface;
+use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
@@ -41,6 +44,21 @@ class WbSearch {
 
 	public static function getMiddlewareHandler( ?ContainerInterface $services = null ): MiddlewareHandler {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.MiddlewareHandler' );
+	}
+
+	public static function getSimpleItemSearch( ?ContainerInterface $services = null ): SimpleItemSearch {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbSearch.SimpleItemSearch' );
+	}
+
+	public static function getSimplePropertySearch( ?ContainerInterface $services = null ): SimplePropertySearch {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbSearch.SimplePropertySearch' );
+	}
+
+	public static function getItemPrefixSearch( ?ContainerInterface $services = null ): ItemPrefixSearch {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbSearch.ItemPrefixSearch' );
 	}
 
 }

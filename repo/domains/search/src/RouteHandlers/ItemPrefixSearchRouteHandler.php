@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 
+use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\Rest\StringStream;
@@ -11,6 +12,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -19,6 +21,8 @@ use Wikimedia\ParamValidator\ParamValidator;
  */
 class ItemPrefixSearchRouteHandler extends SimpleHandler {
 
+	use CirrusSearchEnabledTrait;
+
 	private const SEARCH_QUERY_PARAM = 'q';
 	private const LANGUAGE_QUERY_PARAM = 'language';
 	private const LIMIT_QUERY_PARAM = 'limit';
@@ -26,8 +30,18 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 
 	public function __construct(
 		private ItemPrefixSearch $useCase,
-		private MiddlewareHandler $middlewareHandler
+		private MiddlewareHandler $middlewareHandler,
+		private ResponseFactory $responseFactory
 	) {
+	}
+
+	public static function factory(): Handler {
+		return self::isCirrusSearchEnabled()
+			? new self(
+				WbSearch::getItemPrefixSearch(),
+				WbSearch::getMiddlewareHandler(),
+				new ResponseFactory()
+			) : new RestfulSearchNotAvailableRouteHandler();
 	}
 
 	public function run(): Response {
@@ -43,7 +57,7 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_OFFSET
 			) );
 		} catch ( UseCaseError $e ) {
-			return $this->newErrorResponse( $e->getErrorCode(), $e->getErrorMessage(), $e->getErrorContext() );
+			return $this->responseFactory->newUseCaseErrorResponse( $e );
 		}
 
 		return $this->newSuccessResponse( $useCaseResponse );
@@ -57,20 +71,6 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 				json_encode( [ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ], JSON_UNESCAPED_SLASHES )
 			)
 		);
-
-		return $httpResponse;
-	}
-
-	private function newErrorResponse( string $code, string $message, ?array $context = null ): Response {
-		$httpResponse = new Response();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setHeader( 'Content-Language', 'en' );
-		$httpResponse->setStatus( ErrorResponseToHttpStatus::lookup( $code ) );
-		$httpResponse->setBody( new StringStream( json_encode(
-			// use array_filter to remove 'context' from array if $context is NULL
-			array_filter( [ 'code' => $code, 'message' => $message, 'context' => $context ] ),
-			JSON_UNESCAPED_SLASHES
-		) ) );
 
 		return $httpResponse;
 	}
