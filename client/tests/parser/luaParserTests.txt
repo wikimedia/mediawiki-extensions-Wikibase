@@ -1,0 +1,56 @@
+!! Version 2
+
+# Force the test runner to ensure Scribunto is loaded
+!! functionhooks
+invoke
+!! endfunctionhooks
+
+!! article
+Page with description
+!! text
+{{SHORTDESC:This is the short description}}
+This is a sample page with a short description.
+!! endarticle
+
+!! article
+Page with no description
+!! text
+This is a sample page without a short description.
+!! endarticle
+
+!! article
+Module:Get shortdesc
+!! text
+local p = {}
+p.main = function(frame)
+	return mw.title.new(frame.args.page).shortDescription
+end
+return p
+!! endarticle
+
+!! test
+Test querying short description
+!! wikitext
+{{#invoke:Get shortdesc|main|page=Page with description}}
+!! html
+<p>This is the short description
+</p>
+!! end
+
+!! test
+Test querying for no short description
+!! wikitext
+{{#invoke:Get shortdesc|main|page=Page with no description}}
+!! html
+<p>
+</p>
+!! end
+
+!! test
+Test querying short description of a special page
+!! wikitext
+{{#invoke:Get shortdesc|main|page=Special:RecentChanges}}
+!! html
+<p>
+</p>
+!! end
