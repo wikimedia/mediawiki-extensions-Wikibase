@@ -439,5 +439,11 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Зьняць папярэджаньне",
 	"wikibase-tainted-ref-tainted-icon-title": "Гэтае сьцьверджаньне мае пэўныя магчымыя праблемы.",
 	"wikibase-federated-properties-search-api-error-message": "Уласьцівасьці часова недаступныя.",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Паспрабаваць зноў",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Вы ня можаце рэдагаваць гэтае цьверджаньне празь няўдалы запыт да вікі-крыніцы фэдэрацыі.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Памылка рэдагаваньня",
+	"special-setaliases-parameterized": "Вызначыць сынонімы $1",
+	"special-setlabel-parameterized": "Вызначыць метку $1",
+	"special-setdescription-parameterized": "Вызначыць апісаньне $1",
 	"special-setlabeldescriptionaliases-parameterized": "Вызначыць метку, апісаньне і псэўданімы $1"
 }
