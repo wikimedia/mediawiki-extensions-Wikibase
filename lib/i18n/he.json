@@ -14,7 +14,7 @@
 	"wikibase-deletedentity-item": "פריט מחוק",
 	"wikibase-deletedentity-property": "מאפיין מחוק",
 	"wikibase-deletedentity-query": "שאילתה מחוקה",
-	"wikibase-error-unexpected": "שגיאה: $1",
+	"wikibase-error-unexpected": "שגיאה: $1.",
 	"wikibase-error-unknown": "אירעה שגיאה.",
 	"wikibase-error-save-generic": "לא ניתן היה לשמור עקב שגיאה.",
 	"wikibase-error-remove-generic": "לא ניתן היה להסיר עקב שגיאה.",
