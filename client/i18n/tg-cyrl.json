@@ -4,7 +4,8 @@
 			"Ibrahim",
 			"ToJack",
 			"Vashgird",
-			"ZulfiqorF"
+			"ZulfiqorF",
+			"Farorud"
 		]
 	},
 	"wikibase-comment-update": "Элементи {{WBREPONAME}} тағийр ёфт",
@@ -27,5 +28,6 @@
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Тасдиқ: $1",
 	"wikibase-otherprojects": "Дигар лоиҳаҳо",
 	"wikibase-sitelinks-sitename-columnheading": "Забон",
-	"wikibase-client-data-bridge-references-heading": "Танзимот"
+	"wikibase-client-data-bridge-references-heading": "Танзимот",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Шумо ворид нашудаед"
 }
