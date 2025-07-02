@@ -321,7 +321,6 @@ class ResultBuilder {
 		if ( $props === [] ) {
 			$record = $this->addEntityInfoToRecord( $record, $entityId );
 		} else {
-			// @phan-suppress-next-line PhanTypeMismatchArgumentInternal False positive
 			if ( $props == 'all' || in_array( 'info', $props ) ) {
 				$record = $this->addPageInfo->add( $record, $entityRevision );
 			}
