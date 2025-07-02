@@ -36,7 +36,7 @@ class JulianDateTimeValueCleaner extends DateTimeValueCleaner {
 				return $this->julianDateValue( $value->getTime() )
 					?: $this->cleanupGregorianValue( $value->getTime(), $value->getPrecision() );
 			}
-		} catch ( IllegalValueException $e ) {
+		} catch ( IllegalValueException ) {
 			return null;
 		}
 

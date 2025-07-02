@@ -458,7 +458,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		foreach ( $badges as $badge ) {
 			try {
 				$badgeId = new ItemId( $badge );
-			} catch ( InvalidArgumentException $ex ) {
+			} catch ( InvalidArgumentException ) {
 				$status->fatal( 'wikibase-wikibaserepopage-not-itemid', $badge );
 				return false;
 			}

@@ -52,7 +52,7 @@ class RemoveItemLabel {
 
 		try {
 			$label = $item->getLabels()->getByLanguage( $languageCode );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			throw UseCaseError::newResourceNotFound( 'label' );
 		}
 

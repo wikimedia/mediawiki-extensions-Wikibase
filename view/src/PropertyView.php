@@ -143,7 +143,7 @@ class PropertyView extends EntityView {
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propertyType );
 			$dataTypeLabelHtml = $this->textProvider->getEscaped( $dataType->getMessageKey() );
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			$dataTypeLabelHtml = '<span class="error">' .
 				$this->textProvider->getEscaped( 'wikibase-propertypage-bad-datatype', [ $propertyType ] ) .
 				'</span>';

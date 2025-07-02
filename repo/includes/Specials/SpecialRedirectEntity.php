@@ -58,7 +58,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 
 		try {
 			return $this->idParser->parse( $rawId );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
 				[ $rawId ],

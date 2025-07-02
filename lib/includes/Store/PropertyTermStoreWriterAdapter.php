@@ -33,7 +33,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 			try {
 				$this->store->storeTerms( $id, $entity->getFingerprint() );
 				return true;
-			} catch ( TermStoreException $ex ) {
+			} catch ( TermStoreException ) {
 				return false;
 			}
 		}
@@ -46,7 +46,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 			try {
 				$this->store->deleteTerms( $entityId );
 				return true;
-			} catch ( TermStoreException $ex ) {
+			} catch ( TermStoreException ) {
 				return false;
 			}
 		}

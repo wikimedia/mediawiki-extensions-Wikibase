@@ -263,12 +263,12 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 					$acceptableRanks
 				),
 			];
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $entityId ] ]
 			);
-		} catch ( PropertyLabelNotResolvedException $e ) {
+		} catch ( PropertyLabelNotResolvedException ) {
 			return [ null ];
 		}
 	}
@@ -293,12 +293,12 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 					$acceptableRanks
 				),
 			];
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $entityId ] ]
 			);
-		} catch ( PropertyLabelNotResolvedException $e ) {
+		} catch ( PropertyLabelNotResolvedException ) {
 			return [ null ];
 		}
 	}

@@ -51,7 +51,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 						'type' => $dataValueType,
 						'value' => $valueSerialization['content'],
 					] );
-				} catch ( DeserializationException $e ) {
+				} catch ( DeserializationException ) {
 					throw new InvalidFieldException( 'content', $valueSerialization['content'], "$basePath/content" );
 				}
 				break;
@@ -73,7 +73,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 				'value' => [ 'id' => $content ],
 				'type' => 'wikibase-entityid',
 			] );
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			throw new InvalidFieldException( 'content', $content, "$basePath/content" );
 		}
 	}
@@ -93,7 +93,7 @@ class DataValuesValueDeserializer implements ValueDeserializer {
 
 		try {
 			$timeValue = new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel );
-		} catch ( IllegalValueException $e ) {
+		} catch ( IllegalValueException ) {
 			throw new InvalidFieldException( 'content', $content, "$basePath/content" );
 		}
 

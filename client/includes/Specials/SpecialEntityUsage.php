@@ -79,7 +79,7 @@ class SpecialEntityUsage extends QueryPage {
 		if ( $entity ) {
 			try {
 				$this->entityId = $this->idParser->parse( $entity );
-			} catch ( EntityIdParsingException $ex ) {
+			} catch ( EntityIdParsingException ) {
 				$this->getOutput()->addHTML(
 					Html::element(
 						'p',

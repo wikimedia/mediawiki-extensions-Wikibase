@@ -158,7 +158,7 @@ class FormatEntities extends ApiBase {
 		foreach ( $params['ids'] as $id ) {
 			try {
 				$ids[] = $this->entityIdParser->parse( $id );
-			} catch ( EntityIdParsingException $e ) {
+			} catch ( EntityIdParsingException ) {
 				$this->errorReporter->dieWithError(
 					[ 'wikibase-api-no-such-entity', $id ],
 					'no-such-entity',

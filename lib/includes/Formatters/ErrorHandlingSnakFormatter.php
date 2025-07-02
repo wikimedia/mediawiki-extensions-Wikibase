@@ -73,7 +73,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 					$ex->getExpectedValueType()
 				);
 			}
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			$warningText = $this->formatWarning(
 				'wikibase-snakformatter-property-not-found',
 				$snak->getPropertyId()->getSerialization()

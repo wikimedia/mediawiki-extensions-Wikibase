@@ -105,7 +105,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	private function getSiteLink( Item $item, string $globalId ): ?SiteLink {
 		try {
 			return $item->getSiteLinkList()->getBySiteId( $globalId );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			return null;
 		}
 	}

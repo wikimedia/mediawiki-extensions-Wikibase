@@ -82,7 +82,7 @@ class BinaryOptionDispatchingSnakFormatter implements SnakFormatter {
 	private function getSnakDataType( Snak $snak ) {
 		try {
 			return $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return null;
 		}
 	}

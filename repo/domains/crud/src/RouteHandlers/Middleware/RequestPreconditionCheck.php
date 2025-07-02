@@ -46,7 +46,7 @@ class RequestPreconditionCheck {
 			$entityId = $this->entityIdParser->parse(
 				( $this->getEntityIdFromRequest )( $request )
 			);
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			// Malformed IDs will be caught by validation later.
 			return RequestPreconditionCheckResult::newConditionUnmetResult();
 		}

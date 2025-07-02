@@ -69,9 +69,9 @@ class ReplaceStatement {
 					StatementEditSummary::newReplaceSummary( $editMetadata->getComment(), $statement )
 				)
 			) );
-		} catch ( StatementNotFoundException $e ) {
+		} catch ( StatementNotFoundException ) {
 			throw UseCaseError::newResourceNotFound( 'statement' );
-		} catch ( PropertyChangedException $e ) {
+		} catch ( PropertyChangedException ) {
 			throw new UseCaseError(
 				UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE,
 				'The input value cannot be modified',

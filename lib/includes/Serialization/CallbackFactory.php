@@ -65,7 +65,7 @@ class CallbackFactory {
 					foreach ( $snakGroup as &$snak ) {
 						$snak['datatype'] = $dataType;
 					}
-				} catch ( PropertyDataTypeLookupException $e ) {
+				} catch ( PropertyDataTypeLookupException ) {
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}
@@ -81,7 +81,7 @@ class CallbackFactory {
 						$entityIdParser,
 						$array['property']
 					) );
-				} catch ( PropertyDataTypeLookupException $e ) {
+				} catch ( PropertyDataTypeLookupException ) {
 					//XXX: shall we set $serialization['datatype'] = 'bad' ??
 				}
 			}

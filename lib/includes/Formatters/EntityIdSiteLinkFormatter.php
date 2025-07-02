@@ -49,7 +49,7 @@ class EntityIdSiteLinkFormatter implements EntityIdFormatter {
 
 		try {
 			$term = $this->labelLookup->getLabel( $entityId );
-		} catch ( LabelDescriptionLookupException $ex ) {
+		} catch ( LabelDescriptionLookupException ) {
 		}
 
 		// TODO: Add language fallback indicator

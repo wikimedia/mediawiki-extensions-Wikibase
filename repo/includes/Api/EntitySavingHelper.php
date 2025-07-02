@@ -275,7 +275,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		try {
 			$entity = $this->entityFactory->newEmpty( $entityType );
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			$this->errorReporter->dieError(
 				"No such entity type: '$entityType'",
 				'no-such-entity-type'

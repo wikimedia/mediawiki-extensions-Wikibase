@@ -55,7 +55,7 @@ class RemovePropertyDescription {
 
 		try {
 			$description = $property->getDescriptions()->getByLanguage( $languageCode );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			throw UseCaseError::newResourceNotFound( 'description' );
 		}
 

@@ -240,7 +240,7 @@ class SiteLinkDiffView implements DiffView {
 	private function getBadgeLinkElement( string $idString ): string {
 		try {
 			$itemId = new ItemId( $idString );
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			return htmlspecialchars( $idString );
 		}
 

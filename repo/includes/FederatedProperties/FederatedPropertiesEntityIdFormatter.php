@@ -28,7 +28,7 @@ class FederatedPropertiesEntityIdFormatter implements EntityIdFormatter {
 	public function formatEntityId( EntityId $entityId ) {
 		try {
 			return $this->innerFormatter->formatEntityId( $entityId );
-		} catch ( ApiRequestExecutionException $e ) {
+		} catch ( ApiRequestExecutionException ) {
 			return $entityId->getSerialization();
 		}
 	}

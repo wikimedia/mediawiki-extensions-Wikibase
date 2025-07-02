@@ -622,7 +622,7 @@ class MediaWikiEditEntity implements EditEntity {
 			}
 
 			$this->errorType |= EditEntity::SAVE_ERROR;
-		} catch ( EntityContentTooBigException $ex ) {
+		} catch ( EntityContentTooBigException ) {
 			$this->status->setErrorFlags( $this->errorType );
 			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
 			return $this->status;
@@ -646,7 +646,7 @@ class MediaWikiEditEntity implements EditEntity {
 	private function checkEditFilter( EntityDocument $newEntity, string $summary ): void {
 		try {
 			$hookStatus = $this->editFilterHookRunner->run( $newEntity, $this->context, $summary );
-		} catch ( EntityContentTooBigException $ex ) {
+		} catch ( EntityContentTooBigException ) {
 			$this->status->error( wfMessage( 'wikibase-error-entity-too-big' )->sizeParams( $this->maxSerializedEntitySize * 1024 ) );
 			return;
 		}

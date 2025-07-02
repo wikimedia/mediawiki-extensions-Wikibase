@@ -166,7 +166,7 @@ class ExternalChangeFactory {
 	private function extractEntityId( $prefixedId ) {
 		try {
 			return $this->idParser->parse( $prefixedId );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new UnexpectedValueException( 'Invalid $entityId found for change.' );
 		}
 	}

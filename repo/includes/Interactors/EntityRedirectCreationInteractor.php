@@ -125,6 +125,9 @@ abstract class EntityRedirectCreationInteractor {
 		}
 	}
 
+	/**
+	 * @throws RedirectCreationException
+	 */
 	private function checkRateLimits( IContextSource $context ): void {
 		if ( $context->getUser()->pingLimiter( 'edit' ) ) {
 			// use generic 'failed-save' because RedirectCreationException prepends 'wikibase-redirect-' for the message key,
@@ -159,7 +162,7 @@ abstract class EntityRedirectCreationInteractor {
 				$this->assertEntityIsRedirectable( $revision->getEntity() );
 			}
 
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( RevisionedUnresolvedRedirectException ) {
 			// Nothing to do. It's ok to override a redirect with a redirect.
 		} catch ( StorageException $ex ) {
 			throw new RedirectCreationException( $ex->getMessage(), 'cant-load-entity-content', [], $ex );
@@ -210,6 +213,9 @@ abstract class EntityRedirectCreationInteractor {
 		}
 	}
 
+	/**
+	 * @throws RedirectCreationException
+	 */
 	private function checkSourceAndTargetNotTheSame( EntityId $fromId, EntityId $toId ): void {
 		if ( $fromId->getSerialization() === $toId->getSerialization() ) {
 			throw new RedirectCreationException(

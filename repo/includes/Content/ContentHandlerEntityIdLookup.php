@@ -43,9 +43,9 @@ class ContentHandlerEntityIdLookup implements EntityIdLookup {
 		try {
 			$handler = $this->entityContentFactory->getEntityHandlerForContentModel( $contentModel );
 			return $handler->getIdForTitle( $title );
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			// Not an entity content model
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			// Not a valid entity page title.
 		}

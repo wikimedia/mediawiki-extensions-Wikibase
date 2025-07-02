@@ -55,7 +55,7 @@ class RemoveItemDescription {
 		$item = $this->itemRetriever->getItemWriteModel( $itemId );
 		try {
 			$description = $item->getDescriptions()->getByLanguage( $languageCode );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			throw UseCaseError::newResourceNotFound( 'description' );
 		}
 		$item->getDescriptions()->removeByLanguage( $languageCode );

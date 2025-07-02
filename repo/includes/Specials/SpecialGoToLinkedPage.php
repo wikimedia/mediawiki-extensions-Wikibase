@@ -167,9 +167,9 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 			}
 
 			$this->errorMessageKey = 'item-not-found';
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			$this->errorMessageKey = 'item-id-invalid';
-		} catch ( EntityLookupException $e ) {
+		} catch ( EntityLookupException ) {
 			$this->errorMessageKey = 'item-not-found';
 		}
 

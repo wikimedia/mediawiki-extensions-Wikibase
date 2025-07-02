@@ -315,7 +315,7 @@ class LanguageFallbackChainFactory {
 			foreach ( $languageCodes as $languageCode ) {
 				try {
 					$validCodes[] = LanguageWithConversion::validateLanguageCode( $languageCode );
-				} catch ( InvalidArgumentException $e ) {
+				} catch ( InvalidArgumentException ) {
 					continue;
 				}
 			}

@@ -83,7 +83,7 @@ class StatementEntityReferenceExtractor implements EntityReferenceExtractor {
 		try {
 			$entityId = $this->quantityUnitEntityIdUriParser->parse( $uri );
 			$this->entityIds[$entityId->getSerialization()] = $entityId;
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			// noop
 		}
 	}

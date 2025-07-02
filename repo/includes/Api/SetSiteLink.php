@@ -216,7 +216,7 @@ class SetSiteLink extends ModifyEntity {
 		$item = $entity;
 		try {
 			$siteLink = $item->getSiteLinkList()->getBySiteId( $linksite );
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			$this->errorReporter->dieWithError(
 				[ 'wikibase-validator-no-such-sitelink', $linksite ],
 				'no-such-sitelink'

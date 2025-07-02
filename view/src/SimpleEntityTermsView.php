@@ -110,7 +110,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		if ( $entityId !== null ) {
 			try {
 				$description = $this->labelDescriptionLookup->getDescription( $entityId );
-			} catch ( LabelDescriptionLookupException $e ) {
+			} catch ( LabelDescriptionLookupException ) {
 				// This masks the differences between missing entities, missing terms and lookup errors.
 			}
 		}
@@ -186,7 +186,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 			$label = null;
 			try {
 				$label = $this->labelDescriptionLookup->getLabel( $entityId );
-			} catch ( LabelDescriptionLookupException $e ) {
+			} catch ( LabelDescriptionLookupException ) {
 				// This masks the differences between missing entities, missing terms and lookup errors.
 			}
 			if ( $label !== null ) {

@@ -110,7 +110,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 			try {
 				$entityId = $this->idParser->parse( $candidate );
 				break;
-			} catch ( EntityIdParsingException $ex ) {
+			} catch ( EntityIdParsingException ) {
 				continue;
 			}
 		}

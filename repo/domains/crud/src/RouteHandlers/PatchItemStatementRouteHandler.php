@@ -111,7 +111,7 @@ class PatchItemStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
-		} catch ( ItemRedirect $e ) {
+		} catch ( ItemRedirect ) {
 			return $this->responseFactory
 				->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 		}

@@ -84,7 +84,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 			}
 
 			return $id;
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
 				[ $rawId ],

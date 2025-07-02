@@ -44,7 +44,7 @@ class TermLookupEntityTermsRetriever implements
 	public function getLabel( EntityId $entityId, string $languageCode ): ?Label {
 		try {
 			$labelText = $this->termLookup->getLabel( $entityId, $languageCode );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
@@ -55,7 +55,7 @@ class TermLookupEntityTermsRetriever implements
 	public function getLabels( EntityId $entityId ): ?Labels {
 		try {
 			$labels = $this->termLookup->getLabels( $entityId, $this->termLanguages->getLanguages() );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
@@ -70,7 +70,7 @@ class TermLookupEntityTermsRetriever implements
 	public function getDescription( EntityId $entityId, string $languageCode ): ?Description {
 		try {
 			$descriptionText = $this->termLookup->getDescription( $entityId, $languageCode );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
@@ -80,7 +80,7 @@ class TermLookupEntityTermsRetriever implements
 	public function getDescriptions( EntityId $entityId ): ?Descriptions {
 		try {
 			$descriptions = $this->termLookup->getDescriptions( $entityId, $this->termLanguages->getLanguages() );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}

@@ -78,7 +78,7 @@ class SitelinkDeserializer {
 		foreach ( $serialization[ 'badges' ] as $badge ) {
 			try {
 				$badgeItemId = new ItemId( $badge );
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				throw new InvalidSitelinkBadgeException( $badge );
 			}
 			if ( !in_array( (string)$badgeItemId, $this->allowedBadgeItemIds ) ||

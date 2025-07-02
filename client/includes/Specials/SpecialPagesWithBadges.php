@@ -92,7 +92,7 @@ class SpecialPagesWithBadges extends QueryPage {
 
 		try {
 			$this->badgeId = new ItemId( $badge );
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			if ( $badge ) {
 				$this->getOutput()->addHTML(
 					Html::element(

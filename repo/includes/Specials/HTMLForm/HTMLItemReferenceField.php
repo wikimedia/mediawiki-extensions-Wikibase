@@ -60,7 +60,7 @@ class HTMLItemReferenceField extends HTMLTextField {
 
 		try {
 			$itemId = new ItemId( $value );
-		} catch ( \InvalidArgumentException $e ) {
+		} catch ( \InvalidArgumentException ) {
 			return $this->msg( 'wikibase-item-reference-edit-invalid-format' );
 		}
 

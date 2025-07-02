@@ -127,11 +127,11 @@ class SnakHtmlGenerator {
 	private function getFormattedSnakValue( Snak $snak ) {
 		try {
 			$formattedSnak = $this->snakFormatter->formatSnak( $snak );
-		} catch ( FormattingException $ex ) {
+		} catch ( FormattingException ) {
 			return $this->getInvalidSnakMessage();
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return $this->getPropertyNotFoundMessage();
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			return $this->getInvalidSnakMessage();
 		}
 

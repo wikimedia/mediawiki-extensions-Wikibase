@@ -67,7 +67,7 @@ class ValuesFinder {
 	private function isMatchingDataType( PropertyId $propertyId, $dataType ) {
 		try {
 			return $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId ) === $dataType;
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return false;
 		}
 	}

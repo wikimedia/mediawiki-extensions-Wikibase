@@ -119,7 +119,7 @@ class RdfDumpGenerator extends DumpGenerator {
 				$entityRevision->getEntity()
 			);
 
-		} catch ( MWContentSerializationException $ex ) {
+		} catch ( MWContentSerializationException ) {
 			throw new StorageException( 'Deserialization error for ' . $entityId->getSerialization() );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {
 			if ( $e->getRevisionId() > 0 ) {

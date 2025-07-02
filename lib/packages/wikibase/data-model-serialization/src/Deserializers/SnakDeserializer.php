@@ -168,7 +168,7 @@ class SnakDeserializer implements DispatchableDeserializer {
 	private function deserializePropertyId( string $serialization ): PropertyId {
 		try {
 			$id = $this->propertyIdParser->parse( $serialization );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new InvalidAttributeException(
 				'property',
 				$serialization,

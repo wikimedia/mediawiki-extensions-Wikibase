@@ -36,7 +36,7 @@ class PropertyDataTypeMatcher {
 	public function isMatchingDataType( PropertyId $propertyId, $dataType ) {
 		try {
 			return $this->findDataTypeIdForProperty( $propertyId ) === $dataType;
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return false;
 		}
 	}

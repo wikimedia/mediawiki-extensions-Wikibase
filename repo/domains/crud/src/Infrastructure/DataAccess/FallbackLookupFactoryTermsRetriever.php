@@ -39,7 +39,7 @@ class FallbackLookupFactoryTermsRetriever implements
 			$labelFallback = $this->lookupFactory
 				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
 				->getLabel( $entityId );
-		} catch ( LabelDescriptionLookupException $e ) {
+		} catch ( LabelDescriptionLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}
@@ -54,7 +54,7 @@ class FallbackLookupFactoryTermsRetriever implements
 			$descriptionFallback = $this->lookupFactory
 				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
 				->getDescription( $entityId );
-		} catch ( LabelDescriptionLookupException $e ) {
+		} catch ( LabelDescriptionLookupException ) {
 			// this probably means that the entity does not exist, which should be checked prior to calling this method
 			return null;
 		}

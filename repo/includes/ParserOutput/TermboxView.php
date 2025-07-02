@@ -109,7 +109,7 @@ class TermboxView implements CacheableEntityTermsView {
 				),
 				$this->fallbackChainFactory->newFromLanguageCode( $mainLanguageCode )
 			);
-		} catch ( TermboxRenderingException $exception ) {
+		} catch ( TermboxRenderingException ) {
 			return ViewPlaceHolderEmitter::ERRONEOUS_PLACEHOLDER_VALUE;
 		}
 	}

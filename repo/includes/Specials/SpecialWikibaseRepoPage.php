@@ -124,7 +124,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 
 		try {
 			$id = $idParser->parse( $rawId );
-		} catch ( RuntimeException $ex ) {
+		} catch ( RuntimeException ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-invalid-id',
 				[ $rawId ],

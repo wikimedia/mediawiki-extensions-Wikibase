@@ -97,7 +97,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 			if ( $previousRow !== null && $row->eu_page_id !== $previousRow->eu_page_id ) {
 				// finish previous entry: Let's add the data and check if it needs continuation
-				$fit = $this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
+				$fit = $this->formatPageData( $previousRow, $entry, $result );
 				if ( !$fit ) {
 					$this->setContinueFromRow( $row );
 					break;
@@ -115,7 +115,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		}
 		if ( $entry ) {
-			$this->formatPageData( $previousRow, intval( $previousRow->eu_page_id ), $entry, $result );
+			$this->formatPageData( $previousRow, $entry, $result );
 		}
 	}
 
@@ -136,7 +136,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 */
 	private function formatPageData(
 		object $row,
-		int $pageId,
 		array $entry,
 		ApiResult $result
 	): bool {

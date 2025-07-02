@@ -163,7 +163,7 @@ class SetClaim extends ApiBase {
 	public function execute(): void {
 		try {
 			$this->executeInternal();
-		} catch ( FederatedPropertiesException $ex ) {
+		} catch ( FederatedPropertiesException ) {
 			$this->errorReporter->dieWithError(
 				'wikibase-federated-properties-save-api-error-message',
 				'failed-save'

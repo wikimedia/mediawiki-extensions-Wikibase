@@ -49,7 +49,7 @@ class EntityUriValidator implements ValueValidator {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdPart );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return Result::newError( [ Error::newError(
 				'Malformed ID',
 				null,

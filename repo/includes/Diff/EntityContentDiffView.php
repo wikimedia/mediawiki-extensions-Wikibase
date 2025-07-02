@@ -105,7 +105,7 @@ class EntityContentDiffView extends DifferenceEngine {
 
 		try {
 			$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
-		} catch ( FederatedPropertiesError $ex ) {
+		} catch ( FederatedPropertiesError ) {
 			$parserOutput = false;
 		}
 

@@ -88,7 +88,7 @@ class ChangesListLinesHandler implements
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
-			} catch ( UnexpectedValueException $e ) {
+			} catch ( UnexpectedValueException ) {
 				return;
 			}
 
@@ -124,7 +124,7 @@ class ChangesListLinesHandler implements
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
-			} catch ( UnexpectedValueException $e ) {
+			} catch ( UnexpectedValueException ) {
 				return;
 			}
 
@@ -159,7 +159,7 @@ class ChangesListLinesHandler implements
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
-			} catch ( UnexpectedValueException $e ) {
+			} catch ( UnexpectedValueException ) {
 				return;
 			}
 

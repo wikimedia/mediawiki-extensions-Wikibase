@@ -58,7 +58,7 @@ abstract class DatabaseTermStoreWriterBase {
 		try {
 			$termInLangIdsToClean = $this->deleteTermsWithoutClean( $entityId );
 			$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
-		} catch ( DBReadOnlyError $e ) {
+		} catch ( DBReadOnlyError ) {
 			// The terms DB may be different from the repo wiki's main DB, and an external DB's read-only state is not handled as
 			// gracefully. There is nothing to do here, though. The secondary terms storage will fix itself eventually.
 		}
@@ -68,7 +68,7 @@ abstract class DatabaseTermStoreWriterBase {
 		try {
 			$termInLangIdsToClean = $this->acquireAndInsertTerms( $entityId, $fingerprint );
 			$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
-		} catch ( DBReadOnlyError $e ) {
+		} catch ( DBReadOnlyError ) {
 			// The terms DB may be different from the repo wiki's main DB, and an external DB's read-only state is not handled as
 			// gracefully. There is nothing to do here, though. The secondary terms storage will fix itself eventually.
 		}
@@ -136,7 +136,6 @@ abstract class DatabaseTermStoreWriterBase {
 		$this->termInLangIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
 			function ( array $newTermInLangIds ) use (
-				$entityId,
 				$oldTermInLangIds,
 				&$termInLangIdsToClean,
 				$fname,

@@ -101,16 +101,12 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newErrorResponseFromException( $e );
-		} catch ( ItemRedirect $e ) {
-			return $this->respondStatementNotFound( $statementId );
+		} catch ( ItemRedirect ) {
+			return $this->responseFactory
+				->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 		}
 
 		return $this->newSuccessHttpResponse();
-	}
-
-	private function respondStatementNotFound( string $statementId ): Response {
-		return $this->responseFactory
-			->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 	}
 
 	public function validate( Validator $restValidator ): void {

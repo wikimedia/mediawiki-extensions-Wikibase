@@ -198,7 +198,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 
 		try {
 			return $this->entityIdParser->parse( $prefixedId );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			return null;
 		}
 	}

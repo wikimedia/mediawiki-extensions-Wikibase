@@ -55,7 +55,7 @@ class PropertyIdResolver {
 			if ( !$this->entityLookup->hasEntity( $propertyId ) ) {
 				throw new PropertyLabelNotResolvedException( $propertyLabelOrId, $languageCode );
 			}
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			$propertyId = $this->findPropertyByLabel( $propertyLabelOrId, $languageCode );
 		}
 

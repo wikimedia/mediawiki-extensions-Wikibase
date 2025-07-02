@@ -54,7 +54,7 @@ class RemovePropertyLabel {
 
 		try {
 			$label = $property->getLabels()->getByLanguage( $languageCode );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			throw UseCaseError::newResourceNotFound( 'label' );
 		}
 

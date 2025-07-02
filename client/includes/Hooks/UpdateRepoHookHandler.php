@@ -133,10 +133,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, PageDeleteCompleteH
 	/**
 	 * Push the $updateRepo to the job queue if applicable.
 	 */
-	private function applyUpdateRepo(
-		UpdateRepo $updateRepo,
-		LinkTarget $title
-	): void {
+	private function applyUpdateRepo( UpdateRepo $updateRepo ): void {
 		if ( !$updateRepo->isApplicable() ) {
 			return;
 		}
@@ -197,7 +194,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, PageDeleteCompleteH
 
 		$updateRepo = $this->makeDelete( $deleter->getUser(), $title );
 
-		$this->applyUpdateRepo( $updateRepo, $title );
+		$this->applyUpdateRepo( $updateRepo );
 
 		return true;
 	}
@@ -244,7 +241,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, PageDeleteCompleteH
 			}
 		}
 
-		$this->applyUpdateRepo( $updateRepo, $newLinkTarget );
+		$this->applyUpdateRepo( $updateRepo );
 
 		return true;
 	}

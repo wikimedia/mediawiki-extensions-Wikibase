@@ -77,7 +77,7 @@ class VocabularyUriFormatter implements ValueFormatter {
 				// TODO: Ideally we would show unit *symbols*, taking from a config file,
 				// a system message, or a statement on the unit's item.
 				$term = $this->labelLookup->getLabel( $entityId );
-			} catch ( LabelDescriptionLookupException $ex ) {
+			} catch ( LabelDescriptionLookupException ) {
 				$term = null;
 			}
 
@@ -87,7 +87,7 @@ class VocabularyUriFormatter implements ValueFormatter {
 				// Fall back to the entity ID.
 				return $entityId->getSerialization();
 			}
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			// Fall back to the raw concept URI.
 			return $conceptUri;
 		}

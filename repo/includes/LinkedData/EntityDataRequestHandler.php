@@ -227,7 +227,7 @@ class EntityDataRequestHandler {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new HttpError( 400, $output->msg( 'wikibase-entitydata-bad-id', $id ) );
 		}
 

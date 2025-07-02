@@ -46,7 +46,7 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 			$unusedTermInLangIds = $this->findActuallyUnusedTermInLangIds( $termInLangIds, $dbw );
 			$this->innerCleaner->cleanTermInLangIds( $dbw, $dbr, $unusedTermInLangIds );
 			$dbw->endAtomic( __METHOD__ );
-		} catch ( DBReadOnlyError $error ) {
+		} catch ( DBReadOnlyError ) {
 			// The terms DB may be different from the repo wiki's main DB, and an external DB's read-only state is not handled as
 			// gracefully. There is nothing to do here, though. The secondary terms storage will fix itself eventually.
 		}

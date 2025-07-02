@@ -66,7 +66,7 @@ class MwTimeIsoFormatter implements ValueFormatter {
 
 		try {
 			return $this->getLocalizedDate( $isoTimestamp, $timeValue->getPrecision() );
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			return $isoTimestamp;
 		}
 	}

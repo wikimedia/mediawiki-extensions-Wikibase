@@ -81,7 +81,7 @@ class UsageTrackingSnakFormatter implements SnakFormatter {
 				$unit = $value->getUnit();
 				try {
 					$entityId = $this->repoItemUriParser->parse( $unit );
-				} catch ( EntityIdParsingException $e ) {
+				} catch ( EntityIdParsingException ) {
 					$entityId = null;
 				}
 				if ( $entityId ) {

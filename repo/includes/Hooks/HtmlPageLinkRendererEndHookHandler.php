@@ -201,7 +201,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 		try {
 			return $this->internalDoHtmlPageLinkRendererEnd( $linkRenderer, $target, $text, $customAttribs, $context, $html );
-		} catch ( FederatedPropertiesException $ex ) {
+		} catch ( FederatedPropertiesException ) {
 			$this->federatedPropsDegradedDoHtmlPageLinkRendererEnd( $target, $text, $customAttribs );
 
 			return true;
@@ -306,7 +306,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		try {
 			$label = $labelDescriptionLookup->getLabel( $entityId );
 			$description = $labelDescriptionLookup->getDescription( $entityId );
-		} catch ( LabelDescriptionLookupException $ex ) {
+		} catch ( LabelDescriptionLookupException ) {
 			return true;
 		}
 
@@ -378,7 +378,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		if ( $foreignId !== null ) {
 			try {
 				return $this->entityIdParser->parse( $foreignId );
-			} catch ( EntityIdParsingException $ex ) {
+			} catch ( EntityIdParsingException ) {
 			}
 		}
 

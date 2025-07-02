@@ -52,16 +52,16 @@ class WikibaseLanguageDependentLuaBindings {
 	public function getLabel( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return [ null, null ];
 		}
 
 		try {
 			$term = $this->labelDescriptionLookup->getLabel( $entityId );
-		} catch ( StorageException $ex ) {
+		} catch ( StorageException ) {
 			// TODO: verify this catch is still needed
 			return [ null, null ];
-		} catch ( LabelDescriptionLookupException $ex ) {
+		} catch ( LabelDescriptionLookupException ) {
 			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			return [ null, null ];
 		}
@@ -83,16 +83,16 @@ class WikibaseLanguageDependentLuaBindings {
 	public function getDescription( $prefixedEntityId ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return [ null, null ];
 		}
 
 		try {
 			$term = $this->labelDescriptionLookup->getDescription( $entityId );
-		} catch ( StorageException $ex ) {
+		} catch ( StorageException ) {
 			// TODO: verify this catch is still needed
 			return [ null, null ];
-		} catch ( LabelDescriptionLookupException $ex ) {
+		} catch ( LabelDescriptionLookupException ) {
 			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			return [ null, null ];
 		}

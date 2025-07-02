@@ -134,7 +134,7 @@ class SnakRdfBuilder {
 		if ( !isset( $this->propertyTypes[$propertyKey] ) ) {
 			try {
 				$this->propertyTypes[$propertyKey] = $this->propertyLookup->getDataTypeIdForProperty( $propertyId );
-			} catch ( PropertyDataTypeLookupException $e ) {
+			} catch ( PropertyDataTypeLookupException ) {
 				$this->propertyTypes[$propertyKey] = "unknown";
 			}
 		}

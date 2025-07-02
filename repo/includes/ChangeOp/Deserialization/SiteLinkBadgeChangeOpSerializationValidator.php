@@ -49,7 +49,7 @@ class SiteLinkBadgeChangeOpSerializationValidator {
 			try {
 				// TODO: this should be rather using EntityIdParser
 				$badgeId = new ItemId( $badgeSerialization );
-			} catch ( InvalidArgumentException $ex ) {
+			} catch ( InvalidArgumentException ) {
 				throw new ChangeOpDeserializationException( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'invalid-entity-id' );
 			}

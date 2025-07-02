@@ -123,7 +123,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 			if ( !( $parsedEntityId instanceof ItemId ) && !( $parsedEntityId instanceof NumericPropertyId ) ) {
 				return;
 			}
-		} catch ( EntityIdParsingException $err ) {
+		} catch ( EntityIdParsingException ) {
 			return;
 		}
 
@@ -135,7 +135,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		try {
 			$labelData = $this->termFallbackToTermData( $this->labelDescriptionLookup->getLabel( $parsedEntityId ) );
 			$descriptionData = $this->termFallbackToTermData( $this->labelDescriptionLookup->getDescription( $parsedEntityId ) );
-		} catch ( LabelDescriptionLookupException $err ) {
+		} catch ( LabelDescriptionLookupException ) {
 			return;
 		}
 

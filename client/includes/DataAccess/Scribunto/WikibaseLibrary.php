@@ -327,7 +327,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 	private function parseUserGivenEntityId( string $idSerialization ): EntityId {
 		try {
 			return $this->getEntityIdParser()->parse( $idSerialization );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $idSerialization ] ]
@@ -394,7 +394,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 		try {
 			$entityArr = $this->getEntityAccessor()->getEntity( $prefixedEntityId );
 			return [ $entityArr ];
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $prefixedEntityId ] ]
@@ -403,7 +403,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit',
 				[ 'args' => [ $ex->getEntityAccessCount(), $ex->getEntityAccessLimit() ] ]
 			);
-		} catch ( Exception $ex ) {
+		} catch ( Exception ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
 	}
@@ -457,7 +457,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 	public function entityExists( string $prefixedEntityId ): array {
 		try {
 			return [ $this->getEntityAccessor()->entityExists( $prefixedEntityId ) ];
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $prefixedEntityId ] ]
@@ -484,12 +484,12 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			throw new ScribuntoException( 'wikibase-error-exceeded-entity-access-limit',
 				[ 'args' => [ $ex->getEntityAccessCount(), $ex->getEntityAccessLimit() ] ]
 			);
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new ScribuntoException(
 				'wikibase-error-invalid-entity-id',
 				[ 'args' => [ $prefixedEntityId ] ]
 			);
-		} catch ( Exception $ex ) {
+		} catch ( Exception ) {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
 		return [ $statements ];
@@ -512,7 +512,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			$url = $this->getRepoLinker()->getEntityUrl(
 				$this->getEntityIdParser()->parse( $entityIdSerialization )
 			);
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			$url = null;
 		}
 
@@ -609,7 +609,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
 				)->renderSnak( $snakSerialization ),
 			];
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
 	}
@@ -627,7 +627,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 				)->renderSnak( $snakSerialization ),
 			];
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
 	}
@@ -647,7 +647,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
 				)->renderSnaks( $snaksSerialization ),
 			];
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
 	}
@@ -667,7 +667,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 				)->renderSnaks( $snaksSerialization ),
 			];
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
 	}
@@ -685,7 +685,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			);
 			$ret = [ $propertyId->getSerialization() ];
 			return $ret;
-		} catch ( PropertyLabelNotResolvedException $e ) {
+		} catch ( PropertyLabelNotResolvedException ) {
 			return [ null ];
 		}
 	}
@@ -746,7 +746,7 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			$entityId = $this->getEntityIdParser()->parse( $prefixedEntityId );
 			$type = $entityId->getEntityType();
 			$moduleName = $this->getLuaEntityModules()[$type] ?? 'mw.wikibase.entity';
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			$moduleName = 'mw.wikibase.entity';
 		}
 		return [ $moduleName ];

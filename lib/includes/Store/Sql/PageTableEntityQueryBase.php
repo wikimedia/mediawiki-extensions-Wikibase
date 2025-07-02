@@ -98,7 +98,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 			if ( $slotRole !== SlotRecord::MAIN ) {
 				try {
 					$slotRoleId = $this->slotRoleStore->getId( $slotRole );
-				} catch ( NameTableAccessException $e ) {
+				} catch ( NameTableAccessException ) {
 					// The slot role is not yet saved, nothing to retrieve.
 					continue;
 				}

@@ -78,7 +78,7 @@ class StatementReadModelConverter {
 	private function convertSnakToPropertyValuePair( Snak $snak ): PropertyValuePair {
 		try {
 			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-		} catch ( PropertyDataTypeLookupException $e ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			$dataType = null;
 		}
 

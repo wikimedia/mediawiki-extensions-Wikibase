@@ -133,7 +133,7 @@ class FormatSnakValue extends ApiBase {
 			$value = $this->decodeDataValue( $params );
 			$dataTypeId = $this->getDataTypeId( $params );
 			$formattedValue = $this->formatValue( $params, $value, $dataTypeId );
-		} catch ( FederatedPropertiesException $ex ) {
+		} catch ( FederatedPropertiesException ) {
 			$this->errorReporter->dieException(
 				new FederatedPropertiesException(
 					$this->msg( 'wikibase-federated-properties-failed-request-api-error-message' )->text()
@@ -339,7 +339,7 @@ class FormatSnakValue extends ApiBase {
 	private function lookUpPropertyDataType( string $id ): ?string {
 		try {
 			return $this->dataTypeLookup->getDataTypeIdForProperty( $this->parsePropertyId( $id ) );
-		} catch ( PropertyDataTypeLookupException $e ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return null; // property not found will be handled by the snak formatter later
 		}
 	}

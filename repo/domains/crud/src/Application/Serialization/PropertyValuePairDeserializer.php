@@ -47,7 +47,7 @@ class PropertyValuePairDeserializer {
 
 		try {
 			$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			throw new PropertyNotFoundException( $serialization['property']['id'], "$basePath/property/id" );
 		}
 
@@ -83,7 +83,7 @@ class PropertyValuePairDeserializer {
 	private function parsePropertyId( string $id, string $basePath ): PropertyId {
 		try {
 			$propertyId = $this->entityIdParser->parse( $id );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			throw new InvalidFieldException( 'id', $id, "$basePath/id" );
 		}
 

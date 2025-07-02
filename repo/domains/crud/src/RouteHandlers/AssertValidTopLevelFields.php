@@ -36,7 +36,7 @@ trait AssertValidTopLevelFields {
 	private function assertType( string $type, string $fieldName, $value ): void {
 		try {
 			Assert::parameterType( $type, $value, '$field' );
-		} catch ( InvalidArgumentException $exception ) {
+		} catch ( InvalidArgumentException ) {
 			throw $this->convertUseCaseErrorToHttpException( UseCaseError::newInvalidValue( "/$fieldName" ) );
 		}
 	}

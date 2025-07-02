@@ -275,7 +275,7 @@ class ItemHandler extends EntityHandler {
 				try {
 					$this->isExternalIdByPropertyId[$propertyIdSerialization] =
 						$this->dataTypeLookup->getDataTypeIdForProperty( $propertyId ) === 'external-id';
-				} catch ( PropertyDataTypeLookupException $e ) {
+				} catch ( PropertyDataTypeLookupException ) {
 					$this->isExternalIdByPropertyId[$propertyIdSerialization] = false;
 					continue;
 				}

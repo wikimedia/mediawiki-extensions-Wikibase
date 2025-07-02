@@ -241,7 +241,7 @@ class ClientParserOutputDataUpdater {
 				 * because it is already tracked by {@link ImplicitDescriptionUsageLookup}
 				 */
 				$description = $this->termLookup->getDescription( $itemId, $langCode );
-			} catch ( TermLookupException $exception ) {
+			} catch ( TermLookupException ) {
 				$description = '';
 			}
 			$parserOutputProvider->getParserOutput()->setExtensionData(

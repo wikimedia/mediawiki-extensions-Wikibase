@@ -77,7 +77,7 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 			$out->addModules( 'wikibase.client.miscStyles' );
 		}
 
-		$pageMoveNoticeHtml = $this->getPageMoveNoticeHtml( $oldTitle, $newTitle );
+		$pageMoveNoticeHtml = $this->getPageMoveNoticeHtml( $oldTitle );
 		if ( $pageMoveNoticeHtml ) {
 			$out->addHTML( $pageMoveNoticeHtml );
 		}
@@ -102,9 +102,8 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 
 	/**
 	 * @param Title $oldTitle Title of the page before the move
-	 * @param Title $newTitle Title of the page after the move
 	 */
-	private function getPageMoveNoticeHtml( Title $oldTitle, Title $newTitle ): ?string {
+	private function getPageMoveNoticeHtml( Title $oldTitle ): ?string {
 		$itemLink = $this->getItemUrl( $oldTitle );
 
 		if ( !$itemLink ) {

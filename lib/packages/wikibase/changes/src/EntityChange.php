@@ -200,8 +200,6 @@ class EntityChange extends DiffChange {
 	 * @return array the info array
 	 */
 	protected function unserializeInfo( $serialization ): array {
-		static $factory = null;
-
 		$info = parent::unserializeInfo( $serialization );
 
 		if ( isset( $info[ChangeRow::COMPACT_DIFF] ) && is_string( $info[ChangeRow::COMPACT_DIFF] ) ) {

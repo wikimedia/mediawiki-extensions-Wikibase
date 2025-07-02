@@ -76,7 +76,7 @@ class NotEntityIdValidator implements ValueValidator {
 				);
 				$result = Result::newError( [ $error ] );
 			}
-		} catch ( EntityIdParsingException $parseException ) {
+		} catch ( EntityIdParsingException ) {
 			// All fine, the parsing did not work, so there is no entity id :)
 		}
 

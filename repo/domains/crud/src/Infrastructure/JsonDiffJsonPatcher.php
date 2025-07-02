@@ -22,7 +22,7 @@ class JsonDiffJsonPatcher implements JsonPatcher {
 	public function patch( array $target, array $patch ) {
 		try {
 			$patchDocument = JsonPatch::import( $patch );
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			throw new InvalidArgumentException( 'Invalid patch' );
 		}
 

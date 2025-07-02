@@ -134,7 +134,7 @@ class Runner {
 	private function getEntityIdFromString( Parser $parser, $entityIdString ) {
 		try {
 			$entityId = $this->entityIdParser->parse( $entityIdString );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			// Just ignore this
 			return null;
 		}

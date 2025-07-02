@@ -89,7 +89,7 @@ class DispatchingEntityTypeStatementGrouper implements StatementGrouper {
 		}
 		try {
 			$guid = $this->guidParser->parse( $statementGuid );
-		} catch ( StatementGuidParsingException $ex ) {
+		} catch ( StatementGuidParsingException ) {
 			// FIXME: Fail when there is a statement with no GUID?
 			return null;
 		}

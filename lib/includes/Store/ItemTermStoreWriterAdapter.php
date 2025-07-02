@@ -31,7 +31,7 @@ class ItemTermStoreWriterAdapter implements EntityTermStoreWriter {
 			try {
 				$this->store->storeTerms( $entity->getId(), $entity->getFingerprint() );
 				return true;
-			} catch ( TermStoreException $ex ) {
+			} catch ( TermStoreException ) {
 				return false;
 			}
 		}
@@ -44,7 +44,7 @@ class ItemTermStoreWriterAdapter implements EntityTermStoreWriter {
 			try {
 				$this->store->deleteTerms( $entityId );
 				return true;
-			} catch ( TermStoreException $ex ) {
+			} catch ( TermStoreException ) {
 				return false;
 			}
 		}

@@ -69,7 +69,7 @@ class SpecialEntityPage extends SpecialWikibasePage {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $id );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			throw new HttpError( 400, $this->msg( 'wikibase-entitypage-bad-id', $id ) );
 		}
 

@@ -29,9 +29,9 @@ trait UpdateExceptionHandler {
 			);
 		} catch ( EditPrevented $e ) {
 			throw UseCaseError::newPermissionDenied( $e->getReason(), $e->getContext() );
-		} catch ( RateLimitReached $e ) {
+		} catch ( RateLimitReached ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_RATE_LIMIT );
-		} catch ( TempAccountCreationLimitReached $e ) {
+		} catch ( TempAccountCreationLimitReached ) {
 			throw UseCaseError::newRateLimitReached( UseCaseError::REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT );
 		}
 	}

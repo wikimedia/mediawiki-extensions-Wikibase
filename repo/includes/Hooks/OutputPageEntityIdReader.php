@@ -48,7 +48,7 @@ class OutputPageEntityIdReader {
 
 			try {
 				return $this->entityIdParser->parse( $idString );
-			} catch ( EntityIdParsingException $ex ) {
+			} catch ( EntityIdParsingException ) {
 				wfLogWarning( 'Failed to parse EntityId config var: ' . $idString );
 			}
 		}

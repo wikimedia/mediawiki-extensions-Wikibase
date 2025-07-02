@@ -33,7 +33,7 @@ class JsonDiffJsonPatchValidator implements JsonPatchValidator {
 				self::CODE_INVALID_OPERATION,
 				[ self::CONTEXT_OPERATION => (array)$e->getOperation() ]
 			);
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			return new ValidationError( self::CODE_INVALID );
 		}
 

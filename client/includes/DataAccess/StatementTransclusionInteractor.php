@@ -81,7 +81,7 @@ class StatementTransclusionInteractor {
 	) {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			// Continue as if nothing happened (for usage tracking purposes).
 			$entity = null;
 		}

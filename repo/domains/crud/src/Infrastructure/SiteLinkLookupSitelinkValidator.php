@@ -70,7 +70,7 @@ class SiteLinkLookupSitelinkValidator implements SitelinkValidator {
 				self::CODE_BADGE_NOT_ALLOWED,
 				[ self::CONTEXT_VALUE => $e->getBadge(), self::CONTEXT_SITE_ID => $siteId ]
 			);
-		} catch ( SitelinkTargetNotFound $e ) {
+		} catch ( SitelinkTargetNotFound ) {
 			return new ValidationError( self::CODE_TITLE_NOT_FOUND, [ self::CONTEXT_SITE_ID => $siteId ] );
 		}
 

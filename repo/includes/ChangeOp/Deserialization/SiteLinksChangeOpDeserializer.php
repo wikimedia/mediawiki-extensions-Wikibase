@@ -161,7 +161,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		}
 		try {
 			$siteLink = $entity->getSiteLinkList()->getBySiteId( $linkSite );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			throw new ChangeOpDeserializationException(
 				"The given entity does not have a sitelink to $linkSite",
 				'no-such-sitelink',

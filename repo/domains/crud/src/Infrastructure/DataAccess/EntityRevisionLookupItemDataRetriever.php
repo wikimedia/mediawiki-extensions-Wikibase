@@ -55,7 +55,7 @@ class EntityRevisionLookupItemDataRetriever implements
 	public function getItemWriteModel( ItemId $itemId ): ?ItemWriteModel {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId );
-		} catch ( RevisionedUnresolvedRedirectException $e ) {
+		} catch ( RevisionedUnresolvedRedirectException ) {
 			return null;
 		}
 

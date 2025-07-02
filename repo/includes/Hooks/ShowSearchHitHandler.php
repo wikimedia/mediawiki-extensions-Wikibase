@@ -95,7 +95,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 
 		try {
 			$entity = $this->getEntity( $title );
-		} catch ( UnresolvedEntityRedirectException $exception ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			return;
 		}
 
@@ -228,7 +228,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 		try {
 			$termFallback = new TermFallback( $displayLanguage, HtmlArmor::getHtml( $text['value'] ),
 					$text['language'], null );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			return $text;
 		}
 		$fallback = new LanguageFallbackIndicator(

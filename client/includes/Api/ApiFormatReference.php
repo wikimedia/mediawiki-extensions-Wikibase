@@ -63,7 +63,7 @@ class ApiFormatReference extends ApiBase {
 			$reference = $this->referenceDeserializer->deserialize( $referenceJsonStatus->getValue() );
 			/** @var Reference $reference */
 			'@phan-var Reference $reference';
-		} catch ( DeserializationException $e ) {
+		} catch ( DeserializationException ) {
 			$this->dieWithError( 'wikibase-error-deserialize-error' );
 		}
 

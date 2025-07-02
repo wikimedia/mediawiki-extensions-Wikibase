@@ -51,7 +51,7 @@ class EntityIdLabelFormatter implements EntityIdFormatter {
 	protected function lookupEntityLabel( EntityId $entityId ) {
 		try {
 			return $this->labelLookup->getLabel( $entityId );
-		} catch ( LabelDescriptionLookupException $e ) {
+		} catch ( LabelDescriptionLookupException ) {
 			return null;
 		}
 	}

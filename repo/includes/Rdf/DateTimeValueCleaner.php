@@ -62,7 +62,7 @@ class DateTimeValueCleaner {
 	protected function cleanupGregorianValue( $dateValue, $precision ) {
 		try {
 			[ $minus, $y, $m, $d, $time ] = $this->parseDateValue( $dateValue );
-		} catch ( IllegalValueException $e ) {
+		} catch ( IllegalValueException ) {
 			return null;
 		}
 

@@ -60,7 +60,7 @@ class ChangePropertyDataType extends Maintenance {
 		$newDataType = $this->getOption( 'new-data-type' );
 		try {
 			$propertyId = new NumericPropertyId( $propertyIdSerialization );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			$this->fatalError( "Invalid property id: " . $propertyIdSerialization );
 		}
 

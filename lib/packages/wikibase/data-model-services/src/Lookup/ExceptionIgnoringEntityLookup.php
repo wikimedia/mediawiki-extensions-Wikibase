@@ -33,7 +33,7 @@ class ExceptionIgnoringEntityLookup implements EntityLookup {
 	public function getEntity( EntityId $entityId ) {
 		try {
 			return $this->lookup->getEntity( $entityId );
-		} catch ( EntityLookupException $exception ) {
+		} catch ( EntityLookupException ) {
 			return null;
 		}
 	}

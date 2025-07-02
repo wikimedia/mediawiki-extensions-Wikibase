@@ -181,7 +181,7 @@ class ParseValue extends ApiBase {
 		if ( $name === null && isset( $params['property'] ) ) {
 			try {
 				$propertyId = new NumericPropertyId( $params['property'] );
-			} catch ( InvalidArgumentException $ex ) {
+			} catch ( InvalidArgumentException ) {
 				$this->errorReporter->dieWithError(
 					'wikibase-api-invalid-property-id',
 					'param-illegal'
@@ -189,7 +189,7 @@ class ParseValue extends ApiBase {
 			}
 			try {
 				$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-			} catch ( PropertyDataTypeLookupException $ex ) {
+			} catch ( PropertyDataTypeLookupException ) {
 				$this->errorReporter->dieWithError(
 					'wikibase-api-invalid-property-id', // TODO separate error for valid-but-missing property ID?
 					'param-illegal'
@@ -208,7 +208,7 @@ class ParseValue extends ApiBase {
 		try {
 			$parser = $this->valueParserFactory->newParser( $name, $options );
 			return $parser;
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			$this->errorReporter->dieWithError(
 				'wikibase-api-not-recognized-datatype',
 				'unknown-datatype'

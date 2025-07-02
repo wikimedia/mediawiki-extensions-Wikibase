@@ -91,7 +91,7 @@ class PatchStatement {
 					StatementEditSummary::newPatchSummary( $editMetadata->getComment(), $patchedStatement )
 				)
 			) );
-		} catch ( PropertyChangedException $e ) {
+		} catch ( PropertyChangedException ) {
 			throw UseCaseError::newPatchResultModifiedReadOnlyValue( '/property/id' );
 		}
 

@@ -233,7 +233,7 @@ class EntityUsageTable {
 		foreach ( $rows as $object ) {
 			try {
 				$entityId = $this->idParser->parse( $object->eu_entity_id );
-			} catch ( EntityIdParsingException $e ) {
+			} catch ( EntityIdParsingException ) {
 				continue;
 			}
 

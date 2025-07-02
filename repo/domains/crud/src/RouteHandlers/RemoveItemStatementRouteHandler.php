@@ -102,7 +102,7 @@ class RemoveItemStatementRouteHandler extends SimpleHandler {
 			);
 		} catch ( UseCaseError $exception ) {
 			return $this->responseFactory->newErrorResponseFromException( $exception );
-		} catch ( ItemRedirect $e ) {
+		} catch ( ItemRedirect ) {
 			return $this->responseFactory
 				->newErrorResponseFromException( UseCaseError::newResourceNotFound( 'statement' ) );
 		}

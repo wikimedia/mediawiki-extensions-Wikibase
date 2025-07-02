@@ -109,7 +109,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 					'Entity ID "' . $id->getSerialization() . '" is unknown'
 				);
 			}
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
 				[ $id->getSerialization() ],
@@ -145,7 +145,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 					'Entity ID "' . $id->getSerialization() . '" is unknown'
 				);
 			}
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
 				[ $id->getSerialization() ],

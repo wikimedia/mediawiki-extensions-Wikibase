@@ -90,7 +90,7 @@ class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 	private function parseEntityId( string $id ): ?EntityId {
 		try {
 			return $this->entityIdParser->parse( $id );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return null;
 		}
 	}

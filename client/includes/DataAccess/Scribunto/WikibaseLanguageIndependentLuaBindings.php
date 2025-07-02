@@ -158,7 +158,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		if ( !$entityId ) {
 			try {
 				$normalizedPageTitle = $this->normalizePageTitle( $pageTitle );
-			} catch ( MalformedTitleException $e ) {
+			} catch ( MalformedTitleException ) {
 				return null;
 			}
 
@@ -198,7 +198,7 @@ class WikibaseLanguageIndependentLuaBindings {
 	public function isValidEntityId( $entityIdSerialization ) {
 		try {
 			$this->entityIdParser->parse( $entityIdSerialization );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return false;
 		}
 
@@ -219,14 +219,14 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return null;
 		}
 
 		$this->usageAccumulator->addLabelUsage( $entityId, $languageCode );
 		try {
 			$label = $this->termLookup->getLabel( $entityId, $languageCode );
-		} catch ( TermLookupException $ex ) {
+		} catch ( TermLookupException ) {
 			return null;
 		}
 
@@ -247,7 +247,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		try {
 			$entityId = $this->entityIdParser->parse( $prefixedEntityId );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			return null;
 		}
 
@@ -255,7 +255,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		try {
 			$description = $this->termLookup->getDescription( $entityId, $languageCode );
-		} catch ( TermLookupException $ex ) {
+		} catch ( TermLookupException ) {
 			return null;
 		}
 
@@ -282,7 +282,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		try {
 			$itemId = new ItemId( $prefixedItemId );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			return null;
 		}
 
@@ -318,7 +318,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 		try {
 			$itemId = new ItemId( $prefixedItemId );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			return [];
 		}
 
@@ -364,7 +364,7 @@ class WikibaseLanguageIndependentLuaBindings {
 	public function getReferencedEntityId( EntityId $fromId, PropertyId $propertyId, array $toIds ) {
 		try {
 			$res = $this->referencedEntityIdLookup->getReferencedEntityId( $fromId, $propertyId, $toIds );
-		} catch ( ReferencedEntityIdLookupException $e ) {
+		} catch ( ReferencedEntityIdLookupException ) {
 			return false;
 		}
 

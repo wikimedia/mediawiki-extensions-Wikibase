@@ -70,7 +70,7 @@ class SummaryParsingPrefetchHelper {
 			foreach ( $matches[1] as $idSerialization ) {
 				try {
 					$entityIds[] = $this->entityIdParser->parse( $idSerialization );
-				} catch ( EntityIdParsingException $ex ) {
+				} catch ( EntityIdParsingException ) {
 				}
 			}
 		}

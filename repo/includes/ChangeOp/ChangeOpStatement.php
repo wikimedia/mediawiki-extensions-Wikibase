@@ -131,7 +131,7 @@ class ChangeOpStatement extends ChangeOpBase {
 		}
 		try {
 			$guid = $this->guidParser->parse( $statementGuid );
-		} catch ( StatementGuidParsingException $ex ) {
+		} catch ( StatementGuidParsingException ) {
 			throw new ChangeOpException( 'Statement GUID can not be parsed' );
 		}
 
@@ -206,7 +206,7 @@ class ChangeOpStatement extends ChangeOpBase {
 
 		try {
 			$indexedStatements->addObjectAtIndex( $this->statement, $index );
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			$statements->addStatement( $this->statement );
 			return $statements->toArray();
 		}

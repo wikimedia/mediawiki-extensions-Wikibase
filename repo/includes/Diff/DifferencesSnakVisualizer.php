@@ -85,7 +85,7 @@ class DifferencesSnakVisualizer {
 
 		try {
 			return $this->snakDetailsFormatter->formatSnak( $snak );
-		} catch ( Exception $ex ) {
+		} catch ( Exception ) {
 			// @fixme maybe there is a way we can render something more useful
 			// we are getting multiple types of exceptions and should handle
 			// consistent (and shared code) with what we do in SnakHtmlGenerator.
@@ -138,7 +138,7 @@ class DifferencesSnakVisualizer {
 		try {
 			$after = $this->snakBreadCrumbFormatter->formatSnak( $snak );
 			$result = $this->getColonSeparatedHtml( $before, $after );
-		} catch ( Exception $ex ) {
+		} catch ( Exception ) {
 			// just ignore it
 			$result = $before;
 		}

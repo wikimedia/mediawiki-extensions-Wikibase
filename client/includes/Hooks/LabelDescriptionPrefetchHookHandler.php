@@ -105,7 +105,7 @@ class LabelDescriptionPrefetchHookHandler implements ChangesListInitRowsHook {
 			foreach ( $matches[1] as $match ) {
 				try {
 					$entityIds[] = $this->entityIdParser->parse( $match );
-				} catch ( EntityIdParsingException $ex ) {
+				} catch ( EntityIdParsingException ) {
 				}
 			}
 		}

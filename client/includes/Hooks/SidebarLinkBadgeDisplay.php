@@ -126,7 +126,7 @@ class SidebarLinkBadgeDisplay {
 	private function getLabel( ItemId $badgeId ) {
 		try {
 			$term = $this->labelDescriptionLookup->getLabel( $badgeId );
-		} catch ( LabelDescriptionLookupException $ex ) {
+		} catch ( LabelDescriptionLookupException ) {
 			return null;
 		}
 

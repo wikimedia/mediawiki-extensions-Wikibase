@@ -48,7 +48,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 			}
 		}
 		if ( $firstException !== null ) {
-			throw $firstException;
+			throw $firstException; // @phan-suppress-current-line PhanThrowTypeMismatch
 		}
 	}
 
@@ -62,7 +62,7 @@ class MultiPropertyTermStoreWriter implements PropertyTermStoreWriter {
 			}
 		}
 		if ( $firstException !== null ) {
-			throw $firstException;
+			throw $firstException; // @phan-suppress-current-line PhanThrowTypeMismatch
 		}
 	}
 

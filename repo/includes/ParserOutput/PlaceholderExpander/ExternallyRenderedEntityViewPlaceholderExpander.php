@@ -106,7 +106,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 				),
 				$this->languageFallbackChainFactory->newFromContext( $this->outputPage )
 			);
-		} catch ( TermboxRenderingException $e ) {
+		} catch ( TermboxRenderingException ) {
 			return null;
 		}
 	}

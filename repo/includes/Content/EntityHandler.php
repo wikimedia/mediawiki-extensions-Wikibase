@@ -610,7 +610,7 @@ abstract class EntityHandler extends ContentHandler {
 		try {
 			// apply the patch( new -> old ) to the current revision.
 			$patchedCurrent = $latestContent->getPatchedCopy( $patch );
-		} catch ( PatcherException $ex ) {
+		} catch ( PatcherException ) {
 			return false;
 		}
 

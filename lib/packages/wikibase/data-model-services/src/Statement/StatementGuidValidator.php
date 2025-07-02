@@ -98,7 +98,7 @@ class StatementGuidValidator {
 		try {
 			$this->entityIdParser->parse( $prefixedId );
 			return true;
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			return false;
 		}
 	}

@@ -120,7 +120,7 @@ abstract class SnakObject implements Snak {
 	public function unserialize( $serialized ) {
 		try {
 			$this->propertyId = new NumericPropertyId( $serialized );
-		} catch ( InvalidArgumentException $ex ) {
+		} catch ( InvalidArgumentException ) {
 			// Backwards compatibility with the previous serialization format
 			$this->propertyId = NumericPropertyId::newFromNumber( unserialize( $serialized ) );
 		}

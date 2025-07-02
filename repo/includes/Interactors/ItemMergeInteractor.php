@@ -274,6 +274,9 @@ class ItemMergeInteractor {
 		);
 	}
 
+	/**
+	 * @throws ItemMergeException
+	 */
 	private function saveItem(
 		Item $item,
 		FormatableSummary $summary,

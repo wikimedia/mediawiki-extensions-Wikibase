@@ -17,7 +17,7 @@ class ItemIdRequestValidatingDeserializer {
 	public function validateAndDeserialize( ItemIdRequest $request ): ItemId {
 		try {
 			return new ItemId( $request->getItemId() );
-		} catch ( InvalidArgumentException $e ) {
+		} catch ( InvalidArgumentException ) {
 			throw new UseCaseError(
 				UseCaseError::INVALID_PATH_PARAMETER,
 				"Invalid path parameter: 'item_id'",

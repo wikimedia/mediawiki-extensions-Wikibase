@@ -27,7 +27,7 @@ class TermRetriever {
 			$label = $this->labelDescriptionLookupFactory
 				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
 				->getLabel( $entityId );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist
 			return null;
 		}
@@ -40,7 +40,7 @@ class TermRetriever {
 			$description = $this->labelDescriptionLookupFactory
 				->newLabelDescriptionLookup( $this->languageFactory->getLanguage( $languageCode ) )
 				->getDescription( $entityId );
-		} catch ( TermLookupException $e ) {
+		} catch ( TermLookupException ) {
 			// this probably means that the entity does not exist
 			return null;
 		}

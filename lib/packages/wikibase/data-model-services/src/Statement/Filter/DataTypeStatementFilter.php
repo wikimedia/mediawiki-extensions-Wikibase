@@ -54,7 +54,7 @@ class DataTypeStatementFilter implements StatementFilter {
 
 		try {
 			$dataType = $this->dataTypeLookup->getDataTypeIdForProperty( $id );
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return false;
 		}
 

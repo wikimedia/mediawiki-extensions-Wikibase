@@ -47,7 +47,7 @@ class RemoveTermsInLanguage extends Maintenance {
 
 			try {
 				$entityId = $entityIdParser->parse( $idSerialization );
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				$this->fatalError( "Invalid entity id: " . $idSerialization );
 			}
 

@@ -142,7 +142,7 @@ class EntityAccessor {
 
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;
@@ -177,7 +177,7 @@ class EntityAccessor {
 		$this->usageAccumulator->addOtherUsage( $entityId );
 		try {
 			return $this->entityLookup->hasEntity( $entityId );
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return false;
@@ -202,7 +202,7 @@ class EntityAccessor {
 
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( UnresolvedEntityRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;

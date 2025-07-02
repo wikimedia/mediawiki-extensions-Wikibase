@@ -151,7 +151,7 @@ class SnakValidator implements ValueValidator {
 			} else {
 				$result = Result::newSuccess();
 			}
-		} catch ( PropertyDataTypeLookupException $ex ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			$result = Result::newError( [
 				Error::newError( "Property $propertyId not found!", null, 'no-such-property', [ $propertyId ] ),
 			] );
@@ -171,7 +171,7 @@ class SnakValidator implements ValueValidator {
 	public function validateDataValue( DataValue $dataValue, $dataTypeId ) {
 		try {
 			$dataValueType = $this->dataTypeFactory->getType( $dataTypeId )->getDataValueType();
-		} catch ( OutOfBoundsException $ex ) {
+		} catch ( OutOfBoundsException ) {
 			return Result::newError( [
 				Error::newError(
 					'Bad data type: ' . $dataTypeId,

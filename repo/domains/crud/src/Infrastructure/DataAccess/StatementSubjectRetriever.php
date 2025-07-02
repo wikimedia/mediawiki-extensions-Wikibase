@@ -22,7 +22,7 @@ class StatementSubjectRetriever {
 	public function getStatementSubject( EntityId $subjectId ): ?StatementListProvidingEntity {
 		try {
 			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $subjectId );
-		} catch ( RevisionedUnresolvedRedirectException $e ) {
+		} catch ( RevisionedUnresolvedRedirectException ) {
 			return null;
 		}
 
