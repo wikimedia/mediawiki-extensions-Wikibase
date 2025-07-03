@@ -41,7 +41,10 @@ return [
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getContentModelMappings( $services ),
-			CirrusDebugOptions::fromRequest( RequestContext::getMain()->getRequest() )
+			CirrusDebugOptions::fromRequest( RequestContext::getMain()->getRequest() ),
+			$services->getConfigFactory()
+				->makeConfig( 'WikibaseCirrusSearch' )
+				->get( 'UseStemming' )
 		) );
 	},
 
