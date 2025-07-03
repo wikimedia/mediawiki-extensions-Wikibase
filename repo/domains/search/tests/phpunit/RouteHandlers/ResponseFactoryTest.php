@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Search\RouteHandlers;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\RouteHandlers\ResponseFactory;
@@ -49,4 +50,11 @@ class ResponseFactoryTest extends TestCase {
 		$this->assertSame( $statusCode, $httpResponse->getStatusCode() );
 	}
 
+	public function testGivenErrorCodeNotAssignedStatusCode_throwLogicException(): void {
+		$this->expectException( LogicException::class );
+
+		( new ResponseFactory() )->newUseCaseErrorResponse(
+			new UseCaseError( 'unknown-code', 'should throw a logic exception' )
+		);
+	}
 }
