@@ -18,7 +18,7 @@ function newSearchRequest( language, searchTerm ) {
 		.withQueryParam( 'q', searchTerm );
 }
 
-describe( 'Simple item suggestion', () => {
+describe( 'Item prefix search', () => {
 	const itemEnLabel = utils.title( 'english-label' );
 	let item;
 
