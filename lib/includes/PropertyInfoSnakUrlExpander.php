@@ -3,6 +3,7 @@
 namespace Wikibase\Lib;
 
 use DataValues\StringValue;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikimedia\Assert\Assert;
@@ -61,7 +62,8 @@ class PropertyInfoSnakUrlExpander implements SnakUrlExpander {
 		);
 		$url = str_replace( '$1', $id, $pattern );
 
-		$parsedUrl = wfParseUrl( $url );
+		$urlUtils = MediaWikiServices::getInstance()->getUrlUtils();
+		$parsedUrl = $urlUtils->parse( $url );
 		if ( !$parsedUrl || !array_key_exists( $parsedUrl['scheme'], self::ALLOWED_PROTOCOLS ) ) {
 			return null;
 		}
