@@ -4,6 +4,7 @@
 		mw.log.error( 'scopedTypeaheadSearch could not find element to replace' );
 		return;
 	}
+	const searchInput = document.getElementById( 'searchInput' );
 
 	const Vue = require( 'vue' );
 	const App = require( './ScopedTypeaheadSearch.vue' );
@@ -15,7 +16,7 @@
 	 * loaded and executed on focus.
 	 */
 	mw.log( 'Loading Scoped Typeahead Search...' );
-	Vue.createMwApp( App ).mount( searchContainer );
+	Vue.createMwApp( App, { initialInput: searchInput ? searchInput.value : '' } ).mount( searchContainer );
 	document.querySelector( '#searchform .cdx-text-input__input' ).focus();
 	const animationContainer = document.querySelector(
 		'.vector-search-box .vector-typeahead-search-container .vector-typeahead-search-scope-select'

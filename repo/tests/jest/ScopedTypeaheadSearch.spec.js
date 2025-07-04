@@ -20,6 +20,15 @@ describe( 'ScopedTypeaheadSearch', () => {
 		expect( ScopedTypeaheadSearch ).toHaveProperty( 'name', 'ScopedTypeaheadSearch' );
 	} );
 
+	describe( 'initial input', () => {
+		it( 'correctly populates input field property on load', async () => {
+			const wrapper = await mount( ScopedTypeaheadSearch, { props: { initialInput: 'someValue' } } );
+			expect( wrapper.props( 'initialInput' ) ).toBe( 'someValue' );
+			const typeaheadComponent = wrapper.findComponent( CdxTypeaheadSearch );
+			expect( typeaheadComponent.props( 'initialInputValue' ) ).toBe( 'someValue' );
+		} );
+	} );
+
 	describe( 'the mounted component', () => {
 		const searchResultsWithMatches = {
 			searchinfo: {

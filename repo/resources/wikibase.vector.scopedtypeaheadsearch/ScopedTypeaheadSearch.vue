@@ -16,6 +16,7 @@
 			:highlight-query="true"
 			:visible-item-limit="5"
 			:placeholder="$i18n( 'searchsuggest-search' ).text()"
+			:initial-input-value="initialInput"
 			@input="onInput"
 			@load-more="onLoadMore"
 		>
@@ -52,6 +53,12 @@ const { entityTypesConfig, namespacesConfig } = require( './scopedTypeaheadSearc
 module.exports = exports = defineComponent( {
 	name: 'ScopedTypeaheadSearch',
 	components: { CdxTypeaheadSearch, CdxSelect },
+	props: {
+		initialInput: {
+			type: String,
+			default: ''
+		}
+	},
 	setup() {
 		const api = new mw.Api();
 		const baseUrl = mw.config.get( 'wgScript' );
