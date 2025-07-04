@@ -5,10 +5,8 @@ namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchRequest;
-use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchResponse;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
@@ -60,19 +58,9 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );
 		}
 
-		return $this->newSuccessResponse( $useCaseResponse );
-	}
-
-	private function newSuccessResponse( ItemPrefixSearchResponse $useCaseResponse ): Response {
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setBody(
-			new StringStream(
-				json_encode( [ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ], JSON_UNESCAPED_SLASHES )
-			)
+		return $this->responseFactory->newSuccessResponse(
+			[ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ]
 		);
-
-		return $httpResponse;
 	}
 
 	private function formatResults( ItemSearchResults $results ): array {

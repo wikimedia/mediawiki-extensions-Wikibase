@@ -17,6 +17,16 @@ use Wikibase\Repo\Domains\Search\RouteHandlers\ResponseFactory;
  */
 class ResponseFactoryTest extends TestCase {
 
+	public function testNewSuccessResponse(): void {
+		$httpResponse = ( new ResponseFactory() )->newSuccessResponse( [ 'contents' => 'payload' ] );
+
+		$this->assertJsonStringEqualsJsonString(
+			'{ "contents": "payload" }',
+			$httpResponse->getBody()->getContents()
+		);
+		$this->assertEquals( [ 'application/json' ], $httpResponse->getHeader( 'Content-Type' ) );
+	}
+
 	public function testNewUseCaseErrorResponse(): void {
 		$errorCode = UseCaseError::INVALID_QUERY_PARAMETER;
 		$errorMessage = 'testNewUseCaseErrorResponse error message';

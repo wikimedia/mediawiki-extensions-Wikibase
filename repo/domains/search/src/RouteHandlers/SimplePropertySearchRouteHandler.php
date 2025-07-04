@@ -5,10 +5,8 @@ namespace Wikibase\Repo\Domains\Search\RouteHandlers;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use MediaWiki\Rest\StringStream;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchRequest;
-use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchResponse;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
@@ -60,19 +58,9 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );
 		}
 
-		return $this->newSuccessResponse( $useCaseResponse );
-	}
-
-	private function newSuccessResponse( SimplePropertySearchResponse $useCaseResponse ): Response {
-		$httpResponse = $this->getResponseFactory()->create();
-		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setBody(
-			new StringStream(
-				json_encode( [ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ], JSON_UNESCAPED_SLASHES )
-			)
+		return $this->responseFactory->newSuccessResponse(
+			[ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ]
 		);
-
-		return $httpResponse;
 	}
 
 	private function formatResults( PropertySearchResults $results ): array {

@@ -11,6 +11,18 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
  */
 class ResponseFactory {
 
+	public function newSuccessResponse( array $responseBody ): Response {
+		$httpResponse = new Response();
+		$httpResponse->setHeader( 'Content-Type', 'application/json' );
+		$httpResponse->setBody(
+			new StringStream(
+				json_encode( $responseBody, JSON_UNESCAPED_SLASHES )
+			)
+		);
+
+		return $httpResponse;
+	}
+
 	public function newUseCaseErrorResponse( UseCaseError $e ): Response {
 		return $this->newErrorResponse(
 			ErrorResponseToHttpStatus::lookup( $e->getErrorCode() ),
