@@ -14,8 +14,6 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\Simpl
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\SqlTermStoreSearchEngine;
-use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermRetriever;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
@@ -78,39 +76,17 @@ return [
 		] );
 	},
 
-	/**
-	 * @return InLabelSearchEngine|SqlTermStoreSearchEngine
-	 */
-	'WbSearch.SearchEngine' => function( MediaWikiServices $services ) {
-		global $wgSearchType;
-
-		$isWikibaseCirrusSearchEnabled = $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' );
-		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch';
-
-		$searchEngine = $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled
-			? WbSearch::getInLabelSearchEngine( $services )
-			: new SqlTermStoreSearchEngine(
-				WikibaseRepo::getMatchingTermsLookupFactory( $services )
-					->getLookupForSource( WikibaseRepo::getLocalEntitySource( $services ) ),
-				WikibaseRepo::getEntityLookup( $services ),
-				new TermRetriever( WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services ), $services->getLanguageFactory() ),
-				WikibaseRepo::getLanguageFallbackChainFactory( $services )
-			);
-
-		return $searchEngine;
-	},
-
 	'WbSearch.SimpleItemSearch' => function( MediaWikiServices $services ): SimpleItemSearch {
 		return new SimpleItemSearch(
 			new SimpleItemSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
-			WbSearch::getSearchEngine( $services )
+			WbSearch::getInLabelSearchEngine( $services )
 		);
 	},
 
 	'WbSearch.SimplePropertySearch' => function( MediaWikiServices $services ): SimplePropertySearch {
 		$validator = new SimplePropertySearchValidator( WbSearch::getLanguageCodeValidator( $services ) );
 
-		return new SimplePropertySearch( $validator, WbSearch::getSearchEngine( $services )
+		return new SimplePropertySearch( $validator, WbSearch::getInLabelSearchEngine( $services )
 		);
 	},
 

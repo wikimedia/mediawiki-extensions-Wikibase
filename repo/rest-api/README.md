@@ -12,6 +12,18 @@ To enable routes in development (not recommended for production use), also add:
 $wgRestAPIAdditionalRouteFiles[] = 'extensions/Wikibase/repo/rest-api/routes.dev.json';
 ```
 
+### Enable Restful Search
+
+Some REST API routes — particularly those related to Items and Properties search — require **Elasticsearch** to be configured and enabled through the CirrusSearch extensions.
+
+If Elasticsearch is not set up, these routes will return an error response.
+
+#### To enable Restfull search functionality:
+
+* Install the WikibaseCirrusSearch, CirrusSearch, and Elastica extensions
+
+* Add the necessary configuration to your LocalSettings.php
+
 ## JSON structure changes
 
 * @subpage rest_data_format_differences
