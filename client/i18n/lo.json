@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Aefgh39622",
-			"Lookruk"
+			"Lookruk",
+			"RenKtv"
 		]
 	},
 	"wikibase-dataitem": "ລາຍການ{{WBREPONAME}}",
@@ -15,5 +16,6 @@
 	"wikibase-linkitem-input-site": "ພາສາ:",
 	"wikibase-linkitem-input-page": "ໜ້າ:",
 	"wikibase-rc-hide-wikidata-hide": "ເຊື່ອງ",
-	"wikibase-rc-hide-wikidata-show": "ສະແດງ"
+	"wikibase-rc-hide-wikidata-show": "ສະແດງ",
+	"wikibase-otherprojects": "ໃນໂຄງການອື່ນໆ"
 }

@@ -83,7 +83,7 @@
 	"wikibase-entity-summary-wbeditentity-update": "Тасдиқ тағйир ёфт",
 	"wikibase-entity-summary-wbeditentity-override": "Тасдиқ тоза карда шуд",
 	"wikibase-entity-summary-wbeditentity-update-languages": "Ном, тавзеҳ ва/ё номҳои дигар ба $3 {{PLURAL:$3|забон}} тағйир дода шуд",
-	"wikibase-entity-summary-wbeditentity-update-languages-short": "Тағйири ном, тавзеҳот ва номҳои дигар ба {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Тағйири унвон, тавзеҳот ва/ё номҳои дигари ба забонҳои зер {{#commaseparatedlist: $3}}",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Тағйири ном, тавзеҳот ва/ё номҳои дигари $3 {{PLURAL:$3|забон}} ва дигар қисматҳо",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Тағйири ном, тавзеҳот ва/ё номҳои дигари  {{#commaseparatedlist: $3}} ва дигар қисматҳо",
 	"wikibase-entity-summary-wbsetreference": "Пайванд ба сарчашма маълум шуд",
