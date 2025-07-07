@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"CROIX2"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} ait'm",
+	"wikibase-editlinks": "Chenj link dem",
+	"wikibase-addlinkstitle": "Add langwij link dem",
+	"wikibase-linkitem-addlinks": "Add link dem",
+	"wikibase-linkitem-title": "Link up wid piej",
+	"wikibase-linkitem-linkpage": "Link up wid piej",
+	"wikibase-linkitem-selectlink": "Pleez chuuz wan sait an wan piej weh yuh waan link fu dis piej.",
+	"wikibase-linkitem-input-site": "Langwij:",
+	"wikibase-linkitem-input-page": "Piej:",
+	"wikibase-rc-hide-wikidata-hide": "Haid",
+	"wikibase-rc-hide-wikidata-show": "Shuo",
+	"wikibase-otherprojects": "Een odda prajek dem"
+}
