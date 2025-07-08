@@ -3,11 +3,13 @@
 		"authors": [
 			"Aefgh39622",
 			"Iberia2011",
-			"Lookruk"
+			"Lookruk",
+			"RenKtv"
 		]
 	},
 	"wikibase-edit": "ດັດແກ້",
 	"wikibase-add": "ເພີ່ມ",
+	"wikibase-description-empty": "ບໍ່ໄດ້ກໍານົດຄໍາອະທິບາຍ",
 	"wikibase-sitelinks-special": "ໄຊຕ໌ອື່ນ",
 	"wikibase-itemdisambiguation-lookup-language": "ລະຫັດພາສາ:",
 	"wikibase-modifyterm-language": "ລະຫັດພາສາ:"

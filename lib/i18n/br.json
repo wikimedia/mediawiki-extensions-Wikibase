@@ -28,7 +28,6 @@
 	"datatypes-type-time": "Poent en amzer",
 	"datatypes-type-wikibase-item": "Elfenn",
 	"datatypes-type-geo-shape": "Gwiskad douaroniel",
-	"version-wikibase": "Wikibase",
 	"wikibase-time-precision-BCE-century": "{{PLURAL:$1|1añ kantved|$1vet kantved}} kt JK",
 	"wikibase-entity-summary-wbsetlabel-add": "Skridennad [$2] ouzhpennet",
 	"wikibase-entity-summary-wbsetlabel-set": "Skridennad [$2] kemmet",
