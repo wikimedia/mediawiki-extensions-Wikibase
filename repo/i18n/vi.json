@@ -470,5 +470,9 @@
 	"special-setaliases-parameterized": "Đặt biệt danh $1",
 	"special-setlabel-parameterized": "Đặt nhãn $1",
 	"special-setdescription-parameterized": "Đặt miêu tả $1",
-	"special-setlabeldescriptionaliases-parameterized": "Đặt nhãn, miêu tả, và biệt danh $1"
+	"special-setlabeldescriptionaliases-parameterized": "Đặt nhãn, miêu tả, và biệt danh $1",
+	"wikibase-scoped-search-search-entities": "Tìm kiếm thực thể",
+	"wikibase-scoped-search-search-entities-description": "Tìm các kiểu thực thể {{SITENAME}}",
+	"wikibase-scoped-search-item-scope-name": "Khoản mục",
+	"wikibase-scoped-search-property-scope-name": "Thuộc tính"
 }
