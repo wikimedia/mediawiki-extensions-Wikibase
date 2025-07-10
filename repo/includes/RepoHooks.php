@@ -265,6 +265,7 @@ final class RepoHooks implements
 	public function onUnitTestsList( &$paths ) {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../rest-api/tests/phpunit/';
+		$paths[] = __DIR__ . '/../domains/crud/tests/phpunit/';
 		$paths[] = __DIR__ . '/../domains/search/tests/phpunit/';
 	}
 
