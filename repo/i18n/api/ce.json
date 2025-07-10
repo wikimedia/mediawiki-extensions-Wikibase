@@ -4,6 +4,20 @@
 			"Умар"
 		]
 	},
+	"apihelp-wbcreateclaim-param-snaktype": "Снэкан тайпа",
+	"apihelp-wbcreateredirect-summary": "Духан тӀе дӀасахьажорг кхуллу",
+	"apihelp-wbeditentity-param-tags": "Хийцамийн историна тӀетоьхна хир йолу хийцаман билгалонаш.",
 	"apihelp-wbmergeitems-param-fromid": "Вовшахтуху идентификатор",
-	"apihelp-wbmergeitems-param-toid": "Вовшахтуху идентификатор"
+	"apihelp-wbmergeitems-param-toid": "Вовшахтуху идентификатор",
+	"apihelp-wbsearchentities-param-search": "ХӀара текст леха.",
+	"apihelp-wbsearchentities-param-strictlanguage": "ДӀабойи резерван мотт",
+	"apihelp-wbsearchentities-param-type": "Духан хӀара тайпа леха.",
+	"apihelp-wbsearchentities-param-limit": "ЖамӀийн максималан дукхалла",
+	"apihelp-wbsearchentities-param-profile": "Муьлха лехаман профиль лело йеза.",
+	"apihelp-wbsetlabel-param-language": "Билгалонан меттанаш",
+	"apihelp-wbsetlabel-param-value": "Билгалонан маьӀна",
+	"apihelp-wbsetlabel-param-tags": "Хийцамийн историна тӀетоьхна хир йолу хийцаман билгалонаш.",
+	"apihelp-wbsetreference-param-tags": "Хийцамийн историна тӀетоьхна хир йолу хийцаман билгалонаш.",
+	"apihelp-wbsetsitelink-param-tags": "Хийцамийн историна тӀетоьхна хир йолу хийцаман билгалонаш.",
+	"apihelp-wbsetsitelink-example-4": "ДӀайаккха немцойн сайтан хьажорг элемент тӀера"
 }
