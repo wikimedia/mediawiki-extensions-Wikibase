@@ -649,6 +649,11 @@
 			"path": "/wikibase/v0/search/properties",
 			"method": "GET",
 			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler::factory"
+		},
+		{
+			"path": "/wikibase/v0/suggest/items",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\ItemPrefixSearchRouteHandler::factory"
 		}
 	],
 	"SpecialPages": {

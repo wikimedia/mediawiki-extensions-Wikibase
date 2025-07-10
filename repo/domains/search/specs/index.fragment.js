@@ -59,8 +59,7 @@ const openapi = {
 			"get": {
 				"operationId": "simpleItemSuggest",
 				"tags": [ "item search" ],
-				"summary": "[WIP] Simple Item search by prefix, for labels and aliases",
-				"description": "This endpoint is currently in development and is not recommended for production use.",
+				"summary": "Simple Item search by prefix, for labels and aliases",
 				"parameters": [
 					{
 						...parameters.SearchQuery,
