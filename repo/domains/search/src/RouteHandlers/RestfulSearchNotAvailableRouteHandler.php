@@ -16,7 +16,7 @@ class RestfulSearchNotAvailableRouteHandler extends Handler {
 		return $responseFactory->newErrorResponse(
 			500,
 			'search-not-available',
-			'RESTful Search is not available due to insufficient server configuration'
+			'RESTful search is not available due to insufficient server configuration'
 		);
 	}
 }

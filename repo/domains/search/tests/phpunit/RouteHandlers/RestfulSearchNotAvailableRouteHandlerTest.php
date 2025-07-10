@@ -8,7 +8,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Domains\Search\RouteHandlers\RestfulSearchNotAvailableRouteHandler;
 
 /**
- * @covers \Wikibase\Repo\Domains\Search\RouteHandlers\SimpleItemSearchRouteHandler
+ * @covers \Wikibase\Repo\Domains\Search\RouteHandlers\RestfulSearchNotAvailableRouteHandler
  *
  * @group Wikibase
  *
@@ -30,7 +30,7 @@ class RestfulSearchNotAvailableRouteHandlerTest extends MediaWikiIntegrationTest
 
 		self::assertSame( 'search-not-available', $responseContent->code );
 		self::assertSame(
-			'RESTful Search is not available due to insufficient server configuration',
+			'RESTful search is not available due to insufficient server configuration',
 			$responseContent->message
 		);
 		self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
