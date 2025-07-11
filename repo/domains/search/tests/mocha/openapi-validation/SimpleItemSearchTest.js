@@ -22,12 +22,7 @@ describe( 'Simple item search', () => {
 	const itemEnLabel = utils.title( 'english-label' );
 	let item;
 
-	before( async function () {
-		// Skip this test in CI if OpenSearch is not available
-		if ( process.env.QUIBBLE_OPENSEARCH && process.env.QUIBBLE_OPENSEARCH !== 'true' ) {
-			this.skip();
-		}
-
+	before( async () => {
 		item = await createItem( { labels: { en: itemEnLabel } } );
 
 		await wiki.runAllJobs();

@@ -22,12 +22,7 @@ describe( 'Simple property search', () => {
 	const propertyEnLabel = utils.title( 'english-label' );
 	let property;
 
-	before( async function () {
-		// Skip this test in CI if OpenSearch is not available
-		if ( process.env.QUIBBLE_OPENSEARCH && process.env.QUIBBLE_OPENSEARCH !== 'true' ) {
-			this.skip();
-		}
-
+	before( async () => {
 		property = await createProperty( {
 			data_type: 'string',
 			labels: { en: propertyEnLabel }

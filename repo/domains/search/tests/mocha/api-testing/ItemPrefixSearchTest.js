@@ -41,12 +41,7 @@ describe( 'Item prefix search', () => {
 	const item3Description = 'item without label';
 	const item3Alias = englishTermMatchingAllItems;
 
-	before( async function () {
-		// Skip this test in CI if OpenSearch is not available
-		if ( process.env.QUIBBLE_OPENSEARCH && process.env.QUIBBLE_OPENSEARCH !== 'true' ) {
-			this.skip();
-		}
-
+	before( async () => {
 		item1 = await createItem( {
 			labels: { en: item1Label, de: item1GermanLabel },
 			descriptions: { en: item1Description, de: item1GermanDescription }
