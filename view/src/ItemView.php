@@ -3,6 +3,7 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Serializers\SerializerFactory;
@@ -192,10 +193,9 @@ class ItemView extends EntityView {
 			function ( array $data ): array {
 				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject (T396633)
 					->parse( $data['propertyId'] );
-				$data['propertyUrl'] = WikibaseRepo::getEntityTitleLookup() // TODO inject (T396633)
-					->getTitleForId( $propertyId )
-					->getLinkURL();
-				$data['propertyLabel'] = $propertyId->getSerialization(); // TODO get label (T396633)
+				$data['propertyLinkHtml'] = WikibaseRepo::getEntityIdHtmlLinkFormatterFactory() // TODO inject (T396633)
+					->getEntityIdFormatter( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->languageCode ) )
+					->formatEntityId( $propertyId );
 				return $data;
 			}
 		);

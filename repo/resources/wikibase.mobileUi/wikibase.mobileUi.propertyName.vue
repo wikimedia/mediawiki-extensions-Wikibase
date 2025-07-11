@@ -1,6 +1,14 @@
 <template>
 	<div class="wikibase-mex-property-name">
-		<p><a :href="propertyUrl" class="mex-link">{{ propertyLabel }}</a></p>
+		<!-- eslint-disable vue/no-v-html -->
+		<p
+			v-if="propertyLinkHtml"
+			v-html="propertyLinkHtml"
+		></p>
+		<!-- eslint-enable -->
+		<p v-else>
+			<a :href="propertyUrl" class="mex-link">{{ propertyLabel }}</a>
+		</p>
 	</div>
 </template>
 
@@ -17,6 +25,9 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	computed: {
+		propertyLinkHtml() {
+			return null;
+		},
 		propertyUrl() {
 			const title = new mw.Title(
 				this.propertyId,
