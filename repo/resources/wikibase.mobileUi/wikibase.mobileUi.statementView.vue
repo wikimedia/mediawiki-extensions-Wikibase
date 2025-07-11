@@ -10,11 +10,14 @@
 			</div>
 		</div>
 		<!-- TODO: show all statements for this property T396637 -->
-		<!-- TODO: support Javascript expressions instead of passing `is...` here T396855 -->
 		<mex-main-snak
+			v-if="statement.mainsnak.snaktype === 'value'"
 			:value="statement.mainsnak.datavalue.value"
 			:type="statement.mainsnak.datatype"
 		></mex-main-snak>
+		<div v-else>
+			Unsupported snak type {{ statement.mainsnak.snaktype }}
+		</div>
 		<div class="wikibase-mex-references">
 			<p>
 				<span class="wikibase-mex-icon-down-triangle-x-small"></span>
