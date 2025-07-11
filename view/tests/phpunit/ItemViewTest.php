@@ -19,6 +19,7 @@ use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
+use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -147,6 +148,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->createMock( LocalizedTextProvider::class ),
 			$propertyDataTypeLookup,
 			$snakFormatter,
+			$this->createMock( SnakHtmlGenerator::class ),
 			$vueStatementsView
 		);
 	}

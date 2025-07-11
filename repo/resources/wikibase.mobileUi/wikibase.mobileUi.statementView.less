@@ -56,26 +56,17 @@
 		}
 	}
 
-	.wikibase-mex-references {
-		background-color: @background-color-neutral-subtle;
-
-		p {
-			padding-top: 0.5rem;
-			margin: 0;
-
-			.cdx-icon {
-				vertical-align: middle;
-			}
-		}
+	.statement_data_debug {
+		display: none;
 	}
 }
 
-.wikibase-mex-icon-edit-small {
-	.cdx-mixin-css-icon( @cdx-icon-edit, @param-size-icon: @size-icon-small );
+.wikibase-mex-icon-expand-x-small {
+	.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
 }
 
-.wikibase-mex-icon-down-triangle-x-small {
-	.cdx-mixin-css-icon( @cdx-icon-down-triangle, @param-size-icon: @size-icon-x-small );
+.wikibase-mex-icon-collapse-x-small {
+	.cdx-mixin-css-icon( @cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
 }
 
 .wikibase-rankselector {
@@ -86,4 +77,8 @@
 
 .wikibase-rankselector .ui-icon.ui-icon-rankselector {
 	display: inherit;
+}
+
+.wikibase-mex-clickable {
+	cursor: pointer;
 }

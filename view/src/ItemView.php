@@ -65,6 +65,8 @@ class ItemView extends EntityView {
 
 	private SnakFormatter $snakFormatter;
 
+	private SnakHtmlGenerator $snakHtmlGenerator;
+
 	private bool $vueStatementsView;
 
 	/**
@@ -81,6 +83,7 @@ class ItemView extends EntityView {
 	 * @param LocalizedTextProvider $textProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param SnakFormatter $snakFormatter
+	 * @param SnakHtmlGenerator $snakHtmlGenerator
 	 * @param bool $vueStatementsView
 	 */
 	public function __construct(
@@ -95,6 +98,7 @@ class ItemView extends EntityView {
 		LocalizedTextProvider $textProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		SnakFormatter $snakFormatter,
+		SnakHtmlGenerator $snakHtmlGenerator,
 		bool $vueStatementsView
 	) {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
@@ -107,6 +111,7 @@ class ItemView extends EntityView {
 		$this->entityTermsView = $entityTermsView;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->snakFormatter = $snakFormatter;
+		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
@@ -160,12 +165,30 @@ class ItemView extends EntityView {
 		return $termsHtml . $tocHtml . $statementsHtml;
 	}
 
+	private function populateReferenceSnakHtml( Statement $statement, array $statementData, array &$snakHtmlLookup ) {
+		if ( !array_key_exists( 'references', $statementData ) || !$statementData['references'] ) {
+			return;
+		}
+		foreach ( $statementData['references'] as $referenceData ) {
+			$reference = $statement->getReferences()->getReference( $referenceData['hash'] );
+			foreach ( $reference->getSnaks() as $snakObject ) {
+				foreach ( $referenceData['snaks'] as $snakList ) {
+					foreach ( $snakList as $snakData ) {
+						if ( $snakData['hash'] === $snakObject->getHash() ) {
+							$snakHtmlLookup[$snakObject->getHash()] = $this->snakHtmlGenerator->getSnakHtml( $snakObject, true );
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	 * @param Statement $statement
 	 * @param App $app
 	 * @return string HTML
 	 */
-	private function getVueStatementHtml( Statement $statement, App $app ): string {
+	private function getVueStatementHtml( Statement $statement, App $app, array &$snakHtmlLookup ): string {
 		$mainSnak = $statement->getMainSnak();
 		$statementSerializer = $this->serializerFactory->newStatementSerializer();
 		// XXX: The serialization is mostly unused (only "propertyId" seems to be used)
@@ -173,19 +196,33 @@ class ItemView extends EntityView {
 
 		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
 		$statementData['mainsnak']['datatype'] = $dataType;
+		$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
+		if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
+			$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+		}
 
 		return $app->renderComponent( 'mex-statement', [
 			'statement' => $statementData,
-			'mainSnakHtml' => $this->snakFormatter->formatSnak( $mainSnak ),
 		] );
 	}
 
 	/** @return string HTML */
 	private function getVueStatementsHtml( StatementListProvider $item ): string {
-		$app = new App( [] );
+		$snakHtmlLookup = [];
+		$app = new App( [ 'snakHtml' => function ( $snak ) use ( &$snakHtmlLookup ) {
+			if ( array_key_exists( $snak['hash'], $snakHtmlLookup ) ) {
+				return $snakHtmlLookup[$snak['hash']];
+			}
+			return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
+		} ] );
 		$app->registerComponentTemplate(
 			'mex-statement',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' )
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' ),
+			function ( array $data ): array {
+				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
+				$data['statementDump'] = json_encode( $data['statement'] );
+				return $data;
+			}
 		);
 		$app->registerComponentTemplate(
 			'mex-property-name',
@@ -203,12 +240,27 @@ class ItemView extends EntityView {
 			'mex-main-snak',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' ),
 		);
+		$app->registerComponentTemplate(
+			'mex-references',
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.references.vue' ),
+			function ( array $data ): array {
+				$data['referenceCount'] = count( $data['references'] );
+				$data['hasReferences'] = $data['referenceCount'] > 0;
+				$data['referencesMessage'] = $this->textProvider->getEscaped(
+					'wikibase-statementview-references-counter', [
+						strval( $data[ 'referenceCount' ] ),
+					],
+				);
+				$data['showReferences'] = false;
+				return $data;
+			}
+		);
 
 		$rendered = '';
 		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
 		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
 			$statement = $item->getStatements()->getByPropertyId( $propertyId )->toArray()[ 0 ];
-			$renderedStatement = $this->getVueStatementHtml( $statement, $app );
+			$renderedStatement = $this->getVueStatementHtml( $statement, $app, $snakHtmlLookup );
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}
 

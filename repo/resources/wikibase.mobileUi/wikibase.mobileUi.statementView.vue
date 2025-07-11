@@ -9,25 +9,24 @@
 				</div>
 			</div>
 		</div>
+		<!-- TODO: Remove this debugging element T399286 -->
+		<p class="statement_data_debug">
+			{{ statementDump }}
+		</p>
 		<!-- TODO: show all statements for this property T396637 -->
 		<mex-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:type="statement.mainsnak.datatype"
 			:hash="statement.mainsnak.hash"
-			:html="mainSnakHtml"
+			:html="snakHtml( statement.mainsnak )"
 		></mex-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}
 		</div>
-		<div class="wikibase-mex-references">
-			<p>
-				<span class="wikibase-mex-icon-down-triangle-x-small"></span>
-				<a
-					v-i18n-html:wikibase-statementview-references-counter="[ statement.references ? statement.references.length : 0 ]"
-					href="#"
-					class="mex-link"></a>
-			</p>
-		</div>
+		<mex-references
+			:references="references"
+			:show-references="false"
+		></mex-references>
 	</div>
 </template>
 
@@ -36,13 +35,15 @@ const { defineComponent } = require( 'vue' );
 const MexPropertyName = require( './wikibase.mobileUi.propertyName.vue' );
 const MexMainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
 const { snakHtml } = require( './store/serverRenderedHtml.js' );
+const MexReferences = require( './wikibase.mobileUi.references.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseMexStatement',
 	components: {
 		MexPropertyName,
-		MexMainSnak
+		MexMainSnak,
+		MexReferences
 	},
 	props: {
 		statement: {
@@ -50,9 +51,17 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
+	setup() {
+		return {
+			snakHtml
+		};
+	},
 	computed: {
-		mainSnakHtml() {
-			return snakHtml( this.statement.mainsnak );
+		references() {
+			return ( this.statement.references ? this.statement.references : [] );
+		},
+		statementDump() {
+			return JSON.stringify( this.statement );
 		}
 	}
 } );

@@ -1,0 +1,40 @@
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-mex-statement {
+	.wikibase-mex-references {
+		background-color: @background-color-neutral-subtle;
+
+		p {
+			padding-top: 0.5rem;
+			margin: 0;
+			display: flex;
+			align-items: center;
+
+			span {
+				padding: 0.25rem;
+			}
+
+			.cdx-icon {
+				vertical-align: middle;
+			}
+		}
+
+		div.wikibase-mex-reference-list {
+			display: none;
+		}
+
+		div.wikibase-mex-reference-list.wikibase-mex-references-visible {
+			display: inherit;
+		}
+
+		p.wikibase-mex-reference-link {
+			padding-top: 0;
+		}
+
+		.wikibase-mex-snak-value {
+			div.wikibase-snakview div {
+				display: inherit;
+			}
+		}
+	}
+}
