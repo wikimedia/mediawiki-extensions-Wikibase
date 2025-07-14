@@ -25,9 +25,6 @@ describe( 'wikibase.mobileUi.statementView', () => {
 			get: jest.fn( ( key ) => mockConfig[ key ] )
 		};
 
-		const mockGetUrl = jest.fn().mockReturnValue( 'mock-property-url' );
-		mw.Title.prototype.getUrl = mockGetUrl;
-
 		const mockStatement = {
 			mainsnak: {
 				snaktype: 'value',
@@ -49,6 +46,9 @@ describe( 'wikibase.mobileUi.statementView', () => {
 					plugins: [ createTestingPinia( {
 						initialState: {
 							serverRenderedHtml: {
+								propertyLinks: new Map( [
+									[ 'P1', '<a href="mock-property-url">P1</a>' ]
+								] ),
 								snakHtmls: new Map( [
 									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
 								] )
@@ -67,7 +67,6 @@ describe( 'wikibase.mobileUi.statementView', () => {
 		it( 'sets the right content on claim elements', async () => {
 			const statements = wrapper.findAll( '.wikibase-mex-statement' );
 			const statement = statements[ 0 ];
-			expect( mockGetUrl ).toHaveBeenCalledTimes( 1 );
 			expect( statement.find( '.wikibase-mex-property-name a' ).text() ).toBe( mockStatement.mainsnak.property );
 			expect( statement.find( '.wikibase-mex-property-name a' ).element.href ).toContain( 'mock-property-url' );
 

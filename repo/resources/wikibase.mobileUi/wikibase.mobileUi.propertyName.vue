@@ -2,18 +2,17 @@
 	<div class="wikibase-mex-property-name">
 		<!-- eslint-disable vue/no-v-html -->
 		<p
-			v-if="propertyLinkHtml"
+			class="wikibase-mex-property-name-link"
+			:data-property-id="propertyId"
 			v-html="propertyLinkHtml"
 		></p>
 		<!-- eslint-enable -->
-		<p v-else>
-			<a :href="propertyUrl" class="mex-link">{{ propertyLabel }}</a>
-		</p>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
+const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -26,17 +25,7 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		propertyLinkHtml() {
-			return null;
-		},
-		propertyUrl() {
-			const title = new mw.Title(
-				this.propertyId,
-				mw.config.get( 'wgNamespaceIds', {} ).property || 120 // TODO T396634
-			);
-			return title.getUrl();
-		},
-		propertyLabel() {
-			return this.propertyId; // TODO T396634
+			return propertyLinkHtml( this.propertyId );
 		}
 	}
 } );
