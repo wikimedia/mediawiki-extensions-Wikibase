@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rwang PS"
+			"Kambai Akau",
+			"Rwang PS",
+			"Yakubu Musa"
 		]
 	},
-	"wikibase-edit": "Yong",
-	"wikibase-add": "Gwe",
+	"wikibase-edit": "yong",
+	"wikibase-add": "gwe",
+	"wikibase-label-empty": "Vit jòt naká",
 	"wikibase-description-empty": "Vere ha hak",
 	"wikibase-sitelinks-special": "Vwang bevurum"
 }
