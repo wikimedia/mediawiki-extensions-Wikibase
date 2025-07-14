@@ -4,12 +4,12 @@
 	"description": "OpenAPI definition of Wikibase REST API",
 	"scripts": {
 		"test": "npm run lint",
-		"api-testing": "npm run mocha --require ../domains/crud/tests/mocha/api-testing/fixtures.cjs tests/mocha ../domains/**/tests/mocha",
 		"api-testing:e2e-rest": "npm run mocha -- tests/mocha",
 		"api-testing:e2e-crud": "npm run mocha -- --require ../domains/crud/tests/mocha/api-testing/fixtures.cjs ../domains/crud/tests/mocha/api-testing",
 		"api-testing:e2e-search": "npm run mocha -- ../domains/search/tests/mocha/api-testing",
 		"api-testing:spec-crud": "npm run mocha -- ../domains/crud/tests/mocha/openapi-validation",
 		"api-testing:spec-search": "npm run mocha -- ../domains/search/tests/mocha/openapi-validation",
+		"api-testing": "npm-run-all api-testing:*",
 		"mocha": "mocha --timeout 0 --inline-diffs",
 		"lint": "npm-run-all --parallel --continue-on-error lint:*",
 		"lint:openapi": "npm run spec:join && redocly lint specs/openapi-joined.json",
