@@ -18,8 +18,17 @@
 			// As a proof of concept of passing real data into the Vue component, mount a vue component
 			// for the first statement associated with each property
 			for ( const propertyId of propertyIds ) {
+				let statement = statements[ propertyId ][ 0 ];
+				// get an unfrozen copy so we can add .html
+				statement = JSON.parse( JSON.stringify( statement ) );
+
+				// Pull the statement html from the server side rendering
+				// XXX: Will this work with somevalue / novalue Snaks?
+				statement.mainsnak.html = $( '#wikibase-mex-statementwrapper-' + propertyId ).first()
+					.find( '.wikibase-mex-snak-value' ).html();
+
 				Vue.createMwApp( App, {
-					statement: statements[ propertyId ][ 0 ]
+					statement: statement
 				} ).mount( mexStatementList.querySelector( `#wikibase-mex-statementwrapper-${ propertyId }` ) );
 			}
 		} );

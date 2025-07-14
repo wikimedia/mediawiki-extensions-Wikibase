@@ -12,6 +12,7 @@ use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use WMDE\VueJsTemplating\App;
@@ -61,6 +62,8 @@ class ItemView extends EntityView {
 	 */
 	private $entityTermsView;
 
+	private SnakFormatter $snakFormatter;
+
 	private bool $vueStatementsView;
 
 	/**
@@ -76,6 +79,7 @@ class ItemView extends EntityView {
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param SnakFormatter $snakFormatter
 	 * @param bool $vueStatementsView
 	 */
 	public function __construct(
@@ -89,6 +93,7 @@ class ItemView extends EntityView {
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
+		SnakFormatter $snakFormatter,
 		bool $vueStatementsView
 	) {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
@@ -100,6 +105,7 @@ class ItemView extends EntityView {
 		$this->textProvider = $textProvider;
 		$this->entityTermsView = $entityTermsView;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->snakFormatter = $snakFormatter;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
@@ -161,10 +167,12 @@ class ItemView extends EntityView {
 	private function getVueStatementHtml( Statement $statement, App $app ): string {
 		$mainSnak = $statement->getMainSnak();
 		$statementSerializer = $this->serializerFactory->newStatementSerializer();
+		// XXX: The serialization is mostly unused (only "propertyId" seems to be used)
 		$statementData = $statementSerializer->serialize( $statement );
 
 		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
 		$statementData['mainsnak']['datatype'] = $dataType;
+		$statementData['mainsnak']['html'] = $this->snakFormatter->formatSnak( $mainSnak );
 
 		return $app->renderComponent( 'mex-statement', [ 'statement' => $statementData ] );
 	}
@@ -192,23 +200,6 @@ class ItemView extends EntityView {
 		$app->registerComponentTemplate(
 			'mex-main-snak',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' ),
-			function ( array $data ): array {
-				$data['loadedValue'] = $data['value'];
-				if ( $data['type'] === 'commonsMedia' ) {
-					// The CommonsInlineImageFormatter loads additional metadata about commonsMedia objects.
-					// We will need similar such functionality here - T398314
-					$data['loadedValue'] = [
-						'src' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/' .
-							'd/d5/Rihanna-signature.svg/250px-Rihanna-signature.svg.png',
-						'altText' => 'Some alt text',
-						'filename' => $data['value'],
-						'widthPx' => 348,
-						'heightPx' => 178,
-						'fileSizeKb' => 9,
-					];
-				}
-				return $data;
-			}
 		);
 
 		$rendered = '';

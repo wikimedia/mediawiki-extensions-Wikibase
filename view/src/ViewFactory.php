@@ -266,6 +266,7 @@ class ViewFactory {
 			$this->siteLinkGroups,
 			$textProvider,
 			$this->propertyDataTypeLookup,
+			$this->htmlSnakFormatterFactory->getSnakFormatter( $language->getCode(), $termFallbackChain ),
 			$this->vueStatementsView
 		);
 	}

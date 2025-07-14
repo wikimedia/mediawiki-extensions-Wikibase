@@ -14,6 +14,7 @@
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:value="statement.mainsnak.datavalue.value"
 			:type="statement.mainsnak.datatype"
+			:html="statement.mainsnak.html"
 		></mex-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}

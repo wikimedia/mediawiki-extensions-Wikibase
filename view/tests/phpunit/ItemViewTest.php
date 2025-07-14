@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
@@ -107,6 +108,7 @@ class ItemViewTest extends EntityViewTestCase {
 
 		if ( $vueStatementsExpected ) {
 			$this->assertStringContainsString( 'wikibase-mex-statementgrouplistview', $html );
+			$this->assertStringContainsString( '<div>a snak', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-mex-statementgrouplistview', $html );
 		}
@@ -129,6 +131,9 @@ class ItemViewTest extends EntityViewTestCase {
 		$propertyDataTypeLookup = $this->createConfiguredMock( PropertyDataTypeLookup::class, [
 			'getDataTypeIdForProperty' => 'string',
 		] );
+		$snakFormatter = $this->createConfiguredMock( SnakFormatter::class, [
+			'formatSnak' => '<div>a snak :)</div>',
+		] );
 
 		return new ItemView(
 			$templateFactory,
@@ -141,6 +146,7 @@ class ItemViewTest extends EntityViewTestCase {
 			[],
 			$this->createMock( LocalizedTextProvider::class ),
 			$propertyDataTypeLookup,
+			$snakFormatter,
 			$vueStatementsView
 		);
 	}

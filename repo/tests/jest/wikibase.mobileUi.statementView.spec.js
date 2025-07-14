@@ -33,7 +33,8 @@ describe( 'wikibase.mobileUi.statementView', () => {
 				property: 'P1',
 				hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 				datavalue: { value: 'p1', type: 'string' },
-				datatype: 'string'
+				datatype: 'string',
+				html: '<span>p1</span>'
 			},
 			type: 'statement',
 			id: 'Q1$eb7fdbb4-45d1-f59d-bb3b-013935de1085',
