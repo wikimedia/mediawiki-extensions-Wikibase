@@ -14,7 +14,9 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 require_once __DIR__ . '/DumpEntities.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * @license GPL-2.0-or-later
@@ -155,5 +157,7 @@ class DumpJson extends DumpEntities {
 	}
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = DumpJson::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

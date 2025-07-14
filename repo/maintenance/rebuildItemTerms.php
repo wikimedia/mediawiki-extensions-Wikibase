@@ -14,9 +14,11 @@ use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * @license GPL-2.0-or-later
@@ -166,5 +168,7 @@ class RebuildItemTerms extends Maintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = RebuildItemTerms::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

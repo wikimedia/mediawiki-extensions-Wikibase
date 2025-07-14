@@ -11,9 +11,11 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IReadableDatabase;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for pruning rows belonging to deleted or redirected items
@@ -123,5 +125,7 @@ class PruneItemsPerSite extends Maintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = PruneItemsPerSite::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

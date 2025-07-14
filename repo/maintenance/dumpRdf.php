@@ -16,7 +16,9 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\BNodeLabeler;
 
+// @codeCoverageIgnoreStart
 require_once __DIR__ . '/DumpEntities.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * @license GPL-2.0-or-later
@@ -159,5 +161,7 @@ class DumpRdf extends DumpEntities {
 	}
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = DumpRdf::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

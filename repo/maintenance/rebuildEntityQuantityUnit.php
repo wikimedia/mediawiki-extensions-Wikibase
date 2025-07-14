@@ -11,7 +11,9 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 require_once __DIR__ . '/EntityQuantityUnitRebuilder.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * @license GPL-2.0-or-later
@@ -107,4 +109,6 @@ class RebuildEntityQuantityUnit extends Maintenance {
 	}
 }
 
+// @codeCoverageIgnoreStart
 return RebuildEntityQuantityUnit::class;
+// @codeCoverageIgnoreEnd

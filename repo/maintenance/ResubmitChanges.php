@@ -14,8 +14,10 @@ use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Resubmit stuck jobs based on old changes in the Wikibase wb_changes table
@@ -82,5 +84,7 @@ class ResubmitChanges extends Maintenance {
 	}
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = ResubmitChanges::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

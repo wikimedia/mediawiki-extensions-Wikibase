@@ -20,9 +20,11 @@ use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\AtEase\AtEase;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for generating a dump of entities in the repository.

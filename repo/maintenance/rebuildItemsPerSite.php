@@ -19,9 +19,11 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for rebuilding the wb_items_per_site table.
@@ -143,5 +145,7 @@ class RebuildItemsPerSite extends Maintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = RebuildItemsPerSite::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

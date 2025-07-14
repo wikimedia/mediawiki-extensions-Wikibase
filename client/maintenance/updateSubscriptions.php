@@ -11,11 +11,13 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\WikibaseSettings;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )
 	: __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for inserting subscriptions into wb_changes_subscription based on the
@@ -93,5 +95,7 @@ class UpdateSubscriptions extends Maintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = UpdateSubscriptions::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

@@ -11,9 +11,11 @@ use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for populating wb_changes_subscription based on the wb_items_per_site table.
@@ -96,5 +98,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = PopulateChangesSubscription::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

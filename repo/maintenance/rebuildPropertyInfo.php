@@ -11,9 +11,11 @@ use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
+// @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Maintenance script for rebuilding the property info table.
@@ -100,5 +102,7 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = RebuildPropertyInfo::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd

@@ -19,9 +19,11 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\Purtle\RdfWriterFactory;
 
+// @codeCoverageIgnoreStart
 $basePath =
 	getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';
+// @codeCoverageIgnoreEnd
 
 /**
  * Generate dump-like RDF for newly added units without running full dump.
@@ -382,5 +384,7 @@ QUERY;
 
 }
 
+// @codeCoverageIgnoreStart
 $maintClass = AddUnitConversions::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreEnd
