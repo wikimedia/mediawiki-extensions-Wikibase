@@ -5,7 +5,9 @@
 	'use strict';
 
 	const Vue = require( 'vue' );
+	const Pinia = require( 'pinia' );
 	const App = require( './wikibase.mobileUi/wikibase.mobileUi.statementView.vue' );
+	const { useServerRenderedHtml } = require( './wikibase.mobileUi/store/serverRenderedHtml.js' );
 
 	const mexStatementList = document.getElementById( 'wikibase-mex-statementgrouplistview' );
 
@@ -14,22 +16,19 @@
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
 			const statements = data.claims;
 			const propertyIds = Object.keys( statements );
+			const pinia = Pinia.createPinia();
+			useServerRenderedHtml( pinia ).importFromElement( mexStatementList );
 
 			// As a proof of concept of passing real data into the Vue component, mount a vue component
 			// for the first statement associated with each property
 			for ( const propertyId of propertyIds ) {
-				let statement = statements[ propertyId ][ 0 ];
-				// get an unfrozen copy so we can add .html
-				statement = JSON.parse( JSON.stringify( statement ) );
-
-				// Pull the statement html from the server side rendering
-				// XXX: Will this work with somevalue / novalue Snaks?
-				statement.mainsnak.html = $( '#wikibase-mex-statementwrapper-' + propertyId ).first()
-					.find( '.wikibase-mex-snak-value' ).html();
-
-				Vue.createMwApp( App, {
-					statement: statement
-				} ).mount( mexStatementList.querySelector( `#wikibase-mex-statementwrapper-${ propertyId }` ) );
+				const rootProps = {
+					statement: statements[ propertyId ][ 0 ]
+				};
+				const rootContainer = mexStatementList.querySelector( `#wikibase-mex-statementwrapper-${ propertyId }` );
+				Vue.createMwApp( App, rootProps )
+					.use( pinia )
+					.mount( rootContainer );
 			}
 		} );
 	} else {

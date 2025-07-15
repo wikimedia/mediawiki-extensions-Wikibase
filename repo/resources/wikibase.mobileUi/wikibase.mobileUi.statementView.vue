@@ -12,9 +12,9 @@
 		<!-- TODO: show all statements for this property T396637 -->
 		<mex-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
-			:value="statement.mainsnak.datavalue.value"
 			:type="statement.mainsnak.datatype"
-			:html="statement.mainsnak.html"
+			:hash="statement.mainsnak.hash"
+			:html="mainSnakHtml"
 		></mex-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}
@@ -35,6 +35,7 @@
 const { defineComponent } = require( 'vue' );
 const MexPropertyName = require( './wikibase.mobileUi.propertyName.vue' );
 const MexMainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
+const { snakHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -47,6 +48,11 @@ module.exports = exports = defineComponent( {
 		statement: {
 			type: Object,
 			required: true
+		}
+	},
+	computed: {
+		mainSnakHtml() {
+			return snakHtml( this.statement.mainsnak );
 		}
 	}
 } );

@@ -968,8 +968,10 @@ final class RepoHooks implements
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue',
+					'resources/wikibase.mobileUi/store/serverRenderedHtml.js',
 				],
 				'dependencies' => [
+					'pinia',
 					'vue',
 					'@wikimedia/codex',
 					'wikibase',

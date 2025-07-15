@@ -172,9 +172,11 @@ class ItemView extends EntityView {
 
 		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
 		$statementData['mainsnak']['datatype'] = $dataType;
-		$statementData['mainsnak']['html'] = $this->snakFormatter->formatSnak( $mainSnak );
 
-		return $app->renderComponent( 'mex-statement', [ 'statement' => $statementData ] );
+		return $app->renderComponent( 'mex-statement', [
+			'statement' => $statementData,
+			'mainSnakHtml' => $this->snakFormatter->formatSnak( $mainSnak ),
+		] );
 	}
 
 	/** @return string HTML */

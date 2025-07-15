@@ -6,6 +6,7 @@
 		<!-- eslint-disable vue/no-v-html -->
 		<div
 			class="wikibase-mex-snak-value"
+			:data-snak-hash="hash"
 			:class="{ 'wikibase-mex-media-value': type === 'commonsMedia' }"
 			v-html="html"
 		></div>
@@ -21,6 +22,10 @@ module.exports = exports = defineComponent( {
 	name: 'WikibaseMexMainSnak',
 	props: {
 		type: {
+			type: String,
+			required: true
+		},
+		hash: {
 			type: String,
 			required: true
 		},
