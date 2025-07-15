@@ -9,14 +9,15 @@
 			"З. ӘЙЛЕ",
 			"Ильнар",
 			"Умар",
-			"Ильгиз"
+			"Ильгиз",
+			"Run Li"
 		]
 	},
 	"tooltip-t-wikibase": "Үзара бәйләнгән мәгълүматләр репозиториясе элементларына сылтама",
 	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элементы үзгәртелде",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|үзгәртү}}",
 	"wikibase-dataitem": "{{WBREPONAME}} элементы",
-	"wikibase-editlinks": "Сылтамалрны үзгәрт",
+	"wikibase-editlinks": "Сылтамаларны үзгәрт",
 	"wikibase-editlinkstitle": "Башка телләргә сылтамалар өстәү",
 	"wikibase-addlinkstitle": "Башка телләргә сылтамалар өстә",
 	"wikibase-linkitem-addlinks": "Сылтамалар өстә",

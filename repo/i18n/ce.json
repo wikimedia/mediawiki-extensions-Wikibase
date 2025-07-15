@@ -119,7 +119,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|1=хьост|хьосташ}}",
 	"wikibase-snakview-property-input-placeholder": "башхалла",
 	"wikibase-snakview-unsupportedsnaktype": "«$1» тайпанан цхьанатухург (снэк). ХӀокху цхьанатухучун класс кечйар ловш дац.",
-	"wikibase-snakview-choosesnaktype": "Харжа маьӀан тайп.",
+	"wikibase-snakview-choosesnaktype": "Харжа маьӀнан тайпа.",
 	"wikibase-snakview-variation-datavaluetypemismatch": "МаьӀна нийса ца догӀу билгалонан билгалдаккхарца.",
 	"wikibase-snakview-variation-datavaluetypemismatch-details": "Дагахь йоцу конфликт '$2' билгалонан тайпана а, маьӀнан тайпанан '$1' а йукъахь.",
 	"wikibase-snakview-variation-nonewvaluefordeletedproperty": "ДӀайаьккхинчу билгалонан керла маьӀна хӀотто йиш йац.",

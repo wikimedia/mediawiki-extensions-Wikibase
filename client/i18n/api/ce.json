@@ -4,5 +4,9 @@
 			"Умар"
 		]
 	},
-	"apihelp-query+pageterms-example-label-en": "Схьаэца билгалонаш а, синонимаш а, ингалсан «London» агӀонца йолу"
+	"apihelp-query+wbentityusage-param-prop": "ЖамӀана йукъайало йезаш йолу башхаллаш",
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Нагахь санна дӀахӀоттийна йелахь, духан URL тӀетоьхна хир йу.",
+	"apihelp-query+pageterms-example-label-en": "Схьаэца билгалонаш а, синонимаш а, ингалсан «London» агӀонца йолу",
+	"apihelp-query+wikibase-param-prop": "Муьлха билгалонаш схьаоьцу:",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML дӀайаздар."
 }

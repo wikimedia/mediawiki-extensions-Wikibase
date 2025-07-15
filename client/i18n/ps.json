@@ -106,7 +106,7 @@
 	"echo-pref-tooltip-wikibase-action": "کله چې يو څوک يو مخ چې {{GENDER:|ما جوړ کړی وي}} له {{WBREPONAME}} توکي سره وتړي؛ نو ماته دې خبر راکړل شي.",
 	"exceeded-entity-limit-category": "هغه مخونه چې گڼ‌شمېر {{WBREPONAME}} شتونتياوې ورته لاسرسی لري",
 	"exceeded-entity-limit-category-desc": "دا وېشنيزه د هغه مخونو لړليک جوړوي چې ډېرې {{WBREPONAME}} شتونتياوې ورته لاسرسی لري.",
-	"notification-header-page-connection": "<strong>$3</strong> مخ له {{PLURAL:$4|-1= {{WBREPONAME}} توکي| {{WBREPONAME}} توکي $4}} سره {{GENDER:$2|تړل شوی وو}}",
+	"notification-header-page-connection": "<strong>$3</strong> مخ له {{PLURAL:$4|-1= {{WBREPONAME}} توکي| {{WBREPONAME}} توکي $4}} سره {{GENDER:$2|وتړل شو}}، چېرته چې تاسو د سکالو اړوند اومتوکي راټولولی شئ.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> او {{PLURAL:$4|يو بل مخ|$4 نور مخونه|100={{PLURAL:$4|99}}+ نور مخونه}} له {{WBREPONAME}} توکو سره {{GENDER:$2|تړل شوی}} چېرې چې د سکالو اړوند اومتوکي راټولېدای شي.",
 	"notification-link-text-view-item": "توکی {{GENDER:$1|کتل}}",
 	"notification-subject-page-connection": "په {{SITENAME}} کې يو مخ چې تاسو {{GENDER:$3|جوړ کړی وو}} له {{WBREPONAME}} توکي سره {{GENDER:$2|وتړل شو}}",

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Gadu Israel",
+			"Gaison001",
+			"Kambai Akau",
+			"Rwang PS"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} pye",
+	"wikibase-editlinks": "Yong",
+	"wikibase-addlinkstitle": "Gwe lêm bere eji lang",
+	"wikibase-linkitem-addlinks": "Gwelang",
+	"wikibase-linkitem-title": "Wuna di lang",
+	"wikibase-linkitem-linkpage": "Wuna da lang",
+	"wikibase-linkitem-selectlink": "Ra niri da kasa kwon da lang dè how simo da Wuna wota lang hemo.",
+	"wikibase-linkitem-input-site": "Lêm:",
+	"wikibase-linkitem-input-page": "Lang:",
+	"wikibase-rc-hide-wikidata-hide": "Lere",
+	"wikibase-rc-hide-wikidata-show": "Nuna",
+	"wikibase-otherprojects": "Eji vwang befwom o"
+}
