@@ -33440,7 +33440,7 @@
     },
     "/v0/suggest/items": {
       "get": {
-        "operationId": "simpleItemSuggest",
+        "operationId": "suggestItems",
         "tags": [
           "item search"
         ],
@@ -33673,7 +33673,7 @@
     },
     "/v0/suggest/properties": {
       "get": {
-        "operationId": "simplePropertySuggest",
+        "operationId": "suggestProperties",
         "tags": [
           "property search"
         ],

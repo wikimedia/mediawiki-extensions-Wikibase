@@ -57,7 +57,7 @@ const openapi = {
 		},
 		"/v0/suggest/items": {
 			"get": {
-				"operationId": "simpleItemSuggest",
+				"operationId": "suggestItems",
 				"tags": [ "item search" ],
 				"summary": "Simple Item search by prefix, for labels and aliases",
 				"parameters": [
@@ -77,7 +77,7 @@ const openapi = {
 		},
 		"/v0/suggest/properties": {
 			"get": {
-				"operationId": "simplePropertySuggest",
+				"operationId": "suggestProperties",
 				"tags": [ "property search" ],
 				"summary": "[WIP] Simple Property search by prefix, for labels and aliases",
 				"description": "This endpoint is currently in development and is not recommended for production use.",
