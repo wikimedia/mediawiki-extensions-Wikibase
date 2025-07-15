@@ -87,9 +87,8 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 		);
 		$hash = $snak->getHash();
 
-		// @codingStandardsIgnoreStart
+		// phpcs:ignore
 		$expected = sha1( 'C:48:"Wikibase\DataModel\Snak\DerivedPropertyValueSnak":58:{a:2:{i:0;s:2:"P1";i:1;C:22:"DataValues\StringValue":1:{a}}}' );
-		// @codingStandardsIgnoreEnd
 		$this->assertSame( $expected, $hash );
 	}
 

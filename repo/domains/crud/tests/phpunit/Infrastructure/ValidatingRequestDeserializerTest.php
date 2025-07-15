@@ -403,7 +403,7 @@ class ValidatingRequestDeserializerTest extends TestCase {
 
 }
 
-// @codingStandardsIgnoreStart Various rules are unhappy about these interface one-liners, but there isn't much that can go wrong...
+// phpcs:disable -- Various rules are unhappy about these interface one-liners, but there isn't much that can go wrong...
 // We're creating some combined interfaces here because PHPUnit 9 does not support stubbing multiple interfaces
 interface ItemIdUseCaseRequest extends UseCaseRequest, ItemIdRequest {}
 interface PropertyIdUseCaseRequest extends UseCaseRequest, PropertyIdRequest {}
@@ -421,10 +421,7 @@ interface PropertyLabelEditUseCaseRequest extends UseCaseRequest, PropertyLabelE
 interface ItemDescriptionEditUseCaseRequest extends UseCaseRequest, ItemDescriptionEditRequest {}
 interface PropertyDescriptionEditUseCaseRequest extends UseCaseRequest, PropertyDescriptionEditRequest {}
 interface PropertyFieldsUseCaseRequest extends UseCaseRequest, PropertyFieldsRequest {}
-
-interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {
-
-}
+interface SiteIdUseCaseRequest extends UseCaseRequest, SiteIdRequest {}
 interface SitelinkUseCaseRequest extends UseCaseRequest, SitelinkEditRequest {}
 interface StatementItemIdUseCaseRequest extends UseCaseRequest, ItemStatementIdRequest {}
 interface StatementPropertyIdUseCaseRequest extends UseCaseRequest, PropertyStatementIdRequest {}
@@ -433,4 +430,4 @@ class NullValidator {
 		return null;
 	}
 }
-// @codingStandardsIgnoreEnd
+// phpcs:enable
