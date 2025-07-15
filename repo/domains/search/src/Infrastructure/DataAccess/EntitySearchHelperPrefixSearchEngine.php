@@ -5,20 +5,23 @@ namespace Wikibase\Repo\Domains\Search\Infrastructure\DataAccess;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
+use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine {
+class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, PropertyPrefixSearchEngine {
 	public function __construct(
 		// @phan-suppress-next-line PhanUndeclaredTypeParameter, PhanUndeclaredTypeProperty WikibaseCirrusSearch is ok here
 		private EntitySearchHelperFactory $searchHelperFactory,
@@ -45,12 +48,33 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine {
 			$limit
 		);
 
-		return new ItemSearchResults( ...array_map( $this->convertResult( ... ), $results ) );
+		return new ItemSearchResults( ...array_map( $this->convertResult( ItemSearchResult::class ), $results ) );
 	}
 
-	private function convertResult( TermSearchResult $result ): ItemSearchResult {
-		return new ItemSearchResult(
-			new ItemId( $result->getEntityId()->getSerialization() ),
+	public function suggestProperties( string $searchTerm, string $languageCode, int $limit, int $offset ): PropertySearchResults {
+		$results = array_slice(
+			// @phan-suppress-next-line PhanUndeclaredClassMethod
+			$this->searchHelperFactory->newItemSearchForResultLanguage( // FIXME: This looks wrong but probably works fine. Fix in T399274.
+				$this->request,
+				$this->languageFactory->getLanguage( $languageCode )
+			)->getRankedSearchResults(
+				$searchTerm,
+				$languageCode,
+				Property::ENTITY_TYPE,
+				$limit + $offset + 1,
+				false,
+				null
+			),
+			$offset,
+			$limit
+		);
+
+		return new PropertySearchResults( ...array_map( $this->convertResult( PropertySearchResult::class ), $results ) );
+	}
+
+	private function convertResult( string $resultClass ): callable {
+		return fn( TermSearchResult $result ) => new $resultClass(
+			$result->getEntityId(),
 			$result->getDisplayLabel()
 				? new Label( $result->getDisplayLabel()->getLanguageCode(), $result->getDisplayLabel()->getText() )
 				: null,

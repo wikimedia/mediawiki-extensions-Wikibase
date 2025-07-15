@@ -9,6 +9,8 @@ use MediaWiki\Request\WebRequest;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -17,6 +19,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
@@ -168,6 +172,146 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 						new MatchedData( 'label', 'en', $potato['label'] )
 					),
 					array_slice( $potatoList, 5, 5 )
+				)
+			),
+			5,
+			5,
+		];
+	}
+
+	/**
+	 * @dataProvider propertySearchResultsProvider
+	 */
+	public function testPropertySearch(
+		array $results,
+		PropertySearchResults $expected,
+		int $limit = 10,
+		int $offset = 0
+	): void {
+		$searchTerm = 'subcla';
+		$language = 'en';
+
+		$entitySearchHelper = $this->createMock( EntitySearchHelper::class );
+		$entitySearchHelper->expects( $this->once() )
+			->method( 'getRankedSearchResults' )
+			->with( $searchTerm, $language, Property::ENTITY_TYPE, $limit + $offset + 1, false, null )
+			->willReturn( $results );
+
+			$this->assertEquals(
+				$expected,
+				$this->newSearchEngine( $entitySearchHelper )->suggestProperties( $searchTerm, $language, $limit, $offset )
+			);
+	}
+
+	public static function propertySearchResultsProvider(): Generator {
+		yield 'no results' => [ [], new PropertySearchResults() ];
+		yield 'some results' => [
+			[
+				new TermSearchResult(
+					new Term( 'en', 'property label' ),
+					'label',
+					new NumericPropertyId( 'P123' ),
+					new Term( 'en', 'property label' ),
+					new Term( 'en', 'property description' )
+				),
+				new TermSearchResult(
+					new Term( 'en', 'property 2 label' ),
+					'label',
+					new NumericPropertyId( 'P321' ),
+					new Term( 'en', 'property 2 label' ),
+					new Term( 'en', 'property 2 description' )
+				),
+			],
+			new PropertySearchResults(
+				new PropertySearchResult(
+					new NumericPropertyId( 'P123' ),
+					new Label( 'en', 'property label' ),
+					new Description( 'en', 'property description' ),
+					new MatchedData( 'label', 'en', 'property label' )
+				),
+				new PropertySearchResult(
+					new NumericPropertyId( 'P321' ),
+					new Label( 'en', 'property 2 label' ),
+					new Description( 'en', 'property 2 description' ),
+					new MatchedData( 'label', 'en', 'property 2 label' )
+				)
+			),
+		];
+		yield 'alias as display label' => [
+			[
+				new TermSearchResult(
+					new Term( 'en', 'property alias' ),
+					'alias',
+					new NumericPropertyId( 'P123' ),
+					new Term( 'en', 'property alias' ),
+					new Term( 'en', 'property description' )
+				),
+			],
+			new PropertySearchResults(
+				new PropertySearchResult(
+					new NumericPropertyId( 'P123' ),
+					new Label( 'en', 'property alias' ),
+					new Description( 'en', 'property description' ),
+					new MatchedData( 'alias', 'en', 'property alias' )
+				)
+			),
+		];
+
+		$propertyList = array_map(
+			fn( int $i ) => [
+				'id' => "P12$i",
+				'label' => "property $i",
+				'description' => "property description $i",
+			],
+			range( 1, 11 )
+		);
+
+		yield 'pagination result with limit' => [
+			array_map(
+				fn( array $property ) => new TermSearchResult(
+					new Term( 'en', $property['label'] ),
+					'label',
+					new NumericPropertyId( $property['id'] ),
+					new Term( 'en', $property['label'] ),
+					new Term( 'en', $property['description'] )
+				),
+				$propertyList
+			),
+			new PropertySearchResults(
+				...array_map(
+					fn( array $property ) => new PropertySearchResult(
+						new NumericPropertyId( $property['id'] ),
+						new Label( 'en', $property['label'] ),
+						new Description( 'en', $property['description'] ),
+						new MatchedData( 'label', 'en', $property['label'] )
+					),
+					array_slice( $propertyList, 0, 5 )
+				)
+			),
+			5,
+			0,
+		];
+
+		yield 'pagination result with offset and limit' => [
+			array_map(
+				fn( array $property ) => new TermSearchResult(
+					new Term( 'en', $property['label'] ),
+					'label',
+					new NumericPropertyId( $property['id'] ),
+					new Term( 'en', $property['label'] ),
+					new Term( 'en', $property['description'] )
+				),
+				$propertyList
+			),
+			new PropertySearchResults(
+				...array_map(
+					fn( array $property ) => new PropertySearchResult(
+						new NumericPropertyId( $property['id'] ),
+						new Label( 'en', $property['label'] ),
+						new Description( 'en', $property['description'] ),
+						new MatchedData( 'label', 'en', $property['label'] )
+					),
+					array_slice( $propertyList, 5, 5 )
 				)
 			),
 			5,
