@@ -71,13 +71,13 @@ module.exports = {
 							"id": "P123",
 							"display-label": { "language": "en", "value": "taxon name" },
 							"description": { "language": "en", "value": "scientific name of a taxon" },
-							"match": { "type": "label", "language": "en", "text": "taxon" }
+							"match": { "type": "label", "language": "en", "text": "taxon name" }
 						},
 						{
 							"id": "P234",
 							"display-label": { "language": "en", "value": "taxon rank" },
 							"description": { "language": "en", "value": "level in a taxonomic hierarchy" },
-							"match": { "type": "label", "language": "en", "text": "taxon" }
+							"match": { "type": "label", "language": "en", "text": "taxon rank" }
 						}
 					]
 				}
@@ -102,6 +102,30 @@ module.exports = {
 							"display-label": { "language": "en", "value": "potato" },
 							"description": { "language": "en", "value": "staple food" },
 							"match": { "type": "label", "language": "en", "text": "potato" }
+						}
+					]
+				}
+			}
+		}
+	},
+	"SuggestPropertySuccess": {
+		"description": "A list of search results",
+		"content": {
+			"application/json": {
+				"schema": schemaParts.SearchPropertyResultList,
+				"example": {
+					"results": [
+						{
+							"id": "P123",
+							"display-label": { "language": "en", "value": "taxon name" },
+							"description": { "language": "en", "value": "scientific name of a taxon" },
+							"match": { "type": "label", "language": "en", "text": "taxon name" }
+						},
+						{
+							"id": "P234",
+							"display-label": { "language": "en", "value": "taxon rank" },
+							"description": { "language": "en", "value": "level in a taxonomic hierarchy" },
+							"match": { "type": "label", "language": "en", "text": "taxon rank" }
 						}
 					]
 				}

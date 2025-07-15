@@ -74,6 +74,27 @@ const openapi = {
 					"400": { "$ref": "#/components/responses/BadRequest" }
 				}
 			}
+		},
+		"/v0/suggest/properties": {
+			"get": {
+				"operationId": "simplePropertySuggest",
+				"tags": [ "property search" ],
+				"summary": "[WIP] Simple Property search by prefix, for labels and aliases",
+				"description": "This endpoint is currently in development and is not recommended for production use.",
+				"parameters": [
+					{
+						...parameters.SearchQuery,
+						"example": "taxon"
+					},
+					{ "$ref": "#/components/parameters/SearchLanguage" },
+					{ "$ref": "#/components/parameters/Limit" },
+					{ "$ref": "#/components/parameters/Offset" },
+				],
+				"responses": {
+					"200": { "$ref": "#/components/responses/SuggestPropertySuccess" },
+					"400": { "$ref": "#/components/responses/BadRequest" }
+				}
+			}
 		}
 	},
 	"components": {
