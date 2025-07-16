@@ -12,6 +12,7 @@ use MediaWiki\Tests\Rest\Handler\HandlerTestTrait;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -108,6 +109,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			'useCase' => ItemPrefixSearch::class,
 			'path' => '/wikibase/v0/suggest/items',
 			'serviceName' => 'WbSearch.ItemPrefixSearch',
+		] ];
+
+		yield 'PropertyPrefixSearch' => [ [
+			'useCase' => PropertyPrefixSearch::class,
+			'path' => '/wikibase/v0/suggest/properties',
+			'serviceName' => 'WbSearch.PropertyPrefixSearch',
 		] ];
 	}
 

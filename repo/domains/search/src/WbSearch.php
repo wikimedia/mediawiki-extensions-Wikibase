@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
@@ -51,6 +52,11 @@ class WbSearch {
 	public static function getItemPrefixSearch( ?ContainerInterface $services = null ): ItemPrefixSearch {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbSearch.ItemPrefixSearch' );
+	}
+
+	public static function getPropertyPrefixSearch( ?ContainerInterface $services = null ): PropertyPrefixSearch {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbSearch.PropertyPrefixSearch' );
 	}
 
 }
