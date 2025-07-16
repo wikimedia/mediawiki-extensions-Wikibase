@@ -4,16 +4,17 @@
 			"Gadu Israel",
 			"Gaison001",
 			"Kambai Akau",
-			"Rwang PS"
+			"Rwang PS",
+			"Sarah Niya Danbwarang"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} pye",
 	"wikibase-editlinks": "Yong",
 	"wikibase-addlinkstitle": "Gwe lêm bere eji lang",
-	"wikibase-linkitem-addlinks": "Gwelang",
-	"wikibase-linkitem-title": "Wuna di lang",
+	"wikibase-linkitem-addlinks": "Gwɛ nelang",
+	"wikibase-linkitem-title": "Wuna na lang",
 	"wikibase-linkitem-linkpage": "Wuna da lang",
-	"wikibase-linkitem-selectlink": "Ra niri da kasa kwon da lang dè how simo da Wuna wota lang hemo.",
+	"wikibase-linkitem-selectlink": "Gabɔk kasa kwon na lang dè hwo simo na hwo Wuna na lang hemo.",
 	"wikibase-linkitem-input-site": "Lêm:",
 	"wikibase-linkitem-input-page": "Lang:",
 	"wikibase-rc-hide-wikidata-hide": "Lere",
