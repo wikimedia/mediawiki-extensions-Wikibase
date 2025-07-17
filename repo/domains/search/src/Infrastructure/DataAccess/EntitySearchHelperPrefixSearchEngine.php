@@ -33,7 +33,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 	public function suggestItems( string $searchTerm, string $languageCode, int $limit, int $offset ): ItemSearchResults {
 		$results = array_slice(
 			// @phan-suppress-next-line PhanUndeclaredClassMethod
-			$this->searchHelperFactory->newItemSearchForResultLanguage(
+			$this->searchHelperFactory->newItemPropertySearchHelper(
 				$this->request,
 				$this->languageFactory->getLanguage( $languageCode )
 			)->getRankedSearchResults(
@@ -54,7 +54,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 	public function suggestProperties( string $searchTerm, string $languageCode, int $limit, int $offset ): PropertySearchResults {
 		$results = array_slice(
 			// @phan-suppress-next-line PhanUndeclaredClassMethod
-			$this->searchHelperFactory->newItemSearchForResultLanguage( // FIXME: This looks wrong but probably works fine. Fix in T399274.
+			$this->searchHelperFactory->newItemPropertySearchHelper(
 				$this->request,
 				$this->languageFactory->getLanguage( $languageCode )
 			)->getRankedSearchResults(

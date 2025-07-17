@@ -321,7 +321,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 
 	public function newSearchEngine( EntitySearchHelper $entitySearchHelper ): EntitySearchHelperPrefixSearchEngine {
 		$searchHelperFactory = $this->createMock( EntitySearchHelperFactory::class );
-		$searchHelperFactory->method( 'newItemSearchForResultLanguage' )
+		$searchHelperFactory->method( 'newItemPropertySearchHelper' )
 			->willReturn( $entitySearchHelper );
 
 		return new EntitySearchHelperPrefixSearchEngine(
