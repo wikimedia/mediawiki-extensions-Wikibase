@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch;
 
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 
 /**
@@ -15,6 +16,9 @@ class ItemPrefixSearch {
 	) {
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( ItemPrefixSearchRequest $itemRequest ): ItemPrefixSearchResponse {
 		$this->validator->validate( $itemRequest );
 
