@@ -7,6 +7,7 @@ use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\WbSearch;
@@ -46,12 +47,16 @@ class PropertyPrefixSearchRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase(): Response {
-		$useCaseResponse = $this->useCase->execute( new PropertyPrefixSearchRequest(
-			$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
-			$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
-			$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_LIMIT,
-			$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_OFFSET
-		) );
+		try {
+			$useCaseResponse = $this->useCase->execute( new PropertyPrefixSearchRequest(
+				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
+				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
+				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_LIMIT,
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_OFFSET
+			) );
+		} catch ( UseCaseError $e ) {
+			return $this->responseFactory->newUseCaseErrorResponse( $e );
+		}
 
 		return $this->responseFactory->newSuccessResponse(
 			[ 'results' => $this->formatResults( $useCaseResponse->results ) ]

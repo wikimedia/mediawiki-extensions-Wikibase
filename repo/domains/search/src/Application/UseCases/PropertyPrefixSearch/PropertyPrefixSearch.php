@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch;
 
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 
 /**
@@ -10,11 +11,17 @@ use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 class PropertyPrefixSearch {
 
 	public function __construct(
+		private PropertyPrefixSearchValidator $validator,
 		private PropertyPrefixSearchEngine $searchEngine
 	) {
 	}
 
+	/**
+	 * @throws UseCaseError
+	 */
 	public function execute( PropertyPrefixSearchRequest $searchRequest ): PropertyPrefixSearchResponse {
+		$this->validator->validate( $searchRequest );
+
 		return new PropertyPrefixSearchResponse( $this->searchEngine->suggestProperties(
 			$searchRequest->query,
 			$searchRequest->language,

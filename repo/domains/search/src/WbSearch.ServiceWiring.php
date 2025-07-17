@@ -8,6 +8,7 @@ use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
+use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
@@ -79,6 +80,7 @@ return [
 
 	'WbSearch.PropertyPrefixSearch' => function( MediaWikiServices $services ): PropertyPrefixSearch {
 		return new PropertyPrefixSearch(
+			new PropertyPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
 			new EntitySearchHelperPrefixSearchEngine(
 			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
 				EntitySearchHelperFactory::newFromGlobalState(),

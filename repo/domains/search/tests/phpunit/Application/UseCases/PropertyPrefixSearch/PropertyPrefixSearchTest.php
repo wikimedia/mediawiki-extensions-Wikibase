@@ -3,8 +3,10 @@
 namespace Wikibase\Repo\Tests\Domains\Search\Application\UseCases\PropertyPrefixSearch;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 
@@ -32,13 +34,36 @@ class PropertyPrefixSearchTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedResults,
-			$this->newUseCase( $searchEngine )
-				->execute( new PropertyPrefixSearchRequest( $query, $language, $limit, $offset ) )
+			$this->newUseCase(
+				$this->createStub( PropertyPrefixSearchValidator::class ),
+				$searchEngine
+			)->execute( new PropertyPrefixSearchRequest( $query, $language, $limit, $offset ) )
 				->results
 		);
 	}
 
-	private function newUseCase( PropertyPrefixSearchEngine $searchEngine ): PropertyPrefixSearch {
-		return new PropertyPrefixSearch( $searchEngine );
+	public function testValidatesTheRequest(): void {
+		$request = $this->createStub( PropertyPrefixSearchRequest::class );
+		$expectedException = $this->createStub( UseCaseError::class );
+
+		$validator = $this->createMock( PropertyPrefixSearchValidator::class );
+		$validator->expects( $this->once() )
+			->method( 'validate' )
+			->with( $request )
+			->willThrowException( $expectedException );
+
+		try {
+			$this->newUseCase( $validator, $this->createStub( PropertyPrefixSearchEngine::class ) )->execute( $request );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
+	}
+
+	private function newUseCase(
+		PropertyPrefixSearchValidator $validator,
+		PropertyPrefixSearchEngine $searchEngine
+	): PropertyPrefixSearch {
+		return new PropertyPrefixSearch( $validator, $searchEngine );
 	}
 }
