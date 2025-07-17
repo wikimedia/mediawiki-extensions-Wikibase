@@ -37,8 +37,7 @@ class ItemPrefixSearchTest extends TestCase {
 			$this->newUseCase(
 				$this->createStub( ItemPrefixSearchValidator::class ),
 				$searchEngine
-			)->execute( new ItemPrefixSearchRequest( $query, $language, $limit, $offset ) )
-				->getResults()
+			)->execute( new ItemPrefixSearchRequest( $query, $language, $limit, $offset ) )->results
 		);
 	}
 

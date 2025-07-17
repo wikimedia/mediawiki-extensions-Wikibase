@@ -37,7 +37,7 @@ class SimplePropertySearchTest extends TestCase {
 			$expectedResults,
 			$this->newUseCase( $validator, $searchEngine )
 				->execute( new SimplePropertySearchRequest( $query, $language, $limit, $offset ) )
-				->getResults()
+				->results
 		);
 	}
 

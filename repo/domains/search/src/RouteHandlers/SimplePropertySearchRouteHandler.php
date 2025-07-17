@@ -59,7 +59,7 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 		}
 
 		return $this->responseFactory->newSuccessResponse(
-			[ 'results' => $this->formatResults( $useCaseResponse->getResults() ) ]
+			[ 'results' => $this->formatResults( $useCaseResponse->results ) ]
 		);
 	}
 

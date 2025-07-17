@@ -36,7 +36,7 @@ class SimpleItemSearchTest extends TestCase {
 			$expectedResults,
 			$this->newUseCase( $this->createStub( SimpleItemSearchValidator::class ), $searchEngine )
 				->execute( new SimpleItemSearchRequest( $query, $language, $limit, $offset ) )
-				->getResults()
+				->results
 		);
 	}
 

@@ -8,15 +8,6 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
  * @license GPL-2.0-or-later
  */
 class ItemPrefixSearchResponse {
-
-	private ItemSearchResults $results;
-
-	public function __construct( ItemSearchResults $results ) {
-		$this->results = $results;
+	public function __construct( public readonly ItemSearchResults $results ) {
 	}
-
-	public function getResults(): ItemSearchResults {
-		return $this->results;
-	}
-
 }
