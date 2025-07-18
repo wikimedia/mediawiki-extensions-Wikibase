@@ -1045,7 +1045,15 @@ final class RepoHooks implements
 		};
 		$defaults['wbMobile'] = null;
 		$inCacheKey['wbMobile'] = true;
-		$lazyLoad['wbMobile'] = fn () => WikibaseRepo::getMobileSite();
+		$lazyLoad['wbMobile'] = function () {
+			if ( WikibaseRepo::getMobileSite() ) {
+				if ( WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' ) ) {
+					return 'wbui2025';
+				}
+				return true;
+			}
+			return false;
+		};
 	}
 
 	/** @inheritDoc */

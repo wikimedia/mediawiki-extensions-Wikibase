@@ -356,11 +356,23 @@ XML
 		$this->assertSame( $altLinks, $outputPage->getLinkTags() );
 	}
 
-	public function testOnParserOptionsRegister() {
+	public static function provideWbUi2025Setting() {
+		yield 'wbUi2025 disabled mobile site enabled' => [ true, false, true ];
+		yield 'wbUi2025 enabled mobile site disabled' => [ false, true, false ];
+		yield 'wbUi2025 enabled mobile site enabled' => [ true, true, 'wbui2025' ];
+	}
+
+	/**
+	 * @dataProvider provideWbUi2025Setting
+	 */
+	public function testOnParserOptionsRegister( bool $mobileSite, bool $tmpMobileEditingUI, bool|string $expectedWbMobileValue ) {
 		$defaults = [];
 		$inCacheKey = [];
 		$lazyOptions = [];
-		$this->setService( 'WikibaseRepo.MobileSite', true );
+		$this->setService( 'WikibaseRepo.MobileSite', fn() => $mobileSite );
+		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( [
+			'tmpMobileEditingUI' => $tmpMobileEditingUI,
+		] ) );
 
 		( new RepoHooks )->onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
 
@@ -383,7 +395,7 @@ XML
 		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
 		$this->assertIsCallable( $lazyOptions[ 'termboxVersion' ] );
 		$this->assertIsCallable( $lazyOptions[ 'wbMobile' ] );
-		$this->assertSame( true, $lazyOptions[ 'wbMobile' ]() );
+		$this->assertSame( $expectedWbMobileValue, $lazyOptions[ 'wbMobile' ]() );
 	}
 
 	public function testOnParserOptionsRegister_hook() {
