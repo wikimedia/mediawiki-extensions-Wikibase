@@ -23,7 +23,8 @@
 			// for the first statement associated with each property
 			for ( const propertyId of propertyIds ) {
 				const rootProps = {
-					statement: statements[ propertyId ][ 0 ]
+					statements: statements[ propertyId ],
+					propertyId
 				};
 				const rootContainer = mexStatementList.querySelector( `#wikibase-mex-statementwrapper-${ propertyId }` );
 				Vue.createMwApp( App, rootProps )

@@ -958,6 +958,7 @@ final class RepoHooks implements
 			$modules['wikibase.mobileUi.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.less',
+					'resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.references.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.less',
@@ -969,6 +970,7 @@ final class RepoHooks implements
 					'resources/wikibase.mobileUi.entityViewInit.js',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.references.vue',
+					'resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue',

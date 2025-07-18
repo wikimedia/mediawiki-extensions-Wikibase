@@ -40,7 +40,8 @@ describe( 'wikibase.mobileUi.statementView', () => {
 		beforeEach( async () => {
 			wrapper = await mount( statementView, {
 				props: {
-					statement: mockStatement
+					statements: [ mockStatement ],
+					propertyId: 'P1'
 				},
 				global: {
 					plugins: [ createTestingPinia( {
@@ -61,11 +62,11 @@ describe( 'wikibase.mobileUi.statementView', () => {
 
 		it( 'the component and child components/elements mount successfully', async () => {
 			expect( wrapper.exists() ).toBeTruthy();
-			expect( wrapper.findAll( '.wikibase-mex-statement' ) ).toHaveLength( 1 );
+			expect( wrapper.findAll( '.wikibase-wbui2025-statement-group' ) ).toHaveLength( 1 );
 		} );
 
 		it( 'sets the right content on claim elements', async () => {
-			const statements = wrapper.findAll( '.wikibase-mex-statement' );
+			const statements = wrapper.findAll( '.wikibase-wbui2025-statement-group' );
 			const statement = statements[ 0 ];
 			expect( statement.find( '.wikibase-mex-property-name a' ).text() ).toBe( mockStatement.mainsnak.property );
 			expect( statement.find( '.wikibase-mex-property-name a' ).element.href ).toContain( 'mock-property-url' );

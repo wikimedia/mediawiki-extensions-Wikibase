@@ -200,26 +200,32 @@ class ItemView extends EntityView {
 	}
 
 	/**
-	 * @param Statement $statement
+	 * @param string $propertyId
+	 * @param Statement[] $statements
 	 * @param App $app
+	 * @param array &$snakHtmlLookup
 	 * @return string HTML
 	 */
-	private function getVueStatementHtml( Statement $statement, App $app, array &$snakHtmlLookup ): string {
-		$mainSnak = $statement->getMainSnak();
-		$statementSerializer = $this->serializerFactory->newStatementSerializer();
-		// XXX: The serialization is mostly unused (only "propertyId" seems to be used)
-		$statementData = $statementSerializer->serialize( $statement );
+	private function getVueStatementHtml( string $propertyId, array $statements, App $app, array &$snakHtmlLookup ): string {
+		$statementsData = [];
+		foreach ( $statements as $statement ) {
+			$mainSnak = $statement->getMainSnak();
+			$statementSerializer = $this->serializerFactory->newStatementSerializer();
+			$statementData = $statementSerializer->serialize( $statement );
 
-		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
-		$statementData['mainsnak']['datatype'] = $dataType;
-		$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
-		$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
-		if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
-			$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+			$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
+			$statementData['mainsnak']['datatype'] = $dataType;
+			$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
+			$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
+			if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
+				$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+			}
+			$statementsData[] = $statementData;
 		}
 
 		return $app->renderComponent( 'mex-statement', [
-			'statement' => $statementData,
+			'statements' => $statementsData,
+			'propertyId' => $propertyId,
 		] );
 	}
 
@@ -235,6 +241,10 @@ class ItemView extends EntityView {
 		$app->registerComponentTemplate(
 			'mex-statement',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' ),
+		);
+		$app->registerComponentTemplate(
+			'mex-statement-detail',
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.vue' ),
 			function ( array $data ): array {
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
@@ -293,8 +303,8 @@ class ItemView extends EntityView {
 		$rendered = '';
 		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
 		foreach ( $item->getStatements()->getPropertyIds() as $propertyId ) {
-			$statement = $item->getStatements()->getByPropertyId( $propertyId )->toArray()[ 0 ];
-			$renderedStatement = $this->getVueStatementHtml( $statement, $app, $snakHtmlLookup );
+			$statements = $item->getStatements()->getByPropertyId( $propertyId )->toArray();
+			$renderedStatement = $this->getVueStatementHtml( $propertyId, $statements, $app, $snakHtmlLookup );
 			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}
 
