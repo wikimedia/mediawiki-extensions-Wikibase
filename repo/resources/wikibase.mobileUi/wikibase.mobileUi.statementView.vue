@@ -23,6 +23,10 @@
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}
 		</div>
+		<mex-qualifiers
+			:qualifiers="qualifiers"
+			:qualifiers-order="qualifiersOrder">
+		</mex-qualifiers>
 		<mex-references
 			:references="references"
 			:show-references="false"
@@ -36,6 +40,7 @@ const MexPropertyName = require( './wikibase.mobileUi.propertyName.vue' );
 const MexMainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
 const { snakHtml } = require( './store/serverRenderedHtml.js' );
 const MexReferences = require( './wikibase.mobileUi.references.vue' );
+const MexQualifiers = require( './wikibase.mobileUi.qualifiers.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -43,7 +48,8 @@ module.exports = exports = defineComponent( {
 	components: {
 		MexPropertyName,
 		MexMainSnak,
-		MexReferences
+		MexReferences,
+		MexQualifiers
 	},
 	props: {
 		statement: {
@@ -59,6 +65,12 @@ module.exports = exports = defineComponent( {
 	computed: {
 		references() {
 			return ( this.statement.references ? this.statement.references : [] );
+		},
+		qualifiers() {
+			return ( this.statement.qualifiers ? this.statement.qualifiers : [] );
+		},
+		qualifiersOrder() {
+			return ( this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [] );
 		},
 		statementDump() {
 			return JSON.stringify( this.statement );

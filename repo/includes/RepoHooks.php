@@ -957,6 +957,7 @@ final class RepoHooks implements
 		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
 			$modules['wikibase.mobileUi.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
+					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.references.less',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.less',
@@ -966,6 +967,7 @@ final class RepoHooks implements
 			$modules['wikibase.mobileUi.entityViewInit'] = $moduleTemplate + [
 				'packageFiles' => [
 					'resources/wikibase.mobileUi.entityViewInit.js',
+					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.references.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
 					'resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue',
@@ -980,6 +982,7 @@ final class RepoHooks implements
 					'wikibase.mobileUi.entityView.styles',
 				],
 				'messages' => [
+					'wikibase-statementview-qualifiers-counter',
 					'wikibase-statementview-references-counter',
 				],
 			];

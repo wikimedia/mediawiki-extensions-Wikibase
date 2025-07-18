@@ -183,6 +183,22 @@ class ItemView extends EntityView {
 		}
 	}
 
+	private function populateQualifierSnakHtml( Statement $statement, array $statementData, array &$snakHtmlLookup ) {
+		if (
+			!array_key_exists( 'qualifiers', $statementData ) ||
+			!array_key_exists( 'qualifiers-order', $statementData ) ||
+			!$statementData['qualifiers']
+		) {
+			return;
+		}
+		foreach ( $statementData['qualifiers-order'] as $propertyId ) {
+			foreach ( $statementData['qualifiers'][$propertyId] as $qualifierData ) {
+				$qualifier = $statement->getQualifiers()->getSnak( $qualifierData['hash'] );
+				$snakHtmlLookup[$qualifierData['hash']] = $this->snakHtmlGenerator->getSnakHtml( $qualifier, true );
+			}
+		}
+	}
+
 	/**
 	 * @param Statement $statement
 	 * @param App $app
@@ -197,6 +213,7 @@ class ItemView extends EntityView {
 		$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
 		$statementData['mainsnak']['datatype'] = $dataType;
 		$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
+		$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
 		if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
 			$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
 		}
@@ -220,6 +237,9 @@ class ItemView extends EntityView {
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' ),
 			function ( array $data ): array {
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
+				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
+				$data['qualifiersOrder'] =
+					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
 				$data['statementDump'] = json_encode( $data['statement'] );
 				return $data;
 			}
@@ -252,6 +272,20 @@ class ItemView extends EntityView {
 					],
 				);
 				$data['showReferences'] = false;
+				return $data;
+			}
+		);
+		$app->registerComponentTemplate(
+			'mex-qualifiers',
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.vue' ),
+			function ( array $data ): array {
+				$qualifierCount = count( $data['qualifiers'] );
+				$data['hasQualifiers'] = $qualifierCount > 0;
+				$data['qualifiersMessage'] = $this->textProvider->getEscaped(
+					'wikibase-statementview-qualifiers-counter', [
+						strval( $qualifierCount ),
+					],
+				);
 				return $data;
 			}
 		);
