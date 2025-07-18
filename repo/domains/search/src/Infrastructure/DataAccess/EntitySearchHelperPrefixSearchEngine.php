@@ -31,28 +31,21 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 	}
 
 	public function suggestItems( string $searchTerm, string $languageCode, int $limit, int $offset ): ItemSearchResults {
-		$results = array_slice(
-			// @phan-suppress-next-line PhanUndeclaredClassMethod
-			$this->searchHelperFactory->newItemPropertySearchHelper(
-				$this->request,
-				$this->languageFactory->getLanguage( $languageCode )
-			)->getRankedSearchResults(
-				$searchTerm,
-				$languageCode,
-				Item::ENTITY_TYPE,
-				$limit + $offset + 1,
-				false,
-				null
-			),
-			$offset,
-			$limit
-		);
-
-		return new ItemSearchResults( ...array_map( $this->convertResult( ItemSearchResult::class ), $results ) );
+		return new ItemSearchResults( ...array_map(
+			$this->convertResult( ItemSearchResult::class ),
+			$this->suggestEntities( Item::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset )
+		) );
 	}
 
 	public function suggestProperties( string $searchTerm, string $languageCode, int $limit, int $offset ): PropertySearchResults {
-		$results = array_slice(
+		return new PropertySearchResults( ...array_map(
+			$this->convertResult( PropertySearchResult::class ),
+			$this->suggestEntities( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset )
+		) );
+	}
+
+	private function suggestEntities( string $entityType, string $searchTerm, string $languageCode, int $limit, int $offset ): array {
+		return array_slice(
 			// @phan-suppress-next-line PhanUndeclaredClassMethod
 			$this->searchHelperFactory->newItemPropertySearchHelper(
 				$this->request,
@@ -60,7 +53,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 			)->getRankedSearchResults(
 				$searchTerm,
 				$languageCode,
-				Property::ENTITY_TYPE,
+				$entityType,
 				$limit + $offset + 1,
 				false,
 				null
@@ -68,8 +61,6 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 			$offset,
 			$limit
 		);
-
-		return new PropertySearchResults( ...array_map( $this->convertResult( PropertySearchResult::class ), $results ) );
 	}
 
 	private function convertResult( string $resultClass ): callable {
