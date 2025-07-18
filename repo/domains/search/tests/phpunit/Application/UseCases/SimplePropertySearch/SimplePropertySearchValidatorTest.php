@@ -41,7 +41,7 @@ class SimplePropertySearchValidatorTest extends TestCase {
 	 */
 	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
 		$this->newUseCaseValidator()
-			->validate( new SimplePropertySearchRequest( 'search term', 'en', null, null ) );
+			->validate( new SimplePropertySearchRequest( 'search term', 'en' ) );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {

@@ -29,7 +29,7 @@ class SimplePropertySearchValidator {
 	 * @throws UseCaseError
 	 */
 	public function validate( SimplePropertySearchRequest $request ): void {
-		$validationError = $this->languageValidator->validate( $request->getLanguage() );
+		$validationError = $this->languageValidator->validate( $request->language );
 
 		if ( $validationError ) {
 			switch ( $validationError->getCode() ) {
@@ -48,8 +48,8 @@ class SimplePropertySearchValidator {
 	}
 
 	private function validateLimitAndOffset( SimplePropertySearchRequest $request ): void {
-		$limit = $request->getLimit();
-		$offset = $request->getOffset();
+		$limit = $request->limit;
+		$offset = $request->offset;
 
 		if ( $limit < 0 || $limit > self::MAX_LIMIT ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );

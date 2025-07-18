@@ -51,8 +51,8 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 			$useCaseResponse = $this->useCase->execute( new SimplePropertySearchRequest(
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
 				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
-				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM],
-				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM]
+				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? SimplePropertySearchRequest::DEFAULT_LIMIT,
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? SimplePropertySearchRequest::DEFAULT_OFFSET,
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );

@@ -27,16 +27,11 @@ class SimplePropertySearch {
 	public function execute( SimplePropertySearchRequest $propertyRequest ): SimplePropertySearchResponse {
 		$this->validator->validate( $propertyRequest );
 
-		$searchTerm = $propertyRequest->getQuery();
-		$language = $propertyRequest->getLanguage();
-		$limit = $propertyRequest->getLimit();
-		$offset = $propertyRequest->getOffset();
-
 		return new SimplePropertySearchResponse( $this->searchEngine->searchPropertyByLabel(
-			$searchTerm,
-			$language,
-			$limit,
-			$offset
+			$propertyRequest->query,
+			$propertyRequest->language,
+			$propertyRequest->limit,
+			$propertyRequest->offset
 		) );
 	}
 
