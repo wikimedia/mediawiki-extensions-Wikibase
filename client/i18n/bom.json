@@ -3,18 +3,20 @@
 		"authors": [
 			"Gaison001",
 			"Kambai Akau",
-			"Rwang PS"
+			"Rwang PS",
+			"Gadu Israel",
+			"Sarah Niya Danbwarang"
 		]
 	},
-	"wikibase-dataitem": "{{pye}} pye",
+	"wikibase-dataitem": "{{WBREPONAME}} pye",
 	"wikibase-editlinks": "Yong",
-	"wikibase-addlinkstitle": "Gwe lem bere eji lang",
-	"wikibase-linkitem-addlinks": "Gwelang",
-	"wikibase-linkitem-title": "Wuna di lang",
+	"wikibase-addlinkstitle": "Gwe lêm bere eji lang",
+	"wikibase-linkitem-addlinks": "Gwɛ nelang",
+	"wikibase-linkitem-title": "Wuna na lang",
 	"wikibase-linkitem-linkpage": "Wuna da lang",
-	"wikibase-linkitem-selectlink": "Ra niri da kasa kwon da lang dè how simo da Wuna wota lang hemo",
-	"wikibase-linkitem-input-site": "Lɛm:",
-	"wikibase-linkitem-input-page": "Lang",
+	"wikibase-linkitem-selectlink": "Gabɔk kasa kwon na lang dè hwo simo na hwo Wuna na lang hemo.",
+	"wikibase-linkitem-input-site": "Lêm:",
+	"wikibase-linkitem-input-page": "Lang:",
 	"wikibase-rc-hide-wikidata-hide": "Lere",
 	"wikibase-rc-hide-wikidata-show": "Nuna",
 	"wikibase-otherprojects": "Eji vwang befwom o"
