@@ -216,8 +216,7 @@ describe( 'Item prefix search', () => {
 				.withHeader( 'user-agent', '' )
 				.makeRequest();
 
-			expect( response ).to.have.status( 400 );
-			assert.strictEqual( response.body.code, 'missing-user-agent' );
+			assertValidError( response, 400, 'missing-user-agent' );
 		} );
 
 		Object.entries( {

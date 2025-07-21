@@ -14,6 +14,7 @@ const {
 
 function assertValid400Response( response ) {
 	expect( response ).to.have.status( 400 );
+	assert.header( response, 'Content-Language', 'en' );
 	assert.strictEqual( response.body.code, 'missing-user-agent' );
 	assert.include( response.body.message, 'User-Agent' );
 }

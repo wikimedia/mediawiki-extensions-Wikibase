@@ -14,13 +14,16 @@ class UserAgentCheckMiddleware implements Middleware {
 		$request = $routeHandler->getRequest();
 
 		if ( $request->getHeaderLine( 'User-Agent' ) === '' ) {
-			return $routeHandler->getResponseFactory()->createHttpError(
+			$errorResponse = $routeHandler->getResponseFactory()->createHttpError(
 				400,
 				[
 					'code' => 'missing-user-agent',
 					'message' => 'Request must include User-Agent header',
 				]
 			);
+			$errorResponse->setHeader( 'Content-Language', 'en' );
+
+			return $errorResponse;
 		}
 
 		return $runNext();
