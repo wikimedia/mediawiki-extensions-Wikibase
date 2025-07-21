@@ -3,6 +3,7 @@
 const { assert, utils, wiki } = require( 'api-testing' );
 const { RequestBuilder } = require( '../../../../../rest-api/tests/mocha/helpers/RequestBuilder' );
 const { expect } = require( '../../../../../rest-api/tests/mocha/helpers/chaiHelper' );
+const { assertValidError } = require( '../helpers/responseValidator' );
 
 async function createItem( item ) {
 	return ( await new RequestBuilder()
@@ -16,13 +17,6 @@ function newSearchRequest( language, searchTerm ) {
 		.withRoute( 'GET', '/v0/search/items' )
 		.withQueryParam( 'language', language )
 		.withQueryParam( 'q', searchTerm );
-}
-
-function assertValidError( response, statusCode, responseBodyErrorCode, context ) {
-	expect( response ).to.have.status( statusCode );
-	assert.header( response, 'Content-Language', 'en' );
-	assert.strictEqual( response.body.code, responseBodyErrorCode );
-	assert.deepStrictEqual( response.body.context, context );
 }
 
 describe( 'Simple item search', () => {
