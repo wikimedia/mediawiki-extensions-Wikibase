@@ -561,5 +561,7 @@
 	"wikibase-scoped-search-search-entities": "Entiteiten zoeken",
 	"wikibase-scoped-search-search-entities-description": "Verschillende soorten {{SITENAME}}-entiteiten zoeken",
 	"wikibase-scoped-search-item-scope-name": "Items",
-	"wikibase-scoped-search-property-scope-name": "Eigenschappen"
+	"wikibase-scoped-search-property-scope-name": "Eigenschappen",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Mobiele bewerkingsinterface",
+	"wikibase-mobile-editing-ui-beta-feature-description": "De nieuwe, experimentele mobiele bewerkingsinterface activeren."
 }
