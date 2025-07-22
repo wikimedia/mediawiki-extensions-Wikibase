@@ -85,7 +85,7 @@
 	"wikibase-pageinfo-entity-id-none": "هېڅ",
 	"wikibase-pageinfo-description-local": "ځايي څرگنداوی",
 	"wikibase-pageinfo-description-central": "منځنی څرگنداوی",
-	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} شتونتياوې دې مخ کې کارېدلې دي",
+	"wikibase-pageinfo-entity-usage": "په دې مخ کې کارېدلې {{WBREPONAME}} شتونتياوې",
 	"wikibase-pageinfo-entity-usage-S": "وېبځي‌وېبتړ",
 	"wikibase-pageinfo-entity-usage-L": "ځينې نښلنونه",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "نښلن: $1",
