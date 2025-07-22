@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "1.3",
+    "version": "1.4",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Product Platform Team",
@@ -33677,8 +33677,7 @@
         "tags": [
           "property search"
         ],
-        "summary": "[WIP] Simple Property search by prefix, for labels and aliases",
-        "description": "This endpoint is currently in development and is not recommended for production use.",
+        "summary": "Simple Property search by prefix, for labels and aliases",
         "parameters": [
           {
             "in": "query",

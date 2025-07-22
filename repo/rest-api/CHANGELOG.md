@@ -1,5 +1,9 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
+## Version 1.4
+
+* Added endpoint `GET /wikibase/v0/suggest/properties` ([T397838](https://phabricator.wikimedia.org/T397838))
+
 ## Version 1.3
 
 * Added endpoint `GET /wikibase/v0/suggest/items` ([T388209](https://phabricator.wikimedia.org/T388209))

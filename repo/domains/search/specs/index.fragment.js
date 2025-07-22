@@ -79,8 +79,7 @@ const openapi = {
 			"get": {
 				"operationId": "suggestProperties",
 				"tags": [ "property search" ],
-				"summary": "[WIP] Simple Property search by prefix, for labels and aliases",
-				"description": "This endpoint is currently in development and is not recommended for production use.",
+				"summary": "Simple Property search by prefix, for labels and aliases",
 				"parameters": [
 					{
 						...parameters.SearchQuery,

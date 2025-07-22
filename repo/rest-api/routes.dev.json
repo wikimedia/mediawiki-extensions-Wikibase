@@ -1,7 +1,1 @@
-[
-	{
-		"path": "/wikibase/v0/suggest/properties",
-		"method": "GET",
-		"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\PropertyPrefixSearchRouteHandler::factory"
-	}
-]
+[]
