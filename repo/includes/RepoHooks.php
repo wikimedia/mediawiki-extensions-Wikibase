@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo;
 
+use GraphQL\GraphQL;
 use MediaWiki\Api\ApiEditPage;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\ApiCheckCanExecuteHook;
@@ -38,6 +39,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Skins\Hook\SkinPageReadyConfigHook;
+use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\Title\Title;
 use RuntimeException;
@@ -57,6 +59,7 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\GraphQLPrototype\SpecialWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -101,7 +104,8 @@ final class RepoHooks implements
 	TitleGetRestrictionTypesHook,
 	UnitTestsListHook,
 	WikibaseContentLanguagesHook,
-	GetPreferencesHook
+	GetPreferencesHook,
+	SpecialPage_initListHook
 {
 	/**
 	 * We implement this solely to replace the standard message that
@@ -1225,4 +1229,12 @@ final class RepoHooks implements
 		return true;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	public function onSpecialPage_initList( &$list ) {
+		if ( !class_exists( GraphQL::class ) ) {
+			unset( $list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] );
+		}
+	}
 }
