@@ -117,6 +117,7 @@
 	"wikibase-claimview-snak-tooltip": "Insire un valor correspondente á propiedade chamada \"$1\". Se a propiedade non ten ningún valor designado ou non se coñece o valor real, podes elixir un tipo de valor alternativo premendo na icona ó lado da caixa de entrada.",
 	"wikibase-claimview-snak-new-tooltip": "Despois de especificares unha propiedade podes inserir o valor correspondente. Se a propiedade non ten ningún valor designado ou non se coñece o valor real, podes elixir un tipo de valor alternativo premendo na icona ó lado da caixa de entrada.",
 	"wikibase-referenceview-tabs-manual": "Manual",
+	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|cualificativo|cualificativos}}",
 	"wikibase-statementview-rank-preferred": "Rango privilexiado",
 	"wikibase-statementview-rank-tooltip-preferred": "Valor válido e actualizado",
 	"wikibase-statementview-rank-normal": "Rango normal",

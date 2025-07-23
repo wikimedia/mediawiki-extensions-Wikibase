@@ -39,7 +39,7 @@
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "د مخ بارولو پرمهال زما په ټولو ژبو کې نښې، بل‌نومونه او سپيناوي وښاياست",
 	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "شخصي ژبې د کارن مخبڼې ژبې سره مل د [[mw:Special:MyLanguage/Extension:Babel| بابېل غځول]] سره تنظيمېدای شي.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "په دې نوم هم پېژندل کېږي",
-	"wikibase-entitytermsforlanguagelistview-description": "څرگندونه",
+	"wikibase-entitytermsforlanguagelistview-description": "څرگنداوی",
 	"wikibase-entitytermsforlanguagelistview-label": "نښه",
 	"wikibase-entitytermsforlanguagelistview-language": "ژبه",
 	"wikibase-entitytermsforlanguagelistview-more": "ټولې ورکړل شوې ژبې",

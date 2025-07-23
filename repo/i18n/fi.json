@@ -130,6 +130,7 @@
 	"wikibase-claimview-snak-tooltip": "Kirjoita arvo, joka vastaa ominaisuutta ”$1”. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon arvon tyypille painamalla kuvaketta ennen syöttökenttää.",
 	"wikibase-claimview-snak-new-tooltip": "Määritettyäsi ominaisuuden voit kirjoittaa sitä vastaavan arvon. Jos ominaisuudella ei ole tiettyä arvoa tai arvo ei ole tiedossa, voit valita vaihtoehdon arvon tyypille painamalla kuvaketta ennen syöttökenttää.",
 	"wikibase-referenceview-tabs-manual": "Manuaalinen",
+	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|tarkenne|tarkennetta}}",
 	"wikibase-statementview-rank-preferred": "Suosittu asema",
 	"wikibase-statementview-rank-tooltip-preferred": "Tosi ja ajantasainen arvo",
 	"wikibase-statementview-rank-normal": "Tavallinen asema",
