@@ -836,7 +836,10 @@
 		},
 		"WikibaseGraphQL": {
 			"class": "Wikibase\\Repo\\GraphQLPrototype\\SpecialWikibaseGraphQL",
-			"services": []
+			"services": [
+				"WikibaseRepo.PrefetchingTermLookup",
+				"WikibaseRepo.TermsLanguages"
+			]
 		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",

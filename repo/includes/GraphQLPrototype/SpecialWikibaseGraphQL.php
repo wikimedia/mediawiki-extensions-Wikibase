@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\GraphQLPrototype;
 
 use MediaWiki\SpecialPage\SpecialPage;
+use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\ContentLanguages;
 
 /**
  * @license GPL-2.0-or-later
@@ -12,9 +14,12 @@ class SpecialWikibaseGraphQL extends SpecialPage {
 	public const SPECIAL_PAGE_NAME = 'WikibaseGraphQL';
 	private GraphQLQueryService $graphQLService;
 
-	public function __construct() {
+	public function __construct(
+		PrefetchingTermLookup $termLookup,
+		ContentLanguages $termLanguages,
+	) {
 		parent::__construct( self::SPECIAL_PAGE_NAME, listed: false );
-		$this->graphQLService = new GraphQLQueryService();
+		$this->graphQLService = new GraphQLQueryService( $termLanguages, $termLookup );
 	}
 
 	/**
