@@ -963,6 +963,7 @@ final class RepoHooks implements
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.less',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.less',
@@ -975,9 +976,11 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 				],
 				'dependencies' => [

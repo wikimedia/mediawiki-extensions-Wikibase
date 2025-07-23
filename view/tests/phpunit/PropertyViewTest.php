@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
+use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -116,7 +116,7 @@ class PropertyViewTest extends EntityViewTestCase {
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
-			$this->createConfiguredMock( StatementGrouper::class, [ 'groupStatements' => [] ] ),
+			new FilteringStatementGrouper( [ 'statement' => null ] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
 			$this->createMock( SnakHtmlGenerator::class ),

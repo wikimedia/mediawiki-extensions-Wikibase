@@ -130,44 +130,79 @@ class StatementSectionsView {
 	}
 
 	/**
-	 * @param string $propertyId
-	 * @param Statement[] $statements
+	 * @param StatementList[] $statementsLists
 	 * @param App $app
 	 * @param array &$snakHtmlLookup
 	 * @return string HTML
 	 */
-	private function getVueStatementHtml( string $propertyId, array $statements, App $app, array &$snakHtmlLookup ): string {
-		$statementsData = [];
-		foreach ( $statements as $statement ) {
-			$mainSnak = $statement->getMainSnak();
-			$statementSerializer = $this->serializerFactory->newStatementSerializer();
-			$statementData = $statementSerializer->serialize( $statement );
-
-			$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
-			$statementData['mainsnak']['datatype'] = $dataType;
-			$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
-			$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
-			if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
-				$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+	private function getVueStatementHtml( array $statementsLists, App $app, array &$snakHtmlLookup ): string {
+		$rendered = '';
+		foreach ( $statementsLists as $key => $statementsList ) {
+			if ( !is_string( $key ) || !( $statementsList instanceof StatementList ) ) {
+				throw new InvalidArgumentException(
+					'$statementLists must be an associative array of StatementList objects'
+				);
 			}
-			$statementsData[] = $statementData;
-		}
 
-		return $app->renderComponent( 'wbui2025-statement', [
-			'statements' => $statementsData,
-			'propertyId' => $propertyId,
-		] );
+			if ( $key !== 'statements' && $statementsList->isEmpty() ) {
+				continue;
+			}
+
+			$sectionHeadingHtml = $this->getHtmlForSectionHeading( $key );
+			$propertyStatementMap = [];
+			$propertyList = [];
+			foreach ( $statementsList->getPropertyIds() as $propertyId ) {
+				$propertyStatements = $statementsList->getByPropertyId( $propertyId )->toArray();
+				$propertyList[] = $propertyId->getSerialization();
+
+				$statementsData = [];
+				foreach ( $propertyStatements as $statement ) {
+					$mainSnak = $statement->getMainSnak();
+					$statementSerializer = $this->serializerFactory->newStatementSerializer();
+					$statementData = $statementSerializer->serialize( $statement );
+
+					$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
+					$statementData['mainsnak']['datatype'] = $dataType;
+					$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
+					$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
+					if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
+						$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+					}
+					$statementsData[] = $statementData;
+				}
+				$propertyStatementMap[$propertyId->getSerialization()] = $statementsData;
+			}
+
+			$rendered .= $app->renderComponent( 'wbui2025-statement-sections', [
+				'sectionHeadingHtml' => $sectionHeadingHtml,
+				'propertyList' => $propertyList,
+				'propertyStatementMap' => $propertyStatementMap,
+			] );
+		}
+		return $rendered;
 	}
 
-	/** @return string HTML */
-	private function getVueStatementsHtml( StatementList $statementsList ): string {
+	/**
+	 * @param StatementList[] $statementsLists
+	 * @return string HTML
+	 */
+	private function getVueStatementsHtml( array $statementsLists ): string {
 		$snakHtmlLookup = [];
-		$app = new App( [ 'snakHtml' => function ( $snak ) use ( &$snakHtmlLookup ) {
-			if ( array_key_exists( $snak['hash'], $snakHtmlLookup ) ) {
-				return $snakHtmlLookup[$snak['hash']];
-			}
-			return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
-		} ] );
+		$app = new App( [
+			'snakHtml' => function ( $snak ) use ( &$snakHtmlLookup ) {
+				if ( array_key_exists( $snak['hash'], $snakHtmlLookup ) ) {
+					return $snakHtmlLookup[$snak['hash']];
+				}
+				return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
+			},
+			'concat' => function( ...$args ) {
+				return implode( '', $args );
+			},
+		] );
+		$app->registerComponentTemplate(
+			'wbui2025-statement-sections',
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' ),
+		);
 		$app->registerComponentTemplate(
 			'wbui2025-statement',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
@@ -240,15 +275,9 @@ class StatementSectionsView {
 			}
 		);
 
-		$rendered = '';
-		// Renders a placeholder statement element for each property, creating a mounting point for the client-side version
-		foreach ( $statementsList->getPropertyIds() as $propertyId ) {
-			$statements = $statementsList->getByPropertyId( $propertyId )->toArray();
-			$renderedStatement = $this->getVueStatementHtml( $propertyId, $statements, $app, $snakHtmlLookup );
-			$rendered .= "<div id='wikibase-wbui2025-statementwrapper-$propertyId'>$renderedStatement</div>";
-		}
-
-		return "<div id='wikibase-wbui2025-statementgrouplistview'>$rendered</div>";
+		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
+			$this->getVueStatementHtml( $statementsLists, $app, $snakHtmlLookup ) .
+			"</div>";
 	}
 
 	/**
@@ -259,10 +288,10 @@ class StatementSectionsView {
 	 * @return string HTML
 	 */
 	public function getHtml( StatementList $statementList, bool $wbui2025Ready = false ) {
-		if ( $wbui2025Ready && $this->vueStatementsView ) {
-			return $this->getVueStatementsHtml( $statementList );
-		}
 		$statementLists = $this->statementGrouper->groupStatements( $statementList );
+		if ( $wbui2025Ready && $this->vueStatementsView ) {
+			return $this->getVueStatementsHtml( $statementLists );
+		}
 		$html = '';
 
 		foreach ( $statementLists as $key => $statements ) {
