@@ -269,6 +269,16 @@ class ItemView extends EntityView {
 		$app->registerComponentTemplate(
 			'mex-main-snak',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' ),
+			function ( array $data ): array {
+				$dataType = $data['type'];
+
+				$data['snakValueClass'] = [
+					'wikibase-mex-media-value' => $dataType == 'commonsMedia',
+					'wikibase-mex-time-value' => $dataType == 'time',
+				];
+
+				return $data;
+			}
 		);
 		$app->registerComponentTemplate(
 			'mex-references',

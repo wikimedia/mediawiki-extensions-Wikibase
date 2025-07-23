@@ -7,7 +7,7 @@
 		<div
 			class="wikibase-mex-snak-value"
 			:data-snak-hash="hash"
-			:class="{ 'wikibase-mex-media-value': type === 'commonsMedia' }"
+			:class="snakValueClass"
 			v-html="html"
 		></div>
 		<!-- eslint-enable -->
@@ -32,6 +32,14 @@ module.exports = exports = defineComponent( {
 		html: {
 			type: String,
 			required: true
+		}
+	},
+	computed: {
+		snakValueClass() {
+			return {
+				'wikibase-mex-media-value': this.type === 'commonsMedia',
+				'wikibase-mex-time-value': this.type === 'time'
+			};
 		}
 	}
 } );
