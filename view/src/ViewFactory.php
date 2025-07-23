@@ -237,20 +237,6 @@ class ViewFactory {
 		$numberLocalizer = $this->numberLocalizerFactory->getForLanguage( $language );
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator( $textProvider );
 
-		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
-			$language->getCode(),
-			$termFallbackChain
-		);
-		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
-			$this->languageFactory->getLanguage( $language->getCode() )
-		);
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->templateFactory,
-			$snakFormatter,
-			$propertyIdFormatter,
-			$textProvider
-		);
-
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
 			$termFallbackChain,
@@ -274,15 +260,12 @@ class ViewFactory {
 			$entityTermsView,
 			$this->languageDirectionalityLookup,
 			$statementSectionsView,
-			$this->serializerFactory,
 			$language->getCode(),
 			$siteLinksView,
 			$this->siteLinkGroups,
 			$textProvider,
 			$this->propertyDataTypeLookup,
 			$this->htmlSnakFormatterFactory->getSnakFormatter( $language->getCode(), $termFallbackChain ),
-			$snakHtmlGenerator,
-			$this->vueStatementsView
 		);
 	}
 
@@ -326,7 +309,7 @@ class ViewFactory {
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
-		$languageCode,
+		string $languageCode,
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
@@ -336,12 +319,31 @@ class ViewFactory {
 			$termFallbackChain,
 			$editSectionGenerator
 		);
+		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
+			$languageCode,
+			$termFallbackChain
+		);
+		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
+			$this->languageFactory->getLanguage( $languageCode )
+		);
+		$snakHtmlGenerator = new SnakHtmlGenerator(
+			$this->templateFactory,
+			$snakFormatter,
+			$propertyIdFormatter,
+			$textProvider
+		);
 
 		return new StatementSectionsView(
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
-			$textProvider
+			$textProvider,
+			$snakHtmlGenerator,
+			$snakFormatter,
+			$this->serializerFactory,
+			$this->propertyDataTypeLookup,
+			$languageCode,
+			$this->vueStatementsView
 		);
 	}
 

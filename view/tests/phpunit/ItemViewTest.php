@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -20,6 +21,7 @@ use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
 use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -135,21 +137,31 @@ class ItemViewTest extends EntityViewTestCase {
 		$snakFormatter = $this->createConfiguredMock( SnakFormatter::class, [
 			'formatSnak' => '<div>a snak :)</div>',
 		] );
+		$textProvider = $this->createMock( LocalizedTextProvider::class );
+		$statementSectionsView = new StatementSectionsView(
+			$templateFactory,
+			$this->createConfiguredMock( StatementGrouper::class, [ 'groupStatements' => [] ] ),
+			$this->createMock( StatementGroupListView::class ),
+			$textProvider,
+			$this->createMock( SnakHtmlGenerator::class ),
+			$snakFormatter,
+			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
+			$propertyDataTypeLookup,
+			'en',
+			$vueStatementsView
+		);
 
 		return new ItemView(
 			$templateFactory,
 			$termsView,
 			$this->createMock( LanguageDirectionalityLookup::class ),
-			$this->createMock( StatementSectionsView::class ),
-			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
+			$statementSectionsView,
 			'en',
 			$this->createMock( SiteLinksView::class ),
 			[],
-			$this->createMock( LocalizedTextProvider::class ),
+			$textProvider,
 			$propertyDataTypeLookup,
-			$snakFormatter,
-			$this->createMock( SnakHtmlGenerator::class ),
-			$vueStatementsView
+			$snakFormatter
 		);
 	}
 

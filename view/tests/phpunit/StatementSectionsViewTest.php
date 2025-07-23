@@ -3,10 +3,14 @@
 namespace Wikibase\View\Tests;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Serializers\SerializerFactory;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -44,7 +48,13 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			$templateFactory,
 			$statementGrouper,
 			$statementListView,
-			new DummyLocalizedTextProvider()
+			new DummyLocalizedTextProvider(),
+			$this->createMock( SnakHtmlGenerator::class ),
+			$this->createMock( SnakFormatter::class ),
+			$this->createMock( SerializerFactory::class ),
+			$this->createMock( PropertyDataTypeLookup::class ),
+			'en',
+			false
 		);
 	}
 
