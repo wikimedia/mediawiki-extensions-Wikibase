@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Traversable;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -43,11 +44,6 @@ class StatementSectionsView {
 	private $textProvider;
 
 	/**
-	 * @var SnakHtmlGenerator
-	 */
-	private $snakHtmlGenerator;
-
-	/**
 	 * @var SnakFormatter
 	 */
 	private $snakFormatter;
@@ -77,7 +73,6 @@ class StatementSectionsView {
 		StatementGrouper $statementGrouper,
 		StatementGroupListView $statementListView,
 		LocalizedTextProvider $textProvider,
-		SnakHtmlGenerator $snakHtmlGenerator,
 		SnakFormatter $snakFormatter,
 		SerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
@@ -88,7 +83,6 @@ class StatementSectionsView {
 		$this->statementGrouper = $statementGrouper;
 		$this->statementListView = $statementListView;
 		$this->textProvider = $textProvider;
-		$this->snakHtmlGenerator = $snakHtmlGenerator;
 		$this->snakFormatter = $snakFormatter;
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
@@ -96,7 +90,7 @@ class StatementSectionsView {
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
-	private function populateReferenceSnakHtml( Statement $statement, array $statementData, array &$snakHtmlLookup ) {
+	private function populateReferenceSnakValueHtml( Statement $statement, array $statementData, array &$snakValueHtmlLookup ) {
 		if ( !array_key_exists( 'references', $statementData ) || !$statementData['references'] ) {
 			return;
 		}
@@ -106,7 +100,7 @@ class StatementSectionsView {
 				foreach ( $referenceData['snaks'] as $snakList ) {
 					foreach ( $snakList as $snakData ) {
 						if ( $snakData['hash'] === $snakObject->getHash() ) {
-							$snakHtmlLookup[$snakObject->getHash()] = $this->snakHtmlGenerator->getSnakHtml( $snakObject, true );
+							$snakValueHtmlLookup[$snakObject->getHash()] = $this->snakFormatter->formatSnak( $snakObject );
 						}
 					}
 				}
@@ -114,7 +108,7 @@ class StatementSectionsView {
 		}
 	}
 
-	private function populateQualifierSnakHtml( Statement $statement, array $statementData, array &$snakHtmlLookup ) {
+	private function populateQualifierSnakValueHtml( Statement $statement, array $statementData, array &$snakValueHtmlLookup ) {
 		if (
 			!array_key_exists( 'qualifiers', $statementData ) ||
 			!array_key_exists( 'qualifiers-order', $statementData ) ||
@@ -125,7 +119,7 @@ class StatementSectionsView {
 		foreach ( $statementData['qualifiers-order'] as $propertyId ) {
 			foreach ( $statementData['qualifiers'][$propertyId] as $qualifierData ) {
 				$qualifier = $statement->getQualifiers()->getSnak( $qualifierData['hash'] );
-				$snakHtmlLookup[$qualifierData['hash']] = $this->snakHtmlGenerator->getSnakHtml( $qualifier, true );
+				$snakValueHtmlLookup[$qualifierData['hash']] = $this->snakFormatter->formatSnak( $qualifier );
 			}
 		}
 	}
@@ -134,14 +128,14 @@ class StatementSectionsView {
 	 * @param App $app The Vue App
 	 * @param string $sectionHeadingHtml Section heading as HTML
 	 * @param StatementList $statementsList
-	 * @param array &$snakHtmlLookup
+	 * @param array &$snakValueHtmlLookup
 	 * @return string Rendered HTML
 	 */
 	private function renderStatementsSectionHtml(
 		App $app,
 		string $sectionHeadingHtml,
 		StatementList $statementsList,
-		array &$snakHtmlLookup
+		array &$snakValueHtmlLookup
 	): string {
 		$propertyStatementMap = [];
 		$propertyList = [];
@@ -155,12 +149,10 @@ class StatementSectionsView {
 				$statementSerializer = $this->serializerFactory->newStatementSerializer();
 				$statementData = $statementSerializer->serialize( $statement );
 
-				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
-				$statementData['mainsnak']['datatype'] = $dataType;
-				$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
-				$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
+				$this->populateReferenceSnakValueHtml( $statement, $statementData, $snakValueHtmlLookup );
+				$this->populateQualifierSnakValueHtml( $statement, $statementData, $snakValueHtmlLookup );
 				if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
-					$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+					$snakValueHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
 				}
 				$statementsData[] = $statementData;
 			}
@@ -177,27 +169,27 @@ class StatementSectionsView {
 	/**
 	 * @param StatementList[] $statementsLists
 	 * @param App $app
-	 * @param array &$snakHtmlLookup
+	 * @param array &$snakValueHtmlLookup
 	 * @return string HTML
 	 */
-	private function getVueStatementSectionsHtml( array $statementsLists, App $app, array &$snakHtmlLookup ): string {
+	private function getVueStatementSectionsHtml( array $statementsLists, App $app, array &$snakValueHtmlLookup ): string {
 		$rendered = '';
 		foreach ( $this->iterateOverNonEmptyStatementSections( $statementsLists ) as $key => $statementsList ) {
 			$rendered .= $this->renderStatementsSectionHtml(
 				$app,
 				$this->getHtmlForSectionHeading( $key ),
 				$statementsList,
-				$snakHtmlLookup
+				$snakValueHtmlLookup
 			);
 		}
 		return $rendered;
 	}
 
-	private function setupVueTemplateRenderer( array &$snakHtmlLookup ): App {
+	private function setupVueTemplateRenderer( array &$snakValueHtmlLookup ): App {
 		$app = new App( [
-			'snakHtml' => function ( $snak ) use ( &$snakHtmlLookup ) {
-				if ( array_key_exists( $snak['hash'], $snakHtmlLookup ) ) {
-					return $snakHtmlLookup[$snak['hash']];
+			'snakValueHtml' => function ( $snak ) use ( &$snakValueHtmlLookup ) {
+				if ( array_key_exists( $snak['hash'], $snakValueHtmlLookup ) ) {
+					return $snakValueHtmlLookup[$snak['hash']];
 				}
 				return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
 			},
@@ -239,17 +231,7 @@ class StatementSectionsView {
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-main-snak',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' ),
-			function ( array $data ): array {
-				$dataType = $data['type'];
-
-				$data['snakValueClass'] = [
-					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
-					'wikibase-wbui2025-time-value' => $dataType == 'time',
-				];
-
-				return $data;
-			}
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' )
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-references',
@@ -280,6 +262,24 @@ class StatementSectionsView {
 				return $data;
 			}
 		);
+		$app->registerComponentTemplate(
+			'wbui2025-snak-value',
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue' ),
+			function ( array $data ): array {
+				/** @var PropertyId $propertyId */
+				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject
+					->parse( $data['snak']['property'] );
+				'@phan-var PropertyId $propertyId';
+				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+
+				$data['snakValueClass'] = [
+					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
+					'wikibase-wbui2025-time-value' => $dataType == 'time',
+				];
+
+				return $data;
+			}
+		);
 		return $app;
 	}
 
@@ -288,11 +288,11 @@ class StatementSectionsView {
 	 * @return string HTML
 	 */
 	private function getVueStatementsHtml( array $statementsLists ): string {
-		$snakHtmlLookup = [];
-		$app = $this->setupVueTemplateRenderer( $snakHtmlLookup );
+		$snakValueHtmlLookup = [];
+		$app = $this->setupVueTemplateRenderer( $snakValueHtmlLookup );
 
 		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
-			$this->getVueStatementSectionsHtml( $statementsLists, $app, $snakHtmlLookup ) .
+			$this->getVueStatementSectionsHtml( $statementsLists, $app, $snakValueHtmlLookup ) .
 			"</div>";
 	}
 

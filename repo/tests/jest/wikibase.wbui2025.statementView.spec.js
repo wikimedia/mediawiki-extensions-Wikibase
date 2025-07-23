@@ -50,7 +50,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 								propertyLinks: new Map( [
 									[ 'P1', '<a href="mock-property-url">P1</a>' ]
 								] ),
-								snakHtmls: new Map( [
+								snakValues: new Map( [
 									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
 								] )
 							}

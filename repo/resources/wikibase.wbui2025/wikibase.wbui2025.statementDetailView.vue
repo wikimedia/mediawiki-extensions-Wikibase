@@ -6,9 +6,7 @@
 		</p>
 		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
-			:type="statement.mainsnak.datatype"
-			:hash="statement.mainsnak.hash"
-			:html="snakHtml( statement.mainsnak )"
+			:main-snak="statement.mainsnak"
 		></wbui2025-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}
@@ -27,7 +25,6 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const Wbui2025MainSnak = require( './wikibase.wbui2025.mainSnak.vue' );
-const { snakHtml } = require( './store/serverRenderedHtml.js' );
 const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 
@@ -44,11 +41,6 @@ module.exports = exports = defineComponent( {
 			type: Object,
 			required: true
 		}
-	},
-	setup() {
-		return {
-			snakHtml
-		};
 	},
 	computed: {
 		references() {

@@ -14,13 +14,14 @@
 			:class="{ 'wikibase-wbui2025-references-visible': showReferences }">
 			<template v-for="reference in references" :key="reference">
 				<template v-for="snak in reference['snaks-order']" :key="snak">
-					<template v-for="propertysnak in reference.snaks[snak]" :key="propertysnak">
-						<div
-							class="wikibase-wbui2025-snak-value"
-							:data-snak-hash="propertysnak.hash"
-							v-html="snakHtml( propertysnak )"
-						></div>
-					</template>
+					<div
+						v-for="propertysnak in reference.snaks[snak]"
+						:key="propertysnak"
+						class="wikibase-wbui2025-reference"
+					>
+						<wbui2025-property-name :property-id="snak"></wbui2025-property-name>
+						<wbui2025-snak-value :snak="propertysnak"></wbui2025-snak-value>
+					</div>
 				</template>
 			</template>
 		</div>
@@ -29,21 +30,21 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { snakHtml } = require( './store/serverRenderedHtml.js' );
+const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
+const Wbui2025SnakValue = require( './wikibase.wbui2025.snakValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025References',
+	components: {
+		Wbui2025PropertyName,
+		Wbui2025SnakValue
+	},
 	props: {
 		references: {
 			type: Array,
 			required: true
 		}
-	},
-	setup() {
-		return {
-			snakHtml
-		};
 	},
 	data() {
 		return { showReferences: false };

@@ -975,6 +975,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025.entityViewInit.js',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',

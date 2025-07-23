@@ -321,22 +321,12 @@ class ViewFactory {
 			$languageCode,
 			$termFallbackChain
 		);
-		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
-			$this->languageFactory->getLanguage( $languageCode )
-		);
-		$snakHtmlGenerator = new SnakHtmlGenerator(
-			$this->templateFactory,
-			$snakFormatter,
-			$propertyIdFormatter,
-			$textProvider
-		);
 
 		return new StatementSectionsView(
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
 			$textProvider,
-			$snakHtmlGenerator,
 			$snakFormatter,
 			$this->serializerFactory,
 			$this->propertyDataTypeLookup,

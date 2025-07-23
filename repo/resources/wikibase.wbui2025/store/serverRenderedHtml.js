@@ -3,7 +3,7 @@ const { defineStore } = require( 'pinia' );
 const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 	state: () => ( {
 		propertyLinks: new Map(),
-		snakHtmls: new Map()
+		snakValues: new Map()
 	} ),
 	actions: {
 		/**
@@ -26,11 +26,11 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 					this.propertyLinks.set( propertyId, linkHtml );
 				}
 			}
-			for ( const snak of element.getElementsByClassName( 'wikibase-wbui2025-snak-value' ) ) {
-				const snakHash = snak.dataset.snakHash;
-				const html = snak.innerHTML;
-				if ( this.snakHtmls.has( snakHash ) ) {
-					const previousHtml = this.snakHtmls.get( snakHash );
+			for ( const snakValue of element.getElementsByClassName( 'wikibase-wbui2025-snak-value' ) ) {
+				const snakHash = snakValue.dataset.snakHash;
+				const html = snakValue.innerHTML;
+				if ( this.snakValues.has( snakHash ) ) {
+					const previousHtml = this.snakValues.get( snakHash );
 					if ( previousHtml !== html ) {
 						mw.log.warn(
 							`Inconsistent server-rendered HTML for snak with hash ${ snakHash }:\n` +
@@ -38,7 +38,7 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 						);
 					}
 				} else {
-					this.snakHtmls.set( snakHash, html );
+					this.snakValues.set( snakHash, html );
 				}
 			}
 		}
@@ -54,13 +54,20 @@ function propertyLinkHtml( propertyId ) {
 	return serverRenderedHtml.propertyLinks.get( propertyId );
 }
 
-function snakHtml( snak ) {
+/**
+ * Return the HTML for the value/somevalue/novalue part of the given snak.
+ * Does not include the property.
+ *
+ * @param {Object} snak
+ * @returns {string|undefined} HTML
+ */
+function snakValueHtml( snak ) {
 	const serverRenderedHtml = useServerRenderedHtml();
-	return serverRenderedHtml.snakHtmls.get( snak.hash );
+	return serverRenderedHtml.snakValues.get( snak.hash );
 }
 
 module.exports = {
 	useServerRenderedHtml,
 	propertyLinkHtml,
-	snakHtml
+	snakValueHtml
 };

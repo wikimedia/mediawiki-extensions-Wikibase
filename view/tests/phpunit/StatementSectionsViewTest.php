@@ -10,7 +10,6 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\DummyLocalizedTextProvider;
-use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -49,7 +48,6 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			$statementGrouper,
 			$statementListView,
 			new DummyLocalizedTextProvider(),
-			$this->createMock( SnakHtmlGenerator::class ),
 			$this->createMock( SnakFormatter::class ),
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( PropertyDataTypeLookup::class ),

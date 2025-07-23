@@ -4,15 +4,20 @@
 			v-if="hasQualifiers"
 			class="wikibase-wbui2025-qualifiers"
 		>
-			<p>{{ qualifiersMessage }}</p>
+			<p class="wikibase-wbui2025-qualifiers-header">
+				{{ qualifiersMessage }}
+			</p>
 			<template v-for="snak in qualifiersOrder" :key="snak">
-				<template v-for="propertysnak in qualifiers[snak]" :key="propertysnak">
-					<div
-						class="wikibase-wbui2025-snak-value wikibase-wbui2025-qualifier"
-						:data-snak-hash="propertysnak.hash"
-						v-html="snakHtml( propertysnak )"
-					></div>
-				</template>
+				<div
+					v-for="propertysnak in qualifiers[snak]"
+					:key="propertysnak"
+					class="wikibase-wbui2025-qualifier"
+				>
+					<wbui2025-property-name :property-id="snak"></wbui2025-property-name>
+					<!-- eslint-disable-next-line vue/no-useless-mustaches -->
+					{{ ' ' }}
+					<wbui2025-snak-value :snak="propertysnak"></wbui2025-snak-value>
+				</div>
 			</template>
 		</div>
 	</div>
@@ -20,11 +25,16 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { snakHtml } = require( './store/serverRenderedHtml.js' );
+const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
+const Wbui2025SnakValue = require( './wikibase.wbui2025.snakValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025Qualifiers',
+	components: {
+		Wbui2025PropertyName,
+		Wbui2025SnakValue
+	},
 	props: {
 		qualifiers: {
 			type: Object,
@@ -34,11 +44,6 @@ module.exports = exports = defineComponent( {
 			type: Array,
 			required: true
 		}
-	},
-	setup() {
-		return {
-			snakHtml
-		};
 	},
 	computed: {
 		qualifierCount() {

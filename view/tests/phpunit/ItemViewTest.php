@@ -20,7 +20,6 @@ use Wikibase\View\ItemView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SiteLinksView;
-use Wikibase\View\SnakHtmlGenerator;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -143,7 +142,6 @@ class ItemViewTest extends EntityViewTestCase {
 			new FilteringStatementGrouper( [ 'statement' => null ] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
-			$this->createMock( SnakHtmlGenerator::class ),
 			$snakFormatter,
 			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
 			$propertyDataTypeLookup,
