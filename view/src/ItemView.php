@@ -5,12 +5,10 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -39,11 +37,6 @@ class ItemView extends EntityView {
 	private $siteLinkGroups;
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
-
-	/**
 	 * @var LocalizedTextProvider
 	 */
 	private $textProvider;
@@ -52,8 +45,6 @@ class ItemView extends EntityView {
 	 * @var CacheableEntityTermsView
 	 */
 	private $entityTermsView;
-
-	private SnakFormatter $snakFormatter;
 
 	/**
 	 * @see EntityView::__construct
@@ -66,8 +57,6 @@ class ItemView extends EntityView {
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
-	 * @param SnakFormatter $snakFormatter
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -78,8 +67,6 @@ class ItemView extends EntityView {
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		SnakFormatter $snakFormatter
 	) {
 		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
 
@@ -88,8 +75,6 @@ class ItemView extends EntityView {
 		$this->siteLinkGroups = $siteLinkGroups;
 		$this->textProvider = $textProvider;
 		$this->entityTermsView = $entityTermsView;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->snakFormatter = $snakFormatter;
 	}
 
 	/**

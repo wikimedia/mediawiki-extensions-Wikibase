@@ -264,8 +264,6 @@ class ViewFactory {
 			$siteLinksView,
 			$this->siteLinkGroups,
 			$textProvider,
-			$this->propertyDataTypeLookup,
-			$this->htmlSnakFormatterFactory->getSnakFormatter( $language->getCode(), $termFallbackChain ),
 		);
 	}
 

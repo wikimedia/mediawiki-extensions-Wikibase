@@ -160,8 +160,6 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->createMock( SiteLinksView::class ),
 			[],
 			$textProvider,
-			$propertyDataTypeLookup,
-			$snakFormatter
 		);
 	}
 
