@@ -6,7 +6,8 @@
 			"Macofe",
 			"Nokeoo",
 			"SaldırganSincap",
-			"Zygimantus"
+			"Zygimantus",
+			"Tomasdd"
 		]
 	},
 	"apihelp-wbavailablebadges-example-1": "Užklausia visų prieinamų ženkliukų įrašų.",
@@ -131,7 +132,7 @@
 	"apihelp-wbsearchentities-param-continue": "Poslinkis, nuo kurio pradėti paiešką",
 	"apihelp-wbsearchentities-example-1": "Ieškoti \"abc\" anglų kalba, su numatytosiomis tipo ir limito reikšmėmis",
 	"apihelp-wbsearchentities-example-2": "Ieškoti \"abc\" anglų kalba su limitu 50",
-	"apihelp-wbsearchentities-example-3": "Ieškoti savybės tipo \"alphabet\" anglų kalba",
+	"apihelp-wbsearchentities-example-3": "Ieškoti \"alphabet\" anglų kalba",
 	"apihelp-query+entityterms-example-item": "Gauti etiketes ir alternatyvius vardus įrašo Q84.",
 	"apihelp-query+wbsearch-param-search": "Ieškoti šio teksto.",
 	"apihelp-query+wbsearch-param-language": "Ieškoti šia kalba.",
@@ -140,7 +141,7 @@
 	"apihelp-query+wbsearch-param-limit": "Maksimalus rezultatų skaičius",
 	"apihelp-query+wbsearch-example-1": "Ieškoti \"abc\" anglų kalba, su numatytosiomis tipo ir limito reikšmėmis",
 	"apihelp-query+wbsearch-example-2": "Ieškoti \"abc\" anglų kalba su limitu 50",
-	"apihelp-query+wbsearch-example-3": "Ieškoti savybės tipo \"alphabet\" anglų kalba",
+	"apihelp-query+wbsearch-example-3": "Ieškoti \"alphabet\" anglų kalba",
 	"apihelp-query+wbsubscribers-param-prop": "Savybės, kurias pridėti prie rezultato",
 	"apihelp-query+wbsubscribers-param-limit": "Maksimalus rezultatų skaičius",
 	"apihelp-query+wbsubscribers-example-1": "Gauti subjekto Q42 prenumeratorius",
