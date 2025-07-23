@@ -10,6 +10,9 @@ use Wikibase\DataModel\Snak\Snak;
  * output format. A SnakFormatter may be able to work on any kind of Snak, or
  * may be specialized on a single kind of snak.
  *
+ * The SnakFormatter output only includes the value/somevalue/novalue part of a snak,
+ * without the property (ID/label/link/etc.).
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
