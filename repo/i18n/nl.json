@@ -139,6 +139,7 @@
 	"wikibase-claimview-snak-tooltip": "Voer een waarde in die overeenkomt met de eigenschap \"$1\". Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief waardetype kiezen door op het pictogram voor het invoerveld te klikken.",
 	"wikibase-claimview-snak-new-tooltip": "Nadat u een eigenschap hebt opgegeven kunt u een bijbehorende waarde opgeven. Als de eigenschap geen aangewezen waarde heeft, of de huidige waarde is niet bekend, dan kunt u een alternatief waardetype kiezen door op het pictogram voor het invoerveld te klikken.",
 	"wikibase-referenceview-tabs-manual": "Handmatig",
+	"wikibase-statementview-qualifiers-counter": "$1 kwalificatie{{PLURAL:$1||s}}",
 	"wikibase-statementview-rank-preferred": "Voorkeursrang",
 	"wikibase-statementview-rank-tooltip-preferred": "Correcte en actuele waarde",
 	"wikibase-statementview-rank-normal": "Normale rang",

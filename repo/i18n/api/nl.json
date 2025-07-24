@@ -307,10 +307,10 @@
 	"apihelp-wbsetsitelink-example-6": "Wijzig badges voor de koppeling van het item met ID <samp>$1</samp> naar de Poolse pagina in twee badges die wijzen naar de items met ID's \"Q2\" en \"Q149\", zonder de koppelingstitel op te geven",
 	"apihelp-wbsetsitelink-example-7": "Wijzig de koppeling van het item met ID <samp>$1</samp> naar de Poolse pagina zonder badges te wijzigen",
 	"apihelp-wbsetsitelink-example-8": "Wijzig de koppeling van het item met ID <samp>$1</samp> naar de Poolse pagina en verwijder alle badges ervan",
-	"apihelp-wbformatentities-summary": "Maakt entiteits-ID’s op in HTML.",
+	"apihelp-wbformatentities-summary": "Maakt entiteits-ID’s op in HTML of platte tekst.",
 	"apihelp-wbformatentities-extended-description": "De taal kan worden opgegeven met de globale parameter <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "De op te maken entiteits-ID’s.",
-	"apihelp-wbformatentities-example-1": "Maak één artikel-ID op.",
+	"apihelp-wbformatentities-example-1": "Maak één item-ID op in HTML.",
 	"apihelp-wbformatentities-example-2": "Maak een item-ID en een eigenschaps-ID op.",
 	"apihelp-wbformatentities-example-3": "Maak een item-ID, een eigenschaps-ID en een lexeem-ID op.",
 	"apihelp-wbformatentities-example-4": "Maak drie item-ID’s op in het Frans."
