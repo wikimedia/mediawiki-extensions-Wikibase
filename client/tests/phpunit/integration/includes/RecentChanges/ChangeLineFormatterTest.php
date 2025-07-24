@@ -410,7 +410,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;action=history/',
 			'/title=Special%3AEntityPage%2FQ4&amp;curid=5&amp;diff=92&amp;oldid=90/',
 			'/<span class="comment">\('
-				. '‎<span dir="auto"><span class="autocomment">Changed claim: <\/span><\/span> '
+				. '‎<span dir="auto"><span class="autocomment"><i class="mw-update-icon"><\/i>Changed claim: <\/span><\/span> '
 				. '<a .*?>Property:P213<\/a>: <a .*?>Q850<\/a>'
 				. '\)<\/span>/',
 		];

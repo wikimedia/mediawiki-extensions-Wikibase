@@ -41,6 +41,11 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 				'wbsetitem',
 				'(wikibase-item-summary-wbsetitem)',
 			],
+			'Existing message with no params and with entity' => [
+				[ 'wikibase-entity' ],
+				'wbeditentity',
+				'<i class="mw-add-icon"></i>(wikibase-entity-summary-wbeditentity)',
+			],
 			'Existing message with 1 parameter' => [
 				[ 'wikibase-item', 'wikibase-entity' ],
 				'wbsetlabel-add:|FOO',
@@ -49,7 +54,7 @@ class AutoCommentFormatterTest extends MediaWikiIntegrationTestCase {
 			'Existing message with 2 parameters' => [
 				[ 'wikibase-entity' ],
 				'wbsetaliases-set:10|FOO',
-				'(wikibase-entity-summary-wbsetaliases-set: 10, FOO)',
+				'<i class="mw-update-icon"></i>(wikibase-entity-summary-wbsetaliases-set: 10, FOO)',
 			],
 		];
 	}
