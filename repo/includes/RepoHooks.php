@@ -1237,8 +1237,9 @@ final class RepoHooks implements
 			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
 				'class' => SpecialWikibaseGraphQL::class,
 				'services' => [
-					"WikibaseRepo.PrefetchingTermLookup",
-					"WikibaseRepo.TermsLanguages",
+					'WikibaseRepo.EntityLookup',
+					'WikibaseRepo.PrefetchingTermLookup',
+					'WikibaseRepo.TermsLanguages',
 				],
 			];
 		}

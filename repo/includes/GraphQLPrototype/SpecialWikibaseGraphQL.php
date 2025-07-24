@@ -4,6 +4,7 @@ namespace Wikibase\Repo\GraphQLPrototype;
 
 use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\ContentLanguages;
 
 /**
@@ -15,13 +16,15 @@ class SpecialWikibaseGraphQL extends SpecialPage {
 	private GraphQLQueryService $graphQLService;
 
 	public function __construct(
+		EntityLookup $entityLookup,
 		PrefetchingTermLookup $termLookup,
 		ContentLanguages $termLanguages,
 	) {
 		parent::__construct( self::SPECIAL_PAGE_NAME, listed: false );
 		$this->graphQLService = new GraphQLQueryService( new Schema(
 			$termLanguages,
-			new LabelsResolver( $termLookup )
+			new LabelsResolver( $termLookup ),
+			new StatementsResolver( $entityLookup ),
 		) );
 	}
 

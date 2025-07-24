@@ -4,11 +4,18 @@ namespace Wikibase\Repo\Tests\GraphQLPrototype;
 
 use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\GraphQLPrototype\GraphQLQueryService;
 use Wikibase\Repo\GraphQLPrototype\LabelsResolver;
 use Wikibase\Repo\GraphQLPrototype\Schema;
+use Wikibase\Repo\GraphQLPrototype\StatementsResolver;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -21,6 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	private static Item $item;
+	private static Property $stringProperty;
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -29,17 +37,24 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function addDBDataOnce() {
+		$stringProperty = new Property(
+			null,
+			new Fingerprint( new TermList( [
+				new Term( 'en', 'instance of' ),
+				new Term( 'de', 'ist ein(e)' ),
+			] ) ),
+			'string',
+		);
+		$this->saveEntity( $stringProperty );
+		self::$stringProperty = $stringProperty;
+
 		$item = NewItem::withLabel( 'en', 'potato' )
 			->andLabel( 'de', 'Kartoffel' )
+			->andStatement(
+				NewStatement::noValueFor( self::$stringProperty->getId() )->build()
+			)
 			->build();
-
-		WikibaseRepo::getEntityStore()->saveEntity(
-			$item,
-			__CLASS__,
-			$this->getTestUser()->getUser(),
-			EDIT_NEW
-		);
-
+		$this->saveEntity( $item );
 		self::$item = $item;
 	}
 
@@ -73,11 +88,55 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testStatementsQueryWithPropertyLabels(): void {
+		$itemId = self::$item->getId()->getSerialization();
+		$enLabel = self::$stringProperty->getLabels()->getByLanguage( 'en' )->getText();
+		$deLabel = self::$stringProperty->getLabels()->getByLanguage( 'de' )->getText();
+
+		$this->assertNotNull( $enLabel );
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [
+				'statements' => [
+					[
+						'property' => [
+							'id' => self::$stringProperty->getId()->getSerialization(),
+							'labels' => [
+								'en' => $enLabel,
+								'de' => $deLabel,
+							],
+						],
+					],
+				],
+			] ] ],
+			$this->newGraphQLService()->query( "
+			query {
+				item(id: \"$itemId\") {
+					statements {
+						property {
+							id
+							labels { en de }
+						}
+					}
+				}
+			}" )
+		);
+	}
+
 	public function newGraphQLService(): GraphQLQueryService {
 		return new GraphQLQueryService( new Schema(
 			WikibaseRepo::getTermsLanguages(),
-			new LabelsResolver( WikibaseRepo::getPrefetchingTermLookup() )
+			new LabelsResolver( WikibaseRepo::getPrefetchingTermLookup() ),
+			new StatementsResolver( WikibaseRepo::getEntityLookup() )
 		) );
+	}
+
+	public function saveEntity( EntityDocument $entity ): void {
+		WikibaseRepo::getEntityStore()->saveEntity(
+			$entity,
+			__CLASS__,
+			$this->getTestUser()->getUser(),
+			EDIT_NEW
+		);
 	}
 
 }

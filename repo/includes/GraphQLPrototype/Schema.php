@@ -13,9 +13,12 @@ use Wikibase\Lib\ContentLanguages;
  */
 class Schema extends GraphQLSchema {
 
+	private ?ObjectType $labelsType = null;
+
 	public function __construct(
 		private ContentLanguages $labelLanguages,
 		private LabelsResolver $labelsResolver,
+		private StatementsResolver $statementsResolver,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -38,21 +41,24 @@ class Schema extends GraphQLSchema {
 			'name' => 'Item',
 			'fields' => [
 				'id' => [
-					'type' => Type::string(),
+					'type' => Type::nonNull( Type::string() ),
 				],
 				'labels' => [
 					'type' => $this->labelsType(),
-					'resolve' => fn( array $rootValue, array $args, $context, ResolveInfo $info ) => $this->labelsResolver->fetchLabels(
-						$rootValue,
-						$info
-					),
+					'resolve' => fn( array $rootValue, array $args, $context, ResolveInfo $info ) => $this->labelsResolver
+						->fetchLabels( $rootValue, $info ),
+				],
+				'statements' => [
+					'type' => Type::listOf( $this->statementType() ), // @phan-suppress-current-line PhanUndeclaredInvokeInCallable
+					'resolve' => $this->statementsResolver->fetchStatements( ... ),
 				],
 			],
 		] );
 	}
 
 	private function labelsType(): ObjectType {
-		return new ObjectType( [
+		// In order to reuse a type in multiple places, it needs to be the same type object instance.
+		$this->labelsType ??= new ObjectType( [
 			'name' => 'Labels',
 			'fields' => array_fill_keys(
 				array_map(
@@ -63,6 +69,27 @@ class Schema extends GraphQLSchema {
 				),
 				[ 'type' => Type::string() ]
 			),
+		] );
+
+		return $this->labelsType;
+	}
+
+	private function statementType(): ObjectType {
+		return new ObjectType( [
+			'name' => 'Statement',
+			'fields' => [
+				'property' => new ObjectType( [
+					'name' => 'StatementProperty',
+					'fields' => [
+						'id' => Type::nonNull( Type::string() ),
+						'labels' => [
+							'type' => $this->labelsType(),
+							'resolve' => fn( array $rootValue, array $args, $context, ResolveInfo $info ) => $this->labelsResolver
+								->fetchLabels( $rootValue, $info ),
+						],
+					],
+				] ),
+			],
 		] );
 	}
 

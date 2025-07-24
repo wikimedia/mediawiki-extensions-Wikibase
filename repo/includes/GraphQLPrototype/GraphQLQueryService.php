@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\GraphQLPrototype;
 
 use GraphQL\GraphQL;
-use GraphQL\Type\Schema;
 
 /**
  * @license GPL-2.0-or-later

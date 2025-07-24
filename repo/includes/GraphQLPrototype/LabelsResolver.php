@@ -4,7 +4,7 @@ namespace Wikibase\Repo\GraphQLPrototype;
 
 use GraphQL\Type\Definition\ResolveInfo;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Term\TermTypes;
 
 /**
@@ -16,15 +16,15 @@ class LabelsResolver {
 	}
 
 	public function fetchLabels( array $rootValue, ResolveInfo $info ): array {
-		$itemId = new ItemId( $rootValue['id'] );
+		$entityId = ( new BasicEntityIdParser() )->parse( $rootValue['id'] );
 		$languageCodes = array_keys( $info->getFieldSelection() );
 
 		$this->termLookup->prefetchTerms(
-			[ $itemId ],
+			[ $entityId ],
 			[ TermTypes::TYPE_LABEL ],
 			$languageCodes
 		);
 
-		return $this->termLookup->getLabels( $itemId, $languageCodes );
+		return $this->termLookup->getLabels( $entityId, $languageCodes );
 	}
 }
