@@ -7,6 +7,8 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\GraphQLPrototype\GraphQLQueryService;
+use Wikibase\Repo\GraphQLPrototype\LabelsResolver;
+use Wikibase\Repo\GraphQLPrototype\Schema;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -72,10 +74,10 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function newGraphQLService(): GraphQLQueryService {
-		return new GraphQLQueryService(
+		return new GraphQLQueryService( new Schema(
 			WikibaseRepo::getTermsLanguages(),
-			WikibaseRepo::getPrefetchingTermLookup()
-		);
+			new LabelsResolver( WikibaseRepo::getPrefetchingTermLookup() )
+		) );
 	}
 
 }

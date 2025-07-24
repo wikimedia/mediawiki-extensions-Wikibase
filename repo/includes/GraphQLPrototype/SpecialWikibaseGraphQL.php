@@ -19,7 +19,10 @@ class SpecialWikibaseGraphQL extends SpecialPage {
 		ContentLanguages $termLanguages,
 	) {
 		parent::__construct( self::SPECIAL_PAGE_NAME, listed: false );
-		$this->graphQLService = new GraphQLQueryService( $termLanguages, $termLookup );
+		$this->graphQLService = new GraphQLQueryService( new Schema(
+			$termLanguages,
+			new LabelsResolver( $termLookup )
+		) );
 	}
 
 	/**

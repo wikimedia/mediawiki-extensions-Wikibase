@@ -834,13 +834,6 @@
 				"WikibaseRepo.SubEntityTypesMapper"
 			]
 		},
-		"WikibaseGraphQL": {
-			"class": "Wikibase\\Repo\\GraphQLPrototype\\SpecialWikibaseGraphQL",
-			"services": [
-				"WikibaseRepo.PrefetchingTermLookup",
-				"WikibaseRepo.TermsLanguages"
-			]
-		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
 			"services": [

@@ -1233,8 +1233,14 @@ final class RepoHooks implements
 	 * @inheritDoc
 	 */
 	public function onSpecialPage_initList( &$list ) {
-		if ( !class_exists( GraphQL::class ) ) {
-			unset( $list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] );
+		if ( class_exists( GraphQL::class ) ) {
+			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
+				'class' => SpecialWikibaseGraphQL::class,
+				'services' => [
+					"WikibaseRepo.PrefetchingTermLookup",
+					"WikibaseRepo.TermsLanguages",
+				],
+			];
 		}
 	}
 }
