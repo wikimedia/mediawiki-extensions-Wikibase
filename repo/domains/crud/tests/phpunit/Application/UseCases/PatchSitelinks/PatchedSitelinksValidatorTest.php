@@ -18,6 +18,7 @@ use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkTargetTitleResolver;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
@@ -286,7 +287,7 @@ class PatchedSitelinksValidatorTest extends TestCase {
 	private function newValidator( SitelinkTargetTitleResolver $sitelinkTargetTitleResolver ): PatchedSitelinksValidator {
 		return new PatchedSitelinksValidator(
 			new SitelinksValidator(
-				new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+				new SiteIdValidator( new DummyValidSiteIdsRetriever() ),
 				new SiteLinkLookupSitelinkValidator(
 					new SitelinkDeserializer(
 						'/\?/',

@@ -32,6 +32,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\JsonDiffJsonPatcher;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepository;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
@@ -67,7 +68,7 @@ class PatchSitelinksTest extends TestCase {
 		$this->patcher = new PatchJson( new JsonDiffJsonPatcher() );
 		$this->itemRetriever = $this->createStub( ItemWriteModelRetriever::class );
 		$this->patchedSitelinksValidator = new PatchedSitelinksValidator( new SitelinksValidator(
-			new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+			new SiteIdValidator( new DummyValidSiteIdsRetriever() ),
 			new SiteLinkLookupSitelinkValidator(
 				new SitelinkDeserializer(
 					'/\?/',

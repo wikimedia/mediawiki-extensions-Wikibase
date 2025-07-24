@@ -20,6 +20,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 
 /**
@@ -40,7 +41,7 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 				);
 			case VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER:
 				return new SiteIdRequestValidatingDeserializer(
-					new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS )
+					new SiteIdValidator( new DummyValidSiteIdsRetriever() )
 				);
 			case VRD::SITELINK_EDIT_REQUEST_VALIDATING_DESERIALIZER:
 				return new SitelinkEditRequestValidatingDeserializer(

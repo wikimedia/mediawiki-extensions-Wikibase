@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinkValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SiteIdsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 
 /**
@@ -138,6 +139,9 @@ class SitelinksValidatorTest extends TestCase {
 	}
 
 	private function newValidator(): SitelinksValidator {
-		return new SitelinksValidator( new SiteIdValidator( self::VALID_SITES ), $this->sitelinkValidator );
+		$siteIdsRetriever = $this->createStub( SiteIdsRetriever::class );
+		$siteIdsRetriever->method( 'getValidSiteIds' )->willReturn( self::VALID_SITES );
+
+		return new SitelinksValidator( new SiteIdValidator( $siteIdsRetriever ), $this->sitelinkValidator );
 	}
 }

@@ -7,6 +7,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdReques
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
+use Wikibase\Repo\Domains\Crud\Domain\Services\SiteIdsRetriever;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer
@@ -42,7 +43,10 @@ class SiteIdRequestValidatingDeserializerTest extends TestCase {
 	}
 
 	private function newValidatingDeserializer(): SiteIdRequestValidatingDeserializer {
-		return new SiteIdRequestValidatingDeserializer( new SiteIdValidator( [ 'enwiki' ] ) );
+		$siteIdsRetriever = $this->createStub( SiteIdsRetriever::class );
+		$siteIdsRetriever->method( 'getValidSiteIds' )->willReturn( [ 'enwiki' ] );
+
+		return new SiteIdRequestValidatingDeserializer( new SiteIdValidator( $siteIdsRetriever ) );
 	}
 
 }

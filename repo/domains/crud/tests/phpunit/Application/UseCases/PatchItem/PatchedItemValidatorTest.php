@@ -60,6 +60,7 @@ use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -1090,7 +1091,7 @@ class PatchedItemValidatorTest extends TestCase {
 				new AliasesDeserializer( new AliasesInLanguageDeserializer() ),
 			),
 			new SitelinksValidator(
-				new SiteIdValidator( TestValidatingRequestDeserializer::ALLOWED_SITE_IDS ),
+				new SiteIdValidator( new DummyValidSiteIdsRetriever() ),
 				new SiteLinkLookupSitelinkValidator(
 					new SitelinkDeserializer(
 						'/\?/',

@@ -165,6 +165,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementR
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\FallbackLookupFactoryTermsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\PrefetchingTermLookupAliasesRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\SiteLinkGlobalIdentifiersProviderSiteIdsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\SiteLinkPageNormalizerSitelinkTargetResolver;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
@@ -289,9 +290,12 @@ return [
 					),
 					new StatementsValidator( new StatementValidator( WbCrud::getStatementDeserializer( $services ) ) ),
 					new SitelinksValidator(
-						new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
-							WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
-						) ),
+						new SiteIdValidator(
+							new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
+								WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
+								WikibaseRepo::getSettings( $services )
+							)
+						),
 						new SiteLinkLookupSitelinkValidator(
 							WbCrud::getSitelinkDeserializer( $services ),
 							WikibaseRepo::getStore( $services )->newSiteLinkStore()
@@ -382,9 +386,12 @@ return [
 	VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER =>
 		function ( MediaWikiServices $services ): SiteIdRequestValidatingDeserializer {
 			return new SiteIdRequestValidatingDeserializer(
-				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
-					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
-				) )
+				new SiteIdValidator(
+					new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
+						WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
+						WikibaseRepo::getSettings( $services )
+					)
+				)
 			);
 		},
 
@@ -863,9 +870,12 @@ return [
 					new AliasesDeserializer( new AliasesInLanguageDeserializer() )
 				),
 				new SitelinksValidator(
-					new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
-						WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
-					) ),
+					new SiteIdValidator(
+						new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
+							WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
+							WikibaseRepo::getSettings( $services )
+						)
+					),
 					new SiteLinkLookupSitelinkValidator(
 						WbCrud::getSitelinkDeserializer( $services ),
 						WikibaseRepo::getStore( $services )->newSiteLinkStore()
@@ -1090,9 +1100,12 @@ return [
 			new PatchJson( new JsonDiffJsonPatcher() ),
 			WbCrud::getItemDataRetriever( $services ),
 			new PatchedSitelinksValidator( new SitelinksValidator(
-				new SiteIdValidator( WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services )->getList(
-					WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' )
-				) ),
+				new SiteIdValidator(
+					new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
+						WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
+						WikibaseRepo::getSettings( $services )
+					)
+				),
 				new SiteLinkLookupSitelinkValidator(
 					WbCrud::getSitelinkDeserializer( $services ),
 					WikibaseRepo::getStore( $services )->newSiteLinkStore()

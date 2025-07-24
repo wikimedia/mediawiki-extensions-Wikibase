@@ -146,7 +146,6 @@ use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFa
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
-use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -187,7 +186,6 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 		$this->stubPreconditionMiddlewareFactory();
 		$this->stubStatementRedirectMiddlewareFactory();
-		$this->stubSiteLinkGlobalIdentifiersProvider();
 		$this->stubChangeTagsStore();
 	}
 
@@ -1246,12 +1244,6 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$factory = $this->createStub( StatementRedirectMiddlewareFactory::class );
 		$factory->method( 'newStatementRedirectMiddleware' )->willReturn( $middleware );
 		$this->setService( 'WbCrud.StatementRedirectMiddlewareFactory', $factory );
-	}
-
-	private function stubSiteLinkGlobalIdentifiersProvider(): void {
-		$sitelinkGlobalIdentifiersProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
-		$sitelinkGlobalIdentifiersProvider->method( 'getList' )->willReturn( [] );
-		$this->setService( 'WikibaseRepo.SiteLinkGlobalIdentifiersProvider', $sitelinkGlobalIdentifiersProvider );
 	}
 
 	private function stubChangeTagsStore(): void {
