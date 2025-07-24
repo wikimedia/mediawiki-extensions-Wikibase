@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use Traversable;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -130,64 +131,69 @@ class StatementSectionsView {
 	}
 
 	/**
+	 * @param App $app The Vue App
+	 * @param string $sectionHeadingHtml Section heading as HTML
+	 * @param StatementList $statementsList
+	 * @param array &$snakHtmlLookup
+	 * @return string Rendered HTML
+	 */
+	private function renderStatementsSectionHtml(
+		App $app,
+		string $sectionHeadingHtml,
+		StatementList $statementsList,
+		array &$snakHtmlLookup
+	): string {
+		$propertyStatementMap = [];
+		$propertyList = [];
+		foreach ( $statementsList->getPropertyIds() as $propertyId ) {
+			$propertyStatements = $statementsList->getByPropertyId( $propertyId )->toArray();
+			$propertyList[] = $propertyId->getSerialization();
+
+			$statementsData = [];
+			foreach ( $propertyStatements as $statement ) {
+				$mainSnak = $statement->getMainSnak();
+				$statementSerializer = $this->serializerFactory->newStatementSerializer();
+				$statementData = $statementSerializer->serialize( $statement );
+
+				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
+				$statementData['mainsnak']['datatype'] = $dataType;
+				$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
+				$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
+				if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
+					$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
+				}
+				$statementsData[] = $statementData;
+			}
+			$propertyStatementMap[$propertyId->getSerialization()] = $statementsData;
+		}
+
+		return $app->renderComponent( 'wbui2025-statement-sections', [
+			'sectionHeadingHtml' => $sectionHeadingHtml,
+			'propertyList' => $propertyList,
+			'propertyStatementMap' => $propertyStatementMap,
+		] );
+	}
+
+	/**
 	 * @param StatementList[] $statementsLists
 	 * @param App $app
 	 * @param array &$snakHtmlLookup
 	 * @return string HTML
 	 */
-	private function getVueStatementHtml( array $statementsLists, App $app, array &$snakHtmlLookup ): string {
+	private function getVueStatementSectionsHtml( array $statementsLists, App $app, array &$snakHtmlLookup ): string {
 		$rendered = '';
-		foreach ( $statementsLists as $key => $statementsList ) {
-			if ( !is_string( $key ) || !( $statementsList instanceof StatementList ) ) {
-				throw new InvalidArgumentException(
-					'$statementLists must be an associative array of StatementList objects'
-				);
-			}
-
-			if ( $key !== 'statements' && $statementsList->isEmpty() ) {
-				continue;
-			}
-
-			$sectionHeadingHtml = $this->getHtmlForSectionHeading( $key );
-			$propertyStatementMap = [];
-			$propertyList = [];
-			foreach ( $statementsList->getPropertyIds() as $propertyId ) {
-				$propertyStatements = $statementsList->getByPropertyId( $propertyId )->toArray();
-				$propertyList[] = $propertyId->getSerialization();
-
-				$statementsData = [];
-				foreach ( $propertyStatements as $statement ) {
-					$mainSnak = $statement->getMainSnak();
-					$statementSerializer = $this->serializerFactory->newStatementSerializer();
-					$statementData = $statementSerializer->serialize( $statement );
-
-					$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $mainSnak->getPropertyId() );
-					$statementData['mainsnak']['datatype'] = $dataType;
-					$this->populateReferenceSnakHtml( $statement, $statementData, $snakHtmlLookup );
-					$this->populateQualifierSnakHtml( $statement, $statementData, $snakHtmlLookup );
-					if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
-						$snakHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
-					}
-					$statementsData[] = $statementData;
-				}
-				$propertyStatementMap[$propertyId->getSerialization()] = $statementsData;
-			}
-
-			$rendered .= $app->renderComponent( 'wbui2025-statement-sections', [
-				'sectionHeadingHtml' => $sectionHeadingHtml,
-				'propertyList' => $propertyList,
-				'propertyStatementMap' => $propertyStatementMap,
-			] );
+		foreach ( $this->iterateOverNonEmptyStatementSections( $statementsLists ) as $key => $statementsList ) {
+			$rendered .= $this->renderStatementsSectionHtml(
+				$app,
+				$this->getHtmlForSectionHeading( $key ),
+				$statementsList,
+				$snakHtmlLookup
+			);
 		}
 		return $rendered;
 	}
 
-	/**
-	 * @param StatementList[] $statementsLists
-	 * @return string HTML
-	 */
-	private function getVueStatementsHtml( array $statementsLists ): string {
-		$snakHtmlLookup = [];
+	private function setupVueTemplateRenderer( array &$snakHtmlLookup ): App {
 		$app = new App( [
 			'snakHtml' => function ( $snak ) use ( &$snakHtmlLookup ) {
 				if ( array_key_exists( $snak['hash'], $snakHtmlLookup ) ) {
@@ -274,10 +280,39 @@ class StatementSectionsView {
 				return $data;
 			}
 		);
+		return $app;
+	}
+
+	/**
+	 * @param StatementList[] $statementsLists
+	 * @return string HTML
+	 */
+	private function getVueStatementsHtml( array $statementsLists ): string {
+		$snakHtmlLookup = [];
+		$app = $this->setupVueTemplateRenderer( $snakHtmlLookup );
 
 		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
-			$this->getVueStatementHtml( $statementsLists, $app, $snakHtmlLookup ) .
+			$this->getVueStatementSectionsHtml( $statementsLists, $app, $snakHtmlLookup ) .
 			"</div>";
+	}
+
+	/**
+	 * @param StatementList[] $statementLists
+	 */
+	private function iterateOverNonEmptyStatementSections( array $statementLists ): Traversable {
+		foreach ( $statementLists as $key => $statements ) {
+			if ( !is_string( $key ) || !( $statements instanceof StatementList ) ) {
+				throw new InvalidArgumentException(
+					'$statementLists must be an associative array of StatementList objects'
+				);
+			}
+
+			if ( $key !== 'statements' && $statements->isEmpty() ) {
+				continue;
+			}
+
+			yield $key => $statements;
+		}
 	}
 
 	/**
@@ -292,19 +327,9 @@ class StatementSectionsView {
 		if ( $wbui2025Ready && $this->vueStatementsView ) {
 			return $this->getVueStatementsHtml( $statementLists );
 		}
+
 		$html = '';
-
-		foreach ( $statementLists as $key => $statements ) {
-			if ( !is_string( $key ) || !( $statements instanceof StatementList ) ) {
-				throw new InvalidArgumentException(
-					'$statementLists must be an associative array of StatementList objects'
-				);
-			}
-
-			if ( $key !== 'statements' && $statements->isEmpty() ) {
-				continue;
-			}
-
+		foreach ( $this->iterateOverNonEmptyStatementSections( $statementLists ) as $key => $statements ) {
 			$html .= $this->getHtmlForSectionHeading( $key );
 			$html .= $this->statementListView->getHtml( $statements->toArray() );
 		}
