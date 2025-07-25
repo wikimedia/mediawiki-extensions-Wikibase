@@ -961,24 +961,24 @@ final class RepoHooks implements
 		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
 			$modules['wikibase.mobileUi.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
-					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.less',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.less',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.less',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.references.less',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.less',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.qualifiers.less',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.statementDetailView.less',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.statementView.less',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.references.less',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.mainSnak.less',
 					'../view/resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
 				],
 			];
 			$modules['wikibase.mobileUi.entityViewInit'] = $moduleTemplate + [
 				'packageFiles' => [
 					'resources/wikibase.mobileUi.entityViewInit.js',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.vue',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.references.vue',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.vue',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue',
-					'resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue',
-					'resources/wikibase.mobileUi/store/serverRenderedHtml.js',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.qualifiers.vue',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.references.vue',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.statementDetailView.vue',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.statementView.vue',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.propertyName.vue',
+					'resources/wikibase.wbui2025/wikibase.mobileUi.mainSnak.vue',
+					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 				],
 				'dependencies' => [
 					'pinia',

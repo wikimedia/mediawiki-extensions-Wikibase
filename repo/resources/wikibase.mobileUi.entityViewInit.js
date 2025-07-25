@@ -6,8 +6,8 @@
 
 	const Vue = require( 'vue' );
 	const Pinia = require( 'pinia' );
-	const App = require( './wikibase.mobileUi/wikibase.mobileUi.statementView.vue' );
-	const { useServerRenderedHtml } = require( './wikibase.mobileUi/store/serverRenderedHtml.js' );
+	const App = require( './wikibase.wbui2025/wikibase.mobileUi.statementView.vue' );
+	const { useServerRenderedHtml } = require( './wikibase.wbui2025/store/serverRenderedHtml.js' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
