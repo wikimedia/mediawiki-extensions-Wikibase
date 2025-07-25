@@ -2,7 +2,9 @@
 	<div class="wikibase-wbui2025-statement-group">
 		<div class="wikibase-wbui2025-statement-heading">
 			<div class="wikibase-wbui2025-statement-heading-row">
-				<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
+				<p>
+					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
+				</p>
 				<div class="wikibase-wbui2025-edit-link">
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
 					<a href="#" class="wbui2025-link-heavy">edit</a>

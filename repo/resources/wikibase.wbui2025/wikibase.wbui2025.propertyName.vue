@@ -1,11 +1,11 @@
 <template>
-	<div class="wikibase-wbui2025-property-name">
-		<p
+	<span class="wikibase-wbui2025-property-name">
+		<span
 			class="wikibase-wbui2025-property-name-link"
 			:data-property-id="propertyId"
 			v-html="propertyLinkHtml"
-		></p>
-	</div>
+		></span>
+	</span>
 </template>
 
 <script>
