@@ -26,10 +26,10 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const Wbui2025MainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
+const Wbui2025MainSnak = require( './wikibase.wbui2025.mainSnak.vue' );
 const { snakHtml } = require( './store/serverRenderedHtml.js' );
-const Wbui2025References = require( './wikibase.mobileUi.references.vue' );
-const Wbui2025Qualifiers = require( './wikibase.mobileUi.qualifiers.vue' );
+const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
+const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {

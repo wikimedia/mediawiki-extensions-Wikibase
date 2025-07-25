@@ -4,7 +4,7 @@ jest.mock(
 	{ virtual: true }
 );
 
-const statementView = require( '../../resources/wikibase.wbui2025/wikibase.mobileUi.statementView.vue' );
+const statementView = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 

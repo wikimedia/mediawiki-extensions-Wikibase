@@ -19,8 +19,8 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const Wbui2025PropertyName = require( './wikibase.mobileUi.propertyName.vue' );
-const Wbui2025StatementDetail = require( './wikibase.mobileUi.statementDetailView.vue' );
+const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
+const Wbui2025StatementDetail = require( './wikibase.wbui2025.statementDetailView.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {

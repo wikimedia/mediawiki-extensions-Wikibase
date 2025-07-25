@@ -170,11 +170,11 @@ class StatementSectionsView {
 		} ] );
 		$app->registerComponentTemplate(
 			'wbui2025-statement',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.statementView.vue' ),
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-statement-detail',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.statementDetailView.vue' ),
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' ),
 			function ( array $data ): array {
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
@@ -186,7 +186,7 @@ class StatementSectionsView {
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-property-name',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.propertyName.vue' ),
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' ),
 			function ( array $data ): array {
 				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject (T396633)
 					->parse( $data['propertyId'] );
@@ -198,7 +198,7 @@ class StatementSectionsView {
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-main-snak',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.mainSnak.vue' ),
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' ),
 			function ( array $data ): array {
 				$dataType = $data['type'];
 
@@ -212,7 +212,7 @@ class StatementSectionsView {
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-references',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.references.vue' ),
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' ),
 			function ( array $data ): array {
 				$data['referenceCount'] = count( $data['references'] );
 				$data['hasReferences'] = $data['referenceCount'] > 0;
@@ -227,7 +227,7 @@ class StatementSectionsView {
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-qualifiers',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.mobileUi.qualifiers.vue' ),
+			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' ),
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
 				$data['hasQualifiers'] = $qualifierCount > 0;
