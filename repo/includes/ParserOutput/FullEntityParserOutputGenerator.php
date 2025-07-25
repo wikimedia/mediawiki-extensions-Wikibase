@@ -194,10 +194,10 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			] );
 		} elseif ( $this->tmpMobileEditingUI ) {
 			$parserOutput->addModules( [
-				'wikibase.mobileUi.entityViewInit',
+				'wikibase.wbui2025.entityViewInit',
 			] );
 			$parserOutput->addModuleStyles( [
-				'wikibase.mobileUi.entityView.styles',
+				'wikibase.wbui2025.entityView.styles',
 			] );
 		}
 	}

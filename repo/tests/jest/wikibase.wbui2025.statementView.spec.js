@@ -8,7 +8,7 @@ const statementView = require( '../../resources/wikibase.wbui2025/wikibase.wbui2
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
-describe( 'wikibase.mobileUi.statementView', () => {
+describe( 'wikibase.wbui2025.statementView', () => {
 	it( 'defines component', async () => {
 		expect( typeof statementView ).toBe( 'object' );
 		expect( statementView ).toHaveProperty( 'name', 'WikibaseWbui2025Statement' );

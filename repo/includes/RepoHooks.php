@@ -959,7 +959,7 @@ final class RepoHooks implements
 		// so that wikis without the feature flag don’t even pay the small cost of loading the module *definition*
 		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
 		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
-			$modules['wikibase.mobileUi.entityView.styles'] = $moduleTemplate + [
+			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.less',
@@ -969,7 +969,7 @@ final class RepoHooks implements
 					'../view/resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
 				],
 			];
-			$modules['wikibase.mobileUi.entityViewInit'] = $moduleTemplate + [
+			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
 				'packageFiles' => [
 					'resources/wikibase.wbui2025.entityViewInit.js',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
@@ -985,7 +985,7 @@ final class RepoHooks implements
 					'vue',
 					'@wikimedia/codex',
 					'wikibase',
-					'wikibase.mobileUi.entityView.styles',
+					'wikibase.wbui2025.entityView.styles',
 				],
 				'messages' => [
 					'wikibase-statementview-qualifiers-counter',

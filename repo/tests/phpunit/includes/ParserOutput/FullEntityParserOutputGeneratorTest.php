@@ -238,10 +238,10 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			'mobile view, flag enabled' => [
 				'isMobileView' => true,
 				'tmpMobileEditingUI' => true,
-				'expectedModules' => [ 'wikibase.entityPage.entityLoaded', 'wikibase.mobileUi.entityViewInit' ],
+				'expectedModules' => [ 'wikibase.entityPage.entityLoaded', 'wikibase.wbui2025.entityViewInit' ],
 				'expectedModuleStyles' => [
 					'wikibase.alltargets',
-					'wikibase.mobileUi.entityView.styles',
+					'wikibase.wbui2025.entityView.styles',
 				],
 			],
 		];
