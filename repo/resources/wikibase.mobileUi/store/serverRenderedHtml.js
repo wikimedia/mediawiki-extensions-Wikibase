@@ -11,7 +11,7 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 		 * @return {void}
 		 */
 		importFromElement( element ) {
-			for ( const propertyLink of element.getElementsByClassName( 'wikibase-mex-property-name-link' ) ) {
+			for ( const propertyLink of element.getElementsByClassName( 'wikibase-wbui2025-property-name-link' ) ) {
 				const propertyId = propertyLink.dataset.propertyId;
 				const linkHtml = propertyLink.innerHTML;
 				if ( this.propertyLinks.has( propertyId ) ) {
@@ -26,7 +26,7 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 					this.propertyLinks.set( propertyId, linkHtml );
 				}
 			}
-			for ( const snak of element.getElementsByClassName( 'wikibase-mex-snak-value' ) ) {
+			for ( const snak of element.getElementsByClassName( 'wikibase-wbui2025-snak-value' ) ) {
 				const snakHash = snak.dataset.snakHash;
 				const html = snak.innerHTML;
 				if ( this.snakHtmls.has( snakHash ) ) {

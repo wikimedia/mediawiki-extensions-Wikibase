@@ -1,8 +1,8 @@
 <template>
-	<div class="wikibase-mex-property-name">
+	<div class="wikibase-wbui2025-property-name">
 		<!-- eslint-disable vue/no-v-html -->
 		<p
-			class="wikibase-mex-property-name-link"
+			class="wikibase-wbui2025-property-name-link"
 			:data-property-id="propertyId"
 			v-html="propertyLinkHtml"
 		></p>
@@ -16,7 +16,7 @@ const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseMexPropertyName',
+	name: 'WikibaseWbui2025PropertyName',
 	props: {
 		propertyId: {
 			type: String,

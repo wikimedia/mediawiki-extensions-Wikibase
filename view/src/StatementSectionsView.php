@@ -153,7 +153,7 @@ class StatementSectionsView {
 			$statementsData[] = $statementData;
 		}
 
-		return $app->renderComponent( 'mex-statement', [
+		return $app->renderComponent( 'wbui2025-statement', [
 			'statements' => $statementsData,
 			'propertyId' => $propertyId,
 		] );
@@ -169,11 +169,11 @@ class StatementSectionsView {
 			return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
 		} ] );
 		$app->registerComponentTemplate(
-			'mex-statement',
+			'wbui2025-statement',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementView.vue' ),
 		);
 		$app->registerComponentTemplate(
-			'mex-statement-detail',
+			'wbui2025-statement-detail',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.statementDetailView.vue' ),
 			function ( array $data ): array {
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
@@ -185,7 +185,7 @@ class StatementSectionsView {
 			}
 		);
 		$app->registerComponentTemplate(
-			'mex-property-name',
+			'wbui2025-property-name',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.propertyName.vue' ),
 			function ( array $data ): array {
 				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject (T396633)
@@ -197,21 +197,21 @@ class StatementSectionsView {
 			}
 		);
 		$app->registerComponentTemplate(
-			'mex-main-snak',
+			'wbui2025-main-snak',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.mainSnak.vue' ),
 			function ( array $data ): array {
 				$dataType = $data['type'];
 
 				$data['snakValueClass'] = [
-					'wikibase-mex-media-value' => $dataType == 'commonsMedia',
-					'wikibase-mex-time-value' => $dataType == 'time',
+					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
+					'wikibase-wbui2025-time-value' => $dataType == 'time',
 				];
 
 				return $data;
 			}
 		);
 		$app->registerComponentTemplate(
-			'mex-references',
+			'wbui2025-references',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.references.vue' ),
 			function ( array $data ): array {
 				$data['referenceCount'] = count( $data['references'] );
@@ -226,7 +226,7 @@ class StatementSectionsView {
 			}
 		);
 		$app->registerComponentTemplate(
-			'mex-qualifiers',
+			'wbui2025-qualifiers',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.mobileUi/wikibase.mobileUi.qualifiers.vue' ),
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
@@ -245,10 +245,10 @@ class StatementSectionsView {
 		foreach ( $statementsList->getPropertyIds() as $propertyId ) {
 			$statements = $statementsList->getByPropertyId( $propertyId )->toArray();
 			$renderedStatement = $this->getVueStatementHtml( $propertyId, $statements, $app, $snakHtmlLookup );
-			$rendered .= "<div id='wikibase-mex-statementwrapper-$propertyId'>$renderedStatement</div>";
+			$rendered .= "<div id='wikibase-wbui2025-statementwrapper-$propertyId'>$renderedStatement</div>";
 		}
 
-		return "<div id='wikibase-mex-statementgrouplistview'>$rendered</div>";
+		return "<div id='wikibase-wbui2025-statementgrouplistview'>$rendered</div>";
 	}
 
 	/**

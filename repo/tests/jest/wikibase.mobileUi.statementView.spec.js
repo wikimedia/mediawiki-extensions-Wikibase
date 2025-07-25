@@ -11,7 +11,7 @@ const { createTestingPinia } = require( '@pinia/testing' );
 describe( 'wikibase.mobileUi.statementView', () => {
 	it( 'defines component', async () => {
 		expect( typeof statementView ).toBe( 'object' );
-		expect( statementView ).toHaveProperty( 'name', 'WikibaseMexStatement' );
+		expect( statementView ).toHaveProperty( 'name', 'WikibaseWbui2025Statement' );
 	} );
 
 	describe( 'the mounted component', () => {
@@ -68,10 +68,10 @@ describe( 'wikibase.mobileUi.statementView', () => {
 		it( 'sets the right content on claim elements', async () => {
 			const statements = wrapper.findAll( '.wikibase-wbui2025-statement-group' );
 			const statement = statements[ 0 ];
-			expect( statement.find( '.wikibase-mex-property-name a' ).text() ).toBe( mockStatement.mainsnak.property );
-			expect( statement.find( '.wikibase-mex-property-name a' ).element.href ).toContain( 'mock-property-url' );
+			expect( statement.find( '.wikibase-wbui2025-property-name a' ).text() ).toBe( mockStatement.mainsnak.property );
+			expect( statement.find( '.wikibase-wbui2025-property-name a' ).element.href ).toContain( 'mock-property-url' );
 
-			expect( statement.find( '.wikibase-mex-snak-value' ).text() ).toBe( mockStatement.mainsnak.datavalue.value );
+			expect( statement.find( '.wikibase-wbui2025-snak-value' ).text() ).toBe( mockStatement.mainsnak.datavalue.value );
 		} );
 	} );
 

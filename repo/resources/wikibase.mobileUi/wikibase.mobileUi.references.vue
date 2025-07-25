@@ -1,23 +1,23 @@
 <template>
-	<div class="wikibase-mex-references">
-		<p :class="{ 'wikibase-mex-clickable': hasReferences }" @click="showReferences = !showReferences">
-			<span v-if="hasReferences" :class="{ 'wikibase-mex-icon-expand-x-small': !showReferences, 'wikibase-mex-icon-collapse-x-small': showReferences }"></span>
+	<div class="wikibase-wbui2025-references">
+		<p :class="{ 'wikibase-wbui2025-clickable': hasReferences }" @click="showReferences = !showReferences">
+			<span v-if="hasReferences" :class="{ 'wikibase-wbui2025-icon-expand-x-small': !showReferences, 'wikibase-wbui2025-icon-collapse-x-small': showReferences }"></span>
 			<a
 				v-if="hasReferences"
 				href="javascript: void(0)"
-				class="mex-link">{{ referencesMessage }}</a>
+				class="wbui2025-link">{{ referencesMessage }}</a>
 			<span v-else>{{ referencesMessage }}</span>
 		</p>
 		<div
 			v-if="hasReferences"
-			class="wikibase-mex-reference-list"
-			:class="{ 'wikibase-mex-references-visible': showReferences }">
+			class="wikibase-wbui2025-reference-list"
+			:class="{ 'wikibase-wbui2025-references-visible': showReferences }">
 			<template v-for="reference in references" :key="reference">
 				<template v-for="snak in reference['snaks-order']" :key="snak">
 					<template v-for="propertysnak in reference.snaks[snak]" :key="propertysnak">
 						<!-- eslint-disable vue/no-v-html -->
 						<div
-							class="wikibase-mex-snak-value"
+							class="wikibase-wbui2025-snak-value"
 							:data-snak-hash="propertysnak.hash"
 							v-html="snakHtml( propertysnak )"
 						></div>
@@ -35,7 +35,7 @@ const { snakHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseMexReferences',
+	name: 'WikibaseWbui2025References',
 	props: {
 		references: {
 			type: Array,

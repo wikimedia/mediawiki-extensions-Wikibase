@@ -1,11 +1,11 @@
 <template>
-	<div class="wikibase-mex-main-snak">
+	<div class="wikibase-wbui2025-main-snak">
 		<div class="wikibase-rankselector ui-state-default">
 			<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
 		</div>
 		<!-- eslint-disable vue/no-v-html -->
 		<div
-			class="wikibase-mex-snak-value"
+			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 			:class="snakValueClass"
 			v-html="html"
@@ -19,7 +19,7 @@ const { defineComponent } = require( 'vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseMexMainSnak',
+	name: 'WikibaseWbui2025MainSnak',
 	props: {
 		type: {
 			type: String,
@@ -37,8 +37,8 @@ module.exports = exports = defineComponent( {
 	computed: {
 		snakValueClass() {
 			return {
-				'wikibase-mex-media-value': this.type === 'commonsMedia',
-				'wikibase-mex-time-value': this.type === 'time'
+				'wikibase-wbui2025-media-value': this.type === 'commonsMedia',
+				'wikibase-wbui2025-time-value': this.type === 'time'
 			};
 		}
 	}

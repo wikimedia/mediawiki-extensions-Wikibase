@@ -4,40 +4,40 @@
 		<p class="statement_data_debug">
 			{{ statementDump }}
 		</p>
-		<mex-main-snak
+		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:type="statement.mainsnak.datatype"
 			:hash="statement.mainsnak.hash"
 			:html="snakHtml( statement.mainsnak )"
-		></mex-main-snak>
+		></wbui2025-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}
 		</div>
-		<mex-qualifiers
+		<wbui2025-qualifiers
 			:qualifiers="qualifiers"
 			:qualifiers-order="qualifiersOrder">
-		</mex-qualifiers>
-		<mex-references
+		</wbui2025-qualifiers>
+		<wbui2025-references
 			:references="references"
 			:show-references="false"
-		></mex-references>
+		></wbui2025-references>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
-const MexMainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
+const Wbui2025MainSnak = require( './wikibase.mobileUi.mainSnak.vue' );
 const { snakHtml } = require( './store/serverRenderedHtml.js' );
-const MexReferences = require( './wikibase.mobileUi.references.vue' );
-const MexQualifiers = require( './wikibase.mobileUi.qualifiers.vue' );
+const Wbui2025References = require( './wikibase.mobileUi.references.vue' );
+const Wbui2025Qualifiers = require( './wikibase.mobileUi.qualifiers.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseMexStatementDetail',
+	name: 'WikibaseWbui2025StatementDetail',
 	components: {
-		MexMainSnak,
-		MexReferences,
-		MexQualifiers
+		Wbui2025MainSnak,
+		Wbui2025References,
+		Wbui2025Qualifiers
 	},
 	props: {
 		statement: {

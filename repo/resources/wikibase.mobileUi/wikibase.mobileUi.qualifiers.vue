@@ -9,7 +9,7 @@
 				<template v-for="propertysnak in qualifiers[snak]" :key="propertysnak">
 					<!-- eslint-disable vue/no-v-html -->
 					<div
-						class="wikibase-mex-snak-value wikibase-wbui2025-qualifier"
+						class="wikibase-wbui2025-snak-value wikibase-wbui2025-qualifier"
 						:data-snak-hash="propertysnak.hash"
 						v-html="snakHtml( propertysnak )"
 					></div>
@@ -26,7 +26,7 @@ const { snakHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseMexQualifiers',
+	name: 'WikibaseWbui2025Qualifiers',
 	props: {
 		qualifiers: {
 			type: Object,
