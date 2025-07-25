@@ -102,7 +102,7 @@ This option was considered, but decided against, for the Mobile Termbox work at 
 It’s worth mentioning that the situation for php-vuejs-templating has somewhat improved in the meantime:
 thanks to the adoption of Peast for the JavaScript minifier in MediaWiki core ([T75714][]),
 we can now use this library, already security-reviewed for Wikimedia production,
-to parse the JavaScript expression in the templates and evaluate a subset of them.
+to parse the JavaScript expressions in the templates and evaluate a subset of them.
 This was not available during the Termbox work, so at the time,
 expanding php-vuejs-templating’s JavaScript support would have needed more ugly string manipulation.
 That said, it remains true that php-vuejs-templating is not an industry standard solution
