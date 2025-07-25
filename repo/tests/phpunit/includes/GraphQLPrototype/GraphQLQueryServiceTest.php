@@ -13,6 +13,7 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\GraphQLPrototype\GraphQLQueryService;
+use Wikibase\Repo\GraphQLPrototype\ItemResolver;
 use Wikibase\Repo\GraphQLPrototype\LabelsResolver;
 use Wikibase\Repo\GraphQLPrototype\Schema;
 use Wikibase\Repo\GraphQLPrototype\StatementsResolver;
@@ -122,11 +123,30 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testInvalidItemId(): void {
+		$result = $this->newGraphQLService()->query( 'query { item(id: "X123") { id } }' );
+		$this->assertSame(
+			"Invalid Item ID: 'X123'.",
+			$result['errors'][0]['message']
+		);
+	}
+
+	public function testItemNotFound(): void {
+		$result = $this->newGraphQLService()->query( 'query { item(id: "Q999999") { id } }' );
+		$this->assertSame(
+			"Item 'Q999999' does not exist.",
+			$result['errors'][0]['message']
+		);
+	}
+
 	public function newGraphQLService(): GraphQLQueryService {
+		$entityLookup = WikibaseRepo::getEntityLookup();
+
 		return new GraphQLQueryService( new Schema(
 			WikibaseRepo::getTermsLanguages(),
 			new LabelsResolver( WikibaseRepo::getPrefetchingTermLookup() ),
-			new StatementsResolver( WikibaseRepo::getEntityLookup() )
+			new StatementsResolver( $entityLookup ),
+			new ItemResolver( $entityLookup ),
 		) );
 	}
 

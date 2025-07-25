@@ -25,6 +25,7 @@ class SpecialWikibaseGraphQL extends SpecialPage {
 			$termLanguages,
 			new LabelsResolver( $termLookup ),
 			new StatementsResolver( $entityLookup ),
+			new ItemResolver( $entityLookup )
 		) );
 	}
 

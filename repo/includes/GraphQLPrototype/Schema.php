@@ -19,6 +19,7 @@ class Schema extends GraphQLSchema {
 		private ContentLanguages $labelLanguages,
 		private LabelsResolver $labelsResolver,
 		private StatementsResolver $statementsResolver,
+		private ItemResolver $itemResolver,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -29,7 +30,7 @@ class Schema extends GraphQLSchema {
 						'args' => [
 							'id' => Type::nonNull( Type::string() ),
 						],
-						'resolve' => fn( $rootValue, array $args ) => [ 'id' => $args['id'] ],
+						'resolve' => fn( $rootValue, array $args ) => $this->itemResolver->fetchItem( $args['id'] ),
 					],
 				],
 			] ),
