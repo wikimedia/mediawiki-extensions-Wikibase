@@ -4,6 +4,7 @@ namespace Wikibase\View\Tests;
 
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -51,6 +52,7 @@ use Wikibase\View\Template\TemplateFactory;
 class ItemViewTest extends EntityViewTestCase {
 
 	private const EXTERNAL_ID_PROPERTY_ID = 'P123';
+	private const TIME_VALUE_PROPERTY_ID = 'P724';
 
 	/**
 	 * @param EntityId|ItemId $id
@@ -123,6 +125,10 @@ class ItemViewTest extends EntityViewTestCase {
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
 						new StringValue( 'https://www.example.com/url' )
+					) ),
+					new Statement( new PropertyValueSnak(
+						new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
+						new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN )
 					) ),
 				] ),
 				'vueStatementsExpected' => true,
@@ -224,6 +230,20 @@ class ItemViewTest extends EntityViewTestCase {
 		}
 	}
 
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueMainSnak( callable $viewFactory, Item $item, bool $vueStatementsExpected ) {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+		if ( $vueStatementsExpected ) {
+			$this->assertStringContainsString( 'wikibase-wbui2025-main-snak', $html );
+			$this->assertStringContainsString( 'wikibase-wbui2025-time-value', $html );
+			$this->assertStringContainsString( '<div>a value snak: DataValues\TimeValue</div>', $html );
+		} else {
+			$this->assertStringNotContainsString( 'wikibase-wbui2025-main-snak', $html );
+		}
+	}
+
 	public function testTermsViewPlaceholdersArePropagated() {
 		$placeholders = [ 'a' => 'b' ];
 		$itemView = $this->newItemView( $placeholders );
@@ -243,6 +263,9 @@ class ItemViewTest extends EntityViewTestCase {
 			->willReturnCallback( static function ( PropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === self::EXTERNAL_ID_PROPERTY_ID ) {
 					return 'external-id';
+				}
+				if ( $propertyId->getSerialization() === self::TIME_VALUE_PROPERTY_ID ) {
+					return 'time';
 				}
 				return 'string';
 			} );
