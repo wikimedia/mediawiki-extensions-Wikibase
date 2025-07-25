@@ -49,10 +49,22 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$this->saveEntity( $stringProperty );
 		self::$stringProperty = $stringProperty;
 
+		$timeProperty = new Property(
+			null,
+			new Fingerprint( new TermList( [ new Term( 'en', 'date of birth' ) ] ) ),
+			'time',
+		);
+		$this->saveEntity( $timeProperty );
+
 		$item = NewItem::withLabel( 'en', 'potato' )
 			->andLabel( 'de', 'Kartoffel' )
 			->andStatement(
-				NewStatement::noValueFor( self::$stringProperty->getId() )->build()
+				NewStatement::forProperty( $stringProperty->getId() )
+					->withValue( 'potato value' )
+					->build()
+			)
+			->andStatement( // this statement will get filtered out, because we don't support time values yet
+				NewStatement::noValueFor( $timeProperty->getId() )->build()
 			)
 			->build();
 		$this->saveEntity( $item );
@@ -136,6 +148,36 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			"Item 'Q999999' does not exist.",
 			$result['errors'][0]['message']
+		);
+	}
+
+	public function testStatementsQueryWithStringValue(): void {
+		$itemId = self::$item->getId()->getSerialization();
+		$value = self::$item->getStatements()
+			->getByPropertyId( self::$stringProperty->getId() )->toArray()[0]
+			->getMainSnak()->getDataValue()->getValue();
+
+		$this->assertNotNull( $value );
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [
+				'statements' => [
+					[
+						'property' => [
+							'id' => self::$stringProperty->getId()->getSerialization(),
+						],
+						'value' => [ 'content' => $value ],
+					],
+				],
+			] ] ],
+			$this->newGraphQLService()->query( "
+			query {
+				item(id: \"$itemId\") {
+					statements {
+						property { id }
+						value { content }
+					}
+				}
+			}" )
 		);
 	}
 

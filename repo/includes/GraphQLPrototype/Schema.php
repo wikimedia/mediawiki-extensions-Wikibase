@@ -90,6 +90,12 @@ class Schema extends GraphQLSchema {
 						],
 					],
 				] ),
+				'value' => new ObjectType( [
+					'name' => 'StatementValue',
+					'fields' => [
+						'content' => Type::nonNull( Type::string() ),
+					],
+				] ),
 			],
 		] );
 	}
