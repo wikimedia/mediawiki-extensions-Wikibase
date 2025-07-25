@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\HashSiteStore;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -92,6 +93,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( LocalizedTextProviderFactory::class ),
 			$this->createMock( SpecialPageLinker::class ),
 			$this->createMock( LanguageFactory::class ),
+			$this->createMock( EntityIdParser::class ),
 			false
 		);
 	}
@@ -138,7 +140,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNewStatementSectionsView() {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
-			'de',
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( EditSectionGenerator::class )
 		);

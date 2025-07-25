@@ -5,7 +5,9 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\SiteLookup;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -125,6 +127,11 @@ class ViewFactory {
 	 */
 	private $languageFactory;
 
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
 	private bool $vueStatementsView;
 
 	/**
@@ -147,6 +154,7 @@ class ViewFactory {
 	 * @param LocalizedTextProviderFactory $textProviderFactory
 	 * @param SpecialPageLinker $specialPageLinker
 	 * @param LanguageFactory $languageFactory
+	 * @param EntityIdParser $entityIdParser
 	 * @param bool $vueStatementsView
 	 *
 	 * @throws InvalidArgumentException
@@ -171,6 +179,7 @@ class ViewFactory {
 		LocalizedTextProviderFactory $textProviderFactory,
 		SpecialPageLinker $specialPageLinker,
 		LanguageFactory $languageFactory,
+		EntityIdParser $entityIdParser,
 		bool $vueStatementsView
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
@@ -198,6 +207,7 @@ class ViewFactory {
 		$this->textProviderFactory = $textProviderFactory;
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFactory = $languageFactory;
+		$this->entityIdParser = $entityIdParser;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
@@ -238,7 +248,7 @@ class ViewFactory {
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator( $textProvider );
 
 		$statementSectionsView = $this->newStatementSectionsView(
-			$language->getCode(),
+			$language,
 			$termFallbackChain,
 			$editSectionGenerator
 		);
@@ -283,7 +293,7 @@ class ViewFactory {
 	) {
 		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementSectionsView = $this->newStatementSectionsView(
-			$language->getCode(),
+			$language,
 			$termFallbackChain,
 			$this->newToolbarEditSectionGenerator( $textProvider )
 		);
@@ -300,25 +310,28 @@ class ViewFactory {
 	}
 
 	/**
-	 * @param string $languageCode
+	 * @param Language|string $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
-		string $languageCode,
+		Language|string $language,
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		$textProvider = $this->textProviderFactory->getForLanguageCode( $languageCode );
+		if ( is_string( $language ) ) {
+			$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $language );
+		}
+		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementGroupListView = $this->newStatementGroupListView(
-			$languageCode,
+			$language->getCode(),
 			$termFallbackChain,
 			$editSectionGenerator
 		);
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
-			$languageCode,
+			$language->getCode(),
 			$termFallbackChain
 		);
 
@@ -330,7 +343,9 @@ class ViewFactory {
 			$snakFormatter,
 			$this->serializerFactory,
 			$this->propertyDataTypeLookup,
-			$languageCode,
+			$this->htmlIdFormatterFactory,
+			$this->entityIdParser,
+			$language,
 			$this->vueStatementsView
 		);
 	}

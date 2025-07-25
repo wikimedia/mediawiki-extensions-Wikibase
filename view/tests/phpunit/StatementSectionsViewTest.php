@@ -3,6 +3,8 @@
 namespace Wikibase\View\Tests;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
@@ -10,6 +12,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
@@ -51,7 +54,9 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( SnakFormatter::class ),
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( PropertyDataTypeLookup::class ),
-			'en',
+			$this->createMock( EntityIdFormatterFactory::class ),
+			$this->createMock( EntityIdParser::class ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			false
 		);
 	}

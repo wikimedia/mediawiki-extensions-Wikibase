@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use ObjectCacheFactory;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
@@ -93,6 +94,10 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.LocalizedTextProviderFactory',
 			$this->createMock( LocalizedTextProviderFactory::class )
+		);
+		$this->mockService(
+			'WikibaseRepo.EntityIdParser',
+			$this->createMock( EntityIdParser::class )
 		);
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageFactory' );

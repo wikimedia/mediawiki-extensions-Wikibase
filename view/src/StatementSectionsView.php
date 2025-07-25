@@ -3,8 +3,9 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Language\Language;
 use Traversable;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 use WMDE\VueJsTemplating\App;
 
@@ -59,9 +59,19 @@ class StatementSectionsView {
 	private $propertyDataTypeLookup;
 
 	/**
-	 * @var string
+	 * @var EntityIdFormatterFactory
 	 */
-	private $languageCode;
+	private $entityIdFormatterFactory;
+
+	/**
+	 * @var EntityIdParser
+	 */
+	private $entityIdParser;
+
+	/**
+	 * @var Language
+	 */
+	private $language;
 
 	/**
 	 * @var bool
@@ -76,7 +86,9 @@ class StatementSectionsView {
 		SnakFormatter $snakFormatter,
 		SerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		string $languageCode,
+		EntityIdFormatterFactory $entityIdFormatterFactory,
+		EntityIdParser $entityIdParser,
+		Language $language,
 		bool $vueStatementsView
 	) {
 		$this->templateFactory = $templateFactory;
@@ -86,7 +98,9 @@ class StatementSectionsView {
 		$this->snakFormatter = $snakFormatter;
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->languageCode = $languageCode;
+		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
+		$this->entityIdParser = $entityIdParser;
+		$this->language = $language;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
@@ -221,10 +235,11 @@ class StatementSectionsView {
 			'wbui2025-property-name',
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' ),
 			function ( array $data ): array {
-				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject (T396633)
+				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
-				$data['propertyLinkHtml'] = WikibaseRepo::getEntityIdHtmlLinkFormatterFactory() // TODO inject (T396633)
-					->getEntityIdFormatter( MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $this->languageCode ) )
+
+				$data['propertyLinkHtml'] = $this->entityIdFormatterFactory
+					->getEntityIdFormatter( $this->language )
 					->formatEntityId( $propertyId );
 				return $data;
 			}
@@ -267,7 +282,7 @@ class StatementSectionsView {
 			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue' ),
 			function ( array $data ): array {
 				/** @var PropertyId $propertyId */
-				$propertyId = WikibaseRepo::getEntityIdParser() // TODO inject
+				$propertyId = $this->entityIdParser
 					->parse( $data['snak']['property'] );
 				'@phan-var PropertyId $propertyId';
 				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );

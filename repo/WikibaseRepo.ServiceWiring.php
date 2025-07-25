@@ -2188,6 +2188,7 @@ return [
 			WikibaseRepo::getLocalizedTextProviderFactory( $services ),
 			new RepoSpecialPageLinker(),
 			$services->getLanguageFactory(),
+			WikibaseRepo::getEntityIdParser( $services ),
 			$vueStatementView
 		);
 	},
