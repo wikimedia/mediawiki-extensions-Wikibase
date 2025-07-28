@@ -106,7 +106,7 @@
 	"wikibase-entity-summary-wbsetaliases-add-remove": "{{PLURAL:$1|Přidán a změněn alias|Přidány a změněny aliasy}} pro [$2]",
 	"wikibase-entity-summary-wbsetaliases-add": "{{PLURAL:$1|Přidán alias|Přidány aliasy}} pro [$2]",
 	"wikibase-entity-summary-wbsetaliases-remove": "{{PLURAL:$1|Odstraněn alias|Odstraněny aliasy}} pro [$2]",
-	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|Aktualizován [$2] alias|Aktualizovány [$2] aliasy}}",
+	"wikibase-entity-summary-wbsetaliases-update": "{{PLURAL:$1|Změněn alias|Změněny aliasy}} pro [$2]",
 	"wikibase-entity-summary-wbsetlabeldescriptionaliases": "Změněn štítek, popis a aliasy pro [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add": "Přidán odkaz na [$2]",
 	"wikibase-entity-summary-wbsetsitelink-add-both": "Přidán odkaz s odznakem pro [$2]",
