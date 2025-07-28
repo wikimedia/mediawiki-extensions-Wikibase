@@ -67,6 +67,8 @@ describe( 'GET statement', () => {
 
 			it( 'can get a statement with a deleted property', async () => {
 				const response = await newGetStatementRequestBuilder( testStatementWithDeletedProperty.id )
+					// Disabling the cache here so that it doesn't claim that the property still exists
+					.withConfigOverride( 'wgMainCacheType', 0 )
 					.assertValidRequest()
 					.makeRequest();
 

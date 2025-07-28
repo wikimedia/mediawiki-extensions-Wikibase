@@ -1,6 +1,6 @@
 'use strict';
 
-const { action, utils } = require( 'api-testing' );
+const { action, assert, utils } = require( 'api-testing' );
 const {
 	newSetSitelinkRequestBuilder,
 	newCreateItemRequestBuilder,
@@ -37,10 +37,11 @@ async function getItemId() {
 
 async function deleteProperty( propertyId ) {
 	const admin = await action.root();
-	return admin.action( 'delete', {
+	const response = await admin.action( 'delete', {
 		title: `Property:${propertyId}`,
 		token: await admin.token()
 	}, 'POST' );
+	assert.property( response, 'delete' );
 }
 
 async function createUniqueStringProperty() {
