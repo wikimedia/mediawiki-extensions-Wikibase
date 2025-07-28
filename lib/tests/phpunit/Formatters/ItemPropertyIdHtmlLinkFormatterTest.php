@@ -447,7 +447,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 		$this->currentUserLanguage = $languageCode;
 
 		return new class( $this ) extends ItemPropertyIdHtmlLinkFormatterTest {
-			private $testCase;
+			private ItemPropertyIdHtmlLinkFormatterTest $testCase;
 
 			public function __construct( $testCase ) {
 				$this->testCase = $testCase;
@@ -565,12 +565,12 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $title );
 
 		return new class( $title, $isLocal, $isRedirect, $prefixedTitleText ) {
-			private $title;
-			private $isLocal;
-			private $isRedirect;
-			private $prefixedTitleText;
+			private Title $title;
+			private bool $isLocal;
+			private bool $isRedirect;
+			private string $prefixedTitleText;
 
-			public function __construct( $title, &$isLocal, &$isRedirect, &$prefixedTitleText ) {
+			public function __construct( Title $title, bool &$isLocal, bool &$isRedirect, string &$prefixedTitleText ) {
 				$this->title = $title;
 				$this->isLocal = &$isLocal;
 				$this->isRedirect = &$isRedirect;
@@ -638,11 +638,11 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $title );
 
 		return new class( $title, $isLocal, $prefixedTitleText ) {
-			private $title;
-			private $isLocal;
-			private $prefixedTitleText;
+			private Title $title;
+			private bool $isLocal;
+			private string $prefixedTitleText;
 
-			public function __construct( $title, &$isLocal, &$prefixedTitleText ) {
+			public function __construct( Title $title, bool &$isLocal, string &$prefixedTitleText ) {
 				$this->title = $title;
 				$this->isLocal = &$isLocal;
 				$this->prefixedTitleText = &$prefixedTitleText;

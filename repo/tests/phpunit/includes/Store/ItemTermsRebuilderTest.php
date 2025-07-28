@@ -82,7 +82,7 @@ class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function newItemTermStoreWriter() {
 		return new class implements ItemTermStoreWriter {
-			private $fingerprints = [];
+			private array $fingerprints = [];
 
 			public function storeTerms( ItemId $itemId, Fingerprint $terms ) {
 				$this->fingerprints[$itemId->getNumericId()] = $terms;

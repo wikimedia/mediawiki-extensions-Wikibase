@@ -183,7 +183,7 @@ class EntitySlotDiffRendererTest extends \MediaWikiIntegrationTestCase {
 
 	public function testAddModules() {
 		$output = new class extends OutputPage {
-			private $testStyles;
+			private array $testStyles;
 
 			public function __construct() {
 			}

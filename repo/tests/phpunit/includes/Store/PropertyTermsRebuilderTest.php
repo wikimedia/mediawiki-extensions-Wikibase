@@ -75,7 +75,7 @@ class PropertyTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	private function newPropertyTermStoreWriter() {
 		return new class implements PropertyTermStoreWriter {
-			private $fingerprints = [];
+			private array $fingerprints = [];
 
 			public function storeTerms( NumericPropertyId $propertyId, Fingerprint $terms ) {
 				$this->fingerprints[$propertyId->getNumericId()] = $terms;

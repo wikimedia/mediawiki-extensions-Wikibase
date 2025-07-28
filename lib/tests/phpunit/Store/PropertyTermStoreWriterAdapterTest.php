@@ -51,7 +51,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	private function newPropertyTermStoreWriter(): PropertyTermStoreWriter {
 		return new class implements PropertyTermStoreWriter {
-			private $fingerprints = [];
+			private array $fingerprints = [];
 
 			public function storeTerms( NumericPropertyId $propertyId, Fingerprint $terms ) {
 				$this->fingerprints[$propertyId->getNumericId()] = $terms;
