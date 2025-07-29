@@ -3,14 +3,12 @@
 		<div class="wikibase-rankselector ui-state-default">
 			<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
 		</div>
-		<!-- eslint-disable vue/no-v-html -->
 		<div
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 			:class="snakValueClass"
 			v-html="html"
 		></div>
-		<!-- eslint-enable -->
 	</div>
 </template>
 

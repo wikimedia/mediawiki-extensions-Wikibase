@@ -15,13 +15,11 @@
 			<template v-for="reference in references" :key="reference">
 				<template v-for="snak in reference['snaks-order']" :key="snak">
 					<template v-for="propertysnak in reference.snaks[snak]" :key="propertysnak">
-						<!-- eslint-disable vue/no-v-html -->
 						<div
 							class="wikibase-wbui2025-snak-value"
 							:data-snak-hash="propertysnak.hash"
 							v-html="snakHtml( propertysnak )"
 						></div>
-						<!-- eslint-enable -->
 					</template>
 				</template>
 			</template>

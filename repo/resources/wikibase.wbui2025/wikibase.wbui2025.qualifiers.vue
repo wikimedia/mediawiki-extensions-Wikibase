@@ -7,13 +7,11 @@
 			<p>{{ qualifiersMessage }}</p>
 			<template v-for="snak in qualifiersOrder" :key="snak">
 				<template v-for="propertysnak in qualifiers[snak]" :key="propertysnak">
-					<!-- eslint-disable vue/no-v-html -->
 					<div
 						class="wikibase-wbui2025-snak-value wikibase-wbui2025-qualifier"
 						:data-snak-hash="propertysnak.hash"
 						v-html="snakHtml( propertysnak )"
 					></div>
-					<!-- eslint-enable -->
 				</template>
 			</template>
 		</div>

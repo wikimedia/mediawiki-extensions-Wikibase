@@ -1,12 +1,10 @@
 <template>
 	<div class="wikibase-wbui2025-property-name">
-		<!-- eslint-disable vue/no-v-html -->
 		<p
 			class="wikibase-wbui2025-property-name-link"
 			:data-property-id="propertyId"
 			v-html="propertyLinkHtml"
 		></p>
-		<!-- eslint-enable -->
 	</div>
 </template>
 
