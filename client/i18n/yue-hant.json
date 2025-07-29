@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ktchankt",
-			"Winston Sung"
+			"Winston Sung",
+			"JeffreyKim"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -13,7 +14,7 @@
 	"wikibase-editlinks": "改拎",
 	"wikibase-editlinkstitle": "改跨語言拎",
 	"wikibase-addlinkstitle": "加跨語言連結",
-	"wikibase-linkitem-addlinks": "加新連結",
+	"wikibase-linkitem-addlinks": "加新拎",
 	"wikibase-linkitem-title": "連結頁面",
 	"wikibase-linkitem-linkpage": "連結頁面",
 	"wikibase-linkitem-selectlink": "請揀返想連結到呢一版嘅站點同頁面。",
