@@ -1217,13 +1217,9 @@ final class RepoHooks implements
 			return false;
 		} elseif ( in_array( $skin, [ 'minerva' ] ) ) {
 			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
-			$typeaheadConfig = $mainConfig->get( 'MinervaTypeahead' );
-			$useTypeahead = $typeaheadConfig && $typeaheadConfig[ 'enabled' ];
-			if ( $useTypeahead ) {
-				$config['searchModule'] = 'wikibase.typeahead.search';
-				// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
-				return false;
-			}
+			$config['searchModule'] = 'wikibase.typeahead.search';
+			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
+			return false;
 		} elseif ( in_array( $skin, [ 'vector-2022' ] ) ) {
 			$config['searchModule'] = 'wikibase.typeahead.search';
 			// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
