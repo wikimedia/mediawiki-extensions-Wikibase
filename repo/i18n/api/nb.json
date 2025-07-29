@@ -302,11 +302,13 @@
 	"apihelp-wbsetsitelink-example-6": "Endrer merker for lenka til den polskspråklige siden fra elementet med ID «$1» til to merker som peker til elementene med ID «Q2» og «Q149» uten å oppgi lenketittelen",
 	"apihelp-wbsetsitelink-example-7": "Endre lenka til den polskspråklige siden fra elementet med ID «$1» uten å endre merker",
 	"apihelp-wbsetsitelink-example-8": "Endre lenka til den polskspråklige siden fra elementet med ID «$1» og fjern alle merker",
-	"apihelp-wbformatentities-summary": "Formaterer entitets-ID-er som HTML.",
+	"apihelp-wbformatentities-summary": "Formaterer entitets-ID-er som HTML eller ren tekst.",
 	"apihelp-wbformatentities-extended-description": "Språket kan spesifiseres med parameteren <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "Entitets-ID-ene som skal formateres.",
-	"apihelp-wbformatentities-example-1": "Formater en enkel element-ID.",
+	"apihelp-wbformatentities-param-generate": "Det ønskede resultatformatet som skal gerereres.",
+	"apihelp-wbformatentities-example-1": "Formater en enkel element-ID til HTML.",
 	"apihelp-wbformatentities-example-2": "Formater en element-ID og en egenskaps-ID.",
 	"apihelp-wbformatentities-example-3": "Formater en element-ID, en egenskaps-ID og en leksem-ID.",
-	"apihelp-wbformatentities-example-4": "Formater tre element-ID-er på fransk."
+	"apihelp-wbformatentities-example-4": "Formater tre element-ID-er på fransk.",
+	"apihelp-wbformatentities-example-5": "Formater tre element-ID-er og en egenskaps-ID til ren tekst."
 }

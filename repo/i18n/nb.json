@@ -115,6 +115,7 @@
 	"wikibase-claimview-snak-tooltip": "Angi en verdi som tilsvarer egenskapen «$1». Hvis egenskapen er uten verdi, eller den faktiske verdien er ukjent, kan du velge et alternativ til en egendefinert verdi ved å klikke ikonet foran verdiboksen.",
 	"wikibase-claimview-snak-new-tooltip": "Når du har angitt en egenskap kan du angi en passende verdi. Hvis egenskapen er uten verdi, eller den faktiske verdien er ukjent, kan du velge et alternativ til en egendefinert verdi ved å klikke ikonet foran verdiboksen.",
 	"wikibase-referenceview-tabs-manual": "Manual",
+	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-statementview-rank-preferred": "Foretrukket rang",
 	"wikibase-statementview-rank-tooltip-preferred": "Gyldig og aktuell verdi",
 	"wikibase-statementview-rank-normal": "Normal rang",
@@ -529,5 +530,11 @@
 	"special-setdescription-parameterized": "Sett beskrivelse for $1",
 	"special-setlabeldescriptionaliases-parameterized": "Sett etikett, beskrivelse og aliaser for $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Du kan samhandle med fødererte egenskaper med dette API-et.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien."
+	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien.",
+	"wikibase-scoped-search-search-entities": "Søk i entiteter",
+	"wikibase-scoped-search-search-entities-description": "Finn forskjellige typer {{SITENAME}}-entiteter",
+	"wikibase-scoped-search-item-scope-name": "Elementer",
+	"wikibase-scoped-search-property-scope-name": "Egenskaper",
+	"wikibase-mobile-editing-ui-beta-feature-message": "Grensesnitt for mobilredigering",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiver det nye, eksperimentelle grensesnittet for mobilredigering."
 }

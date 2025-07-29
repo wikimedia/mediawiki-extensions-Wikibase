@@ -172,6 +172,7 @@
 	"wikibase-claimview-snak-tooltip": "Saisissez une valeur correspondant à la propriété appelée « $1 ». Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle n’est pas connue, vous pouvez choisir une valeur alternative en cliquant sur l’icône précédant la zone de saisie.",
 	"wikibase-claimview-snak-new-tooltip": "Après avoir spécifié une propriété, vous pouvez saisir une valeur correspondante. Si la propriété n’a pas de valeur désignée ou si sa valeur actuelle est inconnue, vous pouvez choisir une valeur alternative en cliquant sur l’icône précédant la zone de saisie.",
 	"wikibase-referenceview-tabs-manual": "Manuel",
+	"wikibase-statementview-qualifiers-counter": "$1 qualificatif{{PLURAL:$1||s}}",
 	"wikibase-statementview-rank-preferred": "Rang préféré",
 	"wikibase-statementview-rank-tooltip-preferred": "Valeur valide et à jour",
 	"wikibase-statementview-rank-normal": "Rang normal",
