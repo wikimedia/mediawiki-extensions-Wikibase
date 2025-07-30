@@ -12,6 +12,11 @@ use MediaWiki\Tests\Structure\AbstractSchemaTestBase;
  * @license GPL-2.0-or-later
  */
 class WikibaseClientSchemaTest extends AbstractSchemaTestBase {
+	protected function setUp(): void {
+		parent::setUp();
+		$this->markTestSkipped( 'Temporary disabled for gerrit 1174110' );
+	}
+
 	protected static function getSchemasDirectory(): string {
 		return __DIR__ . '/../../../sql/abstract/';
 	}
