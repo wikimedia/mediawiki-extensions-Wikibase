@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\GraphQLPrototype;
 
+use DataValues\TimeValue;
 use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -63,8 +64,19 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 					->withValue( 'potato value' )
 					->build()
 			)
+			->andStatement( NewStatement::noValueFor( $stringProperty->getId() )->build() )
+			->andStatement( NewStatement::someValueFor( $stringProperty->getId() )->build() )
 			->andStatement( // this statement will get filtered out, because we don't support time values yet
-				NewStatement::noValueFor( $timeProperty->getId() )->build()
+				NewStatement::forProperty( $timeProperty->getId() )
+					->withValue( new TimeValue(
+						'+2025-01-01T00:00:00Z',
+						0,
+						0,
+						0,
+						TimeValue::PRECISION_DAY,
+						TimeValue::CALENDAR_GREGORIAN
+					) )
+					->build()
 			)
 			->build();
 		$this->saveEntity( $item );
@@ -105,20 +117,23 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$itemId = self::$item->getId()->getSerialization();
 		$enLabel = self::$stringProperty->getLabels()->getByLanguage( 'en' )->getText();
 		$deLabel = self::$stringProperty->getLabels()->getByLanguage( 'de' )->getText();
+		$expectedStatementData = [
+			'property' => [
+				'id' => self::$stringProperty->getId()->getSerialization(),
+				'labels' => [
+					'en' => $enLabel,
+					'de' => $deLabel,
+				],
+			],
+		];
 
 		$this->assertNotNull( $enLabel );
 		$this->assertEquals(
 			[ 'data' => [ 'item' => [
 				'statements' => [
-					[
-						'property' => [
-							'id' => self::$stringProperty->getId()->getSerialization(),
-							'labels' => [
-								'en' => $enLabel,
-								'de' => $deLabel,
-							],
-						],
-					],
+					$expectedStatementData, // 3x the same because there's a value, a novalue and a somevalue statement
+					$expectedStatementData,
+					$expectedStatementData,
 				],
 			] ] ],
 			$this->newGraphQLService()->query( "
@@ -167,6 +182,18 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 						],
 						'value' => [ 'content' => $value ],
 					],
+					[
+						'property' => [
+							'id' => self::$stringProperty->getId()->getSerialization(),
+						],
+						'value' => new \stdClass(),
+					],
+					[
+						'property' => [
+							'id' => self::$stringProperty->getId()->getSerialization(),
+						],
+						'value' => new \stdClass(),
+					],
 				],
 			] ] ],
 			$this->newGraphQLService()->query( "
@@ -174,7 +201,9 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 				item(id: \"$itemId\") {
 					statements {
 						property { id }
-						value { content }
+						value {
+							... on Value { content }
+						}
 					}
 				}
 			}" )

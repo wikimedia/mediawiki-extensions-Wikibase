@@ -5,6 +5,7 @@ namespace Wikibase\Repo\GraphQLPrototype;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\UnionType;
 use GraphQL\Type\Schema as GraphQLSchema;
 use Wikibase\Lib\ContentLanguages;
 
@@ -90,13 +91,40 @@ class Schema extends GraphQLSchema {
 						],
 					],
 				] ),
-				'value' => new ObjectType( [
-					'name' => 'StatementValue',
-					'fields' => [
-						'content' => Type::nonNull( Type::string() ),
-					],
-				] ),
+				'value' => $this->valueType(),
 			],
+		] );
+	}
+
+	private function valueType(): UnionType {
+		$value = new ObjectType( [
+			'name' => 'Value',
+			'fields' => [
+				'type' => Type::nonNull( Type::string() ),
+				'content' => Type::nonNull( Type::string() ),
+			],
+		] );
+		$someValue = new ObjectType( [
+			'name' => 'SomeValue',
+			'fields' => [
+				'type' => Type::nonNull( Type::string() ),
+			],
+		] );
+		$noValue = new ObjectType( [
+			'name' => 'NoValue',
+			'fields' => [
+				'type' => Type::nonNull( Type::string() ),
+			],
+		] );
+
+		return new UnionType( [
+			'name' => 'StatementValue',
+			'types' => [ $value, $someValue, $noValue ],
+			'resolveType' => fn( $v ) => [
+				'value' => $value,
+				'somevalue' => $someValue,
+				'novalue' => $noValue,
+			][$v['type']],
 		] );
 	}
 
