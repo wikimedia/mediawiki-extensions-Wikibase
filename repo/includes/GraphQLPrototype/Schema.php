@@ -39,6 +39,7 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function itemType(): ObjectType {
+		// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 		return new ObjectType( [
 			'name' => 'Item',
 			'fields' => [
@@ -52,6 +53,9 @@ class Schema extends GraphQLSchema {
 				],
 				'statements' => [
 					'type' => Type::listOf( $this->statementType() ), // @phan-suppress-current-line PhanUndeclaredInvokeInCallable
+					'args' => [
+						'properties' => Type::listOf( Type::string() ),
+					],
 					'resolve' => $this->statementsResolver->fetchStatements( ... ),
 				],
 			],

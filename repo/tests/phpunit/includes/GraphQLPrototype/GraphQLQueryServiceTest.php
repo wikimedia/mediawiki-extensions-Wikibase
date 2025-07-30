@@ -31,6 +31,7 @@ use Wikibase\Repo\WikibaseRepo;
 class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	private static Item $item;
 	private static Property $stringProperty;
+	private static Property $timeProperty;
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -56,6 +57,7 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 			'time',
 		);
 		$this->saveEntity( $timeProperty );
+		self::$timeProperty = $timeProperty;
 
 		$item = NewItem::withLabel( 'en', 'potato' )
 			->andLabel( 'de', 'Kartoffel' )
@@ -64,8 +66,8 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 					->withValue( 'potato value' )
 					->build()
 			)
-			->andStatement( NewStatement::noValueFor( $stringProperty->getId() )->build() )
-			->andStatement( NewStatement::someValueFor( $stringProperty->getId() )->build() )
+			->andStatement( NewStatement::noValueFor( $timeProperty->getId() )->build() )
+			->andStatement( NewStatement::someValueFor( $timeProperty->getId() )->build() )
 			->andStatement( // this statement will get filtered out, because we don't support time values yet
 				NewStatement::forProperty( $timeProperty->getId() )
 					->withValue( new TimeValue(
@@ -117,29 +119,27 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$itemId = self::$item->getId()->getSerialization();
 		$enLabel = self::$stringProperty->getLabels()->getByLanguage( 'en' )->getText();
 		$deLabel = self::$stringProperty->getLabels()->getByLanguage( 'de' )->getText();
-		$expectedStatementData = [
-			'property' => [
-				'id' => self::$stringProperty->getId()->getSerialization(),
-				'labels' => [
-					'en' => $enLabel,
-					'de' => $deLabel,
-				],
-			],
-		];
+		$propertyId = self::$stringProperty->getId()->getSerialization();
 
 		$this->assertNotNull( $enLabel );
 		$this->assertEquals(
 			[ 'data' => [ 'item' => [
 				'statements' => [
-					$expectedStatementData, // 3x the same because there's a value, a novalue and a somevalue statement
-					$expectedStatementData,
-					$expectedStatementData,
+					[
+						'property' => [
+							'id' => $propertyId,
+							'labels' => [
+								'en' => $enLabel,
+								'de' => $deLabel,
+							],
+						],
+					],
 				],
 			] ] ],
 			$this->newGraphQLService()->query( "
 			query {
 				item(id: \"$itemId\") {
-					statements {
+					statements(properties: [\"$propertyId\"]) {
 						property {
 							id
 							labels { en de }
@@ -168,8 +168,9 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 
 	public function testStatementsQueryWithStringValue(): void {
 		$itemId = self::$item->getId()->getSerialization();
+		$propertyId = self::$stringProperty->getId();
 		$value = self::$item->getStatements()
-			->getByPropertyId( self::$stringProperty->getId() )->toArray()[0]
+			->getByPropertyId( $propertyId )->toArray()[0]
 			->getMainSnak()->getDataValue()->getValue();
 
 		$this->assertNotNull( $value );
@@ -178,31 +179,51 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 				'statements' => [
 					[
 						'property' => [
-							'id' => self::$stringProperty->getId()->getSerialization(),
+							'id' => $propertyId->getSerialization(),
 						],
 						'value' => [ 'content' => $value ],
-					],
-					[
-						'property' => [
-							'id' => self::$stringProperty->getId()->getSerialization(),
-						],
-						'value' => new \stdClass(),
-					],
-					[
-						'property' => [
-							'id' => self::$stringProperty->getId()->getSerialization(),
-						],
-						'value' => new \stdClass(),
 					],
 				],
 			] ] ],
 			$this->newGraphQLService()->query( "
 			query {
 				item(id: \"$itemId\") {
-					statements {
+					statements(properties: [\"$propertyId\"]) {
 						property { id }
 						value {
 							... on Value { content }
+						}
+					}
+				}
+			}" )
+		);
+	}
+
+	public function testNoValueAndSomeValueStatement(): void {
+		$itemId = self::$item->getId()->getSerialization();
+		$propertyId = self::$timeProperty->getId()->getSerialization();
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [
+				'statements' => [
+					[
+						'property' => [ 'id' => $propertyId ],
+						'value' => [ 'type' => 'novalue' ],
+					],
+					[
+						'property' => [ 'id' => $propertyId ],
+						'value' => [ 'type' => 'somevalue' ],
+					],
+				],
+			] ] ],
+			$this->newGraphQLService()->query( "
+			query {
+				item(id: \"$itemId\") {
+					statements(properties: [\"$propertyId\"]) {
+						property { id }
+						value {
+							... on NoValue { type }
+							... on SomeValue { type }
 						}
 					}
 				}

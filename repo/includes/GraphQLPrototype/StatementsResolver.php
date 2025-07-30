@@ -19,7 +19,7 @@ class StatementsResolver {
 	public function __construct( private EntityLookup $entityLookup ) {
 	}
 
-	public function fetchStatements( array $rootValue ): array {
+	public function fetchStatements( array $rootValue, array $args ): array {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( new ItemId( $rootValue['id'] ) );
 		'@phan-var Item $item';
@@ -37,12 +37,17 @@ class StatementsResolver {
 			],
 			array_filter(
 				iterator_to_array( $item->getStatements() ),
-				fn( Statement $statement ) => $statement->getMainSnak() instanceof PropertySomeValueSnak
-					|| $statement->getMainSnak() instanceof PropertyNoValueSnak
-					|| (
-						$statement->getMainSnak() instanceof PropertyValueSnak
-						// @phan-suppress-next-line PhanUndeclaredMethod guaranteed to be a value snak per line above
-						&& $statement->getMainSnak()->getDataValue() instanceof StringValue
+				fn( Statement $statement ) => ( // user-provided properties filter
+						!isset( $args['properties'] )
+						|| in_array( $statement->getPropertyId(), $args['properties'] )
+					) && ( // filter out types of statements that aren't supported yet
+						$statement->getMainSnak() instanceof PropertySomeValueSnak
+						|| $statement->getMainSnak() instanceof PropertyNoValueSnak
+						|| (
+							$statement->getMainSnak() instanceof PropertyValueSnak
+							// @phan-suppress-next-line PhanUndeclaredMethod guaranteed to be a value snak per line above
+							&& $statement->getMainSnak()->getDataValue() instanceof StringValue
+						)
 					)
 			)
 		);
