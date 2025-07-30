@@ -12,23 +12,25 @@ SELECT
   change_user_id,
   change_info
 FROM /*_*/wb_changes;
+
 DROP TABLE /*_*/wb_changes;
 
 
 CREATE TABLE /*_*/wb_changes (
-    change_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    change_type VARCHAR(25) NOT NULL,
-    change_time BLOB NOT NULL,
-    change_object_id BLOB NOT NULL,
-    change_revision_id INTEGER UNSIGNED NOT NULL,
-    change_user_id INTEGER UNSIGNED NOT NULL,
-    change_info BLOB NOT NULL
-  );
+  change_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  change_type VARCHAR(25) NOT NULL,
+  change_time BLOB NOT NULL,
+  change_object_id BLOB NOT NULL,
+  change_revision_id INTEGER UNSIGNED NOT NULL,
+  change_user_id INTEGER UNSIGNED NOT NULL,
+  change_info BLOB NOT NULL
+);
+
 INSERT INTO /*_*/wb_changes (
-    change_id, change_type, change_time,
-    change_object_id, change_revision_id,
-    change_user_id, change_info
-  )
+  change_id, change_type, change_time,
+  change_object_id, change_revision_id,
+  change_user_id, change_info
+)
 SELECT
   change_id,
   change_type,
@@ -39,6 +41,7 @@ SELECT
   change_info
 FROM
   /*_*/__temp__wb_changes;
+
 DROP TABLE /*_*/__temp__wb_changes;
 
 CREATE INDEX wb_changes_change_time ON /*_*/wb_changes (change_time);

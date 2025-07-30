@@ -4,5 +4,3 @@
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
 ALTER TABLE wb_changes
   ALTER change_time TYPE TIMESTAMPTZ;
-ALTER TABLE wb_changes
-  ALTER change_time TYPE TIMESTAMPTZ;
