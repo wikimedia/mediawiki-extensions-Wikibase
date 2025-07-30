@@ -17,7 +17,6 @@
 		</wbui2025-qualifiers>
 		<wbui2025-references
 			:references="references"
-			:show-references="false"
 		></wbui2025-references>
 	</div>
 </template>
