@@ -101,11 +101,23 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function valueType(): UnionType {
-		$value = new ObjectType( [
-			'name' => 'Value',
+		$stringValue = new ObjectType( [
+			'name' => 'StringValue',
 			'fields' => [
 				'type' => Type::nonNull( Type::string() ),
 				'content' => Type::nonNull( Type::string() ),
+			],
+		] );
+		$itemValue = new ObjectType( [
+			'name' => 'ItemValue',
+			'fields' => [
+				'type' => Type::nonNull( Type::string() ),
+				'content' => Type::nonNull( new ObjectType( [
+					'name' => 'ValueItem',
+					'fields' => [
+						'id' => Type::nonNull( Type::string() ),
+					],
+				] ) ),
 			],
 		] );
 		$someValue = new ObjectType( [
@@ -123,9 +135,9 @@ class Schema extends GraphQLSchema {
 
 		return new UnionType( [
 			'name' => 'StatementValue',
-			'types' => [ $value, $someValue, $noValue ],
+			'types' => [ $stringValue, $itemValue, $someValue, $noValue ],
 			'resolveType' => fn( $v ) => [
-				'value' => $value,
+				'value' => isset( $v['content'] ) && is_string( $v['content'] ) ? $stringValue : $itemValue,
 				'somevalue' => $someValue,
 				'novalue' => $noValue,
 			][$v['type']],

@@ -30,7 +30,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	private static Item $item;
+	private static Item $statementValueItem;
 	private static Property $stringProperty;
+	private static Property $itemProperty;
 	private static Property $timeProperty;
 
 	public static function setUpBeforeClass(): void {
@@ -43,13 +45,24 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$stringProperty = new Property(
 			null,
 			new Fingerprint( new TermList( [
-				new Term( 'en', 'instance of' ),
-				new Term( 'de', 'ist ein(e)' ),
+				new Term( 'en', 'postal code' ),
+				new Term( 'de', 'Postleitzahl' ),
 			] ) ),
 			'string',
 		);
 		$this->saveEntity( $stringProperty );
 		self::$stringProperty = $stringProperty;
+
+		$itemProperty = new Property(
+			null,
+			new Fingerprint( new TermList( [
+				new Term( 'en', 'instance of' ),
+				new Term( 'de', 'ist ein(e)' ),
+			] ) ),
+			'wikibase-item',
+		);
+		$this->saveEntity( $itemProperty );
+		self::$itemProperty = $itemProperty;
 
 		$timeProperty = new Property(
 			null,
@@ -59,11 +72,22 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 		$this->saveEntity( $timeProperty );
 		self::$timeProperty = $timeProperty;
 
+		$statementValueItem = NewItem::withLabel( 'en', 'root vegetable' )
+			->andLabel( 'de', 'Wurzelgemüse' )
+			->build();
+		$this->saveEntity( $statementValueItem );
+		self::$statementValueItem = $statementValueItem;
+
 		$item = NewItem::withLabel( 'en', 'potato' )
 			->andLabel( 'de', 'Kartoffel' )
 			->andStatement(
 				NewStatement::forProperty( $stringProperty->getId() )
 					->withValue( 'potato value' )
+					->build()
+			)
+			->andStatement(
+				NewStatement::forProperty( $itemProperty->getId() )
+					->withValue( $statementValueItem->getId() )
 					->build()
 			)
 			->andStatement( NewStatement::noValueFor( $timeProperty->getId() )->build() )
@@ -191,7 +215,36 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 					statements(properties: [\"$propertyId\"]) {
 						property { id }
 						value {
-							... on Value { content }
+							... on StringValue { content }
+						}
+					}
+				}
+			}" )
+		);
+	}
+
+	public function testStatementsQueryWithItemValue(): void {
+		$itemId = self::$item->getId()->getSerialization();
+		$propertyId = self::$itemProperty->getId()->getSerialization();
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [
+				'statements' => [
+					[
+						'property' => [
+							'id' => $propertyId,
+						],
+						'value' => [ 'content' => [ 'id' => self::$statementValueItem->getId() ] ],
+					],
+				],
+			] ] ],
+			$this->newGraphQLService()->query( "
+			query {
+				item(id: \"$itemId\") {
+					statements(properties: [\"$propertyId\"]) {
+						property { id }
+						value {
+							... on ItemValue { content { id } }
 						}
 					}
 				}
