@@ -116,6 +116,11 @@ class Schema extends GraphQLSchema {
 					'name' => 'ValueItem',
 					'fields' => [
 						'id' => Type::nonNull( Type::string() ),
+						'labels' => [
+							'type' => $this->labelsType(),
+							'resolve' => fn( array $rootValue, array $args, $context, ResolveInfo $info ) => $this->labelsResolver
+								->fetchLabels( $rootValue, $info ),
+						],
 					],
 				] ) ),
 			],

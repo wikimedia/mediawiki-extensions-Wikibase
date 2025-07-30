@@ -226,6 +226,9 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 	public function testStatementsQueryWithItemValue(): void {
 		$itemId = self::$item->getId()->getSerialization();
 		$propertyId = self::$itemProperty->getId()->getSerialization();
+		$expectedValueItemLabel = self::$statementValueItem->getLabels()
+			->getByLanguage( 'en' )
+			->getText();
 
 		$this->assertEquals(
 			[ 'data' => [ 'item' => [
@@ -234,7 +237,10 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 						'property' => [
 							'id' => $propertyId,
 						],
-						'value' => [ 'content' => [ 'id' => self::$statementValueItem->getId() ] ],
+						'value' => [ 'content' => [
+							'id' => self::$statementValueItem->getId()->getSerialization(),
+							'labels' => [ 'en' => $expectedValueItemLabel ],
+						] ],
 					],
 				],
 			] ] ],
@@ -244,7 +250,10 @@ class GraphQLQueryServiceTest extends MediaWikiIntegrationTestCase {
 					statements(properties: [\"$propertyId\"]) {
 						property { id }
 						value {
-							... on ItemValue { content { id } }
+							... on ItemValue { content {
+								id
+								labels { en }
+							} }
 						}
 					}
 				}
