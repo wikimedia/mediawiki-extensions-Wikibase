@@ -529,5 +529,9 @@
 	"special-setdescription-parameterized": "Sett beskrivelse for $1",
 	"special-setlabeldescriptionaliases-parameterized": "Sett etikett, beskrivelse og aliaser for $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Du kan samhandle med fødererte egenskaper med dette API-et.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien."
+	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien.",
+	"wikibase-scoped-search-search-entities": "Søk i entiteter",
+	"wikibase-scoped-search-search-entities-description": "Finn forskjellige typer {{SITENAME}}-entiteter",
+	"wikibase-scoped-search-item-scope-name": "Elementer",
+	"wikibase-scoped-search-property-scope-name": "Egenskaper"
 }
