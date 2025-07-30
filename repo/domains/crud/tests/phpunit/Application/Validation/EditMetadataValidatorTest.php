@@ -6,6 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Crud\Application\Validation\EditMetadataValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Crud\Domain\Services\TagsRetriever;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\EditMetadataValidator
@@ -76,7 +77,10 @@ class EditMetadataValidatorTest extends TestCase {
 	}
 
 	private function newEditMetadataValidator(): EditMetadataValidator {
-		return ( new EditMetadataValidator( self::MAX_COMMENT_LENGTH, self::ALLOWED_TAGS ) );
+		$allowedTags = $this->createStub( TagsRetriever::class );
+		$allowedTags->method( 'getAllowedTags' )->willReturn( self::ALLOWED_TAGS );
+
+		return ( new EditMetadataValidator( self::MAX_COMMENT_LENGTH, $allowedTags ) );
 	}
 
 }

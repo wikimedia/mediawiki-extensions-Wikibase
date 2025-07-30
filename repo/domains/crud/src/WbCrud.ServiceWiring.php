@@ -155,6 +155,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\ChangeTagsStoreTagsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
@@ -213,7 +214,7 @@ return [
 			return new EditMetadataRequestValidatingDeserializer(
 				new EditMetadataValidator(
 					CommentStore::COMMENT_CHARACTER_LIMIT,
-					$services->getChangeTagsStore()->listExplicitlyDefinedTags()
+					new ChangeTagsStoreTagsRetriever( $services->getChangeTagsStore() )
 				)
 			);
 		},

@@ -19,6 +19,7 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyAllowedTagsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
@@ -37,7 +38,7 @@ class TestValidatingRequestDeserializerServiceContainer implements ContainerInte
 		switch ( $id ) {
 			case VRD::EDIT_METADATA_REQUEST_VALIDATING_DESERIALIZER:
 				return new EditMetadataRequestValidatingDeserializer(
-					new EditMetadataValidator( 500, TestValidatingRequestDeserializer::ALLOWED_TAGS )
+					new EditMetadataValidator( 500, new DummyAllowedTagsRetriever() )
 				);
 			case VRD::SITE_ID_REQUEST_VALIDATING_DESERIALIZER:
 				return new SiteIdRequestValidatingDeserializer(

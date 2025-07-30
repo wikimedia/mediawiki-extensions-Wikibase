@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers;
 
 use Generator;
 use LogicException;
-use MediaWiki\ChangeTags\ChangeTagsStore;
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Reporter\ErrorReporter;
@@ -186,7 +185,6 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 		$this->stubPreconditionMiddlewareFactory();
 		$this->stubStatementRedirectMiddlewareFactory();
-		$this->stubChangeTagsStore();
 	}
 
 	/**
@@ -1245,11 +1243,4 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$factory->method( 'newStatementRedirectMiddleware' )->willReturn( $middleware );
 		$this->setService( 'WbCrud.StatementRedirectMiddlewareFactory', $factory );
 	}
-
-	private function stubChangeTagsStore(): void {
-		$changeTagsStore = $this->createStub( ChangeTagsStore::class );
-		$changeTagsStore->method( 'listExplicitlyDefinedTags' )->willReturn( [] );
-		$this->setService( 'ChangeTagsStore', $changeTagsStore );
-	}
-
 }

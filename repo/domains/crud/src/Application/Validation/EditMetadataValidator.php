@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Crud\Application\Validation;
 
+use Wikibase\Repo\Domains\Crud\Domain\Services\TagsRetriever;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -13,16 +15,9 @@ class EditMetadataValidator {
 	public const CONTEXT_COMMENT_MAX_LENGTH = 'edit-metadata-validator-context-comment-max-length';
 	public const CONTEXT_TAG_VALUE = 'edit-metadata-validator-context-tag-value';
 
-	private int $maxCommentLength;
-	private array $allowedTags;
-
-	/**
-	 * @param int $maxCommentLength
-	 * @param string[] $allowedTags {@see ChangeTagsStore::listExplicitlyDefinedTags}
-	 */
-	public function __construct( int $maxCommentLength, array $allowedTags ) {
-		$this->maxCommentLength = $maxCommentLength;
-		$this->allowedTags = $allowedTags;
+	public function __construct(
+		private readonly int $maxCommentLength,
+		private readonly TagsRetriever $tagsRetriever ) {
 	}
 
 	public function validateComment( ?string $comment ): ?ValidationError {
@@ -37,8 +32,9 @@ class EditMetadataValidator {
 	}
 
 	public function validateEditTags( array $tags ): ?ValidationError {
+		$allowedTags = $this->tagsRetriever->getAllowedTags();
 		foreach ( $tags as $tag ) {
-			if ( !in_array( $tag, $this->allowedTags ) ) {
+			if ( !in_array( $tag, $allowedTags ) ) {
 				return new ValidationError(
 					self::CODE_INVALID_TAG,
 					[ self::CONTEXT_TAG_VALUE => $tag ]
