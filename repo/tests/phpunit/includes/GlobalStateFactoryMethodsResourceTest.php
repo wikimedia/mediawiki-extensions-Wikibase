@@ -27,9 +27,6 @@ class GlobalStateFactoryMethodsResourceTest extends ExtensionJsonTestBase {
 
 	protected static bool $requireHookHandlers = true;
 
-	// TODO: Remove this
-	protected static bool $testRestRoutes = false;
-
 	/** @dataProvider provideWikibaseServicesMethods */
 	public function testWikibaseServicesMethod( string $methodName ) {
 		$wikibaseServices = WikibaseRepo::getWikibaseServices();
