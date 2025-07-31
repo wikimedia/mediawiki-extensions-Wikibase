@@ -12,12 +12,18 @@
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
 	if ( wbui2025StatementList !== undefined ) {
+		const pinia = Pinia.createPinia();
+
+		// This initialization code runs when the Resource Loader loads the module. Other modules are
+		// also loaded around the same time. If any of those (most notably, the Kartographer extension's
+		// frontend code) run before this one and modify the DOM, what's being imported may not actually
+		// be the untouched, server-rendered HTML.
+		useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
+
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
 			const statements = data.claims;
 			const propertyIds = Object.keys( statements );
-			const pinia = Pinia.createPinia();
-			useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 
 			for ( const propertyId of propertyIds ) {
 				const rootProps = {
