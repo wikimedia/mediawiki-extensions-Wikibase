@@ -19,8 +19,6 @@
 			const pinia = Pinia.createPinia();
 			useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 
-			// As a proof of concept of passing real data into the Vue component, mount a vue component
-			// for the first statement associated with each property
 			for ( const propertyId of propertyIds ) {
 				const rootProps = {
 					statements: statements[ propertyId ],
