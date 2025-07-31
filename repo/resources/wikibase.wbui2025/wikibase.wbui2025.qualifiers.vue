@@ -7,16 +7,16 @@
 			<p class="wikibase-wbui2025-qualifiers-header">
 				{{ qualifiersMessage }}
 			</p>
-			<template v-for="snak in qualifiersOrder" :key="snak">
+			<template v-for="propertyId in qualifiersOrder" :key="propertyId">
 				<div
-					v-for="propertysnak in qualifiers[snak]"
-					:key="propertysnak"
+					v-for="snak in qualifiers[propertyId]"
+					:key="snak"
 					class="wikibase-wbui2025-qualifier"
 				>
-					<wbui2025-property-name :property-id="snak"></wbui2025-property-name>
+					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 					<!-- eslint-disable-next-line vue/no-useless-mustaches -->
 					{{ ' ' }}
-					<wbui2025-snak-value :snak="propertysnak"></wbui2025-snak-value>
+					<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
 				</div>
 			</template>
 		</div>
