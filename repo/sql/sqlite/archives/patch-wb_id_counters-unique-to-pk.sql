@@ -7,18 +7,21 @@ SELECT
   id_value,
   id_type
 FROM /*_*/wb_id_counters;
+
 DROP TABLE /*_*/wb_id_counters;
 
 
 CREATE TABLE /*_*/wb_id_counters (
-    id_type BLOB NOT NULL,
-    id_value INTEGER UNSIGNED NOT NULL,
-    PRIMARY KEY(id_type)
-  );
+  id_type BLOB NOT NULL,
+  id_value INTEGER UNSIGNED NOT NULL,
+  PRIMARY KEY(id_type)
+);
+
 INSERT INTO /*_*/wb_id_counters (id_value, id_type)
 SELECT
   id_value,
   id_type
 FROM
   /*_*/__temp__wb_id_counters;
+
 DROP TABLE /*_*/__temp__wb_id_counters;

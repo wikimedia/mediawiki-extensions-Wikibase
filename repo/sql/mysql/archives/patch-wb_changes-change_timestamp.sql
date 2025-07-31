@@ -2,5 +2,5 @@
 -- Source: repo/sql/abstractSchemaChanges/patch-wb_changes-change_timestamp.json
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
-ALTER TABLE  /*_*/wb_changes
-CHANGE  change_time change_time BINARY(14) NOT NULL;
+ALTER TABLE /*_*/wb_changes
+  CHANGE change_time change_time BINARY(14) NOT NULL;
