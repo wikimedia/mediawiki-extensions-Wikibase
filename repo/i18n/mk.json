@@ -111,6 +111,7 @@
 	"wikibase-claimview-snak-tooltip": "Внесете вредност што одговара на својството наречено „$1“. Ако својството нема назначена вредност или таа не е позната, можете да внесете ваша вредност стискајќи на иконата пред полето за вредност.",
 	"wikibase-claimview-snak-new-tooltip": "Откако ќе укажете својство, можете да ја внесете вашата вредност. Ако својството нема назначена вредност или таа не е позната, можете да внесете ваша вредност стискајќи на иконата пред полето за вредност.",
 	"wikibase-referenceview-tabs-manual": "Рачно",
+	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|определница|определеници}}",
 	"wikibase-statementview-rank-preferred": "Претпочитано",
 	"wikibase-statementview-rank-tooltip-preferred": "Важечка и тековна вредност",
 	"wikibase-statementview-rank-normal": "Нормално",

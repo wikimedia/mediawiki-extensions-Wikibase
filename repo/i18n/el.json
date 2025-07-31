@@ -398,7 +398,7 @@
 	"wikibase-api-failed-save": "Η αποθήκευση απέτυχε.",
 	"wikibase-api-illegal-entity-remove": "Οι οντότητες δεν μπορούν να διαγραφούν παρέχοντας ένα κλειδί <var>αφαίρεσης</var> ανώτατου επιπέδου.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Πρέπει να παρέχετε είτε ένα <var>αναγνωριστικό οντότητας</var> , είτε έναν συνδυασμό <var>ιστότοπου</var> και <var>σελίδας</var> , αλλά όχι και τα δύο.",
-	"wikibase-api-illegal-ids-or-sites-titles-selector": "Είτε παρέχετε τα στοιχεία «ids» ή ζεύγη «sites» και «titles» για την αντίστοιχη σελίδα",
+	"wikibase-api-illegal-ids-or-sites-titles-selector": "Είτε παρέχετε τα στοιχεία \"ids\" ή ζεύγη \"sites\" και \"titles\" για την αντίστοιχη σελίδα",
 	"wikibase-api-inconsistent-language": "Εντοπίστηκε ασυνεπής γλώσσα «$1» (αναμένεται «$2»).",
 	"wikibase-api-inconsistent-site": "Εντοπίστηκε ασυνεπής τοποθεσία.",
 	"wikibase-api-invalid-guid": "Μη έγκυρος οδηγός αξίωσης.",
