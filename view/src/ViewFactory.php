@@ -5,7 +5,6 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
@@ -310,20 +309,17 @@ class ViewFactory {
 	}
 
 	/**
-	 * @param Language|string $language
+	 * @param Language $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
-		Language|string $language,
+		Language $language,
 		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
-		if ( is_string( $language ) ) {
-			$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $language );
-		}
 		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementGroupListView = $this->newStatementGroupListView(
 			$language->getCode(),
