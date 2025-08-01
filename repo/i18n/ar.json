@@ -145,6 +145,7 @@
 	"wikibase-claimview-snak-tooltip": "أدخل قيمة تتوافق مع الخاصية المسماة \"$1\". إذا لم يكن للخاصية قيمة مخصصة أو القيمة الفعلية مجهولة، يمكنك اختيار بديل لتحديد قيمة مخصصة بالنقر على الرمز أمام صندوق إدخال القيمة.",
 	"wikibase-claimview-snak-new-tooltip": "بعد تحديد الخاصية يمكنك إدخال القيمة الموافقة لها. إذا لم يكن للخاصية قيمة مخصصة أو القيمة الفعلية مجهولة، يمكنك اختيار بديل لتحديد قيمة مخصصة بالنقر على الرمز أمام صندوق إدخال القيمة.",
 	"wikibase-referenceview-tabs-manual": "يدوي",
+	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|مؤهل|مؤهلات}}",
 	"wikibase-statementview-rank-preferred": "ترتيب مفضل",
 	"wikibase-statementview-rank-tooltip-preferred": "قيمة صحيحة ومُحدَّثة",
 	"wikibase-statementview-rank-normal": "ترتيب طبيعي",
