@@ -14,8 +14,7 @@
 					class="wikibase-wbui2025-qualifier"
 				>
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-					<!-- eslint-disable-next-line vue/no-useless-mustaches -->
-					{{ ' ' }}
+					{{ ' ' /* use mustache to ensure Vue does not remove space between property name + snak value */ }}
 					<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
 				</div>
 			</template>
