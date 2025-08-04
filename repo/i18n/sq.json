@@ -8,7 +8,8 @@
 			"Liridon",
 			"Ritam",
 			"S4b1nuz E.656",
-			"Vyolla"
+			"Vyolla",
+			"Xhulianoo"
 		]
 	},
 	"wikibase-desc": "Depozitimi i të dhënave të strukturuara",
@@ -20,7 +21,7 @@
 	"wikibase-save": "ruaje",
 	"wikibase-publish": "publikoni",
 	"wikibase-cancel": "anulojeni",
-	"wikibase-add": "shtoni",
+	"wikibase-add": "shto",
 	"wikibase-addqualifier": "shtoni kualifikues",
 	"wikibase-addreference": "shtoni referencë",
 	"wikibase-save-inprogress": "Duke ruajtur…",
@@ -43,7 +44,7 @@
 	"wikibase-label-empty": "Nuk ka emërtim të përkufizuar",
 	"wikibase-label-edit-placeholder": "shkruaj një emërtim",
 	"wikibase-label-edit-placeholder-language-aware": "shkruaj një emërtim në $1",
-	"wikibase-description-empty": "S’ka përshkrim të përcaktuar",
+	"wikibase-description-empty": "Nuk ka përshkrim të përkufizuar",
 	"wikibase-description-edit-placeholder": "shkruani një përshkrim",
 	"wikibase-description-edit-placeholder-language-aware": "shkruani një përshkrim në $1",
 	"wikibase-aliases-edit-placeholder": "shkruani disa emërtime të tjera",
