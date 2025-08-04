@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert } = require( 'api-testing' );
+const { assert, utils } = require( 'api-testing' );
 const { expect } = require( '../../../../../rest-api/tests/mocha/helpers/chaiHelper' );
 const entityHelper = require( '../helpers/entityHelper' );
 const {
@@ -67,8 +67,10 @@ describe( 'GET statement', () => {
 
 			it( 'can get a statement with a deleted property', async () => {
 				const response = await newGetStatementRequestBuilder( testStatementWithDeletedProperty.id )
-					// Disabling the cache here so that it doesn't claim that the property still exists
-					.withConfigOverride( 'wgMainCacheType', 0 )
+					// Randomizing the cache key to guarantee a cache miss so that the cache doesn't claim that the
+					// property still exists. Disabling it via wgMainCacheType doesn't work, and neither does setting
+					// sharedCacheDuration to 0.
+					.withConfigOverride( 'wgWBRepoSettings', { sharedCacheKeyGroup: utils.uniq() } )
 					.assertValidRequest()
 					.makeRequest();
 
