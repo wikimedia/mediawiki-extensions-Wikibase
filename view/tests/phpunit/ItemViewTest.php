@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -95,7 +96,12 @@ class ItemViewTest extends EntityViewTestCase {
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( 'P1' ),
 						new StringValue( 'p1' )
-					) ),
+					), new SnakList( [
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P10' ),
+							new StringValue( 'qualifier10' )
+						),
+					] ) ),
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( 'P2' ),
 						new StringValue( 'p2' )
@@ -132,6 +138,22 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( 'href="/wiki/Property:P2"', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-property-name-link', $html );
+		}
+	}
+
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueQualifiers( callable $viewFactory, Item $item, bool $vueStatementsExpected ): void {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+		if ( $vueStatementsExpected ) {
+			$this->assertStringContainsString( 'wikibase-wbui2025-qualifiers', $html );
+			$this->assertStringContainsString( 'data-property-id="P10"', $html );
+			$this->assertStringContainsString( '<a title="Property:P10"', $html );
+			$this->assertStringContainsString( 'href="/wiki/Property:P10"', $html );
+			$this->assertStringContainsString( '<div>a snak', $html );
+		} else {
+			$this->assertStringNotContainsString( 'wikibase-wbui2025-qualifier', $html );
 		}
 	}
 
