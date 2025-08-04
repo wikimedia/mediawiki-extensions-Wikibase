@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -120,7 +121,7 @@ class ItemViewTest extends EntityViewTestCase {
 
 		if ( $vueStatementsExpected ) {
 			$this->assertStringContainsString( 'wikibase-wbui2025-statementgrouplistview', $html );
-			$this->assertStringContainsString( '<div>a snak', $html );
+			$this->assertStringContainsString( '<div>a string snak: p1</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-statementgrouplistview', $html );
 		}
@@ -151,7 +152,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( 'data-property-id="P10"', $html );
 			$this->assertStringContainsString( '<a title="Property:P10"', $html );
 			$this->assertStringContainsString( 'href="/wiki/Property:P10"', $html );
-			$this->assertStringContainsString( '<div>a snak', $html );
+			$this->assertStringContainsString( '<div>a string snak: qualifier10</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-qualifier', $html );
 		}
@@ -174,9 +175,18 @@ class ItemViewTest extends EntityViewTestCase {
 		$propertyDataTypeLookup = $this->createConfiguredMock( PropertyDataTypeLookup::class, [
 			'getDataTypeIdForProperty' => 'string',
 		] );
-		$snakFormatter = $this->createConfiguredMock( SnakFormatter::class, [
-			'formatSnak' => '<div>a snak :)</div>',
-		] );
+		$snakFormatter = $this->createMock( SnakFormatter::class );
+		$snakFormatter->method( 'formatSnak' )
+			->willReturnCallback( static function ( Snak $snak ) {
+				if ( !( $snak instanceof PropertyValueSnak ) ) {
+					return '<div>a snak: ' . htmlspecialchars( get_class( $snak ) ) . '</div>';
+				}
+				$value = $snak->getDataValue();
+				if ( !( $value instanceof StringValue ) ) {
+					return '<div>a value snak: ' . htmlspecialchars( get_class( $value ) ) . '</div>';
+				}
+				return '<div>a string snak: ' . htmlspecialchars( $value->getValue() ) . '</div>';
+			} );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
