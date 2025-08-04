@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kakonjo"
+			"Kakonjo",
+			"Owobusingye"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} ekikoreso",
 	"wikibase-editlinks": "Gorora otukwate",
+	"wikibase-addlinkstitle": "Okwongyera aha nkwatanisa y'endimi",
 	"wikibase-linkitem-addlinks": "Gitamu otukwate",
 	"wikibase-linkitem-title": "Kwatana n'orubaju",
 	"wikibase-linkitem-linkpage": "Kwatana n'orubaju",
