@@ -55,8 +55,9 @@ class FallbackLabelDescriptionLookupFactory {
 	 * and has the given entity ID term types (if any) prefetched.
 	 *
 	 * @param Language $language
-	 * @param EntityId[] $entityIds Entity IDs to prefetch terms for, if any.
-	 * Only relevant if the factory was constructed with a TermBuffer.
+	 * @param EntityId[] $entityIds Entity ids to prefetch terms for, if any. Can be empty if
+	 *  no prefetching is needed/wanted. Only relevant if the factory was constructed with a
+	 *  TermBuffer.
 	 * @param string[] $termTypes Term types to prefetch (default: only labels).
 	 * One or more TermTypes constants.
 	 * @return FallbackLabelDescriptionLookup
