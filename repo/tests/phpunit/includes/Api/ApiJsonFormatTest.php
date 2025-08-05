@@ -38,11 +38,11 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 				$newKey = null;
 				$newVal = null;
 				foreach ( $replacements as $before => $after ) {
-					if ( is_string( $key ) && strstr( $key, $before ) !== false ) {
+					if ( is_string( $key ) && str_contains( $key, $before ) ) {
 						// replace keys...
 						$newKey = str_replace( $before, $after, $key );
 					}
-					if ( is_string( $val ) && strstr( $val, $before ) !== false ) {
+					if ( is_string( $val ) && str_contains( $val, $before ) ) {
 						// ...and values
 						$newVal = str_replace( $before, $after, $val );
 					} elseif ( is_array( $val ) ) {

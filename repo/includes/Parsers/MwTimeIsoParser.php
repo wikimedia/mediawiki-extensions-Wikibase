@@ -273,13 +273,8 @@ class MwTimeIsoParser extends StringValueParser {
 		return $this->getTimeFromYear( $year, $isBceMsg );
 	}
 
-	/**
-	 * @param string $msgKey
-	 *
-	 * @return bool
-	 */
-	private function isBceMsg( $msgKey ) {
-		return strstr( $msgKey, '-BCE-' );
+	private function isBceMsg( string $msgKey ): bool {
+		return str_contains( $msgKey, '-BCE-' );
 	}
 
 	/**
