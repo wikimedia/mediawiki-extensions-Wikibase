@@ -4,11 +4,13 @@
 			"NikolasKHF"
 		]
 	},
+	"wikibase-dataitem": "Bungkul léq {{WBREPONAME}}",
 	"wikibase-editlinks": "Kerisaq sampéqan",
 	"wikibase-addlinkstitle": "Romboq sampéqan antare base",
 	"wikibase-linkitem-addlinks": "Romboq sampéqan",
 	"wikibase-linkitem-title": "Sampéq siq halaman",
 	"wikibase-linkitem-linkpage": "Sampéq siq halaman",
+	"wikibase-linkitem-selectlink": "Pilih situs kance halaman haq mélém sampéq juq halaman ni.",
 	"wikibase-linkitem-input-site": "Base:",
 	"wikibase-linkitem-input-page": "Halaman:",
 	"wikibase-rc-hide-wikidata-hide": "Seboq",

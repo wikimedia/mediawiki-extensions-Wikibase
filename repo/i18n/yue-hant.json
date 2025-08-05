@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"JeffreyKim",
+			"Ktchankt",
 			"Winston Sung"
 		]
 	},
@@ -100,7 +101,7 @@
 	"wikibase-undo-redirect-latestredirect": "如果最新嘅修訂版本係重新導向，就唔可以復原非重新導向嘅編輯",
 	"wikibase-undo-redirect-latestnoredirect": "如果最新嘅修訂版本唔係重新導向，就唔可以復原重新導向嘅編輯",
 	"wikibase-summary-generated": "摘要（會附加到自動生成嘅摘要）：",
-	"wikibase-disambiguation-title": "\"$1\"嘅消歧",
+	"wikibase-disambiguation-title": "\"$1\"嘅搞清楚",
 	"wikibase-aliases-input-help-message": "為咗令呢個實體更容易搵到，你可以輸入其他名稱。",
 	"wikibase-propertypage-datatype": "數據類型",
 	"wikibase-propertypage-bad-datatype": "未知數據類型：$1",
@@ -127,17 +128,17 @@
 	"wikibase-snakformat-invalid-value": "無效嘅數值。",
 	"wikibase-snakformat-propertynotfound": "搵唔到財產。",
 	"wikibase-shortcopyrightwarning-minimal": "撳一下\"$1\", 你同意[[$2|使用條款]]。",
-	"wikibase-shortcopyrightwarning": "撳一下\"$1\"，即係你同意[[$2|使用條款]]，同埋你無可撤銷噉同意根據[$3 $4]釋放你嘅供款。",
+	"wikibase-shortcopyrightwarning": "撳一下\"$1\"，即係你同意[[$2|使用條款]]，同埋你無可撤銷噉同意根據[$3 $4]釋放你嘅貢獻。",
 	"wikibase-shortcopyrightwarning-accept-persist": "我接受呢啲條款喺我日後嘅編輯入面。唔好再用呢個訊息顯示。",
 	"wikibase-copyrighttooltip-acknowledge": "我接受呢啲條款嚟做我日後嘅編輯。唔好再顯示呢個訊息。",
 	"wikibase-entityselector-more": "多啲",
 	"wikibase-entityselector-notfound": "搵唔到匹配嘅嘢",
 	"wikibase-anonymouseditwarning": "警告：你未登入。如果你作出任何編輯，你嘅［https://en.wikipedia.org/wiki/IP_address IP 地址］將會公開顯示。如果你 <strong> [$1 登入 ] </strong > 或者 <strong> [$2 建立帳戶 ] </strong> ，你嘅編輯將會歸因於用戶名，同埋其他好處。",
-	"wikibase-anonymouseditwarning-heading": "你未登入",
+	"wikibase-anonymouseditwarning-heading": "你未簽到",
 	"wikibase-anonymouseditwarning-message": "目前，如果你作出任何編輯，你嘅 IP 位址就會公開顯示。如果你登入或者建立帳戶，你嘅編輯會歸因於你嘅用戶名，同埋其他好處。",
 	"wikibase-anonymouseditnotificationtempuser-message": "如果你登入或者建立帳戶，你嘅編輯會歸因於你嘅用戶名，同埋其他好處。",
 	"wikibase-anonymouseditwarning-dismiss-persist": "每當我唔登入嗰陣警告我。",
-	"wikibase-anonymouseditwarning-dismiss-button": "唔登入就改",
+	"wikibase-anonymouseditwarning-dismiss-button": "唔簽到就改",
 	"wikibase-anonymouseditnotificationtempuser": "如果你 <strong>[$1 登入 ]</strong>定係<strong>[ $2 建立帳戶 ]</strong >，你嘅編輯將會歸因於用戶名，同埋其他好處。",
 	"wikibase-move-error": "你唔可以移動喺數據命名空間入面嘅頁面，亦都唔可以將頁面移動埋入去。",
 	"wikibase-validator-invalid": "無效嘅數值。",
