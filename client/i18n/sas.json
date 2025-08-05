@@ -10,5 +10,8 @@
 	"wikibase-linkitem-title": "Sampéq siq halaman",
 	"wikibase-linkitem-linkpage": "Sampéq siq halaman",
 	"wikibase-linkitem-input-site": "Base:",
-	"wikibase-rc-hide-wikidata-hide": "Seboq"
+	"wikibase-linkitem-input-page": "Halaman:",
+	"wikibase-rc-hide-wikidata-hide": "Seboq",
+	"wikibase-rc-hide-wikidata-show": "Pegitaq",
+	"wikibase-otherprojects": "Dalem proyék haq lain"
 }

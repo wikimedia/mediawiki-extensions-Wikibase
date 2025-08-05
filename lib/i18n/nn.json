@@ -21,7 +21,7 @@
 	"wikibase-error-ui-no-external-page": "Sida «$2» vart ikkje funnen på «$1».",
 	"wikibase-error-ui-edit-conflict": "Det er ein endringskonflikt på gang. Lasta sida på nytt og lagra på nytt.",
 	"wikibase-language-name-for-terms-mul": "standard for alle språk",
-	"wikibase-quantitydetails-amount": "Mengde",
+	"wikibase-quantitydetails-amount": "Mengd",
 	"wikibase-quantitydetails-upperbound": "Øvre grense",
 	"wikibase-quantitydetails-lowerbound": "Nedre grense",
 	"wikibase-quantitydetails-unit": "Eining",

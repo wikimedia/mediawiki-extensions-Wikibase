@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vyolla"
+			"Vyolla",
+			"Xhulianoo"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Shikoni artikujt e distinktivit në dispozicion.",
@@ -94,7 +95,7 @@
 	"apihelp-wblinktitles-param-fromsite": "Një identifikues për faqen në të cilën ndodhet faqja.\nPërdorni së bashku me <var>fromtitle</var> për të bërë një lidhje të plotë të faqes.",
 	"apihelp-wblinktitles-param-fromtitle": "Titulli i faqes për t'u shoqëruar.\nPërdorni së bashku me <var>fromsite</var> për të bërë një lidhje të plotë të faqes.",
 	"apihelp-wblinktitles-param-bot": "Shënojeni këtë redaktim si bot. Ky flamur URL do të respektohet vetëm nëse përdoruesi i përket grupit \"bot\".",
-	"apihelp-wblinktitles-example-1": "Shtoni një lidhje \"Hidrogjen\" nga faqja angleze në \"Wasserstoff\" në faqen gjermane",
+	"apihelp-wblinktitles-example-1": "Shto një lidhje \"Hidrogjen\" nga faqja angleze te \"Wasserstoff\" në faqen gjermane",
 	"apihelp-wbmergeitems-summary": "Bashkon artikuj të shumtë.",
 	"apihelp-wbmergeitems-param-fromid": "ID-ja nga e cila bashkohet",
 	"apihelp-wbmergeitems-param-toid": "ID-ja për t'u bashkuar",
@@ -286,7 +287,7 @@
 	"apihelp-wbsetsitelink-param-linktitle": "Titulli i faqes që do të lidhet. Nëse ky parametër është një varg i zbrazët ose si <var>linktitle</var> ashtu edhe <var>badges</var> nuk janë vendosur, lidhja do të hiqet.",
 	"apihelp-wbsetsitelink-param-badges": "ID-të e artikujve që do të vendosen si distinktivë. Ata do të zëvendësojnë ato aktuale. Nëse ky parametër nuk është vendosur, shenjat nuk do të ndryshohen",
 	"apihelp-wbsetsitelink-param-tags": "Ndryshoni etiketat për të aplikuar rishikimin.",
-	"apihelp-wbsetsitelink-example-1": "Shtoni një lidhje faqeje në faqen angleze \"Hydrogen\" tek artikulli me ID <samp>$1</samp>, nëse lidhja e faqes nuk ekziston",
+	"apihelp-wbsetsitelink-example-1": "Shto një lidhje faqeje te faqja angleze \"Hydrogen\" tek artikulli me ID <samp>$1</samp>, nëse lidhja e faqes nuk ekziston",
 	"apihelp-wbsetsitelink-example-2": "Shtoni një lidhje faqeje në faqen angleze \"Hydrogen\" në artikullin me ID <samp>$1</samp>, nëse lidhja e faqes nuk ekziston. Shton gjithashtu \"Loves Oxygen\" në përmbledhjen e redaktimit.",
 	"apihelp-wbsetsitelink-example-3": "Shtoni një lidhje faqeje në faqen gjermane \"Wasserstoff\" në artikullin që lidhet me faqen angleze \"Hydrogen\", nëse lidhja e faqes nuk ekziston",
 	"apihelp-wbsetsitelink-example-4": "Hiqni lidhjen e faqes gjermane nga artikulli",

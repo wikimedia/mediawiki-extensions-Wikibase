@@ -22,7 +22,8 @@
 			"Winston Sung",
 			"Zolo",
 			"පසිඳු කාවින්ද",
-			"Nvdtn19"
+			"Nvdtn19",
+			"Chaiwan2009"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -453,7 +454,7 @@
 	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
 	"wikibase-refresh-for-missing-datatype": "Không tìm thấy loại dữ liệu $1 trong tập lệnh máy khách cục bộ. Điều này có thể vì tập lệnh được lưu trong vùng bộ nhớ đệm đã lỗi thời. Hãy cố làm mới trình duyệt của bạn, bỏ qua vùng bộ nhớ đệm cục bộ (Ctrl-Shift-R hoặc Cmd-Shift-R trong hầu hết các trình duyệt) để khắc phục vấn đề.",
 	"wikibase-shortcopyrightwarning-heading": "Ghi công giấy phép",
-	"wikibase-entity-save-error-heading": "Có thứ gì đó bị lỗi",
+	"wikibase-entity-save-error-heading": "Đã xảy ra sự cố",
 	"wikibase-tainted-ref-popper-title": "Tham chiếu/giá trị có thể mâu thuẫn",
 	"wikibase-tainted-ref-popper-help-link-title": "Trang trợ giúp về kiểu ràng buộc này",
 	"wikibase-tainted-ref-popper-help-link-text": "Trợ giúp",
