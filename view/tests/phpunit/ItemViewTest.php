@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Reference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -106,7 +108,14 @@ class ItemViewTest extends EntityViewTestCase {
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( 'P2' ),
 						new StringValue( 'p2' )
-					) ),
+					), new SnakList(), new ReferenceList( [
+						new Reference( new SnakList( [
+							new PropertyValueSnak(
+								new NumericPropertyId( 'P20' ),
+								new StringValue( 'reference20' ),
+							),
+						] ) ),
+					] ) ),
 				] ),
 				'vueStatementsExpected' => true,
 			],
@@ -155,6 +164,22 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( '<div>a string snak: qualifier10</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-qualifier', $html );
+		}
+	}
+
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueReferences( callable $viewFactory, Item $item, bool $vueStatementsExpected ): void {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+		if ( $vueStatementsExpected ) {
+			$this->assertStringContainsString( 'wikibase-wbui2025-references', $html );
+			$this->assertStringContainsString( 'data-property-id="P20"', $html );
+			$this->assertStringContainsString( '<a title="Property:P20"', $html );
+			$this->assertStringContainsString( 'href="/wiki/Property:P20"', $html );
+			$this->assertStringContainsString( '<div>a string snak: reference20</div>', $html );
+		} else {
+			$this->assertStringNotContainsString( 'wikibase-wbui2025-reference', $html );
 		}
 	}
 
