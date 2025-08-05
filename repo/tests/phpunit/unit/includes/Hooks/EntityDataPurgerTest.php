@@ -160,7 +160,7 @@ class EntityDataPurgerTest extends MediaWikiUnitTestCase {
 		);
 
 		$purger->onPageDeleteComplete(
-			new PageIdentityValue( 1, 0, "nothing", false ),
+			PageIdentityValue::localIdentity( 1, 0, "nothing" ),
 			// unused
 			$this->createMock( Authority::class ),
 			"no reason",

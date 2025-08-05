@@ -74,7 +74,7 @@ class DeleteDispatcherTest extends TestCase {
 			$clients
 		);
 		$status = $deleteDispatcher->onPageDeleteComplete(
-			new PageIdentityValue( 1, 0, "nothing", false ),
+			PageIdentityValue::localIdentity( 1, 0, "nothing" ),
 			$this->createMock( User::class ),
 			"reason",
 			1,
@@ -116,7 +116,7 @@ class DeleteDispatcherTest extends TestCase {
 		$logEntry = $this->createMock( ManualLogEntry::class );
 
 		$deleteDispatcher->onPageDeleteComplete(
-			new PageIdentityValue( 1, 0, "nothing", false ),
+			PageIdentityValue::localIdentity( 1, 0, "nothing" ),
 			$user,
 			"reason",
 			$id,

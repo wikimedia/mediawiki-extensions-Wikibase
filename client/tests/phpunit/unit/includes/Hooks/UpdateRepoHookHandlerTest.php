@@ -70,7 +70,7 @@ class UpdateRepoHookHandlerTest extends TestCase {
 
 		$this->assertTrue(
 			$handler->onPageDeleteComplete(
-				new PageIdentityValue( 1, 0, "something", false ),
+				PageIdentityValue::localIdentity( 1, 0, "something" ),
 				$this->createMock( User::class ),
 				"some reason",
 				0,
