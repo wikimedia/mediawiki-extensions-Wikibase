@@ -231,6 +231,9 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 					EntityUsage::DESCRIPTION_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-D',
 					EntityUsage::TITLE_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-T',
 					EntityUsage::STATEMENT_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-C',
+					// Please do not add new usages of "all'("X") aspects. This places too much pressure
+					// on client recentchanges table and generates unnecessary reparses.
+					// The method only remains to monitor redirect pages
 					EntityUsage::ALL_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-X',
 					EntityUsage::OTHER_USAGE => 'apihelp-query+wbentityusage-paramvalue-aspect-O',
 				],

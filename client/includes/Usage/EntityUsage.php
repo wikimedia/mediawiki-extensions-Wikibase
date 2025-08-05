@@ -58,6 +58,10 @@ class EntityUsage {
 	public const STATEMENT_USAGE = 'C';
 
 	/**
+	 * Please do not add new usages of "all'("X") aspects. This places too much pressure
+	 * on client recentchanges tables, and causes unnecessary reparses. The method only remains to monitor redirect pages
+	 * @see WikibaseLanguageIndependentLuaBindings.php line 328 for an example of this.
+	 *
 	 * Usage flag indicating that any and all aspects of the entity
 	 * were (or may have been) used.
 	 */

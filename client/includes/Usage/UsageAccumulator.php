@@ -71,6 +71,10 @@ abstract class UsageAccumulator {
 	}
 
 	/**
+	 * Please do not add new usages of "all'("X") aspects. This places too much pressure
+	 * on client recentchanges tables and causes unnecessary reparses. The method only remains to monitor redirect pages
+	 * @see WikibaseLanguageIndependentLuaBindings.php line 328 for an example of this.
+	 *
 	 * Registers the usage of any/all data of an entity (e.g. when accessed
 	 * programmatically using Lua).
 	 */
