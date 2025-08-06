@@ -4,14 +4,16 @@ jest.mock(
 	{ virtual: true }
 );
 
-const statementView = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
+const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
+const statementDetailViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' );
+const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
 describe( 'wikibase.wbui2025.statementView', () => {
 	it( 'defines component', async () => {
-		expect( typeof statementView ).toBe( 'object' );
-		expect( statementView ).toHaveProperty( 'name', 'WikibaseWbui2025Statement' );
+		expect( typeof statementViewComponent ).toBe( 'object' );
+		expect( statementViewComponent ).toHaveProperty( 'name', 'WikibaseWbui2025StatementView' );
 	} );
 
 	describe( 'the mounted component', () => {
@@ -37,10 +39,16 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			id: 'Q1$eb7fdbb4-45d1-f59d-bb3b-013935de1085',
 			rank: 'normal'
 		};
+		const mockStatement2 = {
+			mainsnak: { snaktype: 'somevalue' },
+			type: 'statement',
+			id: 'Q1$18ed80a7-62a8-4779-a7dd-3876e835979a',
+			rank: 'normal'
+		};
 		beforeEach( async () => {
-			wrapper = await mount( statementView, {
+			wrapper = await mount( statementViewComponent, {
 				props: {
-					statements: [ mockStatement ],
+					statements: [ mockStatement, mockStatement2 ],
 					propertyId: 'P1'
 				},
 				global: {
@@ -61,8 +69,15 @@ describe( 'wikibase.wbui2025.statementView', () => {
 		} );
 
 		it( 'the component and child components/elements mount successfully', async () => {
-			expect( wrapper.exists() ).toBeTruthy();
+			expect( wrapper.exists() ).toBe( true );
 			expect( wrapper.findAll( '.wikibase-wbui2025-statement-group' ) ).toHaveLength( 1 );
+			const propertyNames = wrapper.findAllComponents( propertyNameComponent );
+			expect( propertyNames ).toHaveLength( 1 );
+			expect( propertyNames[ 0 ].props( 'propertyId' ) ).toBe( 'P1' );
+			const statementDetailViews = wrapper.findAllComponents( statementDetailViewComponent );
+			expect( statementDetailViews ).toHaveLength( 2 );
+			expect( statementDetailViews[ 0 ].props( 'statement' ) ).toEqual( mockStatement );
+			expect( statementDetailViews[ 1 ].props( 'statement' ) ).toEqual( mockStatement2 );
 		} );
 
 		it( 'sets the right content on claim elements', async () => {

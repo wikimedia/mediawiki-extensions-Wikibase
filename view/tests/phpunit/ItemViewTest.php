@@ -132,6 +132,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( 'wikibase-wbui2025-statementgrouplistview', $html );
 			$this->assertStringContainsString( 'wikibase-wbui2025-statement-detail-view', $html );
 			$this->assertStringContainsString( '<div>a string snak: p1</div>', $html );
+			$this->assertStringContainsString( '<div>a string snak: p2</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-statementgrouplistview', $html );
 		}

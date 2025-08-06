@@ -216,7 +216,7 @@ class StatementSectionsView {
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' ),
 		);
 		$app->registerComponentTemplate(
-			'wbui2025-statement',
+			'wbui2025-statement-view',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
 		);
 		$app->registerComponentTemplate(

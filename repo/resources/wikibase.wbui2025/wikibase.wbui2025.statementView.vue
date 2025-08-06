@@ -26,7 +26,7 @@ const Wbui2025StatementDetailView = require( './wikibase.wbui2025.statementDetai
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025Statement',
+	name: 'WikibaseWbui2025StatementView',
 	components: {
 		Wbui2025PropertyName,
 		Wbui2025StatementDetailView
