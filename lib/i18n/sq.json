@@ -5,7 +5,8 @@
 			"Besnik b",
 			"GretaDoci",
 			"Liridon",
-			"Vyolla"
+			"Vyolla",
+			"Xhulianoo"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -26,7 +27,7 @@
 	"wikibase-quantitydetails-lowerbound": "Kufi i poshtëm",
 	"wikibase-quantitydetails-unit": "Njësi",
 	"wikibase-timedetails-time": "Kohë",
-	"wikibase-timedetails-isotime": "Vulë kohore",
+	"wikibase-timedetails-isotime": "Vula kohore",
 	"wikibase-timedetails-timezone": "Zonë kohore",
 	"wikibase-timedetails-calendar": "Kalendar",
 	"wikibase-timedetails-precision": "Saktësi",

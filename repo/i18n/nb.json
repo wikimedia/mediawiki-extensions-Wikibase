@@ -150,7 +150,7 @@
 	"wikibase-validator-invalid": "Ugyldig verdi",
 	"wikibase-validator-missing-field": "Savner påkrevd felt «$1»",
 	"wikibase-validator-bad-type": "$2 i stedet for $1",
-	"wikibase-validator-too-long": "Kan ikke være mer enn {{PLURAL:$1|ett|$1}} tegn lang",
+	"wikibase-validator-too-long": "Kan ikke være lengre enn {{PLURAL:$1|ett|$1}} tegn",
 	"wikibase-validator-label-too-long": "Etiketten kan ikke være lengre enn {{PLURAL:$1|ett|$1}} tegn",
 	"wikibase-validator-label-too-short": "Etiketten må være på minst {{PLURAL:$1|ett|$1}} tegn",
 	"wikibase-validator-description-too-long": "Beskrivelsen kan ikke være lengre enn {{PLURAL:$1|ett|$1}} tegn",

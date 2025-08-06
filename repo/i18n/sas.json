@@ -4,5 +4,9 @@
 			"NikolasKHF"
 		]
 	},
-	"wikibase-edit": "kerisaq"
+	"wikibase-edit": "kerisaq",
+	"wikibase-add": "romboq",
+	"wikibase-label-empty": "Ndéqn araq labél",
+	"wikibase-description-empty": "Ndéqn araq déskripsi",
+	"wikibase-sitelinks-special": "Situs haq lain"
 }

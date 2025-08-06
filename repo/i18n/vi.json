@@ -22,7 +22,8 @@
 			"Winston Sung",
 			"Zolo",
 			"පසිඳු කාවින්ද",
-			"Nvdtn19"
+			"Nvdtn19",
+			"Chaiwan2009"
 		]
 	},
 	"wikibase-desc": "Kho dữ liệu có cấu trúc",
@@ -408,9 +409,9 @@
 	"wikibase-listdatatypes-quantity-head": "Số lượng",
 	"wikibase-listdatatypes-quantity-body": "Trường dữ liệu trực tiếp cho số lượng có liên quan đến một đơn vị xác định nào đó. Đơn vị dứt khoát được bao gồm trong các giá trị dữ liệu được nhập.\n* amount – phần ẩn của chuỗi (tương quan đến tiền tố đơn vị không rõ)\n* unit – phần ẩn của chuỗi (tương quan đến cơ quan tiêu chuẩn không rõ; mặc định là 1)\n* upperbound – cận trên của số lượng\n* lowerbound – cận dưới của số lượng",
 	"wikibase-listdatatypes-monolingualtext-head": "Văn bản đơn ngữ",
-	"wikibase-listdatatypes-monolingualtext-body": "Trường dữ liệu trực tiếp cho chuỗi không được dịch ra ngôn ngữ khác. Kiểu chuỗi này được định rõ một lần rồi được sử dụng lại trong mọi ngôn ngữ. Thí dụ địa danh trong ngôn ngữ địa phương, các định danh nào đó, công thức hóa học, hoặc tên khoa học Latinh.\n* language – giá trị hiện định rõ ngôn ngữ của phần text\n* value – giá trị hiện của chuỗi tùy ngôn ngữ",
+	"wikibase-listdatatypes-monolingualtext-body": "Trường dữ liệu trực tiếp cho chuỗi không được dịch sang ngôn ngữ khác. Kiểu chuỗi này được định rõ một lần rồi được sử dụng lại trong mọi ngôn ngữ. Thí dụ địa danh trong ngôn ngữ địa phương, các định danh nào đó, công thức hóa học, hoặc tên khoa học Latinh.\n* language – giá trị hiện định rõ ngôn ngữ của phần text\n* value – giá trị hiện của chuỗi tùy ngôn ngữ",
 	"wikibase-listdatatypes-multilingualtext-head": "Văn bản đa ngữ",
-	"wikibase-listdatatypes-multilingualtext-body": "Trường dữ liệu trực tiếp cho chuỗi được dịch ra các ngôn ngữ khác. Thí dụ thuật ngữ quan trọng ở khắp thế giới có tên khác nhau trong nhiều ngôn ngữ. Các tên có thể tùy theo ngôn ngữ hoặc hệ thống viết.\n* language – giá trị hiện định rõ ngôn ngữ của phần text\n* value – giá trị hiện của chuỗi tùy ngôn ngữ",
+	"wikibase-listdatatypes-multilingualtext-body": "Trường dữ liệu trực tiếp cho chuỗi được dịch sang các ngôn ngữ khác. Thí dụ thuật ngữ quan trọng ở khắp thế giới có tên khác nhau trong nhiều ngôn ngữ. Các tên có thể tùy theo ngôn ngữ hoặc hệ thống viết.\n* language – giá trị hiện định rõ ngôn ngữ của phần text\n* value – giá trị hiện của chuỗi tùy ngôn ngữ",
 	"wikibase-listdatatypes-string-head": "Chuỗi",
 	"wikibase-listdatatypes-string-body": "Trường dữ liệu trực tiếp cho chuỗi chữ, thí dụ định danh không thay đổi tùy theo ngôn ngữ của người đọc.\n* text – giá trị hiện của chuỗi tùy ngôn ngữ",
 	"wikibase-listdatatypes-time-head": "Thời điểm",
@@ -453,7 +454,7 @@
 	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
 	"wikibase-refresh-for-missing-datatype": "Không tìm thấy loại dữ liệu $1 trong tập lệnh máy khách cục bộ. Điều này có thể vì tập lệnh được lưu trong vùng bộ nhớ đệm đã lỗi thời. Hãy cố làm mới trình duyệt của bạn, bỏ qua vùng bộ nhớ đệm cục bộ (Ctrl-Shift-R hoặc Cmd-Shift-R trong hầu hết các trình duyệt) để khắc phục vấn đề.",
 	"wikibase-shortcopyrightwarning-heading": "Ghi công giấy phép",
-	"wikibase-entity-save-error-heading": "Có thứ gì đó bị lỗi",
+	"wikibase-entity-save-error-heading": "Đã xảy ra sự cố",
 	"wikibase-tainted-ref-popper-title": "Tham chiếu/giá trị có thể mâu thuẫn",
 	"wikibase-tainted-ref-popper-help-link-title": "Trang trợ giúp về kiểu ràng buộc này",
 	"wikibase-tainted-ref-popper-help-link-text": "Trợ giúp",

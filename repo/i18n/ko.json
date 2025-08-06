@@ -122,7 +122,7 @@
 	"wikibase-statementview-rank-normal": "일반 등급",
 	"wikibase-statementview-rank-tooltip-normal": "잠재적으로 역사적이지만 유효한 값",
 	"wikibase-statementview-rank-deprecated": "비사용 등급",
-	"wikibase-statementview-rank-tooltip-deprecated": "잘못된 값이지만, 과거에는 유효한 값이라고 여겨짐",
+	"wikibase-statementview-rank-tooltip-deprecated": "(과거에는) 잘못된 값으로 알려졌으나, 일반적으로는 유효한 값",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|개의 참고문헌}}",
 	"wikibase-snakview-property-input-placeholder": "속성",
 	"wikibase-snakview-unsupportedsnaktype": "\"$1\"의 유형의 Snak입니다. Snak의 이 유형에 대한 처리는 아직 지원하지 않습니다.",
