@@ -11,25 +11,25 @@
 				</div>
 			</div>
 		</div>
-		<wbui2025-statement-detail
+		<wbui2025-statement-detail-view
 			v-for="statement in statements"
 			:key="statement"
 			:statement="statement"
-		></wbui2025-statement-detail>
+		></wbui2025-statement-detail-view>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
-const Wbui2025StatementDetail = require( './wikibase.wbui2025.statementDetailView.vue' );
+const Wbui2025StatementDetailView = require( './wikibase.wbui2025.statementDetailView.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025Statement',
 	components: {
 		Wbui2025PropertyName,
-		Wbui2025StatementDetail
+		Wbui2025StatementDetailView
 	},
 	props: {
 		statements: {

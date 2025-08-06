@@ -29,7 +29,7 @@ const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025StatementDetail',
+	name: 'WikibaseWbui2025StatementDetailView',
 	components: {
 		Wbui2025MainSnak,
 		Wbui2025References,
@@ -46,7 +46,7 @@ module.exports = exports = defineComponent( {
 			return ( this.statement.references ? this.statement.references : [] );
 		},
 		qualifiers() {
-			return ( this.statement.qualifiers ? this.statement.qualifiers : [] );
+			return ( this.statement.qualifiers ? this.statement.qualifiers : {} );
 		},
 		qualifiersOrder() {
 			return ( this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [] );
