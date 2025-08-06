@@ -103,7 +103,7 @@
 	"echo-pref-tooltip-wikibase-action": "當有人將頁面{{GENDER:|我建立嘅}}連接到{{WBREPONAME}}項目嗰陣通知我。",
 	"exceeded-entity-limit-category": "存取咗太多{{WBREPONAME}}實體嘅頁面",
 	"exceeded-entity-limit-category-desc": "呢個類別會列出存取咗太多{{WBREPONAME}}實體嘅頁面。",
-	"notification-header-page-connection": "頁面<strong>$3</strong>係{{GENDER:$2|連接}}到{{PLURAL:$4|-1=a{{WBREPONAME}}項目|{{WBREPONAME}}項目$4}}，喺呢度可以收集同主題相關嘅數據。",
+	"notification-header-page-connection": "頁面<strong>$3</strong>已經{{GENDER:$2|連接}}咗去{{PLURAL:$4|-1=a{{WBREPONAME}}項|{{WBREPONAME}}項 $4}}，喺呢度可以收集同主題相關嘅數據。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>同埋{{PLURAL:$4|one other page|$4其他頁面|100=99+其他頁面}}係{{GENDER:$2|連接}}到{{WBREPONAME}}項目，喺呢度可以收集同主題相關嘅數據。",
 	"notification-link-text-view-item": "{{GENDER:$1|視圖}}項目",
 	"notification-subject-page-connection": "你{{GENDER:$3|建立}}上面嘅一個頁面係{{GENDER:$2|連接咗}}到一個{{WBREPONAME}}項目",
