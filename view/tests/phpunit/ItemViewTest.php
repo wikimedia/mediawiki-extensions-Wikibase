@@ -10,11 +10,13 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Statement\Filter\DataTypeStatementFilter;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
@@ -47,6 +49,8 @@ use Wikibase\View\Template\TemplateFactory;
  * @author Daniel Kinzler
  */
 class ItemViewTest extends EntityViewTestCase {
+
+	private const EXTERNAL_ID_PROPERTY_ID = 'P123';
 
 	/**
 	 * @param EntityId|ItemId $id
@@ -116,6 +120,10 @@ class ItemViewTest extends EntityViewTestCase {
 							),
 						] ) ),
 					] ) ),
+					new Statement( new PropertyValueSnak(
+						new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
+						new StringValue( 'https://www.example.com/url' )
+					) ),
 				] ),
 				'vueStatementsExpected' => true,
 			],
@@ -135,6 +143,37 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( '<div>a string snak: p2</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-statementgrouplistview', $html );
+		}
+	}
+
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueStatementsSectionsView( callable $viewFactory, Item $item, bool $vueStatementsExpected ) {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+
+		if ( $vueStatementsExpected ) {
+			$this->assertStringContainsString( 'wikibase-wbui2025-statement-section', $html );
+			$this->assertStringContainsString(
+				'<div class="wikibase-wbui2025-statement-section-heading">' .
+				'<h2 class="wb-section-heading section-heading wikibase-statements wikibase-statements-statement" ' .
+				'dir="auto" id="statement">' .
+				'wikibase-statementsection-statement' .
+				'</h2></div>',
+				$html
+			);
+			$this->assertStringContainsString(
+				'<div class="wikibase-wbui2025-statement-section-heading">' .
+				'<h2 class="wb-section-heading section-heading wikibase-statements wikibase-statements-identifier" ' .
+				'dir="auto" id="identifier">' .
+				'wikibase-statementsection-identifier' .
+				'</h2></div>',
+				$html
+			);
+			$this->assertStringContainsString( '<div>a string snak: p1</div>', $html );
+		} else {
+			$this->assertStringNotContainsString( 'wikibase-wbui2025-statement-section', $html );
+			$this->assertStringNotContainsString( 'wikibase-wbui2025-statement-section-heading', $html );
 		}
 	}
 
@@ -199,9 +238,14 @@ class ItemViewTest extends EntityViewTestCase {
 
 		$termsView = $this->createMock( CacheableEntityTermsView::class );
 		$termsView->method( 'getPlaceholders' )->willReturn( $placeholders );
-		$propertyDataTypeLookup = $this->createConfiguredMock( PropertyDataTypeLookup::class, [
-			'getDataTypeIdForProperty' => 'string',
-		] );
+		$propertyDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
+		$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )
+			->willReturnCallback( static function ( PropertyId $propertyId ) {
+				if ( $propertyId->getSerialization() === self::EXTERNAL_ID_PROPERTY_ID ) {
+					return 'external-id';
+				}
+				return 'string';
+			} );
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$snakFormatter->method( 'formatSnak' )
 			->willReturnCallback( static function ( Snak $snak ) {
@@ -215,9 +259,13 @@ class ItemViewTest extends EntityViewTestCase {
 				return '<div>a string snak: ' . htmlspecialchars( $value->getValue() ) . '</div>';
 			} );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
+		$textProvider->method( 'getEscaped' )->willReturnCallback( static fn ( $messageKey ) => $messageKey );
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
-			new FilteringStatementGrouper( [ 'statement' => null ] ),
+			new FilteringStatementGrouper( [
+				'statement' => null,
+				'identifier' => new DataTypeStatementFilter( $propertyDataTypeLookup, [ 'external-id' ] ),
+			] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
 			$snakFormatter,
