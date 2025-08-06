@@ -1,9 +1,6 @@
 <template>
 	<!-- TODO: Remove this debugging element T399286 -->
 	<div class="wikibase-wbui2025-statement-detail-view">
-		<p class="statement_data_debug">
-			{{ statementDump }}
-		</p>
 		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:main-snak="statement.mainsnak"
@@ -50,9 +47,6 @@ module.exports = exports = defineComponent( {
 		},
 		qualifiersOrder() {
 			return ( this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [] );
-		},
-		statementDump() {
-			return JSON.stringify( this.statement );
 		}
 	}
 } );

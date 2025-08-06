@@ -227,7 +227,6 @@ class StatementSectionsView {
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
 				$data['qualifiersOrder'] =
 					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
-				$data['statementDump'] = json_encode( $data['statement'] );
 				return $data;
 			}
 		);
