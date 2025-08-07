@@ -1,3 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/no-namespace
+declare namespace Cypress {
+	interface Chainable {
+		visitTitle( args: string|object, qsDefaults: object ): Chainable<void>;
+		visitTitleMobile( args: string|object ): Chainable<void>;
+	}
+}
+
 Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 	let options = null;
 	let title = null;
