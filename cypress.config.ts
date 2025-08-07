@@ -22,6 +22,16 @@ export default defineConfig( {
 		},
 		setupNodeEvents( on, config ) {
 			on( 'task', {
+				/* eslint-disable no-console */
+				log( message ) {
+					console.log( message );
+					return null;
+				},
+				table( message ) {
+					console.table( message );
+					return null;
+				},
+				/* eslint-enable */
 				// eslint-disable-next-line es-x/no-rest-spread-properties
 				...mwApiCommands( config ),
 			} );

@@ -1,3 +1,5 @@
+import 'cypress-axe';
+
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
 	interface Chainable {
@@ -27,7 +29,9 @@ Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 			} );
 		}
 	}
-	return cy.visit( Object.assign( options, { url: 'index.php' } ) );
+	cy.visit( Object.assign( options, { url: 'index.php' } ) );
+	cy.injectAxe();
+	return cy.window();
 } );
 
 Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { mobileaction: 'toggle_view_mobile' } ) );
