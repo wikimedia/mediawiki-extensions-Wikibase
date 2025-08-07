@@ -27,15 +27,6 @@ class ArchitectureTest {
 	private const USE_CASES = 'Wikibase\Repo\Domains\Crud\Application\UseCases';
 	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation';
 
-	/** NOTE: This test is currently overly simplistic and too strict (see T391829). */
-	public function testNoCrossDomainDependencies(): Rule {
-		return PHPat::rule()
-			->classes( Selector::inNamespace( self::CRUD_DOMAIN ) )
-			->shouldNotDependOn()
-			->classes( Selector::inNamespace( 'Wikibase\Repo\Domains' ) )
-			->excluding( Selector::inNamespace( self::CRUD_DOMAIN ) );
-	}
-
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
 			->classes(
