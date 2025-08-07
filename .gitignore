@@ -1,6 +1,11 @@
 composer.phar
 composer.lock
 
+# Cypress
+cypress/.cache
+cypress/screenshots
+cypress/videos
+cypress/downloads
 vendor/
 extensions/
 node_modules/
