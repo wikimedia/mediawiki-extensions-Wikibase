@@ -1,6 +1,6 @@
 # @wmde/wikibase-rest-api
 
-This is an auto-generated Wikibase REST API client library using the API’s [OpenAPI document](https://doc.wikimedia.org/Wikibase/master/js/rest-api/openapi.json). It is generated via [`OpenAPITools/openapi-generator`](https://github.com/OpenAPITools/openapi-generator) and WMDE does not provide any guarantees about the library functionality.
+This is an auto-generated Wikibase REST API client library using the API’s [OpenAPI document](https://doc.wikimedia.org/Wikibase/master/js/rest-api/openapi.json). It is generated via [`OpenAPITools/openapi-generator`](https://github.com/OpenAPITools/openapi-generator) in [a GitHub Action](https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/.github/workflows/publishRestApiClient.yml). WMDE does not provide any guarantees about the library functionality.
 
 ## Usage
 
