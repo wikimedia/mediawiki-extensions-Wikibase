@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"JeffreyKim"
+			"JeffreyKim",
+			"Ktchankt"
 		]
 	},
 	"apihelp-query+wbentityusage-summary": "傳回指定頁面入面用嘅所有實體ID。",
@@ -9,7 +10,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-S": "呢個實體嘅網站條拎會被使用",
 	"apihelp-query+wbentityusage-paramvalue-aspect-L": "用咗個實體嘅標籤",
 	"apihelp-query+wbentityusage-paramvalue-aspect-D": "用咗個實體嘅描述",
-	"apihelp-query+wbentityusage-paramvalue-aspect-T": "系統會用對應實體嘅本地頁面呔圖",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "系統會用對應實體嘅本地頁面標題",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "會用嚟自實體嘅聲明",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "實體嘅所有方面都係用緊或者可能會用緊",
 	"apihelp-query+wbentityusage-paramvalue-aspect-O": "用咗有關實體嘅其他嘢。呢個目前暗示住別名嘅使用同埋明確檢查實體存在。",
