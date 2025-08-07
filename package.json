@@ -42,7 +42,7 @@
 		"@wdio/mocha-framework": "7.40.0",
 		"@wdio/spec-reporter": "7.40.0",
 		"@wikimedia/codex": "2.2.1",
-		"api-testing": "1.7.1",
+		"api-testing": "1.7.0",
 		"apollo-boost": "^0.4.9",
 		"cross-fetch": "^3.1.5",
 		"cypress": "^14.5.3",
