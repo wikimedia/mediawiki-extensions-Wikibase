@@ -62,9 +62,15 @@ abstract class UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of other (i.e. not label, sitelink, or title) of an
-	 * entity (e.g. access to statements or labels in labels a language other
-	 * than the content language).
+	 * Registers the usage of an entity's aliases (in the given language).
+	 */
+	public function addAliasUsage( EntityId $id, ?string $languageCode = null ): void {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::ALIAS_USAGE, $languageCode ) );
+	}
+
+	/**
+	 * Registers the usage of “other” aspects of an entity
+	 * (see {@link EntityUsage::OTHER_USAGE} for details).
 	 */
 	public function addOtherUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::OTHER_USAGE ) );

@@ -133,6 +133,14 @@ class AffectedPagesFinder {
 			$aspects = array_merge( $aspects, $descriptionsAspects );
 		}
 
+		if ( $diffAspects->getAliasChanges() !== [] ) {
+			$aliasAspects = $this->getChangedTermAspects(
+				EntityUsage::ALIAS_USAGE,
+				$diffAspects->getAliasChanges()
+			);
+			$aspects = array_merge( $aspects, $aliasAspects );
+		}
+
 		if ( $diffAspects->getStatementChanges() !== [] ) {
 			$statementAspects = $this->getChangedStatementAspects(
 				$diffAspects->getStatementChanges()

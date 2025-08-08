@@ -201,6 +201,16 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	}
 
 	/**
+	 * Add an alias usage (called once specific aliases are accessed).
+	 *
+	 * @param string $entityId The Entity from which the aliases were accessed.
+	 * @param string|null $langCode Language code of the aliases accessed.
+	 */
+	public function addAliasUsage( string $entityId, ?string $langCode ): void {
+		$this->getImplementation()->addAliasUsage( $entityId, $langCode );
+	}
+
+	/**
 	 * Add an other (O) usage (called once the otherwise not covered aspect is used).
 	 *
 	 * @param string $entityId The Entity from which something was accessed.
@@ -225,6 +235,7 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 			'addLabelUsage' => [ $this, 'addLabelUsage' ],
 			'addDescriptionUsage' => [ $this, 'addDescriptionUsage' ],
 			'addTitleOrSiteLinksUsage' => [ $this, 'addTitleOrSiteLinksUsage' ],
+			'addAliasUsage' => [ $this, 'addAliasUsage' ],
 			'addOtherUsage' => [ $this, 'addOtherUsage' ],
 			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];

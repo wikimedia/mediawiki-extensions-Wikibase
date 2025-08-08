@@ -35,6 +35,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [],
 			'descriptionChanges' => [],
+			'aliasChanges' => [],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [],
 			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [],
@@ -46,6 +47,9 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$descriptionDiff = $emptyDiff;
 		$descriptionDiff['descriptionChanges'] = [ 'ru' ];
+
+		$aliasDiff = $emptyDiff;
+		$aliasDiff['aliasChanges'] = [ 'tr' ];
 
 		$statementP1Diff = $emptyDiff;
 		$statementP1Diff['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'P1' ];
@@ -75,6 +79,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'de', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es' ],
+			'aliasChanges' => [ 'de', 'es' ],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
 			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
@@ -88,6 +93,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'fr', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es', 'pl' ],
+			'aliasChanges' => [ 'de', 'es', 'pl' ],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
 			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
@@ -102,6 +108,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'de', 'fr', 'ru' ],
 			'descriptionChanges' => [ 'pl' ],
+			'aliasChanges' => [ 'pl' ],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
 			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
@@ -142,6 +149,9 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$descriptionItem = $emptyItem->copy();
 		$descriptionItem->setDescription( 'ru', 'ru desc' );
 
+		$aliasItem = $emptyItem->copy();
+		$aliasItem->setAliases( 'tr', [ 'tr alias', 'tr alias2' ] );
+
 		$noValueP1StatementItem = $emptyItem->copy();
 		$noValueP1StatementItem->setStatements( $noValueP1Statements );
 
@@ -167,6 +177,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$berlinItem->setLabel( 'ru', 'Берлин' );
 		$berlinItem->setDescription( 'de', 'abc' );
 		$berlinItem->setDescription( 'es', 'def' );
+		$berlinItem->setAliases( 'de', [ 'abc' ] );
+		$berlinItem->setAliases( 'es', [ 'def', 'ghi' ] );
 		$berlinItem->setStatements( $someValueStatements );
 
 		$parisItem = $emptyItem->copy();
@@ -178,6 +190,9 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$parisItem->setDescription( 'de', 'abc' );
 		$parisItem->setDescription( 'es', 'def' );
 		$parisItem->setDescription( 'pl', 'xyz' );
+		$parisItem->setAliases( 'de', [ 'abc' ] );
+		$parisItem->setAliases( 'es', [ 'def', 'ghi' ] );
+		$parisItem->setAliases( 'pl', [ 'xyz' ] );
 		$parisItem->setStatements( $noValueP2Statements );
 
 		$noValueP1Property = $emptyProperty->copy();
@@ -203,6 +218,11 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 				$emptyDiff,
 				$descriptionItem,
 				$descriptionItem,
+			],
+			'$aliasItem === $aliasItem' => [
+				$emptyDiff,
+				$aliasItem,
+				$aliasItem,
 			],
 			'$noValueP1StatementItem === $noValueP1StatementItem' => [
 				$emptyDiff,
@@ -253,6 +273,11 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 				$descriptionDiff,
 				$emptyItem,
 				$descriptionItem,
+			],
+			'alias changes' => [
+				$aliasDiff,
+				$emptyItem,
+				$aliasItem,
 			],
 			'item statement change (no value)' => [
 				$statementP1Diff,
@@ -388,6 +413,7 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [],
 			'descriptionChanges' => [],
+			'aliasChanges' => [],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [],
 			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [],

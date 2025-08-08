@@ -204,7 +204,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$cases['alias change on Q1'] = [
-			[ EntityUsage::OTHER_USAGE ],
+			[ EntityUsage::ALIAS_USAGE, EntityUsage::ALIAS_USAGE . '.de' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
@@ -276,6 +276,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$q1SitelinkUsage = new EntityUsage( $q1, EntityUsage::SITELINK_USAGE );
 		$q2SitelinkUsage = new EntityUsage( $q2, EntityUsage::SITELINK_USAGE );
 		$q2OtherUsage = new EntityUsage( $q2, EntityUsage::OTHER_USAGE );
+		$q2AliasUsage = new EntityUsage( $q2, EntityUsage::ALIAS_USAGE );
+		$q2AliasUsage_fr = new EntityUsage( $q2, EntityUsage::ALIAS_USAGE, 'fr' );
 
 		$q1LabelUsage_en = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'en' );
 		$q2LabelUsage = new EntityUsage( $q2, EntityUsage::LABEL_USAGE );
@@ -317,6 +319,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$q2OtherUsage,
 			$q2LabelUsage,
 			$q2DescriptionUsage,
+			$q2AliasUsage,
 		] );
 
 		// Cases
@@ -457,9 +460,9 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$cases['other change on Q2 (used on page 2)'] = [
 			[
-				new PageEntityUsages( 2, [ $q2OtherUsage ] ),
+				new PageEntityUsages( 2, [ $q2AliasUsage, $q2AliasUsage_fr ] ),
 			],
-			[ EntityUsage::OTHER_USAGE ],
+			[ EntityUsage::ALIAS_USAGE . '.fr', EntityUsage::ALIAS_USAGE ],
 			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,

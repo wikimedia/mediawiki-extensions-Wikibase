@@ -131,6 +131,20 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * Add an alias usage (called once specific aliases are accessed).
+	 *
+	 * @param string $entityId The Entity from which the aliases were accessed.
+	 * @param string|null $langCode Language code the aliases accessed.
+	 */
+	public function addAliasUsage( string $entityId, ?string $langCode ): void {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		if ( !$this->termsLanguages->hasLanguage( $langCode ) ) {
+			$langCode = null;
+		}
+		$this->usageAccumulator->addAliasUsage( $entityId, $langCode );
+	}
+
+	/**
 	 * Add a other usage.
 	 *
 	 * @param string $entityId The Entity from which something was accessed.

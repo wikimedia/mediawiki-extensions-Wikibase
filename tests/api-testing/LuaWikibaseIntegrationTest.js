@@ -246,7 +246,7 @@ describe( 'Lua Wikibase integration', () => {
 		const pageText = await parsePage( pageTitle );
 		assert.equal( pageText, `<p>${ englishLabel + '-redirected' }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
-		assert.equal( usageAspects, 'O' );
+		assert.equal( usageAspects, 'A.en' );
 	} );
 
 	it( 'getEntity_labels can be invoked correctly', async () => {

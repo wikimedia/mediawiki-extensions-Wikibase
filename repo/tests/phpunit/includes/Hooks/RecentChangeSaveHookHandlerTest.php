@@ -239,7 +239,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$testItemChange = new ItemChange( [
 			'time' => '20210906122813',
 			'info' => [
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [], [
 					'some_wiki' => [ null, 'some_page', false ],
 				], false ),
 				'metadata' => [
@@ -354,7 +354,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'type' => 'wikibase-someEntity~update',
 			'object_id' => 'Q1',
 			'info' => [ //this is based on item change example, as we now need the diff
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [ 'P1' ], [], [], false ),
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [ 'P1' ], [], [], false ),
 				'metadata' => [
 					'page_id' => 3,
 					'rev_id' => 123,
@@ -373,7 +373,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'type' => 'wikibase-someEntity~update',
 			'object_id' => 'Q1',
 			'info' => [
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [ 'P1' ], [], false ),
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [ 'P1' ], [], false ),
 				'metadata' => [
 				],
 			],

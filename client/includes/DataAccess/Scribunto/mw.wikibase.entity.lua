@@ -112,7 +112,7 @@ local function maskEntityTables( entity )
 	maskEntityTable( entity, 'labels', php.addLabelUsage )
 	maskEntityTable( entity, 'sitelinks', php.addTitleOrSiteLinksUsage )
 	maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
-	maskEntityTable( entity, 'aliases', php.addOtherUsage )
+	maskEntityTable( entity, 'aliases', php.addAliasUsage )
 end
 
 -- Create new entity object from given data

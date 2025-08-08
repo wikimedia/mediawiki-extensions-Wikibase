@@ -37,6 +37,13 @@ class EntityDiffChangedAspects implements Serializable {
 	private $descriptionChanges;
 
 	/**
+	 * Language codes of the aliases that changed (added, removed or updated)
+	 *
+	 * @var string[]
+	 */
+	private $aliasChanges;
+
+	/**
 	 * Property id serialization from the statements that changed (added, removed or updated) - this excludes any changes that are
 	 * purely qual/ref
 	 *
@@ -61,7 +68,7 @@ class EntityDiffChangedAspects implements Serializable {
 	private $siteLinkChanges;
 
 	/**
-	 * Other changes that are not covered in above, like aliases
+	 * Other changes that are not covered in above
 	 *
 	 * @var bool
 	 */
@@ -72,6 +79,7 @@ class EntityDiffChangedAspects implements Serializable {
 	 *
 	 * @param string[] $labelChanges Language codes of the labels that changed (added, removed or updated)
 	 * @param string[] $descriptionChanges Language codes of the descriptions that changed (added, removed or updated)
+	 * @param string[] $aliasChanges Language codes of the aliases that changed (added, removed or updated)
 	 * @param string[] $statementChangesExcludingQualOrRefOnlyChanges Property id serialization from the statements that changed (added,
 	 * removed or updated), excluding statement changes which are qualifier/ref only
 	 * @param string[] $statementChangesQualOrRefOnly Property id serialization from the statements that changed
@@ -83,13 +91,15 @@ class EntityDiffChangedAspects implements Serializable {
 	public function __construct(
 		array $labelChanges,
 		array $descriptionChanges,
+		array $aliasChanges,
 		array $statementChangesExcludingQualOrRefOnlyChanges,
 		array $statementChangesQualOrRefOnly,
 		array $siteLinkChanges,
-			  $otherChanges
+		$otherChanges
 	) {
 		Assert::parameterElementType( 'string', $labelChanges, '$labelChanges' );
 		Assert::parameterElementType( 'string', $descriptionChanges, '$descriptionChanges' );
+		Assert::parameterElementType( 'string', $aliasChanges, '$aliasChanges' );
 		Assert::parameterElementType(
 			'string', $statementChangesExcludingQualOrRefOnlyChanges, '$statementChangesExcludingQualOrRefOnlyChanges'
 		);
@@ -100,6 +110,7 @@ class EntityDiffChangedAspects implements Serializable {
 
 		$this->labelChanges = $labelChanges;
 		$this->descriptionChanges = $descriptionChanges;
+		$this->aliasChanges = $aliasChanges;
 		$this->statementChangesExcludingQualOrRefOnlyChanges = $statementChangesExcludingQualOrRefOnlyChanges;
 		$this->statementChangesQualOrRefOnly = $statementChangesQualOrRefOnly;
 		$this->siteLinkChanges = $siteLinkChanges;
@@ -122,6 +133,15 @@ class EntityDiffChangedAspects implements Serializable {
 	 */
 	public function getDescriptionChanges() {
 		return $this->descriptionChanges;
+	}
+
+	/**
+	 * Language codes of the aliases that changed (added, removed or updated)
+	 *
+	 * @return string[]
+	 */
+	public function getAliasChanges() {
+		return $this->aliasChanges;
 	}
 
 	/**
@@ -200,6 +220,7 @@ class EntityDiffChangedAspects implements Serializable {
 
 		$this->labelChanges = $data['labelChanges'];
 		$this->descriptionChanges = $data['descriptionChanges'];
+		$this->aliasChanges = $data['aliasChanges'] ?? [];
 		$this->statementChangesExcludingQualOrRefOnlyChanges = array_values(
 			(array)$data['statementChangesExcludingQualOrRefOnlyChanges']
 		);
@@ -213,6 +234,7 @@ class EntityDiffChangedAspects implements Serializable {
 			'arrayFormatVersion' => self::ARRAYFORMATVERSION,
 			'labelChanges' => $this->getLabelChanges(),
 			'descriptionChanges' => $this->getDescriptionChanges(),
+			'aliasChanges' => $this->getAliasChanges(),
 			'statementChangesExcludingQualOrRefOnlyChanges' => $this->getStatementChangesExcludingQualOrRefOnly(),
 			'statementChangesQualOrRefOnly' => $this->getStatementChangesQualOrRefOnly(),
 			'siteLinkChanges' => $this->getSiteLinkChanges(),

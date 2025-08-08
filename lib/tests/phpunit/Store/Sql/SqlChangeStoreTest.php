@@ -91,7 +91,8 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 					'change_revision_id' => '0',
 					'change_user_id' => '0',
 					'change_info' => '{"compactDiff":"{\"arrayFormatVersion\":1,' .
-						'\"labelChanges\":[],\"descriptionChanges\":[],\"statementChangesExcludingQualOrRefOnlyChanges\":[],' .
+						'\"labelChanges\":[],\"descriptionChanges\":[],\"aliasChanges\":[],' .
+						'\"statementChangesExcludingQualOrRefOnlyChanges\":[],' .
 						'\"statementChangesQualOrRefOnly\":[],\"siteLinkChanges\":[],\"otherChanges\":false}"}',
 				],
 				$changeWithDiff,
