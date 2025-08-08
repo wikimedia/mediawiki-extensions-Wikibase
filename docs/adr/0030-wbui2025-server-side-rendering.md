@@ -153,7 +153,7 @@ Apart from installing the library via composer (or `mediawiki/vendor.git`),
 no necessary changes to the deployment of Wikidata or other Wikibase instances are expected.
 
 [Termbox SSR]: https://wikitech.wikimedia.org/wiki/WMDE/Wikidata/SSR_Service
-[php-vuejs-templating]: https://www.php.net/manual/en/book.v8js.php
+[php-vuejs-templating]: https://github.com/wmde/php-vuejs-templating/
 [DOM]: https://www.php.net/manual/en/book.dom.php
 [Vue-SSR-POC]: https://gerrit.wikimedia.org/r/c/mediawiki/core/+/1114077
 [WMDE-internal notes]: https://docs.google.com/document/d/1LidOJHohmjkVUzNI2chjbL-99ORLeWxTq7mHcs0fp-E/edit?tab=t.0#heading=h.72po82oi3ffs
