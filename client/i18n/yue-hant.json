@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Al12si",
 			"JeffreyKim",
 			"Ktchankt",
 			"Winston Sung"
@@ -10,7 +11,7 @@
 	"tooltip-t-wikibase": "連到接住資料儲存庫嘅項目",
 	"wikibase-after-page-move": "你嘅搬動應該依家[$1 反映喺{{WBREPONAME}}項目]語言連，我哋問你查返呢個已經發生咗。",
 	"wikibase-after-page-delete": "呢個頁面嘅連結應該喺[$1相關嘅{{WBREPONAME}}項目]入面移除咗。我哋要求你檢查呢個情況發生咗。",
-	"wikibase-comment-add": "已經建立咗個{{WBREPONAME}}項目。",
+	"wikibase-comment-add": "成功建立{{WBREPONAME}}項目。",
 	"wikibase-comment-remove": "刪除咗相關嘅{{WBREPONAME}}項目。移除咗語言條拎。",
 	"wikibase-comment-linked": "一個{{WBREPONAME}}項目已經連結到呢個頁面。",
 	"wikibase-comment-unlink": "呢個頁面已經喺{{WBREPONAME}}項目入面解除條拎，而呢個語言條拎已經移除。",
@@ -40,7 +41,7 @@
 	"wikibase-linkitem-not-loggedin": "你需要登入呢個維基同埋[$1中央數據存儲庫]先至可以用得呢個功能。",
 	"wikibase-linkitem-success-link": "呢啲頁面已經連結咗。你可以喺我哋嘅[$1中央數據存儲庫]入面搵到包含連結嘅項目。",
 	"limitreport-entityaccesscount": "載入咗嘅維基基實體數量",
-	"wikibase-property-notfound": "$1搵唔到財產。",
+	"wikibase-property-notfound": "搵唔到 $1 屬性。",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "收埋",
 	"wikibase-rc-hide-wikidata-show": "顯示",
@@ -93,7 +94,7 @@
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "結單：$1",
 	"wikibase-pageinfo-entity-usage-X": "所有實體資料",
 	"wikibase-pageinfo-entity-usage-O": "雜項（例如別名、實體存在）",
-	"wikibase-property-render-error": "未能提供物業 $1: $2",
+	"wikibase-property-render-error": "$1 屬性顯示失敗: $2",
 	"wikibase-otherprojects": "第啲項目",
 	"wikibase-otherprojects-beta-message": "其他項目嘅側欄",
 	"wikibase-otherprojects-beta-description": "喺側欄加入咗一個「{{int:wikibase-otherprojects}}」部分，呢個部分會根據{{WBREPONAME}}資料提供其他維基媒體項目嘅拎。",
@@ -174,7 +175,7 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "你未簽到",
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "你可以喺唔使登入嘅情況下發佈你嘅變更。你嘅 IP 位址會記錄喺頁面嘅編輯記錄入面。你亦都可以重新登入同埋重試發佈。",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "唔簽到就發佈",
-	"wikibase-client-data-bridge-saving-error-assertuser-save": "唔使簽到就可以儲存",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "唔簽到，就咁儲存",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "簽到（喺新標籤打開）",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "繼續編輯"
 }

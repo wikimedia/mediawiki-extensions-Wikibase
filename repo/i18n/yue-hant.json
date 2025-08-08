@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Al12si",
 			"JeffreyKim",
 			"Ktchankt",
 			"Winston Sung"
@@ -116,7 +117,7 @@
 	"wikibase-statementview-rank-deprecated": "已經棄用咗嘅級別",
 	"wikibase-statementview-rank-tooltip-deprecated": "價值係人都知係錯嘅，但係（以前）通常都係人人認為",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|參考來源}}",
-	"wikibase-snakview-property-input-placeholder": "財產",
+	"wikibase-snakview-property-input-placeholder": "屬性",
 	"wikibase-snakview-unsupportedsnaktype": "\"$1\"類型嘅Snak。 呢種蛇嘅處理方法仲未支援。",
 	"wikibase-snakview-choosesnaktype": "揀一個數值類型。",
 	"wikibase-snakview-variation-datavaluetypemismatch": "呢個數值唔符合物業嘅定義。",
