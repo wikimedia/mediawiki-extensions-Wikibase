@@ -18,14 +18,6 @@ describe( 'wikibase.wbui2025.statementView', () => {
 
 	describe( 'the mounted component', () => {
 		let wrapper;
-		const mockConfig = {
-			wgNamespaceIds: {
-				property: 122
-			}
-		};
-		mw.config = {
-			get: jest.fn( ( key ) => mockConfig[ key ] )
-		};
 
 		const mockStatement = {
 			mainsnak: {
