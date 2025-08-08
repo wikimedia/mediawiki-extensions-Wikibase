@@ -13,6 +13,7 @@ use Wikimedia\Assert\Assert;
 /**
  * A Status representing the result of an {@link EntityRedirectCreationInteractor}.
  *
+ * @inherits TempUserStatus<array{savedTempUser:?UserIdentity,context:IContextSource,entityRedirect:EntityRedirect}>
  * @license GPL-2.0-or-later
  */
 class EntityRedirectCreationStatus extends TempUserStatus {

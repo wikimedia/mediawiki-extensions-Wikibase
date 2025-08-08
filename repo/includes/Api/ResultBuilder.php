@@ -1062,7 +1062,7 @@ class ResultBuilder {
 	 *
 	 * @see ApiResult::addValue()
 	 *
-	 * @param Status $status The status to get the revision ID from.
+	 * @param Status<array> $status The status to get the revision ID from.
 	 * @param string|null|array $path Where in the result to put the revision id
 	 * @param int|null $oldRevId The id of the latest revision of the entity before
 	 *        the last (possibly null) edit
@@ -1090,7 +1090,7 @@ class ResultBuilder {
 	/**
 	 * Add the temp username if the Status object contains a temp user
 	 *
-	 * @param Status $status As returned by {@link \Wikibase\Repo\EditEntity\EditEntity::attemptSave()}
+	 * @param Status<array> $status As returned by {@link \Wikibase\Repo\EditEntity\EditEntity::attemptSave()}
 	 * @param callable $getTempUserRedirectUrl When called with a temp user, should return a redirect URL;
 	 * callers should use the {@link ApiCreateTempUserTrait} and pass this as
 	 * `fn( $user ) => $this->getTempUserRedirectUrl( $params, $user )`

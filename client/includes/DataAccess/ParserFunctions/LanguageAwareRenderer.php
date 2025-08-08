@@ -92,6 +92,7 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 		return $status->getValue();
 	}
 
+	/** @return Status<never> */
 	private function getStatusForException( string $propertyLabel, Exception $exception ): Status {
 		if ( $exception instanceof MessageException ) {
 			$message = new Message( $exception->getKey(), $exception->getParams() );

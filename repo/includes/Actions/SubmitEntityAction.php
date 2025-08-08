@@ -203,24 +203,16 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 	/**
-	 * @return Status containing EntityContent
+	 * @return Status<EntityContent>
 	 */
 	private function getPatchContent(
 		RevisionRecord $olderRevision,
 		RevisionRecord $newerRevision,
 		RevisionRecord $latestRevision
 	): Status {
-		/**
-		 * @var EntityContent $olderContent
-		 * @var EntityContent $newerContent
-		 * @var EntityContent $latestContent
-		 */
-		$olderContent = $olderRevision->getContent( SlotRecord::MAIN );
-		$newerContent = $newerRevision->getContent( SlotRecord::MAIN );
-		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
-		'@phan-var EntityContent $olderContent';
-		'@phan-var EntityContent $newerContent';
-		'@phan-var EntityContent $latestContent';
+		$olderContent = $this->getEntityContent( $olderRevision );
+		$newerContent = $this->getEntityContent( $newerRevision );
+		$latestContent = $this->getEntityContent( $latestRevision );
 
 		if ( $newerContent->isRedirect() !== $latestContent->isRedirect() ) {
 			return Status::newFatal( $latestContent->isRedirect()

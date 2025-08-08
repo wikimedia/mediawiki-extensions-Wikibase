@@ -115,8 +115,9 @@ class EditEntityAction extends ViewEntityAction {
 	 * Loads the revisions specified by the web request and returns them as a three element array
 	 * wrapped in a Status object. If any error arises, it will be reported using the status object.
 	 *
-	 * @return Status A Status object containing an array with three revision record objects,
+	 * @return Status<RevisionRecord[]> A Status object containing an array with three revision record objects,
 	 *   [ $olderRevision, $newerRevision, $latestRevision ].
+	 * @phan-return Status<array{0:RevisionRecord,1:RevisionRecord,2:RevisionRecord}>
 	 */
 	protected function loadRevisions(): Status {
 		$latestRevId = $this->getTitle()->getLatestRevID();
@@ -206,6 +207,15 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 	/**
+	 * Helper function to "fix" the return type of {@link RevisionRecord::getContent()}
+	 * because we know it will be {@link EntityContent}.
+	 */
+	protected function getEntityContent( RevisionRecord $revision ): EntityContent {
+		// @phan-suppress-next-line PhanTypeMismatchReturnSuperType
+		return $revision->getContent( SlotRecord::MAIN );
+	}
+
+	/**
 	 * Output an error page showing the given status
 	 */
 	protected function showUndoErrorPage( Status $status ): void {
@@ -258,14 +268,9 @@ class EditEntityAction extends ViewEntityAction {
 		 */
 		[ $olderRevision, $newerRevision, $latestRevision ] = $revisions->getValue();
 
-		/**
-		 * @var EntityContent $olderContent
-		 * @var EntityContent $newerContent
-		 * @var EntityContent $latestContent
-		 */
-		$olderContent = $olderRevision->getContent( SlotRecord::MAIN );
-		$newerContent = $newerRevision->getContent( SlotRecord::MAIN );
-		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
+		$olderContent = $this->getEntityContent( $olderRevision );
+		$newerContent = $this->getEntityContent( $newerRevision );
+		$latestContent = $this->getEntityContent( $latestRevision );
 
 		if ( $newerContent->isRedirect() !== $latestContent->isRedirect() ) {
 			$this->getOutput()->addWikiMsg( $latestContent->isRedirect()

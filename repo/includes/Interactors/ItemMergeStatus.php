@@ -13,6 +13,7 @@ use Wikimedia\Assert\Assert;
 /**
  * A Status representing the result of an {@link ItemMergeInteractor}.
  *
+ * @inherits TempUserStatus<array{savedTempUser:?UserIdentity,context:IContextSource,fromEntityRevision:EntityRevision,toEntityRevision:EntityRevision,redirected:bool}>
  * @license GPL-2.0-or-later
  */
 class ItemMergeStatus extends TempUserStatus {

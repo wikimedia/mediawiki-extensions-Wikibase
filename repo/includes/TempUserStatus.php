@@ -9,6 +9,8 @@ use MediaWiki\Status\Status;
 use MediaWiki\User\UserIdentity;
 use Wikimedia\Assert\Assert;
 
+// @phan-file-suppress PhanGenericConstructorTypes -- this class has no constructor
+
 /**
  * A Status that may have resulted in a temporary user being created.
  *
@@ -16,16 +18,17 @@ use Wikimedia\Assert\Assert;
  * a context that should be used for any further actions,
  * and arbitrary other data.
  *
+ * @template T Must be a subtype of array{savedTempUser:?UserIdentity,context:IContextSource}
+ * @inherits Status<T>
  * @license GPL-2.0-or-later
  */
 class TempUserStatus extends Status {
 
-	/** @return static */ // TODO change next line to `static` and remove phpdoc in PHP 8.0
 	protected static function newTempUserStatus(
 		array $data,
 		?UserIdentity $savedTempUser,
 		IContextSource $context
-	): self {
+	): static {
 		return self::newGood( array_merge( $data, [
 			'savedTempUser' => $savedTempUser,
 			'context' => $context,
@@ -39,7 +42,9 @@ class TempUserStatus extends Status {
 	 */
 	public function getSavedTempUser(): ?UserIdentity {
 		Assert::precondition( $this->isOK(), '$this->isOK()' );
-		return $this->getValue()['savedTempUser'];
+		$value = $this->getValue();
+		'@phan-var array{savedTempUser:?UserIdentity,context:IContextSource} $value';
+		return $value['savedTempUser'];
 	}
 
 	/**
@@ -51,7 +56,9 @@ class TempUserStatus extends Status {
 	 */
 	public function getContext(): IContextSource {
 		Assert::precondition( $this->isOK(), '$this->isOK()' );
-		return $this->getValue()['context'];
+		$value = $this->getValue();
+		'@phan-var array{savedTempUser:?UserIdentity,context:IContextSource} $value';
+		return $value['context'];
 	}
 
 }

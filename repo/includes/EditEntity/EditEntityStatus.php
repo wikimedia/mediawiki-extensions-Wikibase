@@ -16,6 +16,7 @@ use Wikimedia\Assert\Assert;
 /**
  * A Status representing the result of an {@link EditEntity} edit.
  *
+ * @inherits TempUserStatus<array{savedTempUser:?UserIdentity,context:IContextSource,revision:EntityRevision}>
  * @license GPL-2.0-or-later
  */
 class EditEntityStatus extends TempUserStatus {
@@ -70,6 +71,7 @@ class EditEntityStatus extends TempUserStatus {
 		Assert::precondition( !$this->isOK(), '!$this->isOK()' );
 		$value = $this->getValue();
 		if ( is_array( $value ) || $value instanceof ArrayAccess ) {
+			// @phan-suppress-next-line PhanTypeMismatchReturn
 			return $value['errorFlags'] ?? null;
 		} else {
 			return null;

@@ -159,7 +159,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		$status = $editEntity->attemptSave( $entity, self::SUMMARY_TEXT, EDIT_NEW, false );
 
 		if ( !$status->isOK() ) {
-			$this->output( "\n" . $status->getValue() . "\n" );
+			$this->error( $status );
 			return null;
 		} else {
 			return $editEntity->getEntityId();
