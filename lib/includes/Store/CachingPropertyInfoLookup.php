@@ -57,7 +57,8 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	protected $propertyInfoFullyPopulated = false;
 
 	/**
-	 * @param PropertyInfoLookup $lookup The info lookup to call back to.
+	 * @param PropertyInfoLookup $lookup The info lookup to call back to. This may be another CachingPropertyInfoLookup with a different
+	 *                                   type of cache.
 	 * @param BagOStuff|WANObjectCache $cache
 	 * @param string $cacheKeyGroup Group name of the Wikibases to be used when generating global cache keys
 	 * @param int $cacheDuration Number of seconds to keep the cached version for.
@@ -159,22 +160,24 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 */
 	public function getAllPropertyInfo() {
 		if ( !$this->propertyInfoFullyPopulated ) {
-			$wanCacheHit = true;
+			$cacheHit = true;
 			$fname = __METHOD__;
 			$this->propertyInfo = $this->cache->getWithSetCallback(
 				$this->getFullTableCacheKey(),
 				$this->cacheDuration,
-				function () use ( &$wanCacheHit, $fname ) {
+				function () use ( &$cacheHit, $fname ) {
 					$this->logger->debug(
-						'{method}: caching fresh property info table', [ 'method' => $fname ]
+						'{method}: caching fresh property info table in {cacheType}',
+						[ 'method' => $fname, 'cacheType' => get_class( $this->cache ) ],
 					);
-					$wanCacheHit = false;
+					$cacheHit = false;
 					return $this->lookup->getAllPropertyInfo();
 				}
 			);
-			if ( !$wanCacheHit ) {
+			if ( !$cacheHit ) {
 				$this->logger->debug(
-					'{method}: Repopulating property info table in WAN cache', [ 'method' => __METHOD__ ]
+					'{method}: Repopulating property info table in {cacheType}',
+					[ 'method' => $fname, 'cacheType' => get_class( $this->cache ) ],
 				);
 			}
 			$this->propertyInfoFullyPopulated = true;
