@@ -71,7 +71,6 @@ class EditEntityStatus extends TempUserStatus {
 		Assert::precondition( !$this->isOK(), '!$this->isOK()' );
 		$value = $this->getValue();
 		if ( is_array( $value ) || $value instanceof ArrayAccess ) {
-			// @phan-suppress-next-line PhanTypeMismatchReturn
 			return $value['errorFlags'] ?? null;
 		} else {
 			return null;
