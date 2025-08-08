@@ -89,6 +89,7 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 			return '<p class="error wikibase-error">' . $error . '</p>';
 		}
 
+		// @phan-suppress-next-line PhanUseReturnValueOfNever
 		return $status->getValue();
 	}
 
