@@ -383,6 +383,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 			// redirect targets. The regress will eventually terminate even for circular
 			// redirect chains, because the second time an entity ID is encountered, it
 			// will be marked as already resolved.
+			// @phan-suppress-next-line PhanPossiblyInfiniteRecursionSameParams
 			$this->resolveMentionedEntities();
 		}
 	}

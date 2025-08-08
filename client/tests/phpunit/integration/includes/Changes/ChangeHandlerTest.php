@@ -621,7 +621,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $usages );
 
 		$titleFactory = $this->getMockBuilder( TitleFactory::class )
-			->setMethodsExcept( [ 'castFromPageIdentity' ] )
+			->setMethodsExcept( [ 'newFromPageIdentity' ] )
 			->getMock();
 
 		$pageStore = $this->createMock( PageStore::class );
