@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -86,12 +85,6 @@ interface Store {
 	 * @return EntityStoreWatcher
 	 */
 	public function getEntityStoreWatcher();
-
-	/**
-	 * @deprecated use WikibaseRepo::getPropertyInfoLookup instead
-	 * @return PropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup();
 
 	/**
 	 * @return PropertyInfoStore

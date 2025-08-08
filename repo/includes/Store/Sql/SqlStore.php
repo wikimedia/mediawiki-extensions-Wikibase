@@ -26,7 +26,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -95,8 +94,6 @@ class SqlStore implements Store {
 	 * @var DispatchingEntityStoreWatcher|null
 	 */
 	private $entityStoreWatcher = null;
-
-	private PropertyInfoLookup $propertyInfoLookup;
 
 	/**
 	 * @var PropertyInfoStore|null
@@ -180,7 +177,6 @@ class SqlStore implements Store {
 		GetEntityByLinkedTitleLookupHook $hookRunner,
 		DatabaseEntitySource $entitySource,
 		SettingsArray $settings,
-		PropertyInfoLookup $propertyInfoLookup,
 		ObjectCacheFactory $objectCacheFactory
 	) {
 		$this->entityChangeFactory = $entityChangeFactory;
@@ -199,7 +195,6 @@ class SqlStore implements Store {
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->propertyInfoLookup = $propertyInfoLookup;
 	}
 
 	/**
@@ -432,15 +427,6 @@ class SqlStore implements Store {
 		}
 
 		return $this->cacheRetrievingEntityRevisionLookup;
-	}
-
-	/**
-	 * @deprecated use WikibaseRepo::getPropertyInfoLookup instead
-	 *
-	 * @return PropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup(): PropertyInfoLookup {
-		return $this->propertyInfoLookup;
 	}
 
 	/**

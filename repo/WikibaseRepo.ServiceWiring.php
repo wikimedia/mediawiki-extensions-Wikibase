@@ -1901,7 +1901,6 @@ return [
 			WikibaseRepo::getHookRunner( $services ),
 			WikibaseRepo::getLocalEntitySource( $services ),
 			WikibaseRepo::getSettings( $services ),
-			WikibaseRepo::getPropertyInfoLookup( $services ),
 			$services->getObjectCacheFactory()
 		);
 	},

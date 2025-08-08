@@ -56,7 +56,6 @@ class StoreTest extends MediaWikiIntegrationTestCase {
 				'sharedCacheType' => CACHE_NONE,
 				'sharedCacheDuration' => 60 * 60,
 			] ),
-			WikibaseRepo::getPropertyInfoLookup(),
 			$this->createMock( ObjectCacheFactory::class )
 		);
 	}
