@@ -30,6 +30,7 @@
 				<element key="repo/tests/architecture" value="Wikibase\Repo\Tests\Architecture"/>
 				<element key="repo/rest-api/src" value="Wikibase\Repo\RestApi"/>
 				<element key="repo/rest-api/tests/phpunit" value="Wikibase\Repo\Tests\RestApi"/>
+				<element key="repo/rest-api/tests/architecture" value="Wikibase\Repo\Tests\RestApi\Architecture"/>
 				<element key="repo/domains/search/src" value="Wikibase\Repo\Domains\Search"/>
 				<element key="repo/domains/search/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Search"/>
 				<element key="repo/domains/search/tests/architecture" value="Wikibase\Repo\Tests\Domains\Search\Architecture"/>

@@ -11,6 +11,10 @@ services:
 		class: Wikibase\Repo\Tests\Architecture\ArchitectureTest
 		tags:
 			- phpat.test
+	-
+		class: Wikibase\Repo\Tests\RestApi\Architecture\ArchitectureTest
+		tags:
+			- phpat.test
 
 parameters:
 	level: 1
@@ -22,6 +26,8 @@ parameters:
 		- ./repo/domains/crud/tests/architecture/
 		- ./repo/domains/search/src/
 		- ./repo/domains/search/tests/architecture/
+		- ./repo/rest-api/src/
+		- ./repo/rest-api/tests/architecture/
 
 includes:
 	- vendor/phpat/phpat/extension.neon

@@ -950,6 +950,7 @@
 		"Wikibase\\Repo\\Tests\\Unit\\": "repo/tests/phpunit/unit/",
 		"Wikibase\\Repo\\Tests\\Architecture\\": "repo/tests/architecture/",
 		"Wikibase\\Repo\\Tests\\RestApi\\": "repo/rest-api/tests/phpunit/",
+		"Wikibase\\Repo\\Tests\\RestApi\\Architecture\\": "repo/rest-api/tests/architecture/",
 		"Wikibase\\Repo\\Tests\\Domains\\Search\\": "repo/domains/search/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Search\\Architecture\\": "repo/domains/search/tests/architecture/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\": "repo/domains/crud/tests/phpunit/",
