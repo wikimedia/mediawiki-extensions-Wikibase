@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"JeffreyKim",
-			"Ktchankt"
+			"Ktchankt",
+			"Yueman"
 		]
 	},
 	"apihelp-query+wbentityusage-summary": "傳回指定頁面入面用嘅所有實體ID。",
@@ -13,7 +14,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "系統會用對應實體嘅本地頁面標題",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "會用嚟自實體嘅聲明",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "實體嘅所有方面都係用緊或者可能會用緊",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "用咗有關實體嘅其他嘢。呢個目前暗示住別名嘅使用同埋明確檢查實體存在。",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "用緊有關實體嘅其他嘢。而家呢個係意味住用咗別名同埋對實體存在嘅明確檢查。",
 	"apihelp-query+wbentityusage-param-prop": "要加入到結果嘅屬性。",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "如果啟用咗，就會加入實體嘅網址",
 	"apihelp-query+wbentityusage-param-entities": "淨係返返去使用呢啲實體嘅頁面。",
