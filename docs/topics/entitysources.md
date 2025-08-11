@@ -12,9 +12,8 @@ Entity source configuration is controlled by a configuration option called `enti
 
 An entitysource is an associative array mapping entity source names to settings relevant to the particular source.
 
-DEFAULT: None, must be configured.
-The _example_ (not default!) settings configure a local entity source with items in namespace 120, properties in namespace 122, and extension-defined entity types in namespaces according to the `WikibaseRepoEntityNamespaces` hook.
-Custom (non-example) settings will not include extension-defined entity types by default (the `WikibaseRepoEntityNamespaces` hook is only run by the example settings), all entity types must be configured explicitly in that case.
+DEFAULT: If `defaultEntityNamespaces` is `true` (which is the default), the default is a single local entity source with items in namespace 120, properties in namespace 122, and extension-defined entity types in namespaces according to the `WikibaseRepoEntityNamespaces` hook.
+Custom (non-default) settings will not include extension-defined entity types by default (the `WikibaseRepoEntityNamespaces` hook is only run by the default settings), all entity types must be configured explicitly in that case.
 
 Configuration of each source is an associative array containing the following keys:
 

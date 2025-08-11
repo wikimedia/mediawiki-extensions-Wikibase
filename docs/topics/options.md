@@ -423,6 +423,10 @@ Text for data license link.
 
 DEFAULT: [$wgRightsText]
 
+#### defaultEntityNamespaces {#repo_defaultEntityNamespaces}
+If true, Wikibase will create Item and Property namespaces (ID 120 and 122), and the default [entitySources] setting will use those namespaces.
+If you e.g. want to have items in the main namespace instead, you need to set this setting to false, configure any custom namespaces yourself, and also configure custom [entitySources].
+
 #### localEntitySourceName
 Name of the entity source of the local repo (the same site).
 
