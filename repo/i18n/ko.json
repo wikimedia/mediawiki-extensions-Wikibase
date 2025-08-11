@@ -156,7 +156,7 @@
 	"wikibase-validator-bad-value": "손상된 데이터 값: $1",
 	"wikibase-validator-bad-value-type": "$1 값 유형이 잘못됨, $2(으)로 예상됨",
 	"wikibase-validator-bad-data-type": "잘못된 자료형: $1",
-	"wikibase-validator-bad-url": "URL에는 공백이나 대괄호와 같은 특정한 문자의 포함을 허용하지 않습니다: $1",
+	"wikibase-validator-bad-url": "URL에는 공백이나 대괄호와 같은 특정 문자가 포함될 수 없습니다: $1",
 	"wikibase-validator-url-scheme-missing": "이 URL에는 \"https://\"와 같은 스킴이 없습니다.: $1",
 	"wikibase-validator-bad-url-scheme": "\"$1\" URL 스킴을 지원하지 않습니다.",
 	"wikibase-validator-unknown-unit": "알 수 없는 단위: $1",

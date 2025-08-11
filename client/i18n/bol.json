@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"El-hussain14"
+			"El-hussain14",
+			"Mbfika"
 		]
 	},
-	"wikibase-dataitem": "{{WBREPONAME}} ƴa",
-	"wikibase-editlinks": "Rama goggo gwamo",
-	"wikibase-addlinkstitle": "Add interlanguage links",
-	"wikibase-linkitem-addlinks": "Sauwi goggo gwamo",
-	"wikibase-linkitem-title": "Gwanto ga shafi",
-	"wikibase-linkitem-linkpage": "Gwanti page 'yame",
-	"wikibase-linkitem-selectlink": "Nko Allah zaɓi yanar gizo shafi ga yalla ma dolan ma ayi gwanto ye",
+	"wikibase-dataitem": "{{WBREPONAME}} 'ƴa",
+	"wikibase-editlinks": "Rama goggo gomo",
+	"wikibase-addlinkstitle": "Sauwii goggo boo maddi",
+	"wikibase-linkitem-addlinks": "Sauwi goggo gamo",
+	"wikibase-linkitem-title": "Gwanto ga peji",
+	"wikibase-linkitem-linkpage": "Gonto ga peji",
+	"wikibase-linkitem-selectlink": "Nko Allah zaɓi peji la ma dolan ma gonte ga eme.",
 	"wikibase-linkitem-input-site": "bòo:",
-	"wikibase-linkitem-input-page": "Ngafe:",
+	"wikibase-linkitem-input-page": "Peji:",
 	"wikibase-rc-hide-wikidata-hide": "Bunko",
 	"wikibase-rc-hide-wikidata-show": "'yawe",
 	"wikibase-otherprojects": "Ga messe rutan payo"

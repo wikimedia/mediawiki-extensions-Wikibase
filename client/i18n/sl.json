@@ -103,7 +103,7 @@
 	"wikibase-otherprojects-beta-description": "V stransko letvico doda razdelek »{{int:wikibase-otherprojects}}«, ki na podlagi podatkov v projektu {{WBREPONAME}} ponuja povezave do drugih projektov Wikimedie.",
 	"wikibase-sitelinks-sitename-columnheading": "Jezik",
 	"wikibase-sitelinks-link-columnheading": "Povezana stran",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezave}} s projektom {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezava|Povezave}} z {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Obvesti me, ko kdo poveže stran, ki sem jo {{GENDER:|ustvaril|ustvarila|ustvaril_a}}, s predmetom v shrambi {{WBREPONAME}}.",
 	"notification-header-page-connection": "Stran <strong>$3</strong> je bila {{GENDER:$2|povezana}} s {{PLURAL:$4|-1=predmetom v shrambi  {{WBREPONAME}}|predmetom $4 v shrambi {{WBREPONAME}}}}, v kateri je mogoče zbirati podatke, povezane s temo.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> in {{PLURAL:$4|še ena stran {{GENDER:$2|sta bili povezani}}|še $4 strani {{GENDER:$2|so bile povezane}}|še $4 strani {{GENDER:$2|je bilo povezanih}}|100=še 99+ strani {{GENDER:$2|je bilo povezanih}}}} s predmeti v shrambi {{WBREPONAME}}, v kateri se lahko zbirajo podatki, relevantni za temo.",
