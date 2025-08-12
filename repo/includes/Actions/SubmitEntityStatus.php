@@ -4,10 +4,8 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Actions;
 
-use Elastica\Status;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\User\UserIdentity;
-use StatusValue;
 use Wikibase\Repo\TempUserStatus;
 
 /**
@@ -28,20 +26,6 @@ class SubmitEntityStatus extends TempUserStatus {
 			$savedTempUser,
 			$context
 		);
-	}
-
-	/**
-	 * @param StatusValue|Status $sv
-	 * @return static
-	 */
-	public static function wrap( $sv ) {
-		// This implementation only exists to change the declared return type,
-		// from Status to static (i.e. EditEntityStatus);
-		// it would become redundant if Ic1a8eccc53 is merged.
-		// (Note that the parent *implementation* already returns static,
-		// it just isn’t declared as such yet.)
-		// @phan-suppress-next-line PhanTypeMismatchReturnSuperType
-		return parent::wrap( $sv );
 	}
 
 }
