@@ -1,10 +1,10 @@
 # 32) wbui2025 Server-Rendered HTML {#adr_0032}
 
-Date: 2025-07-31 (TODO: bump)
+Date: 2025-08-12
 
 ## Status
 
-proposed (TODO: accepted)
+accepted
 
 ## Context
 
@@ -14,7 +14,7 @@ For example, the formatters handle language selection and fallbacks.
 
 The HTML outputted by these formatters is generally simple, and can be styled with CSS.
 In the case that CSS alone is insufficient, we could introduce a new output format
-(similar to existing "[verbose][FORMAT_HTML_VERBOSE]" or "[diff][FORMAT_HTML_DIFF]" HTML formats; see [SnakFormat][]).
+(similar to existing [verbose][FORMAT_HTML_VERBOSE] or [diff][FORMAT_HTML_DIFF] HTML formats; see [SnakFormat][]).
 
 In the server-side rendering, we can use the HTML from these formatters directly,
 via the `v-html` directive (already supported by php-vuejs-templating).
