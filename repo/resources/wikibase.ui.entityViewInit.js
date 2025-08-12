@@ -433,13 +433,13 @@
 					isEmpty = !label || label.getText() === '';
 
 				if ( isEmpty ) {
-					$( 'h1' ).find( '.wikibase-title' )
+					$( 'h1, .vector-sticky-header-context-bar-primary' ).find( '.wikibase-title' )
 						.toggleClass( 'wb-empty', true )
 						.find( '.wikibase-title-label' )
 						.text( mw.msg( 'wikibase-label-empty' ) );
 				} else {
 					var indicator = wb.view.languageFallbackIndicator.getHtml( label, userLanguage );
-					$( 'h1' ).find( '.wikibase-title' )
+					$( 'h1, .vector-sticky-header-context-bar-primary' ).find( '.wikibase-title' )
 						.toggleClass( 'wb-empty', false )
 						.find( '.wikibase-title-label' )
 						.html( mw.html.escape( label.getText() ) + indicator );
