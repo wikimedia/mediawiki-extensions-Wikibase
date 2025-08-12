@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"JeffreyKim"
+			"JeffreyKim",
+			"Ktchankt"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "查詢吓可用嘅徽章項目。",
@@ -16,7 +17,7 @@
 	"apihelp-wbcreateclaim-param-summary": "編輯嘅總結。\n前面會有一個自動產生嘅留言。自動評論同摘要嘅長度限制係260個字元。請注意，所有超過呢個限制嘅嘢都會被切斷。",
 	"apihelp-wbcreateclaim-param-tags": "更改標籤嚟套用喺修訂版本。",
 	"apihelp-wbcreateclaim-example-1": "為屬性<samp>P9001</samp>嘅項目<samp>$1</samp>嚟建立聲明，並且使用「{{int:wikibase-snakview-snaktypeselector-novalue}}」嘅snak。",
-	"apihelp-wbcreateclaim-example-2": "為屬性<samp>P9002</samp>嘅項目<samp>$1</samp>嚟建立返聲明，並且使用埋字串值「<var>其字串</var>」",
+	"apihelp-wbcreateclaim-example-2": "為屬性<samp>P9002</samp>嘅項目<samp>$1</samp>嚟建立返聲明，並且用埋字串值「<var>itsastring</var>」",
 	"apihelp-wbcreateclaim-example-3": "為屬性<samp>P9003</samp>嘅項目<samp>$1</samp>嚟建立返申索，而項目嘅值係項目<samp>Q1</samp>",
 	"apihelp-wbcreateclaim-example-4": "為屬性<samp>P9004</samp>嘅項目<samp>$1</samp>建立一個申索，並且有埋座標蛇值",
 	"apihelp-wbcreateredirect-summary": "建立實體嘅跳轉。",

@@ -204,7 +204,7 @@
 	"wikibase-itembytitle-lookup-site": "地點：",
 	"wikibase-itembytitle-lookup-page": "頁",
 	"wikibase-itembytitle-submit": "搵",
-	"wikibase-itembytitle-error-site": "請使用現有嘅網站識別碼，例如英文維基百科嘅「enwiki」。",
+	"wikibase-itembytitle-error-site": "請用現有嘅網站識別碼，例如英文維基百科嘅「enwiki」。",
 	"wikibase-itembytitle-error-item": "搵唔到條拎結去指定頁面嘅項目。",
 	"wikibase-itembytitle-create": "你亦可以[$1 建立一個項目]。",
 	"wikibase-itembytitle-summary": "Special:ItemByTitle 用嚟喺連結咗嘅網站上面搵特定頁面嘅相應項目。<br />第一個欄位，「{{int:wikibase-itembytitle-lookup-site}}」，係你輸入語言同網站代碼嘅位置。<br />對於第二個欄位，「{{int:wikibase-itembytitle-lookup-page}}」，你一定要輸入喺連接咗嘅網站上面出現嘅頁面標題。",
@@ -226,7 +226,7 @@
 	"wikibase-itemdisambiguation-nothing-found": "唔好意思，搵唔到有嗰個標籤嘅項目。",
 	"wikibase-itemdisambiguation-search": "你可以[$1 搵個項目]。",
 	"wikibase-itemdisambiguation-create": "你亦可以[$1 建立一個項目]。",
-	"wikibase-itemdisambiguation-invalid-langcode": "唔好意思，你提供嘅語言代碼係系統未知嘅，請使用有效嘅語言代碼，例如「en」。",
+	"wikibase-itemdisambiguation-invalid-langcode": "唔好意思，你提供嘅語言代碼係系統未知嘅，請用有效嘅語言代碼，例如「en」。",
 	"wikibase-itemdisambiguation-description": "用嚟搵嘅數值一定要係完整嘅文字條目，語言係識別碼，例如「en」。",
 	"wikibase-itemdisambiguation-summary": "搵晒所有標籤完全相同嘅項目。",
 	"special-newproperty": "建立一個新嘅屬性",
@@ -535,5 +535,5 @@
 	"wikibase-scoped-search-item-scope-name": "項目",
 	"wikibase-scoped-search-property-scope-name": "屬性",
 	"wikibase-mobile-editing-ui-beta-feature-message": "流動編輯用戶介面",
-	"wikibase-mobile-editing-ui-beta-feature-description": "啟用全新嘅實驗性流動編輯使用者介面。"
+	"wikibase-mobile-editing-ui-beta-feature-description": "啟用全新嘅實驗性流動編輯用戶介面。"
 }
