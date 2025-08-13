@@ -126,8 +126,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
-			$this->isMobileView,
-			WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' )
+			$this->isMobileView
 		);
 
 		$pog = new StatslibTimeRecordingEntityParserOutputGenerator(
@@ -188,12 +187,17 @@ class EntityParserOutputGeneratorFactory {
 				$this->newKartographerDataUpdater( $this->kartographerEmbeddingHandler ) );
 		}
 
+		$tmpMobileEditingUI = WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' );
 		$entityUpdaters = [
 			new ItemParserOutputUpdater(
-				$statementUpdater
+				$statementUpdater,
+				$this->isMobileView,
+				$tmpMobileEditingUI
 			),
 			new PropertyParserOutputUpdater(
-				$statementUpdater
+				$statementUpdater,
+				$this->isMobileView,
+				$tmpMobileEditingUI
 			),
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,

@@ -118,7 +118,7 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 
 		if ( $dataUpdaters === null ) {
 			$dataUpdaters = [
-				new ItemParserOutputUpdater( $statementUpdater ),
+				new ItemParserOutputUpdater( $statementUpdater, false, false ),
 				new ReferencedEntitiesDataUpdater(
 					$this->newEntityReferenceExtractor(),
 					$this->getEntityTitleLookupMock(),

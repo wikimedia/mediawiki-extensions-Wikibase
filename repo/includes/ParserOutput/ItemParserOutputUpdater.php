@@ -13,11 +13,20 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemParserOutputUpdater implements EntityParserOutputUpdater {
 
-	/** @var StatementDataUpdater */
-	private $statementDataUpdater;
+	private StatementDataUpdater $statementDataUpdater;
 
-	public function __construct( StatementDataUpdater $statementDataUpdater ) {
+	private bool $isMobileView;
+
+	private bool $tmpMobileEditingUI;
+
+	public function __construct(
+		StatementDataUpdater $statementDataUpdater,
+		bool $isMobileView,
+		bool $tmpMobileEditingUI
+	) {
 		$this->statementDataUpdater = $statementDataUpdater;
+		$this->isMobileView = $isMobileView;
+		$this->tmpMobileEditingUI = $tmpMobileEditingUI;
 	}
 
 	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
@@ -32,6 +41,15 @@ class ItemParserOutputUpdater implements EntityParserOutputUpdater {
 		}
 
 		$this->statementDataUpdater->updateParserOutput( $parserOutput );
+
+		if ( $this->isMobileView && $this->tmpMobileEditingUI ) {
+			$parserOutput->addModules( [
+				'wikibase.wbui2025.entityViewInit',
+			] );
+			$parserOutput->addModuleStyles( [
+				'wikibase.wbui2025.entityView.styles',
+			] );
+		}
 	}
 
 }

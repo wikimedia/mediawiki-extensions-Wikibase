@@ -287,7 +287,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		);
 
 		$dataUpdaters = [
-			new ItemParserOutputUpdater( $statementUpdater ),
+			new ItemParserOutputUpdater( $statementUpdater, $isMobileView, $tmpMobileEditingUI ),
 			new ReferencedEntitiesDataUpdater(
 				$this->newEntityReferenceExtractor(),
 				$entityTitleLookup,
@@ -307,8 +307,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->language ),
-			$isMobileView,
-			$tmpMobileEditingUI
+			$isMobileView
 		);
 	}
 }
