@@ -96,12 +96,30 @@ class RecentChangeSaveHookHandler {
 			return;
 		}
 
-		$this->setChangeMetaData( $change, $recentChange, $centralUserId );
-		$this->changeStore->saveChange( $change );
+		$compactDiff = $change->getCompactDiff();
 
-		$this->enqueueDispatchChangesJob(
-			$change->getEntityId()->getSerialization()
-		);
+		// Find any statement changes other than the qualifier/reference only change.
+		$hasOtherStatementChanges = $compactDiff->getStatementChangesExcludingQualOrRefOnly() !== [];
+
+		// Find any different aspect changes, other than statement change
+		$hasNonStatementChange = $compactDiff->getDescriptionChanges() !== [] || $compactDiff->getLabelChanges() !== []
+			|| $compactDiff->getSiteLinkChanges() !== [] || $compactDiff->hasOtherChanges();
+
+		$allAreRefOrQualOnlyChanges = !$hasOtherStatementChanges && !$hasNonStatementChange;
+
+		if ( $allAreRefOrQualOnlyChanges ) {
+			// We must temporarily disable change propagation for qualifiers and references to client recentchanges
+			// while we implement a more granular injection for the relevant changes.
+			// This will be implemented before end of 2026
+			// @see T401286
+			return;
+		}
+			// If there are other changes, they should still be propagated and the job should be dispatched
+			$this->setChangeMetaData( $change, $recentChange, $centralUserId );
+			$this->changeStore->saveChange( $change );
+			$this->enqueueDispatchChangesJob(
+				$change->getEntityId()->getSerialization()
+			);
 	}
 
 	private function changeNeedsDispatching( EntityChange $change ): bool {

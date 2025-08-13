@@ -214,6 +214,7 @@ class EntityChangeTest extends ChangeRowTest {
 			[],
 			[],
 			[],
+			[],
 			false
 		);
 		$info = [ 'compactDiff' => $aspects->serialize() ];
@@ -225,6 +226,7 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testSerializeAndUnserializeInfoCompactDiffBadSerialization() {
 		$aspects = new EntityDiffChangedAspects(
 			[ 'de' ],
+			[],
 			[],
 			[],
 			[],

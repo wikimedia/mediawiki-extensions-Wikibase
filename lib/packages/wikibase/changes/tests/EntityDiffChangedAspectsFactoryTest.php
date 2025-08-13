@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
@@ -34,7 +35,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [],
 			'descriptionChanges' => [],
-			'statementChanges' => [],
+			'statementChangesExcludingQualOrRefOnlyChanges' => [],
+			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [],
 			'otherChanges' => false,
 		];
@@ -46,13 +48,19 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$descriptionDiff['descriptionChanges'] = [ 'ru' ];
 
 		$statementP1Diff = $emptyDiff;
-		$statementP1Diff['statementChanges'] = [ 'P1' ];
+		$statementP1Diff['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'P1' ];
 
 		$statementP2Diff = $emptyDiff;
-		$statementP2Diff['statementChanges'] = [ 'P2' ];
+		$statementP2Diff['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'P2' ];
 
 		$statementP1P2Diff = $emptyDiff;
-		$statementP1P2Diff['statementChanges'] = [ 'P1', 'P2' ];
+		$statementP1P2Diff['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'P1', 'P2' ];
+
+		$statementChangesQualOrRefOnlyP2Diff = $emptyDiff;
+		$statementChangesQualOrRefOnlyP2Diff['statementChangesQualOrRefOnly'] = [ 'P2' ];
+
+		$statementChangesMainSnakAndQualDiff = $emptyDiff;
+		$statementChangesMainSnakAndQualDiff['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'P2' ];
 
 		$siteLinkDiff = $emptyDiff;
 		$siteLinkDiff['siteLinkChanges'] = [ 'enwiki' => [ null, 'PHP', false ] ];
@@ -67,7 +75,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'de', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es' ],
-			'statementChanges' => [ 'P2' ],
+			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
+			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
 				'dewiki' => [ null, 'Berlin', true ],
 				'enwiki' => [ null, 'Berlin', false ],
@@ -79,7 +88,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'fr', 'ru' ],
 			'descriptionChanges' => [ 'de', 'es', 'pl' ],
-			'statementChanges' => [ 'P2' ],
+			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
+			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
 				'dewiki' => [ null, 'Paris', true ],
 				'enwiki' => [ null, 'Paris', false ],
@@ -92,7 +102,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'de', 'fr', 'ru' ],
 			'descriptionChanges' => [ 'pl' ],
-			'statementChanges' => [ 'P2' ],
+			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'P2' ],
+			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [
 				'dewiki' => [ 'Berlin', 'Paris', false ],
 				'enwiki' => [ 'Berlin', 'Paris', false ],
@@ -114,6 +125,14 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 		$someValueStatement = new Statement( new PropertySomeValueSnak( $p2 ) );
 		$someValueStatements = new StatementList( $someValueStatement );
 
+		$someValueStatementWithQualifier = new Statement( new PropertySomeValueSnak( $p2 ) );
+		$someValueStatementWithQualifier->setQualifiers( new SnakList( [
+			new PropertyNoValueSnak( 42 ),
+			new PropertySomeValueSnak( 24 ),
+			new PropertyNoValueSnak( 24 ),
+		] ) );
+		$someValueStatementsWithQualifier = new StatementList( $someValueStatementWithQualifier );
+
 		$emptyItem = new Item( $q2, null, null, null );
 		$emptyProperty = new Property( $p2, null, 'hey', null );
 
@@ -131,6 +150,9 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$someValueStatementItem = $emptyItem->copy();
 		$someValueStatementItem->setStatements( $someValueStatements );
+
+		$someValueStatementItemWithQualifer = $emptyItem->copy();
+		$someValueStatementItemWithQualifer->setStatements( $someValueStatementsWithQualifier );
 
 		$siteLinkItem = $emptyItem->copy();
 		$siteLinkItem->addSiteLink( new SiteLink( 'enwiki', 'PHP' ) );
@@ -257,6 +279,16 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 				$someValueStatementItem,
 				$noValueP2StatementItem,
 			],
+			'statement change (only add qualifier)' => [
+				$statementChangesQualOrRefOnlyP2Diff,
+				$someValueStatementItem,
+				$someValueStatementItemWithQualifer,
+			],
+			'statement change (add value and a qualifier) - so both mainSnak and qualifier change' => [
+				$statementChangesMainSnakAndQualDiff,
+				$noValueP2StatementItem,
+				$someValueStatementItemWithQualifer,
+			],
 			'sitelink changes' => [
 				$siteLinkDiff,
 				$emptyItem,
@@ -356,7 +388,8 @@ class EntityDiffChangedAspectsFactoryTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [],
 			'descriptionChanges' => [],
-			'statementChanges' => [],
+			'statementChangesExcludingQualOrRefOnlyChanges' => [],
+			'statementChangesQualOrRefOnly' => [],
 			'siteLinkChanges' => [],
 			'otherChanges' => true,
 		];

@@ -34,7 +34,8 @@ class EntityDiffChangedAspectsFactory {
 	public function newFromEntityDiff( Diff $entityDiff ) {
 		$labelChanges = [];
 		$descriptionChanges = [];
-		$statementChanges = [];
+		$statementChangesExcludingQualOrRefOnlyChanges = [];
+		$statementChangesQualOrRefOnly = [];
 		$siteLinkChanges = [];
 		$otherChanges = false;
 
@@ -63,7 +64,8 @@ class EntityDiffChangedAspectsFactory {
 			$claimsDiff = $entityDiff->getClaimsDiff();
 			if ( $claimsDiff ) {
 				$remainingDiffOps -= count( $claimsDiff );
-				$statementChanges = $this->getChangedStatements( $claimsDiff );
+				$statementChangesExcludingQualOrRefOnlyChanges = $this->getChangedStatementsExcludingQualOrRefOnlyChanges( $claimsDiff );
+				$statementChangesQualOrRefOnly = $this->getChangedStatementsQualOrRefOnly( $claimsDiff );
 			}
 		}
 
@@ -74,7 +76,8 @@ class EntityDiffChangedAspectsFactory {
 		return new EntityDiffChangedAspects(
 			$labelChanges,
 			$descriptionChanges,
-			$statementChanges,
+			$statementChangesExcludingQualOrRefOnlyChanges,
+			$statementChangesQualOrRefOnly,
 			$siteLinkChanges,
 			$otherChanges
 		);
@@ -143,9 +146,8 @@ class EntityDiffChangedAspectsFactory {
 	 *
 	 * @return string[]
 	 */
-	private function getChangedStatements( Diff $claimsDiff ) {
+	private function getChangedStatementsExcludingQualOrRefOnlyChanges( Diff $claimsDiff ) {
 		$changedStatements = [];
-
 		foreach ( $claimsDiff as $pid => $diffOp ) {
 			/** @var Statement $statement */
 			if ( $diffOp instanceof DiffOpAdd ) {
@@ -156,17 +158,46 @@ class EntityDiffChangedAspectsFactory {
 				$statement = $diffOp->getOldValue();
 				/** @var $newStatement Statement */
 				$newStatement = $diffOp->getNewValue();
-
-				$changedStatements[] = $newStatement->getPropertyId()->getSerialization();
+				$isQualOrRefOnlyStatementChange = $statement->getMainSnak()->equals( $newStatement->getMainSnak() );
+				if ( !$isQualOrRefOnlyStatementChange ) {
+					$changedStatements[] = $newStatement->getPropertyId()->getSerialization();
+				} else {
+					// The change is qualifier or reference only - we shouldn't add anything to changedStatements
+					break;
+				}
 			} else {
 				$this->logger->warning( 'Unknown DiffOp type {class}', [
 					'class' => get_class( $diffOp ),
 				] );
 				continue;
 			}
-
 			'@phan-var Statement $statement';
 			$changedStatements[] = $statement->getPropertyId()->getSerialization();
+		}
+		return array_values( array_unique( $changedStatements ) );
+	}
+
+	/**
+	 * @param Diff $claimsDiff
+	 *
+	 * @return string[]
+	 */
+	private function getChangedStatementsQualOrRefOnly( Diff $claimsDiff ) {
+		$changedStatements = [];
+
+		foreach ( $claimsDiff as $pid => $diffOp ) {
+			/** @var Statement $statement */
+			if ( $diffOp instanceof DiffOpChange ) {
+				$statement = $diffOp->getOldValue();
+				/** @var $newStatement Statement */
+				$newStatement = $diffOp->getNewValue();
+				$newStatementId = $newStatement->getPropertyId()->getSerialization();
+				$isQualOrRefOnlyStatementChange = $statement->getMainSnak()->equals( $newStatement->getMainSnak() );
+				if ( $isQualOrRefOnlyStatementChange ) {
+					$changedStatements[] = $newStatementId;
+					// When only a reference or qualifier is changed, the old and new statement Pid will not have changed
+				}
+			}
 		}
 
 		return array_values( array_unique( $changedStatements ) );
