@@ -100,7 +100,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Неке изјаве",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Изјава: $1",
 	"wikibase-pageinfo-entity-usage-X": "Сви подаци о ентитетима",
-	"wikibase-pageinfo-entity-usage-O": "Разно (нпр. изјаве, постојање ентитета итд.)",
+	"wikibase-pageinfo-entity-usage-O": "Разно (нпр. постојање ентитета)",
 	"wikibase-otherprojects": "На другим пројектима",
 	"wikibase-otherprojects-beta-message": "Други пројекти на бочној траци",
 	"wikibase-otherprojects-beta-description": "Додаје одељак „{{int:wikibase-otherprojects}}“ на бочној траци с везама на остале Викимедијине пројекте на основу података из Викибазе.",

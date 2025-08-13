@@ -3,6 +3,7 @@
 		"authors": [
 			"Phurbutsering",
 			"TayfunEt.",
+			"Tenzin Thoesam",
 			"Zolgoyo"
 		]
 	},
@@ -10,5 +11,7 @@
 	"wikibase-linkitem-input-site": "སྐད་རིགས།:",
 	"wikibase-linkitem-input-page": "ཤོག་ངོས།:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-usage-A": "མིང་གཞན་ཁ་ཤས་",
+	"wikibase-pageinfo-entity-usage-O": "ཐ་སྙད་སྣ་ཚོགས། (དཔེར་ན། དངོས་པོའི་ཡོད་མེད།)",
 	"wikibase-otherprojects": "ལས་གཞི་གཞན་དག།"
 }
