@@ -1,9 +1,10 @@
 export class ItemViewPage {
 
-	itemId: string
+	// eslint-disable-next-line es-x/no-class-fields
+	private itemId: string;
 
 	public constructor( itemId: string ) {
-		this.itemId = itemId
+		this.itemId = itemId;
 	}
 
 	public open(): this {

@@ -1,6 +1,6 @@
 module.exports = {
 	extends: [
-		'wikimedia/mediawiki-qunit',
+		'wikimedia/mediawiki/qunit',
 		'../../../.eslintrc.js'
 	],
 	parserOptions: {

@@ -1,19 +1,19 @@
-import { Util } from 'cypress-wikibase-api'
+import { Util } from 'cypress-wikibase-api';
 
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 
 describe( 'wbui2025 item view', () => {
 	context( 'mobile view', () => {
 		beforeEach( () => {
-			cy.viewport( 375, 1280 )
-		} )
+			cy.viewport( 375, 1280 );
+		} );
 
 		it( 'loads the item view', () => {
 			cy.task( 'MwApi:CreateItem', { label: Util.getTestString( 'item' ) } )
 				.then( ( itemId: string ) => {
-					const itemViewPage = new ItemViewPage( itemId )
-					itemViewPage.open().statementsSection()
-				} )
-		} )
-	} )
-} )
+					const itemViewPage = new ItemViewPage( itemId );
+					itemViewPage.open().statementsSection();
+				} );
+		} );
+	} );
+} );

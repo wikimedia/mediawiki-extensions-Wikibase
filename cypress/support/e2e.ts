@@ -5,8 +5,8 @@ Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 		title = args;
 		options = {
 			qs: Object.assign( qsDefaults, {
-				title: args
-			} )
+				title: args,
+			} ),
 		};
 	} else {
 		options = args;
@@ -15,13 +15,11 @@ Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 			options.qs = Object.assign( qsDefaults, options.qs, { title } );
 		} else {
 			options.qs = Object.assign( qsDefaults, {
-				title
+				title,
 			} );
 		}
 	}
 	return cy.visit( Object.assign( options, { url: 'index.php' } ) );
 } );
 
-Cypress.Commands.add( 'visitTitleMobile', ( args ) => {
-	return cy.visitTitle( args, { mobileaction: 'toggle_view_mobile' } );
-} );
+Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { mobileaction: 'toggle_view_mobile' } ) );
