@@ -167,7 +167,6 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 			'rc_comment' => '',
 			'rc_minor' => false,
 			'rc_bot' => false,
-			'rc_new' => false,
 			'rc_cur_id' => 0,
 			'rc_this_oldid' => 0,
 			'rc_last_oldid' => 0,

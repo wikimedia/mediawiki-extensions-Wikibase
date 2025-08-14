@@ -633,7 +633,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_comment_data' => null,
 			'rc_minor' => true,
 			'rc_bot' => $params['wikibase-repo-change']['bot'],
-			'rc_new' => false,
 			'rc_cur_id' => $title->getArticleID(),
 			'rc_this_oldid' => $title->getLatestRevID(),
 			'rc_last_oldid' => $title->getLatestRevID(),

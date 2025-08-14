@@ -95,7 +95,6 @@ abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTes
 			'rc_comment' => 'Testing',
 			'rc_minor' => false,
 			'rc_bot' => false,
-			'rc_new' => false,
 			'rc_cur_id' => 0,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
