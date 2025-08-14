@@ -88,6 +88,8 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Билгало: $1",
 	"wikibase-pageinfo-entity-usage-D": "Цхьаболу хаамаш",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Хаам: $1",
+	"wikibase-pageinfo-entity-usage-A": "Цхьацца псевдонимаш",
+	"wikibase-pageinfo-entity-usage-A-with-modifier": "Псевдоним: $1",
 	"wikibase-pageinfo-entity-usage-T": "Корта",
 	"wikibase-pageinfo-entity-usage-C": "Цхьадолу тӀечӀагӀдарш",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Хаам: $1",

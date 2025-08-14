@@ -38,7 +38,7 @@
 	"apihelp-query+description-extended-description": "描述係純文字，喺一行，但係其他方面係任意嘅（可能包括原始 HTML 標籤，亦都應該解釋為純文字）。佢一定唔可以用喺HTML冇轉錄入面！",
 	"apihelp-query+description-param-prefersource": "如果有邊個描述來源：",
 	"apihelp-query+description-paramvalue-prefersource-local": "透過頁面嘅維基文字入面嘅<code><nowiki>{{SHORTDESC:...}}</nowiki></code>解析器函數嚟畀本地描述。",
-	"apihelp-query+description-paramvalue-prefersource-central": "相關嘅{{WBREPONAME}}項目嘅中心描述。",
+	"apihelp-query+description-paramvalue-prefersource-central": "相關嘅{{WBREPONAME}}項嘅中心描述。",
 	"apihelp-query+description-example": "攞「倫敦」頁面嘅描述。",
 	"apihelp-query+description-example-central": "攞到「倫敦」頁面嘅描述，如果有嘅話，首選中央描述。",
 	"apihelp-query+wikibase-summary": "攞到有關維基庫用戶端同埋相關嘅維基庫存儲庫嘅資訊。",
