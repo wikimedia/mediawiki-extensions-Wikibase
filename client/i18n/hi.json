@@ -95,6 +95,7 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "लेबल: $1",
 	"wikibase-pageinfo-entity-usage-D": "कुछ विवरण",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "विवरण: $1",
+	"wikibase-pageinfo-entity-usage-A-with-modifier": "उपनाम: $1",
 	"wikibase-pageinfo-entity-usage-T": "शीर्षक",
 	"wikibase-pageinfo-entity-usage-C": "कुछ बयान",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "बयान: $1",
