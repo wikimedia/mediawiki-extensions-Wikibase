@@ -972,7 +972,7 @@ final class RepoHooks implements
 			];
 			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
 				'packageFiles' => [
-					'resources/wikibase.wbui2025.entityViewInit.js',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.entityViewInit.js',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue',
