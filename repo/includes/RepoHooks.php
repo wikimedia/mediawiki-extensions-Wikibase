@@ -983,6 +983,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
@@ -991,6 +992,8 @@ final class RepoHooks implements
 						'callback' => CodexModule::getIcons( ... ),
 						'callbackParam' => [
 							'cdxIconAdd',
+							'cdxIconCheck',
+							'cdxIconClose',
 						],
 					],
 				],
@@ -1002,12 +1005,16 @@ final class RepoHooks implements
 				],
 				'messages' => [
 					'wikibase-add',
+					'wikibase-cancel',
+					'wikibase-entityselector-notfound',
+					'wikibase-statementgrouplistview-add',
 					'wikibase-statementview-qualifiers-counter',
 					'wikibase-statementview-references-counter',
 				],
 				'codexComponents' => [
 					'CdxButton',
 					'CdxIcon',
+					'CdxLookup',
 				],
 			];
 		}

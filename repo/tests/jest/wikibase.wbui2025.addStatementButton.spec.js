@@ -5,11 +5,12 @@ jest.mock(
 );
 jest.mock(
 	'../../resources/wikibase.wbui2025/icons.json',
-	() => ( { cdxIconAdd: 'add' } ),
+	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close' } ),
 	{ virtual: true }
 );
 
 const addStatementButtonComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue' );
+const propertySelectorComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue' );
 const { CdxButton } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 
@@ -19,6 +20,10 @@ describe( 'wikibase.wbui2025.references', () => {
 		expect( addStatementButtonComponent )
 			.toHaveProperty( 'name', 'WikibaseWbui2025AddStatementButton' );
 	} );
+
+	mw.config = {
+		get: () => 'en'
+	};
 
 	describe( 'the mounted component', () => {
 		let wrapper, addButton;
@@ -38,9 +43,11 @@ describe( 'wikibase.wbui2025.references', () => {
 		} );
 
 		it( 'shows a property selector on click', async () => {
+			let propertySelector = wrapper.findComponent( propertySelectorComponent );
+			expect( propertySelector.exists() ).toBe( false );
 			await addButton.vm.$emit( 'click' );
-			const propertySelector = wrapper.find( '.wikibase-wbui2025-add-statement-button' ).find( 'div' );
-			expect( propertySelector.text() ).toBe( 'A property selector' );
+			propertySelector = wrapper.findComponent( propertySelectorComponent );
+			expect( propertySelector.exists() ).toBe( true );
 		} );
 	} );
 } );
