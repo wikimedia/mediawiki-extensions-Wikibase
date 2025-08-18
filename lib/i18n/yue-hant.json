@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"Yueman"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "維基百科",
+	"wikibase-snakview-snaktypeselector-novalue": "冇數値",
 	"wikibase-entity-summary-wbcreateclaim-create": "加咗聲稱"
 }
