@@ -60,7 +60,7 @@
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "所有{{WBREPONAME}}嘅編輯都會指定為「次要」，所以「{{WBREPONAME}}編輯」篩選器同「非次要編輯」篩選器會衝突。",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "所有{{WBREPONAME}}嘅編輯都會指定為「次要」，所以「{{WBREPONAME}}編輯」篩選器同「非次要編輯」篩選器會衝突。",
 	"wikibase-replicationnote": "請注意，可能需要幾分鐘先至可以喺所有維基上面睇到呢啲變更。",
-	"wikibase-watchlist-show-changes-pref": "喺你嘅觀看清單入面顯示{{WBREPONAME}}嘅編輯",
+	"wikibase-watchlist-show-changes-pref": "喺你嘅監視清單入面顯示{{WBREPONAME}}嘅編輯",
 	"wikibase-error-deserialize-error": "解序列化唔到啲數據。",
 	"wikibase-error-serialize-error": "解序列化唔到啲數據。",
 	"wikibase-error-invalid-entity-id": "ID\"$2\"係系統未知嘅。 請用有效嘅實體 ID 。",
