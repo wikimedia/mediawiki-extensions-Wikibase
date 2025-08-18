@@ -218,6 +218,10 @@ class StatementSectionsView {
 		$app->registerComponentTemplate(
 			'wbui2025-statement-view',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
+			function( array $data ): array {
+				$data['showModalEditForm'] = false;
+				return $data;
+			}
 		);
 		$app->registerComponentTemplate(
 			'wbui2025-statement-detail-view',

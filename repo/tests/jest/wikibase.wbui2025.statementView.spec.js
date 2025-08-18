@@ -3,6 +3,17 @@ jest.mock(
 	() => require( '@wikimedia/codex' ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconAdd: 'add',
+		cdxIconArrowPrevious: 'arrowPrevious',
+		cdxIconCheck: 'check',
+		cdxIconClose: 'close',
+		cdxIconTrash: 'trash'
+	} ),
+	{ virtual: true }
+);
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const statementDetailViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' );

@@ -969,6 +969,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.less',
 					'../view/resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
+					'../view/resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				],
 			];
 			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
@@ -984,6 +985,8 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatementAddValue.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
@@ -992,8 +995,10 @@ final class RepoHooks implements
 						'callback' => CodexModule::getIcons( ... ),
 						'callbackParam' => [
 							'cdxIconAdd',
+							'cdxIconArrowPrevious',
 							'cdxIconCheck',
 							'cdxIconClose',
+							'cdxIconTrash',
 						],
 					],
 				],
@@ -1015,6 +1020,8 @@ final class RepoHooks implements
 					'CdxButton',
 					'CdxIcon',
 					'CdxLookup',
+					'CdxSelect',
+					'CdxTextInput',
 				],
 			];
 		}

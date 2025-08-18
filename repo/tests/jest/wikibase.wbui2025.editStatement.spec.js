@@ -1,0 +1,85 @@
+jest.mock(
+	'../../codex.js',
+	() => require( '@wikimedia/codex' ),
+	{ virtual: true }
+);
+jest.mock(
+	'../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconAdd: 'add',
+		cdxIconArrowPrevious: 'arrowPrevious',
+		cdxIconCheck: 'check',
+		cdxIconClose: 'close',
+		cdxIconTrash: 'trash'
+	} ),
+	{ virtual: true }
+);
+
+const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
+const editStatementAddValueComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementAddValue.vue' );
+const { CdxButton, CdxIcon } = require( '../../codex.js' );
+const { mount } = require( '@vue/test-utils' );
+const { createTestingPinia } = require( '@pinia/testing' );
+
+describe( 'wikibase.wbui2025.editStatment', () => {
+	it( 'defines component', async () => {
+		expect( typeof editStatementComponent ).toBe( 'object' );
+		expect( editStatementComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatement' );
+	} );
+
+	describe( 'the mounted component', () => {
+		let wrapper, addValueForm, addValueButton, closeButton, publishButton, backIcon;
+		beforeEach( async () => {
+			wrapper = await mount( editStatementComponent, {
+				props: {
+					propertyId: 'P1'
+				},
+				global: {
+					plugins: [
+						createTestingPinia()
+					]
+				}
+			} );
+			addValueForm = wrapper.findComponent( editStatementAddValueComponent );
+			const buttons = wrapper.findAllComponents( CdxButton );
+			addValueButton = buttons[ buttons.length - 3 ];
+			closeButton = buttons[ buttons.length - 2 ];
+			publishButton = buttons[ buttons.length - 1 ];
+			backIcon = wrapper.findComponent( CdxIcon );
+		} );
+
+		it( 'mount its child components', () => {
+			expect( wrapper.exists() ).toBe( true );
+			expect( addValueForm.exists() ).toBe( true );
+			expect( addValueButton.exists() ).toBe( true );
+			expect( closeButton.exists() ).toBe( true );
+			expect( publishButton.exists() ).toBe( true );
+			expect( backIcon.exists() ).toBe( true );
+		} );
+
+		it( 'emits a hide event when close button is clicked', async () => {
+			await closeButton.trigger( 'click' );
+			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
+			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
+		} );
+
+		it( 'emits a hide event when back icon is clicked', async () => {
+			await backIcon.trigger( 'click' );
+			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
+			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
+		} );
+
+		it( 'adds a new value when add value is clicked', async () => {
+			expect( wrapper.vm.valueForms.length ).toBe( 1 );
+			await addValueButton.trigger( 'click' );
+			expect( wrapper.vm.valueForms.length ).toBe( 2 );
+		} );
+
+		it( 'removes a value when remove is triggered', async () => {
+			expect( wrapper.vm.valueForms.length ).toBe( 1 );
+			await addValueForm.vm.$emit( 'remove', 0 );
+			expect( wrapper.vm.valueForms.length ).toBe( 0 );
+		} );
+	} );
+} );
