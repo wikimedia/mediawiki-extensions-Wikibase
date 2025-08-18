@@ -1,5 +1,3 @@
-/* eslint-disable no-implicit-globals */
-
 /**
  * Check accessibility using axe, failing the test on violations.
  *
@@ -24,5 +22,3 @@ export function checkA11y( context = undefined, options = undefined ): void {
 		} ) ) );
 	} );
 }
-
-/* eslint-enable */
