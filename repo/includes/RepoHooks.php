@@ -33,6 +33,7 @@ use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\ResourceLoader\CodexModule;
 use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Revision\RevisionRecord;
@@ -971,6 +972,7 @@ final class RepoHooks implements
 				],
 			];
 			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
+				'class' => CodexModule::class,
 				'packageFiles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.entityViewInit.js',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
@@ -983,11 +985,16 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
+					[
+						'name' => 'resources/wikibase.wbui2025/icons.json',
+						'callback' => CodexModule::getIcons( ... ),
+						'callbackParam' => [
+						],
+					],
 				],
 				'dependencies' => [
 					'pinia',
 					'vue',
-					'@wikimedia/codex',
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',
 				],
@@ -995,6 +1002,7 @@ final class RepoHooks implements
 					'wikibase-statementview-qualifiers-counter',
 					'wikibase-statementview-references-counter',
 				],
+				// 'codexComponents' => [],
 			];
 		}
 
