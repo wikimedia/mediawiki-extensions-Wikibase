@@ -23,7 +23,7 @@
 	"wikibase-comment-sitelink-change": "語言條拎由$1改為$2",
 	"wikibase-comment-sitelink-remove": "剷走咗嘅語言條拎：$1",
 	"wikibase-comment-multi": "$1{{PLURAL:$1|個改動}}",
-	"wikibase-dataitem": "{{WBREPONAME}}項目",
+	"wikibase-dataitem": "{{WBREPONAME}}項",
 	"wikibase-editlinks": "改拎",
 	"wikibase-editlinkstitle": "改跨語言拎",
 	"wikibase-addlinkstitle": "加跨語言連結",
