@@ -1,9 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Winston Sung"
+			"Winston Sung",
+			"H78c67c",
+			"JeffreyKim",
+			"Yueman"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase",
+	"wikibase-deletedentity-item": "刪除咗嘅項目",
+	"wikibase-deletedentity-property": "刪除咗嘅屬性",
+	"wikibase-deletedentity-query": "刪除咗嘅查詢",
+	"wikibase-error-unexpected": "錯誤：$1。",
+	"wikibase-error-unknown": "發生咗個錯誤。",
+	"wikibase-error-save-generic": "因為出錯咗而儲存唔到。",
+	"wikibase-error-remove-generic": "因為出錯咗而刪除唔到。",
+	"wikibase-error-save-timeout": "我哋遇到技術困難。唔該再試多次。",
+	"wikibase-error-remove-timeout": "我哋遇到技術困難。唔該再試多次。",
 	"wikibase-sitelinks-wikipedia": "維基百科",
+	"wikibase-snakview-snaktypeselector-novalue": "冇數値",
 	"wikibase-entity-summary-wbcreateclaim-create": "加咗聲稱"
 }

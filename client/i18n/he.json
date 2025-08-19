@@ -11,7 +11,8 @@
 			"Yona b",
 			"דגש",
 			"דגש חזק",
-			"ערן"
+			"ערן",
+			"YaronSh"
 		]
 	},
 	"wikibase-client-desc": "לקוח להרחבה Wikibase",
@@ -34,7 +35,7 @@
 	"wikibase-addlinkstitle": "הוספת קישורים בין־לשוניים",
 	"wikibase-linkitem-addlinks": "הוספת קישורים",
 	"wikibase-linkitem-alreadylinked": "הדף שניסית לקשר אליו כבר משויך ל[$1 פריט] במאגר הנתונים המרכזי שמקשר אל [[$2]] באתר הזה. אפשר לשייך רק דף אחד לפריט. נא לבחור דף אחר.",
-	"wikibase-linkitem-close": "סגירה תיבת דו־שיח ורענון דף",
+	"wikibase-linkitem-close": "סגירת תיבת דו־שיח ורענון דף",
 	"wikibase-linkitem-failure": "שגיאה בלתי־ידועה אירעה בעת ניסיון לקשר את הדף הנתון.",
 	"wikibase-linkitem-failed-modify": "לא היה אפשר לקשר דפים: כשל במיזוג פריטי {{WBREPONAME}} מתאימים.",
 	"wikibase-linkitem-title": "קישור עם דף",

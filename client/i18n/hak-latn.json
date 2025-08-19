@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"tooltip-t-wikibase": "Lièn-kiet chṳ yí-kîn lièn-chiap ke chṳ̂-liau tú-chhùn-khù hong-muk",
+	"wikibase-comment-update": "yí pien-von {{WBREPONAME}} hong-muk",
+	"wikibase-dataitem": "{{WBREPONAME}} hong-muk",
+	"wikibase-editlinks": "Phiên-siá lièn-kiet",
+	"wikibase-editlinkstitle": "Phiên-siá khiam ngî-ngièn lièn-kiet",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Ám",
+	"wikibase-rc-hide-wikidata-show": "Chán-sṳ",
+	"wikibase-rc-wikibase-edit-letter": "Sú",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} phiên-siá",
+	"wikibase-otherprojects": "Khì-thâ chiá-moi kie-va̍k"
+}
