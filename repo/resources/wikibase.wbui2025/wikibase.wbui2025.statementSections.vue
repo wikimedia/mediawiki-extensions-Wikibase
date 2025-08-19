@@ -1,8 +1,6 @@
 <template>
 	<div class="wikibase-wbui2025-statement-section">
-		<!-- eslint-disable vue/no-v-html -->
 		<div class="wikibase-wbui2025-statement-section-heading" v-html="sectionHeadingHtml"></div>
-		<!-- eslint-enable -->
 		<div class="wikibase-wbui2025-statement-section-content">
 			<div
 				v-for="propertyId in propertyList"
