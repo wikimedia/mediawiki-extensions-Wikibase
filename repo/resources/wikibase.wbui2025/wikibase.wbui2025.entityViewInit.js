@@ -6,7 +6,8 @@
 
 	const Vue = require( 'vue' );
 	const Pinia = require( 'pinia' );
-	const App = require( './wikibase.wbui2025.statementView.vue' );
+	const StatementView = require( './wikibase.wbui2025.statementView.vue' );
+	const AddStatementButton = require( './wikibase.wbui2025.addStatementButton.vue' );
 	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
@@ -31,9 +32,14 @@
 					propertyId
 				};
 				const rootContainer = wbui2025StatementList.querySelector( `#wikibase-wbui2025-statementwrapper-${ propertyId }` );
-				Vue.createMwApp( App, rootProps )
+				Vue.createMwApp( StatementView, rootProps )
 					.use( pinia )
 					.mount( rootContainer );
+			}
+
+			for ( const addContainer of wbui2025StatementList.getElementsByClassName( 'wikibase-wbui2025-statement-section-add-wrapper' ) ) {
+				Vue.createMwApp( AddStatementButton, {} )
+					.mount( addContainer );
 			}
 		} );
 	} else {

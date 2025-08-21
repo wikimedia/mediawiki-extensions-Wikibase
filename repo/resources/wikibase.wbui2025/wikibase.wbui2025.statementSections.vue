@@ -13,6 +13,7 @@
 					:property-id="propertyId"
 				></wbui2025-statement-view>
 			</div>
+			<div class="wikibase-wbui2025-statement-section-add-wrapper"></div>
 		</div>
 	</div>
 </template>
