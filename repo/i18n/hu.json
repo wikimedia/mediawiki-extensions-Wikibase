@@ -235,7 +235,7 @@
 	"wikibase-itemdisambiguation-invalid-langcode": "Ismeretlen nyelvkód — kérlek adj meg egy érvényes nyelvkódot, például „en”.",
 	"wikibase-itemdisambiguation-summary": "Minden azonos címkéjű elem megkeresése.",
 	"special-newproperty": "Új tulajdonság létrehozása",
-	"wikibase-newproperty-summary": "Ellenőrizd, hogy nem létezik-e már a tulajdonság!<br />Meg kell adnod minden új tulajdonságnak egy [[{{int:Wikibase-label-helppage}}|címkét]] és egy [[{{int:Wikibase-description-helppage}}|leírást]], valamint egy érvényes tulajdonságtípust.",
+	"wikibase-newproperty-summary": "Ellenőrizd, hogy nem létezik-e már a tulajdonság!<br />Meg kell adnod minden új tulajdonságnak egy {{int:Wikibase-label-helppage|címkét}} és egy {{int:Wikibase-description-helppage|leírást}}, valamint egy érvényes tulajdonságtípust.",
 	"wikibase-newproperty-fieldset": "Új tulajdonság létrehozása",
 	"wikibase-newproperty-datatype": "Adattípus:",
 	"wikibase-newproperty-invalid-datatype": "Érvénytelen adattípus.",
