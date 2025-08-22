@@ -144,7 +144,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>警告：</strong>你未簽到。如果你進行任何編輯，你嘅IP位址將會公開顯示。如果你<strong>簽到</ strong>或者<strong>開戶口</strong>，你嘅編輯會歸落你嘅用戶名，同埋有其他好處。",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "唔簽到就改",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "簽到或者開戶",
-	"wikibase-client-data-bridge-license-heading": "用法同授權",
+	"wikibase-client-data-bridge-license-heading": "用途同授權",
 	"wikibase-client-data-bridge-license-body": "<p>改呢個值亦會同步喺{{WBREPONAME}}上面改埋，亦可能會喺其他語言嘅維基上面改埋。</p>\n<p>撳一下「{{int:$1}}」，即係你同意[$2 使用條款]，同埋你唔可以撤銷咁同意喺[$3 $4]之下釋放你嘅貢獻。</p>",
 	"wikibase-client-data-bridge-bailout-heading": "你可以做以下嘅嘢：",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "喺{{WBREPONAME}}上面編輯值。撳下面嘅掣就可以直接編輯值（條拎會喺新標籤入面打開）。",
