@@ -142,7 +142,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entity );
-		$parserOutput->setTitleText( $titleHtml );
+		$parserOutput->setTitleText( $titleHtml ?? '' );
 
 		// split parser cache by desktop/mobile/wbui2025 (T344362, T394291, T394291)
 		$parserOutput->recordOption( 'wbMobile' );
