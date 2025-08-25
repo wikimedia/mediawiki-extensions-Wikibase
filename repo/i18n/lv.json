@@ -199,6 +199,7 @@
 	"wikibase-listdatavaluetypes-name-monolingualtext": "vienas valodas teksts",
 	"wikibase-listdatavaluetypes-name-quantity": "daudzums",
 	"wikibase-listdatavaluetypes-name-time": "laiks",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Wikibase vienuma id",
 	"wikibase-concept-uri": "Jēdziena URI",
 	"wikibase-concept-uri-tooltip": "URI, kas apzīmē šajā vienumā aprakstīto jēdzienu",
 	"datatypes-type-url": "URL",

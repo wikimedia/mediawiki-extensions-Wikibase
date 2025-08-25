@@ -64,7 +64,7 @@
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Krejt përpunimet në {{WBREPONAME}} janë deklaruar si \"të vockla\", kështu që filtri \"përpunime në {{WBREPONAME}}\" bie ndesh me filtrin \"Përpunime jo të vockla\".",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Krejt përpunimet në {{WBREPONAME}} janë deklaruar si \"të vockla\", kështu që filtri \"përpunime në {{WBREPONAME}}\" bie ndesh me filtrin \"Përpunime jo të vockla\".",
 	"wikibase-replicationnote": "Ju lutemi, kini parasysh që mund të duhen disa minuta derisa ndryshimet të jenë të dukshme në krejt wiki-t.",
-	"wikibase-watchlist-show-changes-pref": "Shfaq redaktimet {{WBREPONAME}} në listën tënde mbikëqyrëse",
+	"wikibase-watchlist-show-changes-pref": "Shfaq redaktimet {{WBREPONAME}} në listën tënde të vëzhgimit",
 	"wikibase-error-deserialize-error": "S’u arrit të çserializohen të dhëna.",
 	"wikibase-error-serialize-error": "S’u arrit të serializohen të dhëna.",
 	"wikibase-error-invalid-entity-id": "ID-ja \"$2\" është e panjohur për sistemin. Ju lutemi, përdorni një ID të vlefshme njësish.",
