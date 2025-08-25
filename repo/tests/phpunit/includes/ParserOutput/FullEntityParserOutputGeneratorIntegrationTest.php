@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -123,7 +122,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	public function testGetParserOutputIncludesLabelsOfRedirectEntityUsedAsStatementValue() {
-		$mwServices = MediaWikiServices::getInstance();
+		$mwServices = $this->getServiceContainer();
 
 		$property = new Property( new NumericPropertyId( 'P93' ), null, 'wikibase-item' );
 		$item = new Item( new ItemId( 'Q303' ) );

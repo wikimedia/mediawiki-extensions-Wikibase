@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWiki\Context\RequestContext;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
@@ -160,7 +159,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				$mentionedEntityTracker,
 				$dedupe
 			) {
-				$services = MediaWikiServices::getInstance();
+				$services = $this->getServiceContainer();
 				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
 				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 				$valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(

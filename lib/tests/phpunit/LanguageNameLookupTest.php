@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests;
 
 use MediaWiki\Languages\LanguageNameUtils;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
@@ -53,7 +52,7 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$languageNameLookup = new LanguageNameLookup(
-			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			$this->getServiceContainer()->getLanguageNameUtils(),
 			new MediaWikiMessageInLanguageProvider(),
 			$in
 		);
@@ -68,7 +67,7 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$languageNameLookup = new LanguageNameLookup(
-			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			$this->getServiceContainer()->getLanguageNameUtils(),
 			new MediaWikiMessageInLanguageProvider(),
 			$in
 		);
@@ -78,7 +77,7 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetNameForTerms_mul(): void {
 		$languageNameLookup = new LanguageNameLookup(
-			MediaWikiServices::getInstance()->getLanguageNameUtils(),
+			$this->getServiceContainer()->getLanguageNameUtils(),
 			new MediaWikiMessageInLanguageProvider(),
 			'en'
 		);

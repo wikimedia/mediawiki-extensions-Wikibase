@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\UserIdentityValue;
@@ -167,7 +166,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$queuedJobs = $jobQueueGroup->get( 'DispatchChanges' )->getAllQueuedJobs();
 		$job = $queuedJobs->current();
 		$this->assertNotNull( $job );
@@ -196,7 +195,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
@@ -221,7 +220,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
@@ -264,7 +263,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup(
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup(
 			WikiMap::getCurrentWikiDbDomain()->getId()
 		);
 		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );

@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use MediaWiki\Html\Html;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
 use MediaWikiIntegrationTestCase;
@@ -29,7 +28,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetHtml() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$result = $handler->getHtml( $this->newSampleCoordinate(), $language );
@@ -59,7 +58,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetHtml_marsCoordinate() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$this->assertFalse(
@@ -68,7 +67,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetPreviewHtml() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$value = $this->newSampleCoordinate();
@@ -84,7 +83,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetPreviewHtml_marsCoordinate() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$this->assertFalse(
@@ -93,7 +92,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetParserOutput() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$coordinate = new GlobeCoordinateValue(
 			new LatLongValue( 12, 34 ),
@@ -120,7 +119,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetParserOutput_empty() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 
 		$parserOutput = $handler->getParserOutput(
@@ -136,7 +135,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetMapframeInitJS() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		/** @var CachingKartographerEmbeddingHandler $handler */
 		$handler = TestingAccessWrapper::newFromObject( $handler );
 
@@ -157,7 +156,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 	}
 
 	public function testGetMapframeInitJS_escaping() {
-		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		$handler = new CachingKartographerEmbeddingHandler( $this->getServiceContainer()->getParserFactory()->create() );
 		/** @var CachingKartographerEmbeddingHandler $handler */
 		$handler = TestingAccessWrapper::newFromObject( $handler );
 

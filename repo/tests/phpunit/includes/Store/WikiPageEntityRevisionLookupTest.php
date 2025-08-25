@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Store;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
@@ -79,7 +78,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$nsLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
 				$nsLookup,
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+				$this->getServiceContainer()->getSlotRoleStore()
 			),
 			new DatabaseEntitySource(
 				'test',
@@ -123,9 +122,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$this->getMetaDataLookup(),
 			new WikiPageEntityDataLoader(
 				WikibaseRepo::getEntityContentDataCodec(),
-				MediaWikiServices::getInstance()->getBlobStore()
+				$this->getServiceContainer()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore()
+			$this->getServiceContainer()->getRevisionStore()
 		);
 	}
 
@@ -160,9 +159,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$metaDataLookup,
 			new WikiPageEntityDataLoader(
 				WikibaseRepo::getEntityContentDataCodec(),
-				MediaWikiServices::getInstance()->getBlobStore()
+				$this->getServiceContainer()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore()
+			$this->getServiceContainer()->getRevisionStore()
 		);
 
 		$entityRevision = $lookup->getEntityRevision( $entityId, $revisionId, 'load-mode' );
@@ -243,9 +242,9 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$this->getMetaDataLookup(),
 			new WikiPageEntityDataLoader(
 				WikibaseRepo::getEntityContentDataCodec(),
-				MediaWikiServices::getInstance()->getBlobStore()
+				$this->getServiceContainer()->getBlobStore()
 			),
-			MediaWikiServices::getInstance()->getRevisionStore()
+			$this->getServiceContainer()->getRevisionStore()
 		);
 
 		$shouldFail = function () {

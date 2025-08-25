@@ -105,7 +105,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 			$this->getEntityNamespaceLookup(),
 			$this->getInterwikiLookup(),
 			$this->getEntityLinkFormatterFactory( $titleText ),
-			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$this->getServiceContainer()->getSpecialPageFactory(),
 			$languageFallbackChainFactory,
 			$this->entityUrlLookup,
 			new EntityLinkTargetEntityIdLookup(

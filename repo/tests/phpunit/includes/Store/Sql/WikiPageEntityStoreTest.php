@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use Exception;
 use InvalidArgumentException;
 use MediaWiki\Language\RawMessage;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
@@ -395,7 +394,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE, false, [ 'mw-replace' ] );
 
 		// FIXME: use the $lookup to check this, once EntityLookup supports redirects.
-		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$revisionLookup = $this->getServiceContainer()->getRevisionLookup();
 		$revisionRecord = $revisionLookup->getRevisionById( $redirectRevId );
 
 		$this->assertTrue(
@@ -569,7 +568,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 		$itemId = $item->getId();
 
-		MediaWikiServices::getInstance()->getPermissionManager()
+		$this->getServiceContainer()->getPermissionManager()
 			->overrideUserRightsForTesting( $user, [ /* no viewmywatchlist, no editmywatchlist */ ] );
 
 		$store->updateWatchlist( $user, $itemId, true );
@@ -611,7 +610,7 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	) {
 		$user ??= $this->getTestUser()->getUser();
 
-		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$revLookup = $this->getServiceContainer()->getRevisionLookup();
 		try {
 			$rev = $store->saveEntity( $entity, $summary, $user, $flags, $baseRevId );
 			$status = Status::newGood( $revLookup->getRevisionById( $rev->getRevisionId() ) );

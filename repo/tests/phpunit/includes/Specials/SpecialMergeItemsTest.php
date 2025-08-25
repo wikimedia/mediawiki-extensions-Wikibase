@@ -9,7 +9,6 @@ use MediaWiki\Exception\PermissionsError;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
@@ -102,7 +101,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	}
 
 	protected function newSpecialPage(): SpecialMergeItems {
-		$services = MediaWikiServices::getInstance();
+		$services = $this->getServiceContainer();
 		$summaryFormatter = WikibaseRepo::getSummaryFormatter( $services );
 
 		$mergeFactory = new MergeFactory(

@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\ChangeModification;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\WikiMap\WikiMap;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -62,7 +61,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$dispatchChangesJob->run();
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$queuedJobs = $jobQueueGroup->get( 'EntityChangeNotification' )->getAllQueuedJobs();
 		$job = $queuedJobs->current();
 		$this->assertNotNull( $job );
@@ -101,7 +100,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$dispatchChangesJob->run();
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
@@ -123,7 +122,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$dispatchChangesJob->run();
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 
@@ -164,7 +163,7 @@ class DispatchChangesJobTest extends MediaWikiIntegrationTestCase {
 
 		$dispatchChangesJob->run();
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertFalse( $jobQueueGroup->get( 'EntityChangeNotification' )->isEmpty() );
 	}
 

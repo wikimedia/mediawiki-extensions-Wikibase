@@ -13,7 +13,6 @@ use MediaWiki\Content\ContentHandler;
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\WikiPage;
 use MediaWiki\Revision\RevisionRecord;
@@ -231,7 +230,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		//      if the user language is different. It's unclear whether this is actually the desired behavior,
 		//      since Wikibase Entities are inherently multilingual, so they have no actual "page language".
 
-		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
+		$contLang = $this->getServiceContainer()->getContentLanguage();
 		// test whatever is there
 		$this->assertEquals( $contLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 

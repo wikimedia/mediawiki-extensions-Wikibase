@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\User\TempUser\TempUserConfig;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
@@ -25,7 +24,7 @@ class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 			->method( 'isEnabled' )
 			->willReturn( false );
 		$builder = new AnonymousEditWarningBuilder(
-			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$this->getServiceContainer()->getSpecialPageFactory(),
 			$tempUserConfig
 		);
 
@@ -52,7 +51,7 @@ class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 			->method( 'isEnabled' )
 			->willReturn( true );
 		$builder = new AnonymousEditWarningBuilder(
-			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$this->getServiceContainer()->getSpecialPageFactory(),
 			$tempUserConfig
 		);
 
