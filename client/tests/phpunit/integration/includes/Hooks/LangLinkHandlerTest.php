@@ -88,7 +88,10 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 
 		return new LangLinkHandler(
 			$this->getLanguageLinkBadgeDisplay(),
-			new NamespaceChecker( [ NS_TALK ] ),
+			new NamespaceChecker(
+				$this->getServiceContainer()->getNamespaceInfo(),
+				[ NS_TALK ]
+			),
 			new SiteLinksForDisplayLookup(
 				$this->mockRepo,
 				$this->mockRepo,

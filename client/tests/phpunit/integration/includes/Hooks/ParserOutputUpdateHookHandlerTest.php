@@ -576,7 +576,11 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$settings = $this->newSettings();
 
 		$namespaces = $settings->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( [], $namespaces );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			[],
+			$namespaces
+		);
 
 		return $namespaceChecker;
 	}

@@ -99,8 +99,9 @@ class SkinAfterPortletHandlerTest extends TestCase {
 	}
 
 	private function getHookHandler() {
+		$namespaceInfo = MediaWikiServices::getInstance()->getNamespaceInfo();
 		$linkGenerator = new RepoItemLinkGenerator(
-			new NamespaceChecker( [] ),
+			new NamespaceChecker( $namespaceInfo, [] ),
 			$this->getRepoLinker(),
 			new ItemIdParser(),
 			'wikipedia',

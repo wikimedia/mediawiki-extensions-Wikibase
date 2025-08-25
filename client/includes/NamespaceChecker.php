@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\NamespaceInfo;
 
 /**
@@ -15,6 +14,8 @@ use MediaWiki\Title\NamespaceInfo;
  */
 class NamespaceChecker {
 
+	private NamespaceInfo $namespaceInfo;
+
 	/**
 	 * @var int[]
 	 */
@@ -25,22 +26,19 @@ class NamespaceChecker {
 	 */
 	private $enabledNamespaces;
 
-	/** @var NamespaceInfo */
-	private $namespaceInfo;
-
 	/**
+	 * @param NamespaceInfo $namespaceInfo
 	 * @param int[] $excludedNamespaces
 	 * @param int[] $enabledNamespaces if empty, setting not in use and all namespaces enabled
-	 * @param NamespaceInfo|null $namespaceInfo falls back to default instance
 	 */
 	public function __construct(
+		NamespaceInfo $namespaceInfo,
 		array $excludedNamespaces,
 		array $enabledNamespaces = [],
-		?NamespaceInfo $namespaceInfo = null
 	) {
+		$this->namespaceInfo = $namespaceInfo;
 		$this->excludedNamespaces = $excludedNamespaces;
 		$this->enabledNamespaces = $enabledNamespaces;
-		$this->namespaceInfo = $namespaceInfo ?: MediaWikiServices::getInstance()->getNamespaceInfo();
 	}
 
 	/**

@@ -63,7 +63,11 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newSidebarHookHandler() {
 		$en = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
 		$namespaces = $this->newSettings()->getSetting( 'namespaces' );
-		$namespaceChecker = new NamespaceChecker( [], $namespaces );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			[],
+			$namespaces
+		);
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
 			new SidebarLinkBadgeDisplay(

@@ -33,7 +33,11 @@ class PopulateUnexpectedUnconnectedPagePagePropTest extends MaintenanceBaseTestC
 			null,
 			[
 				'WikibaseClient.NamespaceChecker' => function() {
-					return new NamespaceChecker( [], [ $this->getDefaultWikitextNS() ] );
+					return new NamespaceChecker(
+						$this->getServiceContainer()->getNamespaceInfo(),
+						[],
+						[ $this->getDefaultWikitextNS() ]
+					);
 				},
 			]
 		);

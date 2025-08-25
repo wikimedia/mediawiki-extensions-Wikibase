@@ -30,7 +30,11 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider constructorProvider
 	 */
 	public function testConstructor( array $excluded, array $enabled ) {
-		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			$excluded,
+			$enabled
+		);
 		$this->assertEquals( $enabled, $namespaceChecker->getEnabledNamespaces() );
 		$this->assertEquals( $excluded, $namespaceChecker->getExcludedNamespaces() );
 	}
@@ -58,7 +62,11 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider enabledProvider
 	 */
 	public function testIsWikibaseEnabled( $namespace, $excluded, $enabled, $expected ) {
-		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			$excluded,
+			$enabled
+		);
 		$result = $namespaceChecker->isWikibaseEnabled( $namespace );
 		$this->assertEquals( $expected, $result );
 	}
@@ -67,7 +75,11 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider enabledInvalidProvider
 	 */
 	public function testIsWikibaseEnabledInvalid( $namespace, $excluded, $enabled ) {
-		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			$excluded,
+			$enabled
+		);
 		$this->expectException( InvalidArgumentException::class );
 		$namespaceChecker->isWikibaseEnabled( $namespace );
 	}
@@ -112,7 +124,11 @@ class NamespaceCheckerTest extends MediaWikiIntegrationTestCase {
 		if ( is_callable( $expected ) ) {
 			$expected = $expected();
 		}
-		$namespaceChecker = new NamespaceChecker( $excluded, $enabled );
+		$namespaceChecker = new NamespaceChecker(
+			$this->getServiceContainer()->getNamespaceInfo(),
+			$excluded,
+			$enabled
+		);
 		$result = $namespaceChecker->getWikibaseNamespaces();
 		$this->assertArrayEquals( $expected, $result );
 	}

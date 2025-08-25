@@ -173,7 +173,11 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 
 		$primer = new UnexpectedUnconnectedPagePrimer(
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
-			new NamespaceChecker( [], [ $this->getDefaultWikitextNS() ] ),
+			new NamespaceChecker(
+				$this->getServiceContainer()->getNamespaceInfo(),
+				[],
+				[ $this->getDefaultWikitextNS() ]
+			),
 			$batchSize
 		);
 		if ( $batchSizeSelectMultiplicator ) {
@@ -199,7 +203,11 @@ class UnexpectedUnconnectedPagePrimerTest extends MediaWikiIntegrationTestCase {
 		] );
 		$primer = new UnexpectedUnconnectedPagePrimer(
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
-			new NamespaceChecker( [], [ $namespaceInt ] ),
+			new NamespaceChecker(
+				$this->getServiceContainer()->getNamespaceInfo(),
+				[],
+				[ $namespaceInt ]
+			),
 			2
 		);
 		$primer->setBatchSizeSelectMultiplicator( 1 );

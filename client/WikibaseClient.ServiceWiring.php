@@ -617,9 +617,9 @@ return [
 	'WikibaseClient.NamespaceChecker' => function ( MediaWikiServices $services ): NamespaceChecker {
 		$settings = WikibaseClient::getSettings( $services );
 		return new NamespaceChecker(
+			$services->getNamespaceInfo(),
 			$settings->getSetting( 'excludeNamespaces' ),
-			$settings->getSetting( 'namespaces' ),
-			$services->getNamespaceInfo()
+			$settings->getSetting( 'namespaces' )
 		);
 	},
 
