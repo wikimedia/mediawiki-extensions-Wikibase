@@ -105,7 +105,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Alcune dichiarazioni",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Dichiarazione: $1",
 	"wikibase-pageinfo-entity-usage-X": "Tutti i dati dell'entità",
-	"wikibase-pageinfo-entity-usage-O": "Varie (ad esempio alias, entità esistenza)",
+	"wikibase-pageinfo-entity-usage-O": "Varie (ad esempio esistenza dell'entità)",
 	"wikibase-property-render-error": "Errore durante il rendering della proprietà $1: $2",
 	"wikibase-otherprojects": "In altri progetti",
 	"wikibase-otherprojects-beta-message": "Barra laterale degli altri progetti",
