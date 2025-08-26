@@ -70,6 +70,7 @@ use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewHooks;
 use Wikimedia\Rdbms\IDBAccessObject;
 
@@ -1001,6 +1002,10 @@ final class RepoHooks implements
 							'cdxIconClose',
 							'cdxIconTrash',
 						],
+					],
+					[
+						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
+						'content' => StatementSectionsView::WBUI2025_SUPPORTED_DATATYPES,
 					],
 				],
 				'dependencies' => [

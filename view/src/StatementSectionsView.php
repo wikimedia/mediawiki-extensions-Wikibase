@@ -23,6 +23,11 @@ use WMDE\VueJsTemplating\App;
  */
 class StatementSectionsView {
 
+	/** Data types supported by the Vue statements view. */
+	public const WBUI2025_SUPPORTED_DATATYPES = [
+		'string',
+	];
+
 	/**
 	 * @var TemplateFactory
 	 */
@@ -219,6 +224,12 @@ class StatementSectionsView {
 			'wbui2025-statement-group-view',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' ),
 			function( array $data ): array {
+				/** @var PropertyId $propertyId */
+				$propertyId = $this->entityIdParser
+					->parse( $data['propertyId'] );
+				'@phan-var PropertyId $propertyId';
+				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+				$data['isUnsupportedDataType'] = !in_array( $dataType, self::WBUI2025_SUPPORTED_DATATYPES, strict: true );
 				$data['showModalEditForm'] = false;
 				return $data;
 			}

@@ -14,6 +14,11 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/supportedDatatypes.json',
+	() => [ 'string' ],
+	{ virtual: true }
+);
 
 const statementSections = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' );
 const { mount } = require( '@vue/test-utils' );

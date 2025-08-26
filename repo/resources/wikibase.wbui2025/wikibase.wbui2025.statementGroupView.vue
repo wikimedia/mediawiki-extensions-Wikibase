@@ -11,9 +11,18 @@
 				<p>
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				</p>
-				<div class="wikibase-wbui2025-edit-link" @click="showEditForm">
+				<div
+					class="wikibase-wbui2025-edit-link"
+					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType }"
+					@click="showEditForm"
+				>
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
-					<span class="wikibase-wbui2025-link-heavy">edit</span>
+					<span
+						class="wikibase-wbui2025-link-heavy"
+						:class="{ 'is-red-link': isUnsupportedDataType }"
+					>
+						edit
+					</span>
 				</div>
 			</div>
 		</div>
@@ -30,6 +39,7 @@ const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
 const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
+const supportedDatatypes = require( './supportedDatatypes.json' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -54,8 +64,17 @@ module.exports = exports = defineComponent( {
 			showModalEditForm: false
 		};
 	},
+	computed: {
+		isUnsupportedDataType() {
+			const datatype = this.statements[ 0 ].mainsnak.datatype;
+			return !supportedDatatypes.includes( datatype );
+		}
+	},
 	methods: {
 		showEditForm() {
+			if ( this.isUnsupportedDataType ) {
+				return;
+			}
 			[ 'body', '.minerva-footer', '.minerva-header' ]
 					.map( ( el ) => document.querySelector( el ) )
 					.filter( ( el ) => el )
