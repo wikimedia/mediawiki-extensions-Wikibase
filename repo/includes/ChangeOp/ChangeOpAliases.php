@@ -136,19 +136,19 @@ class ChangeOpAliases extends ChangeOpBase {
 	 * @return Result
 	 */
 	public function validate( EntityDocument $entity ) {
-		$languageValidator = $this->termValidatorFactory->getAliasLanguageValidator();
-		$termValidator = $this->termValidatorFactory->getAliasValidator();
-
-		// check that the language is valid
-		$result = $languageValidator->validate( $this->languageCode );
-
-		if ( !$result->isValid() ) {
-			return $result;
-		}
+		$result = Result::newSuccess();
 
 		// It should be possible to remove invalid aliases, but not to add/set new invalid ones
 		if ( $this->action === 'set' || $this->action === '' || $this->action === 'add' ) {
+			// check that the language is valid
+			$languageValidator = $this->termValidatorFactory->getAliasLanguageValidator();
+			$result = $languageValidator->validate( $this->languageCode );
+			if ( !$result->isValid() ) {
+				return $result;
+			}
+
 			// Check that the new aliases are valid
+			$termValidator = $this->termValidatorFactory->getAliasValidator();
 			foreach ( $this->aliases as $alias ) {
 				$result = $termValidator->validate( $alias );
 

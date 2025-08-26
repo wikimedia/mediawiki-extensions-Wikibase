@@ -105,9 +105,11 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 	public static function changeOpAliasesAndResultProvider() {
 		$enAliases = [ 'en-alias1', 'en-alias2', 'en-alias3' ];
 		$existingEnAliases = [ 'en-existingAlias1', 'en-existingAlias2' ];
+		$existingInvalidAliases = [ 'INVALID-alias' ];
 		$itemContent = new ItemContent( new EntityInstanceHolder( new Item() ) );
 		$item = $itemContent->getEntity();
 		$item->setAliases( 'en', $existingEnAliases );
+		$item->setAliases( 'INVALID', $existingInvalidAliases );
 
 		return [
 			'add new aliases' => [
@@ -198,6 +200,17 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					false
 				),
 			],
+			'remove invalid language' => [
+				$item->copy(),
+				[ 'INVALID', [ 'INVALID-alias' ], 'remove' ],
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'INVALID',
+					$existingInvalidAliases,
+					[],
+					true
+				),
+			],
 		];
 	}
 
@@ -230,9 +243,6 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 			],
 			'add invalid language' => [
 				[ 'INVALID', [ 'valid' ], 'add' ],
-			],
-			'remove invalid language' => [
-				[ 'INVALID', [ 'valid' ], 'remove' ],
 			],
 		];
 	}

@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Exception\ReadOnlyError;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -190,12 +191,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'clear an item with no value' => [
 				'p' => [ 'data' => '{}', 'clear' => '' ],
 				'e' => [ 'type' => 'item' ] ],
-			'add 2 labels' => [
-				'p' => [ 'data' => '{"labels":{"en":{"language":"en","value":"A Label"},'
+			'add 2 labels (including in an otherwise unknown language)' => [
+				'p' => [ 'data' => '{"labels":{"en-x-T403097":{"language":"en-x-T403097","value":"A Label"},'
 					. '"sv":{"language":"sv","value":"SVLabel"}}}' ],
-				'e' => [ 'labels' => [ 'en' => 'A Label', 'sv' => 'SVLabel' ] ] ],
-			'remove a label with remove' => [
-				'p' => [ 'data' => '{"labels":{"en":{"language":"en","remove":true}}}' ],
+				'e' => [ 'labels' => [ 'en-x-T403097' => 'A Label', 'sv' => 'SVLabel' ] ],
+				'config' => [
+					MainConfigNames::ExtraLanguageNames => [ 'en-x-T403097' => 'test language' ],
+				] ],
+			'remove a label (in unsupported language) with remove' => [
+				'p' => [ 'data' => '{"labels":{"en-x-T403097":{"language":"en-x-T403097","remove":true}}}' ],
 				'e' => [ 'labels' => [ 'sv' => 'SVLabel' ] ] ],
 			'override and add 2 descriptions' => [
 				'p' => [ 'clear' => '', 'data' => '{"descriptions":{'
@@ -416,22 +420,6 @@ class EditEntityTest extends WikibaseApiTestCase {
 		EntityTestHelper::injectIds( $data, self::$idMap );
 	}
 
-	/**
-	 * Skips a test of the given entity type is not enabled.
-	 *
-	 * @param string|null $requiredEntityType
-	 */
-	private function skipIfEntityTypeNotKnown( $requiredEntityType ) {
-		if ( $requiredEntityType === null ) {
-			return;
-		}
-
-		$enabledTypes = WikibaseRepo::getLocalEntityTypes();
-		if ( !in_array( $requiredEntityType, $enabledTypes ) ) {
-			$this->markTestSkipped( 'Entity type not enabled: ' . $requiredEntityType );
-		}
-	}
-
 	public function testUserCanEditWhenTheyHaveSufficientPermission() {
 		$userWithAllPermissions = $this->createUserWithGroup( 'all-permission' );
 
@@ -546,8 +534,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideData
 	 */
-	public function testEditEntity( $params, $expected, $needed = null ) {
-		$this->skipIfEntityTypeNotKnown( $needed );
+	public function testEditEntity( $params, $expected, $config = [] ) {
+		if ( $config !== [] ) {
+			$this->overrideConfigValues( $config );
+		}
 
 		// this registers a new datatype, can’t be done in setUp
 		self::$idMap['%UppercaseStringProp%'] = $this
@@ -1197,9 +1187,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testEditEntityExceptions( $params, $expected, $needed = null ) {
-		$this->skipIfEntityTypeNotKnown( $needed );
-
+	public function testEditEntityExceptions( $params, $expected ) {
 		$this->injectIds( $params );
 		$this->injectIds( $expected );
 
