@@ -1,5 +1,4 @@
 <template>
-	<!-- TODO: Remove this debugging element T399286 -->
 	<div class="wikibase-wbui2025-statement-detail-view">
 		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
