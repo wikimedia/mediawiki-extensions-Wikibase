@@ -17,14 +17,14 @@ jest.mock(
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const statementDetailViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' );
-const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
+const statementGroupViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
-describe( 'wikibase.wbui2025.statementView', () => {
+describe( 'wikibase.wbui2025.statementGroupView', () => {
 	it( 'defines component', async () => {
-		expect( typeof statementViewComponent ).toBe( 'object' );
-		expect( statementViewComponent ).toHaveProperty( 'name', 'WikibaseWbui2025StatementView' );
+		expect( typeof statementGroupViewComponent ).toBe( 'object' );
+		expect( statementGroupViewComponent ).toHaveProperty( 'name', 'WikibaseWbui2025StatementGroupView' );
 	} );
 
 	describe( 'the mounted component', () => {
@@ -49,7 +49,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			rank: 'normal'
 		};
 		beforeEach( async () => {
-			wrapper = await mount( statementViewComponent, {
+			wrapper = await mount( statementGroupViewComponent, {
 				props: {
 					statements: [ mockStatement, mockStatement2 ],
 					propertyId: 'P1'

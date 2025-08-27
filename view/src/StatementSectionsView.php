@@ -216,8 +216,8 @@ class StatementSectionsView {
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' ),
 		);
 		$app->registerComponentTemplate(
-			'wbui2025-statement-view',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
+			'wbui2025-statement-group-view',
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' ),
 			function( array $data ): array {
 				$data['showModalEditForm'] = false;
 				return $data;

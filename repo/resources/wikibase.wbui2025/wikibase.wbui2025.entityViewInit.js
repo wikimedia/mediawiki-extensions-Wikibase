@@ -6,7 +6,7 @@
 
 	const Vue = require( 'vue' );
 	const Pinia = require( 'pinia' );
-	const StatementView = require( './wikibase.wbui2025.statementView.vue' );
+	const StatementGroupView = require( './wikibase.wbui2025.statementGroupView.vue' );
 	const AddStatementButton = require( './wikibase.wbui2025.addStatementButton.vue' );
 	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
 
@@ -32,7 +32,7 @@
 					propertyId
 				};
 				const rootContainer = wbui2025StatementList.querySelector( `#wikibase-wbui2025-statementwrapper-${ propertyId }` );
-				Vue.createMwApp( StatementView, rootProps )
+				Vue.createMwApp( StatementGroupView, rootProps )
 					.use( pinia )
 					.mount( rootContainer );
 			}

@@ -33,7 +33,7 @@ const Wbui2025EditStatementView = require( './wikibase.wbui2025.editStatement.vu
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025StatementView',
+	name: 'WikibaseWbui2025StatementGroupView',
 	components: {
 		Wbui2025PropertyName,
 		Wbui2025StatementDetailView,

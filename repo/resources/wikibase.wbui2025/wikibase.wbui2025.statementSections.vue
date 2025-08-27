@@ -6,10 +6,10 @@
 				v-for="propertyId in propertyList"
 				:id="concat( 'wikibase-wbui2025-statementwrapper-', propertyId )"
 				:key="propertyId">
-				<wbui2025-statement-view
+				<wbui2025-statement-group-view
 					:statements="propertyStatementMap[propertyId]"
 					:property-id="propertyId"
-				></wbui2025-statement-view>
+				></wbui2025-statement-group-view>
 			</div>
 			<div class="wikibase-wbui2025-statement-section-add-wrapper"></div>
 		</div>
@@ -19,13 +19,13 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const { concat } = require( './wikibase.wbui2025.utils.js' );
-const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
+const Wbui2025StatementGroupView = require( './wikibase.wbui2025.statementGroupView.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025StatementSections',
 	components: {
-		Wbui2025StatementView
+		Wbui2025StatementGroupView
 	},
 	props: {
 		sectionHeadingHtml: {
