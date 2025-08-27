@@ -24,7 +24,7 @@ class ItemChange extends EntityChange {
 	}
 
 	/**
-	 * @param array[] $siteLinkChanges
+	 * @param array<string,array{0: ?string, 1: ?string, 2: bool}> $siteLinkChanges
 	 * @return Diff
 	 */
 	private function getDiffFromSiteLinkChanges( array $siteLinkChanges ): Diff {
@@ -39,6 +39,10 @@ class ItemChange extends EntityChange {
 		return new Diff( $siteLinkDiff, true );
 	}
 
+	/**
+	 * @param array{0: ?string, 1: ?string, 2: bool} $change
+	 * @return Diff
+	 */
 	private function getDiffFromSiteLinkChangesPerWiki( array $change ): Diff {
 		if ( $change[0] === null && $change[1] !== null ) {
 			return new Diff( [ 'name' => new DiffOpAdd( $change[1] ) ], true );

@@ -83,7 +83,7 @@ class EntityDiffChangedAspectsFactory {
 	/**
 	 * @param Diff $siteLinkDiff
 	 *
-	 * @return array[]
+	 * @return array<string,array{0: ?string, 1: ?string, 2: bool}>
 	 */
 	private function getChangedSiteLinks( Diff $siteLinkDiff ) {
 		$siteLinkChanges = [];
@@ -98,8 +98,7 @@ class EntityDiffChangedAspectsFactory {
 	/**
 	 * @param DiffOp $siteLinkDiffOp
 	 *
-	 * @return array ( string|null $oldPageName, string|null $newPageName, bool $badgesChanged )
-	 * @phan-return array{0:?string,1:?string,2:bool}
+	 * @return array{0: ?string, 1: ?string, 2: bool} ( string|null $oldPageName, string|null $newPageName, bool $badgesChanged )
 	 */
 	private function getSiteLinkChangePerSite( DiffOp $siteLinkDiffOp ) {
 		if ( !$siteLinkDiffOp instanceof Diff ) {

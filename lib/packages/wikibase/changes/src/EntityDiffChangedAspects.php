@@ -47,7 +47,7 @@ class EntityDiffChangedAspects implements Serializable {
 	 * Map of site ids to array of old value, new value and boolean value determining if badge
 	 * has changed or not
 	 *
-	 * @var array[]
+	 * @var array<string,array{0: ?string, 1: ?string, 2: bool}>
 	 */
 	private $siteLinkChanges;
 
@@ -64,8 +64,8 @@ class EntityDiffChangedAspects implements Serializable {
 	 * @param string[] $labelChanges Language codes of the labels that changed (added, removed or updated)
 	 * @param string[] $descriptionChanges Language codes of the descriptions that changed (added, removed or updated)
 	 * @param string[] $statementChanges Property id serialization from the statements that changed (added, removed or updated)
-	 * @param array[] $siteLinkChanges Map of global site identifiers to [ string|null $oldPageName,
-	 *  string|null $newPageName, bool $badgesChanged ]
+	 * @param array<string,array{0: ?string, 1: ?string, 2: bool}> $siteLinkChanges Map of global site identifiers to
+	 *  [ string|null $oldPageName, string|null $newPageName, bool $badgesChanged ]
 	 * @param bool $otherChanges Do we have changes that are not covered more specifically?
 	 */
 	public function __construct(
@@ -120,7 +120,7 @@ class EntityDiffChangedAspects implements Serializable {
 	 * Map of site ids to array of old value, new value and boolean value determining if badge
 	 * has changed or not
 	 *
-	 * @return array[]
+	 * @return array<string,array{0: ?string, 1: ?string, 2: bool}>
 	 */
 	public function getSiteLinkChanges() {
 		return $this->siteLinkChanges;

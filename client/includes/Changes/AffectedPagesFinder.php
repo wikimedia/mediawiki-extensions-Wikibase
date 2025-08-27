@@ -251,7 +251,7 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param array[] $siteLinkDiff
+	 * @param array<string,array{0: ?string, 1: ?string, 2: bool}> $siteLinkDiff
 	 *
 	 * @throws UnexpectedValueException
 	 * @return string[]
@@ -272,7 +272,7 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param array $siteLinkDiff
+	 * @param array{0: ?string, 1: ?string, 2: bool} $siteLinkDiff
 	 *
 	 * @return bool
 	 */
