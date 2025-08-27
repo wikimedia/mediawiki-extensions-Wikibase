@@ -16,7 +16,7 @@ jest.mock(
 );
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
-const statementDetailViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' );
+const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const statementGroupViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
@@ -77,10 +77,10 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			const propertyNames = wrapper.findAllComponents( propertyNameComponent );
 			expect( propertyNames ).toHaveLength( 1 );
 			expect( propertyNames[ 0 ].props( 'propertyId' ) ).toBe( 'P1' );
-			const statementDetailViews = wrapper.findAllComponents( statementDetailViewComponent );
-			expect( statementDetailViews ).toHaveLength( 2 );
-			expect( statementDetailViews[ 0 ].props( 'statement' ) ).toEqual( mockStatement );
-			expect( statementDetailViews[ 1 ].props( 'statement' ) ).toEqual( mockStatement2 );
+			const statementViews = wrapper.findAllComponents( statementViewComponent );
+			expect( statementViews ).toHaveLength( 2 );
+			expect( statementViews[ 0 ].props( 'statement' ) ).toEqual( mockStatement );
+			expect( statementViews[ 1 ].props( 'statement' ) ).toEqual( mockStatement2 );
 		} );
 
 		it( 'sets the right content on claim elements', async () => {

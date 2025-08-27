@@ -7,15 +7,15 @@ jest.mock(
 const mainSnakComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' );
 const qualifiersComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' );
 const referencesComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' );
-const statementDetailViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' );
+const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
-describe( 'wikibase.wbui2025.statementDetailView', () => {
+describe( 'wikibase.wbui2025.statementView', () => {
 	it( 'defines component', async () => {
-		expect( typeof statementDetailViewComponent ).toBe( 'object' );
-		expect( statementDetailViewComponent )
-			.toHaveProperty( 'name', 'WikibaseWbui2025StatementDetailView' );
+		expect( typeof statementViewComponent ).toBe( 'object' );
+		expect( statementViewComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025StatementView' );
 	} );
 
 	describe( 'the mounted component', () => {
@@ -26,7 +26,7 @@ describe( 'wikibase.wbui2025.statementDetailView', () => {
 		};
 
 		it( 'mounts successfully with empty default qualifiers and references', () => {
-			const wrapper = mount( statementDetailViewComponent, {
+			const wrapper = mount( statementViewComponent, {
 				props: {
 					statement: {
 						mainsnak: { snaktype: 'somevalue' }
@@ -36,7 +36,7 @@ describe( 'wikibase.wbui2025.statementDetailView', () => {
 			} );
 
 			expect( wrapper.exists() ).toBe( true );
-			expect( wrapper.findAll( '.wikibase-wbui2025-statement-detail-view' ) ).toHaveLength( 1 );
+			expect( wrapper.findAll( '.wikibase-wbui2025-statement-view' ) ).toHaveLength( 1 );
 			const qualifiersWrappers = wrapper.findAllComponents( qualifiersComponent );
 			expect( qualifiersWrappers ).toHaveLength( 1 );
 			expect( qualifiersWrappers[ 0 ].props( 'qualifiers' ) ).toEqual( {} );
@@ -72,7 +72,7 @@ describe( 'wikibase.wbui2025.statementDetailView', () => {
 					datatype: 'string'
 				} ]
 			} ];
-			const wrapper = mount( statementDetailViewComponent, {
+			const wrapper = mount( statementViewComponent, {
 				props: {
 					statement: {
 						mainsnak: mainSnak,

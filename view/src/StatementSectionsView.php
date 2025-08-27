@@ -224,8 +224,8 @@ class StatementSectionsView {
 			}
 		);
 		$app->registerComponentTemplate(
-			'wbui2025-statement-detail-view',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue' ),
+			'wbui2025-statement-view',
+			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
 			function ( array $data ): array {
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];

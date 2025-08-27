@@ -1,5 +1,5 @@
 <template>
-	<div class="wikibase-wbui2025-statement-detail-view">
+	<div class="wikibase-wbui2025-statement-view">
 		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:main-snak="statement.mainsnak"
@@ -25,7 +25,7 @@ const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025StatementDetailView',
+	name: 'WikibaseWbui2025StatementView',
 	components: {
 		Wbui2025MainSnak,
 		Wbui2025References,

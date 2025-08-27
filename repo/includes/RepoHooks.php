@@ -963,7 +963,7 @@ final class RepoHooks implements
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
-					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.less',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.less',
@@ -980,7 +980,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue',
-					'resources/wikibase.wbui2025/wikibase.wbui2025.statementDetailView.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
