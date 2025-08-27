@@ -470,7 +470,7 @@
 	"wikibase-listdatavaluetypes-name-time": "хан",
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Викибазан билгалонан ID",
 	"wikibase-listdatavaluetypes-generalbody": "ХӀокху хаамийн тайпанан маьӀна тайпа ду <code>$1</code>.",
-	"wikibase-concept-uri": "URI концептан",
+	"wikibase-concept-uri": "Концептан URI",
 	"wikibase-concept-uri-tooltip": "URI, оцу элементо билгалбоккхуш болу кхетам",
 	"wikibase-pageimage-helptext": "ХӀара сурт схьаэцна ду хӀуманан дӀахьедаршкара. Сурт хийца йиш йу дӀахьедар хийцарца.",
 	"datatypes-type-url": "URL",

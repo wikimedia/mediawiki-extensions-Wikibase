@@ -8,8 +8,12 @@
 		]
 	},
 	"wikibase-comment-unlink": "ཤོག་ངོས་འདི་{{WBREPONAME}} ནས་སྦྲེལ་མཐུད་བཅད་སོང། སྐད་ཡིག་སྦྲེལ་མཐུད་སྤོས་སོང།",
+	"wikibase-addlinkstitle": "སྐད་ཡིག་འབྲེལ་བ་སྣོན་",
+	"wikibase-linkitem-title": "འབྲེལ་ཡོད་ཤོག་ངོས་དང་སྦྲེལ།",
 	"wikibase-linkitem-input-site": "སྐད་རིགས།:",
 	"wikibase-linkitem-input-page": "ཤོག་ངོས།:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "སྦས།",
+	"wikibase-rc-hide-wikidata-show": "སྟོན།",
 	"wikibase-otherprojects": "ལས་གཞི་གཞན་དག།"
 }
