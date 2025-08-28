@@ -1,10 +1,10 @@
 <template>
 	<div class="wikibase-wbui2025-statement-group">
 		<div v-if="showModalEditForm" class="modal-statement-edit-form-anchor">
-			<wbui2025-edit-statement-view
+			<wbui2025-edit-statement-group
 				:property-id="propertyId"
 				@hide="hideEditForm"
-			></wbui2025-edit-statement-view>
+			></wbui2025-edit-statement-group>
 		</div>
 		<div class="wikibase-wbui2025-statement-heading">
 			<div class="wikibase-wbui2025-statement-heading-row">
@@ -29,7 +29,7 @@
 const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
-const Wbui2025EditStatementView = require( './wikibase.wbui2025.editStatement.vue' );
+const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -37,7 +37,7 @@ module.exports = exports = defineComponent( {
 	components: {
 		Wbui2025PropertyName,
 		Wbui2025StatementView,
-		Wbui2025EditStatementView
+		Wbui2025EditStatementGroup
 	},
 	props: {
 		statements: {

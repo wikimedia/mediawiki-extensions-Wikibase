@@ -55,7 +55,7 @@ const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025EditStatement',
+	name: 'WikibaseWbui2025EditStatementGroup',
 	components: {
 		CdxButton,
 		CdxIcon,

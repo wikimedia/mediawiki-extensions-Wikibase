@@ -15,23 +15,23 @@ jest.mock(
 	{ virtual: true }
 );
 
-const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
+const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue' );
 const editStatementAddValueComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementAddValue.vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
-describe( 'wikibase.wbui2025.editStatment', () => {
+describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	it( 'defines component', async () => {
-		expect( typeof editStatementComponent ).toBe( 'object' );
-		expect( editStatementComponent )
-			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatement' );
+		expect( typeof editStatementGroupComponent ).toBe( 'object' );
+		expect( editStatementGroupComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatementGroup' );
 	} );
 
 	describe( 'the mounted component', () => {
 		let wrapper, addValueForm, addValueButton, closeButton, publishButton, backIcon;
 		beforeEach( async () => {
-			wrapper = await mount( editStatementComponent, {
+			wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1'
 				},
