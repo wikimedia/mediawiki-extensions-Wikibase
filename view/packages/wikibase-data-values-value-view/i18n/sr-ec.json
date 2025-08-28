@@ -36,7 +36,7 @@
 	"valueview-expert-timeinput-precision-second": "секунд",
 	"valueview-expert-timeinput-calendar": "Календар:",
 	"valueview-expertextender-languageselector-label": "Језик (обавезно):",
-	"valueview-expertextender-unitsuggester-label": "Јединица (опционално):",
+	"valueview-expertextender-unitsuggester-label": "Јединица (необавезно):",
 	"valueview-preview-label": "приказаће се као:",
 	"valueview-preview-novalue": "није препозната ниједна валидна вредност",
 	"valueview-listrotator-manually": "подеси ручно"
