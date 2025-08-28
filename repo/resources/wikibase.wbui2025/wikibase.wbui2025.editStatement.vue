@@ -50,7 +50,7 @@ const {
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025EditStatementAddValue',
+	name: 'WikibaseWbui2025EditStatement',
 	components: {
 		CdxButton,
 		CdxIcon,

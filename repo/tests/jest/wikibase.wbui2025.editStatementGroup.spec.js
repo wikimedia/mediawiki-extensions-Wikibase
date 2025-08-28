@@ -16,7 +16,7 @@ jest.mock(
 );
 
 const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue' );
-const editStatementAddValueComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementAddValue.vue' );
+const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
@@ -29,7 +29,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		let wrapper, addValueForm, addValueButton, closeButton, publishButton, backIcon;
+		let wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon;
 		beforeEach( async () => {
 			wrapper = await mount( editStatementGroupComponent, {
 				props: {
@@ -41,7 +41,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 					]
 				}
 			} );
-			addValueForm = wrapper.findComponent( editStatementAddValueComponent );
+			statementForm = wrapper.findComponent( editStatementComponent );
 			const buttons = wrapper.findAllComponents( CdxButton );
 			addValueButton = buttons[ buttons.length - 3 ];
 			closeButton = buttons[ buttons.length - 2 ];
@@ -51,7 +51,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 
 		it( 'mount its child components', () => {
 			expect( wrapper.exists() ).toBe( true );
-			expect( addValueForm.exists() ).toBe( true );
+			expect( statementForm.exists() ).toBe( true );
 			expect( addValueButton.exists() ).toBe( true );
 			expect( closeButton.exists() ).toBe( true );
 			expect( publishButton.exists() ).toBe( true );
@@ -78,7 +78,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 
 		it( 'removes a value when remove is triggered', async () => {
 			expect( wrapper.vm.valueForms.length ).toBe( 1 );
-			await addValueForm.vm.$emit( 'remove', 0 );
+			await statementForm.vm.$emit( 'remove', 0 );
 			expect( wrapper.vm.valueForms.length ).toBe( 0 );
 		} );
 	} );

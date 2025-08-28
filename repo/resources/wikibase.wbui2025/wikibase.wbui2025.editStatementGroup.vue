@@ -12,10 +12,10 @@
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
 				<template v-for="valueForm in valueForms" :key="valueForm.id">
-					<wikibase-wbui2025-edit-statement-add-value
+					<wikibase-wbui2025-edit-statement
 						:value-id="valueForm.id"
 						@remove="removeValue"
-					></wikibase-wbui2025-edit-statement-add-value>
+					></wikibase-wbui2025-edit-statement>
 				</template>
 				<div class="wikibase-wbui2025-add-value">
 					<cdx-button @click="addValue">
@@ -50,7 +50,7 @@ const {
 	cdxIconClose
 } = require( './icons.json' );
 
-const WikibaseWbui2025EditStatementAddValue = require( './wikibase.wbui2025.editStatementAddValue.vue' );
+const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
@@ -59,7 +59,7 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		WikibaseWbui2025EditStatementAddValue
+		WikibaseWbui2025EditStatement
 	},
 	props: {
 		propertyId: {

@@ -12,21 +12,21 @@ jest.mock(
 	{ virtual: true }
 );
 
-const editStatementAddValueComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementAddValue.vue' );
+const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxSelect, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 
-describe( 'wikibase.wbui2025.editStatmentAddValue', () => {
+describe( 'wikibase.wbui2025.editStatement', () => {
 	it( 'defines component', async () => {
-		expect( typeof editStatementAddValueComponent ).toBe( 'object' );
-		expect( editStatementAddValueComponent )
-			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatementAddValue' );
+		expect( typeof editStatementComponent ).toBe( 'object' );
+		expect( editStatementComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatement' );
 	} );
 
 	describe( 'the mounted component', () => {
 		let wrapper, addQualifierButton, addReferenceButton, removeButton, textInput, select;
 		beforeEach( async () => {
-			wrapper = await mount( editStatementAddValueComponent, {
+			wrapper = await mount( editStatementComponent, {
 				props: {
 					valueId: 1
 				}
