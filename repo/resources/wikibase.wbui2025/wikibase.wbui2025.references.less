@@ -17,18 +17,18 @@
 			.cdx-icon {
 				vertical-align: middle;
 			}
+
+			&.wikibase-wbui2025-reference-link {
+				padding-top: 0;
+			}
 		}
 
 		div.wikibase-wbui2025-reference-list {
 			display: none;
-		}
 
-		div.wikibase-wbui2025-reference-list.wikibase-wbui2025-references-visible {
-			display: inherit;
-		}
-
-		p.wikibase-wbui2025-reference-link {
-			padding-top: 0;
+			&.wikibase-wbui2025-references-visible {
+				display: inherit;
+			}
 		}
 
 		.wikibase-wbui2025-reference {
@@ -39,6 +39,18 @@
 			div.wikibase-snakview div {
 				display: inherit;
 			}
+		}
+
+		.wikibase-wbui2025-clickable {
+			cursor: pointer;
+		}
+
+		.wikibase-wbui2025-icon-expand-x-small {
+			.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
+		}
+
+		.wikibase-wbui2025-icon-collapse-x-small {
+			.cdx-mixin-css-icon( @cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
 		}
 	}
 }

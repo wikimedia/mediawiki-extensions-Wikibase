@@ -6,18 +6,21 @@
 	border-style: solid;
 	margin-top: 1em;
 
-	.wbui2025-link {
+	.wikibase-wbui2025-link() {
 		.cdx-mixin-link();
 	}
 
-	.wbui2025-link-heavy {
-		font-weight: 500;
-		font-size: 0.85rem;
-		.wbui2025-link();
+	.wikibase-wbui2025-link {
+		.wikibase-wbui2025-link();
+
+		&-heavy {
+			font-weight: 500;
+			font-size: 0.85rem;
+		}
 	}
 
 	.wikibase-wbui2025-property-name :link {
-		.wbui2025-link();
+		.wikibase-wbui2025-link();
 	}
 
 	p {
@@ -29,7 +32,7 @@
 		background-color: @background-color-neutral;
 		width: 100%;
 
-		.wikibase-wbui2025-statement-heading-row {
+		&-row {
 			display: table-row;
 		}
 

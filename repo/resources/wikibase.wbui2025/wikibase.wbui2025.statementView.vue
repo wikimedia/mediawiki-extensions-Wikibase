@@ -13,7 +13,7 @@
 				</p>
 				<div class="wikibase-wbui2025-edit-link" @click="showEditForm">
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
-					<span class="wbui2025-link-heavy">edit</span>
+					<span class="wikibase-wbui2025-link-heavy">edit</span>
 				</div>
 			</div>
 		</div>

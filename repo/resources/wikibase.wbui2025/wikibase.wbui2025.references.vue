@@ -5,7 +5,7 @@
 			<a
 				v-if="hasReferences"
 				href="javascript: void(0)"
-				class="wbui2025-link">{{ referencesMessage }}</a>
+				class="wikibase-wbui2025-link">{{ referencesMessage }}</a>
 			<span v-else>{{ referencesMessage }}</span>
 		</p>
 		<div

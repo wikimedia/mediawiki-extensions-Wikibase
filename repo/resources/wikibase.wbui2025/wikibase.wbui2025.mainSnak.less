@@ -1,68 +1,13 @@
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-main-snak .wikibase-wbui2025-snak-value {
-	padding-left: 2em;
-}
+.wikibase-wbui2025-main-snak {
+	.wikibase-rankselector {
+		position: absolute;
+		padding-left: 1rem;
+		padding-top: 0.5rem;
 
-.wikibase-wbui2025-main-snak:has( .wikibase-wbui2025-media-value ) {
-	background-color: @background-color-neutral-subtle;
-	margin-top: 1rem;
-	margin-bottom: 0.5rem;
-	display: table;
-	width: 100%;
-
-	.wikibase-wbui2025-media-value {
-		display: table-row;
-
-		.thumb {
-			display: table-cell;
-			float: none;
-
-			img {
-				max-height: 124px;
-				max-width: 124px;
-				height: auto;
-				width: auto;
-				margin: 0.5rem 0.5rem 0.75rem 1rem;
-				padding: 0.5rem;
-				background-color: @background-color-base;
-				float: right;
-			}
+		.ui-icon.ui-icon-rankselector {
+			display: inherit;
 		}
-
-		.commons-media-caption {
-			display: table-cell;
-			vertical-align: top;
-			padding: 0.8rem 0.5rem 0.5rem 0.5rem;
-			margin-top: -0.3rem;
-			font-size: @font-size-small;
-		}
-	}
-}
-
-.wikibase-wbui2025-time-value {
-	.wb-calendar-name {
-		font-style: italic;
-		padding-left: 0.5em;
-	}
-}
-
-.wikibase-wbui2025-globe-coordinate-value {
-	>div {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.wikibase-kartographer-caption {
-		order: 0;
-		margin: @spacing-50 @spacing-0 @spacing-25 @spacing-75;
-	}
-
-	.mw-parser-output {
-		order: 1;
-	}
-
-	a.mw-kartographer-map {
-		width: 100%;
 	}
 }
