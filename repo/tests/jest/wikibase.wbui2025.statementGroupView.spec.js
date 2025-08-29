@@ -146,9 +146,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			const editLink = wrapper.find( '.wikibase-wbui2025-edit-link' );
 			expect( editLink.exists() ).toBe( true );
 			expect( editLink.classes() ).toContain( 'wikibase-wbui2025-edit-link-unsupported' );
-			const styledLink = editLink.find( '.wikibase-wbui2025-link-heavy' );
-			expect( styledLink.exists() ).toBe( true );
-			expect( styledLink.classes() ).toContain( 'is-red-link' );
+			expect( editLink.classes() ).toContain( 'is-red-link' );
 		} );
 
 		it( 'does nothing when clicking edit link', async () => {

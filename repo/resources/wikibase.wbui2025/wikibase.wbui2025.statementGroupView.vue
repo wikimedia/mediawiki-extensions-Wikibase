@@ -12,15 +12,12 @@
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				</p>
 				<div
-					class="wikibase-wbui2025-edit-link"
-					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType }"
+					class="wikibase-wbui2025-link wikibase-wbui2025-edit-link"
+					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType, 'is-red-link': isUnsupportedDataType }"
 					@click="showEditForm"
 				>
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
-					<span
-						class="wikibase-wbui2025-link-heavy"
-						:class="{ 'is-red-link': isUnsupportedDataType }"
-					>
+					<span class="wikibase-wbui2025-link-heavy">
 						{{ $i18n( 'wikibase-edit' ) }}
 					</span>
 				</div>
