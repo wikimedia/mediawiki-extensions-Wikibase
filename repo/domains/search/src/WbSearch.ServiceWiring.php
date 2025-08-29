@@ -17,6 +17,7 @@ use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
+use Wikibase\Repo\Domains\Search\RouteHandlers\SearchExceptionMiddleware;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
@@ -74,6 +75,7 @@ return [
 	'WbSearch.MiddlewareHandler' => function ( MediaWikiServices $services ): MiddlewareHandler {
 		return new MiddlewareHandler( [
 			WbSearch::getUnexpectedErrorHandlerMiddleware(),
+			new SearchExceptionMiddleware(),
 			new UserAgentCheckMiddleware(),
 		] );
 	},
