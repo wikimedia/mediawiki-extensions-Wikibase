@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use Generator;
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use PHPUnit\Framework\TestCase;
@@ -36,6 +37,21 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 			UnexpectedErrorHandlerMiddleware::ERROR_CODE,
 			$responseBody->code
 		);
+	}
+
+	public function testDoesNotConsiderHttpExceptionsUnexpected(): void {
+		$expectedException = $this->createStub( HttpException::class );
+
+		try {
+			$this->newMiddleware()->run(
+				$this->createStub( Handler::class ),
+				fn() => throw $expectedException
+			);
+
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( HttpException $e ) {
+			$this->assertSame( $expectedException, $e );
+		}
 	}
 
 	public function testGivenNoError_returnsRouteResponse(): void {

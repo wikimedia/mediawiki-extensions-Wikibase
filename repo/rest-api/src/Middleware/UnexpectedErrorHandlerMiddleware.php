@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\RestApi\Middleware;
 
 use MediaWiki\Rest\Handler;
+use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\StringStream;
@@ -25,6 +26,8 @@ class UnexpectedErrorHandlerMiddleware implements Middleware {
 	public function run( Handler $routeHandler, callable $runNext ): Response {
 		try {
 			return $runNext();
+		} catch ( HttpException $exception ) {
+			throw $exception; // other middlewares may throw those so we just rethrow
 		} catch ( Throwable $exception ) {
 			$this->errorReporter->reportError( $exception, $routeHandler, $routeHandler->getRequest() );
 
