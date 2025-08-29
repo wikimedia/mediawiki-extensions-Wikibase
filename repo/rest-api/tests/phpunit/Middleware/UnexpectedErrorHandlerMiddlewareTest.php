@@ -21,23 +21,13 @@ use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
  */
 class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 
-	private ErrorReporter $errorReporter;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->errorReporter = $this->createStub( ErrorReporter::class );
-	}
-
 	/**
 	 * @dataProvider throwableProvider
 	 */
 	public function testHandlesError( Throwable $throwable ): void {
 		$response = $this->newMiddleware()->run(
 			$this->createStub( Handler::class ),
-			function () use ( $throwable ): Response {
-				throw $throwable;
-			}
+			fn() => throw $throwable
 		);
 
 		$this->assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
@@ -62,8 +52,8 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 	public function testReportsError(): void {
 		$routeHandler = $this->createStub( Handler::class );
 		$exception = new RuntimeException();
-		$this->errorReporter = $this->createMock( ErrorReporter::class );
-		$this->errorReporter->expects( $this->once() )
+		$errorReporter = $this->createMock( ErrorReporter::class );
+		$errorReporter->expects( $this->once() )
 			->method( 'reportError' )
 			->with(
 				$exception,
@@ -71,11 +61,9 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 				$this->anything()
 			);
 
-		$this->newMiddleware()->run(
+		$this->newMiddleware( $errorReporter )->run(
 			$routeHandler,
-			function () use ( $exception ): void {
-				throw $exception;
-			}
+			fn() => throw $exception
 		);
 	}
 
@@ -84,10 +72,8 @@ class UnexpectedErrorHandlerMiddlewareTest extends TestCase {
 		yield [ new RuntimeException() ];
 	}
 
-	private function newMiddleware(): UnexpectedErrorHandlerMiddleware {
-		return new UnexpectedErrorHandlerMiddleware(
-			$this->errorReporter
-		);
+	private function newMiddleware( ?ErrorReporter $errorReporter = null ): UnexpectedErrorHandlerMiddleware {
+		return new UnexpectedErrorHandlerMiddleware( $errorReporter ?? $this->createStub( ErrorReporter::class ) );
 	}
 
 }
