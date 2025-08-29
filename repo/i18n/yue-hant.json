@@ -397,7 +397,7 @@
 	"wikibase-api-no-common-item": "冇共同嘅項目。",
 	"wikibase-api-no-data": "冇數據可以操作。",
 	"wikibase-api-no-external-page": "外部客戶端網站「$1 」冇提供「$2」頁面嘅頁面資料。",
-	"wikibase-api-nosuchrevid": "搵唔到 ID 嘅修訂版。",
+	"wikibase-api-nosuchrevid": "搵唔到呢個 ID 嘅修訂。",
 	"wikibase-api-no-such-claim": "搵唔到噉嘅聲稱。",
 	"wikibase-api-no-such-entity": "搵唔到個 ID 係「$1」嘅實體。",
 	"wikibase-api-no-such-entity-link": "搵唔到包含提供網站同版名條網站拎嘅項目。",
