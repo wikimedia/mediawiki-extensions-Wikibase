@@ -1,5 +1,5 @@
 <template>
-	<div class="wikibase-wbui2025-edit-statement-modal-overlay">
+	<wikibase-wbui2025-modal-overlay>
 		<div class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
 				<div class="wikibase-wbui2025-edit-statement-headline">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</wikibase-wbui2025-modal-overlay>
 </template>
 
 <script>
@@ -51,6 +51,7 @@ const {
 } = require( './icons.json' );
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
+const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
@@ -59,7 +60,8 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		WikibaseWbui2025EditStatement
+		WikibaseWbui2025EditStatement,
+		WikibaseWbui2025ModalOverlay
 	},
 	props: {
 		propertyId: {
@@ -102,19 +104,6 @@ module.exports = exports = defineComponent( {
 
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-edit-statement-modal-overlay {
-	position: fixed;
-	background-color: @background-color-base;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1;
-}
 
 .wikibase-wbui2025-edit-statement {
 	position: relative;

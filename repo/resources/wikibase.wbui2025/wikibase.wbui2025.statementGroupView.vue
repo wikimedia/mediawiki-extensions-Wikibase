@@ -75,17 +75,9 @@ module.exports = exports = defineComponent( {
 			if ( this.isUnsupportedDataType ) {
 				return;
 			}
-			[ 'body', '.minerva-footer', '.minerva-header' ]
-					.map( ( el ) => document.querySelector( el ) )
-					.filter( ( el ) => el )
-					.forEach( ( el ) => el.classList.add( 'wikibase-wbui2025-modal-open' ) );
 			this.showModalEditForm = true;
 		},
 		hideEditForm() {
-			[ 'body', '.minerva-footer', '.minerva-header' ]
-					.map( ( el ) => document.querySelector( el ) )
-					.filter( ( el ) => el )
-					.forEach( ( el ) => el.classList.remove( 'wikibase-wbui2025-modal-open' ) );
 			this.showModalEditForm = false;
 		}
 	}
