@@ -964,7 +964,6 @@ final class RepoHooks implements
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
-					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.less',

@@ -1,9 +1,5 @@
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-snak-value {
-	padding-left: 2em;
-}
-
 .wikibase-wbui2025-time-value {
 	.wb-calendar-name {
 		font-style: italic;
@@ -32,37 +28,14 @@
 }
 
 .wikibase-wbui2025-main-snak:has( .wikibase-wbui2025-media-value ) {
-	background-color: @background-color-neutral-subtle;
-	margin-top: 1rem;
-	margin-bottom: 0.5rem;
-	display: table;
-	width: 100%;
+	align-items: flex-start;
 }
 
-.wikibase-wbui2025-media-value {
-	display: table-row;
-
-	.thumb {
-		display: table-cell;
-		float: none;
-
-		img {
-			max-height: 124px;
-			max-width: 124px;
-			height: auto;
-			width: auto;
-			margin: 0.5rem 0.5rem 0.75rem 1rem;
-			padding: 0.5rem;
-			background-color: @background-color-base;
-			float: right;
-		}
-	}
-
-	.commons-media-caption {
-		display: table-cell;
-		vertical-align: top;
-		padding: 0.8rem 0.5rem 0.5rem 0.5rem;
-		margin-top: -0.3rem;
-		font-size: @font-size-small;
-	}
+.wikibase-wbui2025-snak-value {
+	display: inline-flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 3rem;
+	margin: 0;
+	padding: @spacing-0 @spacing-0 @spacing-0 @spacing-30;
 }
