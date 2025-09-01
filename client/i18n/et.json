@@ -91,7 +91,7 @@
 	"wikibase-pageinfo-entity-usage-C": "mõned avaldused",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "avaldus ($1)",
 	"wikibase-pageinfo-entity-usage-X": "olemi kõik andmed",
-	"wikibase-pageinfo-entity-usage-O": "muu (näiteks rööpkujud, olemi olemasolu)",
+	"wikibase-pageinfo-entity-usage-O": "muu (näiteks olemi olemasolu)",
 	"wikibase-property-render-error": "Omaduse $1 viimistlemine ebaõnnestus: $2",
 	"wikibase-otherprojects": "Teistes projektides",
 	"wikibase-otherprojects-beta-message": "Teiste projektide külgriba",
