@@ -612,6 +612,11 @@
 		"rcshowwikidata": 0,
 		"wlshowwikibase": 0
 	},
+	"RecentChangeSources": {
+		"wb": {
+			"revision": true
+		}
+	},
 	"attributes": {
 		"Scribunto": {
 			"ExtraLuaTitleAttributes": {
