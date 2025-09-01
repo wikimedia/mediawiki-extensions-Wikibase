@@ -117,6 +117,7 @@ class PropertyViewTest extends EntityViewTestCase {
 			'formatSnak' => '<div>a snak :)</div>',
 		] );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
+		$textProvider->method( 'get' )->willReturnArgument( 0 );
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
 			new FilteringStatementGrouper( [ 'statement' => null ] ),

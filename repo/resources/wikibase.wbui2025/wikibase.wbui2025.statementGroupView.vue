@@ -21,7 +21,7 @@
 						class="wikibase-wbui2025-link-heavy"
 						:class="{ 'is-red-link': isUnsupportedDataType }"
 					>
-						edit
+						{{ $i18n( 'wikibase-edit' ) }}
 					</span>
 				</div>
 			</div>

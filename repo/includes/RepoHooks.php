@@ -1017,6 +1017,7 @@ final class RepoHooks implements
 				'messages' => [
 					'wikibase-add',
 					'wikibase-cancel',
+					'wikibase-edit',
 					'wikibase-entityselector-notfound',
 					'wikibase-statementgrouplistview-add',
 					'wikibase-statementview-qualifiers-counter',

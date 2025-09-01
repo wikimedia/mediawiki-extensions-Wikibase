@@ -215,6 +215,9 @@ class StatementSectionsView {
 			'concat' => function( ...$args ) {
 				return implode( '', $args );
 			},
+			'$i18n' => function ( string $messageKey, string ...$params ): string {
+				return $this->textProvider->get( $messageKey, $params );
+			},
 		] );
 		$app->registerComponentTemplate(
 			'wbui2025-statement-sections',

@@ -282,7 +282,8 @@ class ItemViewTest extends EntityViewTestCase {
 				return '<div>a string snak: ' . htmlspecialchars( $value->getValue() ) . '</div>';
 			} );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
-		$textProvider->method( 'getEscaped' )->willReturnCallback( static fn ( $messageKey ) => $messageKey );
+		$textProvider->method( 'get' )->willReturnArgument( 0 );
+		$textProvider->method( 'getEscaped' )->willReturnArgument( 0 );
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
 			new FilteringStatementGrouper( [
