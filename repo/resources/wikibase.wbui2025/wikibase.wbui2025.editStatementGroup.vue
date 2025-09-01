@@ -20,7 +20,7 @@
 				<div class="wikibase-wbui2025-add-value">
 					<cdx-button @click="addValue">
 						<cdx-icon :icon="cdxIconAdd"></cdx-icon>
-						add value
+						{{ $i18n( 'wikibase-statementlistview-add' ) }}
 					</cdx-button>
 				</div>
 			</div>
@@ -28,11 +28,11 @@
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button @click="$emit( 'hide' )">
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
-						cancel
+						{{ $i18n( 'wikibase-cancel' ) }}
 					</cdx-button>
 					<cdx-button class="inactive">
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
-						publish
+						{{ $i18n( 'wikibase-publish' ) }}
 					</cdx-button>
 				</div>
 			</div>

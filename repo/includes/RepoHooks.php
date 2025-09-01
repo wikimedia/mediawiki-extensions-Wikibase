@@ -1017,11 +1017,18 @@ final class RepoHooks implements
 				],
 				'messages' => [
 					'wikibase-add',
+					'wikibase-addqualifier',
+					'wikibase-addreference',
 					'wikibase-cancel',
 					'wikibase-edit',
 					'wikibase-entityselector-notfound',
+					'wikibase-publish',
+					'wikibase-remove',
+					'wikibase-snakview-snaktypeselector-value',
 					'wikibase-statementgrouplistview-add',
+					'wikibase-statementlistview-add',
 					'wikibase-statementview-qualifiers-counter',
+					'wikibase-statementview-rank-normal',
 					'wikibase-statementview-references-counter',
 				],
 				'codexComponents' => [

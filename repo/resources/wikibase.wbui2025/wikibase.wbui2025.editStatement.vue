@@ -3,13 +3,13 @@
 		<div class="wikibase-wbui2025-value-input-fields">
 			<div class="wikibase-wbui2025-edit-statement-value-input">
 				<div class="wikibase-snaktypeselector ui-state-default">
-					<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" title="custom value"></span>
+					<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" :title="$i18n( 'wikibase-snakview-snaktypeselector-value' )"></span>
 				</div>
 				<cdx-text-input v-model="value" placeholder="add property value here"></cdx-text-input>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
 				<div class="wikibase-rankselector ui-state-default">
-					<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
+					<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" :title="$i18n( 'wikibase-statementview-rank-normal' )"></span>
 				</div>
 				<cdx-select
 					v-model:selected="rankSelection"
@@ -21,20 +21,20 @@
 			<div class="wikibase-wbui2025-button-holder">
 				<cdx-button>
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
-					add qualifier
+					{{ $i18n( 'wikibase-addqualifier' ) }}
 				</cdx-button>
 			</div>
 			<div class="wikibase-wbui2025-button-holder">
 				<cdx-button>
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
-					add reference
+					{{ $i18n( 'wikibase-addreference' ) }}
 				</cdx-button>
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-remove-value">
 			<cdx-button @click="$emit( 'remove', valueId )">
 				<cdx-icon :icon="cdxIconTrash"></cdx-icon>
-				remove
+				{{ $i18n( 'wikibase-remove' ) }}
 			</cdx-button>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ module.exports = exports = defineComponent( {
 		return {
 			value: '',
 			rankMenuItems: [
-				{ label: 'normal rank', value: 0 }
+				{ label: mw.msg( 'wikibase-statementview-rank-normal' ), value: 0 }
 			],
 			rankSelection: 0
 		};
