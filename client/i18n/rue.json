@@ -11,7 +11,7 @@
 	"tooltip-t-wikibase": "Посилання на пов’язаний елемент сховища даних",
 	"wikibase-dataitem": "Елемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Едітовати одказы",
-	"wikibase-editlinkstitle": "Редагувати міжмовні посилання",
+	"wikibase-editlinkstitle": "Редіґовати меджіязыковы одказы",
 	"wikibase-linkitem-addlinks": "Придати одказы",
 	"wikibase-linkitem-close": "Заперти діалоґ і обновити сторінку",
 	"wikibase-linkitem-title": "Звязати зо сторінков",
@@ -31,7 +31,7 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Едітованя, якы походять з Вікіданых.",
 	"wikibase-replicationnote": "Усвідомте собі, же може то тырвати дакілько минут, покы зміны набудуть чінности на вшыткых вікі.",
 	"wikibase-pageinfo-entity-id": "Ідентіфікатор елемента у {{WBREPONAME}}",
-	"wikibase-otherprojects": "У другых проєктох",
+	"wikibase-otherprojects": "В другых проєктах",
 	"wikibase-sitelinks-sitename-columnheading": "Язык",
 	"wikibase-sitelinks-link-columnheading": "Звязана сторінка"
 }

@@ -28,7 +28,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ndryshim|ndryshime}}",
 	"wikibase-dataitem": "Objekt {{WBREPONAME}}",
 	"wikibase-editlinks": "Redakto lidhjet",
-	"wikibase-editlinkstitle": "Përpunoni lidhje ndërgjuhësore",
+	"wikibase-editlinkstitle": "Redakto lidhjet ndërgjuhësore",
 	"wikibase-addlinkstitle": "Shto lidhje ndërgjuhësore",
 	"wikibase-linkitem-addlinks": "Shto lidhje",
 	"wikibase-linkitem-alreadylinked": "Faqja që donit të lidhnit i është bashkëngjitur tashmë një [$1 objekti] te depoja qendrore e të dhënave që është e lidhur me [[$2]] në këtë sajt. Objektet mund të kenë të bashkëngjitur vetëm një faqe për sajt. Ju lutemi, zgjidhni një faqe tjetër për ta lidhur.",

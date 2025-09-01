@@ -104,7 +104,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|連線}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "當有人將頁面{{GENDER:|我建立嘅}}連接到{{WBREPONAME}}項嗰陣通知我。",
 	"notification-header-page-connection": "頁面<strong>$3</strong>已經{{GENDER:$2|連接}}咗去{{PLURAL:$4|-1=一個{{WBREPONAME}}項|{{WBREPONAME}}項 $4}}，喺呢度可以收集同主題相關嘅數據。",
-	"notification-bundle-header-page-connection": "<strong>$3</strong>同埋{{PLURAL:$4|$4版其他頁面|100=99+版其他頁面}}已經{{GENDER:$2|連接}}到{{WBREPONAME}}項，喺呢度可以收集同主題相關嘅數據。",
+	"notification-bundle-header-page-connection": "<strong>$3</strong>同埋{{PLURAL:$4|另外一版|另外$4版|100=另外99+版}}已經{{GENDER:$2|連接}}到{{WBREPONAME}}項，喺呢度可以收集同主題相關嘅數據。",
 	"notification-link-text-view-item": "{{GENDER:$1|視圖}}項目",
 	"notification-subject-page-connection": "你{{GENDER:$3|建立}}上面嘅一個頁面係{{GENDER:$2|連接咗}}到一個{{WBREPONAME}}項",
 	"unresolved-property-category": "有未解決屬性嘅頁面",
