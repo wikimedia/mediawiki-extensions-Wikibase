@@ -29,9 +29,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		let wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon;
-		beforeEach( async () => {
-			wrapper = await mount( editStatementGroupComponent, {
+		async function mountAndGetParts() {
+			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1'
 				},
@@ -41,15 +40,18 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 					]
 				}
 			} );
-			statementForm = wrapper.findComponent( editStatementComponent );
+			const statementForm = wrapper.findComponent( editStatementComponent );
 			const buttons = wrapper.findAllComponents( CdxButton );
-			addValueButton = buttons[ buttons.length - 3 ];
-			closeButton = buttons[ buttons.length - 2 ];
-			publishButton = buttons[ buttons.length - 1 ];
-			backIcon = wrapper.findComponent( CdxIcon );
-		} );
+			const addValueButton = buttons[ buttons.length - 3 ];
+			const closeButton = buttons[ buttons.length - 2 ];
+			const publishButton = buttons[ buttons.length - 1 ];
+			const backIcon = wrapper.findComponent( CdxIcon );
+			return { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon };
+		}
 
-		it( 'mount its child components', () => {
+		it( 'mount its child components', async () => {
+			const { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon } = await mountAndGetParts();
+
 			expect( wrapper.exists() ).toBe( true );
 			expect( statementForm.exists() ).toBe( true );
 			expect( addValueButton.exists() ).toBe( true );
@@ -59,24 +61,28 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		} );
 
 		it( 'emits a hide event when close button is clicked', async () => {
+			const { wrapper, closeButton } = await mountAndGetParts();
 			await closeButton.trigger( 'click' );
 			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
 			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
 		} );
 
 		it( 'emits a hide event when back icon is clicked', async () => {
+			const { wrapper, backIcon } = await mountAndGetParts();
 			await backIcon.trigger( 'click' );
 			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
 			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
 		} );
 
 		it( 'adds a new value when add value is clicked', async () => {
+			const { wrapper, addValueButton } = await mountAndGetParts();
 			expect( wrapper.vm.valueForms.length ).toBe( 1 );
 			await addValueButton.trigger( 'click' );
 			expect( wrapper.vm.valueForms.length ).toBe( 2 );
 		} );
 
 		it( 'removes a value when remove is triggered', async () => {
+			const { wrapper, statementForm } = await mountAndGetParts();
 			expect( wrapper.vm.valueForms.length ).toBe( 1 );
 			await statementForm.vm.$emit( 'remove', 0 );
 			expect( wrapper.vm.valueForms.length ).toBe( 0 );
