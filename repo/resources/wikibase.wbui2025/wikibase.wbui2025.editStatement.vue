@@ -5,7 +5,7 @@
 				<div class="wikibase-snaktypeselector ui-state-default">
 					<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" :title="$i18n( 'wikibase-snakview-snaktypeselector-value' )"></span>
 				</div>
-				<cdx-text-input v-model="value" placeholder="add property value here"></cdx-text-input>
+				<cdx-text-input v-model="value"></cdx-text-input>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
 				<div class="wikibase-rankselector ui-state-default">
