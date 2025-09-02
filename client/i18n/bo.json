@@ -13,5 +13,7 @@
 	"wikibase-linkitem-input-site": "སྐད་རིགས།:",
 	"wikibase-linkitem-input-page": "ཤོག་ངོས།:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "སྦས།",
+	"wikibase-rc-hide-wikidata-show": "སྟོན།",
 	"wikibase-otherprojects": "ལས་གཞི་གཞན་དག།"
 }

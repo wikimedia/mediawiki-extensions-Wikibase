@@ -21,7 +21,8 @@
 			"Sergento",
 			"Tkalyn",
 			"Ата",
-			"Максим Підліснюк"
+			"Максим Підліснюк",
+			"Serhio Magpie"
 		]
 	},
 	"wikibase-client-desc": "Клієнт для розширення Wikibase",
@@ -120,7 +121,7 @@
 	"wikibase-sitelinks-link-columnheading": "Пов'язана сторінка",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Зв'язок|Зв'язки}} з {{GRAMMAR:instrumental|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Повідомити мене, коли хтось поєднує сторінку, яку {{GENDER:|я створив|я створила}}, з елементом {{GRAMMAR:genitive|{{WBREPONAME}}}}.",
-	"exceeded-entity-limit-category": "Сторінки із завеликою кількість звертань до сутностей {{WBREPONAME}}.",
+	"exceeded-entity-limit-category": "{{WBREPONAME}}:Сторінки із завеликою кількість звертань до сутностей",
 	"exceeded-entity-limit-category-desc": "Ця категорія містить сторінки із занадто великою кількістю звертань до сутностей {{WBREPONAME}}.",
 	"notification-header-page-connection": "Сторінку <strong>$3</strong> {{GENDER:$2|поєднано}} з елементом {{PLURAL:$4|-1= {{GRAMMAR:genitive|{{WBREPONAME}}}}|{{GRAMMAR:genitive|{{WBREPONAME}}}} $4}}, де можуть збиратися дані, що стосуються теми.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> та {{PLURAL:$4|одна інша сторінка|$4 інші сторінки|$4 інших сторінок|100=99+ інших сторінок}} {{GENDER:$2|поєднано}} з елементами {{GRAMMAR:genitive|{{WBREPONAME}}}}, де можуть бути зібрані дані, що найбільш відносяться до обговорення.",
