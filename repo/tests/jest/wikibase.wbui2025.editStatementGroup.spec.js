@@ -28,6 +28,13 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			.toHaveProperty( 'name', 'WikibaseWbui2025EditStatementGroup' );
 	} );
 
+	const mockConfig = {
+		wgEditSubmitButtonLabelPublish: false
+	};
+	mw.config = {
+		get: jest.fn( ( key ) => mockConfig[ key ] )
+	};
+
 	describe( 'the mounted component', () => {
 		async function mountAndGetParts() {
 			const wrapper = await mount( editStatementGroupComponent, {
@@ -49,7 +56,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			return { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon };
 		}
 
-		it( 'mount its child components', async () => {
+		it( 'mount its child components correctly', async () => {
 			const { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon } = await mountAndGetParts();
 
 			expect( wrapper.exists() ).toBe( true );
@@ -58,6 +65,15 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( closeButton.exists() ).toBe( true );
 			expect( publishButton.exists() ).toBe( true );
 			expect( backIcon.exists() ).toBe( true );
+
+			expect( publishButton.text() ).toContain( 'wikibase-save' );
+		} );
+
+		it( 'uses publish message if configured', async () => {
+			mockConfig.wgEditSubmitButtonLabelPublish = true;
+			const { publishButton } = await mountAndGetParts();
+
+			expect( publishButton.text() ).toContain( 'wikibase-publish' );
 		} );
 
 		it( 'emits a hide event when close button is clicked', async () => {

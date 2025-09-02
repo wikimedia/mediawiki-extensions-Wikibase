@@ -1024,6 +1024,7 @@ final class RepoHooks implements
 					'wikibase-entityselector-notfound',
 					'wikibase-publish',
 					'wikibase-remove',
+					'wikibase-save',
 					'wikibase-snakview-snaktypeselector-value',
 					'wikibase-statementgrouplistview-add',
 					'wikibase-statementlistview-add',

@@ -32,7 +32,7 @@
 					</cdx-button>
 					<cdx-button class="inactive">
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
-						{{ $i18n( 'wikibase-publish' ) }}
+						{{ saveMessage }}
 					</cdx-button>
 				</div>
 			</div>
@@ -88,6 +88,13 @@ module.exports = exports = defineComponent( {
 	computed: {
 		propertyLinkHtml() {
 			return propertyLinkHtml( this.propertyId );
+		},
+		saveMessage() {
+			if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
+				return mw.msg( 'wikibase-publish' );
+			} else {
+				return mw.msg( 'wikibase-save' );
+			}
 		}
 	},
 	methods: {
