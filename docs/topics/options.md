@@ -775,14 +775,6 @@ Higher value mean fewer jobs but longer run-time per job.
 
 DEFAULT: [wikiPageUpdaterDbBatchSize], for backwards compatibility, or MediaWiki core's [$wgUpdateRowsPerJob], which currently defaults to 300.
 
-#### resolveWikibaseLabels
-Temporary setting (see T393442) to allow controlled rollout.
-Displays links to Wikibase in Recent Changes and other change lists as labels,
-rather than the Qid or Pid.
-
-E.g. Link's label text is "instance of" instead of "Property:P31".
-
-DEFAULT: ```false```
 ### Echo
 
 #### sendEchoNotification

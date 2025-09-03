@@ -56,7 +56,7 @@ end
 local function addStatementUsage( entityId, propertyId )
 	if isValidPropertyId( propertyId ) then
 		-- Only attempt to track the usage if we have a valid property id.
-		php.addStatementUsage( entityId, propertyId )
+		php.addStatementUsage( entityId, propertyId ) --add an argument here??
 	end
 end
 
