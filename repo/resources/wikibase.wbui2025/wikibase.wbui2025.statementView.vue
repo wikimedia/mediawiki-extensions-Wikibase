@@ -39,13 +39,13 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		references() {
-			return ( this.statement.references ? this.statement.references : [] );
+			return this.statement.references ? this.statement.references : [];
 		},
 		qualifiers() {
-			return ( this.statement.qualifiers ? this.statement.qualifiers : {} );
+			return this.statement.qualifiers ? this.statement.qualifiers : {};
 		},
 		qualifiersOrder() {
-			return ( this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [] );
+			return this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [];
 		}
 	}
 } );

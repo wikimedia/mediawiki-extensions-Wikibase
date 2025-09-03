@@ -379,6 +379,8 @@ return call_user_func( function() {
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-tooltip-preferred',
 				'wikibase-statementview-rank-normal',
+				'wikibase-statementview-rank-preferred',
+				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-normal',
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-deprecated',

@@ -48,7 +48,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			rank: 'normal'
 		};
 		const mockStatement2 = {
-			mainsnak: { snaktype: 'somevalue' },
+			mainsnak: { snaktype: 'somevalue', datavalue: { type: 'string', value: '' } },
 			type: 'statement',
 			id: 'Q1$18ed80a7-62a8-4779-a7dd-3876e835979a',
 			rank: 'normal'

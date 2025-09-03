@@ -8,23 +8,28 @@
 				<cdx-text-input v-model="value"></cdx-text-input>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
-				<div class="wikibase-rankselector ui-state-default">
-					<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" :title="$i18n( 'wikibase-statementview-rank-normal' )"></span>
-				</div>
 				<cdx-select
-					v-model:selected="rankSelection"
+					:selected="rankSelection"
 					:menu-items="rankMenuItems"
+					@update:selected="rankSelection = $event; $emit( 'update:rank', $event )"
 				></cdx-select>
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-qualifiers-and-references">
 			<div class="wikibase-wbui2025-button-holder">
+				<wbui2025-qualifiers
+					:qualifiers="qualifiers"
+					:qualifiers-order="qualifiersOrder">
+				</wbui2025-qualifiers>
 				<cdx-button>
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 					{{ $i18n( 'wikibase-addqualifier' ) }}
 				</cdx-button>
 			</div>
 			<div class="wikibase-wbui2025-button-holder">
+				<wbui2025-references
+					:references="references"
+				></wbui2025-references>
 				<cdx-button>
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 					{{ $i18n( 'wikibase-addreference' ) }}
@@ -47,6 +52,12 @@ const {
 	cdxIconAdd,
 	cdxIconTrash
 } = require( './icons.json' );
+const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
+const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
+
+const rankSelectorPreferredIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="0" y="0" xlink:href="#a"/><use stroke="#36c" x="0" y="0" xlink:href="#b"/></svg>';
+const rankSelectorNormalIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="-9" y="0" xlink:href="#a"/><use stroke="#36c" x="-9" y="0" xlink:href="#b"/></svg>';
+const rankSelectorDeprecatedIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="-18" y="0" xlink:href="#a"/><use stroke="#36c" x="-18" y="0" xlink:href="#b"/></svg>';
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -55,15 +66,37 @@ module.exports = exports = defineComponent( {
 		CdxButton,
 		CdxIcon,
 		CdxSelect,
-		CdxTextInput
+		CdxTextInput,
+		Wbui2025References,
+		Wbui2025Qualifiers
 	},
 	props: {
 		valueId: {
 			type: Number,
 			required: true
+		},
+		mainSnak: {
+			type: Object,
+			required: true,
+			default: () => ( {
+				datavalue: {
+					value: '',
+					type: 'string'
+				}
+			} )
+		},
+		statement: {
+			type: Object,
+			required: true,
+			default: () => ( {} )
+		},
+		rank: {
+			type: String,
+			required: true,
+			default: () => 'normal'
 		}
 	},
-	emits: [ 'remove' ],
+	emits: [ 'remove', 'update:mainSnak', 'update:rank' ],
 	setup() {
 		return {
 			cdxIconAdd,
@@ -72,12 +105,38 @@ module.exports = exports = defineComponent( {
 	},
 	data() {
 		return {
-			value: '',
 			rankMenuItems: [
-				{ label: mw.msg( 'wikibase-statementview-rank-normal' ), value: 0 }
+				{ label: mw.msg( 'wikibase-statementview-rank-normal' ), value: 'normal', icon: rankSelectorNormalIcon },
+				{ label: mw.msg( 'wikibase-statementview-rank-preferred' ), value: 'preferred', icon: rankSelectorPreferredIcon },
+				{ label: mw.msg( 'wikibase-statementview-rank-deprecated' ), value: 'deprecated', icon: rankSelectorDeprecatedIcon }
 			],
-			rankSelection: 0
+			rankSelection: this.rank
 		};
+	},
+	computed: {
+		value: {
+			get() {
+				return this.mainSnak.datavalue.value;
+			},
+			set( newValue ) {
+				this.$emit( 'update:mainSnak',
+					Object.assign( Object.assign( {}, this.mainSnak ), {
+						datavalue: {
+							value: newValue,
+							type: this.mainSnak.datavalue.type
+						}
+					} ) );
+			}
+		},
+		references() {
+			return this.statement.references ? this.statement.references : [];
+		},
+		qualifiers() {
+			return this.statement.qualifiers ? this.statement.qualifiers : {};
+		},
+		qualifiersOrder() {
+			return this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [];
+		}
 	}
 } );
 </script>

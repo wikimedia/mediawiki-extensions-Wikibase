@@ -39,7 +39,17 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		async function mountAndGetParts() {
 			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
-					propertyId: 'P1'
+					propertyId: 'P1',
+					statements: [ {
+						mainSnak: {
+							datavalue: {
+								value: '',
+								type: 'string'
+							}
+						},
+						rank: 'normal'
+
+					} ]
 				},
 				global: {
 					plugins: [

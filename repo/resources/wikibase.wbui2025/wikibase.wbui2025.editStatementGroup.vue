@@ -11,14 +11,17 @@
 				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
-				<template v-for="valueForm in valueForms" :key="valueForm.id">
+				<template v-for="( valueForm, index ) in valueForms" :key="valueForm.id">
 					<wikibase-wbui2025-edit-statement
+						v-model:rank="valueForms[index].statement.rank"
+						v-model:main-snak="valueForms[index].statement.mainsnak"
+						:statement="valueForms[index].statement"
 						:value-id="valueForm.id"
 						@remove="removeValue"
 					></wikibase-wbui2025-edit-statement>
 				</template>
 				<div class="wikibase-wbui2025-add-value">
-					<cdx-button @click="addValue">
+					<cdx-button @click="addValue( null )">
 						<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 						{{ $i18n( 'wikibase-statementlistview-add' ) }}
 					</cdx-button>
@@ -67,6 +70,10 @@ module.exports = exports = defineComponent( {
 		propertyId: {
 			type: String,
 			required: true
+		},
+		statements: {
+			type: Array,
+			required: true
 		}
 	},
 	emits: [ 'hide' ],
@@ -80,9 +87,8 @@ module.exports = exports = defineComponent( {
 	},
 	data() {
 		return {
-			valueForms: [
-				{ id: 0 }
-			]
+			valueForms: [],
+			maxValueFormId: 0
 		};
 	},
 	computed: {
@@ -98,12 +104,33 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		addValue() {
-			const maxId = this.valueForms.reduce( ( max, form ) => Math.max( max, form.id ), 0 ) + 1;
-			this.valueForms.push( { id: maxId } );
+		addValue( statement = null ) {
+			const valueForm = { id: this.maxValueFormId, statement: {} };
+			this.maxValueFormId++;
+			if ( statement ) {
+				valueForm.statement = Object.assign( {}, statement );
+			} else {
+				valueForm.statement = Object.assign( {}, {
+					mainSnak: {
+						datavalue: {
+							value: '',
+							type: 'string'
+						}
+					},
+					rank: 'normal',
+					'qualifiers-order': [],
+					qualifiers: {}
+				} );
+			}
+			this.valueForms.push( valueForm );
 		},
 		removeValue( valueId ) {
 			this.valueForms = this.valueForms.filter( ( form ) => form.id !== valueId );
+		}
+	},
+	mounted: function () {
+		if ( this.statements && this.statements.length > 0 ) {
+			this.statements.forEach( ( statement ) => this.addValue( statement ) );
 		}
 	}
 } );

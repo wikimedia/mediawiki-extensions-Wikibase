@@ -3,6 +3,7 @@
 		<div v-if="showModalEditForm" class="modal-statement-edit-form-anchor">
 			<wbui2025-edit-statement-group
 				:property-id="propertyId"
+				:statements="statements"
 				@hide="hideEditForm"
 			></wbui2025-edit-statement-group>
 		</div>
