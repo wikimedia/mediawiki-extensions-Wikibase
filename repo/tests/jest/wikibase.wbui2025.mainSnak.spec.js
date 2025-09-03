@@ -10,27 +10,30 @@ const { createTestingPinia } = require( '@pinia/testing' );
 
 describe( 'wikibase.wbui2025.mainSnak', () => {
 	describe( 'the mounted component', () => {
-
-		it( 'correctly sets the properties in the HTML', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
-					mainSnak: {
-						datatype: 'string',
-						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-						property: 'P1',
-						datavalue: { value: 'p1', type: 'string' }
-					}
-				},
+		function mountMainSnakView( props = {}, initialState = {} ) {
+			return mount( mainSnakView, {
+				props,
 				global: {
 					plugins: [ createTestingPinia( {
-						initialState: {
-							serverRenderedHtml: {
-								snakValues: new Map( [
-									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
-								] )
-							}
-						}
+						initialState
 					} ) ]
+				}
+			} );
+		}
+
+		it( 'correctly sets the properties in the HTML', async () => {
+			const wrapper = await mountMainSnakView( {
+				mainSnak: {
+					datatype: 'string',
+					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+					property: 'P1',
+					datavalue: { value: 'p1', type: 'string' }
+				}
+			}, {
+				serverRenderedHtml: {
+					snakValues: new Map( [
+						[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
+					] )
 				}
 			} );
 
@@ -43,14 +46,12 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 		} );
 
 		it( 'sets a custom class for a media snak', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
-					mainSnak: {
-						datatype: 'commonsMedia',
-						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-						property: 'P1',
-						datavalue: { value: 'p1', type: 'string' }
-					}
+			const wrapper = await mountMainSnakView( {
+				mainSnak: {
+					datatype: 'commonsMedia',
+					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+					property: 'P1',
+					datavalue: { value: 'p1', type: 'string' }
 				}
 			} );
 
@@ -61,14 +62,12 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 		} );
 
 		it( 'sets a custom class for a time snak', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
-					mainSnak: {
-						datatype: 'time',
-						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-						property: 'P1',
-						datavalue: { value: 'p1', type: 'time' }
-					}
+			const wrapper = await mountMainSnakView( {
+				mainSnak: {
+					datatype: 'time',
+					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+					property: 'P1',
+					datavalue: { value: 'p1', type: 'time' }
 				}
 			} );
 
