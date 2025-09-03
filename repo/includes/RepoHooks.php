@@ -984,6 +984,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statusMessage.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue',
@@ -992,6 +993,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
+					'resources/wikibase.wbui2025/store/messageStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
@@ -1039,6 +1041,7 @@ final class RepoHooks implements
 					'CdxButton',
 					'CdxIcon',
 					'CdxLookup',
+					'CdxMessage',
 					'CdxSelect',
 					'CdxTextInput',
 				],

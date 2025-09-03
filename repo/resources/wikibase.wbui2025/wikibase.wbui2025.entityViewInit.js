@@ -6,9 +6,8 @@
 
 	const Vue = require( 'vue' );
 	const Pinia = require( 'pinia' );
-	const StatementGroupView = require( './wikibase.wbui2025.statementGroupView.vue' );
-	const AddStatementButton = require( './wikibase.wbui2025.addStatementButton.vue' );
 	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
+	const { useMessageStore } = require( './store/messageStore.js' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
@@ -20,6 +19,11 @@
 		// frontend code) run before this one and modify the DOM, what's being imported may not actually
 		// be the untouched, server-rendered HTML.
 		useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
+		useMessageStore( pinia );
+
+		const AddStatementButton = require( './wikibase.wbui2025.addStatementButton.vue' );
+		const StatusMessage = require( './wikibase.wbui2025.statusMessage.vue' );
+		const StatementGroupView = require( './wikibase.wbui2025.statementGroupView.vue' );
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
@@ -41,6 +45,10 @@
 				Vue.createMwApp( AddStatementButton, {} )
 					.mount( addContainer );
 			}
+			const statusMessageContainer = document.getElementById( 'wikibase-wbui2025-status-message-mount-point' );
+			Vue.createMwApp( StatusMessage, {} )
+				.use( pinia )
+				.mount( statusMessageContainer );
 		} );
 	} else {
 		mw.error( 'Unable to find statement list placeholder element to mount mobile statement view' );

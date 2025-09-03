@@ -201,6 +201,7 @@ class StatementSectionsView {
 				$snakValueHtmlLookup
 			);
 		}
+		$rendered .= '<div id="wikibase-wbui2025-status-message-mount-point" aria-live="polite"></div>';
 		return $rendered;
 	}
 
