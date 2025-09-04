@@ -1,8 +1,10 @@
 <template>
 	<teleport to="body">
-		<div class="wikibase-wbui2025-modal-overlay">
-			<slot></slot>
-		</div>
+		<transition name="wikibase-wbui2025-modal-slide-in" appear>
+			<div class="wikibase-wbui2025-modal-overlay">
+				<slot></slot>
+			</div>
+		</transition>
 	</teleport>
 </template>
 
@@ -35,6 +37,15 @@ module.exports = exports = defineComponent( {
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
+}
+
+.wikibase-wbui2025-modal-slide-in-enter-active {
+	transition-duration: @transition-duration-base;
+	transition-timing-function: @transition-timing-function-user;
+}
+
+.wikibase-wbui2025-modal-slide-in-enter-from {
+	left: 100%;
 }
 
 body.wikibase-wbui2025-modal-open {
