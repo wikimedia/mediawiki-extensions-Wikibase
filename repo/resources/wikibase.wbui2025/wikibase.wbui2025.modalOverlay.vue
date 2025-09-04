@@ -1,7 +1,9 @@
 <template>
-	<div class="wikibase-wbui2025-modal-overlay">
-		<slot></slot>
-	</div>
+	<teleport to="body">
+		<div class="wikibase-wbui2025-modal-overlay">
+			<slot></slot>
+		</div>
+	</teleport>
 </template>
 
 <script>
@@ -11,16 +13,10 @@ const { defineComponent } = require( 'vue' );
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025ModalOverlay',
 	mounted() {
-		[ 'body', '.minerva-footer', '.minerva-header' ]
-			.map( ( el ) => document.querySelector( el ) )
-			.filter( ( el ) => el )
-			.forEach( ( el ) => el.classList.add( 'wikibase-wbui2025-modal-open' ) );
+		document.body.classList.add( 'wikibase-wbui2025-modal-open' );
 	},
 	unmounted() {
-		[ 'body', '.minerva-footer', '.minerva-header' ]
-			.map( ( el ) => document.querySelector( el ) )
-			.filter( ( el ) => el )
-			.forEach( ( el ) => el.classList.remove( 'wikibase-wbui2025-modal-open' ) );
+		document.body.classList.remove( 'wikibase-wbui2025-modal-open' );
 	}
 } );
 </script>
@@ -39,14 +35,6 @@ module.exports = exports = defineComponent( {
 	justify-content: center;
 	align-items: center;
 	z-index: 1;
-}
-
-.minerva-header.wikibase-wbui2025-modal-open {
-	display: none;
-}
-
-.minerva-footer.wikibase-wbui2025-modal-open {
-	display: none;
 }
 
 body.wikibase-wbui2025-modal-open {
