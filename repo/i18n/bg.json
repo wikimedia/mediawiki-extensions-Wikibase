@@ -234,5 +234,6 @@
 	"right-property-term": "Променяне на условията за Свойствата (етикети, описания, псевдоними)",
 	"action-property-create": "създаване на Свойства",
 	"right-property-create": "Създаване на Свойства",
-	"wikibase-pageinfo-subscription-none": "Никакво"
+	"wikibase-pageinfo-subscription-none": "Никакво",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Отказ"
 }
