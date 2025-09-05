@@ -102,8 +102,8 @@ class RecentChangeSaveHookHandler {
 		$hasOtherStatementChanges = $compactDiff->getStatementChangesExcludingQualOrRefOnly() !== [];
 
 		// Find any different aspect changes, other than statement change
-		$hasNonStatementChange = $compactDiff->getDescriptionChanges() !== [] || $compactDiff->getLabelChanges() !== []
-			|| $compactDiff->getSiteLinkChanges() !== [] || $compactDiff->hasOtherChanges();
+		$hasNonStatementChange = $compactDiff->getDescriptionChanges() !== [] || $compactDiff->getAliasChanges() !== []
+			|| $compactDiff->getLabelChanges() !== [] || $compactDiff->getSiteLinkChanges() !== [] || $compactDiff->hasOtherChanges();
 
 		$allAreRefOrQualOnlyChanges = !$hasOtherStatementChanges && !$hasNonStatementChange;
 
