@@ -15,7 +15,7 @@
 					<wikibase-wbui2025-edit-statement
 						v-model:rank="valueForms[index].statement.rank"
 						v-model:main-snak="valueForms[index].statement.mainsnak"
-						:statement="valueForms[index].statement"
+						:statement-id="valueForms[index].statement.id"
 						:value-id="valueForm.id"
 						@remove="removeValue"
 					></wikibase-wbui2025-edit-statement>
@@ -33,7 +33,7 @@
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
 					</cdx-button>
-					<cdx-button class="inactive">
+					<cdx-button :class="{ inactive: formSubmitted }" @click="submitForm">
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
 						{{ saveMessage }}
 					</cdx-button>
@@ -55,7 +55,9 @@ const {
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
-const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const { propertyLinkHtml, updateSnakValueHtml } = require( './store/serverRenderedHtml.js' );
+const { getStatementsForProperty } = require( './store/statementsStore.js' );
+const { updateMainSnak, renderSnakValueHtml } = require( './api/editEntity.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -71,8 +73,8 @@ module.exports = exports = defineComponent( {
 			type: String,
 			required: true
 		},
-		statements: {
-			type: Array,
+		entityId: {
+			type: String,
 			required: true
 		}
 	},
@@ -88,7 +90,8 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			valueForms: [],
-			maxValueFormId: 0
+			maxValueFormId: 0,
+			formSubmitted: false
 		};
 	},
 	computed: {
@@ -101,6 +104,9 @@ module.exports = exports = defineComponent( {
 			} else {
 				return mw.msg( 'wikibase-save' );
 			}
+		},
+		statements() {
+			return getStatementsForProperty( this.propertyId );
 		}
 	},
 	methods: {
@@ -111,6 +117,7 @@ module.exports = exports = defineComponent( {
 				valueForm.statement = Object.assign( {}, statement );
 			} else {
 				valueForm.statement = Object.assign( {}, {
+					id: null,
 					mainSnak: {
 						datavalue: {
 							value: '',
@@ -126,6 +133,22 @@ module.exports = exports = defineComponent( {
 		},
 		removeValue( valueId ) {
 			this.valueForms = this.valueForms.filter( ( form ) => form.id !== valueId );
+		},
+		submitForm() {
+			this.formSubmitted = true;
+			if ( this.valueForms.length === 0 ) {
+				return;
+			}
+			updateMainSnak(
+				this.entityId,
+				this.valueForms[ 0 ].statement.id,
+				this.valueForms[ 0 ].statement.mainsnak
+			)
+				.then( () => renderSnakValueHtml( this.valueForms[ 0 ].statement.mainsnak.datavalue ) )
+				.then( ( result ) => {
+					updateSnakValueHtml( this.valueForms[ 0 ].statement.mainsnak.hash, result );
+					this.$emit( 'hide' );
+				} );
 		}
 	},
 	mounted: function () {

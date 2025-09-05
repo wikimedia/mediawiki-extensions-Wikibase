@@ -7,8 +7,8 @@
 				:id="concat( 'wikibase-wbui2025-statementwrapper-', propertyId )"
 				:key="propertyId">
 				<wbui2025-statement-group-view
-					:statements="propertyStatementMap[propertyId]"
 					:property-id="propertyId"
+					:entity-id="entityId"
 				></wbui2025-statement-group-view>
 			</div>
 			<div class="wikibase-wbui2025-statement-section-add-wrapper"></div>
@@ -36,8 +36,8 @@ module.exports = exports = defineComponent( {
 			type: Array,
 			required: true
 		},
-		propertyStatementMap: {
-			type: Object,
+		entityId: {
+			type: String,
 			required: true
 		}
 	},

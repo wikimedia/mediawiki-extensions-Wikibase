@@ -114,7 +114,9 @@ class PropertyView extends EntityView {
 		$html = $this->getHtmlForTerms( $property )
 			. $this->templateFactory->render( 'wikibase-toc' )
 			. $this->getHtmlForDataType( $property->getDataTypeId() )
-			. $this->statementSectionsView->getHtml( $property->getStatements(), wbui2025Ready: true );
+			. $this->statementSectionsView->getHtml(
+				$property->getStatements(), entityId: $property->getId(), wbui2025Ready: true
+			);
 
 		$footer = wfMessage( 'wikibase-property-footer' );
 		$footer = $footer->exists() ? $footer->parse() : '';

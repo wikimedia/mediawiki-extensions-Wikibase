@@ -8,6 +8,7 @@
 	const Pinia = require( 'pinia' );
 	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
 	const { useMessageStore } = require( './store/messageStore.js' );
+	const { useStatementsStore, getPropertyIds } = require( './store/statementsStore.js' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
@@ -27,13 +28,13 @@
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
-			const statements = data.claims;
-			const propertyIds = Object.keys( statements );
+			const statementStore = useStatementsStore( pinia );
+			statementStore.populateWithClaims( data.claims );
 
-			for ( const propertyId of propertyIds ) {
+			for ( const propertyId of getPropertyIds() ) {
 				const rootProps = {
-					statements: statements[ propertyId ],
-					propertyId
+					propertyId,
+					entityId: data.id
 				};
 				const rootContainer = wbui2025StatementList.querySelector( `#wikibase-wbui2025-statementwrapper-${ propertyId }` );
 				Vue.createMwApp( StatementGroupView, rootProps )

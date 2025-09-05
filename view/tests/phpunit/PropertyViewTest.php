@@ -8,12 +8,14 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -148,6 +150,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	}
 
 	public static function provideTestVueStatementsView(): iterable {
+		$guidGenerator = new GuidGenerator();
 		return [
 			[
 				'viewFactory' => fn ( self $self ) => $self->newPropertyView(),
@@ -157,14 +160,24 @@ class PropertyViewTest extends EntityViewTestCase {
 			[
 				'viewFactory' => fn ( self $self ) => $self->newPropertyView( [], true ),
 				'property' => self::newEntityForStatements( [
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P1' ),
-						new StringValue( 'p1' )
-					) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P2' ),
-						new StringValue( 'p2' )
-					) ),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P1' ),
+							new StringValue( 'p1' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P2' ),
+							new StringValue( 'p2' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
 				] ),
 				'vueStatementsExpected' => true,
 			],

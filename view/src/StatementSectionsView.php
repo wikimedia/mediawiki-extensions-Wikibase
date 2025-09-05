@@ -5,6 +5,7 @@ namespace Wikibase\View;
 use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use Traversable;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
@@ -14,6 +15,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\Template\TemplateFactory;
+use Wikimedia\Assert\Assert;
 use WMDE\VueJsTemplating\App;
 
 /**
@@ -145,6 +147,7 @@ class StatementSectionsView {
 
 	/**
 	 * @param App $app The Vue App
+	 * @param string $entityId
 	 * @param string $sectionHeadingHtml Section heading as HTML
 	 * @param StatementList $statementsList
 	 * @param array &$snakValueHtmlLookup
@@ -152,9 +155,10 @@ class StatementSectionsView {
 	 */
 	private function renderStatementsSectionHtml(
 		App $app,
+		string $entityId,
 		string $sectionHeadingHtml,
 		StatementList $statementsList,
-		array &$snakValueHtmlLookup
+		array &$snakValueHtmlLookup,
 	): string {
 		$propertyStatementMap = [];
 		$propertyList = [];
@@ -182,30 +186,47 @@ class StatementSectionsView {
 			'sectionHeadingHtml' => $sectionHeadingHtml,
 			'propertyList' => $propertyList,
 			'propertyStatementMap' => $propertyStatementMap,
+			'entityId' => $entityId,
 		] );
 	}
 
 	/**
 	 * @param StatementList[] $statementsLists
 	 * @param App $app
+	 * @param string $entityId
 	 * @param array &$snakValueHtmlLookup
 	 * @return string HTML
 	 */
-	private function getVueStatementSectionsHtml( array $statementsLists, App $app, array &$snakValueHtmlLookup ): string {
+	private function getVueStatementSectionsHtml(
+		array $statementsLists,
+		App $app,
+		string $entityId,
+		array &$snakValueHtmlLookup,
+	): string {
 		$rendered = '';
 		foreach ( $this->iterateOverNonEmptyStatementSections( $statementsLists ) as $key => $statementsList ) {
 			$rendered .= $this->renderStatementsSectionHtml(
 				$app,
+				$entityId,
 				$this->getHtmlForSectionHeading( $key ),
 				$statementsList,
-				$snakValueHtmlLookup
+				$snakValueHtmlLookup,
 			);
 		}
 		$rendered .= '<div id="wikibase-wbui2025-status-message-mount-point" aria-live="polite"></div>';
 		return $rendered;
 	}
 
-	private function setupVueTemplateRenderer( array &$snakValueHtmlLookup ): App {
+	/**
+	 * @param array &$snakValueHtmlLookup
+	 * @param array<StatementList> $statementsLists
+	 * @return App
+	 */
+	private function setupVueTemplateRenderer(
+		array &$snakValueHtmlLookup,
+		array $statementsLists,
+	): App {
+		$statementSerializer = $this->serializerFactory->newStatementSerializer();
 		$app = new App( [
 			'snakValueHtml' => function ( $snak ) use ( &$snakValueHtmlLookup ) {
 				if ( array_key_exists( $snak['hash'], $snakValueHtmlLookup ) ) {
@@ -227,12 +248,22 @@ class StatementSectionsView {
 		$app->registerComponentTemplate(
 			'wbui2025-statement-group-view',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' ),
-			function( array $data ): array {
+			function( array $data ) use ( $statementsLists, $statementSerializer ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
 				'@phan-var PropertyId $propertyId';
 				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+				$statementsByProperty = array_merge(
+					...array_map(
+						fn ( $statementsList ) => $statementsList->getByPropertyId( $propertyId )->toArray(),
+						array_values( $statementsLists )
+					)
+				);
+				$data['statements'] = array_map(
+					fn ( $statement ) => $statementSerializer->serialize( $statement ),
+					$statementsByProperty
+				);
 				$data['isUnsupportedDataType'] = !in_array( $dataType, self::WBUI2025_SUPPORTED_DATATYPES, strict: true );
 				$data['showModalEditForm'] = false;
 				return $data;
@@ -241,7 +272,16 @@ class StatementSectionsView {
 		$app->registerComponentTemplate(
 			'wbui2025-statement-view',
 			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
-			function ( array $data ): array {
+			function ( array $data ) use ( $statementsLists, $statementSerializer ): array {
+				$statementById = current(
+					array_filter(
+						array_map(
+							fn ( $statementList ) => $statementList->getFirstStatementWithGuid( $data['statementId'] ),
+							array_values( $statementsLists )
+						)
+					)
+				);
+				$data['statement'] = $statementSerializer->serialize( $statementById );
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
 				$data['qualifiersOrder'] =
@@ -317,15 +357,21 @@ class StatementSectionsView {
 	}
 
 	/**
+	 * @param EntityId $entityId
 	 * @param StatementList[] $statementsLists
 	 * @return string HTML
 	 */
-	private function getVueStatementsHtml( array $statementsLists ): string {
+	private function getVueStatementsHtml( EntityId $entityId, array $statementsLists ): string {
 		$snakValueHtmlLookup = [];
-		$app = $this->setupVueTemplateRenderer( $snakValueHtmlLookup );
+		$app = $this->setupVueTemplateRenderer( $snakValueHtmlLookup, $statementsLists );
 
 		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
-			$this->getVueStatementSectionsHtml( $statementsLists, $app, $snakValueHtmlLookup ) .
+			$this->getVueStatementSectionsHtml(
+				$statementsLists,
+				$app,
+				$entityId->getSerialization(),
+				$snakValueHtmlLookup,
+			) .
 			"</div>";
 	}
 
@@ -350,15 +396,17 @@ class StatementSectionsView {
 
 	/**
 	 * @param StatementList $statementList
+	 * @param ?EntityId $entityId
 	 * @param bool $wbui2025Ready whether the caller supports wbui2025
 	 *
 	 * @throws InvalidArgumentException
 	 * @return string HTML
 	 */
-	public function getHtml( StatementList $statementList, bool $wbui2025Ready = false ) {
+	public function getHtml( StatementList $statementList, ?EntityId $entityId = null, bool $wbui2025Ready = false ) {
 		$statementLists = $this->statementGrouper->groupStatements( $statementList );
 		if ( $wbui2025Ready && $this->vueStatementsView ) {
-			return $this->getVueStatementsHtml( $statementLists );
+			Assert::invariant( $entityId !== null, 'entityId should be set when wbui2025Ready' );
+			return $this->getVueStatementsHtml( $entityId, $statementLists );
 		}
 
 		$html = '';

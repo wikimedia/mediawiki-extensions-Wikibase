@@ -120,7 +120,9 @@ class ItemView extends EntityView {
 
 		$termsHtml = $this->getHtmlForTerms( $item );
 		$tocHtml = $this->templateFactory->render( 'wikibase-toc' );
-		$statementsHtml = $this->statementSectionsView->getHtml( $item->getStatements(), wbui2025Ready: true );
+		$statementsHtml = $this->statementSectionsView->getHtml(
+			$item->getStatements(), entityId: $item->getId(), wbui2025Ready: true
+		);
 
 		return $termsHtml . $tocHtml . $statementsHtml;
 	}

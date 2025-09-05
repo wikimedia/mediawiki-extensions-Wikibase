@@ -40,20 +40,33 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1',
-					statements: [ {
-						mainSnak: {
-							datavalue: {
-								value: '',
-								type: 'string'
-							}
-						},
-						rank: 'normal'
-
-					} ]
+					entityId: 'Q123'
 				},
 				global: {
 					plugins: [
-						createTestingPinia()
+						createTestingPinia( {
+							initialState: {
+								statements: {
+									statements: new Map( [
+										[ 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7',
+											{
+												id: 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7',
+												mainSnak: {
+													datavalue: {
+														value: '',
+														type: 'string'
+													}
+												},
+												rank: 'normal'
+											}
+										]
+									] ),
+									properties: new Map( [
+										[ 'P1', [ 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7' ] ]
+									] )
+								}
+							}
+						} )
 					]
 				}
 			} );

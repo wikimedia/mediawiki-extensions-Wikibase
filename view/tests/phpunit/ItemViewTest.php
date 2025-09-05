@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Filter\DataTypeStatementFilter;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -93,6 +94,7 @@ class ItemViewTest extends EntityViewTestCase {
 	}
 
 	public static function provideTestVueStatementsView(): iterable {
+		$guidGenerator = new GuidGenerator();
 		return [
 			[
 				'viewFactory' => fn ( self $self ) => $self->newItemView(),
@@ -104,32 +106,53 @@ class ItemViewTest extends EntityViewTestCase {
 				'item' => self::newEntityForStatements( [
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( 'P1' ),
-						new StringValue( 'p1' )
+						new StringValue( 'p1' ),
 					), new SnakList( [
 						new PropertyValueSnak(
 							new NumericPropertyId( 'P10' ),
 							new StringValue( 'qualifier10' )
 						),
-					] ) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P2' ),
-						new StringValue( 'p2' )
-					), new SnakList(), new ReferenceList( [
-						new Reference( new SnakList( [
-							new PropertyValueSnak(
-								new NumericPropertyId( 'P20' ),
-								new StringValue( 'reference20' ),
+					]
+					),
+					null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P2' ),
+							new StringValue( 'p2' )
+						),
+						new SnakList(),
+						new ReferenceList( [
+							new Reference(
+								new SnakList( [
+									new PropertyValueSnak(
+										new NumericPropertyId( 'P20' ),
+										new StringValue( 'reference20' ),
+									),
+								] )
 							),
-						] ) ),
-					] ) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
-						new StringValue( 'https://www.example.com/url' )
-					) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
-						new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN )
-					) ),
+						] ),
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
+							new StringValue( 'https://www.example.com/url' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
+							new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
 				] ),
 				'vueStatementsExpected' => true,
 			],

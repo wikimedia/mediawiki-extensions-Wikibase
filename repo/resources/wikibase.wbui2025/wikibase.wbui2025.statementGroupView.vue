@@ -3,7 +3,7 @@
 		<div v-if="showModalEditForm" class="modal-statement-edit-form-anchor">
 			<wbui2025-edit-statement-group
 				:property-id="propertyId"
-				:statements="statements"
+				:entity-id="entityId"
 				@hide="hideEditForm"
 			></wbui2025-edit-statement-group>
 		</div>
@@ -27,7 +27,7 @@
 		<wbui2025-statement-view
 			v-for="statement in statements"
 			:key="statement"
-			:statement="statement"
+			:statement-id="statement.id"
 		></wbui2025-statement-view>
 	</div>
 </template>
@@ -38,6 +38,7 @@ const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
 const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
+const { getStatementsForProperty } = require( './store/statementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -48,8 +49,8 @@ module.exports = exports = defineComponent( {
 		Wbui2025EditStatementGroup
 	},
 	props: {
-		statements: {
-			type: Array,
+		entityId: {
+			type: String,
 			required: true
 		},
 		propertyId: {
@@ -63,6 +64,9 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	computed: {
+		statements() {
+			return getStatementsForProperty( this.propertyId );
+		},
 		isUnsupportedDataType() {
 			const datatype = this.statements[ 0 ].mainsnak.datatype;
 			return !supportedDatatypes.includes( datatype );

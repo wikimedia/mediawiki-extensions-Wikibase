@@ -66,8 +66,14 @@ function snakValueHtml( snak ) {
 	return serverRenderedHtml.snakValues.get( snak.hash );
 }
 
+function updateSnakValueHtml( hash, html ) {
+	const serverRenderedHtml = useServerRenderedHtml();
+	serverRenderedHtml.snakValues.set( hash, html );
+}
+
 module.exports = {
 	useServerRenderedHtml,
 	propertyLinkHtml,
-	snakValueHtml
+	snakValueHtml,
+	updateSnakValueHtml
 };

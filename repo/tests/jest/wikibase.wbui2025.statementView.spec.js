@@ -19,20 +19,29 @@ describe( 'wikibase.wbui2025.statementView', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		const globalOptions = {
-			plugins: [
-				createTestingPinia()
-			]
+		const globalOptions = function ( initialState ) {
+			return {
+				plugins: [
+					createTestingPinia( { initialState } )
+				]
+			};
 		};
 
 		it( 'mounts successfully with empty default qualifiers and references', () => {
 			const wrapper = mount( statementViewComponent, {
 				props: {
-					statement: {
-						mainsnak: { snaktype: 'somevalue' }
-					}
+					statementId: 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7'
 				},
-				global: globalOptions
+				global: globalOptions( {
+					statements: {
+						statements: new Map( [
+							[ 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7', {
+								id: 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7',
+								mainsnak: { snaktype: 'somevalue' }
+							} ]
+						] )
+					}
+				} )
 			} );
 
 			expect( wrapper.exists() ).toBe( true );
@@ -74,14 +83,21 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			} ];
 			const wrapper = mount( statementViewComponent, {
 				props: {
-					statement: {
-						mainsnak: mainSnak,
-						qualifiers,
-						'qualifiers-order': qualifiersOrder,
-						references
-					}
+					statementId: 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2'
 				},
-				global: globalOptions
+				global: globalOptions( {
+					statements: {
+						statements: new Map( [
+							[ 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2', {
+								id: 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2',
+								mainsnak: mainSnak,
+								qualifiers,
+								'qualifiers-order': qualifiersOrder,
+								references
+							} ]
+						] )
+					}
+				} )
 			} );
 
 			const mainSnakWrappers = wrapper.findAllComponents( mainSnakComponent );

@@ -8,6 +8,8 @@ export class ItemViewPage {
 
 	public static EDIT_LINKS = '.wikibase-wbui2025-edit-link';
 
+	public static SNAK_VALUES = '.wikibase-wbui2025-snak-value > p';
+
 	private itemId: string;
 
 	public constructor( itemId: string ) {
@@ -26,5 +28,9 @@ export class ItemViewPage {
 
 	public editLinks(): Chainable {
 		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.EDIT_LINKS );
+	}
+
+	public snakValues(): Chainable {
+		return cy.get( ItemViewPage.SNAK_VALUES );
 	}
 }

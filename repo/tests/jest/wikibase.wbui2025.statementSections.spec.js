@@ -49,8 +49,8 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 			wrapper = await mount( statementSections, {
 				props: {
 					sectionHeadingHtml: '<h2>Heading</h2>',
-					propertyStatementMap: { P1: [ mockStatement ] },
-					propertyList: [ 'P1' ]
+					propertyList: [ 'P1' ],
+					entityId: 'Q1'
 				},
 				global: {
 					plugins: [ createTestingPinia( {
@@ -62,6 +62,10 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 								snakValues: new Map( [
 									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
 								] )
+							},
+							statements: {
+								statements: new Map( [ [ mockStatement.id, mockStatement ] ] ),
+								properties: new Map( [ [ 'P1', [ mockStatement.id ] ] ] )
 							}
 						}
 					} ) ]
