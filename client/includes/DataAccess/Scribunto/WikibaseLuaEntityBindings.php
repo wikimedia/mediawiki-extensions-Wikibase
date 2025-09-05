@@ -103,6 +103,19 @@ class WikibaseLuaEntityBindings {
 	}
 
 	/**
+	 * Add a statement usage (called once specific statements are accessed) when the qualifiers and/or references are also accessed.
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 * @param string $propertyId Property id of the statements accessed.
+	 */
+	public function addStatementWithQualOrRefUsage( string $entityId, string $propertyId ): void {
+		$entityId = $this->entityIdParser->parse( $entityId );
+		$propertyId = new NumericPropertyId( $propertyId );
+
+		$this->usageAccumulator->addStatementWithQualOrRefUsage( $entityId, $propertyId );
+	}
+
+	/**
 	 * Add a label usage (called once specific labels are accessed).
 	 *
 	 * @param string $entityId The Entity from which the labels were accessed.

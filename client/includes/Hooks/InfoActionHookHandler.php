@@ -209,6 +209,8 @@ class InfoActionHookHandler implements InfoActionHook {
 			//   wikibase-pageinfo-entity-usage-D-with-modifier
 			//   wikibase-pageinfo-entity-usage-C
 			//   wikibase-pageinfo-entity-usage-C-with-modifier
+			//   wikibase-pageinfo-entity-usage-CQR
+			//   wikibase-pageinfo-entity-usage-CQR-with-modifier
 			//   wikibase-pageinfo-entity-usage-S
 			//   wikibase-pageinfo-entity-usage-T
 			//   wikibase-pageinfo-entity-usage-X
