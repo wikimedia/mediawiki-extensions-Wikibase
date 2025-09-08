@@ -79,7 +79,7 @@
 	"wikibase-restore-title": "Restaurando la revisión antigua de «$1»",
 	"wikibase-partial-undo": "La edición pue desfacese parcialmente.",
 	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|cambiu nun pue|cambios nun puen}} desfacese porque mentanto {{PLURAL:$1|el valor camudó|los valores camudaron}}.",
-	"wikibase-empty-undo": "Nun hai ren que pueda desfacese equí.",
+	"wikibase-empty-undo": "Nun hai nada que pueda desfacese equí.",
 	"wikibase-undo-revision-error": "Falló desfacer",
 	"wikibase-undo-samerev": "Hai que dar dos revisiones distintes pa desfacer una edición.",
 	"wikibase-undo-badpage": "Revisión incorreuta: La revisión $2 nun pertenez a [[:$1]].",

@@ -41,6 +41,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "ворид намудани тавзеҳот ба $1",
 	"wikibase-aliases-edit-placeholder": "ворид намудани ягон синоним",
 	"wikibase-aliases-edit-placeholder-language-aware": "ворид намудани ягон синоним ба $1",
+	"wikibase-aliases-edit-label": "Номҳои иловагӣ, ки бо хати рост (I) бояд ҷудо карда шаванд:",
 	"wikibase-content-language-edit-label": "Забон:",
 	"wikibase-diffview-reference": "эзоҳ",
 	"wikibase-diffview-rank": "рутба",
