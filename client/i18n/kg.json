@@ -13,5 +13,6 @@
 	"wikibase-linkitem-linkpage": "Link with page",
 	"wikibase-linkitem-selectlink": "Please select a site and a page that you want to link to this page.",
 	"wikibase-linkitem-input-site": "Ndinga:",
-	"wikibase-linkitem-input-page": "Lutiti:"
+	"wikibase-linkitem-input-page": "Lutiti:",
+	"wikibase-rc-hide-wikidata-hide": "Hide"
 }

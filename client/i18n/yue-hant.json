@@ -12,7 +12,7 @@
 	"wikibase-client-desc": "Wikibase擴展客戶端",
 	"tooltip-t-wikibase": "連到接住資料儲存庫嘅項目",
 	"wikibase-after-page-move": "你嘅搬動應該依家[$1 反映喺{{WBREPONAME}}項目]語言連，我哋問你查返呢個已經發生咗。",
-	"wikibase-after-page-delete": "呢版嘅連結應該喺[$1 相關嘅{{WBREPONAME}}項]入面剷走咗。我哋想請你檢查呢個樣嘢發生咗。",
+	"wikibase-after-page-delete": "呢版嘅連結應該由[$1 相關嘅{{WBREPONAME}}項]度剷走咗。我哋想請你檢查呢樣嘢發生咗。",
 	"wikibase-comment-add": "成功建立{{WBREPONAME}}項。",
 	"wikibase-comment-remove": "刪咗相關嘅{{WBREPONAME}}項。剷咗語言條拎。",
 	"wikibase-comment-linked": "一個{{WBREPONAME}}項已經連結到呢個頁面。",
