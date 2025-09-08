@@ -15,6 +15,8 @@
 					<wikibase-wbui2025-edit-statement
 						v-model:rank="valueForms[index].statement.rank"
 						v-model:main-snak="valueForms[index].statement.mainsnak"
+						v-model:qualifiers="valueForms[index].statement.qualifiers"
+						v-model:qualifiers-order="valueForms[index].statement['qualifiers-order']"
 						:statement-id="valueForms[index].statement.id"
 						:value-id="valueForm.id"
 						@remove="removeValue"
@@ -63,7 +65,7 @@ const {
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
-const { propertyLinkHtml, updateSnakValueHtml } = require( './store/serverRenderedHtml.js' );
+const { propertyLinkHtml, snakValueHtml, updateSnakValueHtml } = require( './store/serverRenderedHtml.js' );
 const {
 	getStatementsForProperty,
 	updateStatementData,
@@ -161,11 +163,30 @@ module.exports = exports = defineComponent( {
 			).then( ( returnedClaims ) => {
 				this.claimsToDeleteOnSubmit().map( ( claim ) => removeStatementData( this.propertyId, claim.id ) );
 				setStatementIdsForProperty( this.propertyId, returnedClaims.map( ( claim ) => claim.id ) );
-				returnedClaims.forEach( ( claim ) => updateStatementData( claim.id, claim ) );
+				const snaksWithoutHtml = [];
+				returnedClaims.forEach( ( claim ) => {
+					updateStatementData( claim.id, claim );
+
+					if ( !snakValueHtml( claim.mainsnak.hash ) ) {
+						snaksWithoutHtml.push( claim.mainsnak );
+					}
+
+					if ( claim.qualifiers ) {
+						for ( const propertyId in claim.qualifiers ) {
+							for ( const qualifier of claim.qualifiers[ propertyId ] ) {
+								if ( !snakValueHtml( qualifier.hash ) ) {
+									snaksWithoutHtml.push( qualifier );
+								}
+							}
+						}
+					}
+				} );
+
 				return Promise.all(
-					returnedClaims.map(
-						( claim ) => renderSnakValueHtml( claim.mainsnak.datavalue )
-								.then( ( result ) => updateSnakValueHtml( claim.mainsnak.hash, result ) ) )
+					snaksWithoutHtml.map(
+						( snak ) => renderSnakValueHtml( snak.datavalue )
+							.then( ( result ) => updateSnakValueHtml( snak.hash, result ) )
+					)
 				);
 			} )
 			.then( () => {

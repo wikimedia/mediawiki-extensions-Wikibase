@@ -54,6 +54,11 @@ function propertyLinkHtml( propertyId ) {
 	return serverRenderedHtml.propertyLinks.get( propertyId );
 }
 
+function updatePropertyLinkHtml( propertyId, html ) {
+	const serverRenderedHtml = useServerRenderedHtml();
+	serverRenderedHtml.propertyLinks.set( propertyId, html );
+}
+
 /**
  * Return the HTML for the value/somevalue/novalue part of the given snak.
  * Does not include the property.
@@ -74,6 +79,7 @@ function updateSnakValueHtml( hash, html ) {
 module.exports = {
 	useServerRenderedHtml,
 	propertyLinkHtml,
+	updatePropertyLinkHtml,
 	snakValueHtml,
 	updateSnakValueHtml
 };

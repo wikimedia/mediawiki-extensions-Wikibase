@@ -1,5 +1,5 @@
 <template>
-	<teleport to="body">
+	<teleport to="#mw-teleport-target">
 		<transition name="wikibase-wbui2025-modal-slide-in" appear>
 			<div class="wikibase-wbui2025-modal-overlay">
 				<slot></slot>
@@ -18,7 +18,10 @@ module.exports = exports = defineComponent( {
 		document.body.classList.add( 'wikibase-wbui2025-modal-open' );
 	},
 	unmounted() {
-		document.body.classList.remove( 'wikibase-wbui2025-modal-open' );
+		const target = document.getElementById( 'mw-teleport-target' );
+		if ( target && target.childElementCount === 0 ) {
+			document.body.classList.remove( 'wikibase-wbui2025-modal-open' );
+		}
 	}
 } );
 </script>

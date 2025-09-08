@@ -29,13 +29,20 @@ const renderSnakValueHtml = async function ( dataValue ) {
 		generate: 'text/html; disposition=verbose-preview',
 		datavalue: JSON.stringify( dataValue )
 	} );
-	if ( !fetchResult.result.startsWith( '<' ) ) {
-		return '<p>' + fetchResult.result + '</p>';
-	}
 	return fetchResult.result;
+};
+
+const renderPropertyLinkHtml = async function ( propertyId ) {
+	const fetchResult = await api.get( {
+		action: 'wbformatentities',
+		generate: 'text/html',
+		ids: [ propertyId ]
+	} );
+	return fetchResult.wbformatentities && fetchResult.wbformatentities[ propertyId ];
 };
 
 module.exports = {
 	updateStatements,
-	renderSnakValueHtml
+	renderSnakValueHtml,
+	renderPropertyLinkHtml
 };

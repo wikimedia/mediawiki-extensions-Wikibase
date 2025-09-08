@@ -7,14 +7,24 @@ jest.mock(
 	'../../resources/wikibase.wbui2025/icons.json',
 	() => ( {
 		cdxIconAdd: 'add',
+		cdxIconCheck: 'check',
+		cdxIconClose: 'close',
 		cdxIconTrash: 'trash'
 	} ),
 	{ virtual: true }
 );
 
+const languageCode = 'de';
+const mockConfig = {
+	wgUserLanguage: languageCode
+};
+mw.config = {
+	get: jest.fn( ( key ) => mockConfig[ key ] )
+};
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxSelect, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
+const Wbui2025AddQualifier = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addQualifier.vue' );
 const Wbui2025Qualifiers = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' );
 const Wbui2025References = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' );
 const { storeWithStatements } = require( './piniaHelpers.js' );
@@ -27,6 +37,8 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 	} );
 
 	describe( 'the mounted component', () => {
+		mw.Api.prototype.get = jest.fn().mockResolvedValue( {} );
+
 		let wrapper, addQualifierButton, addReferenceButton, removeButton, textInput, select, qualifiers, references;
 		beforeEach( async () => {
 			const testStatementId = 'Q1$f80539f8-4635-4e4d-ae20-41e027e093b9';
@@ -126,6 +138,8 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 							type: 'string'
 						}
 					},
+					qualifiers: testStatement.qualifiers,
+					qualifiersOrder: testStatement[ 'qualifiers-order' ],
 					statementId: testStatementId
 				},
 				global: {
@@ -150,6 +164,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			expect( removeButton.exists() ).toBe( true );
 			expect( textInput.exists() ).toBe( true );
 			expect( select.exists() ).toBe( true );
+			expect( wrapper.findComponent( Wbui2025AddQualifier ).exists() ).toBe( false );
 		} );
 
 		it( 'emits a remove event when remove is clicked', async () => {
@@ -164,6 +179,42 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			expect( wrapper.findAll( '.wikibase-wbui2025-qualifier' ) ).toHaveLength( 1 );
 			expect( references ).toHaveLength( 1 );
 			expect( wrapper.findAll( '.wikibase-wbui2025-reference-snak' ) ).toHaveLength( 4 );
+		} );
+
+		describe( 'add qualifier', () => {
+			let addQualifierForm;
+
+			beforeEach( async () => {
+				await addQualifierButton.trigger( 'click' );
+				addQualifierForm = wrapper.findComponent( Wbui2025AddQualifier );
+			} );
+
+			it( 'mounts the add qualifier component when add qualifier is clicked', () => {
+				expect( addQualifierForm.exists() ).toBe( true );
+			} );
+
+			it( 'hides the form when "hide" is emitted', async () => {
+				await addQualifierForm.vm.$emit( 'hide' );
+				expect( addQualifierForm.exists() ).toBe( false );
+			} );
+
+			it( 'adds the new qualifier and hides the form when "add-qualifier" is emitted', async () => {
+				const snakData = {
+					snakType: 'value',
+					hash: 'placeholder-hash',
+					property: 'P23',
+					datavalue: {
+						value: 'string value',
+						type: 'string'
+					},
+					datatype: 'string'
+				};
+				await addQualifierForm.vm.$emit( 'add-qualifier', 'P23', snakData );
+				expect( addQualifierForm.exists() ).toBe( false );
+				expect( qualifiers[ 0 ].props( 'qualifiers' ) ).toEqual( expect.objectContaining( {
+					P23: [ snakData ]
+				} ) );
+			} );
 		} );
 	} );
 } );

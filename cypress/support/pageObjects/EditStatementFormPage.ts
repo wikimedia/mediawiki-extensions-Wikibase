@@ -7,6 +7,7 @@ export class EditStatementFormPage {
 		REMOVE_VALUE_BUTTONS: '.wikibase-wbui2025-remove-value > .cdx-button',
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
 		SUBMIT_BUTTONS: '.wikibase-wbui2025-edit-form-actions > .cdx-button',
+		ADD_QUALIFIER_BUTTON: '.wikibase-wbui2025-add-qualifier-button',
 		TEXT_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-text-input input',
 	};
 
@@ -38,6 +39,10 @@ export class EditStatementFormPage {
 
 	public cancelButton(): Chainable {
 		return cy.get( EditStatementFormPage.FORM_ACTIONS ).contains( 'cancel' );
+	}
+
+	public addQualifierButton(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.ADD_QUALIFIER_BUTTON );
 	}
 
 	public textInput(): Chainable {

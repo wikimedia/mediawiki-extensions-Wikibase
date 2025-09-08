@@ -21,26 +21,18 @@
 				</cdx-button>
 			</div>
 		</div>
-		<cdx-lookup
-			v-model:selected="selection"
-			v-model:input-value="inputValue"
-			:menu-items="menuItems"
-			:menu-config="menuConfig"
-			@update:input-value="onUpdateInputValue"
-			@load-more="onLoadMore"
+		<wikibase-wbui2025-property-lookup
+			@update:selected="onPropertySelection"
 		>
-			<template #no-results>
-				{{ $i18n( 'wikibase-entityselector-notfound' ) }}
-			</template>
-		</cdx-lookup>
+		</wikibase-wbui2025-property-lookup>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon, CdxLookup } = require( '../../codex.js' );
+const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { cdxIconCheck, cdxIconClose } = require( './icons.json' );
-const { api } = require( './api/api.js' );
+const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -48,7 +40,7 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxLookup
+		WikibaseWbui2025PropertyLookup
 	},
 	props: {
 		headingMessageKey: {
@@ -61,14 +53,7 @@ module.exports = exports = defineComponent( {
 		return {
 			cdxIconCheck,
 			cdxIconClose,
-			selection: null,
-			inputValue: '',
-			currentSearchTerm: '',
-			menuItems: [],
-			menuConfig: {
-				visibleItemLimit: 3
-			},
-			languageCode: mw.config.get( 'wgUserLanguage' )
+			selection: null
 		};
 	},
 	computed: {
@@ -83,88 +68,8 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		fetchResults( offset = undefined ) {
-			const params = {
-				action: 'wbsearchentities',
-				language: this.languageCode,
-				type: 'property',
-				search: this.currentSearchTerm
-			};
-			if ( offset ) {
-				params.continue = offset;
-			}
-
-			return api.get( params );
-		},
-
-		adaptApiResponse( results ) {
-			return results.map( ( { id, label, url, match, description, display = {} } ) => ( {
-				value: id,
-				label,
-				match: match.type === 'alias' ? `(${ match.text })` : '',
-				description,
-				// url, TODO: ideally we would include the URL here, but it causes unwanted behavior (T342507)
-				language: {
-					label: display && display.label && display.label.language,
-					match: match.type === 'alias' ? match.language : undefined,
-					description: display && display.description && display.description.language
-				}
-			} ) );
-		},
-
-		async onUpdateInputValue( value ) {
-			// internally track the current search term
-			this.currentSearchTerm = value;
-
-			// unset search results if there is no search term
-			if ( !value ) {
-				this.menuItems = [];
-				return;
-			}
-
-			try {
-				const response = await this.fetchResults();
-				// make sure the response is still relevant first
-				if ( this.currentSearchTerm !== value ) {
-					return;
-				}
-				if ( response.search && response.search.length > 0 ) {
-					// format API response into Codex menu items
-					this.menuItems = this.adaptApiResponse( response.search );
-				} else {
-					this.menuItems = [];
-				}
-			} catch ( _ ) {
-				// on error, reset search results
-				this.menuItems = [];
-			}
-		},
-
-		async onLoadMore() {
-			const value = this.currentSearchTerm;
-			if ( !value ) {
-				return;
-			}
-
-			try {
-				const response = await this.fetchResults( this.menuItems.length );
-				// make sure the response is still relevant first
-				if ( this.currentSearchTerm !== value ) {
-					return;
-				}
-				if ( response.search && response.search.length > 0 ) {
-					const newItems = this.adaptApiResponse( response.search );
-					// deduplicate search results
-					const seenItemValues = new Set( this.menuItems.map( ( item ) => item.value ) );
-					for ( const newItem of newItems ) {
-						if ( !seenItemValues.has( newItem.value ) ) {
-							this.menuItems.push( newItem );
-						}
-					}
-				}
-			} catch ( _ ) {
-				// on error, do nothing
-			}
+		onPropertySelection( propertyId ) {
+			this.selection = propertyId;
 		}
 	}
 } );
