@@ -5,7 +5,7 @@
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
 					<p class="heading">
-						edit statement
+						{{ $i18n( 'wikibase-statementgrouplistview-edit', valueForms.length ) }}
 					</p>
 				</div>
 				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>

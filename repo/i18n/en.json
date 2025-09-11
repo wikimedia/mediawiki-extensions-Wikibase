@@ -40,6 +40,7 @@
 	"wikibase-statementlistview-add-tooltip": "Add a new value",
 	"wikibase-statementgrouplistview-add": "add statement",
 	"wikibase-statementgrouplistview-add-tooltip": "Add a new statement",
+	"wikibase-statementgrouplistview-edit": "edit {{PLURAL:$1|statement|statements}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In more languages",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link": "https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Wikibase/Configuring_languages",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configure",

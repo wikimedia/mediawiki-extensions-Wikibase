@@ -1027,6 +1027,7 @@ final class RepoHooks implements
 					'wikibase-save',
 					'wikibase-snakview-snaktypeselector-value',
 					'wikibase-statementgrouplistview-add',
+					'wikibase-statementgrouplistview-edit',
 					'wikibase-statementlistview-add',
 					'wikibase-statementview-qualifiers-counter',
 					'wikibase-statementview-rank-normal',
