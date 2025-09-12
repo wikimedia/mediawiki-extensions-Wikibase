@@ -9,7 +9,7 @@ const qualifiersComponent = require( '../../resources/wikibase.wbui2025/wikibase
 const referencesComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' );
 const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const { storeWithStatements } = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.statementView', () => {
 	it( 'defines component', async () => {
@@ -19,29 +19,25 @@ describe( 'wikibase.wbui2025.statementView', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		const globalOptions = function ( initialState ) {
+		const globalOptions = function ( statements ) {
 			return {
 				plugins: [
-					createTestingPinia( { initialState } )
+					storeWithStatements( statements )
 				]
 			};
 		};
 
 		it( 'mounts successfully with empty default qualifiers and references', () => {
+			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: { snaktype: 'somevalue' }
+			};
 			const wrapper = mount( statementViewComponent, {
 				props: {
-					statementId: 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7'
+					statementId: testStatementId
 				},
-				global: globalOptions( {
-					statements: {
-						statements: new Map( [
-							[ 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7', {
-								id: 'Q1$49578930-35cd-4c30-9b61-8f4766cd8dd7',
-								mainsnak: { snaktype: 'somevalue' }
-							} ]
-						] )
-					}
-				} )
+				global: globalOptions( [ testStatement ] )
 			} );
 
 			expect( wrapper.exists() ).toBe( true );
@@ -81,23 +77,19 @@ describe( 'wikibase.wbui2025.statementView', () => {
 					datatype: 'string'
 				} ]
 			} ];
+			const testStatementId = 'Q1$8c0cc07e-3c0c-4d1c-a9ea-3f5cece0564e';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: mainSnak,
+				qualifiers,
+				'qualifiers-order': qualifiersOrder,
+				references
+			};
 			const wrapper = mount( statementViewComponent, {
 				props: {
-					statementId: 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2'
+					statementId: testStatementId
 				},
-				global: globalOptions( {
-					statements: {
-						statements: new Map( [
-							[ 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2', {
-								id: 'Q1$330e02ca-b106-4dd5-9d02-8d2578d2b3a2',
-								mainsnak: mainSnak,
-								qualifiers,
-								'qualifiers-order': qualifiersOrder,
-								references
-							} ]
-						] )
-					}
-				} )
+				global: globalOptions( [ testStatement ] )
 			} );
 
 			const mainSnakWrappers = wrapper.findAllComponents( mainSnakComponent );

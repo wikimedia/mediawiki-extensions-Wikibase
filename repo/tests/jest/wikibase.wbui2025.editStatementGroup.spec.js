@@ -23,7 +23,7 @@ const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const { storeWithStatementsAndProperties } = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	it( 'defines component', async () => {
@@ -41,6 +41,16 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 
 	describe( 'the mounted component', () => {
 		async function mountAndGetParts() {
+			const testStatement = {
+				id: 'Q1$6e87f6d3-444f-405a-8c17-96ff7df34b62',
+				mainSnak: {
+					datavalue: {
+						value: '',
+						type: 'string'
+					}
+				},
+				rank: 'normal'
+			};
 			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1',
@@ -48,29 +58,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 				},
 				global: {
 					plugins: [
-						createTestingPinia( {
-							initialState: {
-								statements: {
-									statements: new Map( [
-										[ 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7',
-											{
-												id: 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7',
-												mainSnak: {
-													datavalue: {
-														value: '',
-														type: 'string'
-													}
-												},
-												rank: 'normal'
-											}
-										]
-									] ),
-									properties: new Map( [
-										[ 'P1', [ 'Q123$93412eb7-64db-4911-823f-ef1dcbf3b9e7' ] ]
-									] )
-								}
-							}
-						} )
+						storeWithStatementsAndProperties( { P1: [ testStatement ] } )
 					]
 				}
 			} );

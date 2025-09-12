@@ -26,7 +26,11 @@ jest.mock(
 
 const statementSections = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const {
+	storeWithHtmlAndStatements,
+	storeContentsWithServerRenderedHtml,
+	storeContentWithStatementsAndProperties
+} = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.statementSections', () => {
 	it( 'defines component', async () => {
@@ -57,22 +61,17 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 					entityId: 'Q1'
 				},
 				global: {
-					plugins: [ createTestingPinia( {
-						initialState: {
-							serverRenderedHtml: {
-								propertyLinks: new Map( [
-									[ 'P1', '<a href="mock-property-url">P1</a>' ]
-								] ),
-								snakValues: new Map( [
-									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
-								] )
-							},
-							statements: {
-								statements: new Map( [ [ mockStatement.id, mockStatement ] ] ),
-								properties: new Map( [ [ 'P1', [ mockStatement.id ] ] ] )
-							}
-						}
-					} ) ]
+					plugins: [
+						storeWithHtmlAndStatements(
+							storeContentsWithServerRenderedHtml(
+								{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' },
+								{ P1: '<a href="mock-property-url">P1</a>' }
+							),
+							storeContentWithStatementsAndProperties( {
+								P1: [ mockStatement ]
+							} )
+						)
+					]
 				}
 			} );
 		} );
