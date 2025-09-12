@@ -17,6 +17,7 @@ use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
+use Wikibase\View\VueNoScriptRendering;
 
 /**
  * @covers \Wikibase\View\StatementSectionsView
@@ -46,17 +47,22 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 		$statementListView->method( 'getHtml' )
 			->willReturn( '<LIST>' );
 
+		$vueNoScriptRendering = new VueNoScriptRendering(
+			$this->createMock( EntityIdFormatterFactory::class ),
+			$this->createMock( EntityIdParser::class ),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			new DummyLocalizedTextProvider(),
+			$this->createMock( PropertyDataTypeLookup::class ),
+			$this->createMock( SerializerFactory::class ),
+			$this->createMock( SnakFormatter::class ),
+		);
+
 		return new StatementSectionsView(
 			$templateFactory,
 			$statementGrouper,
 			$statementListView,
 			new DummyLocalizedTextProvider(),
-			$this->createMock( SnakFormatter::class ),
-			$this->createMock( SerializerFactory::class ),
-			$this->createMock( PropertyDataTypeLookup::class ),
-			$this->createMock( EntityIdFormatterFactory::class ),
-			$this->createMock( EntityIdParser::class ),
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$vueNoScriptRendering,
 			false
 		);
 	}

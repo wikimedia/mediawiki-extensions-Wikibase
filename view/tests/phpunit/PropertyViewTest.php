@@ -29,6 +29,7 @@ use Wikibase\View\PropertyView;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\VueNoScriptRendering;
 
 /**
  * @covers \Wikibase\View\EntityView
@@ -120,17 +121,21 @@ class PropertyViewTest extends EntityViewTestCase {
 		] );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$textProvider->method( 'get' )->willReturnArgument( 0 );
+		$vueNoScriptRendering = new VueNoScriptRendering(
+			$this->getEntityIdFormatterFactory(),
+			$this->getEntityIdParser(),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$textProvider,
+			$propertyDataTypeLookup,
+			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
+			$snakFormatter
+		);
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
 			new FilteringStatementGrouper( [ 'statement' => null ] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
-			$snakFormatter,
-			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
-			$propertyDataTypeLookup,
-			$this->getEntityIdFormatterFactory(),
-			$this->getEntityIdParser(),
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$vueNoScriptRendering,
 			$vueStatementsView
 		);
 

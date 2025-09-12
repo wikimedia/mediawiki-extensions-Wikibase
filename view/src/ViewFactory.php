@@ -330,18 +330,22 @@ class ViewFactory {
 			$language->getCode(),
 			$termFallbackChain
 		);
+		$vueNoScriptRendering = new VueNoScriptRendering(
+			$this->htmlIdFormatterFactory,
+			$this->entityIdParser,
+			$language,
+			$textProvider,
+			$this->propertyDataTypeLookup,
+			$this->serializerFactory,
+			$snakFormatter,
+		);
 
 		return new StatementSectionsView(
 			$this->templateFactory,
 			$this->statementGrouper,
 			$statementGroupListView,
 			$textProvider,
-			$snakFormatter,
-			$this->serializerFactory,
-			$this->propertyDataTypeLookup,
-			$this->htmlIdFormatterFactory,
-			$this->entityIdParser,
-			$language,
+			$vueNoScriptRendering,
 			$this->vueStatementsView
 		);
 	}

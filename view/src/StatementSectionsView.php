@@ -3,20 +3,12 @@
 namespace Wikibase\View;
 
 use InvalidArgumentException;
-use MediaWiki\Language\Language;
 use Traversable;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Serializers\SerializerFactory;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\View\Template\TemplateFactory;
 use Wikimedia\Assert\Assert;
-use WMDE\VueJsTemplating\App;
 
 /**
  * @license GPL-2.0-or-later
@@ -24,11 +16,6 @@ use WMDE\VueJsTemplating\App;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
 class StatementSectionsView {
-
-	/** Data types supported by the Vue statements view. */
-	public const WBUI2025_SUPPORTED_DATATYPES = [
-		'string',
-	];
 
 	/**
 	 * @var TemplateFactory
@@ -51,34 +38,9 @@ class StatementSectionsView {
 	private $textProvider;
 
 	/**
-	 * @var SnakFormatter
+	 * @var VueNoScriptRendering
 	 */
-	private $snakFormatter;
-
-	/**
-	 * @var SerializerFactory
-	 */
-	private $serializerFactory;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
-
-	/**
-	 * @var EntityIdFormatterFactory
-	 */
-	private $entityIdFormatterFactory;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $entityIdParser;
-
-	/**
-	 * @var Language
-	 */
-	private $language;
+	private $vueNoScriptRendering;
 
 	/**
 	 * @var bool
@@ -90,270 +52,37 @@ class StatementSectionsView {
 		StatementGrouper $statementGrouper,
 		StatementGroupListView $statementListView,
 		LocalizedTextProvider $textProvider,
-		SnakFormatter $snakFormatter,
-		SerializerFactory $serializerFactory,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		EntityIdFormatterFactory $entityIdFormatterFactory,
-		EntityIdParser $entityIdParser,
-		Language $language,
+		VueNoScriptRendering $vueNoScriptRendering,
 		bool $vueStatementsView
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->statementGrouper = $statementGrouper;
 		$this->statementListView = $statementListView;
 		$this->textProvider = $textProvider;
-		$this->snakFormatter = $snakFormatter;
-		$this->serializerFactory = $serializerFactory;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
-		$this->entityIdParser = $entityIdParser;
-		$this->language = $language;
+		$this->vueNoScriptRendering = $vueNoScriptRendering;
 		$this->vueStatementsView = $vueStatementsView;
 	}
 
-	private function populateReferenceSnakValueHtml( Statement $statement, array $statementData, array &$snakValueHtmlLookup ) {
-		if ( !array_key_exists( 'references', $statementData ) || !$statementData['references'] ) {
-			return;
-		}
-		foreach ( $statementData['references'] as $referenceData ) {
-			$reference = $statement->getReferences()->getReference( $referenceData['hash'] );
-			foreach ( $reference->getSnaks() as $snakObject ) {
-				foreach ( $referenceData['snaks'] as $snakList ) {
-					foreach ( $snakList as $snakData ) {
-						if ( $snakData['hash'] === $snakObject->getHash() ) {
-							$snakValueHtmlLookup[$snakObject->getHash()] = $this->snakFormatter->formatSnak( $snakObject );
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private function populateQualifierSnakValueHtml( Statement $statement, array $statementData, array &$snakValueHtmlLookup ) {
-		if (
-			!array_key_exists( 'qualifiers', $statementData ) ||
-			!array_key_exists( 'qualifiers-order', $statementData ) ||
-			!$statementData['qualifiers']
-		) {
-			return;
-		}
-		foreach ( $statementData['qualifiers-order'] as $propertyId ) {
-			foreach ( $statementData['qualifiers'][$propertyId] as $qualifierData ) {
-				$qualifier = $statement->getQualifiers()->getSnak( $qualifierData['hash'] );
-				$snakValueHtmlLookup[$qualifierData['hash']] = $this->snakFormatter->formatSnak( $qualifier );
-			}
-		}
-	}
-
 	/**
-	 * @param App $app The Vue App
+	 * @param array<string,StatementList> $statementsLists
 	 * @param string $entityId
-	 * @param string $sectionHeadingHtml Section heading as HTML
-	 * @param StatementList $statementsList
-	 * @param array &$snakValueHtmlLookup
-	 * @return string Rendered HTML
-	 */
-	private function renderStatementsSectionHtml(
-		App $app,
-		string $entityId,
-		string $sectionHeadingHtml,
-		StatementList $statementsList,
-		array &$snakValueHtmlLookup,
-	): string {
-		$propertyStatementMap = [];
-		$propertyList = [];
-		foreach ( $statementsList->getPropertyIds() as $propertyId ) {
-			$propertyStatements = $statementsList->getByPropertyId( $propertyId )->toArray();
-			$propertyList[] = $propertyId->getSerialization();
-
-			$statementsData = [];
-			foreach ( $propertyStatements as $statement ) {
-				$mainSnak = $statement->getMainSnak();
-				$statementSerializer = $this->serializerFactory->newStatementSerializer();
-				$statementData = $statementSerializer->serialize( $statement );
-
-				$this->populateReferenceSnakValueHtml( $statement, $statementData, $snakValueHtmlLookup );
-				$this->populateQualifierSnakValueHtml( $statement, $statementData, $snakValueHtmlLookup );
-				if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
-					$snakValueHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
-				}
-				$statementsData[] = $statementData;
-			}
-			$propertyStatementMap[$propertyId->getSerialization()] = $statementsData;
-		}
-
-		return $app->renderComponent( 'wbui2025-statement-sections', [
-			'sectionHeadingHtml' => $sectionHeadingHtml,
-			'propertyList' => $propertyList,
-			'propertyStatementMap' => $propertyStatementMap,
-			'entityId' => $entityId,
-		] );
-	}
-
-	/**
-	 * @param StatementList[] $statementsLists
-	 * @param App $app
-	 * @param string $entityId
-	 * @param array &$snakValueHtmlLookup
 	 * @return string HTML
 	 */
 	private function getVueStatementSectionsHtml(
 		array $statementsLists,
-		App $app,
 		string $entityId,
-		array &$snakValueHtmlLookup,
 	): string {
+		$this->vueNoScriptRendering->loadStatementData( $statementsLists );
 		$rendered = '';
 		foreach ( $this->iterateOverNonEmptyStatementSections( $statementsLists ) as $key => $statementsList ) {
-			$rendered .= $this->renderStatementsSectionHtml(
-				$app,
+			$rendered .= $this->vueNoScriptRendering->renderStatementsSectionHtml(
 				$entityId,
 				$this->getHtmlForSectionHeading( $key ),
 				$statementsList,
-				$snakValueHtmlLookup,
 			);
 		}
 		$rendered .= '<div id="wikibase-wbui2025-status-message-mount-point" aria-live="polite"></div>';
 		return $rendered;
-	}
-
-	/**
-	 * @param array &$snakValueHtmlLookup
-	 * @param array<StatementList> $statementsLists
-	 * @return App
-	 */
-	private function setupVueTemplateRenderer(
-		array &$snakValueHtmlLookup,
-		array $statementsLists,
-	): App {
-		$statementSerializer = $this->serializerFactory->newStatementSerializer();
-		$app = new App( [
-			'snakValueHtml' => function ( $snak ) use ( &$snakValueHtmlLookup ) {
-				if ( array_key_exists( $snak['hash'], $snakValueHtmlLookup ) ) {
-					return $snakValueHtmlLookup[$snak['hash']];
-				}
-				return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
-			},
-			'concat' => function( ...$args ) {
-				return implode( '', $args );
-			},
-			'$i18n' => function ( string $messageKey, string ...$params ): string {
-				return $this->textProvider->get( $messageKey, $params );
-			},
-		] );
-		$app->registerComponentTemplate(
-			'wbui2025-statement-sections',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' ),
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-statement-group-view',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' ),
-			function( array $data ) use ( $statementsLists, $statementSerializer ): array {
-				/** @var PropertyId $propertyId */
-				$propertyId = $this->entityIdParser
-					->parse( $data['propertyId'] );
-				'@phan-var PropertyId $propertyId';
-				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-				$statementsByProperty = array_merge(
-					...array_map(
-						fn ( $statementsList ) => $statementsList->getByPropertyId( $propertyId )->toArray(),
-						array_values( $statementsLists )
-					)
-				);
-				$data['statements'] = array_map(
-					fn ( $statement ) => $statementSerializer->serialize( $statement ),
-					$statementsByProperty
-				);
-				$data['isUnsupportedDataType'] = !in_array( $dataType, self::WBUI2025_SUPPORTED_DATATYPES, strict: true );
-				$data['showModalEditForm'] = false;
-				return $data;
-			}
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-statement-view',
-			file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' ),
-			function ( array $data ) use ( $statementsLists, $statementSerializer ): array {
-				$statementById = current(
-					array_filter(
-						array_map(
-							fn ( $statementList ) => $statementList->getFirstStatementWithGuid( $data['statementId'] ),
-							array_values( $statementsLists )
-						)
-					)
-				);
-				$data['statement'] = $statementSerializer->serialize( $statementById );
-				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
-				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
-				$data['qualifiersOrder'] =
-					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
-				return $data;
-			}
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-property-name',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' ),
-			function ( array $data ): array {
-				$propertyId = $this->entityIdParser
-					->parse( $data['propertyId'] );
-
-				$data['propertyLinkHtml'] = $this->entityIdFormatterFactory
-					->getEntityIdFormatter( $this->language )
-					->formatEntityId( $propertyId );
-				return $data;
-			}
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-main-snak',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' )
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-references',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' ),
-			function ( array $data ): array {
-				$data['referenceCount'] = count( $data['references'] );
-				$data['hasReferences'] = $data['referenceCount'] > 0;
-				$data['referencesMessage'] = $this->textProvider->getEscaped(
-					'wikibase-statementview-references-counter', [
-						strval( $data[ 'referenceCount' ] ),
-					],
-				);
-				$data['showReferences'] = false;
-				return $data;
-			}
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-qualifiers',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' ),
-			function ( array $data ): array {
-				$qualifierCount = count( $data['qualifiers'] );
-				$data['hasQualifiers'] = $qualifierCount > 0;
-				$data['qualifiersMessage'] = $this->textProvider->getEscaped(
-					'wikibase-statementview-qualifiers-counter', [
-						strval( $qualifierCount ),
-					],
-				);
-				return $data;
-			}
-		);
-		$app->registerComponentTemplate(
-			'wbui2025-snak-value',
-			fn () => file_get_contents( __DIR__ . '/../../repo/resources/wikibase.wbui2025/wikibase.wbui2025.snakValue.vue' ),
-			function ( array $data ): array {
-				/** @var PropertyId $propertyId */
-				$propertyId = $this->entityIdParser
-					->parse( $data['snak']['property'] );
-				'@phan-var PropertyId $propertyId';
-				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-
-				$data['snakValueClass'] = [
-					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
-					'wikibase-wbui2025-time-value' => $dataType == 'time',
-				];
-
-				return $data;
-			}
-		);
-		return $app;
 	}
 
 	/**
@@ -362,15 +91,10 @@ class StatementSectionsView {
 	 * @return string HTML
 	 */
 	private function getVueStatementsHtml( EntityId $entityId, array $statementsLists ): string {
-		$snakValueHtmlLookup = [];
-		$app = $this->setupVueTemplateRenderer( $snakValueHtmlLookup, $statementsLists );
-
 		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
 			$this->getVueStatementSectionsHtml(
 				$statementsLists,
-				$app,
 				$entityId->getSerialization(),
-				$snakValueHtmlLookup,
 			) .
 			"</div>";
 	}
