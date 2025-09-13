@@ -158,9 +158,8 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 	protected function createForm(): void {
 		$pre = '';
 		if ( !$this->getUser()->isRegistered() ) {
-			$pre = Html::rawElement(
-				'p',
-				[ 'class' => 'warning' ],
+			$this->getOutput()->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
+			$pre = Html::warningBox(
 				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
 			);
 		}
