@@ -9,8 +9,8 @@ use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Message\Message;
+use MediaWiki\Page\PageReference;
 use MediaWiki\Parser\ParserOutput;
-use MediaWiki\Title\Title;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -27,13 +27,13 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	private Language $language;
 	private StatementTransclusionInteractor $statementTransclusionInteractor;
 	private ParserOutput $parserOutput;
-	private Title $title;
+	private ?PageReference $title;
 
 	public function __construct(
 		Language $language,
 		StatementTransclusionInteractor $statementTransclusionInteractor,
 		ParserOutput $parserOutput,
-		Title $title
+		?PageReference $title
 	) {
 		$this->language = $language;
 		$this->statementTransclusionInteractor = $statementTransclusionInteractor;

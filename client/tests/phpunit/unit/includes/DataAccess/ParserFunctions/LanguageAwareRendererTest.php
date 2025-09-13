@@ -6,8 +6,8 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\PageReferenceValue;
 use MediaWiki\Parser\ParserOutput;
-use MediaWiki\Title\Title;
 use MediaWikiTestCaseTrait;
 use Wikibase\Client\DataAccess\ParserFunctions\LanguageAwareRenderer;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
@@ -70,7 +70,7 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 			$targetLanguage,
 			$entityStatementsRenderer,
 			$parserOutput,
-			$this->createMock( Title::class )
+			PageReferenceValue::localReference( NS_MAIN, 'Douglas Adams' )
 		);
 	}
 

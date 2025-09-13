@@ -7,9 +7,9 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 use MediaWiki\Language\Language;
 use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Page\PageReference;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
-use MediaWiki\Title\Title;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
@@ -111,7 +111,7 @@ class StatementGroupRendererFactory {
 				$usageAccumulator,
 				$parser,
 				$parser->getOutput(),
-				$parser->getTitle()
+				$parser->getPage()
 			);
 		} elseif ( $this->useVariants( $parser ) ) {
 			$variants = $this->langConvFactory->getLanguageConverter( $parser->getTargetLanguage() )->getVariants();
@@ -121,7 +121,7 @@ class StatementGroupRendererFactory {
 				$usageAccumulator,
 				$parser,
 				$parser->getOutput(),
-				$parser->getTitle()
+				$parser->getPage()
 			);
 		} else {
 			$targetLanguage = $parser->getTargetLanguage();
@@ -131,7 +131,7 @@ class StatementGroupRendererFactory {
 				$usageAccumulator,
 				$parser,
 				$parser->getOutput(),
-				$parser->getTitle()
+				$parser->getPage()
 			);
 		}
 	}
@@ -142,7 +142,7 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param Parser $parser
 	 * @param ParserOutput $parserOutput
-	 * @param Title $title
+	 * @param PageReference|null $title
 	 * @return LanguageAwareRenderer
 	 */
 	private function newLanguageAwareRenderer(
@@ -151,7 +151,7 @@ class StatementGroupRendererFactory {
 		UsageAccumulator $usageAccumulator,
 		Parser $parser,
 		ParserOutput $parserOutput,
-		Title $title
+		?PageReference $title
 	): LanguageAwareRenderer {
 		$snakFormatter = $this->dataAccessSnakFormatterFactory->newWikitextSnakFormatter(
 			$language,
@@ -188,7 +188,7 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param Parser $parser
 	 * @param ParserOutput $parserOutput
-	 * @param Title $title
+	 * @param PageReference|null $title
 	 * @return LanguageAwareRenderer
 	 */
 	private function getLanguageAwareRendererFromCode(
@@ -197,7 +197,7 @@ class StatementGroupRendererFactory {
 		UsageAccumulator $usageAccumulator,
 		Parser $parser,
 		ParserOutput $parserOutput,
-		Title $title
+		?PageReference $title
 	): LanguageAwareRenderer {
 		if ( !isset( $this->languageAwareRenderers[$languageCode] ) ) {
 			$this->languageAwareRenderers[$languageCode] = $this->newLanguageAwareRenderer(
@@ -219,7 +219,7 @@ class StatementGroupRendererFactory {
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param Parser $parser
 	 * @param ParserOutput $parserOutput
-	 * @param Title $title
+	 * @param PageReference|null $title
 	 *
 	 * @return VariantsAwareRenderer
 	 */
@@ -229,7 +229,7 @@ class StatementGroupRendererFactory {
 		UsageAccumulator $usageAccumulator,
 		Parser $parser,
 		ParserOutput $parserOutput,
-		Title $title
+		?PageReference $title
 	): VariantsAwareRenderer {
 		$languageAwareRenderers = [];
 
