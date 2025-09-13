@@ -231,7 +231,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 	protected function getWarnings() {
 		if ( !$this->getUser()->isRegistered() ) {
 			return [
-				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ),
+				$this->msg( $this->anonymousEditWarningBuilder->buildAnonymousEditWarningMessage( $this->getFullTitle() ) )
+					->parse(),
 			];
 		}
 

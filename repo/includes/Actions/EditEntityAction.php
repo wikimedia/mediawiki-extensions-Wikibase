@@ -321,7 +321,8 @@ class EditEntityAction extends ViewEntityAction {
 		if ( !$this->getUser()->isRegistered() ) {
 			$this->getOutput()->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
 			$this->getOutput()->addHTML( Html::warningBox(
-				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getTitle()->getPrefixedText() ),
+				$this->msg( $this->anonymousEditWarningBuilder->buildAnonymousEditWarningMessage( $this->getTitle() ) )
+					->parse(),
 			) );
 		}
 

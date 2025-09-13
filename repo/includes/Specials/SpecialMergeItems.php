@@ -233,7 +233,8 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		if ( !$this->getUser()->isRegistered() ) {
 			$this->getOutput()->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
 			$pre = Html::warningBox(
-				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() )
+				$this->msg( $this->anonymousEditWarningBuilder->buildAnonymousEditWarningMessage( $this->getFullTitle() ) )
+					->parse()
 			);
 		}
 

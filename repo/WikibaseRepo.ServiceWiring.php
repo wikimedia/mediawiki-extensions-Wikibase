@@ -288,7 +288,11 @@ return [
 	},
 
 	'WikibaseRepo.AnonymousEditWarningBuilder' => function ( MediaWikiServices $services ): AnonymousEditWarningBuilder {
-		return new AnonymousEditWarningBuilder( $services->getSpecialPageFactory(), $services->getTempUserConfig() );
+		return new AnonymousEditWarningBuilder(
+			$services->getSpecialPageFactory(),
+			$services->getTitleFormatter(),
+			$services->getTempUserConfig(),
+		);
 	},
 
 	'WikibaseRepo.ApiHelperFactory' => function ( MediaWikiServices $services ): ApiHelperFactory {
