@@ -18,62 +18,6 @@ use Wikibase\Repo\AnonymousEditWarningBuilder;
  */
 class AnonymousEditWarningBuilderTest extends MediaWikiIntegrationTestCase {
 
-	public function testBuildAnonymousEditWarningHTML(): void {
-		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
-		$tempUserConfig = $this->createMock( TempUserConfig::class );
-		$tempUserConfig->expects( $this->once() )
-			->method( 'isEnabled' )
-			->willReturn( false );
-		$builder = new AnonymousEditWarningBuilder(
-			$this->getServiceContainer()->getSpecialPageFactory(),
-			$this->getServiceContainer()->getTitleFormatter(),
-			$tempUserConfig
-		);
-
-		$actualHTML = $builder->buildAnonymousEditWarningHTML( 'Foo' );
-
-		$this->assertStringContainsString(
-			'wikibase-anonymouseditwarning',
-			$actualHTML
-		);
-		$this->assertStringContainsString(
-			'Special:UserLogin&amp;returnto=Foo',
-			$actualHTML
-		);
-		$this->assertStringContainsString(
-			'Special:CreateAccount&amp;returnto=Foo',
-			$actualHTML
-		);
-	}
-
-	public function testBuildAnonymousEditWarningHTMLTempUsers(): void {
-		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'qqx' );
-		$tempUserConfig = $this->createMock( TempUserConfig::class );
-		$tempUserConfig->expects( $this->once() )
-			->method( 'isEnabled' )
-			->willReturn( true );
-		$builder = new AnonymousEditWarningBuilder(
-			$this->getServiceContainer()->getSpecialPageFactory(),
-			$this->getServiceContainer()->getTitleFormatter(),
-			$tempUserConfig
-		);
-
-		$actualHTML = $builder->buildAnonymousEditWarningHTML( 'Foo' );
-
-		$this->assertStringContainsString(
-			'wikibase-anonymouseditnotificationtempuser',
-			$actualHTML
-		);
-		$this->assertStringContainsString(
-			'Special:UserLogin&amp;returnto=Foo',
-			$actualHTML
-		);
-		$this->assertStringContainsString(
-			'Special:CreateAccount&amp;returnto=Foo',
-			$actualHTML
-		);
-	}
-
 	public static function provideBuildMessageValues() {
 		return [
 			'temp users off' => [ false, 'wikibase-anonymouseditwarning' ],

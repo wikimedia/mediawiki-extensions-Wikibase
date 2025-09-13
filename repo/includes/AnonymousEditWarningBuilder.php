@@ -29,21 +29,6 @@ class AnonymousEditWarningBuilder {
 		$this->tempUserConfig = $tempUserConfig;
 	}
 
-	/** @deprecated since 1.45, use `buildAnonymousEditWarningMessage()` instead */
-	public function buildAnonymousEditWarningHTML( string $returnToFullTitle ): string {
-		$loginPage = $this->specialPageFactory->getPage( 'UserLogin' );
-		$loginHref = $loginPage->getPageTitle()->getFullURL( 'returnto=' . $returnToFullTitle );
-		$createAccountHref = $this->specialPageFactory
-			->getPage( 'CreateAccount' )
-			->getPageTitle()
-			->getFullURL( 'returnto=' . $returnToFullTitle );
-		$messageKey = 'wikibase-anonymouseditwarning';
-		if ( $this->tempUserConfig->isEnabled() ) {
-			$messageKey = 'wikibase-anonymouseditnotificationtempuser';
-		}
-		return $loginPage->msg( $messageKey, $loginHref, $createAccountHref )->parse();
-	}
-
 	public function buildAnonymousEditWarningMessage( PageReference $returnToPage ): MessageValue {
 		$query = [
 			'returnto' => $this->titleFormatter->getPrefixedDBkey( $returnToPage ),
