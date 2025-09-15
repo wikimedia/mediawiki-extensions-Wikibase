@@ -6,6 +6,7 @@ export class EditStatementFormPage {
 		PROPERTY_NAME: '.wikibase-wbui2025-property-name > a',
 		REMOVE_VALUE_BUTTONS: '.wikibase-wbui2025-remove-value > .cdx-button',
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
+		SUBMIT_BUTTONS: '.wikibase-wbui2025-edit-form-actions > .cdx-button',
 		TEXT_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-text-input input',
 	};
 
@@ -41,5 +42,9 @@ export class EditStatementFormPage {
 
 	public textInput(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.TEXT_INPUT );
+	}
+
+	public publishButton(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).last();
 	}
 }

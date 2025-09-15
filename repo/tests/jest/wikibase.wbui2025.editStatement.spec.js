@@ -118,7 +118,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
-					valueId: 1,
+					valueId: '1',
 					rank: 'normal',
 					mainSnak: {
 						datavalue: {

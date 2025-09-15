@@ -10,6 +10,14 @@ export class ItemViewPage {
 
 	public static SNAK_VALUES = '.wikibase-wbui2025-snak-value > p';
 
+	public static QUALIFIERS_SECTION = '.wikibase-wbui2025-qualifiers';
+
+	public static QUALIFIERS = '.wikibase-wbui2025-qualifier';
+
+	public static REFERENCES_SECTION = '.wikibase-wbui2025-references';
+
+	public static REFERENCES = '.wikibase-wbui2025-reference';
+
 	private itemId: string;
 
 	public constructor( itemId: string ) {
@@ -32,5 +40,21 @@ export class ItemViewPage {
 
 	public snakValues(): Chainable {
 		return cy.get( ItemViewPage.SNAK_VALUES );
+	}
+
+	public qualifiersSections(): Chainable {
+		return cy.get( ItemViewPage.QUALIFIERS_SECTION );
+	}
+
+	public qualifiers( context: HTMLElement ): Chainable {
+		return cy.get( ItemViewPage.QUALIFIERS, { withinSubject: context } );
+	}
+
+	public referencesSections(): Chainable {
+		return cy.get( ItemViewPage.REFERENCES_SECTION );
+	}
+
+	public references( context: HTMLElement ): Chainable {
+		return cy.get( ItemViewPage.REFERENCES, { withinSubject: context } );
 	}
 }

@@ -64,8 +64,13 @@ const {
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const { propertyLinkHtml, updateSnakValueHtml } = require( './store/serverRenderedHtml.js' );
-const { getStatementsForProperty } = require( './store/statementsStore.js' );
-const { updateMainSnak, renderSnakValueHtml } = require( './api/editEntity.js' );
+const {
+	getStatementsForProperty,
+	updateStatementData,
+	setStatementIdsForProperty,
+	removeStatementData
+} = require( './store/statementsStore.js' );
+const { updateStatements, renderSnakValueHtml } = require( './api/editEntity.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -98,7 +103,8 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			valueForms: [],
-			maxValueFormId: 0,
+			createdStatements: [],
+			removedStatements: [],
 			formSubmitted: false
 		};
 	},
@@ -119,44 +125,60 @@ module.exports = exports = defineComponent( {
 	},
 	methods: {
 		addValue( statement = null ) {
-			const valueForm = { id: this.maxValueFormId, statement: {} };
-			this.maxValueFormId++;
-			if ( statement ) {
-				valueForm.statement = Object.assign( {}, statement );
-			} else {
-				valueForm.statement = Object.assign( {}, {
-					id: null,
-					mainSnak: {
+			const statementId = statement === null ? ( new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid() ) : statement.id;
+			if ( statement === null ) {
+				statement = {
+					id: statementId,
+					mainsnak: {
+						snaktype: 'value',
+						property: this.propertyId,
 						datavalue: {
 							value: '',
 							type: 'string'
-						}
+						},
+						datatype: 'string'
 					},
+					type: 'statement',
 					rank: 'normal',
 					'qualifiers-order': [],
 					qualifiers: {}
-				} );
+				};
+				this.createdStatements.push( statementId );
 			}
+			const valueForm = { id: statementId, statement: Object.assign( {}, statement ) };
+			updateStatementData( statementId, statement );
 			this.valueForms.push( valueForm );
 		},
 		removeValue( valueId ) {
 			this.valueForms = this.valueForms.filter( ( form ) => form.id !== valueId );
+			this.removedStatements.push( valueId );
 		},
 		submitForm() {
 			this.formSubmitted = true;
 			if ( this.valueForms.length === 0 ) {
 				return;
 			}
-			updateMainSnak(
+			updateStatements(
 				this.entityId,
-				this.valueForms[ 0 ].statement.id,
-				this.valueForms[ 0 ].statement.mainsnak
-			)
-				.then( () => renderSnakValueHtml( this.valueForms[ 0 ].statement.mainsnak.datavalue ) )
-				.then( ( result ) => {
-					updateSnakValueHtml( this.valueForms[ 0 ].statement.mainsnak.hash, result );
-					this.$emit( 'hide' );
-				} );
+				this.propertyId,
+				this.valueForms.map( ( form ) => form.statement ).concat( this.claimsToDeleteOnSubmit() )
+			).then( ( returnedClaims ) => {
+				this.claimsToDeleteOnSubmit().map( ( claim ) => removeStatementData( this.propertyId, claim.id ) );
+				setStatementIdsForProperty( this.propertyId, returnedClaims.map( ( claim ) => claim.id ) );
+				returnedClaims.forEach( ( claim ) => updateStatementData( claim.id, claim ) );
+				return Promise.all(
+					returnedClaims.map(
+						( claim ) => renderSnakValueHtml( claim.mainsnak.datavalue )
+								.then( ( result ) => updateSnakValueHtml( claim.mainsnak.hash, result ) ) )
+				);
+			} )
+			.then( () => {
+				this.$emit( 'hide' );
+			} );
+		},
+		claimsToDeleteOnSubmit: function () {
+			return this.removedStatements.filter( ( statementId ) => !this.createdStatements.includes( statementId ) )
+					.map( ( statementId ) => ( { id: statementId, remove: '' } ) );
 		}
 	},
 	mounted: function () {

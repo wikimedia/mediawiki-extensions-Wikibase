@@ -19,6 +19,24 @@ jest.mock(
 	() => ( { api: { get: jest.fn() } } )
 );
 
+const crypto = require( 'crypto' );
+// eslint-disable-next-line no-undef
+Object.defineProperty( globalThis, 'wikibase', {
+	value: {
+		utilities: {
+			ClaimGuidGenerator: class {
+				constructor( entityId ) {
+					this.entityId = entityId;
+				}
+
+				newGuid() {
+					return this.entityId + '$' + crypto.randomUUID();
+				}
+			}
+		}
+	}
+} );
+
 const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue' );
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
@@ -115,7 +133,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		it( 'removes a value when remove is triggered', async () => {
 			const { wrapper, statementForm } = await mountAndGetParts();
 			expect( wrapper.vm.valueForms.length ).toBe( 1 );
-			await statementForm.vm.$emit( 'remove', 0 );
+			await statementForm.vm.$emit( 'remove', wrapper.vm.valueForms[ 0 ].id );
 			expect( wrapper.vm.valueForms.length ).toBe( 0 );
 		} );
 	} );

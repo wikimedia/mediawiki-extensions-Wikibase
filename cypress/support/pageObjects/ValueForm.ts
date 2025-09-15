@@ -4,8 +4,6 @@ export class ValueForm {
 
 	public static VALUE_INPUT_SELECTOR = '.cdx-text-input input';
 
-	public static SUBMIT_BUTTONS = '.wikibase-wbui2025-edit-form-actions > .cdx-button';
-
 	private rootElement: HTMLElement;
 
 	public constructor( rootElement: HTMLElement ) {
@@ -20,7 +18,4 @@ export class ValueForm {
 		return this.valueInput().clear().type( newInputValue );
 	}
 
-	public publishButton(): Chainable {
-		return cy.get( ValueForm.SUBMIT_BUTTONS ).last();
-	}
 }

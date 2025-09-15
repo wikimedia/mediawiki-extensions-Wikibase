@@ -50,10 +50,27 @@ const updateStatementData = function ( statementId, statementData ) {
 	statementsStore.statements.set( statementId, statementData );
 };
 
+const removeStatementData = function ( propertyId, statementId ) {
+	const statementsStore = useStatementsStore();
+	statementsStore.statements.delete( statementId );
+	const statementsForProperty = statementsStore.properties.get( propertyId );
+	statementsStore.properties.set(
+		propertyId,
+		statementsForProperty.filter( ( existingStatementId ) => existingStatementId !== statementId )
+	);
+};
+
+const setStatementIdsForProperty = function ( propertyId, statementIds ) {
+	const statementsStore = useStatementsStore();
+	statementsStore.properties.set( propertyId, statementIds );
+};
+
 module.exports = {
 	useStatementsStore,
+	removeStatementData,
 	getPropertyIds,
 	getStatementsForProperty,
 	getStatementById,
+	setStatementIdsForProperty,
 	updateStatementData
 };

@@ -1019,6 +1019,7 @@ final class RepoHooks implements
 					'vue',
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',
+					'wikibase.utilities.ClaimGuidGenerator',
 				],
 				'messages' => [
 					'wikibase-add',

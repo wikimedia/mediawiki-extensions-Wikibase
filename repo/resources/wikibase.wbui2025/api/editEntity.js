@@ -2,28 +2,22 @@ const { updateStatementData } = require( '../store/statementsStore.js' );
 const { api } = require( './api.js' );
 
 /**
- * @param {string} itemId The ID of the item to update
- * @param {string} statementId The ID of the statement to update
- * @param {Object} mainSnak The value of the snak
+ * @param {string} entityId The ID of the entity to update
+ * @param {string} propertyId The ID of the property
+ * @param {Array} statements
  */
-const updateMainSnak = async function ( itemId, statementId, mainSnak ) {
-	const data = {
-		claims: [
-			{
-				id: statementId,
-				mainsnak: mainSnak,
-				type: 'statement',
-				rank: 'normal'
-			}
-		]
-	};
-
+const updateStatements = async function ( entityId, propertyId, statements ) {
 	return api.postWithEditToken( {
 		action: 'wbeditentity',
-		id: itemId,
-		data: JSON.stringify( data )
-	// TODO: Update the statement data store with the data returned from the server T401405
-	} ).then( () => updateStatementData( statementId, data.claims[ 0 ] ) );
+		id: entityId,
+		data: JSON.stringify( { claims: statements } )
+	} ).then( ( response ) => {
+		if ( propertyId in response.entity.claims ) {
+			response.entity.claims[ propertyId ]
+				.forEach( ( statement ) => updateStatementData( statement.id, statement ) );
+		}
+		return response.entity.claims[ propertyId ];
+	} );
 };
 
 /**
@@ -42,6 +36,6 @@ const renderSnakValueHtml = async function ( dataValue ) {
 };
 
 module.exports = {
-	updateMainSnak,
+	updateStatements,
 	renderSnakValueHtml
 };

@@ -73,7 +73,7 @@ module.exports = exports = defineComponent( {
 	},
 	props: {
 		valueId: {
-			type: Number,
+			type: String,
 			required: true
 		},
 		mainSnak: {
@@ -138,7 +138,7 @@ module.exports = exports = defineComponent( {
 			return this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [];
 		},
 		statement() {
-			return this.statementId ? getStatementById( this.statementId ) : {};
+			return getStatementById( this.statementId );
 		}
 	}
 } );
