@@ -16,6 +16,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "til 1/10 av et buesekund",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "til 1/100 av et buesekund",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "til 1/1000 av et buesekund",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "juliansk",
 	"valueview-expert-timeinput-precision": "Presisjon:",
