@@ -33,6 +33,7 @@
 	"wikibase-statementlistview-add-tooltip": "ТӀетоха керла маьӀна",
 	"wikibase-statementgrouplistview-add": "дӀахьедар тӀетоха",
 	"wikibase-statementgrouplistview-add-tooltip": "ТӀетоха керла хаам",
+	"wikibase-statementgrouplistview-edit": "хийца {{PLURAL:$1|дӀахьедар|дӀахьедарш}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Масийтта маттахь",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Нисйан",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Гайта цӀераш, псевдонимаш, хаамаш суна мел хууш болучу меттанашкахь",

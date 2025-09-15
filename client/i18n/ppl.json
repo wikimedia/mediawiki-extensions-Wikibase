@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AliciaMarroquín",
 			"Canjura",
 			"KuskutanCarpintero21",
 			"TimumachtikanNawat"
@@ -16,5 +17,6 @@
 	"wikibase-linkitem-input-site": "Tajtaketzalis",
 	"wikibase-linkitem-input-page": "Amat",
 	"wikibase-rc-hide-wikidata-hide": "Shikinaya",
-	"wikibase-rc-hide-wikidata-show": "Shikilwiti"
+	"wikibase-rc-hide-wikidata-show": "Shikilwiti",
+	"wikibase-otherprojects": "Tik ukse itekiw"
 }

@@ -33,6 +33,7 @@
 	"wikibase-statementlistview-add-tooltip": "Додај нова вредност",
 	"wikibase-statementgrouplistview-add": "додај исказ",
 	"wikibase-statementgrouplistview-add-tooltip": "Додај нов исказ",
+	"wikibase-statementgrouplistview-edit": "уреди {{PLURAL:$1|исказ|искази}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На уште јазици",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Нагоди поставки",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Прикажувај натписи, истозначници и описи на сите мои јазици при вчитувањето на страницата",

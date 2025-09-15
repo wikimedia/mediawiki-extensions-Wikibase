@@ -38,6 +38,7 @@
 	"wikibase-statementlistview-add-tooltip": "Legg til en ny verdi",
 	"wikibase-statementgrouplistview-add": "legg til utsagn",
 	"wikibase-statementgrouplistview-add-tooltip": "Legg til et nytt utsagn",
+	"wikibase-statementgrouplistview-edit": "rediger {{PLURAL:$1|utsagn}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "På flere språk",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurer",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Vis etiketter, alias og beskrivelser på alle mine språk når siden er lastet inn",

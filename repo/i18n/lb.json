@@ -32,6 +32,7 @@
 	"wikibase-statementlistview-add-tooltip": "En neie Wäert derbäisetzen",
 	"wikibase-statementgrouplistview-add": "Ausso derbäisetzen",
 	"wikibase-statementgrouplistview-add-tooltip": "Eng nei Ausso derbäisetzen",
+	"wikibase-statementgrouplistview-edit": "{{PLURAL:$1|Ausso|Aussoen}} änneren",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "A méi Sproochen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Astellen",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Etiketten, Aliasen a Beschreiwungen an all menge Sprooche beim Luede vun der Säit weisen",

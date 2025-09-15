@@ -40,6 +40,7 @@
 	"wikibase-statementlistview-add-tooltip": "Engadir un valor novo",
 	"wikibase-statementgrouplistview-add": "engadir unha declaración",
 	"wikibase-statementgrouplistview-add-tooltip": "Engadir unha nova declaración",
+	"wikibase-statementgrouplistview-edit": "editar {{PLURAL:$1|a declaración|as declaracións}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Noutras linguas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Amosar etiquetas, pseudónimos e descricións en tódalas miñas linguas ao cargar a páxina",

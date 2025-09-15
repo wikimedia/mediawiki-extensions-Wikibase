@@ -30,6 +30,7 @@
 	"wikibase-statementlistview-add-tooltip": "Adder un nove valor",
 	"wikibase-statementgrouplistview-add": "adder declaration",
 	"wikibase-statementgrouplistview-add-tooltip": "Adder un nove declaration",
+	"wikibase-statementgrouplistview-edit": "modificar declaration{{PLURAL:$1||es}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In plus linguas",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurar",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Monstrar etiquettas, aliases e descriptiones in tote mi linguas al cargamento de paginas",

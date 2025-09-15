@@ -68,6 +68,7 @@
 	"wikibase-statementlistview-add-tooltip": "أضِف قيمة جديدة",
 	"wikibase-statementgrouplistview-add": "أضِف بياناً",
 	"wikibase-statementgrouplistview-add-tooltip": "أضِف بياناً جديداً",
+	"wikibase-statementgrouplistview-edit": "تعديل {{PLURAL:$1|بيان|بيانات}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "بلغاتٍ أخرى",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "اضبط الإعدادات",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "عرض التسميات، الأسماء الأخرى والأوصاف بكل لغاتي عند تحميل الصفحة",

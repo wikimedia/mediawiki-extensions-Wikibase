@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Canjura"
+			"Canjura",
+			"Jose Antonio Guillen Landaverde",
+			"Taty Flores de Constante"
 		]
 	},
-	"wikibase-edit": "Shikpata"
+	"wikibase-edit": "Shikpata",
+	"wikibase-add": "Shikajshitili",
+	"wikibase-description-empty": "tesu kiwawasujket"
 }

@@ -61,6 +61,7 @@
 	"wikibase-statementlistview-add-tooltip": "Yeni bir değer ekle",
 	"wikibase-statementgrouplistview-add": "ifade ekle",
 	"wikibase-statementgrouplistview-add-tooltip": "Yeni bir ifade ekle",
+	"wikibase-statementgrouplistview-edit": "{{PLURAL:$1|ifadeyi|ifadeleri}} düzenle",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Daha fazla dilde",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Yapılandır",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Sayfa yüklenirken tüm dillerimdeki açıklamaları ve etiketlerin takma adlarını göster",

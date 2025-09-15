@@ -46,6 +46,7 @@
 	"wikibase-statementlistview-add-tooltip": "הוספת ערך חדש",
 	"wikibase-statementgrouplistview-add": "הוספת קביעה",
 	"wikibase-statementgrouplistview-add-tooltip": "הוספת הצהרה חדשה",
+	"wikibase-statementgrouplistview-edit": "עריכת {{PLURAL:$1|קביעה|קביעות}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "בשפות נוספות",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "הגדרות",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "הצגת תוויות, כינויים ותיאורים בכל השפות שלי בעת טעינת הדף",

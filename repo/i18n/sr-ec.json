@@ -42,6 +42,7 @@
 	"wikibase-statementlistview-add-tooltip": "Додајте нову вредност",
 	"wikibase-statementgrouplistview-add": "додај изјаву",
 	"wikibase-statementgrouplistview-add-tooltip": "Додајте нову изјаву",
+	"wikibase-statementgrouplistview-edit": "уреди {{PLURAL:$1|изјаву|изјаве}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На другим језицима",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Конфигуриши",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Прикажи називе, псеудониме и описе на свим мојим језицима",

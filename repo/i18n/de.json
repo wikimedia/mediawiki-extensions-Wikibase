@@ -61,6 +61,7 @@
 	"wikibase-statementlistview-add-tooltip": "Einen neuen Wert hinzufügen",
 	"wikibase-statementgrouplistview-add": "Aussage hinzufügen",
 	"wikibase-statementgrouplistview-add-tooltip": "Eine neue Aussage hinzufügen",
+	"wikibase-statementgrouplistview-edit": "{{PLURAL:$1|Aussage|Aussagen}} bearbeiten",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In weiteren Sprachen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurieren",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Bezeichnungen, Aliasse und Beschreibungen in all meinen Sprachen beim Laden der Seite anzeigen",

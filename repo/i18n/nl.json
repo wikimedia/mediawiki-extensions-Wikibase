@@ -62,6 +62,7 @@
 	"wikibase-statementlistview-add-tooltip": "Een nieuwe waarde toevoegen",
 	"wikibase-statementgrouplistview-add": "verklaring toevoegen",
 	"wikibase-statementgrouplistview-add-tooltip": "Een nieuwe verklaring toevoegen",
+	"wikibase-statementgrouplistview-edit": "verklaring{{PLURAL:$1||en}} bewerken",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In meer talen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Instellen",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Labels, aliassen en beschrijvingen in al mijn talen weergeven bij het laden van de pagina",
