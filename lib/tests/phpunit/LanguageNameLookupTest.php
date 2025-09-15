@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests;
 
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
@@ -48,7 +49,12 @@ class LanguageNameLookupTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetName( string $lang, ?string $in, string $expected ) {
 		if ( $in !== LanguageNameUtils::AUTONYMS ) {
-			$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
+			if ( !(
+				ExtensionRegistry::getInstance()->isLoaded( 'cldr' )
+				|| ExtensionRegistry::getInstance()->isLoaded( 'CLDR' )
+			) ) {
+				self::markTestSkipped( 'cldr extension is required for this test' );
+			}
 		}
 
 		$languageNameLookup = new LanguageNameLookup(
