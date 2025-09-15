@@ -66,7 +66,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "सभी {{WBREPONAME}} के संपादनों को \"छोटे\" के रूप में चिह्नित किया गया है, इसलिए \"{{WBREPONAME}} पर संपादन\" फ़िल्टर \"गैर-छोटे संपादन\" फ़िल्टर से टकराता है।",
 	"wikibase-replicationnote": "कृपया याद रखें कि बदलाव को सभी विकियों पर दिखने में कई मिनट लग सकते हैं।",
 	"wikibase-watchlist-show-changes-pref": "आपकी ध्यानसूची में {{WBREPONAME}} के सम्पादन दिखाएँ",
-	"wikibase-error-deserialize-error": "डेटा को अक्रमबद्ध न जा सका।",
+	"wikibase-error-deserialize-error": "डेटा को अक्रमांकित न किया जा सका।",
 	"wikibase-error-serialize-error": "डेटा को क्रमबद्ध न किया जा सका।",
 	"wikibase-error-invalid-entity-id": "सिस्टम में ID \"$2\" परिभाषित नहीं है। कृपया किसी मान्य सत्ता ID का इस्तेमाल करें।",
 	"wikibase-error-exceeded-entity-access-limit": "ज़्यादा {{WBREPONAME}} सत्तों को पढ़ा गया।",

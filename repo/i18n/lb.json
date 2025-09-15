@@ -4,7 +4,8 @@
 			"Les Meloures",
 			"Robby",
 			"Soued031",
-			"Volvox"
+			"Volvox",
+			"GilPe"
 		]
 	},
 	"wikibase-entity": "Objet",
@@ -77,7 +78,7 @@
 	"wikibase-undo-badpage": "Falsch Versioun: D'Versioun $2 gehéiert net zu [[:$1]].",
 	"wikibase-undo-firstrev": "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	"wikibase-undo-nocontent": "Den Inhalt vun der Versioun $2 vun der Säit $1 kann net geluede ginn",
-	"wikibase-summary-generated": "Resumé (gëtt un en automatesch generéierte Resumé ugehaangen):",
+	"wikibase-summary-generated": "Resümmee (gëtt un en automatesch generéierte Resümmee ugehaangen):",
 	"wikibase-disambiguation-title": "Homonymie fir \"$1\"",
 	"wikibase-propertypage-datatype": "Datentyp",
 	"wikibase-propertypage-bad-datatype": "Onbekannten Datentyp: $1",

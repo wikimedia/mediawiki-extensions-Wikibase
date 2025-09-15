@@ -5,6 +5,11 @@
 			"Noooote"
 		]
 	},
+	"wikibase-dataitem": "Item de {{WBREPONAME}}",
+	"wikibase-editlinks": "Hace edit maga links",
+	"wikibase-addlinkstitle": "Aumenta interlanguage links",
+	"wikibase-linkitem-addlinks": "Aumenta maga links",
+	"wikibase-linkitem-title": "Link tiene pagina",
 	"wikibase-linkitem-linkpage": "Hace link con el pagina",
 	"wikibase-linkitem-selectlink": "Escogi un sitio y un pagina que quiere tu conecta con este pagina.",
 	"wikibase-linkitem-input-site": "Lenguaje:",
