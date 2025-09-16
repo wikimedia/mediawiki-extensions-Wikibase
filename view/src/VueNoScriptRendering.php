@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikimedia\Assert\Assert;
 use WMDE\VueJsTemplating\App;
 
 /**
@@ -58,14 +59,10 @@ class VueNoScriptRendering {
 		$this->snakFormatter = $snakFormatter;
 	}
 
-	/**
-	 * @param array<string,StatementList> $statementsLists
-	 * @return void
-	 */
-	public function loadStatementData( array $statementsLists ): void {
+	public function loadStatementData( StatementList $allStatements ): void {
 		$this->snakValueHtmlLookup = [];
 		$this->app = new App( $this->globalTemplateFunctions() );
-		$this->registerTemplates( $statementsLists );
+		$this->registerTemplates( $allStatements );
 	}
 
 	/**
@@ -101,45 +98,32 @@ class VueNoScriptRendering {
 		);
 	}
 
-	/**
-	 * @param array<string,StatementList> $statementsLists
-	 * @return void
-	 */
-	private function registerTemplates( array $statementsLists ): void {
+	private function registerTemplates( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-sections', 'wikibase.wbui2025.statementSections.vue'
 		);
 		$this->registerComponentTemplate(
 			'wbui2025-main-snak', 'wikibase.wbui2025.mainSnak.vue'
 		);
-		$this->registerStatementGroupView( $statementsLists );
-		$this->registerStatementView( $statementsLists );
+		$this->registerStatementGroupView( $allStatements );
+		$this->registerStatementView( $allStatements );
 		$this->registerPropertyNameView();
 		$this->registerReferencesView();
 		$this->registerQualifiersView();
 		$this->registerSnakValueView();
 	}
 
-	/**
-	 * @param array<string,StatementList> $statementsLists
-	 * @return void
-	 */
-	private function registerStatementGroupView( array $statementsLists ): void {
+	private function registerStatementGroupView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-group-view',
 			'wikibase.wbui2025.statementGroupView.vue',
-			function( array $data ) use ( $statementsLists ): array {
+			function( array $data ) use ( $allStatements ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
 				'@phan-var PropertyId $propertyId';
 				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-				$statementsByProperty = array_merge(
-					...array_map(
-						fn ( $statementsList ) => $statementsList->getByPropertyId( $propertyId )->toArray(),
-						array_values( $statementsLists )
-					)
-				);
+				$statementsByProperty = $allStatements->getByPropertyId( $propertyId )->toArray();
 				$data['statements'] = array_map(
 					fn ( $statement ) => $this->statementSerializer->serialize( $statement ),
 					$statementsByProperty
@@ -151,23 +135,14 @@ class VueNoScriptRendering {
 		);
 	}
 
-	/**
-	 * @param array<string,StatementList> $statementsLists
-	 * @return void
-	 */
-	private function registerStatementView( array $statementsLists ): void {
+	private function registerStatementView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-view',
 			'wikibase.wbui2025.statementView.vue',
-			function ( array $data ) use ( $statementsLists ): array {
-				$statementById = current(
-					array_filter(
-						array_map(
-							fn ( $statementList ) => $statementList->getFirstStatementWithGuid( $data['statementId'] ),
-							array_values( $statementsLists )
-						)
-					)
-				);
+			function ( array $data ) use ( $allStatements ): array {
+				$statementId = $data['statementId'];
+				$statementById = $allStatements->getFirstStatementWithGuid( $statementId );
+				Assert::invariant( $statementById !== null, "Statement $statementId not found" );
 				$data['statement'] = $this->statementSerializer->serialize( $statementById );
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];

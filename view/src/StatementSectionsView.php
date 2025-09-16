@@ -64,17 +64,19 @@ class StatementSectionsView {
 	}
 
 	/**
-	 * @param array<string,StatementList> $statementsLists
+	 * @param StatementList $allStatements
+	 * @param array<string,StatementList> $groupedStatements
 	 * @param string $entityId
 	 * @return string HTML
 	 */
 	private function getVueStatementSectionsHtml(
-		array $statementsLists,
+		StatementList $allStatements,
+		array $groupedStatements,
 		string $entityId,
 	): string {
-		$this->vueNoScriptRendering->loadStatementData( $statementsLists );
+		$this->vueNoScriptRendering->loadStatementData( $allStatements );
 		$rendered = '';
-		foreach ( $this->iterateOverNonEmptyStatementSections( $statementsLists ) as $key => $statementsList ) {
+		foreach ( $this->iterateOverNonEmptyStatementSections( $groupedStatements ) as $key => $statementsList ) {
 			$rendered .= $this->vueNoScriptRendering->renderStatementsSectionHtml(
 				$entityId,
 				$this->getHtmlForSectionHeading( $key ),
@@ -87,13 +89,15 @@ class StatementSectionsView {
 
 	/**
 	 * @param EntityId $entityId
-	 * @param StatementList[] $statementsLists
+	 * @param StatementList $allStatements
+	 * @param StatementList[] $groupedStatements
 	 * @return string HTML
 	 */
-	private function getVueStatementsHtml( EntityId $entityId, array $statementsLists ): string {
+	private function getVueStatementsHtml( EntityId $entityId, StatementList $allStatements, array $groupedStatements ): string {
 		return "<div id='wikibase-wbui2025-statementgrouplistview'>" .
 			$this->getVueStatementSectionsHtml(
-				$statementsLists,
+				$allStatements,
+				$groupedStatements,
 				$entityId->getSerialization(),
 			) .
 			"</div>";
@@ -130,7 +134,7 @@ class StatementSectionsView {
 		$statementLists = $this->statementGrouper->groupStatements( $statementList );
 		if ( $wbui2025Ready && $this->vueStatementsView ) {
 			Assert::invariant( $entityId !== null, 'entityId should be set when wbui2025Ready' );
-			return $this->getVueStatementsHtml( $entityId, $statementLists );
+			return $this->getVueStatementsHtml( $entityId, $statementList, $statementLists );
 		}
 
 		$html = '';
