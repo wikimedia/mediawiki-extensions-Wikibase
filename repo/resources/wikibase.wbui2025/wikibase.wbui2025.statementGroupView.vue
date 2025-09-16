@@ -68,6 +68,9 @@ module.exports = exports = defineComponent( {
 			return getStatementsForProperty( this.propertyId );
 		},
 		isUnsupportedDataType() {
+			if ( !this.statements || this.statements.length === 0 ) {
+				return false;
+			}
 			const datatype = this.statements[ 0 ].mainsnak.datatype;
 			return !supportedDatatypes.includes( datatype );
 		}

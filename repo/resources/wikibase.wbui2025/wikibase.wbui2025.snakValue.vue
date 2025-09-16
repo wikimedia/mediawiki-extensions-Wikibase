@@ -25,7 +25,9 @@ module.exports = exports = defineComponent( {
 			return {
 				'wikibase-wbui2025-media-value': this.snak.datatype === 'commonsMedia',
 				'wikibase-wbui2025-time-value': this.snak.datatype === 'time',
-				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate'
+				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate',
+				'wikibase-wbui2025-tabular-data-value': this.snak.datatype === 'tabular-data',
+				'wikibase-wbui2025-geo-shape-value': this.snak.datatype === 'geo-shape'
 			};
 		}
 	},

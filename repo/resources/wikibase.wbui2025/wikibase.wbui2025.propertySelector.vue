@@ -76,6 +76,8 @@ module.exports = exports = defineComponent( {
 </script>
 
 <style lang="less">
+@import 'mediawiki.skin.variables.less';
+
 .wikibase-wbui2025-property-selector {
 	.wikibase-wbui2025-property-selector-heading {
 		display: flex;

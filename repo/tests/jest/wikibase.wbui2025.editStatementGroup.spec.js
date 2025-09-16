@@ -18,6 +18,19 @@ jest.mock(
 	'../../resources/wikibase.wbui2025/api/api.js',
 	() => ( { api: { get: jest.fn() } } )
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/supportedDatatypes.json',
+	() => [ 'string', 'tabular-data', 'geo-shape' ],
+	{ virtual: true }
+);
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/commons.js',
+	() => ( {
+		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
+		transformSearchResults: jest.fn( ( results ) => results )
+	} ),
+	{ virtual: true }
+);
 
 const crypto = require( 'crypto' );
 // eslint-disable-next-line no-undef
@@ -66,7 +79,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 					datavalue: {
 						value: '',
 						type: 'string'
-					}
+					},
+					datatype: 'string'
 				},
 				rank: 'normal'
 			};

@@ -9,6 +9,11 @@ export class EditStatementFormPage {
 		SUBMIT_BUTTONS: '.wikibase-wbui2025-edit-form-actions > .cdx-button',
 		ADD_QUALIFIER_BUTTON: '.wikibase-wbui2025-add-qualifier-button',
 		TEXT_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-text-input input',
+		LOOKUP_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-lookup input',
+		LOOKUP_COMPONENT: '.wikibase-wbui2025-edit-statement-value-input .cdx-lookup',
+		MENU: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu',
+		MENU_ITEM: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu-item',
+		RANK_SELECT: '.wikibase-wbui2025-rank-input .cdx-select-vue',
 	};
 
 	public static FORM_HEADING = '.wikibase-wbui2025-edit-statement-heading';
@@ -51,5 +56,33 @@ export class EditStatementFormPage {
 
 	public publishButton(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).last();
+	}
+
+	public lookupInput(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.LOOKUP_INPUT );
+	}
+
+	public lookupComponent(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT );
+	}
+
+	public menu(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.MENU );
+	}
+
+	public rankSelect(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.RANK_SELECT );
+	}
+
+	public menuItems(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM );
+	}
+
+	public getLookupComponentSelector(): string {
+		return EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT;
+	}
+
+	public getLookupInputSelector(): string {
+		return EditStatementFormPage.SELECTORS.LOOKUP_INPUT;
 	}
 }

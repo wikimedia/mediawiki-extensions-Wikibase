@@ -33,6 +33,17 @@
 					:placeholder="$i18n( 'wikibase-addqualifier' ).text()"
 				>
 				</cdx-text-input>
+				<cdx-lookup
+					v-else-if="isTabularOrGeoShapeDatatype"
+					v-model:selected="lookupSelection"
+					v-model:input-value="lookupInputValue"
+					:menu-items="lookupMenuItems"
+					:menu-config="menuConfig"
+					class="wikibase-wbui2025-add-qualifier-value"
+					@update:input-value="onUpdateInputValue"
+					@load-more="onLoadMore"
+				>
+				</cdx-lookup>
 			</div>
 		</div>
 	</wikibase-wbui2025-modal-overlay>
@@ -40,8 +51,10 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon, CdxTextInput } = require( '../../codex.js' );
+const { CdxButton, CdxIcon, CdxLookup, CdxTextInput } = require( '../../codex.js' );
 const { cdxIconCheck, cdxIconClose } = require( './icons.json' );
+const supportedDatatypes = require( './supportedDatatypes.json' );
+const { searchByDatatype, transformSearchResults } = require( './api/commons.js' );
 
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
@@ -51,6 +64,7 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
+		CdxLookup,
 		CdxTextInput,
 		WikibaseWbui2025ModalOverlay,
 		WikibaseWbui2025PropertyLookup
@@ -62,10 +76,20 @@ module.exports = exports = defineComponent( {
 			cdxIconClose,
 			selectedPropertyId: null,
 			selectedPropertyDatatype: null,
-			snakValue: ''
+			snakValue: '',
+			lookupMenuItems: [],
+			lookupSelection: null,
+			lookupInputValue: '',
+			menuConfig: {
+				visibleItemLimit: 6
+			}
 		};
 	},
 	computed: {
+		isTabularOrGeoShapeDatatype() {
+			return supportedDatatypes.includes( this.selectedPropertyDatatype ) &&
+				( this.selectedPropertyDatatype === 'tabular-data' || this.selectedPropertyDatatype === 'geo-shape' );
+		},
 		addButtonDisabled() {
 			return this.snakValue === '';
 		},
@@ -75,7 +99,7 @@ module.exports = exports = defineComponent( {
 				property: this.selectedPropertyId,
 				datavalue: {
 					value: this.snakValue,
-					type: this.selectedPropertyDatatype
+					type: 'string'
 				},
 				datatype: this.selectedPropertyDatatype
 			};
@@ -84,7 +108,59 @@ module.exports = exports = defineComponent( {
 	methods: {
 		onPropertySelection( propertyId, propertyData ) {
 			this.selectedPropertyId = propertyId;
-			this.selectedPropertyDatatype = propertyData.datatype;
+			this.selectedPropertyDatatype = propertyData && propertyData.datatype;
+			this.lookupMenuItems = [];
+			this.lookupSelection = null;
+			this.lookupInputValue = '';
+		},
+		fetchLookupResults( searchTerm, offset = 0 ) {
+			return searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
+		},
+		onUpdateInputValue( value ) {
+			if ( !value ) {
+				this.lookupMenuItems = [];
+				return;
+			}
+
+			this.fetchLookupResults( value )
+				.then( ( data ) => {
+					if ( this.lookupInputValue !== value ) {
+						return;
+					}
+
+					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
+						this.lookupMenuItems = [];
+						return;
+					}
+
+					const results = transformSearchResults( data.query.search );
+					this.lookupMenuItems = results;
+				} )
+				.catch( () => {
+					this.lookupMenuItems = [];
+				} );
+		},
+		onLoadMore() {
+			if ( !this.lookupInputValue ) {
+				return;
+			}
+
+			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
+				.then( ( data ) => {
+					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
+						return;
+					}
+
+					const newResults = transformSearchResults( data.query.search );
+					this.lookupMenuItems.push( ...newResults );
+				} );
+		}
+	},
+	watch: {
+		lookupSelection( newSelection ) {
+			if ( newSelection && this.isTabularOrGeoShapeDatatype ) {
+				this.snakValue = newSelection;
+			}
 		}
 	}
 } );

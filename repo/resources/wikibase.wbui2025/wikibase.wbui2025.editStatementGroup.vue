@@ -15,6 +15,7 @@
 					<wikibase-wbui2025-edit-statement
 						:property-id="propertyId"
 						:statement-id="statementGuid"
+						:datatype="propertyDatatype"
 						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
 				</template>
@@ -143,6 +144,13 @@ module.exports = exports = defineComponent( {
 		},
 		statements() {
 			return getStatementsForProperty( this.propertyId );
+		},
+		propertyDatatype() {
+			// eslint-disable-next-line vue/no-undef-properties
+			if ( this.statements && this.statements.length > 0 ) {
+				return this.statements[ 0 ].mainsnak.datatype;
+			}
+			return null;
 		}
 	} ),
 	methods: Object.assign( mapActions( useEditStatementsStore, {
@@ -179,11 +187,9 @@ module.exports = exports = defineComponent( {
 					} );
 					this.formSubmitted = false;
 				} );
-
 		}
 	} ),
 	mounted() {
-		// eslint-disable-next-line vue/no-undef-properties
 		if ( this.statements && this.statements.length > 0 ) {
 			this.initializeEditStatementStoreFromStatementStore(
 				this.statements.map( ( statement ) => statement.id ),

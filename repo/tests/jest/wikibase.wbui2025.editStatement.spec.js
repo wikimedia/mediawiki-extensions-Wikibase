@@ -13,6 +13,19 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/supportedDatatypes.json',
+	() => [ 'string', 'tabular-data', 'geo-shape' ],
+	{ virtual: true }
+);
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/commons.js',
+	() => ( {
+		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
+		transformSearchResults: jest.fn( ( results ) => results )
+	} ),
+	{ virtual: true }
+);
 
 const languageCode = 'de';
 const mockConfig = {
@@ -22,7 +35,7 @@ mw.config = {
 	get: jest.fn( ( key ) => mockConfig[ key ] )
 };
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
-const { CdxButton, CdxSelect, CdxTextInput } = require( '../../codex.js' );
+const { CdxButton, CdxLookup, CdxSelect, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025AddQualifier = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addQualifier.vue' );
 const Wbui2025Qualifiers = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' );
@@ -38,7 +51,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		mw.Api.prototype.get = jest.fn().mockResolvedValue( {} );
+		mw.Api.prototype.get = jest.fn().mockResolvedValue( { result: '<div>html value</div>' } );
 
 		let wrapper, addQualifierButton, addReferenceButton, removeButton, textInput, select, qualifiers, references;
 		beforeEach( async () => {
@@ -212,6 +225,200 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					P23: [ snakData ]
 				} ) );
 			} );
+		} );
+	} );
+
+	describe( 'tabular-data datatype', () => {
+		let wrapper, lookup;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$tabular-data-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					datavalue: {
+						value: 'Data:Example.tab',
+						type: 'string'
+					},
+					datatype: 'tabular-data'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+
+			wrapper = await mount( editStatementComponent, {
+				props: {
+					propertyId: testPropertyId,
+					statementId: testStatementId,
+					datatype: 'tabular-data'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [ testStatement ] )
+					]
+				}
+			} );
+
+			lookup = wrapper.findComponent( CdxLookup );
+		} );
+
+		it( 'renders cdx-lookup instead of cdx-text-input for tabular-data', async () => {
+			await wrapper.vm.$nextTick();
+			lookup = wrapper.findComponent( CdxLookup );
+			expect( lookup.exists() ).toBe( true );
+		} );
+
+		it( 'sets isTabularOrGeoShapeDataType to true', () => {
+			expect( wrapper.vm.isTabularOrGeoShapeDataType ).toBe( true );
+		} );
+
+		it( 'has proper menu config', () => {
+			expect( wrapper.vm.menuConfig ).toEqual( { visibleItemLimit: 6 } );
+		} );
+
+		it( 'calls searchByDatatype when input value changes', async () => {
+			const { searchByDatatype } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
+			await wrapper.vm.onUpdateInputValue( 'Test' );
+			expect( searchByDatatype ).toHaveBeenCalledWith( 'tabular-data', 'Test', 0 );
+		} );
+
+		it( 'clears menu items when input is empty', async () => {
+			wrapper.vm.lookupMenuItems = [ { label: 'Test', value: 'Test' } ];
+			await wrapper.vm.onUpdateInputValue( '' );
+			expect( wrapper.vm.lookupMenuItems ).toEqual( [] );
+		} );
+	} );
+
+	describe( 'geo-shape datatype', () => {
+		let wrapper, lookup;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$geo-shape-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					datavalue: {
+						value: 'Data:Hamburg.map',
+						type: 'string'
+					},
+					datatype: 'geo-shape'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+
+			wrapper = await mount( editStatementComponent, {
+				props: {
+					propertyId: testPropertyId,
+					statementId: testStatementId,
+					datatype: 'geo-shape'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [ testStatement ] )
+					]
+				}
+			} );
+
+			lookup = wrapper.findComponent( CdxLookup );
+		} );
+
+		it( 'renders cdx-lookup instead of cdx-text-input for geo-shape', async () => {
+			await wrapper.vm.$nextTick();
+			lookup = wrapper.findComponent( CdxLookup );
+			expect( lookup.exists() ).toBe( true );
+		} );
+
+		it( 'sets isTabularOrGeoShapeDataType to true', () => {
+			expect( wrapper.vm.isTabularOrGeoShapeDataType ).toBe( true );
+		} );
+
+		it( 'calls searchByDatatype with geo-shape when input value changes', async () => {
+			const { searchByDatatype } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
+			await wrapper.vm.onUpdateInputValue( 'Region' );
+			expect( searchByDatatype ).toHaveBeenCalledWith( 'geo-shape', 'Region', 0 );
+		} );
+	} );
+
+	describe( 'lookup load more functionality', () => {
+		let wrapper;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$tabular-data-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					datavalue: {
+						value: 'Data:Example.tab',
+						type: 'string'
+					},
+					datatype: 'tabular-data'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+
+			wrapper = await mount( editStatementComponent, {
+				props: {
+					propertyId: testPropertyId,
+					statementId: testStatementId,
+					datatype: 'tabular-data'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [ testStatement ] )
+					]
+				}
+			} );
+		} );
+
+		it( 'calls searchByDatatype with offset on load more', async () => {
+			const { searchByDatatype } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
+			wrapper.vm.lookupInputValue = 'Test';
+			wrapper.vm.lookupMenuItems = [ { label: 'Item1', value: 'Item1' } ];
+
+			await wrapper.vm.onLoadMore();
+
+			expect( searchByDatatype ).toHaveBeenCalledWith( 'tabular-data', 'Test', 1 );
+		} );
+
+		it( 'does not call API if inputValue is empty', async () => {
+			const { searchByDatatype } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
+			searchByDatatype.mockClear();
+			wrapper.vm.lookupInputValue = '';
+
+			await wrapper.vm.onLoadMore();
+
+			expect( searchByDatatype ).not.toHaveBeenCalled();
+		} );
+
+		it( 'appends new results to existing menu items', async () => {
+			const { searchByDatatype, transformSearchResults } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
+			const existingItems = [ { label: 'Item1', value: 'Item1' } ];
+			const newResults = [ { label: 'Item2', value: 'Item2' } ];
+
+			wrapper.vm.lookupInputValue = 'Test';
+			wrapper.vm.lookupMenuItems = [ ...existingItems ];
+
+			searchByDatatype.mockResolvedValue( {
+				query: {
+					search: [ { title: 'File:Item2' } ]
+				}
+			} );
+			transformSearchResults.mockReturnValue( newResults );
+
+			await wrapper.vm.onLoadMore();
+
+			expect( wrapper.vm.lookupMenuItems ).toEqual( [ ...existingItems, ...newResults ] );
 		} );
 	} );
 

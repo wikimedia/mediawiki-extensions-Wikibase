@@ -27,6 +27,8 @@ class VueNoScriptRendering {
 	/** Data types supported by the Vue statements view. */
 	public const WBUI2025_SUPPORTED_DATATYPES = [
 		'string',
+		'tabular-data',
+		'geo-shape',
 	];
 
 	private const VUE_TEMPLATE_FOLDER = __DIR__ . '/../../repo/resources/wikibase.wbui2025/';

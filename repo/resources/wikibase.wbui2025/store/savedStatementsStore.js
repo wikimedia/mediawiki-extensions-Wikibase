@@ -51,7 +51,7 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 				snaksWithoutHtml
 					.filter( ( snak ) => snak.snaktype === 'value' )
 					.map(
-						( snak ) => renderSnakValueHtml( snak.datavalue )
+						( snak ) => renderSnakValueHtml( snak.datavalue, snak.property )
 						.then( ( result ) => updateSnakValueHtmlForHash( snak.hash, result ) )
 					)
 			);

@@ -14,14 +14,22 @@ const updateStatements = async function ( entityId, statements ) {
 
 /**
  * @param {Object} dataValue
+ * @param {string|null} propertyId
  */
-const renderSnakValueHtml = async function ( dataValue ) {
-	const fetchResult = await api.get( {
+const renderSnakValueHtml = async function ( dataValue, propertyId = null ) {
+	const params = {
 		action: 'wbformatvalue',
 		generate: 'text/html; disposition=verbose-preview',
 		datavalue: JSON.stringify( dataValue )
-	} );
+	};
+
+	if ( propertyId ) {
+		params.property = propertyId;
+	}
+
+	const fetchResult = await api.get( params );
 	return fetchResult.result;
+
 };
 
 const renderPropertyLinkHtml = async function ( propertyId ) {
