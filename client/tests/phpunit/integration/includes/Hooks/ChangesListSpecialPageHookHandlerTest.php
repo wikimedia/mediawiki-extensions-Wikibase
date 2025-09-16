@@ -10,6 +10,7 @@ use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Specials\SpecialRecentChanges;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\User;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
 use Wikimedia\Rdbms\Expression;
 use Wikimedia\Rdbms\IDatabase;
@@ -25,7 +26,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
-class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase {
+class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var ExtensionRegistry
@@ -72,9 +73,6 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$specialPage = MediaWikiServices::getInstance()->getSpecialPageFactory()
 			->getPage( 'Recentchanges' );
 
-		/** @var SpecialRecentChanges $wrappedSpecialPage */
-		$wrappedSpecialPage = TestingAccessWrapper::newFromObject( $specialPage );
-
 		/** @var ChangesListSpecialPageHookHandler $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandler(
 			$this->getDatabase(),
@@ -88,9 +86,8 @@ class ChangesListSpecialPageHookHandlerTest extends \PHPUnit\Framework\TestCase 
 		$specialPage->setContext( $context );
 
 		// Register built-in filters, since the Wikidata one uses its group
-		$wrappedSpecialPage->registerFiltersFromDefinitions(
-			$wrappedSpecialPage->filterGroupDefinitions
-		);
+		$specialPage->setHookContainer( $this->createHookContainer() );
+		$specialPage->setup( '' );
 
 		$hookHandler->addFilter( $specialPage );
 
