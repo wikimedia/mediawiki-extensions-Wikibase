@@ -47,8 +47,8 @@
 	QUnit.test( 'getMonolingualTextLanguages', ( assert ) => {
 		var allLanguages = ( wb.WikibaseContentLanguages.getMonolingualTextLanguages() ).getAll();
 
-		[ 'abe', 'de', 'en', 'ko' ].forEach( ( languageCode ) => {
-			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
+		[ 'aeb', 'de', 'en', 'ko' ].forEach( ( languageCode ) => {
+			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1, languageCode );
 		} );
 	} );
 
@@ -56,7 +56,7 @@
 		var allLanguages = ( wb.WikibaseContentLanguages.getTermLanguages() ).getAll();
 
 		[ 'bag', 'de', 'en', 'ko' ].forEach( ( languageCode ) => {
-			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1 );
+			assert.notStrictEqual( allLanguages.indexOf( languageCode ), -1, languageCode );
 		} );
 	} );
 
