@@ -55,11 +55,11 @@ describe( 'wbui2025 item view publish statement changes', () => {
 				/* Change the value of the first property */
 				const valueForm = new ValueForm( element );
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', initialPropertyValue );
-				valueForm.publishButton().should( 'not.have.class', 'inactive' );
+				valueForm.publishButton().should( 'not.be.disabled' );
 				valueForm.setValueInput( newPropertyValue );
 				/* Save changes by clicking 'publish' */
 				valueForm.publishButton().click();
-				valueForm.publishButton().should( 'have.class', 'inactive' );
+				valueForm.publishButton().should( 'be.disabled' );
 			} );
 
 			/* Wait for the form to close, and check the value is changed */

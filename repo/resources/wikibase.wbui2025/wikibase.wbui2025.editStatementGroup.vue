@@ -29,11 +29,19 @@
 			</div>
 			<div class="wikibase-wbui2025-edit-statement-footer">
 				<div class="wikibase-wbui2025-edit-form-actions">
-					<cdx-button @click="$emit( 'hide' )">
+					<cdx-button
+						weight="quiet"
+						@click="$emit( 'hide' )"
+					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
 					</cdx-button>
-					<cdx-button :class="{ inactive: formSubmitted }" @click="submitForm">
+					<cdx-button
+						action="progressive"
+						weight="primary"
+						:disabled="formSubmitted"
+						@click="submitForm"
+					>
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
 						{{ saveMessage }}
 					</cdx-button>
@@ -256,17 +264,6 @@ module.exports = exports = defineComponent( {
 			display: flex;
 			align-items: center;
 			gap: @spacing-200;
-
-			button.cdx-button {
-				cursor: pointer;
-				border-color: @border-color-transparent;
-				background: @background-color-transparent;
-
-				&.inactive {
-					color: @color-disabled;
-					background: @background-color-disabled;
-				}
-			}
 		}
 	}
 }
