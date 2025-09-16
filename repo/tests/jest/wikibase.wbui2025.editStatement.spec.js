@@ -168,7 +168,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			expect( qualifiers ).toHaveLength( 1 );
 			expect( wrapper.findAll( '.wikibase-wbui2025-qualifier' ) ).toHaveLength( 1 );
 			expect( references ).toHaveLength( 1 );
-			expect( wrapper.findAll( '.wikibase-wbui2025-reference' ) ).toHaveLength( 4 );
+			expect( wrapper.findAll( '.wikibase-wbui2025-reference-snak' ) ).toHaveLength( 4 );
 		} );
 	} );
 } );

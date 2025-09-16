@@ -2,8 +2,6 @@
 
 .wikibase-wbui2025-statement-group {
 	.wikibase-wbui2025-references {
-		background-color: @background-color-neutral-subtle;
-
 		p {
 			padding-top: 0.5rem;
 			margin: 0;
@@ -32,12 +30,43 @@
 		}
 
 		.wikibase-wbui2025-reference {
-			padding-left: 2em;
+			background-color: @background-color-neutral-subtle;
+
+			&:not( :last-child ) {
+				margin-bottom: @spacing-125;
+			}
+		}
+
+		.wikibase-wbui2025-reference-snak {
+			display: flex;
+			padding: @spacing-75 @spacing-100;
+			align-items: flex-start;
+			gap: @spacing-75;
+			align-self: stretch;
+
+			.wikibase-wbui2025-property-name-link {
+				padding: 0;
+				width: @size-800;
+				display: flex;
+				align-items: flex-end;
+				gap: 6px;
+
+				& > a {
+					overflow: hidden;
+					text-overflow: @text-overflow-ellipsis;
+					white-space: nowrap;
+				}
+			}
 		}
 
 		.wikibase-wbui2025-snak-value {
 			div.wikibase-snakview div {
 				display: inherit;
+			}
+
+			>a {
+				display: unset;
+				padding-left: unset;
 			}
 		}
 

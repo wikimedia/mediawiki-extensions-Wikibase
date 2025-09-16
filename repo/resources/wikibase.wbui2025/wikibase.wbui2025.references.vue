@@ -13,16 +13,18 @@
 			class="wikibase-wbui2025-reference-list"
 			:class="{ 'wikibase-wbui2025-references-visible': showReferences }">
 			<template v-for="reference in references" :key="reference">
-				<template v-for="propertyId in reference['snaks-order']" :key="propertyId">
-					<div
-						v-for="snak in reference.snaks[propertyId]"
-						:key="snak"
-						class="wikibase-wbui2025-reference"
-					>
-						<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-						<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
-					</div>
-				</template>
+				<div class="wikibase-wbui2025-reference">
+					<template v-for="propertyId in reference['snaks-order']" :key="propertyId">
+						<div
+							v-for="snak in reference.snaks[propertyId]"
+							:key="snak"
+							class="wikibase-wbui2025-reference-snak"
+						>
+							<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
+							<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
+						</div>
+					</template>
+				</div>
 			</template>
 		</div>
 	</div>
