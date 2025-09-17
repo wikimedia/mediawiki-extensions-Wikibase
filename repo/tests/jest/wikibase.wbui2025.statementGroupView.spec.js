@@ -19,6 +19,10 @@ jest.mock(
 	() => [ 'string' ],
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );

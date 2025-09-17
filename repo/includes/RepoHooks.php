@@ -992,6 +992,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
+					'resources/wikibase.wbui2025/api/api.js',
 					'resources/wikibase.wbui2025/api/editEntity.js',
 					'resources/wikibase.wbui2025/store/messageStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',

@@ -14,6 +14,10 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue' );
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );

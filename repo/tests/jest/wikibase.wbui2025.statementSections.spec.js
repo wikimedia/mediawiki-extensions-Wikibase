@@ -19,6 +19,10 @@ jest.mock(
 	() => [ 'string' ],
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const statementSections = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue' );
 const { mount } = require( '@vue/test-utils' );

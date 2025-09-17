@@ -1,5 +1,5 @@
 const { updateStatementData } = require( '../store/statementsStore.js' );
-const api = new mw.Api();
+const { api } = require( './api.js' );
 
 /**
  * @param {string} itemId The ID of the item to update

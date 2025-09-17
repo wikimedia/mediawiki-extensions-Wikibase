@@ -8,6 +8,10 @@ jest.mock(
 	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close' } ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const addStatementButtonComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue' );
 const propertySelectorComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue' );

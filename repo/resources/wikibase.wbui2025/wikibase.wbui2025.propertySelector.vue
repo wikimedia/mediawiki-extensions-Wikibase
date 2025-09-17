@@ -40,6 +40,7 @@
 const { computed, defineComponent, ref } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxLookup } = require( '../../codex.js' );
 const { cdxIconCheck, cdxIconClose } = require( './icons.json' );
+const { api } = require( './api/api.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -64,7 +65,6 @@ module.exports = exports = defineComponent( {
 		const menuConfig = {
 			visibleItemLimit: 3
 		};
-		const api = new mw.Api();
 
 		// messages that can be used here:
 		// * wikibase-statementgrouplistview-add
