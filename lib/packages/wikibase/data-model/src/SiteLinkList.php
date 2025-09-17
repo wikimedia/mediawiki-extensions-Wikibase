@@ -149,7 +149,6 @@ class SiteLinkList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 *
 	 * @since 0.7.4
 	 *
 	 * @param mixed $target

@@ -21,7 +21,6 @@ use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\WikibasePingback;
 
 /**
- *
  * @covers \Wikibase\Repo\WikibasePingback
  * @group Wikibase
  * @group Database

@@ -274,7 +274,6 @@ class StatementList implements IteratorAggregate, Countable {
 	}
 
 	/**
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

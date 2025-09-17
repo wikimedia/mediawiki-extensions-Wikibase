@@ -29,7 +29,6 @@ use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryPropertyR
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
- *
  */
 class RemovePropertyLabelTest extends TestCase {
 

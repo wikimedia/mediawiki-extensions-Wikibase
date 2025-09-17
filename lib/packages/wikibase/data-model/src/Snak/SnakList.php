@@ -122,7 +122,6 @@ class SnakList extends ArrayObject {
 	}
 
 	/**
-	 *
 	 * The comparison is done purely value based, ignoring the order of the elements in the array.
 	 *
 	 * @since 0.3

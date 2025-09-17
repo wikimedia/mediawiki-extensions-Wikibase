@@ -102,7 +102,6 @@ abstract class EntityHandler extends ContentHandler {
 	 *        blob needs to be re-serialized on export. The callback must take two parameters,
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
 	 *        False positives are acceptable, false negatives are not.
-	 *
 	 */
 	public function __construct(
 		$modelId,

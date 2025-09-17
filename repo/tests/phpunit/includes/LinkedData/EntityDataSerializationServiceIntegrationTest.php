@@ -22,7 +22,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @group Database
  *
  * @license GPL-2.0-or-later
- *
  */
 class EntityDataSerializationServiceIntegrationTest extends MediaWikiIntegrationTestCase {
 	public function testItemRdfWithStub() {

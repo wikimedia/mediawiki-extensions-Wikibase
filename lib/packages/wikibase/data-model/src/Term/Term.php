@@ -67,7 +67,6 @@ class Term {
 	}
 
 	/**
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

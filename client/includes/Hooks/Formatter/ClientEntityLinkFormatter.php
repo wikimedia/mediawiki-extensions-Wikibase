@@ -60,7 +60,6 @@ class ClientEntityLinkFormatter {
 	 * or an empty array.
 	 * @return array{0: string, 1: Language}
 	 * @see TermLanguageFallbackChain::extractPreferredValueOrAny
-	 *
 	 */
 	private function extractTextAndLanguage( ?array $termData, Language $pageLanguage ): array {
 		if ( $termData ) {

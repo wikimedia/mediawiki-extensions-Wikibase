@@ -26,7 +26,6 @@ interface Snak extends Serializable, PropertyIdProvider {
 	public function getType();
 
 	/**
-	 *
 	 * @return string
 	 */
 	public function getHash();
