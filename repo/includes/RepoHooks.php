@@ -273,6 +273,7 @@ final class RepoHooks implements
 		$paths[] = __DIR__ . '/../rest-api/tests/phpunit/';
 		$paths[] = __DIR__ . '/../domains/crud/tests/phpunit/';
 		$paths[] = __DIR__ . '/../domains/search/tests/phpunit/';
+		$paths[] = __DIR__ . '/../domains/reuse/tests/phpunit/';
 	}
 
 	/** @inheritDoc */
