@@ -79,7 +79,6 @@ module.exports = exports = defineComponent( {
 			const params = {
 				action: 'wbsearchentities',
 				language: languageCode,
-				uselang: languageCode,
 				type: 'property',
 				search: currentSearchTerm.value
 			};

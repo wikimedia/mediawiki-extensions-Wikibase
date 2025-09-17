@@ -129,7 +129,6 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			expect( api.get ).toHaveBeenCalledWith( {
 				action: 'wbsearchentities',
 				language: languageCode,
-				uselang: languageCode,
 				type: 'property',
 				search: 'search term'
 			} );
