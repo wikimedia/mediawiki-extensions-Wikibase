@@ -24,13 +24,13 @@ class EntityDataFormatProvider {
 
 	/**
 	 * @var null|array Associative array from MIME type to format name
-	 * @note: initialized by initFormats()
+	 * @note initialized by initFormats()
 	 */
 	private $mimeTypes = null;
 
 	/**
 	 * @var null|array Associative array from file extension to format name
-	 * @note: initialized by initFormats()
+	 * @note initialized by initFormats()
 	 */
 	private $fileExtensions = null;
 

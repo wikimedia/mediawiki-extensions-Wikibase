@@ -36,7 +36,7 @@ use Wikibase\Repo\Validators\UrlValidator;
 /**
  * Defines validators for the basic well known data types supported by Wikibase.
  *
- * @warning: This is a low level factory for use by bootstrap code only!
+ * @warning This is a low level factory for use by bootstrap code only!
  * Program logic should use an instance of DataTypeValidatorFactory.
  *
  * @license GPL-2.0-or-later

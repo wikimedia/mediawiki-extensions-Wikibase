@@ -8,6 +8,11 @@
 	    <severity>0</severity>
 	</rule>
 
+	<!-- Use of @SuppressWarnings from PHPMD -->
+	<rule ref="MediaWiki.Commenting.ClassAnnotations.UnrecognizedAnnotation">
+	    <severity>0</severity>
+	</rule>
+
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.
 		The code is not guaranteed to be easier to read if this is disallowed. -->
 	<rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace">

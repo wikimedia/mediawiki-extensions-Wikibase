@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
  * This service only looks up terms in the specified language(s)
  * and does not apply language fallbacks.
  *
- * @note: A TermLookup cannot be used to determine whether an entity exists or not.
+ * @note A TermLookup cannot be used to determine whether an entity exists or not.
  *
  * @since 1.1
  *
