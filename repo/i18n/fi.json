@@ -387,6 +387,7 @@
 	"wikibase-mylanguagefallbackchain-babel": "Voit muokata sitä lisäämällä <nowiki>{{#babel: }}</nowiki> [[Special:MyPage|{{GENDER:$1|käyttäjäsivullesi}}]].",
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, muunnettu kielestä $3 – $4",
+	"wikibase-api-unresolved-redirect": "Annettu entiteettitunniste viittaa uudelleenohjaukseen, mitä ei tueta tässä kontekstissa.",
 	"wikibase-api-failed-save": "Tallennus epäonnistui.",
 	"wikibase-api-no-such-entity": "Entiteettiä tunnisteella ”$1” ei löydy.",
 	"wikibase-api-no-such-reference": "Annettua lähdettä ei löytynyt.",
