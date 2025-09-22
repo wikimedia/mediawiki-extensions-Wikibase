@@ -86,7 +86,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 				const valueForm = new ValueForm( element );
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', initialPropertyValue );
 				editFormPage.publishButton().should( 'not.be.disabled' );
-				valueForm.setValueInput( newPropertyValue );
+				valueForm.setValueInput( ` ${ newPropertyValue } ` ); // should trim whitespace using wbparsevalue
 				/* Change the rank */
 				valueForm.setRank( 'Deprecated rank' );
 			} );

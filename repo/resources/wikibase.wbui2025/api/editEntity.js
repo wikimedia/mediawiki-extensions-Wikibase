@@ -33,8 +33,30 @@ const renderPropertyLinkHtml = async function ( propertyId ) {
 	return fetchResult.wbformatentities && fetchResult.wbformatentities[ propertyId ];
 };
 
+/**
+ * Parse a given input into a full data value.
+ *
+ * @param {string} propertyId
+ * @param {string} input
+ * @returns {Promise<Object|null>} A data value object (with "type" and "value" keys),
+ * or null if the input could not be parsed successfully.
+ */
+const parseValue = async function ( propertyId, input ) {
+	try {
+		const { results } = await api.get( {
+			action: 'wbparsevalue',
+			property: propertyId,
+			values: [ input ]
+		} );
+		return results.find( ( result ) => result.raw === input );
+	} catch ( e ) {
+		return null;
+	}
+};
+
 module.exports = {
 	updateStatements,
 	renderSnakValueHtml,
-	renderPropertyLinkHtml
+	renderPropertyLinkHtml,
+	parseValue
 };

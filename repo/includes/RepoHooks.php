@@ -998,6 +998,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/api/editEntity.js',
 					'resources/wikibase.wbui2025/store/editStatementsStore.js',
 					'resources/wikibase.wbui2025/store/messageStore.js',
+					'resources/wikibase.wbui2025/store/parsedValueStore.js',
 					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 					[

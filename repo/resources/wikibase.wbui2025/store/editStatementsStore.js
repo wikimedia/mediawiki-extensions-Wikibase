@@ -1,4 +1,5 @@
 const { defineStore } = require( 'pinia' );
+const { useParsedValueStore } = require( './parsedValueStore.js' );
 const { useSavedStatementsStore } = require( './savedStatementsStore.js' );
 const { updateStatements } = require( '../api/editEntity.js' );
 
@@ -37,30 +38,6 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 		}
 	}
 } );
-
-const buildStatementObjectFromMutableStatement = function ( statementId ) {
-	const editStatementStore = useEditStatementStore( statementId )();
-	const builtData = {
-		id: statementId,
-		mainsnak: {
-			snaktype: editStatementStore.snaktype,
-			property: editStatementStore.propertyId
-		},
-		references: editStatementStore.references,
-		'qualifiers-order': editStatementStore.qualifiersOrder,
-		qualifiers: editStatementStore.qualifiers,
-		type: 'statement',
-		rank: editStatementStore.rank
-	};
-	if ( editStatementStore.snaktype === 'value' ) {
-		builtData.mainsnak.datavalue = {
-			value: editStatementStore.value,
-			type: 'string'
-		};
-		builtData.mainsnak.datatype = 'string';
-	}
-	return builtData;
-};
 
 const useEditStatementsStore = defineStore( 'editStatements', {
 	state: () => ( {
@@ -105,24 +82,61 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		},
 
 		/**
+		 * @private
+		 * @param {string} statementId
+		 * @returns {Promise<object>}
+		 */
+		async buildStatementObjectFromMutableStatement( statementId ) {
+			const parsedValueStore = useParsedValueStore();
+			const editStatementStore = useEditStatementStore( statementId )();
+			const builtData = {
+				id: statementId,
+				mainsnak: {
+					snaktype: editStatementStore.snaktype,
+					property: editStatementStore.propertyId
+				},
+				references: editStatementStore.references,
+				'qualifiers-order': editStatementStore.qualifiersOrder,
+				qualifiers: editStatementStore.qualifiers,
+				type: 'statement',
+				rank: editStatementStore.rank
+			};
+			if ( editStatementStore.snaktype === 'value' ) {
+				builtData.mainsnak.datavalue = await parsedValueStore.getParsedValue(
+					editStatementStore.propertyId,
+					editStatementStore.value
+				);
+				builtData.mainsnak.datatype = 'string';
+			}
+			return builtData;
+		},
+
+		/**
+		 * @private
+		 * @returns {Promise<object[]>}
+		 */
+		async buildStatementsForSerialization() {
+			const claimsToDeleteOnSubmit = this.removedStatements
+				.filter( ( statementId ) => !this.createdStatements.includes( statementId ) )
+				.map( ( statementId ) => ( { id: statementId, remove: '' } ) );
+			const statements = [];
+			for ( const statementId of this.statements ) {
+				statements.push( await this.buildStatementObjectFromMutableStatement( statementId ) );
+			}
+			return statements.concat( claimsToDeleteOnSubmit );
+		},
+
+		/**
 		 * @param {string} entityId
 		 */
-		saveChangedStatements( entityId ) {
+		async saveChangedStatements( entityId ) {
 			const statementsStore = useSavedStatementsStore();
-			return updateStatements( entityId, this.statementsForSerialization )
+			return updateStatements( entityId, await this.buildStatementsForSerialization() )
 				.then( ( returnedClaims ) => statementsStore.populateWithClaims( returnedClaims, true ) );
 		}
 	},
 	getters: {
-		statementIds: ( state ) => state.statements,
-		statementsForSerialization( state ) {
-			const claimsToDeleteOnSubmit = state.removedStatements
-				.filter( ( statementId ) => !state.createdStatements.includes( statementId ) )
-				.map( ( statementId ) => ( { id: statementId, remove: '' } ) );
-			return state.statements
-				.map( ( statementId ) => buildStatementObjectFromMutableStatement( statementId ) )
-				.concat( claimsToDeleteOnSubmit );
-		}
+		statementIds: ( state ) => state.statements
 	}
 } );
 
