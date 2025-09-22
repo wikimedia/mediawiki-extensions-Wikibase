@@ -3,7 +3,8 @@
 		"authors": [
 			"TimumachtikanNawat",
 			"Canjura",
-			"KuskutanCarpintero21"
+			"KuskutanCarpintero21",
+			"AliciaMarroquín"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} datka",
@@ -16,5 +17,6 @@
 	"wikibase-linkitem-input-site": "Tajtaketzalis",
 	"wikibase-linkitem-input-page": "Amat",
 	"wikibase-rc-hide-wikidata-hide": "Shikinaya",
-	"wikibase-rc-hide-wikidata-show": "Shikilwiti"
+	"wikibase-rc-hide-wikidata-show": "Shikilwiti",
+	"wikibase-otherprojects": "Tik ukse itekiw"
 }

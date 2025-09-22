@@ -9,6 +9,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "ليان د عنصر مرتابط ف الريپو ديال الضوني",
+	"wikibase-after-page-move": "التحويل ديالك خاص يكون [$1 باين دابا ف الليان د اللوغة ديال ستون {{WBREPONAME}}]. بغيناك عافاك تتيقن بلي هادشي طرا.",
 	"wikibase-comment-update": "تبديل عنصر {{WBREPONAME}}",
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
 	"wikibase-editlinks": "بدل ليانات",

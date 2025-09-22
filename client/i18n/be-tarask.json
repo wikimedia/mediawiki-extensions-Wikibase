@@ -46,7 +46,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Схаваць",
 	"wikibase-rc-hide-wikidata-show": "Паказаць",
-	"wikibase-rc-show-wikidata-pref": "Паказваць праўкі {{WBREPONAME}} у сьпісе апошніх зьменаў",
+	"wikibase-rc-show-wikidata-pref": "Паказваць рэдагаваньні {{grammar:genitive|{{WBREPONAME}}}} у сьпісе апошніх зьменаў",
 	"wikibase-rc-wikibase-edit-letter": "З",
 	"wikibase-rc-wikibase-edit-title": "Праўка {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Праўкі {{grammar:genitive|{{WBREPONAME}}}}",

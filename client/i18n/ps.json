@@ -132,7 +132,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "د څرگند لامل له امله تاسو دا ارزښت نشئ سمولی.",
 	"wikibase-client-data-bridge-edit-decision-heading": "مهرباني وکړئ، هغه سمون ډول غوره کړئ، چې تاسو کړی دی:",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "ما يو ناسم ارزښت <strong>سم کړ</strong>",
-	"wikibase-client-data-bridge-edit-decision-replace-description": "مخکنی ارزښت  سم نه وو او هيڅکله به هم سم نه وي.",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "مخکنی ارزښت  سم نه وو او هېڅکله به هم سم نه وي.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "زوړ ارزښت مې <strong>هم‌مهاله کړ</strong>",
 	"wikibase-client-data-bridge-edit-decision-update-description": "مخکنی ارزښت سم کارېده؛ خو اوس يې وخت تېر شوی.",
 	"wikibase-client-data-bridge-references-heading": "سرچينې",
