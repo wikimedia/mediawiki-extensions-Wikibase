@@ -101,16 +101,26 @@ describe( 'item', () => {
 			() => window.mw.config.get( [ 'wgPageName', 'wgFormattedNamespaces', 'wgNamespaceNumber' ] )
 		);
 		const talkPageTitle = wgFormattedNamespaces[ wgNamespaceNumber + 1 ] + ':' + itemId;
+		const wikitext = `[[${ itemTitle }]]`;
 
 		await ( new Page() ).openTitle( talkPageTitle, { action: 'submit', vehidebetadialog: 1, hidewelcomedialog: 1 } );
 
 		const wpTextbox1 = $( '#wpTextbox1' );
 		await wpTextbox1.waitForExist();
-		await wpTextbox1.setValue( `[[${ itemTitle }]]` );
+		await wpTextbox1.setValue( wikitext );
 
 		// Now the actual action happens: an api request with action=stashedit that caused T111346
-		await $( '#wpSummary' ).click();
+		const wpSummary = $( '#wpSummary' );
+		await wpSummary.click();
 		await browser.keys( 'typing some letters so the action=stashedit API request can finish' );
+
+		if ( await wpTextbox1.getValue() !== wikitext ) {
+			// for some reason the input didn't get set, try again (T388228)
+			await wpTextbox1.setValue( wikitext );
+			await wpSummary.setValue( '' );
+			await wpSummary.click();
+			await browser.keys( 'typing some letters so the action=stashedit API request can finish' );
+		}
 
 		await $( '#wpSave' ).click();
 		await expect( $( '#mw-content-text .mw-content-ltr p' ) ).toHaveText( itemTitle );
