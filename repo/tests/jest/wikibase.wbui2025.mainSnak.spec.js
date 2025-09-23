@@ -27,7 +27,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
+					},
+					rank: 'deprecated'
 				},
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
@@ -38,6 +39,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 			expect( snak.text() ).toEqual( 'p1' );
 			expect( snak.attributes()[ 'data-snak-hash' ] ).toEqual( 'ee6053a6982690ba0f5227d587394d9111eea401' );
 			expect( snak.attributes().class ).toEqual( 'wikibase-wbui2025-snak-value' );
+			const rankSelector = wrapper.find( '.wikibase-rankselector span' );
+			expect( rankSelector.attributes().class ).toContain( 'wikibase-rankselector-deprecated' );
 		} );
 
 		it( 'sets a custom class for a media snak', async () => {
@@ -47,7 +50,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 					property: 'P1',
 					datavalue: { value: 'p1', type: 'string' }
-				}
+				},
+				rank: 'normal'
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
@@ -63,7 +67,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 					property: 'P1',
 					datavalue: { value: 'p1', type: 'time' }
-				}
+				},
+				rank: 'normal'
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();

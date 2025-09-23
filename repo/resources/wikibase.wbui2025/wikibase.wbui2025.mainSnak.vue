@@ -1,7 +1,7 @@
 <template>
 	<div class="wikibase-wbui2025-main-snak">
 		<div class="wikibase-rankselector ui-state-default">
-			<span class="ui-icon ui-icon-rankselector wikibase-rankselector-normal" title="Normal rank"></span>
+			<span :class="concat( 'ui-icon ui-icon-rankselector wikibase-rankselector-', rank )" :title="rankTitleString"></span>
 		</div>
 		<wbui2025-snak-value :snak="mainSnak"></wbui2025-snak-value>
 	</div>
@@ -10,6 +10,7 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const Wbui2025SnakValue = require( './wikibase.wbui2025.snakValue.vue' );
+const { concat } = require( './wikibase.wbui2025.utils.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -21,6 +22,24 @@ module.exports = exports = defineComponent( {
 		mainSnak: {
 			type: Object,
 			required: true
+		},
+		rank: {
+			type: String,
+			required: true
+		}
+	},
+	setup() {
+		return {
+			concat
+		};
+	},
+	computed: {
+		rankTitleString() {
+			// messages that can be used here:
+			// * wikibase-statementview-rank-normal
+			// * wikibase-statementview-rank-preferred
+			// * wikibase-statementview-rank-deprecated
+			return mw.msg( 'wikibase-statementview-rank-' + this.rank );
 		}
 	}
 } );

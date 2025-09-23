@@ -102,15 +102,30 @@ class VueNoScriptRendering {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-sections', 'wikibase.wbui2025.statementSections.vue'
 		);
-		$this->registerComponentTemplate(
-			'wbui2025-main-snak', 'wikibase.wbui2025.mainSnak.vue'
-		);
+		$this->registerMainSnakView();
 		$this->registerStatementGroupView( $allStatements );
 		$this->registerStatementView( $allStatements );
 		$this->registerPropertyNameView();
 		$this->registerReferencesView();
 		$this->registerQualifiersView();
 		$this->registerSnakValueView();
+	}
+
+	private function registerMainSnakView(): void {
+		$this->registerComponentTemplate(
+			'wbui2025-main-snak',
+			'wikibase.wbui2025.mainSnak.vue',
+			function( array $data ) {
+				$data['rankTitleString'] = $this->textProvider->get(
+					// messages that can be used here:
+					// * wikibase-statementview-rank-normal
+					// * wikibase-statementview-rank-preferred
+					// * wikibase-statementview-rank-deprecated
+				'wikibase-statementview-rank-' . $data['rank']
+				);
+				return $data;
+			}
+		);
 	}
 
 	private function registerStatementGroupView( StatementList $allStatements ): void {

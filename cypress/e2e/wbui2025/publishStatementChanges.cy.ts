@@ -59,6 +59,11 @@ describe( 'wbui2025 item view publish statement changes', () => {
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
 
+			/* Check that the rank is normal initially */
+			itemViewPage.mainSnaks().first().then( ( element ) => {
+				itemViewPage.rank( element ).should( 'have.class', itemViewPage.getClassForRank( 'normal' ) );
+			} );
+
 			/* Open up the edit form */
 			itemViewPage.editLinks().first().click();
 			const editFormPage = new EditStatementFormPage();
@@ -81,6 +86,8 @@ describe( 'wbui2025 item view publish statement changes', () => {
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', initialPropertyValue );
 				editFormPage.publishButton().should( 'not.be.disabled' );
 				valueForm.setValueInput( newPropertyValue );
+				/* Change the rank */
+				valueForm.setRank( 'Deprecated rank' );
 			} );
 			/* Add a second statement value */
 			editFormPage.addValueButtons().last().click();
@@ -98,6 +105,11 @@ describe( 'wbui2025 item view publish statement changes', () => {
 			/* Wait for the form to close, and check the value is changed */
 			editFormPage.valueForms().should( 'not.exist' );
 			itemViewPage.snakValues().first().should( 'have.text', newPropertyValue );
+
+			/* Check that the rank is updated to deprecated */
+			itemViewPage.mainSnaks().first().then( ( element ) => {
+				itemViewPage.rank( element ).should( 'have.class', itemViewPage.getClassForRank( 'deprecated' ) );
+			} );
 
 			/* Check that references and qualifiers are still present */
 			itemViewPage.qualifiersSections().first().then( ( element ) => {

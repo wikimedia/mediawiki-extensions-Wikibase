@@ -31,7 +31,8 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
 			const testStatement = {
 				id: testStatementId,
-				mainsnak: { snaktype: 'somevalue' }
+				mainsnak: { snaktype: 'somevalue' },
+				rank: 'normal'
 			};
 			const wrapper = mount( statementViewComponent, {
 				props: {
@@ -81,6 +82,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatement = {
 				id: testStatementId,
 				mainsnak: mainSnak,
+				rank: 'normal',
 				qualifiers,
 				'qualifiers-order': qualifiersOrder,
 				references

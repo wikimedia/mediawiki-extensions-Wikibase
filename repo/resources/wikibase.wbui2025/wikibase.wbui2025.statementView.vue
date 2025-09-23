@@ -3,6 +3,7 @@
 		<wbui2025-main-snak
 			v-if="statement.mainsnak.snaktype === 'value'"
 			:main-snak="statement.mainsnak"
+			:rank="statement.rank"
 		></wbui2025-main-snak>
 		<div v-else>
 			Unsupported snak type {{ statement.mainsnak.snaktype }}

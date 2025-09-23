@@ -18,6 +18,10 @@ export class ItemViewPage {
 
 	public static REFERENCES = '.wikibase-wbui2025-reference';
 
+	public static MAIN_SNAKS = '.wikibase-wbui2025-main-snak';
+
+	public static RANK_ICON = '.wikibase-rankselector span.ui-icon';
+
 	private itemId: string;
 
 	public constructor( itemId: string ) {
@@ -56,5 +60,17 @@ export class ItemViewPage {
 
 	public references( context: HTMLElement ): Chainable {
 		return cy.get( ItemViewPage.REFERENCES, { withinSubject: context } );
+	}
+
+	public mainSnaks(): Chainable {
+		return cy.get( ItemViewPage.MAIN_SNAKS );
+	}
+
+	public rank( context: HTMLElement ): Chainable {
+		return cy.get( ItemViewPage.RANK_ICON, { withinSubject: context } );
+	}
+
+	public getClassForRank( rank: string ): string {
+		return 'wikibase-rankselector-' + rank;
 	}
 }
