@@ -8,5 +8,7 @@
 	},
 	"wikibase-edit": "Shikpata",
 	"wikibase-add": "Shikajshitili",
-	"wikibase-description-empty": "tesu kiwawasujket"
+	"wikibase-label-empty": "Tesu kitukeytijtiwit",
+	"wikibase-description-empty": "tesu kiwawasujket",
+	"wikibase-sitelinks-special": "ukseuk ajamat"
 }
