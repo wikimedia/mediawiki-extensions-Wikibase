@@ -112,7 +112,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Деякі твердження",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Твердження: $1",
 	"wikibase-pageinfo-entity-usage-X": "Всі дані сутності",
-	"wikibase-pageinfo-entity-usage-O": "Інше (наприклад, псевдоніми, існування сутності)",
+	"wikibase-pageinfo-entity-usage-O": "Інше (наприклад, існування сутності)",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
 	"wikibase-otherprojects": "В інших проєктах",
 	"wikibase-otherprojects-beta-message": "Бічна панель інших проектів",
