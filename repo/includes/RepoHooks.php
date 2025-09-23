@@ -60,7 +60,7 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\GraphQLPrototype\SpecialWikibaseGraphQL;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\SpecialWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -1291,9 +1291,7 @@ final class RepoHooks implements
 			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
 				'class' => SpecialWikibaseGraphQL::class,
 				'services' => [
-					'WikibaseRepo.EntityLookup',
-					'WikibaseRepo.PrefetchingTermLookup',
-					'WikibaseRepo.TermsLanguages',
+					'WbReuse.GraphQLService',
 				],
 			];
 		}
