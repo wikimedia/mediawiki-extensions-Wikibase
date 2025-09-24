@@ -79,6 +79,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 			const newPropertyValue = 'newPropertyValue';
 			const secondStatementValue = 'newStatementValue';
+			const thirdStatementValue = 'thirdStatementValue';
 			editFormPage.valueForms();
 			editFormPage.valueForms().first().then( ( element: HTMLElement ) => {
 				/* Change the value of the first statement */
@@ -97,6 +98,22 @@ describe( 'wbui2025 item view publish statement changes', () => {
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', '' );
 				valueForm.setValueInput( secondStatementValue );
 			} );
+			/* Add a third statement value to test novalue */
+			editFormPage.addValueButtons().last().click();
+			editFormPage.valueForms().last().then( ( element: HTMLElement ) => {
+				/* Enter a new value for the third statement */
+				const valueForm = new ValueForm( element );
+				valueForm.valueInput().invoke( 'val' ).should( 'equal', '' );
+				valueForm.setValueInput( thirdStatementValue );
+				valueForm.valueInput().invoke( 'val' ).should( 'equal', thirdStatementValue );
+				valueForm.setSnakType( 'no value' );
+				valueForm.noValueSomeValuePlaceholder().should( 'contain', 'no value' );
+				valueForm.setSnakType( 'unknown value' );
+				valueForm.noValueSomeValuePlaceholder().should( 'contain', 'unknown value' );
+				valueForm.setSnakType( 'custom value' );
+				valueForm.valueInput().invoke( 'val' ).should( 'equal', thirdStatementValue );
+				valueForm.setSnakType( 'no value' );
+			} );
 
 			/* Save changes by clicking 'publish' */
 			editFormPage.publishButton().click();
@@ -104,7 +121,9 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 			/* Wait for the form to close, and check the value is changed */
 			editFormPage.valueForms().should( 'not.exist' );
-			itemViewPage.snakValues().first().should( 'have.text', newPropertyValue );
+			itemViewPage.mainSnakValues().first().should( 'have.text', newPropertyValue );
+			itemViewPage.mainSnakValues().eq( 1 ).should( 'have.text', secondStatementValue );
+			itemViewPage.mainSnakValues().eq( 2 ).should( 'have.text', 'no value' );
 
 			/* Check that the rank is updated to deprecated */
 			itemViewPage.mainSnaks().first().then( ( element ) => {
@@ -125,9 +144,13 @@ describe( 'wbui2025 item view publish statement changes', () => {
 				const valueForm = new ValueForm( element );
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', newPropertyValue );
 			} );
-			editFormPage.valueForms().last().then( ( element: HTMLElement ) => {
+			editFormPage.valueForms().eq( 1 ).then( ( element: JQuery<HTMLElement> ) => {
 				const valueForm = new ValueForm( element );
 				valueForm.valueInput().invoke( 'val' ).should( 'equal', secondStatementValue );
+			} );
+			editFormPage.valueForms().eq( 2 ).then( ( element: JQuery<HTMLElement> ) => {
+				const valueForm = new ValueForm( element );
+				valueForm.noValueSomeValuePlaceholder().should( 'contain', 'no value' );
 			} );
 
 			/* Reload page and check that data was saved */

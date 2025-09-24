@@ -62,6 +62,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			const testStatement = {
 				id: 'Q1$6e87f6d3-444f-405a-8c17-96ff7df34b62',
 				mainSnak: {
+					snaktype: 'value',
 					datavalue: {
 						value: '',
 						type: 'string'

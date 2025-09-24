@@ -45,6 +45,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			const testStatement = {
 				id: testStatementId,
 				mainSnak: {
+					snaktype: 'value',
 					datavalue: {
 						value: 'test value',
 						type: 'string'
@@ -133,6 +134,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					valueId: '1',
 					rank: 'normal',
 					mainSnak: {
+						snaktype: 'value',
 						datavalue: {
 							value: 'test value',
 							type: 'string'
@@ -217,4 +219,44 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			} );
 		} );
 	} );
+
+	describe( 'the mounted component with a novalue statement', () => {
+		let wrapper, textInput, noValueSomeValuePlaceholder;
+		beforeEach( async () => {
+			const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
+			const testNoValueStatement = {
+				id: testNoValueStatementId,
+				mainSnak: {
+					snaktype: 'novalue'
+				}
+			};
+			wrapper = await mount( editStatementComponent, {
+				props: {
+					valueId: '1',
+					rank: 'normal',
+					mainSnak: {
+						snaktype: 'novalue'
+					},
+					statementId: testNoValueStatementId
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [ testNoValueStatement ] )
+					] }
+			} );
+			textInput = wrapper.findComponent( CdxTextInput );
+			noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
+		} );
+
+		it( 'mount its child components', () => {
+			expect( wrapper.exists() ).toBe( true );
+			expect( textInput.exists() ).toBe( false );
+			expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
+		} );
+
+		it( 'loads and shows data correctly', () => {
+			expect( noValueSomeValuePlaceholder.text() ).toContain( 'wikibase-snakview-variations-novalue-label' );
+		} );
+	} );
+
 } );

@@ -10,9 +10,17 @@
 		<div class="wikibase-wbui2025-value-input-fields">
 			<div class="wikibase-wbui2025-edit-statement-value-input">
 				<div class="wikibase-snaktypeselector ui-state-default">
-					<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" :title="$i18n( 'wikibase-snakview-snaktypeselector-value' )"></span>
+					<cdx-menu-button
+						v-model:selected="snakTypeSelection"
+						:menu-items="snakTypeMenuItems"
+					>
+						<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" :title="$i18n( 'wikibase-snakview-snaktypeselector-value' )"></span>
+					</cdx-menu-button>
 				</div>
-				<cdx-text-input v-model="value"></cdx-text-input>
+				<cdx-text-input v-if="snakTypeSelection === 'value'" v-model="value"></cdx-text-input>
+				<div v-else class="wikibase-wbui2025-novalue-somevalue-holder">
+					<p>{{ snakTypeSelectionMessage }}</p>
+				</div>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
 				<cdx-select
@@ -57,7 +65,7 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon, CdxSelect, CdxTextInput } = require( '../../codex.js' );
+const { CdxButton, CdxIcon, CdxMenuButton, CdxSelect, CdxTextInput } = require( '../../codex.js' );
 const {
 	cdxIconAdd,
 	cdxIconTrash
@@ -79,6 +87,7 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
+		CdxMenuButton,
 		CdxSelect,
 		CdxTextInput,
 		Wbui2025AddQualifier,
@@ -94,6 +103,7 @@ module.exports = exports = defineComponent( {
 			type: Object,
 			required: true,
 			default: () => ( {
+				snaktype: 'value',
 				datavalue: {
 					value: '',
 					type: 'string'
@@ -134,7 +144,13 @@ module.exports = exports = defineComponent( {
 			showAddQualifierModal: false,
 			localQualifiers: this.qualifiers ? this.qualifiers : {},
 			localQualifiersOrder: this.qualifiersOrder ? this.qualifiersOrder : [],
-			newQualifierCounter: 0
+			newQualifierCounter: 0,
+			snakTypeMenuItems: [
+				{ label: mw.msg( 'wikibase-snakview-snaktypeselector-value' ), value: 'value' },
+				{ label: mw.msg( 'wikibase-snakview-variations-novalue-label' ), value: 'novalue' },
+				{ label: mw.msg( 'wikibase-snakview-variations-somevalue-label' ), value: 'somevalue' }
+			],
+			previousValue: null
 		};
 	},
 	computed: {
@@ -151,6 +167,42 @@ module.exports = exports = defineComponent( {
 						}
 					} ) );
 			}
+		},
+		snakTypeSelection: {
+			get() {
+				return this.mainSnak.snaktype;
+			},
+			set( newValue ) {
+				if ( this.mainSnak.snaktype === 'value' ) {
+					this.previousValue = this.value;
+				}
+				let datavalue;
+				if ( newValue === 'value' ) {
+					datavalue = {
+						value: this.previousValue ? this.previousValue : '',
+						type: 'string'
+					};
+				}
+				const updatedSnak = {
+					property: this.mainSnak.property,
+					datatype: this.mainSnak.datatype,
+					snaktype: newValue
+				};
+				if ( datavalue !== undefined ) {
+					updatedSnak.datavalue = datavalue;
+				}
+				this.$emit( 'update:mainSnak', updatedSnak );
+			}
+		},
+		snakTypeSelectionMessage() {
+			if ( this.snakTypeSelection === 'value' ) {
+				return null;
+			}
+			const messageKey = 'wikibase-snakview-variations-' + this.snakTypeSelection + '-label';
+			// messages that can appear here:
+			// * wikibase-snakview-variations-novalue-label
+			// * wikibase-snakview-variations-somevalue-label
+			return mw.msg( messageKey );
 		},
 		references() {
 			return this.statement.references ? this.statement.references : [];
@@ -210,12 +262,24 @@ module.exports = exports = defineComponent( {
 			width: 100%;
 			display: flex;
 			justify-content: center;
-			gap: @spacing-75;
+
+			div.wikibase-wbui2025-novalue-somevalue-holder {
+				width: 100%;
+				display: flex;
+				align-items: center;
+
+				p {
+					color: @color-placeholder;
+					padding: 0;
+					margin: 0;
+					align-items: center;
+					gap: @spacing-25;
+				}
+			}
 
 			.wikibase-snaktypeselector {
 				position: relative;
 				padding: 0;
-				margin-top: 3px;
 				display: inline-block;
 			}
 

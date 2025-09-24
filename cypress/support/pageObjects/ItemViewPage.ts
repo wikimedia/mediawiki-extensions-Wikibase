@@ -8,7 +8,7 @@ export class ItemViewPage {
 
 	public static EDIT_LINKS = '.wikibase-wbui2025-edit-link';
 
-	public static SNAK_VALUES = '.wikibase-wbui2025-snak-value';
+	public static MAIN_SNAK_VALUES = '.wikibase-wbui2025-main-snak .wikibase-wbui2025-snak-value';
 
 	public static QUALIFIERS_SECTION = '.wikibase-wbui2025-qualifiers';
 
@@ -28,8 +28,12 @@ export class ItemViewPage {
 		this.itemId = itemId;
 	}
 
-	public open(): this {
-		cy.visitTitleMobile( 'Item:' + this.itemId );
+	public open( lang: string = 'en' ): this {
+		// We force tests to be in English be default, to be able to make assertions
+		// about texts (especially, for example, selecting items from a Codex MenuButton
+		// menu) without needing to modify Codex components or introduce translation
+		// support to Cypress.
+		cy.visitTitleMobile( { title: 'Item:' + this.itemId, uselang: lang } );
 		return this;
 	}
 
@@ -42,8 +46,8 @@ export class ItemViewPage {
 		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.EDIT_LINKS );
 	}
 
-	public snakValues(): Chainable {
-		return cy.get( ItemViewPage.SNAK_VALUES );
+	public mainSnakValues(): Chainable {
+		return cy.get( ItemViewPage.MAIN_SNAK_VALUES );
 	}
 
 	public qualifiersSections(): Chainable {

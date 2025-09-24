@@ -184,9 +184,22 @@ module.exports = exports = defineComponent( {
 
 				return Promise.all(
 					snaksWithoutHtml.map(
-						( snak ) => renderSnakValueHtml( snak.datavalue )
-							.then( ( result ) => updateSnakValueHtml( snak.hash, result ) )
-					)
+						( snak ) => {
+							if ( snak.snaktype === 'value' ) {
+								return renderSnakValueHtml( snak.datavalue )
+										.then( ( result ) => updateSnakValueHtml( snak.hash, result ) );
+							} else {
+								const messageKey = 'wikibase-snakview-variations-' + snak.snaktype + '-label';
+								// messages that can appear here:
+								// * wikibase-snakview-variations-novalue-label
+								// * wikibase-snakview-variations-somevalue-label
+								updateSnakValueHtml(
+									snak.hash,
+									'<span class="wikibase-snakview-variation-' + snak.snaktype + 'snak">' + mw.msg( messageKey ) + '</span>'
+								);
+								return Promise.resolve();
+							}
+						} )
 				);
 			} )
 			.then( () => {

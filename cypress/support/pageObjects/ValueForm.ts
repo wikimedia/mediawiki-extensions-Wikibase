@@ -8,6 +8,12 @@ export class ValueForm {
 
 	public static RANK_SELECTOR_MENU_ITEM = '.cdx-select-vue .cdx-menu .cdx-menu-item__text__label';
 
+	public static SNAK_TYPE_SELECTOR = '.cdx-menu-button button';
+
+	public static SNAK_TYPE_SELECTOR_MENU_ITEM = '.cdx-menu-button__menu-wrapper .cdx-menu .cdx-menu-item__text__label';
+
+	public static NO_VALUE_SOME_VALUE_PLACEHOLDER = '.wikibase-wbui2025-novalue-somevalue-holder';
+
 	private rootElement: HTMLElement;
 
 	public constructor( rootElement: HTMLElement ) {
@@ -29,4 +35,14 @@ export class ValueForm {
 			).contains( rank ).click() );
 	}
 
+	public setSnakType( snakType: string ): Chainable {
+		return cy.get( ValueForm.SNAK_TYPE_SELECTOR, { withinSubject: this.rootElement } ).click()
+			.then( () => cy.get(
+				ValueForm.SNAK_TYPE_SELECTOR_MENU_ITEM, { withinSubject: this.rootElement },
+			).contains( snakType ).click() );
+	}
+
+	public noValueSomeValuePlaceholder(): Chainable {
+		return cy.get( ValueForm.NO_VALUE_SOME_VALUE_PLACEHOLDER, { withinSubject: this.rootElement } );
+	}
 }
