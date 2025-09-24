@@ -3,7 +3,10 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\GraphQL;
-use PHPUnit\Framework\TestCase;
+use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 
@@ -14,7 +17,7 @@ use Wikibase\Repo\Domains\Reuse\WbReuse;
  *
  * @license GPL-2.0-or-later
  */
-class GraphQLServiceTest extends TestCase {
+class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -25,13 +28,28 @@ class GraphQLServiceTest extends TestCase {
 	public function testIdQuery(): void {
 		$itemId = 'Q123';
 
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
+
 		$this->assertEquals(
 			[ 'data' => [ 'item' => [ 'id' => $itemId ] ] ],
-			$this->newGraphQLService()->query( "query { item(id: \"$itemId\") { id } }" )
+			$this->newGraphQLService( $entityLookup )->query( "query { item(id: \"$itemId\") { id } }" )
 		);
 	}
 
-	private function newGraphQLService(): GraphQLService {
+	public function testGivenItemDoesNotExist_returnsNull(): void {
+		$itemId = 'Q999999';
+
+		$entityLookup = new InMemoryEntityLookup();
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => null ] ],
+			$this->newGraphQLService( $entityLookup )->query( "query { item(id: \"$itemId\") { id } }" )
+		);
+	}
+
+	private function newGraphQLService( EntityLookup $entityLookup ): GraphQLService {
+		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		return WbReuse::getGraphQLService();
 	}
 }

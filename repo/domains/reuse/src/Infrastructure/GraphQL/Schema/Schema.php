@@ -5,13 +5,13 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
  * @license GPL-2.0-or-later
  */
 class Schema extends GraphQLSchema {
-
-	public function __construct() {
+	public function __construct( ItemResolver $itemResolver ) {
 		parent::__construct( [
 			'query' => new ObjectType( [
 				'name' => 'Query',
@@ -21,7 +21,7 @@ class Schema extends GraphQLSchema {
 						'args' => [
 							'id' => Type::nonNull( Type::string() ),
 						],
-						'resolve' => fn( $rootValue, array $args ) => [ 'id' => $args['id'] ],
+						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolve( $args['id'] ),
 					],
 				],
 			] ),
