@@ -7,10 +7,11 @@
 			"Keenan Pepper",
 			"LesVisages",
 			"Robin van der Vliet",
-			"Tamzin"
+			"Tamzin",
+			"Ne"
 		]
 	},
-	"wikibase-dataitem": "ni lon lipu {{WBREPONAME}}",
+	"wikibase-dataitem": "ijo ni lon {{WBREPONAME}}",
 	"wikibase-editlinks": "o ante e linja",
 	"wikibase-addlinkstitle": "o linja e lipu sama pi toki ante",
 	"wikibase-linkitem-addlinks": "o pana e linja",

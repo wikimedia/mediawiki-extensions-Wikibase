@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChoiChong"
+			"ChoiChong",
+			"さきじょーぐー"
 		]
 	},
-	"wikibase-edit": "直すん",
+	"wikibase-edit": "編集すん",
 	"wikibase-add": "追加",
 	"wikibase-label-empty": "ラベルー設定さりやびらん",
 	"wikibase-description-empty": "説明ぇーあいびらん",
