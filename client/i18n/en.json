@@ -99,6 +99,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Title",
 	"wikibase-pageinfo-entity-usage-C": "Some statements",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Statement: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Some statements (with qualifiers and references)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Statement (with qualifiers and references): $1",
 	"wikibase-pageinfo-entity-usage-X": "All entity data",
 	"wikibase-pageinfo-entity-usage-O": "Miscellaneous (e.g. entity existence)",
 	"wikibase-property-render-error": "Failed to render property $1: $2",
