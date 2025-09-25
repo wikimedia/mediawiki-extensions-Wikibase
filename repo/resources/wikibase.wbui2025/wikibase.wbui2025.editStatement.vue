@@ -97,14 +97,10 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	emits: [ 'remove', 'update:mainSnak', 'update:rank' ],
-	setup() {
-		return {
-			cdxIconAdd,
-			cdxIconTrash
-		};
-	},
 	data() {
 		return {
+			cdxIconAdd,
+			cdxIconTrash,
 			rankMenuItems: [
 				{ label: mw.msg( 'wikibase-statementview-rank-normal' ), value: 'normal', icon: rankSelectorNormalIcon },
 				{ label: mw.msg( 'wikibase-statementview-rank-preferred' ), value: 'preferred', icon: rankSelectorPreferredIcon },

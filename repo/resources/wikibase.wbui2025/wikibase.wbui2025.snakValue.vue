@@ -20,11 +20,6 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
-	setup() {
-		return {
-			snakValueHtml
-		};
-	},
 	computed: {
 		snakValueClass() {
 			return {
@@ -33,6 +28,9 @@ module.exports = exports = defineComponent( {
 				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate'
 			};
 		}
+	},
+	methods: {
+		snakValueHtml
 	},
 	mounted() {
 		if ( this.snak.datatype === 'globe-coordinate' ) {

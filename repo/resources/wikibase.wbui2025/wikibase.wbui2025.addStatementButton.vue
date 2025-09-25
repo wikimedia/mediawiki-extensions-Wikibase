@@ -18,7 +18,7 @@
 </template>
 
 <script>
-const { defineComponent, ref } = require( 'vue' );
+const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { cdxIconAdd } = require( './icons.json' );
 const Wbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
@@ -34,14 +34,10 @@ module.exports = exports = defineComponent( {
 		Wbui2025PropertySelector
 	},
 	props: {},
-	setup( props ) {
-		const propertySelectorVisible = ref( false );
-
-		return {
-			cdxIconAdd,
-			propertySelectorVisible
-		};
-	}
+	data: () => ( {
+		cdxIconAdd,
+		propertySelectorVisible: false
+	} )
 } );
 </script>
 

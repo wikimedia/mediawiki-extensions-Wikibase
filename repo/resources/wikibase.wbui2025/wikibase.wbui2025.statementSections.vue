@@ -41,10 +41,8 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
-	setup() {
-		return {
-			concat
-		};
+	methods: {
+		concat
 	}
 } );
 </script>

@@ -92,16 +92,12 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	emits: [ 'hide' ],
-	setup() {
+	data() {
 		return {
 			cdxIconAdd,
 			cdxIconArrowPrevious,
 			cdxIconCheck,
-			cdxIconClose
-		};
-	},
-	data() {
-		return {
+			cdxIconClose,
 			valueForms: [],
 			createdStatements: [],
 			removedStatements: [],
