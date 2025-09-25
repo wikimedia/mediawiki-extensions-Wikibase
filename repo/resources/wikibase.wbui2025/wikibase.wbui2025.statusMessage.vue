@@ -24,25 +24,9 @@
 </template>
 
 <script>
-const { defineComponent, ref } = require( 'vue' );
+const { defineComponent } = require( 'vue' );
 const { CdxMessage } = require( '../../codex.js' );
 const { useMessageStore } = require( './store/messageStore.js' );
-
-let messageStore;
-
-const containerRef = ref( null );
-const fixedWidth = ref( 0 );
-
-/*
- * The message container has a fixed position so that it floats at the bottom of
- * the screen. This puts it outside of the layout so it is unable to inherit the
- * width of the parent without some Javascript support.
- */
-const updateWidth = () => {
-	if ( containerRef.value ) {
-		fixedWidth.value = containerRef.value.offsetWidth;
-	}
-};
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -50,29 +34,37 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxMessage
 	},
-	setup() {
-		messageStore = useMessageStore();
+	data() {
 		return {
-			containerRef,
-			fixedWidth
+			fixedWidth: 0
 		};
 	},
 	computed: {
 		messageList() {
-			return messageStore.messages;
+			return useMessageStore().messages;
 		}
 	},
 	methods: {
 		deleteMessage( messageId ) {
-			messageStore.clearStatusMessage( messageId );
+			useMessageStore().clearStatusMessage( messageId );
+		},
+		/*
+		 * The message container has a fixed position so that it floats at the bottom of
+		 * the screen. This puts it outside of the layout so it is unable to inherit the
+		 * width of the parent without some Javascript support.
+		 */
+		updateWidth() {
+			if ( this.$refs.containerRef ) {
+				this.fixedWidth = this.$refs.containerRef.offsetWidth;
+			}
 		}
 	},
 	mounted() {
-		updateWidth();
-		window.addEventListener( 'resize', updateWidth );
+		this.updateWidth();
+		window.addEventListener( 'resize', this.updateWidth );
 	},
 	unmounted() {
-		window.removeEventListener( 'resize', updateWidth );
+		window.removeEventListener( 'resize', this.updateWidth );
 	}
 } );
 </script>
