@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -21,7 +22,7 @@ class Schema extends GraphQLSchema {
 						'args' => [
 							'id' => Type::nonNull( Type::string() ),
 						],
-						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolve( $args['id'] ),
+						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
 					],
 				],
 			] ),
@@ -34,6 +35,15 @@ class Schema extends GraphQLSchema {
 			'fields' => [
 				'id' => [
 					'type' => Type::nonNull( Type::string() ),
+					'resolve' => fn( Item $item ) => $item->id,
+				],
+				'label' => [
+					'type' => Type::string(),
+					'args' => [
+						'languageCode' => Type::nonNull( Type::string() ),
+					],
+					'resolve' => fn( Item $item, array $args ) => $item->labels
+						->getLabelInLanguage( $args['languageCode'] )?->text,
 				],
 			],
 		] );

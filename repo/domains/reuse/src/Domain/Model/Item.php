@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
  */
 class Item {
 
-	public function __construct( public readonly ItemId $id ) {
+	public function __construct( public readonly ItemId $id, public readonly Labels $labels ) {
 	}
 
 }

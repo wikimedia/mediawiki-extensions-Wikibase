@@ -20,7 +20,7 @@ class ItemResolver {
 	) {
 	}
 
-	public function resolve( string $itemId ): Deferred {
+	public function resolveItem( string $itemId ): Deferred {
 		$this->itemsToFetch[] = $itemId;
 
 		return new Deferred( function() use ( $itemId ) {
@@ -30,11 +30,7 @@ class ItemResolver {
 					->itemsBatch;
 			}
 
-			$item = $this->itemsBatch->getItem( new ItemId( $itemId ) );
-
-			return $item
-				? [ 'id' => $item->id->getSerialization() ] // a serializer goes here eventually
-				: null;
+			return $this->itemsBatch->getItem( new ItemId( $itemId ) );
 		} );
 	}
 }

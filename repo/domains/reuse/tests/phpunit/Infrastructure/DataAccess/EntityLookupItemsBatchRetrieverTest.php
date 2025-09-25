@@ -21,16 +21,23 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 	public function testGetItems(): void {
 		$deletedItem = new ItemId( 'Q666' );
 		$item1Id = new ItemId( 'Q123' );
+		$item1EnLabel = 'potato';
 		$item2Id = new ItemId( 'Q321' );
 
 		$lookup = new InMemoryEntityLookup();
-		$lookup->addEntity( NewItem::withId( $item1Id )->build() );
+		$lookup->addEntity(
+			NewItem::withId( $item1Id )
+				->andLabel( 'en', $item1EnLabel )
+				->build()
+		);
 		$lookup->addEntity( NewItem::withId( $item2Id )->build() );
 
 		$batch = $this->newRetriever( $lookup )
 			->getItems( $item1Id, $item2Id, $deletedItem );
 
 		$this->assertEquals( $item1Id, $batch->getItem( $item1Id )->id );
+		$this->assertSame( $item1EnLabel, $batch->getItem( $item1Id )->labels->getLabelInLanguage( 'en' )->text );
+
 		$this->assertEquals( $item2Id, $batch->getItem( $item2Id )->id );
 		$this->assertNull( $batch->getItem( $deletedItem ) );
 	}

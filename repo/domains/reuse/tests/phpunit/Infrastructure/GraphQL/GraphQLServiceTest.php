@@ -37,6 +37,27 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testLabelsQuery(): void {
+		$itemId = 'Q123';
+		$enLabel = 'potato';
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $itemId )
+				->andLabel( 'en', $enLabel )
+				->build()
+		);
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [ 'enLabel' => $enLabel, 'deLabel' => null ] ] ],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query { item(id: \"$itemId\") {
+				enLabel: label(languageCode: \"en\")
+				deLabel: label(languageCode: \"de\")
+			} }" )
+		);
+	}
+
 	public function testGivenItemDoesNotExist_returnsNull(): void {
 		$itemId = 'Q999999';
 
@@ -45,6 +66,39 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals(
 			[ 'data' => [ 'item' => null ] ],
 			$this->newGraphQLService( $entityLookup )->query( "query { item(id: \"$itemId\") { id } }" )
+		);
+	}
+
+	public function testMultipleItemsAtOnce(): void {
+		$item1Id = 'Q123';
+		$item1Label = 'potato';
+		$item2Id = 'Q321';
+		$item2Label = 'garlic';
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $item1Id )
+				->andLabel( 'en', $item1Label )
+				->build()
+		);
+		$entityLookup->addEntity(
+			NewItem::withId( $item2Id )
+				->andLabel( 'en', $item2Label )
+				->build()
+		);
+
+		$this->assertEquals(
+			[
+				'data' => [
+					'item1' => [ 'label' => $item1Label ],
+					'item2' => [ 'label' => $item2Label ],
+				],
+			],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query {
+				item1: item(id: \"$item1Id\") { label(languageCode: \"en\") }
+				item2: item(id: \"$item2Id\") { label(languageCode: \"en\") }
+			}" )
 		);
 	}
 

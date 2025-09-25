@@ -4,8 +4,12 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\ItemsBatchRetriever;
 
 /**
@@ -33,6 +37,16 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 		$item = $this->entityLookup->getEntity( $id );
 		'@phan-var \Wikibase\DataModel\Entity\Item|null $item';
 
-		return $item ? new Item( $item->getId() ) : null;
+		return $item ? new Item(
+			$item->getId(),
+			new Labels( ...$this->termListToLabelList( $item->getLabels() ) )
+		) : null;
+	}
+
+	private function termListToLabelList( TermList $labels ): array {
+		return array_map(
+			fn( Term $t ) => new Label( $t->getLanguageCode(), $t->getText() ),
+			iterator_to_array( $labels )
+		);
 	}
 }

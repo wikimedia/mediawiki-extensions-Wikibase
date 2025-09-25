@@ -17,4 +17,8 @@ class Labels extends ArrayObject {
 			)
 		);
 	}
+
+	public function getLabelInLanguage( string $languageCode ): ?Label {
+		return $this[$languageCode] ?? null;
+	}
 }

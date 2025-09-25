@@ -11,6 +11,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItemsResponse;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -27,33 +28,34 @@ class ItemResolverTest extends TestCase {
 		}
 	}
 
-	public function testResolve(): void {
+	public function testResolveItems(): void {
 		$requestedItems = [ 'Q123', 'Q321', 'Q234' ];
+		$itemsBatch = $this->newItemsBatchForIds( $requestedItems );
 
 		$batchGetItems = $this->createMock( BatchGetItems::class );
 		// expecting the use case to only be called once demonstrates that the resolver aggregates multiple requests into one batch
 		$batchGetItems->expects( $this->once() )
 			->method( 'execute' )
 			->with( new BatchGetItemsRequest( $requestedItems ) )
-			->willReturn( new BatchGetItemsResponse( $this->newItemsBatchForIds( $requestedItems ) ) );
+			->willReturn( new BatchGetItemsResponse( $itemsBatch ) );
 
 		$resolver = new ItemResolver( $batchGetItems );
 
-		$item1Promise = $resolver->resolve( $requestedItems[0] );
-		$item2Promise = $resolver->resolve( $requestedItems[1] );
-		$item3Promise = $resolver->resolve( $requestedItems[2] );
+		$item1Promise = $resolver->resolveItem( $requestedItems[0] );
+		$item2Promise = $resolver->resolveItem( $requestedItems[1] );
+		$item3Promise = $resolver->resolveItem( $requestedItems[2] );
 
 		SyncPromise::runQueue(); // resolves the three promises above
 
-		$this->assertEquals( [ 'id' => $requestedItems[0] ], $item1Promise->result );
-		$this->assertEquals( [ 'id' => $requestedItems[1] ], $item2Promise->result );
-		$this->assertEquals( [ 'id' => $requestedItems[2] ], $item3Promise->result );
+		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[0] ) ), $item1Promise->result );
+		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[1] ) ), $item2Promise->result );
+		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[2] ) ), $item3Promise->result );
 	}
 
 	private function newItemsBatchForIds( array $itemIds ): ItemsBatch {
 		$batch = [];
 		foreach ( $itemIds as $id ) {
-			$batch[$id] = new Item( new ItemId( $id ) );
+			$batch[$id] = new Item( new ItemId( $id ), new Labels() );
 		}
 
 		return new ItemsBatch( $batch );
