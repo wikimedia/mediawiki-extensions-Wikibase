@@ -37,7 +37,7 @@
 </template>
 
 <script>
-const { computed, defineComponent, ref } = require( 'vue' );
+const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxLookup } = require( '../../codex.js' );
 const { cdxIconCheck, cdxIconClose } = require( './icons.json' );
 const { api } = require( './api/api.js' );
@@ -57,39 +57,47 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	emits: [ 'add', 'cancel' ],
-	setup( props ) {
-		const selection = ref( null );
-		const inputValue = ref( '' );
-		const currentSearchTerm = ref( '' );
-		const menuItems = ref( [] );
-		const menuConfig = {
-			visibleItemLimit: 3
+	data() {
+		return {
+			cdxIconCheck,
+			cdxIconClose,
+			selection: null,
+			inputValue: '',
+			currentSearchTerm: '',
+			menuItems: [],
+			menuConfig: {
+				visibleItemLimit: 3
+			},
+			languageCode: mw.config.get( 'wgUserLanguage' )
 		};
-
-		// messages that can be used here:
-		// * wikibase-statementgrouplistview-add
-		// * anything else the parent component passes in
-		const headingMessage = mw.msg( props.headingMessageKey );
-
-		const addButtonDisabled = computed( () => selection.value === null );
-
-		const languageCode = mw.config.get( 'wgUserLanguage' );
-
-		function fetchResults( offset = undefined ) {
+	},
+	computed: {
+		headingMessage() {
+			// messages that can be used here:
+			// * wikibase-statementgrouplistview-add
+			// * anything else the parent component passes in
+			return mw.msg( this.headingMessageKey );
+		},
+		addButtonDisabled() {
+			return this.selection === null;
+		}
+	},
+	methods: {
+		fetchResults( offset = undefined ) {
 			const params = {
 				action: 'wbsearchentities',
-				language: languageCode,
+				language: this.languageCode,
 				type: 'property',
-				search: currentSearchTerm.value
+				search: this.currentSearchTerm
 			};
 			if ( offset ) {
 				params.continue = offset;
 			}
 
 			return api.get( params );
-		}
+		},
 
-		function adaptApiResponse( results ) {
+		adaptApiResponse( results ) {
 			return results.map( ( { id, label, url, match, description, display = {} } ) => ( {
 				value: id,
 				label,
@@ -102,55 +110,55 @@ module.exports = exports = defineComponent( {
 					description: display && display.description && display.description.language
 				}
 			} ) );
-		}
+		},
 
-		async function onUpdateInputValue( value ) {
+		async onUpdateInputValue( value ) {
 			// internally track the current search term
-			currentSearchTerm.value = value;
+			this.currentSearchTerm = value;
 
 			// unset search results if there is no search term
 			if ( !value ) {
-				menuItems.value = [];
+				this.menuItems = [];
 				return;
 			}
 
 			try {
-				const response = await fetchResults();
+				const response = await this.fetchResults();
 				// make sure the response is still relevant first
-				if ( currentSearchTerm.value !== value ) {
+				if ( this.currentSearchTerm !== value ) {
 					return;
 				}
 				if ( response.search && response.search.length > 0 ) {
 					// format API response into Codex menu items
-					menuItems.value = adaptApiResponse( response.search );
+					this.menuItems = this.adaptApiResponse( response.search );
 				} else {
-					menuItems.value = [];
+					this.menuItems = [];
 				}
 			} catch ( _ ) {
 				// on error, reset search results
-				menuItems.value = [];
+				this.menuItems = [];
 			}
-		}
+		},
 
-		async function onLoadMore() {
-			const value = currentSearchTerm.value;
+		async onLoadMore() {
+			const value = this.currentSearchTerm;
 			if ( !value ) {
 				return;
 			}
 
 			try {
-				const response = await fetchResults( menuItems.value.length );
+				const response = await this.fetchResults( this.menuItems.length );
 				// make sure the response is still relevant first
-				if ( currentSearchTerm.value !== value ) {
+				if ( this.currentSearchTerm !== value ) {
 					return;
 				}
 				if ( response.search && response.search.length > 0 ) {
-					const newItems = adaptApiResponse( response.search );
+					const newItems = this.adaptApiResponse( response.search );
 					// deduplicate search results
-					const seenItemValues = new Set( menuItems.value.map( ( item ) => item.value ) );
+					const seenItemValues = new Set( this.menuItems.map( ( item ) => item.value ) );
 					for ( const newItem of newItems ) {
 						if ( !seenItemValues.has( newItem.value ) ) {
-							menuItems.value.push( newItem );
+							this.menuItems.push( newItem );
 						}
 					}
 				}
@@ -158,19 +166,6 @@ module.exports = exports = defineComponent( {
 				// on error, do nothing
 			}
 		}
-
-		return {
-			addButtonDisabled,
-			cdxIconCheck,
-			cdxIconClose,
-			inputValue,
-			headingMessage,
-			menuConfig,
-			menuItems,
-			onLoadMore,
-			onUpdateInputValue,
-			selection
-		};
 	}
 } );
 </script>
