@@ -6,17 +6,19 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatch
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
+use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
-	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
-		return new GraphQLService(
-			new Schema(
-				new ItemResolver(
-					new BatchGetItems( new EntityLookupItemsBatchRetriever( WikibaseRepo::getEntityLookup( $services ) ) )
-				)
+	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
+		return new Schema(
+			new ItemResolver(
+				new BatchGetItems( new EntityLookupItemsBatchRetriever( WikibaseRepo::getEntityLookup( $services ) ) )
 			)
 		);
+	},
+	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
+		return new GraphQLService( WbReuse::getGraphQLSchema( $services ) );
 	},
 ];
