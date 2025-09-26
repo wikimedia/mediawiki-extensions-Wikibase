@@ -64,6 +64,8 @@
 				</div>
 			</div>
 		</div>
+		<wikibase-wbui2025-status-message>
+		</wikibase-wbui2025-status-message>
 	</wikibase-wbui2025-modal-overlay>
 </template>
 
@@ -85,9 +87,11 @@ const {
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
+const WikibaseWbui2025StatusMessage = require( './wikibase.wbui2025.statusMessage.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
 const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
+const { useMessageStore } = require( './store/messageStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -98,7 +102,8 @@ module.exports = exports = defineComponent( {
 		CdxMessage,
 		CdxProgressBar,
 		WikibaseWbui2025EditStatement,
-		WikibaseWbui2025ModalOverlay
+		WikibaseWbui2025ModalOverlay,
+		WikibaseWbui2025StatusMessage
 	},
 	props: {
 		propertyId: {
@@ -129,11 +134,9 @@ module.exports = exports = defineComponent( {
 			return propertyLinkHtml( this.propertyId );
 		},
 		saveMessage() {
-			if ( mw.config.get( 'wgEditSubmitButtonLabelPublish' ) ) {
-				return mw.msg( 'wikibase-publish' );
-			} else {
-				return mw.msg( 'wikibase-save' );
-			}
+			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
+				? mw.msg( 'wikibase-publish' )
+				: mw.msg( 'wikibase-save' );
 		},
 		statements() {
 			return getStatementsForProperty( this.propertyId );
@@ -144,7 +147,9 @@ module.exports = exports = defineComponent( {
 		createNewBlankEditableStatement: 'createNewBlankStatement',
 		removeStatement: 'removeStatement',
 		saveChangedStatements: 'saveChangedStatements'
-	} ), {
+	} ), mapActions( useMessageStore, [
+		'addStatusMessage'
+	] ), {
 		createNewStatement() {
 			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
 			this.createNewBlankEditableStatement( statementId, this.propertyId );
@@ -160,10 +165,21 @@ module.exports = exports = defineComponent( {
 			this.saveChangedStatements( this.entityId )
 				.then( () => {
 					this.$emit( 'hide' );
+					this.addStatusMessage( {
+						type: 'success',
+						text: 'Success: Your statement was published'
+					} );
+				} )
+				.catch( () => {
+					this.addStatusMessage( {
+						text: 'An error occurred while saving. Please try again.'
+					} );
+					this.formSubmitted = false;
 				} );
+
 		}
 	} ),
-	mounted: function () {
+	mounted() {
 		// eslint-disable-next-line vue/no-undef-properties
 		if ( this.statements && this.statements.length > 0 ) {
 			this.initializeEditStatementStoreFromStatementStore(
