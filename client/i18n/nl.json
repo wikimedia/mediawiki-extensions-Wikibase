@@ -115,6 +115,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Enkele verklaringen",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Verklaring: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Enige verklaringen (met kwalificaties en referenties)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Verklaring (met kwalificaties en referenties): $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsgegevens",
 	"wikibase-pageinfo-entity-usage-O": "Anders (bv. het bestaan van entiteiten)",
 	"wikibase-property-render-error": "Het verwerken van de eigenschap $1 is mislukt: $2",

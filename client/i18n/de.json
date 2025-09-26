@@ -100,6 +100,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Einige Aussagen",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Aussage: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Einige Aussagen (mit Qualifikatoren und Einzelnachweisen)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Aussage (mit Qualifikator und Einzelnachweis): $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle Objektdaten",
 	"wikibase-pageinfo-entity-usage-O": "Sonstiges (z. B. Entitäten-Existenz)",
 	"wikibase-property-render-error": "Eigenschaft „$1“ konnte nicht gerendert werden: $2",
