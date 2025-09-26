@@ -58,6 +58,27 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testDescriptionsQuery(): void {
+		$itemId = 'Q123';
+		$enDescription = 'root vegetable';
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $itemId )
+				->andDescription( 'en', $enDescription )
+				->build()
+		);
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [ 'enDescription' => $enDescription, 'deDescription' => null ] ] ],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query { item(id: \"$itemId\") {
+				enDescription: description(languageCode: \"en\")
+				deDescription: description(languageCode: \"de\")
+			} }" )
+		);
+	}
+
 	public function testGivenItemDoesNotExist_returnsNull(): void {
 		$itemId = 'Q999999';
 

@@ -45,6 +45,14 @@ class Schema extends GraphQLSchema {
 					'resolve' => fn( Item $item, array $args ) => $item->labels
 						->getLabelInLanguage( $args['languageCode'] )?->text,
 				],
+				'description' => [
+					'type' => Type::string(),
+					'args' => [
+						'languageCode' => Type::nonNull( Type::string() ),
+					],
+					'resolve' => fn( Item $item, array $args ) => $item->descriptions
+						->getDescriptionInLanguage( $args['languageCode'] )?->text,
+				],
 			],
 		] );
 	}
