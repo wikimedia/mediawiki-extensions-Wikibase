@@ -2,8 +2,8 @@
 	<wikibase-wbui2025-modal-overlay>
 		<div class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
-					<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
 					<p class="heading">
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
 					</p>
@@ -205,46 +205,41 @@ module.exports = exports = defineComponent( {
 	width: 100%;
 
 	.wikibase-wbui2025-edit-statement-heading {
-		flex: 0 0 auto;
-		padding: @spacing-250 @spacing-75 @spacing-150 @spacing-75;
-		gap: @spacing-300;
-		align-self: stretch;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: @spacing-125 @spacing-75;
 		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		gap: @spacing-25;
 
-		.wikibase-wbui2025-edit-statement-headline {
-			display: flex;
-
-			span.cdx-icon {
-				position: absolute;
-				padding: 0;
-				cursor: pointer;
-			}
+		.cdx-icon {
+			position: absolute;
+			left: @spacing-75;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
 		}
 
-		p {
-			margin: 0;
-			font-style: normal;
-			font-weight: 700;
-			width: 100%;
+		.wikibase-wbui2025-edit-statement-headline {
 			text-align: center;
 
-			&.heading {
-				color: @color-emphasized;
+			p.heading {
+				margin: 0;
+				font-weight: 700;
 				font-size: 1.25rem;
 				line-height: 1.5625rem;
 				padding: 0;
+				color: @color-emphasized;
 			}
 		}
 
-		div.wikibase-wbui2025-property-name {
-			font-style: normal;
+		.wikibase-wbui2025-property-name {
 			font-weight: 700;
-			width: 100%;
-			text-align: center;
 			color: @color-progressive--focus;
 			font-size: 1rem;
 			line-height: 1.6rem;
-			letter-spacing: -0.003rem;
+			text-align: center;
 		}
 	}
 
@@ -300,7 +295,7 @@ module.exports = exports = defineComponent( {
 	.wikibase-wbui2025-edit-statement-footer {
 		flex: 0 0 auto;
 		display: flex;
-		padding: @spacing-125 @spacing-400 @spacing-300 @spacing-400;
+		padding: @spacing-125 @spacing-400 @spacing-200;
 		flex-direction: column;
 		align-items: center;
 		gap: 0.625rem;
