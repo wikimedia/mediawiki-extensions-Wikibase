@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"BOKOBA VEROLY",
-			"Cgmbo"
+			"Cgmbo",
+			"Marphy 123"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} kima",
@@ -15,5 +16,7 @@
 	"wikibase-linkitem-input-site": "Ndinga:",
 	"wikibase-linkitem-input-page": "Lutiti:",
 	"wikibase-rc-hide-wikidata-hide": "Hide",
+	"wikibase-pageinfo-entity-usage-CQR": "Bangogo ya nkaka (ti bantendula mpi ba références)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Mambu ya bo ke tuba (ti mambu ya bo ke tubila): $1",
 	"wikibase-otherprojects": "Na bisalu ya nkaka"
 }

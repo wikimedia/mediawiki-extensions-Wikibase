@@ -123,6 +123,8 @@
 	"wikibase-pageinfo-entity-usage-T": "عنوان",
 	"wikibase-pageinfo-entity-usage-C": "بعض العبارات",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "بيان: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "بعض العبارات (مع المؤهلات والمراجع)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "البيان (مع المؤهلات والمراجع): $1",
 	"wikibase-pageinfo-entity-usage-X": "كل بيانات الكيان",
 	"wikibase-pageinfo-entity-usage-O": "متفرقات (على سبيل المثال وجود الكيان)",
 	"wikibase-property-render-error": "فشل عرض الخاصية $1: $2",

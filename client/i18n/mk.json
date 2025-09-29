@@ -93,6 +93,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Наслов",
 	"wikibase-pageinfo-entity-usage-C": "Некои искази",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Исказ: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Некои искази (со определници и наводи)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Исказ (со определници и наводи): $1",
 	"wikibase-pageinfo-entity-usage-X": "Сите податоци за единиците",
 	"wikibase-pageinfo-entity-usage-O": "Разно (на пр. постоење на единицата)",
 	"wikibase-property-render-error": "Не успеав да го испишам својството $1: $2",

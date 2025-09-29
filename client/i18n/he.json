@@ -103,6 +103,8 @@
 	"wikibase-pageinfo-entity-usage-T": "כותרת",
 	"wikibase-pageinfo-entity-usage-C": "קביעות אחדות",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "קביעה: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "כמה קביעות (עם מבחינים ומקורות)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "קביעה (עם מבחינים ומקורות): $1",
 	"wikibase-pageinfo-entity-usage-X": "כל נתוני הישות",
 	"wikibase-pageinfo-entity-usage-O": "אחר (למשל קיום ישות)",
 	"wikibase-property-render-error": "כשל בהכנת המאפיין $1 לתצוגה: $2",
