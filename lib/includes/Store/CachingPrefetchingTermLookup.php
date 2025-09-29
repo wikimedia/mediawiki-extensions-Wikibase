@@ -261,8 +261,8 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 * @param string $languageCode
-	 * @param string|string[]|false $value string for existing label or description, string[] for existing aliases, false for term known
-	 *                                     to not exist.
+	 * @param string|string[]|false $value string for existing label or description, string[] for existing aliases,
+	 *  false for term known to not exist.
 	 */
 	private function setPrefetchedTermBuffer( EntityId $entityId, string $termType, string $languageCode, $value ): void {
 		if ( !isset( $this->prefetchedTerms[$entityId->getSerialization()] ) ) {
@@ -279,8 +279,8 @@ final class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 * @param string $languageCode
-	 * @param string|string[] $freshTerm string for existing label or description, string[] for existing aliases
-	 *                                   Should never be null or false @see bufferAndCacheMissingTerm
+	 * @param string|string[] $freshTerm string for existing label or description, string[] for existing aliases.
+	 *  Should never be null or false, see {@link bufferAndCacheMissingTerm}.
 	 */
 	private function bufferAndCacheExistingTerm( EntityId $entityId, string $termType, string $languageCode, $freshTerm ): void {
 		$this->setPrefetchedTermBuffer( $entityId, $termType, $languageCode, $freshTerm );
