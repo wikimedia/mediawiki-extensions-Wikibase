@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Descriptions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -57,7 +58,7 @@ class ItemResolverTest extends TestCase {
 	private function newItemsBatchForIds( array $itemIds ): ItemsBatch {
 		$batch = [];
 		foreach ( $itemIds as $id ) {
-			$batch[$id] = new Item( new ItemId( $id ), new Labels(), new Descriptions(), new Aliases() );
+			$batch[$id] = new Item( new ItemId( $id ), new Labels(), new Descriptions(), new Aliases(), new Sitelinks() );
 		}
 
 		return new ItemsBatch( $batch );

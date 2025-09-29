@@ -62,6 +62,25 @@ class Schema extends GraphQLSchema {
 					'resolve' => fn( Item $item, array $args ) => $item->aliases
 						->getAliasesInLanguageInLanguage( $args['languageCode'] )?->aliases ?? [],
 				],
+				'sitelink' => [
+					'type' => new ObjectType( [
+						'name' => 'Sitelink',
+						'fields' => [
+							'title' => Type::nonNull( Type::string() ),
+							'url' => Type::nonNull( Type::string() ),
+						],
+					] ),
+					'args' => [
+						'siteId' => Type::nonNull( Type::string() ),
+					],
+					'resolve' => function( Item $item, array $args ) {
+						$sitelink = $item->sitelinks->getSitelinkForSite( $args['siteId'] );
+						return $sitelink ? [
+							'title' => $sitelink->title,
+							'url' => $sitelink->url,
+						] : null;
+					},
+				],
 			],
 		] );
 	}

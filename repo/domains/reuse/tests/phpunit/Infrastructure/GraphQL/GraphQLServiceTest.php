@@ -3,6 +3,9 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\GraphQL;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
@@ -100,6 +103,42 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testSitelinkQuery(): void {
+		$itemId = 'Q123';
+		$sitelinkSiteId = 'examplewiki';
+		$sitelinkTitle = 'Potato';
+
+		$sitelinkSite = new MediaWikiSite();
+		$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
+		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
+		$sitelinkSite->setGlobalId( $sitelinkSiteId );
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $itemId )
+				->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
+				->build()
+		);
+
+		$this->assertEquals(
+			[
+				'data' => [
+					'item' => [
+						'sitelink1' => [ 'title' => $sitelinkTitle, 'url' => $expectedSitelinkUrl ],
+						'sitelink2' => null,
+					],
+				],
+			],
+			$this->newGraphQLService( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ) )->query(
+				"
+				query { item(id: \"$itemId\") {
+					sitelink1: sitelink(siteId: \"$sitelinkSiteId\") { title url }
+					sitelink2: sitelink(siteId: \"otherSiteId\") { title }
+				} }"
+			)
+		);
+	}
+
 	public function testGivenItemDoesNotExist_returnsNull(): void {
 		$itemId = 'Q999999';
 
@@ -144,8 +183,9 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newGraphQLService( EntityLookup $entityLookup ): GraphQLService {
+	private function newGraphQLService( EntityLookup $entityLookup, ?SiteLookup $siteLookup = null ): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
+		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );
 		return WbReuse::getGraphQLService();
 	}
 }

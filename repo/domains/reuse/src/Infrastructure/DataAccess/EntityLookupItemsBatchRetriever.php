@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess;
 
+use MediaWiki\Site\SiteLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\SiteLink as DataModelSiteLink;
+use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -16,6 +19,8 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelink;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\ItemsBatchRetriever;
 
 /**
@@ -23,7 +28,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Services\ItemsBatchRetriever;
  */
 class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 
-	public function __construct( private readonly EntityLookup $entityLookup ) {
+	public function __construct( private readonly EntityLookup $entityLookup, private readonly SiteLookup $siteLookup ) {
 	}
 
 	/**
@@ -48,6 +53,7 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 			new Labels( ...$this->termListToLabelList( $item->getLabels() ) ),
 			new Descriptions( ...$this->termListToDescriptionList( $item->getDescriptions() ) ),
 			new Aliases( ...$this->aliasGroupListToAliasesInLanguageList( $item->getAliasGroups() ) ),
+			new Sitelinks( ...$this->siteLinkListToSitelinkList( $item->getSiteLinkList() ) )
 		) : null;
 	}
 
@@ -69,6 +75,17 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 		return array_map(
 			fn( AliasGroup $g ) => new AliasesInLanguage( $g->getLanguageCode(), $g->getAliases() ),
 			iterator_to_array( $aliasGroupList )
+		);
+	}
+
+	private function siteLinkListToSitelinkList( SiteLinkList $sitelinks ): array {
+		return array_map(
+			fn( DataModelSiteLink $s ) => new Sitelink(
+				site: $s->getSiteId(),
+				title: $s->getPageName(),
+				url: $this->siteLookup->getSite( $s->getSiteId() )->getPageUrl( $s->getPageName() ),
+			),
+			iterator_to_array( $sitelinks )
 		);
 	}
 }

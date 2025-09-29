@@ -2,11 +2,15 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess;
 
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Site\MediaWikiSite;
+use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelink;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 
 /**
@@ -24,19 +28,27 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$item1EnLabel = 'potato';
 		$item1EnDescription = 'root vegetable';
 		$item1EnAliases = [ 'spud', 'tater' ];
+		$item1SitelinkSiteId = 'examplewiki';
+		$item1SitelinkTitle = 'Potato';
 		$item2Id = new ItemId( 'Q321' );
 
-		$lookup = new InMemoryEntityLookup();
-		$lookup->addEntity(
+		$sitelinkSite = new MediaWikiSite();
+		$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
+		$expectedSitelinkUrl = "https://wiki.example/wiki/$item1SitelinkTitle";
+		$sitelinkSite->setGlobalId( $item1SitelinkSiteId );
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
 			NewItem::withId( $item1Id )
 				->andLabel( 'en', $item1EnLabel )
 				->andDescription( 'en', $item1EnDescription )
 				->andAliases( 'en', $item1EnAliases )
+				->andSiteLink( $item1SitelinkSiteId, $item1SitelinkTitle )
 				->build()
 		);
-		$lookup->addEntity( NewItem::withId( $item2Id )->build() );
+		$entityLookup->addEntity( NewItem::withId( $item2Id )->build() );
 
-		$batch = $this->newRetriever( $lookup )
+		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ) )
 			->getItems( $item1Id, $item2Id, $deletedItem );
 
 		$this->assertEquals( $item1Id, $batch->getItem( $item1Id )->id );
@@ -52,13 +64,21 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 			$item1EnAliases,
 			$batch->getItem( $item1Id )->aliases->getAliasesInLanguageInLanguage( 'en' )->aliases
 		);
+		$this->assertEquals(
+			new Sitelink(
+				$item1SitelinkSiteId,
+				$item1SitelinkTitle,
+				$expectedSitelinkUrl,
+			),
+			$batch->getItem( $item1Id )->sitelinks->getSitelinkForSite( $item1SitelinkSiteId )
+		);
 
 		$this->assertEquals( $item2Id, $batch->getItem( $item2Id )->id );
 		$this->assertNull( $batch->getItem( $deletedItem ) );
 	}
 
-	private function newRetriever( EntityLookup $entityLookup ): EntityLookupItemsBatchRetriever {
-		return new EntityLookupItemsBatchRetriever( $entityLookup );
+	private function newRetriever( EntityLookup $entityLookup, SiteLookup $siteLookup ): EntityLookupItemsBatchRetriever {
+		return new EntityLookupItemsBatchRetriever( $entityLookup, $siteLookup );
 	}
 
 }

@@ -14,7 +14,10 @@ return [
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
 		return new Schema(
 			new ItemResolver(
-				new BatchGetItems( new EntityLookupItemsBatchRetriever( WikibaseRepo::getEntityLookup( $services ) ) )
+				new BatchGetItems( new EntityLookupItemsBatchRetriever(
+					WikibaseRepo::getEntityLookup( $services ),
+					$services->getSiteLookup(),
+				) )
 			)
 		);
 	},
