@@ -61,7 +61,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		async function mountAndGetParts() {
 			const testStatement = {
 				id: 'Q1$6e87f6d3-444f-405a-8c17-96ff7df34b62',
-				mainSnak: {
+				mainsnak: {
 					snaktype: 'value',
 					datavalue: {
 						value: '',
@@ -126,16 +126,16 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 
 		it( 'adds a new value when add value is clicked', async () => {
 			const { wrapper, addValueButton } = await mountAndGetParts();
-			expect( wrapper.vm.valueForms.length ).toBe( 1 );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 1 );
 			await addValueButton.trigger( 'click' );
-			expect( wrapper.vm.valueForms.length ).toBe( 2 );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 2 );
 		} );
 
 		it( 'removes a value when remove is triggered', async () => {
 			const { wrapper, statementForm } = await mountAndGetParts();
-			expect( wrapper.vm.valueForms.length ).toBe( 1 );
-			await statementForm.vm.$emit( 'remove', wrapper.vm.valueForms[ 0 ].id );
-			expect( wrapper.vm.valueForms.length ).toBe( 0 );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 1 );
+			await statementForm.vm.$emit( 'remove', wrapper.vm.editableStatementGuids[ 0 ] );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 0 );
 		} );
 	} );
 } );

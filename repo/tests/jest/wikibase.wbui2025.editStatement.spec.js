@@ -28,6 +28,7 @@ const Wbui2025AddQualifier = require( '../../resources/wikibase.wbui2025/wikibas
 const Wbui2025Qualifiers = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' );
 const Wbui2025References = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' );
 const { storeWithStatements } = require( './piniaHelpers.js' );
+const { useEditStatementsStore } = require( '../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
 
 describe( 'wikibase.wbui2025.editStatement', () => {
 	it( 'defines component', async () => {
@@ -44,13 +45,14 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			const testStatementId = 'Q1$f80539f8-4635-4e4d-ae20-41e027e093b9';
 			const testStatement = {
 				id: testStatementId,
-				mainSnak: {
+				mainsnak: {
 					snaktype: 'value',
 					datavalue: {
 						value: 'test value',
 						type: 'string'
 					}
 				},
+				rank: 'normal',
 				'qualifiers-order': [ 'P1' ],
 				qualifiers: {
 					P1: [ {
@@ -131,17 +133,6 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
-					valueId: '1',
-					rank: 'normal',
-					mainSnak: {
-						snaktype: 'value',
-						datavalue: {
-							value: 'test value',
-							type: 'string'
-						}
-					},
-					qualifiers: testStatement.qualifiers,
-					qualifiersOrder: testStatement[ 'qualifiers-order' ],
 					statementId: testStatementId
 				},
 				global: {
@@ -149,6 +140,8 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 						storeWithStatements( [ testStatement ] )
 					] }
 			} );
+			const editStatementsStore = useEditStatementsStore();
+			editStatementsStore.initializeFromStatementStore( [ testStatement.id ], 'P1' );
 			const buttons = wrapper.findAllComponents( CdxButton );
 			addQualifierButton = buttons[ 0 ];
 			addReferenceButton = buttons[ 1 ];
@@ -202,7 +195,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 
 			it( 'adds the new qualifier and hides the form when "add-qualifier" is emitted', async () => {
 				const snakData = {
-					snakType: 'value',
+					snaktype: 'value',
 					hash: 'placeholder-hash',
 					property: 'P23',
 					datavalue: {
@@ -226,17 +219,13 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
 			const testNoValueStatement = {
 				id: testNoValueStatementId,
-				mainSnak: {
+				mainsnak: {
 					snaktype: 'novalue'
-				}
+				},
+				rank: 'normal'
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
-					valueId: '1',
-					rank: 'normal',
-					mainSnak: {
-						snaktype: 'novalue'
-					},
 					statementId: testNoValueStatementId
 				},
 				global: {
@@ -244,6 +233,9 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 						storeWithStatements( [ testNoValueStatement ] )
 					] }
 			} );
+			const editStatementsStore = useEditStatementsStore();
+			editStatementsStore.initializeFromStatementStore( [ testNoValueStatementId ], 'P1' );
+			await wrapper.vm.$nextTick();
 			textInput = wrapper.findComponent( CdxTextInput );
 			noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
 		} );

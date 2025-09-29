@@ -11,7 +11,8 @@ const storeWithStatements = function ( statements ) {
 				statements: {
 					statements: createStatementsMap( statements )
 				}
-			}
+			},
+			stubActions: false
 		}
 	);
 };
@@ -34,7 +35,8 @@ const storeContentWithStatementsAndProperties = function ( propertyStatementMap 
 
 const storeWithStatementsAndProperties = function ( propertyStatementMap ) {
 	return createTestingPinia( {
-		initialState: storeContentWithStatementsAndProperties( propertyStatementMap )
+		initialState: storeContentWithStatementsAndProperties( propertyStatementMap ),
+		stubActions: false
 	} );
 };
 
@@ -49,13 +51,15 @@ const storeContentsWithServerRenderedHtml = function ( snakHashToHtmlMap, proper
 
 const storeWithServerRenderedHtml = function ( snakHashToHtmlMap, propertyToHtmlMap = {} ) {
 	return createTestingPinia( {
-		initialState: storeContentsWithServerRenderedHtml( snakHashToHtmlMap, propertyToHtmlMap )
+		initialState: storeContentsWithServerRenderedHtml( snakHashToHtmlMap, propertyToHtmlMap ),
+		stubActions: false
 	} );
 };
 
 const storeWithHtmlAndStatements = function ( serverRenderedHtmlStoreContents, statementsStoreContents ) {
 	return createTestingPinia( {
-		initialState: Object.assign( {}, serverRenderedHtmlStoreContents, statementsStoreContents )
+		initialState: Object.assign( {}, serverRenderedHtmlStoreContents, statementsStoreContents ),
+		stubActions: false
 	} );
 };
 

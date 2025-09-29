@@ -70,11 +70,11 @@ class VueNoScriptRendering {
 	 */
 	private function globalTemplateFunctions(): array {
 		return [
-			'snakValueHtml' => function ( $snak ) {
-				if ( array_key_exists( $snak['hash'], $this->snakValueHtmlLookup ) ) {
-					return $this->snakValueHtmlLookup[$snak['hash']];
+			'snakValueHtmlForHash' => function ( $hash ) {
+				if ( array_key_exists( $hash, $this->snakValueHtmlLookup ) ) {
+					return $this->snakValueHtmlLookup[$hash];
 				}
-				return '<p>No server-side HTML stored for snak ' . $snak['hash'] . '</p>';
+				return '<p>No server-side HTML stored for snak ' . $hash . '</p>';
 			},
 			'concat' => function( ...$args ) {
 				return implode( '', $args );

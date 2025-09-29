@@ -3,13 +3,13 @@
 		class="wikibase-wbui2025-snak-value"
 		:data-snak-hash="snak.hash"
 		:class="snakValueClass"
-		v-html="snakValueHtml( snak )"
+		v-html="snakValueHtmlForHash( snak.hash )"
 	></div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { snakValueHtml } = require( './store/serverRenderedHtml.js' );
+const { snakValueHtmlForHash } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -30,7 +30,7 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		snakValueHtml
+		snakValueHtmlForHash
 	},
 	mounted() {
 		if ( this.snak.datatype === 'globe-coordinate' ) {

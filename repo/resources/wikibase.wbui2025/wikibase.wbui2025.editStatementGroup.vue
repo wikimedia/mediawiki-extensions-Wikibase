@@ -5,25 +5,20 @@
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
 					<p class="heading">
-						{{ $i18n( 'wikibase-statementgrouplistview-edit', valueForms.length ) }}
+						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
 					</p>
 				</div>
 				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
-				<template v-for="( valueForm, index ) in valueForms" :key="valueForm.id">
+				<template v-for="statementGuid in editableStatementGuids" :key="statementGuid">
 					<wikibase-wbui2025-edit-statement
-						v-model:rank="valueForms[index].statement.rank"
-						v-model:main-snak="valueForms[index].statement.mainsnak"
-						v-model:qualifiers="valueForms[index].statement.qualifiers"
-						v-model:qualifiers-order="valueForms[index].statement['qualifiers-order']"
-						:statement-id="valueForms[index].statement.id"
-						:value-id="valueForm.id"
-						@remove="removeValue"
+						:statement-id="statementGuid"
+						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
 				</template>
 				<div class="wikibase-wbui2025-add-value">
-					<cdx-button @click="addValue( null )">
+					<cdx-button @click="createNewStatement">
 						<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 						{{ $i18n( 'wikibase-statementlistview-add' ) }}
 					</cdx-button>
@@ -54,6 +49,7 @@
 </template>
 
 <script>
+const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const {
@@ -65,14 +61,9 @@ const {
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
-const { propertyLinkHtml, snakValueHtml, updateSnakValueHtml } = require( './store/serverRenderedHtml.js' );
-const {
-	getStatementsForProperty,
-	updateStatementData,
-	setStatementIdsForProperty,
-	removeStatementData
-} = require( './store/statementsStore.js' );
-const { updateStatements, renderSnakValueHtml } = require( './api/editEntity.js' );
+const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const { getStatementsForProperty } = require( './store/statementsStore.js' );
+const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -100,13 +91,13 @@ module.exports = exports = defineComponent( {
 			cdxIconArrowPrevious,
 			cdxIconCheck,
 			cdxIconClose,
-			valueForms: [],
-			createdStatements: [],
-			removedStatements: [],
 			formSubmitted: false
 		};
 	},
-	computed: {
+	computed: Object.assign( mapState( useEditStatementsStore, {
+		editableStatementGuids: 'statementIds'
+	} ),
+	{
 		propertyLinkHtml() {
 			return propertyLinkHtml( this.propertyId );
 		},
@@ -120,100 +111,35 @@ module.exports = exports = defineComponent( {
 		statements() {
 			return getStatementsForProperty( this.propertyId );
 		}
-	},
-	methods: {
-		addValue( statement = null ) {
-			const statementId = statement === null ? ( new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid() ) : statement.id;
-			if ( statement === null ) {
-				statement = {
-					id: statementId,
-					mainsnak: {
-						snaktype: 'value',
-						property: this.propertyId,
-						datavalue: {
-							value: '',
-							type: 'string'
-						},
-						datatype: 'string'
-					},
-					type: 'statement',
-					rank: 'normal',
-					'qualifiers-order': [],
-					qualifiers: {}
-				};
-				this.createdStatements.push( statementId );
-			}
-			const valueForm = { id: statementId, statement: Object.assign( {}, statement ) };
-			updateStatementData( statementId, statement );
-			this.valueForms.push( valueForm );
-		},
-		removeValue( valueId ) {
-			this.valueForms = this.valueForms.filter( ( form ) => form.id !== valueId );
-			this.removedStatements.push( valueId );
+	} ),
+	methods: Object.assign( mapActions( useEditStatementsStore, {
+		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
+		createNewBlankEditableStatement: 'createNewBlankStatement',
+		removeStatement: 'removeStatement',
+		saveChangedStatements: 'saveChangedStatements'
+	} ), {
+		createNewStatement() {
+			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
+			this.createNewBlankEditableStatement( statementId, this.propertyId );
 		},
 		submitForm() {
 			this.formSubmitted = true;
-			if ( this.valueForms.length === 0 ) {
+			if ( this.editableStatementGuids.length === 0 ) {
 				return;
 			}
-			updateStatements(
-				this.entityId,
-				this.propertyId,
-				this.valueForms.map( ( form ) => form.statement ).concat( this.claimsToDeleteOnSubmit() )
-			).then( ( returnedClaims ) => {
-				this.claimsToDeleteOnSubmit().map( ( claim ) => removeStatementData( this.propertyId, claim.id ) );
-				setStatementIdsForProperty( this.propertyId, returnedClaims.map( ( claim ) => claim.id ) );
-				const snaksWithoutHtml = [];
-				returnedClaims.forEach( ( claim ) => {
-					updateStatementData( claim.id, claim );
-
-					if ( !snakValueHtml( claim.mainsnak.hash ) ) {
-						snaksWithoutHtml.push( claim.mainsnak );
-					}
-
-					if ( claim.qualifiers ) {
-						for ( const propertyId in claim.qualifiers ) {
-							for ( const qualifier of claim.qualifiers[ propertyId ] ) {
-								if ( !snakValueHtml( qualifier.hash ) ) {
-									snaksWithoutHtml.push( qualifier );
-								}
-							}
-						}
-					}
+			this.saveChangedStatements( this.entityId )
+				.then( () => {
+					this.$emit( 'hide' );
 				} );
-
-				return Promise.all(
-					snaksWithoutHtml.map(
-						( snak ) => {
-							if ( snak.snaktype === 'value' ) {
-								return renderSnakValueHtml( snak.datavalue )
-										.then( ( result ) => updateSnakValueHtml( snak.hash, result ) );
-							} else {
-								const messageKey = 'wikibase-snakview-variations-' + snak.snaktype + '-label';
-								// messages that can appear here:
-								// * wikibase-snakview-variations-novalue-label
-								// * wikibase-snakview-variations-somevalue-label
-								updateSnakValueHtml(
-									snak.hash,
-									'<span class="wikibase-snakview-variation-' + snak.snaktype + 'snak">' + mw.msg( messageKey ) + '</span>'
-								);
-								return Promise.resolve();
-							}
-						} )
-				);
-			} )
-			.then( () => {
-				this.$emit( 'hide' );
-			} );
-		},
-		claimsToDeleteOnSubmit: function () {
-			return this.removedStatements.filter( ( statementId ) => !this.createdStatements.includes( statementId ) )
-					.map( ( statementId ) => ( { id: statementId, remove: '' } ) );
 		}
-	},
+	} ),
 	mounted: function () {
+		// eslint-disable-next-line vue/no-undef-properties
 		if ( this.statements && this.statements.length > 0 ) {
-			this.statements.forEach( ( statement ) => this.addValue( statement ) );
+			this.initializeEditStatementStoreFromStatementStore(
+				this.statements.map( ( statement ) => statement.id ),
+				this.propertyId
+			);
 		}
 	}
 } );

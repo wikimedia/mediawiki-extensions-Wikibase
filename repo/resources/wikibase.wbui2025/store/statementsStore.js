@@ -1,4 +1,6 @@
 const { defineStore } = require( 'pinia' );
+const { snakValueHtmlForHash, updateSnakValueHtmlForHash } = require( './serverRenderedHtml.js' );
+const { renderSnakValueHtml } = require( '../api/editEntity.js' );
 
 const useStatementsStore = defineStore( 'statements', {
 	state: () => ( {
@@ -6,16 +8,53 @@ const useStatementsStore = defineStore( 'statements', {
 		properties: new Map()
 	} ),
 	actions: {
-		populateWithClaims( claims ) {
-			const unfrozenClaims = JSON.parse( JSON.stringify( claims ) );
-			for ( const [ propertyId, statementList ] of Object.entries( unfrozenClaims ) ) {
+		populateWithClaims( claims, renderMissingHtml = false ) {
+			this.statements = new Map();
+			this.properties = new Map();
+			const snaksWithoutHtml = [];
+			for ( const [ propertyId, statementList ] of Object.entries( claims ) ) {
 				const statementIdList = [];
 				for ( const statement of statementList ) {
 					this.statements.set( statement.id, statement );
 					statementIdList.push( statement.id );
+					if ( 'hash' in statement.mainsnak && !snakValueHtmlForHash( statement.mainsnak.hash ) ) {
+						snaksWithoutHtml.push( statement.mainsnak );
+					}
+					if ( statement.qualifiers ) {
+						for ( const qualifierPropertyId in statement.qualifiers ) {
+							for ( const qualifier of statement.qualifiers[ qualifierPropertyId ] ) {
+								if ( 'hash' in qualifier && !snakValueHtmlForHash( qualifier.hash ) ) {
+									snaksWithoutHtml.push( qualifier );
+								}
+							}
+						}
+					}
 				}
 				this.properties.set( propertyId, statementIdList );
 			}
+			if ( !renderMissingHtml ) {
+				return Promise.resolve();
+			}
+
+			snaksWithoutHtml.filter( ( snak ) => snak.snaktype !== 'value' )
+				.forEach( ( snak ) => {
+					const messageKey = 'wikibase-snakview-variations-' + snak.snaktype + '-label';
+					// messages that can appear here:
+					// * wikibase-snakview-variations-novalue-label
+					// * wikibase-snakview-variations-somevalue-label
+					updateSnakValueHtmlForHash(
+						snak.hash,
+						'<span class="wikibase-snakview-variation-' + snak.snaktype + 'snak">' + mw.msg( messageKey ) + '</span>'
+					);
+				} );
+			return Promise.all(
+				snaksWithoutHtml
+					.filter( ( snak ) => snak.snaktype === 'value' )
+					.map(
+						( snak ) => renderSnakValueHtml( snak.datavalue )
+						.then( ( result ) => updateSnakValueHtmlForHash( snak.hash, result ) )
+					)
+			);
 		}
 	}
 } );
@@ -45,21 +84,6 @@ const getStatementById = function ( statementId ) {
 	return statementsStore.statements.get( statementId );
 };
 
-const updateStatementData = function ( statementId, statementData ) {
-	const statementsStore = useStatementsStore();
-	statementsStore.statements.set( statementId, statementData );
-};
-
-const removeStatementData = function ( propertyId, statementId ) {
-	const statementsStore = useStatementsStore();
-	statementsStore.statements.delete( statementId );
-	const statementsForProperty = statementsStore.properties.get( propertyId );
-	statementsStore.properties.set(
-		propertyId,
-		statementsForProperty.filter( ( existingStatementId ) => existingStatementId !== statementId )
-	);
-};
-
 const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 	const statementsStore = useStatementsStore();
 	statementsStore.properties.set( propertyId, statementIds );
@@ -67,10 +91,8 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 
 module.exports = {
 	useStatementsStore,
-	removeStatementData,
 	getPropertyIds,
 	getStatementsForProperty,
 	getStatementById,
-	setStatementIdsForProperty,
-	updateStatementData
+	setStatementIdsForProperty
 };

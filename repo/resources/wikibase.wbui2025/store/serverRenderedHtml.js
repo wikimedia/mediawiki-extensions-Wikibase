@@ -63,15 +63,15 @@ function updatePropertyLinkHtml( propertyId, html ) {
  * Return the HTML for the value/somevalue/novalue part of the given snak.
  * Does not include the property.
  *
- * @param {Object} snak
+ * @param {string} hash
  * @returns {string|undefined} HTML
  */
-function snakValueHtml( snak ) {
+function snakValueHtmlForHash( hash ) {
 	const serverRenderedHtml = useServerRenderedHtml();
-	return serverRenderedHtml.snakValues.get( snak.hash );
+	return serverRenderedHtml.snakValues.get( hash );
 }
 
-function updateSnakValueHtml( hash, html ) {
+function updateSnakValueHtmlForHash( hash, html ) {
 	const serverRenderedHtml = useServerRenderedHtml();
 	serverRenderedHtml.snakValues.set( hash, html );
 }
@@ -80,6 +80,6 @@ module.exports = {
 	useServerRenderedHtml,
 	propertyLinkHtml,
 	updatePropertyLinkHtml,
-	snakValueHtml,
-	updateSnakValueHtml
+	snakValueHtmlForHash,
+	updateSnakValueHtmlForHash
 };

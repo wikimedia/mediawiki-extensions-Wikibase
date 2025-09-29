@@ -24,17 +24,16 @@
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
 				<cdx-select
-					:selected="rankSelection"
+					v-model:selected="rank"
 					:menu-items="rankMenuItems"
-					@update:selected="rankSelection = $event; $emit( 'update:rank', $event )"
 				></cdx-select>
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-qualifiers-and-references">
 			<div class="wikibase-wbui2025-button-holder">
 				<wbui2025-qualifiers
-					:qualifiers="localQualifiers"
-					:qualifiers-order="localQualifiersOrder">
+					:qualifiers="qualifiers"
+					:qualifiers-order="qualifiersOrder">
 				</wbui2025-qualifiers>
 				<cdx-button
 					class="wikibase-wbui2025-add-qualifier-button"
@@ -55,7 +54,7 @@
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-remove-value">
-			<cdx-button @click="$emit( 'remove', valueId )">
+			<cdx-button @click="$emit( 'remove', statementId )">
 				<cdx-icon :icon="cdxIconTrash"></cdx-icon>
 				{{ $i18n( 'wikibase-remove' ) }}
 			</cdx-button>
@@ -64,7 +63,8 @@
 </template>
 
 <script>
-const { defineComponent } = require( 'vue' );
+const { defineComponent, computed } = require( 'vue' );
+const { mapWritableState } = require( 'pinia' );
 const { CdxButton, CdxIcon, CdxMenuButton, CdxSelect, CdxTextInput } = require( '../../codex.js' );
 const {
 	cdxIconAdd,
@@ -73,8 +73,8 @@ const {
 const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
-const { getStatementById } = require( './store/statementsStore.js' );
-const { updateSnakValueHtml, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const { useEditStatementStore } = require( './store/editStatementsStore.js' );
 const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
 
 const rankSelectorPreferredIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="0" y="0" xlink:href="#a"/><use stroke="#36c" x="0" y="0" xlink:href="#b"/></svg>';
@@ -95,42 +95,35 @@ module.exports = exports = defineComponent( {
 		Wbui2025Qualifiers
 	},
 	props: {
-		valueId: {
-			type: String,
-			required: true
-		},
-		mainSnak: {
-			type: Object,
-			required: true,
-			default: () => ( {
-				snaktype: 'value',
-				datavalue: {
-					value: '',
-					type: 'string'
-				}
-			} )
-		},
 		statementId: {
-			type: [ String, null ],
-			required: true
-		},
-		rank: {
 			type: String,
-			required: true,
-			default: () => 'normal'
-		},
-		qualifiers: {
-			type: Object,
-			required: false,
-			default: null
-		},
-		qualifiersOrder: {
-			type: Array,
-			required: false,
-			default: null
+			required: true
 		}
 	},
-	emits: [ 'remove', 'update:mainSnak', 'update:rank', 'update:qualifiers', 'update:qualifiersOrder' ],
+	emits: [ 'remove' ],
+	setup( props ) {
+		/*
+		 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
+		 * store - we pass in the statementId to make a statement-specific store. This forces us to use
+		 * the Option API to initialise the component.
+		 */
+		const computedProperties = mapWritableState( useEditStatementStore( props.statementId ), [
+			'qualifiers',
+			'qualifiersOrder',
+			'rank',
+			'references',
+			'snaktype',
+			'value'
+		] );
+		return {
+			qualifiers: computed( computedProperties.qualifiers ),
+			qualifiersOrder: computed( computedProperties.qualifiersOrder ),
+			rank: computed( computedProperties.rank ),
+			references: computed( computedProperties.references ),
+			snaktype: computed( computedProperties.snaktype ),
+			value: computed( computedProperties.value )
+		};
+	},
 	data() {
 		return {
 			cdxIconAdd,
@@ -140,58 +133,29 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-statementview-rank-preferred' ), value: 'preferred', icon: rankSelectorPreferredIcon },
 				{ label: mw.msg( 'wikibase-statementview-rank-deprecated' ), value: 'deprecated', icon: rankSelectorDeprecatedIcon }
 			],
-			rankSelection: this.rank,
 			showAddQualifierModal: false,
-			localQualifiers: this.qualifiers ? this.qualifiers : {},
-			localQualifiersOrder: this.qualifiersOrder ? this.qualifiersOrder : [],
-			newQualifierCounter: 0,
 			snakTypeMenuItems: [
 				{ label: mw.msg( 'wikibase-snakview-snaktypeselector-value' ), value: 'value' },
 				{ label: mw.msg( 'wikibase-snakview-variations-novalue-label' ), value: 'novalue' },
 				{ label: mw.msg( 'wikibase-snakview-variations-somevalue-label' ), value: 'somevalue' }
 			],
+			newQualifierCounter: 0,
 			previousValue: null
 		};
 	},
 	computed: {
-		value: {
-			get() {
-				return this.mainSnak.datavalue.value;
-			},
-			set( newValue ) {
-				this.$emit( 'update:mainSnak',
-					Object.assign( Object.assign( {}, this.mainSnak ), {
-						datavalue: {
-							value: newValue,
-							type: this.mainSnak.datavalue.type
-						}
-					} ) );
-			}
-		},
 		snakTypeSelection: {
 			get() {
-				return this.mainSnak.snaktype;
+				return this.snaktype;
 			},
-			set( newValue ) {
-				if ( this.mainSnak.snaktype === 'value' ) {
+			set( newSnakTypeSelection ) {
+				if ( this.snaktype === 'value' ) {
 					this.previousValue = this.value;
 				}
-				let datavalue;
-				if ( newValue === 'value' ) {
-					datavalue = {
-						value: this.previousValue ? this.previousValue : '',
-						type: 'string'
-					};
+				if ( newSnakTypeSelection === 'value' ) {
+					this.value = this.previousValue;
 				}
-				const updatedSnak = {
-					property: this.mainSnak.property,
-					datatype: this.mainSnak.datatype,
-					snaktype: newValue
-				};
-				if ( datavalue !== undefined ) {
-					updatedSnak.datavalue = datavalue;
-				}
-				this.$emit( 'update:mainSnak', updatedSnak );
+				this.snaktype = newSnakTypeSelection;
 			}
 		},
 		snakTypeSelectionMessage() {
@@ -203,12 +167,6 @@ module.exports = exports = defineComponent( {
 			// * wikibase-snakview-variations-novalue-label
 			// * wikibase-snakview-variations-somevalue-label
 			return mw.msg( messageKey );
-		},
-		references() {
-			return this.statement.references ? this.statement.references : [];
-		},
-		statement() {
-			return getStatementById( this.statementId );
 		}
 	},
 	methods: {
@@ -217,21 +175,17 @@ module.exports = exports = defineComponent( {
 				this.newQualifierCounter += 1;
 				snakData.hash = `${ this.statementId }-new-qualifier-${ this.newQualifierCounter }`;
 			}
-			if ( this.localQualifiers[ propertyId ] === undefined ) {
-				this.localQualifiers[ propertyId ] = [];
-				this.localQualifiersOrder.push( propertyId );
+			if ( this.qualifiers[ propertyId ] === undefined ) {
+				this.qualifiers[ propertyId ] = [];
+				this.qualifiersOrder.push( propertyId );
 
 				renderPropertyLinkHtml( propertyId )
 					.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
-
-				this.$emit( 'update:qualifiersOrder', this.localQualifiersOrder );
 			}
 
-			this.localQualifiers[ propertyId ].push( snakData );
+			this.qualifiers[ propertyId ].push( snakData );
 			renderSnakValueHtml( snakData.datavalue )
-				.then( ( result ) => updateSnakValueHtml( snakData.hash, result ) );
-
-			this.$emit( 'update:qualifiers', this.localQualifiers );
+				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
 
 			this.showAddQualifierModal = false;
 		}
