@@ -54,8 +54,14 @@
 	"wikibase-newproperty-datatype": "Maǵlıwmat túri:",
 	"special-newitem": "Jańa element jaratıw",
 	"wikibase-newitem-fieldset": "Jańa element jaratıw",
+	"wikibase-newentity-language": "Til:",
 	"wikibase-newentity-label": "Tema:",
+	"wikibase-newentity-description": "Túsindirmesi:",
+	"wikibase-newentity-submit": "Jaratıw",
 	"wikibase-setlabel-label": "Tema:",
+	"wikibase-setdescription-label": "Túsindirme:",
 	"wikibase-modifyterm-language": "Til kodı:",
-	"wikibase-listproperties-datatype": "Maǵlıwmat túri:"
+	"wikibase-listproperties-datatype": "Maǵlıwmat túri:",
+	"wikibase-tainted-ref-popper-help-link-text": "Járdem",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Qaytadan urınıp kóriń"
 }

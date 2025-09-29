@@ -28,7 +28,8 @@
 			"乌拉跨氪",
 			"SunAfterRain",
 			"H78c67c",
-			"SupaplexTW"
+			"SupaplexTW",
+			"LowensteinYang"
 		]
 	},
 	"wikibase-client-desc": "Wikibase 擴充套件客戶端",
@@ -65,7 +66,7 @@
 	"wikibase-linkitem-not-loggedin-title": "您需要登入。",
 	"wikibase-linkitem-not-loggedin": "您需要登入此 Wiki 並在 [$1 中央資料儲存庫] 中使用此功能。",
 	"wikibase-linkitem-success-link": "已連結頁面。您可以於我們的[$1 中央資料儲存庫]找到包含此連結的項目。",
-	"limitreport-entityaccesscount": "Wikibase 項目的載入數目",
+	"limitreport-entityaccesscount": "Wikibase實體的載入數目",
 	"wikibase-property-notfound": "查無 $1 屬性。",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "隱藏",
@@ -108,7 +109,7 @@
 	"wikibase-pageinfo-entity-id-none": "無",
 	"wikibase-pageinfo-description-local": "本地描述",
 	"wikibase-pageinfo-description-central": "中心描述",
-	"wikibase-pageinfo-entity-usage": "在此頁面使用的{{WBREPONAME}}實體",
+	"wikibase-pageinfo-entity-usage": "在此頁面中使用的{{WBREPONAME}}實體",
 	"wikibase-pageinfo-entity-usage-S": "網站連結",
 	"wikibase-pageinfo-entity-usage-L": "一些標籤",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "標籤：$1",
@@ -119,8 +120,8 @@
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "陳述：$1",
 	"wikibase-pageinfo-entity-usage-X": "所有實體資料",
 	"wikibase-pageinfo-entity-usage-O": "雜項（如別名、實體存在等）",
-	"wikibase-property-render-error": "呈現屬性 $1 失敗：$2",
-	"wikibase-otherprojects": "其他專案",
+	"wikibase-property-render-error": "呈現屬性$1時失敗：$2",
+	"wikibase-otherprojects": "在其他專案中",
 	"wikibase-otherprojects-beta-message": "其他專案側邊欄",
 	"wikibase-otherprojects-beta-description": "在側邊欄加入 \"{{int:wikibase-otherprojects}}\" 區塊，可根據 {{WBREPONAME}} 中的資料提供連結可連至其他維基媒體專案。",
 	"wikibase-sitelinks-sitename-columnheading": "語言",

@@ -381,7 +381,7 @@
 	"special-mylanguagefallbackchain": "ترتيب لغات العرض",
 	"wikibase-mylanguagefallbackchain-text": "الترتيب اللغوي المستخدم لعرض تسميات الكيانات (عناصر وخاصيات، إلخ) لك معروضة بالأسفل.",
 	"wikibase-mylanguagefallbackchain-babel": "يمكنك تعديلها بإضافة &lrm; <nowiki>{{#babel: }}</nowiki>&lrm; على [[Special:MyPage|صفحة المستخدم]] {{GENDER:$1|الخاصة بك}}.",
-	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, تم تحويله من $3 - $4",
+	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, حُوِّلَت من $3 - $4",
 	"wikibase-api-claim-value-missing": "ينبغي توفير قيمة عند إنشاء زعم بسناك PropertyValueSnak.",
 	"wikibase-api-claim-value-unexpected": "أنت لا يمكنك توفير قيمة عند إنشاء زعم بلا PropertyValueSnak كالسناك الرئيسي.",
 	"wikibase-api-common-item": "اكتُشف عنصر مُشترَك.",

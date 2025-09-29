@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"ChoiChong",
-			"春春眠眠"
+			"春春眠眠",
+			"さきじょーぐー"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
-	"wikibase-editlinks": "リンク直すん",
-	"wikibase-editlinkstitle": "口間リンク直すん",
+	"wikibase-editlinks": "リンク編集すん",
+	"wikibase-editlinkstitle": "言葉ぬ間ぬリンク編集すん",
+	"wikibase-addlinkstitle": "言葉間リンク追加すん",
 	"wikibase-linkitem-addlinks": "リンクぬ追加",
 	"wikibase-linkitem-title": "ページとぅぬリンク",
 	"wikibase-linkitem-linkpage": "ページとぅリンク",
@@ -15,9 +17,9 @@
 	"wikibase-linkitem-input-site": "言葉（くとぅば）",
 	"wikibase-linkitem-input-page": "ページ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "かくすん",
+	"wikibase-rc-hide-wikidata-hide": "隠すん",
 	"wikibase-rc-hide-wikidata-show": "表示",
 	"wikibase-rc-wikibase-edit-letter": "デ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ぬ直すん",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ぬ編集すん",
 	"wikibase-otherprojects": "他ぬプロジェクト"
 }
