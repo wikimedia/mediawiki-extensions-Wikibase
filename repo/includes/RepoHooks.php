@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use GraphQL\GraphQL;
 use MediaWiki\Api\ApiEditPage;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\ApiCheckCanExecuteHook;
@@ -1289,7 +1288,8 @@ final class RepoHooks implements
 	 * @inheritDoc
 	 */
 	public function onSpecialPage_initList( &$list ) {
-		if ( class_exists( GraphQL::class ) ) {
+		$settings = WikibaseRepo::getSettings();
+		if ( $settings->getSetting( 'tmpEnableGraphQL' ) === true ) {
 			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
 				'class' => SpecialWikibaseGraphQL::class,
 				'services' => [

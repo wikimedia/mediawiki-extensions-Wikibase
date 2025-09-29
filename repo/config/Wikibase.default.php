@@ -482,4 +482,13 @@ return [
 	 * @see https://phabricator.wikimedia.org/T394292
 	 */
 	'tmpEnableMobileEditingUIBetaFeature' => false,
+
+	/**
+	 * @note This config option is only used during the initial development of the GraphQL API.
+	 * It will be removed in the future with no warning.
+	 *
+	 * @var bool Whether to enable the new GraphQL API.
+	 * @see https://phabricator.wikimedia.org/T404842
+	 */
+	'tmpEnableGraphQL' => false,
 ];
