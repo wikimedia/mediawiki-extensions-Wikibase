@@ -13,6 +13,7 @@ class Item {
 		public readonly ItemId $id,
 		public readonly Labels $labels,
 		public readonly Descriptions $descriptions,
+		public readonly Aliases $aliases,
 	) {
 	}
 

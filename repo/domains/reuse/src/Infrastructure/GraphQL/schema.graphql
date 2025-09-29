@@ -6,4 +6,5 @@ type Item {
   id: String!
   label(languageCode: String!): String
   description(languageCode: String!): String
+  aliases(languageCode: String!): [String]!
 }

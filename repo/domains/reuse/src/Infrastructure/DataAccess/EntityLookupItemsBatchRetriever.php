@@ -4,8 +4,12 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Term\AliasGroup;
+use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Aliases;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\AliasesInLanguage;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Description;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Descriptions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
@@ -43,6 +47,7 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 			$item->getId(),
 			new Labels( ...$this->termListToLabelList( $item->getLabels() ) ),
 			new Descriptions( ...$this->termListToDescriptionList( $item->getDescriptions() ) ),
+			new Aliases( ...$this->aliasGroupListToAliasesInLanguageList( $item->getAliasGroups() ) ),
 		) : null;
 	}
 
@@ -57,6 +62,13 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 		return array_map(
 			fn( Term $t ) => new Description( $t->getLanguageCode(), $t->getText() ),
 			iterator_to_array( $descriptions )
+		);
+	}
+
+	private function aliasGroupListToAliasesInLanguageList( AliasGroupList $aliasGroupList ): array {
+		return array_map(
+			fn( AliasGroup $g ) => new AliasesInLanguage( $g->getLanguageCode(), $g->getAliases() ),
+			iterator_to_array( $aliasGroupList )
 		);
 	}
 }

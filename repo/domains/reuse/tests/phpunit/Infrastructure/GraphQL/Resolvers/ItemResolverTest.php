@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItemsRequest;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItemsResponse;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Aliases;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Descriptions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
@@ -56,7 +57,7 @@ class ItemResolverTest extends TestCase {
 	private function newItemsBatchForIds( array $itemIds ): ItemsBatch {
 		$batch = [];
 		foreach ( $itemIds as $id ) {
-			$batch[$id] = new Item( new ItemId( $id ), new Labels(), new Descriptions() );
+			$batch[$id] = new Item( new ItemId( $id ), new Labels(), new Descriptions(), new Aliases() );
 		}
 
 		return new ItemsBatch( $batch );

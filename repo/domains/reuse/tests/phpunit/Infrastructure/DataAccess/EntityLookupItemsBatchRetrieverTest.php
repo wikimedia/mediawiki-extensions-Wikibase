@@ -23,6 +23,7 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$item1Id = new ItemId( 'Q123' );
 		$item1EnLabel = 'potato';
 		$item1EnDescription = 'root vegetable';
+		$item1EnAliases = [ 'spud', 'tater' ];
 		$item2Id = new ItemId( 'Q321' );
 
 		$lookup = new InMemoryEntityLookup();
@@ -30,6 +31,7 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 			NewItem::withId( $item1Id )
 				->andLabel( 'en', $item1EnLabel )
 				->andDescription( 'en', $item1EnDescription )
+				->andAliases( 'en', $item1EnAliases )
 				->build()
 		);
 		$lookup->addEntity( NewItem::withId( $item2Id )->build() );
@@ -45,6 +47,10 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$this->assertSame(
 			$item1EnDescription,
 			$batch->getItem( $item1Id )->descriptions->getDescriptionInLanguage( 'en' )->text
+		);
+		$this->assertSame(
+			$item1EnAliases,
+			$batch->getItem( $item1Id )->aliases->getAliasesInLanguageInLanguage( 'en' )->aliases
 		);
 
 		$this->assertEquals( $item2Id, $batch->getItem( $item2Id )->id );

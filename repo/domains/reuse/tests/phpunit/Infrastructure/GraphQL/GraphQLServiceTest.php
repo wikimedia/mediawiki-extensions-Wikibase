@@ -79,6 +79,27 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testAliasesQuery(): void {
+		$itemId = 'Q123';
+		$enAliases = [ 'spud', 'tater' ];
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $itemId )
+				->andAliases( 'en', $enAliases )
+				->build()
+		);
+
+		$this->assertEquals(
+			[ 'data' => [ 'item' => [ 'enAliases' => $enAliases, 'deAliases' => [] ] ] ],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query { item(id: \"$itemId\") {
+				enAliases: aliases(languageCode: \"en\")
+				deAliases: aliases(languageCode: \"de\")
+			} }" )
+		);
+	}
+
 	public function testGivenItemDoesNotExist_returnsNull(): void {
 		$itemId = 'Q999999';
 
