@@ -209,11 +209,6 @@ class VueNoScriptRendering {
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
 				$data['hasQualifiers'] = $qualifierCount > 0;
-				$data['qualifiersMessage'] = $this->textProvider->getEscaped(
-					'wikibase-statementview-qualifiers-counter', [
-						strval( $qualifierCount ),
-					],
-				);
 				return $data;
 			}
 		);

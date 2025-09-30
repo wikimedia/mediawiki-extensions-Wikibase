@@ -4,9 +4,6 @@
 			v-if="hasQualifiers"
 			class="wikibase-wbui2025-qualifiers"
 		>
-			<p class="wikibase-wbui2025-qualifiers-header">
-				{{ qualifiersMessage }}
-			</p>
 			<template v-for="propertyId in qualifiersOrder" :key="propertyId">
 				<div
 					v-for="snak in qualifiers[propertyId]"
@@ -50,9 +47,6 @@ module.exports = exports = defineComponent( {
 		},
 		hasQualifiers() {
 			return this.qualifierCount > 0;
-		},
-		qualifiersMessage() {
-			return mw.msg( 'wikibase-statementview-qualifiers-counter', [ this.qualifierCount ] );
 		}
 	}
 } );

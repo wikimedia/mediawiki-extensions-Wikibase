@@ -375,7 +375,6 @@ return call_user_func( function() {
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
-				'wikibase-statementview-qualifiers-counter',
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-tooltip-preferred',
 				'wikibase-statementview-rank-normal',

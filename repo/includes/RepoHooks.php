@@ -1035,7 +1035,6 @@ final class RepoHooks implements
 					'wikibase-statementgrouplistview-add',
 					'wikibase-statementgrouplistview-edit',
 					'wikibase-statementlistview-add',
-					'wikibase-statementview-qualifiers-counter',
 					'wikibase-statementview-rank-normal',
 					'wikibase-statementview-rank-preferred',
 					'wikibase-statementview-rank-deprecated',
