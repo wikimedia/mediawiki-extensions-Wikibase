@@ -908,6 +908,7 @@ final class RepoHooks implements
 					'wikibase-aliases-edit-placeholder',
 					'wikibase-aliases-edit-placeholder-language-aware',
 					'wikibase-aliases-edit-placeholder-mul',
+					'wikibase-publishing-progress',
 				],
 			],
 		];
@@ -1032,6 +1033,7 @@ final class RepoHooks implements
 					'wikibase-edit',
 					'wikibase-entityselector-notfound',
 					'wikibase-publish',
+					'wikibase-publishing-progress',
 					'wikibase-remove',
 					'wikibase-save',
 					'wikibase-snakview-property-input-placeholder',
@@ -1054,6 +1056,7 @@ final class RepoHooks implements
 					'CdxMessage',
 					'CdxSelect',
 					'CdxTextInput',
+					'CdxProgressBar',
 				],
 			];
 		}

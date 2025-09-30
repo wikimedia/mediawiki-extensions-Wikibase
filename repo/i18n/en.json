@@ -35,6 +35,7 @@
 	"wikibase-addreference": "add reference",
 	"wikibase-save-inprogress": "Saving…",
 	"wikibase-publish-inprogress": "Publishing…",
+	"wikibase-publishing-progress": "Publishing in progress…",
 	"wikibase-remove-inprogress": "Removing…",
 	"wikibase-statementlistview-add": "add value",
 	"wikibase-statementlistview-add-tooltip": "Add a new value",

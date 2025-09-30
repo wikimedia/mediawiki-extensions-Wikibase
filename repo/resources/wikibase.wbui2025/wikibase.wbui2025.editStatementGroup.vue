@@ -24,7 +24,26 @@
 					</cdx-button>
 				</div>
 			</div>
+			<transition name="fade">
+				<div v-if="showProgress" class="wikibase-wbui2025-message-container">
+					<cdx-message
+						type="notice"
+						class="wikibase-wbui2025-message"
+					>
+						{{ $i18n( 'wikibase-publishing-progress' ) }}
+					</cdx-message>
+				</div>
+			</transition>
 			<div class="wikibase-wbui2025-edit-statement-footer">
+				<transition name="fade">
+					<cdx-progress-bar
+						v-if="showProgress"
+						:value="100"
+						inline
+						aria-label="Publishing in progress"
+					></cdx-progress-bar>
+				</transition>
+
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button
 						weight="quiet"
@@ -51,7 +70,12 @@
 <script>
 const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon } = require( '../../codex.js' );
+const {
+	CdxButton,
+	CdxIcon,
+	CdxMessage,
+	CdxProgressBar
+} = require( '../../codex.js' );
 const {
 	cdxIconAdd,
 	cdxIconArrowPrevious,
@@ -71,6 +95,8 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
+		CdxMessage,
+		CdxProgressBar,
 		WikibaseWbui2025EditStatement,
 		WikibaseWbui2025ModalOverlay
 	},
@@ -91,6 +117,7 @@ module.exports = exports = defineComponent( {
 			cdxIconArrowPrevious,
 			cdxIconCheck,
 			cdxIconClose,
+			showProgress: false,
 			formSubmitted: false
 		};
 	},
@@ -127,6 +154,9 @@ module.exports = exports = defineComponent( {
 			if ( this.editableStatementGuids.length === 0 ) {
 				return;
 			}
+			setTimeout( () => {
+				this.showProgress = true;
+			}, 300 );
 			this.saveChangedStatements( this.entityId )
 				.then( () => {
 					this.$emit( 'hide' );
@@ -228,6 +258,28 @@ module.exports = exports = defineComponent( {
 		}
 	}
 
+	.wikibase-wbui2025-message-container {
+		display: flex;
+		justify-content: center;
+		padding: @spacing-150;
+	}
+
+	.wikibase-wbui2025-message {
+		display: flex;
+		width: 343px;
+		max-width: 90%;
+		padding: @spacing-100 @spacing-100 @spacing-100 @spacing-150;
+		justify-content: flex-end;
+		align-items: center;
+		gap: @spacing-50;
+	}
+	.cdx-progress-bar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
 	.wikibase-wbui2025-edit-statement-footer {
 		flex: 0 0 auto;
 		display: flex;
@@ -237,6 +289,7 @@ module.exports = exports = defineComponent( {
 		gap: 0.625rem;
 		box-shadow: 0 -2px 11.8px 0 rgba(0, 0, 0, 0.10);
 		justify-content: center;
+		position: relative;
 
 		.wikibase-wbui2025-edit-form-actions {
 			display: flex;
