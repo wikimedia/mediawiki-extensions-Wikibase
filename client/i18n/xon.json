@@ -1,8 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abdul Fatawu 352"
+			"Abdul Fatawu 352",
+			"Andani Inusah"
 		]
 	},
-	"wikibase-linkitem-addlinks": "Gbɔŋ kpihi nyɛli"
+	"wikibase-dataitem": "WBREPONAME",
+	"wikibase-editlinks": "\"Kpɛli kpali zɔɔ\"",
+	"wikibase-addlinkstitle": "“Taŋimi nyɛla bɔbuŋ kɔligu”",
+	"wikibase-linkitem-addlinks": "Gbɔŋ kpihi nyɛli",
+	"wikibase-linkitem-title": "“Kɔligu ni taa”",
+	"wikibase-linkitem-linkpage": "“Kɔligu ni taa”",
+	"wikibase-linkitem-selectlink": "Taŋi ɛɛra ŋunŋmɛ kpɛɛli ni na, taŋi kpɛɛli ŋunŋmɛ na ni nyɛli ŋɔ.",
+	"wikibase-linkitem-input-site": "“Nyɛla”",
+	"wikibase-linkitem-input-page": "\n\"Kpɛli kpali zɔɔ\"",
+	"wikibase-rc-hide-wikidata-hide": "Tɔbbu",
+	"wikibase-rc-hide-wikidata-show": "Lahi”",
+	"wikibase-otherprojects": "\"Ni ti kpihi kɔɔri ŋmɔ.\""
 }
