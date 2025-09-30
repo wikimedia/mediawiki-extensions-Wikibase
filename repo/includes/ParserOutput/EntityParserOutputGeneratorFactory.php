@@ -132,7 +132,6 @@ class EntityParserOutputGeneratorFactory {
 		$pog = new StatslibTimeRecordingEntityParserOutputGenerator(
 			$pog,
 			$this->statsFactory,
-			'wikibase.repo.ParserOutputGenerator.timing',
 			'ParserOutputGenerator'
 		);
 

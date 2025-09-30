@@ -27,28 +27,20 @@ class StatslibTimeRecordingEntityParserOutputGenerator implements EntityParserOu
 	/**
 	 * @var string
 	 */
-	private $statsdTimingPrefix;
-
-	/**
-	 * @var string
-	 */
 	private $statsTimingPrefix;
 
 	/**
 	 * @param EntityParserOutputGenerator $inner
 	 * @param StatsFactory $statsFactory
-	 * @param string $statsdTimingPrefix Resulting metric will be: $timingPrefix.getParserOutput.<html/nohtml>><entitytype>
 	 * @param string $statsTimingPrefix
 	 */
 	public function __construct(
 		EntityParserOutputGenerator $inner,
 		StatsFactory $statsFactory,
-		string $statsdTimingPrefix,
 		string $statsTimingPrefix
 	) {
 		$this->inner = $inner;
 		$this->statsFactory = $statsFactory->withComponent( 'WikibaseRepo' );
-		$this->statsdTimingPrefix = $statsdTimingPrefix;
 		$this->statsTimingPrefix = $statsTimingPrefix;
 	}
 
@@ -68,15 +60,9 @@ class StatslibTimeRecordingEntityParserOutputGenerator implements EntityParserOu
 		$htmlMetricPart = $generateHtml ? 'html' : 'nohtml';
 		$entityRevisionEntityType = $entityRevision->getEntity()->getType();
 		$timing = $this->statsFactory
-			->getTiming(
-				"{$this->statsTimingPrefix}_getParserOutput_duration_seconds"
-			)
+			->getTiming( "{$this->statsTimingPrefix}_getParserOutput_duration_seconds" )
 			->setLabels( [ 'html_metric' => $htmlMetricPart, 'entity_revision_entity_type' => $entityRevisionEntityType ] )
-			->copyToStatsdAt(
-				"{$this->statsdTimingPrefix}.getParserOutput.{$htmlMetricPart}.{$entityRevisionEntityType}"
-			);
-
-		$timing->start();
+			->start();
 		$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
 		$timing->stop();
 
