@@ -25,8 +25,7 @@ class FallbackChainModuleMethods {
 				$statsFactory = $services->getStatsFactory()->withComponent( 'WikibaseRepo' );
 				$timing = $statsFactory
 					->getTiming( 'fallbackchains_timing_seconds' )
-					->copyToStatsdAt( 'wikibase.view.fallbackchains.timing' );
-				$timing->start();
+					->start();
 
 				$fallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $services );
 				$languages = WikibaseRepo::getTermsLanguages( $services )->getLanguages();

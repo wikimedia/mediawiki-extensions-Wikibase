@@ -94,9 +94,7 @@ class StatslibSaveTimeRecordingEditEntity implements EditEntity {
 		$timing = $this->statsFactory
 			->getTiming( 'EditEntity_attemptSave_duration_seconds' )
 			->setLabel( 'type', $newEntity->getType() )
-			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EditEntity.attemptSave.{$newEntity->getType()}" );
-
-		$timing->start();
+			->start();
 		$result = $this->inner->attemptSave( $newEntity, $summary, $flags, $token, $watch, $tags );
 		$timing->stop();
 

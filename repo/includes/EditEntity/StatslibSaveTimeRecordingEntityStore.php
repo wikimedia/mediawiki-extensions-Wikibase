@@ -49,9 +49,7 @@ class StatslibSaveTimeRecordingEntityStore implements EntityStore {
 		$timing = $this->statsFactory
 			->getTiming( 'EditEntity_EntityStore_saveEntity_duration_seconds' )
 			->setLabel( 'type', $entity->getType() )
-			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EntityStore.saveEntity.{$entity->getType()}" );
-
-		$timing->start();
+			->start();
 		$result = $this->entityStore->saveEntity( $entity, $summary, $user, $flags, $baseRevId, $tags );
 		$timing->stop();
 
