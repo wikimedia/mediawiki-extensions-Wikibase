@@ -38,16 +38,16 @@ class PrefetchingTermLookupBatchLabelsRetriever implements BatchItemLabelsRetrie
 
 		$labelsByEntityId = [];
 		foreach ( $entityIds as $entityId ) {
-			$entityLabels = new Labels();
+			$entityLabels = [];
 			foreach ( $languageCodes as $language ) {
 				$text = $this->termLookup->getPrefetchedTerm( $entityId, TermTypes::TYPE_LABEL, $language );
 				if ( !is_string( $text ) ) {
 					continue;
 				}
-				$entityLabels[$language] = new Label( $language, $text );
+				$entityLabels[] = new Label( $language, $text );
 			}
 
-			$labelsByEntityId[$entityId->getSerialization()] = $entityLabels;
+			$labelsByEntityId[$entityId->getSerialization()] = new Labels( ...$entityLabels );
 		}
 		return $labelsByEntityId;
 	}
