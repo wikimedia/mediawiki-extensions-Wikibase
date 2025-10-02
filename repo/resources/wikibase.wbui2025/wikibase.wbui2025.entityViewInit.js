@@ -8,7 +8,7 @@
 	const Pinia = require( 'pinia' );
 	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
 	const { useMessageStore } = require( './store/messageStore.js' );
-	const { useStatementsStore, getPropertyIds } = require( './store/statementsStore.js' );
+	const { useSavedStatementsStore, getPropertyIds } = require( './store/savedStatementsStore.js' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
@@ -28,8 +28,8 @@
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
-			const statementStore = useStatementsStore( pinia );
-			statementStore.populateWithClaims( data.claims );
+			const savedStatementStore = useSavedStatementsStore( pinia );
+			savedStatementStore.populateWithClaims( data.claims );
 
 			for ( const propertyId of getPropertyIds() ) {
 				const rootProps = {

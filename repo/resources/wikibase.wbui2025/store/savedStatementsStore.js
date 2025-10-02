@@ -90,7 +90,7 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 };
 
 module.exports = {
-	useStatementsStore,
+	useSavedStatementsStore: useStatementsStore,
 	getPropertyIds,
 	getStatementsForProperty,
 	getStatementById,

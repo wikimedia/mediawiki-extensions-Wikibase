@@ -38,7 +38,7 @@ const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
 const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
-const { getStatementsForProperty } = require( './store/statementsStore.js' );
+const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {

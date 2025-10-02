@@ -62,7 +62,7 @@ const {
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
-const { getStatementsForProperty } = require( './store/statementsStore.js' );
+const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
 const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
 
 // @vue/component

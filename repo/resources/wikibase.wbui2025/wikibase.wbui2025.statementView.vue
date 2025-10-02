@@ -19,7 +19,7 @@ const { defineComponent } = require( 'vue' );
 const Wbui2025MainSnak = require( './wikibase.wbui2025.mainSnak.vue' );
 const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
-const { getStatementById } = require( './store/statementsStore.js' );
+const { getStatementById } = require( './store/savedStatementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {

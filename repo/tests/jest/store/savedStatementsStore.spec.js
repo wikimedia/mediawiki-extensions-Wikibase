@@ -1,5 +1,5 @@
 const { setActivePinia, createPinia } = require( 'pinia' );
-const { useStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/statementsStore.js' );
+const { useSavedStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
 const { api } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 
@@ -71,32 +71,32 @@ describe( 'Statements Store', () => {
 	} );
 
 	it( 'store starts empty', () => {
-		const statementsStore = useStatementsStore();
-		expect( statementsStore.statements.size ).toBe( 0 );
-		expect( statementsStore.properties.size ).toBe( 0 );
+		const savedStatementsStore = useSavedStatementsStore();
+		expect( savedStatementsStore.statements.size ).toBe( 0 );
+		expect( savedStatementsStore.properties.size ).toBe( 0 );
 	} );
 
 	it( 'can be populated with claims', () => {
-		const statementsStore = useStatementsStore();
+		const savedStatementsStore = useSavedStatementsStore();
 		const testClaims = {
 			P5: [ testStatement ]
 		};
-		statementsStore.populateWithClaims( testClaims );
-		expect( statementsStore.statements.size ).toBe( 1 );
-		expect( statementsStore.properties.size ).toBe( 1 );
+		savedStatementsStore.populateWithClaims( testClaims );
+		expect( savedStatementsStore.statements.size ).toBe( 1 );
+		expect( savedStatementsStore.properties.size ).toBe( 1 );
 	} );
 
 	it( 'looks up html for snaks with no stored html', () => {
-		const statementsStore = useStatementsStore();
+		const savedStatementsStore = useSavedStatementsStore();
 		const testClaims = {
 			P5: [ testStatement ]
 		};
 		updateSnakValueHtmlForHash( testSnakHash, '<p>Some Html</p>' );
 		const apiSpy = jest.spyOn( api, 'get' );
 		apiSpy.mockReturnValue( '<p>FakeData</p>' );
-		statementsStore.populateWithClaims( testClaims, true );
-		expect( statementsStore.statements.size ).toBe( 1 );
-		expect( statementsStore.properties.size ).toBe( 1 );
+		savedStatementsStore.populateWithClaims( testClaims, true );
+		expect( savedStatementsStore.statements.size ).toBe( 1 );
+		expect( savedStatementsStore.properties.size ).toBe( 1 );
 		expect( apiSpy ).toHaveBeenCalledTimes( 1 );
 	} );
 } );

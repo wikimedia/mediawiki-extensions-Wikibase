@@ -1,5 +1,5 @@
 const { defineStore } = require( 'pinia' );
-const { useStatementsStore } = require( './statementsStore.js' );
+const { useSavedStatementsStore } = require( './savedStatementsStore.js' );
 const { updateStatements } = require( '../api/editEntity.js' );
 
 const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' + statementId, {
@@ -75,7 +75,7 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		 */
 		appendStatementToEditStatementsStore( statementId, propertyId ) {
 			this.statements.push( statementId );
-			const statementsStore = useStatementsStore();
+			const statementsStore = useSavedStatementsStore();
 			const editStatementStore = useEditStatementStore( statementId )();
 			editStatementStore.initializeWithStatement( statementsStore.statements.get( statementId ), propertyId );
 		},
@@ -108,7 +108,7 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		 * @param {string} entityId
 		 */
 		saveChangedStatements( entityId ) {
-			const statementsStore = useStatementsStore();
+			const statementsStore = useSavedStatementsStore();
 			return updateStatements( entityId, this.statementsForSerialization )
 				.then( ( returnedClaims ) => statementsStore.populateWithClaims( returnedClaims, true ) );
 		}
