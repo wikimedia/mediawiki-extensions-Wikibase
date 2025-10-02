@@ -3,14 +3,14 @@
 namespace Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
+use Wikibase\Repo\Domains\Reuse\Domain\Services\BatchItemLabelsRetriever;
 
 /**
  * @license GPL-2.0-or-later
  */
 class BatchGetItemLabels {
 
-	public function __construct( private readonly PrefetchingTermLookupBatchLabelsRetriever $retriever ) {
+	public function __construct( private readonly BatchItemLabelsRetriever $retriever ) {
 	}
 
 	/**
