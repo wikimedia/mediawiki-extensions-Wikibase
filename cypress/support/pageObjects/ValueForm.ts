@@ -2,7 +2,11 @@ import Chainable = Cypress.Chainable;
 
 export class ValueForm {
 
-	public static VALUE_INPUT_SELECTOR = '.cdx-text-input input';
+	public static VALUE_INPUT_SELECTOR = '.wikibase-wbui2025-edit-statement-value-input .cdx-text-input input';
+
+	public static QUALIFIER_INPUT_SELECTOR = '.wikibase-wbui2025-qualifiers .cdx-text-input input';
+
+	public static QUALIFIER_REMOVE_BUTTON = '.wikibase-wbui2025-qualifiers button.cdx-button';
 
 	public static RANK_SELECTOR = '.cdx-select-vue';
 
@@ -21,11 +25,19 @@ export class ValueForm {
 	}
 
 	public valueInput(): Chainable {
-		return cy.get( ValueForm.VALUE_INPUT_SELECTOR, { withinSubject: this.rootElement } );
+		return cy.get( ValueForm.VALUE_INPUT_SELECTOR, { withinSubject: this.rootElement } ).first();
 	}
 
 	public setValueInput( newInputValue: string ): Chainable {
 		return this.valueInput().clear().type( newInputValue );
+	}
+
+	public qualifierInputs(): Chainable {
+		return cy.get( ValueForm.QUALIFIER_INPUT_SELECTOR, { withinSubject: this.rootElement } );
+	}
+
+	public qualifierRemoveButtons(): Chainable {
+		return cy.get( ValueForm.QUALIFIER_REMOVE_BUTTON, { withinSubject: this.rootElement } );
 	}
 
 	public setRank( rank: string ): Chainable {

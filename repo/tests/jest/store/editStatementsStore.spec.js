@@ -4,7 +4,12 @@ jest.mock(
 );
 
 const { setActivePinia, createPinia } = require( 'pinia' );
-const { useEditStatementStore, useEditStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
+const {
+	useEditStatementStore,
+	useEditStatementsStore,
+	useEditSnakStore,
+	generateNextSnakKey
+} = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
 const { useParsedValueStore } = require( '../../../resources/wikibase.wbui2025/store/parsedValueStore.js' );
 const { useSavedStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { parseValue: mockedParseValue } = require( '../../../resources/wikibase.wbui2025/api/editEntity.js' );
@@ -30,8 +35,8 @@ describe( 'Edit Statements Store', () => {
 			editStatementsStore.createNewBlankStatement( id2, 'P1' );
 			const v1 = 'value 1';
 			const v2 = 'value 2';
-			useEditStatementStore( id1 )().value = v1;
-			useEditStatementStore( id2 )().value = v2;
+			useEditSnakStore( useEditStatementStore( id1 )().mainSnakKey )().value = v1;
+			useEditSnakStore( useEditStatementStore( id2 )().mainSnakKey )().value = v2;
 
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
@@ -51,8 +56,8 @@ describe( 'Edit Statements Store', () => {
 			const id1 = 'Q1$00000000-0000-0000-0000-000000000001';
 			const id2 = 'Q1$00000000-0000-0000-0000-000000000002';
 			editStatementsStore.initializeFromStatementStore( [ id1, id2 ], 'P1' );
-			useEditStatementStore( id1 )().snaktype = 'somevalue';
-			useEditStatementStore( id2 )().snaktype = 'novalue';
+			useEditSnakStore( useEditStatementStore( id1 )().mainSnakKey )().snaktype = 'somevalue';
+			useEditSnakStore( useEditStatementStore( id2 )().mainSnakKey )().snaktype = 'novalue';
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
@@ -66,6 +71,35 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			editStatementsStore.removeStatement( id );
+
+			expect( editStatementsStore.isFullyParsed ).toBe( true );
+		} );
+
+		it( 'qualifiers need to be parsed', async () => {
+			const parsedValueStore = useParsedValueStore();
+			const editStatementsStore = useEditStatementsStore();
+			const id1 = 'Q1$00000000-0000-0000-0000-000000000001';
+			const v1 = 'value 1';
+			editStatementsStore.initializeFromStatementStore( [ id1 ], 'P1' );
+			const editStatementStore = useEditStatementStore( id1 )();
+			useEditSnakStore( editStatementStore.mainSnakKey )().snaktype = 'novalue';
+			const snakKey = generateNextSnakKey();
+			useEditSnakStore( snakKey )().initializeWithSnak( {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datavalue: {
+					type: 'string',
+					value: v1
+				}
+			} );
+			editStatementStore.qualifiers.P1 = [ snakKey ];
+			editStatementStore.qualifiersOrder.push( 'P1' );
+
+			expect( editStatementsStore.isFullyParsed ).toBe( false );
+
+			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
+			await parsedValueStore.getParsedValue( 'P1', v1 );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
@@ -122,7 +156,7 @@ describe( 'Edit Statements Store', () => {
 			const editStatementsStore = useEditStatementsStore();
 			editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
 
-			useEditStatementStore( id )().snaktype = 'somevalue';
+			useEditSnakStore( useEditStatementStore( id )().mainSnakKey )().snaktype = 'somevalue';
 
 			expect( editStatementsStore.hasChanges ).toBe( true );
 		} );
@@ -169,7 +203,7 @@ describe( 'Edit Statements Store', () => {
 			const editStatementsStore = useEditStatementsStore();
 			editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
 
-			useEditStatementStore( id )().value += ' ';
+			useEditSnakStore( useEditStatementStore( id )().mainSnakKey )().value += ' ';
 
 			expect( editStatementsStore.hasChanges ).toBe( null );
 			expect( mockedParseValue ).not.toHaveBeenCalled();
@@ -216,7 +250,7 @@ describe( 'Edit Statements Store', () => {
 			const editStatementsStore = useEditStatementsStore();
 			editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
 
-			useEditStatementStore( id )().value += 'd';
+			useEditSnakStore( useEditStatementStore( id )().mainSnakKey )().value += 'd';
 
 			expect( editStatementsStore.hasChanges ).toBe( null );
 			expect( mockedParseValue ).not.toHaveBeenCalled();
@@ -265,7 +299,8 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.hasChanges ).toBe( false );
 
 			const editStatementStore = useEditStatementStore( id )();
-			editStatementStore.qualifiers = { P1: [ {
+			const snakKey = generateNextSnakKey();
+			useEditSnakStore( snakKey )().initializeWithSnak( {
 				property: 'P1',
 				snaktype: 'value',
 				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
@@ -273,7 +308,8 @@ describe( 'Edit Statements Store', () => {
 					type: 'string',
 					value: 'abc'
 				}
-			} ] };
+			} );
+			editStatementStore.qualifiers = { P1: [ snakKey ] };
 			editStatementStore.qualifiersOrder = [ 'P1' ];
 
 			expect( editStatementsStore.hasChanges ).toBe( true );

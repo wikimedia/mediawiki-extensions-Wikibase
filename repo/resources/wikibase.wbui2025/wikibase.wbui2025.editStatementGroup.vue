@@ -2,7 +2,7 @@
 	<wikibase-wbui2025-modal-overlay>
 		<div class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
-				<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<p class="heading">
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
@@ -15,7 +15,6 @@
 					<wikibase-wbui2025-edit-statement
 						:property-id="propertyId"
 						:statement-id="statementGuid"
-						:datatype="propertyDatatype"
 						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
 				</template>
@@ -49,7 +48,7 @@
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button
 						weight="quiet"
-						@click="$emit( 'hide' )"
+						@click="cancelEditForm"
 					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
@@ -154,6 +153,7 @@ module.exports = exports = defineComponent( {
 		}
 	} ),
 	methods: Object.assign( mapActions( useEditStatementsStore, {
+		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
 		removeStatement: 'removeStatement',
@@ -163,7 +163,8 @@ module.exports = exports = defineComponent( {
 	] ), {
 		createNewStatement() {
 			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
-			this.createNewBlankEditableStatement( statementId, this.propertyId );
+			// eslint-disable-next-line vue/no-undef-properties
+			this.createNewBlankEditableStatement( statementId, this.propertyId, this.propertyDatatype );
 		},
 		submitForm() {
 			this.formSubmitted = true;
@@ -176,6 +177,7 @@ module.exports = exports = defineComponent( {
 			this.saveChangedStatements( this.entityId )
 				.then( () => {
 					this.$emit( 'hide' );
+					this.disposeOfEditableStatementStores();
 					this.addStatusMessage( {
 						type: 'success',
 						text: 'Success: Your statement was published'
@@ -187,9 +189,13 @@ module.exports = exports = defineComponent( {
 					} );
 					this.formSubmitted = false;
 				} );
+		},
+		cancelEditForm() {
+			this.$emit( 'hide' );
+			this.disposeOfEditableStatementStores();
 		}
 	} ),
-	mounted() {
+	beforeMount: function () {
 		if ( this.statements && this.statements.length > 0 ) {
 			this.initializeEditStatementStoreFromStatementStore(
 				this.statements.map( ( statement ) => statement.id ),

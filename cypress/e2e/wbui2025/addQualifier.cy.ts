@@ -2,13 +2,23 @@ import { Util } from 'cypress-wikibase-api';
 
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
+import { LoginPage } from '../../support/pageObjects/LoginPage';
 import { AddQualifierFormPage } from '../../support/pageObjects/AddQualifierFormPage';
 import { interceptCommonsSearch } from '../../support/apiMockHelpers';
+import { ValueForm } from '../../support/pageObjects/ValueForm';
 
 describe( 'wbui2025 add qualifiers', () => {
 	context( 'mobile view', () => {
 		let itemViewPage: ItemViewPage;
 		beforeEach( () => {
+			const loginPage = new LoginPage();
+			cy.task(
+				'MwApi:CreateUser',
+				{ usernamePrefix: 'mextest' },
+			).then( ( { username, password } ) => {
+				loginPage.login( username, password );
+			} );
+
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'string' } )
 				.then( ( propertyId: string ) => {
 					cy.wrap( propertyId ).as( 'propertyId' );
@@ -34,7 +44,7 @@ describe( 'wbui2025 add qualifiers', () => {
 			cy.viewport( 375, 1280 );
 		} );
 
-		it( 'is possible to add a qualifier', () => {
+		it( 'is possible to add and edit a qualifier', () => {
 			itemViewPage.open();
 			itemViewPage.editLinks().first().click();
 			const editStatementFormPage = new EditStatementFormPage();
@@ -53,11 +63,44 @@ describe( 'wbui2025 add qualifiers', () => {
 			addQualifierFormPage.setSnakValue( qualifierSnakValue );
 			addQualifierFormPage.addButton().click();
 
-			editStatementFormPage.valueForms().should( 'contain.text', qualifierSnakValue );
+			editStatementFormPage.valueForms().first().then( ( element: HTMLElement ) => {
+				const valueForm = new ValueForm( element );
+				valueForm.qualifierInputs().first().invoke( 'val' ).should( 'equal', qualifierSnakValue );
+			} );
+
 			editStatementFormPage.publishButton().click();
+
+			/* Wait for the form to close, and check the value is changed */
+			editStatementFormPage.valueForms().should( 'not.exist' );
 			itemViewPage.qualifiersSections().first().then( ( element ) => {
 				itemViewPage.qualifiers( element ).should( 'contain.text', qualifierSnakValue );
 			} );
+
+			/* Open the edit dialog again to edit the qualifier */
+			const updatedQualifierSnakValue = Util.getTestString( 'qualifierSnak' );
+			itemViewPage.editLinks().first().click();
+			editStatementFormPage.valueForms().first().then( ( element: HTMLElement ) => {
+				const valueForm = new ValueForm( element );
+				valueForm.qualifierInputs().first().clear().type( updatedQualifierSnakValue );
+			} );
+			editStatementFormPage.publishButton().click();
+
+			/* Wait for the form to close, and check the value is changed */
+			editStatementFormPage.valueForms().should( 'not.exist' );
+			itemViewPage.qualifiersSections().first().then( ( element ) => {
+				itemViewPage.qualifiers( element ).should( 'contain.text', updatedQualifierSnakValue );
+			} );
+
+			/* Open the edit dialog again to delete the qualifier */
+			itemViewPage.editLinks().first().click();
+			editStatementFormPage.valueForms().first().then( ( element: HTMLElement ) => {
+				const valueForm = new ValueForm( element );
+				valueForm.qualifierRemoveButtons().first().click();
+			} );
+			editStatementFormPage.publishButton().click();
+			/* Wait for the form to close, and check the value is gone */
+			editStatementFormPage.valueForms().should( 'not.exist' );
+			itemViewPage.qualifiersSections().should( 'not.exist' );
 		} );
 	} );
 
@@ -139,6 +182,8 @@ describe( 'wbui2025 add qualifiers', () => {
 				.type( 'Example' );
 
 			cy.wait( '@commonsSearch' );
+			addQualifierFormPage.snakValueMenuItems().first()
+				.invoke( 'text' ).should( 'not.be.empty' );
 
 			addQualifierFormPage.snakValueMenuItems().first()
 				.invoke( 'text' )
@@ -150,8 +195,12 @@ describe( 'wbui2025 add qualifiers', () => {
 			addQualifierFormPage.addButton().click();
 
 			cy.get( '@qualifierValue' ).then( ( qualifierValue ) => {
-				editStatementFormPage.valueForms().should( 'contain.text', qualifierValue );
+				editStatementFormPage.valueForms().first().then( ( element: HTMLElement ) => {
+					const valueForm = new ValueForm( element );
+					valueForm.qualifierInputs().first().invoke( 'val' ).should( 'equal', qualifierValue );
+				} );
 			} );
+
 		} );
 	} );
 
@@ -233,18 +282,24 @@ describe( 'wbui2025 add qualifiers', () => {
 				.type( 'Country' );
 
 			cy.wait( '@commonsSearch' );
+			addQualifierFormPage.snakValueMenuItems().first()
+				.invoke( 'text' ).should( 'not.be.empty' );
 
 			addQualifierFormPage.snakValueMenuItems().first()
 				.invoke( 'text' )
 				.then( ( selectedText ) => {
 					cy.wrap( selectedText.trim() ).as( 'qualifierValue' );
 					addQualifierFormPage.snakValueMenuItems().first().click();
+
 				} );
 
 			addQualifierFormPage.addButton().click();
 
 			cy.get( '@qualifierValue' ).then( ( qualifierValue ) => {
-				editStatementFormPage.valueForms().should( 'contain.text', qualifierValue );
+				editStatementFormPage.valueForms().first().then( ( element: HTMLElement ) => {
+					const valueForm = new ValueForm( element );
+					valueForm.qualifierInputs().first().invoke( 'val' ).should( 'equal', qualifierValue );
+				} );
 			} );
 		} );
 

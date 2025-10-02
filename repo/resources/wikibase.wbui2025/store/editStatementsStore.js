@@ -1,4 +1,4 @@
-const { defineStore } = require( 'pinia' );
+const { defineStore, getActivePinia } = require( 'pinia' );
 const { useParsedValueStore } = require( './parsedValueStore.js' );
 const { useSavedStatementsStore, getStatementById } = require( './savedStatementsStore.js' );
 const { updateStatements } = require( '../api/editEntity.js' );
@@ -24,11 +24,69 @@ function sameDataValue( dv1, dv2 ) {
 	}
 }
 
+const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
+	state: () => ( {
+		value: undefined,
+		snaktype: 'value',
+		property: undefined,
+		datatype: 'string',
+		valuetype: 'string',
+		hash: undefined
+	} ),
+	actions: {
+		initializeWithSnak( snak ) {
+			this.snaktype = snak.snaktype;
+			if ( this.snaktype === 'value' ) {
+				this.value = snak.datavalue.value;
+				this.valuetype = snak.datavalue.type;
+			}
+			this.datatype = snak.datatype;
+			this.property = snak.property;
+			this.hash = snak.hash;
+		},
+		async buildSnakJson() {
+			const parsedValueStore = useParsedValueStore();
+			const snakJson = {
+				snaktype: this.snaktype,
+				property: this.property,
+				datatype: this.datatype
+			};
+			if ( this.snaktype === 'value' ) {
+				snakJson.datavalue = await parsedValueStore.getParsedValue(
+					this.property,
+					this.value
+				);
+				snakJson.datatype = 'string';
+			}
+			return snakJson;
+		},
+		currentDataValue() {
+			if ( this.snaktype !== 'value' ) {
+				return undefined;
+			}
+			return {
+				type: this.valuetype,
+				value: this.value
+			};
+		}
+	}
+} );
+
+let nextSnakKey = 0;
+
+const generateNextSnakKey = function () {
+	return 'snak' + nextSnakKey++;
+};
+
+function deleteStore( store ) {
+	delete getActivePinia().state.value[ store.$id ];
+	store.$dispose();
+}
+
 const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' + statementId, {
 	state: () => ( {
 		rank: 'normal',
-		snaktype: 'value',
-		value: '',
+		mainSnakKey: undefined,
 		qualifiers: {},
 		qualifiersOrder: [],
 		references: [],
@@ -38,37 +96,71 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 		/**
 		 * @param {Object|undefined} statementData
 		 * @param {string} propertyId
+		 * @param {string|null} propertyDataType
 		 */
-		initializeWithStatement( statementData, propertyId ) {
+		initializeWithStatement( statementData, propertyId, propertyDataType = null ) {
 			this.$reset();
 			this.propertyId = propertyId;
 			if ( statementData === undefined ) {
-				return;
+				statementData = {
+					rank: 'normal',
+					propertyId,
+					mainsnak: {
+						property: propertyId,
+						snaktype: 'value',
+						datatype: propertyDataType || 'string',
+						datavalue: {
+							value: '',
+							type: 'string'
+						}
+					}
+				};
 			}
 			this.rank = statementData.rank;
-			this.snaktype = statementData.mainsnak.snaktype;
-			if ( statementData.mainsnak.snaktype === 'value' ) {
-				this.value = statementData.mainsnak.datavalue.value;
-			}
+			this.mainSnakKey = generateNextSnakKey();
+			useEditSnakStore( this.mainSnakKey )().initializeWithSnak( statementData.mainsnak );
 			this.qualifiers = {};
 			for ( const [ qualifierPropertyId, statementList ] of Object.entries( statementData.qualifiers || {} ) ) {
-				this.qualifiers[ qualifierPropertyId ] = statementList.slice( 0 );
+				this.qualifiers[ qualifierPropertyId ] = statementList.map( ( snak ) => {
+					const snakKey = generateNextSnakKey();
+					useEditSnakStore( snakKey )().initializeWithSnak( snak );
+					return snakKey;
+				} );
 			}
 			this.qualifiersOrder = ( statementData[ 'qualifiers-order' ] || [] ).slice( 0 );
 			this.references = ( statementData.references || [] ).slice( 0 );
+		},
+
+		disposeOfStatementStoreAndSnaks() {
+			deleteStore( useEditSnakStore( this.mainSnakKey )() );
+			for ( const [ , statementList ] of Object.entries( this.qualifiers ) ) {
+				statementList.forEach( ( snakKey ) => deleteStore( useEditSnakStore( snakKey )() ) );
+			}
+			// TODO: T405236 Also dispose of reference snak data here
+			deleteStore( this );
 		}
 	},
 	getters: {
 		isFullyParsed( state ) {
 			const parsedValueStore = useParsedValueStore();
 			const isFullyParsedValue = ( value ) => value !== undefined && value !== null;
-			if (
-				state.snaktype === 'value' &&
-				!isFullyParsedValue( parsedValueStore.peekParsedValue( state.propertyId, state.value ) )
-			) {
+			const snakFullyParsed = function ( snak ) {
+				return snak.snaktype !== 'value' ||
+					isFullyParsedValue( parsedValueStore.peekParsedValue( snak.property, snak.value ) );
+			};
+			const mainSnakState = useEditSnakStore( state.mainSnakKey )();
+			if ( !snakFullyParsed( mainSnakState ) ) {
 				return false;
 			}
-			// TODO check qualifiers and references once they use wbparsevalue (T406887)
+			for ( const propertyId of state.qualifiersOrder ) {
+				for ( const snakKey of state.qualifiers[ propertyId ] ) {
+					const qualifierSnakState = useEditSnakStore( snakKey )();
+					if ( !snakFullyParsed( qualifierSnakState ) ) {
+						return false;
+					}
+				}
+			}
+			// TODO check references once they use wbparsevalue (T406887)
 			return true;
 		},
 		/**
@@ -85,12 +177,13 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 				return true;
 			}
 
-			if ( state.rank !== savedStatement.rank || state.snaktype !== savedStatement.mainsnak.snaktype ) {
+			const mainSnakStore = useEditSnakStore( state.mainSnakKey )();
+			if ( state.rank !== savedStatement.rank || mainSnakStore.snaktype !== savedStatement.mainsnak.snaktype ) {
 				return true;
 			}
 
-			if ( state.snaktype === 'value' ) {
-				const dataValue = useParsedValueStore().peekParsedValue( state.propertyId, state.value );
+			if ( mainSnakStore.snaktype === 'value' ) {
+				const dataValue = useParsedValueStore().peekParsedValue( state.propertyId, mainSnakStore.value );
 				if ( !dataValue ) {
 					return null;
 				}
@@ -110,12 +203,12 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 					return true;
 				}
 				for ( let i = 0; i < qualifiers.length; i++ ) {
-					const qualifier = qualifiers[ i ];
+					const qualifier = useEditSnakStore( qualifiers[ i ] )();
 					const savedQualifier = savedQualifiers[ i ];
 					if ( qualifier.snaktype !== savedQualifier.snaktype ) {
 						return true;
 					}
-					if ( qualifier.snaktype === 'value' && !sameDataValue( qualifier.datavalue, savedQualifier.datavalue ) ) {
+					if ( qualifier.snaktype === 'value' && !sameDataValue( qualifier.currentDataValue(), savedQualifier.datavalue ) ) {
 						return true;
 					}
 				}
@@ -168,12 +261,13 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		/**
 		 * @param {string} statementId
 		 * @param {string} propertyId
+		 * @param {string|null} propertyDataType
 		 */
-		appendStatementToEditStatementsStore( statementId, propertyId ) {
+		appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType = null ) {
 			this.statements.push( statementId );
 			const statementsStore = useSavedStatementsStore();
 			const editStatementStore = useEditStatementStore( statementId )();
-			editStatementStore.initializeWithStatement( statementsStore.statements.get( statementId ), propertyId );
+			editStatementStore.initializeWithStatement( statementsStore.statements.get( statementId ), propertyId, propertyDataType );
 		},
 		/**
 		 * @param {Array<string>} statementIds
@@ -187,10 +281,11 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		/**
 		 * @param {string} statementId
 		 * @param {string} propertyId
+		 * @param {string} propertyDataType
 		 */
-		createNewBlankStatement( statementId, propertyId ) {
+		createNewBlankStatement( statementId, propertyId, propertyDataType ) {
 			this.createdStatements.push( statementId );
-			this.appendStatementToEditStatementsStore( statementId, propertyId );
+			this.appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType );
 		},
 		/**
 		 * @param {string} removeStatementId
@@ -206,28 +301,23 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		 * @returns {Promise<object>}
 		 */
 		async buildStatementObjectFromMutableStatement( statementId ) {
-			const parsedValueStore = useParsedValueStore();
 			const editStatementStore = useEditStatementStore( statementId )();
-			const builtData = {
+			const mainSnakStore = useEditSnakStore( editStatementStore.mainSnakKey )();
+			const builtQualifierData = {};
+			for ( const [ propertyId, statementList ] of Object.entries( editStatementStore.qualifiers ) ) {
+				builtQualifierData[ propertyId ] = await Promise.all( statementList.map(
+					async ( snakHash ) => await useEditSnakStore( snakHash )().buildSnakJson()
+				) );
+			}
+			return {
 				id: statementId,
-				mainsnak: {
-					snaktype: editStatementStore.snaktype,
-					property: editStatementStore.propertyId
-				},
+				mainsnak: await mainSnakStore.buildSnakJson(),
 				references: editStatementStore.references,
 				'qualifiers-order': editStatementStore.qualifiersOrder,
-				qualifiers: editStatementStore.qualifiers,
+				qualifiers: builtQualifierData,
 				type: 'statement',
 				rank: editStatementStore.rank
 			};
-			if ( editStatementStore.snaktype === 'value' ) {
-				builtData.mainsnak.datavalue = await parsedValueStore.getParsedValue(
-					editStatementStore.propertyId,
-					editStatementStore.value
-				);
-				builtData.mainsnak.datatype = 'string';
-			}
-			return builtData;
 		},
 
 		/**
@@ -252,6 +342,10 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 			const statementsStore = useSavedStatementsStore();
 			return updateStatements( entityId, await this.buildStatementsForSerialization() )
 				.then( ( returnedClaims ) => statementsStore.populateWithClaims( returnedClaims, true ) );
+		},
+
+		disposeOfStores() {
+			this.statements.forEach( ( statementId ) => useEditStatementStore( statementId )().disposeOfStatementStoreAndSnaks() );
 		}
 	},
 	getters: {
@@ -288,6 +382,8 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 } );
 
 module.exports = {
+	useEditSnakStore,
 	useEditStatementStore,
-	useEditStatementsStore
+	useEditStatementsStore,
+	generateNextSnakKey
 };

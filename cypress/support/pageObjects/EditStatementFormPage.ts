@@ -8,8 +8,8 @@ export class EditStatementFormPage {
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
 		SUBMIT_BUTTONS: '.wikibase-wbui2025-edit-form-actions > .cdx-button',
 		ADD_QUALIFIER_BUTTON: '.wikibase-wbui2025-add-qualifier-button',
-		TEXT_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-text-input input',
-		LOOKUP_INPUT: '.wikibase-wbui2025-edit-statement-value-input > .cdx-lookup input',
+		TEXT_INPUT: '.wikibase-wbui2025-edit-statement-value-input .cdx-text-input input',
+		LOOKUP_INPUT: '.wikibase-wbui2025-edit-statement-value-input .cdx-lookup input',
 		LOOKUP_COMPONENT: '.wikibase-wbui2025-edit-statement-value-input .cdx-lookup',
 		MENU: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu',
 		MENU_ITEM: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu-item',
@@ -51,7 +51,7 @@ export class EditStatementFormPage {
 	}
 
 	public textInput(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.TEXT_INPUT );
+		return cy.get( EditStatementFormPage.SELECTORS.TEXT_INPUT ).first();
 	}
 
 	public publishButton(): Chainable {
