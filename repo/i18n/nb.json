@@ -116,7 +116,6 @@
 	"wikibase-claimview-snak-tooltip": "Angi en verdi som tilsvarer egenskapen «$1». Hvis egenskapen er uten verdi, eller den faktiske verdien er ukjent, kan du velge et alternativ til en egendefinert verdi ved å klikke ikonet foran verdiboksen.",
 	"wikibase-claimview-snak-new-tooltip": "Når du har angitt en egenskap kan du angi en passende verdi. Hvis egenskapen er uten verdi, eller den faktiske verdien er ukjent, kan du velge et alternativ til en egendefinert verdi ved å klikke ikonet foran verdiboksen.",
 	"wikibase-referenceview-tabs-manual": "Manual",
-	"wikibase-statementview-qualifiers-counter": "$1 {{PLURAL:$1|kvalifikator|kvalifikatorer}}",
 	"wikibase-statementview-rank-preferred": "Foretrukket rang",
 	"wikibase-statementview-rank-tooltip-preferred": "Gyldig og aktuell verdi",
 	"wikibase-statementview-rank-normal": "Normal rang",

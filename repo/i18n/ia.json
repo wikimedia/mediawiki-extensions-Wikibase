@@ -108,7 +108,6 @@
 	"wikibase-claimview-snak-tooltip": "Insere un valor correspondente al proprietate con nomine \"$1\". Si le proprietate non ha un valor designate o le valor actual non es cognoscite, tu pote eliger un typo de valor alternative cliccante sur le icone ante le quadro de entrata.",
 	"wikibase-claimview-snak-new-tooltip": "Post haber specificate un proprietate, tu pote inserer un valor correspondente. Si le proprietate non ha valor designate o le valor actual non es cognoscite, tu pote eliger un typo de valor alternative cliccante sur le icone ante le quadro de entrata.",
 	"wikibase-referenceview-tabs-manual": "Manual",
-	"wikibase-statementview-qualifiers-counter": "$1 qualificator{{PLURAL:$1||es}}",
 	"wikibase-statementview-rank-preferred": "Rango preferite",
 	"wikibase-statementview-rank-tooltip-preferred": "Valor valide e actual",
 	"wikibase-statementview-rank-normal": "Rango normal",

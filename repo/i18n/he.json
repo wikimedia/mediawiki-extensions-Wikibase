@@ -124,7 +124,6 @@
 	"wikibase-claimview-snak-tooltip": "נא להזין ערך שמתאים למאפיין ששמו \"$1\". אם למאפיין אין ערך מוגדר או שהערך האמיתי אינו ידוע, ביכולתך לבחור סוג ערך חלופי באמצעות לחיצה על הסמל לפני תיבת הקלט.",
 	"wikibase-claimview-snak-new-tooltip": "אחרי ציון המאפיין ביכולתך להזין ערך מתאים. אם למאפיין אין ערך מוגדר או שהערך האמיתי אינו ידוע, ביכולתך לבחור סוג ערך חלופי באמצעות לחיצה על הסמל לפני תיבת הקלט.",
 	"wikibase-referenceview-tabs-manual": "ידני",
-	"wikibase-statementview-qualifiers-counter": "{{PLURAL:$1|מבחין אחד|$1 מבחינים}}",
 	"wikibase-statementview-rank-preferred": "דירוג מועדף",
 	"wikibase-statementview-rank-tooltip-preferred": "ערך תקין ועדכני",
 	"wikibase-statementview-rank-normal": "דירוג רגיל",
