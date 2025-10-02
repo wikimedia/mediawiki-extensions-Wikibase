@@ -2,7 +2,7 @@ const { defineStore } = require( 'pinia' );
 const { snakValueHtmlForHash, updateSnakValueHtmlForHash } = require( './serverRenderedHtml.js' );
 const { renderSnakValueHtml } = require( '../api/editEntity.js' );
 
-const useStatementsStore = defineStore( 'statements', {
+const useSavedStatementsStore = defineStore( 'savedStatements', {
 	state: () => ( {
 		statements: new Map(),
 		properties: new Map()
@@ -60,7 +60,7 @@ const useStatementsStore = defineStore( 'statements', {
 } );
 
 const getPropertyIds = function () {
-	const statementsStore = useStatementsStore();
+	const statementsStore = useSavedStatementsStore();
 	return statementsStore.properties.keys();
 };
 
@@ -69,7 +69,7 @@ const getPropertyIds = function () {
  * @returns {*}
  */
 const getStatementsForProperty = function ( propertyId ) {
-	const statementsStore = useStatementsStore();
+	const statementsStore = useSavedStatementsStore();
 	return statementsStore.properties.get( propertyId ).map(
 		( statementId ) => statementsStore.statements.get( statementId )
 	);
@@ -80,17 +80,17 @@ const getStatementsForProperty = function ( propertyId ) {
  * @returns {*}
  */
 const getStatementById = function ( statementId ) {
-	const statementsStore = useStatementsStore();
+	const statementsStore = useSavedStatementsStore();
 	return statementsStore.statements.get( statementId );
 };
 
 const setStatementIdsForProperty = function ( propertyId, statementIds ) {
-	const statementsStore = useStatementsStore();
+	const statementsStore = useSavedStatementsStore();
 	statementsStore.properties.set( propertyId, statementIds );
 };
 
 module.exports = {
-	useSavedStatementsStore: useStatementsStore,
+	useSavedStatementsStore,
 	getPropertyIds,
 	getStatementsForProperty,
 	getStatementById,

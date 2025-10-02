@@ -60,7 +60,7 @@ function updatePropertyLinkHtml( propertyId, html ) {
 }
 
 /**
- * Return the HTML for the value/somevalue/novalue part of the given snak.
+ * Return the HTML for the value/somevalue/novalue part of the snak with the given hash.
  * Does not include the property.
  *
  * @param {string} hash

@@ -29,7 +29,7 @@ describe( 'wikibase.wbui2025.statusMessage', () => {
 
 		it( 'the component and child components mount successfully', async () => {
 			const wrapper = await mountStatusMessage( {
-				messageStore: {
+				message: {
 					messages: new Map( [ [ 1, { text: 'something' } ] ] )
 				}
 			} );
@@ -49,7 +49,7 @@ describe( 'wikibase.wbui2025.statusMessage', () => {
 
 		it( 'sets the properties of the messages', async () => {
 			const wrapper = await mountStatusMessage( {
-				messageStore: {
+				message: {
 					messages: new Map( [
 						[ 1, { text: 'something' } ],
 						[ 2, { text: 'something else', type: 'error' } ]

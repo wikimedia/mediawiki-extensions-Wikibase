@@ -1,6 +1,6 @@
 const { defineStore } = require( 'pinia' );
 
-const useMessageStore = defineStore( 'messageStore', {
+const useMessageStore = defineStore( 'message', {
 	state: () => ( {
 		messages: new Map(),
 		messageCounter: 0

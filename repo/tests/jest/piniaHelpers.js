@@ -8,7 +8,7 @@ const storeWithStatements = function ( statements ) {
 	return createTestingPinia(
 		{
 			initialState: {
-				statements: {
+				savedStatements: {
 					statements: createStatementsMap( statements )
 				}
 			},
@@ -26,7 +26,7 @@ const storeContentWithStatementsAndProperties = function ( propertyStatementMap 
 		return [ propertyId, statementList.map( ( statement ) => statement.id ) ];
 	} ) );
 	return {
-		statements: {
+		savedStatements: {
 			statements: statementMap,
 			properties: propertyMap
 		}
