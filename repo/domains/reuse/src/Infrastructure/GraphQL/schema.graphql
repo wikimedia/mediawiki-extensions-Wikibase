@@ -1,9 +1,11 @@
 type Query {
-  item(id: String!): Item
+  item(id: ItemId!): Item
 }
 
+scalar ItemId
+
 type Item {
-  id: String!
+  id: ItemId!
   label(languageCode: String!): String
   description(languageCode: String!): String
   aliases(languageCode: String!): [String]!

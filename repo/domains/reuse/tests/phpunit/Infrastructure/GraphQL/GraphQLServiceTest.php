@@ -183,6 +183,17 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testValidatesItemIdArg(): void {
+		$id = 'P123';
+		$result = $this->newGraphQLService( new InMemoryEntityLookup() )
+			->query( "{ item(id: \"{$id}\") { id } }" );
+
+		$this->assertSame(
+			"Not a valid Item ID: \"$id\"",
+			$result['errors'][0]['message']
+		);
+	}
+
 	private function newGraphQLService( EntityLookup $entityLookup, ?SiteLookup $siteLookup = null ): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );

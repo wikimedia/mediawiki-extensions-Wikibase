@@ -18,7 +18,6 @@ class BatchGetItemLabels {
 	 * Validation must be added before it can be used in a context where the request is created from user input.
 	 */
 	public function execute( BatchGetItemLabelsRequest $request ): BatchGetItemLabelsResponse {
-
 		$itemIds = array_map(
 			fn( string $id ) => new ItemId( $id ),
 			$request->itemIds

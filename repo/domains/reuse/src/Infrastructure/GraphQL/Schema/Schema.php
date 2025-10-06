@@ -12,7 +12,10 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
  * @license GPL-2.0-or-later
  */
 class Schema extends GraphQLSchema {
-	public function __construct( ItemResolver $itemResolver ) {
+	public function __construct(
+		ItemResolver $itemResolver,
+		private readonly ItemIdType $itemIdType,
+	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
 				'name' => 'Query',
@@ -20,7 +23,7 @@ class Schema extends GraphQLSchema {
 					'item' => [
 						'type' => $this->itemType(),
 						'args' => [
-							'id' => Type::nonNull( Type::string() ),
+							'id' => Type::nonNull( $this->itemIdType ),
 						],
 						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
 					],
@@ -34,8 +37,8 @@ class Schema extends GraphQLSchema {
 			'name' => 'Item',
 			'fields' => [
 				'id' => [
-					'type' => Type::nonNull( Type::string() ),
-					'resolve' => fn( Item $item ) => $item->id,
+					'type' => Type::nonNull( $this->itemIdType ),
+					'resolve' => fn( Item $item ) => $item->id->getSerialization(),
 				],
 				'label' => [
 					'type' => Type::string(),
