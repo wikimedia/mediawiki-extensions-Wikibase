@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\SpecialPage\SpecialPage;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -47,7 +48,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				self::newItem(),
 				'kitten item',
 				[ 'http://an.url.com', 'https://another.url.org' ],
-				[ 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ],
+				[ '6:File:This_is_a_file.pdf', '6:File:Selfie.jpg' ],
 			],
 			[ new Item(), null, [], [] ],
 		];
@@ -99,7 +100,10 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 
 		$this->assertEquals(
 			$images,
-			array_keys( $parserOutput->getImages() ),
+			array_map(
+				fn( $item ) => strval( $item['link'] ),
+				$parserOutput->getLinkList( ParserOutputLinkTypes::MEDIA )
+			),
 			'images'
 		);
 
