@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bellatrix10",
-			"Ookuninusi"
+			"Ookuninusi",
+			"ITZQing"
 		]
 	},
 	"tooltip-t-wikibase": "Poveznica na stavku na projektu Wikipodaci",
@@ -10,6 +11,13 @@
 	"wikibase-dataitem": "Stavka ({{WBREPONAME}})",
 	"wikibase-editlinks": "Uredi poveznice",
 	"wikibase-editlinkstitle": "Uredi poveznice na druge jezike",
+	"wikibase-addlinkstitle": "Dodaj međujezičke veze",
+	"wikibase-linkitem-addlinks": "Dodaj veze",
+	"wikibase-linkitem-title": "Poveži sa stranicom",
+	"wikibase-linkitem-linkpage": "Poveži sa stranicom",
+	"wikibase-linkitem-selectlink": "Odaberite sajt i stranicu koju želite povezati sa ovom stranicom.",
+	"wikibase-linkitem-input-site": "Jezik:",
+	"wikibase-linkitem-input-page": "Stranica:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sakrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
