@@ -100,6 +100,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Tittel",
 	"wikibase-pageinfo-entity-usage-C": "Noen utsagn",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Utsagn: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Noen utsagn (med kvalifikatorer og referanser)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Utsagn (med kvalifikatorer og referanser): $1",
 	"wikibase-pageinfo-entity-usage-X": "All entitetsdata",
 	"wikibase-pageinfo-entity-usage-O": "Diverse (f.eks. entitetseksistens)",
 	"wikibase-property-render-error": "Klarte ikke å gjengi egenskapen $1: $2",

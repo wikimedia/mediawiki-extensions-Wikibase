@@ -97,6 +97,8 @@
 	"wikibase-pageinfo-entity-usage-T": "سرليک",
 	"wikibase-pageinfo-entity-usage-C": "ځينې پرېکړه ليکونه",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "پرېکړه ليک: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "ځينې پرېکړه‌ليکونه (له وړتياوو او سرچينو سره)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "پرېکړه‌ليک (له وړتياوو او سرچينو سره): $1",
 	"wikibase-pageinfo-entity-usage-X": "د شتونتيا ټول اومتوکي",
 	"wikibase-pageinfo-entity-usage-O": "گډوډ(بېلگې په ډول شتونتيا څرنگوالی)",
 	"wikibase-property-render-error": "د $1 ځانتيا وړاندې کولو کې نابريالی شو: $2",
