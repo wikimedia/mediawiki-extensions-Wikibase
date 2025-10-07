@@ -42,6 +42,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 
 		let wrapper, addQualifierButton, addReferenceButton, removeButton, textInput, select, qualifiers, references;
 		beforeEach( async () => {
+			const testPropertyId = 'P1';
 			const testStatementId = 'Q1$f80539f8-4635-4e4d-ae20-41e027e093b9';
 			const testStatement = {
 				id: testStatementId,
@@ -133,6 +134,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
+					propertyId: testPropertyId,
 					statementId: testStatementId
 				},
 				global: {
@@ -141,7 +143,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					] }
 			} );
 			const editStatementsStore = useEditStatementsStore();
-			editStatementsStore.initializeFromStatementStore( [ testStatement.id ], 'P1' );
+			editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
 			const buttons = wrapper.findAllComponents( CdxButton );
 			addQualifierButton = buttons[ 0 ];
 			addReferenceButton = buttons[ 1 ];
@@ -216,6 +218,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 	describe( 'the mounted component with a novalue statement', () => {
 		let wrapper, textInput, noValueSomeValuePlaceholder;
 		beforeEach( async () => {
+			const testPropertyId = 'P1';
 			const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
 			const testNoValueStatement = {
 				id: testNoValueStatementId,
@@ -226,6 +229,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
+					propertyId: testPropertyId,
 					statementId: testNoValueStatementId
 				},
 				global: {
@@ -234,7 +238,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					] }
 			} );
 			const editStatementsStore = useEditStatementsStore();
-			editStatementsStore.initializeFromStatementStore( [ testNoValueStatementId ], 'P1' );
+			editStatementsStore.initializeFromStatementStore( [ testNoValueStatementId ], testPropertyId );
 			await wrapper.vm.$nextTick();
 			textInput = wrapper.findComponent( CdxTextInput );
 			noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );

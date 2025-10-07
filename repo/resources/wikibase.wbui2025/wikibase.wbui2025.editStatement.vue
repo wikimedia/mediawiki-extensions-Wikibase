@@ -75,6 +75,7 @@ const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
 const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 const { useEditStatementStore } = require( './store/editStatementsStore.js' );
+const { useParsedValueStore } = require( './store/parsedValueStore.js' );
 const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
 
 const rankSelectorPreferredIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="0" y="0" xlink:href="#a"/><use stroke="#36c" x="0" y="0" xlink:href="#b"/></svg>';
@@ -95,6 +96,10 @@ module.exports = exports = defineComponent( {
 		Wbui2025Qualifiers
 	},
 	props: {
+		propertyId: {
+			type: String,
+			required: true
+		},
 		statementId: {
 			type: String,
 			required: true
@@ -140,7 +145,8 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-snakview-variations-somevalue-label' ), value: 'somevalue' }
 			],
 			newQualifierCounter: 0,
-			previousValue: null
+			previousValue: null,
+			parseValueTimeout: null
 		};
 	},
 	computed: {
@@ -189,6 +195,18 @@ module.exports = exports = defineComponent( {
 
 			this.showAddQualifierModal = false;
 		}
+	},
+	watch: {
+		value() {
+			if ( this.parseValueTimeout !== null ) {
+				clearTimeout( this.parseValueTimeout );
+			}
+			const parsedValueStore = useParsedValueStore();
+			this.parseValueTimeout = setTimeout( () => {
+				parsedValueStore.getParsedValue( this.propertyId, this.value );
+			}, 300 );
+		}
+		// TODO watchers on qualifiers + references (T406887)
 	}
 } );
 </script>

@@ -13,6 +13,7 @@
 			<div class="wikibase-wbui2025-edit-form-body">
 				<template v-for="statementGuid in editableStatementGuids" :key="statementGuid">
 					<wikibase-wbui2025-edit-statement
+						:property-id="propertyId"
 						:statement-id="statementGuid"
 						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
