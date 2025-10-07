@@ -89,7 +89,6 @@ use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
-use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
@@ -1761,8 +1760,7 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			$lbFactory->getLocalDomainID(),
-			[ DomainDb::LOAD_GROUP_FROM_REPO ]
+			$lbFactory->getLocalDomainID()
 		);
 	},
 

@@ -21,10 +21,6 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @license GPL-2.0-or-later
  */
 abstract class DomainDb {
-
-	public const LOAD_GROUP_FROM_CLIENT = 'from-client';
-	public const LOAD_GROUP_FROM_REPO = 'from-repo';
-
 	private ILBFactory $lbFactory;
 	private string $domainId;
 	private ReplicationWaiter $replicationWaiter;
@@ -37,10 +33,9 @@ abstract class DomainDb {
 	private ?SessionConsistentConnectionManager $sessionConsistentConnectionManager = null;
 	private ?ConnectionManager $connectionManager = null;
 
-	public function __construct( ILBFactory $lbFactory, string $domainId, array $loadGroups = [] ) {
+	public function __construct( ILBFactory $lbFactory, string $domainId ) {
 		$this->lbFactory = $lbFactory;
 		$this->domainId = $domainId;
-		$this->loadGroups = $loadGroups;
 
 		$this->replicationWaiter = new ReplicationWaiter(
 			$lbFactory,
@@ -56,8 +51,7 @@ abstract class DomainDb {
 		if ( $this->sessionConsistentConnectionManager === null ) {
 			$this->sessionConsistentConnectionManager = new SessionConsistentConnectionManager(
 				$this->lbFactory->getMainLB( $this->domainId ),
-				$this->domainId,
-				$this->loadGroups
+				$this->domainId
 			);
 		}
 		return $this->sessionConsistentConnectionManager;
@@ -71,8 +65,7 @@ abstract class DomainDb {
 		if ( $this->connectionManager === null ) {
 			$this->connectionManager = new ConnectionManager(
 				$this->lbFactory->getMainLB( $this->domainId ),
-				$this->domainId,
-				$this->loadGroups
+				$this->domainId
 			);
 		}
 		return $this->connectionManager;

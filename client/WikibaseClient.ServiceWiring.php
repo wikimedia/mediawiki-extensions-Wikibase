@@ -102,7 +102,6 @@ use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
-use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
@@ -203,8 +202,7 @@ return [
 		$lbFactory = $services->getDBLoadBalancerFactory();
 
 		return new ClientDomainDbFactory(
-			$lbFactory,
-			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+			$lbFactory
 		);
 	},
 
@@ -832,8 +830,7 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID(),
-			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID()
 		);
 	},
 
