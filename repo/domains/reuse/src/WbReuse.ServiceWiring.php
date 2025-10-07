@@ -7,6 +7,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ItemIdType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\SiteIdType;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -21,6 +22,10 @@ return [
 				) )
 			),
 			new ItemIdType(),
+			new SiteIdType(
+				WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
+				WikibaseRepo::getSettings( $services ),
+			),
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {

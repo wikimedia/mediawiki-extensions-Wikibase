@@ -12,6 +12,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
+use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
 /**
  * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService
@@ -106,12 +107,16 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	public function testSitelinkQuery(): void {
 		$itemId = 'Q123';
 		$sitelinkSiteId = 'examplewiki';
+		$otherSiteId = 'otherSiteId';
 		$sitelinkTitle = 'Potato';
 
 		$sitelinkSite = new MediaWikiSite();
 		$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
 		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
 		$sitelinkSite->setGlobalId( $sitelinkSiteId );
+
+		$siteIdProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
+		$siteIdProvider->method( 'getList' )->willReturn( [ $sitelinkSiteId, $otherSiteId ] );
 
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity(
@@ -129,11 +134,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					],
 				],
 			],
-			$this->newGraphQLService( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ) )->query(
+			$this->newGraphQLService( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ), $siteIdProvider )->query(
 				"
 				query { item(id: \"$itemId\") {
 					sitelink1: sitelink(siteId: \"$sitelinkSiteId\") { title url }
-					sitelink2: sitelink(siteId: \"otherSiteId\") { title }
+					sitelink2: sitelink(siteId: \"$otherSiteId\") { title }
 				} }"
 			)
 		);
@@ -194,9 +199,36 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function newGraphQLService( EntityLookup $entityLookup, ?SiteLookup $siteLookup = null ): GraphQLService {
+	public function testValidatesSiteIdArg(): void {
+		$siteId = 'not-a-valid-site-id';
+		$itemId = 'Q123';
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
+
+		$result = $this->newGraphQLService( $entityLookup )
+			->query( "{ item(id: \"$itemId\") {
+				sitelink(siteId: \"$siteId\") { title }
+			 } }" );
+
+		$this->assertSame(
+			"Not a valid site ID: \"$siteId\"",
+			$result['errors'][0]['message']
+		);
+	}
+
+	private function newGraphQLService(
+		EntityLookup $entityLookup,
+		?SiteLookup $siteLookup = null,
+		?SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider = null,
+	): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );
+		$this->setService(
+			'WikibaseRepo.SiteLinkGlobalIdentifiersProvider',
+			$siteLinkGlobalIdentifiersProvider ?? $this->createStub( SiteLinkGlobalIdentifiersProvider::class )
+		);
+
 		return WbReuse::getGraphQLService();
 	}
 }

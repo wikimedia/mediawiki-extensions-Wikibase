@@ -15,6 +15,7 @@ class Schema extends GraphQLSchema {
 	public function __construct(
 		ItemResolver $itemResolver,
 		private readonly ItemIdType $itemIdType,
+		private readonly SiteIdType $siteIdType,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -74,7 +75,7 @@ class Schema extends GraphQLSchema {
 						],
 					] ),
 					'args' => [
-						'siteId' => Type::nonNull( Type::string() ),
+						'siteId' => Type::nonNull( $this->siteIdType ),
 					],
 					'resolve' => function( Item $item, array $args ) {
 						$sitelink = $item->sitelinks->getSitelinkForSite( $args['siteId'] );

@@ -9,8 +9,10 @@ type Item {
   label(languageCode: String!): String
   description(languageCode: String!): String
   aliases(languageCode: String!): [String]!
-  sitelink(siteId: String!): Sitelink
+  sitelink(siteId: SiteId!): Sitelink
 }
+
+scalar SiteId
 
 type Sitelink {
   title: String!
