@@ -830,7 +830,7 @@ abstract class EntityHandler extends ContentHandler {
 				$language, $target, false
 			);
 			$parserOutput->setRedirectHeader( $html );
-			$parserOutput->setText( '' );
+			$parserOutput->setContentHolderText( '' );
 		}
 
 		return $parserOutput;

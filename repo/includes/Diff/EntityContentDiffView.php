@@ -110,8 +110,8 @@ class EntityContentDiffView extends DifferenceEngine {
 		}
 
 		if ( $parserOutput ) {
-			$parserOutput->setText( ToolbarEditSectionGenerator::enableSectionEditLinks(
-				$parserOutput->getRawText(),
+			$parserOutput->setContentHolderText( ToolbarEditSectionGenerator::enableSectionEditLinks(
+				$parserOutput->getContentHolderText(),
 				false
 			) );
 		}

@@ -147,7 +147,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		// split parser cache by desktop/mobile/wbui2025 (T344362, T394291, T394291)
 		$parserOutput->recordOption( 'wbMobile' );
 		$viewContent = $entityView->getContent( $entity, $entityRevision->getRevisionId() );
-		$parserOutput->setText( $viewContent->getHtml() );
+		$parserOutput->setContentHolderText( $viewContent->getHtml() );
 
 		$placeholders = $viewContent->getPlaceholders();
 		foreach ( $placeholders as $key => $value ) {
