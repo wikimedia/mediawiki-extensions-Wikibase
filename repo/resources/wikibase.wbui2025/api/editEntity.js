@@ -5,11 +5,11 @@ const { api } = require( './api.js' );
  * @param {Array} statements
  */
 const updateStatements = async function ( entityId, statements ) {
-	return api.postWithEditToken( {
+	return api.postWithEditToken( api.assertCurrentUser( {
 		action: 'wbeditentity',
 		id: entityId,
 		data: JSON.stringify( { claims: statements } )
-	} ).then( ( response ) => response.entity.claims );
+	} ) ).then( ( response ) => response.entity.claims );
 };
 
 /**
