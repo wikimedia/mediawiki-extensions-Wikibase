@@ -217,6 +217,30 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	/**
+	 * @dataProvider languageCodeFieldProvider
+	 */
+	public function testValidatesLanguageCodes( string $field ): void {
+		$itemId = 'Q123';
+		$languageCode = 'invalid-language-code';
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
+
+		$result = $this->newGraphQLService( $entityLookup )
+			->query( "{ item(id: \"$itemId\") {
+				$field(languageCode: \"$languageCode\")
+			} }" );
+
+		$this->assertSame(
+			"Not a valid language code: \"$languageCode\"",
+			$result['errors'][0]['message']
+		);
+	}
+
+	public static function languageCodeFieldProvider(): array {
+		return [ [ 'label' ], [ 'description' ], [ 'aliases' ] ];
+	}
+
 	private function newGraphQLService(
 		EntityLookup $entityLookup,
 		?SiteLookup $siteLookup = null,

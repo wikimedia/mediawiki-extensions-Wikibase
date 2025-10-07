@@ -6,6 +6,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatch
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ItemIdType;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\SiteIdType;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
@@ -26,6 +27,7 @@ return [
 				WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
 				WikibaseRepo::getSettings( $services ),
 			),
+			new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() )
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {

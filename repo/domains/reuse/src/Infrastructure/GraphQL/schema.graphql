@@ -6,11 +6,13 @@ scalar ItemId
 
 type Item {
   id: ItemId!
-  label(languageCode: String!): String
-  description(languageCode: String!): String
-  aliases(languageCode: String!): [String]!
+  label(languageCode: LanguageCode!): String
+  description(languageCode: LanguageCode!): String
+  aliases(languageCode: LanguageCode!): [String]!
   sitelink(siteId: SiteId!): Sitelink
 }
+
+scalar LanguageCode
 
 scalar SiteId
 

@@ -16,6 +16,7 @@ class Schema extends GraphQLSchema {
 		ItemResolver $itemResolver,
 		private readonly ItemIdType $itemIdType,
 		private readonly SiteIdType $siteIdType,
+		private readonly LanguageCodeType $languageCodeType,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -44,7 +45,7 @@ class Schema extends GraphQLSchema {
 				'label' => [
 					'type' => Type::string(),
 					'args' => [
-						'languageCode' => Type::nonNull( Type::string() ),
+						'languageCode' => Type::nonNull( $this->languageCodeType ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->labels
 						->getLabelInLanguage( $args['languageCode'] )?->text,
@@ -52,7 +53,7 @@ class Schema extends GraphQLSchema {
 				'description' => [
 					'type' => Type::string(),
 					'args' => [
-						'languageCode' => Type::nonNull( Type::string() ),
+						'languageCode' => Type::nonNull( $this->languageCodeType ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->descriptions
 						->getDescriptionInLanguage( $args['languageCode'] )?->text,
@@ -61,7 +62,7 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( Type::string() ) ),
 					'args' => [
-						'languageCode' => Type::nonNull( Type::string() ),
+						'languageCode' => Type::nonNull( $this->languageCodeType ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->aliases
 						->getAliasesInLanguageInLanguage( $args['languageCode'] )?->aliases ?? [],
