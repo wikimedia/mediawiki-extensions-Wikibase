@@ -478,7 +478,7 @@
 	"wikibase-listdatavaluetypes-name-time": "Ώρα",
 	"wikibase-listdatavaluetypes-name-wikibase-entityid": "Αναγνωριστικό οντότητας Wikibase",
 	"wikibase-listdatavaluetypes-generalbody": "Ο τύπος τιμής για αυτόν τον τύπο δεδομένων είναι <code>$1</code> .",
-	"wikibase-concept-uri": "Έννοια URI",
+	"wikibase-concept-uri": "URI Έννοιας",
 	"wikibase-concept-uri-tooltip": "URI που αναγνωρίζει την ιδέα που περιγράφεται σε αυτό το Θέμα",
 	"wikibase-pageimage-helptext": "Αυτή η εικόνα έχει ληφθεί από τις δηλώσεις αυτού του θέματος. Μπορείτε να αλλάξετε την εικόνα και να την προσαρμόσετε ανάλογα αλλάζοντας αυτήν την ρήση.",
 	"datatypes-type-url": "URL",

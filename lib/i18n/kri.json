@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"122112ê",
-			"Protostar"
+			"Protostar",
+			"AmazingJus"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipidia",
-	"wikibase-time-precision-Gannum": "na $1 billiòn yar",
-	"wikibase-time-precision-annum": "na $1 yar"
+	"wikibase-time-precision-Gannum": "na $1 bilyɔn ia AD",
+	"wikibase-time-precision-annum": "na {{PLURAL:$1|$1 ia|$1 ia dɛn}} AD"
 }
