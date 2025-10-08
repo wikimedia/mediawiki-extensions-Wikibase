@@ -36,6 +36,9 @@ return [
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
-		return new GraphQLService( WbReuse::getGraphQLSchema( $services ) );
+		return new GraphQLService(
+			WbReuse::getGraphQLSchema( $services ),
+			$services->getMainConfig(),
+		);
 	},
 ];

@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use Exception;
+use GraphQL\Error\DebugFlag;
 use GraphQL\GraphQL;
+use MediaWiki\Config\Config;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 
 /**
@@ -11,13 +13,18 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
  */
 class GraphQLService {
 
-	public function __construct( private Schema $schema ) {
+	public function __construct(
+		private readonly Schema $schema,
+		private readonly Config $config,
+	) {
 	}
 
 	public function query( string $query ): array {
 		try {
 			$result = GraphQL::executeQuery( $this->schema, $query, [] );
-			$output = $result->toArray();
+			$output = $result->toArray(
+				$this->config->get( 'ShowExceptionDetails' ) ? DebugFlag::INCLUDE_TRACE : DebugFlag::NONE
+			);
 		} catch ( Exception $e ) {
 			$output = [
 				'errors' => [
