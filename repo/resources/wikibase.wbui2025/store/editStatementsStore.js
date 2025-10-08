@@ -36,6 +36,20 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			this.qualifiersOrder = ( statementData[ 'qualifiers-order' ] || [] ).slice( 0 );
 			this.references = ( statementData.references || [] ).slice( 0 );
 		}
+	},
+	getters: {
+		isFullyParsed( state ) {
+			const parsedValueStore = useParsedValueStore();
+			const isFullyParsedValue = ( value ) => value !== undefined && value !== null;
+			if (
+				state.snaktype === 'value' &&
+				!isFullyParsedValue( parsedValueStore.peekParsedValue( state.propertyId, state.value ) )
+			) {
+				return false;
+			}
+			// TODO check qualifiers and references once they use wbparsevalue (T406887)
+			return true;
+		}
 	}
 } );
 
@@ -136,7 +150,16 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		}
 	},
 	getters: {
-		statementIds: ( state ) => state.statements
+		statementIds: ( state ) => state.statements,
+		isFullyParsed( state ) {
+			for ( const statementId of state.statements ) {
+				const editStatementStore = useEditStatementStore( statementId )();
+				if ( !editStatementStore.isFullyParsed ) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 } );
 

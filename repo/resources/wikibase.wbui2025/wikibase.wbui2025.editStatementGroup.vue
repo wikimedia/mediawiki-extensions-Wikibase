@@ -56,7 +56,7 @@
 					<cdx-button
 						action="progressive"
 						weight="primary"
-						:disabled="formSubmitted"
+						:disabled="formSubmitted || !fullyParsed"
 						@click="submitForm"
 					>
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
@@ -128,7 +128,8 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	computed: Object.assign( mapState( useEditStatementsStore, {
-		editableStatementGuids: 'statementIds'
+		editableStatementGuids: 'statementIds',
+		fullyParsed: 'isFullyParsed'
 	} ),
 	{
 		propertyLinkHtml() {

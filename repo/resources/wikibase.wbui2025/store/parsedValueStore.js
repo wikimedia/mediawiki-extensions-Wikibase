@@ -1,4 +1,5 @@
 const { defineStore } = require( 'pinia' );
+const { reactive } = require( 'vue' );
 const { parseValue } = require( '../api/editEntity.js' );
 
 const useParsedValueStore = defineStore( 'parsedValue', {
@@ -6,6 +7,16 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 		parsedValuesPerProperty: new Map()
 	} ),
 	actions: {
+		/**
+		 * Request that the given input for the given property ID should be parsed,
+		 * and return the parsed value asynchronously.
+		 * Parsed values are cached, so the returned promise might already be resolved.
+		 *
+		 * @param {string} propertyId
+		 * @param {string} value
+		 * @returns {Promise<object|null>} A promise that will resolve to the parsed value
+		 * (a data value object with "type" and "value" keys), or null if it could not be parsed.
+		 */
 		getParsedValue( propertyId, value ) {
 			let parsedValues = this.parsedValuesPerProperty.get( propertyId );
 			if ( parsedValues === undefined ) {
@@ -14,13 +25,13 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 			}
 			let parsedValue = parsedValues.get( value );
 			if ( parsedValue === undefined ) {
-				parsedValue = {
+				parsedValue = reactive( {
 					promise: parseValue( propertyId, value ).then( ( parsed ) => {
 						parsedValue.resolved = parsed;
 						return parsed;
 					} ),
 					resolved: undefined
-				};
+				} );
 				parsedValues.set( value, parsedValue );
 			}
 			return parsedValue.promise;
