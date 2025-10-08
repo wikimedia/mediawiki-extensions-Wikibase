@@ -71,7 +71,6 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 	protected static function getMethod( $methodName ) {
 		$class = new ReflectionClass( ByPropertyIdArray::class );
 		$method = $class->getMethod( $methodName );
-		$method->setAccessible( true );
 		return $method;
 	}
 

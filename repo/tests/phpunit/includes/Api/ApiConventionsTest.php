@@ -116,7 +116,6 @@ class ApiConventionsTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function assertGetExamplesMessages( $moduleClass, ApiBase $module ) {
 		$method = new ReflectionMethod( $moduleClass, 'getExamplesMessages' );
-		$method->setAccessible( true );
 		$examples = $method->invoke( $module );
 
 		$this->assertNotEmpty( $examples, 'there are no examples for ' . $moduleClass );

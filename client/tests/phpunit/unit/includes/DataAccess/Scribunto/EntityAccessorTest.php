@@ -149,7 +149,6 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testZeroIndexArray( array $array, array $expected ) {
 		$renumber = new ReflectionMethod( EntityAccessor::class, 'renumber' );
-		$renumber->setAccessible( true );
 		$renumber->invokeArgs( $this->getEntityAccessor(), [ &$array ] );
 
 		$this->assertSame( $expected, $array );
