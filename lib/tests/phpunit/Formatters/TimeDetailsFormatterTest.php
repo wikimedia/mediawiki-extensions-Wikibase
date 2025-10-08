@@ -63,23 +63,18 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$class = new \ReflectionClass( TimeValue::class );
 
 		$timestampProperty = $class->getProperty( 'timestamp' );
-		$timestampProperty->setAccessible( true );
 		$timestampProperty->setValue( $value, $timestamp );
 
 		$timezoneProperty = $class->getProperty( 'timezone' );
-		$timezoneProperty->setAccessible( true );
 		$timezoneProperty->setValue( $value, $timezone );
 
 		$beforeProperty = $class->getProperty( 'before' );
-		$beforeProperty->setAccessible( true );
 		$beforeProperty->setValue( $value, $before );
 
 		$afterProperty = $class->getProperty( 'after' );
-		$afterProperty->setAccessible( true );
 		$afterProperty->setValue( $value, $after );
 
 		$precisionProperty = $class->getProperty( 'precision' );
-		$precisionProperty->setAccessible( true );
 		$precisionProperty->setValue( $value, $precision );
 
 		return $value;

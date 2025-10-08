@@ -51,11 +51,9 @@ class HtmlTimeFormatterTest extends \PHPUnit\Framework\TestCase {
 		$class = new \ReflectionClass( TimeValue::class );
 
 		$timestampProperty = $class->getProperty( 'timestamp' );
-		$timestampProperty->setAccessible( true );
 		$timestampProperty->setValue( $value, $timestamp );
 
 		$precisionProperty = $class->getProperty( 'precision' );
-		$precisionProperty->setAccessible( true );
 		$precisionProperty->setValue( $value, $precision );
 
 		return $value;
