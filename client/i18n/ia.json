@@ -91,6 +91,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Titulo",
 	"wikibase-pageinfo-entity-usage-C": "Alcun declarationes",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaration: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Alcun declarationes (con qualificatores e referentias)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Declaration (con qualificatores e referentias): $1",
 	"wikibase-pageinfo-entity-usage-X": "Tote le datos del entitate",
 	"wikibase-pageinfo-entity-usage-O": "Miscellanee (p.ex. existentia de entitate)",
 	"wikibase-property-render-error": "Non ha potite generar le proprietate $1: $2",
