@@ -105,7 +105,7 @@ module.exports = exports = defineComponent( {
 		/*
 		 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
 		 * store - we pass in the statementId to make a statement-specific store. This forces us to use
-		 * the Option API to initialise the component.
+		 * the Composition API to initialise the component.
 		 */
 		const computedProperties = mapWritableState( useEditStatementStore( props.statementId ), [
 			'qualifiers',
