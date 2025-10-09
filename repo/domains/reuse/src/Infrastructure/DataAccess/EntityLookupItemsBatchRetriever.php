@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink as DataModelSiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
@@ -21,14 +22,20 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelink;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\ItemsBatchRetriever;
+use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later
  */
 class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 
-	public function __construct( private readonly EntityLookup $entityLookup, private readonly SiteLookup $siteLookup ) {
+	public function __construct(
+		private readonly EntityLookup $entityLookup,
+		private readonly SiteLookup $siteLookup,
+		private readonly StatementReadModelConverter $statementReadModelConverter
+	) {
 	}
 
 	/**
@@ -53,7 +60,8 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 			new Labels( ...$this->termListToLabelList( $item->getLabels() ) ),
 			new Descriptions( ...$this->termListToDescriptionList( $item->getDescriptions() ) ),
 			new Aliases( ...$this->aliasGroupListToAliasesInLanguageList( $item->getAliasGroups() ) ),
-			new Sitelinks( ...$this->siteLinkListToSitelinkList( $item->getSiteLinkList() ) )
+			new Sitelinks( ...$this->siteLinkListToSitelinkList( $item->getSiteLinkList() ) ),
+			new Statements( ...$this->statementListToStatements( $item->getStatements() ) ),
 		) : null;
 	}
 
@@ -88,4 +96,12 @@ class EntityLookupItemsBatchRetriever implements ItemsBatchRetriever {
 			iterator_to_array( $sitelinks )
 		);
 	}
+
+	private function statementListToStatements( StatementList $statementList ): array {
+		return array_map(
+			$this->statementReadModelConverter->convert( ... ),
+			iterator_to_array( $statementList )
+		);
+	}
+
 }

@@ -5,7 +5,10 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -85,6 +88,48 @@ class Schema extends GraphQLSchema {
 							'url' => $sitelink->url,
 						] : null;
 					},
+				],
+				'statements' => [
+					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+					'type' => Type::nonNull( Type::listOf( $this->statementType() ) ),
+					'args' => [
+						'propertyId' => Type::nonNull( Type::string() ),
+					],
+					'resolve' => function( Item $item, array $args ) {
+						return $item->statements->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) );
+					},
+				],
+			],
+		] );
+	}
+
+	private function statementType(): ObjectType {
+		return new ObjectType( [
+			'name' => 'Statement',
+			'fields' => [
+				'id' => [
+					'type' => Type::nonNull( Type::string() ),
+					'resolve' => fn( Statement $statement ) => $statement->id,
+				],
+				'property' => [
+					'type' => Type::nonNull( $this->predicatePropertyType() ),
+					'resolve' => fn( Statement $statement ) => $statement->property,
+				],
+			],
+		] );
+	}
+
+	private function predicatePropertyType(): ObjectType {
+		return new ObjectType( [
+			'name' => 'PredicateProperty',
+			'fields' => [
+				'id' => [
+					'type' => Type::nonNull( Type::string() ),
+					'resolve' => fn( PredicateProperty $rootValue ) => $rootValue->id,
+				],
+				'dataType' => [
+					'type' => Type::string(),
+					'resolve' => fn( PredicateProperty $rootValue ) => $rootValue->dataType,
 				],
 			],
 		] );

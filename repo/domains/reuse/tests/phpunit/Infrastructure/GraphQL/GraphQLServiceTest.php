@@ -9,7 +9,9 @@ use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Tests\NewItem;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
@@ -144,6 +146,37 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	public function testStatementsQuery(): void {
+		$itemId = 'Q123';
+		$statement = NewStatement::noValueFor( 'P1' )->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )->build();
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( NewItem::withId( $itemId )->andStatement( $statement )->build() );
+
+		$this->assertEquals(
+			[
+				'data' => [
+					'item' => [
+						'P1' => [
+							[
+								'id' => $statement->getGuid(),
+								'property' => [
+									'id' => $statement->getMainSnak()->getPropertyId()->getSerialization(),
+									'dataType' => 'string',
+								],
+							],
+						],
+						'P3' => [],
+					],
+				],
+			],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query { item(id: \"$itemId\") {
+				P1:  statements(propertyId: \"P1\"){ id property{ id dataType } },
+				P3:  statements(propertyId: \"P3\"){ id property{ id dataType } },
+			} }" )
+		);
+	}
+
 	public function testGivenItemDoesNotExist_returnsNull(): void {
 		$itemId = 'Q999999';
 
@@ -248,6 +281,12 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );
+
+		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
+		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
+			->willReturn( 'string' );
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $dataTypeLookup );
+
 		$this->setService(
 			'WikibaseRepo.SiteLinkGlobalIdentifiersProvider',
 			$siteLinkGlobalIdentifiersProvider ?? $this->createStub( SiteLinkGlobalIdentifiersProvider::class )

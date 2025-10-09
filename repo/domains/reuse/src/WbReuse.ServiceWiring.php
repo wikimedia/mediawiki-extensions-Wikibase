@@ -2,6 +2,7 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
+use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
@@ -20,6 +21,10 @@ return [
 				new BatchGetItems( new EntityLookupItemsBatchRetriever(
 					WikibaseRepo::getEntityLookup( $services ),
 					$services->getSiteLookup(),
+					new StatementReadModelConverter(
+						WikibaseRepo::getStatementGuidParser( $services ),
+						WikibaseRepo::getPropertyDataTypeLookup( $services )
+					)
 				) )
 			),
 			new ItemIdType(),

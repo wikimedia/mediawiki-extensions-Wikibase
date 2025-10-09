@@ -10,6 +10,7 @@ type Item {
   description(languageCode: LanguageCode!): String
   aliases(languageCode: LanguageCode!): [String]!
   sitelink(siteId: SiteId!): Sitelink
+  statements(propertyId: String!): [Statement]!
 }
 
 scalar LanguageCode
@@ -19,4 +20,14 @@ scalar SiteId
 type Sitelink {
   title: String!
   url: String!
+}
+
+type Statement {
+  id: String!
+  property: PredicateProperty!
+}
+
+type PredicateProperty {
+  id: String!
+  dataType: String
 }

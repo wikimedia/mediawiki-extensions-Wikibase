@@ -15,6 +15,7 @@ class Item {
 		public readonly Descriptions $descriptions,
 		public readonly Aliases $aliases,
 		public readonly Sitelinks $sitelinks,
+		public readonly Statements $statements
 	) {
 	}
 
