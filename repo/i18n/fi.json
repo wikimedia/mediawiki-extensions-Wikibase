@@ -48,6 +48,7 @@
 	"wikibase-addreference": "lisää lähde",
 	"wikibase-save-inprogress": "Tallennetaan...",
 	"wikibase-publish-inprogress": "Julkaistaan…",
+	"wikibase-publishing-progress": "Julkaisu käynnissä…",
 	"wikibase-remove-inprogress": "Poistetaan...",
 	"wikibase-statementlistview-add": "lisää arvo",
 	"wikibase-statementlistview-add-tooltip": "Lisää uusi arvo",

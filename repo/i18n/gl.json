@@ -35,6 +35,7 @@
 	"wikibase-addreference": "engadir unha referencia",
 	"wikibase-save-inprogress": "Gardando...",
 	"wikibase-publish-inprogress": "Publicando…",
+	"wikibase-publishing-progress": "A publicación está en curso…",
 	"wikibase-remove-inprogress": "Eliminando...",
 	"wikibase-statementlistview-add": "engadir un valor",
 	"wikibase-statementlistview-add-tooltip": "Engadir un valor novo",

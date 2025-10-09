@@ -57,6 +57,7 @@
 	"wikibase-addreference": "bron toevoegen",
 	"wikibase-save-inprogress": "Bezig met opslaan...",
 	"wikibase-publish-inprogress": "Publiceren…",
+	"wikibase-publishing-progress": "Publicatie in uitvoering…",
 	"wikibase-remove-inprogress": "Bezig met verwijderen...",
 	"wikibase-statementlistview-add": "waarde toevoegen",
 	"wikibase-statementlistview-add-tooltip": "Een nieuwe waarde toevoegen",

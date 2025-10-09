@@ -28,6 +28,7 @@
 	"wikibase-addreference": "додај навод",
 	"wikibase-save-inprogress": "Зачувувам...",
 	"wikibase-publish-inprogress": "Објавувам...",
+	"wikibase-publishing-progress": "Објавувањето е во тек…",
 	"wikibase-remove-inprogress": "Отстранувам...",
 	"wikibase-statementlistview-add": "додај вредност",
 	"wikibase-statementlistview-add-tooltip": "Додај нова вредност",
