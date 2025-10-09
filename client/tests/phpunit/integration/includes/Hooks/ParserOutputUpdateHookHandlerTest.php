@@ -7,6 +7,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 use MediaWiki\Content\Content;
 use MediaWiki\Content\ContentHandler;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Site\HashSiteStore;
@@ -368,7 +369,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertSame( -NS_MAIN, $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
-		$this->assertSame( [], $parserOutput->getLanguageLinks() );
+		$this->assertSame( [], $parserOutput->getLinkList( ParserOutputLinkTypes::LANGUAGE ) );
 		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
 		$this->assertNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
@@ -387,7 +388,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull( $parserOutput->getPageProperty( 'wikibase_item' ) );
 		$this->assertNull( $parserOutput->getPageProperty( 'unexpectedUnconnectedPage' ) );
 
-		$this->assertSame( [], $parserOutput->getLanguageLinks() );
+		$this->assertSame( [], $parserOutput->getLinkList( ParserOutputLinkTypes::LANGUAGE ) );
 		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
 		$this->assertNull( $parserOutput->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY ) );
@@ -548,7 +549,14 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
 		$this->assertIsArray( $links );
 
-		$actualLinks = $parserOutput->getLanguageLinks();
+		$actualLinks = [];
+		foreach ( $parserOutput->getLinkList( ParserOutputLinkTypes::LANGUAGE ) as [ 'link' => $link ] ) {
+			$ll = $link->getInterwiki() . ':' . $link->getDBkey();
+			if ( $link->getFragment() !== '' ) {
+				$ll .= '#' . $link->getFragment();
+			}
+			$actualLinks[] = $ll;
+		}
 
 		foreach ( $links as $link ) {
 			$this->assertContains( $link, $actualLinks, 'LanguageLink: ' );

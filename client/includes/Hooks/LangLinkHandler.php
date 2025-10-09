@@ -3,12 +3,14 @@
 namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleValue;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\SiteLink;
+use Wikimedia\Parsoid\Core\LinkTarget;
 
 /**
  * @todo split this up and find a better home for stuff that adds
@@ -213,7 +215,7 @@ class LangLinkHandler {
 	 * Converts a list of interwiki links into an associative array that maps
 	 * global site IDs to the respective target pages on the designated wikis.
 	 *
-	 * @param string[] $flatLinks
+	 * @param list<array{link:LinkTarget}> $flatLinks
 	 *
 	 * @return string[] An associative array, using site IDs for keys
 	 *           and the target pages on the respective wiki as the associated value.
@@ -222,13 +224,12 @@ class LangLinkHandler {
 		$links = [];
 		$sites = $this->siteLookup->getSites();
 
-		foreach ( $flatLinks as $s ) {
-			$parts = explode( ':', $s, 2 );
-			if ( count( $parts ) !== 2 ) {
-				continue;
+		foreach ( $flatLinks as [ 'link' => $link ] ) {
+			$lang = $link->getInterwiki();
+			$page = $link->getDBkey();
+			if ( $link->getFragment() !== '' ) {
+				$page .= '#' . $link->getFragment();
 			}
-
-			[ $lang, $page ] = $parts;
 
 			if ( $sites->hasNavigationId( $lang ) ) {
 				$site = $sites->getSiteByNavigationId( $lang );
@@ -261,8 +262,9 @@ class LangLinkHandler {
 		if ( !$this->useRepoLinks( $title, $parserOutput ) ) {
 			return [];
 		}
-		$onPageLinks = $parserOutput->getLanguageLinks();
-		$onPageLinks = $this->localLinksToArray( $onPageLinks );
+		$onPageLinks = $this->localLinksToArray(
+			$parserOutput->getLinkList( ParserOutputLinkTypes::LANGUAGE )
+		);
 
 		$repoLinks = $this->siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title );
 
