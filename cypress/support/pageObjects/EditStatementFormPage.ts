@@ -16,6 +16,8 @@ export class EditStatementFormPage {
 		MENU_ITEM: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu-item',
 		RANK_SELECT: '.wikibase-wbui2025-rank-input .cdx-select-vue',
 		ADD_REFERENCE_BUTTON: '.wikibase-wbui2025-add-reference-button',
+		REFERENCES: '.wikibase-wbui2025-editable-reference',
+		REFERENCES_ACCORDION: '.wikibase-wbui2025-editable-references-section .cdx-accordion summary',
 	};
 
 	public static FORM_HEADING = '.wikibase-wbui2025-edit-statement-heading';
@@ -78,6 +80,14 @@ export class EditStatementFormPage {
 
 	public menuItems(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM );
+	}
+
+	public references(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES );
+	}
+
+	public referencesAccordion(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES_ACCORDION );
 	}
 
 	public getLookupComponentSelector(): string {

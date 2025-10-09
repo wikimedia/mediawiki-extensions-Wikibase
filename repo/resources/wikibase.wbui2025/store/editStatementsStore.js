@@ -128,7 +128,21 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 				} );
 			}
 			this.qualifiersOrder = ( statementData[ 'qualifiers-order' ] || [] ).slice( 0 );
-			this.references = ( statementData.references || [] ).slice( 0 );
+			this.references = ( statementData.references || [] ).map( ( reference ) => {
+				const tempReference = {
+					hash: reference.hash,
+					snaks: {},
+					'snaks-order': ( reference[ 'snaks-order' ] || [] ).slice( 0 )
+				};
+				for ( const [ snakPropertyId, snakList ] of Object.entries( reference.snaks || {} ) ) {
+					tempReference.snaks[ snakPropertyId ] = snakList.map( ( snak ) => {
+						const snakKey = generateNextSnakKey();
+						useEditSnakStore( snakKey )().initializeWithSnak( snak );
+						return snakKey;
+					} );
+				}
+				return tempReference;
+			} );
 		},
 
 		disposeOfStatementStoreAndSnaks() {
@@ -136,7 +150,11 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			for ( const [ , statementList ] of Object.entries( this.qualifiers ) ) {
 				statementList.forEach( ( snakKey ) => deleteStore( useEditSnakStore( snakKey )() ) );
 			}
-			// TODO: T405236 Also dispose of reference snak data here
+			for ( const reference of this.references ) {
+				for ( const [ , statementList ] of Object.entries( reference.snaks || {} ) ) {
+					statementList.forEach( ( snakKey ) => deleteStore( useEditSnakStore( snakKey )() ) );
+				}
+			}
 			deleteStore( this );
 		}
 	},
@@ -160,7 +178,19 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 					}
 				}
 			}
-			// TODO check references once they use wbparsevalue (T406887)
+			for ( const reference of state.references ) {
+				for ( const propertyId of reference[ 'snaks-order' ] ) {
+					if ( !Array.isArray( ( reference.snaks || {} )[ propertyId ] ) ) {
+						continue;
+					}
+					for ( const snakKey of reference.snaks[ propertyId ] ) {
+						const referenceSnakState = useEditSnakStore( snakKey )();
+						if ( !snakFullyParsed( referenceSnakState ) ) {
+							return false;
+						}
+					}
+				}
+			}
 			return true;
 		},
 		/**
@@ -234,12 +264,12 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 						return true;
 					}
 					for ( let j = 0; j < referenceSnaks.length; j++ ) {
-						const referenceSnak = referenceSnaks[ j ];
+						const referenceSnak = useEditSnakStore( referenceSnaks[ j ] )();
 						const savedReferenceSnak = savedReferenceSnaks[ j ];
 						if ( referenceSnak.snaktype !== savedReferenceSnak.snaktype ) {
 							return true;
 						}
-						if ( referenceSnak.snaktype === 'value' && !sameDataValue( referenceSnak.datavalue, savedReferenceSnak.datavalue ) ) {
+						if ( referenceSnak.snaktype === 'value' && !sameDataValue( referenceSnak.currentDataValue(), savedReferenceSnak.datavalue ) ) {
 							return true;
 						}
 					}
@@ -309,10 +339,23 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 					async ( snakHash ) => await useEditSnakStore( snakHash )().buildSnakJson()
 				) );
 			}
+
+			const builtReferencesData = await Promise.all( editStatementStore.references.map( async ( reference ) => {
+				const builtReference = {
+					'snaks-order': reference[ 'snaks-order' ],
+					snaks: {}
+				};
+				for ( const [ propertyId, statementList ] of Object.entries( reference.snaks ) ) {
+					builtReference.snaks[ propertyId ] = await Promise.all( statementList.map(
+						async ( snakHash ) => await useEditSnakStore( snakHash )().buildSnakJson()
+					) );
+				}
+				return builtReference;
+			} ) );
 			return {
 				id: statementId,
 				mainsnak: await mainSnakStore.buildSnakJson(),
-				references: editStatementStore.references,
+				references: builtReferencesData,
 				'qualifiers-order': editStatementStore.qualifiersOrder,
 				qualifiers: builtQualifierData,
 				type: 'statement',
