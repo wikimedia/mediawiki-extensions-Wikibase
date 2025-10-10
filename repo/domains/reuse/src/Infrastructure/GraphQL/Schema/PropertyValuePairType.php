@@ -11,13 +11,16 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
  */
 class PropertyValuePairType extends ObjectType {
 
-	// Include the value during property value implementation.
-	public function __construct( PredicatePropertyType $predicateType ) {
+	public function __construct( PredicatePropertyType $predicateType, ValueType $valueType ) {
 		$config = [
 			'fields' => [
 				'property' => [
 					'type' => Type::nonNull( $predicateType ),
 					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->property,
+				],
+				'value' => [
+					'type' => Type::nonNull( $valueType ),
+					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->value,
 				],
 			],
 		];

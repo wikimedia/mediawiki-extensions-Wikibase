@@ -31,6 +31,8 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\Type;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
@@ -45,6 +47,7 @@ use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
@@ -300,6 +303,21 @@ return call_user_func( function() {
 			'normalizer-factory-callback' => static function () {
 				return WikibaseRepo::getStringValueNormalizer();
 			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'StringValue',
+					'fields' => [
+						'type' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => fn() => 'value',
+						],
+						'content' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => fn( Value $v ) => $v->content->getValue(),
+						],
+					],
+				] );
+			},
 		],
 		'VT:time' => [
 			'expert-module' => 'jquery.valueview.experts.TimeInput',
@@ -452,6 +470,29 @@ return call_user_func( function() {
 			},
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
+			},
+			'graphql-value-type' => static function() {
+				return new ObjectType( [
+					'name' => 'ItemValue',
+					'fields' => [
+						'type' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => fn() => 'value',
+						],
+						'content' => [
+							'type' => Type::nonNull( new ObjectType( [
+								'name' => 'ValueItem',
+								'fields' => [
+									'id' => [
+										'type' => Type::nonNull( Type::string() ),
+										'resolve' => fn( EntityIdValue $content ) => $content->getEntityId()->getSerialization(),
+									],
+								],
+							] ) ),
+							'resolve' => fn( Value $v ) => $v->content,
+						],
+					],
+				] );
 			},
 		],
 		'PT:wikibase-property' => [

@@ -27,6 +27,7 @@ type Statement {
   rank: Rank!
   qualifiers(propertyId: String!): [PropertyValuePair]!
   property: PredicateProperty!
+  value: Value!
 }
 
 enum Rank {
@@ -37,10 +38,27 @@ enum Rank {
 
 type PropertyValuePair {
   property: PredicateProperty!
+  value: Value!
 }
 
 type PredicateProperty {
   id: String!
   dataType: String
   label(languageCode: LanguageCode!): String
+}
+
+union Value = StringValue | ItemValue
+
+type StringValue {
+  type: String!
+  content: String!
+}
+
+type ItemValue {
+  type: String!
+  content: ValueItem!
+}
+
+type ValueItem {
+  id: String!
 }

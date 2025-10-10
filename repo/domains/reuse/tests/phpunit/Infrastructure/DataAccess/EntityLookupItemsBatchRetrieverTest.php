@@ -167,6 +167,76 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$this->assertNull( $batch->getItem( $this->deletedItem ) );
 	}
 
+	public function testGetItemWithStatementsWithValue(): void {
+		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
+		$item1Statement2Guid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d8f";
+		$item1StatementPropertyId = 'P1';
+		$item1Statement2PropertyId = 'P3';
+		$itemValueItemId = 'Q6';
+		$item1Statement = NewStatement::forProperty( $item1StatementPropertyId )
+			->withGuid( $item1StatementGuid )
+			->withValue( 'stringValue' )
+			->build();
+		$item1Statement2 = NewStatement::forProperty( $item1Statement2PropertyId )
+			->withGuid( $item1Statement2Guid )
+			->withValue( new ItemId( $itemValueItemId ) )
+			->build();
+
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $item1StatementPropertyId ), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $item1Statement2PropertyId ), 'wikibase-item' );
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $this->item1Id )
+				->andStatement( $item1Statement )
+				->andStatement( $item1Statement2 )
+				->build()
+		);
+
+		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [] ), $dataTypeLookup )
+			->getItems( $this->item1Id, $this->item2Id, $this->deletedItem );
+
+		$this->assertEquals( $this->item1Id, $batch->getItem( $this->item1Id )->id );
+
+		$statementWithStringValue = $batch->getItem( $this->item1Id )
+			->statements->getStatementsByPropertyId( new NumericPropertyId( $item1StatementPropertyId ) );
+		$this->assertCount( 1, $statementWithStringValue );
+		$statementWithItemValue = $batch->getItem( $this->item1Id )
+			->statements->getStatementsByPropertyId( new NumericPropertyId( $item1Statement2PropertyId ) );
+		$this->assertCount( 1, $statementWithItemValue );
+
+		$this->assertSame(
+			$item1Statement->getGuid(),
+			$statementWithStringValue[0]->id->getSerialization()
+		);
+
+		$this->assertSame(
+			'value',
+			$statementWithStringValue[0]->value->valueType
+		);
+
+		$this->assertSame(
+			'stringValue',
+			$statementWithStringValue[0]->value->content->getValue()
+		);
+
+		$this->assertSame(
+			$item1Statement2->getGuid(),
+			$statementWithItemValue[0]->id->getSerialization()
+		);
+
+		$this->assertSame(
+			'value',
+			$statementWithItemValue[0]->value->valueType
+		);
+
+		$this->assertSame(
+			$itemValueItemId,
+			$statementWithItemValue[0]->value->content->getEntityId()->getSerialization()
+		);
+	}
+
 	private function newRetriever(
 		EntityLookup $entityLookup,
 		SiteLookup $siteLookup,

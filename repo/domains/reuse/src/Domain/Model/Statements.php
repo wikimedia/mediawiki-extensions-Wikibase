@@ -19,10 +19,10 @@ class Statements {
 	 * @return Statement[]
 	 */
 	public function getStatementsByPropertyId( PropertyId $id ): array {
-		return array_filter(
+		return array_values( array_filter(
 			$this->statements,
 			fn( Statement $s ) => $s->property->id->equals( $id )
-		);
+		) );
 	}
 
 }

@@ -7,8 +7,7 @@ namespace Wikibase\Repo\Domains\Reuse\Domain\Model;
  */
 class PropertyValuePair {
 
-	// will add the value in upcoming patches
-	public function __construct( public readonly PredicateProperty $property ) {
+	public function __construct( public readonly PredicateProperty $property, public readonly Value $value ) {
 	}
 
 }

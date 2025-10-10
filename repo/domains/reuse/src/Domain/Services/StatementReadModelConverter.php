@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
@@ -14,6 +15,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Qualifiers;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Rank;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
 
 /**
  * @license GPL-2.0-or-later
@@ -39,6 +41,7 @@ class StatementReadModelConverter {
 			new Rank( $inputStatement->getRank() ),
 			$this->convertQualifiers( $inputStatement->getQualifiers() ),
 			$mainPropertyValuePair->property,
+			$mainPropertyValuePair->value,
 		);
 	}
 
@@ -58,7 +61,13 @@ class StatementReadModelConverter {
 			$dataType = null;
 		}
 
-		return new PropertyValuePair( new PredicateProperty( $snak->getPropertyId(), $dataType ) );
+		return new PropertyValuePair(
+			new PredicateProperty( $snak->getPropertyId(), $dataType ),
+			new Value(
+				$snak->getType(),
+				$snak instanceof PropertyValueSnak ? $snak->getDataValue() : null
+			)
+		);
 	}
 
 }
