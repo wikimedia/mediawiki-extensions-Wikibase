@@ -63,6 +63,7 @@
 	"wikibase-addreference": "أضِف مرجعاً",
 	"wikibase-save-inprogress": "جارٍ الحفظ...",
 	"wikibase-publish-inprogress": "جارٍ النشر",
+	"wikibase-publishing-progress": "جاري النشر…",
 	"wikibase-remove-inprogress": "جارٍ الحذف",
 	"wikibase-statementlistview-add": "أضِف قيمةً",
 	"wikibase-statementlistview-add-tooltip": "أضِف قيمة جديدة",
