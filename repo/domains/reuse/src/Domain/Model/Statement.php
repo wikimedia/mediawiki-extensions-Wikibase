@@ -11,6 +11,7 @@ class Statement {
 
 	public function __construct(
 		public readonly StatementGuid $id,
+		public readonly Rank $rank,
 		public readonly PredicateProperty $property
 	) {
 	}

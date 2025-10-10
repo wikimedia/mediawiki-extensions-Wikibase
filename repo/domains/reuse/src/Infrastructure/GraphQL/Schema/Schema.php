@@ -2,10 +2,12 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 
+use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
@@ -111,6 +113,10 @@ class Schema extends GraphQLSchema {
 					'type' => Type::nonNull( Type::string() ),
 					'resolve' => fn( Statement $statement ) => $statement->id,
 				],
+				'rank' => [
+					'type' => Type::nonNull( $this->rankType() ),
+					'resolve' => fn( Statement $statement ) => $statement->rank->asInt(),
+				],
 				'property' => [
 					'type' => Type::nonNull( $this->predicatePropertyType() ),
 					'resolve' => fn( Statement $statement ) => $statement->property,
@@ -130,6 +136,23 @@ class Schema extends GraphQLSchema {
 				'dataType' => [
 					'type' => Type::string(),
 					'resolve' => fn( PredicateProperty $rootValue ) => $rootValue->dataType,
+				],
+			],
+		] );
+	}
+
+	private function rankType(): EnumType {
+		return new EnumType( [
+			'name' => 'Rank',
+			'values' => [
+				'deprecated' => [
+					'value' => StatementWriteModel::RANK_DEPRECATED,
+				],
+				'normal' => [
+					'value' => StatementWriteModel::RANK_NORMAL,
+				],
+				'preferred' => [
+					'value' => StatementWriteModel::RANK_PREFERRED,
 				],
 			],
 		] );

@@ -24,7 +24,14 @@ type Sitelink {
 
 type Statement {
   id: String!
+  rank: Rank!
   property: PredicateProperty!
+}
+
+enum Rank {
+  deprecated
+  normal
+  preferred
 }
 
 type PredicateProperty {

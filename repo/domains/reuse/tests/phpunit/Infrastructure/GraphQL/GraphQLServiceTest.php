@@ -148,7 +148,10 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 
 	public function testStatementsQuery(): void {
 		$itemId = 'Q123';
-		$statement = NewStatement::noValueFor( 'P1' )->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )->build();
+		$statement = NewStatement::noValueFor( 'P1' )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
+			->withRank( 1 )
+			->build();
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity( NewItem::withId( $itemId )->andStatement( $statement )->build() );
 
@@ -159,6 +162,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'P1' => [
 							[
 								'id' => $statement->getGuid(),
+								'rank' => 'normal',
 								'property' => [
 									'id' => $statement->getMainSnak()->getPropertyId()->getSerialization(),
 									'dataType' => 'string',
@@ -171,8 +175,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			],
 			$this->newGraphQLService( $entityLookup )->query( "
 			query { item(id: \"$itemId\") {
-				P1:  statements(propertyId: \"P1\"){ id property{ id dataType } },
-				P3:  statements(propertyId: \"P3\"){ id property{ id dataType } },
+				P1:  statements(propertyId: \"P1\"){ id rank property{ id dataType } },
+				P3:  statements(propertyId: \"P3\"){ id rank property{ id dataType } },
 			} }" )
 		);
 	}

@@ -27,18 +27,50 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityLookupItemsBatchRetrieverTest extends TestCase {
 
-	public function testGetItems(): void {
-		$deletedItem = new ItemId( 'Q666' );
-		$item1Id = new ItemId( 'Q123' );
+	private ItemId $item1Id;
+	private ItemId $deletedItem;
+	private ItemId $item2Id;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->deletedItem = new ItemId( 'Q666' );
+		$this->item1Id = new ItemId( 'Q123' );
+		$this->item2Id = new ItemId( 'Q321' );
+	}
+
+	public function testGetItemsWithLabelsAndDescriptions(): void {
 		$item1EnLabel = 'potato';
 		$item1EnDescription = 'root vegetable';
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $this->item1Id )
+				->andLabel( 'en', $item1EnLabel )
+				->andDescription( 'en', $item1EnDescription )
+				->build()
+		);
+		$entityLookup->addEntity( NewItem::withId( $this->item2Id )->build() );
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+
+		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [] ), $dataTypeLookup )
+			->getItems( $this->item1Id, $this->item2Id, $this->deletedItem );
+
+		$this->assertEquals( $this->item1Id, $batch->getItem( $this->item1Id )->id );
+
+		$this->assertSame(
+			$item1EnLabel,
+			$batch->getItem( $this->item1Id )->labels->getLabelInLanguage( 'en' )->text
+		);
+
+		$this->assertSame(
+			$item1EnDescription,
+			$batch->getItem( $this->item1Id )->descriptions->getDescriptionInLanguage( 'en' )->text
+		);
+	}
+
+	public function testGetItemsWithAliasesAndSitelinks(): void {
 		$item1EnAliases = [ 'spud', 'tater' ];
-		$item1StatementGuid = "$item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
-		$item1StatementPropertyId = 'P1';
-		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )->withGuid( $item1StatementGuid )->build();
 		$item1SitelinkSiteId = 'examplewiki';
 		$item1SitelinkTitle = 'Potato';
-		$item2Id = new ItemId( 'Q321' );
 
 		$sitelinkSite = new MediaWikiSite();
 		$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
@@ -46,45 +78,60 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$sitelinkSite->setGlobalId( $item1SitelinkSiteId );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $item1StatementPropertyId ), 'string' );
 
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity(
-			NewItem::withId( $item1Id )
-				->andLabel( 'en', $item1EnLabel )
-				->andDescription( 'en', $item1EnDescription )
+			NewItem::withId( $this->item1Id )
 				->andAliases( 'en', $item1EnAliases )
 				->andSiteLink( $item1SitelinkSiteId, $item1SitelinkTitle )
-				->andStatement( $item1Statement )
 				->build()
 		);
-		$entityLookup->addEntity( NewItem::withId( $item2Id )->build() );
+		$entityLookup->addEntity( NewItem::withId( $this->item2Id )->build() );
 
 		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ), $dataTypeLookup )
-			->getItems( $item1Id, $item2Id, $deletedItem );
+			->getItems( $this->item1Id, $this->item2Id, $this->deletedItem );
 
-		$this->assertEquals( $item1Id, $batch->getItem( $item1Id )->id );
-		$this->assertSame(
-			$item1EnLabel,
-			$batch->getItem( $item1Id )->labels->getLabelInLanguage( 'en' )->text
-		);
-		$this->assertSame(
-			$item1EnDescription,
-			$batch->getItem( $item1Id )->descriptions->getDescriptionInLanguage( 'en' )->text
-		);
+		$this->assertEquals( $this->item1Id, $batch->getItem( $this->item1Id )->id );
+
 		$this->assertSame(
 			$item1EnAliases,
-			$batch->getItem( $item1Id )->aliases->getAliasesInLanguageInLanguage( 'en' )->aliases
+			$batch->getItem( $this->item1Id )->aliases->getAliasesInLanguageInLanguage( 'en' )->aliases
 		);
+
 		$this->assertEquals(
 			new Sitelink(
 				$item1SitelinkSiteId,
 				$item1SitelinkTitle,
 				$expectedSitelinkUrl,
 			),
-			$batch->getItem( $item1Id )->sitelinks->getSitelinkForSite( $item1SitelinkSiteId )
+			$batch->getItem( $this->item1Id )->sitelinks->getSitelinkForSite( $item1SitelinkSiteId )
 		);
-		$statements = $batch->getItem( $item1Id )
+	}
+
+	public function testGetItemsWithStatements(): void {
+		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
+		$item1StatementPropertyId = 'P1';
+		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )
+			->withGuid( $item1StatementGuid )->withRank( 0 )
+			->build();
+
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $item1StatementPropertyId ), 'string' );
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $this->item1Id )
+				->andStatement( $item1Statement )
+				->build()
+		);
+		$entityLookup->addEntity( NewItem::withId( $this->item2Id )->build() );
+
+		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [] ), $dataTypeLookup )
+			->getItems( $this->item1Id, $this->item2Id, $this->deletedItem );
+
+		$this->assertEquals( $this->item1Id, $batch->getItem( $this->item1Id )->id );
+
+		$statements = $batch->getItem( $this->item1Id )
 			->statements->getStatementsByPropertyId( new NumericPropertyId( $item1StatementPropertyId ) );
 		$this->assertCount( 1, $statements );
 
@@ -94,12 +141,17 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		);
 
 		$this->assertSame(
+			$item1Statement->getRank(),
+			$statements[0]->rank->asInt()
+		);
+
+		$this->assertSame(
 			'string',
 			$statements[0]->property->dataType
 		);
 
-		$this->assertEquals( $item2Id, $batch->getItem( $item2Id )->id );
-		$this->assertNull( $batch->getItem( $deletedItem ) );
+		$this->assertEquals( $this->item2Id, $batch->getItem( $this->item2Id )->id );
+		$this->assertNull( $batch->getItem( $this->deletedItem ) );
 	}
 
 	private function newRetriever(

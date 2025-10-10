@@ -10,6 +10,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Rank;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 
 /**
@@ -33,6 +34,7 @@ class StatementReadModelConverter {
 
 		return new Statement(
 			$this->statementIdParser->parse( $guid ),
+			new Rank( $inputStatement->getRank() ),
 			$mainPropertyValuePair->property,
 		);
 	}
