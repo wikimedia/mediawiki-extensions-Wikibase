@@ -56,6 +56,7 @@
 	"wikibase-addreference": "kaynak ekle",
 	"wikibase-save-inprogress": "Kaydediliyor…",
 	"wikibase-publish-inprogress": "Yayımlanıyor...",
+	"wikibase-publishing-progress": "Yayım devam ediyor…",
 	"wikibase-remove-inprogress": "Kaldırılıyor…",
 	"wikibase-statementlistview-add": "değer ekle",
 	"wikibase-statementlistview-add-tooltip": "Yeni bir değer ekle",
