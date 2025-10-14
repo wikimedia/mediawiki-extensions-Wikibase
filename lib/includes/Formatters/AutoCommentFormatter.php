@@ -83,8 +83,6 @@ class AutoCommentFormatter {
 	 * @return string|null The localized summary (HTML), or null
 	 */
 	public function formatAutoComment( $auto ) {
-		$icon = null; // icon to improve visuals of WB logs
-
 		// Split $auto into a message name and parameters.
 		// $auto should look like name:param1|param2|...
 		if ( !preg_match( '/^([a-z\-]+)\s*(:\s*(.*?)\s*)?$/', $auto, $matches ) ) {
@@ -100,7 +98,6 @@ class AutoCommentFormatter {
 			return null;
 		}
 
-		$icon = $this->decideIconForTheKey( $msg->getKey() );
 		$args = array_map( function ( $arg ) {
 			// MediaWiki HTML-escaped the auto-comment already,
 			// undo that, then wikitext-escape the args for the message
@@ -110,7 +107,7 @@ class AutoCommentFormatter {
 		}, $args );
 		// render the autocomment
 		$auto = $msg->params( $args )->parse();
-		return $icon . $auto;
+		return $auto;
 	}
 
 	/**
@@ -142,15 +139,4 @@ class AutoCommentFormatter {
 		return $comment;
 	}
 
-	/**
-	 * @param string $key for Wikibase change
-	 * @return string proper icon in proper styling
-	 */
-	public function decideIconForTheKey( $key ): string {
-		$iconMap = json_decode( file_get_contents( __DIR__ . '/../../../client/resources/jsons/wb.icon.key.map.json' ), true );
-		if ( !isset( $iconMap[$key] ) ) {
-			return ''; //given key is not found then no icon will be displayed
-		}
-		return $iconMap[ $key ];
-	}
 }
