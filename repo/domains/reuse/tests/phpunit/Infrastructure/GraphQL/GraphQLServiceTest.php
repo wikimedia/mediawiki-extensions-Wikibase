@@ -2,11 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
+use DataValues\StringValue;
 use GraphQL\GraphQL;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -146,7 +148,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testStatementsQuery(): void {
+	public function testStatementsWithIdAndRankQuery(): void {
 		$itemId = 'Q123';
 		$statement = NewStatement::noValueFor( 'P1' )
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
@@ -175,8 +177,60 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			],
 			$this->newGraphQLService( $entityLookup )->query( "
 			query { item(id: \"$itemId\") {
-				P1:  statements(propertyId: \"P1\"){ id rank property{ id dataType } },
-				P3:  statements(propertyId: \"P3\"){ id rank property{ id dataType } },
+				P1: statements(propertyId: \"P1\"){ id rank property{ id dataType } },
+				P3: statements(propertyId: \"P3\"){ id rank property{ id dataType } },
+			} }" )
+		);
+	}
+
+	// Include the value in the qualifier during property value implementation.
+	public function testStatementsWithQualifiersQuery(): void {
+		$itemId = 'Q123';
+		$statementPropertyId = 'P1';
+		$itemStatementQualifierPropertyId = 'P24';
+		$statement1 = NewStatement::noValueFor( $statementPropertyId )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
+			->withQualifier( new NumericPropertyId( $itemStatementQualifierPropertyId ), new StringValue( 'stringValue' ) )
+			->build();
+		$qualifier = $statement1->getQualifiers()[0];
+		$statement2 = NewStatement::noValueFor( $statementPropertyId )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
+			->build();
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity( NewItem::withId( $itemId )
+			->andStatement( $statement1 )
+			->andStatement( $statement2 )
+			->build()
+		);
+
+		$this->assertEquals(
+			[
+				'data' => [
+					'item' => [
+						$statementPropertyId => [
+							[
+								'id' => $statement1->getGuid(),
+								'qualifiers' => [
+									[
+										'property' => [
+											'id' => $qualifier->getPropertyId()->getSerialization(),
+											'dataType' => 'string',
+										],
+									],
+								],
+							],
+							[
+								'id' => $statement2->getGuid(),
+								'qualifiers' => [],
+							],
+						],
+					],
+				],
+			],
+			$this->newGraphQLService( $entityLookup )->query( "
+			query { item(id: \"$itemId\") {
+			 $statementPropertyId: statements(propertyId: \"$statementPropertyId\"){ 
+			 id qualifiers(propertyId: \"$itemStatementQualifierPropertyId\"){ property{ id dataType } } }
 			} }" )
 		);
 	}

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess;
 
+use DataValues\StringValue;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\SiteLookup;
@@ -26,7 +27,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntityLookupItemsBatchRetrieverTest extends TestCase {
-
+	//TODO: refactor this test
 	private ItemId $item1Id;
 	private ItemId $deletedItem;
 	private ItemId $item2Id;
@@ -111,8 +112,11 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 	public function testGetItemsWithStatements(): void {
 		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
 		$item1StatementPropertyId = 'P1';
+		$item1StatementQualifierPropertyId = new NumericPropertyId( 'P42' );
 		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )
-			->withGuid( $item1StatementGuid )->withRank( 0 )
+			->withGuid( $item1StatementGuid )
+			->withRank( 0 )
+			->withQualifier( $item1StatementQualifierPropertyId, new StringValue( 'stringValue' ) )
 			->build();
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
@@ -148,6 +152,15 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$this->assertSame(
 			'string',
 			$statements[0]->property->dataType
+		);
+
+		// Include the value in the qualifier during property value implementation.
+		$qualifiers = $statements[0]->qualifiers->getQualifiersByPropertyId( $item1StatementQualifierPropertyId );
+		$this->assertCount( 1, $qualifiers );
+
+		$this->assertSame(
+			$item1StatementQualifierPropertyId,
+			$qualifiers[0]->property->id
 		);
 
 		$this->assertEquals( $this->item2Id, $batch->getItem( $this->item2Id )->id );

@@ -25,6 +25,7 @@ type Sitelink {
 type Statement {
   id: String!
   rank: Rank!
+  qualifiers(propertyId: String!): [PropertyValuePair]!
   property: PredicateProperty!
 }
 
@@ -32,6 +33,10 @@ enum Rank {
   deprecated
   normal
   preferred
+}
+
+type PropertyValuePair {
+  property: PredicateProperty!
 }
 
 type PredicateProperty {

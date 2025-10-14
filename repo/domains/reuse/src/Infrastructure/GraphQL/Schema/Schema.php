@@ -9,7 +9,6 @@ use GraphQL\Type\Schema as GraphQLSchema;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
@@ -22,6 +21,8 @@ class Schema extends GraphQLSchema {
 		private readonly ItemIdType $itemIdType,
 		private readonly SiteIdType $siteIdType,
 		private readonly LanguageCodeType $languageCodeType,
+		private readonly PredicatePropertyType $predicatePropertyType,
+		private readonly PropertyValuePairType $propertyValuePairType,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -97,9 +98,8 @@ class Schema extends GraphQLSchema {
 					'args' => [
 						'propertyId' => Type::nonNull( Type::string() ),
 					],
-					'resolve' => function( Item $item, array $args ) {
-						return $item->statements->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) );
-					},
+					'resolve' => fn( Item $item, array $args ) => $item->statements
+						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
 			],
 		] );
@@ -117,25 +117,18 @@ class Schema extends GraphQLSchema {
 					'type' => Type::nonNull( $this->rankType() ),
 					'resolve' => fn( Statement $statement ) => $statement->rank->asInt(),
 				],
+				'qualifiers' => [
+					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+					'type' => Type::nonNull( Type::listOf( $this->propertyValuePairType ) ),
+					'args' => [
+						'propertyId' => Type::nonNull( Type::string() ),
+					],
+					'resolve' => fn( Statement $statement, $args ) => $statement->qualifiers
+						->getQualifiersByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
+				],
 				'property' => [
-					'type' => Type::nonNull( $this->predicatePropertyType() ),
+					'type' => Type::nonNull( $this->predicatePropertyType ),
 					'resolve' => fn( Statement $statement ) => $statement->property,
-				],
-			],
-		] );
-	}
-
-	private function predicatePropertyType(): ObjectType {
-		return new ObjectType( [
-			'name' => 'PredicateProperty',
-			'fields' => [
-				'id' => [
-					'type' => Type::nonNull( Type::string() ),
-					'resolve' => fn( PredicateProperty $rootValue ) => $rootValue->id,
-				],
-				'dataType' => [
-					'type' => Type::string(),
-					'resolve' => fn( PredicateProperty $rootValue ) => $rootValue->dataType,
 				],
 			],
 		] );
