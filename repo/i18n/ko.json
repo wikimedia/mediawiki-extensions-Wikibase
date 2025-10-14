@@ -326,6 +326,8 @@
 	"wikibase-entitydata-storage-error": "$1 엔티티 불러오기를 실패했습니다.",
 	"wikibase-entitydata-title": "개체 데이터",
 	"wikibase-entitydata-text": "이 문서는 개체 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 개체 ID를 입력하세요.",
+	"special-entitypage": "개체 문서",
+	"wikibase-entitypage-title": "개체 문서",
 	"wikibase-entitypage-bad-id": "ID $1가 잘못되었습니다.",
 	"wikibase-parse-error": "잘못된 형식의 값입니다.",
 	"wikibase-parse-error-coordinate": "좌표 값의 형식이 잘못되었습니다.",

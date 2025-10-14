@@ -5,6 +5,7 @@
 			"Noooote"
 		]
 	},
+	"wikibase-client-desc": "Cliente para con el extension Wikibase",
 	"wikibase-dataitem": "Item de {{WBREPONAME}}",
 	"wikibase-editlinks": "Hace edit maga links",
 	"wikibase-addlinkstitle": "Aumenta interlanguage links",
