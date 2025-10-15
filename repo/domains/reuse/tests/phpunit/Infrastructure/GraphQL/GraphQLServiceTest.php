@@ -8,10 +8,16 @@ use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\Term;
+use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
@@ -229,9 +235,73 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			],
 			$this->newGraphQLService( $entityLookup )->query( "
 			query { item(id: \"$itemId\") {
-			 $statementPropertyId: statements(propertyId: \"$statementPropertyId\"){ 
+			 $statementPropertyId: statements(propertyId: \"$statementPropertyId\"){
 			 id qualifiers(propertyId: \"$itemStatementQualifierPropertyId\"){ property{ id dataType } } }
 			} }" )
+		);
+	}
+
+	public function testPredicatePropertyLabelsQuery(): void {
+		$itemId = 'Q123';
+		$statementProperty = new Property(
+			new NumericPropertyId( 'P1' ),
+			new Fingerprint( new TermList( [ new Term( 'en', 'statement prop' ) ] ) ),
+			'string',
+		);
+		$qualifierProperty = new Property(
+			new NumericPropertyId( 'P2' ),
+			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
+			'string',
+		);
+		$statement = NewStatement::noValueFor( $statementProperty->getId() )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
+			->withQualifier( $qualifierProperty->getId(), 'some qualifier value' )
+			->build();
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $itemId )
+				->andStatement( $statement )
+				->build()
+		);
+
+		$termLookup = new InMemoryPrefetchingTermLookup();
+		$termLookup->setData( [ $statementProperty, $qualifierProperty ] );
+
+		$this->assertEquals(
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'property' => [ 'label' => $statementProperty->getLabels()->getByLanguage( 'en' )->getText() ],
+								'qualifiers' => [
+									[
+										'property' => [
+											'label' => $qualifierProperty->getLabels()->getByLanguage( 'en' )->getText(),
+										],
+									],
+								],
+							],
+						],
+					],
+				],
+			],
+			$this->newGraphQLService( $entityLookup, termLookup: $termLookup )->query(
+				"
+				query { item(id: \"$itemId\") {
+					statements(propertyId: \"{$statementProperty->getId()}\") {
+						property {
+							label(languageCode: \"en\")
+						}
+						qualifiers(propertyId: \"{$qualifierProperty->getId()}\") {
+							property {
+								label(languageCode: \"en\")
+							}
+						}
+					}
+				} }"
+			)
 		);
 	}
 
@@ -336,6 +406,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		EntityLookup $entityLookup,
 		?SiteLookup $siteLookup = null,
 		?SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider = null,
+		?PrefetchingTermLookup $termLookup = null,
 	): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );
@@ -348,6 +419,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$this->setService(
 			'WikibaseRepo.SiteLinkGlobalIdentifiersProvider',
 			$siteLinkGlobalIdentifiersProvider ?? $this->createStub( SiteLinkGlobalIdentifiersProvider::class )
+		);
+
+		$this->setService(
+			'WikibaseRepo.PrefetchingTermLookup',
+			$termLookup ?? $this->createStub( PrefetchingTermLookup::class ),
 		);
 
 		return WbReuse::getGraphQLService();

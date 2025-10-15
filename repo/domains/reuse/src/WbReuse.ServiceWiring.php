@@ -2,10 +2,13 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ItemIdType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PredicatePropertyType;
@@ -18,7 +21,15 @@ use Wikibase\Repo\WikibaseRepo;
 /** @phpcs-require-sorted-array */
 return [
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
-		$predicatePropertyType = new PredicatePropertyType();
+		$languageCodeType = new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );
+		$predicatePropertyType = new PredicatePropertyType(
+			new PropertyLabelsResolver(
+				new BatchGetPropertyLabels( new PrefetchingTermLookupBatchLabelsRetriever(
+					WikibaseRepo::getPrefetchingTermLookup( $services ),
+				) ),
+			),
+			$languageCodeType,
+		);
 
 		return new Schema(
 			new ItemResolver(
@@ -36,7 +47,7 @@ return [
 				WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
 				WikibaseRepo::getSettings( $services ),
 			),
-			new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() ),
+			$languageCodeType,
 			$predicatePropertyType,
 			new PropertyValuePairType( $predicatePropertyType ),
 		);
