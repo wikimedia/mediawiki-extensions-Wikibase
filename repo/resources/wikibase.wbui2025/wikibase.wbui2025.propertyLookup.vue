@@ -1,5 +1,6 @@
 <template>
 	<cdx-lookup
+		ref="cdxLookup"
 		v-model:selected="selection"
 		v-model:input-value="inputValue"
 		class="wikibase-wbui2025-property-lookup"
@@ -129,6 +130,10 @@ module.exports = exports = defineComponent( {
 			} catch ( _ ) {
 				// on error, do nothing
 			}
+		},
+		// eslint-disable-next-line vue/no-unused-properties
+		focus() {
+			this.$refs.cdxLookup.$refs.textInput.focus();
 		}
 	}
 } );

@@ -6,6 +6,13 @@
 		>
 		</wbui2025-add-qualifier>
 	</template>
+	<template v-if="showAddReferenceModal">
+		<wbui2025-add-reference
+			@hide="showAddReferenceModal = false"
+			@add-reference="addReference"
+		>
+		</wbui2025-add-reference>
+	</template>
 	<div class="wikibase-wbui2025-edit-statement-value-form">
 		<div class="wikibase-wbui2025-value-input-fields">
 			<div
@@ -45,7 +52,9 @@
 				<wbui2025-references
 					:references="references"
 				></wbui2025-references>
-				<cdx-button>
+				<cdx-button
+					class="wikibase-wbui2025-add-reference-button"
+					@click="showAddReferenceModal = true">
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 					{{ $i18n( 'wikibase-addreference' ) }}
 				</cdx-button>
@@ -72,6 +81,7 @@ const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025EditableQualifiers = require( './wikibase.wbui2025.editableQualifiers.vue' );
 const Wbui2025EditableSnakValue = require( './wikibase.wbui2025.editableSnakValue.vue' );
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
+const Wbui2025AddReference = require( './wikibase.wbui2025.addReference.vue' );
 const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 const { useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
 const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
@@ -91,7 +101,8 @@ module.exports = exports = defineComponent( {
 		Wbui2025AddQualifier,
 		Wbui2025References,
 		Wbui2025EditableQualifiers,
-		Wbui2025EditableSnakValue
+		Wbui2025EditableSnakValue,
+		Wbui2025AddReference
 	},
 	props: {
 		propertyId: {
@@ -136,7 +147,9 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-statementview-rank-deprecated' ), value: 'deprecated', icon: rankSelectorDeprecatedIcon }
 			],
 			showAddQualifierModal: false,
-			newQualifierCounter: 0
+			newQualifierCounter: 0,
+			showAddReferenceModal: false,
+			newReferenceCounter: 0
 		};
 	},
 	methods: {
@@ -169,6 +182,35 @@ module.exports = exports = defineComponent( {
 				delete this.qualifiers[ propertyId ];
 				this.qualifiersOrder.splice( this.qualifiersOrder.indexOf( propertyId ), 1 );
 			}
+		},
+		addReference( propertyId, snakData ) {
+			if ( !snakData.hash ) {
+				this.newReferenceCounter += 1;
+				snakData.hash = `${ this.statementId }-new-reference-${ this.newReferenceCounter }`;
+			}
+
+			const snaks = {};
+
+			renderPropertyLinkHtml( propertyId )
+				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+
+			useEditSnakStore( snakData.hash )().initializeWithSnak( snakData );
+
+			snaks[ propertyId ] = [ snakData ];
+
+			this.references.push( {
+				snaks,
+				'snaks-order': [ propertyId ]
+			} );
+
+			renderSnakValueHtml( snakData.datavalue )
+				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+
+			if ( snakData.snaktype === 'value' ) {
+				useParsedValueStore().getParsedValue( propertyId, snakData.datavalue.value );
+			}
+
+			this.showAddReferenceModal = false;
 		}
 	}
 } );

@@ -97,6 +97,6 @@ describe( 'Statements Store', () => {
 		savedStatementsStore.populateWithClaims( testClaims, true );
 		expect( savedStatementsStore.statements.size ).toBe( 1 );
 		expect( savedStatementsStore.properties.size ).toBe( 1 );
-		expect( apiSpy ).toHaveBeenCalledTimes( 1 );
+		expect( apiSpy ).toHaveBeenCalledTimes( 3 );
 	} );
 } );

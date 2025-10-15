@@ -3,6 +3,7 @@ import Chainable = Cypress.Chainable;
 export class EditStatementFormPage {
 
 	public static SELECTORS = {
+		FORM: '.wikibase-wbui2025-edit-statement',
 		PROPERTY_NAME: '.wikibase-wbui2025-property-name > a',
 		REMOVE_VALUE_BUTTONS: '.wikibase-wbui2025-remove-value > .cdx-button',
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
@@ -14,6 +15,7 @@ export class EditStatementFormPage {
 		MENU: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu',
 		MENU_ITEM: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu-item',
 		RANK_SELECT: '.wikibase-wbui2025-rank-input .cdx-select-vue',
+		ADD_REFERENCE_BUTTON: '.wikibase-wbui2025-add-reference-button',
 	};
 
 	public static FORM_HEADING = '.wikibase-wbui2025-edit-statement-heading';
@@ -88,5 +90,13 @@ export class EditStatementFormPage {
 
 	public getLookupInputSelector(): string {
 		return EditStatementFormPage.SELECTORS.LOOKUP_INPUT;
+	}
+
+	public addReferenceButton(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.ADD_REFERENCE_BUTTON );
+	}
+
+	public form(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.FORM );
 	}
 }

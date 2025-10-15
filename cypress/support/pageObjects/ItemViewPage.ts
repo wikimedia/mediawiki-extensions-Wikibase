@@ -16,6 +16,8 @@ export class ItemViewPage {
 
 	public static REFERENCES_SECTION = '.wikibase-wbui2025-references';
 
+	public static REFERENCES_ACCORDION = '.wikibase-wbui2025-clickable';
+
 	public static REFERENCES = '.wikibase-wbui2025-reference';
 
 	public static MAIN_SNAKS = '.wikibase-wbui2025-main-snak';
@@ -60,6 +62,10 @@ export class ItemViewPage {
 
 	public referencesSections(): Chainable {
 		return cy.get( ItemViewPage.REFERENCES_SECTION );
+	}
+
+	public referencesAccordion( context: HTMLElement ): Chainable {
+		return cy.get( ItemViewPage.REFERENCES_ACCORDION, { withinSubject: context } );
 	}
 
 	public references( context: HTMLElement ): Chainable {

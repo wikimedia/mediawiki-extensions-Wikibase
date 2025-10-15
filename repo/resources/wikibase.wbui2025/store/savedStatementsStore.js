@@ -29,6 +29,28 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 							}
 						}
 					}
+					if ( statement.references ) {
+						for ( const reference of statement.references ) {
+							const snaks = reference.snaks;
+							if ( !snaks || typeof snaks !== 'object' ) {
+								continue;
+							}
+
+							for ( const referenceSnak in reference.snaks ) {
+								const list = snaks[ referenceSnak ];
+								if ( !list.length ) {
+									continue;
+								}
+
+								for ( const snak of reference.snaks[ referenceSnak ] ) {
+									if ( 'hash' in snak && !snakValueHtmlForHash( snak.hash ) ) {
+										snaksWithoutHtml.push( snak );
+									}
+								}
+							}
+						}
+					}
+
 				}
 				this.properties.set( propertyId, statementIdList );
 			}
