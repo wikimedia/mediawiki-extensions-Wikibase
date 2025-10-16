@@ -966,9 +966,9 @@ final class RepoHooks implements
 		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
 			$modules['mw.config.values.wbTabularDataStorageApiEndpointUrl'] = $moduleTemplate + [
 				'class' => MediaWikiConfigModule::class,
-				'getconfigvalueprovider' => function () {
+				'getconfigvalueprovider' => function () use ( $settings ) {
 					return new SettingsValueProvider(
-						WikibaseRepo::getSettings(),
+						$settings,
 						'wbTabularDataStorageApiEndpointUrl',
 						'tabularDataStorageApiEndpointUrl',
 					);
@@ -976,9 +976,9 @@ final class RepoHooks implements
 			];
 			$modules['mw.config.values.wbGeoShapeStorageApiEndpointUrl'] = $moduleTemplate + [
 				'class' => MediaWikiConfigModule::class,
-				'getconfigvalueprovider' => function () {
+				'getconfigvalueprovider' => function () use ( $settings ) {
 					return new SettingsValueProvider(
-						WikibaseRepo::getSettings(),
+						$settings,
 						'wbGeoShapeStorageApiEndpointUrl',
 						'geoShapeStorageApiEndpointUrl',
 					);
