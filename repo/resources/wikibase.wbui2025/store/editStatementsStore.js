@@ -38,8 +38,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 		property: undefined,
 		datatype: 'string',
 		valuetype: 'string',
-		hash: undefined,
-		parseValueTimeout: null
+		hash: undefined
 	} ),
 	getters: {
 		valueStrategy() {
