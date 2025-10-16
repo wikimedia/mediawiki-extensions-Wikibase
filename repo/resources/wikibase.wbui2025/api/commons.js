@@ -10,14 +10,13 @@ const {
 	tabularDataStorageApiEndpointUrl,
 	geoShapeStorageApiEndpointUrl
 } = require( '../repoSettings.json' );
+const { foreignApi } = require( './api.js' );
 const tabularDataSearchTerm = 'contentmodel:Tabular.JsonConfig';
 const geoShapeDataSearchTerm = 'contentmodel:Map.JsonConfig';
 
 // TODO: See [T403973]. Not sure if that's the correct structure, but I think it will need to be reviewed.
 const params = {
-	origin: '*',
 	action: 'query',
-	format: 'json',
 	list: 'search',
 	srnamespace: 486,
 	srlimit: 10
@@ -31,12 +30,10 @@ const params = {
  * @return {Promise<Object>} Promise resolving to search results
  */
 const searchTabularData = function ( searchTerm, offset = 0 ) {
-	params.srsearch = `Data:${ searchTerm } ${ tabularDataSearchTerm }`;
-	params.sroffset = offset;
-
-	const urlParams = new URLSearchParams( params );
-	return fetch( `${ tabularDataStorageApiEndpointUrl }?${ urlParams.toString() }` )
-		.then( ( response ) => response.json() );
+	return foreignApi( tabularDataStorageApiEndpointUrl ).get( Object.assign( {
+		srsearch: `Data:${ searchTerm } ${ tabularDataSearchTerm }`,
+		sroffset: offset
+	}, params ) );
 };
 
 /**
@@ -47,12 +44,10 @@ const searchTabularData = function ( searchTerm, offset = 0 ) {
  * @return {Promise<Object>} Promise resolving to search results
  */
 const searchGeoShapes = function ( searchTerm, offset = 0 ) {
-	params.srsearch = `Data:${ searchTerm } ${ geoShapeDataSearchTerm }`;
-	params.sroffset = offset;
-
-	const urlParams = new URLSearchParams( params );
-	return fetch( `${ geoShapeStorageApiEndpointUrl }?${ urlParams.toString() }` )
-		.then( ( response ) => response.json() );
+	return foreignApi( geoShapeStorageApiEndpointUrl ).get( Object.assign( {
+		srsearch: `Data:${ searchTerm } ${ geoShapeDataSearchTerm }`,
+		sroffset: offset
+	}, params ) );
 };
 
 /**

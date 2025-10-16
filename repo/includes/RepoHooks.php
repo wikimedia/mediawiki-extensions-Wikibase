@@ -1028,6 +1028,7 @@ final class RepoHooks implements
 					],
 				],
 				'dependencies' => [
+					'mediawiki.ForeignApi',
 					'pinia',
 					'vue',
 					'wikibase',
