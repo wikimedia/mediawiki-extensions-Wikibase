@@ -50,7 +50,7 @@ type PredicateProperty {
   label(languageCode: LanguageCode!): String
 }
 
-union Value = StringValue | ItemValue
+union Value = StringValue | ItemValue | GlobeCoordinateValue
 
 type StringValue {
   content: String!
@@ -63,6 +63,13 @@ type ItemValue {
 type ValueItem {
   id: String!
   label(languageCode: LanguageCode!): String
+}
+
+type GlobeCoordinateValue {
+  latitude: Float!
+  longitude: Float!
+  precision: Float
+  globe: String!
 }
 
 enum ValueType {

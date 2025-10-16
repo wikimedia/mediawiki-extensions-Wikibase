@@ -32,6 +32,7 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -209,6 +210,30 @@ return call_user_func( function() {
 				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
+			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'GlobeCoordinateValue',
+					'fields' => [
+						'latitude' => Type::nonNull( Type::float() ),
+						'longitude' => Type::nonNull( Type::float() ),
+						'precision' => Type::float(),
+						'globe' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						/** @var GlobeCoordinateValue $globeCoordinateValue */
+						$globeCoordinateValue = $valueProvider->value->content;
+						'@phan-var GlobeCoordinateValue $globeCoordinateValue';
+
+						return match ( $info->fieldName ) {
+							'latitude' => $globeCoordinateValue->getLatitude(),
+							'longitude' => $globeCoordinateValue->getLongitude(),
+							'precision' => $globeCoordinateValue->getPrecision(),
+							'globe' => $globeCoordinateValue->getGlobe(),
+							default => null,
+						};
+					},
+				] );
 			},
 		],
 		'VT:monolingualtext' => [

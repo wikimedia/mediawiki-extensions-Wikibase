@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
+use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\StringValue;
 use Generator;
 use GraphQL\GraphQL;
@@ -45,6 +47,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Item $qualifierValueItem;
 	private static Property $stringTypeProperty;
 	private static Property $itemTypeProperty;
+	private static Property $globeCoordinateTypeProperty;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -78,6 +81,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$dataTypeLookup->setDataTypeForProperty( self::$stringTypeProperty->getId(), 'string' );
 		$dataTypeLookup->setDataTypeForProperty( self::$qualifierProperty->getId(), 'string' );
 		$dataTypeLookup->setDataTypeForProperty( self::$itemTypeProperty->getId(), 'wikibase-item' );
+		$dataTypeLookup->setDataTypeForProperty( self::$globeCoordinateTypeProperty->getId(), 'globe-coordinate' );
 
 		$this->assertEquals(
 			$expectedResult,
@@ -117,8 +121,9 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithNoValuePropertyId = 'P4';
 		$statementWithNoReferencesPropertyId = $statementWithNoValuePropertyId;
 		$statementWithSomeValuePropertyId = 'P5';
+		$statementWithGlobeCoordinateValuePropertyId = 'P6';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
-		$statementReferencePropertyId = 'P6';
+		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
 		$qualifierStringValue = 'qualifierStringValue';
 		$statementStringValue = 'statementStringValue';
@@ -134,6 +139,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
 			->withValue( new ItemId( $itemValueItemId ) )
 			->withQualifier( $statementWithItemValueQualifierPropertyId, self::$qualifierValueItem->getId() )
+			->build();
+		$globeCoordinateValue = new GlobeCoordinateValue( new LatLongValue( 52.516, 13.383 ) );
+		$statementWithGlobeCoordinateValue = NewStatement::forProperty( $statementWithGlobeCoordinateValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( $globeCoordinateValue )
 			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
@@ -154,6 +164,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			'string',
 		);
 		self::$itemTypeProperty = new Property( new NumericPropertyId( $statementWithItemValuePropertyId ), null, 'wikibase-item' );
+		self::$globeCoordinateTypeProperty = new Property(
+			new NumericPropertyId( $statementWithGlobeCoordinateValuePropertyId ),
+			null,
+			'globe-coordinate',
+		);
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -167,6 +182,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
 			->andStatement( $statementWithStringValue )
 			->andStatement( $statementWithItemValue )
+			->andStatement( $statementWithGlobeCoordinateValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->build();
@@ -349,6 +365,31 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 									'content' => [ 'id' => $itemValueItemId ],
 								],
 								'valueType' => 'value',
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with globe-coordinate value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$statementWithGlobeCoordinateValuePropertyId\") {
+					value {
+						... on GlobeCoordinateValue { latitude longitude precision globe }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'latitude' => $globeCoordinateValue->getLatitude(),
+									'longitude' => $globeCoordinateValue->getLongitude(),
+									'precision' => $globeCoordinateValue->getPrecision(),
+									'globe' => $globeCoordinateValue->getGlobe(),
+								],
 							],
 						],
 					],
