@@ -49,8 +49,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\Hooks\WikibaseContentLanguagesHook;
 use Wikibase\Lib\LibHooks;
-use Wikibase\Lib\Modules\MediaWikiConfigModule;
-use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\StaticContentLanguages;
@@ -964,26 +962,6 @@ final class RepoHooks implements
 		// so that wikis without the feature flag don't even pay the small cost of loading the module *definition*
 		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
 		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
-			$modules['mw.config.values.wbTabularDataStorageApiEndpointUrl'] = $moduleTemplate + [
-				'class' => MediaWikiConfigModule::class,
-				'getconfigvalueprovider' => function () use ( $settings ) {
-					return new SettingsValueProvider(
-						$settings,
-						'wbTabularDataStorageApiEndpointUrl',
-						'tabularDataStorageApiEndpointUrl',
-					);
-				},
-			];
-			$modules['mw.config.values.wbGeoShapeStorageApiEndpointUrl'] = $moduleTemplate + [
-				'class' => MediaWikiConfigModule::class,
-				'getconfigvalueprovider' => function () use ( $settings ) {
-					return new SettingsValueProvider(
-						$settings,
-						'wbGeoShapeStorageApiEndpointUrl',
-						'geoShapeStorageApiEndpointUrl',
-					);
-				},
-			];
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
@@ -1041,6 +1019,13 @@ final class RepoHooks implements
 						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
 						'content' => VueNoScriptRendering::WBUI2025_SUPPORTED_DATATYPES,
 					],
+					[
+						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
+						'content' => [
+							'tabularDataStorageApiEndpointUrl' => $settings->getSetting( 'tabularDataStorageApiEndpointUrl' ),
+							'geoShapeStorageApiEndpointUrl' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+						],
+					],
 				],
 				'dependencies' => [
 					'pinia',
@@ -1048,8 +1033,6 @@ final class RepoHooks implements
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',
 					'wikibase.utilities.ClaimGuidGenerator',
-					'mw.config.values.wbTabularDataStorageApiEndpointUrl',
-					'mw.config.values.wbGeoShapeStorageApiEndpointUrl',
 				],
 				'messages' => [
 					'wikibase-add',

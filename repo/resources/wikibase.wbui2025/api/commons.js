@@ -6,8 +6,10 @@
  * shapes on Wikimedia Commons through their API.
  */
 
-const tabularDataCommonsApiUrl = mw.config.get( 'wbTabularDataStorageApiEndpointUrl' );
-const geoShapeCommonsApiUrl = mw.config.get( 'wbGeoShapeStorageApiEndpointUrl' );
+const {
+	tabularDataStorageApiEndpointUrl,
+	geoShapeStorageApiEndpointUrl
+} = require( '../repoSettings.json' );
 const tabularDataSearchTerm = 'contentmodel:Tabular.JsonConfig';
 const geoShapeDataSearchTerm = 'contentmodel:Map.JsonConfig';
 
@@ -33,7 +35,7 @@ const searchTabularData = function ( searchTerm, offset = 0 ) {
 	params.sroffset = offset;
 
 	const urlParams = new URLSearchParams( params );
-	return fetch( `${ tabularDataCommonsApiUrl }?${ urlParams.toString() }` )
+	return fetch( `${ tabularDataStorageApiEndpointUrl }?${ urlParams.toString() }` )
 		.then( ( response ) => response.json() );
 };
 
@@ -49,7 +51,7 @@ const searchGeoShapes = function ( searchTerm, offset = 0 ) {
 	params.sroffset = offset;
 
 	const urlParams = new URLSearchParams( params );
-	return fetch( `${ geoShapeCommonsApiUrl }?${ urlParams.toString() }` )
+	return fetch( `${ geoShapeStorageApiEndpointUrl }?${ urlParams.toString() }` )
 		.then( ( response ) => response.json() );
 };
 

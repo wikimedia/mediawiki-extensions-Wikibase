@@ -20,6 +20,14 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
+	'../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
+		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
+	} ),
+	{ virtual: true }
+);
+jest.mock(
 	'../../resources/wikibase.wbui2025/api/api.js',
 	() => ( { api: { get: jest.fn() } } )
 );
