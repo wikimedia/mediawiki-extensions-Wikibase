@@ -8,7 +8,7 @@ function blockUser( username, expiry ) {
 	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
 			action: 'block',
-			user: username || browser.config.mwUser,
+			user: username || browser.options.capabilities[ 'mw:user' ],
 			reason: 'browser test',
 			token: bot.editToken,
 			expiry,
@@ -20,7 +20,7 @@ function unblockUser( username ) {
 	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
 			action: 'unblock',
-			user: username || browser.config.mwUser,
+			user: username || browser.options.capabilities[ 'mw:user' ],
 			reason: 'browser test done',
 			token: bot.editToken,
 		} );
@@ -71,7 +71,7 @@ describe( 'permission checks', () => {
 						title,
 						token: bot.editToken,
 						reason: 'browser test',
-						user: browser.config.mwUser,
+						user: browser.options.capabilities[ 'mw:user' ],
 						protections: 'edit=sysop|move=sysop',
 					} );
 				} )

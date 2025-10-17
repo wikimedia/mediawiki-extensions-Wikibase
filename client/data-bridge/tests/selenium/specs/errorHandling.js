@@ -61,13 +61,13 @@ describe( 'App', () => {
 
 		NetworkUtil.disableNetwork();
 		DataBridgePage.launchApp();
-		DataBridgePage.error.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		DataBridgePage.error.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
 		NetworkUtil.enableNetwork();
 		DataBridgePage.errorUnknownRelaunch.click();
-		DataBridgePage.app.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		DataBridgePage.app.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 		WarningAnonymousEdit.dismiss();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
@@ -107,7 +107,7 @@ describe( 'App', () => {
 
 		// show License
 		DataBridgePage.saveButton.click();
-		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 		// lose internet connection
 		NetworkUtil.disableNetwork();
@@ -116,7 +116,7 @@ describe( 'App', () => {
 		DataBridgePage.saveButton.click();
 
 		// show ErrorSaving screen
-		DataBridgePage.error.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		DataBridgePage.error.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 		assert.ok( DataBridgePage.showsErrorSaving() );
 
@@ -161,7 +161,7 @@ describe( 'App', () => {
 
 		// show License
 		DataBridgePage.saveButton.click();
-		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 		// lose internet connection
 		NetworkUtil.disableNetwork();
@@ -222,7 +222,9 @@ describe( 'App', () => {
 			DataBridgePage.editDecision( 'replace' ).click();
 
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+			DataBridgePage.licensePopup.waitForDisplayed( {
+				timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
+			} );
 
 			// log out
 			browser.deleteCookies();
@@ -238,7 +240,9 @@ describe( 'App', () => {
 			// go back, try again
 			ErrorSavingAssertUser.clickBackButton();
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+			DataBridgePage.licensePopup.waitForDisplayed( {
+				timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
+			} );
 			DataBridgePage.saveButton.click();
 			DataBridgePage.error.waitForDisplayed();
 
@@ -257,8 +261,8 @@ describe( 'App', () => {
 			ErrorSavingAssertUser.loginButton.click();
 			WindowUtil.doInOtherWindow( () => {
 				LoginPage.username.waitForDisplayed();
-				DomUtil.setValue( LoginPage.username, browser.config.mwUser );
-				DomUtil.setValue( LoginPage.password, browser.config.mwPwd );
+				DomUtil.setValue( LoginPage.username, browser.options.capabilities[ 'mw:user' ] );
+				DomUtil.setValue( LoginPage.password, browser.options.capabilities[ 'mw:pwd' ] );
 				LoginPage.loginButton.click();
 				LoginPage.username.waitForDisplayed( {
 					reverse: true,
@@ -349,7 +353,9 @@ describe( 'App', () => {
 			DataBridgePage.editDecision( 'replace' ).click();
 
 			DataBridgePage.saveButton.click();
-			DataBridgePage.licensePopup.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+			DataBridgePage.licensePopup.waitForDisplayed( {
+				timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
+			} );
 
 			// clear the item, removing the target statement
 			browser.call( () => Api.bot().then( ( bot ) => bot.request( {

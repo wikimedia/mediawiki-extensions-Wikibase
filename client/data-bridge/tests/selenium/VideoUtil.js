@@ -21,7 +21,7 @@ module.exports = {
 	 * @param {Object} test Mocha Test object
 	 */
 	startVideoRecording( test ) {
-		videoPath = filePath( test, browser.config.screenshotPath, 'mp4' );
+		videoPath = filePath( test, browser.options.capabilities[ 'mw:screenshotPath' ], 'mp4' );
 		const { spawn } = require( 'child_process' );
 		ffmpeg = spawn( 'ffmpeg', [
 			'-f', 'x11grab', //  grab the X11 display

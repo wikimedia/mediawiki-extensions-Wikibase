@@ -122,7 +122,7 @@ class DataBridgePage extends Page {
 
 	open( title ) {
 		await super.openTitle( title );
-		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', browser.config.waitforTimeout );
+		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', browser.options.waitforTimeout );
 	}
 
 	openAppOnPage( title ) {
@@ -132,7 +132,7 @@ class DataBridgePage extends Page {
 
 	launchApp() {
 		this.overloadedLink.click();
-		this.app.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+		this.app.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 		WarningAnonymousEdit.dismiss();
 	}
 

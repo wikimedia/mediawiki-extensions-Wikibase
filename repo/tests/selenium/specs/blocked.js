@@ -5,15 +5,15 @@ const Page = require( 'wdio-mediawiki/Page' );
 const LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
 const bot = new MWBot( {
-	apiUrl: browser.config.baseUrl + '/api.php'
+	apiUrl: browser.options.baseUrl + '/api.php'
 } );
 
 describe( 'blocked user cannot use', () => {
 
 	before( async () => {
 		await bot.loginGetEditToken( {
-			username: browser.config.mwUser,
-			password: browser.config.mwPwd
+			username: browser.options.capabilities[ 'mw:user' ],
+			password: browser.options.capabilities[ 'mw:pwd' ]
 		} );
 
 		await LoginPage.loginAdmin();
@@ -22,7 +22,7 @@ describe( 'blocked user cannot use', () => {
 	beforeEach( async () => {
 		await bot.request( {
 			action: 'block',
-			user: browser.config.mwUser,
+			user: browser.options.capabilities[ 'mw:user' ],
 			expiry: '1 minute',
 			reason: 'Wikibase browser test (T211120)',
 			token: bot.editToken
@@ -32,7 +32,7 @@ describe( 'blocked user cannot use', () => {
 	afterEach( async () => {
 		await bot.request( {
 			action: 'unblock',
-			user: browser.config.mwUser,
+			user: browser.options.capabilities[ 'mw:user' ],
 			reason: 'Wikibase browser test done (T211120)',
 			token: bot.editToken
 		} );

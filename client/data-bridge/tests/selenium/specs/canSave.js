@@ -102,12 +102,12 @@ describe( 'App', () => {
 		browser.switchWindow( title );
 
 		DataBridgePage.app.waitForDisplayed( {
-			timeout: browser.config.nonApiTimeout,
+			timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
 			reverse: true,
 			timeoutMsg: 'App is still being displayed after clicking the save button',
 		} );
 		DataBridgePage.app.waitForExist( {
-			timeout: browser.config.nonApiTimeout,
+			timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
 			reverse: true,
 			timeoutMsg: 'App still exists in the DOM after clicking the save button',
 		} );
@@ -185,7 +185,7 @@ describe( 'App', () => {
 		DataBridgePage.closeButton.click();
 
 		DataBridgePage.app.waitForDisplayed( {
-			timeout: browser.config.nonApiTimeout,
+			timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
 			reverse: true,
 			timeoutMsg: 'App is still being displayed after clicking the save button',
 		} );
