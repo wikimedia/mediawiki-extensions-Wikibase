@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use DataValues\StringValue;
+use Generator;
 use GraphQL\GraphQL;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
@@ -10,6 +11,7 @@ use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -33,109 +35,120 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
  */
 class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 
+	private static Item $item1;
+	private static Item $item2;
+	private static Property $statementProperty;
+	private static Property $qualifierProperty;
+	private static MediaWikiSite $sitelinkSite;
+	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
+
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
 			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
 		}
 	}
 
-	public function testIdQuery(): void {
-		$itemId = 'Q123';
-
+	/**
+	 * @dataProvider queryProvider
+	 */
+	public function testQuery( string $query, array $expectedResult ): void {
 		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
-
-		$this->assertEquals(
-			[ 'data' => [ 'item' => [ 'id' => $itemId ] ] ],
-			$this->newGraphQLService( $entityLookup )->query( "query { item(id: \"$itemId\") { id } }" )
-		);
-	}
-
-	public function testLabelsQuery(): void {
-		$itemId = 'Q123';
-		$enLabel = 'potato';
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $itemId )
-				->andLabel( 'en', $enLabel )
-				->build()
-		);
-
-		$this->assertEquals(
-			[ 'data' => [ 'item' => [ 'enLabel' => $enLabel, 'deLabel' => null ] ] ],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query { item(id: \"$itemId\") {
-				enLabel: label(languageCode: \"en\")
-				deLabel: label(languageCode: \"de\")
-			} }" )
-		);
-	}
-
-	public function testDescriptionsQuery(): void {
-		$itemId = 'Q123';
-		$enDescription = 'root vegetable';
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $itemId )
-				->andDescription( 'en', $enDescription )
-				->build()
-		);
-
-		$this->assertEquals(
-			[ 'data' => [ 'item' => [ 'enDescription' => $enDescription, 'deDescription' => null ] ] ],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query { item(id: \"$itemId\") {
-				enDescription: description(languageCode: \"en\")
-				deDescription: description(languageCode: \"de\")
-			} }" )
-		);
-	}
-
-	public function testAliasesQuery(): void {
-		$itemId = 'Q123';
-		$enAliases = [ 'spud', 'tater' ];
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $itemId )
-				->andAliases( 'en', $enAliases )
-				->build()
-		);
-
-		$this->assertEquals(
-			[ 'data' => [ 'item' => [ 'enAliases' => $enAliases, 'deAliases' => [] ] ] ],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query { item(id: \"$itemId\") {
-				enAliases: aliases(languageCode: \"en\")
-				deAliases: aliases(languageCode: \"de\")
-			} }" )
-		);
-	}
-
-	public function testSitelinkQuery(): void {
-		$itemId = 'Q123';
-		$sitelinkSiteId = 'examplewiki';
-		$otherSiteId = 'otherSiteId';
-		$sitelinkTitle = 'Potato';
-
-		$sitelinkSite = new MediaWikiSite();
-		$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
-		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
-		$sitelinkSite->setGlobalId( $sitelinkSiteId );
+		$entityLookup->addEntity( self::$item1 );
+		$entityLookup->addEntity( self::$item2 );
 
 		$siteIdProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
-		$siteIdProvider->method( 'getList' )->willReturn( [ $sitelinkSiteId, $otherSiteId ] );
+		$siteIdProvider->method( 'getList' )->willReturn( self::ALLOWED_SITELINK_SITES );
 
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $itemId )
-				->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
-				->build()
-		);
+		$termLookup = new InMemoryPrefetchingTermLookup();
+		$termLookup->setData( [ self::$statementProperty, self::$qualifierProperty ] );
 
 		$this->assertEquals(
+			$expectedResult,
+			$this->newGraphQLService(
+				$entityLookup,
+				new HashSiteStore( [ self::$sitelinkSite ] ),
+				$siteIdProvider,
+				$termLookup,
+			)->query( $query )
+		);
+	}
+
+	public function queryProvider(): Generator {
+		$itemId = 'Q123';
+		$enLabel = 'potato';
+		$enDescription = 'root vegetable';
+		$enAliases = [ 'spud', 'tater' ];
+		$sitelinkSiteId = self::ALLOWED_SITELINK_SITES[0];
+		$otherSiteId = self::ALLOWED_SITELINK_SITES[1];
+		$sitelinkTitle = 'Potato';
+		$statementPropertyId = 'P1';
+		$qualifierPropertyId = 'P2';
+		$unusedPropertyId = 'P9999';
+		$statement = NewStatement::noValueFor( $statementPropertyId )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
+			->withRank( 1 )
+			->withQualifier( new NumericPropertyId( $qualifierPropertyId ), new StringValue( 'stringValue' ) )
+			->build();
+
+		self::$sitelinkSite = new MediaWikiSite();
+		self::$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
+		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
+		self::$sitelinkSite->setGlobalId( $sitelinkSiteId );
+
+		self::$statementProperty = new Property(
+			new NumericPropertyId( $statementPropertyId ),
+			new Fingerprint( new TermList( [ new Term( 'en', 'statement prop' ) ] ) ),
+			'string',
+		);
+		self::$qualifierProperty = new Property(
+			new NumericPropertyId( $qualifierPropertyId ),
+			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
+			'string',
+		);
+
+		self::$item1 = NewItem::withId( $itemId )
+			->andLabel( 'en', $enLabel )
+			->andDescription( 'en', $enDescription )
+			->andAliases( 'en', $enAliases )
+			->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
+			->andStatement( $statement )
+			->build();
+
+		$item2Id = 'Q321';
+		self::$item2 = NewItem::withId( $item2Id )
+			->andLabel( 'en', 'another item' )
+			->build();
+
+		yield 'id only' => [
+			"{ item(id: \"$itemId\") { id } }",
+			[ 'data' => [ 'item' => [ 'id' => $itemId ] ] ],
+		];
+		yield 'label' => [
+			"{ item(id: \"$itemId\") {
+				enLabel: label(languageCode: \"en\")
+				deLabel: label(languageCode: \"de\")
+			} }",
+			[ 'data' => [ 'item' => [ 'enLabel' => $enLabel, 'deLabel' => null ] ] ],
+		];
+		yield 'description' => [
+			"{ item(id: \"$itemId\") {
+				enDescription: description(languageCode: \"en\")
+				deDescription: description(languageCode: \"de\")
+			} }",
+			[ 'data' => [ 'item' => [ 'enDescription' => $enDescription, 'deDescription' => null ] ] ],
+		];
+		yield 'aliases' => [
+			"{ item(id: \"$itemId\") {
+				enAliases: aliases(languageCode: \"en\")
+				deAliases: aliases(languageCode: \"de\")
+			} }",
+			[ 'data' => [ 'item' => [ 'enAliases' => $enAliases, 'deAliases' => [] ] ] ],
+		];
+		yield 'sitelink' => [
+			"{ item(id: \"$itemId\") {
+				sitelink1: sitelink(siteId: \"$sitelinkSiteId\") { title url }
+				sitelink2: sitelink(siteId: \"$otherSiteId\") { title }
+			} }",
 			[
 				'data' => [
 					'item' => [
@@ -144,141 +157,88 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					],
 				],
 			],
-			$this->newGraphQLService( $entityLookup, new HashSiteStore( [ $sitelinkSite ] ), $siteIdProvider )->query(
-				"
-				query { item(id: \"$itemId\") {
-					sitelink1: sitelink(siteId: \"$sitelinkSiteId\") { title url }
-					sitelink2: sitelink(siteId: \"$otherSiteId\") { title }
-				} }"
-			)
-		);
-	}
-
-	public function testStatementsWithIdAndRankQuery(): void {
-		$itemId = 'Q123';
-		$statement = NewStatement::noValueFor( 'P1' )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
-			->withRank( 1 )
-			->build();
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity( NewItem::withId( $itemId )->andStatement( $statement )->build() );
-
-		$this->assertEquals(
-			[
-				'data' => [
-					'item' => [
-						'P1' => [
-							[
-								'id' => $statement->getGuid(),
-								'rank' => 'normal',
-								'property' => [
-									'id' => $statement->getMainSnak()->getPropertyId()->getSerialization(),
-									'dataType' => 'string',
-								],
-							],
-						],
-						'P3' => [],
-					],
-				],
-			],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query { item(id: \"$itemId\") {
-				P1: statements(propertyId: \"P1\"){ id rank property{ id dataType } },
-				P3: statements(propertyId: \"P3\"){ id rank property{ id dataType } },
-			} }" )
-		);
-	}
-
-	// Include the value in the qualifier during property value implementation.
-	public function testStatementsWithQualifiersQuery(): void {
-		$itemId = 'Q123';
-		$statementPropertyId = 'P1';
-		$itemStatementQualifierPropertyId = 'P24';
-		$statement1 = NewStatement::noValueFor( $statementPropertyId )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
-			->withQualifier( new NumericPropertyId( $itemStatementQualifierPropertyId ), new StringValue( 'stringValue' ) )
-			->build();
-		$qualifier = $statement1->getQualifiers()[0];
-		$statement2 = NewStatement::noValueFor( $statementPropertyId )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
-			->build();
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity( NewItem::withId( $itemId )
-			->andStatement( $statement1 )
-			->andStatement( $statement2 )
-			->build()
-		);
-
-		$this->assertEquals(
+		];
+		yield 'statement with id and rank' => [
+			"{ item(id: \"$itemId\") {
+				$statementPropertyId: statements(propertyId: \"$statementPropertyId\") {
+					id
+					rank
+					property { id dataType }
+				}
+				$unusedPropertyId: statements(propertyId: \"$unusedPropertyId\") { id }
+			} }",
 			[
 				'data' => [
 					'item' => [
 						$statementPropertyId => [
 							[
-								'id' => $statement1->getGuid(),
-								'qualifiers' => [
-									[
-										'property' => [
-											'id' => $qualifier->getPropertyId()->getSerialization(),
-											'dataType' => 'string',
-										],
-									],
+								'id' => $statement->getGuid(),
+								'rank' => 'normal',
+								'property' => [
+									'id' => $statementPropertyId,
+									'dataType' => 'string',
 								],
 							],
-							[
-								'id' => $statement2->getGuid(),
-								'qualifiers' => [],
-							],
 						],
+						$unusedPropertyId => [],
 					],
 				],
 			],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query { item(id: \"$itemId\") {
-			 $statementPropertyId: statements(propertyId: \"$statementPropertyId\"){
-			 id qualifiers(propertyId: \"$itemStatementQualifierPropertyId\"){ property{ id dataType } } }
-			} }" )
-		);
-	}
-
-	public function testPredicatePropertyLabelsQuery(): void {
-		$itemId = 'Q123';
-		$statementProperty = new Property(
-			new NumericPropertyId( 'P1' ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'statement prop' ) ] ) ),
-			'string',
-		);
-		$qualifierProperty = new Property(
-			new NumericPropertyId( 'P2' ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
-			'string',
-		);
-		$statement = NewStatement::noValueFor( $statementProperty->getId() )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
-			->withQualifier( $qualifierProperty->getId(), 'some qualifier value' )
-			->build();
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $itemId )
-				->andStatement( $statement )
-				->build()
-		);
-
-		$termLookup = new InMemoryPrefetchingTermLookup();
-		$termLookup->setData( [ $statementProperty, $qualifierProperty ] );
-
-		$this->assertEquals(
+		];
+		yield 'statement with qualifier' => [
+			"{ item(id: \"$itemId\") {
+			 	statements(propertyId: \"$statementPropertyId\") {
+			 		$qualifierPropertyId: qualifiers(propertyId: \"$qualifierPropertyId\") {
+			 			property { id dataType }
+			 		}
+			 		$unusedPropertyId: qualifiers(propertyId: \"$unusedPropertyId\") {
+			 			property { id }
+			 		}
+				}
+			} }",
 			[
 				'data' => [
 					'item' => [
 						'statements' => [
 							[
-								'property' => [ 'label' => $statementProperty->getLabels()->getByLanguage( 'en' )->getText() ],
+								$qualifierPropertyId => [
+									[
+										'property' => [
+											'id' => $qualifierPropertyId,
+											'dataType' => 'string',
+										],
+									],
+								],
+								$unusedPropertyId => [],
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'labels of predicate properties' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"{$statementPropertyId}\") {
+					property {
+						label(languageCode: \"en\")
+					}
+					qualifiers(propertyId: \"{$qualifierPropertyId}\") {
+						property {
+							label(languageCode: \"en\")
+						}
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'property' => [ 'label' => self::$statementProperty->getLabels()->getByLanguage( 'en' )->getText() ],
 								'qualifiers' => [
 									[
 										'property' => [
-											'label' => $qualifierProperty->getLabels()->getByLanguage( 'en' )->getText(),
+											'label' => self::$qualifierProperty->getLabels()->getByLanguage( 'en' )->getText(),
 										],
 									],
 								],
@@ -287,119 +247,63 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					],
 				],
 			],
-			$this->newGraphQLService( $entityLookup, termLookup: $termLookup )->query(
-				"
-				query { item(id: \"$itemId\") {
-					statements(propertyId: \"{$statementProperty->getId()}\") {
-						property {
-							label(languageCode: \"en\")
-						}
-						qualifiers(propertyId: \"{$qualifierProperty->getId()}\") {
-							property {
-								label(languageCode: \"en\")
-							}
-						}
-					}
-				} }"
-			)
-		);
-	}
-
-	public function testGivenItemDoesNotExist_returnsNull(): void {
-		$itemId = 'Q999999';
-
-		$entityLookup = new InMemoryEntityLookup();
-
-		$this->assertEquals(
-			[ 'data' => [ 'item' => null ] ],
-			$this->newGraphQLService( $entityLookup )->query( "query { item(id: \"$itemId\") { id } }" )
-		);
-	}
-
-	public function testMultipleItemsAtOnce(): void {
-		$item1Id = 'Q123';
-		$item1Label = 'potato';
-		$item2Id = 'Q321';
-		$item2Label = 'garlic';
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity(
-			NewItem::withId( $item1Id )
-				->andLabel( 'en', $item1Label )
-				->build()
-		);
-		$entityLookup->addEntity(
-			NewItem::withId( $item2Id )
-				->andLabel( 'en', $item2Label )
-				->build()
-		);
-
-		$this->assertEquals(
+		];
+		yield 'multiple items at once' => [
+			"{
+				item1: item(id: \"$itemId\") { label(languageCode: \"en\") }
+				item2: item(id: \"$item2Id\") { label(languageCode: \"en\") }
+			}",
 			[
 				'data' => [
-					'item1' => [ 'label' => $item1Label ],
-					'item2' => [ 'label' => $item2Label ],
+					'item1' => [ 'label' => self::$item1->getLabels()->getByLanguage( 'en' )->getText() ],
+					'item2' => [ 'label' => self::$item2->getLabels()->getByLanguage( 'en' )->getText() ],
 				],
 			],
-			$this->newGraphQLService( $entityLookup )->query( "
-			query {
-				item1: item(id: \"$item1Id\") { label(languageCode: \"en\") }
-				item2: item(id: \"$item2Id\") { label(languageCode: \"en\") }
-			}" )
-		);
-	}
-
-	public function testValidatesItemIdArg(): void {
-		$id = 'P123';
-		$result = $this->newGraphQLService( new InMemoryEntityLookup() )
-			->query( "{ item(id: \"{$id}\") { id } }" );
-
-		$this->assertSame(
-			"Not a valid Item ID: \"$id\"",
-			$result['errors'][0]['message']
-		);
-	}
-
-	public function testValidatesSiteIdArg(): void {
-		$siteId = 'not-a-valid-site-id';
-		$itemId = 'Q123';
-
-		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
-
-		$result = $this->newGraphQLService( $entityLookup )
-			->query( "{ item(id: \"$itemId\") {
-				sitelink(siteId: \"$siteId\") { title }
-			 } }" );
-
-		$this->assertSame(
-			"Not a valid site ID: \"$siteId\"",
-			$result['errors'][0]['message']
-		);
+		];
+		yield 'item does not exist' => [
+			'{ item(id: "Q9999999") { id } }',
+			[ 'data' => [ 'item' => null ] ],
+		];
 	}
 
 	/**
-	 * @dataProvider languageCodeFieldProvider
+	 * @dataProvider errorsProvider
 	 */
-	public function testValidatesLanguageCodes( string $field ): void {
-		$itemId = 'Q123';
-		$languageCode = 'invalid-language-code';
+	public function testErrors( string $query, string $expectedErrorMessage ): void {
+		$itemId = 'Q123'; // same as the one in errorsProvider()
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
 
-		$result = $this->newGraphQLService( $entityLookup )
-			->query( "{ item(id: \"$itemId\") {
-				$field(languageCode: \"$languageCode\")
-			} }" );
+		$result = $this->newGraphQLService( $entityLookup )->query( $query );
 
-		$this->assertSame(
-			"Not a valid language code: \"$languageCode\"",
-			$result['errors'][0]['message']
-		);
+		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
 	}
 
-	public static function languageCodeFieldProvider(): array {
-		return [ [ 'label' ], [ 'description' ], [ 'aliases' ] ];
+	public static function errorsProvider(): Generator {
+		$itemId = 'Q123'; // same as the one in testErrors()
+
+		yield 'validates item ID' => [
+			'{ item(id: "P123") { id } }',
+			'Not a valid Item ID: "P123"',
+		];
+
+		$siteId = 'not-a-valid-site-id';
+		yield 'validates site ID' => [
+			"{ item(id: \"$itemId\") {
+				sitelink(siteId: \"$siteId\") { title }
+			 } }",
+			"Not a valid site ID: \"$siteId\"",
+		];
+
+		$languageCode = 'not-a-valid-language-code';
+		foreach ( [ 'label', 'description', 'aliases' ] as $field ) {
+			yield "validates $field language code" => [
+				"{ item(id: \"$itemId\") {
+					$field(languageCode: \"$languageCode\")
+				} }",
+				"Not a valid language code: \"$languageCode\"",
+			];
+		}
 	}
 
 	private function newGraphQLService(
