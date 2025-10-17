@@ -88,7 +88,7 @@ describe( 'item', () => {
 		await expect( ItemPage.editButton ).not.toExist();
 	} );
 
-	it.skip( 'has its label not rendered when linked on a Wikipage', async () => {
+	it( 'has its label not rendered when linked on a Wikipage', async () => {
 		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T111346-' ) );
 		await EntityPage.open( itemId );
 
