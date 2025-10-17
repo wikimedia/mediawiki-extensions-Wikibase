@@ -1,0 +1,11 @@
+@import 'mediawiki.skin.variables.less';
+
+/* Display the sticky property labels below the sticky header (T407113) */
+@media ( min-width: 851px ) {
+	body.skin-timeless .wikibase-statementgrouplistview .wikibase-statementgroupview-property .wikibase-statementgroupview-property-label {
+		// Height of sticky header + 10px as defined normally
+		// FIXME: Ideally there should be a variable for the sticky header height (T407611)
+		// FIXME: 3.125rem is the min-height of the sticky header. It *could* be more?
+		top: calc( 3.125rem + 10px );
+	}
+}

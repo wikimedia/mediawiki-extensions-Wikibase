@@ -95,6 +95,7 @@ return call_user_func( function() {
 				'wikibase/wikibase.monolingualtext.less',
 			],
 			'skinStyles' => [
+				'timeless' => 'wikibase/wikibase.timeless.less',
 				'vector-2022' => 'wikibase/wikibase.vector-2022.less',
 			],
 		],
