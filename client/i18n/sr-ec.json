@@ -96,6 +96,7 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Ознака: $1",
 	"wikibase-pageinfo-entity-usage-D": "Неки описи",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Опис: $1",
+	"wikibase-pageinfo-entity-usage-A": "Неки псеудоними",
 	"wikibase-pageinfo-entity-usage-A-with-modifier": "Псеудоним: $1",
 	"wikibase-pageinfo-entity-usage-T": "Наслов",
 	"wikibase-pageinfo-entity-usage-C": "Неке изјаве",
