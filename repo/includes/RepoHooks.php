@@ -684,7 +684,12 @@ final class RepoHooks implements
 			StubUserLang::unstub( $wgLang );
 		}
 
-		$formatter = new AutoCommentFormatter( $wgLang, [ 'wikibase-' . $entityType, 'wikibase-entity' ] );
+		$enableWikidataIconsInClientWatchlist = WikibaseRepo::getSettings()->getSetting( 'enableWikidataIconsInClientWatchlist' );
+		$formatter = new AutoCommentFormatter(
+			$wgLang,
+			[ 'wikibase-' . $entityType, 'wikibase-entity' ],
+			$enableWikidataIconsInClientWatchlist
+		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {

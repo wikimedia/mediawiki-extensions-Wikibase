@@ -156,6 +156,11 @@ return call_user_func( function() {
 		 * @see https://phabricator.wikimedia.org/T312097
 		 */
 		'enableMulLanguageCode' => false,
+
+		/**
+		 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
+		 */
+		'enableWikidataIconsInClientWatchlist' => false,
 	];
 
 	// Some defaults depend on information not available at this time.

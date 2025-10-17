@@ -488,4 +488,9 @@ return [
 	 * @see https://phabricator.wikimedia.org/T404842
 	 */
 	'tmpEnableGraphQL' => false,
+
+	/**
+	 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
+	 */
+	'enableWikidataIconsInClientWatchlist' => false,
 ];
