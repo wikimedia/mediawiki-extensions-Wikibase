@@ -22,8 +22,9 @@ class GraphQLService {
 	public function query( string $query ): array {
 		try {
 			$result = GraphQL::executeQuery( $this->schema, $query, [] );
+			$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
 			$output = $result->toArray(
-				$this->config->get( 'ShowExceptionDetails' ) ? DebugFlag::INCLUDE_TRACE : DebugFlag::NONE
+				$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
 			);
 		} catch ( Exception $e ) {
 			$output = [
