@@ -38,10 +38,7 @@ Entity usage on client pages is tracked using the following codes (each represen
  - description (D.xx) - The entity's description in language xx is used.
  - alias (A.xx) - The entity's alias in language xx is used.
  - title (T) - The title of the local page corresponding to the entity is used.
- - statements (C) - Certain statements (identified by their property id) from the entity are used, only the mainsnak
-   value, without qualifiers or references for the claim.
- - statements with qualifiers/ references (CQR) - Certain statements (identified by their property id) from the entity
-   are used, along with qualifiers and/or references to those claims.
+ - statements (C) - Certain statements (identified by their property id) from the entity are used.
  - other (O) - Something else about the entity is used. This currently implies entity existence checks.
  - all (X) - All aspects of an entity are or may be used.
 
