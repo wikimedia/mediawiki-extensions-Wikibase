@@ -16,6 +16,7 @@
 	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/10 வரை",
 	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/100 வரை",
 	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "ஒரு ஆர்க்செகண்டில் (கோணம் இரண்டாவது) 1/1000  வரை",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "கிரிகோரியன்",
 	"valueview-expert-timevalue-calendar-julian": "ஜூலியன்",
 	"valueview-expert-timeinput-precision": "துல்லியம்:",
