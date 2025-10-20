@@ -908,7 +908,6 @@ final class RepoHooks implements
 					'wikibase-aliases-edit-placeholder',
 					'wikibase-aliases-edit-placeholder-language-aware',
 					'wikibase-aliases-edit-placeholder-mul',
-					'wikibase-publishing-progress',
 				],
 			],
 		];
@@ -1046,7 +1045,9 @@ final class RepoHooks implements
 					'wikibase-edit',
 					'wikibase-entityselector-notfound',
 					'wikibase-publish',
+					'wikibase-publishing-error',
 					'wikibase-publishing-progress',
+					'wikibase-publishing-succeeded',
 					'wikibase-remove',
 					'wikibase-save',
 					'wikibase-snakview-property-input-placeholder',

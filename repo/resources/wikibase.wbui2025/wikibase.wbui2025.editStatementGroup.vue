@@ -180,12 +180,12 @@ module.exports = exports = defineComponent( {
 					this.disposeOfEditableStatementStores();
 					this.addStatusMessage( {
 						type: 'success',
-						text: 'Success: Your statement was published'
+						text: mw.msg( 'wikibase-publishing-succeeded' )
 					} );
 				} )
 				.catch( () => {
 					this.addStatusMessage( {
-						text: 'An error occurred while saving. Please try again.'
+						text: mw.msg( 'wikibase-publishing-error' )
 					} );
 					this.formSubmitted = false;
 				} );
