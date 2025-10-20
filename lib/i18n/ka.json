@@ -46,7 +46,7 @@
 	"wikibase-time-precision-Gannum": "$1 მილიარდ წელიწადში",
 	"wikibase-time-precision-Mannum": "$1 მილიონ წელიწადში",
 	"wikibase-time-precision-annum": "$1 წელიწადში",
-	"wikibase-time-precision-millennium": "მე-$1 ათასწლეული",
+	"wikibase-time-precision-millennium": "$1 ათასწლეული",
 	"wikibase-time-precision-century": "მე-$1 საუკუნე",
 	"wikibase-time-precision-10annum": "$1 წმ",
 	"wikibase-entity-summary-wbsetitem": "შექმნილია ახალი ელემენტი",
