@@ -65,14 +65,6 @@ class EntityUsage {
 	public const ALIAS_USAGE = 'A';
 
 	/**
-	 * Usage flag indicating that certain statements (identified by their property id)
-	 * from the entity were used alongside qualifiers or references of that claim.
-	 * This currently implies that we also have an OTHER_USAGE or an ALL_USAGE
-	 * for the same entity (STATEMENT_USAGE is never used alone).
-	 */
-	public const STATEMENT_WITH_QUAL_OR_REF_USAGE = 'CQR';
-
-	/**
 	 * Please do not add new usages of "all'("X") aspects. This places too much pressure
 	 * on client recentchanges tables, and causes unnecessary reparses. The method only remains to monitor redirect pages
 	 * @see WikibaseLanguageIndependentLuaBindings.php line 328 for an example of this.
@@ -104,7 +96,6 @@ class EntityUsage {
 		self::TITLE_USAGE => null,
 		self::STATEMENT_USAGE => null,
 		self::ALIAS_USAGE => null,
-		self::STATEMENT_WITH_QUAL_OR_REF_USAGE => null,
 		self::OTHER_USAGE => null,
 		self::ALL_USAGE => null,
 	];

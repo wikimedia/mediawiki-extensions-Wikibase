@@ -177,92 +177,6 @@ function wikibase.setupInterface( settings )
 		return getEntityObject( id )
 	end
 
--- Is this a valid property id (Pnnn)?
---
--- @param {string} propertyId
-local function isValidPropertyId( propertyId )
-	return type( propertyId ) == 'string' and propertyId:match( '^P[1-9]%d*$' )
-end
-
--- Log access to claims of entity with qualifiers and/or references
---
--- @param {string} entityId
--- @param {string} propertyId
-local function addStatementWithQualOrRefUsage( entityId, propertyId )
-	if isValidPropertyId( propertyId ) then
-		-- Only attempt to track the usage if we have a valid property id.
-		php.addStatementWithQualOrRefUsage( entityId, propertyId )
-	end
-end
-
--- Function to mask a statement's subtables in order to log access
--- Code for logging based on: http://www.lua.org/pil/13.4.4.html
---
--- @param {table} statement
--- @param {string} tableName
--- @param {function} usageFunc
--- @param {string} entityId
--- @param {string} propertyId
-local function maskStatementTable( statement, tableName, usageFunc, entityId, propertyId )
-	if statement[tableName] == nil then
-		return
-	end
-
-	local actualStatementTable = statement[tableName]
-	statement[tableName] = {}
-
-	local function logNext( _, key )
-		local k, v = next( actualStatementTable, key )
-		if k ~= nil then
-			usageFunc( entityId, propertyId )
-		end
-		return k, v
-	end
-
-	local pseudoTableMetatable = {
-		__index = function( _, key )
-		-- note: we do not specify string here like in maskEntityTable, because
-		-- sometimes the key is e.g. P1 e.g. for qualifier
-		-- sometimes the key is a number e.g. for references
-			usageFunc( entityId, propertyId )
-			return actualStatementTable[key]
-		end,
-
-		__newindex = function (table,key,value)
-			if (table[key] == actualStatementTable[key]) then
-				return
-			else
-				error( 'Statement table cannot be modified', 2 )
-			end
-		end,
-
-		__pairs = function( _ )
-			return logNext, {}, nil
-		end,
-	}
-
-	 setmetatable( statement[tableName], pseudoTableMetatable )
-end
-
-
--- Function to mask a statement's subtables in order to log access and prevent modifications
---
--- @param {table} statements
-local function maskStatementTables( statementsForPropertyId, entityId, propertyId )
-
-	-- TODO ----- This isn't quite working, WIP
-
-
-
-	-- within claim we need to mask subtables for quals and refs too so they can be tracked
-	if statementsForPropertyId then
-		for _, statement in ipairs(statementsForPropertyId) do
-			maskStatementTable(statement, "qualifiers", addStatementWithQualOrRefUsage, entityId, propertyId)
-			maskStatementTable(statement, "references", addStatementWithQualOrRefUsage, entityId, propertyId)
-		end
-	end
-end
-
 	-- getEntityObject is an alias for getEntity as these used to be different.
 	wikibase.getEntityObject = wikibase.getEntity
 
@@ -286,17 +200,12 @@ end
 			incrementStatsKey( 'getEntityStatements' )
 
 			statements = php.getEntityStatements( entityId, propertyId, rank )
-
 			addToCache( statementCache, cacheKey, statements )
 		end
 
 		if statements and statements[propertyId] then
 			-- Use a clone here, so that users can't modify the cached statement
-			local clonedStatementsForPropertyId = mw.clone( statements[propertyId] )
-			-- Masking for tracking usages of qualifers/references must occur after
-			-- cloning, as otherwise the cloning would appear as a usage or quals/refs
-            maskStatementTables( clonedStatementsForPropertyId, entityId, propertyId )
-			return clonedStatementsForPropertyId
+			return mw.clone( statements[propertyId] )
 		end
 
 		return {}

@@ -199,7 +199,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
-	public function testGivenRecentChangeForEntityChangeWithOneQualOrRefOnlyChange_schedulesDispatchJob() {
+	public function testGivenRecentChangeForEntityChangeWithOneQualOrRefOnlyChange_skipsSchedulingDispatchJob() {
 		$recentChangeAttrs = [
 			'rc_timestamp' => 1234567890,
 			'rc_bot' => 1,
@@ -221,7 +221,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
 		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
-		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
+		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
 	public function testGivenRecentChangeForAddingSitelink_schedulesDispatchJob() {
