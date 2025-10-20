@@ -49,14 +49,28 @@ local function isValidPropertyId( propertyId )
 	return type( propertyId ) == 'string' and propertyId:match( '^P[1-9]%d*$' )
 end
 
--- Log access to claims of entity
+-- This should only ever change during the clone operation of getEntityStatements
+local qualOrRefUsageTrackingEnabled = true
+
+-- Log access to claims of entity with qualifiers and/or references
+--
+-- @param {string} entityId
+-- @param {string} propertyId
+local function addStatementWithQualOrRefUsage( entityId, propertyId )
+	if isValidPropertyId( propertyId ) and qualOrRefUsageTrackingEnabled == true then
+		-- Only attempt to track the usage if we have a valid property id.
+		php.addStatementWithQualOrRefUsage( entityId, propertyId )
+	end
+end
+
+-- Log access to claims of entity mainsnak only
 --
 -- @param {string} entityId
 -- @param {string} propertyId
 local function addStatementUsage( entityId, propertyId )
 	if isValidPropertyId( propertyId ) then
 		-- Only attempt to track the usage if we have a valid property id.
-		php.addStatementUsage( entityId, propertyId ) --add an argument here??
+		php.addStatementUsage( entityId, propertyId )
 	end
 end
 
@@ -104,11 +118,71 @@ local function maskEntityTable( entity, tableName, usageFunc )
 	setmetatable( entity[tableName], pseudoTableMetatable )
 end
 
+-- Function to mask a statement's subtables in order to log access
+-- Code for logging based on: http://www.lua.org/pil/13.4.4.html
+--
+-- @param {table} statement
+-- @param {string} tableName
+-- @param {function} usageFunc
+-- @param {string} entityId
+-- @param {string} propertyId
+local function maskStatementTable( statement, tableName, usageFunc, entityId, propertyId )
+	if statement[tableName] == nil then
+		return
+	end
+
+	local actualStatementTable = statement[tableName]
+	statement[tableName] = {}
+
+	local function logNext( _, key )
+		local k, v = next( actualStatementTable, key )
+		if k ~= nil then
+			usageFunc( entityId, propertyId )
+		end
+		return k, v
+	end
+
+	local pseudoTableMetatable = {
+		__index = function( _, key )
+		-- note: we do not specify string here like in maskEntityTable, because
+		-- sometimes the key is e.g. P1 e.g. for qualifier
+		-- sometimes the key is a number e.g. for references
+			usageFunc( entityId, propertyId )
+			return actualStatementTable[key]
+		end,
+
+		__newindex = function (table,key,value)
+			if (table[key] == actualStatementTable[key]) then
+				return
+				--note: this seems to happen in getBestStatements but the values match so no update needed
+			else
+				error( 'Statement table cannot be modified', 2 )
+			end
+		end,
+
+		__pairs = function( _ )
+			return logNext, {}, nil
+		end,
+	}
+
+	 setmetatable( statement[tableName], pseudoTableMetatable )
+end
+
 -- Function to mask an entity's subtables in order to log access and prevent modifications
 --
 -- @param {table} entity
 local function maskEntityTables( entity )
-	maskEntityTable( entity, 'claims', addStatementUsage )
+	-- within claim we need to mask subtables for quals and refs too so they can be tracked
+	if entity.claims then
+		for propertyId, statements in pairs(entity.claims) do         -- for each property e.g. P1
+			for _, statement in ipairs(statements) do
+				maskStatementTable(statement, "qualifiers", addStatementWithQualOrRefUsage, entity.id, propertyId)
+				maskStatementTable(statement, "references", addStatementWithQualOrRefUsage, entity.id, propertyId)
+			end
+		end
+	end
+
+ 	maskEntityTable( entity, 'claims', addStatementUsage )
 	maskEntityTable( entity, 'labels', php.addLabelUsage )
 	maskEntityTable( entity, 'sitelinks', php.addTitleOrSiteLinksUsage )
 	maskEntityTable( entity, 'descriptions', php.addDescriptionUsage )
@@ -266,8 +340,15 @@ local function getEntityStatements( entity, propertyLabelOrId, funcName )
 	end
 
 	if propertyId and entity.claims[propertyId] then
+
+		qualOrRefUsageTrackingEnabled = false
 		-- Create a deep copy of the table to prevent unexpected value changes (T270851).
-		return mw.clone(entity.claims[propertyId])
+		-- The clone operation is considered a read of qualifiers and references so we need to
+		-- switch off tracking just during the clone operation
+		local clone = mw.clone(entity.claims[propertyId])
+		qualOrRefUsageTrackingEnabled = true
+
+		return clone
 	end
 
 	return {}

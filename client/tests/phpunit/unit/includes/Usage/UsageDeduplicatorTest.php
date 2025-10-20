@@ -29,8 +29,11 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 		$q1All = new EntityUsage( $q1, EntityUsage::ALL_USAGE );
 		$q1Statement1 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P15' );
 		$q1Statement2 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P16' );
+		$q1Statement1QR = new EntityUsage( $q1, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, 'P15' );
+		$q1Statement2QR = new EntityUsage( $q1, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, 'P16' );
 		$q1Statement3 = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P17' );
 		$q1Statement = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE );
+		$q1StatementQR = new EntityUsage( $q1, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE );
 
 		$q2 = new ItemId( 'Q2' );
 		$q2Label = new EntityUsage( $q2, EntityUsage::LABEL_USAGE );
@@ -73,6 +76,22 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 			[
 				[ $q1LabelEn, $q1LabelDe, $q1LabelRu, $q1LabelPl ],
 				[ $q1Label ],
+			],
+			[
+				[ $q1LabelEn, $q1Statement1, $q1Statement1QR ],
+				[ $q1LabelEn, $q1Statement1QR ],
+			],
+			[
+				[ $q1LabelEn, $q1Statement, $q1StatementQR ],
+				[ $q1LabelEn, $q1StatementQR ],
+			],
+			[
+				[ $q1LabelEn, $q1Statement1, $q1Statement2, $q1Statement3, $q1Statement1QR ],
+				[ $q1LabelEn, $q1StatementQR ],
+			],
+			[
+				[ $q1LabelEn, $q1Statement, $q1Statement1QR ],
+				[ $q1LabelEn, $q1Statement, $q1Statement1QR ],
 			],
 		];
 	}
