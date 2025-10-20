@@ -33,7 +33,7 @@ export class ItemViewPage {
 		// about texts (especially, for example, selecting items from a Codex MenuButton
 		// menu) without needing to modify Codex components or introduce translation
 		// support to Cypress.
-		cy.visitTitleMobile( { title: 'Item:' + this.itemId, uselang: lang } );
+		cy.visitTitleMobile( { title: 'Item:' + this.itemId, qs: { uselang: lang } } );
 		return this;
 	}
 

@@ -75,5 +75,9 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-status-message-container {
 	position: fixed;
 	bottom: 0;
+
+	& .cdx-message--user-dismissable {
+		padding: 10px 10px 28px;
+	}
 }
 </style>

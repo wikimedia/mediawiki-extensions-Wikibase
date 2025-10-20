@@ -3,7 +3,7 @@ import 'cypress-axe';
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
 	interface Chainable {
-		visitTitle( args: string|object, qsDefaults: object ): Chainable<void>;
+		visitTitle( args: string|object, qsDefaults: object ): Chainable<Window>;
 		visitTitleMobile( args: string|object ): Chainable<void>;
 	}
 }

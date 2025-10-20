@@ -58,6 +58,10 @@ export class EditStatementFormPage {
 		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).last();
 	}
 
+	public cancelButton(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).first();
+	}
+
 	public lookupInput(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.LOOKUP_INPUT );
 	}
