@@ -238,6 +238,10 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		align-items: center;
 
 		p {
+			font-family: 'Inter', sans-serif;
+			font-weight: 500;
+			font-size: 1.125rem;
+			line-height: 1.25;
 			color: @color-placeholder;
 			padding: 0;
 			margin: 0;
@@ -264,5 +268,4 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		width: 100%;
 	}
 }
-
 </style>
