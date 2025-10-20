@@ -42,12 +42,14 @@ use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
+use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
@@ -468,6 +470,9 @@ return call_user_func( function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
 			'graphql-value-type' => static function() {
+				$itemLabelsResolver = WbReuse::getItemLabelsResolver();
+				$languageCodeType = WbReuse::getLanguageCodeType();
+
 				return new ObjectType( [
 					'name' => 'ItemValue',
 					'fields' => [
@@ -478,6 +483,19 @@ return call_user_func( function() {
 									'id' => [
 										'type' => Type::nonNull( Type::string() ),
 										'resolve' => fn( EntityIdValue $content ) => $content->getEntityId()->getSerialization(),
+									],
+									'label' => [
+										'type' => Type::string(),
+										'args' => [
+											'languageCode' => Type::nonNull( $languageCodeType ),
+										],
+										'resolve' => function( EntityIdValue $value, array $args ) use( $itemLabelsResolver ) {
+											/** @var ItemId $itemId */
+											$itemId = $value->getEntityId();
+											'@phan-var ItemId $itemId';
+
+											return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
+										},
 									],
 								],
 							] ) ),

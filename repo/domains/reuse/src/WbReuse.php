@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Domains\Reuse;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 
 /**
@@ -19,5 +21,15 @@ class WbReuse {
 	public static function getGraphQLSchema( ?ContainerInterface $services = null ): Schema {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.GraphQLSchema' );
+	}
+
+	public static function getItemLabelsResolver( ?ContainerInterface $services = null ): ItemLabelsResolver {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.ItemLabelsResolver' );
+	}
+
+	public static function getLanguageCodeType( ?ContainerInterface $services = null ): LanguageCodeType {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.LanguageCodeType' );
 	}
 }

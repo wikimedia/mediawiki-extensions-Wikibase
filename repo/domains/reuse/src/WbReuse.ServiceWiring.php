@@ -1,12 +1,14 @@
 <?php declare( strict_types=1 );
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGetItemLabels;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ItemIdType;
@@ -23,7 +25,7 @@ use Wikibase\Repo\WikibaseRepo;
 /** @phpcs-require-sorted-array */
 return [
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
-		$languageCodeType = new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );
+		$languageCodeType = WbReuse::getLanguageCodeType( $services );
 		$predicatePropertyType = new PredicatePropertyType(
 			new PropertyLabelsResolver(
 				new BatchGetPropertyLabels( new PrefetchingTermLookupBatchLabelsRetriever(
@@ -63,5 +65,15 @@ return [
 			WbReuse::getGraphQLSchema( $services ),
 			$services->getMainConfig(),
 		);
+	},
+	'WbReuse.ItemLabelsResolver' => function( MediaWikiServices $services ): ItemLabelsResolver {
+		return new ItemLabelsResolver(
+			new BatchGetItemLabels(
+				new PrefetchingTermLookupBatchLabelsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+			)
+		);
+	},
+	'WbReuse.LanguageCodeType' => function( MediaWikiServices $services ): LanguageCodeType {
+		return new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );
 	},
 ];

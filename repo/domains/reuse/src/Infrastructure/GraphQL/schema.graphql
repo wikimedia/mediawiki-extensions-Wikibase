@@ -61,6 +61,7 @@ type ItemValue {
 
 type ValueItem {
   id: String!
+  label(languageCode: LanguageCode!): String
 }
 
 enum ValueType {
