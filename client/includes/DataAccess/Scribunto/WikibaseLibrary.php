@@ -23,7 +23,6 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
@@ -353,7 +352,6 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			'entityExists' => [ $this, 'entityExists' ],
 			'getBadges' => [ $this, 'getBadges' ],
 			'getEntityStatements' => [ $this, 'getEntityStatements' ],
-			'addStatementWithQualOrRefUsage' => [ $this, 'addStatementWithQualOrRefUsage' ],
 			'getEntityUrl' => [ $this, 'getEntityUrl' ],
 			'renderSnak' => [ $this, 'renderSnak' ],
 			'formatValue' => [ $this, 'formatValue' ],
@@ -495,19 +493,6 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			throw new ScribuntoException( 'wikibase-error-serialize-error' );
 		}
 		return [ $statements ];
-	}
-
-	/**
-	 * Add a statement usage (called once specific statements are accessed) when the qualifiers and/or references are also accessed.
-	 *
-	 * @param string $entityId The Entity from which the statements were accessed.
-	 * @param string $propertyId Property id of the statements accessed.
-	 */
-	public function addStatementWithQualOrRefUsage( string $entityId, string $propertyId ): void {
-		$entityId = $this->entityIdParser->parse( $entityId );
-		$propertyId = new NumericPropertyId( $propertyId );
-
-		$this->usageAccumulator->addStatementWithQualOrRefUsage( $entityId, $propertyId );
 	}
 
 	/**
