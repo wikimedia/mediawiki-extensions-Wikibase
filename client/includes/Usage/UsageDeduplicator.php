@@ -62,23 +62,6 @@ class UsageDeduplicator {
 	 */
 	private function deduplicateStructuredUsages( array $structuredUsages ) {
 		foreach ( $structuredUsages as &$usagesPerEntity ) {
-			$containsQualOrReference = array_filter(
-				$usagesPerEntity,
-				function ( $value, $key ) {
-					return $key === EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE;
-				},
-				ARRAY_FILTER_USE_BOTH
-			) !== [];
-			if ( $containsQualOrReference ) {
-				$deduplicatedStatementUsage = $this->deduplicateStatementUsages(
-					$usagesPerEntity[EntityUsage::STATEMENT_USAGE],
-					$usagesPerEntity[EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE]
-				);
-				$usagesPerEntity[EntityUsage::STATEMENT_USAGE] = $deduplicatedStatementUsage[EntityUsage::STATEMENT_USAGE];
-				$usagesPerEntity[EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE] =
-					$deduplicatedStatementUsage[EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE];
-			}
-
 			foreach ( $usagesPerEntity as $aspect => &$usagesPerAspect ) {
 				$this->limitPerAspect( $aspect, $usagesPerAspect );
 				$this->deduplicatePerAspect( $usagesPerAspect );
@@ -86,40 +69,6 @@ class UsageDeduplicator {
 		}
 
 		return $structuredUsages;
-	}
-
-	/**
-	 * @param EntityUsage[] $statementUsages
-	 * @param EntityUsage[] $statementWithQualOrRefUsages
-	 */
-	private function deduplicateStatementUsages( array $statementUsages, array $statementWithQualOrRefUsages ): array {
-		foreach ( $statementWithQualOrRefUsages as $statementWithQualOrRefUsage ) {
-			if ( $statementWithQualOrRefUsage->getModifier() === null ) {
-				$statementUsages = [];
-			} else {
-					// If CQR does have a modifier, remove C usages with that modifier
-				$modifier = $statementWithQualOrRefUsage->getModifier();
-				$statementUsages = array_filter( $statementUsages, function ( $usage ) use ( $modifier ) {
-					return $usage->getModifier() !== $modifier;
-				} );
-			}
-		}
-		// If the combined CQR and C usages with independent modifiers > 33, throw away the QR modifier and remove C usages
-		$combinedStatementUsages = [ ...$statementUsages, ...$statementWithQualOrRefUsages ];
-		$statementUsageLimit = $this->usageModifierLimits[EntityUsage::STATEMENT_USAGE];
-		if ( $statementUsageLimit !== null ) {
-			if ( count( $combinedStatementUsages ) > $statementUsageLimit ) {
-				$statementUsages = [];
-				$statementWithQualOrRefUsages = [ new EntityUsage(
-					$statementWithQualOrRefUsages[0]->getEntityId(),
-					EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE
-				// Throw away modifier
-				) ];
-			}
-		}
-		return [ EntityUsage::STATEMENT_USAGE => $statementUsages,
-			EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE => $statementWithQualOrRefUsages,
-		];
 	}
 
 	/**
