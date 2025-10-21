@@ -9,10 +9,20 @@ use Wikibase\DataModel\Statement\StatementGuid;
  */
 class Statement {
 
+	/**
+	 * @param StatementGuid $id
+	 * @param Rank $rank
+	 * @param Qualifiers $qualifiers
+	 * @param Reference[] $references
+	 * @param PredicateProperty $property
+	 * @param Value|null $value
+	 * @param ValueType $valueType
+	 */
 	public function __construct(
 		public readonly StatementGuid $id,
 		public readonly Rank $rank,
 		public readonly Qualifiers $qualifiers,
+		public readonly array $references,
 		public readonly PredicateProperty $property,
 		public readonly ?Value $value,
 		public readonly ValueType $valueType

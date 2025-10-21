@@ -12,7 +12,6 @@ class ValueTypeType extends EnumType {
 
 	public function __construct() {
 		$config = [
-			'name' => 'ValueType',
 			'values' => [
 				'novalue' => [
 					'value' => ValueType::TYPE_NO_VALUE,

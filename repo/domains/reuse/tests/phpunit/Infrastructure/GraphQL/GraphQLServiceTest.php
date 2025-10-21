@@ -15,10 +15,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
@@ -113,8 +115,10 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$qualifierPropertyId = 'P2';
 		$statementWithItemValuePropertyId = 'P3';
 		$statementWithNoValuePropertyId = 'P4';
+		$statementWithNoReferencesPropertyId = $statementWithNoValuePropertyId;
 		$statementWithSomeValuePropertyId = 'P5';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
+		$statementReferencePropertyId = 'P6';
 		$unusedPropertyId = 'P9999';
 		$qualifierStringValue = 'qualifierStringValue';
 		$statementStringValue = 'statementStringValue';
@@ -122,8 +126,10 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
 			->withRank( 1 )
 			->withQualifier( new NumericPropertyId( $qualifierPropertyId ), new StringValue( $qualifierStringValue ) )
+			->withReference( new Reference( [ new PropertySomeValueSnak( new NumericPropertyId( $statementReferencePropertyId ) ) ] ) )
 			->withValue( $statementStringValue )
 			->build();
+
 		$statementWithItemValue = NewStatement::forProperty( ( $statementWithItemValuePropertyId ) )
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
 			->withValue( new ItemId( $itemValueItemId ) )
@@ -232,6 +238,48 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 							],
 						],
 						$unusedPropertyId => [],
+					],
+				],
+			],
+		];
+		yield 'statement with references' => [
+			"{ item(id: \"$itemId\") {
+			 	$statementWithStringValuePropertyId: statements(propertyId: \"$statementWithStringValuePropertyId\") {
+			 		references{
+			 			parts{
+							property { id dataType } 
+							value { ...on StringValue { content } }
+							valueType
+						}
+			 		}
+				}
+				$statementWithNoReferencesPropertyId: statements(propertyId: \"$statementWithNoReferencesPropertyId\") { 
+					references { parts { valueType }
+			 		}
+				 }
+			} }",
+			[
+				'data' => [
+					'item' => [
+						$statementWithStringValuePropertyId => [
+							[
+								'references' => [
+									[
+										'parts' => [
+											[
+												'property' => [
+													'id' => $statementReferencePropertyId,
+													'dataType' => null,
+												],
+												'value' => null,
+												'valueType' => 'somevalue',
+											],
+										],
+									],
+								],
+							],
+						],
+						$statementWithNoReferencesPropertyId => [ [ 'references' => [] ] ],
 					],
 				],
 			],

@@ -9,6 +9,7 @@ use GraphQL\Type\Schema as GraphQLSchema;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Reference;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
@@ -128,6 +129,11 @@ class Schema extends GraphQLSchema {
 					'resolve' => fn( Statement $statement, $args ) => $statement->qualifiers
 						->getQualifiersByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
+				'references' => [
+					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+					'type' => Type::nonNull( Type::listOf( $this->referenceType() ) ),
+					'resolve' => fn( Statement $statement ) => $statement->references,
+				],
 				'property' => [
 					'type' => Type::nonNull( $this->predicatePropertyType ),
 					'resolve' => fn( Statement $statement ) => $statement->property,
@@ -157,6 +163,19 @@ class Schema extends GraphQLSchema {
 				],
 				'preferred' => [
 					'value' => StatementWriteModel::RANK_PREFERRED,
+				],
+			],
+		] );
+	}
+
+	private function referenceType(): ObjectType {
+		return new ObjectType( [
+			'name' => 'Reference',
+			'fields' => [
+				'parts' => [
+					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+					'type' => Type::nonNull( Type::listOf( $this->propertyValuePairType ) ),
+					'resolve' => fn( Reference $reference ) => $reference->parts,
 				],
 			],
 		] );

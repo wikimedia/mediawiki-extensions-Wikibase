@@ -26,6 +26,7 @@ type Statement {
   id: String!
   rank: Rank!
   qualifiers(propertyId: String!): [PropertyValuePair]!
+  references: [Reference]!
   property: PredicateProperty!
   value: Value
   valueType: ValueType!
@@ -68,4 +69,8 @@ enum ValueType {
   novalue
   somevalue
   value
+}
+
+type Reference {
+  parts: [PropertyValuePair]!
 }

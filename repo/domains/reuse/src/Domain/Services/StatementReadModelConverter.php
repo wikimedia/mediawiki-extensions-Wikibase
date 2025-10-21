@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Domains\Reuse\Domain\Services;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Reference as DataModelReference;
+use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -14,6 +16,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Qualifiers;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Rank;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Reference;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ValueType;
@@ -41,6 +44,7 @@ class StatementReadModelConverter {
 			$this->statementIdParser->parse( $guid ),
 			new Rank( $inputStatement->getRank() ),
 			$this->convertQualifiers( $inputStatement->getQualifiers() ),
+			$this->convertReferences( $inputStatement->getReferences() ),
 			$mainPropertyValuePair->property,
 			$mainPropertyValuePair->value,
 			ValueType::fromString( $inputStatement->getMainSnak()->getType() ),
@@ -53,6 +57,23 @@ class StatementReadModelConverter {
 				$this->convertSnakToPropertyValuePair( ... ),
 				iterator_to_array( $qualifiers )
 			)
+		);
+	}
+
+	/**
+	 * @param ReferenceList $references
+	 *
+	 * @return Reference[]
+	 */
+	private function convertReferences( ReferenceList $references ): array {
+		return array_map(
+			fn( DataModelReference $ref ) => new Reference(
+				array_map(
+					$this->convertSnakToPropertyValuePair( ... ),
+					iterator_to_array( $ref->getSnaks() )
+				)
+			),
+			iterator_to_array( $references )
 		);
 	}
 

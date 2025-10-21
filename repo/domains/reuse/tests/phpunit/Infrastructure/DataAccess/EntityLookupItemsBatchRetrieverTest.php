@@ -9,9 +9,11 @@ use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
+use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelink;
@@ -174,6 +176,53 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 
 		$this->assertEquals( $this->item2Id, $batch->getItem( $this->item2Id )->id );
 		$this->assertNull( $batch->getItem( $this->deletedItem ) );
+	}
+
+	public function testGetItemsWithStatementsWithReferences(): void {
+		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
+		$item1StatementPropertyId = 'P1';
+		$item1StatementReferencePropertyId = new NumericPropertyId( 'P42' );
+		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )
+			->withGuid( $item1StatementGuid )
+			->withReference( new Reference( [ new PropertySomeValueSnak( $item1StatementReferencePropertyId ) ] ) )
+			->build();
+
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( new NumericPropertyId( $item1StatementPropertyId ), 'string' );
+
+		$entityLookup = new InMemoryEntityLookup();
+		$entityLookup->addEntity(
+			NewItem::withId( $this->item1Id )
+				->andStatement( $item1Statement )
+				->build()
+		);
+
+		$batch = $this->newRetriever( $entityLookup, new HashSiteStore( [] ), $dataTypeLookup )
+			->getItems( $this->item1Id, $this->item2Id );
+
+		$this->assertEquals( $this->item1Id, $batch->getItem( $this->item1Id )->id );
+
+		$statements = $batch->getItem( $this->item1Id )
+			->statements->getStatementsByPropertyId( new NumericPropertyId( $item1StatementPropertyId ) );
+		$this->assertCount( 1, $statements );
+
+		$references = $statements[0]->references;
+		$this->assertCount( 1, $references );
+
+		$this->assertSame(
+			$item1StatementReferencePropertyId,
+			$references[0]->parts[0]->property->id
+		);
+
+		$this->assertSame(
+			null,
+			$references[0]->parts[0]->value
+		);
+
+		$this->assertSame(
+			'somevalue',
+			$references[0]->parts[0]->valueType->value
+		);
 	}
 
 	public function testGetItemWithStatementsWithValue(): void {
