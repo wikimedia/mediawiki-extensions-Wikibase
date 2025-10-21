@@ -48,7 +48,8 @@ use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
@@ -306,15 +307,7 @@ return call_user_func( function() {
 				return WikibaseRepo::getStringValueNormalizer();
 			},
 			'graphql-value-type' => static function () {
-				return new ObjectType( [
-					'name' => 'StringValue',
-					'fields' => [
-						'content' => [
-							'type' => Type::nonNull( Type::string() ),
-							'resolve' => fn( Value $v ) => $v->content->getValue(),
-						],
-					],
-				] );
+				return WbReuse::getStringValueType();
 			},
 		],
 		'VT:time' => [
@@ -499,7 +492,7 @@ return call_user_func( function() {
 									],
 								],
 							] ) ),
-							'resolve' => fn( Value $v ) => $v->content,
+							'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->content,
 						],
 					],
 				] );

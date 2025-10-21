@@ -132,7 +132,11 @@ class Schema extends GraphQLSchema {
 					'type' => Type::nonNull( $this->predicatePropertyType ),
 					'resolve' => fn( Statement $statement ) => $statement->property,
 				],
-				'value' => $this->valueType,
+				'value' => [
+					'type' => $this->valueType,
+					// The whole Statement is passed down here so that the Value type has access to the property data type.
+					'resolve' => fn( Statement $statement ) => $statement->value ? $statement : null,
+				],
 				'valueType' => [
 					'type' => Type::nonNull( $this->valueTypeType ),
 					'resolve' => fn( Statement $statement ) => $statement->valueType,

@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -40,7 +41,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Item $item2;
 	private static Item $statementValueItem;
 	private static Item $qualifierValueItem;
-	private static Property $statementProperty;
+	private static Property $stringTypeProperty;
+	private static Property $itemTypeProperty;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -64,11 +66,16 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 
 		$termLookup = new InMemoryPrefetchingTermLookup();
 		$termLookup->setData( [
-			self::$statementProperty,
+			self::$stringTypeProperty,
 			self::$qualifierProperty,
 			self::$statementValueItem,
 			self::$qualifierValueItem,
 		] );
+
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		$dataTypeLookup->setDataTypeForProperty( self::$stringTypeProperty->getId(), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( self::$qualifierProperty->getId(), 'string' );
+		$dataTypeLookup->setDataTypeForProperty( self::$itemTypeProperty->getId(), 'wikibase-item' );
 
 		$this->assertEquals(
 			$expectedResult,
@@ -77,6 +84,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				new HashSiteStore( [ self::$sitelinkSite ] ),
 				$siteIdProvider,
 				$termLookup,
+				$dataTypeLookup,
 			)->query( $query )
 		);
 	}
@@ -134,11 +142,12 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
 		self::$sitelinkSite->setGlobalId( $sitelinkSiteId );
 
-		self::$statementProperty = new Property(
+		self::$stringTypeProperty = new Property(
 			new NumericPropertyId( $statementWithStringValuePropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'statement prop' ) ] ) ),
 			'string',
 		);
+		self::$itemTypeProperty = new Property( new NumericPropertyId( $statementWithItemValuePropertyId ), null, 'wikibase-item' );
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -344,7 +353,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					'item' => [
 						'statements' => [
 							[
-								'property' => [ 'label' => self::$statementProperty->getLabels()->getByLanguage( 'en' )->getText() ],
+								'property' => [ 'label' => self::$stringTypeProperty->getLabels()->getByLanguage( 'en' )->getText() ],
 								'qualifiers' => [
 									[
 										'property' => [
@@ -463,14 +472,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		?SiteLookup $siteLookup = null,
 		?SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider = null,
 		?PrefetchingTermLookup $termLookup = null,
+		?PropertyDataTypeLookup $dataTypeLookup = null,
 	): GraphQLService {
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 		$this->setService( 'SiteLookup', $siteLookup ?? new HashSiteStore() );
-
-		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturn( 'string' );
-		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $dataTypeLookup );
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $dataTypeLookup ?? new InMemoryDataTypeLookup() );
 
 		$this->setService(
 			'WikibaseRepo.SiteLinkGlobalIdentifiersProvider',

@@ -17,6 +17,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PredicatePropertyT
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PropertyValuePairType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\SiteIdType;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\StringValueType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ValueType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ValueTypeType;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
@@ -34,7 +35,7 @@ return [
 			),
 			$languageCodeType,
 		);
-		$valueType = new ValueType();
+		$valueType = new ValueType( WikibaseRepo::getDataTypeDefinitions( $services )->getGraphqlValueTypes() );
 		$valueTypeType = new ValueTypeType();
 
 		return new Schema(
@@ -75,5 +76,8 @@ return [
 	},
 	'WbReuse.LanguageCodeType' => function( MediaWikiServices $services ): LanguageCodeType {
 		return new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );
+	},
+	'WbReuse.StringValueType' => function( MediaWikiServices $services ): StringValueType {
+		return new StringValueType();
 	},
 ];

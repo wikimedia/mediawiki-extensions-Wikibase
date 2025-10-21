@@ -16,7 +16,7 @@ class PropertyValuePairType extends ObjectType {
 		ValueType $valueType,
 		ValueTypeType $valueTypeType
 	) {
-		$config = [
+		parent::__construct( [
 			'fields' => [
 				'property' => [
 					'type' => Type::nonNull( $predicateType ),
@@ -24,15 +24,15 @@ class PropertyValuePairType extends ObjectType {
 				],
 				'value' => [
 					'type' => $valueType,
-					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->value,
+					// The whole PropertyValuePair is passed down here so that the Value type has access to the property data type.
+					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->value ? $rootValue : null,
 				],
 				'valueType' => [
 					'type' => Type::nonNull( $valueTypeType ),
 					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->valueType,
 				],
 			],
-		];
-		parent::__construct( $config );
+		] );
 	}
 
 }

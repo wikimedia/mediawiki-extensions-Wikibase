@@ -8,6 +8,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\StringValueType;
 
 /**
  * @license GPL-2.0-or-later
@@ -31,5 +32,10 @@ class WbReuse {
 	public static function getLanguageCodeType( ?ContainerInterface $services = null ): LanguageCodeType {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.LanguageCodeType' );
+	}
+
+	public static function getStringValueType( ?ContainerInterface $services = null ): StringValueType {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.StringValueType' );
 	}
 }
