@@ -24,6 +24,7 @@ class Schema extends GraphQLSchema {
 		private readonly PredicatePropertyType $predicatePropertyType,
 		private readonly PropertyValuePairType $propertyValuePairType,
 		private readonly ValueType $valueType,
+		private readonly ValueTypeType $valueTypeType,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -132,6 +133,10 @@ class Schema extends GraphQLSchema {
 					'resolve' => fn( Statement $statement ) => $statement->property,
 				],
 				'value' => $this->valueType,
+				'valueType' => [
+					'type' => Type::nonNull( $this->valueTypeType ),
+					'resolve' => fn( Statement $statement ) => $statement->valueType,
+				],
 			],
 		] );
 	}

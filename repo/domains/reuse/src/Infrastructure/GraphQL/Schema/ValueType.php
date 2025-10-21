@@ -19,7 +19,7 @@ class ValueType extends UnionType {
 		);
 		$config = [
 			'types' => array_values( $valueTypes ),
-			'resolveType' => fn( Value $v ) => $v->content != null && $v->content instanceof StringValue
+			'resolveType' => fn( Value $v ) => $v->content instanceof StringValue
 					? $valueTypes[ 'VT:string' ]
 					: $valueTypes[ 'PT:wikibase-item' ],
 		];

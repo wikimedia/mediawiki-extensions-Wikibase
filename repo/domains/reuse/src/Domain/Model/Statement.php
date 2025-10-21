@@ -14,7 +14,8 @@ class Statement {
 		public readonly Rank $rank,
 		public readonly Qualifiers $qualifiers,
 		public readonly PredicateProperty $property,
-		public readonly Value $value
+		public readonly ?Value $value,
+		public readonly ValueType $valueType
 	) {
 	}
 

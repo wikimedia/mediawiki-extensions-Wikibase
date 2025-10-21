@@ -16,6 +16,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Qualifiers;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Rank;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Value;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ValueType;
 
 /**
  * @license GPL-2.0-or-later
@@ -42,6 +43,7 @@ class StatementReadModelConverter {
 			$this->convertQualifiers( $inputStatement->getQualifiers() ),
 			$mainPropertyValuePair->property,
 			$mainPropertyValuePair->value,
+			ValueType::fromString( $inputStatement->getMainSnak()->getType() ),
 		);
 	}
 
@@ -63,9 +65,8 @@ class StatementReadModelConverter {
 
 		return new PropertyValuePair(
 			new PredicateProperty( $snak->getPropertyId(), $dataType ),
-			new Value(
-				$snak instanceof PropertyValueSnak ? $snak->getDataValue() : null
-			)
+			$snak instanceof PropertyValueSnak ? new Value( $snak->getDataValue() ) : null,
+			ValueType::fromString( $snak->getType() ),
 		);
 	}
 

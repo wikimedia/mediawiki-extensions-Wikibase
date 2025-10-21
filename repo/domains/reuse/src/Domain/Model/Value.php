@@ -9,10 +9,7 @@ use DataValues\DataValue;
  */
 class Value {
 
-	/**
-	 * @param DataValue|null $content Guaranteed to be non-null if value type is "value", always null otherwise.
-	 */
-	public function __construct( public readonly ?DataValue $content = null ) {
+	public function __construct( public readonly DataValue $content ) {
 	}
 
 }

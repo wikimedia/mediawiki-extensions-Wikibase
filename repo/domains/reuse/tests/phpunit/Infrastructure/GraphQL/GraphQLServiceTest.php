@@ -87,7 +87,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$qualifierPropertyId = 'P2';
 		$statementWithItemValuePropertyId = 'P3';
 		$statementWithNoValuePropertyId = 'P4';
-		$statementWithSomeValueValuePropertyId = 'P5';
+		$statementWithSomeValuePropertyId = 'P5';
 		$unusedPropertyId = 'P9999';
 		$qualifierStringValue = 'qualifierStringValue';
 		$statementStringValue = 'statementStringValue';
@@ -100,6 +100,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithItemValue = NewStatement::forProperty( ( $statementWithItemValuePropertyId ) )
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
 			->withValue( new ItemId( $itemValueItemId ) )
+			->build();
+
+		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d9f" )
+			->build();
+		$statementWithSomeValue = NewStatement::someValueFor( ( $statementWithSomeValuePropertyId ) )
+			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d6f" )
 			->build();
 
 		self::$sitelinkSite = new MediaWikiSite();
@@ -125,6 +132,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
 			->andStatement( $statementWithStringValue )
 			->andStatement( $statementWithItemValue )
+			->andStatement( $statementWithNoValue )
+			->andStatement( $statementWithSomeValue )
 			->build();
 
 		$item2Id = 'Q321';
@@ -204,6 +213,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			 		$qualifierPropertyId: qualifiers(propertyId: \"$qualifierPropertyId\") {
 			 			property { id dataType } 
 			 			value { ...on StringValue { content } }
+			 			valueType
 			 		}
 			 		$unusedPropertyId: qualifiers(propertyId: \"$unusedPropertyId\") {
 			 			property { id }
@@ -224,6 +234,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 										'value' => [
 											'content' => $qualifierStringValue,
 										],
+										'valueType' => 'value',
 									],
 								],
 								$unusedPropertyId => [],
@@ -237,9 +248,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			"{ item(id: \"$itemId\") {
 				$statementWithStringValuePropertyId: statements(propertyId: \"$statementWithStringValuePropertyId\") {
 					value { ...on StringValue{ content } } 
+					valueType
 				}
 				$statementWithItemValuePropertyId: statements(propertyId: \"$statementWithItemValuePropertyId\") {
-					value { ...on ItemValue{ content { id } } }
+					value { ...on ItemValue{ content { id } } } 
+					valueType
 				}
 			} }",
 			[
@@ -250,6 +263,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								'value' => [
 									'content' => $statementStringValue,
 								],
+								'valueType' => 'value',
 							],
 						],
 						$statementWithItemValuePropertyId => [
@@ -257,6 +271,35 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								'value' => [
 									'content' => [ 'id' => $itemValueItemId ],
 								],
+								'valueType' => 'value',
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statements with novalue and somevalue' => [
+			"{ item(id: \"$itemId\") {
+				$statementWithSomeValuePropertyId: statements(propertyId: \"$statementWithSomeValuePropertyId\") {
+					value { ...on StringValue{ content } } 
+					valueType
+				}
+				$statementWithNoValuePropertyId: statements(propertyId: \"$statementWithNoValuePropertyId\") {
+					valueType
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						$statementWithSomeValuePropertyId => [
+							[
+								'value' => null,
+								'valueType' => 'somevalue',
+							],
+						],
+						$statementWithNoValuePropertyId => [
+							[
+								'valueType' => 'novalue',
 							],
 						],
 					],

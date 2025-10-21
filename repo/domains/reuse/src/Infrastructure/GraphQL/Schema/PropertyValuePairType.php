@@ -11,7 +11,11 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
  */
 class PropertyValuePairType extends ObjectType {
 
-	public function __construct( PredicatePropertyType $predicateType, ValueType $valueType ) {
+	public function __construct(
+		PredicatePropertyType $predicateType,
+		ValueType $valueType,
+		ValueTypeType $valueTypeType
+	) {
 		$config = [
 			'fields' => [
 				'property' => [
@@ -19,8 +23,12 @@ class PropertyValuePairType extends ObjectType {
 					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->property,
 				],
 				'value' => [
-					'type' => Type::nonNull( $valueType ),
+					'type' => $valueType,
 					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->value,
+				],
+				'valueType' => [
+					'type' => Type::nonNull( $valueTypeType ),
+					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->valueType,
 				],
 			],
 		];

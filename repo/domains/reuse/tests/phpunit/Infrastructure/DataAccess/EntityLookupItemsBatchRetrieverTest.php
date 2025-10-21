@@ -154,13 +154,22 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 			$statements[0]->property->dataType
 		);
 
-		// Include the value in the qualifier during property value implementation.
 		$qualifiers = $statements[0]->qualifiers->getQualifiersByPropertyId( $item1StatementQualifierPropertyId );
 		$this->assertCount( 1, $qualifiers );
 
 		$this->assertSame(
 			$item1StatementQualifierPropertyId,
 			$qualifiers[0]->property->id
+		);
+
+		$this->assertSame(
+			'stringValue',
+			$qualifiers[0]->value->content->getValue()
+		);
+
+		$this->assertSame(
+			'value',
+			$qualifiers[0]->valueType->value
 		);
 
 		$this->assertEquals( $this->item2Id, $batch->getItem( $this->item2Id )->id );
@@ -217,6 +226,11 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		);
 
 		$this->assertSame(
+			'value',
+			$statementWithStringValue[0]->valueType->value
+		);
+
+		$this->assertSame(
 			$item1Statement2->getGuid(),
 			$statementWithItemValue[0]->id->getSerialization()
 		);
@@ -224,6 +238,11 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$this->assertSame(
 			$itemValueItemId,
 			$statementWithItemValue[0]->value->content->getEntityId()->getSerialization()
+		);
+
+		$this->assertSame(
+			'value',
+			$statementWithItemValue[0]->valueType->value
 		);
 	}
 

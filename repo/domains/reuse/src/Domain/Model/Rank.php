@@ -7,7 +7,8 @@ use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 
 /**
  * @license GPL-2.0-or-later
- */class Rank {
+ */
+class Rank {
 
 	private const RANKS = [
 		StatementWriteModel::RANK_DEPRECATED,

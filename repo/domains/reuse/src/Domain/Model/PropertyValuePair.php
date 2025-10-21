@@ -7,7 +7,11 @@ namespace Wikibase\Repo\Domains\Reuse\Domain\Model;
  */
 class PropertyValuePair {
 
-	public function __construct( public readonly PredicateProperty $property, public readonly Value $value ) {
+	public function __construct(
+		public readonly PredicateProperty $property,
+		public readonly ?Value $value,
+		public readonly ValueType $valueType,
+	) {
 	}
 
 }
