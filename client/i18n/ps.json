@@ -139,7 +139,7 @@
 	"wikibase-client-data-bridge-references-heading": "سرچينې",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "تاسو غونډال کې ننوتي نه ياست",
 	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "تاسو غونډال کې ننوتي نه ياست. که تاسو  strong>غونډال ته ننوځئ</strong> يا <strong>يو گڼون جوړ کړئ</strong>؛ نو ستاسو کارن‌ونډې به ستاسو تر کارن‌نوم لاندې \n د نورو ډېرو گټو سره يوځای خوندي شي.",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>گواښنه:</strong> تاسو غونډال ته ننوتي نه ياست.\nکه تاسو هر ډول سمونونه وکړئ؛ نو ستاسو وېب‌پته به په ټولگړې ډول ښکاره شي. که تاسو  strong>غونډال ته ننوځئ</strong> يا <strong>يو گڼون جوړ کړئ</strong>؛ نو ستاسو کارن‌ونډې به ستاسو تر کارن‌نوم لاندې \n د نورو ډېرو گټو سره يوځای خوندي شي.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>گواښنه:</strong> تاسو غونډال ته ننوتي نه ياست.\nکه تاسو هر ډول سمونونه وکړئ؛ نو ستاسو وېب‌پته به په ټولگړې ډول ښکاره شي. که تاسو  strong>غونډال ته ننوځئ</strong> يا <strong>يو گڼون جوړ کړئ؛</strong> نو ستاسو کارن‌ونډې به ستاسو تر کارن‌نوم لاندې د نورو ډېرو گټو سره يوځای خوندي شي.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "غونډال ته له ننوتلو پرته سمون",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ننوتل یا نوم لیکنه کول",
 	"wikibase-client-data-bridge-license-heading": "کارول او منښت",
