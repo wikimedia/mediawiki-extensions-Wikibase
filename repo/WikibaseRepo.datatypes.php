@@ -307,10 +307,6 @@ return call_user_func( function() {
 				return new ObjectType( [
 					'name' => 'StringValue',
 					'fields' => [
-						'type' => [
-							'type' => Type::nonNull( Type::string() ),
-							'resolve' => fn() => 'value',
-						],
 						'content' => [
 							'type' => Type::nonNull( Type::string() ),
 							'resolve' => fn( Value $v ) => $v->content->getValue(),
@@ -475,10 +471,6 @@ return call_user_func( function() {
 				return new ObjectType( [
 					'name' => 'ItemValue',
 					'fields' => [
-						'type' => [
-							'type' => Type::nonNull( Type::string() ),
-							'resolve' => fn() => 'value',
-						],
 						'content' => [
 							'type' => Type::nonNull( new ObjectType( [
 								'name' => 'ValueItem',

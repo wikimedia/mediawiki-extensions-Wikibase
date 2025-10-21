@@ -64,7 +64,6 @@ class StatementReadModelConverter {
 		return new PropertyValuePair(
 			new PredicateProperty( $snak->getPropertyId(), $dataType ),
 			new Value(
-				$snak->getType(),
 				$snak instanceof PropertyValueSnak ? $snak->getDataValue() : null
 			)
 		);

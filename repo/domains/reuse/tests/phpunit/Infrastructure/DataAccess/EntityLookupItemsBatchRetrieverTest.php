@@ -212,11 +212,6 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		);
 
 		$this->assertSame(
-			'value',
-			$statementWithStringValue[0]->value->valueType
-		);
-
-		$this->assertSame(
 			'stringValue',
 			$statementWithStringValue[0]->value->content->getValue()
 		);
@@ -224,11 +219,6 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 		$this->assertSame(
 			$item1Statement2->getGuid(),
 			$statementWithItemValue[0]->id->getSerialization()
-		);
-
-		$this->assertSame(
-			'value',
-			$statementWithItemValue[0]->value->valueType
 		);
 
 		$this->assertSame(
