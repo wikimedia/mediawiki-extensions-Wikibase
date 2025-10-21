@@ -81,6 +81,39 @@ describe( 'Lua Wikibase integration', () => {
 						},
 						type: 'statement',
 						rank: 'normal',
+						qualifiers: {
+							P1: [
+								{
+									hash: 'hash',
+									snaktype: 'value',
+									property: 'P3',
+									datavalue: {
+										value: 'qualifier value',
+										type: 'string',
+									},
+								},
+							],
+						},
+						references: [
+							{
+								hash: 'hash',
+								snaks: {
+									P1: [
+										{
+											snaktype: 'value',
+											property: 'P3',
+											datavalue: {
+												value: 'ref value',
+												type: 'string',
+											},
+										},
+									],
+								},
+								'snaks-order': [
+									'P1',
+								],
+							},
+						],
 					},
 				],
 			} ),
@@ -110,6 +143,20 @@ describe( 'Lua Wikibase integration', () => {
 						return claims
 					end
 					return claims[1].mainsnak.datavalue.value
+				end
+				p.getEntity_claims_with_qual = function( frame )
+					local claims = mw.wikibase.getEntity( '${ testItemId }' ).claims[ frame.args[ 1 ] ]
+					if claims == nil then
+						return claims
+					end
+					return claims[1].qualifiers.P3[1].datavalue.value
+				end
+				p.getEntity_claims_with_ref = function( frame )
+					local claims = mw.wikibase.getEntity( '${ testItemId }' ).claims[ frame.args[ 1 ] ]
+					if claims == nil then
+						return claims
+					end
+					return claims[1].references[1].snaks.P3[1].datavalue.value
 				end
 				p.getEntity_aliases = function() return mw.wikibase.getEntity( '${ testItemId }' ).aliases.en[1].value end
 				p.getEntity_labels = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels.de.value end
@@ -238,6 +285,24 @@ describe( 'Lua Wikibase integration', () => {
 		assert.equal( pageText, '' );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, `C.${ testPropertyId + '1' }` );
+	} );
+
+	it( 'getEntity_claims_with_qual can be invoked correctly', async () => {
+		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_qual|${ testPropertyId }}}`, pageTitle );
+		const pageText = await parsePage( pageTitle );
+		assert.equal( pageText, `<p>${ 'qualifier value' }\n</p>` );
+		const usageAspects = await getUsageAspects( pageTitle, testItemId );
+		assert.include( usageAspects, `CQR.${ testPropertyId }` );
+	} );
+
+	it( 'getEntity_claims_with_ref can be invoked correctly', async () => {
+		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_ref|${ testPropertyId }}}`, pageTitle );
+		const pageText = await parsePage( pageTitle );
+		assert.equal( pageText, `<p>${ 'ref value' }\n</p>` );
+		const usageAspects = await getUsageAspects( pageTitle, testItemId );
+		assert.include( usageAspects, `CQR.${ testPropertyId }` );
 	} );
 
 	it( 'getEntity_aliases can be invoked correctly', async () => {

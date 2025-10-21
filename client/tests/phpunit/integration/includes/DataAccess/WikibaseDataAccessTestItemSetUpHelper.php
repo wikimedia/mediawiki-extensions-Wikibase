@@ -76,16 +76,22 @@ class WikibaseDataAccessTestItemSetUpHelper {
 			new NumericPropertyId( 'P342' ),
 			new StringValue( 'Moar qualifiers' )
 		);
-		$referenceSnak = new PropertyValueSnak(
-			new NumericPropertyId( 'P342' ),
+		$referenceSnak1 = new PropertyValueSnak(
+			new NumericPropertyId( 'P300' ),
 			new StringValue( 'A reference' )
+		);
+
+		$referenceSnak2 = new PropertyValueSnak(
+			new NumericPropertyId( 'P300' ),
+			new StringValue( 'More references' )
 		);
 
 		$statement1->setQualifiers(
 			new SnakList( [ $qualifierSnak1, $qualifierSnak2 ] )
 		);
 
-		$statement1->addNewReference( $referenceSnak );
+		$statement1->addNewReference( $referenceSnak1 );
+		$statement1->addNewReference( $referenceSnak2 );
 
 		$stringProperty->getStatements()->addStatement( $statement1 );
 		$this->siteLinkLookup->putEntity( $stringProperty );
