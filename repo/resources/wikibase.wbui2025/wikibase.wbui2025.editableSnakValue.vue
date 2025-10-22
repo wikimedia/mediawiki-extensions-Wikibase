@@ -12,7 +12,7 @@
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 		>
-			<cdx-text-input v-if="!isTabularOrGeoShapeDataType && snakTypeSelection === 'value'" v-model="value"></cdx-text-input>
+			<cdx-text-input v-if="!isTabularOrGeoShapeDataType && snakTypeSelection === 'value'" v-model.trim="value"></cdx-text-input>
 			<cdx-lookup
 				v-else-if="isTabularOrGeoShapeDataType"
 				v-model:selected="lookupSelection"

@@ -35,7 +35,7 @@
 					</cdx-message>
 				</div>
 			</transition>
-			<div class="wikibase-wbui2025-edit-statement-footer">
+			<div ref="editFormActionsRef" class="wikibase-wbui2025-edit-statement-footer">
 				<transition name="fade">
 					<cdx-progress-bar
 						v-if="showProgress"
@@ -65,8 +65,6 @@
 				</div>
 			</div>
 		</div>
-		<wikibase-wbui2025-status-message>
-		</wikibase-wbui2025-status-message>
 	</wikibase-wbui2025-modal-overlay>
 </template>
 
@@ -88,7 +86,6 @@ const {
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
-const WikibaseWbui2025StatusMessage = require( './wikibase.wbui2025.statusMessage.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
 const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
 const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
@@ -103,8 +100,7 @@ module.exports = exports = defineComponent( {
 		CdxMessage,
 		CdxProgressBar,
 		WikibaseWbui2025EditStatement,
-		WikibaseWbui2025ModalOverlay,
-		WikibaseWbui2025StatusMessage
+		WikibaseWbui2025ModalOverlay
 	},
 	props: {
 		propertyId: {
@@ -185,7 +181,9 @@ module.exports = exports = defineComponent( {
 				} )
 				.catch( () => {
 					this.addStatusMessage( {
-						text: mw.msg( 'wikibase-publishing-error' )
+						text: mw.msg( 'wikibase-publishing-error' ),
+						attachTo: this.$refs.editFormActionsRef,
+						type: 'error'
 					} );
 					this.formSubmitted = false;
 				} );

@@ -1052,6 +1052,7 @@ final class RepoHooks implements
 				],
 				'messages' => [
 					'wikibase-add',
+					'wikibase-addstatement',
 					'wikibase-addqualifier',
 					'wikibase-addreference',
 					'wikibase-cancel',

@@ -1,18 +1,10 @@
 <template>
-	<wikibase-wbui2025-modal-overlay>
-		<div class="wikibase-wbui2025-add-reference">
-			<div class="wikibase-wbui2025-add-reference-heading">
-				<div class="wikibase-wbui2025-add-reference-close">
-					<cdx-button
-						:aria-label="$i18n( 'wikibase-cancel' )"
-						weight="quiet"
-						@click="$emit( 'hide' )"
-					>
-						<cdx-icon :icon="cdxIconClose"></cdx-icon>
-					</cdx-button>
-				</div>
-				<h2>{{ $i18n( 'wikibase-addreference' ) }}</h2>
-			</div>
+	<wikibase-wbui2025-modal-overlay
+		:header="$i18n( 'wikibase-addreference' )"
+		minimal-style
+		hide-footer
+		@hide="$emit( 'hide' )">
+		<template #content>
 			<div class="wikibase-wbui2025-add-reference-form">
 				<cdx-button
 					action="progressive"
@@ -36,14 +28,14 @@
 				>
 				</cdx-text-input>
 			</div>
-		</div>
+		</template>
 	</wikibase-wbui2025-modal-overlay>
 </template>
 
 <script>
 const { defineComponent, nextTick } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxTextInput } = require( '../../codex.js' );
-const { cdxIconClose, cdxIconCheck } = require( './icons.json' );
+const { cdxIconCheck } = require( './icons.json' );
 
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
@@ -60,7 +52,6 @@ module.exports = exports = defineComponent( {
 	emits: [ 'hide', 'add-reference' ],
 	data() {
 		return {
-			cdxIconClose,
 			cdxIconCheck,
 			selectedPropertyId: null,
 			selectedPropertyDatatype: null,
@@ -102,32 +93,6 @@ module.exports = exports = defineComponent( {
 
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-add-reference {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: @spacing-65;
-	width: 100%;
-	height: 100%;
-}
-
-.wikibase-wbui2025-add-reference-heading {
-	align-self: stretch;
-	padding: @spacing-100 @spacing-100 @spacing-200;
-	border-bottom: @border-width-base @border-style-base @border-color-subtle;
-
-	h2 {
-		padding: @spacing-0;
-		font-family: @font-family-base;
-		text-align: center;
-		color: @color-emphasized;
-	}
-}
-
-.wikibase-wbui2025-add-reference-close {
-	text-align: right;
-}
 
 .wikibase-wbui2025-add-reference-form {
 	padding: @spacing-200 @spacing-100;

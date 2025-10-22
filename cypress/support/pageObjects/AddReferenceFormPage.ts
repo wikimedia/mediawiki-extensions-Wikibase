@@ -2,7 +2,7 @@ import Chainable = Cypress.Chainable;
 
 export class AddReferenceFormPage {
 	public static SELECTORS = {
-		HEADING: '.wikibase-wbui2025-add-reference-heading h2',
+		HEADING: 'h2.wikibase-wbui2025-modal-overlay__header__title',
 		PROPERTY_INPUT: '.wikibase-wbui2025-property-lookup input',
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-add-reference-value input',
 		ADD_BUTTON: '.wikibase-wbui2025-add-reference-form .cdx-button',

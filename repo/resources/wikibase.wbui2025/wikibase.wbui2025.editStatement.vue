@@ -64,7 +64,7 @@
 				</cdx-button>
 			</div>
 		</div>
-		<div class="wikibase-wbui2025-remove-value">
+		<div v-if="!hideRemoveButton" class="wikibase-wbui2025-remove-value">
 			<cdx-button weight="quiet" @click="$emit( 'remove', statementId )">
 				<cdx-icon :icon="cdxIconTrash"></cdx-icon>
 				{{ $i18n( 'wikibase-remove' ) }}
@@ -116,6 +116,11 @@ module.exports = exports = defineComponent( {
 		statementId: {
 			type: String,
 			required: true
+		},
+		hideRemoveButton: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	emits: [ 'remove' ],
