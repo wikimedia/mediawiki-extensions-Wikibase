@@ -32,5 +32,15 @@ exports.config = {
 	waitforTimeout: 10 * 1000,
 
 	// See also: http://webdriver.io/guide/testrunner/reporters.html
-	reporters: [ 'spec' ]
+	reporters: [ 'spec' ],
+
+	onComplete() {
+		try {
+			return config.onComplete();
+		} catch ( _ ) {
+			// ignore TypeError: Cannot read properties of undefined (reading 'project') [T407831]
+			// remove this onComplete() override again once we’re on a version of wdio-mediawiki
+			// with a fix (maybe 6.0.1?)
+		}
+	}
 };
