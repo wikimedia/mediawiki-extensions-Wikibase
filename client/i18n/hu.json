@@ -103,6 +103,7 @@
 	"wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Összekapcsolás|Összekapcsolások}} a(z) {{WBREPONAME}} adatbázissal",
 	"echo-pref-tooltip-wikibase-action": "Értesítést kérek, ha valaki összekapcsol egy általam létrehozott oldalt egy {{WBREPONAME}}-elemmel.",
+	"exceeded-entity-limit-category": "Túl sok {{WBREPONAME}}-entitásra hivatkozó lapok",
 	"notification-header-page-connection": "A(z) <strong>$3</strong> {{GENDER:$2|össze lett kapcsolva}} {{PLURAL:$4|-1=egy {{WBREPONAME}}-elemmel|a(z) $4 {{WBREPONAME}}-elemmel}}, ahol a témához releváns adatokat lehet összegyűjteni.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> és {{PLURAL:$4|még egy|$4 másik|100=99+ másik}} lap {{GENDER:$2|össze lett kapcsolva}} {{WBREPONAME}}-elemekkel, ahol a témához releváns adatokat lehet összegyűjteni.",
 	"notification-link-text-view-item": "Elem {{GENDER:$1|megtekintése}}",
