@@ -57,6 +57,7 @@ class ItemView extends EntityView {
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
+	 * @param array $viewOptions
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -67,8 +68,9 @@ class ItemView extends EntityView {
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider,
+		array $viewOptions,
 	) {
-		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode, $viewOptions );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;

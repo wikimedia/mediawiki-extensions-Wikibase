@@ -6,6 +6,9 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Parser\ParserOptions;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -35,7 +38,9 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( $lang );
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $lang );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGeneratorForParserOptions( $parserOptions );
 
 		$this->assertInstanceOf( EntityParserOutputGenerator::class, $instance );
 	}
@@ -45,7 +50,9 @@ class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCas
 			$this->createMock( DispatchingEntityViewFactory::class ),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( EntityTitleLookup::class ),
+			$this->createMock( LanguageFactory::class ),
 			new LanguageFallbackChainFactory(),
+			$this->createMock( LanguageNameUtils::class ),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
 			$this->createMock( EntityReferenceExtractorDelegator::class ),

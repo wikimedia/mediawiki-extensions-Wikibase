@@ -8,6 +8,9 @@ use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\Language;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -34,7 +37,9 @@ class EntityParserOutputGeneratorFactory {
 	private DispatchingEntityViewFactory $entityViewFactory;
 	private DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory;
 	private EntityTitleLookup $entityTitleLookup;
+	private LanguageFactory $languageFactory;
 	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private LanguageNameUtils $languageNameUtils;
 	private EntityDataFormatProvider $entityDataFormatProvider;
 	private PropertyDataTypeLookup $propertyDataTypeLookup;
 
@@ -66,7 +71,9 @@ class EntityParserOutputGeneratorFactory {
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFactory $languageFactory
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param LanguageNameUtils $languageNameUtils
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
@@ -85,7 +92,9 @@ class EntityParserOutputGeneratorFactory {
 		DispatchingEntityViewFactory $entityViewFactory,
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		EntityTitleLookup $entityTitleLookup,
+		LanguageFactory $languageFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LanguageNameUtils $languageNameUtils,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
@@ -102,7 +111,9 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->languageFactory = $languageFactory;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->languageNameUtils = $languageNameUtils;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
@@ -117,7 +128,41 @@ class EntityParserOutputGeneratorFactory {
 		$this->isMobileView = $isMobileView;
 	}
 
-	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
+	private function getValidUserLanguage( Language $language ): Language {
+		if ( !$this->languageNameUtils->isValidBuiltInCode( $language->getCode() ) ) {
+			return $this->languageFactory->getLanguage( 'und' ); // T204791
+		}
+		return $language;
+	}
+
+	/**
+	 * Introduce this function to make it possible to transition the interface
+	 * for `getEntityParserOutputGenerator` from taking a Language to taking a ParserOptions
+	 * object.
+	 *
+	 * We introduce this new function, update callers to call the new function with the
+	 * new interface, then in future commits we will remove the old function.
+	 *
+	 * @param ParserOptions $options
+	 * @return EntityParserOutputGenerator
+	 */
+	public function getEntityParserOutputGeneratorForParserOptions( ParserOptions $options ): EntityParserOutputGenerator {
+		$userLanguage = $this->getValidUserLanguage( $options->getUserLangObj() );
+		$wbMobile = $options->getOption( 'wbMobile' );
+
+		return $this->getEntityParserOutputGenerator( $userLanguage, $wbMobile );
+	}
+
+	/**
+	 * @deprecated Remove this function in favour of the function version that takes
+	 * a ParserOptions object. When all callers of this function have migrated, the function
+	 * can be removed.
+	 *
+	 * @param Language $userLanguage
+	 * @param bool|string $wbMobile
+	 * @return EntityParserOutputGenerator
+	 */
+	public function getEntityParserOutputGenerator( Language $userLanguage, $wbMobile = false ): EntityParserOutputGenerator {
 		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
@@ -126,6 +171,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
+			$wbMobile,
 			$this->isMobileView
 		);
 
@@ -186,17 +232,12 @@ class EntityParserOutputGeneratorFactory {
 				$this->newKartographerDataUpdater( $this->kartographerEmbeddingHandler ) );
 		}
 
-		$tmpMobileEditingUI = WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' );
 		$entityUpdaters = [
 			new ItemParserOutputUpdater(
 				$statementUpdater,
-				$this->isMobileView,
-				$tmpMobileEditingUI
 			),
 			new PropertyParserOutputUpdater(
 				$statementUpdater,
-				$this->isMobileView,
-				$tmpMobileEditingUI
 			),
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,

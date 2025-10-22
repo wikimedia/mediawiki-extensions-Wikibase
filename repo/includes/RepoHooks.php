@@ -30,6 +30,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\CodexModule;
@@ -962,10 +963,13 @@ final class RepoHooks implements
 			];
 		}
 
-		// temporarily register this RL module only if the feature flag is enabled,
-		// so that wikis without the feature flag don't even pay the small cost of loading the module *definition*
-		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
-		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
+		// temporarily register this RL module only if the feature flag for mobile editing or its beta feature are
+		// enabled, so that wikis without either feature flag don't even pay the small cost of loading the module
+		// *definition* (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
+		if (
+			$settings->getSetting( 'tmpMobileEditingUI' ) ||
+			$settings->getSetting( 'tmpEnableMobileEditingUIBetaFeature' )
+		) {
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
@@ -1142,14 +1146,11 @@ final class RepoHooks implements
 		};
 		$defaults['wbMobile'] = null;
 		$inCacheKey['wbMobile'] = true;
-		$lazyLoad['wbMobile'] = function () {
-			if ( WikibaseRepo::getMobileSite() ) {
-				if ( WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' ) ) {
-					return 'wbui2025';
-				}
-				return true;
-			}
-			return false;
+		$lazyLoad['wbMobile'] = function ( ParserOptions $parserOptions ) {
+			return WikibaseRepo::getWbui2025FeatureFlag()->generateWbMobileFlagValue(
+				WikibaseRepo::getMobileSite(),
+				$parserOptions->getUserIdentity(),
+			);
 		};
 	}
 

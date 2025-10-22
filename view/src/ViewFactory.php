@@ -131,7 +131,10 @@ class ViewFactory {
 	 */
 	private $entityIdParser;
 
-	private bool $vueStatementsView;
+	/**
+	 * @var Wbui2025FeatureFlag
+	 */
+	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
 
 	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
@@ -154,7 +157,7 @@ class ViewFactory {
 	 * @param SpecialPageLinker $specialPageLinker
 	 * @param LanguageFactory $languageFactory
 	 * @param EntityIdParser $entityIdParser
-	 * @param bool $vueStatementsView
+	 * @param Wbui2025FeatureFlag $wbui2025FeatureFlag
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -179,7 +182,7 @@ class ViewFactory {
 		SpecialPageLinker $specialPageLinker,
 		LanguageFactory $languageFactory,
 		EntityIdParser $entityIdParser,
-		bool $vueStatementsView
+		Wbui2025FeatureFlag $wbui2025FeatureFlag,
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -207,7 +210,7 @@ class ViewFactory {
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFactory = $languageFactory;
 		$this->entityIdParser = $entityIdParser;
-		$this->vueStatementsView = $vueStatementsView;
+		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
 	}
 
 	/**
@@ -234,13 +237,15 @@ class ViewFactory {
 	 * @param Language $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param CacheableEntityTermsView $entityTermsView
+	 * @param array $viewOptions
 	 *
 	 * @return ItemView
 	 */
 	public function newItemView(
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain,
-		CacheableEntityTermsView $entityTermsView
+		CacheableEntityTermsView $entityTermsView,
+		array $viewOptions = [],
 	) {
 		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$numberLocalizer = $this->numberLocalizerFactory->getForLanguage( $language );
@@ -249,7 +254,8 @@ class ViewFactory {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language,
 			$termFallbackChain,
-			$editSectionGenerator
+			$editSectionGenerator,
+			$viewOptions,
 		);
 
 		$siteLinksView = new SiteLinksView(
@@ -273,6 +279,7 @@ class ViewFactory {
 			$siteLinksView,
 			$this->siteLinkGroups,
 			$textProvider,
+			$viewOptions,
 		);
 	}
 
@@ -282,19 +289,22 @@ class ViewFactory {
 	 * @param Language $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param CacheableEntityTermsView $entityTermsView
+	 * @param array $viewOptions
 	 *
 	 * @return PropertyView
 	 */
 	public function newPropertyView(
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain,
-		CacheableEntityTermsView $entityTermsView
+		CacheableEntityTermsView $entityTermsView,
+		array $viewOptions = [],
 	) {
 		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language,
 			$termFallbackChain,
-			$this->newToolbarEditSectionGenerator( $textProvider )
+			$this->newToolbarEditSectionGenerator( $textProvider ),
+			$viewOptions,
 		);
 
 		return new PropertyView(
@@ -304,7 +314,8 @@ class ViewFactory {
 			$statementSectionsView,
 			$this->dataTypeFactory,
 			$language->getCode(),
-			$textProvider
+			$textProvider,
+			$viewOptions,
 		);
 	}
 
@@ -312,13 +323,15 @@ class ViewFactory {
 	 * @param Language $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param array $viewOptions
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		EditSectionGenerator $editSectionGenerator,
+		array $viewOptions = [],
 	) {
 		$textProvider = $this->textProviderFactory->getForLanguage( $language );
 		$statementGroupListView = $this->newStatementGroupListView(
@@ -346,7 +359,7 @@ class ViewFactory {
 			$statementGroupListView,
 			$textProvider,
 			$vueNoScriptRendering,
-			$this->vueStatementsView
+			Wbui2025FeatureFlag::wbui2025EnabledForViewOptions( $viewOptions ),
 		);
 	}
 

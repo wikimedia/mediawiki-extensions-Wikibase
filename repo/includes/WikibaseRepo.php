@@ -134,6 +134,7 @@ use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * Top level factory for the WikibaseRepo extension.
@@ -275,6 +276,11 @@ class WikibaseRepo {
 	public static function getMobileSite( ?ContainerInterface $services = null ): bool {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.MobileSite' );
+	}
+
+	public static function getWbui2025FeatureFlag( ?ContainerInterface $services = null ): Wbui2025FeatureFlag {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.Wbui2025FeatureFlag' );
 	}
 
 	public static function getEntityExistenceChecker( ?ContainerInterface $services = null ): EntityExistenceChecker {

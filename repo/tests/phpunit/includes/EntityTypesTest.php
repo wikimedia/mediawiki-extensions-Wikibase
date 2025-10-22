@@ -56,7 +56,8 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$entityView = $callback(
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
-			new Item( new ItemId( 'Q123' ) )
+			new Item( new ItemId( 'Q123' ) ),
+			[],
 		);
 
 		$this->assertInstanceOf( EntityDocumentView::class, $entityView );

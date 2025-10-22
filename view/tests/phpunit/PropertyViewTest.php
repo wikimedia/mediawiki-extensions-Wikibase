@@ -30,6 +30,7 @@ use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\EntityView
@@ -146,7 +147,8 @@ class PropertyViewTest extends EntityViewTestCase {
 			$statementSectionsView,
 			$this->getDataTypeFactory(),
 			'en',
-			$this->createMock( LocalizedTextProvider::class )
+			$this->createMock( LocalizedTextProvider::class ),
+			[ Wbui2025FeatureFlag::EXTENSION_DATA_KEY => $vueStatementsView ? 'wbui2025' : false ],
 		);
 	}
 

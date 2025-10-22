@@ -52,6 +52,7 @@ class PropertyView extends EntityView {
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param string $languageCode
 	 * @param LocalizedTextProvider $textProvider
+	 * @param array $viewOptions
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -60,9 +61,10 @@ class PropertyView extends EntityView {
 		StatementSectionsView $statementSectionsView,
 		DataTypeFactory $dataTypeFactory,
 		$languageCode,
-		LocalizedTextProvider $textProvider
+		LocalizedTextProvider $textProvider,
+		array $viewOptions,
 	) {
-		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode, $viewOptions );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->dataTypeFactory = $dataTypeFactory;

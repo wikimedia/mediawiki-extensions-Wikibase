@@ -853,9 +853,7 @@ abstract class EntityHandler extends ContentHandler {
 		$generateHtml = true
 	) {
 		$outputGenerator = WikibaseRepo::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator(
-				$this->getValidUserLanguage( $options->getUserLangObj() )
-			);
+			->getEntityParserOutputGeneratorForParserOptions( $options );
 
 		$entityRevision = $this->getEntityRevision( $content, $revisionId );
 
@@ -870,15 +868,6 @@ abstract class EntityHandler extends ContentHandler {
 		$this->applyEntityPageProperties( $content, $parserOutput );
 
 		return $parserOutput;
-	}
-
-	private function getValidUserLanguage( Language $language ): Language {
-		$services = MediaWikiServices::getInstance();
-		if ( !$services->getLanguageNameUtils()->isValidBuiltInCode( $language->getCode() ) ) {
-			return $services->getLanguageFactory()->getLanguage( 'und' ); // T204791
-		}
-
-		return $language;
 	}
 
 	/**

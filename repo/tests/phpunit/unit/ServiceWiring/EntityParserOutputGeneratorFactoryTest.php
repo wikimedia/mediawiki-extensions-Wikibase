@@ -61,6 +61,10 @@ class EntityParserOutputGeneratorFactoryTest extends ServiceWiringTestCase {
 			->method( 'getRepoGroup' );
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLinkBatchFactory' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageNameUtils' );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getLanguageFactory' );
 
 		$this->assertInstanceOf(
 			EntityParserOutputGeneratorFactory::class,

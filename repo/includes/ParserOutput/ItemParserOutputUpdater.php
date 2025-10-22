@@ -7,6 +7,7 @@ namespace Wikibase\Repo\ParserOutput;
 use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @license GPL-2.0-or-later
@@ -15,18 +16,10 @@ class ItemParserOutputUpdater implements EntityParserOutputUpdater {
 
 	private StatementDataUpdater $statementDataUpdater;
 
-	private bool $isMobileView;
-
-	private bool $tmpMobileEditingUI;
-
 	public function __construct(
-		StatementDataUpdater $statementDataUpdater,
-		bool $isMobileView,
-		bool $tmpMobileEditingUI
+		StatementDataUpdater $statementDataUpdater
 	) {
 		$this->statementDataUpdater = $statementDataUpdater;
-		$this->isMobileView = $isMobileView;
-		$this->tmpMobileEditingUI = $tmpMobileEditingUI;
 	}
 
 	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
@@ -42,7 +35,7 @@ class ItemParserOutputUpdater implements EntityParserOutputUpdater {
 
 		$this->statementDataUpdater->updateParserOutput( $parserOutput );
 
-		if ( $this->isMobileView && $this->tmpMobileEditingUI ) {
+		if ( Wbui2025FeatureFlag::wbui2025EnabledForParserOutput( $parserOutput ) ) {
 			$parserOutput->addModules( [
 				'wikibase.wbui2025.entityViewInit',
 			] );

@@ -36,6 +36,7 @@ use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\ItemView
@@ -338,6 +339,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->createMock( SiteLinksView::class ),
 			[],
 			$textProvider,
+			[ Wbui2025FeatureFlag::EXTENSION_DATA_KEY => $vueStatementsView ? 'wbui2025' : false ],
 		);
 	}
 

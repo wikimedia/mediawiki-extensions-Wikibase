@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Parser\ParserOptions;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -32,7 +35,9 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 	public function testGetFederatedPropertiesEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' );
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( $lang );
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $lang );
+		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGeneratorForParserOptions( $parserOptions );
 
 		$this->assertInstanceOf( FederatedPropertiesUiEntityParserOutputGeneratorDecorator::class, $instance );
 	}
@@ -42,7 +47,9 @@ class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase
 			$this->createMock( DispatchingEntityViewFactory::class ),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( EntityTitleLookup::class ),
+			$this->createMock( LanguageFactory::class ),
 			new LanguageFallbackChainFactory(),
+			$this->createMock( LanguageNameUtils::class ),
 			$this->createMock( EntityDataFormatProvider::class ),
 			new InMemoryDataTypeLookup(),
 			$this->createMock( EntityReferenceExtractorDelegator::class ),
