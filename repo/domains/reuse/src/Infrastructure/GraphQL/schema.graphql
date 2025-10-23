@@ -57,10 +57,6 @@ type StringValue {
 }
 
 type ItemValue {
-  content: ValueItem!
-}
-
-type ValueItem {
   id: String!
   label(languageCode: LanguageCode!): String
 }

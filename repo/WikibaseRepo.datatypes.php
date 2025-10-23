@@ -494,30 +494,32 @@ return call_user_func( function() {
 				return new ObjectType( [
 					'name' => 'ItemValue',
 					'fields' => [
-						'content' => [
-							'type' => Type::nonNull( new ObjectType( [
-								'name' => 'ValueItem',
-								'fields' => [
-									'id' => [
-										'type' => Type::nonNull( Type::string() ),
-										'resolve' => fn( EntityIdValue $content ) => $content->getEntityId()->getSerialization(),
-									],
-									'label' => [
-										'type' => Type::string(),
-										'args' => [
-											'languageCode' => Type::nonNull( $languageCodeType ),
-										],
-										'resolve' => function( EntityIdValue $value, array $args ) use( $itemLabelsResolver ) {
-											/** @var ItemId $itemId */
-											$itemId = $value->getEntityId();
-											'@phan-var ItemId $itemId';
+						'id' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
 
-											return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
-										},
-									],
-								],
-							] ) ),
-							'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->content,
+								return $idValue->getEntityId()->getSerialization();
+							},
+						],
+						'label' => [
+							'type' => Type::string(),
+							'args' => [
+								'languageCode' => Type::nonNull( $languageCodeType ),
+							],
+							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								/** @var ItemId $itemId */
+								$itemId = $idValue->getEntityId();
+								'@phan-var ItemId $itemId';
+
+								return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
+							},
 						],
 					],
 				] );

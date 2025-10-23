@@ -344,7 +344,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					valueType
 				}
 				$statementWithItemValuePropertyId: statements(propertyId: \"$statementWithItemValuePropertyId\") {
-					value { ...on ItemValue { content { id } } }
+					value { ...on ItemValue { id } }
 					valueType
 				}
 			} }",
@@ -361,9 +361,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						],
 						$statementWithItemValuePropertyId => [
 							[
-								'value' => [
-									'content' => [ 'id' => $itemValueItemId ],
-								],
+								'value' => [ 'id' => $itemValueItemId ],
 								'valueType' => 'value',
 							],
 						],
@@ -461,13 +459,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				statements(propertyId: \"{$statementWithItemValuePropertyId}\") {
 					value {
 						... on ItemValue {
-							content { label(languageCode: \"en\") }
+							label(languageCode: \"en\")
 						}
 					}
 					qualifiers(propertyId: \"{$statementWithItemValueQualifierPropertyId}\") {
 						value {
 							... on ItemValue {
-								content { label(languageCode: \"en\") }
+								label(languageCode: \"en\")
 							}
 						}
 					}
@@ -479,16 +477,12 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'statements' => [
 							[
 								'value' => [
-									'content' => [
-										'label' => self::$statementValueItem->getLabels()->getByLanguage( 'en' )->getText(),
-									],
+									'label' => self::$statementValueItem->getLabels()->getByLanguage( 'en' )->getText(),
 								],
 								'qualifiers' => [
 									[
 										'value' => [
-											'content' => [
-												'label' => self::$qualifierValueItem->getLabels()->getByLanguage( 'en' )->getText(),
-											],
+											'label' => self::$qualifierValueItem->getLabels()->getByLanguage( 'en' )->getText(),
 										],
 									],
 								],
