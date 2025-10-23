@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
+use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
 use Generator;
 use GraphQL\GraphQL;
@@ -48,6 +49,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $stringTypeProperty;
 	private static Property $itemTypeProperty;
 	private static Property $globeCoordinateTypeProperty;
+	private static Property $monolingualTextProperty;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -78,10 +80,15 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( self::$stringTypeProperty->getId(), 'string' );
-		$dataTypeLookup->setDataTypeForProperty( self::$qualifierProperty->getId(), 'string' );
-		$dataTypeLookup->setDataTypeForProperty( self::$itemTypeProperty->getId(), 'wikibase-item' );
-		$dataTypeLookup->setDataTypeForProperty( self::$globeCoordinateTypeProperty->getId(), 'globe-coordinate' );
+		foreach ( [
+			self::$qualifierProperty,
+			self::$stringTypeProperty,
+			self::$itemTypeProperty,
+			self::$globeCoordinateTypeProperty,
+			self::$monolingualTextProperty,
+		] as $property ) {
+			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
+		}
 
 		$this->assertEquals(
 			$expectedResult,
@@ -122,6 +129,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithNoReferencesPropertyId = $statementWithNoValuePropertyId;
 		$statementWithSomeValuePropertyId = 'P5';
 		$statementWithGlobeCoordinateValuePropertyId = 'P6';
+		$statementWithMonolingualTextValuePropertyId = 'P7';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
@@ -144,6 +152,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithGlobeCoordinateValue = NewStatement::forProperty( $statementWithGlobeCoordinateValuePropertyId )
 			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
 			->withValue( $globeCoordinateValue )
+			->build();
+		$monolingualTextValue = new MonolingualTextValue( 'en', 'potato' );
+		$statementWithMonolingualTextValue = NewStatement::forProperty( $statementWithMonolingualTextValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( $monolingualTextValue )
 			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
@@ -169,6 +182,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			null,
 			'globe-coordinate',
 		);
+		self::$monolingualTextProperty = new Property(
+			new NumericPropertyId( $statementWithMonolingualTextValuePropertyId ),
+			null,
+			'monolingualtext',
+		);
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -183,6 +201,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithStringValue )
 			->andStatement( $statementWithItemValue )
 			->andStatement( $statementWithGlobeCoordinateValue )
+			->andStatement( $statementWithMonolingualTextValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->build();
@@ -387,6 +406,29 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 									'longitude' => $globeCoordinateValue->getLongitude(),
 									'precision' => $globeCoordinateValue->getPrecision(),
 									'globe' => $globeCoordinateValue->getGlobe(),
+								],
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with monolingualtext value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$statementWithMonolingualTextValuePropertyId\") {
+					value {
+						... on MonolingualTextValue { language text }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'language' => $monolingualTextValue->getLanguageCode(),
+									'text' => $monolingualTextValue->getText(),
 								],
 							],
 						],

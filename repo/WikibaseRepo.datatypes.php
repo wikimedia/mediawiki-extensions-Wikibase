@@ -262,6 +262,26 @@ return call_user_func( function() {
 			) {
 				return new MonolingualTextRdfBuilder();
 			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'MonolingualTextValue',
+					'fields' => [
+						'language' => Type::nonNull( Type::string() ),
+						'text' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						/** @var MonolingualTextValue $value */
+						$value = $valueProvider->value->content;
+						'@phan-var MonolingualTextValue $value';
+
+						return match ( $info->fieldName ) {
+							'language' => $value->getLanguageCode(),
+							'text' => $value->getText(),
+							default => null,
+						};
+					},
+				] );
+			},
 		],
 		'VT:quantity' => [
 			'expert-module' => 'jquery.valueview.experts.QuantityInput',
