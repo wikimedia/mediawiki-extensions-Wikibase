@@ -2,10 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
+use DataValues\DecimalValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
+use DataValues\QuantityValue;
 use DataValues\StringValue;
+use DataValues\UnboundedQuantityValue;
 use Generator;
 use GraphQL\GraphQL;
 use MediaWiki\Site\HashSiteStore;
@@ -50,6 +53,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $itemTypeProperty;
 	private static Property $globeCoordinateTypeProperty;
 	private static Property $monolingualTextProperty;
+	private static Property $quantityProperty;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -86,6 +90,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$itemTypeProperty,
 			self::$globeCoordinateTypeProperty,
 			self::$monolingualTextProperty,
+			self::$quantityProperty,
 		] as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
@@ -130,6 +135,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithSomeValuePropertyId = 'P5';
 		$statementWithGlobeCoordinateValuePropertyId = 'P6';
 		$statementWithMonolingualTextValuePropertyId = 'P7';
+		$statementWithQuantityValuePropertyId = 'P8';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
@@ -157,6 +163,24 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithMonolingualTextValue = NewStatement::forProperty( $statementWithMonolingualTextValuePropertyId )
 			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
 			->withValue( $monolingualTextValue )
+			->build();
+		$quantityValue = new QuantityValue(
+			new DecimalValue( '+0.111' ),
+			'https://wikibase.example/wiki/Q123',
+			new DecimalValue( '+0.1150' ),
+			new DecimalValue( '+0.1105' ),
+		);
+		$unboundedQuantityValue = new UnboundedQuantityValue(
+			new DecimalValue( '+321' ),
+			'https://wikibase.example/wiki/Q321',
+		);
+		$statementWithQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( $quantityValue )
+			->build();
+		$statementWithUnboundedQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( $unboundedQuantityValue )
 			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
@@ -187,6 +211,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			null,
 			'monolingualtext',
 		);
+		self::$quantityProperty = new Property(
+			new NumericPropertyId( $statementWithQuantityValuePropertyId ),
+			null,
+			'quantity',
+		);
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -202,6 +231,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithItemValue )
 			->andStatement( $statementWithGlobeCoordinateValue )
 			->andStatement( $statementWithMonolingualTextValue )
+			->andStatement( $statementWithQuantityValue )
+			->andStatement( $statementWithUnboundedQuantityValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->build();
@@ -429,6 +460,39 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								'value' => [
 									'language' => $monolingualTextValue->getLanguageCode(),
 									'text' => $monolingualTextValue->getText(),
+								],
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with quantity value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$statementWithQuantityValuePropertyId\") {
+					value {
+						... on QuantityValue { amount unit lowerBound upperBound }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'amount' => $quantityValue->getAmount()->getValue(),
+									'unit' => $quantityValue->getUnit(),
+									'lowerBound' => $quantityValue->getLowerBound()->getValue(),
+									'upperBound' => $quantityValue->getUpperBound()->getValue(),
+								],
+							],
+							[
+								'value' => [
+									'amount' => $unboundedQuantityValue->getAmount()->getValue(),
+									'unit' => $unboundedQuantityValue->getUnit(),
+									'lowerBound' => null,
+									'upperBound' => null,
 								],
 							],
 						],
