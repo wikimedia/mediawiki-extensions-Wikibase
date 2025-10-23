@@ -398,6 +398,25 @@ return call_user_func( function() {
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
 			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'TimeValue',
+					'fields' => [
+						'time' => Type::nonNull( Type::string() ),
+						'timezone' => Type::nonNull( Type::int() ),
+						'before' => Type::nonNull( Type::int() ),
+						'after' => Type::nonNull( Type::int() ),
+						'precision' => Type::nonNull( Type::int() ),
+						'calendarModel' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						$value = $valueProvider->value->content->getArrayValue();
+						$value['calendarModel'] = $value['calendarmodel'] ?? null; // prefer camel case over all lowercase
+
+						return $value[$info->fieldName] ?? null;
+					},
+				] );
+			},
 		],
 		'PT:url' => [
 			'validator-factory-callback' => function() {

@@ -8,6 +8,7 @@ use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;
+use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use Generator;
 use GraphQL\GraphQL;
@@ -54,6 +55,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $globeCoordinateTypeProperty;
 	private static Property $monolingualTextProperty;
 	private static Property $quantityProperty;
+	private static Property $timeProperty;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -91,6 +93,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$globeCoordinateTypeProperty,
 			self::$monolingualTextProperty,
 			self::$quantityProperty,
+			self::$timeProperty,
 		] as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
@@ -136,6 +139,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithGlobeCoordinateValuePropertyId = 'P6';
 		$statementWithMonolingualTextValuePropertyId = 'P7';
 		$statementWithQuantityValuePropertyId = 'P8';
+		$statementWithTimeValuePropertyId = 'P9';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
@@ -182,6 +186,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
 			->withValue( $unboundedQuantityValue )
 			->build();
+		$timeValue = new TimeValue(
+			timestamp: '+2001-01-01T00:00:00Z',
+			timezone: 60,
+			before: 0,
+			after: 1,
+			precision: TimeValue::PRECISION_MONTH,
+			calendarModel: 'http://www.wikidata.org/entity/Q1985727',
+		);
+		$statementWithTimeValue = NewStatement::forProperty( $statementWithTimeValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( $timeValue )
+			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d9f" )
@@ -216,6 +232,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			null,
 			'quantity',
 		);
+		self::$timeProperty = new Property(
+			new NumericPropertyId( $statementWithTimeValuePropertyId ),
+			null,
+			'time',
+		);
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -233,6 +254,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithMonolingualTextValue )
 			->andStatement( $statementWithQuantityValue )
 			->andStatement( $statementWithUnboundedQuantityValue )
+			->andStatement( $statementWithTimeValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->build();
@@ -493,6 +515,33 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 									'unit' => $unboundedQuantityValue->getUnit(),
 									'lowerBound' => null,
 									'upperBound' => null,
+								],
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with time value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$statementWithTimeValuePropertyId\") {
+					value {
+						... on TimeValue { time timezone before after precision calendarModel }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'time' => $timeValue->getTime(),
+									'timezone' => $timeValue->getTimezone(),
+									'before' => $timeValue->getBefore(),
+									'after' => $timeValue->getAfter(),
+									'precision' => $timeValue->getPrecision(),
+									'calendarModel' => $timeValue->getCalendarModel(),
 								],
 							],
 						],
