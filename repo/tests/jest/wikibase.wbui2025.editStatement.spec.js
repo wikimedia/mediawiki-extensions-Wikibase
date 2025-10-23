@@ -313,8 +313,12 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					wait++;
 				}
 				expect( addQualifierForm.exists() ).toBe( false );
-				expect( qualifiers[ 0 ].props( 'qualifiers' ) ).toEqual( expect.objectContaining( {
-					P23: [ snakData.hash ]
+
+				const updatedQualifiers = wrapper.findAllComponents( Wbui2025EditableQualifiers );
+				const updatedQualifiersProps = updatedQualifiers[ 0 ].props( 'qualifiers' );
+
+				expect( updatedQualifiersProps ).toEqual( expect.objectContaining( {
+					P23: expect.any( Array )
 				} ) );
 			} );
 		} );

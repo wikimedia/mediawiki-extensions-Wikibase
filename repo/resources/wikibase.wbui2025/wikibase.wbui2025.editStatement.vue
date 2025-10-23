@@ -122,8 +122,8 @@ module.exports = exports = defineComponent( {
 		 * store - we pass in the statementId to make a statement-specific store. This forces us to use
 		 * the Composition API to initialise the component.
 		 */
-		const editStatmentStore = wbui2025.store.useEditStatementStore( props.statementId );
-		const computedStatementProperties = mapWritableState( editStatmentStore, [
+		const editStatementStore = wbui2025.store.useEditStatementStore( props.statementId );
+		const computedStatementProperties = mapWritableState( editStatementStore, [
 			'mainSnakKey',
 			'qualifiers',
 			'qualifiersOrder',
@@ -148,36 +148,24 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-statementview-rank-deprecated' ), value: 'deprecated', icon: rankSelectorDeprecatedIcon }
 			],
 			showAddQualifierModal: false,
-			newQualifierCounter: 0,
-			showAddReferenceModal: false,
-			newReferenceCounter: 0
+			showAddReferenceModal: false
 		};
 	},
 	methods: {
-		async addQualifier( propertyId, snakData ) {
-			if ( !snakData.hash ) {
-				this.newQualifierCounter += 1;
-				snakData.hash = `${ this.statementId }-new-qualifier-${ this.newQualifierCounter }`;
-			}
-			if ( this.qualifiers[ propertyId ] === undefined ) {
-				this.qualifiers[ propertyId ] = [];
-				this.qualifiersOrder.push( propertyId );
-
-				wbui2025.api.renderPropertyLinkHtml( propertyId )
-					.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( propertyId, result ) );
-			}
-
-			const editSnakStore = wbui2025.store.useEditSnakStore( snakData.hash )();
-			await editSnakStore.initializeWithSnak( snakData );
-			this.qualifiers[ propertyId ].push( snakData.hash );
-			wbui2025.api.renderSnakValueHtml( snakData.datavalue, propertyId )
-					.then( ( result ) => wbui2025.store.updateSnakValueHtmlForHash( snakData.hash, result ) );
-			if ( snakData.snaktype === 'value' ) {
-				editSnakStore.getValueStrategy().getParsedValue();
-			}
-
+		addQualifier( propertyId, snakData ) {
+			wbui2025.store
+				.useEditStatementStore( this.statementId )()
+				.addQualifier( propertyId, snakData );
 			this.showAddQualifierModal = false;
 		},
+
+		addReference( propertyId, snakData ) {
+			wbui2025.store
+				.useEditStatementStore( this.statementId )()
+				.addReference( propertyId, snakData );
+			this.showAddReferenceModal = false;
+		},
+
 		removeQualifierSnakFromProperty( propertyId, snakKey ) {
 			this.qualifiers[ propertyId ].splice( this.qualifiers[ propertyId ].indexOf( snakKey ), 1 );
 			if ( this.qualifiers[ propertyId ].length === 0 ) {
@@ -185,36 +173,7 @@ module.exports = exports = defineComponent( {
 				this.qualifiersOrder.splice( this.qualifiersOrder.indexOf( propertyId ), 1 );
 			}
 		},
-		async addReference( propertyId, snakData ) {
-			if ( !snakData.hash ) {
-				this.newReferenceCounter += 1;
-				snakData.hash = `${ this.statementId }-new-reference-${ this.newReferenceCounter }`;
-			}
 
-			const snaks = {};
-
-			wbui2025.api.renderPropertyLinkHtml( propertyId )
-				.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( propertyId, result ) );
-
-			const editSnakStore = wbui2025.store.useEditSnakStore( snakData.hash )();
-			await editSnakStore.initializeWithSnak( snakData );
-
-			snaks[ propertyId ] = [ snakData.hash ];
-
-			this.references.push( {
-				snaks,
-				'snaks-order': [ propertyId ]
-			} );
-
-			wbui2025.api.renderSnakValueHtml( snakData.datavalue )
-				.then( ( result ) => wbui2025.store.updateSnakValueHtmlForHash( snakData.hash, result ) );
-
-			if ( snakData.snaktype === 'value' ) {
-				editSnakStore.getValueStrategy().getParsedValue();
-			}
-
-			this.showAddReferenceModal = false;
-		},
 		removeReference( reference ) {
 			this.references.splice( this.references.indexOf( reference ), 1 );
 		},

@@ -37,14 +37,24 @@ describe( 'Edit Statements Store', () => {
 		it( 'existing and new statement, initially unparsed, then parsed', async () => {
 			const editStatementsStore = useEditStatementsStore();
 			const parsedValueStore = useParsedValueStore();
+
 			const id1 = 'Q1$00000000-0000-0000-0000-000000000001';
 			const id2 = 'Q1$00000000-0000-0000-0000-000000000002';
+
 			await editStatementsStore.initializeFromStatementStore( [ id1 ], 'P1' );
 			await editStatementsStore.createNewBlankStatement( id2, 'P1' );
+
 			const v1 = 'value 1';
 			const v2 = 'value 2';
-			useEditSnakStore( useEditStatementStore( id1 )().mainSnakKey )().textvalue = v1;
-			useEditSnakStore( useEditStatementStore( id2 )().mainSnakKey )().textvalue = v2;
+
+			const snak1 = useEditSnakStore( useEditStatementStore( id1 )().mainSnakKey )();
+			const snak2 = useEditSnakStore( useEditStatementStore( id2 )().mainSnakKey )();
+
+			snak1.textvalue = v1;
+			snak1.value = v1;
+
+			snak2.textvalue = v2;
+			snak2.value = v2;
 
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
@@ -212,7 +222,9 @@ describe( 'Edit Statements Store', () => {
 			const editStatementsStore = useEditStatementsStore();
 			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
 
-			useEditSnakStore( useEditStatementStore( id )().mainSnakKey )().textvalue += ' ';
+			const snak = useEditSnakStore( useEditStatementStore( id )().mainSnakKey )();
+			snak.textvalue += ' ';
+			snak.value = snak.textvalue;
 
 			expect( editStatementsStore.hasChanges ).toBe( null );
 			expect( mockedParseValue ).not.toHaveBeenCalled();
@@ -258,7 +270,9 @@ describe( 'Edit Statements Store', () => {
 			const editStatementsStore = useEditStatementsStore();
 			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
 
-			useEditSnakStore( useEditStatementStore( id )().mainSnakKey )().textvalue += 'd';
+			const snak = useEditSnakStore( useEditStatementStore( id )().mainSnakKey )();
+			snak.textvalue += 'd';
+			snak.value = snak.textvalue;
 
 			expect( editStatementsStore.hasChanges ).toBe( null );
 			expect( mockedParseValue ).not.toHaveBeenCalled();

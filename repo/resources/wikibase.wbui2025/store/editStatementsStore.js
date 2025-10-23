@@ -2,7 +2,8 @@ const { defineStore, getActivePinia } = require( 'pinia' );
 const { useSavedStatementsStore, getStatementById } = require( './savedStatementsStore.js' );
 const { snakValueStrategyFactory } = require( './snakValueStrategyFactory.js' );
 require( './snakValueStrategies.js' );
-const { updateStatements } = require( '../api/editEntity.js' );
+const { updateStatements, renderSnakValueHtml, renderPropertyLinkHtml } = require( '../api/editEntity.js' );
+const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './serverRenderedHtml.js' );
 
 /**
  * Check if two data values (objects with "type" and "value" keys) are equal.
@@ -42,7 +43,6 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 		getValueStrategy() {
 			return snakValueStrategyFactory.getStrategyForSnakStore( this );
 		},
-
 		async initializeWithSnak( snak ) {
 			this.snaktype = snak.snaktype;
 			this.datatype = snak.datatype;
@@ -151,6 +151,54 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			await Promise.all( snakInitPromises );
 		},
 
+		async addQualifier( propertyId, snakData ) {
+			if ( !snakData.hash ) {
+				snakData.hash = `${ this.$id }-qualifier-${ propertyId }-${ generateNextSnakKey() }`;
+			}
+			if ( this.qualifiers[ propertyId ] === undefined ) {
+				this.qualifiers[ propertyId ] = [];
+				this.qualifiersOrder.push( propertyId );
+
+				renderPropertyLinkHtml( propertyId )
+					.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+			}
+
+			const editSnakStore = useEditSnakStore( snakData.hash )();
+			await editSnakStore.initializeWithSnak( snakData );
+			this.qualifiers[ propertyId ].push( snakData.hash );
+			renderSnakValueHtml( snakData.datavalue, propertyId )
+				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+			if ( snakData.snaktype === 'value' ) {
+				editSnakStore.getValueStrategy().getParsedValue();
+			}
+		},
+
+		async addReference( propertyId, snakData ) {
+			if ( !snakData.hash ) {
+				snakData.hash = `${ this.$id }-reference-${ propertyId }-${ generateNextSnakKey() }`;
+			}
+			const snaks = {};
+
+			renderPropertyLinkHtml( propertyId )
+				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+
+			const editSnakStore = useEditSnakStore( snakData.hash )();
+			await editSnakStore.initializeWithSnak( snakData );
+
+			snaks[ propertyId ] = [ snakData.hash ];
+
+			this.references.push( {
+				snaks,
+				'snaks-order': [ propertyId ]
+			} );
+
+			renderSnakValueHtml( snakData.datavalue )
+				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+
+			if ( snakData.snaktype === 'value' ) {
+				editSnakStore.getValueStrategy().getParsedValue();
+			}
+		},
 		disposeOfStatementStoreAndSnaks() {
 			deleteStore( useEditSnakStore( this.mainSnakKey )() );
 			for ( const [ , statementList ] of Object.entries( this.qualifiers ) ) {
