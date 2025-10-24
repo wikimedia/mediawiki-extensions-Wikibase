@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -103,8 +104,10 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	private function newParserOutputGenerator() {
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 		return WikibaseRepo::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
+			->getEntityParserOutputGeneratorForParserOptions( $parserOptions );
 	}
 
 	private function saveItem( $id ) {
@@ -147,9 +150,12 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
 		$revision = $store->saveEntity( $item, 'test item', $user );
 
-		$language = $mwServices->getLanguageFactory()->getLanguage( 'en' );
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getEntityParserOutputGeneratorFactory( $mwServices );
-		$entityParserOutputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $language );
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $mwServices->getLanguageFactory()->getLanguage( 'en' ) );
+		$entityParserOutputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGeneratorForParserOptions(
+			$parserOptions
+		);
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 

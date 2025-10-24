@@ -135,34 +135,9 @@ class EntityParserOutputGeneratorFactory {
 		return $language;
 	}
 
-	/**
-	 * Introduce this function to make it possible to transition the interface
-	 * for `getEntityParserOutputGenerator` from taking a Language to taking a ParserOptions
-	 * object.
-	 *
-	 * We introduce this new function, update callers to call the new function with the
-	 * new interface, then in future commits we will remove the old function.
-	 *
-	 * @param ParserOptions $options
-	 * @return EntityParserOutputGenerator
-	 */
 	public function getEntityParserOutputGeneratorForParserOptions( ParserOptions $options ): EntityParserOutputGenerator {
 		$userLanguage = $this->getValidUserLanguage( $options->getUserLangObj() );
-		$wbMobile = $options->getOption( 'wbMobile' );
 
-		return $this->getEntityParserOutputGenerator( $userLanguage, $wbMobile );
-	}
-
-	/**
-	 * @deprecated Remove this function in favour of the function version that takes
-	 * a ParserOptions object. When all callers of this function have migrated, the function
-	 * can be removed.
-	 *
-	 * @param Language $userLanguage
-	 * @param bool|string $wbMobile
-	 * @return EntityParserOutputGenerator
-	 */
-	public function getEntityParserOutputGenerator( Language $userLanguage, $wbMobile = false ): EntityParserOutputGenerator {
 		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
@@ -171,7 +146,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
-			$wbMobile,
+			$options->getOption( 'wbMobile' ),
 			$this->isMobileView
 		);
 
