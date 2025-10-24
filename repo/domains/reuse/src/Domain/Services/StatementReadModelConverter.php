@@ -9,7 +9,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
-use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
+use Wikibase\DataModel\Statement\Statement as DataModelStatement;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PredicateProperty;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Qualifiers;
@@ -29,7 +29,7 @@ class StatementReadModelConverter {
 	) {
 	}
 
-	public function convert( StatementWriteModel $inputStatement ): Statement {
+	public function convert( DataModelStatement $inputStatement ): Statement {
 		$guid = $inputStatement->getGuid();
 		if ( $guid === null ) {
 			throw new InvalidArgumentException( 'Can only convert statements that have a non-null GUID' );
