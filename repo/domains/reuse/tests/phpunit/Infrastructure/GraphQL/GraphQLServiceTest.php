@@ -152,7 +152,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$qualifierStringValue = 'qualifierStringValue';
 		$statementStringValue = 'statementStringValue';
 		$statementWithStringValue = NewStatement::forProperty( ( $statementWithStringValuePropertyId ) )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d7f" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withRank( 1 )
 			->withQualifier( new NumericPropertyId( $qualifierPropertyId ), new StringValue( $qualifierStringValue ) )
 			->withReference( new Reference( [ new PropertySomeValueSnak( new NumericPropertyId( $statementReferencePropertyId ) ) ] ) )
@@ -160,18 +161,21 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->build();
 
 		$statementWithItemValue = NewStatement::forProperty( ( $statementWithItemValuePropertyId ) )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d8f" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( new ItemId( $itemValueItemId ) )
 			->withQualifier( $statementWithItemValueQualifierPropertyId, self::$qualifierValueItem->getId() )
 			->build();
 		$globeCoordinateValue = new GlobeCoordinateValue( new LatLongValue( 52.516, 13.383 ) );
 		$statementWithGlobeCoordinateValue = NewStatement::forProperty( $statementWithGlobeCoordinateValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( $globeCoordinateValue )
 			->build();
 		$monolingualTextValue = new MonolingualTextValue( 'en', 'potato' );
 		$statementWithMonolingualTextValue = NewStatement::forProperty( $statementWithMonolingualTextValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( $monolingualTextValue )
 			->build();
 		$quantityValue = new QuantityValue(
@@ -185,11 +189,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			'https://wikibase.example/wiki/Q321',
 		);
 		$statementWithQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( $quantityValue )
 			->build();
 		$statementWithUnboundedQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( $unboundedQuantityValue )
 			->build();
 		$timeValue = new TimeValue(
@@ -201,7 +207,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			calendarModel: 'http://www.wikidata.org/entity/Q1985727',
 		);
 		$statementWithTimeValue = NewStatement::forProperty( $statementWithTimeValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( $timeValue )
 			->build();
 		self::$propertyUsedAsValue = new Property(
@@ -210,15 +217,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			'string',
 		);
 		$statementWithPropertyValue = NewStatement::forProperty( $statementWithPropertyValuePropertyId )
-			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->withValue( new EntityIdValue( self::$propertyUsedAsValue->getId() ) )
 			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d9f" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->build();
 		$statementWithSomeValue = NewStatement::someValueFor( ( $statementWithSomeValuePropertyId ) )
-			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d6f" )
+			->withSubject( $itemId )
+			->withSomeGuid()
 			->build();
 
 		self::$sitelinkSite = new MediaWikiSite();

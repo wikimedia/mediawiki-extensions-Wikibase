@@ -3,10 +3,8 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Domain\Services;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,14 +21,14 @@ class StatementReadModelConverterTest extends TestCase {
 	private const STRING_PROPERTY = 'P123';
 
 	public function testConvert_simpleStatement(): void {
-		$id = new StatementGuid( new ItemId( 'Q123' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$statementWriteModel = NewStatement::noValueFor( 'P123' )
-			->withGuid( (string)$id )
+			->withSubject( 'Q123' )
+			->withSomeGuid()
 			->build();
 
 		$readModel = $this->newConverter()->convert( $statementWriteModel );
 
-		$this->assertEquals( $id, $readModel->id );
+		$this->assertEquals( $statementWriteModel->getGuid(), $readModel->id );
 		$this->assertSame( $statementWriteModel->getPropertyId(), $readModel->property->id );
 		$this->assertSame( 'string', $readModel->property->dataType );
 	}

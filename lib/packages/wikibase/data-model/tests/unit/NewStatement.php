@@ -49,6 +49,8 @@ class NewStatement {
 	/** @var string|bool|null */
 	private $guid;
 
+	private ?string $subjectId = null;
+
 	/**
 	 * @var Snak[]
 	 */
@@ -152,16 +154,24 @@ class NewStatement {
 		return $result;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withSomeGuid() {
+	public function withSomeGuid(): static {
 		$result = clone $this;
 		if ( $result->guid !== null ) {
 			throw new LogicException( 'Cannot redefine GUID' );
 		}
 
 		$result->guid = self::GENERATE_GUID;
+
+		return $result;
+	}
+
+	public function withSubject( EntityId|string $subject ): static {
+		$result = clone $this;
+		if ( $result->subjectId !== null ) {
+			throw new LogicException( 'Cannot redefine subject' );
+		}
+
+		$result->subjectId = (string)$subject;
 
 		return $result;
 	}
@@ -230,8 +240,10 @@ class NewStatement {
 		$result->setRank( $this->rank );
 
 		if ( $this->guid === self::GENERATE_GUID ) {
+			// defaulting to the Property ID here doesn't really make sense. withSomeGuid() should be used in combination with withSubject()
+			$subject = $this->subjectId ?? $this->propertyId;
 			$result->setGuid(
-				$this->propertyId->getSerialization() . '$' . $this->generateUuidV4()
+				"$subject\$" . $this->generateUuidV4()
 			);
 		} elseif ( $this->guid ) {
 			$result->setGuid( $this->guid );

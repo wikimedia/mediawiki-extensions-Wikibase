@@ -112,11 +112,11 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 	}
 
 	public function testGetItemsWithStatements(): void {
-		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
 		$item1StatementPropertyId = 'P1';
 		$item1StatementQualifierPropertyId = new NumericPropertyId( 'P42' );
 		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )
-			->withGuid( $item1StatementGuid )
+			->withSubject( $this->item1Id )
+			->withSomeGuid()
 			->withRank( 0 )
 			->withQualifier( $item1StatementQualifierPropertyId, new StringValue( 'stringValue' ) )
 			->build();
@@ -179,11 +179,11 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 	}
 
 	public function testGetItemsWithStatementsWithReferences(): void {
-		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
 		$item1StatementPropertyId = 'P1';
 		$item1StatementReferencePropertyId = new NumericPropertyId( 'P42' );
 		$item1Statement = NewStatement::noValueFor( $item1StatementPropertyId )
-			->withGuid( $item1StatementGuid )
+			->withSubject( $this->item1Id )
+			->withSomeGuid()
 			->withReference( new Reference( [ new PropertySomeValueSnak( $item1StatementReferencePropertyId ) ] ) )
 			->build();
 
@@ -226,17 +226,17 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 	}
 
 	public function testGetItemWithStatementsWithValue(): void {
-		$item1StatementGuid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d7f";
-		$item1Statement2Guid = "$this->item1Id\$bed933b7-4207-d679-7571-3630cfb49d8f";
 		$item1StatementPropertyId = 'P1';
 		$item1Statement2PropertyId = 'P3';
 		$itemValueItemId = 'Q6';
 		$item1Statement = NewStatement::forProperty( $item1StatementPropertyId )
-			->withGuid( $item1StatementGuid )
+			->withSubject( $this->item1Id )
+			->withSomeGuid()
 			->withValue( 'stringValue' )
 			->build();
 		$item1Statement2 = NewStatement::forProperty( $item1Statement2PropertyId )
-			->withGuid( $item1Statement2Guid )
+			->withSubject( $this->item1Id )
+			->withSomeGuid()
 			->withValue( new ItemId( $itemValueItemId ) )
 			->build();
 
