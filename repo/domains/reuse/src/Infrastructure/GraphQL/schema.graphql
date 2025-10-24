@@ -52,13 +52,18 @@ type PredicateProperty {
   label(languageCode: LanguageCode!): String
 }
 
-union Value = StringValue | ItemValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue
+union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue
 
 type StringValue {
   content: String!
 }
 
 type ItemValue {
+  id: String!
+  label(languageCode: LanguageCode!): String
+}
+
+type PropertyValue {
   id: String!
   label(languageCode: LanguageCode!): String
 }

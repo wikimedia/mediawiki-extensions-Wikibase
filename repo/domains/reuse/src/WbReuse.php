@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\StringValueType;
@@ -27,6 +28,11 @@ class WbReuse {
 	public static function getItemLabelsResolver( ?ContainerInterface $services = null ): ItemLabelsResolver {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.ItemLabelsResolver' );
+	}
+
+	public static function getPropertyLabelsResolver( ?ContainerInterface $services = null ): PropertyLabelsResolver {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.PropertyLabelsResolver' );
 	}
 
 	public static function getLanguageCodeType( ?ContainerInterface $services = null ): LanguageCodeType {

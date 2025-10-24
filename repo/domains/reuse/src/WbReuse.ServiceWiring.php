@@ -29,11 +29,7 @@ return [
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
 		$languageCodeType = WbReuse::getLanguageCodeType( $services );
 		$predicatePropertyType = new PredicatePropertyType(
-			new PropertyLabelsResolver(
-				new BatchGetPropertyLabels( new PrefetchingTermLookupBatchLabelsRetriever(
-					WikibaseRepo::getPrefetchingTermLookup( $services ),
-				) ),
-			),
+			WbReuse::getPropertyLabelsResolver( $services ),
 			$languageCodeType,
 		);
 		$valueType = new ValueType( WikibaseRepo::getDataTypeDefinitions( $services )->getGraphqlValueTypes() );
@@ -78,6 +74,13 @@ return [
 	},
 	'WbReuse.LanguageCodeType' => function( MediaWikiServices $services ): LanguageCodeType {
 		return new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );
+	},
+	'WbReuse.PropertyLabelsResolver' => function( MediaWikiServices $services ): PropertyLabelsResolver {
+		return new PropertyLabelsResolver(
+			new BatchGetPropertyLabels(
+				new PrefetchingTermLookupBatchLabelsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+			)
+		);
 	},
 	'WbReuse.StringValueType' => function( MediaWikiServices $services ): StringValueType {
 		return new StringValueType();

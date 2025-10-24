@@ -18,6 +18,7 @@ use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -56,6 +57,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $monolingualTextProperty;
 	private static Property $quantityProperty;
 	private static Property $timeProperty;
+	private static Property $propertyTypeProperty;
+	private static Property $propertyUsedAsValue;
 	private static Property $qualifierProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
@@ -83,6 +86,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$qualifierProperty,
 			self::$statementValueItem,
 			self::$qualifierValueItem,
+			self::$propertyUsedAsValue,
 		] );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
@@ -94,6 +98,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$monolingualTextProperty,
 			self::$quantityProperty,
 			self::$timeProperty,
+			self::$propertyTypeProperty,
 		] as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
@@ -140,6 +145,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithMonolingualTextValuePropertyId = 'P7';
 		$statementWithQuantityValuePropertyId = 'P8';
 		$statementWithTimeValuePropertyId = 'P9';
+		$statementWithPropertyValuePropertyId = 'P10';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
@@ -198,6 +204,15 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
 			->withValue( $timeValue )
 			->build();
+		self::$propertyUsedAsValue = new Property(
+			new NumericPropertyId( 'P789' ),
+			new Fingerprint( new TermList( [ new Term( 'en', 'property used as value' ) ] ) ),
+			'string',
+		);
+		$statementWithPropertyValue = NewStatement::forProperty( $statementWithPropertyValuePropertyId )
+			->withGuid( "$itemId\$a82559b1-da8f-4e02-9f72-e304b90a9bde" )
+			->withValue( new EntityIdValue( self::$propertyUsedAsValue->getId() ) )
+			->build();
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
 			->withGuid( "$itemId\$bed933b7-4207-d679-7571-3630cfb49d9f" )
@@ -237,6 +252,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			null,
 			'time',
 		);
+		self::$propertyTypeProperty = new Property(
+			new NumericPropertyId( $statementWithPropertyValuePropertyId ),
+			null,
+			'wikibase-property',
+		);
 		self::$qualifierProperty = new Property(
 			new NumericPropertyId( $qualifierPropertyId ),
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
@@ -255,6 +275,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithQuantityValue )
 			->andStatement( $statementWithUnboundedQuantityValue )
 			->andStatement( $statementWithTimeValue )
+			->andStatement( $statementWithPropertyValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->build();
@@ -542,6 +563,32 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 									'after' => $timeValue->getAfter(),
 									'precision' => $timeValue->getPrecision(),
 									'calendarModel' => $timeValue->getCalendarModel(),
+								],
+							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with property value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$statementWithPropertyValuePropertyId\") {
+					value {
+						... on PropertyValue {
+							id
+							label(languageCode: \"en\")
+						}
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'id' => self::$propertyUsedAsValue->getId()->getSerialization(),
+									'label' => self::$propertyUsedAsValue->getLabels()->getByLanguage( 'en' )->getText(),
 								],
 							],
 						],

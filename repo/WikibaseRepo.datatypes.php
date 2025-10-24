@@ -44,6 +44,7 @@ use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -609,6 +610,43 @@ return call_user_func( function() {
 			},
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
+			},
+			'graphql-value-type' => static function() {
+				$labelsResolver = WbReuse::getPropertyLabelsResolver();
+				$languageCodeType = WbReuse::getLanguageCodeType();
+
+				return new ObjectType( [
+					'name' => 'PropertyValue',
+					'fields' => [
+						'id' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								return $idValue->getEntityId()->getSerialization();
+							},
+						],
+						'label' => [
+							'type' => Type::string(),
+							'args' => [
+								'languageCode' => Type::nonNull( $languageCodeType ),
+							],
+							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								/** @var PropertyId $propertyId */
+								$propertyId = $idValue->getEntityId();
+								'@phan-var PropertyId $propertyId';
+
+								return $labelsResolver->resolve( $propertyId, $args['languageCode'] );
+							},
+						],
+					],
+				] );
 			},
 		],
 	];
