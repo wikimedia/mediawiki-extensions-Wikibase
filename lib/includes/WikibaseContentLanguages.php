@@ -168,6 +168,7 @@ class WikibaseContentLanguages {
 
 				// Language codes we don't want for semantic reasons
 				'de-formal',
+				'en-simple',
 				'es-formal',
 				'hu-formal',
 				'nl-informal',
