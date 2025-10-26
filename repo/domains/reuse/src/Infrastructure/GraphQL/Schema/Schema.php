@@ -26,6 +26,7 @@ class Schema extends GraphQLSchema {
 		private readonly PropertyValuePairType $propertyValuePairType,
 		private readonly ValueType $valueType,
 		private readonly ValueTypeType $valueTypeType,
+		private readonly PropertyIdType $propertyIdType
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -99,7 +100,7 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( $this->statementType() ) ),
 					'args' => [
-						'propertyId' => Type::nonNull( Type::string() ),
+						'propertyId' => Type::nonNull( $this->propertyIdType ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->statements
 						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
@@ -124,7 +125,7 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( $this->propertyValuePairType ) ),
 					'args' => [
-						'propertyId' => Type::nonNull( Type::string() ),
+						'propertyId' => Type::nonNull( $this->propertyIdType ),
 					],
 					'resolve' => fn( Statement $statement, $args ) => $statement->qualifiers
 						->getQualifiersByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),

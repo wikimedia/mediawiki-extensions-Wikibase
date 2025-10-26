@@ -590,6 +590,27 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				"Not a valid language code: \"$languageCode\"",
 			];
 		}
+
+		$propertyId = 'not-a-valid-property-id';
+		yield 'validates property ID' => [
+			"{ item(id: \"$itemId\") {
+			statements(propertyId: \"$propertyId\") { id }
+		 } }",
+			"Not a valid Property ID: \"$propertyId\"",
+		];
+
+		$qualifierPropertyId = 'not-a-valid-property-id';
+		$validPropertyId = 'P123';
+		yield 'validates property ID for qualifiers' => [
+			"{ item(id: \"$itemId\") {
+			statements(propertyId: \"$validPropertyId\") {
+				qualifiers(propertyId: \"$qualifierPropertyId\") {
+					valueType
+				} 
+			 }
+		 } }",
+			"Not a valid Property ID: \"$propertyId\"",
+		];
 	}
 
 	private function newGraphQLService(

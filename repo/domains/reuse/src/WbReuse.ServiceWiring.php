@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsR
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\ItemIdType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PredicatePropertyType;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PropertyIdType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\PropertyValuePairType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\SiteIdType;
@@ -58,7 +59,8 @@ return [
 			$predicatePropertyType,
 			new PropertyValuePairType( $predicatePropertyType, $valueType, $valueTypeType ),
 			$valueType,
-			$valueTypeType
+			$valueTypeType,
+			new PropertyIdType()
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
