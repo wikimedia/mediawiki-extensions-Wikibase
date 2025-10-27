@@ -222,17 +222,8 @@ return call_user_func( function() {
 						'globe' => Type::nonNull( Type::string() ),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						/** @var GlobeCoordinateValue $globeCoordinateValue */
-						$globeCoordinateValue = $valueProvider->value->content;
-						'@phan-var GlobeCoordinateValue $globeCoordinateValue';
-
-						return match ( $info->fieldName ) {
-							'latitude' => $globeCoordinateValue->getLatitude(),
-							'longitude' => $globeCoordinateValue->getLongitude(),
-							'precision' => $globeCoordinateValue->getPrecision(),
-							'globe' => $globeCoordinateValue->getGlobe(),
-							default => null,
-						};
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
 					},
 				] );
 			},
@@ -271,15 +262,8 @@ return call_user_func( function() {
 						'text' => Type::nonNull( Type::string() ),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						/** @var MonolingualTextValue $value */
-						$value = $valueProvider->value->content;
-						'@phan-var MonolingualTextValue $value';
-
-						return match ( $info->fieldName ) {
-							'language' => $value->getLanguageCode(),
-							'text' => $value->getText(),
-							default => null,
-						};
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
 					},
 				] );
 			},
