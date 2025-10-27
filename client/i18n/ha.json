@@ -6,7 +6,8 @@
 			"DonCamillo",
 			"Em-em",
 			"Gwanki",
-			"Salihu aliyu"
+			"Salihu aliyu",
+			"SaldırganSincap"
 		]
 	},
 	"wikibase-client-desc": "Abokin ciniki don fadada Wikibase",
@@ -106,6 +107,6 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Haɗi|Haɗi}} tare da {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Sanar da ni lokacin da wani ya haɗa shafi {{GENDER:|Na ƙirƙira}} zuwa wani abu {{WBREPONAME}}.",
 	"notification-header-page-connection": "Shafin <strong>$3</strong> shine {{GENDER:$2|an haɗe}} zuwa {{PLURAL:$4|-1=a {{WBREPONAME}} abu|{{WBREPONAME}} abu $4}}, ta inda za'a iya tattara bayanan da suka dace da batun.",
-	"notification-bundle-header-page-connection": "strong>$3</strong> and {{PLURAL:$4|one other page|$4 other pages|100=99+ other pages}} were {{GENDER:$2|connected}} to {{WBREPONAME}} items, where data relevant to the topics can be collected.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> and {{PLURAL:$4|one other page|$4 other pages|100=99+ other pages}} were {{GENDER:$2|connected}} to {{WBREPONAME}} items, where data relevant to the topics can be collected.",
 	"notification-link-text-view-item": "{{GENDER:$1|View}} abu"
 }

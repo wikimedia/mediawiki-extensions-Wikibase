@@ -9,7 +9,8 @@
 			"Purodha",
 			"Tiin",
 			"Umherirrender",
-			"Brettchenweber"
+			"Brettchenweber",
+			"SaldırganSincap"
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",
@@ -145,7 +146,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Ohne Anmeldung bearbeiten",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Anmelden oder Benutzerkonto erstellen",
 	"wikibase-client-data-bridge-license-heading": "Verwendung und Lizenz",
-	"wikibase-client-data-bridge-license-body": "<p>Das Ändern dieses Wertes wird ihn auch auf {{WBREPONAME}} und möglicherweise auf Wikis in anderen Sprachen ändern.</p>\n<p>Durch das Klicken auf „{{int:$1}}“ stimmst du den [$2 Nutzungsbedingungen] zu und du stimmst unwiderruflich zu, deinen Beitrag unter [$3 $4] freizugeben.<p>",
+	"wikibase-client-data-bridge-license-body": "<p>Das Ändern dieses Wertes wird ihn auch auf {{WBREPONAME}} und möglicherweise auf Wikis in anderen Sprachen ändern.</p>\n<p>Durch das Klicken auf „{{int:$1}}“ stimmst du den [$2 Nutzungsbedingungen] zu und du stimmst unwiderruflich zu, deinen Beitrag unter [$3 $4] freizugeben.</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Stattdessen könntest du Folgendes tun:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Bearbeite den Wert auf {{WBREPONAME}}. Klicke auf die Schaltfläche unten, um den Wert direkt zu bearbeiten (der Link wird in einem neuen Tab geöffnet).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Bearbeite den Wert auf {{WBREPONAME}}",

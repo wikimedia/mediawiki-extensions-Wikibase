@@ -6,7 +6,8 @@
 			"Frzzl",
 			"Tamzin",
 			"Juwan",
-			"Eic17H"
+			"Eic17H",
+			"Tbodt"
 		]
 	},
 	"wikibase-desc": "kulupu nanpa",
@@ -62,7 +63,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "lipu",
 	"wikibase-alias-edit-placeholder": "o pana e nimi ante",
 	"wikibase-label-input-help-message": "o pana e nimi ni lon $1.",
-	"wikibase-sitelinks-counter": "lipu $1",
+	"wikibase-sitelinks-counter": "{{PLURAL:$1|lipu}} $1",
 	"wikibase-sitelinks-special": "lipu ante",
 	"wikibase-remove": "o weka",
 	"wikibase-undo-title": "ante pi lipu \"$1\" li pini lon",

@@ -6,7 +6,8 @@
 			"JeffreyKim",
 			"Al12si",
 			"H78c67c",
-			"Yueman"
+			"Yueman",
+			"SaldırganSincap"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -135,7 +136,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "上一個值以前係正確嘅，但係而家已經過時。",
 	"wikibase-client-data-bridge-references-heading": "參考文獻",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "你未簽到",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>警告：</strong>你未簽到。如果你進行任何編輯，你嘅IP位址將會公開顯示。如果你<strong>簽到</ strong>或者<strong>開戶口</strong>，你嘅編輯會歸落你嘅用戶名，同埋有其他好處。",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>警告：</strong>你未簽到。如果你進行任何編輯，你嘅IP位址將會公開顯示。如果你<strong>簽到</strong>或者<strong>開戶口</strong>，你嘅編輯會歸落你嘅用戶名，同埋有其他好處。",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "唔簽到就改",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "簽到或者開戶",
 	"wikibase-client-data-bridge-license-heading": "用途同授權",

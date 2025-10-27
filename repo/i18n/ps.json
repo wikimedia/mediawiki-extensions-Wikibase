@@ -6,7 +6,8 @@
 			"Baloch Khan",
 			"Ladsgroup",
 			"Af420",
-			"شاه زمان پټان"
+			"شاه زمان پټان",
+			"SaldırganSincap"
 		]
 	},
 	"wikibase-desc": "جوړښتي اومتوکو ساتنځی",
@@ -289,6 +290,8 @@
 	"content-model-wikibase-item": "د ويکيبېز توکی",
 	"content-model-wikibase-property": "ويکي‌بنسټ ځانتيا",
 	"content-model-wikibase-query": "ويکي‌بنسټ پوښتنه",
+	"action-item-term": "د توکي گړنې بدلول (نښکې، څرگنداوي، بل‌نومونه)",
+	"right-item-term": "د توکي گړنې بدلول (نښکې، څرگنداوي، بل‌نومونه)",
 	"action-item-merge": "توکي يو ځای کول",
 	"right-item-merge": "توکي يو ځای کول",
 	"action-item-redirect": "د توکو مخگرځي جوړول",

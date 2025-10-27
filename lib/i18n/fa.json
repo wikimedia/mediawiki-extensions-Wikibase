@@ -22,7 +22,8 @@
 			"Rtemis",
 			"ZxxZxxZ",
 			"Ebrahim",
-			"Jeeputer"
+			"Jeeputer",
+			"LordProfo"
 		]
 	},
 	"specialpages-group-wikibase": "ویکی‌بیس",
@@ -102,10 +103,10 @@
 	"wikibase-entity-summary-wbsetreference": "ارجاعی تنظیم شد",
 	"wikibase-entity-summary-wbsetreference-add": "ارجاع به خواسته اضافه شد",
 	"wikibase-entity-summary-wbsetreference-set": "ارجاع به خواسته تغییر داده شد",
-	"wikibase-entity-summary-wbsetlabel-add": "برچسب [$2] اضافه شد",
+	"wikibase-entity-summary-wbsetlabel-add": "برچسب [$2] افزوده شد",
 	"wikibase-entity-summary-wbsetlabel-set": "برچسب [$2] تغییر داده شد",
 	"wikibase-entity-summary-wbsetlabel-remove": "برچسب [$2] حذف شد",
-	"wikibase-entity-summary-wbsetdescription-add": "توصیف [$2] اضافه شد",
+	"wikibase-entity-summary-wbsetdescription-add": "توصیف [$2] افزوده شد",
 	"wikibase-entity-summary-wbsetdescription-set": "توصیف [$2] تغییر داده شد",
 	"wikibase-entity-summary-wbsetdescription-remove": "توصیف [$2] حذف شد",
 	"wikibase-entity-summary-wbsetaliases-set": "{{PLURAL:$1|نام مستعار|نام‌های مستعار}} [$2] تنظیم شد",
