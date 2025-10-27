@@ -30,7 +30,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 			],
 		];
 
-		$parser = new EntitySourceDefinitionsConfigParser();
+		$parser = new EntitySourceDefinitionsConfigParser( $paramIrrelevantForTest = 'mywikidb' );
 
 		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
 
@@ -74,7 +74,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 			],
 		];
 
-		$parser = new EntitySourceDefinitionsConfigParser();
+		$parser = new EntitySourceDefinitionsConfigParser( $paramIrrelevantForTest = 'mywikidb' );
 
 		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
 
@@ -103,11 +103,34 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 		$this->assertInstanceOf( ApiEntitySource::class, $sources[2] );
 	}
 
+	public function testGivenLocalDatabaseName_getDatabaseNameOfSourceReturnsFalse() {
+		$localDatabaseName = 'local';
+
+		$config = [
+			'local' => [
+				'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
+				'repoDatabase' => $localDatabaseName,
+				'baseUri' => 'http://example.com/entity/',
+				'rdfNodeNamespacePrefix' => 'wd',
+				'rdfPredicateNamespacePrefix' => '',
+				'interwikiPrefix' => 'localwiki',
+			],
+		];
+
+		$parser = new EntitySourceDefinitionsConfigParser( $localDatabaseName );
+
+		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new SubEntityTypesMapper( [] ) );
+
+		$sources = $sourceDefinitions->getSources();
+
+		$this->assertFalse( $sources[0]->getDatabaseName() );
+	}
+
 	/**
 	 * @dataProvider provideInvalidConfig
 	 */
 	public function testGivenInvalidConfig_throwsException( $config ) {
-		$parser = new EntitySourceDefinitionsConfigParser();
+		$parser = new EntitySourceDefinitionsConfigParser( $paramIrrelevantForTest = 'mywikidb' );
 
 		$this->expectException( \InvalidArgumentException::class );
 
