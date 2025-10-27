@@ -39,11 +39,9 @@
 const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
 
-const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
-const { useMessageStore } = require( './store/messageStore.js' );
-
 const { CdxButton, CdxIcon } = require( '../../codex.js' );
 const { cdxIconAdd } = require( './icons.json' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
@@ -71,7 +69,7 @@ module.exports = exports = defineComponent( {
 		propertyData: null,
 		formSubmitted: false
 	} ),
-	computed: Object.assign( mapState( useEditStatementsStore, {
+	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		createdStatementGuids: 'createdStatementIds',
 		fullyParsed: 'isFullyParsed',
 		hasChanges: 'hasChanges'
@@ -85,12 +83,12 @@ module.exports = exports = defineComponent( {
 				: mw.msg( 'wikibase-save' );
 		}
 	} ),
-	methods: Object.assign( mapActions( useEditStatementsStore, {
+	methods: Object.assign( mapActions( wbui2025.store.useEditStatementsStore, {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
 		saveChangedStatements: 'saveChangedStatements'
-	} ), mapActions( useMessageStore, [
+	} ), mapActions( wbui2025.store.useMessageStore, [
 		'addStatusMessage'
 	] ), {
 		createNewStatement() {

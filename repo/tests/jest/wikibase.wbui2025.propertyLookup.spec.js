@@ -8,14 +8,13 @@ jest.mock(
 	() => ( { cdxIconCheck: 'check', cdxIconClose: 'close' } ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../resources/wikibase.wbui2025/api/api.js',
-	() => ( { api: { get: jest.fn() } } )
-);
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
+wbui2025.api.api = { get: jest.fn() };
 const propertyLookupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyLookup.vue' );
 const { CdxLookup } = require( '../../codex.js' );
-const { api } = require( '../../resources/wikibase.wbui2025/api/api.js' );
 const { mount } = require( '@vue/test-utils' );
 
 describe( 'wikibase.wbui2025.propertySelector', () => {
@@ -101,7 +100,7 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			],
 			success: 1
 		};
-		api.get.mockResolvedValue( emptySearchResult );
+		wbui2025.api.api.get.mockResolvedValue( emptySearchResult );
 
 		const languageCode = 'de';
 		const mockConfig = {
@@ -130,12 +129,12 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 		} );
 
 		it( 'text input causes an API call and updates menu items', async () => {
-			api.get.mockResolvedValueOnce( p123SearchResult );
+			wbui2025.api.api.get.mockResolvedValueOnce( p123SearchResult );
 			await lookup.vm.$emit( 'update:input-value', 'search term' );
 			await lookup.vm.$nextTick();
 
-			expect( api.get ).toHaveBeenCalledTimes( 1 );
-			expect( api.get ).toHaveBeenCalledWith( {
+			expect( wbui2025.api.api.get ).toHaveBeenCalledTimes( 1 );
+			expect( wbui2025.api.api.get ).toHaveBeenCalledWith( {
 				action: 'wbsearchentities',
 				language: languageCode,
 				type: 'property',
@@ -148,7 +147,7 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 		it( 'does not make an API call when the input is blank', async () => {
 			await lookup.vm.$emit( 'update:input-value', '' );
 
-			expect( api.get ).not.toHaveBeenCalled();
+			expect( wbui2025.api.api.get ).not.toHaveBeenCalled();
 		} );
 
 		it( 'emits an event when a property is selected', async () => {
@@ -164,28 +163,28 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 
 		describe( 'loading more results', () => {
 			beforeEach( async () => {
-				api.get.mockResolvedValueOnce( p123SearchResult );
+				wbui2025.api.api.get.mockResolvedValueOnce( p123SearchResult );
 				await lookup.vm.$emit( 'update:input-value', 'search term' );
 			} );
 
 			it( 'makes another api call when `load-more` is emitted and adds more menu items', async () => {
-				api.get.mockResolvedValueOnce( p456SearchResult );
+				wbui2025.api.api.get.mockResolvedValueOnce( p456SearchResult );
 				await lookup.vm.$emit( 'load-more' );
 				await lookup.vm.$nextTick();
 
-				expect( api.get ).toHaveBeenCalledTimes( 2 );
-				expect( api.get ).toHaveBeenCalledWith( expect.objectContaining( {
+				expect( wbui2025.api.api.get ).toHaveBeenCalledTimes( 2 );
+				expect( wbui2025.api.api.get ).toHaveBeenCalledWith( expect.objectContaining( {
 					continue: 1
 				} ) );
 				expect( lookup.props( 'menuItems' )[ 1 ] ).toEqual( p456MenuItem );
 			} );
 
 			it( 'excludes duplicates from the results', async () => {
-				api.get.mockResolvedValueOnce( p123SearchResult );
+				wbui2025.api.api.get.mockResolvedValueOnce( p123SearchResult );
 				await lookup.vm.$emit( 'load-more' );
 				await lookup.vm.$nextTick();
 
-				expect( api.get ).toHaveBeenCalledTimes( 2 );
+				expect( wbui2025.api.api.get ).toHaveBeenCalledTimes( 2 );
 				expect( lookup.props( 'menuItems' ) ).toHaveLength( 1 );
 			} );
 		} );

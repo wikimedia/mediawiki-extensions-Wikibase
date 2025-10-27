@@ -71,7 +71,6 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
-use Wikibase\View\VueNoScriptRendering;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Rdbms\IDBAccessObject;
 
@@ -983,6 +982,34 @@ final class RepoHooks implements
 					'../view/resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				],
 			];
+			$modules['wikibase.wbui2025.lib'] = $moduleTemplate + [
+				'packageFiles' => [
+					'resources/wikibase.wbui2025/lib.js',
+					'resources/wikibase.wbui2025/store/snakValueStrategyFactory.js',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
+					'resources/wikibase.wbui2025/api/api.js',
+					'resources/wikibase.wbui2025/api/editEntity.js',
+					'resources/wikibase.wbui2025/store/editStatementsStore.js',
+					'resources/wikibase.wbui2025/api/commons.js',
+					'resources/wikibase.wbui2025/store/messageStore.js',
+					'resources/wikibase.wbui2025/store/parsedValueStore.js',
+					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
+					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
+					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
+					[
+						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
+						'content' => [
+							'tabularDataStorageApiEndpointUrl' => $settings->getSetting( 'tabularDataStorageApiEndpointUrl' ),
+							'geoShapeStorageApiEndpointUrl' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+						],
+					],
+				],
+				'dependencies' => [
+					'mediawiki.ForeignApi',
+					'pinia',
+					'wikibase',
+				],
+			];
 			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
 				'class' => CodexModule::class,
 				'packageFiles' => [
@@ -1009,16 +1036,6 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
-					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
-					'resources/wikibase.wbui2025/api/api.js',
-					'resources/wikibase.wbui2025/api/editEntity.js',
-					'resources/wikibase.wbui2025/store/editStatementsStore.js',
-					'resources/wikibase.wbui2025/api/commons.js',
-					'resources/wikibase.wbui2025/store/messageStore.js',
-					'resources/wikibase.wbui2025/store/parsedValueStore.js',
-					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
-					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
-					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
 						'callback' => CodexModule::getIcons( ... ),
@@ -1033,23 +1050,15 @@ final class RepoHooks implements
 					],
 					[
 						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
-						'content' => VueNoScriptRendering::WBUI2025_SUPPORTED_DATATYPES,
-					],
-					[
-						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
-						'content' => [
-							'tabularDataStorageApiEndpointUrl' => $settings->getSetting( 'tabularDataStorageApiEndpointUrl' ),
-							'geoShapeStorageApiEndpointUrl' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
-						],
+						'content' => WikibaseRepo::getWbui2025FeatureFlag()->getSupportedDataTypes(),
 					],
 				],
 				'dependencies' => [
-					'mediawiki.ForeignApi',
-					'pinia',
 					'vue',
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',
 					'wikibase.utilities.ClaimGuidGenerator',
+					'wikibase.wbui2025.lib',
 				],
 				'messages' => [
 					'wikibase-add',
@@ -1089,6 +1098,10 @@ final class RepoHooks implements
 					'CdxProgressBar',
 				],
 			];
+			MediaWikiServices::getInstance()->getHookContainer()->run(
+				'WikibaseRepoWbui2025InitResourceDependenciesHook',
+				[ &$modules['wikibase.wbui2025.entityViewInit']['dependencies'] ]
+			);
 		}
 
 		$rl->register( $modules );

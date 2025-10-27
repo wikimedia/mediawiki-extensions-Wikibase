@@ -19,19 +19,9 @@ jest.mock(
 	() => [ 'string' ],
 	{ virtual: true }
 );
-jest.mock(
-	'../../resources/wikibase.wbui2025/repoSettings.json',
-	() => ( {
-		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
-		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
-	} ),
-	{ virtual: true }
-);
-jest.mock(
-	'../../resources/wikibase.wbui2025/api/api.js',
-	() => ( { api: { get: jest.fn() } } )
-);
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const statementGroupViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' );

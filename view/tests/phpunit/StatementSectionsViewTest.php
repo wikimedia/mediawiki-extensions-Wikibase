@@ -18,6 +18,7 @@ use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\StatementSectionsView
@@ -55,6 +56,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( PropertyDataTypeLookup::class ),
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( SnakFormatter::class ),
+			$this->createMock( Wbui2025FeatureFlag::class ),
 		);
 
 		return new StatementSectionsView(

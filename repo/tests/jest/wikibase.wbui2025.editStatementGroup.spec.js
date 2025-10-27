@@ -23,14 +23,6 @@ jest.mock(
 	() => [ 'string', 'tabular-data', 'geo-shape' ],
 	{ virtual: true }
 );
-jest.mock(
-	'../../resources/wikibase.wbui2025/api/commons.js',
-	() => ( {
-		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
-		transformSearchResults: jest.fn( ( results ) => results )
-	} ),
-	{ virtual: true }
-);
 
 const crypto = require( 'crypto' );
 // eslint-disable-next-line no-undef
@@ -50,6 +42,8 @@ Object.defineProperty( globalThis, 'wikibase', {
 	}
 } );
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const editStatementGroupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue' );
 const editStatementComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue' );
 const { CdxButton, CdxIcon } = require( '../../codex.js' );

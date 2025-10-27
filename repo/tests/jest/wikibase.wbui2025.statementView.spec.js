@@ -4,6 +4,8 @@ jest.mock(
 	{ virtual: true }
 );
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const mainSnakComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' );
 const qualifiersComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.vue' );
 const referencesComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.references.vue' );

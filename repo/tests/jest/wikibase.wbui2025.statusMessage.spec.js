@@ -4,6 +4,8 @@ jest.mock(
 	{ virtual: true }
 );
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const { createTestingPinia } = require( '@pinia/testing' );
 const statusMessageComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statusMessage.vue' );
 const { CdxMessage } = require( '../../codex.js' );

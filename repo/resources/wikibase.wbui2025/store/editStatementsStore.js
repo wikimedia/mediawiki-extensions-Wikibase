@@ -1,6 +1,7 @@
 const { defineStore, getActivePinia } = require( 'pinia' );
 const { useSavedStatementsStore, getStatementById } = require( './savedStatementsStore.js' );
-const { snakValueStrategyFactory } = require( './snakValueStrategies.js' );
+const { snakValueStrategyFactory } = require( './snakValueStrategyFactory.js' );
+require( './snakValueStrategies.js' );
 const { updateStatements } = require( '../api/editEntity.js' );
 
 /**
