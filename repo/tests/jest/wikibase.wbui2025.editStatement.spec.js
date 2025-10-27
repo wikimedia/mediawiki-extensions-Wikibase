@@ -26,6 +26,14 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/editEntity.js',
+	() => ( {
+		parseValue: jest.fn(),
+		renderSnakValueHtml: jest.fn(),
+		renderPropertyLinkHtml: jest.fn()
+	} )
+);
 
 const languageCode = 'de';
 const mockConfig = {
@@ -43,6 +51,11 @@ const Wbui2025EditableReferencesSection = require( '../../resources/wikibase.wbu
 const Wbui2025EditableReference = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editableReference.vue' );
 const { storeWithStatements } = require( './piniaHelpers.js' );
 const { useEditStatementsStore } = require( '../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
+const {
+	parseValue: mockedParseValue,
+	renderSnakValueHtml: mockRenderSnakValueHtml,
+	renderPropertyLinkHtml: mockRenderPropertyLinkHtml
+} = require( '../../resources/wikibase.wbui2025/api/editEntity.js' );
 
 function snakKeysFromReference( reference ) {
 	return Object.values( reference.props( 'reference' ).snaks ).reduce(
@@ -72,7 +85,8 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					datavalue: {
 						value: 'test value',
 						type: 'string'
-					}
+					},
+					datatype: 'string'
 				},
 				rank: 'normal',
 				'qualifiers-order': [ 'P1' ],
@@ -175,7 +189,6 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 			};
 			wrapper = await mount( editStatementComponent, {
 				props: {
-					propertyId: testPropertyId,
 					statementId: testStatementId
 				},
 				global: {
@@ -184,7 +197,7 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					] }
 			} );
 			const editStatementsStore = useEditStatementsStore();
-			editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
+			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
 			await wrapper.vm.$nextTick();
 			addQualifierButton = wrapper.findComponent( '.wikibase-wbui2025-add-qualifier-button' );
 			addReferenceButton = wrapper.findComponent( '.wikibase-wbui2025-add-reference-button' );
@@ -283,7 +296,20 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 					},
 					datatype: 'string'
 				};
+				mockedParseValue.mockResolvedValue( { type: 'string', value: 'string value' } );
+				mockRenderPropertyLinkHtml.mockResolvedValueOnce( '<a>a property link</a>' );
+				mockRenderSnakValueHtml.mockResolvedValueOnce( '<a>string</a>' );
 				await addQualifierForm.vm.$emit( 'add-qualifier', 'P23', snakData );
+				// The 'add-qualifier' event listener is asynchronous. We need to wait some time here
+				// for the various promises in the addQualifier action to complete.
+				let wait = 0;
+				while ( wait < 5 ) {
+					await addQualifierForm.vm.$nextTick();
+					if ( !addQualifierForm.exists() ) {
+						break;
+					}
+					wait++;
+				}
 				expect( addQualifierForm.exists() ).toBe( false );
 				expect( qualifiers[ 0 ].props( 'qualifiers' ) ).toEqual( expect.objectContaining( {
 					P23: [ snakData.hash ]

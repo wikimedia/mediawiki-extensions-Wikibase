@@ -22,7 +22,6 @@
 			>
 				<wbui2025-editable-snak-value
 					:snak-key="mainSnakKey"
-					:property-id="propertyId"
 				></wbui2025-editable-snak-value>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
@@ -87,9 +86,8 @@ const Wbui2025EditableSnakValue = require( './wikibase.wbui2025.editableSnakValu
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
 const Wbui2025AddReference = require( './wikibase.wbui2025.addReference.vue' );
 const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
-const { generateNextSnakKey, useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
+const { useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
 const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
-const { useParsedValueStore } = require( './store/parsedValueStore.js' );
 
 const rankSelectorPreferredIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="0" y="0" xlink:href="#a"/><use stroke="#36c" x="0" y="0" xlink:href="#b"/></svg>';
 const rankSelectorNormalIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="-9" y="0" xlink:href="#a"/><use stroke="#36c" x="-9" y="0" xlink:href="#b"/></svg>';
@@ -109,10 +107,6 @@ module.exports = exports = defineComponent( {
 		Wbui2025AddReference
 	},
 	props: {
-		propertyId: {
-			type: String,
-			required: true
-		},
 		statementId: {
 			type: String,
 			required: true
@@ -162,7 +156,7 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	methods: {
-		addQualifier( propertyId, snakData ) {
+		async addQualifier( propertyId, snakData ) {
 			if ( !snakData.hash ) {
 				this.newQualifierCounter += 1;
 				snakData.hash = `${ this.statementId }-new-qualifier-${ this.newQualifierCounter }`;
@@ -175,12 +169,13 @@ module.exports = exports = defineComponent( {
 					.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
 			}
 
-			useEditSnakStore( snakData.hash )().initializeWithSnak( snakData );
+			const editSnakStore = useEditSnakStore( snakData.hash )();
+			await editSnakStore.initializeWithSnak( snakData );
 			this.qualifiers[ propertyId ].push( snakData.hash );
 			renderSnakValueHtml( snakData.datavalue, propertyId )
-				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+					.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
 			if ( snakData.snaktype === 'value' ) {
-				useParsedValueStore().getParsedValue( propertyId, snakData.datavalue.value );
+				editSnakStore.getValueStrategy().getParsedValue();
 			}
 
 			this.showAddQualifierModal = false;
@@ -192,8 +187,7 @@ module.exports = exports = defineComponent( {
 				this.qualifiersOrder.splice( this.qualifiersOrder.indexOf( propertyId ), 1 );
 			}
 		},
-		addReference( propertyId, snakData ) {
-			const snakKey = generateNextSnakKey();
+		async addReference( propertyId, snakData ) {
 			if ( !snakData.hash ) {
 				this.newReferenceCounter += 1;
 				snakData.hash = `${ this.statementId }-new-reference-${ this.newReferenceCounter }`;
@@ -204,9 +198,10 @@ module.exports = exports = defineComponent( {
 			renderPropertyLinkHtml( propertyId )
 				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
 
-			useEditSnakStore( snakKey )().initializeWithSnak( snakData );
+			const editSnakStore = useEditSnakStore( snakData.hash )();
+			await editSnakStore.initializeWithSnak( snakData );
 
-			snaks[ propertyId ] = [ snakKey ];
+			snaks[ propertyId ] = [ snakData.hash ];
 
 			this.references.push( {
 				snaks,
@@ -217,7 +212,7 @@ module.exports = exports = defineComponent( {
 				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
 
 			if ( snakData.snaktype === 'value' ) {
-				useParsedValueStore().getParsedValue( propertyId, snakData.datavalue.value );
+				editSnakStore.getValueStrategy().getParsedValue();
 			}
 
 			this.showAddReferenceModal = false;

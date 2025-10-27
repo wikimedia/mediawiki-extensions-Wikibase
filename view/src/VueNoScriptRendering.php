@@ -29,6 +29,8 @@ class VueNoScriptRendering {
 		'string',
 		'tabular-data',
 		'geo-shape',
+		'wikibase-item',
+		'wikibase-property',
 	];
 
 	private const VUE_TEMPLATE_FOLDER = __DIR__ . '/../../repo/resources/wikibase.wbui2025/';

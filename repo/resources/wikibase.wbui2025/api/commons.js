@@ -10,7 +10,7 @@ const {
 	tabularDataStorageApiEndpointUrl,
 	geoShapeStorageApiEndpointUrl
 } = require( '../repoSettings.json' );
-const { foreignApi } = require( './api.js' );
+const { api, foreignApi } = require( './api.js' );
 const tabularDataSearchTerm = 'contentmodel:Tabular.JsonConfig';
 const geoShapeDataSearchTerm = 'contentmodel:Map.JsonConfig';
 
@@ -51,21 +51,37 @@ const searchGeoShapes = function ( searchTerm, offset = 0 ) {
 };
 
 /**
- * Generic search function that routes to appropriate search method based on datatype
+ * Search the repo for entities with a matching label
  *
- * @param {string} datatype The datatype to search for
- * @param {string} searchTerm The search term
- * @param {number} offset Optional result offset for pagination
- * @return {Promise<Object>} Promise resolving to search results
+ * @param {string} searchTerm
+ * @param {string} entityType
+ * @returns {Promise<*>}
  */
-const searchByDatatype = function ( datatype, searchTerm, offset = 0 ) {
-	if ( datatype === 'tabular-data' ) {
-		return searchTabularData( searchTerm, offset );
-	} else if ( datatype === 'geo-shape' ) {
-		return searchGeoShapes( searchTerm, offset );
+const searchForEntities = async function ( searchTerm, entityType ) {
+	return api.get( api.assertCurrentUser( {
+		action: 'wbsearchentities',
+		search: searchTerm,
+		type: entityType,
+		language: mw.config.get( 'wgUserLanguage' )
+	} ) ).then( ( response ) => response.search );
+};
+
+/**
+ * Transform entity search results into menu items format
+ *
+ * @param {Array} searchResults Array of search results from API
+ * @return {Array} Array of menu items with label, value, and description
+ */
+const transformEntitySearchResults = function ( searchResults ) {
+	if ( !searchResults || searchResults.length === 0 ) {
+		return [];
 	}
 
-	throw new Error( `Unsupported datatype: ${ datatype }` );
+	return searchResults.map( ( result ) => ( {
+		label: result.label,
+		value: result.id,
+		description: result.description
+	} ) );
 };
 
 /**
@@ -87,8 +103,9 @@ const transformSearchResults = function ( searchResults ) {
 };
 
 module.exports = {
+	searchForEntities,
 	searchTabularData,
 	searchGeoShapes,
-	searchByDatatype,
-	transformSearchResults
+	transformSearchResults,
+	transformEntitySearchResults
 };

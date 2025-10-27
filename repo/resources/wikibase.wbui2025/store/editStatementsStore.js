@@ -1,6 +1,6 @@
 const { defineStore, getActivePinia } = require( 'pinia' );
-const { useParsedValueStore } = require( './parsedValueStore.js' );
 const { useSavedStatementsStore, getStatementById } = require( './savedStatementsStore.js' );
+const { snakValueStrategyFactory } = require( './snakValueStrategies.js' );
 const { updateStatements } = require( '../api/editEntity.js' );
 
 /**
@@ -18,7 +18,9 @@ function sameDataValue( dv1, dv2 ) {
 		case 'string':
 			// the value is directly a string
 			return dv1.value === dv2.value;
-		// TODO add cases for other data value types as we implement them (T403974, T407324)
+		case 'wikibase-entityid':
+			return dv1.value.id === dv2.value.id && dv1.value[ 'entity-type' ] === dv2.value[ 'entity-type' ];
+		// TODO add cases for other data value types as we implement them (T407324)
 		default:
 			throw new Error( `Unsupported data value type ${ dv1.type }` );
 	}
@@ -27,6 +29,8 @@ function sameDataValue( dv1, dv2 ) {
 const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 	state: () => ( {
 		value: undefined,
+		textvalue: undefined,
+		selectionvalue: undefined,
 		snaktype: 'value',
 		property: undefined,
 		datatype: 'string',
@@ -34,29 +38,31 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 		hash: undefined
 	} ),
 	actions: {
-		initializeWithSnak( snak ) {
+		getValueStrategy() {
+			return snakValueStrategyFactory.getStrategyForSnakStore( this );
+		},
+
+		async initializeWithSnak( snak ) {
 			this.snaktype = snak.snaktype;
+			this.datatype = snak.datatype;
+			this.property = snak.property;
 			if ( this.snaktype === 'value' ) {
+				this.textvalue = await this.getValueStrategy().renderValueToText( snak.datavalue );
+				this.selectionvalue = this.getValueStrategy().getSelectionValueForSavedValue( snak.datavalue );
 				this.value = snak.datavalue.value;
 				this.valuetype = snak.datavalue.type;
 			}
-			this.datatype = snak.datatype;
-			this.property = snak.property;
 			this.hash = snak.hash;
 		},
 		async buildSnakJson() {
-			const parsedValueStore = useParsedValueStore();
 			const snakJson = {
 				snaktype: this.snaktype,
 				property: this.property,
 				datatype: this.datatype
 			};
 			if ( this.snaktype === 'value' ) {
-				snakJson.datavalue = await parsedValueStore.getParsedValue(
-					this.property,
-					this.value
-				);
-				snakJson.datatype = 'string';
+				snakJson.datavalue = await this.getValueStrategy().buildDataValue( this );
+				snakJson.datatype = this.valuetype;
 			}
 			return snakJson;
 		},
@@ -64,10 +70,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 			if ( this.snaktype !== 'value' ) {
 				return undefined;
 			}
-			return {
-				type: this.valuetype,
-				value: this.value
-			};
+			return this.getValueStrategy().peekDataValue( this );
 		}
 	}
 } );
@@ -98,7 +101,7 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 		 * @param {string} propertyId
 		 * @param {string|null} propertyDataType
 		 */
-		initializeWithStatement( statementData, propertyId, propertyDataType = null ) {
+		async initializeWithStatement( statementData, propertyId, propertyDataType = null ) {
 			this.$reset();
 			this.propertyId = propertyId;
 			if ( statementData === undefined ) {
@@ -118,12 +121,13 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			}
 			this.rank = statementData.rank;
 			this.mainSnakKey = generateNextSnakKey();
-			useEditSnakStore( this.mainSnakKey )().initializeWithSnak( statementData.mainsnak );
+			await useEditSnakStore( this.mainSnakKey )().initializeWithSnak( statementData.mainsnak );
 			this.qualifiers = {};
+			const snakInitPromises = [];
 			for ( const [ qualifierPropertyId, statementList ] of Object.entries( statementData.qualifiers || {} ) ) {
 				this.qualifiers[ qualifierPropertyId ] = statementList.map( ( snak ) => {
 					const snakKey = generateNextSnakKey();
-					useEditSnakStore( snakKey )().initializeWithSnak( snak );
+					snakInitPromises.push( useEditSnakStore( snakKey )().initializeWithSnak( snak ) );
 					return snakKey;
 				} );
 			}
@@ -137,12 +141,13 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 				for ( const [ snakPropertyId, snakList ] of Object.entries( reference.snaks || {} ) ) {
 					tempReference.snaks[ snakPropertyId ] = snakList.map( ( snak ) => {
 						const snakKey = generateNextSnakKey();
-						useEditSnakStore( snakKey )().initializeWithSnak( snak );
+						snakInitPromises.push( useEditSnakStore( snakKey )().initializeWithSnak( snak ) );
 						return snakKey;
 					} );
 				}
 				return tempReference;
 			} );
+			await Promise.all( snakInitPromises );
 		},
 
 		disposeOfStatementStoreAndSnaks() {
@@ -160,11 +165,10 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 	},
 	getters: {
 		isFullyParsed( state ) {
-			const parsedValueStore = useParsedValueStore();
 			const isFullyParsedValue = ( value ) => value !== undefined && value !== null;
 			const snakFullyParsed = function ( snak ) {
 				return snak.snaktype !== 'value' ||
-					isFullyParsedValue( parsedValueStore.peekParsedValue( snak.property, snak.value ) );
+					isFullyParsedValue( snak.getValueStrategy().peekDataValue( snak ) );
 			};
 			const mainSnakState = useEditSnakStore( state.mainSnakKey )();
 			if ( !snakFullyParsed( mainSnakState ) ) {
@@ -213,7 +217,7 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			}
 
 			if ( mainSnakStore.snaktype === 'value' ) {
-				const dataValue = useParsedValueStore().peekParsedValue( state.propertyId, mainSnakStore.value );
+				const dataValue = mainSnakStore.currentDataValue();
 				if ( !dataValue ) {
 					return null;
 				}
@@ -238,8 +242,14 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 					if ( qualifier.snaktype !== savedQualifier.snaktype ) {
 						return true;
 					}
-					if ( qualifier.snaktype === 'value' && !sameDataValue( qualifier.currentDataValue(), savedQualifier.datavalue ) ) {
-						return true;
+					if ( qualifier.snaktype === 'value' ) {
+						const qualifierDataValue = qualifier.currentDataValue();
+						if ( !qualifierDataValue ) {
+							return null;
+						}
+						if ( !sameDataValue( qualifierDataValue, savedQualifier.datavalue ) ) {
+							return true;
+						}
 					}
 				}
 			}
@@ -269,8 +279,14 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 						if ( referenceSnak.snaktype !== savedReferenceSnak.snaktype ) {
 							return true;
 						}
-						if ( referenceSnak.snaktype === 'value' && !sameDataValue( referenceSnak.currentDataValue(), savedReferenceSnak.datavalue ) ) {
-							return true;
+						if ( referenceSnak.snaktype === 'value' ) {
+							const referenceDataValue = referenceSnak.currentDataValue();
+							if ( !referenceDataValue ) {
+								return null;
+							}
+							if ( referenceSnak.snaktype === 'value' && !sameDataValue( referenceDataValue, savedReferenceSnak.datavalue ) ) {
+								return true;
+							}
 						}
 					}
 				}
@@ -293,29 +309,29 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		 * @param {string} propertyId
 		 * @param {string|null} propertyDataType
 		 */
-		appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType = null ) {
+		async appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType = null ) {
 			this.statements.push( statementId );
 			const statementsStore = useSavedStatementsStore();
 			const editStatementStore = useEditStatementStore( statementId )();
-			editStatementStore.initializeWithStatement( statementsStore.statements.get( statementId ), propertyId, propertyDataType );
+			return editStatementStore.initializeWithStatement( statementsStore.statements.get( statementId ), propertyId, propertyDataType );
 		},
 		/**
 		 * @param {Array<string>} statementIds
 		 * @param {string} propertyId
 		 */
-		initializeFromStatementStore( statementIds, propertyId ) {
+		async initializeFromStatementStore( statementIds, propertyId ) {
 			this.$reset();
 			this.statements = [];
-			statementIds.forEach( ( statementId ) => this.appendStatementToEditStatementsStore( statementId, propertyId ) );
+			return Promise.all( statementIds.map( ( statementId ) => this.appendStatementToEditStatementsStore( statementId, propertyId ) ) );
 		},
 		/**
 		 * @param {string} statementId
 		 * @param {string} propertyId
 		 * @param {string} propertyDataType
 		 */
-		createNewBlankStatement( statementId, propertyId, propertyDataType ) {
+		async createNewBlankStatement( statementId, propertyId, propertyDataType ) {
 			this.createdStatements.push( statementId );
-			this.appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType );
+			return this.appendStatementToEditStatementsStore( statementId, propertyId, propertyDataType );
 		},
 		/**
 		 * @param {string} removeStatementId

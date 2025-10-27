@@ -79,7 +79,7 @@ export class EditStatementFormPage {
 	}
 
 	public menuItems(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM );
+		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
 	public references(): Chainable {

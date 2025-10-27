@@ -95,6 +95,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 					]
 				}
 			} );
+			await wrapper.setData( { editStatementDataLoaded: true } );
 			const statementForm = wrapper.findComponent( editStatementComponent );
 			const buttons = wrapper.findAllComponents( CdxButton );
 			const addValueButton = buttons[ buttons.length - 3 ];

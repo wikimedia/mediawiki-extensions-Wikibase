@@ -12,9 +12,9 @@
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 		>
-			<cdx-text-input v-if="!isTabularOrGeoShapeDataType && snakTypeSelection === 'value'" v-model.trim="value"></cdx-text-input>
+			<cdx-text-input v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'" v-model.trim="textvalue"></cdx-text-input>
 			<cdx-lookup
-				v-else-if="isTabularOrGeoShapeDataType"
+				v-else-if="valueStrategy.isLookupDatatype()"
 				v-model:selected="lookupSelection"
 				v-model:input-value="lookupInputValue"
 				:menu-items="lookupMenuItems"
@@ -43,11 +43,9 @@
 const { computed, defineComponent } = require( 'vue' );
 const { mapWritableState } = require( 'pinia' );
 const { cdxIconTrash } = require( './icons.json' );
-const supportedDatatypes = require( './supportedDatatypes.json' );
 const { CdxButton, CdxIcon, CdxLookup, CdxMenuButton, CdxTextInput } = require( '../../codex.js' );
-const { searchByDatatype, transformSearchResults } = require( './api/commons.js' );
 const { useEditSnakStore } = require( './store/editStatementsStore.js' );
-const { useParsedValueStore } = require( './store/parsedValueStore.js' );
+const { snakValueStrategyFactory } = require( './store/snakValueStrategies.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -68,10 +66,6 @@ module.exports = exports = defineComponent( {
 		snakKey: {
 			type: String,
 			required: true
-		},
-		propertyId: {
-			type: String,
-			required: true
 		}
 	},
 	emits: [ 'remove-snak' ],
@@ -81,17 +75,21 @@ module.exports = exports = defineComponent( {
 	 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
 	 * the Composition API to initialise the component.
 	 */
-		const computedProperties = mapWritableState( useEditSnakStore( props.snakKey ), [
-			'value',
+		const editSnakStoreGetter = useEditSnakStore( props.snakKey );
+		const computedProperties = mapWritableState( editSnakStoreGetter, [
+			'textvalue',
+			'selectionvalue',
 			'datatype',
 			'snaktype',
 			'hash'
 		] );
 		return {
-			value: computed( computedProperties.value ),
+			textvalue: computed( computedProperties.textvalue ),
+			selectionvalue: computed( computedProperties.selectionvalue ),
 			datatype: computed( computedProperties.datatype ),
 			snaktype: computed( computedProperties.snaktype ),
-			hash: computed( computedProperties.hash )
+			hash: computed( computedProperties.hash ),
+			valueStrategy: editSnakStoreGetter().getValueStrategy()
 		};
 	},
 	data() {
@@ -106,26 +104,23 @@ module.exports = exports = defineComponent( {
 			previousValue: null,
 			lookupMenuItems: [],
 			lookupSelection: null,
-			lookupInputValue: '',
+			lookupInputValue: null,
 			menuConfig: {
 				visibleItemLimit: 6
 			}
 		};
 	},
 	computed: {
-		isTabularOrGeoShapeDataType() {
-			return supportedDatatypes.includes( this.datatype ) && ( this.datatype === 'tabular-data' || this.datatype === 'geo-shape' );
-		},
 		snakTypeSelection: {
 			get() {
 				return this.snaktype;
 			},
 			set( newSnakTypeSelection ) {
 				if ( this.snaktype === 'value' ) {
-					this.previousValue = this.value;
+					this.previousValue = this.textvalue;
 				}
 				if ( newSnakTypeSelection === 'value' ) {
-					this.value = this.previousValue;
+					this.textvalue = this.previousValue;
 				}
 				this.snaktype = newSnakTypeSelection;
 			}
@@ -143,7 +138,7 @@ module.exports = exports = defineComponent( {
 	},
 	methods: {
 		fetchLookupResults( searchTerm, offset = 0 ) {
-			return searchByDatatype( this.datatype, searchTerm, offset );
+			return snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
 		},
 
 		onUpdateInputValue( value ) {
@@ -158,13 +153,7 @@ module.exports = exports = defineComponent( {
 						return;
 					}
 
-					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
-						this.lookupMenuItems = [];
-						return;
-					}
-
-					const results = transformSearchResults( data.query.search );
-					this.lookupMenuItems = results;
+					this.lookupMenuItems = this.valueStrategy.transformSearchResults( data );
 				} )
 				.catch( ( error ) => {
 					this.lookupMenuItems = [];
@@ -176,37 +165,58 @@ module.exports = exports = defineComponent( {
 			}
 
 			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
-				.then( ( data ) => {
-					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
-						return;
-					}
-
-					const newResults = transformSearchResults( data.query.search );
-					this.lookupMenuItems.push( ...newResults );
-				} );
+				.then( ( data ) => this.lookupMenuItems.push( ...this.valueStrategy.transformSearchResults( data ) ) );
 		}
 	},
 	watch: {
-		value: {
+		textvalue: {
 			handler( newValue ) {
-				if ( this.isTabularOrGeoShapeDataType && this.lookupSelection !== newValue ) {
-					this.lookupInputValue = newValue || '';
-					this.lookupSelection = newValue || null;
+				if ( newValue === undefined ) {
+					return;
+				}
+				if ( this.valueStrategy.isLookupDatatype() && this.lookupSelection !== newValue ) {
+					if ( this.valueStrategy.isEntityDatatype() ) {
+						if ( this.lookupSelection === null ) {
+							this.lookupMenuItems = [
+								{
+									value: '__init__',
+									label: newValue
+								}
+							];
+							this.lookupInputValue = newValue;
+							this.lookupSelection = '__init__';
+						} else {
+							this.lookupInputValue = newValue;
+						}
+					} else {
+						this.lookupSelection = newValue || null;
+						this.lookupInputValue = newValue || '';
+					}
 				}
 
 				if ( this.parseValueTimeout !== null ) {
 					clearTimeout( this.parseValueTimeout );
 				}
-				const parsedValueStore = useParsedValueStore();
 				this.parseValueTimeout = setTimeout( () => {
-					parsedValueStore.getParsedValue( this.propertyId, this.value );
+					if ( this.valueStrategy.isEntityDatatype() ) {
+						this.valueStrategy.getParsedValue();
+					} else {
+						this.valueStrategy.getParsedValue( newValue );
+					}
 				}, 300 );
 			},
 			immediate: true
 		},
 		lookupSelection( newSelection ) {
-			if ( newSelection && this.isTabularOrGeoShapeDataType && this.value !== newSelection ) {
-				this.value = newSelection;
+			if ( newSelection && this.valueStrategy.isLookupDatatype() && this.textvalue !== newSelection ) {
+				if ( this.valueStrategy.isEntityDatatype() ) {
+					const lookupItem = this.lookupMenuItems.find( ( item ) => item.value === newSelection );
+					this.textvalue = lookupItem.label || lookupItem.value;
+					this.selectionvalue = newSelection;
+					this.lookupInputValue = this.textvalue;
+				} else {
+					this.textvalue = newSelection;
+				}
 			}
 		}
 	} }

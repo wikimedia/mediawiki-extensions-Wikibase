@@ -5,7 +5,6 @@
 	<div class="wikibase-wbui2025-editable-snak-holder">
 		<wbui2025-editable-snak-value
 			:snak-key="snakKey"
-			:property-id="propertyId"
 			:removable="true"
 			@remove-snak="removeSnak"
 		></wbui2025-editable-snak-value>

@@ -123,7 +123,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			cy.wait( '@commonsSearch' );
 			editFormPage.menu().should( 'exist' );
 
-			editFormPage.menuItems().eq( 3 ).click();
+			editFormPage.menuItems().eq( 0 ).click();
 			editFormPage.lookupInput().should( 'have.value', 'Data:Weather_data.tab' );
 
 			editFormPage.addValueButtons().first().click();
@@ -141,7 +141,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			cy.wait( '@commonsSearch' );
 			editFormPage.menu().should( 'exist' );
 
-			editFormPage.menuItems().eq( 11 ).click();
+			editFormPage.menuItems().eq( 2 ).click();
 			editFormPage.valueForms()
 				.last()
 				.find( editFormPage.getLookupInputSelector() )
@@ -272,7 +272,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				.should( 'exist' )
 				.should( 'be.visible' );
 
-			editFormPage.menuItems().eq( 3 ).click();
+			editFormPage.menuItems().eq( 0 ).click();
 			editFormPage.lookupInput().should( 'have.value', 'Data:Hamburg.map' );
 
 			editFormPage.addValueButtons().first().click();
@@ -290,7 +290,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			cy.wait( '@commonsSearch' );
 			editFormPage.menu().should( 'exist' );
 
-			editFormPage.menuItems().eq( 9 ).click();
+			editFormPage.menuItems().eq( 1 ).click();
 			editFormPage.valueForms()
 				.last()
 				.find( editFormPage.getLookupInputSelector() )

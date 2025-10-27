@@ -1,6 +1,6 @@
 <template>
 	<wikibase-wbui2025-modal-overlay>
-		<div class="wikibase-wbui2025-edit-statement">
+		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
 				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
@@ -13,7 +13,6 @@
 			<div class="wikibase-wbui2025-edit-form-body">
 				<template v-for="statementGuid in editableStatementGuids" :key="statementGuid">
 					<wikibase-wbui2025-edit-statement
-						:property-id="propertyId"
 						:statement-id="statementGuid"
 						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
@@ -56,7 +55,7 @@
 					<cdx-button
 						action="progressive"
 						weight="primary"
-						:disabled="formSubmitted || !fullyParsed || hasChanges !== true"
+						:disabled="!canSubmit"
 						@click="submitForm"
 					>
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
@@ -120,7 +119,8 @@ module.exports = exports = defineComponent( {
 			cdxIconCheck,
 			cdxIconClose,
 			showProgress: false,
-			formSubmitted: false
+			formSubmitted: false,
+			editStatementDataLoaded: false
 		};
 	},
 	computed: Object.assign( mapState( useEditStatementsStore, {
@@ -146,6 +146,9 @@ module.exports = exports = defineComponent( {
 				return this.statements[ 0 ].mainsnak.datatype;
 			}
 			return null;
+		},
+		canSubmit() {
+			return !this.formSubmitted && this.fullyParsed && this.hasChanges === true;
 		}
 	} ),
 	methods: Object.assign( mapActions( useEditStatementsStore, {
@@ -198,7 +201,9 @@ module.exports = exports = defineComponent( {
 			this.initializeEditStatementStoreFromStatementStore(
 				this.statements.map( ( statement ) => statement.id ),
 				this.propertyId
-			);
+			).then( () => {
+				this.editStatementDataLoaded = true;
+			} );
 		}
 	}
 } );

@@ -14,10 +14,11 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 		 *
 		 * @param {string} propertyId
 		 * @param {string} value
+		 * @param {Object} parseOptions
 		 * @returns {Promise<object|null>} A promise that will resolve to the parsed value
 		 * (a data value object with "type" and "value" keys), or null if it could not be parsed.
 		 */
-		getParsedValue( propertyId, value ) {
+		getParsedValue( propertyId, value, parseOptions ) {
 			let parsedValues = this.parsedValuesPerProperty.get( propertyId );
 			if ( parsedValues === undefined ) {
 				parsedValues = new Map();
@@ -26,7 +27,7 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 			let parsedValue = parsedValues.get( value );
 			if ( parsedValue === undefined ) {
 				parsedValue = reactive( {
-					promise: parseValue( propertyId, value ).then( ( parsed ) => {
+					promise: parseValue( value, parseOptions ).then( ( parsed ) => {
 						parsedValue.resolved = parsed;
 						return parsed;
 					} ),

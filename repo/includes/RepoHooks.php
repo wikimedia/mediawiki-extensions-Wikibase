@@ -1018,6 +1018,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/store/parsedValueStore.js',
 					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
+					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
 						'callback' => CodexModule::getIcons( ... ),

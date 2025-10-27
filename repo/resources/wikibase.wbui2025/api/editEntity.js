@@ -13,13 +13,14 @@ const updateStatements = async function ( entityId, statements ) {
 };
 
 /**
+ * @param {string} generate
  * @param {Object} dataValue
  * @param {string|null} propertyId
  */
-const renderSnakValueHtml = async function ( dataValue, propertyId = null ) {
+const renderSnakValue = async function ( generate, dataValue, propertyId = null ) {
 	const params = {
 		action: 'wbformatvalue',
-		generate: 'text/html; disposition=verbose-preview',
+		generate: generate,
 		datavalue: JSON.stringify( dataValue )
 	};
 
@@ -29,7 +30,22 @@ const renderSnakValueHtml = async function ( dataValue, propertyId = null ) {
 
 	const fetchResult = await api.get( params );
 	return fetchResult.result;
+};
 
+/**
+ * @param {Object} dataValue
+ * @param {string|null} propertyId
+ */
+const renderSnakValueHtml = async function ( dataValue, propertyId = null ) {
+	return renderSnakValue( 'text/html; disposition=verbose-preview', dataValue, propertyId );
+};
+
+/**
+ * @param {Object} dataValue
+ * @param {string|null} propertyId
+ */
+const renderSnakValueText = async function ( dataValue, propertyId = null ) {
+	return renderSnakValue( 'text/plain', dataValue, propertyId );
 };
 
 const renderPropertyLinkHtml = async function ( propertyId ) {
@@ -44,18 +60,17 @@ const renderPropertyLinkHtml = async function ( propertyId ) {
 /**
  * Parse a given input into a full data value.
  *
- * @param {string} propertyId
  * @param {string} input
+ * @param {Object} parseOptions
  * @returns {Promise<Object|null>} A data value object (with "type" and "value" keys),
  * or null if the input could not be parsed successfully.
  */
-const parseValue = async function ( propertyId, input ) {
+const parseValue = async function ( input, parseOptions = {} ) {
 	try {
-		const { results } = await api.get( {
+		const { results } = await api.get( Object.assign( {
 			action: 'wbparsevalue',
-			property: propertyId,
 			values: [ input ]
-		} );
+		}, parseOptions ) );
 		return results.find( ( result ) => result.raw === input );
 	} catch ( e ) {
 		return null;
@@ -65,6 +80,7 @@ const parseValue = async function ( propertyId, input ) {
 module.exports = {
 	updateStatements,
 	renderSnakValueHtml,
+	renderSnakValueText,
 	renderPropertyLinkHtml,
 	parseValue
 };

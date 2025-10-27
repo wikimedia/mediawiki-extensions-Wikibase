@@ -47,7 +47,8 @@ const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxLookup, CdxTextInput } = require( '../../codex.js' );
 const { cdxIconCheck } = require( './icons.json' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
-const { searchByDatatype, transformSearchResults } = require( './api/commons.js' );
+const { transformSearchResults } = require( './api/commons.js' );
+const { snakValueStrategyFactory } = require( './store/snakValueStrategies.js' );
 
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
@@ -106,7 +107,7 @@ module.exports = exports = defineComponent( {
 			this.lookupInputValue = '';
 		},
 		fetchLookupResults( searchTerm, offset = 0 ) {
-			return searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
+			return snakValueStrategyFactory.searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
 		},
 		onUpdateInputValue( value ) {
 			if ( !value ) {

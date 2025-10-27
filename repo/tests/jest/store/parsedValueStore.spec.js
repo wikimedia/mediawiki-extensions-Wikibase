@@ -18,25 +18,25 @@ describe( 'parsed value store', () => {
 			const parsedValueStore = useParsedValueStore();
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: 'abc' } );
 
-			const parsedValue1 = await parsedValueStore.getParsedValue( 'P123', ' abc ' );
+			const parsedValue1 = await parsedValueStore.getParsedValue( 'P123', ' abc ', { property: 'P123' } );
 			expect( parsedValue1 ).toEqual( { type: 'string', value: 'abc' } );
-			expect( mockedParseValue ).toHaveBeenCalledWith( 'P123', ' abc ' );
+			expect( mockedParseValue ).toHaveBeenCalledWith( ' abc ', { property: 'P123' } );
 
-			const parsedValue2 = await parsedValueStore.getParsedValue( 'P123', ' abc ' );
+			const parsedValue2 = await parsedValueStore.getParsedValue( 'P123', ' abc ', { property: 'P123' } );
 			expect( parsedValue2 ).toEqual( { type: 'string', value: 'abc' } );
 			expect( mockedParseValue ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'sends separate requests for different properties and values', async () => {
 			const parsedValueStore = useParsedValueStore();
-			mockedParseValue.mockImplementation( ( propertyId, value ) => Promise.resolve( {
+			mockedParseValue.mockImplementation( ( value, options ) => Promise.resolve( {
 				type: 'string',
-				value: `parsed ${ propertyId }:${ value }`
+				value: `parsed ${ options.property }:${ value }`
 			} ) );
 
-			const parsedValue1 = await parsedValueStore.getParsedValue( 'P123', 'abc' );
-			const parsedValue2 = await parsedValueStore.getParsedValue( 'P456', 'def' );
-			const parsedValue3 = await parsedValueStore.getParsedValue( 'P123', 'def' );
+			const parsedValue1 = await parsedValueStore.getParsedValue( 'P123', 'abc', { property: 'P123' } );
+			const parsedValue2 = await parsedValueStore.getParsedValue( 'P456', 'def', { property: 'P456' } );
+			const parsedValue3 = await parsedValueStore.getParsedValue( 'P123', 'def', { property: 'P123' } );
 
 			expect( mockedParseValue ).toHaveBeenCalledTimes( 3 );
 			expect( parsedValue1 ).toEqual( { type: 'string', value: 'parsed P123:abc' } );
