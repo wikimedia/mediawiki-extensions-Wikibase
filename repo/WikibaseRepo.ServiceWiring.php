@@ -17,6 +17,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\WikiMap\WikiMap;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -1031,7 +1032,7 @@ return [
 		$settings = WikibaseRepo::getSettings( $services );
 		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
-		$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser( WikiMap::getCurrentWikiId() );
 
 		$entitySourceDefinitions = $configParser->newDefinitionsFromConfigArray(
 			$settings->getSetting( 'entitySources' ),

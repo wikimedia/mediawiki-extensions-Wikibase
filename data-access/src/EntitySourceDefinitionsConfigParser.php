@@ -15,6 +15,9 @@ use Wikimedia\Assert\Assert;
  */
 class EntitySourceDefinitionsConfigParser {
 
+	public function __construct( private string $mediawikiCurrentWikiId ) {
+	}
+
 	/**
 	 * @param array[] $sourceConfig
 	 * @param SubEntityTypesMapper $subEntityTypesMapper
@@ -37,9 +40,14 @@ class EntitySourceDefinitionsConfigParser {
 					];
 
 				}
+				$repoDatabase = $sourceData['repoDatabase'];
+				if ( $repoDatabase === $this->mediawikiCurrentWikiId ) {
+					$repoDatabase = false;
+				}
+
 				$sources[] = new DatabaseEntitySource(
 					$sourceName,
-					$sourceData['repoDatabase'],
+					$repoDatabase,
 					$namespaceSlotData,
 					$sourceData['baseUri'],
 					$sourceData['rdfNodeNamespacePrefix'],
