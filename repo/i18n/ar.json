@@ -63,7 +63,9 @@
 	"wikibase-addreference": "أضِف مرجعاً",
 	"wikibase-save-inprogress": "جارٍ الحفظ...",
 	"wikibase-publish-inprogress": "جارٍ النشر",
-	"wikibase-publishing-progress": "جاري النشر…",
+	"wikibase-publishing-error": "حدث خطأ أثناء حفظ التغييرات. انتظر قليلًا وحاول مرة أخرى.",
+	"wikibase-publishing-progress": "جاري الانتهاء من تغييراتك…",
+	"wikibase-publishing-succeeded": "لقد تم حفظ التغييرات الخاصة بك!",
 	"wikibase-remove-inprogress": "جارٍ الحذف",
 	"wikibase-statementlistview-add": "أضِف قيمةً",
 	"wikibase-statementlistview-add-tooltip": "أضِف قيمة جديدة",
@@ -547,7 +549,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "هذا البيان به بعض القضايا المحتملة.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "تم اكتشاف تكرار في السناك الرئيسي. لم تتم إضافة البيان.",
 	"wikibase-editentity-warning-serializeresult": "تعذر إجراء تسلسل لبيانات الكيان للنتيجة.",
-	"wikibase-federated-properties-search-api-error-message": "الخصائص غير متاحة مؤقتًا.",
+	"wikibase-federated-properties-search-api-error-message": "الخواص غير متاحة مؤقتًا.",
 	"wikibase-federated-properties-save-api-error-message": "فشل الحفظ الخاص بك بسبب طلب فاشل إلى wiki مصدر الاتحاد.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "البيانات حول هذا العنصر غير متاحة مؤقتًا بسبب فشل طلب wiki مصدر الاتحاد. يرجى تحديث الصفحة.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "تستخدم قاعدة ويكي المعلومات هذه الخصائص الموحدة من مصدر خارجي. يمكنك الوصول إلى $1 .",
@@ -569,7 +571,7 @@
 	"wikibase-scoped-search-search-entities": "كيانات البحث",
 	"wikibase-scoped-search-search-entities-description": "ابحث عن أنواع مختلفة من كيانات {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "العناصر",
-	"wikibase-scoped-search-property-scope-name": "الخصائص",
+	"wikibase-scoped-search-property-scope-name": "الخواص",
 	"wikibase-mobile-editing-ui-beta-feature-message": "واجهة تحرير الهاتف المحمول",
 	"wikibase-mobile-editing-ui-beta-feature-description": "قم بتمكين واجهة المستخدم الجديدة لتحرير الهاتف المحمول التجريبية."
 }
