@@ -17,6 +17,7 @@ class Wbui2025FeatureFlag {
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';
 	public const EXTENSION_DATA_KEY = 'wikibase-mobile';
 	public const WBMOBILE_WBUI2025_FLAG = 'wbui2025';
+	public const PARSER_OPTION_NAME = 'wbMobile';
 
 	private UserOptionsLookup $userOptionsLookup;
 	private bool $wbui2025Enabled;

@@ -26,6 +26,7 @@ use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Hooks\WikibaseRepoOnParserOutputUpdaterConstructionHook;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Stats\StatsFactory;
 
 /**
@@ -146,7 +147,7 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
-			$options->getOption( 'wbMobile' ),
+			$options->getOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME ),
 			$this->isMobileView
 		);
 

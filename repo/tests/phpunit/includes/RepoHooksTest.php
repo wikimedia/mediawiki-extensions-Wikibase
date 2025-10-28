@@ -31,6 +31,7 @@ use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Wbui2025FeatureFlag;
 use WikiImporter;
 
 /**
@@ -395,17 +396,17 @@ XML
 		$this->assertSame( [
 			'wb' => null,
 			'termboxVersion' => null,
-			'wbMobile' => null,
+			Wbui2025FeatureFlag::PARSER_OPTION_NAME => null,
 		], $defaults );
 		$this->assertSame( [
 			'wb' => true,
 			'termboxVersion' => true,
-			'wbMobile' => true,
+			Wbui2025FeatureFlag::PARSER_OPTION_NAME => true,
 		], $inCacheKey );
 		$this->assertSame( [
 			'wb',
 			'termboxVersion',
-			'wbMobile',
+			Wbui2025FeatureFlag::PARSER_OPTION_NAME,
 		], array_keys( $lazyOptions ) );
 		$parserOptions = $this->createConfiguredMock( ParserOptions::class, [
 			'getUserIdentity' => $this->createMock( UserIdentity::class ),
@@ -413,8 +414,8 @@ XML
 		$this->assertIsCallable( $lazyOptions[ 'wb' ] );
 		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
 		$this->assertIsCallable( $lazyOptions[ 'termboxVersion' ] );
-		$this->assertIsCallable( $lazyOptions[ 'wbMobile' ] );
-		$this->assertSame( $expectedWbMobileValue, $lazyOptions[ 'wbMobile' ]( $parserOptions ) );
+		$this->assertIsCallable( $lazyOptions[ Wbui2025FeatureFlag::PARSER_OPTION_NAME ] );
+		$this->assertSame( $expectedWbMobileValue, $lazyOptions[ Wbui2025FeatureFlag::PARSER_OPTION_NAME ]( $parserOptions ) );
 	}
 
 	public function testOnParserOptionsRegister_hook() {

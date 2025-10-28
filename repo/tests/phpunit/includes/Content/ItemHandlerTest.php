@@ -27,6 +27,7 @@ use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\Repo\Content\ItemHandler
@@ -320,7 +321,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$title = Title::makeTitle( NS_MAIN, 'Foo' );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', 'wbMobile' ];
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', Wbui2025FeatureFlag::PARSER_OPTION_NAME ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,

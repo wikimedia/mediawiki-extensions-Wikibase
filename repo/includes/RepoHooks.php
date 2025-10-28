@@ -72,6 +72,7 @@ use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\View\ViewHooks;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
@@ -1145,9 +1146,9 @@ final class RepoHooks implements
 				TermboxView::TERMBOX_VERSION . TermboxView::CACHE_VERSION :
 				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION . PlaceholderEmittingEntityTermsView::CACHE_VERSION;
 		};
-		$defaults['wbMobile'] = null;
-		$inCacheKey['wbMobile'] = true;
-		$lazyLoad['wbMobile'] = function ( ParserOptions $parserOptions ) {
+		$defaults[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = null;
+		$inCacheKey[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = true;
+		$lazyLoad[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = function ( ParserOptions $parserOptions ) {
 			return WikibaseRepo::getWbui2025FeatureFlag()->generateWbMobileFlagValue(
 				WikibaseRepo::getMobileSite(),
 				$parserOptions->getUserIdentity(),

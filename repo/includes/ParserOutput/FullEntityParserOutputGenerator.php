@@ -166,7 +166,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$parserOutput->setTitleText( $titleHtml ?? '' );
 
 		// split parser cache by desktop/mobile/wbui2025 (T344362, T394291, T394291)
-		$parserOutput->recordOption( 'wbMobile' );
+		$parserOutput->recordOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME );
 		$viewContent = $entityView->getContent( $entity, $entityRevision->getRevisionId() );
 		$parserOutput->setContentHolderText( $viewContent->getHtml() );
 
@@ -187,7 +187,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			'wikibase.alltargets',
 		] );
 		// split parser cache by desktop/mobile (T344362)
-		$parserOutput->recordOption( 'wbMobile' );
+		$parserOutput->recordOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME );
 		// T324991
 		if ( !$this->isMobileView ) {
 			$parserOutput->addModuleStyles( [
