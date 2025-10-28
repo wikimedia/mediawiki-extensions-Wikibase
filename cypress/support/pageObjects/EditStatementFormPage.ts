@@ -44,10 +44,6 @@ export class EditStatementFormPage {
 		return cy.get( EditStatementFormPage.VALUE_FORMS );
 	}
 
-	public cancelButton(): Chainable {
-		return cy.get( EditStatementFormPage.FORM_ACTIONS ).contains( 'cancel' );
-	}
-
 	public addQualifierButton(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.ADD_QUALIFIER_BUTTON );
 	}
