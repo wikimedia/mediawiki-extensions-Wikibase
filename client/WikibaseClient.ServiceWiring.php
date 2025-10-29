@@ -13,6 +13,7 @@ use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
 use MediaWiki\StubObject\StubObject;
 use MediaWiki\User\ExternalUserNames;
+use MediaWiki\WikiMap\WikiMap;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -446,7 +447,7 @@ return [
 		$subEntityTypesMapper = new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 
-		$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser( WikiMap::getCurrentWikiId() );
 
 		return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
 	},
