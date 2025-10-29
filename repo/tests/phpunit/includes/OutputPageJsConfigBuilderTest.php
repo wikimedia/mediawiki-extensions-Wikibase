@@ -21,7 +21,7 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
 class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideBooleans */
-	public function testBuild( bool $publish, bool $taintedRefs ) {
+	public function testBuild( bool $publish, bool $taintedRefs, bool $federatedValuesEnabled ) {
 		$this->overrideConfigValue( MainConfigNames::EditSubmitButtonLabelPublish, $publish );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
@@ -35,7 +35,8 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'Q42' => 'wb-badge-featuredarticle',
 			],
 			250,
-			$taintedRefs
+			$taintedRefs,
+			$federatedValuesEnabled
 		);
 
 		$expectedKey = $publish ? 'wikibase-publish' : 'wikibase-save';
@@ -54,16 +55,17 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			],
 			'wbMultiLingualStringLimit' => 250,
 			'wbTaintedReferencesEnabled' => $taintedRefs,
+			'wbFederatedValuesEnabled' => $federatedValuesEnabled
 		];
 
 		$this->assertEquals( $expected, $configVars );
 	}
 
 	public static function provideBooleans(): iterable {
-		yield 'save, no tainted refs' => [ false, false ];
-		yield 'save, tainted refs' => [ false, true ];
-		yield 'publish, no tainted refs' => [ true, false ];
-		yield 'publish, tainted refs' => [ true, true ];
+		yield 'save, no tainted, federated values off' => [ false, false, false ];
+		yield 'save, tainted, federated values on'     => [ false, true,  true  ];
+		yield 'publish, no tainted, federated values on' => [ true, false, true ];
+		yield 'publish, tainted, federated values off'   => [ true, true,  false ];
 	}
 
 	/**

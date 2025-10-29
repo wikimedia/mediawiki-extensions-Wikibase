@@ -22,6 +22,9 @@ return [
 	// url for federated properties source location
 	'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
 
+	// feature flag for federated values
+	'federatedValuesEnabled' => false,
+
 	// feature flag for tainted references
 	'taintedReferencesEnabled' => false,
 
