@@ -102,7 +102,7 @@
 	"exceeded-entity-limit-category": "Paginas con troppo de entitates de {{WBREPONAME}} invocate",
 	"exceeded-entity-limit-category-desc": "Iste categoria lista paginas con troppo de entitates de {{WBREPONAME}} invocate.",
 	"notification-header-page-connection": "Le pagina <strong>$3</strong> ha essite {{GENDER:$2|connectite}} {{PLURAL:$4|-1=a un elemento de {{WBREPONAME}}|al elemento de {{WBREPONAME}} $4}}, ubi le datos relevante al topico pote esser colligite.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un altere pagina|$4 altere paginas|100=99+ altere paginas}} ha essite {{GENDER:$2|connectite}} a {{WBREPONAME}} objectos, ubi se pote colliger datos relevante al topicos.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un altere pagina|$4 altere paginas|100=99 o plus altere paginas}} ha essite connectite a elementos de {{WBREPONAME}}, ubi le datos relevante al topicos pote esser colligite.{{GENDER:$2|}}",
 	"notification-link-text-view-item": "{{GENDER:$1|Vider}} elemento",
 	"notification-subject-page-connection": "Un pagina sur {{SITENAME}} que tu ha {{GENDER:$3|create}} ha essite {{GENDER:$2|connectite}} a un elemento de {{WBREPONAME}}",
 	"unresolved-property-category": "Paginas con proprietates non resolvite",
