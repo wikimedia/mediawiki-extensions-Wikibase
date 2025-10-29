@@ -70,7 +70,7 @@
 	"wikibase-watchlist-show-changes-pref": "Εμφάνιση αλλαγών {{WBREPONAME}} στη λίστα παρακολούθησης σας",
 	"wikibase-error-deserialize-error": "Η αποσειριοποίηση δεδομένων απέτυχε.",
 	"wikibase-error-serialize-error": "Η σειριοποίηση δεδομένων απέτυχε.",
-	"wikibase-error-invalid-entity-id": "Το αναγνωριστικό «$2» είναι άγνωστος στο σύστημα. Παρακαλούμε χρησιμοποιήστε ένα έγκυρο αναγνωριστικό οντότητας.",
+	"wikibase-error-invalid-entity-id": "Το αναγνωριστικό «$2» είναι άγνωστο στο σύστημα. Παρακαλούμε χρησιμοποιήστε ένα έγκυρο αναγνωριστικό οντότητας.",
 	"wikibase-error-exceeded-entity-access-limit": "Πρόσβαση σε πάρα πολλές οντότητες {{WBREPONAME}}. Αριθμός των οντοτήτων που φορτώθηκαν: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Πάρα πολλές κλήσεις «mw.wikibase.getReferencedEntityId», μόνο έως και $2 {{PLURAL:$2|επιτρέπεται|επιτρέπονται}}.",
 	"unconnectedpages": "Σελίδες που δεν είναι συνδεδεμένες με αντικείμενα",
