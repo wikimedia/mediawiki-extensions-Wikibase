@@ -316,6 +316,21 @@ return call_user_func( function() {
 			'search-index-data-formatter-callback' => function ( UnboundedQuantityValue $value ) {
 				return (string)round( $value->getAmount()->getValueFloat() );
 			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'QuantityValue',
+					'fields' => [
+						'amount' => Type::nonNull( Type::string() ),
+						'unit' => Type::nonNull( Type::string() ),
+						'lowerBound' => Type::string(),
+						'upperBound' => Type::string(),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
+					},
+				] );
+			},
 		],
 		'VT:string' => [
 			'expert-module' => 'jquery.valueview.experts.StringValue',
