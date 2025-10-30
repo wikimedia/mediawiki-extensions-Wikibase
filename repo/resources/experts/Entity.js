@@ -63,11 +63,19 @@
 		 * @param {string} repoApiUrl
 		 */
 		_initEntityselector: function ( repoApiUrl ) {
-			this.$input.entityselector( {
+			var opts = {
 				url: repoApiUrl,
 				type: this.constructor.TYPE,
 				selectOnAutocomplete: true
-			} );
+			};
+
+			if ( mw.config.get('wbFederatedValuesEnabled') && this.constructor.TYPE === 'item' ) {
+				// For Item statement values, ask entityselector to emit this hook; the handler lives
+				// in the RL module 'wikibase.federatedValues'.
+				opts.searchApiParametersHookName = 'wikibase.entityselector.search.api-parameters.searchcontext.value';
+			}
+
+			this.$input.entityselector( opts );
 		},
 
 		/**

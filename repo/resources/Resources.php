@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Modules\DataTypesModule;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
+use Wikibase\Repo\FederatedValues\EntitySearchContext;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -77,6 +78,7 @@ return call_user_func( function() {
 				'jquery.valueview.Expert',
 				'wikibase.experts.__namespace',
 				'wikibase.experts.Entity',
+				'wikibase.federatedValues',
 			],
 		],
 
@@ -369,6 +371,20 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.federatedValues' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase.federatedValues/wikibase.federatedValues.init.js',
+				[
+					'name' => 'wikibase.federatedValues/entitySearchContext.json',
+					'callback' => static function () {
+						return EntitySearchContext::toArray();
+					},
+				],
+			],
+			'dependencies' => [
+				'mw.config.values.wbRepo',
+			]
+		],
 	];
 
 	return $modules;

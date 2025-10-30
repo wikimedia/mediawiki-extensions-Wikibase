@@ -10,6 +10,7 @@ use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiResult;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
@@ -22,6 +23,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
+use Wikibase\Repo\FederatedValues\EntitySearchContext;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\InvariantException;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -316,6 +318,82 @@ class SearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
+		// TODO: Federated Values - Merge with local results
+		if (
+			WikibaseRepo::getSettings()->getSetting( 'federatedValuesEnabled' ) &&
+			($params['type'] ?? '') === 'item' &&
+			($params['searchcontext'] ?? '') === EntitySearchContext::VALUE
+		) {
+				// Build a clean param set for Wikidata
+				// proxy identical query to Wikidata when searching for a value
+				$remote = [
+						'action'      => 'wbsearchentities',
+						'format'      => 'json',
+						'errorformat' => 'plaintext',
+						'search'      => (string)$params['search'],
+						'language'    => (string)$params['language'],
+						'uselang'     => (string)($params['uselang'] ?? $params['language']),
+						'type'        => 'item',
+				];
+
+				if ( isset( $params['limit'] ) ) {
+						$remote['limit'] = (int)$params['limit'];
+				}
+				if ( isset( $params['continue'] ) ) {
+						$remote['continue'] = (int)$params['continue'];
+				}
+				if ( array_key_exists( 'strictlanguage', $params ) ) {
+						// wbsearchentities expects 1/0
+						$remote['strictlanguage'] = $params['strictlanguage'] ? 1 : 0;
+				}
+				if ( isset( $params['profile'] ) ) {
+						$remote['profile'] = (string)$params['profile'];
+				}
+				if ( isset( $params['props'] ) ) {
+						// flatten multi to pipe-separated
+						$remote['props'] = is_array( $params['props'] ) ? implode( '|', $params['props'] ) : (string)$params['props'];
+				}
+
+				// Use GET with query string (mirrors how the UI calls the local API)
+				// TODO: Federated Values - get from settings
+				$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remote );
+
+				$http = \MediaWiki\MediaWikiServices::getInstance()->getHttpRequestFactory();
+				$req  = $http->create( $remoteUrl, [
+						'method'  => 'GET',
+						'timeout' => 10,
+				] );
+
+				$status = $req->execute();
+				if ( !$status->isOK() ) {
+						$this->dieWithError( [ 'apierror-badaccess-generic', 'Remote search request failed' ] );
+				}
+
+				$resp = \FormatJson::decode( $req->getContent(), true ) ?: [];
+
+				// Return fields with the same shape as the local path
+				$result = $this->getResult();
+
+				// (Optional) debug: inspect the raw remote response
+				// wfDebugLog( 'wikibase', 'wikidata wbsearchentities response: ' . json_encode( $resp ) );
+
+				if ( array_key_exists( 'searchinfo', $resp ) ) {
+						$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
+				} else {
+						$result->addValue( null, 'searchinfo', [ 'search' => (string)$params['search'] ] );
+				}
+
+				$result->addValue( null, 'search', $resp['search'] ?? [] );
+
+				if ( isset( $resp['search-continue'] ) ) {
+						$result->addValue( null, 'search-continue', $resp['search-continue'] );
+				}
+
+				$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
+				$result->addValue( null, 'success', 1 );
+				return;
+		}
+
 		$results = $this->getSearchResults( $params );
 
 		$this->getResult()->addValue(
@@ -395,6 +473,12 @@ class SearchEntities extends ApiBase {
 				ParamValidator::PARAM_TYPE => $this->termsLanguages->getLanguages(),
 				ParamValidator::PARAM_REQUIRED => true,
 			],
+			// Federated Values
+			'searchcontext' => [
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_DEFAULT => '',
+			],
+			// END Federated Values
 			'strictlanguage' => [
 				ParamValidator::PARAM_TYPE => 'boolean',
 				ParamValidator::PARAM_DEFAULT => false,

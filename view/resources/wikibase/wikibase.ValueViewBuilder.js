@@ -81,7 +81,8 @@
 			var valueViewOptions = Object.assign( {}, this._baseOptions, {
 				htmlFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/html; disposition=verbose-preview' ),
 				plaintextFormatter: this._formatterFactory.getFormatter( dataTypeId, propertyId, 'text/plain' ),
-				value: dataValue
+				value: dataValue,
+				context: 'statement-value'
 			} );
 
 			if ( !dataType || ( dataValue && dataValue.getType() === 'undeserializable' ) ) {
