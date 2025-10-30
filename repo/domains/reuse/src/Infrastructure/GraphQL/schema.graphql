@@ -52,7 +52,7 @@ type PredicateProperty {
   label(languageCode: LanguageCode!): String
 }
 
-union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue | EntityValue
+union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue | EntityValue | UnknownValue
 
 type StringValue {
   content: String!
@@ -99,6 +99,12 @@ type TimeValue {
 type EntityValue {
   id: String!
 }
+
+type UnknownValue {
+  content: Json!
+}
+
+scalar Json
 
 enum ValueType {
   novalue

@@ -10,6 +10,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use DataValues\UnDeserializableValue;
 use Generator;
 use GraphQL\GraphQL;
 use MediaWiki\Site\HashSiteStore;
@@ -62,6 +63,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $propertyUsedAsValue;
 	private static Property $qualifierProperty;
 	private static Property $customEntityIdProperty;
+	private static Property $unknownTypeProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
 	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
@@ -103,6 +105,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$timeProperty,
 			self::$propertyTypeProperty,
 			self::$customEntityIdProperty,
+			self::$unknownTypeProperty,
 		] as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
@@ -153,6 +156,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithCustomEntityIdValuePropertyId = 'P13';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
+		$unknownTypePropertyId = 'P12';
 		$unusedPropertyId = 'P9999';
 		$qualifierStringValue = 'qualifierStringValue';
 		$statementStringValue = 'statementStringValue';
@@ -226,6 +230,22 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withSomeGuid()
 			->withValue( new EntityIdValue( self::$propertyUsedAsValue->getId() ) )
 			->build();
+
+		self::$unknownTypeProperty = new Property( new NumericPropertyId( $unknownTypePropertyId ), null, 'unknown-type' );
+		$unknownValueData = [ 'some' => 'data' ];
+		$statementWithUnknownType = NewStatement::forProperty( $unknownTypePropertyId )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			// Ideally we would just stub DataValue here, but that's not possible because it extends Serializable,
+			// which is deprecated and emits a warning.
+			->withValue( new UnDeserializableValue( $unknownValueData, null, 'test value' ) );
+
+		$deletedProperty = 'P999';
+		$valueUsedInStatementWithDeletedProperty = new StringValue( 'deleted value' );
+		$statementWithDeletedProperty = NewStatement::forProperty( $deletedProperty )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $valueUsedInStatementWithDeletedProperty );
 
 		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
 			->withSubject( $itemId )
@@ -309,6 +329,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
 			->andStatement( $statementWithCustomEntityIdValue )
+			->andStatement( $statementWithUnknownType )
+			->andStatement( $statementWithDeletedProperty )
 			->build();
 
 		$item2Id = 'Q321';
@@ -650,6 +672,38 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 							[
 								'valueType' => 'novalue',
 							],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with unknown value type' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$unknownTypePropertyId\") {
+					value { ...on UnknownValue { content } }
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[ 'value' => [ 'content' => $unknownValueData ] ],
+						],
+					],
+				],
+			],
+		];
+		yield 'statement with deleted property' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$deletedProperty\") {
+					value { ...on UnknownValue { content } }
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[ 'value' => [ 'content' => $valueUsedInStatementWithDeletedProperty->getArrayValue() ] ],
 						],
 					],
 				],

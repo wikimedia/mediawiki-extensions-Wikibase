@@ -413,10 +413,7 @@ class DataTypeDefinitions {
 	 * @return callable[] List of callbacks by data type, without "PT:" prefixes.
 	 */
 	public function getGraphqlValueTypes(): array {
-		return $this->resolveValueTypeFallback(
-			$this->getMapForDefinitionField( 'graphql-value-type' ),
-			allowMissing: true, // TODO remove or set to false once T404692 is done since it should no longer be needed
-		);
+		return $this->resolveValueTypeFallback( $this->getMapForDefinitionField( 'graphql-value-type' ) );
 	}
 
 }
