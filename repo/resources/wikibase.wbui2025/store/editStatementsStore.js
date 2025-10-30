@@ -31,6 +31,7 @@ function sameDataValue( dv1, dv2 ) {
 const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 	state: () => ( {
 		value: undefined,
+		datavalue: undefined,
 		textvalue: undefined,
 		selectionvalue: undefined,
 		snaktype: 'value',
@@ -40,17 +41,19 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 		hash: undefined,
 		parseValueTimeout: null
 	} ),
-	actions: {
-		getValueStrategy() {
+	getters: {
+		valueStrategy() {
 			return snakValueStrategyFactory.getStrategyForSnakStore( this );
-		},
+		}
+	},
+	actions: {
 		async initializeWithSnak( snak ) {
 			this.snaktype = snak.snaktype;
 			this.datatype = snak.datatype;
 			this.property = snak.property;
 			if ( this.snaktype === 'value' ) {
-				this.textvalue = await this.getValueStrategy().renderValueToText( snak.datavalue );
-				this.selectionvalue = this.getValueStrategy().getSelectionValueForSavedValue( snak.datavalue );
+				this.textvalue = await this.valueStrategy.renderValueToText( snak.datavalue );
+				this.selectionvalue = this.valueStrategy.getSelectionValueForSavedValue( snak.datavalue );
 				this.value = snak.datavalue.value;
 				this.valuetype = snak.datavalue.type;
 			}
@@ -63,15 +66,26 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 				datatype: this.datatype
 			};
 			if ( this.snaktype === 'value' ) {
-				snakJson.datavalue = await this.getValueStrategy().buildDataValue( this );
+				snakJson.datavalue = await this.valueStrategy.buildDataValue( this );
 			}
 			return snakJson;
+		},
+		async setNewPropertyAndDatatype( property, datatype ) {
+			this.property = property;
+			this.datatype = datatype;
+			if ( this.snaktype === 'value' ) {
+				const resetDatavalue = { value: '', type: 'string' };
+				this.textvalue = await this.valueStrategy.renderValueToText( resetDatavalue );
+				this.selectionvalue = this.valueStrategy.getSelectionValueForSavedValue( resetDatavalue );
+				this.value = '';
+				this.valuetype = 'string';
+			}
 		},
 		currentDataValue() {
 			if ( this.snaktype !== 'value' ) {
 				return undefined;
 			}
-			return this.getValueStrategy().peekDataValue( this );
+			return this.valueStrategy.peekDataValue( this );
 		},
 		dispose() {
 			deleteStore( this );
@@ -159,20 +173,20 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			if ( !this.qualifiers[ editSnakStore.property ] ) {
 				this.qualifiers[ editSnakStore.property ] = [];
 				this.qualifiersOrder.push( editSnakStore.property );
-				renderPropertyLinkHtml( editSnakStore.property ).then( ( result ) => updatePropertyLinkHtml( editSnakStore.property, result ) );
+				renderPropertyLinkHtml( [ editSnakStore.property ] ).then( ( result ) => updatePropertyLinkHtml( result ) );
 			}
 			this.qualifiers[ editSnakStore.property ].push( snakKey );
 
 			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property ).then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 
 			if ( editSnakStore.snaktype === 'value' ) {
-				editSnakStore.getValueStrategy().getParsedValue();
+				editSnakStore.valueStrategy.getParsedValue();
 			}
 		},
 		async addReference( snakKey ) {
 			const editSnakStore = useEditSnakStore( snakKey )();
 
-			renderPropertyLinkHtml( editSnakStore.property ).then( ( result ) => updatePropertyLinkHtml( editSnakStore.property, result ) );
+			renderPropertyLinkHtml( [ editSnakStore.property ] ).then( ( result ) => updatePropertyLinkHtml( result ) );
 			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property )
 				.then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 
@@ -184,7 +198,7 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			this.references.push( newReference );
 
 			if ( editSnakStore.valuetype === 'value' ) {
-				editSnakStore.getValueStrategy().getParsedValue();
+				editSnakStore.valueStrategy.getParsedValue();
 			}
 		},
 		disposeOfStatementStoreAndSnaks() {
@@ -205,7 +219,7 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			const isFullyParsedValue = ( value ) => value !== undefined && value !== null;
 			const snakFullyParsed = function ( snak ) {
 				return snak.snaktype !== 'value' ||
-					isFullyParsedValue( snak.getValueStrategy().peekDataValue( snak ) );
+					isFullyParsedValue( snak.valueStrategy.peekDataValue( snak ) );
 			};
 			const mainSnakState = useEditSnakStore( state.mainSnakKey )();
 			if ( !snakFullyParsed( mainSnakState ) ) {
@@ -229,6 +243,12 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 						if ( !snakFullyParsed( referenceSnakState ) ) {
 							return false;
 						}
+					}
+				}
+				for ( const snakKey of ( reference.newSnaks || [] ) ) {
+					const referenceSnakState = useEditSnakStore( snakKey )();
+					if ( !snakFullyParsed( referenceSnakState ) ) {
+						return false;
 					}
 				}
 			}
@@ -298,6 +318,9 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 				const reference = state.references[ i ];
 				const savedReference = savedStatement.references[ i ];
 				if ( reference.hash !== savedReference.hash ) {
+					return true;
+				}
+				if ( Array.isArray( reference.newSnaks ) && reference.newSnaks.length > 0 ) {
 					return true;
 				}
 				const referencePropertyIds = new Set( [ ...reference[ 'snaks-order' ], ...savedReference[ 'snaks-order' ] ] );
@@ -402,6 +425,19 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 					builtReference.snaks[ propertyId ] = await Promise.all( statementList.map(
 						async ( snakHash ) => await useEditSnakStore( snakHash )().buildSnakJson()
 					) );
+				}
+				if ( Array.isArray( reference.newSnaks ) ) {
+					const newSnaks = await Promise.all( reference.newSnaks.map(
+						async ( snakKey ) => await useEditSnakStore( snakKey )().buildSnakJson()
+					) );
+
+					for ( const snak of newSnaks ) {
+						if ( !Array.isArray( builtReference.snaks[ snak.property ] ) ) {
+							builtReference.snaks[ snak.property ] = [ snak ];
+						} else {
+							builtReference.snaks[ snak.property ].push( snak );
+						}
+					}
 				}
 				return builtReference;
 			} ) );

@@ -12,8 +12,10 @@
 				v-for="reference in references"
 				:key="reference"
 				:reference="reference"
+				@add-reference-snak="addReferenceSnak"
 				@remove-reference="removeReference"
 				@remove-reference-snak="removeReferenceSnak"
+				@remove-new-reference-snak="removeNewReferenceSnak"
 			></wbui2025-editable-reference>
 		</cdx-accordion>
 		<p v-else>
@@ -40,7 +42,7 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
-	emits: [ 'remove-reference', 'remove-reference-snak' ],
+	emits: [ 'add-reference-snak', 'remove-reference', 'remove-reference-snak', 'remove-new-reference-snak' ],
 	data() {
 		return { showReferences: false };
 	},
@@ -56,11 +58,17 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
+		addReferenceSnak( reference, snakKey ) {
+			this.$emit( 'add-reference-snak', reference, snakKey );
+		},
 		removeReference( reference ) {
 			this.$emit( 'remove-reference', reference );
 		},
 		removeReferenceSnak( reference, propertyId, snakKey ) {
 			this.$emit( 'remove-reference-snak', reference, propertyId, snakKey );
+		},
+		removeNewReferenceSnak( reference, snakKey ) {
+			this.$emit( 'remove-new-reference-snak', reference, snakKey );
 		}
 	},
 	watch: {

@@ -122,6 +122,71 @@ describe( 'Edit Statements Store', () => {
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
+
+		it( 'references need to be parsed', async () => {
+			const parsedValueStore = useParsedValueStore();
+			const editStatementsStore = useEditStatementsStore();
+			const id1 = 'Q1$00000000-0000-0000-0000-000000000001';
+			const v1 = 'value 1';
+			await editStatementsStore.initializeFromStatementStore( [ id1 ], 'P1' );
+			const editStatementStore = useEditStatementStore( id1 )();
+			useEditSnakStore( editStatementStore.mainSnakKey )().snaktype = 'novalue';
+			const snakKey = generateNextSnakKey();
+			await useEditSnakStore( snakKey )().initializeWithSnak( {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datavalue: {
+					type: 'string',
+					value: v1
+				},
+				datatype: 'string'
+			} );
+			editStatementStore.references = [ {
+				snaks: {
+					P1: [ snakKey ]
+				},
+				'snaks-order': [ 'P1' ]
+			} ];
+			expect( editStatementsStore.isFullyParsed ).toBe( false );
+
+			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
+			await parsedValueStore.getParsedValue( 'P1', v1 );
+
+			expect( editStatementsStore.isFullyParsed ).toBe( true );
+		} );
+
+		it( 'newly added references need to be parsed', async () => {
+			const parsedValueStore = useParsedValueStore();
+			const editStatementsStore = useEditStatementsStore();
+			const id1 = 'Q1$00000000-0000-0000-0000-000000000001';
+			const v1 = 'value 1';
+			await editStatementsStore.initializeFromStatementStore( [ id1 ], 'P1' );
+			const editStatementStore = useEditStatementStore( id1 )();
+			useEditSnakStore( editStatementStore.mainSnakKey )().snaktype = 'novalue';
+			const snakKey = generateNextSnakKey();
+			await useEditSnakStore( snakKey )().initializeWithSnak( {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datavalue: {
+					type: 'string',
+					value: v1
+				},
+				datatype: 'string'
+			} );
+			editStatementStore.references = [ {
+				snaks: {},
+				'snaks-order': [],
+				newSnaks: [ snakKey ]
+			} ];
+			expect( editStatementsStore.isFullyParsed ).toBe( false );
+
+			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
+			await parsedValueStore.getParsedValue( 'P1', v1 );
+
+			expect( editStatementsStore.isFullyParsed ).toBe( true );
+		} );
 	} );
 
 	describe( 'hasChanges getter', () => {
@@ -451,6 +516,115 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.hasChanges ).toBe( true );
 		} );
 
-		// TODO: add tests for editing the reference once editing references is supported (T405236?)
+		it( 'editing a reference snak is a change', async () => {
+			const id = 'Q1$00000000-0000-0000-0000-000000000001';
+			const statements = { P1: [ {
+				id,
+				rank: 'normal',
+				mainsnak: {
+					property: 'P1',
+					snaktype: 'novalue',
+					hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+				},
+				references: [ {
+					hash: 'd7389795787c3030b9476b7448f3e1eda380b0d9',
+					snaks: { P1: [ {
+						property: 'P1',
+						snaktype: 'novalue',
+						hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+					} ] },
+					'snaks-order': [ 'P1' ]
+				} ]
+			} ] };
+			useSavedStatementsStore().populateWithClaims( statements );
+			useParsedValueStore().populateWithStatements( statements );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
+
+			expect( editStatementsStore.hasChanges ).toBe( false );
+
+			const editStatementStore = useEditStatementStore( id )();
+			const snakKey = editStatementStore.references[ 0 ].snaks.P1[ 0 ];
+			const snak = useEditSnakStore( snakKey )();
+			snak.snaktype = 'somevalue';
+
+			expect( editStatementsStore.hasChanges ).toBe( true );
+		} );
+
+		it( 'removing a snak from a reference is a change', async () => {
+			const id = 'Q1$00000000-0000-0000-0000-000000000001';
+			const statements = { P1: [ {
+				id,
+				rank: 'normal',
+				mainsnak: {
+					property: 'P1',
+					snaktype: 'novalue',
+					hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+				},
+				references: [ {
+					hash: 'd7389795787c3030b9476b7448f3e1eda380b0d9',
+					snaks: { P1: [
+						{
+							property: 'P1',
+							snaktype: 'novalue',
+							hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+						},
+						{
+							property: 'P1',
+							snaktype: 'somevalue',
+							hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+						}
+					] },
+					'snaks-order': [ 'P1' ]
+				} ]
+			} ] };
+			useSavedStatementsStore().populateWithClaims( statements );
+			useParsedValueStore().populateWithStatements( statements );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
+
+			expect( editStatementsStore.hasChanges ).toBe( false );
+
+			const editStatementStore = useEditStatementStore( id )();
+			const snakKeys = editStatementStore.references[ 0 ].snaks.P1;
+			editStatementStore.references[ 0 ].snaks.P1 = snakKeys.slice( 1 );
+
+			expect( editStatementsStore.hasChanges ).toBe( true );
+		} );
+
+		it( 'adding a new snak to a reference is a change', async () => {
+			const id = 'Q1$00000000-0000-0000-0000-000000000001';
+			const statements = { P1: [ {
+				id,
+				rank: 'normal',
+				mainsnak: {
+					property: 'P1',
+					snaktype: 'novalue',
+					hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+				},
+				references: [ {
+					hash: 'd7389795787c3030b9476b7448f3e1eda380b0d9',
+					snaks: { P1: [
+						{
+							property: 'P1',
+							snaktype: 'novalue',
+							hash: 'c77761897897f63f151c4a1deb8bd3ad23ac51c6'
+						}
+					] },
+					'snaks-order': [ 'P1' ]
+				} ]
+			} ] };
+			useSavedStatementsStore().populateWithClaims( statements );
+			useParsedValueStore().populateWithStatements( statements );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
+
+			expect( editStatementsStore.hasChanges ).toBe( false );
+
+			const editStatementStore = useEditStatementStore( id )();
+			editStatementStore.references[ 0 ].newSnaks = [ 'snak500' ];
+
+			expect( editStatementsStore.hasChanges ).toBe( true );
+		} );
 	} );
 } );

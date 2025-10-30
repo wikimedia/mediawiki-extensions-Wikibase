@@ -18,7 +18,7 @@ const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 
 const editableSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableSnakValue.vue' );
-const { CdxTextInput } = require( '../../../codex.js' );
+const { CdxButton, CdxMenuButton, CdxTextInput } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithStatements } = require( '../piniaHelpers.js' );
 const { useEditStatementsStore, useEditStatementStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
@@ -31,35 +31,38 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 	} );
 
 	describe( 'string datatype', () => {
-		let wrapper, textInput;
+		let wrapper, textInput, removeButton, snakTypeSelector, snakKey;
+
+		const testPropertyId = 'P1';
+		const testStatementId = 'Q1$string-statement-id';
+		const testStatement = {
+			id: testStatementId,
+			mainsnak: {
+				snaktype: 'value',
+				datavalue: {
+					value: 'example string',
+					type: 'string'
+				},
+				datatype: 'string'
+			},
+			rank: 'normal',
+			'qualifiers-order': [],
+			qualifiers: {},
+			references: []
+		};
 
 		beforeEach( async () => {
-			const testPropertyId = 'P1';
-			const testStatementId = 'Q1$string-statement-id';
-			const testStatement = {
-				id: testStatementId,
-				mainsnak: {
-					snaktype: 'value',
-					datavalue: {
-						value: 'example string',
-						type: 'string'
-					},
-					datatype: 'string'
-				},
-				rank: 'normal',
-				'qualifiers-order': [],
-				qualifiers: {},
-				references: []
-			};
 			const testingPinia = storeWithStatements( [ testStatement ] );
 			const editStatementsStore = useEditStatementsStore();
 			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
 			const editStatementStore = useEditStatementStore( testStatementId )();
 
+			snakKey = editStatementStore.mainSnakKey;
 			wrapper = await mount( editableSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: snakKey,
+					removable: true
 				},
 				global: {
 					plugins: [ testingPinia ]
@@ -67,10 +70,37 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			} );
 
 			textInput = wrapper.findComponent( CdxTextInput );
+			removeButton = wrapper.findComponent( CdxButton );
+			snakTypeSelector = wrapper.findComponent( CdxMenuButton );
 		} );
 
 		it( 'should set the text-input to the current snak value', async () => {
 			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+		} );
+
+		it( 'correctly mounts the child components', () => {
+			expect( textInput.exists() ).toBe( true );
+			expect( textInput.props( 'disabled' ) ).toBe( false );
+			expect( snakTypeSelector.exists() ).toBe( true );
+			expect( snakTypeSelector.props( 'disabled' ) ).toBe( false );
+			expect( removeButton.exists() ).toBe( true );
+			expect( removeButton.isDisabled() ).toBe( false );
+		} );
+
+		it( 'emits "remove-snak" when the remove button is clicked', async () => {
+			await removeButton.vm.$emit( 'click' );
+			expect( wrapper.emitted() ).toEqual( { 'remove-snak': [ [ snakKey ] ] } );
+		} );
+
+		describe( 'when it is disabled', () => {
+			beforeEach( async () => {
+				await wrapper.setProps( { disabled: true } );
+			} );
+			it( 'disables the child components', () => {
+				expect( textInput.props( 'disabled' ) ).toBe( true );
+				expect( snakTypeSelector.props( 'disabled' ) ).toBe( true );
+				expect( removeButton.isDisabled() ).toBe( true );
+			} );
 		} );
 	} );
 
@@ -114,7 +144,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 				noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
 			} );
 
-			it( 'mount its child components', () => {
+			it( 'mounts its child components', () => {
 				expect( wrapper.exists() ).toBe( true );
 				expect( textInput.exists() ).toBe( false );
 				expect( noValueSomeValuePlaceholder.exists() ).toBe( true );

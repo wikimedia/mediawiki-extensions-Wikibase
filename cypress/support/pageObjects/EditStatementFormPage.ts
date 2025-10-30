@@ -18,6 +18,7 @@ export class EditStatementFormPage {
 		SNAK_TYPE_SELECT: '.wikibase-wbui2025-edit-statement-value-input .wikibase-snaktypeselector .cdx-menu-button',
 		ADD_REFERENCE_BUTTON: '.wikibase-wbui2025-add-reference-button',
 		REFERENCES: '.wikibase-wbui2025-editable-reference',
+		REFERENCE_SNAKS: '.wikibase-wbui2025-editable-reference-snak',
 		REFERENCES_ACCORDION: '.wikibase-wbui2025-editable-references-section .cdx-accordion summary',
 	};
 
@@ -89,6 +90,10 @@ export class EditStatementFormPage {
 
 	public references(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES );
+	}
+
+	public referenceSnaks(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.REFERENCE_SNAKS );
 	}
 
 	public referencesAccordion(): Chainable {

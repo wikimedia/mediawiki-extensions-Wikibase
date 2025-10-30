@@ -86,17 +86,26 @@ describe( 'Statements Store', () => {
 		expect( savedStatementsStore.properties.size ).toBe( 1 );
 	} );
 
-	it( 'looks up html for snaks with no stored html', () => {
+	it( 'looks up html for snaks and properties with no stored html', async () => {
 		const savedStatementsStore = useSavedStatementsStore();
 		const testClaims = {
 			P5: [ testStatement ]
 		};
 		updateSnakValueHtmlForHash( testSnakHash, '<p>Some Html</p>' );
 		const apiSpy = jest.spyOn( api, 'get' );
-		apiSpy.mockReturnValue( '<p>FakeData</p>' );
-		savedStatementsStore.populateWithClaims( testClaims, true );
+		apiSpy.mockImplementation( ( args ) => {
+			if ( args.action === 'wbformatvalue' ) {
+				return '<p>FakeData</p>';
+			} else if ( args.action === 'wbformatentities' ) {
+				return { wbformatentities: {} };
+			}
+		} );
+		await savedStatementsStore.populateWithClaims( testClaims, true );
 		expect( savedStatementsStore.statements.size ).toBe( 1 );
 		expect( savedStatementsStore.properties.size ).toBe( 1 );
-		expect( apiSpy ).toHaveBeenCalledTimes( 3 );
+		expect( apiSpy ).toHaveBeenNthCalledWith( 1, expect.objectContaining( { action: 'wbformatentities', ids: expect.arrayContaining( [ 'P1', 'P2', 'P5' ] ) } ) );
+		expect( apiSpy ).toHaveBeenNthCalledWith( 2, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '{"value":"test value"' ) } ) );
+		expect( apiSpy ).toHaveBeenNthCalledWith( 3, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '{"value":"Ofc it\'s a string reference"' ) } ) );
+		expect( apiSpy ).toHaveBeenNthCalledWith( 4, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '+1999-00-00T00:00:00Z' ) } ) );
 	} );
 } );

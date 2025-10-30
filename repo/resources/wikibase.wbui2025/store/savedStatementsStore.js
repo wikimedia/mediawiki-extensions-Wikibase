@@ -1,6 +1,11 @@
 const { defineStore } = require( 'pinia' );
-const { snakValueHtmlForHash, updateSnakValueHtmlForHash } = require( './serverRenderedHtml.js' );
-const { renderSnakValueHtml } = require( '../api/editEntity.js' );
+const {
+	propertyLinkHtml,
+	updatePropertyLinkHtml,
+	snakValueHtmlForHash,
+	updateSnakValueHtmlForHash
+} = require( './serverRenderedHtml.js' );
+const { renderPropertyLinkHtml, renderSnakValueHtml } = require( '../api/editEntity.js' );
 
 const useSavedStatementsStore = defineStore( 'savedStatements', {
 	state: () => ( {
@@ -12,7 +17,11 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 			this.statements = new Map();
 			this.properties = new Map();
 			const snaksWithoutHtml = [];
+			const propertiesWithoutHtml = new Set();
 			for ( const [ propertyId, statementList ] of Object.entries( claims ) ) {
+				if ( !propertyLinkHtml( propertyId ) ) {
+					propertiesWithoutHtml.add( propertyId );
+				}
 				const statementIdList = [];
 				for ( const statement of statementList ) {
 					this.statements.set( statement.id, statement );
@@ -22,6 +31,9 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 					}
 					if ( statement.qualifiers ) {
 						for ( const qualifierPropertyId in statement.qualifiers ) {
+							if ( !propertyLinkHtml( qualifierPropertyId ) ) {
+								propertiesWithoutHtml.add( qualifierPropertyId );
+							}
 							for ( const qualifier of statement.qualifiers[ qualifierPropertyId ] ) {
 								if ( 'hash' in qualifier && !snakValueHtmlForHash( qualifier.hash ) ) {
 									snaksWithoutHtml.push( qualifier );
@@ -36,13 +48,15 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 								continue;
 							}
 
-							for ( const referenceSnak in reference.snaks ) {
-								const list = snaks[ referenceSnak ];
-								if ( !list.length ) {
+							for ( const referenceProperty in snaks ) {
+								if ( !snaks[ referenceProperty ].length ) {
 									continue;
 								}
+								if ( !propertyLinkHtml( referenceProperty ) ) {
+									propertiesWithoutHtml.add( referenceProperty );
+								}
 
-								for ( const snak of reference.snaks[ referenceSnak ] ) {
+								for ( const snak of reference.snaks[ referenceProperty ] ) {
 									if ( 'hash' in snak && !snakValueHtmlForHash( snak.hash ) ) {
 										snaksWithoutHtml.push( snak );
 									}
@@ -58,6 +72,11 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 				return Promise.resolve();
 			}
 
+			if ( propertiesWithoutHtml.size > 0 ) {
+				renderPropertyLinkHtml( Array.from( propertiesWithoutHtml ) )
+					.then( ( result ) => updatePropertyLinkHtml( result ) );
+			}
+
 			snaksWithoutHtml.filter( ( snak ) => snak.snaktype !== 'value' )
 				.forEach( ( snak ) => {
 					const messageKey = 'wikibase-snakview-variations-' + snak.snaktype + '-label';
@@ -69,12 +88,13 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 						'<span class="wikibase-snakview-variation-' + snak.snaktype + 'snak">' + mw.msg( messageKey ) + '</span>'
 					);
 				} );
+
 			return Promise.all(
 				snaksWithoutHtml
 					.filter( ( snak ) => snak.snaktype === 'value' )
 					.map(
 						( snak ) => renderSnakValueHtml( snak.datavalue, snak.property )
-						.then( ( result ) => updateSnakValueHtmlForHash( snak.hash, result ) )
+							.then( ( result ) => updateSnakValueHtmlForHash( snak.hash, result ) )
 					)
 			);
 		}

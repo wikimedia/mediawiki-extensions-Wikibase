@@ -4,6 +4,7 @@
 			<cdx-menu-button
 				v-model:selected="snakTypeSelection"
 				:menu-items="snakTypeMenuItems"
+				:disabled="disabled"
 			>
 				<span class="ui-icon ui-icon-snaktypeselector wikibase-snaktypeselector" :title="snakTypeSelectionMessage"></span>
 			</cdx-menu-button>
@@ -18,6 +19,7 @@
 				ref="inputElement"
 				:snak-key="snakKey"
 				:class="className"
+				:disabled="disabled"
 			></component>
 			<div v-else class="wikibase-wbui2025-novalue-somevalue-holder">
 				<p>{{ snakTypeSelectionMessage }}</p>
@@ -26,6 +28,7 @@
 				<cdx-button
 					weight="quiet"
 					:aria-label="$i18n( 'wikibase-remove' )"
+					:disabled="disabled"
 					@click="$emit( 'remove-snak', snakKey )"
 				>
 					<cdx-icon :icon="cdxIconTrash"></cdx-icon>
@@ -68,26 +71,32 @@ module.exports = exports = defineComponent( {
 			type: String,
 			required: false,
 			default: 'wikibase-wbui2025-editable-snak-value-input'
+		},
+		disabled: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	emits: [ 'remove-snak' ],
 	setup( props ) {
-	/*
-	 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
-	 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
-	 * the Composition API to initialise the component.
-	 */
+		/*
+		 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
+		 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
+		 * the Composition API to initialise the component.
+		 */
 		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue',
 			'snaktype',
-			'hash'
+			'hash',
+			'valueStrategy'
 		] );
 		return {
 			textvalue: computed( computedProperties.textvalue ),
 			snaktype: computed( computedProperties.snaktype ),
 			hash: computed( computedProperties.hash ),
-			valueStrategy: editSnakStoreGetter().getValueStrategy()
+			valueStrategy: computed( computedProperties.valueStrategy )
 		};
 	},
 	data() {

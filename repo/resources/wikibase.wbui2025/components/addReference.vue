@@ -68,7 +68,7 @@ module.exports = exports = defineComponent( {
 			if ( !this.snakKey ) {
 				return true;
 			}
-			return !wbui2025.store.useEditSnakStore( this.snakKey )().getValueStrategy().peekDataValue();
+			return !wbui2025.store.useEditSnakStore( this.snakKey )().valueStrategy.peekDataValue();
 		}
 	},
 	methods: {
