@@ -494,6 +494,9 @@ return call_user_func( function() {
 			'search-index-data-formatter-callback' => function ( EntityIdValue $value ) {
 				return $value->getEntityId()->getSerialization();
 			},
+			'graphql-value-type' => static function() {
+				return WbReuse::getEntityValueType();
+			},
 		],
 		'PT:wikibase-item' => [
 			'expert-module' => 'wikibase.experts.Item',

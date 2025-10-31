@@ -18,6 +18,7 @@ use MediaWiki\Site\SiteLookup;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -60,8 +61,10 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	private static Property $propertyTypeProperty;
 	private static Property $propertyUsedAsValue;
 	private static Property $qualifierProperty;
+	private static Property $customEntityIdProperty;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
+	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -99,6 +102,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			self::$quantityProperty,
 			self::$timeProperty,
 			self::$propertyTypeProperty,
+			self::$customEntityIdProperty,
 		] as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
@@ -146,6 +150,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$statementWithQuantityValuePropertyId = 'P8';
 		$statementWithTimeValuePropertyId = 'P9';
 		$statementWithPropertyValuePropertyId = 'P10';
+		$statementWithCustomEntityIdValuePropertyId = 'P13';
 		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
 		$statementReferencePropertyId = 'P11';
 		$unusedPropertyId = 'P9999';
@@ -231,6 +236,16 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->withSomeGuid()
 			->build();
 
+		$customEntityId = $this->createMock( EntityId::class );
+		$customEntityId->method( 'getSerialization' )
+			->willReturn( 'T3' );
+		$entityIdValue = new EntityIdValue( $customEntityId );
+		$statementWithCustomEntityIdValue = NewStatement::forProperty( $statementWithCustomEntityIdValuePropertyId )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $entityIdValue )
+			->build();
+
 		self::$sitelinkSite = new MediaWikiSite();
 		self::$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
 		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
@@ -272,6 +287,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
 			'string',
 		);
+		self::$customEntityIdProperty = new Property(
+			new NumericPropertyId( $statementWithCustomEntityIdValuePropertyId ),
+			null,
+			self::CUSTOM_ENTITY_DATA_TYPE
+		);
 
 		self::$item1 = NewItem::withId( $itemId )
 			->andLabel( 'en', $enLabel )
@@ -288,6 +308,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			->andStatement( $statementWithPropertyValue )
 			->andStatement( $statementWithNoValue )
 			->andStatement( $statementWithSomeValue )
+			->andStatement( $statementWithCustomEntityIdValue )
 			->build();
 
 		$item2Id = 'Q321';
@@ -704,6 +725,22 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+		yield 'entity id value for which there is no data type specific GraphQL type' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"{$statementWithCustomEntityIdValuePropertyId}\") {
+					value {... on EntityValue { id } }
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[ 'value' => [ 'id' => $entityIdValue->getEntityId()->getSerialization() ] ],
+						],
+					],
+				],
+			],
+		];
 		yield 'multiple items at once' => [
 			"{
 				item1: item(id: \"$itemId\") { label(languageCode: \"en\") }
@@ -803,6 +840,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			'WikibaseRepo.PrefetchingTermLookup',
 			$termLookup ?? $this->createStub( PrefetchingTermLookup::class ),
 		);
+
+		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ): void {
+			$dataTypes['PT:' . self::CUSTOM_ENTITY_DATA_TYPE] = [
+				'value-type' => 'wikibase-entityid',
+			];
+		} );
+		$this->resetServices();
 
 		return WbReuse::getGraphQLService();
 	}
