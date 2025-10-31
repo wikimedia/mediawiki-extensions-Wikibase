@@ -1,85 +1,84 @@
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-statement-group {
-	.wikibase-wbui2025-references {
-		p {
-			padding-top: 0.5rem;
-			margin: 0;
+.wikibase-wbui2025-references,
+.wikibase-wbui2025-editable-references-section {
+	p {
+		padding-top: 0.5rem;
+		margin: 0;
+		display: flex;
+		align-items: center;
+
+		span {
+			padding: @spacing-35 0 @spacing-35 @spacing-75;
+		}
+
+		.cdx-icon {
+			vertical-align: middle;
+		}
+
+		&.wikibase-wbui2025-reference-link {
+			padding-top: 0;
+		}
+	}
+
+	div.wikibase-wbui2025-reference-list {
+		display: none;
+
+		&.wikibase-wbui2025-references-visible {
+			display: inherit;
+		}
+	}
+
+	.wikibase-wbui2025-reference {
+		background-color: @background-color-neutral-subtle;
+
+		&:not( :last-child ) {
+			margin-bottom: @spacing-125;
+		}
+	}
+
+	.wikibase-wbui2025-reference-snak {
+		display: flex;
+		padding: @spacing-75 @spacing-100;
+		align-items: flex-start;
+		gap: @spacing-75;
+		align-self: stretch;
+
+		.wikibase-wbui2025-property-name-link {
+			padding: 0;
+			width: @size-800;
 			display: flex;
-			align-items: center;
+			align-items: flex-end;
+			gap: 6px;
 
-			span {
-				padding: @spacing-35 0 @spacing-35 @spacing-75;
-			}
-
-			.cdx-icon {
-				vertical-align: middle;
-			}
-
-			&.wikibase-wbui2025-reference-link {
-				padding-top: 0;
+			& > a {
+				overflow: hidden;
+				text-overflow: @text-overflow-ellipsis;
+				white-space: nowrap;
 			}
 		}
+	}
 
-		div.wikibase-wbui2025-reference-list {
-			display: none;
-
-			&.wikibase-wbui2025-references-visible {
-				display: inherit;
-			}
+	.wikibase-wbui2025-snak-value {
+		div.wikibase-snakview div {
+			display: inherit;
 		}
 
-		.wikibase-wbui2025-reference {
-			background-color: @background-color-neutral-subtle;
-
-			&:not( :last-child ) {
-				margin-bottom: @spacing-125;
-			}
+		>a {
+			display: unset;
+			padding-left: unset;
 		}
+	}
 
-		.wikibase-wbui2025-reference-snak {
-			display: flex;
-			padding: @spacing-75 @spacing-100;
-			align-items: flex-start;
-			gap: @spacing-75;
-			align-self: stretch;
+	.wikibase-wbui2025-clickable {
+		cursor: pointer;
+	}
 
-			.wikibase-wbui2025-property-name-link {
-				padding: 0;
-				width: @size-800;
-				display: flex;
-				align-items: flex-end;
-				gap: 6px;
+	.wikibase-wbui2025-icon-expand-x-small {
+		.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
+	}
 
-				& > a {
-					overflow: hidden;
-					text-overflow: @text-overflow-ellipsis;
-					white-space: nowrap;
-				}
-			}
-		}
-
-		.wikibase-wbui2025-snak-value {
-			div.wikibase-snakview div {
-				display: inherit;
-			}
-
-			>a {
-				display: unset;
-				padding-left: unset;
-			}
-		}
-
-		.wikibase-wbui2025-clickable {
-			cursor: pointer;
-		}
-
-		.wikibase-wbui2025-icon-expand-x-small {
-			.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
-		}
-
-		.wikibase-wbui2025-icon-collapse-x-small {
-			.cdx-mixin-css-icon( @cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
-		}
+	.wikibase-wbui2025-icon-collapse-x-small {
+		.cdx-mixin-css-icon(@cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
 	}
 }

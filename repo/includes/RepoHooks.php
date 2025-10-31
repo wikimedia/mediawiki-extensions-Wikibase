@@ -1002,6 +1002,8 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.modalOverlay.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editableQualifiers.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableReference.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableReferencesSection.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editableSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editableSnakValue.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue',
@@ -1074,6 +1076,7 @@ final class RepoHooks implements
 					'wikibase-statementview-references-counter',
 				],
 				'codexComponents' => [
+					'CdxAccordion',
 					'CdxButton',
 					'CdxIcon',
 					'CdxLookup',

@@ -27,7 +27,11 @@
 				<p>{{ snakTypeSelectionMessage }}</p>
 			</div>
 			<div v-if="removable" class="wikibase-wbui2025-remove-snak">
-				<cdx-button :aria-label="$i18n( 'wikibase-remove' )" @click="$emit( 'remove-snak', snakKey )">
+				<cdx-button
+					weight="quiet"
+					:aria-label="$i18n( 'wikibase-remove' )"
+					@click="$emit( 'remove-snak', snakKey )"
+				>
 					<cdx-icon :icon="cdxIconTrash"></cdx-icon>
 				</cdx-button>
 			</div>
@@ -222,13 +226,6 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 
 		div.cdx-text-input {
 			width: 100%;
-		}
-	}
-
-	.wikibase-wbui2025-remove-snak {
-		button.cdx-button {
-			color: @color-base;
-			border: 0;
 		}
 	}
 

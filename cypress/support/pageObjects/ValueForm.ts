@@ -18,6 +18,12 @@ export class ValueForm {
 
 	public static NO_VALUE_SOME_VALUE_PLACEHOLDER = '.wikibase-wbui2025-novalue-somevalue-holder';
 
+	public static TEXT_INPUT = '.cdx-text-input input';
+
+	public static REMOVE_SNAK_BUTTON = '.wikibase-wbui2025-remove-snak';
+
+	public static REMOVE_REFERENCE_BUTTON = '.wikibase-wbui2025-editable-reference-remove-button-holder button';
+
 	private rootElement: HTMLElement;
 
 	public constructor( rootElement: HTMLElement ) {
@@ -56,5 +62,17 @@ export class ValueForm {
 
 	public noValueSomeValuePlaceholder(): Chainable {
 		return cy.get( ValueForm.NO_VALUE_SOME_VALUE_PLACEHOLDER, { withinSubject: this.rootElement } );
+	}
+
+	public textInput(): Chainable {
+		return cy.get( ValueForm.TEXT_INPUT, { withinSubject: this.rootElement } );
+	}
+
+	public removeSnakButton(): Chainable {
+		return cy.get( ValueForm.REMOVE_SNAK_BUTTON, { withinSubject: this.rootElement } );
+	}
+
+	public removeReferenceButton(): Chainable {
+		return cy.get( ValueForm.REMOVE_REFERENCE_BUTTON, { withinSubject: this.rootElement } );
 	}
 }

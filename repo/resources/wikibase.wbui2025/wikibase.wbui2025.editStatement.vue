@@ -33,14 +33,15 @@
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-qualifiers-and-references">
+			<wbui2025-editable-qualifiers
+				:qualifiers="qualifiers"
+				:qualifiers-order="qualifiersOrder"
+				@remove-snak-from-property="removeQualifierSnakFromProperty"
+			>
+			</wbui2025-editable-qualifiers>
 			<div class="wikibase-wbui2025-button-holder">
-				<wbui2025-editable-qualifiers
-					:qualifiers="qualifiers"
-					:qualifiers-order="qualifiersOrder"
-					@remove-snak-from-property="removeQualifierSnakFromProperty"
-				>
-				</wbui2025-editable-qualifiers>
 				<cdx-button
+					action="progressive"
 					class="wikibase-wbui2025-add-qualifier-button"
 					@click="showAddQualifierModal = true"
 				>
@@ -48,11 +49,14 @@
 					{{ $i18n( 'wikibase-addqualifier' ) }}
 				</cdx-button>
 			</div>
+			<wbui2025-editable-references-section
+				:references="references"
+				@remove-reference="removeReference"
+				@remove-reference-snak="removeReferenceSnak"
+			></wbui2025-editable-references-section>
 			<div class="wikibase-wbui2025-button-holder">
-				<wbui2025-references
-					:references="references"
-				></wbui2025-references>
 				<cdx-button
+					action="progressive"
 					class="wikibase-wbui2025-add-reference-button"
 					@click="showAddReferenceModal = true">
 					<cdx-icon :icon="cdxIconAdd"></cdx-icon>
@@ -61,7 +65,7 @@
 			</div>
 		</div>
 		<div class="wikibase-wbui2025-remove-value">
-			<cdx-button @click="$emit( 'remove', statementId )">
+			<cdx-button weight="quiet" @click="$emit( 'remove', statementId )">
 				<cdx-icon :icon="cdxIconTrash"></cdx-icon>
 				{{ $i18n( 'wikibase-remove' ) }}
 			</cdx-button>
@@ -77,13 +81,13 @@ const {
 	cdxIconAdd,
 	cdxIconTrash
 } = require( './icons.json' );
-const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
+const Wbui2025EditableReferencesSection = require( './wikibase.wbui2025.editableReferencesSection.vue' );
 const Wbui2025EditableQualifiers = require( './wikibase.wbui2025.editableQualifiers.vue' );
 const Wbui2025EditableSnakValue = require( './wikibase.wbui2025.editableSnakValue.vue' );
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
 const Wbui2025AddReference = require( './wikibase.wbui2025.addReference.vue' );
 const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
-const { useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
+const { generateNextSnakKey, useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
 const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
 const { useParsedValueStore } = require( './store/parsedValueStore.js' );
 
@@ -99,7 +103,7 @@ module.exports = exports = defineComponent( {
 		CdxIcon,
 		CdxSelect,
 		Wbui2025AddQualifier,
-		Wbui2025References,
+		Wbui2025EditableReferencesSection,
 		Wbui2025EditableQualifiers,
 		Wbui2025EditableSnakValue,
 		Wbui2025AddReference
@@ -184,6 +188,7 @@ module.exports = exports = defineComponent( {
 			}
 		},
 		addReference( propertyId, snakData ) {
+			const snakKey = generateNextSnakKey();
 			if ( !snakData.hash ) {
 				this.newReferenceCounter += 1;
 				snakData.hash = `${ this.statementId }-new-reference-${ this.newReferenceCounter }`;
@@ -194,9 +199,9 @@ module.exports = exports = defineComponent( {
 			renderPropertyLinkHtml( propertyId )
 				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
 
-			useEditSnakStore( snakData.hash )().initializeWithSnak( snakData );
+			useEditSnakStore( snakKey )().initializeWithSnak( snakData );
 
-			snaks[ propertyId ] = [ snakData ];
+			snaks[ propertyId ] = [ snakKey ];
 
 			this.references.push( {
 				snaks,
@@ -211,6 +216,19 @@ module.exports = exports = defineComponent( {
 			}
 
 			this.showAddReferenceModal = false;
+		},
+		removeReference( reference ) {
+			this.references.splice( this.references.indexOf( reference ), 1 );
+		},
+		removeReferenceSnak( reference, propertyId, snakKey ) {
+			reference.snaks[ propertyId ].splice( reference.snaks[ propertyId ].indexOf( snakKey ), 1 );
+			if ( reference.snaks[ propertyId ].length === 0 ) {
+				delete reference.snaks[ propertyId ];
+				reference[ 'snaks-order' ].splice( reference[ 'snaks-order' ].indexOf( propertyId ), 1 );
+				if ( reference[ 'snaks-order' ].length === 0 ) {
+					this.removeReference( reference );
+				}
+			}
 		}
 	}
 } );
@@ -267,25 +285,16 @@ module.exports = exports = defineComponent( {
 		gap: @spacing-100;
 		align-self: stretch;
 
+		> * {
+			align-self: stretch;
+		}
+
 		div.wikibase-wbui2025-button-holder {
-			width: 100%;
 
 			& > button.cdx-button {
 				width: 100%;
-				cursor: pointer;
 				justify-content: flex-start;
-				border-color: @border-color-progressive;
-				background: @background-color-progressive-subtle;
-				color: @color-progressive;
 			}
-		}
-	}
-
-	.wikibase-wbui2025-remove-value {
-		button.cdx-button {
-			cursor: pointer;
-			background-color: @background-color-base;
-			border: 0;
 		}
 	}
 }

@@ -3,6 +3,7 @@ import { Util } from 'cypress-wikibase-api';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { AddReferenceFormPage } from '../../support/pageObjects/AddReferenceFormPage';
+import { ValueForm } from '../../support/pageObjects/ValueForm';
 
 describe( 'wbui2025 add reference', () => {
 	context( 'mobile view', () => {
@@ -52,7 +53,11 @@ describe( 'wbui2025 add reference', () => {
 			addReferenceFormPage.setSnakValue( referenceSnakValue );
 			addReferenceFormPage.addButton().click();
 
-			editStatementFormPage.valueForms().should( 'contain.text', referenceSnakValue );
+			editStatementFormPage.references().first().then( ( element ) => {
+				const valueForm = new ValueForm( element );
+				valueForm.textInput().should( 'have.value', referenceSnakValue );
+			} );
+
 			editStatementFormPage.publishButton().click();
 			editStatementFormPage.form().should( 'not.exist' );
 

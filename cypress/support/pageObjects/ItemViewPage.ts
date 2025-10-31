@@ -39,9 +39,8 @@ export class ItemViewPage {
 		return this;
 	}
 
-	public statementsSection(): this {
-		cy.get( ItemViewPage.STATEMENTS );
-		return this;
+	public statementsSection(): Chainable {
+		return cy.get( ItemViewPage.STATEMENTS );
 	}
 
 	public editLinks(): Chainable {
