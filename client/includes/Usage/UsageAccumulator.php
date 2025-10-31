@@ -62,6 +62,16 @@ abstract class UsageAccumulator {
 	}
 
 	/**
+	 * Registers the usage of statements from an entity (identified by their property id) when qualifiers or references are also accessed.
+	 *
+	 * @param EntityId $id
+	 * @param NumericPropertyId $propertyId The NumericPropertyId of Statements that are used.
+	 */
+	public function addStatementWithQualOrRefUsage( EntityId $id, NumericPropertyId $propertyId ): void {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, $propertyId->getSerialization() ) );
+	}
+
+	/**
 	 * Registers the usage of an entity's aliases (in the given language).
 	 */
 	public function addAliasUsage( EntityId $id, ?string $languageCode = null ): void {

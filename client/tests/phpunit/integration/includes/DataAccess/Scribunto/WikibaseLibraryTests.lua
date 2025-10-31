@@ -53,6 +53,54 @@ local function testGetAllStatementsTableIsCloned()
 	return #statements == #newStatements -1
 end
 
+local function integrationTestTraverseReferencesWithIpairs( )
+	local statements = mw.wikibase.getAllStatements( 'Q32487', 'P342' )
+	local refs = statements[1]['references']
+
+	local result = {}
+
+    -- use ipairs to access something in the references
+	for i, ref in ipairs( refs ) do
+		for pid, snaks in pairs( ref.snaks ) do
+			result[#result + 1] = snaks[1].datavalue.value
+		end
+	end
+
+	return result
+end
+
+local function integrationTestTraverseReferencesWithPairs( )
+	local statements = mw.wikibase.getAllStatements( 'Q32487', 'P342' )
+	local refs = statements[1]['references']
+
+	local result = {}
+
+    -- use pairs to access something in the references
+	for i, ref in pairs( refs ) do
+		for pid, snaks in pairs( ref.snaks ) do
+			result[#result + 1] = snaks[1].datavalue.value
+		end
+	end
+
+	return result
+end
+
+local function integrationTestTraverseQualifiersWithPairs( )
+	local statements = mw.wikibase.getAllStatements( 'Q32487', 'P342' )
+	local qualifiersByPid = statements[1]['qualifiers']
+
+	local result = {}
+
+    -- use pairs to access something in the qualifiers
+	for pid, snaks in pairs( qualifiersByPid ) do
+		for _, snak in ipairs( snaks ) do
+			result[#result + 1] = snak.datavalue.value
+		end
+	end
+
+	return result
+end
+
 local function testGetEntityObjectIsCloned()
 	mw.wikibase.getEntityObject( 'Q199024' ).id = 'a'
 
@@ -182,6 +230,18 @@ local tests = {
 	{ name = 'mw.wikibase.getAllStatements (is cloned)', func = testGetAllStatementsTableIsCloned,
       expect = { true }
   	},
+	{ name = 'mw.wikibase.getAllStatements (with references and using ipairs)',
+	  func = integrationTestTraverseReferencesWithIpairs,
+	  expect = { { 'A reference', 'More references' } }
+	},
+	{ name = 'mw.wikibase.getAllStatements (with references and using pairs)',
+	  func = integrationTestTraverseReferencesWithPairs,
+	  expect = { { 'A reference', 'More references' } }
+	},
+	{ name = 'mw.wikibase.getAllStatements (with qualifiers and using pairs)',
+	  func = integrationTestTraverseQualifiersWithPairs,
+	  expect = { { 'A qualifier Snak', 'Moar qualifiers' } }
+	},
 	{ name = 'mw.wikibase.getEntityObject (is cloned)', func = testGetEntityObjectIsCloned, type='ToString',
 	  expect = { 'Q199024' }
 	},

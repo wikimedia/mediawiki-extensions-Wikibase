@@ -159,6 +159,56 @@ local function integrationTestGetAllStatements( propertyId )
 
 	return result
 end
+local function integrationTestTraverseReferencesWithIpairs( propertyId )
+	local entity = mw.wikibase.getEntityObject()
+	local statements = entity:getAllStatements( propertyId )
+	local refs = statements[1]['references']
+
+	local result = {}
+
+    -- use ipairs to access something in the references
+	for i, ref in ipairs( refs ) do
+		for pid, snaks in pairs( ref.snaks ) do
+			result[#result + 1] = snaks[1].datavalue.value
+		end
+	end
+
+	return result
+end
+
+local function integrationTestTraverseReferencesWithPairs( propertyId )
+	local entity = mw.wikibase.getEntityObject()
+	local statements = entity:getAllStatements( propertyId )
+	local refs = statements[1]['references']
+
+	local result = {}
+
+    -- use pairs to access something in the references
+	for i, ref in pairs( refs ) do
+		for pid, snaks in pairs( ref.snaks ) do
+			result[#result + 1] = snaks[1].datavalue.value
+		end
+	end
+
+	return result
+end
+
+local function integrationTestTraverseQualifiersWithPairs( propertyId )
+	local entity = mw.wikibase.getEntityObject()
+	local statements = entity:getAllStatements( propertyId )
+	local qualifiersByPid = statements[1]['qualifiers']
+
+    local result = {}
+
+    -- use pairs to access something in the qualifiers
+    for pid, snaks in pairs( qualifiersByPid ) do
+        for _, snak in ipairs( snaks ) do
+            result[#result + 1] = snak.datavalue.value
+        end
+    end
+
+	return result
+end
 
 local function integrationTestFormatPropertyValues( ranks )
 	local entity = mw.wikibase.getEntityObject()
@@ -510,6 +560,21 @@ local tests = {
 	  args = { 'LuaTestStringProperty' },
 	  expect = { { 'Lua :)', 'Lua is clearly superior to the parser function' } }
 	},
+	{ name = 'mw.wikibase.entity.getAllStatements integration 4 (with references and using ipairs)',
+	  func = integrationTestTraverseReferencesWithIpairs,
+	  args = { 'P342' },
+	  expect = { { 'A reference', 'More references' } }
+    },
+	{ name = 'mw.wikibase.entity.getAllStatements integration 5 (with references and using pairs)',
+	  func = integrationTestTraverseReferencesWithPairs,
+	  args = { 'P342' },
+	  expect = { { 'A reference', 'More references' } }
+	},
+    { name = 'mw.wikibase.entity.getAllStatements integration 6 (with qualifiers and using pairs)',
+      func = integrationTestTraverseQualifiersWithPairs,
+      args = { 'P342' },
+      expect = { { 'A qualifier Snak', 'Moar qualifiers' } }
+    },
 	{ name = 'mw.wikibase.entity.getProperties integration', func = integrationTestGetPropertiesCount,
 	  expect = { 1 }
 	},

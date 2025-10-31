@@ -93,4 +93,19 @@ class WikibaseLuaEntityBindingsTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	public function testAddStatementWithQualOrRefUsage() {
+		$q2013 = new ItemId( 'Q2013' );
+		$usageAccumulator = new HashUsageAccumulator();
+
+		$wikibaseLuaEntityBindings = $this->getWikibaseLuaEntityBindings( $usageAccumulator );
+		$wikibaseLuaEntityBindings->addStatementWithQualOrRefUsage( $q2013->getSerialization(), 'P1337' );
+
+		$this->assertCount( 1, $usageAccumulator->getUsages() );
+		$this->assertEquals(
+			[
+				'Q2013#CQR.P1337' => new EntityUsage( $q2013, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, 'P1337' ),
+			],
+			$usageAccumulator->getUsages()
+		);
+	}
 }
