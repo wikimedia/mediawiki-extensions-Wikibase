@@ -7,7 +7,8 @@
 			"Al12si",
 			"H78c67c",
 			"Yueman",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"Z423x5c6"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",
@@ -29,7 +30,7 @@
 	"wikibase-editlinkstitle": "改跨語言拎",
 	"wikibase-addlinkstitle": "加跨語言連結",
 	"wikibase-linkitem-addlinks": "加新拎",
-	"wikibase-linkitem-alreadylinked": "你想連結嘅頁面已經附加咗去中央資料庫上面嘅[$1項目]，而呢個項目會連結去呢個網站嘅[[$2]]。每個網站嘅項目只可以附加一頁。請揀另一個頁面去條拎。",
+	"wikibase-linkitem-alreadylinked": "你想連結嘅頁面已經附加咗去中央資料庫上面嘅[$1 項目]，而呢個項目會連結去呢個網站嘅[[$2]]。每個網站嘅項目只可以附加一頁。請揀另一個頁面去條拎。",
 	"wikibase-linkitem-close": "閂對話框同重新載入頁面",
 	"wikibase-linkitem-failure": "嘗試連結指定頁面嗰陣發生咗一個未知嘅錯誤。",
 	"wikibase-linkitem-failed-modify": "連結唔到頁面：合併埋唔到{{WBREPONAME}}上面嘅相應項。",

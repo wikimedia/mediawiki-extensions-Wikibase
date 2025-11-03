@@ -11,8 +11,8 @@
 			"SaldırganSincap",
 			"ديفيد",
 			"محمد أحمد عبد الفتاح",
-			"Amire80",
-			"Hubaishan"
+			"Hubaishan",
+			"Mohammed Qays"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "استعلم عن العناصر المتوفرة بشارات.",
@@ -214,7 +214,7 @@
 	"apihelp-query+wbsubscribers-description": "الحصول على اشتراكات للكيانات المعطاة.",
 	"apihelp-query+wbsubscribers-summary": "الحصول على اشتراكات للكيانات المعطاة.",
 	"apihelp-query+wbsubscribers-param-entities": "الكيانات للحصول على اشتراكات لها",
-	"apihelp-query+wbsubscribers-param-prop": "الخصائص للإضافة للنتيجة",
+	"apihelp-query+wbsubscribers-param-prop": "الخواص للإضافة للنتيجة",
 	"apihelp-query+wbsubscribers-param-limit": "العدد الأقصى للنتائج",
 	"apihelp-query+wbsubscribers-example-1": "الحصول على مشتركين للكيان <samp>Q42</samp>",
 	"apihelp-query+wbsubscribers-example-2": "الحصول على مشتركين للكيان <samp>Q42</samp> مع تضمين مسار ل<code>Special:EntityUsage</code>",

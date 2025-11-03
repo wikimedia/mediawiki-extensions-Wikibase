@@ -518,7 +518,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "هذا البيان به بعض القضايا المحتملة.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "تم اكتشاف تكرار في السناك الرئيسي. لم تتم إضافة البيان.",
 	"wikibase-editentity-warning-serializeresult": "تعذر إجراء تسلسل لبيانات الكيان للنتيجة.",
-	"wikibase-federated-properties-search-api-error-message": "الخصائص غير متاحة مؤقتًا.",
+	"wikibase-federated-properties-search-api-error-message": "الخواص غير متاحة مؤقتًا.",
 	"wikibase-federated-properties-save-api-error-message": "فشل الحفظ الخاص بك بسبب طلب فاشل إلى wiki مصدر الاتحاد.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "البيانات حول هذا العنصر غير متاحة مؤقتًا بسبب فشل طلب wiki مصدر الاتحاد. يرجى تحديث الصفحة.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "تستخدم قاعدة ويكي المعلومات هذه الخصائص الموحدة من مصدر خارجي. يمكنك الوصول إلى $1 .",
