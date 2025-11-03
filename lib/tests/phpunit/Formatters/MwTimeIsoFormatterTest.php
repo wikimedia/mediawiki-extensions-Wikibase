@@ -321,7 +321,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 			[
 				'+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY,
-				'16 Avgust, 2013',
+				'16 avgust, 2013',
 				'kaa',
 			],
 			[
