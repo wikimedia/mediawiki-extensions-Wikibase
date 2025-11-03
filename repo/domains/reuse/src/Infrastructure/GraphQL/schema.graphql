@@ -52,7 +52,7 @@ type PredicateProperty {
   label(languageCode: LanguageCode!): String
 }
 
-union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue
+union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue | EntityValue
 
 type StringValue {
   content: String!
@@ -94,6 +94,10 @@ type TimeValue {
   after: Int!
   precision: Int!
   calendarModel: String!
+}
+
+type EntityValue {
+  id: String!
 }
 
 enum ValueType {

@@ -1,9 +1,14 @@
 <?php declare( strict_types=1 );
 
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGetItemLabels;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
@@ -26,6 +31,17 @@ use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
+	'WbReuse.EntityValueType' => function( MediaWikiServices $services ): ObjectType {
+		return new ObjectType( [
+			'name' => 'EntityValue',
+			'fields' => [ 'id' => Type::nonNull( Type::string() ) ],
+			'resolveField' => function( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+
+				return $valueProvider->value->content
+						   ->getArrayValue()[ $info->fieldName ] ?? null;
+			},
+		] );
+	},
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
 		$languageCodeType = WbReuse::getLanguageCodeType( $services );
 		$predicatePropertyType = new PredicatePropertyType(

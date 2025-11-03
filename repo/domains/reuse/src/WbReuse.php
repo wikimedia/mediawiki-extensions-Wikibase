@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse;
 
+use GraphQL\Type\Definition\ObjectType;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
@@ -43,5 +44,10 @@ class WbReuse {
 	public static function getStringValueType( ?ContainerInterface $services = null ): StringValueType {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.StringValueType' );
+	}
+
+	public static function getEntityValueType( ?ContainerInterface $services = null ): ObjectType {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.EntityValueType' );
 	}
 }
