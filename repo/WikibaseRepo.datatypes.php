@@ -352,7 +352,7 @@ return call_user_func( function() {
 				return WikibaseRepo::getStringValueNormalizer();
 			},
 			'graphql-value-type' => static function () {
-				return WbReuse::getStringValueType();
+				return WbReuse::getGraphQLTypes()->getStringValueType();
 			},
 		],
 		'VT:time' => [
@@ -495,7 +495,7 @@ return call_user_func( function() {
 				return $value->getEntityId()->getSerialization();
 			},
 			'graphql-value-type' => static function() {
-				return WbReuse::getEntityValueType();
+				return WbReuse::getGraphQLTypes()->getEntityValueType();
 			},
 		],
 		'PT:wikibase-item' => [
@@ -531,7 +531,7 @@ return call_user_func( function() {
 			},
 			'graphql-value-type' => static function() {
 				$itemLabelsResolver = WbReuse::getItemLabelsResolver();
-				$labelProviderType = WbReuse::getLabelProviderType();
+				$labelProviderType = WbReuse::getGraphQLTypes()->getLabelProviderType();
 				$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
 				$labelField->resolveFn = function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
 					/** @var EntityIdValue $idValue */
@@ -597,7 +597,7 @@ return call_user_func( function() {
 			},
 			'graphql-value-type' => static function() {
 				$labelsResolver = WbReuse::getPropertyLabelsResolver();
-				$labelProviderType = WbReuse::getLabelProviderType();
+				$labelProviderType = WbReuse::getGraphQLTypes()->getLabelProviderType();
 				$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
 				$labelField->resolveFn = function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
 					/** @var EntityIdValue $idValue */
