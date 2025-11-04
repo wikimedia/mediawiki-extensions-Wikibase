@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Domain\Model;
 
+use DataValues\DataValue;
 use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
@@ -15,7 +16,7 @@ class Statement {
 	 * @param Qualifiers $qualifiers
 	 * @param Reference[] $references
 	 * @param PredicateProperty $property
-	 * @param Value|null $value
+	 * @param DataValue|null $value
 	 * @param ValueType $valueType
 	 */
 	public function __construct(
@@ -24,7 +25,7 @@ class Statement {
 		public readonly Qualifiers $qualifiers,
 		public readonly array $references,
 		public readonly PredicateProperty $property,
-		public readonly ?Value $value,
+		public readonly ?DataValue $value,
 		public readonly ValueType $valueType
 	) {
 	}

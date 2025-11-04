@@ -37,8 +37,7 @@ return [
 			'fields' => [ 'id' => Type::nonNull( Type::string() ) ],
 			'resolveField' => function( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
 
-				return $valueProvider->value->content
-						   ->getArrayValue()[ $info->fieldName ] ?? null;
+				return $valueProvider->value->getArrayValue()[ $info->fieldName ] ?? null;
 			},
 		] );
 	},
