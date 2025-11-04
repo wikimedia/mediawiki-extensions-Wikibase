@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
+use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\Domains\Crud\Domain\Model\AliasesEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Model\DescriptionsEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Model\LabelsEditSummary;
@@ -38,7 +38,7 @@ class TermsEditSummaryToFormattableSummaryConverter {
 	private function convert( array $modifiedLanguages, ?string $userComment ): Summary {
 		$languagesCount = count( $modifiedLanguages );
 
-		if ( $languagesCount >= ChangedLanguagesCounter::SHORTENED_SUMMARY_MAX_EDIT ) {
+		if ( $languagesCount >= EditSummaryHelper::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
 			$summary = new Summary(
 				'wbeditentity',
 				'update-languages',

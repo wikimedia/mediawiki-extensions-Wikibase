@@ -18,14 +18,11 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Stats\StatsFactory;
@@ -119,11 +116,7 @@ class EditEntity extends ModifyEntity {
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
 			$entityChangeOpProvider,
-			new EditSummaryHelper(
-				new ChangedLanguagesCollector(),
-				new ChangedLanguagesCounter(),
-				new NonLanguageBoundChangesCounter()
-			),
+			new EditSummaryHelper(),
 			$settings->getSetting( 'federatedPropertiesEnabled' ),
 			$settings->getSetting( 'sandboxEntityIds' )
 		);

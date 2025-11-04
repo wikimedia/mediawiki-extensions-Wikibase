@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Api;
 
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
+use Wikibase\Repo\ChangeOp\ChangeOpResultTraversal;
+use Wikibase\Repo\ChangeOp\ChangeOpsResult;
+use Wikibase\Repo\ChangeOp\LanguageBoundChangeOpResult;
 
 /**
  * Helper methods for preparing summary instance for editing entity activity
@@ -14,24 +14,9 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
  */
 class EditSummaryHelper {
 
-	/** @var ChangedLanguagesCounter */
-	private $changedLanguagesCounter;
+	use ChangeOpResultTraversal;
 
-	/** @var ChangedLanguagesCollector */
-	private $changedLanguagesCollector;
-
-	/** @var NonLanguageBoundChangesCounter */
-	private $nonLanguageBoundChangesCounter;
-
-	public function __construct(
-		ChangedLanguagesCollector $changedLanguagesCollector,
-		ChangedLanguagesCounter $changedLanguagesCounter,
-		NonLanguageBoundChangesCounter $nonLanguageBoundChangesCounter
-	) {
-		$this->changedLanguagesCollector = $changedLanguagesCollector;
-		$this->changedLanguagesCounter = $changedLanguagesCounter;
-		$this->nonLanguageBoundChangesCounter = $nonLanguageBoundChangesCounter;
-	}
+	public const SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES = 50;
 
 	/**
 	 * Prepares edit summaries with appropriate action and comment args
@@ -42,17 +27,28 @@ class EditSummaryHelper {
 	 * @return void
 	 */
 	public function prepareEditSummary( Summary $summary, ChangeOpResult $changeOpResult ) {
-		$changedLanguagesCount = $this->changedLanguagesCounter->countChangedLanguages( $changeOpResult );
-		$nonLanguageBoundChangesCount = $this->nonLanguageBoundChangesCounter->countChanges( $changeOpResult );
+		$changedLanguagesAsKeys = [];
+		$nonLanguageBoundChangesCount = 0;
 
-		if ( $changedLanguagesCount === $this->changedLanguagesCounter::ZERO_EDIT ) {
+		foreach ( $this->makeRecursiveTraversable( $changeOpResult ) as $result ) {
+			if ( !$result->isEntityChanged() ) {
+				continue;
+			}
+			if ( $result instanceof LanguageBoundChangeOpResult ) {
+				$changedLanguagesAsKeys[$result->getLanguageCode()] = 1;
+			} elseif ( !$result instanceof ChangeOpsResult ) {
+				$nonLanguageBoundChangesCount += 1;
+			}
+		}
+
+		$changedLanguagesCount = count( $changedLanguagesAsKeys );
+
+		if ( $changedLanguagesCount === 0 ) {
 			$action = 'update';
-		} elseif ( $changedLanguagesCount <= $this->changedLanguagesCounter::SHORTENED_SUMMARY_MAX_EDIT ) {
+		} elseif ( $changedLanguagesCount <= self::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
 			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other-short' : 'update-languages-short';
 
-			$collectChangedLanguages = $this->changedLanguagesCollector->collectChangedLanguages( $changeOpResult );
-
-			$summary->setAutoCommentArgs( [ $collectChangedLanguages ] );
+			$summary->setAutoCommentArgs( [ array_keys( $changedLanguagesAsKeys ) ] );
 		} else {
 			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other' : 'update-languages';
 

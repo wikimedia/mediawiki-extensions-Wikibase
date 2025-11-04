@@ -17,11 +17,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\EditSummaryHelper;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
@@ -127,11 +124,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 			WikibaseRepo::getEntityChangeOpProvider(),
-			new EditSummaryHelper(
-				new ChangedLanguagesCollector(),
-				new ChangedLanguagesCounter(),
-				new NonLanguageBoundChangesCounter()
-			),
+			new EditSummaryHelper(),
 			false,
 			[ 'mainItem' => 'Q42' ]
 		);
