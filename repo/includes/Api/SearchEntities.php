@@ -295,6 +295,103 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
+	 * Builds the query parameters for a remote wbsearchentities request.
+	 *
+	 * Accepts validated local API params and converts them into the
+	 * format expected by the remote Wikibase endpoint.
+	 *
+	 * @param array $params Extracted API request parameters
+	 * @return array Query parameters for the remote request
+	 */
+	private function buildRemoteParams( array $params ): array {
+		$remoteParams = [
+			'action'      => 'wbsearchentities',
+			'format'      => 'json',
+			'errorformat' => 'plaintext',
+			'search'      => (string)$params['search'],
+			'language'    => (string)$params['language'],
+			'uselang'     => (string)( $params['uselang'] ?? $params['language'] ),
+			'type'        => (string)$params['type'],
+		];
+
+		if ( isset( $params['limit'] ) ) {
+			$remoteParams['limit'] = (int)$params['limit'];
+		}
+
+		if ( isset( $params['continue'] ) ) {
+			$remoteParams['continue'] = (int)$params['continue'];
+		}
+
+		if ( array_key_exists( 'strictlanguage', $params ) ) {
+			// wbsearchentities expects 1/0
+			$remoteParams['strictlanguage'] = $params['strictlanguage'] ? 1 : 0;
+		}
+
+		if ( isset( $params['profile'] ) ) {
+			$remoteParams['profile'] = (string)$params['profile'];
+		}
+
+		if ( isset( $params['props'] ) ) {
+			// Flatten multi to pipe-separated for remote API
+			$remoteParams['props'] = is_array( $params['props'] )
+				? implode( '|', $params['props'] )
+				: (string)$params['props'];
+		}
+
+		return $remoteParams;
+	}
+
+		/**
+	 * Executes a remote entity search request.
+	 *
+	 * Performs a proxy call to a remote Wikibase (e.g. Wikidata) using the same
+	 * parameters as wbsearchentities, returning the results directly to the API
+	 * output. Intended for cases where search should be delegated to a remote
+	 * source rather than performed locally.
+	 *
+	 * @param array $params Extracted API request parameters.
+	 * @throws ApiUsageException
+	 */
+		private function executeRemoteSearch( array $params ): void {
+			$remoteParams = $this->buildRemoteParams( $params );
+
+			// TODO: get remote base URL from configuration
+			$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remoteParams );
+
+			$http = MediaWikiServices::getInstance()->getHttpRequestFactory();
+			$req  = $http->create( $remoteUrl, [
+				'method'  => 'GET',
+				'timeout' => 10,
+			] );
+
+			$status = $req->execute();
+			if ( !$status->isOK() ) {
+				$this->dieWithError(
+					[ 'apierror-badaccess-generic', 'Remote search request failed' ]
+				);
+			}
+
+			$resp = \FormatJson::decode( $req->getContent(), true ) ?: [];
+
+			$result = $this->getResult();
+
+			if ( array_key_exists( 'searchinfo', $resp ) ) {
+				$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
+			} else {
+				$result->addValue( null, 'searchinfo', [ 'search' => (string)$params['search'] ] );
+			}
+
+			$result->addValue( null, 'search', $resp['search'] ?? [] );
+
+			if ( isset( $resp['search-continue'] ) ) {
+				$result->addValue( null, 'search-continue', $resp['search-continue'] );
+			}
+
+			$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
+			$result->addValue( null, 'success', 1 );
+		}
+
+	/**
 	 * @inheritDoc
 	 */
 	public function execute(): void {
@@ -316,79 +413,13 @@ class SearchEntities extends ApiBase {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$params = $this->extractRequestParams();
-		// TODO: Federated Values - Merge with local results
+				// TODO: Federated Values - Merge with local results
 		if (
 			WikibaseRepo::getSettings()->getSetting( 'federatedValuesEnabled' ) &&
-			($params['type'] ?? '') === 'item'
+			( $params['type'] ?? '' ) === 'item'
 		) {
-				// Build a clean param set for Wikidata
-				// proxy identical query to Wikidata when searching for a value
-				$remote = [
-						'action'      => 'wbsearchentities',
-						'format'      => 'json',
-						'errorformat' => 'plaintext',
-						'search'      => (string)$params['search'],
-						'language'    => (string)$params['language'],
-						'uselang'     => (string)($params['uselang'] ?? $params['language']),
-						'type'        => 'item',
-				];
-
-				if ( isset( $params['limit'] ) ) {
-						$remote['limit'] = (int)$params['limit'];
-				}
-				if ( isset( $params['continue'] ) ) {
-						$remote['continue'] = (int)$params['continue'];
-				}
-				if ( array_key_exists( 'strictlanguage', $params ) ) {
-						// wbsearchentities expects 1/0
-						$remote['strictlanguage'] = $params['strictlanguage'] ? 1 : 0;
-				}
-				if ( isset( $params['profile'] ) ) {
-						$remote['profile'] = (string)$params['profile'];
-				}
-				if ( isset( $params['props'] ) ) {
-						// flatten multi to pipe-separated
-						$remote['props'] = is_array( $params['props'] ) ? implode( '|', $params['props'] ) : (string)$params['props'];
-				}
-
-				// Use GET with query string (mirrors how the UI calls the local API)
-				// TODO: Federated Values - get from settings
-				$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remote );
-
-				$http = \MediaWiki\MediaWikiServices::getInstance()->getHttpRequestFactory();
-				$req  = $http->create( $remoteUrl, [
-						'method'  => 'GET',
-						'timeout' => 10,
-				] );
-
-				$status = $req->execute();
-				if ( !$status->isOK() ) {
-						$this->dieWithError( [ 'apierror-badaccess-generic', 'Remote search request failed' ] );
-				}
-
-				$resp = \FormatJson::decode( $req->getContent(), true ) ?: [];
-
-				// Return fields with the same shape as the local path
-				$result = $this->getResult();
-
-				// (Optional) debug: inspect the raw remote response
-				// wfDebugLog( 'wikibase', 'wikidata wbsearchentities response: ' . json_encode( $resp ) );
-
-				if ( array_key_exists( 'searchinfo', $resp ) ) {
-						$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
-				} else {
-						$result->addValue( null, 'searchinfo', [ 'search' => (string)$params['search'] ] );
-				}
-
-				$result->addValue( null, 'search', $resp['search'] ?? [] );
-
-				if ( isset( $resp['search-continue'] ) ) {
-						$result->addValue( null, 'search-continue', $resp['search-continue'] );
-				}
-
-				$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
-				$result->addValue( null, 'success', 1 );
-				return;
+			$this->executeRemoteSearch( $params );
+			return;
 		}
 
 		$results = $this->getSearchResults( $params );
