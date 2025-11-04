@@ -10,7 +10,6 @@ use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiResult;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Cache\LinkBatchFactory;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
