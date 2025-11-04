@@ -341,55 +341,37 @@ class SearchEntities extends ApiBase {
 		return $remoteParams;
 	}
 
-		/**
-	 * Executes a remote entity search request.
+	/**
+	 * Performs the remote wbsearchentities request and returns
+	 * the decoded JSON response as an associative array.
 	 *
-	 * Performs a proxy call to a remote Wikibase (e.g. Wikidata) using the same
-	 * parameters as wbsearchentities, returning the results directly to the API
-	 * output. Intended for cases where search should be delegated to a remote
-	 * source rather than performed locally.
-	 *
-	 * @param array $params Extracted API request parameters.
+	 * @param array $params
+	 * @return array
 	 * @throws ApiUsageException
 	 */
-		private function executeRemoteSearch( array $params ): void {
-			$remoteParams = $this->buildRemoteParams( $params );
+	private function fetchRemoteSearchResponse( array $params ): array {
+		$remoteParams = $this->buildRemoteParams( $params );
 
-			// TODO: get remote base URL from configuration
-			$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remoteParams );
+		// TODO: get remote base URL from configuration
+		$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remoteParams );
 
-			$http = MediaWikiServices::getInstance()->getHttpRequestFactory();
-			$req  = $http->create( $remoteUrl, [
-				'method'  => 'GET',
-				'timeout' => 10,
-			] );
+		$http = MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$req  = $http->create( $remoteUrl, [
+			'method'  => 'GET',
+			'timeout' => 10,
+		] );
 
-			$status = $req->execute();
-			if ( !$status->isOK() ) {
-				$this->dieWithError(
-					[ 'apierror-badaccess-generic', 'Remote search request failed' ]
-				);
-			}
-
-			$resp = \FormatJson::decode( $req->getContent(), true ) ?: [];
-
-			$result = $this->getResult();
-
-			if ( array_key_exists( 'searchinfo', $resp ) ) {
-				$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
-			} else {
-				$result->addValue( null, 'searchinfo', [ 'search' => (string)$params['search'] ] );
-			}
-
-			$result->addValue( null, 'search', $resp['search'] ?? [] );
-
-			if ( isset( $resp['search-continue'] ) ) {
-				$result->addValue( null, 'search-continue', $resp['search-continue'] );
-			}
-
-			$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
-			$result->addValue( null, 'success', 1 );
+		$status = $req->execute();
+		if ( !$status->isOK() ) {
+			$this->dieWithError(
+				[ 'apierror-badaccess-generic', 'Remote search request failed' ]
+			);
 		}
+
+		$resp = \FormatJson::decode( $req->getContent(), true );
+
+		return is_array( $resp ) ? $resp : [];
+	}
 
 	/**
 	 * @inheritDoc
@@ -413,14 +395,38 @@ class SearchEntities extends ApiBase {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$params = $this->extractRequestParams();
-				// TODO: Federated Values - Merge with local results
+
+		// TODO: Federated Values - Merge with local results
 		if (
 			WikibaseRepo::getSettings()->getSetting( 'federatedValuesEnabled' ) &&
 			( $params['type'] ?? '' ) === 'item'
 		) {
-			$this->executeRemoteSearch( $params );
+			// Remote-only path (current behavior), now inlined here
+			$resp = $this->fetchRemoteSearchResponse( $params );
+			$result = $this->getResult();
+
+			if ( array_key_exists( 'searchinfo', $resp ) ) {
+				$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
+			} else {
+				$result->addValue(
+					null,
+					'searchinfo',
+					[ 'search' => (string)$params['search'] ]
+				);
+			}
+
+			$result->addValue( null, 'search', $resp['search'] ?? [] );
+
+			if ( isset( $resp['search-continue'] ) ) {
+				$result->addValue( null, 'search-continue', $resp['search-continue'] );
+			}
+
+			$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
+			$result->addValue( null, 'success', 1 );
 			return;
 		}
+
+		// --- local path below remains unchanged ---
 
 		$results = $this->getSearchResults( $params );
 
