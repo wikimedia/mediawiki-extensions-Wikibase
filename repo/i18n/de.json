@@ -52,6 +52,7 @@
 	"wikibase-publish": "veröffentlichen",
 	"wikibase-cancel": "abbrechen",
 	"wikibase-add": "hinzufügen",
+	"wikibase-addstatement": "Aussage hinzufügen",
 	"wikibase-addqualifier": "Qualifikator hinzufügen",
 	"wikibase-addreference": "Fundstelle hinzufügen",
 	"wikibase-save-inprogress": "Speichere …",

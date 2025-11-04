@@ -88,6 +88,7 @@
 	"wikibase-publish": "publier",
 	"wikibase-cancel": "annuler",
 	"wikibase-add": "ajouter",
+	"wikibase-addstatement": "ajouter une déclaration",
 	"wikibase-addqualifier": "ajouter un qualificatif",
 	"wikibase-addreference": "ajouter une référence",
 	"wikibase-save-inprogress": "Enregistrement en cours...",
