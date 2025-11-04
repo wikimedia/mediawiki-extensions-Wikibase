@@ -1,18 +1,11 @@
 <template>
-	<wikibase-wbui2025-modal-overlay>
-		<div class="wikibase-wbui2025-add-qualifier">
-			<div class="wikibase-wbui2025-add-qualifier-heading">
-				<div class="wikibase-wbui2025-add-qualifier-close">
-					<cdx-button
-						:aria-label="$i18n( 'wikibase-cancel' )"
-						weight="quiet"
-						@click="$emit( 'hide' )"
-					>
-						<cdx-icon :icon="cdxIconClose"></cdx-icon>
-					</cdx-button>
-				</div>
-				<h2>{{ $i18n( 'wikibase-addqualifier' ) }}</h2>
-			</div>
+	<wikibase-wbui2025-modal-overlay
+		:header="$i18n( 'wikibase-addqualifier' )"
+		minimal-style
+		hide-footer
+		@hide="$emit( 'hide' )"
+	>
+		<template #content>
 			<div class="wikibase-wbui2025-add-qualifier-form">
 				<cdx-button
 					action="progressive"
@@ -45,14 +38,14 @@
 				>
 				</cdx-lookup>
 			</div>
-		</div>
+		</template>
 	</wikibase-wbui2025-modal-overlay>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxLookup, CdxTextInput } = require( '../../codex.js' );
-const { cdxIconCheck, cdxIconClose } = require( './icons.json' );
+const { cdxIconCheck } = require( './icons.json' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
 const { searchByDatatype, transformSearchResults } = require( './api/commons.js' );
 
@@ -73,7 +66,6 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			cdxIconCheck,
-			cdxIconClose,
 			selectedPropertyId: null,
 			selectedPropertyDatatype: null,
 			snakValue: '',
@@ -168,15 +160,6 @@ module.exports = exports = defineComponent( {
 
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-add-qualifier {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: @spacing-65;
-	width: 100%;
-	height: 100%;
-}
 
 .wikibase-wbui2025-add-qualifier-heading {
 	align-self: stretch;

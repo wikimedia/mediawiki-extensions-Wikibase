@@ -319,6 +319,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'parentheses',
+				'wikibase-addstatement',
 				'wikibase-addqualifier',
 				'wikibase-addreference',
 				'wikibase-badgeselector-badge-placeholder-title',

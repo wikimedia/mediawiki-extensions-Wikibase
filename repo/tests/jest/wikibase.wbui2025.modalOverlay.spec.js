@@ -4,6 +4,16 @@ jest.mock(
 	{ virtual: true }
 );
 
+jest.mock(
+	'../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconArrowPrevious: 'arrowPrevious',
+		cdxIconCheck: 'check',
+		cdxIconClose: 'close'
+	} ),
+	{ virtual: true }
+);
+
 const modalOverlayComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.modalOverlay.vue' );
 const { mount } = require( '@vue/test-utils' );
 

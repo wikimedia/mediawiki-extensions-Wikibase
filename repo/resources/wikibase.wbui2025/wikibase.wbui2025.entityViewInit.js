@@ -46,7 +46,10 @@
 			}
 
 			for ( const addContainer of wbui2025StatementList.getElementsByClassName( 'wikibase-wbui2025-statement-section-add-wrapper' ) ) {
-				Vue.createMwApp( AddStatementButton, {} )
+				Vue.createMwApp( AddStatementButton, {
+					entityId: data.id
+				} )
+					.use( pinia )
 					.mount( addContainer );
 			}
 			const statusMessageContainer = document.getElementById( 'wikibase-wbui2025-status-message-mount-point' );

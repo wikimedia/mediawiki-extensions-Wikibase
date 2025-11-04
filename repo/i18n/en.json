@@ -31,6 +31,7 @@
 	"wikibase-publish": "publish",
 	"wikibase-cancel": "cancel",
 	"wikibase-add": "add",
+	"wikibase-addstatement": "add statement",
 	"wikibase-addqualifier": "add qualifier",
 	"wikibase-addreference": "add reference",
 	"wikibase-save-inprogress": "Saving…",

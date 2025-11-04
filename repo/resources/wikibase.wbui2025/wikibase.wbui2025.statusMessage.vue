@@ -1,26 +1,29 @@
 <template>
-	<div id="wikibase-wbui2025-status-messages" ref="containerRef">
-		<div
-			class="wikibase-wbui2025-status-message-container"
-			:style="{ width: fixedWidth + 'px' }"
-		>
-			<template
-				v-for="[ messageId, message ] in messageList"
-				:key="message"
+	<teleport to="#mw-teleport-target">
+		<div id="wikibase-wbui2025-status-messages">
+			<div
+				v-if="messageList !== null && messageList.size > 0"
+				class="wikibase-wbui2025-status-message-container"
+				:style="{ bottom: bottom + 'px' }"
 			>
-				<cdx-message
-					:type="message.type || 'success'"
-					allow-user-dismiss
-					:auto-dismiss="message.type !== 'error'"
-					:display-time="4000"
-					@user-dismiss="deleteMessage( messageId )"
-					@auto-dismiss="deleteMessage( messageId )"
+				<template
+					v-for="[ messageId, message ] in messageList"
+					:key="message"
 				>
-					{{ message.text }}
-				</cdx-message>
-			</template>
+					<cdx-message
+						:type="message.type || 'success'"
+						allow-user-dismiss
+						:auto-dismiss="message.type !== 'error'"
+						:display-time="4000"
+						@user-dismissed="deleteMessage( messageId )"
+						@auto-dismissed="deleteMessage( messageId )"
+					>
+						{{ message.text }}
+					</cdx-message>
+				</template>
+			</div>
 		</div>
-	</div>
+	</teleport>
 </template>
 
 <script>
@@ -36,7 +39,8 @@ module.exports = exports = defineComponent( {
 	},
 	data() {
 		return {
-			fixedWidth: 0
+			attachTo: null,
+			bottom: 0
 		};
 	},
 	computed: {
@@ -47,24 +51,29 @@ module.exports = exports = defineComponent( {
 	methods: {
 		deleteMessage( messageId ) {
 			useMessageStore().clearStatusMessage( messageId );
-		},
-		/*
-		 * The message container has a fixed position so that it floats at the bottom of
-		 * the screen. This puts it outside of the layout so it is unable to inherit the
-		 * width of the parent without some Javascript support.
-		 */
-		updateWidth() {
-			if ( this.$refs.containerRef ) {
-				this.fixedWidth = this.$refs.containerRef.offsetWidth;
-			}
 		}
 	},
-	mounted() {
-		this.updateWidth();
-		window.addEventListener( 'resize', this.updateWidth );
-	},
-	unmounted() {
-		window.removeEventListener( 'resize', this.updateWidth );
+	watch: {
+		messageList: {
+			handler( messages ) {
+				for ( const message of messages.values() ) {
+					if ( message.attachTo ) {
+						this.attachTo = message.attachTo;
+					}
+				}
+			},
+			immediate: true,
+			deep: true
+		},
+		attachTo: {
+			handler( newAttachTo ) {
+				if ( newAttachTo ) {
+					this.bottom = newAttachTo.offsetHeight;
+				} else {
+					this.bottom = 0;
+				}
+			}
+		}
 	}
 } );
 </script>
@@ -72,13 +81,20 @@ module.exports = exports = defineComponent( {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-status-message-container {
-	position: fixed;
-	bottom: 0;
-	z-index: 1;
+#wikibase-wbui2025-status-messages {
+	width: 100vw;
+}
 
-	& .cdx-message--user-dismissable {
-		padding: 10px 10px 28px;
-	}
+.wikibase-wbui2025-status-message-container {
+	width: 100vw;
+	position: fixed;
+	bottom: @spacing-0;
+	z-index: 999;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	left: 0;
+	padding: @spacing-125 @spacing-100;
+	box-sizing: border-box;
 }
 </style>

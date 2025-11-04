@@ -24,6 +24,8 @@ export class ItemViewPage {
 
 	public static RANK_ICON = '.wikibase-rankselector span.ui-icon';
 
+	public static ADD_STATEMENT_BUTTON = '.wikibase-wbui2025-add-statement-button>.cdx-button';
+
 	private itemId: string;
 
 	public constructor( itemId: string ) {
@@ -77,6 +79,10 @@ export class ItemViewPage {
 
 	public rank( context: HTMLElement ): Chainable {
 		return cy.get( ItemViewPage.RANK_ICON, { withinSubject: context } );
+	}
+
+	public addStatementButton(): Chainable {
+		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.ADD_STATEMENT_BUTTON );
 	}
 
 	public getClassForRank( rank: string ): string {
