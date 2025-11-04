@@ -31,8 +31,8 @@ class OutputPageJsConfigBuilder {
 	 * @param string[] $badgeItems
 	 * @param int $stringLimit
 	 * @param bool $taintedReferencesEnabled
-	 * @param bool $federatedValuesEnabled
-	 *
+	 * @param bool $federationEnabled
+	 * @param string[] $federationForEntityTypes
 	 * @return array
 	 */
 	public function build(
@@ -42,7 +42,8 @@ class OutputPageJsConfigBuilder {
 		array $badgeItems,
 		$stringLimit,
 		$taintedReferencesEnabled,
-		$federatedValuesEnabled
+		$federationEnabled,
+		$federationForEntityTypes,
 	) {
 		$lang = $out->getLanguage();
 		$title = $out->getTitle();
@@ -54,7 +55,8 @@ class OutputPageJsConfigBuilder {
 		$configVars['wbBadgeItems'] = $badgeItems;
 		$configVars['wbMultiLingualStringLimit'] = $stringLimit;
 		$configVars['wbTaintedReferencesEnabled'] = $taintedReferencesEnabled;
-		$configVars['wbFederatedValuesEnabled'] = $federatedValuesEnabled;
+		$configVars['wbFederationEnabled'] = $federationEnabled;
+		$configVars['wbFederationForEntityTypes'] = $federationForEntityTypes;
 
 		return $configVars;
 	}
