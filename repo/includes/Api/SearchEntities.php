@@ -446,15 +446,7 @@ class SearchEntities extends ApiBase {
 			$remoteParams['limit'] = $params['limit'];
 			$remoteResp = $this->fetchRemoteSearchResponse( $remoteParams );
 			$remoteEntries = $remoteResp['search'] ?? [];
-
-			foreach ( $remoteEntries as $remoteEntry ) {
-				// Mark remote repository if not already present
-				if ( !isset( $remoteEntry['repository'] ) ) {
-				// TODO: get remote name from configuration
-					$remoteEntry['repository'] = 'wikidata';
-				}
-				$entries[] = $remoteEntry;
-			}
+			$entries = array_merge( $entries, $remoteEntries );
 		}
 
 		$nextContinuation = $params['continue'] + $params['limit'];
