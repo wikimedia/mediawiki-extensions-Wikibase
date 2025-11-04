@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 
 use GraphQL\Type\Definition\EnumType;
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
@@ -23,7 +24,8 @@ class Schema extends GraphQLSchema {
 		private readonly SiteIdType $siteIdType,
 		private readonly LanguageCodeType $languageCodeType,
 		private readonly PropertyValuePairType $propertyValuePairType,
-		private readonly PropertyIdType $propertyIdType
+		private readonly PropertyIdType $propertyIdType,
+		private readonly InterfaceType $labelProviderType,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -42,6 +44,10 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function itemType(): ObjectType {
+		$labelField = clone $this->labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
+		$labelField->resolveFn = fn( Item $item, array $args ) => $item->labels
+			->getLabelInLanguage( $args['languageCode'] )?->text;
+
 		return new ObjectType( [
 			'name' => 'Item',
 			'fields' => [
@@ -49,14 +55,7 @@ class Schema extends GraphQLSchema {
 					'type' => Type::nonNull( $this->itemIdType ),
 					'resolve' => fn( Item $item ) => $item->id->getSerialization(),
 				],
-				'label' => [
-					'type' => Type::string(),
-					'args' => [
-						'languageCode' => Type::nonNull( $this->languageCodeType ),
-					],
-					'resolve' => fn( Item $item, array $args ) => $item->labels
-						->getLabelInLanguage( $args['languageCode'] )?->text,
-				],
+				$labelField,
 				'description' => [
 					'type' => Type::string(),
 					'args' => [
@@ -103,6 +102,7 @@ class Schema extends GraphQLSchema {
 						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
 			],
+			'interfaces' => [ $this->labelProviderType ],
 		] );
 	}
 
