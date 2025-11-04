@@ -2,14 +2,15 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 
-use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyValuePairType extends ObjectType {
+class PropertyValuePairType extends InterfaceType {
 
 	public function __construct(
 		PredicatePropertyType $predicateType,
@@ -20,16 +21,16 @@ class PropertyValuePairType extends ObjectType {
 			'fields' => [
 				'property' => [
 					'type' => Type::nonNull( $predicateType ),
-					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->property,
+					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => $rootValue->property,
 				],
 				'value' => [
 					'type' => $valueType,
-					// The whole PropertyValuePair is passed down here so that the Value type has access to the property data type.
-					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->value ? $rootValue : null,
+					// The whole root value is passed down here so that the Value type has access to the property data type.
+					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => $rootValue->value ? $rootValue : null,
 				],
 				'valueType' => [
 					'type' => Type::nonNull( $valueTypeType ),
-					'resolve' => fn( PropertyValuePair $rootValue ) => $rootValue->valueType,
+					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => $rootValue->valueType,
 				],
 			],
 		] );

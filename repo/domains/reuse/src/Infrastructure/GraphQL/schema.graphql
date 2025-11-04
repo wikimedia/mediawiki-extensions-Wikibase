@@ -24,23 +24,17 @@ type Sitelink {
 
 scalar PropertyId
 
-type Statement {
-  id: String!
-  rank: Rank!
-  qualifiers(propertyId: PropertyId!): [PropertyValuePair]!
-  references: [Reference]!
+type Statement implements PropertyValuePair {
   property: PredicateProperty!
   value: Value
   valueType: ValueType!
+  id: String!
+  rank: Rank!
+  qualifiers(propertyId: PropertyId!): [Qualifier]!
+  references: [Reference]!
 }
 
-enum Rank {
-  deprecated
-  normal
-  preferred
-}
-
-type PropertyValuePair {
+interface PropertyValuePair {
   property: PredicateProperty!
   value: Value
   valueType: ValueType!
@@ -112,6 +106,24 @@ enum ValueType {
   value
 }
 
+enum Rank {
+  deprecated
+  normal
+  preferred
+}
+
+type Qualifier implements PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
+}
+
 type Reference {
-  parts: [PropertyValuePair]!
+  parts: [ReferencePart]!
+}
+
+type ReferencePart implements PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
 }
