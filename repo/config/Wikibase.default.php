@@ -16,14 +16,17 @@ global $wgCdnMaxAge;
 
 /** @phan-file-suppress PhanUnextractableAnnotation */
 return [
+	// New, generic federation config
+	'federationEnabled' => false,
+
+	// Which entity types can be federated (only items currently implemented).
+	'federationForEntityTypes' => [ 'item' ],
+
 	// feature flag for federated properties
 	'federatedPropertiesEnabled' => false,
 
 	// url for federated properties source location
 	'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
-
-	// feature flag for federated values
-	'federatedValuesEnabled' => false,
 
 	// feature flag for tainted references
 	'taintedReferencesEnabled' => false,

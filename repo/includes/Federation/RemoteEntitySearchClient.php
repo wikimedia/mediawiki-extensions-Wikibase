@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Federation;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\Lib\SettingsArray;
 
-class RemoteSearchClient {
+class RemoteEntitySearchClient {
 
 	private HttpRequestFactory $httpRequestFactory;
 	private SettingsArray $settings;
