@@ -105,7 +105,7 @@
 	"apihelp-wbmergeitems-param-summary": "編輯嘅總結。\n前面會有一個自動產生嘅留言。自動評論同摘要嘅長度限制係260個字元。請注意，所有超過呢個限制嘅嘢都會被切斷。",
 	"apihelp-wbmergeitems-param-tags": "更改標籤嚟套用喺修訂版本。",
 	"apihelp-wbmergeitems-param-bot": "將呢個編輯標記為機械人。淨係得當有用戶屬於「機械人」谷嗰陣先會尊重呢個網址旗號。",
-	"apihelp-wbmergeitems-example-1": "將<samp>$1</samp>嘅資料合併到<samp><samp>$2</samp>",
+	"apihelp-wbmergeitems-example-1": "將<samp>$1</samp>嘅資料合併到<samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "將<samp>$1</samp>嘅資料合併成<samp>$2</samp>，而唔使理會任何衝突嘅網站連結",
 	"apihelp-wbmergeitems-example-4": "將<samp>$1</samp>嘅資料合併成<samp>$2</samp>，而唔使理會任何衝突嘅網站連結同描述",
 	"apihelp-wbparsevalue-summary": "用<code>數值解析器</code>嚟解析啲數值。",
