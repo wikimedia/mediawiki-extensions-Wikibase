@@ -396,38 +396,6 @@ class SearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
-		// TODO: Federated Values - Merge with local results
-		if (
-			WikibaseRepo::getSettings()->getSetting( 'federatedValuesEnabled' ) &&
-			( $params['type'] ?? '' ) === 'item'
-		) {
-			// Remote-only path (current behavior), now inlined here
-			$resp = $this->fetchRemoteSearchResponse( $params );
-			$result = $this->getResult();
-
-			if ( array_key_exists( 'searchinfo', $resp ) ) {
-				$result->addValue( null, 'searchinfo', $resp['searchinfo'] );
-			} else {
-				$result->addValue(
-					null,
-					'searchinfo',
-					[ 'search' => (string)$params['search'] ]
-				);
-			}
-
-			$result->addValue( null, 'search', $resp['search'] ?? [] );
-
-			if ( isset( $resp['search-continue'] ) ) {
-				$result->addValue( null, 'search-continue', $resp['search-continue'] );
-			}
-
-			$this->getResult()->addIndexedTagName( [ 'search' ], 'entity' );
-			$result->addValue( null, 'success', 1 );
-			return;
-		}
-
-		// --- local path below remains unchanged ---
-
 		$results = $this->getSearchResults( $params );
 
 		$this->getResult()->addValue(
@@ -464,6 +432,29 @@ class SearchEntities extends ApiBase {
 		$entries = [];
 		foreach ( $returnedResults as $match ) {
 			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
+		}
+
+		// --- Federated Values: optionally append remote results ---
+		if (
+			WikibaseRepo::getSettings()->getSetting( 'federatedValuesEnabled' ) &&
+			( $params['type'] ?? '' ) === 'item'
+		) {
+			$remoteParams = $params;
+			// Deliberately ignore remote continuation for now; pagination is still local-based.
+			$remoteParams['continue'] = 0;
+			// TODO: Perhaps this is a constant and doesn't care about local limit...
+			$remoteParams['limit'] = $params['limit'];
+			$remoteResp = $this->fetchRemoteSearchResponse( $remoteParams );
+			$remoteEntries = $remoteResp['search'] ?? [];
+
+			foreach ( $remoteEntries as $remoteEntry ) {
+				// Mark remote repository if not already present
+				if ( !isset( $remoteEntry['repository'] ) ) {
+				// TODO: get remote name from configuration
+					$remoteEntry['repository'] = 'wikidata';
+				}
+				$entries[] = $remoteEntry;
+			}
 		}
 
 		$nextContinuation = $params['continue'] + $params['limit'];
@@ -527,6 +518,12 @@ class SearchEntities extends ApiBase {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => 0,
 				IntegerDef::PARAM_MAX => self::CONTINUE_HARD_LIMIT,
+				IntegerDef::PARAM_MIN => 0,
+			],
+			'remotecontinue' => [
+				ParamValidator::PARAM_TYPE => 'integer',
+				ParamValidator::PARAM_REQUIRED => false,
+				ParamValidator::PARAM_DEFAULT => 0,
 				IntegerDef::PARAM_MIN => 0,
 			],
 			'props' => [
