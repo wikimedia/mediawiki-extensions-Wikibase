@@ -1359,7 +1359,10 @@
 			"ViewHooks"
 		],
 		"VectorSearchResourceLoaderConfig": "RepoHooks",
-		"WikibaseContentLanguages": "RepoHooks"
+		"WikibaseContentLanguages": "RepoHooks",
+		"WikibaseRepoEntitySearchHelperCallbacks": [
+			"Wikibase\\Repo\\Federation\\FederatedValuesHooks::onWikibaseRepoEntitySearchHelperCallbacks"
+		]
 	},
 	"RateLimits": {
 		"wikibase-idgenerator": {

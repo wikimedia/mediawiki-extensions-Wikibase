@@ -181,6 +181,7 @@ use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
+use Wikibase\Repo\Federation\RemoteSearchClient;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -1746,6 +1747,13 @@ return [
 		MediaWikiServices $services
 	): RedirectResolvingLatestRevisionLookup {
 		return new RedirectResolvingLatestRevisionLookup( WikibaseRepo::getEntityRevisionLookup( $services ) );
+	},
+
+	'WikibaseRepo.FederatedValues.RemoteSearchClient' => static function ( MediaWikiServices $services ): RemoteSearchClient {
+		return new RemoteSearchClient(
+			$services->getHttpRequestFactory(),
+			WikibaseRepo::getSettings( $services )
+		);
 	},
 
 	'WikibaseRepo.ReferenceNormalizer' => function ( MediaWikiServices $services ): ReferenceNormalizer {
