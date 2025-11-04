@@ -520,12 +520,6 @@ class SearchEntities extends ApiBase {
 				IntegerDef::PARAM_MAX => self::CONTINUE_HARD_LIMIT,
 				IntegerDef::PARAM_MIN => 0,
 			],
-			'remotecontinue' => [
-				ParamValidator::PARAM_TYPE => 'integer',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => 0,
-				IntegerDef::PARAM_MIN => 0,
-			],
 			'props' => [
 				ParamValidator::PARAM_TYPE => [ 'url' ],
 				ParamValidator::PARAM_ISMULTI => true,
