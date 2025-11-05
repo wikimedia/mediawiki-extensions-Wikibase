@@ -165,6 +165,12 @@ final class RepoHooks implements
 			}
 		}
 
+		if ( $settings->getSetting( 'federationEnabled' ) ) {
+			// Load entity-search badges JS on all repo pages
+			// TODO: Federation - scope to only load on typeahead
+			$out->addModules( [ 'wikibase.federation.entitysearchBadges' ] );
+		}
+
 		if ( $settings->getSetting( 'wikibasePingback' ) ) {
 			WikibasePingback::schedulePingback();
 		}
@@ -896,6 +902,7 @@ final class RepoHooks implements
 					'wikibase.getLanguageNameByCode',
 				],
 			],
+
 			'wikibase.special.languageLabelDescriptionAliases' => $moduleTemplate + [
 				'scripts' => [
 					'resources/wikibase.special/wikibase.special.languageLabelDescriptionAliases.js',
@@ -960,6 +967,22 @@ final class RepoHooks implements
 			$modules['wikibase.vector.scopedTypeaheadSearchStyles'] = $moduleTemplate + [
 				"styles" => [
 					'resources/wikibase.vector.scopedTypeaheadSearch.less',
+				],
+			];
+		}
+
+		if ( $settings->getSetting( 'federationEnabled' ) ) {
+			$modules['wikibase.federation.entitysearchBadges'] = $moduleTemplate + [
+				'scripts' => [
+					'resources/wikibase.federation/entitysearchBadges.js',
+				],
+				'styles' => [
+					// optional, if you have styling for the badges / headers:
+					'resources/wikibase.federation/entitysearchBadges.less',
+				],
+				'dependencies' => [
+			    'jquery.wikibase.entityselector',
+    			'mediawiki.util',
 				],
 			];
 		}
