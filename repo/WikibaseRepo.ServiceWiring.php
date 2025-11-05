@@ -176,12 +176,12 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
+use Wikibase\Repo\Federation\RemoteEntitySearchClient;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesAwareDispatchingEntityIdParser;
 use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
-use Wikibase\Repo\Federation\RemoteEntitySearchClient;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -1187,6 +1187,14 @@ return [
 		);
 	},
 
+	'WikibaseRepo.Federation.RemoteEntitySearchClient' =>
+		static function ( MediaWikiServices $services ): RemoteEntitySearchClient {
+			return new RemoteEntitySearchClient(
+				$services->getHttpRequestFactory(),
+				WikibaseRepo::getSettings( $services )
+			);
+	},
+
 	'WikibaseRepo.FederatedPropertiesServiceFactory' => function ( MediaWikiServices $services ): ApiServiceFactory {
 		$settings = WikibaseRepo::getSettings( $services );
 
@@ -1754,13 +1762,6 @@ return [
 		MediaWikiServices $services
 	): RedirectResolvingLatestRevisionLookup {
 		return new RedirectResolvingLatestRevisionLookup( WikibaseRepo::getEntityRevisionLookup( $services ) );
-	},
-
-	'WikibaseRepo.Federation.RemoteEntitySearchClient' => static function ( MediaWikiServices $services ): RemoteEntitySearchClient {
-		return new RemoteEntitySearchClient(
-			$services->getHttpRequestFactory(),
-			WikibaseRepo::getSettings( $services )
-		);
 	},
 
 	'WikibaseRepo.ReferenceNormalizer' => function ( MediaWikiServices $services ): ReferenceNormalizer {

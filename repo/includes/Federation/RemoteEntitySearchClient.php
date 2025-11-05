@@ -76,7 +76,7 @@ class RemoteEntitySearchClient {
 	public function searchEntities( array $params ): array {
 		$remoteParams = $this->buildRemoteParams( $params );
 
-		// For now hard-coded; later read from federation config in $this->settings
+		// TODO: Federation - For now hard-coded; later read from federation config in $this->settings
 		$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remoteParams );
 
 		$req = $this->httpRequestFactory->create( $remoteUrl, [

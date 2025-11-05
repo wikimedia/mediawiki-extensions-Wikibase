@@ -1300,6 +1300,13 @@
 		},
 		"ViewHooks": {
 			"class": "\\Wikibase\\View\\ViewHooks"
+		},
+		"WikibaseRepoEntitySearchHelperCallbacks": {
+			"class": "Wikibase\\Repo\\Federation\\Hooks\\RemoteEntitySearchHelperCallbacksHookHandler",
+			"services": [
+				"WikibaseRepo.Federation.RemoteEntitySearchClient",
+				"WikibaseRepo.Settings"
+			]
 		}
 	},
 	"Hooks": {
@@ -1363,8 +1370,8 @@
 		],
 		"VectorSearchResourceLoaderConfig": "RepoHooks",
 		"WikibaseContentLanguages": "RepoHooks",
-		"WikibaseRepoEntitySearchHelperCallbacks": [
-	    "Wikibase\\Repo\\Federation\\FederationHooks::onWikibaseRepoEntitySearchHelperCallbacks"
+		"WikibaseRepoEntitySearchHelperCallbacks":[
+			"WikibaseRepoEntitySearchHelperCallbacks"
 		]
 	},
 	"RateLimits": {

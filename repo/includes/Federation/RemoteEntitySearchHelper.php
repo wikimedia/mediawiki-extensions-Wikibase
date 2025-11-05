@@ -50,6 +50,7 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 		$strictLanguage,
 		?string $profileContext
 	) {
+
 		// Always get local results first
 		$localResults = $this->inner->getRankedSearchResults(
 			$text,
@@ -60,8 +61,6 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			$profileContext
 		);
 
-		// If federation is globally disabled or this type is not configured,
-		// just return local results.
 		if (
 			!$this->isFederationEnabled() ||
 			!$this->isEntityTypeFederated( $entityType )
@@ -70,7 +69,6 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 		}
 
 		// Build remote params similar to wbsearchentities;
-		// NOTE: type is now the incoming $entityType, not hard-coded 'item'.
 		$remoteParams = [
 			'search'         => $text,
 			'language'       => $languageCode,
@@ -90,8 +88,7 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			$languageCode
 		);
 
-		// For now: just append remote results at the end (same behavior as before,
-		// where SearchEntities array_merge'd local + remote entries).
+		// For now just append remote results at the end
 		return array_merge( $localResults, $remoteResults );
 	}
 
