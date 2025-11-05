@@ -14,7 +14,7 @@
 		>
 			<cdx-text-input v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'" v-model.trim="textvalue"></cdx-text-input>
 			<cdx-lookup
-				v-else-if="valueStrategy.isLookupDatatype()"
+				v-else-if="valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
 				v-model:selected="lookupSelection"
 				v-model:input-value="lookupInputValue"
 				:menu-items="lookupMenuItems"
