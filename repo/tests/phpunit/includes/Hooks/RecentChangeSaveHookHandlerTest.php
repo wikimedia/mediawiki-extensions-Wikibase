@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\User\CentralId\CentralIdLookup;
 use MediaWiki\User\UserIdentityValue;
@@ -167,7 +166,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$queuedJobs = $jobQueueGroup->get( 'DispatchChanges' )->getAllQueuedJobs();
 		$job = $queuedJobs->current();
 		$this->assertNotNull( $job );
@@ -196,11 +195,11 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
-	public function testGivenRecentChangeForEntityChangeWithOneQualOrRefOnlyChange_skipsSchedulingDispatchJob() {
+	public function testGivenRecentChangeForEntityChangeWithOneQualOrRefOnlyChange_schedulesDispatchJob() {
 		$recentChangeAttrs = [
 			'rc_timestamp' => 1234567890,
 			'rc_bot' => 1,
@@ -221,8 +220,8 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
-		$this->assertTrue( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
 	}
 
 	public function testGivenRecentChangeForAddingSitelink_schedulesDispatchJob() {
@@ -240,7 +239,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$testItemChange = new ItemChange( [
 			'time' => '20210906122813',
 			'info' => [
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [], [
 					'some_wiki' => [ null, 'some_page', false ],
 				], false ),
 				'metadata' => [
@@ -264,7 +263,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->newHookHandler()->onRecentChange_save( $recentChange );
 
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup(
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup(
 			WikiMap::getCurrentWikiDbDomain()->getId()
 		);
 		$this->assertFalse( $jobQueueGroup->get( 'DispatchChanges' )->isEmpty() );
@@ -355,7 +354,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'type' => 'wikibase-someEntity~update',
 			'object_id' => 'Q1',
 			'info' => [ //this is based on item change example, as we now need the diff
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [ 'P1' ], [], [], false ),
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [ 'P1' ], [], [], false ),
 				'metadata' => [
 					'page_id' => 3,
 					'rev_id' => 123,
@@ -374,7 +373,7 @@ class RecentChangeSaveHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'type' => 'wikibase-someEntity~update',
 			'object_id' => 'Q1',
 			'info' => [
-				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [ 'P1' ], [], false ),
+				'compactDiff' => new EntityDiffChangedAspects( [], [], [], [], [ 'P1' ], [], false ),
 				'metadata' => [
 				],
 			],

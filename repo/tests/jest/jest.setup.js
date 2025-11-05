@@ -41,5 +41,6 @@ TitleMock.prototype.getUrl = jest.fn();
 global.mw = {
 	Api: ApiMock,
 	msg: jest.fn( ( key ) => key ),
-	Title: TitleMock
+	Title: TitleMock,
+	config: new Map()
 };

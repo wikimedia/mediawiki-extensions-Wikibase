@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\User\User;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * Hook handler that registers beta features with the BetaFeatures extension.
@@ -31,7 +32,7 @@ class GetBetaFeaturePreferencesHookHandler {
 		if ( !$this->enableMobileEditingUIBetaFeature ) {
 			return;
 		}
-		$betaFeatures['wikibase-mobile-editing-ui'] = [
+		$betaFeatures[Wbui2025FeatureFlag::OPTION_NAME] = [
 			'label-message' => 'wikibase-mobile-editing-ui-beta-feature-message',
 			'desc-message' => 'wikibase-mobile-editing-ui-beta-feature-description',
 			// These links are required, but given we don't have community pages set up yet, link to Phab.

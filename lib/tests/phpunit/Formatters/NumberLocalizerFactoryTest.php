@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 
@@ -20,7 +19,7 @@ class NumberLocalizerFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetForLanguageCode( string $langCode, string $expected ): void {
 		$factory = new NumberLocalizerFactory(
-			MediaWikiServices::getInstance()->getLanguageFactory()
+			$this->getServiceContainer()->getLanguageFactory()
 		);
 
 		$localizer = $factory->getForLanguageCode( $langCode );
@@ -32,7 +31,7 @@ class NumberLocalizerFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider languageCodeProvider
 	 */
 	public function testGetForLanguage( string $langCode, string $expected ): void {
-		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 		$factory = new NumberLocalizerFactory( $languageFactory );
 
 		$localizer = $factory->getForLanguage( $languageFactory->getLanguage( $langCode ) );

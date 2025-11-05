@@ -3,13 +3,13 @@
 		class="wikibase-wbui2025-snak-value"
 		:data-snak-hash="snak.hash"
 		:class="snakValueClass"
-		v-html="snakValueHtml( snak )"
+		v-html="snakValueHtmlForHash( snak.hash )"
 	></div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { snakValueHtml } = require( './store/serverRenderedHtml.js' );
+const { snakValueHtmlForHash } = require( './store/serverRenderedHtml.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -20,19 +20,19 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
-	setup() {
-		return {
-			snakValueHtml
-		};
-	},
 	computed: {
 		snakValueClass() {
 			return {
 				'wikibase-wbui2025-media-value': this.snak.datatype === 'commonsMedia',
 				'wikibase-wbui2025-time-value': this.snak.datatype === 'time',
-				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate'
+				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate',
+				'wikibase-wbui2025-tabular-data-value': this.snak.datatype === 'tabular-data',
+				'wikibase-wbui2025-geo-shape-value': this.snak.datatype === 'geo-shape'
 			};
 		}
+	},
+	methods: {
+		snakValueHtmlForHash
 	},
 	mounted() {
 		if ( this.snak.datatype === 'globe-coordinate' ) {

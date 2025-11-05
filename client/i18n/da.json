@@ -82,6 +82,8 @@
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Beskrivelse: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Nogle udsagn",
+	"wikibase-pageinfo-entity-usage-CQR": "Nogle udsagn (med kvalifikationer og referencer)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Udsagn (med kvalifikationer og referencer): $1",
 	"wikibase-property-render-error": "Visning af egenskaben $1 mislykkedes: $2",
 	"wikibase-otherprojects": "I andre projekter",
 	"wikibase-otherprojects-beta-message": "Andre projekter sidebar",

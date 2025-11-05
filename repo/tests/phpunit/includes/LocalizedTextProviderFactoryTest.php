@@ -4,7 +4,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests;
 
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\LocalizedTextProviderFactory;
 
@@ -21,7 +20,7 @@ class LocalizedTextProviderFactoryTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetForLanguageCode( string $langCode ): void {
 		$factory = new LocalizedTextProviderFactory(
-			MediaWikiServices::getInstance()->getLanguageFactory()
+			$this->getServiceContainer()->getLanguageFactory()
 		);
 
 		$localizer = $factory->getForLanguageCode( $langCode );
@@ -33,7 +32,7 @@ class LocalizedTextProviderFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider languageCodeProvider
 	 */
 	public function testGetForLanguage( string $langCode ): void {
-		$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
+		$languageFactory = $this->getServiceContainer()->getLanguageFactory();
 		$factory = new LocalizedTextProviderFactory( $languageFactory );
 
 		$localizer = $factory->getForLanguage( $languageFactory->getLanguage( $langCode ) );

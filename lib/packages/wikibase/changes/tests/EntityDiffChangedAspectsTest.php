@@ -21,6 +21,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		$validParams = [
 			'labelChanges' => [ 'a', '1' ],
 			'descriptionChanges' => [ 'b', '2' ],
+			'aliasChanges' => [ 'f', '1' ],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'c', '3' ],
 			'statementChangesQualOrRefOnly' => [ 'q', '4' ],
 			'siteLinkChanges' => [ 'd' => [ null, null, true ] ],
@@ -32,6 +33,9 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 
 		$invalidDescriptionChanges = $validParams;
 		$invalidDescriptionChanges['descriptionChanges'] = [ 'b', 2 ];
+
+		$invalidAliasChanges = $validParams;
+		$invalidAliasChanges['aliasChanges'] = [ 'f', 1 ];
 
 		$invalidStatementChangesExcludingQualOrRefOnlyChanges = $validParams;
 		$invalidStatementChangesExcludingQualOrRefOnlyChanges['statementChangesExcludingQualOrRefOnlyChanges'] = [ 'c', 3 ];
@@ -51,6 +55,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'Invalid labelChanges' => $invalidLabelChanges,
 			'Invalid descriptionChanges' => $invalidDescriptionChanges,
+			'Invalid aliasChanges' => $invalidAliasChanges,
 			'Invalid statementChangesExcludingQualOrRefOnlyChanges' => $invalidStatementChangesExcludingQualOrRefOnlyChanges,
 			'Invalid statementChangesQualOrRefOnly' => $invalidStatementChangesQualOrRefOnly,
 			'Invalid siteLinkChanges keys' => $invalidSiteLinkChangesKeys,
@@ -65,6 +70,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidConstruction(
 		array $labelChanges,
 		array $descriptionChanges,
+		array $aliasChanges,
 		array $statementChangesExcludingQualOrRefOnlyChanges,
 		array $statementChangesQualOrRefOnly,
 		array $siteLinkChanges,
@@ -75,6 +81,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		$entity = new EntityDiffChangedAspects(
 			$labelChanges,
 			$descriptionChanges,
+			$aliasChanges,
 			$statementChangesExcludingQualOrRefOnlyChanges,
 			$statementChangesQualOrRefOnly,
 			$siteLinkChanges,
@@ -85,6 +92,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		return new EntityDiffChangedAspects(
 			[ 'a', '1' ],
 			[ 'b', '2' ],
+			[ 'f', '1' ],
 			[ 'c', '3' ],
 			[ 'q', '4' ],
 			[ 'd' => [ null, null, true ] ],
@@ -147,6 +155,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 			'arrayFormatVersion' => EntityDiffChangedAspects::ARRAYFORMATVERSION,
 			'labelChanges' => [ 'a', '1' ],
 			'descriptionChanges' => [ 'b', '2' ],
+			'aliasChanges' => [ 'f', '1' ],
 			'statementChangesExcludingQualOrRefOnlyChanges' => [ 'c', '3' ],
 			'statementChangesQualOrRefOnly' => [ 'q', '4' ],
 			'siteLinkChanges' => [ 'd' => [ null, null, true ] ],
@@ -168,9 +177,21 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 	 * @return string
 	 */
 	private function getKnownGoodSerialization() {
-	// note: if you change the structure of EntityDiffChangedAspects,
-	// you need to update the number for length of the serialized payload here but also update numbers
-	// in 2 places in testUnserialize_wrongFormatVersion below
+			return 'C:45:"Wikibase\Lib\Changes\EntityDiffChangedAspects":211:' .
+			'{{"arrayFormatVersion":1,"labelChanges":[],"descriptionChanges":[],' .
+			'"aliasChanges":[],"statementChangesExcludingQualOrRefOnlyChanges":[],' .
+				'"statementChangesQualOrRefOnly":[],"siteLinkChanges":[],"otherChanges":true}}';
+	}
+
+	/**
+	 * Serialization test to ensure backwards compatibility
+	 *
+	 * @return string
+	 */
+	private function getOldKnownGoodSerialization() {
+		// note: if you change the structure of EntityDiffChangedAspects,
+		// you need to update the number for length of the serialized payload here but also update numbers
+		// in 2 places in testUnserialize_wrongFormatVersion below
 		return 'C:45:"Wikibase\Lib\Changes\EntityDiffChangedAspects":193:' .
 			'{{"arrayFormatVersion":1,"labelChanges":[],"descriptionChanges":[],"statementChangesExcludingQualOrRefOnlyChanges":[],' .
 			'"statementChangesQualOrRefOnly":[],"siteLinkChanges":[],"otherChanges":true}}';
@@ -180,7 +201,16 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		$entityDiffChangedAspects = unserialize( $this->getKnownGoodSerialization() );
 
 		$this->assertSame(
-			( new EntityDiffChangedAspects( [], [], [], [], [], true ) )->toArray(),
+			( new EntityDiffChangedAspects( [], [], [], [], [], [], true ) )->toArray(),
+			$entityDiffChangedAspects->toArray()
+		);
+	}
+
+	public function testOldUnserialize() {
+		$entityDiffChangedAspects = unserialize( $this->getOldKnownGoodSerialization() );
+
+		$this->assertSame(
+			( new EntityDiffChangedAspects( [], [], [], [], [], [], true ) )->toArray(),
 			$entityDiffChangedAspects->toArray()
 		);
 	}
@@ -209,8 +239,8 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 		);
 		// Change the length of the serialization "body" (the content from Serializable::serialize)
 		$entityDiffChangedAspectsSerialization = str_replace(
-			'":193:',
-			'":' . ( strlen( $arrayFormatVersion ) + 192 ) . ':',
+			'":211:',
+			'":' . ( strlen( $arrayFormatVersion ) + 210 ) . ':',
 			$entityDiffChangedAspectsSerialization
 		);
 

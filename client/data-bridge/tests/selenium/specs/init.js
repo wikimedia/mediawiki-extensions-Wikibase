@@ -70,7 +70,7 @@ describe( 'init', () => {
 		}, {
 			timeout: {
 				interval: 500,
-				timeout: browser.config.nonApiTimeout,
+				timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
 			},
 		} );
 		DataBridgePage.loadingBar.waitForExist( {
@@ -222,7 +222,7 @@ describe( 'init', () => {
 				DataBridgePage.bridge.waitForDisplayed();
 
 				browser.waitUntil( () => DataBridgePage.propertyLabel.getText() === expectedLabel, {
-					timeout: browser.config.nonApiTimeout,
+					timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ],
 					timeoutMsg: `${DataBridgePage.propertyLabel.getText()} is not equal to ${expectedLabel}`,
 				} );
 			}
@@ -279,7 +279,7 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+				DataBridgePage.app.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
@@ -312,7 +312,7 @@ describe( 'init', () => {
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( { timeout: browser.config.nonApiTimeout } );
+				DataBridgePage.app.waitForDisplayed( { timeout: browser.options.capabilities[ 'mw:nonApiTimeout' ] } );
 
 				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 

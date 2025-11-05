@@ -51,7 +51,6 @@ export default defineComponent( {
 			this.rootModule.dispatch( 'setTargetValue', dataValue );
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

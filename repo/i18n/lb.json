@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"GilPe",
 			"Les Meloures",
 			"Robby",
 			"Soued031",
@@ -26,11 +27,14 @@
 	"wikibase-addreference": "Referenz derbäisetzen",
 	"wikibase-save-inprogress": "Späicheren...",
 	"wikibase-publish-inprogress": "Verëffentlechen...",
+	"wikibase-publishing-error": "Beim Späichere vun Ären Ännerungen ass eppes schif gaangen. Waart e Moment a probéiert nach eng Kéier.",
+	"wikibase-publishing-succeeded": "Är Ännerunge goufe gespäichert!",
 	"wikibase-remove-inprogress": "Ewechuelen...",
 	"wikibase-statementlistview-add": "Wäert derbäisetzen",
 	"wikibase-statementlistview-add-tooltip": "En neie Wäert derbäisetzen",
 	"wikibase-statementgrouplistview-add": "Ausso derbäisetzen",
 	"wikibase-statementgrouplistview-add-tooltip": "Eng nei Ausso derbäisetzen",
+	"wikibase-statementgrouplistview-edit": "{{PLURAL:$1|Ausso|Aussoen}} änneren",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "A méi Sproochen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Astellen",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Etiketten, Aliasen a Beschreiwungen an all menge Sprooche beim Luede vun der Säit weisen",
@@ -93,7 +97,7 @@
 	"wikibase-undo-badpage": "Falsch Versioun: D'Versioun $2 gehéiert net zu [[:$1]].",
 	"wikibase-undo-firstrev": "D'Uleeë vun der Säit kann net réckgängeg gemaach ginn",
 	"wikibase-undo-nocontent": "Den Inhalt vun der Versioun $2 vun der Säit $1 kann net geluede ginn",
-	"wikibase-summary-generated": "Resumé (gëtt un en automatesch generéierte Resumé ugehaangen):",
+	"wikibase-summary-generated": "Resümmee (gëtt un en automatesch generéierte Resümmee ugehaangen):",
 	"wikibase-disambiguation-title": "Homonymie fir \"$1\"",
 	"wikibase-propertypage-datatype": "Datentyp",
 	"wikibase-propertypage-bad-datatype": "Onbekannten Datentyp: $1",

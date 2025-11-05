@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiUsageException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
@@ -132,7 +131,7 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 			new BasicEntityIdParser(),
 			$errorReporter,
 			$interactor,
-			MediaWikiServices::getInstance()->getPermissionManager(),
+			$this->getServiceContainer()->getPermissionManager(),
 			[ 'mainItem' => 'Q100', 'auxItem' => 'Q200' ]
 		);
 	}

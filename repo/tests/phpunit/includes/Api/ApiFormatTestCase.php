@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiMain;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Tests\Api\ApiTestContext;
 use MediaWiki\User\User;
@@ -73,7 +72,7 @@ abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 		return ObjectFactory::getObjectFromSpec( $apiModules[$moduleName], [
 			'assertClass' => $moduleClass,
 			'extraArgs' => [ $main, $moduleName ],
-			'serviceContainer' => MediaWikiServices::getInstance(),
+			'serviceContainer' => $this->getServiceContainer(),
 		] );
 	}
 

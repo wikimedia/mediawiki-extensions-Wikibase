@@ -4,24 +4,22 @@
 ( function ( wb ) {
 	'use strict';
 
-	// Sinon: Cannot stub non-existent own property uls
-	if ( !( 'uls' in $ ) ) {
-		$.uls = undefined;
-	}
-	if ( !( 'uls' in mw ) ) {
-		mw.uls = undefined;
-	}
-
 	QUnit.module( 'wikibase.getUserLanguages', {
 		beforeEach() {
-			this.simulateUlsInstalled = ( isInstalled ) => {
-				// Define or replace object, depending on whether ULS is installed.
-				if ( isInstalled ) {
-					this.sandbox.stub( $, 'uls', { data: {} } );
-					this.sandbox.stub( mw, 'uls', { data: {}, getFrequentLanguageList() {} } );
+			this.simulateUlsInstalled = ( simulateInstalled ) => {
+				const stubJqUls = simulateInstalled ? { data: {} } : {};
+				const stubMwUls = simulateInstalled ? { data: {}, getFrequentLanguageList() {} } : {};
+
+				// Define or replace property, depending on whether ULS is really installed.
+				if ( 'uls' in $ ) {
+					sinon.replace( $, 'uls', stubJqUls );
 				} else {
-					this.sandbox.stub( $, 'uls', {} );
-					this.sandbox.stub( mw, 'uls', {} );
+					sinon.define( $, 'uls', stubJqUls );
+				}
+				if ( 'uls' in mw ) {
+					sinon.replace( mw, 'uls', stubMwUls );
+				} else {
+					sinon.define( mw, 'uls', stubMwUls );
 				}
 			};
 		}

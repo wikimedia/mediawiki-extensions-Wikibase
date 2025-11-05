@@ -19,12 +19,28 @@ jest.mock(
 	() => [ 'string' ],
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
+		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
+	} ),
+	{ virtual: true }
+);
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const statementViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue' );
 const statementGroupViewComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const {
+	storeWithHtmlAndStatements,
+	storeContentsWithServerRenderedHtml,
+	storeContentWithStatementsAndProperties
+} = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.statementGroupView', () => {
 	it( 'defines component', async () => {
@@ -48,7 +64,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			rank: 'normal'
 		};
 		const mockStatement2 = {
-			mainsnak: { snaktype: 'somevalue' },
+			mainsnak: { snaktype: 'somevalue', datavalue: { type: 'string', value: '' }, datatype: 'string' },
 			type: 'statement',
 			id: 'Q1$18ed80a7-62a8-4779-a7dd-3876e835979a',
 			rank: 'normal'
@@ -56,22 +72,21 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		beforeEach( async () => {
 			wrapper = await mount( statementGroupViewComponent, {
 				props: {
-					statements: [ mockStatement, mockStatement2 ],
-					propertyId: 'P1'
+					propertyId: 'P1',
+					entityId: 'Q1'
 				},
 				global: {
-					plugins: [ createTestingPinia( {
-						initialState: {
-							serverRenderedHtml: {
-								propertyLinks: new Map( [
-									[ 'P1', '<a href="mock-property-url">P1</a>' ]
-								] ),
-								snakValues: new Map( [
-									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
-								] )
-							}
-						}
-					} ) ]
+					plugins: [
+						storeWithHtmlAndStatements(
+							storeContentsWithServerRenderedHtml(
+								{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' },
+								{ P1: '<a href="mock-property-url">P1</a>' }
+							),
+							storeContentWithStatementsAndProperties( {
+								P1: [ mockStatement, mockStatement2 ]
+							} )
+						)
+					]
 				}
 			} );
 		} );
@@ -84,8 +99,8 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			expect( propertyNames[ 0 ].props( 'propertyId' ) ).toBe( 'P1' );
 			const statementViews = wrapper.findAllComponents( statementViewComponent );
 			expect( statementViews ).toHaveLength( 2 );
-			expect( statementViews[ 0 ].props( 'statement' ) ).toEqual( mockStatement );
-			expect( statementViews[ 1 ].props( 'statement' ) ).toEqual( mockStatement2 );
+			expect( statementViews[ 0 ].props( 'statementId' ) ).toEqual( mockStatement.id );
+			expect( statementViews[ 1 ].props( 'statementId' ) ).toEqual( mockStatement2.id );
 		} );
 
 		it( 'sets the right content on claim elements', async () => {
@@ -98,6 +113,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		} );
 
 		it( 'opens modal edit form when clicking edit link', async () => {
+			mw.config = { get: () => false };
 			await wrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
 			expect( wrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( true );
 		} );
@@ -121,22 +137,21 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		beforeEach( async () => {
 			wrapper = await mount( statementGroupViewComponent, {
 				props: {
-					statements: [ mockStatement ],
-					propertyId: 'P2'
+					propertyId: 'P2',
+					entityId: 'Q1'
 				},
 				global: {
-					plugins: [ createTestingPinia( {
-						initialState: {
-							serverRenderedHtml: {
-								propertyLinks: new Map( [
-									[ 'P2', '<a href="mock-property-url">P2</a>' ]
-								] ),
-								snakValues: new Map( [
-									[ '1725f8bd2897fb1a3491f94bf04869dbc4f68df5', '<a href="https://example.com/">https://example.com/</a>' ]
-								] )
-							}
-						}
-					} ) ]
+					plugins: [
+						storeWithHtmlAndStatements(
+							storeContentsWithServerRenderedHtml(
+								{ '1725f8bd2897fb1a3491f94bf04869dbc4f68df5': '<a href="https://example.com/">https://example.com/</a>' },
+								{ P2: '<a href="mock-property-url">P2</a>' }
+							),
+							storeContentWithStatementsAndProperties( {
+								P2: [ mockStatement ]
+							} )
+						)
+					]
 				}
 			} );
 		} );
@@ -146,9 +161,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			const editLink = wrapper.find( '.wikibase-wbui2025-edit-link' );
 			expect( editLink.exists() ).toBe( true );
 			expect( editLink.classes() ).toContain( 'wikibase-wbui2025-edit-link-unsupported' );
-			const styledLink = editLink.find( '.wikibase-wbui2025-link-heavy' );
-			expect( styledLink.exists() ).toBe( true );
-			expect( styledLink.classes() ).toContain( 'is-red-link' );
+			expect( editLink.classes() ).toContain( 'is-red-link' );
 		} );
 
 		it( 'does nothing when clicking edit link', async () => {

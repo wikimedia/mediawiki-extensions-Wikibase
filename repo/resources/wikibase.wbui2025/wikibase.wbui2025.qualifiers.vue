@@ -1,24 +1,18 @@
 <template>
-	<div>
-		<div
-			v-if="hasQualifiers"
-			class="wikibase-wbui2025-qualifiers"
-		>
-			<p class="wikibase-wbui2025-qualifiers-header">
-				{{ qualifiersMessage }}
-			</p>
-			<template v-for="propertyId in qualifiersOrder" :key="propertyId">
-				<div
-					v-for="snak in qualifiers[propertyId]"
-					:key="snak"
-					class="wikibase-wbui2025-qualifier"
-				>
-					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-					{{ ' ' /* use mustache to ensure Vue does not remove space between property name + snak value */ }}
-					<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
-				</div>
-			</template>
-		</div>
+	<div
+		v-if="hasQualifiers"
+		class="wikibase-wbui2025-qualifiers"
+	>
+		<template v-for="propertyId in qualifiersOrder" :key="propertyId">
+			<div
+				v-for="snak in qualifiers[propertyId]"
+				:key="snak"
+				class="wikibase-wbui2025-qualifier"
+			>
+				<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
+				<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
+			</div>
+		</template>
 	</div>
 </template>
 
@@ -50,9 +44,6 @@ module.exports = exports = defineComponent( {
 		},
 		hasQualifiers() {
 			return this.qualifierCount > 0;
-		},
-		qualifiersMessage() {
-			return mw.msg( 'wikibase-statementview-qualifiers-counter', [ this.qualifierCount ] );
 		}
 	}
 } );

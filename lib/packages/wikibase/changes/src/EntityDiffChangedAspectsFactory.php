@@ -34,6 +34,7 @@ class EntityDiffChangedAspectsFactory {
 	public function newFromEntityDiff( Diff $entityDiff ) {
 		$labelChanges = [];
 		$descriptionChanges = [];
+		$aliasChanges = [];
 		$statementChangesExcludingQualOrRefOnlyChanges = [];
 		$statementChangesQualOrRefOnly = [];
 		$siteLinkChanges = [];
@@ -61,6 +62,12 @@ class EntityDiffChangedAspectsFactory {
 				$descriptionChanges = $this->getChangedDescriptions( $descriptionsDiff );
 			}
 
+			$aliasDiff = $entityDiff->getAliasesDiff();
+			if ( $aliasDiff ) {
+				$remainingDiffOps -= count( $aliasDiff );
+				$aliasChanges = $this->getChangedAliases( $aliasDiff );
+			}
+
 			$claimsDiff = $entityDiff->getClaimsDiff();
 			if ( $claimsDiff ) {
 				$remainingDiffOps -= count( $claimsDiff );
@@ -76,6 +83,7 @@ class EntityDiffChangedAspectsFactory {
 		return new EntityDiffChangedAspects(
 			$labelChanges,
 			$descriptionChanges,
+			$aliasChanges,
 			$statementChangesExcludingQualOrRefOnlyChanges,
 			$statementChangesQualOrRefOnly,
 			$siteLinkChanges,
@@ -139,6 +147,15 @@ class EntityDiffChangedAspectsFactory {
 	 */
 	private function getChangedDescriptions( Diff $descriptionsDiff ) {
 		return array_keys( iterator_to_array( $descriptionsDiff ) );
+	}
+
+	/**
+	 * @param Diff $aliasesDiff
+	 *
+	 * @return string[]
+	 */
+	private function getChangedAliases( Diff $aliasesDiff ) {
+		return array_keys( iterator_to_array( $aliasesDiff ) );
 	}
 
 	/**

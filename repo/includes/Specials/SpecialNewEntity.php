@@ -208,7 +208,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$output->addHTML( $this->getCopyrightHTML() );
 
 		foreach ( $this->getWarnings() as $warning ) {
-			$output->addHTML( Html::rawElement( 'div', [ 'class' => 'warning' ], $warning ) );
+			$this->getOutput()->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
+			$this->getOutput()->addHTML( Html::warningBox( $warning ) );
 		}
 	}
 

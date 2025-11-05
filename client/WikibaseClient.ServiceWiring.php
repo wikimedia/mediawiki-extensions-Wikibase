@@ -13,6 +13,7 @@ use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
 use MediaWiki\StubObject\StubObject;
 use MediaWiki\User\ExternalUserNames;
+use MediaWiki\WikiMap\WikiMap;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -102,7 +103,6 @@ use Wikibase\Lib\MediaWikiMessageInLanguageProvider;
 use Wikibase\Lib\MessageInLanguageProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
-use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
@@ -203,8 +203,7 @@ return [
 		$lbFactory = $services->getDBLoadBalancerFactory();
 
 		return new ClientDomainDbFactory(
-			$lbFactory,
-			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+			$lbFactory
 		);
 	},
 
@@ -448,7 +447,7 @@ return [
 		$subEntityTypesMapper = new SubEntityTypesMapper( WikibaseClient::getEntityTypeDefinitions( $services )
 			->get( EntityTypeDefinitions::SUB_ENTITY_TYPES ) );
 
-		$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser( WikiMap::getCurrentWikiId() );
 
 		return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $subEntityTypesMapper );
 	},
@@ -832,8 +831,7 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID(),
-			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+			WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName() ?: $lbFactory->getLocalDomainID()
 		);
 	},
 

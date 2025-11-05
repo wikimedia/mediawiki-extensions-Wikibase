@@ -37,6 +37,7 @@ class DispatchingEntityViewFactory {
 	 * @param Language $language
 	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EntityDocument $entity
+	 * @param array $factoryOptions
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityDocumentView
@@ -44,7 +45,8 @@ class DispatchingEntityViewFactory {
 	public function newEntityView(
 		Language $language,
 		TermLanguageFallbackChain $termFallbackChain,
-		EntityDocument $entity
+		EntityDocument $entity,
+		array $factoryOptions = [],
 	) {
 		$entityType = $entity->getType();
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
@@ -54,7 +56,8 @@ class DispatchingEntityViewFactory {
 		$entityView = $this->entityViewFactoryCallbacks[$entityType](
 			$language,
 			$termFallbackChain,
-			$entity
+			$entity,
+			$factoryOptions,
 		);
 
 		Assert::postcondition(

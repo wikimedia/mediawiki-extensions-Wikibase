@@ -10,7 +10,6 @@ use Wikibase\DataAccess\DatabaseEntitySource;
  *
  * @license GPL-2.0-or-later
  */
-
 class NewDatabaseEntitySource {
 
 	/** @var string */

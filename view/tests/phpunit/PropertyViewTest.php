@@ -8,12 +8,14 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -27,6 +29,8 @@ use Wikibase\View\PropertyView;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\EntityView
@@ -118,17 +122,21 @@ class PropertyViewTest extends EntityViewTestCase {
 		] );
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$textProvider->method( 'get' )->willReturnArgument( 0 );
+		$vueNoScriptRendering = new VueNoScriptRendering(
+			$this->getEntityIdFormatterFactory(),
+			$this->getEntityIdParser(),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$textProvider,
+			$propertyDataTypeLookup,
+			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
+			$snakFormatter
+		);
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
 			new FilteringStatementGrouper( [ 'statement' => null ] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
-			$snakFormatter,
-			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
-			$propertyDataTypeLookup,
-			$this->getEntityIdFormatterFactory(),
-			$this->getEntityIdParser(),
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$vueNoScriptRendering,
 			$vueStatementsView
 		);
 
@@ -139,7 +147,8 @@ class PropertyViewTest extends EntityViewTestCase {
 			$statementSectionsView,
 			$this->getDataTypeFactory(),
 			'en',
-			$this->createMock( LocalizedTextProvider::class )
+			$this->createMock( LocalizedTextProvider::class ),
+			[ Wbui2025FeatureFlag::EXTENSION_DATA_KEY => $vueStatementsView ? 'wbui2025' : false ],
 		);
 	}
 
@@ -148,6 +157,7 @@ class PropertyViewTest extends EntityViewTestCase {
 	}
 
 	public static function provideTestVueStatementsView(): iterable {
+		$guidGenerator = new GuidGenerator();
 		return [
 			[
 				'viewFactory' => fn ( self $self ) => $self->newPropertyView(),
@@ -157,14 +167,24 @@ class PropertyViewTest extends EntityViewTestCase {
 			[
 				'viewFactory' => fn ( self $self ) => $self->newPropertyView( [], true ),
 				'property' => self::newEntityForStatements( [
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P1' ),
-						new StringValue( 'p1' )
-					) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P2' ),
-						new StringValue( 'p2' )
-					) ),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P1' ),
+							new StringValue( 'p1' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P2' ),
+							new StringValue( 'p2' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
 				] ),
 				'vueStatementsExpected' => true,
 			],

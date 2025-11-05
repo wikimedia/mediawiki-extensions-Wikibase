@@ -1,48 +1,81 @@
 <template>
-	<div class="wikibase-wbui2025-edit-statement-modal-overlay">
-		<div class="wikibase-wbui2025-edit-statement">
+	<wikibase-wbui2025-modal-overlay>
+		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
-					<cdx-icon :icon="cdxIconArrowPrevious" @click="$emit( 'hide' )"></cdx-icon>
 					<p class="heading">
-						edit statement
+						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
 					</p>
 				</div>
 				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
-				<template v-for="valueForm in valueForms" :key="valueForm.id">
+				<template v-for="statementGuid in editableStatementGuids" :key="statementGuid">
 					<wikibase-wbui2025-edit-statement
-						:value-id="valueForm.id"
-						@remove="removeValue"
+						:statement-id="statementGuid"
+						@remove="removeStatement"
 					></wikibase-wbui2025-edit-statement>
 				</template>
 				<div class="wikibase-wbui2025-add-value">
-					<cdx-button @click="addValue">
+					<cdx-button @click="createNewStatement">
 						<cdx-icon :icon="cdxIconAdd"></cdx-icon>
-						add value
+						{{ $i18n( 'wikibase-statementlistview-add' ) }}
 					</cdx-button>
 				</div>
 			</div>
-			<div class="wikibase-wbui2025-edit-statement-footer">
+			<transition name="fade">
+				<div v-if="showProgress" class="wikibase-wbui2025-message-container">
+					<cdx-message
+						type="notice"
+						class="wikibase-wbui2025-message"
+					>
+						{{ $i18n( 'wikibase-publishing-progress' ) }}
+					</cdx-message>
+				</div>
+			</transition>
+			<div ref="editFormActionsRef" class="wikibase-wbui2025-edit-statement-footer">
+				<transition name="fade">
+					<cdx-progress-bar
+						v-if="showProgress"
+						:value="100"
+						inline
+						aria-label="Publishing in progress"
+					></cdx-progress-bar>
+				</transition>
+
 				<div class="wikibase-wbui2025-edit-form-actions">
-					<cdx-button @click="$emit( 'hide' )">
+					<cdx-button
+						weight="quiet"
+						@click="cancelEditForm"
+					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
-						cancel
+						{{ $i18n( 'wikibase-cancel' ) }}
 					</cdx-button>
-					<cdx-button class="inactive">
+					<cdx-button
+						action="progressive"
+						weight="primary"
+						:disabled="!canSubmit"
+						@click="submitForm"
+					>
 						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
-						publish
+						{{ saveMessage }}
 					</cdx-button>
 				</div>
 			</div>
 		</div>
-	</div>
+	</wikibase-wbui2025-modal-overlay>
 </template>
 
 <script>
+const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon } = require( '../../codex.js' );
+const {
+	CdxButton,
+	CdxIcon,
+	CdxMessage,
+	CdxProgressBar
+} = require( '../../codex.js' );
 const {
 	cdxIconAdd,
 	cdxIconArrowPrevious,
@@ -51,7 +84,11 @@ const {
 } = require( './icons.json' );
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
+const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
+const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
+const { useMessageStore } = require( './store/messageStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -59,42 +96,114 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		WikibaseWbui2025EditStatement
+		CdxMessage,
+		CdxProgressBar,
+		WikibaseWbui2025EditStatement,
+		WikibaseWbui2025ModalOverlay
 	},
 	props: {
 		propertyId: {
 			type: String,
 			required: true
+		},
+		entityId: {
+			type: String,
+			required: true
 		}
 	},
 	emits: [ 'hide' ],
-	setup() {
+	data() {
 		return {
 			cdxIconAdd,
 			cdxIconArrowPrevious,
 			cdxIconCheck,
-			cdxIconClose
+			cdxIconClose,
+			showProgress: false,
+			formSubmitted: false,
+			editStatementDataLoaded: false
 		};
 	},
-	data() {
-		return {
-			valueForms: [
-				{ id: 0 }
-			]
-		};
-	},
-	computed: {
+	computed: Object.assign( mapState( useEditStatementsStore, {
+		editableStatementGuids: 'statementIds',
+		fullyParsed: 'isFullyParsed',
+		hasChanges: 'hasChanges'
+	} ),
+	{
 		propertyLinkHtml() {
 			return propertyLinkHtml( this.propertyId );
-		}
-	},
-	methods: {
-		addValue() {
-			const maxId = this.valueForms.reduce( ( max, form ) => Math.max( max, form.id ), 0 ) + 1;
-			this.valueForms.push( { id: maxId } );
 		},
-		removeValue( valueId ) {
-			this.valueForms = this.valueForms.filter( ( form ) => form.id !== valueId );
+		saveMessage() {
+			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
+				? mw.msg( 'wikibase-publish' )
+				: mw.msg( 'wikibase-save' );
+		},
+		statements() {
+			return getStatementsForProperty( this.propertyId );
+		},
+		propertyDatatype() {
+			// eslint-disable-next-line vue/no-undef-properties
+			if ( this.statements && this.statements.length > 0 ) {
+				return this.statements[ 0 ].mainsnak.datatype;
+			}
+			return null;
+		},
+		canSubmit() {
+			return !this.formSubmitted && this.fullyParsed && this.hasChanges === true;
+		}
+	} ),
+	methods: Object.assign( mapActions( useEditStatementsStore, {
+		disposeOfEditableStatementStores: 'disposeOfStores',
+		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
+		createNewBlankEditableStatement: 'createNewBlankStatement',
+		removeStatement: 'removeStatement',
+		saveChangedStatements: 'saveChangedStatements'
+	} ), mapActions( useMessageStore, [
+		'addStatusMessage'
+	] ), {
+		createNewStatement() {
+			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
+			// eslint-disable-next-line vue/no-undef-properties
+			this.createNewBlankEditableStatement( statementId, this.propertyId, this.propertyDatatype );
+		},
+		submitForm() {
+			this.formSubmitted = true;
+			if ( this.editableStatementGuids.length === 0 ) {
+				return;
+			}
+			setTimeout( () => {
+				this.showProgress = true;
+			}, 300 );
+			this.saveChangedStatements( this.entityId )
+				.then( () => {
+					this.$emit( 'hide' );
+					this.disposeOfEditableStatementStores();
+					this.addStatusMessage( {
+						type: 'success',
+						text: mw.msg( 'wikibase-publishing-succeeded' )
+					} );
+				} )
+				.catch( () => {
+					this.addStatusMessage( {
+						text: mw.msg( 'wikibase-publishing-error' ),
+						attachTo: this.$refs.editFormActionsRef,
+						type: 'error'
+					} );
+					this.formSubmitted = false;
+				} );
+		},
+		cancelEditForm() {
+			this.$emit( 'hide' );
+			this.disposeOfEditableStatementStores();
+		}
+	} ),
+	beforeMount: function () {
+		if ( this.statements && this.statements.length > 0 ) {
+			this.initializeEditStatementStoreFromStatementStore(
+				this.statements.map( ( statement ) => statement.id ),
+				this.propertyId
+			).then( () => {
+				this.editStatementDataLoaded = true;
+			} );
 		}
 	}
 } );
@@ -102,19 +211,6 @@ module.exports = exports = defineComponent( {
 
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-edit-statement-modal-overlay {
-	position: fixed;
-	background-color: @background-color-base;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1;
-}
 
 .wikibase-wbui2025-edit-statement {
 	position: relative;
@@ -126,46 +222,41 @@ module.exports = exports = defineComponent( {
 	width: 100%;
 
 	.wikibase-wbui2025-edit-statement-heading {
-		flex: 0 0 auto;
-		padding: @spacing-250 @spacing-75 @spacing-150 @spacing-75;
-		gap: @spacing-300;
-		align-self: stretch;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: @spacing-125 @spacing-75;
 		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		gap: @spacing-25;
 
-		.wikibase-wbui2025-edit-statement-headline {
-			display: flex;
-
-			span.cdx-icon {
-				position: absolute;
-				padding: 0;
-				cursor: pointer;
-			}
+		.cdx-icon {
+			position: absolute;
+			left: @spacing-75;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
 		}
 
-		p {
-			margin: 0;
-			font-style: normal;
-			font-weight: 700;
-			width: 100%;
+		.wikibase-wbui2025-edit-statement-headline {
 			text-align: center;
 
-			&.heading {
-				color: @color-emphasized;
+			p.heading {
+				margin: 0;
+				font-weight: 700;
 				font-size: 1.25rem;
 				line-height: 1.5625rem;
 				padding: 0;
+				color: @color-emphasized;
 			}
 		}
 
-		div.wikibase-wbui2025-property-name {
-			font-style: normal;
+		.wikibase-wbui2025-property-name {
 			font-weight: 700;
-			width: 100%;
-			text-align: center;
 			color: @color-progressive--focus;
 			font-size: 1rem;
 			line-height: 1.6rem;
-			letter-spacing: -0.003rem;
+			text-align: center;
 		}
 	}
 
@@ -196,31 +287,43 @@ module.exports = exports = defineComponent( {
 		}
 	}
 
+	.wikibase-wbui2025-message-container {
+		display: flex;
+		justify-content: center;
+		padding: @spacing-150;
+	}
+
+	.wikibase-wbui2025-message {
+		display: flex;
+		width: 343px;
+		max-width: 90%;
+		padding: @spacing-100 @spacing-100 @spacing-100 @spacing-150;
+		justify-content: flex-end;
+		align-items: center;
+		gap: @spacing-50;
+	}
+	.cdx-progress-bar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
 	.wikibase-wbui2025-edit-statement-footer {
 		flex: 0 0 auto;
 		display: flex;
-		padding: @spacing-125 @spacing-400 @spacing-300 @spacing-400;
+		padding: @spacing-125 @spacing-400 @spacing-200;
 		flex-direction: column;
 		align-items: center;
 		gap: 0.625rem;
 		box-shadow: 0 -2px 11.8px 0 rgba(0, 0, 0, 0.10);
 		justify-content: center;
+		position: relative;
 
 		.wikibase-wbui2025-edit-form-actions {
 			display: flex;
 			align-items: center;
 			gap: @spacing-200;
-
-			button.cdx-button {
-				cursor: pointer;
-				border-color: @border-color-transparent;
-				background: @background-color-transparent;
-
-				&.inactive {
-					color: @color-disabled;
-					background: @background-color-disabled;
-				}
-			}
 		}
 	}
 }

@@ -22,9 +22,13 @@ exports.config = {
 	// Test Configurations
 	// ===================
 
-	// Setting this enables automatic screenshots for when a browser command fails
-	// It is also used by afterTest for capturig failed assertions.
-	screenshotPath: process.env.LOG_DIR || __dirname + '/log',
+	capabilities: [ {
+		...config.capabilities[ 0 ],
+
+		// Setting this enables automatic screenshots for when a browser command fails
+		// It is also used by afterTest for capturig failed assertions.
+		'mw:screenshotPath': process.env.LOG_DIR || __dirname + '/log'
+	} ],
 
 	// Default timeout for each waitFor* command.
 	waitforTimeout: 10 * 1000,
@@ -36,6 +40,10 @@ exports.config = {
 	// Hooks
 	// =====
 	async beforeSuite() {
-		await WikibaseApi.initialize();
+		await WikibaseApi.initialize(
+			undefined,
+			browser.options.capabilities[ 'mw:user' ],
+			browser.options.capabilities[ 'mw:pwd' ]
+		);
 	}
 };

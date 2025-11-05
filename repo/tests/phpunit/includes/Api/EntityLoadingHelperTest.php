@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use Exception;
 use MediaWiki\Api\ApiUsageException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
@@ -164,7 +163,7 @@ class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityLoadingHelper
 	 */
 	protected function newEntityLoadingHelper( array $config ) {
-		$services = MediaWikiServices::getInstance();
+		$services = $this->getServiceContainer();
 
 		return new EntityLoadingHelper(
 			$this->getMockRevisionLookup(

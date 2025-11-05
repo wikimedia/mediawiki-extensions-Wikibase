@@ -95,6 +95,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Título",
 	"wikibase-pageinfo-entity-usage-C": "Algunhas declaracións",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaración: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Algunhas declaracións (con cualificadores e referencias)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Declaración (con cualificadores e referencias): $1",
 	"wikibase-pageinfo-entity-usage-X": "Tódolos datos da entidade",
 	"wikibase-pageinfo-entity-usage-O": "Varios (por exemplo: existencia de entidade)",
 	"wikibase-property-render-error": "Erro ao renderizar a propiedade \"$1\": $2",

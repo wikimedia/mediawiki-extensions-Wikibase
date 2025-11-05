@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Class representing a collection of settings.
  *
- * @note: settings can be dynamic: if a setting is given as a closure, the closure will be
+ * @note settings can be dynamic: if a setting is given as a closure, the closure will be
  *        called to get the actual setting value the first time this setting is retrieved
  *        using getSetting(). The closure is called with the SettingsArray as the only argument.
  *

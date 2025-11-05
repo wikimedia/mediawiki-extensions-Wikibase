@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"SaldırganSincap",
 			"Исмаил Садуев",
 			"Умар"
 		]
@@ -94,7 +95,7 @@
 	"wikibase-pageinfo-entity-usage-C": "Цхьадолу тӀечӀагӀдарш",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Хаам: $1",
 	"wikibase-pageinfo-entity-usage-X": "Духхера массо хаамаш",
-	"wikibase-pageinfo-entity-usage-O": "Кхин (масала, псевдонимаш, хӀуманаш хилар)",
+	"wikibase-pageinfo-entity-usage-O": "Тайп-тайпана (масала, дух хилар)",
 	"wikibase-property-render-error": "«$1» башхалла: $2 гучуйоккхуш гӀалат ду",
 	"wikibase-otherprojects": "Кхечу проекташкахь",
 	"wikibase-otherprojects-beta-message": "Кхечу проектийн агӀонгара панель",
@@ -163,7 +164,7 @@
 	"wikibase-client-data-bridge-edit-conflict-error-message": "ХӀара маьӀна хӀинцца хийцина хьуна хьалха кхечу декъашхочо. Хьан хийцамаш кхочушбан аьтто бац. Дехар до, агӀо йуха дӀа а йиллина, керла мах хадо.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Цхьа хӀума нийса дац",
 	"wikibase-client-data-bridge-unknown-error-message": "ГӀалат нисделла, хаьржина маьӀна хийца йиш йац хӀокху хенахь. Дехар до, йуха карлайаккха хьажа.",
-	"wikibase-client-data-bridge-error-report": "<p>Нагахь санна гӀалат лаьтташ делахь, дехар до, [$1 хаам бе хӀокху проблемах] хьайн ардамаш буьйцуш, хӀара информаци йукъа а йокхуш:</p>\n<ul>\n$2</li>\n<li>$4 элементан $3 башхалла</li>\n<li>ГӀалатан код: $5</li>\n</ul>\n\n\n<p>Если ошибка повторяется, пожалуйста, [$1 сообщите об этой проблеме] описав ваши действия и включив следующую информацию:</p>\n<ul>\n<li>$2</li>\n<li>Свойство $3 элемента $4</li>\n<li>Код ошибки: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-report": "<p>Нагахь санна гӀалат лаьтташ делахь, дехар до, [$1 хаам бе хӀокху проблемах] хьайн ардамаш буьйцуш, хӀара информаци йукъа а йокхуш:</p>\n<ul>\n<li>$2</li>\n<li>$4 элементан $3 башхалла</li>\n<li>ГӀалатан код: $5</li>\n</ul>\n\n\n<p>Если ошибка повторяется, пожалуйста, [$1 сообщите об этой проблеме] описав ваши действия и включив следующую информацию:</p>\n<ul>\n<li>$2</li>\n<li>Свойство $3 элемента $4</li>\n<li>Код ошибки: $5</li>\n</ul>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Йуха карлайаккха",
 	"wikibase-client-data-bridge-error-reload-page": "Карлайаккха агӀо",
 	"wikibase-client-data-bridge-error-go-back": "Йуха гӀо",

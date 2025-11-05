@@ -58,7 +58,6 @@ export default defineComponent( {
 			return this.value === this.htmlValue;
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 
 </script>

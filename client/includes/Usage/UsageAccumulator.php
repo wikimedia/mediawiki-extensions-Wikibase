@@ -62,9 +62,25 @@ abstract class UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of other (i.e. not label, sitelink, or title) of an
-	 * entity (e.g. access to statements or labels in labels a language other
-	 * than the content language).
+	 * Registers the usage of statements from an entity (identified by their property id) when qualifiers or references are also accessed.
+	 *
+	 * @param EntityId $id
+	 * @param NumericPropertyId $propertyId The NumericPropertyId of Statements that are used.
+	 */
+	public function addStatementWithQualOrRefUsage( EntityId $id, NumericPropertyId $propertyId ): void {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, $propertyId->getSerialization() ) );
+	}
+
+	/**
+	 * Registers the usage of an entity's aliases (in the given language).
+	 */
+	public function addAliasUsage( EntityId $id, ?string $languageCode = null ): void {
+		$this->addUsage( new EntityUsage( $id, EntityUsage::ALIAS_USAGE, $languageCode ) );
+	}
+
+	/**
+	 * Registers the usage of “other” aspects of an entity
+	 * (see {@link EntityUsage::OTHER_USAGE} for details).
 	 */
 	public function addOtherUsage( EntityId $id ): void {
 		$this->addUsage( new EntityUsage( $id, EntityUsage::OTHER_USAGE ) );

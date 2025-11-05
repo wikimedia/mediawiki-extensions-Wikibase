@@ -12,7 +12,7 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 /**
  * Low level factory for SnakFormatters for well known data types.
  *
- * @warning: This is a low level factory for use by bootstrap code only!
+ * @warning This is a low level factory for use by bootstrap code only!
  * Program logic should use an instance of OutputFormatValueFormatterFactory
  * resp. OutputFormatSnakFormatterFactory.
  *

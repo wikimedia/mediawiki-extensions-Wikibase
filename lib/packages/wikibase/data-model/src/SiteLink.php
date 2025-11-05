@@ -106,7 +106,6 @@ class SiteLink {
 	}
 
 	/**
-	 *
 	 * @since 0.7.4
 	 *
 	 * @param mixed $target

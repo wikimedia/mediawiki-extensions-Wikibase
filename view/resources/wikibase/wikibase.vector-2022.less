@@ -1,3 +1,5 @@
+@import 'mediawiki.skin.variables.less';
+
 /************************************************************************************
 IN __WIDE__ MODE ALWAYS SHOW ITEMS IN TWO COLUMNS
 Workaround for T316797
@@ -20,5 +22,17 @@ is set to WIDE so that the display of languages appears on side
 	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-page-tools-pinned-enabled .wikibase-statementgroupview,
 	.vector-feature-limited-width-clientpref-0.vector-feature-main-menu-pinned-enabled.vector-feature-appearance-pinned-clientpref-1 .wikibase-statementgroupview {
 		grid-template-columns: 10em auto;
+	}
+}
+
+/* Display the sticky property labels below the sticky header (T407113) */
+@media ( min-width: @min-width-breakpoint-desktop ) {
+	html.client-js.vector-sticky-header-enabled {
+		.wikibase-statementgrouplistview .wikibase-statementgroupview-property .wikibase-statementgroupview-property-label {
+			// Height of sticky header + 10px as defined normally
+			// FIXME: Ideally there should be a variable for the sticky header height (T407611)
+			// FIXME: 3.125rem is the min-height of the sticky header. It *could* be more?
+			top: calc( 3.125rem + 10px );
+		}
 	}
 }

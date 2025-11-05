@@ -95,6 +95,7 @@ return call_user_func( function() {
 				'wikibase/wikibase.monolingualtext.less',
 			],
 			'skinStyles' => [
+				'timeless' => 'wikibase/wikibase.timeless.less',
 				'vector-2022' => 'wikibase/wikibase.vector-2022.less',
 			],
 		],
@@ -318,6 +319,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'parentheses',
+				'wikibase-addstatement',
 				'wikibase-addqualifier',
 				'wikibase-addreference',
 				'wikibase-badgeselector-badge-placeholder-title',
@@ -375,10 +377,11 @@ return call_user_func( function() {
 				'wikibase-statementgrouplistview-add-tooltip',
 				'wikibase-statementlistview-add',
 				'wikibase-statementlistview-add-tooltip',
-				'wikibase-statementview-qualifiers-counter',
 				'wikibase-statementview-rank-preferred',
 				'wikibase-statementview-rank-tooltip-preferred',
 				'wikibase-statementview-rank-normal',
+				'wikibase-statementview-rank-preferred',
+				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-normal',
 				'wikibase-statementview-rank-deprecated',
 				'wikibase-statementview-rank-tooltip-deprecated',

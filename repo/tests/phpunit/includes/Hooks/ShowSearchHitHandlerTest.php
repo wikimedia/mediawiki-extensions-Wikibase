@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Hooks;
 use HtmlArmor;
 use MediaWiki\Context\ContextSource;
 use MediaWiki\Language\RawMessage;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
@@ -260,7 +261,12 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		array $languages,
 		string $expected
 	) {
-		$this->markTestSkippedIfExtensionNotLoaded( 'CLDR' );
+		if ( !(
+			ExtensionRegistry::getInstance()->isLoaded( 'cldr' )
+			|| ExtensionRegistry::getInstance()->isLoaded( 'CLDR' )
+		) ) {
+			self::markTestSkipped( 'cldr extension is required for this test' );
+		}
 
 		$testFile = __DIR__ . '/../../data/searchHits/' . $expected . ".plain.html";
 

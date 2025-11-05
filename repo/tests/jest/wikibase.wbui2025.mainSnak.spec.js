@@ -6,33 +6,32 @@ jest.mock(
 
 const mainSnakView = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const { storeWithServerRenderedHtml } = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.mainSnak', () => {
 	describe( 'the mounted component', () => {
+		function mountMainSnakView( props = {}, snakHashToHtmlMap = {} ) {
+			return mount( mainSnakView, {
+				props,
+				global: {
+					plugins: [ storeWithServerRenderedHtml( snakHashToHtmlMap ) ]
+				}
+			} );
+		}
 
 		it( 'correctly sets the properties in the HTML', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
+			const wrapper = await mountMainSnakView(
+				{
 					mainSnak: {
 						datatype: 'string',
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
+					},
+					rank: 'deprecated'
 				},
-				global: {
-					plugins: [ createTestingPinia( {
-						initialState: {
-							serverRenderedHtml: {
-								snakValues: new Map( [
-									[ 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>p1</span>' ]
-								] )
-							}
-						}
-					} ) ]
-				}
-			} );
+				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
+			);
 
 			expect( wrapper.exists() ).toBeTruthy();
 			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
@@ -40,18 +39,19 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 			expect( snak.text() ).toEqual( 'p1' );
 			expect( snak.attributes()[ 'data-snak-hash' ] ).toEqual( 'ee6053a6982690ba0f5227d587394d9111eea401' );
 			expect( snak.attributes().class ).toEqual( 'wikibase-wbui2025-snak-value' );
+			const rankSelector = wrapper.find( '.wikibase-rankselector span' );
+			expect( rankSelector.attributes().class ).toContain( 'wikibase-rankselector-deprecated' );
 		} );
 
 		it( 'sets a custom class for a media snak', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
-					mainSnak: {
-						datatype: 'commonsMedia',
-						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-						property: 'P1',
-						datavalue: { value: 'p1', type: 'string' }
-					}
-				}
+			const wrapper = await mountMainSnakView( {
+				mainSnak: {
+					datatype: 'commonsMedia',
+					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+					property: 'P1',
+					datavalue: { value: 'p1', type: 'string' }
+				},
+				rank: 'normal'
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
@@ -61,15 +61,14 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 		} );
 
 		it( 'sets a custom class for a time snak', async () => {
-			const wrapper = await mount( mainSnakView, {
-				props: {
-					mainSnak: {
-						datatype: 'time',
-						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-						property: 'P1',
-						datavalue: { value: 'p1', type: 'time' }
-					}
-				}
+			const wrapper = await mountMainSnakView( {
+				mainSnak: {
+					datatype: 'time',
+					hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+					property: 'P1',
+					datavalue: { value: 'p1', type: 'time' }
+				},
+				rank: 'normal'
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();

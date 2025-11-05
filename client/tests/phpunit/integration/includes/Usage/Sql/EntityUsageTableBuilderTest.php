@@ -10,7 +10,6 @@ use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
-use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikimedia\Rdbms\LBFactorySingle;
 
@@ -38,8 +37,7 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$domainDbFactory = new ClientDomainDbFactory(
-			LBFactorySingle::newFromConnection( $this->db ),
-			[ DomainDb::LOAD_GROUP_FROM_CLIENT ]
+			LBFactorySingle::newFromConnection( $this->db )
 		);
 
 		$primer = new EntityUsageTableBuilder(

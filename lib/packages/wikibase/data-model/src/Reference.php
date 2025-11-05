@@ -90,7 +90,6 @@ class Reference implements Countable {
 	}
 
 	/**
-	 *
 	 * The comparison is done purely value based, ignoring the order of the snaks.
 	 *
 	 * @since 0.3

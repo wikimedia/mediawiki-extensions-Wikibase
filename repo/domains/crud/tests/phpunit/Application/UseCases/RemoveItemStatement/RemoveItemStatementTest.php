@@ -20,7 +20,6 @@ use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestVa
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
- *
  */
 class RemoveItemStatementTest extends TestCase {
 

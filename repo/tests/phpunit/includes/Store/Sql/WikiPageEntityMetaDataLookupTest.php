@@ -5,7 +5,6 @@ declare( strict_types=1 );
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;
 use stdClass;
@@ -93,7 +92,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
 				$namespaceLookup,
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+				$this->getServiceContainer()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
 			$this->getRepoDomainDb()
@@ -148,7 +147,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$nsLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
 				$nsLookup,
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+				$this->getServiceContainer()->getSlotRoleStore()
 			),
 			$this->newEntitySource(),
 			new RepoDomainDb(
@@ -392,7 +391,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 			$namespaceLookup,
 			new EntityIdLocalPartPageTableEntityQuery(
 				$namespaceLookup,
-				MediaWikiServices::getInstance()->getSlotRoleStore()
+				$this->getServiceContainer()->getSlotRoleStore()
 			),
 			$itemSource,
 			$this->getRepoDomainDb()

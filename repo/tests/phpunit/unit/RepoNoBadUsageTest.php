@@ -35,6 +35,7 @@ class RepoNoBadUsageTest extends NoBadUsageTestBase {
 				'WikibaseRepo.ServiceWiring.php' => 2, // RepoDomainDbFactory+TermsDomainDbFactory service wiring
 				'tests/phpunit/includes/Store/Sql/WikiPageEntityMetaDataLookupTest.php' => true, // mock
 				'tests/phpunit/unit/ServiceWiringTestCase.php' => true, // mock
+				'maintenance/DumpEntities.php' => 1, // To set the dump db group
 			],
 		];
 	}

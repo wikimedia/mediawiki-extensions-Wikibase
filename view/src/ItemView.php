@@ -57,6 +57,7 @@ class ItemView extends EntityView {
 	 * @param SiteLinksView $siteLinksView
 	 * @param string[] $siteLinkGroups
 	 * @param LocalizedTextProvider $textProvider
+	 * @param array $viewOptions
 	 */
 	public function __construct(
 		TemplateFactory $templateFactory,
@@ -67,8 +68,9 @@ class ItemView extends EntityView {
 		SiteLinksView $siteLinksView,
 		array $siteLinkGroups,
 		LocalizedTextProvider $textProvider,
+		array $viewOptions,
 	) {
-		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode );
+		parent::__construct( $templateFactory, $languageDirectionalityLookup, $languageCode, $viewOptions );
 
 		$this->statementSectionsView = $statementSectionsView;
 		$this->siteLinksView = $siteLinksView;
@@ -120,7 +122,9 @@ class ItemView extends EntityView {
 
 		$termsHtml = $this->getHtmlForTerms( $item );
 		$tocHtml = $this->templateFactory->render( 'wikibase-toc' );
-		$statementsHtml = $this->statementSectionsView->getHtml( $item->getStatements(), wbui2025Ready: true );
+		$statementsHtml = $this->statementSectionsView->getHtml(
+			$item->getStatements(), entityId: $item->getId(), wbui2025Ready: true
+		);
 
 		return $termsHtml . $tocHtml . $statementsHtml;
 	}

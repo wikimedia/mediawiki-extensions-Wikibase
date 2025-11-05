@@ -5,14 +5,53 @@ jest.mock(
 );
 jest.mock(
 	'../../resources/wikibase.wbui2025/icons.json',
-	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close' } ),
+	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close', cdxIconArrowPrevious: 'arrowPrevious' } ),
+	{ virtual: true }
+);
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
+
+jest.mock(
+	'../../resources/wikibase.wbui2025/supportedDatatypes.json',
+	() => [ 'string', 'tabular-data', 'geo-shape' ],
 	{ virtual: true }
 );
 
+jest.mock(
+	'../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
+		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
+	} ),
+	{ virtual: true }
+);
+
+const crypto = require( 'crypto' );
+
+// eslint-disable-next-line no-undef
+Object.defineProperty( globalThis, 'wikibase', {
+	value: {
+		utilities: {
+			ClaimGuidGenerator: class {
+				constructor( entityId ) {
+					this.entityId = entityId;
+				}
+
+				newGuid() {
+					return this.entityId + '$' + crypto.randomUUID();
+				}
+			}
+		}
+	}
+} );
+
 const addStatementButtonComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue' );
-const propertySelectorComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue' );
-const { CdxButton } = require( '../../codex.js' );
+const propertyLookupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyLookup.vue' );
+const { CdxButton, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
+const { storeWithStatements } = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.references', () => {
 	it( 'defines component', async () => {
@@ -26,28 +65,54 @@ describe( 'wikibase.wbui2025.references', () => {
 	};
 
 	describe( 'the mounted component', () => {
-		let wrapper, addButton;
+		let wrapper, addButton, propertyLookup, publishButton;
 		beforeEach( async () => {
-			wrapper = await mount( addStatementButtonComponent );
+			wrapper = await mount( addStatementButtonComponent, {
+				props: {
+					entityId: 'Q123'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [ ] )
+					] }
+			} );
 			addButton = wrapper.findComponent( CdxButton );
+			propertyLookup = wrapper.findComponent( propertyLookupComponent );
 		} );
 
 		it( 'the component and child components mount successfully', () => {
 			expect( wrapper.exists() ).toBe( true );
 			expect( addButton.exists() ).toBe( true );
+			expect( propertyLookup.exists() ).toBe( false );
 		} );
 
 		it( 'sets the initial properties on the CdxButton component', () => {
-			expect( addButton.props( 'action' ) ).toBe( 'default' );
+			expect( addButton.props( 'action' ) ).toBe( 'progressive' );
 			expect( addButton.props( 'weight' ) ).toBe( 'normal' );
 		} );
 
-		it( 'shows a property selector on click', async () => {
-			let propertySelector = wrapper.findComponent( propertySelectorComponent );
-			expect( propertySelector.exists() ).toBe( false );
+		it( 'shows a property lookup on click', async () => {
+			expect( propertyLookup.exists() ).toBe( false );
 			await addButton.vm.$emit( 'click' );
-			propertySelector = wrapper.findComponent( propertySelectorComponent );
-			expect( propertySelector.exists() ).toBe( true );
+			propertyLookup = wrapper.findComponent( propertyLookupComponent );
+			publishButton = wrapper.findAllComponents( CdxButton )[ 2 ];
+			expect( propertyLookup.exists() ).toBe( true );
+			expect( publishButton.props( 'weight' ) ).toBe( 'primary' );
 		} );
+
+		describe( 'when a property with string datatype is selected', () => {
+
+			it( 'mounts a text input when a property with string datatype is selected', async () => {
+				await addButton.vm.$emit( 'click' );
+				propertyLookup = wrapper.findComponent( propertyLookupComponent );
+				await propertyLookup.vm.$emit( 'update:selected', 'P23', { datatype: 'string' } );
+				// The first CdxTextInput component is a child of Wbui2025PropertyLookup.
+				// If the snak value input exists, it is the second one.
+				const snakValueInput = wrapper.findAllComponents( CdxTextInput )[ 1 ];
+				expect( snakValueInput.exists() ).toBe( true );
+			} );
+
+		} );
+
 	} );
 } );

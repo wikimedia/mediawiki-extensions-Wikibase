@@ -115,6 +115,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Başlık",
 	"wikibase-pageinfo-entity-usage-C": "Bazı ifadeler",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "İfade: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Bazı açıklamalar (niteleyiciler ve kaynaklarla)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Açıklama (niteleyiciler ve kaynaklarla): $1",
 	"wikibase-pageinfo-entity-usage-X": "Tüm varlık verileri",
 	"wikibase-pageinfo-entity-usage-O": "Çeşitli (ör. varlık varlığı)",
 	"wikibase-property-render-error": "$1 özelliği oluşturulamadı: $2",

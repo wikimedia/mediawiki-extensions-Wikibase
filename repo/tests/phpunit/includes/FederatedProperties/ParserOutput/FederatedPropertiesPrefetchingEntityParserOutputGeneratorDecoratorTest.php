@@ -60,7 +60,7 @@ class FederatedPropertiesPrefetchingEntityParserOutputGeneratorDecoratorTest ext
 
 		$expectedIds = [ $fedPropId1, $fedPropId2 ];
 
-		$this->entityViewFactory = $this->mockEntityViewFactory( false );
+		$this->entityViewFactory = $this->mockEntityViewFactory( true );
 
 		$apiEntityLookup = $this->createMock( ApiEntityLookup::class );
 		$apiEntityLookup->expects( $this->once() )

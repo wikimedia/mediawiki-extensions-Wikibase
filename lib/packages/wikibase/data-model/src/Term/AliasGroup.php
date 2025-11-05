@@ -81,7 +81,6 @@ class AliasGroup implements Countable {
 	}
 
 	/**
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

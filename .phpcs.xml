@@ -8,6 +8,11 @@
 	    <severity>0</severity>
 	</rule>
 
+	<!-- Use of @SuppressWarnings from PHPMD -->
+	<rule ref="MediaWiki.Commenting.ClassAnnotations.UnrecognizedAnnotation">
+	    <severity>0</severity>
+	</rule>
+
 	<!-- Starting a function's body with an empty line can be helpful after a very large header.
 		The code is not guaranteed to be easier to read if this is disallowed. -->
 	<rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace">
@@ -113,7 +118,9 @@
 	<exclude-pattern type="relative">^docs/*</exclude-pattern>
 	<exclude-pattern type="relative">^\.phan/stubs/</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<exclude-pattern type="relative">^client/data-bridge/node_modules/</exclude-pattern>
 	<exclude-pattern type="relative">^lib/packages/*/*/vendor/</exclude-pattern>
 	<exclude-pattern type="relative">^repo/rest-api/node_modules/</exclude-pattern>
 	<exclude-pattern type="relative">^repo/tests/browser</exclude-pattern>
+	<exclude-pattern type="relative">^view/lib/*/node_modules/</exclude-pattern>
 </ruleset>

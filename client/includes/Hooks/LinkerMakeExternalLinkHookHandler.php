@@ -27,7 +27,6 @@ use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 	private Language $contentLanguage;
 	private EntityIdParser $entityIdParser;
-	private bool $resolveWikibaseLabelsFlag;
 	private string $repoUrlHost;
 	private bool $isRepoEntityNamespaceMain;
 	private ClientEntityLinkFormatter $clientEntityLinkFormatter;
@@ -41,14 +40,12 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		bool $isRepoEntityNamespaceMain,
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		string $repoUrlHost,
-		bool $resolveWikibaseLabelsFlag,
 		?Title $title
 	) {
 		$this->contentLanguage = $contentLanguage;
 		$this->entityIdParser = $entityIdParser;
 		$this->isRepoEntityNamespaceMain = $isRepoEntityNamespaceMain;
 		$this->clientEntityLinkFormatter = $clientEntityLinkFormatter;
-		$this->resolveWikibaseLabelsFlag = $resolveWikibaseLabelsFlag;
 		$this->repoUrlHost = $repoUrlHost;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->currentPageTitle = $title;
@@ -63,7 +60,6 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		SettingsArray $settings
 	): self {
 		$context = RequestContext::getMain();
-		$resolveWikibaseLabelsFlag = $settings->getSetting( 'resolveWikibaseLabels' );
 		$repoUrlHost = parse_url( $settings->getSetting( 'repoUrl' ), PHP_URL_HOST );
 		$language = $context->getUser()->isSafeToLoad() ? $context->getLanguage() : $contentLanguage;
 		$terms = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
@@ -76,7 +72,6 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 			$isRepoEntityNamespaceMain,
 			$labelDescriptionLookup,
 			$repoUrlHost,
-			$resolveWikibaseLabelsFlag,
 			$context->getTitle()
 		);
 	}
@@ -105,7 +100,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
 	public function onLinkerMakeExternalLink( &$url, &$text, &$link, &$attribs, $linkType ) {
-		if ( !$this->resolveWikibaseLabelsFlag || !$this->isRecentChangeOrWatchlist() || !$this->isRepoUrl( $url ) ) {
+		if ( !$this->isRecentChangeOrWatchlist() || !$this->isRepoUrl( $url ) ) {
 			return;
 		}
 

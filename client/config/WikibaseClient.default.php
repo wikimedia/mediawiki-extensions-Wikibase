@@ -60,11 +60,6 @@ return call_user_func( function() {
 		// in the parser functions and via Lua.
 		// Allows users to split the ParserCache by user language.
 		'allowDataAccessInUserLanguage' => false,
-		// @see T393442: Temporary setting to allow controlled rollout.
-		// Displays links to Wikibase in Recent Changes and other change lists as labels,
-		// rather than the Qid or Pid. E.g. "instance of" instead of "Property:P31".
-		'resolveWikibaseLabels' => false,
-
 		/**
 		 * Prefix to use for cache keys that should be shared among a Wikibase Repo instance and all
 		 * its clients. This is for things like caching entity blobs in memcached.
@@ -161,6 +156,11 @@ return call_user_func( function() {
 		 * @see https://phabricator.wikimedia.org/T312097
 		 */
 		'enableMulLanguageCode' => false,
+
+		/**
+		 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
+		 */
+		'enableWikidataIconsInClientWatchlist' => false,
 	];
 
 	// Some defaults depend on information not available at this time.

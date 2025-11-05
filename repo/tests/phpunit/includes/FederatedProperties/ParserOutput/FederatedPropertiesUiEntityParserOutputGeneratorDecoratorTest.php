@@ -42,7 +42,7 @@ class FederatedPropertiesUiEntityParserOutputGeneratorDecoratorTest extends Enti
 
 		$updater = $this->createMock( ItemParserOutputUpdater::class );
 
-		$this->entityViewFactory = $this->mockEntityViewFactory( false );
+		$this->entityViewFactory = $this->mockEntityViewFactory( true );
 
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator(
 			$this->newPrefetchingParserOutputGenerator( [ $updater ], $userLanguage ),

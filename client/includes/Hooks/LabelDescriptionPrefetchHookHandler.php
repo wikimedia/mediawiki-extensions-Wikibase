@@ -63,11 +63,6 @@ class LabelDescriptionPrefetchHookHandler implements ChangesListInitRowsHook {
 	 * @param IResultWrapper|\stdClass[] $rows
 	 */
 	public function onChangesListInitRows( $changesList, $rows ): void {
-		// Flag for rollout of T388685. Wikibase labels should not be prefetched
-		// if are not assigned to links in @LinkerMakeExternalLinkHookHandler
-		if ( !$this->settings->getSetting( 'resolveWikibaseLabels' ) ) {
-			return;
-		}
 		$mentionedEntityIds = $this->extractSummaryMentions( $rows );
 		if ( !$mentionedEntityIds ) {
 			return;

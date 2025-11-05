@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Statement\Filter\DataTypeStatementFilter;
 use Wikibase\DataModel\Services\Statement\Grouper\FilteringStatementGrouper;
+use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -34,6 +35,8 @@ use Wikibase\View\SiteLinksView;
 use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\ItemView
@@ -93,6 +96,7 @@ class ItemViewTest extends EntityViewTestCase {
 	}
 
 	public static function provideTestVueStatementsView(): iterable {
+		$guidGenerator = new GuidGenerator();
 		return [
 			[
 				'viewFactory' => fn ( self $self ) => $self->newItemView(),
@@ -104,32 +108,53 @@ class ItemViewTest extends EntityViewTestCase {
 				'item' => self::newEntityForStatements( [
 					new Statement( new PropertyValueSnak(
 						new NumericPropertyId( 'P1' ),
-						new StringValue( 'p1' )
+						new StringValue( 'p1' ),
 					), new SnakList( [
 						new PropertyValueSnak(
 							new NumericPropertyId( 'P10' ),
 							new StringValue( 'qualifier10' )
 						),
-					] ) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P2' ),
-						new StringValue( 'p2' )
-					), new SnakList(), new ReferenceList( [
-						new Reference( new SnakList( [
-							new PropertyValueSnak(
-								new NumericPropertyId( 'P20' ),
-								new StringValue( 'reference20' ),
+					]
+					),
+					null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( 'P2' ),
+							new StringValue( 'p2' )
+						),
+						new SnakList(),
+						new ReferenceList( [
+							new Reference(
+								new SnakList( [
+									new PropertyValueSnak(
+										new NumericPropertyId( 'P20' ),
+										new StringValue( 'reference20' ),
+									),
+								] )
 							),
-						] ) ),
-					] ) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
-						new StringValue( 'https://www.example.com/url' )
-					) ),
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
-						new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN )
-					) ),
+						] ),
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
+							new StringValue( 'https://www.example.com/url' )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
+					new Statement(
+						new PropertyValueSnak(
+							new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
+							new TimeValue( '+2015-11-11T00:00:00Z', 0, 0, 0, TimeValue::PRECISION_DAY, TimeValue::CALENDAR_GREGORIAN )
+						),
+						null,
+						null,
+						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
+					),
 				] ),
 				'vueStatementsExpected' => true,
 			],
@@ -284,6 +309,15 @@ class ItemViewTest extends EntityViewTestCase {
 		$textProvider = $this->createMock( LocalizedTextProvider::class );
 		$textProvider->method( 'get' )->willReturnArgument( 0 );
 		$textProvider->method( 'getEscaped' )->willReturnArgument( 0 );
+		$vueNoScriptRendering = new VueNoScriptRendering(
+			$this->getEntityIdFormatterFactory(),
+			$this->getEntityIdParser(),
+			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$textProvider,
+			$propertyDataTypeLookup,
+			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
+			$snakFormatter
+		);
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,
 			new FilteringStatementGrouper( [
@@ -292,12 +326,7 @@ class ItemViewTest extends EntityViewTestCase {
 			] ),
 			$this->createMock( StatementGroupListView::class ),
 			$textProvider,
-			$snakFormatter,
-			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
-			$propertyDataTypeLookup,
-			$this->getEntityIdFormatterFactory(),
-			$this->getEntityIdParser(),
-			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
+			$vueNoScriptRendering,
 			$vueStatementsView
 		);
 
@@ -310,6 +339,7 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->createMock( SiteLinksView::class ),
 			[],
 			$textProvider,
+			[ Wbui2025FeatureFlag::EXTENSION_DATA_KEY => $vueStatementsView ? 'wbui2025' : false ],
 		);
 	}
 

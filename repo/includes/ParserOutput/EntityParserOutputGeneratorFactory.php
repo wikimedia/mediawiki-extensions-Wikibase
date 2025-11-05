@@ -8,6 +8,9 @@ use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\Language;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
@@ -23,6 +26,7 @@ use Wikibase\Repo\Hooks\WikibaseRepoHookRunner;
 use Wikibase\Repo\Hooks\WikibaseRepoOnParserOutputUpdaterConstructionHook;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Stats\StatsFactory;
 
 /**
@@ -34,7 +38,9 @@ class EntityParserOutputGeneratorFactory {
 	private DispatchingEntityViewFactory $entityViewFactory;
 	private DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory;
 	private EntityTitleLookup $entityTitleLookup;
+	private LanguageFactory $languageFactory;
 	private LanguageFallbackChainFactory $languageFallbackChainFactory;
+	private LanguageNameUtils $languageNameUtils;
 	private EntityDataFormatProvider $entityDataFormatProvider;
 	private PropertyDataTypeLookup $propertyDataTypeLookup;
 
@@ -66,7 +72,9 @@ class EntityParserOutputGeneratorFactory {
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFactory $languageFactory
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
+	 * @param LanguageNameUtils $languageNameUtils
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator
@@ -85,7 +93,9 @@ class EntityParserOutputGeneratorFactory {
 		DispatchingEntityViewFactory $entityViewFactory,
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		EntityTitleLookup $entityTitleLookup,
+		LanguageFactory $languageFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
+		LanguageNameUtils $languageNameUtils,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		EntityReferenceExtractorDelegator $entityReferenceExtractorDelegator,
@@ -102,7 +112,9 @@ class EntityParserOutputGeneratorFactory {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->entityTitleLookup = $entityTitleLookup;
+		$this->languageFactory = $languageFactory;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
+		$this->languageNameUtils = $languageNameUtils;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->entityReferenceExtractorDelegator = $entityReferenceExtractorDelegator;
@@ -117,7 +129,16 @@ class EntityParserOutputGeneratorFactory {
 		$this->isMobileView = $isMobileView;
 	}
 
-	public function getEntityParserOutputGenerator( Language $userLanguage ): EntityParserOutputGenerator {
+	private function getValidUserLanguage( Language $language ): Language {
+		if ( !$this->languageNameUtils->isValidBuiltInCode( $language->getCode() ) ) {
+			return $this->languageFactory->getLanguage( 'und' ); // T204791
+		}
+		return $language;
+	}
+
+	public function getEntityParserOutputGeneratorForParserOptions( ParserOptions $options ): EntityParserOutputGenerator {
+		$userLanguage = $this->getValidUserLanguage( $options->getUserLangObj() );
+
 		$pog = new FullEntityParserOutputGenerator(
 			$this->entityViewFactory,
 			$this->entityMetaTagsCreatorFactory,
@@ -126,13 +147,13 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityDataFormatProvider,
 			$this->getDataUpdaters(),
 			$userLanguage,
+			$options->getOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME ),
 			$this->isMobileView
 		);
 
 		$pog = new StatslibTimeRecordingEntityParserOutputGenerator(
 			$pog,
 			$this->statsFactory,
-			'wikibase.repo.ParserOutputGenerator.timing',
 			'ParserOutputGenerator'
 		);
 
@@ -187,17 +208,12 @@ class EntityParserOutputGeneratorFactory {
 				$this->newKartographerDataUpdater( $this->kartographerEmbeddingHandler ) );
 		}
 
-		$tmpMobileEditingUI = WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' );
 		$entityUpdaters = [
 			new ItemParserOutputUpdater(
 				$statementUpdater,
-				$this->isMobileView,
-				$tmpMobileEditingUI
 			),
 			new PropertyParserOutputUpdater(
 				$statementUpdater,
-				$this->isMobileView,
-				$tmpMobileEditingUI
 			),
 			new ReferencedEntitiesDataUpdater(
 				$this->entityReferenceExtractorDelegator,

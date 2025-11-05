@@ -3,6 +3,7 @@
 		<div v-if="showModalEditForm" class="modal-statement-edit-form-anchor">
 			<wbui2025-edit-statement-group
 				:property-id="propertyId"
+				:entity-id="entityId"
 				@hide="hideEditForm"
 			></wbui2025-edit-statement-group>
 		</div>
@@ -12,15 +13,12 @@
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				</p>
 				<div
-					class="wikibase-wbui2025-edit-link"
-					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType }"
+					class="wikibase-wbui2025-link wikibase-wbui2025-edit-link"
+					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType, 'is-red-link': isUnsupportedDataType }"
 					@click="showEditForm"
 				>
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
-					<span
-						class="wikibase-wbui2025-link-heavy"
-						:class="{ 'is-red-link': isUnsupportedDataType }"
-					>
+					<span class="wikibase-wbui2025-link-heavy">
 						{{ $i18n( 'wikibase-edit' ) }}
 					</span>
 				</div>
@@ -29,7 +27,7 @@
 		<wbui2025-statement-view
 			v-for="statement in statements"
 			:key="statement"
-			:statement="statement"
+			:statement-id="statement.id"
 		></wbui2025-statement-view>
 	</div>
 </template>
@@ -40,6 +38,7 @@ const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
 const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
+const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -50,8 +49,8 @@ module.exports = exports = defineComponent( {
 		Wbui2025EditStatementGroup
 	},
 	props: {
-		statements: {
-			type: Array,
+		entityId: {
+			type: String,
 			required: true
 		},
 		propertyId: {
@@ -65,7 +64,13 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	computed: {
+		statements() {
+			return getStatementsForProperty( this.propertyId );
+		},
 		isUnsupportedDataType() {
+			if ( !this.statements || this.statements.length === 0 ) {
+				return false;
+			}
 			const datatype = this.statements[ 0 ].mainsnak.datatype;
 			return !supportedDatatypes.includes( datatype );
 		}
@@ -75,17 +80,9 @@ module.exports = exports = defineComponent( {
 			if ( this.isUnsupportedDataType ) {
 				return;
 			}
-			[ 'body', '.minerva-footer', '.minerva-header' ]
-					.map( ( el ) => document.querySelector( el ) )
-					.filter( ( el ) => el )
-					.forEach( ( el ) => el.classList.add( 'wikibase-wbui2025-modal-open' ) );
 			this.showModalEditForm = true;
 		},
 		hideEditForm() {
-			[ 'body', '.minerva-footer', '.minerva-header' ]
-					.map( ( el ) => document.querySelector( el ) )
-					.filter( ( el ) => el )
-					.forEach( ( el ) => el.classList.remove( 'wikibase-wbui2025-modal-open' ) );
 			this.showModalEditForm = false;
 		}
 	}

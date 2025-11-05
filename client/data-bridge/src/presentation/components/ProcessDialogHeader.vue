@@ -27,7 +27,6 @@ import { defineComponent } from 'vue';
  */
 export default defineComponent( {
 	name: 'ProcessDialogHeader',
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

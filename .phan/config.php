@@ -34,6 +34,7 @@ $cfg['directory_list'] = array_merge(
 		'repo/includes',
 		'repo/domains/crud/src',
 		'repo/domains/search/src',
+		'repo/domains/reuse/src',
 		'repo/rest-api/src',
 		'lib/includes',
 		'client/maintenance',

@@ -65,7 +65,6 @@ class TermFallback extends Term {
 	}
 
 	/**
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

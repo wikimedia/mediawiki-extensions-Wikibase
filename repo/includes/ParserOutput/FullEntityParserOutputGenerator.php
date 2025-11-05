@@ -12,7 +12,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\ViewPlaceHolderEmitter;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * Creates the parser output for an entity.
@@ -41,6 +43,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 	private Language $language;
 
+	private bool|string $wbMobile;
+
 	private bool $isMobileView;
 
 	/**
@@ -51,6 +55,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
 	 * @param EntityParserOutputUpdater[] $dataUpdaters
 	 * @param Language $language
+	 * @param bool|string $wbMobile
+	 * @param bool $isMobileView
 	 */
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
@@ -60,6 +66,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		EntityDataFormatProvider $entityDataFormatProvider,
 		array $dataUpdaters,
 		Language $language,
+		bool|string $wbMobile,
 		bool $isMobileView
 	) {
 		$this->entityViewFactory = $entityViewFactory;
@@ -69,6 +76,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->dataUpdaters = $dataUpdaters;
 		$this->language = $language;
+		$this->wbMobile = $wbMobile;
 		$this->isMobileView = $isMobileView;
 	}
 
@@ -86,6 +94,12 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$parserOutput = new ParserOutput();
 		$parserOutput->resetParseStartTime();
 
+		$entityView = $this->createEntityView( $entityRevision );
+		$parserOutputOptions = $entityView->getParserOutputOptions();
+		foreach ( $parserOutputOptions as $key => $value ) {
+			$parserOutput->setExtensionData( $key, $value );
+		}
+
 		$updaterCollection = new EntityParserOutputDataUpdaterCollection( $parserOutput, $this->dataUpdaters );
 		$updaterCollection->updateParserOutput( $entity );
 
@@ -99,7 +113,8 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
-				$entityRevision
+				$entityRevision,
+				$entityView,
 			);
 		} else {
 			// If we don't have HTML, the ParserOutput in question
@@ -128,26 +143,32 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		return $parserOutput;
 	}
 
+	private function createEntityView( EntityRevision $entityRevision ): EntityDocumentView {
+		$entity = $entityRevision->getEntity();
+
+		return $this->entityViewFactory->newEntityView(
+			$this->language,
+			$this->termLanguageFallbackChain,
+			$entity,
+			[ Wbui2025FeatureFlag::EXTENSION_DATA_KEY => $this->wbMobile ],
+		);
+	}
+
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
-		EntityRevision $entityRevision
+		EntityRevision $entityRevision,
+		EntityDocumentView $entityView,
 	): void {
 		$entity = $entityRevision->getEntity();
 
-		$entityView = $this->entityViewFactory->newEntityView(
-			$this->language,
-			$this->termLanguageFallbackChain,
-			$entity
-		);
-
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entity );
-		$parserOutput->setTitleText( $titleHtml );
+		$parserOutput->setTitleText( $titleHtml ?? '' );
 
 		// split parser cache by desktop/mobile/wbui2025 (T344362, T394291, T394291)
-		$parserOutput->recordOption( 'wbMobile' );
+		$parserOutput->recordOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME );
 		$viewContent = $entityView->getContent( $entity, $entityRevision->getRevisionId() );
-		$parserOutput->setText( $viewContent->getHtml() );
+		$parserOutput->setContentHolderText( $viewContent->getHtml() );
 
 		$placeholders = $viewContent->getPlaceholders();
 		foreach ( $placeholders as $key => $value ) {
@@ -166,7 +187,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			'wikibase.alltargets',
 		] );
 		// split parser cache by desktop/mobile (T344362)
-		$parserOutput->recordOption( 'wbMobile' );
+		$parserOutput->recordOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME );
 		// T324991
 		if ( !$this->isMobileView ) {
 			$parserOutput->addModuleStyles( [

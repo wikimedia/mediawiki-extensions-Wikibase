@@ -31,4 +31,6 @@ interface EntityDocumentView {
 	 */
 	public function getTitleHtml( EntityDocument $entity );
 
+	public function getParserOutputOptions(): array;
+
 }

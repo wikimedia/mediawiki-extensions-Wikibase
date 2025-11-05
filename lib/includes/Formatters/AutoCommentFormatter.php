@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Formatters;
 
+use MediaWiki\Html\Html;
 use MediaWiki\Language\Language;
 use MediaWiki\Message\Message;
 
@@ -23,6 +24,12 @@ class AutoCommentFormatter {
 	private $messagePrefixes;
 
 	/**
+	 * @var bool Feature flag to turn icons for Wikibase changes displayed on
+	 * client Recent Change page on for some wikis temporarily (T397258)
+	 */
+	private $enableWikidataIconsInClientWatchlist;
+	/**
+	 * /**
 	 * Local message lookup cache. The number of summary messages is limited,
 	 * so this shouldn't grow beyond a few dozen entries.
 	 *
@@ -35,10 +42,13 @@ class AutoCommentFormatter {
 	 * @param string[] $messagePrefixes Prefixes to try when constructing the message key from
 	 *        the name given in the autocomment block. Typically something like
 	 *        [ 'wikibase-item', 'wikibase-entity' ].
+	 * @param bool $enableWikidataIconsInClientWatchlist Feature flag to turn icons for Wikibase
+	 * changes displayed on client Recent Change page on for some wikis temporarily (T397258)
 	 */
-	public function __construct( Language $language, array $messagePrefixes ) {
+	public function __construct( Language $language, array $messagePrefixes, bool $enableWikidataIconsInClientWatchlist ) {
 		$this->language = $language;
 		$this->messagePrefixes = $messagePrefixes;
+		$this->enableWikidataIconsInClientWatchlist = $enableWikidataIconsInClientWatchlist;
 	}
 
 	/**
@@ -98,6 +108,7 @@ class AutoCommentFormatter {
 			return null;
 		}
 
+		$icon = $this->enableWikidataIconsInClientWatchlist ? $this->decideIconForTheKey( $msg->getKey() ) : '';
 		$args = array_map( function ( $arg ) {
 			// MediaWiki HTML-escaped the auto-comment already,
 			// undo that, then wikitext-escape the args for the message
@@ -107,7 +118,7 @@ class AutoCommentFormatter {
 		}, $args );
 		// render the autocomment
 		$auto = $msg->params( $args )->parse();
-		return $auto;
+		return $icon . $auto;
 	}
 
 	/**
@@ -139,4 +150,15 @@ class AutoCommentFormatter {
 		return $comment;
 	}
 
+	/**
+	 * @param string $key for Wikibase change
+	 * @return string proper icon in proper styling
+	 */
+	public function decideIconForTheKey( $key ): string {
+		$iconMap = json_decode( file_get_contents( __DIR__ . '/../../../client/resources/jsons/wb.icon.key.map.json' ), true );
+		if ( !isset( $iconMap[$key] ) ) {
+			return ''; //given key is not found then no icon will be displayed
+		}
+		return Html::rawElement( 'i', [ 'class' => 'mw-' . $iconMap[$key] . '-icon' ] );
+	}
 }

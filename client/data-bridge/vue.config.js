@@ -56,9 +56,6 @@ module.exports = {
 				return {
 					...options,
 					compilerOptions: {
-						compatConfig: {
-							MODE: 3,
-						},
 					},
 				};
 			} );

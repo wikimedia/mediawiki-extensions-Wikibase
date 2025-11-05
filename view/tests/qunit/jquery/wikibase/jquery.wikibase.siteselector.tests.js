@@ -110,7 +110,7 @@
 		}
 	} ) );
 
-	QUnit.test( 'getSelectedSite()', ( assert ) => {
+	QUnit.test( 'getSelectedSite()', async ( assert ) => {
 		var $siteSelector = newTestSiteSelector(),
 			siteSelector = $siteSelector.data( 'siteselector' );
 
@@ -133,93 +133,52 @@
 			[ '(de)', 'dewiki' ],
 			[ 'zh-min-nan.wikipedia.org/wiki/Dummy', 'zh_min_nan' ],
 			[ 'de.wikipedia.org', 'dewiki' ],
-			[ 'zh-min-nan/de', 'zh_min_nan' ]
+			[ 'zh-min-nan/de', 'zh_min_nan' ],
+			// At the end, reset selected site by clearing input:
+			[ '', null ],
+			[ 'doesnotexist', null ]
 		];
 
-		/**
-		 * @param {string} string
-		 * @param {string} expectedSiteId
-		 * @param {Function} next
-		 */
-		var testString = function ( string, expectedSiteId, next ) {
+		for ( var [ string, expectedSiteId ] of testStrings ) {
 			$siteSelector.val( string );
 
-			var done = assert.async();
+			const actual = {
+				selected: null,
+				open: null
+			};
 
 			$siteSelector.one( 'siteselectorselected', ( event, siteId ) => {
-				assert.strictEqual(
-					siteId,
-					expectedSiteId,
-					'Triggered "selected" event returning site id: "' + siteId + '".'
-				);
+				actual.selected = siteId;
 			} );
 
 			$siteSelector.one( 'siteselectoropen', () => {
-				// siteselector sets the selected site on the "siteselector" open. So, defer
-				// checking selected site:
+				// siteselector sets the selected site on the "siteselector" open.
+				// So, defer checking selected site:
 				setTimeout( () => {
-					assert.strictEqual(
-						siteSelector.getSelectedSite(),
-						expectedSiteId ? getSite( expectedSiteId ) : null,
-						'Implicitly selected expected site "' + ( expectedSiteId || 'NULL' )
-							+ '" using input "' + string + '".'
-					);
+					actual.open = siteSelector.getSelectedSite();
 					siteSelector._close();
-					done();
-					next();
 				}, 0 );
 
 			} );
 
-			siteSelector.search()
-			.done( ( suggestions ) => {
-				assert.strictEqual(
-					suggestions.length > 0 ? suggestions[ 0 ] : null,
-					expectedSiteId ? getSite( expectedSiteId ) : null,
-					'Returned expected first suggestion "' + ( expectedSiteId || 'NULL' )
-						+ '" using input "' + string + '".'
-				);
+			const suggestions = await siteSelector.search();
 
-				if ( !suggestions.length ) {
-					done();
-					next();
-				}
-			} )
-			.fail( () => {
-				QUnit.ok(
-					false,
-					'Search failed.'
-				);
-				done();
-				next();
-			} );
-		};
+			assert.propEqual(
+				actual,
+				{
+					selected: expectedSiteId || null,
+					open: expectedSiteId ? getSite( expectedSiteId ) : null
+				},
+				'Triggered "selected" event.'
+			);
 
-		var $queue = $( {} );
-
-		/**
-		 * @param {Array} testSet
-		 */
-		function addToQueue( testSet ) {
-			$queue.queue( 'tests', ( next ) => {
-				testString( testSet[ 0 ], testSet[ 1 ], next );
-			} );
+			assert.strictEqual(
+				suggestions.length > 0 ? suggestions[ 0 ] : null,
+				expectedSiteId ? getSite( expectedSiteId ) : null,
+				'Returned expected first suggestion "' + ( expectedSiteId || 'NULL' )
+					+ '" using input "' + string + '".'
+			);
 		}
-
-		for ( var j = 0; j < testStrings.length; j++ ) {
-			addToQueue( testStrings[ j ] );
-		}
-
-		// Reset selected site by clearing input:
-		$queue.queue( 'tests', ( next ) => {
-			testString( '', null, next );
-		} );
-
-		$queue.queue( 'tests', ( next ) => {
-			testString( 'doesnotexist', null, next );
-		} );
-
-		$queue.dequeue( 'tests' );
 	} );
 
 	QUnit.test( 'Create passing a source function', ( assert ) => {

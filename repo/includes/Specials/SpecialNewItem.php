@@ -234,7 +234,7 @@ class SpecialNewItem extends SpecialNewEntity {
 					$site = $this->getSiteLinkTargetSite( $siteId );
 
 					if ( $site === null ) {
-						return [ $this->msg( 'wikibase-newitem-not-recognized-siteid' )->text() ];
+						return $this->msg( 'wikibase-newitem-not-recognized-siteid' );
 					}
 
 					return true;
@@ -321,7 +321,10 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	protected function getWarnings(): array {
 		if ( !$this->getUser()->isRegistered() ) {
-			return [ $this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getFullTitle()->getPrefixedText() ) ];
+			return [
+				$this->msg( $this->anonymousEditWarningBuilder->buildAnonymousEditWarningMessage( $this->getFullTitle() ) )
+					->parse(),
+			];
 		}
 
 		return [];
