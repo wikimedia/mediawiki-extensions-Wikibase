@@ -31,6 +31,7 @@
 	"wikibase-publish": "publicar",
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "engadir",
+	"wikibase-addstatement": "engadir unha declaración",
 	"wikibase-addqualifier": "engadir un cualificativo",
 	"wikibase-addreference": "engadir unha referencia",
 	"wikibase-save-inprogress": "Gardando…",

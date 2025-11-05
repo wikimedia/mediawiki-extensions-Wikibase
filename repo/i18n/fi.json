@@ -44,6 +44,7 @@
 	"wikibase-publish": "julkaise",
 	"wikibase-cancel": "peruuta",
 	"wikibase-add": "lisää",
+	"wikibase-addstatement": "lisää esitys",
 	"wikibase-addqualifier": "lisää tarkenne",
 	"wikibase-addreference": "lisää lähde",
 	"wikibase-save-inprogress": "Tallennetaan...",

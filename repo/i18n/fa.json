@@ -47,6 +47,7 @@
 	"wikibase-publish": "انتشار",
 	"wikibase-cancel": "لغو",
 	"wikibase-add": "افزودن",
+	"wikibase-addstatement": "افزودن گزاره",
 	"wikibase-addqualifier": "افزودن توصیف‌گر",
 	"wikibase-addreference": "افزودن ارجاع",
 	"wikibase-save-inprogress": "درحال ذخیره‌کردن...",
