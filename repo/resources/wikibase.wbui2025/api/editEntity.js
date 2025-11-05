@@ -1,15 +1,39 @@
 const { api } = require( './api.js' );
+const {
+	getCurrentPageLocation,
+	addReturnToParams,
+	handleTempUserRedirect
+} = require( '../utils.js' );
 
 /**
+ * Updating statements and checking for TempUserAccount
+ *
  * @param {string} entityId The ID of the entity to update
  * @param {Array} statements
  */
 const updateStatements = async function ( entityId, statements ) {
-	return api.postWithEditToken( api.assertCurrentUser( {
+	const location = getCurrentPageLocation();
+
+	let params = {
 		action: 'wbeditentity',
 		id: entityId,
 		data: JSON.stringify( { claims: statements } )
-	} ) ).then( ( response ) => response.entity.claims );
+	};
+
+	// Add return-to parameters for temporary account redirect support (T407335)
+	params = addReturnToParams( params, location );
+
+	const response = await api.postWithEditToken( api.assertCurrentUser( params ) );
+
+	if ( handleTempUserRedirect( response ) ) {
+		return new Promise( () => {} );
+	}
+
+	if ( !response.entity || !response.entity.claims ) {
+		throw new Error( 'Invalid API response: missing entity.claims' );
+	}
+
+	return response.entity.claims;
 };
 
 /**

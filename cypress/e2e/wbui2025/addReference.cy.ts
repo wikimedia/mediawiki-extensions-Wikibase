@@ -5,6 +5,7 @@ import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFo
 import { AddReferenceFormPage } from '../../support/pageObjects/AddReferenceFormPage';
 import { ValueForm } from '../../support/pageObjects/ValueForm';
 import { interceptCommonsSearch } from '../../support/apiMockHelpers';
+import { LoginPage } from '../../support/pageObjects/LoginPage';
 
 describe( 'wbui2025 add reference', () => {
 	context( 'mobile view', () => {
@@ -13,6 +14,13 @@ describe( 'wbui2025 add reference', () => {
 		const tabularDataItem: string = 'Data:Ncei.noaa.gov/weather/New_York_City.tab';
 
 		beforeEach( () => {
+			const loginPage = new LoginPage();
+			cy.task(
+				'MwApi:CreateUser',
+				{ usernamePrefix: 'mextest' },
+			).then( ( { username, password } ) => {
+				loginPage.login( username, password );
+			} );
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'tabular-data' } )
 				.then( ( propertyId: string ) => {
 					cy.wrap( propertyId ).as( 'tabularDataPropertyId' );
