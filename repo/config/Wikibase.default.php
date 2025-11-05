@@ -19,7 +19,8 @@ return [
 	// New, generic federation config
 	'federationEnabled' => false,
 
-	// Which entity types can be federated (only items currently implemented).
+	// A string[] list of entity type IDs (e.g. ['item', 'property']) which can
+	// be federated. Currently only 'item' is supported.
 	'federationForEntityTypes' => [ 'item' ],
 
 	// feature flag for federated properties
