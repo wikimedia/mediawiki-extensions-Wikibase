@@ -872,6 +872,20 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		 } }",
 			"Not a valid Property ID: \"$propertyId\"",
 		];
+
+		$numberOfRequestedItems = 51;
+		$tooComplexQuery = '{';
+		for ( $i = 0; $i < $numberOfRequestedItems; $i++ ) {
+			$tooComplexQuery .= "item$i: item(id: \"$itemId\") { id }";
+		}
+		$tooComplexQuery .= '}';
+		$percentageOverMaxComplexity = ceil(
+			$numberOfRequestedItems * GraphQLService::ITEM_FIELD_COMPLEXITY / GraphQLService::MAX_QUERY_COMPLEXITY * 100
+		) - 100;
+		yield 'rejects queries that are too complex' => [
+			$tooComplexQuery,
+			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
 	}
 
 	private function newGraphQLService(
