@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Tests\Site\TestSites;
@@ -412,7 +413,15 @@ class LangLinkHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 
-		$this->assertArrayEquals( $expectedLinks, $parserOutput->getLanguageLinks(), false, false );
+		$actualLinks = [];
+		foreach ( $parserOutput->getLinkList( ParserOutputLinkTypes::LANGUAGE ) as [ 'link' => $link ] ) {
+			$ll = $link->getInterwiki() . ':' . $link->getDBkey();
+			if ( $link->getFragment() !== '' ) {
+				$ll .= '#' . $link->getFragment();
+			}
+			$actualLinks[] = $ll;
+		}
+		$this->assertArrayEquals( $expectedLinks, $actualLinks, false, false );
 		$this->assertArrayEquals( $expectedBadges, $parserOutput->getExtensionData( 'wikibase_badges' ), false, true );
 	}
 

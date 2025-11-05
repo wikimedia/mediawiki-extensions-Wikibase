@@ -36,9 +36,13 @@ Entity usage on client pages is tracked using the following codes (each represen
  - sitelinks (S) - The entity's sitelinks are used.
  - label (L.xx) - The entity's label in language xx is used.
  - description (D.xx) - The entity's description in language xx is used.
+ - alias (A.xx) - The entity's alias in language xx is used.
  - title (T) - The title of the local page corresponding to the entity is used.
- - statements (C) - Certain statements (identified by their property id) from the entity are used.
- - other (O) - Something else about the entity is used. This currently implies alias usage and entity existence checks.
+ - statements (C) - Certain statements (identified by their property id) from the entity are used, only the mainsnak
+   value, without qualifiers or references for the claim.
+ - statements with qualifiers/ references (CQR) - Certain statements (identified by their property id) from the entity
+   are used, along with qualifiers and/or references to those claims.
+ - other (O) - Something else about the entity is used. This currently implies entity existence checks.
  - all (X) - All aspects of an entity are or may be used.
 
 Changes result in updates to pages that use the respective entity based on the aspect that is used.
@@ -46,6 +50,7 @@ Changes are classified accordingly:
 
  - sitelinks (S) - Any change to the entity's sitelinks. Pages that use the S or X aspect are updated.
  - label (L.xx) - The label in the language “xx” changed. Pages that use the L.xx or X aspect are updated.
+ - alias (A.xx) - The alias in the language “xx” changed. Pages that use the A.xx or X aspect are updated.
  - title (T) - The sitelink corresponding to the local wiki was changed. Pages that use the S, T, or X aspect are updated.
  - other (O) - Something else about the entity (such as statement data) changed. Only pages that use the O or X aspects are updated.
 

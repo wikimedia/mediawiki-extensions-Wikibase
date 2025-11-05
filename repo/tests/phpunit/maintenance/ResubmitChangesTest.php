@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Maintenance;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
 use MediaWiki\WikiMap\WikiMap;
 use Wikibase\Lib\Changes\ChangeRow;
@@ -35,7 +34,7 @@ class ResubmitChangesTest extends MaintenanceBaseTestCase {
 		$this->maintenance->execute();
 
 		$wiki = WikiMap::getCurrentWikiDbDomain()->getId();
-		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
+		$jobQueueGroup = $this->getServiceContainer()->getJobQueueGroupFactory()->makeJobQueueGroup( $wiki );
 		$queuedJobs = $jobQueueGroup->get( 'DispatchChanges' )->getAllQueuedJobs();
 
 		$job = $queuedJobs->current();

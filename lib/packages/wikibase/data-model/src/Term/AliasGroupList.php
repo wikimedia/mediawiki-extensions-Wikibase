@@ -114,7 +114,6 @@ class AliasGroupList implements Countable, IteratorAggregate {
 	}
 
 	/**
-	 *
 	 * @since 0.7.4
 	 *
 	 * @param mixed $target

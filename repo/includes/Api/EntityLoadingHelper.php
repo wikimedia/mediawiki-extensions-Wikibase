@@ -168,7 +168,6 @@ class EntityLoadingHelper {
 	}
 
 	/**
-	 *
 	 * @param array $requestParams the output of ApiBase::extractRequestParams()
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, it must be consistent with

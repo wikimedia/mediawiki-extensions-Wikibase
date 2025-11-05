@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleValue;
 use MediaWikiIntegrationTestCase;
@@ -579,7 +578,7 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 		return new WikiPageEntityStorePermissionChecker(
 			$this->getNamespaceLookup(),
 			$this->getTitleLookup(),
-			MediaWikiServices::getInstance()->getPermissionManager(),
+			$this->getServiceContainer()->getPermissionManager(),
 			[
 				'read',
 				'edit',

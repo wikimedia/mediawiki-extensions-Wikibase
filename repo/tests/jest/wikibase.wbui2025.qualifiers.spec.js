@@ -61,7 +61,7 @@ describe( 'wikibase.wbui2025.qualifiers', () => {
 
 		it( 'mounts successfully', () => {
 			expect( wrapper.exists() ).toBe( true );
-			expect( wrapper.findAll( '.wikibase-wbui2025-qualifiers-header' ) ).toHaveLength( 1 );
+			expect( wrapper.findAll( '.wikibase-wbui2025-qualifiers' ) ).toHaveLength( 1 );
 		} );
 
 		it( 'mounts property name and snak value', () => {

@@ -161,13 +161,23 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	}
 
 	/**
-	 * Add a statement usage (called once specific statements are accessed).
+	 * Add a statement usage without qualifiers and/or references (called once specific statements are accessed).
 	 *
 	 * @param string $entityId The Entity from which the statements were accessed.
 	 * @param string $propertyId Property id of the statements accessed.
 	 */
 	public function addStatementUsage( string $entityId, string $propertyId ): void {
 		$this->getImplementation()->addStatementUsage( $entityId, $propertyId );
+	}
+
+	/**
+	 * Add a statement usage with qualifiers and/or references as well as mainsnak (called once specific statements are accessed).
+	 *
+	 * @param string $entityId The Entity from which the statements were accessed.
+	 * @param string $propertyId Property id of the statements accessed.
+	 */
+	public function addStatementWithQualOrRefUsage( string $entityId, string $propertyId ): void {
+		$this->getImplementation()->addStatementWithQualOrRefUsage( $entityId, $propertyId );
 	}
 
 	/**
@@ -201,6 +211,16 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 	}
 
 	/**
+	 * Add an alias usage (called once specific aliases are accessed).
+	 *
+	 * @param string $entityId The Entity from which the aliases were accessed.
+	 * @param string|null $langCode Language code of the aliases accessed.
+	 */
+	public function addAliasUsage( string $entityId, ?string $langCode ): void {
+		$this->getImplementation()->addAliasUsage( $entityId, $langCode );
+	}
+
+	/**
 	 * Add an other (O) usage (called once the otherwise not covered aspect is used).
 	 *
 	 * @param string $entityId The Entity from which something was accessed.
@@ -222,9 +242,11 @@ class WikibaseEntityLibrary extends LibraryBase implements ParserOutputProvider 
 			'formatStatements' => [ $this, 'formatStatements' ],
 			'formatPropertyValues' => [ $this, 'formatPropertyValues' ],
 			'addStatementUsage' => [ $this, 'addStatementUsage' ],
+			'addStatementWithQualOrRefUsage' => [ $this, 'addStatementWithQualOrRefUsage' ],
 			'addLabelUsage' => [ $this, 'addLabelUsage' ],
 			'addDescriptionUsage' => [ $this, 'addDescriptionUsage' ],
 			'addTitleOrSiteLinksUsage' => [ $this, 'addTitleOrSiteLinksUsage' ],
+			'addAliasUsage' => [ $this, 'addAliasUsage' ],
 			'addOtherUsage' => [ $this, 'addOtherUsage' ],
 			'incrementStatsKey' => [ $this, 'incrementStatsKey' ],
 		];

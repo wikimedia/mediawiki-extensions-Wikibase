@@ -408,4 +408,12 @@ class DataTypeDefinitions {
 		return $this->getMapForDefinitionField( 'normalizer-factory-callback' );
 	}
 
+	/**
+	 * Get the GraphQL type to be used for values of different data types and value types
+	 * @return callable[] List of callbacks by data type, without "PT:" prefixes.
+	 */
+	public function getGraphqlValueTypes(): array {
+		return $this->resolveValueTypeFallback( $this->getMapForDefinitionField( 'graphql-value-type' ) );
+	}
+
 }

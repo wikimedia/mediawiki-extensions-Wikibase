@@ -11,7 +11,6 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikimedia\Rdbms\IResultWrapper;
 
-//phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 /**
  * Hook handler for prefetching on history pages.
  *

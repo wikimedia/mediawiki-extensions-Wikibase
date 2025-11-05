@@ -6,7 +6,7 @@ jest.mock(
 
 const propertyNameComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue' );
 const { mount } = require( '@vue/test-utils' );
-const { createTestingPinia } = require( '@pinia/testing' );
+const { storeWithServerRenderedHtml } = require( './piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.propertyName', () => {
 	it( 'defines component', async () => {
@@ -24,15 +24,10 @@ describe( 'wikibase.wbui2025.propertyName', () => {
 				},
 				global: {
 					plugins: [
-						createTestingPinia( {
-							initialState: {
-								serverRenderedHtml: {
-									propertyLinks: new Map( [
-										[ 'P1', '<a href="mock-property-url">P1</a>' ]
-									] )
-								}
-							}
-						} )
+						storeWithServerRenderedHtml(
+							{},
+							{ P1: '<a href="mock-property-url">P1</a>' }
+						)
 					]
 				}
 			} );

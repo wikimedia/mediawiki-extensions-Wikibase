@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Tests\Interactors;
 
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Site\HashSiteStore;
@@ -368,7 +367,7 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$user = $this->getTestSysop()->getUser();
-		$watchlistManager = MediaWikiServices::getInstance()->getWatchlistManager();
+		$watchlistManager = $this->getServiceContainer()->getWatchlistManager();
 		$watchlistManager->addWatch( $user, $entityTitleLookup->getTitleForId( $fromId ) );
 
 		$tag = __METHOD__ . '-tag';

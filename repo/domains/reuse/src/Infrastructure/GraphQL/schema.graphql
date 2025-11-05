@@ -1,0 +1,117 @@
+type Query {
+  item(id: ItemId!): Item
+}
+
+scalar ItemId
+
+type Item {
+  id: ItemId!
+  label(languageCode: LanguageCode!): String
+  description(languageCode: LanguageCode!): String
+  aliases(languageCode: LanguageCode!): [String]!
+  sitelink(siteId: SiteId!): Sitelink
+  statements(propertyId: PropertyId!): [Statement]!
+}
+
+scalar LanguageCode
+
+scalar SiteId
+
+type Sitelink {
+  title: String!
+  url: String!
+}
+
+scalar PropertyId
+
+type Statement {
+  id: String!
+  rank: Rank!
+  qualifiers(propertyId: PropertyId!): [PropertyValuePair]!
+  references: [Reference]!
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
+}
+
+enum Rank {
+  deprecated
+  normal
+  preferred
+}
+
+type PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
+}
+
+type PredicateProperty {
+  id: String!
+  dataType: String
+  label(languageCode: LanguageCode!): String
+}
+
+union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue | EntityValue | UnknownValue
+
+type StringValue {
+  content: String!
+}
+
+type ItemValue {
+  id: String!
+  label(languageCode: LanguageCode!): String
+}
+
+type PropertyValue {
+  id: String!
+  label(languageCode: LanguageCode!): String
+}
+
+type GlobeCoordinateValue {
+  latitude: Float!
+  longitude: Float!
+  precision: Float
+  globe: String!
+}
+
+type MonolingualTextValue {
+  language: String!
+  text: String!
+}
+
+type QuantityValue {
+  amount: String!
+  unit: String!
+  lowerBound: String
+  upperBound: String
+}
+
+type TimeValue {
+  time: String!
+  timezone: Int!
+  before: Int!
+  after: Int!
+  precision: Int!
+  calendarModel: String!
+}
+
+type EntityValue {
+  id: String!
+}
+
+type UnknownValue {
+  content: Json!
+}
+
+scalar Json
+
+enum ValueType {
+  novalue
+  somevalue
+  value
+}
+
+type Reference {
+  parts: [PropertyValuePair]!
+}

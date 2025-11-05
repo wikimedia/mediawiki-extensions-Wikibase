@@ -23,10 +23,6 @@
 		.wikibase-wbui2025-link();
 	}
 
-	p {
-		padding-left: 1rem;
-	}
-
 	.wikibase-wbui2025-statement-heading {
 		display: table;
 		background-color: @background-color-neutral;
@@ -38,13 +34,16 @@
 
 		.wikibase-wbui2025-property-name {
 			display: table-cell;
+			padding: @spacing-35 0 @spacing-35 @spacing-75;
+			vertical-align: middle;
 		}
 
 		.wikibase-wbui2025-edit-link {
 			display: table-cell;
 			width: 1px;
 			white-space: nowrap;
-			padding-right: 1rem;
+			padding-right: @spacing-30;
+			vertical-align: middle;
 			cursor: pointer;
 
 			.cdx-icon {
@@ -56,18 +55,6 @@
 			}
 		}
 	}
-}
-
-.minerva-header.wikibase-wbui2025-modal-open {
-	display: none;
-}
-
-.minerva-footer.wikibase-wbui2025-modal-open {
-	display: none;
-}
-
-body.wikibase-wbui2025-modal-open {
-	overflow: hidden;
 }
 
 .wikibase-wbui2025-icon-edit-small {

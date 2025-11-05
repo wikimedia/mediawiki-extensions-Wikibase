@@ -55,7 +55,6 @@ class LabelUniquenessValidatorTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 *
 	 * @dataProvider provideErrors
 	 * @param array $terms
 	 * @param array $expectedLabelCollisionLookups every lookup generates a conflict in this test

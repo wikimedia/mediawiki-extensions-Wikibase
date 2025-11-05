@@ -7,6 +7,9 @@ module.exports = {
 	setupFiles: [
 		'./jest.setup.js'
 	],
+	setupFilesAfterEnv: [
+		'./jest.setupAfterEnv.js'
+	],
 	testEnvironment: 'jsdom',
 	testEnvironmentOptions: {
 		customExportConditions: [ 'node', 'node-addons' ]

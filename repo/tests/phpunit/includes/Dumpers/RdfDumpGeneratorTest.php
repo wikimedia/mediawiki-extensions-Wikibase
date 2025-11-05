@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Dumpers;
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
@@ -176,7 +175,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				$mentionedEntityTracker,
 				$dedupe
 			) {
-				$services = MediaWikiServices::getInstance();
+				$services = $this->getServiceContainer();
 				$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
 				$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 				$valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(

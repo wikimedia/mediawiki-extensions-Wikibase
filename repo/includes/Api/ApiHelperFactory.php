@@ -23,7 +23,7 @@ use Wikibase\Repo\SummaryFormatter;
 /**
  * A factory class for API helper objects.
  *
- * @note: This is a high level factory which should not be injected or passed around.
+ * @note This is a high level factory which should not be injected or passed around.
  * It should only be used when bootstrapping from a static context.
  *
  * @license GPL-2.0-or-later

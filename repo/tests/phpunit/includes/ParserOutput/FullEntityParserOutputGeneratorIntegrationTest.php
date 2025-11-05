@@ -3,7 +3,8 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\ParserOptions;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -70,14 +71,15 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 
 		$parserOutput = $this->newParserOutputGenerator()->getParserOutput( new EntityRevision( $item, $revision ) );
 
-		$this->assertArrayHasKey(
-			$propertyId,
-			$parserOutput->getLinks()[$this->propertyNamespace]
-		);
-		$this->assertArrayHasKey(
-			$unitItemId,
-			$parserOutput->getLinks()[$this->itemNamespace]
-		);
+		$links = $parserOutput->getLinkList( ParserOutputLinkTypes::LOCAL );
+		$this->assertTrue( array_any( $links, fn( $item ) =>
+			$item['link']->getNamespace() === (int)$this->propertyNamespace &&
+			$item['link']->getDBkey() === $propertyId
+		), var_export( $links, true ) );
+		$this->assertTrue( array_any( $links, fn( $item ) =>
+			$item['link']->getNamespace() === (int)$this->itemNamespace &&
+			$item['link']->getDBkey() === $unitItemId
+		) );
 	}
 
 	public function testSetsViewChunksForEntityTermsView() {
@@ -102,8 +104,10 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	private function newParserOutputGenerator() {
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
 		return WikibaseRepo::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) );
+			->getEntityParserOutputGeneratorForParserOptions( $parserOptions );
 	}
 
 	private function saveItem( $id ) {
@@ -123,7 +127,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 	}
 
 	public function testGetParserOutputIncludesLabelsOfRedirectEntityUsedAsStatementValue() {
-		$mwServices = MediaWikiServices::getInstance();
+		$mwServices = $this->getServiceContainer();
 
 		$property = new Property( new NumericPropertyId( 'P93' ), null, 'wikibase-item' );
 		$item = new Item( new ItemId( 'Q303' ) );
@@ -146,9 +150,12 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiIntegratio
 		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
 		$revision = $store->saveEntity( $item, 'test item', $user );
 
-		$language = $mwServices->getLanguageFactory()->getLanguage( 'en' );
 		$entityParserOutputGeneratorFactory = WikibaseRepo::getEntityParserOutputGeneratorFactory( $mwServices );
-		$entityParserOutputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGenerator( $language );
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUserLang( $mwServices->getLanguageFactory()->getLanguage( 'en' ) );
+		$entityParserOutputGenerator = $entityParserOutputGeneratorFactory->getEntityParserOutputGeneratorForParserOptions(
+			$parserOptions
+		);
 
 		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
 

@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use MediaWiki\FileRepo\File\File;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -67,7 +68,6 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	public function testUpdateParserOutput(
 		StatementList $statements,
 		array $expectedFiles,
-		array $expectedFileSearchOptions
 	) {
 		$parserOutput = new ParserOutput();
 		$instance = $this->newInstance();
@@ -77,8 +77,12 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		$instance->updateParserOutput( $parserOutput );
-		$this->assertSame( $expectedFiles, array_keys( $parserOutput->getImages() ) );
-		$this->assertSame( $expectedFileSearchOptions, $parserOutput->getFileSearchOptions() );
+		$actualFiles = array_map(
+			static fn( $item ) => ( [ 'link' => strval( $item['link'] ) ] + $item ),
+			$parserOutput->getLinkList( ParserOutputLinkTypes::MEDIA )
+		);
+		usort( $actualFiles, fn( $a, $b ) => $a['link'] <=> $b['link'] );
+		$this->assertSame( $expectedFiles, $actualFiles );
 	}
 
 	public static function imageLinksProvider() {
@@ -99,23 +103,39 @@ class ImageLinksDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 			[ new StatementList(), [], [] ],
 			[
 				$set1,
-				[ '1.jpg' ],
-				[ '1.jpg' => [ 'time' => false, 'sha1' => false ] ],
+				[
+					[
+						'link' => '6:1.jpg',
+						'time' => false,
+						'sha1' => false,
+					],
+				],
 			],
 			[
 				$set2,
-				[ '2a.jpg', '2b.jpg' ],
 				[
-					'2a.jpg' => [ 'time' => false, 'sha1' => false ],
-					'2b.jpg' => [ 'time' => false, 'sha1' => false ],
+					[
+						'link' => '6:2a.jpg',
+						'time' => false,
+						'sha1' => false,
+					],
+					[
+						'link' => '6:2b.jpg',
+						'time' => false,
+						'sha1' => false,
+					],
 				],
 			],
 			[
 				$set3,
-				[ '2a.jpg', 'Exists.png' ],
 				[
-					'2a.jpg' => [ 'time' => false, 'sha1' => false ],
-					'Exists.png' => [
+					[
+						'link' => '6:2a.jpg',
+						'time' => false,
+						'sha1' => false,
+					],
+					[
+						'link' => '6:Exists.png',
 						'time' => '20121026200049',
 						'sha1' => 'ccde261bb2a1d49e1c9bfd06847f9a8c2b640fe9',
 					],

@@ -102,7 +102,6 @@ abstract class EntityHandler extends ContentHandler {
 	 *        blob needs to be re-serialized on export. The callback must take two parameters,
 	 *        the blob an the serialization format. It must return true if re-serialization is needed.
 	 *        False positives are acceptable, false negatives are not.
-	 *
 	 */
 	public function __construct(
 		$modelId,
@@ -831,7 +830,7 @@ abstract class EntityHandler extends ContentHandler {
 				$language, $target, false
 			);
 			$parserOutput->setRedirectHeader( $html );
-			$parserOutput->setText( '' );
+			$parserOutput->setContentHolderText( '' );
 		}
 
 		return $parserOutput;
@@ -854,9 +853,7 @@ abstract class EntityHandler extends ContentHandler {
 		$generateHtml = true
 	) {
 		$outputGenerator = WikibaseRepo::getEntityParserOutputGeneratorFactory()
-			->getEntityParserOutputGenerator(
-				$this->getValidUserLanguage( $options->getUserLangObj() )
-			);
+			->getEntityParserOutputGeneratorForParserOptions( $options );
 
 		$entityRevision = $this->getEntityRevision( $content, $revisionId );
 
@@ -871,15 +868,6 @@ abstract class EntityHandler extends ContentHandler {
 		$this->applyEntityPageProperties( $content, $parserOutput );
 
 		return $parserOutput;
-	}
-
-	private function getValidUserLanguage( Language $language ): Language {
-		$services = MediaWikiServices::getInstance();
-		if ( !$services->getLanguageNameUtils()->isValidBuiltInCode( $language->getCode() ) ) {
-			return $services->getLanguageFactory()->getLanguage( 'und' ); // T204791
-		}
-
-		return $language;
 	}
 
 	/**

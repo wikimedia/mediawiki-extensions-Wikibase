@@ -91,7 +91,6 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 
 		$modifyEntity = ( new ReflectionClass( $api ) )
 			->getMethod( 'modifyEntity' );
-		$modifyEntity->setAccessible( true );
 
 		$modifyEntity->invokeArgs( $api, [ &$item, $changeOp, $params ] );
 
@@ -111,7 +110,6 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 
 		$modifyEntity = ( new ReflectionClass( $api ) )
 			->getMethod( 'modifyEntity' );
-		$modifyEntity->setAccessible( true );
 
 		$this->expectException( ApiUsageException::class );
 		$modifyEntity->invokeArgs( $api, [ &$item, $changeOp, $params ] );

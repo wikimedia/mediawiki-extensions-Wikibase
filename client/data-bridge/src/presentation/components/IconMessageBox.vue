@@ -35,7 +35,6 @@ export default defineComponent( {
 			default: false,
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

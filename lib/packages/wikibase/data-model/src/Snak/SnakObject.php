@@ -82,7 +82,6 @@ abstract class SnakObject implements Snak {
 	}
 
 	/**
-	 *
 	 * @since 0.3
 	 *
 	 * @param mixed $target

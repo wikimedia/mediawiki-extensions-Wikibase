@@ -319,10 +319,10 @@ class EditEntityAction extends ViewEntityAction {
 		}
 
 		if ( !$this->getUser()->isRegistered() ) {
-			$this->getOutput()->addHTML( Html::rawElement(
-				'p',
-				[ 'class' => 'warning' ],
-				$this->anonymousEditWarningBuilder->buildAnonymousEditWarningHTML( $this->getTitle()->getPrefixedText() ),
+			$this->getOutput()->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
+			$this->getOutput()->addHTML( Html::warningBox(
+				$this->msg( $this->anonymousEditWarningBuilder->buildAnonymousEditWarningMessage( $this->getTitle() ) )
+					->parse(),
 			) );
 		}
 

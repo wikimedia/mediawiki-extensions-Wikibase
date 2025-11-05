@@ -35,7 +35,7 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 /**
  * Low level factory for ValueFormatters for well known data types.
  *
- * @warning: This is a low level factory for use by bootstrap code only!
+ * @warning This is a low level factory for use by bootstrap code only!
  * Program logic should use an instance of OutputFormatValueFormatterFactory
  * resp. OutputFormatSnakFormatterFactory.
  *

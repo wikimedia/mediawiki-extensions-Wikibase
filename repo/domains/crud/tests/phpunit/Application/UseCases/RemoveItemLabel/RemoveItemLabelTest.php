@@ -27,7 +27,6 @@ use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryItemRepos
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
- *
  */
 class RemoveItemLabelTest extends TestCase {
 

@@ -3,6 +3,7 @@
 		"authors": [
 			"JeffreyKim",
 			"Ktchankt",
+			"SaldırganSincap",
 			"Yueman"
 		]
 	},
@@ -86,7 +87,7 @@
 	"apihelp-wbgetentities-example-6": "攞到ID<samp>Q42</samp>嘅實體，顯示晒所有可用語言嘅所有標籤",
 	"apihelp-wbgetentities-example-7": "攞到ID<samp>P17</samp>同<samp>P3</samp>淨係顯示資料類型嘅實體",
 	"apihelp-wbgetentities-example-8": "攞到ID<samp>Q42</samp>嘅實體，顯示晒英文嘅所有嘅名",
-	"apihelp-wbgetentities-example-9": "攞到ID< samp>Q1</samp>同< samp>Q42</samp>嘅實體，顯示緊英文、德文同法文嘅描述",
+	"apihelp-wbgetentities-example-9": "攞到ID<samp>Q1</samp>同<samp>Q42</samp>嘅實體，顯示緊英文、德文同法文嘅描述",
 	"apihelp-wbgetentities-example-10": "喺網站「<var>enwiki</var>」上面攞到「<var>柏林</var>」頁面嘅項目，同埋英文語言嘅語言屬性",
 	"apihelp-wbgetentities-example-11": "喺「<var>enwiki</var> 」網站上面攞到「<var>柏林</var>」頁面嘅項目，喺「<var>柏林</var>」入面將標題標準化之後",
 	"apihelp-wbgetentities-example-12": "攞<samp>Q42</samp>項目嘅網站連結",
@@ -105,7 +106,7 @@
 	"apihelp-wbmergeitems-param-summary": "編輯嘅總結。\n前面會有一個自動產生嘅留言。自動評論同摘要嘅長度限制係260個字元。請注意，所有超過呢個限制嘅嘢都會被切斷。",
 	"apihelp-wbmergeitems-param-tags": "更改標籤嚟套用喺修訂版本。",
 	"apihelp-wbmergeitems-param-bot": "將呢個編輯標記為機械人。淨係得當有用戶屬於「機械人」谷嗰陣先會尊重呢個網址旗號。",
-	"apihelp-wbmergeitems-example-1": "將<samp>$1</samp>嘅資料合併到<samp><samp>$2</samp>",
+	"apihelp-wbmergeitems-example-1": "將<samp>$1</samp>嘅資料合併到<samp>$2</samp>",
 	"apihelp-wbmergeitems-example-3": "將<samp>$1</samp>嘅資料合併成<samp>$2</samp>，而唔使理會任何衝突嘅網站連結",
 	"apihelp-wbmergeitems-example-4": "將<samp>$1</samp>嘅資料合併成<samp>$2</samp>，而唔使理會任何衝突嘅網站連結同描述",
 	"apihelp-wbparsevalue-summary": "用<code>數值解析器</code>嚟解析啲數值。",

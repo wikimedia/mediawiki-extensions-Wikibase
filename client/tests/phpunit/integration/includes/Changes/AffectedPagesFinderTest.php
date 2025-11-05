@@ -24,6 +24,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
@@ -204,7 +205,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$cases['alias change on Q1'] = [
-			[ EntityUsage::OTHER_USAGE ],
+			[ EntityUsage::ALIAS_USAGE, EntityUsage::ALIAS_USAGE . '.de' ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
@@ -239,11 +240,24 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$cases['statement change on Q1'] = [
-			[ EntityUsage::STATEMENT_USAGE, EntityUsage::STATEMENT_USAGE . '.P5' ],
+			[ EntityUsage::STATEMENT_USAGE,
+				EntityUsage::STATEMENT_USAGE . '.P5',
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE,
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE . '.P5',
+			],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
 				new Item( $q1 ),
 				static::getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
+			),
+		];
+
+		$cases['statement change on Q1 qualifier when qualifiers are tracked'] = [
+			[ EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE . '.P5' ],
+			$changeFactory->newFromUpdate( //entity change
+				EntityChange::UPDATE,
+				static::getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) ),
+				static::getItemWithStatementWithQualifier( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) )
 			),
 		];
 
@@ -276,6 +290,8 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$q1SitelinkUsage = new EntityUsage( $q1, EntityUsage::SITELINK_USAGE );
 		$q2SitelinkUsage = new EntityUsage( $q2, EntityUsage::SITELINK_USAGE );
 		$q2OtherUsage = new EntityUsage( $q2, EntityUsage::OTHER_USAGE );
+		$q2AliasUsage = new EntityUsage( $q2, EntityUsage::ALIAS_USAGE );
+		$q2AliasUsage_fr = new EntityUsage( $q2, EntityUsage::ALIAS_USAGE, 'fr' );
 
 		$q1LabelUsage_en = new EntityUsage( $q1, EntityUsage::LABEL_USAGE, 'en' );
 		$q2LabelUsage = new EntityUsage( $q2, EntityUsage::LABEL_USAGE );
@@ -317,6 +333,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$q2OtherUsage,
 			$q2LabelUsage,
 			$q2DescriptionUsage,
+			$q2AliasUsage,
 		] );
 
 		// Cases
@@ -457,9 +474,9 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$cases['other change on Q2 (used on page 2)'] = [
 			[
-				new PageEntityUsages( 2, [ $q2OtherUsage ] ),
+				new PageEntityUsages( 2, [ $q2AliasUsage, $q2AliasUsage_fr ] ),
 			],
-			[ EntityUsage::OTHER_USAGE ],
+			[ EntityUsage::ALIAS_USAGE . '.fr', EntityUsage::ALIAS_USAGE ],
 			[ $page1Q2Usages, $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -526,7 +543,11 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			[
 				new PageEntityUsages( 2, [ $q2StatementUsage_p1 ] ),
 			],
-			[ EntityUsage::STATEMENT_USAGE . '.P1', EntityUsage::STATEMENT_USAGE ],
+			[ EntityUsage::STATEMENT_USAGE . '.P1',
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE . '.P1',
+				EntityUsage::STATEMENT_USAGE,
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE,
+			],
 			[ $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -537,7 +558,11 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$cases['unrelated statement change on Q2 (used by page 2)'] = [
 			[],
-			[ EntityUsage::STATEMENT_USAGE . '.P2', EntityUsage::STATEMENT_USAGE ],
+			[ EntityUsage::STATEMENT_USAGE . '.P2',
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE . '.P2',
+				EntityUsage::STATEMENT_USAGE,
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE,
+			],
 			[ $page2Q2Usages ],
 			$changeFactory->newFromUpdate(
 				EntityChange::UPDATE,
@@ -672,6 +697,25 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 		$item = new Item( $qid );
 		$item->getStatements()->addNewStatement( $snak );
+
+		return $item;
+	}
+
+	/**
+	 * @param ItemId $qid
+	 * @param NumericPropertyId $pid
+	 * @param DataValue $value
+	 *
+	 * @return Item
+	 */
+	private static function getItemWithStatementWithQualifier( ItemId $qid, NumericPropertyId $pid, DataValue $value ) {
+		$snak = new PropertyValueSnak( $pid, $value );
+		$p11 = new NumericPropertyId( 'P11' );
+		$qualSnak = new PropertyValueSnak( $p11, new StringValue( "qualifier" ) );
+		$qualifiers = new SnakList( [ $qualSnak ] );
+
+		$item = new Item( $qid );
+		$item->getStatements()->addNewStatement( $snak, $qualifiers );
 
 		return $item;
 	}

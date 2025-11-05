@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use DataValues\StringValue;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\CommentStore\CommentStoreComment;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Tests\Api\ApiTestCase;
@@ -426,7 +425,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$regex = "!$r!";
 		}
 
-		$revRecord = MediaWikiServices::getInstance()
+		$revRecord = $this->getServiceContainer()
 			->getRevisionLookup()
 			->getRevisionById( $revid );
 		$this->assertNotNull( $revRecord, "revision not found: $revid" );

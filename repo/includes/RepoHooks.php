@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use GraphQL\GraphQL;
 use MediaWiki\Api\ApiEditPage;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\ApiCheckCanExecuteHook;
@@ -31,6 +30,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
+use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\CodexModule;
@@ -60,7 +60,7 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
-use Wikibase\Repo\GraphQLPrototype\SpecialWikibaseGraphQL;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\SpecialWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -70,8 +70,9 @@ use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
-use Wikibase\View\StatementSectionsView;
 use Wikibase\View\ViewHooks;
+use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Rdbms\IDBAccessObject;
 
 /**
@@ -273,6 +274,7 @@ final class RepoHooks implements
 		$paths[] = __DIR__ . '/../rest-api/tests/phpunit/';
 		$paths[] = __DIR__ . '/../domains/crud/tests/phpunit/';
 		$paths[] = __DIR__ . '/../domains/search/tests/phpunit/';
+		$paths[] = __DIR__ . '/../domains/reuse/tests/phpunit/';
 	}
 
 	/** @inheritDoc */
@@ -684,7 +686,12 @@ final class RepoHooks implements
 			StubUserLang::unstub( $wgLang );
 		}
 
-		$formatter = new AutoCommentFormatter( $wgLang, [ 'wikibase-' . $entityType, 'wikibase-entity' ] );
+		$enableWikidataIconsInClientWatchlist = WikibaseRepo::getSettings()->getSetting( 'enableWikidataIconsInClientWatchlist' );
+		$formatter = new AutoCommentFormatter(
+			$wgLang,
+			[ 'wikibase-' . $entityType, 'wikibase-entity' ],
+			$enableWikidataIconsInClientWatchlist
+		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {
@@ -957,14 +964,16 @@ final class RepoHooks implements
 			];
 		}
 
-		// temporarily register this RL module only if the feature flag is enabled,
-		// so that wikis without the feature flag don’t even pay the small cost of loading the module *definition*
-		// (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
-		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
+		// temporarily register this RL module only if the feature flag for mobile editing or its beta feature are
+		// enabled, so that wikis without either feature flag don't even pay the small cost of loading the module
+		// *definition* (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
+		if (
+			$settings->getSetting( 'tmpMobileEditingUI' ) ||
+			$settings->getSetting( 'tmpEnableMobileEditingUIBetaFeature' )
+		) {
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'styles' => [
 					'resources/wikibase.wbui2025/wikibase.wbui2025.qualifiers.less',
-					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.less',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.references.less',
@@ -984,14 +993,32 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementView.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementSections.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.statementGroupView.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.statusMessage.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyName.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.addQualifier.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.addReference.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.propertyLookup.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.modalOverlay.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableQualifiers.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableReference.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableReferencesSection.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableSnak.vue',
+					'resources/wikibase.wbui2025/wikibase.wbui2025.editableSnakValue.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatementGroup.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.editStatement.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue',
 					'resources/wikibase.wbui2025/wikibase.wbui2025.utils.js',
+					'resources/wikibase.wbui2025/api/api.js',
+					'resources/wikibase.wbui2025/api/editEntity.js',
+					'resources/wikibase.wbui2025/store/editStatementsStore.js',
+					'resources/wikibase.wbui2025/api/commons.js',
+					'resources/wikibase.wbui2025/store/messageStore.js',
+					'resources/wikibase.wbui2025/store/parsedValueStore.js',
+					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
+					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
 						'callback' => CodexModule::getIcons( ... ),
@@ -1001,34 +1028,65 @@ final class RepoHooks implements
 							'cdxIconCheck',
 							'cdxIconClose',
 							'cdxIconTrash',
+							'cdxIconInfo',
 						],
 					],
 					[
 						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
-						'content' => StatementSectionsView::WBUI2025_SUPPORTED_DATATYPES,
+						'content' => VueNoScriptRendering::WBUI2025_SUPPORTED_DATATYPES,
+					],
+					[
+						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
+						'content' => [
+							'tabularDataStorageApiEndpointUrl' => $settings->getSetting( 'tabularDataStorageApiEndpointUrl' ),
+							'geoShapeStorageApiEndpointUrl' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+						],
 					],
 				],
 				'dependencies' => [
+					'mediawiki.ForeignApi',
 					'pinia',
 					'vue',
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',
+					'wikibase.utilities.ClaimGuidGenerator',
 				],
 				'messages' => [
 					'wikibase-add',
+					'wikibase-addstatement',
+					'wikibase-addqualifier',
+					'wikibase-addreference',
 					'wikibase-cancel',
 					'wikibase-edit',
 					'wikibase-entityselector-notfound',
+					'wikibase-publish',
+					'wikibase-publishing-error',
+					'wikibase-publishing-progress',
+					'wikibase-publishing-succeeded',
+					'wikibase-remove',
+					'wikibase-save',
+					'wikibase-snakview-property-input-placeholder',
+					'wikibase-snakview-snaktypeselector-value',
+					'wikibase-snakview-variations-novalue-label',
+					'wikibase-snakview-variations-somevalue-label',
 					'wikibase-statementgrouplistview-add',
-					'wikibase-statementview-qualifiers-counter',
+					'wikibase-statementgrouplistview-edit',
+					'wikibase-statementlistview-add',
+					'wikibase-statementview-rank-normal',
+					'wikibase-statementview-rank-preferred',
+					'wikibase-statementview-rank-deprecated',
 					'wikibase-statementview-references-counter',
 				],
 				'codexComponents' => [
+					'CdxAccordion',
 					'CdxButton',
 					'CdxIcon',
 					'CdxLookup',
+					'CdxMenuButton',
+					'CdxMessage',
 					'CdxSelect',
 					'CdxTextInput',
+					'CdxProgressBar',
 				],
 			];
 		}
@@ -1093,16 +1151,13 @@ final class RepoHooks implements
 				TermboxView::TERMBOX_VERSION . TermboxView::CACHE_VERSION :
 				PlaceholderEmittingEntityTermsView::TERMBOX_VERSION . PlaceholderEmittingEntityTermsView::CACHE_VERSION;
 		};
-		$defaults['wbMobile'] = null;
-		$inCacheKey['wbMobile'] = true;
-		$lazyLoad['wbMobile'] = function () {
-			if ( WikibaseRepo::getMobileSite() ) {
-				if ( WikibaseRepo::getSettings()->getSetting( 'tmpMobileEditingUI' ) ) {
-					return 'wbui2025';
-				}
-				return true;
-			}
-			return false;
+		$defaults[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = null;
+		$inCacheKey[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = true;
+		$lazyLoad[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = function ( ParserOptions $parserOptions ) {
+			return WikibaseRepo::getWbui2025FeatureFlag()->generateWbMobileFlagValue(
+				WikibaseRepo::getMobileSite(),
+				$parserOptions->getUserIdentity(),
+			);
 		};
 	}
 
@@ -1268,13 +1323,12 @@ final class RepoHooks implements
 	 * @inheritDoc
 	 */
 	public function onSpecialPage_initList( &$list ) {
-		if ( class_exists( GraphQL::class ) ) {
+		$settings = WikibaseRepo::getSettings();
+		if ( $settings->getSetting( 'tmpEnableGraphQL' ) === true ) {
 			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
 				'class' => SpecialWikibaseGraphQL::class,
 				'services' => [
-					'WikibaseRepo.EntityLookup',
-					'WikibaseRepo.PrefetchingTermLookup',
-					'WikibaseRepo.TermsLanguages',
+					'WbReuse.GraphQLService',
 				],
 			];
 		}

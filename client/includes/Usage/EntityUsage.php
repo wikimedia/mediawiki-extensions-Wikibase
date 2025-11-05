@@ -58,6 +58,21 @@ class EntityUsage {
 	public const STATEMENT_USAGE = 'C';
 
 	/**
+	 * Usage flag indicating that one of the entity's aliases were used.
+	 * This would be the case when showing the aliases of a referenced entity. Note that
+	 * aliases usage is typically tracked with a modifier specifying the language code.
+	 */
+	public const ALIAS_USAGE = 'A';
+
+	/**
+	 * Usage flag indicating that certain statements (identified by their property id)
+	 * from the entity were used alongside qualifiers or references of that claim.
+	 * This currently implies that we also have an OTHER_USAGE or an ALL_USAGE
+	 * for the same entity (STATEMENT_USAGE is never used alone).
+	 */
+	public const STATEMENT_WITH_QUAL_OR_REF_USAGE = 'CQR';
+
+	/**
 	 * Please do not add new usages of "all'("X") aspects. This places too much pressure
 	 * on client recentchanges tables, and causes unnecessary reparses. The method only remains to monitor redirect pages
 	 * @see WikibaseLanguageIndependentLuaBindings.php line 328 for an example of this.
@@ -73,7 +88,7 @@ class EntityUsage {
 	 * the specific usage flags together with the "other" flag are equivalent
 	 * to the "all" flag ( S + T + L + O = X or rather O = X - S - T - L ).
 	 *
-	 * This currently covers alias usage and entity existence checks.
+	 * This currently covers entity existence checks only.
 	 */
 	public const OTHER_USAGE = 'O';
 
@@ -88,6 +103,8 @@ class EntityUsage {
 		self::DESCRIPTION_USAGE => null,
 		self::TITLE_USAGE => null,
 		self::STATEMENT_USAGE => null,
+		self::ALIAS_USAGE => null,
+		self::STATEMENT_WITH_QUAL_OR_REF_USAGE => null,
 		self::OTHER_USAGE => null,
 		self::ALL_USAGE => null,
 	];

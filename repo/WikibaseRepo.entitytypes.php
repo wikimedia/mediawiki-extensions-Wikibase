@@ -92,7 +92,8 @@ return [
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			TermLanguageFallbackChain $fallbackChain,
-			EntityDocument $entity
+			EntityDocument $entity,
+			array $viewOptions,
 		) {
 			$viewFactory = WikibaseRepo::getViewFactory();
 			return $viewFactory->newItemView(
@@ -104,7 +105,8 @@ return [
 						$language,
 						$fallbackChain,
 						TermboxFlag::getInstance()->shouldRenderTermbox()
-					)
+					),
+				$viewOptions,
 			);
 		},
 		Def::META_TAGS_CREATOR_CALLBACK => function ( $userLanguage ) {
@@ -306,7 +308,8 @@ return [
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			TermLanguageFallbackChain $fallbackChain,
-			EntityDocument $entity
+			EntityDocument $entity,
+			array $viewOptions,
 		) {
 			$viewFactory = WikibaseRepo::getViewFactory();
 			return $viewFactory->newPropertyView(
@@ -318,7 +321,8 @@ return [
 						$language,
 						$fallbackChain,
 						TermboxFlag::getInstance()->shouldRenderTermbox()
-					)
+					),
+				$viewOptions
 			);
 		},
 		Def::META_TAGS_CREATOR_CALLBACK => function ( Language $userLanguage ) {

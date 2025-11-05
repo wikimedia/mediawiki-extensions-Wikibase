@@ -8,7 +8,7 @@ use MediaWiki\Site\SiteStore;
 /**
  * Builds the site identifiers table
  *
- * @note: this should move out of Wikibase
+ * @note this should move out of Wikibase
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >

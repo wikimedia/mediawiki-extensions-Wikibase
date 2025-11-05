@@ -62,7 +62,6 @@ export default defineComponent( {
 			return this.$clientRouter.getPageUrl( this.pageTitle, { action: 'edit' } );
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

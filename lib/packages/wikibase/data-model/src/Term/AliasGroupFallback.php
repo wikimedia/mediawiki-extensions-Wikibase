@@ -73,7 +73,6 @@ class AliasGroupFallback extends AliasGroup {
 	}
 
 	/**
-	 *
 	 * @param mixed $target
 	 *
 	 * @return bool

@@ -6,6 +6,7 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Hook\FormatAutocommentsHook;
 use MediaWiki\Language\Language;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\SettingsArray;
 
@@ -51,7 +52,8 @@ class FormatAutocommentsHandler implements FormatAutocommentsHook {
 
 		$formatter = new AutoCommentFormatter(
 			$this->contentLanguage,
-			[ 'wikibase-entity' ]
+			[ 'wikibase-entity' ],
+			WikibaseClient::getSettings()->getSetting( 'enableWikidataIconsInClientWatchlist' )
 		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 

@@ -152,7 +152,6 @@ class CreatePropertyValidatorTest extends TestCase {
 	/**
 	 * @dataProvider labelsValidationErrorProvider
 	 * @dataProvider descriptionsValidationErrorProvider
-	 *
 	 */
 	public function testGivenValidationErrorInField_throws(
 		callable $getFieldValidator,

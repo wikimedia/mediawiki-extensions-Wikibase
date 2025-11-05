@@ -43,11 +43,11 @@
     "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^2.3.0",
     "@vue/vue3-jest": "^28.1.0",
-    "@wdio/cli": "^7.16.13",
-    "@wdio/devtools-service": "^7.16.13",
-    "@wdio/local-runner": "^7.16.13",
-    "@wdio/mocha-framework": "^7.16.13",
-    "@wdio/spec-reporter": "^7.16.13",
+    "@wdio/cli": "^8.46.0",
+    "@wdio/devtools-service": "^8.42.0",
+    "@wdio/local-runner": "^8.46.0",
+    "@wdio/mocha-framework": "^8.46.0",
+    "@wdio/spec-reporter": "^8.43.0",
     "@wmde/eslint-config-wikimedia-typescript": "^0.2.1",
     "@wmde/vuex-helpers": "^0.1.2",
     "@wmde/wikibase-datamodel-types": "^0.2.0",
@@ -90,8 +90,8 @@
     "url-search-params-polyfill": "^8.1.1",
     "vue-eslint-parser": "^7.11.0",
     "vuex": "4.0.2",
-    "wdio-mediawiki": "^1.2.0",
-    "wdio-wikibase": "^5.2.0",
+    "wdio-mediawiki": "3.0.1",
+    "wdio-wikibase": "6.3.0",
     "wikimedia-ui-base": "^0.19.0"
   }
 }

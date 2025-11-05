@@ -31,6 +31,9 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\ResolveInfo;
+use GraphQL\Type\Definition\Type;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
@@ -40,11 +43,16 @@ use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
+use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\Parsers\EntityIdValueParser;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
@@ -204,6 +212,21 @@ return call_user_func( function() {
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new GlobeCoordinateRdfBuilder( $complexValueHelper );
 			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'GlobeCoordinateValue',
+					'fields' => [
+						'latitude' => Type::nonNull( Type::float() ),
+						'longitude' => Type::nonNull( Type::float() ),
+						'precision' => Type::float(),
+						'globe' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
+					},
+				] );
+			},
 		],
 		'VT:monolingualtext' => [
 			'expert-module' => 'jquery.valueview.experts.MonolingualText',
@@ -230,6 +253,19 @@ return call_user_func( function() {
 				DedupeBag $dedupe
 			) {
 				return new MonolingualTextRdfBuilder();
+			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'MonolingualTextValue',
+					'fields' => [
+						'language' => Type::nonNull( Type::string() ),
+						'text' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
+					},
+				] );
 			},
 		],
 		'VT:quantity' => [
@@ -264,6 +300,21 @@ return call_user_func( function() {
 			},
 			'search-index-data-formatter-callback' => function ( UnboundedQuantityValue $value ) {
 				return (string)round( $value->getAmount()->getValueFloat() );
+			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'QuantityValue',
+					'fields' => [
+						'amount' => Type::nonNull( Type::string() ),
+						'unit' => Type::nonNull( Type::string() ),
+						'lowerBound' => Type::string(),
+						'upperBound' => Type::string(),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						return $valueProvider->value->content
+							->getArrayValue()[$info->fieldName] ?? null;
+					},
+				] );
 			},
 		],
 		'VT:string' => [
@@ -300,6 +351,9 @@ return call_user_func( function() {
 			'normalizer-factory-callback' => static function () {
 				return WikibaseRepo::getStringValueNormalizer();
 			},
+			'graphql-value-type' => static function () {
+				return WbReuse::getStringValueType();
+			},
 		],
 		'VT:time' => [
 			'expert-module' => 'jquery.valueview.experts.TimeInput',
@@ -328,6 +382,25 @@ return call_user_func( function() {
 				$complexValueHelper = ( $flags & RdfProducer::PRODUCE_FULL_VALUES ) ?
 					new ComplexValueRdfHelper( $vocab, $writer->sub(), $dedupe ) : null;
 				return new TimeRdfBuilder( $dateCleaner, $complexValueHelper );
+			},
+			'graphql-value-type' => static function () {
+				return new ObjectType( [
+					'name' => 'TimeValue',
+					'fields' => [
+						'time' => Type::nonNull( Type::string() ),
+						'timezone' => Type::nonNull( Type::int() ),
+						'before' => Type::nonNull( Type::int() ),
+						'after' => Type::nonNull( Type::int() ),
+						'precision' => Type::nonNull( Type::int() ),
+						'calendarModel' => Type::nonNull( Type::string() ),
+					],
+					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
+						$value = $valueProvider->value->content->getArrayValue();
+						$value['calendarModel'] = $value['calendarmodel'] ?? null; // prefer camel case over all lowercase
+
+						return $value[$info->fieldName] ?? null;
+					},
+				] );
 			},
 		],
 		'PT:url' => [
@@ -421,6 +494,9 @@ return call_user_func( function() {
 			'search-index-data-formatter-callback' => function ( EntityIdValue $value ) {
 				return $value->getEntityId()->getSerialization();
 			},
+			'graphql-value-type' => static function() {
+				return WbReuse::getEntityValueType();
+			},
 		],
 		'PT:wikibase-item' => [
 			'expert-module' => 'wikibase.experts.Item',
@@ -453,6 +529,43 @@ return call_user_func( function() {
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
+			'graphql-value-type' => static function() {
+				$itemLabelsResolver = WbReuse::getItemLabelsResolver();
+				$languageCodeType = WbReuse::getLanguageCodeType();
+
+				return new ObjectType( [
+					'name' => 'ItemValue',
+					'fields' => [
+						'id' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								return $idValue->getEntityId()->getSerialization();
+							},
+						],
+						'label' => [
+							'type' => Type::string(),
+							'args' => [
+								'languageCode' => Type::nonNull( $languageCodeType ),
+							],
+							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								/** @var ItemId $itemId */
+								$itemId = $idValue->getEntityId();
+								'@phan-var ItemId $itemId';
+
+								return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
+							},
+						],
+					],
+				] );
+			},
 		],
 		'PT:wikibase-property' => [
 			'expert-module' => 'wikibase.experts.Property',
@@ -484,6 +597,43 @@ return call_user_func( function() {
 			},
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
+			},
+			'graphql-value-type' => static function() {
+				$labelsResolver = WbReuse::getPropertyLabelsResolver();
+				$languageCodeType = WbReuse::getLanguageCodeType();
+
+				return new ObjectType( [
+					'name' => 'PropertyValue',
+					'fields' => [
+						'id' => [
+							'type' => Type::nonNull( Type::string() ),
+							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								return $idValue->getEntityId()->getSerialization();
+							},
+						],
+						'label' => [
+							'type' => Type::string(),
+							'args' => [
+								'languageCode' => Type::nonNull( $languageCodeType ),
+							],
+							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value->content;
+								'@phan-var EntityIdValue $idValue';
+
+								/** @var PropertyId $propertyId */
+								$propertyId = $idValue->getEntityId();
+								'@phan-var PropertyId $propertyId';
+
+								return $labelsResolver->resolve( $propertyId, $args['languageCode'] );
+							},
+						],
+					],
+				] );
 			},
 		],
 	];

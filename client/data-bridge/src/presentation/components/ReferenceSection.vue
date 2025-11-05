@@ -32,7 +32,6 @@ export default defineComponent( {
 			return this.rootModule.state.renderedTargetReferences;
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

@@ -17,6 +17,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\WikiMap\WikiMap;
 use Psr\Log\LoggerInterface;
 use Serializers\DispatchingSerializer;
 use Serializers\Serializer;
@@ -89,7 +90,6 @@ use Wikibase\Lib\Normalization\ReferenceNormalizer;
 use Wikibase\Lib\Normalization\SnakNormalizer;
 use Wikibase\Lib\Normalization\StatementNormalizer;
 use Wikibase\Lib\Normalization\StringValueNormalizer;
-use Wikibase\Lib\Rdbms\DomainDb;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Rdbms\VirtualTermsDomainDb;
@@ -254,6 +254,7 @@ use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\ObjectFactory\ObjectFactory;
 
@@ -289,7 +290,11 @@ return [
 	},
 
 	'WikibaseRepo.AnonymousEditWarningBuilder' => function ( MediaWikiServices $services ): AnonymousEditWarningBuilder {
-		return new AnonymousEditWarningBuilder( $services->getSpecialPageFactory(), $services->getTempUserConfig() );
+		return new AnonymousEditWarningBuilder(
+			$services->getSpecialPageFactory(),
+			$services->getTitleFormatter(),
+			$services->getTempUserConfig(),
+		);
 	},
 
 	'WikibaseRepo.ApiHelperFactory' => function ( MediaWikiServices $services ): ApiHelperFactory {
@@ -899,7 +904,9 @@ return [
 			WikibaseRepo::getEntityViewFactory( $services ),
 			WikibaseRepo::getEntityMetaTagsCreatorFactory( $services ),
 			WikibaseRepo::getEntityTitleLookup( $services ),
+			$services->getLanguageFactory(),
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+			$services->getLanguageNameUtils(),
 			WikibaseRepo::getEntityDataFormatProvider( $services ),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
@@ -1026,7 +1033,7 @@ return [
 		$settings = WikibaseRepo::getSettings( $services );
 		$subEntityTypesMapper = WikibaseRepo::getSubEntityTypesMapper( $services );
 
-		$configParser = new EntitySourceDefinitionsConfigParser();
+		$configParser = new EntitySourceDefinitionsConfigParser( WikiMap::getCurrentWikiId() );
 
 		$entitySourceDefinitions = $configParser->newDefinitionsFromConfigArray(
 			$settings->getSetting( 'entitySources' ),
@@ -1765,8 +1772,7 @@ return [
 
 		return new RepoDomainDbFactory(
 			$lbFactory,
-			$lbFactory->getLocalDomainID(),
-			[ DomainDb::LOAD_GROUP_FROM_REPO ]
+			$lbFactory->getLocalDomainID()
 		);
 	},
 
@@ -2170,9 +2176,6 @@ return [
 			$services->getObjectCacheFactory()->getLocalClusterInstance()
 		);
 
-		$vueStatementView = $settings->getSetting( 'tmpMobileEditingUI' ) &&
-			WikibaseRepo::getMobileSite( $services );
-
 		return new ViewFactory(
 			WikibaseRepo::getEntityIdHtmlLinkFormatterFactory( $services ),
 			WikibaseRepo::getEntityIdLabelFormatterFactory( $services ),
@@ -2196,7 +2199,14 @@ return [
 			new RepoSpecialPageLinker(),
 			$services->getLanguageFactory(),
 			WikibaseRepo::getEntityIdParser( $services ),
-			$vueStatementView
+			WikibaseRepo::getWbui2025FeatureFlag( $services ),
+		);
+	},
+
+	'WikibaseRepo.Wbui2025FeatureFlag' => function ( MediaWikiServices $services ): Wbui2025FeatureFlag {
+		return new Wbui2025FeatureFlag(
+			$services->getUserOptionsLookup(),
+			WikibaseRepo::getSettings( $services ),
 		);
 	},
 

@@ -56,7 +56,6 @@ export default defineComponent( {
 	mounted(): void {
 		this.rootModule.dispatch( 'trackErrorsFallingBackToGenericView' );
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

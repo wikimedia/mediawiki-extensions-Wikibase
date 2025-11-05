@@ -153,7 +153,7 @@
 	"wikibase-item-summary-wblinktitles-connect": "Sayfaları bağlamak için bir dil bağlantısı eklendi",
 	"wikibase-property-summary-wbcreate-new": "Yeni bir Mülk oluşturdu",
 	"wikibase-property-summary-wbeditentity-create": "Yeni bir Mülk oluşturdu",
-	"wikibase-property-summary-wbeditentity-create-property": "Yeni bir Mülk oluşturdu",
+	"wikibase-property-summary-wbeditentity-create-property": "Yeni bir Özellik oluşturdu",
 	"wikibase-property-summary-wbeditentity-update": "Bir Mülkü Değiştirdi",
 	"wikibase-property-summary-wbeditentity-override": "Bir Mülkü Temizlendi",
 	"wikibase-property-summary-special-create-property": "{{PLURAL:$1|Değeri|Değeri}} ile bir [$2] Mülk oluşturdu",

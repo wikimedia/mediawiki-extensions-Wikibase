@@ -72,6 +72,5 @@ export default defineComponent( {
 			return parseInt( window.getComputedStyle( element ).getPropertyValue( property ) );
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>

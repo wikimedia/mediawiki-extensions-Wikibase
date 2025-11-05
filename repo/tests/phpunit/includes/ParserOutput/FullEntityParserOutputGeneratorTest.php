@@ -3,12 +3,16 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\User\User;
+use MediaWiki\User\UserOptionsLookup;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\CompositeStatementDataUpdater;
@@ -21,6 +25,7 @@ use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\View\EntityView;
 use Wikibase\View\ViewContent;
 use Wikibase\View\ViewPlaceHolderEmitter;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator
@@ -47,7 +52,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				self::newItem(),
 				'kitten item',
 				[ 'http://an.url.com', 'https://another.url.org' ],
-				[ 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ],
+				[ '6:File:This_is_a_file.pdf', '6:File:Selfie.jpg' ],
 			],
 			[ new Item(), null, [], [] ],
 		];
@@ -99,7 +104,10 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 
 		$this->assertEquals(
 			$images,
-			array_keys( $parserOutput->getImages() ),
+			array_map(
+				fn( $item ) => strval( $item['link'] ),
+				$parserOutput->getLinkList( ParserOutputLinkTypes::MEDIA )
+			),
 			'images'
 		);
 
@@ -140,6 +148,11 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 	}
 
 	public function testGetParserOutput_dontGenerateHtml() {
+		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
+		$this->entityViewFactory->expects( $this->once() )
+			->method( 'newEntityView' )
+			->willReturn( $this->createMock( EntityView::class ) );
+
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator();
 
 		$item = $this->newItem();
@@ -201,6 +214,11 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		$this->language = 'de';
 		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
 
+		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
+		$this->entityViewFactory->expects( $this->once() )
+			->method( 'newEntityView' )
+			->willReturn( $this->createMock( EntityView::class ) );
+
 		$parserOutput = $this->newEntityParserOutputGenerator()->getParserOutput( $entityRevision, false );
 		$this->assertSame( 'de', $parserOutput->getLanguage()->toBcp47Code() );
 	}
@@ -254,7 +272,27 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		array $expectedModules,
 		array $expectedModuleStyles
 	): void {
+		$featureFlag = new Wbui2025FeatureFlag(
+			$this->createMock( UserOptionsLookup::class ),
+			new SettingsArray( [
+				'tmpMobileEditingUI' => $tmpMobileEditingUI,
+				'tmpEnableMobileEditingUIBetaFeature' => false,
+			] )
+		);
 		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
+		$entityView = $this->createMock( EntityView::class );
+		$entityView->expects( $this->once() )
+			->method( 'getParserOutputOptions' )
+			->willReturn( [
+				Wbui2025FeatureFlag::EXTENSION_DATA_KEY =>
+					$featureFlag->generateWbMobileFlagValue( $isMobileView, $this->createMock( User::class ) ),
+			] );
+
+		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
+		$this->entityViewFactory->expects( $this->once() )
+			->method( 'newEntityView' )
+			->willReturn( $entityView );
+
 		$parserOutput = $this->newEntityParserOutputGenerator( null, null, $isMobileView, $tmpMobileEditingUI )
 			->getParserOutput( $entityRevision, false );
 		$this->assertArrayEquals(
@@ -307,7 +345,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			$entityDataFormatProvider,
 			$dataUpdaters,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( $this->language ),
-			$isMobileView
+			$tmpMobileEditingUI ? Wbui2025FeatureFlag::WBMOBILE_WBUI2025_FLAG : $isMobileView,
+			$isMobileView,
 		);
 	}
 }

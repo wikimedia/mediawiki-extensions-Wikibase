@@ -8,6 +8,7 @@
 			"Lucas Werkmeister",
 			"Metalhead64",
 			"Purodha",
+			"SaldırganSincap",
 			"Tiin",
 			"Umherirrender"
 		]
@@ -100,6 +101,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-C": "Einige Aussagen",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Aussage: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Einige Aussagen (mit Qualifikatoren und Einzelnachweisen)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Aussage (mit Qualifikator und Einzelnachweis): $1",
 	"wikibase-pageinfo-entity-usage-X": "Alle Objektdaten",
 	"wikibase-pageinfo-entity-usage-O": "Sonstiges (z. B. Entitäten-Existenz)",
 	"wikibase-property-render-error": "Eigenschaft „$1“ konnte nicht gerendert werden: $2",
@@ -149,7 +152,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Ohne Anmeldung bearbeiten",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Anmelden oder Benutzerkonto erstellen",
 	"wikibase-client-data-bridge-license-heading": "Verwendung und Lizenz",
-	"wikibase-client-data-bridge-license-body": "<p>Das Ändern dieses Wertes wird ihn auch auf {{WBREPONAME}} und möglicherweise auf Wikis in anderen Sprachen ändern.</p>\n<p>Durch das Klicken auf „{{int:$1}}“ stimmst du den [$2 Nutzungsbedingungen] zu und du stimmst unwiderruflich zu, deinen Beitrag unter [$3 $4] freizugeben.<p>",
+	"wikibase-client-data-bridge-license-body": "<p>Das Ändern dieses Wertes wird ihn auch auf {{WBREPONAME}} und möglicherweise auf Wikis in anderen Sprachen ändern.</p>\n<p>Durch das Klicken auf „{{int:$1}}“ stimmst du den [$2 Nutzungsbedingungen] zu und du stimmst unwiderruflich zu, deinen Beitrag unter [$3 $4] freizugeben.</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Stattdessen könntest du Folgendes tun:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Bearbeite den Wert auf {{WBREPONAME}}. Klicke auf die Schaltfläche unten, um den Wert direkt zu bearbeiten (der Link wird in einem neuen Tab geöffnet).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Bearbeite den Wert auf {{WBREPONAME}}",

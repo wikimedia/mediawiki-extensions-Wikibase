@@ -54,7 +54,6 @@ export default defineComponent( {
 			return this.rootModule.state.originalHref;
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

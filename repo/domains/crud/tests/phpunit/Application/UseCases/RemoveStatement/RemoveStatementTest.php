@@ -29,7 +29,6 @@ use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryStatement
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
- *
  */
 class RemoveStatementTest extends TestCase {
 

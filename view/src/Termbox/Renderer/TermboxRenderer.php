@@ -19,7 +19,6 @@ interface TermboxRenderer {
 	 *
 	 * @return string
 	 * @throws TermboxRenderingException
-	 *
 	 */
 	public function getContent( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages );
 

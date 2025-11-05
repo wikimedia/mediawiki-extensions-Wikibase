@@ -22,8 +22,6 @@ class RedirectTrackingUsageAccumulator extends UsageAccumulator {
 	 */
 	private $entityRedirectTargetLookup;
 
-	/**
-	 */
 	public function __construct(
 		UsageAccumulator $innerUsageAccumulator,
 		EntityRedirectTargetLookup $entityRedirectTargetLookup

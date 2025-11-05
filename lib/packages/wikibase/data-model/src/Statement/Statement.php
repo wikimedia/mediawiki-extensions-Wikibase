@@ -251,7 +251,6 @@ class Statement implements PropertyIdProvider {
 	}
 
 	/**
-	 *
 	 * @since 0.7.4
 	 *
 	 * @param mixed $target

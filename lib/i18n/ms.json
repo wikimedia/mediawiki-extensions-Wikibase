@@ -19,6 +19,7 @@
 	"wikibase-error-ui-no-external-page": "Rencana yang dinyatakan tidak dapat dijumpai di halaman yang berpadanan.",
 	"wikibase-error-ui-edit-conflict": "Terdapat percanggahan suntingan. Sila muat semula dan simpan semula.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (dialih aksara)",
+	"wikibase-language-name-for-terms-mul": "lalai untuk semua bahasa",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "nilai tidak diketahui",
 	"wikibase-snakview-snaktypeselector-novalue": "tiada nilai",

@@ -9,9 +9,8 @@ use InvalidArgumentException;
 use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Message\Message;
+use MediaWiki\Page\PageReference;
 use MediaWiki\Parser\ParserOutput;
-use MediaWiki\Status\Status;
-use MediaWiki\Title\Title;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
@@ -25,31 +24,16 @@ use Wikibase\Lib\MessageException;
  */
 class LanguageAwareRenderer implements StatementGroupRenderer {
 
-	/**
-	 * @var Language
-	 */
-	private $language;
-
-	/**
-	 * @var StatementTransclusionInteractor
-	 */
-	private $statementTransclusionInteractor;
-
-	/**
-	 * @var ParserOutput
-	 */
-	private $parserOutput;
-
-	/**
-	 * @var Title
-	 */
-	private $title;
+	private Language $language;
+	private StatementTransclusionInteractor $statementTransclusionInteractor;
+	private ParserOutput $parserOutput;
+	private ?PageReference $title;
 
 	public function __construct(
 		Language $language,
 		StatementTransclusionInteractor $statementTransclusionInteractor,
 		ParserOutput $parserOutput,
-		Title $title
+		?PageReference $title
 	) {
 		$this->language = $language;
 		$this->statementTransclusionInteractor = $statementTransclusionInteractor;
@@ -63,13 +47,11 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 	 *
 	 * @return string Wikitext
 	 */
-	public function render( EntityId $entityId, $propertyLabelOrId ) {
+	public function render( EntityId $entityId, $propertyLabelOrId ): string {
 		try {
-			$status = Status::newGood(
-				$this->statementTransclusionInteractor->render(
-					$entityId,
-					$propertyLabelOrId
-				)
+			return $this->statementTransclusionInteractor->render(
+				$entityId,
+				$propertyLabelOrId
 			);
 		} catch ( PropertyLabelNotResolvedException $ex ) {
 			$trackingCategories = MediaWikiServices::getInstance()->getTrackingCategories();
@@ -79,32 +61,24 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 				$this->title
 			);
 
-			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
+			$message = $this->getMessageForException( $propertyLabelOrId, $ex );
 		} catch ( EntityLookupException | InvalidArgumentException $ex ) {
-			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
+			$message = $this->getMessageForException( $propertyLabelOrId, $ex );
 		}
 
-		if ( !$status->isGood() ) {
-			$error = $status->getMessage()->inLanguage( $this->language )->text();
-			return '<p class="error wikibase-error">' . $error . '</p>';
-		}
-
-		// @phan-suppress-next-line PhanUseReturnValueOfNever
-		return $status->getValue();
+		$error = $message->inLanguage( $this->language )->text();
+		return '<p class="error wikibase-error">' . $error . '</p>';
 	}
 
-	/** @return Status<never> */
-	private function getStatusForException( string $propertyLabel, Exception $exception ): Status {
+	private function getMessageForException( string $propertyLabel, Exception $exception ): Message {
+		$message = new Message( 'wikibase-property-render-error' );
+		$message->plaintextParams( $propertyLabel );
 		if ( $exception instanceof MessageException ) {
-			$message = new Message( $exception->getKey(), $exception->getParams() );
+			$message->params( new Message( $exception->getKey(), $exception->getParams() ) );
 		} else {
-			$message = $exception->getMessage();
+			$message->plaintextParams( $exception->getMessage() );
 		}
-		return Status::newFatal(
-			'wikibase-property-render-error',
-			$propertyLabel,
-			$message
-		);
+		return $message;
 	}
 
 }

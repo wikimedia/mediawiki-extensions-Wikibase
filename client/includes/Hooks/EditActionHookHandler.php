@@ -59,8 +59,6 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	/**
-	 * phpcs:ignore MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
-	 *
 	 * @inheritDoc
 	 */
 	public function onEditPage__showStandardInputs_options( $editor, $out, &$tabindex ): void {

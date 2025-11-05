@@ -768,7 +768,6 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$user = $this->getTestUser()->getUser();
 
 		$isNew = new ReflectionMethod( MediaWikiEditEntity::class, 'isNew' );
-		$isNew->setAccessible( true );
 
 		$edit = $this->makeEditEntity( $repo, $item->getId(), $titleLookup, $user );
 		$this->assertTrue( $isNew->invoke( $edit ), 'New entity: No id' );

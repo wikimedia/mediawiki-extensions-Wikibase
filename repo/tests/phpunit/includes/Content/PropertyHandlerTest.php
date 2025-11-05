@@ -17,6 +17,7 @@ use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\Repo\Content\PropertyHandler
@@ -202,7 +203,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$parserOutput = $contentRenderer->getParserOutput( $content, $title );
 
-		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', 'wbMobile' ];
+		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion', Wbui2025FeatureFlag::PARSER_OPTION_NAME ];
 		$actualOptions = $parserOutput->getUsedOptions();
 		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,

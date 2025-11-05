@@ -45,6 +45,7 @@ describe( 'wbui2025 item view edit statements', () => {
 			itemViewPage.editLinks().first().click();
 			const editFormPage = new EditStatementFormPage();
 			editFormPage.propertyName().should( 'have.text', propertyName );
+			editFormPage.textInput().should( 'have.value', 'ExampleString' );
 			// Check that the value form is present (i.e. one 'add value' form is present)
 			editFormPage.valueForms();
 			editFormPage.removeValueButtons().first().click();

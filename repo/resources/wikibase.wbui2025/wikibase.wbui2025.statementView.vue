@@ -1,12 +1,9 @@
 <template>
 	<div class="wikibase-wbui2025-statement-view">
 		<wbui2025-main-snak
-			v-if="statement.mainsnak.snaktype === 'value'"
 			:main-snak="statement.mainsnak"
+			:rank="statement.rank"
 		></wbui2025-main-snak>
-		<div v-else>
-			Unsupported snak type {{ statement.mainsnak.snaktype }}
-		</div>
 		<wbui2025-qualifiers
 			:qualifiers="qualifiers"
 			:qualifiers-order="qualifiersOrder">
@@ -22,6 +19,7 @@ const { defineComponent } = require( 'vue' );
 const Wbui2025MainSnak = require( './wikibase.wbui2025.mainSnak.vue' );
 const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
+const { getStatementById } = require( './store/savedStatementsStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -32,20 +30,23 @@ module.exports = exports = defineComponent( {
 		Wbui2025Qualifiers
 	},
 	props: {
-		statement: {
-			type: Object,
+		statementId: {
+			type: String,
 			required: true
 		}
 	},
 	computed: {
 		references() {
-			return ( this.statement.references ? this.statement.references : [] );
+			return this.statement.references ? this.statement.references : [];
 		},
 		qualifiers() {
-			return ( this.statement.qualifiers ? this.statement.qualifiers : {} );
+			return this.statement.qualifiers ? this.statement.qualifiers : {};
 		},
 		qualifiersOrder() {
-			return ( this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [] );
+			return this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [];
+		},
+		statement() {
+			return getStatementById( this.statementId );
 		}
 	}
 } );

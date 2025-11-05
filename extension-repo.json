@@ -932,6 +932,7 @@
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Repo\\Domains\\Search\\": "repo/domains/search/src/",
 		"Wikibase\\Repo\\Domains\\Crud\\": "repo/domains/crud/src/",
+		"Wikibase\\Repo\\Domains\\Reuse\\": "repo/domains/reuse/src/",
 		"Wikibase\\Repo\\RestApi\\": "repo/rest-api/src/",
 		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\Lib\\FederatedProperties\\": "lib/packages/wikibase/federated-properties/src/",
@@ -955,6 +956,7 @@
 		"Wikibase\\Repo\\Tests\\Domains\\Search\\Architecture\\": "repo/domains/search/tests/architecture/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\": "repo/domains/crud/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\Architecture\\": "repo/domains/crud/tests/architecture/",
+		"Wikibase\\Repo\\Tests\\Domains\\Reuse\\": "repo/domains/reuse/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\Unit\\": "lib/tests/phpunit/unit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
@@ -989,7 +991,8 @@
 	"ServiceWiringFiles": [
 		"repo/WikibaseRepo.ServiceWiring.php",
 		"repo/domains/crud/src/WbCrud.ServiceWiring.php",
-		"repo/domains/search/src/WbSearch.ServiceWiring.php"
+		"repo/domains/search/src/WbSearch.ServiceWiring.php",
+		"repo/domains/reuse/src/WbReuse.ServiceWiring.php"
 	],
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase",

@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Entity;
 use InvalidArgumentException;
 
 /**
- *
  * @license GPL-2.0-or-later
  */
 abstract class SerializableEntityId implements EntityId {

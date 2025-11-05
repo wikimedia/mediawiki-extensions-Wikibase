@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Hamcrest\Matcher;
 use HamcrestPHPUnitIntegration;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Tests\Site\TestSites;
@@ -68,7 +67,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function addDBDataOnce(): void {
 		self::$matchers = self::createMatchers();
-		$sitesTable = MediaWikiServices::getInstance()->getSiteStore();
+		$sitesTable = $this->getServiceContainer()->getSiteStore();
 		$sitesTable->clear();
 		$sitesTable->saveSites( TestSites::getSites() );
 

@@ -15,19 +15,12 @@ class RepoDomainDbFactory {
 	private string $repoDomain;
 	private ILBFactory $lbFactory;
 
-	/**
-	 * @var string[]
-	 */
-	private array $loadGroups;
-
 	public function __construct(
 		ILBFactory $lbFactory,
-		string $repoDomain,
-		array $loadGroups = []
+		string $repoDomain
 	) {
 		$this->lbFactory = $lbFactory;
 		$this->repoDomain = $repoDomain;
-		$this->loadGroups = $loadGroups;
 	}
 
 	/**
@@ -46,11 +39,7 @@ class RepoDomainDbFactory {
 	}
 
 	private function newForDomain( string $domainId ): RepoDomainDb {
-		return new RepoDomainDb(
-			$this->lbFactory,
-			$domainId,
-			$this->loadGroups
-		);
+		return new RepoDomainDb( $this->lbFactory, $domainId );
 	}
 
 }

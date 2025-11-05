@@ -111,7 +111,6 @@
 	"wikibase-claimview-snak-tooltip": "輸入一個同名為\"$1\"嘅屬性對應嘅數值。如果屬性冇指定值，或者唔知實際值，你可以撳一下輸入框前面嘅圖示嚟揀其他值類型。",
 	"wikibase-claimview-snak-new-tooltip": "指定屬性之後，你可以輸入對應嘅數值。如果屬性冇指定嘅數值，或者唔知實際值，你可以撳一下輸入框前面嘅圖示嚟揀其他類型嘅數值。",
 	"wikibase-referenceview-tabs-manual": "手冊",
-	"wikibase-statementview-qualifiers-counter": "$1{{PLURAL:$1|個限定詞}}",
 	"wikibase-statementview-rank-preferred": "首選級別",
 	"wikibase-statementview-rank-tooltip-preferred": "有效同最新嘅值",
 	"wikibase-statementview-rank-normal": "正常等級",

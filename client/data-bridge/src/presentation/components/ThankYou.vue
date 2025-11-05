@@ -52,7 +52,6 @@ export default defineComponent( {
 			this.$emit( 'opened-reference-edit-on-repo' );
 		},
 	},
-	compatConfig: { MODE: 3 },
 } );
 </script>
 

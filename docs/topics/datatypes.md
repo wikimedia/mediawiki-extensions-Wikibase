@@ -53,6 +53,9 @@ Each key is associated with a map that provides the following fields:
   * A callable that returns one or more [DataValueNormalizer]s (a single instance or an array of them) for use with this data type. Data values are normalized on save according to the normalizers for the property data type and value type (which are combined, rather than overriding one another).
     Normalization takes place between parsing and validation (which are defined using other callbacks, see above). While parsing is based on string input, is usually interactive, and can be fairly lenient (e.g. trimming whitespace), normalization is based on already parsed data values and applied whenever a data value is saved, including non-interactively; normalization should therefore be more conservative than parsing. Validation afterwards ensures that the (normalized) value is valid before it is saved.
     Wikibase currently does not normalize values at any other stage (e.g. post-save, when loading an item), because some normalizations are too expensive to apply when dumping large numbers of entities.
+* graphql-value-type (repo)
+  * A callable that returns the GraphQL type used for values of this data type. This maps a data type
+    to a GraphQL value type name the GraphQL schema layer will expose.
 
 Since for each property data type the associated value type is known, this provides a convenient fallback mechanism: If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
 

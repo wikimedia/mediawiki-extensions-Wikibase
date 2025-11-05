@@ -8,9 +8,14 @@ jest.mock(
 	() => ( { cdxIconCheck: 'check', cdxIconClose: 'close' } ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../resources/wikibase.wbui2025/api/api.js',
+	() => ( { api: { get: jest.fn() } } )
+);
 
 const propertySelectorComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertySelector.vue' );
-const { CdxButton, CdxLookup } = require( '../../codex.js' );
+const propertyLookupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyLookup.vue' );
+const { CdxButton } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 
 describe( 'wikibase.wbui2025.propertySelector', () => {
@@ -21,57 +26,29 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		const emptySearchResult = {
-			searchInfo: 'search term',
-			search: [],
-			success: 1
-		};
-		const p123SearchResult = {
-			searchinfo: 'search term',
-			search: [
-				{
-					id: 'P123',
-					url: 'unused',
-					label: 'eine Beschriftung',
-					description: 'a description',
-					display: {
-						label: {
-							value: 'eine Beschriftung',
-							language: 'de'
-						},
-						description: {
-							value: 'a description',
-							language: 'en'
-						}
-					},
-					match: {
-						type: 'alias',
-						language: 'en',
-						text: 'search term'
-					},
-					aliases: [ 'search term' ]
+		const propertyData = {
+			id: 'P123',
+			datatype: 'string',
+			url: 'unused',
+			label: 'eine Beschriftung',
+			description: 'a description',
+			display: {
+				label: {
+					value: 'eine Beschriftung',
+					language: 'de'
+				},
+				description: {
+					value: 'a description',
+					language: 'en'
 				}
-			],
-			success: 1
+			},
+			match: {
+				type: 'alias',
+				language: 'en',
+				text: 'search term'
+			},
+			aliases: [ 'search term' ]
 		};
-		const p456SearchResult = {
-			searchinfo: 'search term',
-			search: [
-				{
-					id: 'P456',
-					url: 'unused',
-					display: {},
-					match: {
-						type: 'entityId',
-						text: 'P456'
-					},
-					aliases: [ 'P456' ]
-				}
-			],
-			success: 1
-		};
-		const mockedGet = jest.fn().mockResolvedValue( emptySearchResult );
-		mw.Api.prototype.get = mockedGet;
 
 		const languageCode = 'de';
 		const mockConfig = {
@@ -81,7 +58,7 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			get: jest.fn( ( key ) => mockConfig[ key ] )
 		};
 
-		let wrapper, cancelButton, addButton, lookup;
+		let wrapper, cancelButton, addButton, propertyLookup;
 		beforeEach( async () => {
 			wrapper = await mount( propertySelectorComponent, {
 				props: {
@@ -91,14 +68,14 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			const buttons = wrapper.findAllComponents( CdxButton );
 			cancelButton = buttons[ 0 ];
 			addButton = buttons[ 1 ];
-			lookup = wrapper.findComponent( CdxLookup );
+			propertyLookup = wrapper.findComponent( propertyLookupComponent );
 		} );
 
 		it( 'the component and child components mount successfully', () => {
 			expect( wrapper.exists() ).toBe( true );
 			expect( cancelButton.exists() ).toBe( true );
 			expect( addButton.exists() ).toBe( true );
-			expect( lookup.exists() ).toBe( true );
+			expect( propertyLookup.exists() ).toBe( true );
 		} );
 
 		it( 'sets the initial properties on the CdxButton components', () => {
@@ -109,89 +86,10 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			expect( addButton.isDisabled() ).toBe( true );
 		} );
 
-		it( 'sets the initial properties on the CdxLookup component', () => {
-			expect( lookup.props( 'menuItems' ) ).toEqual( [] );
-			expect( lookup.props( 'menuConfig' ) ).toEqual( {
-				visibleItemLimit: 3
-			} );
-		} );
-
-		it( 'text input causes an API call and updates menu items', async () => {
-			mockedGet.mockResolvedValueOnce( p123SearchResult );
-			await lookup.vm.$emit( 'update:input-value', 'search term' );
-			await lookup.vm.$nextTick();
-
-			expect( mockedGet ).toHaveBeenCalledTimes( 1 );
-			expect( mockedGet ).toHaveBeenCalledWith( {
-				action: 'wbsearchentities',
-				language: languageCode,
-				uselang: languageCode,
-				type: 'property',
-				search: 'search term'
-			} );
-			expect( lookup.props( 'menuItems' ) ).toEqual( [
-				{
-					value: 'P123',
-					label: 'eine Beschriftung',
-					match: '(search term)',
-					description: 'a description',
-					language: {
-						label: 'de',
-						match: 'en',
-						description: 'en'
-					}
-				}
-			] );
-		} );
-
-		it( 'does not make an API call when the input is blank', async () => {
-			await lookup.vm.$emit( 'update:input-value', '' );
-
-			expect( mockedGet ).not.toHaveBeenCalled();
-		} );
-
 		it( 'enables the add button after selecting a property', async () => {
-			await lookup.vm.$emit( 'update:selected', 'P123' );
+			await propertyLookup.vm.$emit( 'update:selected', 'P123', propertyData );
 
 			expect( addButton.isDisabled() ).toBe( false );
-		} );
-
-		describe( 'loading more results', () => {
-			beforeEach( async () => {
-				mockedGet.mockResolvedValueOnce( p123SearchResult );
-				await lookup.vm.$emit( 'update:input-value', 'search term' );
-			} );
-
-			it( 'makes another api call when `load-more` is emitted and adds more menu items', async () => {
-				mockedGet.mockResolvedValueOnce( p456SearchResult );
-				await lookup.vm.$emit( 'load-more' );
-				await lookup.vm.$nextTick();
-
-				expect( mockedGet ).toHaveBeenCalledTimes( 2 );
-				expect( mockedGet ).toHaveBeenCalledWith( expect.objectContaining( {
-					continue: 1
-				} ) );
-				expect( lookup.props( 'menuItems' )[ 1 ] ).toEqual( {
-					value: 'P456',
-					label: undefined,
-					match: '',
-					description: undefined,
-					language: {
-						label: undefined,
-						match: undefined,
-						description: undefined
-					}
-				} );
-			} );
-
-			it( 'excludes duplicates from the results', async () => {
-				mockedGet.mockResolvedValueOnce( p123SearchResult );
-				await lookup.vm.$emit( 'load-more' );
-				await lookup.vm.$nextTick();
-
-				expect( mockedGet ).toHaveBeenCalledTimes( 2 );
-				expect( lookup.props( 'menuItems' ) ).toHaveLength( 1 );
-			} );
 		} );
 	} );
 } );

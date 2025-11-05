@@ -4,6 +4,8 @@
 			"Tofeiku"
 		]
 	},
+	"wikibase-error-unexpected": "رالت: $1.",
+	"wikibase-language-name-for-terms-mul": "لالاي اونتوق سموا بهاس",
 	"wikibase-quantitydetails-amount": "جومله",
 	"wikibase-quantitydetails-unit": "اونيت",
 	"wikibase-timedetails-time": "ماس",

@@ -38,7 +38,6 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		parent::setUp();
 		$this->settings = WikibaseClient::getSettings();
 		$this->settings->setSetting( 'repoUrl', "https://www.wikidata.org" );
-		$this->settings->setSetting( 'resolveWikibaseLabels', true );
 
 		$this->mockParser = $this->createStub( EntityIdParser::class );
 		$this->mockLookup = $this->createStub( FallbackLabelDescriptionLookup::class );
@@ -73,7 +72,6 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 			$this->isRepoEntityNamespaceMain,
 			$this->mockLookup,
 			parse_url( $this->settings->getSetting( 'repoUrl' ), PHP_URL_HOST ),
-			$this->settings->getSetting( 'resolveWikibaseLabels' ),
 			$this->context->getTitle()
 		);
 	}
@@ -171,20 +169,6 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$originalText = 'Q123456789';
 		$text = $originalText;
 		$url = 'https://www.wikidata.org/wiki/Q123456789';
-		$attribs = [];
-		$link = "link";
-		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
-		$this->assertEquals( $originalText, $text );
-	}
-
-	public function testOnLinkerMakeExternalLink_featureFlagOff() {
-		$this->settings->setSetting( 'resolveWikibaseLabels', false );
-		$this->mockLookup = $this->createStub( FallbackLabelDescriptionLookup::class );
-
-		$originalText = "Q64";
-		$url = "https://www.wikidata.org/wiki/Q64";
-		$text = $originalText;
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();

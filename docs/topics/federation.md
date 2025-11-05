@@ -2,8 +2,7 @@
 
 Federation here means accessing the entities of one Wikibase Repository from another Wikibase Repository.
 
-* “Foreign” is used to mean that something refers to and comes from another Wikibase repository.
-* Foreign EntityIds and mappings are documented in the file docs/foreign-entity-ids.wiki in the wikibase/data-model component.
+“Foreign” is used to mean that something refers to and comes from another Wikibase repository.
 
 As of March 2017:
  - In order to enable access to entities from federated repositories both Repo and Client components must be enabled.
