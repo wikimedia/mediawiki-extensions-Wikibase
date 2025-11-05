@@ -4,7 +4,8 @@ namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
 use MediaWiki\Context\RequestContext;
-use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\Language\LanguageFallback;
+use MediaWiki\Language\LanguageFallbackMode;
 use MediaWiki\MainConfigNames;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
@@ -82,17 +83,17 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$languageFallback = $this->createMock( LanguageFallback::class );
 		$languageFallback->method( 'getAll' )
-			->willReturnCallback( function( $code, $mode = LanguageFallback::MESSAGES ) {
+			->willReturnCallback( function( $code, $mode = LanguageFallbackMode::MESSAGES ) {
 				return $this->getLanguageFallbacksForCallback( $code, $mode );
 			} );
 
 		return new LanguageFallbackChainFactory( $termsLanguages, null, null, $languageFallback );
 	}
 
-	private function getLanguageFallbacksForCallback( string $code, $mode ): array {
+	private function getLanguageFallbacksForCallback( string $code, LanguageFallbackMode $mode ): array {
 		$fallbacks = $this->getStrictLanguageFallbacksForCallback( $code );
 
-		if ( $mode === LanguageFallback::MESSAGES && !in_array( 'en', $fallbacks ) ) {
+		if ( $mode === LanguageFallbackMode::MESSAGES && !in_array( 'en', $fallbacks ) ) {
 			$fallbacks[] = 'en';
 		}
 

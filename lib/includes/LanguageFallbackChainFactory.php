@@ -7,9 +7,10 @@ use MediaWiki\Babel\Babel;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Language\Language;
 use MediaWiki\Language\LanguageConverter;
-use MediaWiki\Languages\LanguageConverterFactory;
-use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\Language\LanguageConverterFactory;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageFallback;
+use MediaWiki\Language\LanguageFallbackMode;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\User\User;
@@ -181,7 +182,7 @@ class LanguageFallbackChainFactory {
 		$this->addLanguageAndVariantsToChain( $language, $chain, $fetched );
 
 		$languageCode = is_string( $language ) ? $language : $language->getCode();
-		$fallbacks = $this->languageFallback->getAll( $languageCode, LanguageFallback::STRICT );
+		$fallbacks = $this->languageFallback->getAll( $languageCode, LanguageFallbackMode::STRICT );
 		foreach ( $fallbacks as $other ) {
 			$this->addLanguageAndVariantsToChain( $other, $chain, $fetched );
 		}
