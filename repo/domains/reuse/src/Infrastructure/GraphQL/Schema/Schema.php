@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 
 use GraphQL\Type\Definition\EnumType;
-use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
@@ -20,12 +19,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 class Schema extends GraphQLSchema {
 	public function __construct(
 		ItemResolver $itemResolver,
-		private readonly ItemIdType $itemIdType,
-		private readonly SiteIdType $siteIdType,
-		private readonly LanguageCodeType $languageCodeType,
-		private readonly PropertyValuePairType $propertyValuePairType,
-		private readonly PropertyIdType $propertyIdType,
-		private readonly InterfaceType $labelProviderType,
+		private readonly Types $types,
 	) {
 		parent::__construct( [
 			'query' => new ObjectType( [
@@ -34,7 +28,7 @@ class Schema extends GraphQLSchema {
 					'item' => [
 						'type' => $this->itemType(),
 						'args' => [
-							'id' => Type::nonNull( $this->itemIdType ),
+							'id' => Type::nonNull( $this->types->getItemIdType() ),
 						],
 						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
 					],
@@ -44,7 +38,8 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function itemType(): ObjectType {
-		$labelField = clone $this->labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
+		$labelProviderType = $this->types->getLabelProviderType();
+		$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
 		$labelField->resolveFn = fn( Item $item, array $args ) => $item->labels
 			->getLabelInLanguage( $args['languageCode'] )?->text;
 
@@ -52,14 +47,14 @@ class Schema extends GraphQLSchema {
 			'name' => 'Item',
 			'fields' => [
 				'id' => [
-					'type' => Type::nonNull( $this->itemIdType ),
+					'type' => Type::nonNull( $this->types->getItemIdType() ),
 					'resolve' => fn( Item $item ) => $item->id->getSerialization(),
 				],
 				$labelField,
 				'description' => [
 					'type' => Type::string(),
 					'args' => [
-						'languageCode' => Type::nonNull( $this->languageCodeType ),
+						'languageCode' => Type::nonNull( $this->types->getLanguageCodeType() ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->descriptions
 						->getDescriptionInLanguage( $args['languageCode'] )?->text,
@@ -68,7 +63,7 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( Type::string() ) ),
 					'args' => [
-						'languageCode' => Type::nonNull( $this->languageCodeType ),
+						'languageCode' => Type::nonNull( $this->types->getLanguageCodeType() ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->aliases
 						->getAliasesInLanguageInLanguage( $args['languageCode'] )?->aliases ?? [],
@@ -82,7 +77,7 @@ class Schema extends GraphQLSchema {
 						],
 					] ),
 					'args' => [
-						'siteId' => Type::nonNull( $this->siteIdType ),
+						'siteId' => Type::nonNull( $this->types->getSiteIdType() ),
 					],
 					'resolve' => function( Item $item, array $args ) {
 						$sitelink = $item->sitelinks->getSitelinkForSite( $args['siteId'] );
@@ -96,33 +91,35 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( $this->statementType() ) ),
 					'args' => [
-						'propertyId' => Type::nonNull( $this->propertyIdType ),
+						'propertyId' => Type::nonNull( $this->types->getPropertyIdType() ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->statements
 						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
 			],
-			'interfaces' => [ $this->labelProviderType ],
+			'interfaces' => [ $labelProviderType ],
 		] );
 	}
 
 	private function statementType(): ObjectType {
+		$propertyValuePairType = $this->types->getPropertyValuePairType();
+
 		$qualifierType = new ObjectType( [
 			'name' => 'Qualifier',
 			'fields' => [
-				$this->propertyValuePairType->getField( 'property' ),
-				$this->propertyValuePairType->getField( 'value' ),
-				$this->propertyValuePairType->getField( 'valueType' ),
+				$propertyValuePairType->getField( 'property' ),
+				$propertyValuePairType->getField( 'value' ),
+				$propertyValuePairType->getField( 'valueType' ),
 			],
-			'interfaces' => [ $this->propertyValuePairType ],
+			'interfaces' => [ $propertyValuePairType ],
 		] );
 
 		return new ObjectType( [
 			'name' => 'Statement',
 			'fields' => [
-				$this->propertyValuePairType->getField( 'property' ),
-				$this->propertyValuePairType->getField( 'value' ),
-				$this->propertyValuePairType->getField( 'valueType' ),
+				$propertyValuePairType->getField( 'property' ),
+				$propertyValuePairType->getField( 'value' ),
+				$propertyValuePairType->getField( 'valueType' ),
 				'id' => [
 					'type' => Type::nonNull( Type::string() ),
 					'resolve' => fn( Statement $statement ) => $statement->id,
@@ -135,7 +132,7 @@ class Schema extends GraphQLSchema {
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( $qualifierType ) ),
 					'args' => [
-						'propertyId' => Type::nonNull( $this->propertyIdType ),
+						'propertyId' => Type::nonNull( $this->types->getPropertyIdType() ),
 					],
 					'resolve' => fn( Statement $statement, $args ) => $statement->qualifiers
 						->getQualifiersByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
@@ -146,7 +143,7 @@ class Schema extends GraphQLSchema {
 					'resolve' => fn( Statement $statement ) => $statement->references,
 				],
 			],
-			'interfaces' => [ $this->propertyValuePairType ],
+			'interfaces' => [ $propertyValuePairType ],
 		] );
 	}
 
@@ -168,14 +165,15 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function referenceType(): ObjectType {
+		$propertyValuePairType = $this->types->getPropertyValuePairType();
 		$referencePartType = new ObjectType( [
 			'name' => 'ReferencePart',
 			'fields' => [
-				$this->propertyValuePairType->getField( 'property' ),
-				$this->propertyValuePairType->getField( 'value' ),
-				$this->propertyValuePairType->getField( 'valueType' ),
+				$propertyValuePairType->getField( 'property' ),
+				$propertyValuePairType->getField( 'value' ),
+				$propertyValuePairType->getField( 'valueType' ),
 			],
-			'interfaces' => [ $this->propertyValuePairType ],
+			'interfaces' => [ $propertyValuePairType ],
 		] );
 
 		return new ObjectType( [

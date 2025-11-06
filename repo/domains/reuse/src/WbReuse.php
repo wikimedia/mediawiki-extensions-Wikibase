@@ -2,16 +2,13 @@
 
 namespace Wikibase\Repo\Domains\Reuse;
 
-use GraphQL\Type\Definition\InterfaceType;
-use GraphQL\Type\Definition\ObjectType;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\LanguageCodeType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\StringValueType;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Types;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,6 +24,11 @@ class WbReuse {
 			->get( 'WbReuse.GraphQLSchema' );
 	}
 
+	public static function getGraphQLTypes( ?ContainerInterface $services = null ): Types {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.GraphQLTypes' );
+	}
+
 	public static function getItemLabelsResolver( ?ContainerInterface $services = null ): ItemLabelsResolver {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.ItemLabelsResolver' );
@@ -35,25 +37,5 @@ class WbReuse {
 	public static function getPropertyLabelsResolver( ?ContainerInterface $services = null ): PropertyLabelsResolver {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.PropertyLabelsResolver' );
-	}
-
-	public static function getLabelProviderType( ?ContainerInterface $services = null ): InterfaceType {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbReuse.LabelProviderType' );
-	}
-
-	public static function getLanguageCodeType( ?ContainerInterface $services = null ): LanguageCodeType {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbReuse.LanguageCodeType' );
-	}
-
-	public static function getStringValueType( ?ContainerInterface $services = null ): StringValueType {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbReuse.StringValueType' );
-	}
-
-	public static function getEntityValueType( ?ContainerInterface $services = null ): ObjectType {
-		return ( $services ?: MediaWikiServices::getInstance() )
-			->get( 'WbReuse.EntityValueType' );
 	}
 }
