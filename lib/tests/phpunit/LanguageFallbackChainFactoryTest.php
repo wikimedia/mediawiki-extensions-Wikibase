@@ -89,7 +89,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		return new LanguageFallbackChainFactory( $termsLanguages, null, null, $languageFallback );
 	}
 
-	private function getLanguageFallbacksForCallback( string $code, int $mode ): array {
+	private function getLanguageFallbacksForCallback( string $code, $mode ): array {
 		$fallbacks = $this->getStrictLanguageFallbacksForCallback( $code );
 
 		if ( $mode === LanguageFallback::MESSAGES && !in_array( 'en', $fallbacks ) ) {
