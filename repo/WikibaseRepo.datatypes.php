@@ -222,7 +222,7 @@ return call_user_func( function() {
 						'globe' => Type::nonNull( Type::string() ),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						return $valueProvider->value->content
+						return $valueProvider->value
 							->getArrayValue()[$info->fieldName] ?? null;
 					},
 				] );
@@ -262,7 +262,7 @@ return call_user_func( function() {
 						'text' => Type::nonNull( Type::string() ),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						return $valueProvider->value->content
+						return $valueProvider->value
 							->getArrayValue()[$info->fieldName] ?? null;
 					},
 				] );
@@ -311,7 +311,7 @@ return call_user_func( function() {
 						'upperBound' => Type::string(),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						return $valueProvider->value->content
+						return $valueProvider->value
 							->getArrayValue()[$info->fieldName] ?? null;
 					},
 				] );
@@ -395,7 +395,7 @@ return call_user_func( function() {
 						'calendarModel' => Type::nonNull( Type::string() ),
 					],
 					'resolveField' => function ( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) {
-						$value = $valueProvider->value->content->getArrayValue();
+						$value = $valueProvider->value->getArrayValue();
 						$value['calendarModel'] = $value['calendarmodel'] ?? null; // prefer camel case over all lowercase
 
 						return $value[$info->fieldName] ?? null;
@@ -540,7 +540,7 @@ return call_user_func( function() {
 							'type' => Type::nonNull( Type::string() ),
 							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
 								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value->content;
+								$idValue = $valueProvider->value;
 								'@phan-var EntityIdValue $idValue';
 
 								return $idValue->getEntityId()->getSerialization();
@@ -553,7 +553,7 @@ return call_user_func( function() {
 							],
 							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
 								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value->content;
+								$idValue = $valueProvider->value;
 								'@phan-var EntityIdValue $idValue';
 
 								/** @var ItemId $itemId */
@@ -609,7 +609,7 @@ return call_user_func( function() {
 							'type' => Type::nonNull( Type::string() ),
 							'resolve' => function( Statement|PropertyValuePair $valueProvider ) {
 								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value->content;
+								$idValue = $valueProvider->value;
 								'@phan-var EntityIdValue $idValue';
 
 								return $idValue->getEntityId()->getSerialization();
@@ -622,7 +622,7 @@ return call_user_func( function() {
 							],
 							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
 								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value->content;
+								$idValue = $valueProvider->value;
 								'@phan-var EntityIdValue $idValue';
 
 								/** @var PropertyId $propertyId */
