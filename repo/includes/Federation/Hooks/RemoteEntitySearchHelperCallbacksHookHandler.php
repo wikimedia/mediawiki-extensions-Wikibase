@@ -33,13 +33,13 @@ class RemoteEntitySearchHelperCallbacksHookHandler implements WikibaseRepoEntity
 		$remoteClient = $this->remoteClient;
 		$settings = $this->settings;
 
-		foreach ( $callbacks as $entityType => $originalFactory ) {
+		foreach ( $callbacks as $entityType => $localSearchHelperFactory ) {
 			// Wrap the existing factory with our decorator.
-			$callbacks[$entityType] = static function ( ...$args ) use ( $originalFactory, $remoteClient, $settings ) {
-				$innerHelper = $originalFactory( ...$args );
+			$callbacks[$entityType] = static function ( ...$args ) use ( $localSearchHelperFactory, $remoteClient, $settings ) {
+				$localSearchHelper = $localSearchHelperFactory( ...$args );
 
 				return new RemoteEntitySearchHelper(
-					$innerHelper,
+					$localSearchHelper,
 					$remoteClient,
 					$settings
 				);
