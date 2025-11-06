@@ -43,12 +43,6 @@ return [
 	},
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
 		$languageCodeType = WbReuse::getLanguageCodeType( $services );
-		$predicatePropertyType = new PredicatePropertyType(
-			WbReuse::getPropertyLabelsResolver( $services ),
-			$languageCodeType,
-		);
-		$valueType = new ValueType( WikibaseRepo::getDataTypeDefinitions( $services )->getGraphqlValueTypes() );
-		$valueTypeType = new ValueTypeType();
 
 		return new Schema(
 			new ItemResolver(
@@ -67,10 +61,14 @@ return [
 				WikibaseRepo::getSettings( $services ),
 			),
 			$languageCodeType,
-			$predicatePropertyType,
-			new PropertyValuePairType( $predicatePropertyType, $valueType, $valueTypeType ),
-			$valueType,
-			$valueTypeType,
+			new PropertyValuePairType(
+				new PredicatePropertyType(
+					WbReuse::getPropertyLabelsResolver( $services ),
+					$languageCodeType,
+				),
+				new ValueType( WikibaseRepo::getDataTypeDefinitions( $services )->getGraphqlValueTypes() ),
+				new ValueTypeType()
+			),
 			new PropertyIdType()
 		);
 	},

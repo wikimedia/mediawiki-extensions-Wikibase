@@ -22,10 +22,7 @@ class Schema extends GraphQLSchema {
 		private readonly ItemIdType $itemIdType,
 		private readonly SiteIdType $siteIdType,
 		private readonly LanguageCodeType $languageCodeType,
-		private readonly PredicatePropertyType $predicatePropertyType,
 		private readonly PropertyValuePairType $propertyValuePairType,
-		private readonly ValueType $valueType,
-		private readonly ValueTypeType $valueTypeType,
 		private readonly PropertyIdType $propertyIdType
 	) {
 		parent::__construct( [
@@ -110,9 +107,22 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function statementType(): ObjectType {
+		$qualifierType = new ObjectType( [
+			'name' => 'Qualifier',
+			'fields' => [
+				$this->propertyValuePairType->getField( 'property' ),
+				$this->propertyValuePairType->getField( 'value' ),
+				$this->propertyValuePairType->getField( 'valueType' ),
+			],
+			'interfaces' => [ $this->propertyValuePairType ],
+		] );
+
 		return new ObjectType( [
 			'name' => 'Statement',
 			'fields' => [
+				$this->propertyValuePairType->getField( 'property' ),
+				$this->propertyValuePairType->getField( 'value' ),
+				$this->propertyValuePairType->getField( 'valueType' ),
 				'id' => [
 					'type' => Type::nonNull( Type::string() ),
 					'resolve' => fn( Statement $statement ) => $statement->id,
@@ -123,7 +133,7 @@ class Schema extends GraphQLSchema {
 				],
 				'qualifiers' => [
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
-					'type' => Type::nonNull( Type::listOf( $this->propertyValuePairType ) ),
+					'type' => Type::nonNull( Type::listOf( $qualifierType ) ),
 					'args' => [
 						'propertyId' => Type::nonNull( $this->propertyIdType ),
 					],
@@ -135,20 +145,8 @@ class Schema extends GraphQLSchema {
 					'type' => Type::nonNull( Type::listOf( $this->referenceType() ) ),
 					'resolve' => fn( Statement $statement ) => $statement->references,
 				],
-				'property' => [
-					'type' => Type::nonNull( $this->predicatePropertyType ),
-					'resolve' => fn( Statement $statement ) => $statement->property,
-				],
-				'value' => [
-					'type' => $this->valueType,
-					// The whole Statement is passed down here so that the Value type has access to the property data type.
-					'resolve' => fn( Statement $statement ) => $statement->value ? $statement : null,
-				],
-				'valueType' => [
-					'type' => Type::nonNull( $this->valueTypeType ),
-					'resolve' => fn( Statement $statement ) => $statement->valueType,
-				],
 			],
+			'interfaces' => [ $this->propertyValuePairType ],
 		] );
 	}
 
@@ -170,12 +168,22 @@ class Schema extends GraphQLSchema {
 	}
 
 	private function referenceType(): ObjectType {
+		$referencePartType = new ObjectType( [
+			'name' => 'ReferencePart',
+			'fields' => [
+				$this->propertyValuePairType->getField( 'property' ),
+				$this->propertyValuePairType->getField( 'value' ),
+				$this->propertyValuePairType->getField( 'valueType' ),
+			],
+			'interfaces' => [ $this->propertyValuePairType ],
+		] );
+
 		return new ObjectType( [
 			'name' => 'Reference',
 			'fields' => [
 				'parts' => [
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
-					'type' => Type::nonNull( Type::listOf( $this->propertyValuePairType ) ),
+					'type' => Type::nonNull( Type::listOf( $referencePartType ) ),
 					'resolve' => fn( Reference $reference ) => $reference->parts,
 				],
 			],
