@@ -531,7 +531,19 @@ return call_user_func( function() {
 			},
 			'graphql-value-type' => static function() {
 				$itemLabelsResolver = WbReuse::getItemLabelsResolver();
-				$languageCodeType = WbReuse::getLanguageCodeType();
+				$labelProviderType = WbReuse::getLabelProviderType();
+				$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
+				$labelField->resolveFn = function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
+					/** @var EntityIdValue $idValue */
+					$idValue = $valueProvider->value;
+					'@phan-var EntityIdValue $idValue';
+
+					/** @var ItemId $itemId */
+					$itemId = $idValue->getEntityId();
+					'@phan-var ItemId $itemId';
+
+					return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
+				};
 
 				return new ObjectType( [
 					'name' => 'ItemValue',
@@ -546,24 +558,9 @@ return call_user_func( function() {
 								return $idValue->getEntityId()->getSerialization();
 							},
 						],
-						'label' => [
-							'type' => Type::string(),
-							'args' => [
-								'languageCode' => Type::nonNull( $languageCodeType ),
-							],
-							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $itemLabelsResolver ) {
-								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value;
-								'@phan-var EntityIdValue $idValue';
-
-								/** @var ItemId $itemId */
-								$itemId = $idValue->getEntityId();
-								'@phan-var ItemId $itemId';
-
-								return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
-							},
-						],
+						$labelField,
 					],
+					'interfaces' => [ $labelProviderType ],
 				] );
 			},
 		],
@@ -600,7 +597,19 @@ return call_user_func( function() {
 			},
 			'graphql-value-type' => static function() {
 				$labelsResolver = WbReuse::getPropertyLabelsResolver();
-				$languageCodeType = WbReuse::getLanguageCodeType();
+				$labelProviderType = WbReuse::getLabelProviderType();
+				$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
+				$labelField->resolveFn = function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
+					/** @var EntityIdValue $idValue */
+					$idValue = $valueProvider->value;
+					'@phan-var EntityIdValue $idValue';
+
+					/** @var PropertyId $propertyId */
+					$propertyId = $idValue->getEntityId();
+					'@phan-var PropertyId $propertyId';
+
+					return $labelsResolver->resolve( $propertyId, $args['languageCode'] );
+				};
 
 				return new ObjectType( [
 					'name' => 'PropertyValue',
@@ -615,24 +624,9 @@ return call_user_func( function() {
 								return $idValue->getEntityId()->getSerialization();
 							},
 						],
-						'label' => [
-							'type' => Type::string(),
-							'args' => [
-								'languageCode' => Type::nonNull( $languageCodeType ),
-							],
-							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args ) use( $labelsResolver ) {
-								/** @var EntityIdValue $idValue */
-								$idValue = $valueProvider->value;
-								'@phan-var EntityIdValue $idValue';
-
-								/** @var PropertyId $propertyId */
-								$propertyId = $idValue->getEntityId();
-								'@phan-var PropertyId $propertyId';
-
-								return $labelsResolver->resolve( $propertyId, $args['languageCode'] );
-							},
-						],
+						$labelField,
 					],
+					'interfaces' => [ $labelProviderType ],
 				] );
 			},
 		],

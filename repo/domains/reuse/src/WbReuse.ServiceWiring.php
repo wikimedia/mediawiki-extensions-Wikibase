@@ -1,5 +1,6 @@
 <?php declare( strict_types=1 );
 
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -42,8 +43,6 @@ return [
 		] );
 	},
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
-		$languageCodeType = WbReuse::getLanguageCodeType( $services );
-
 		return new Schema(
 			new ItemResolver(
 				new BatchGetItems( new EntityLookupItemsBatchRetriever(
@@ -60,16 +59,17 @@ return [
 				WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
 				WikibaseRepo::getSettings( $services ),
 			),
-			$languageCodeType,
+			WbReuse::getLanguageCodeType( $services ),
 			new PropertyValuePairType(
 				new PredicatePropertyType(
 					WbReuse::getPropertyLabelsResolver( $services ),
-					$languageCodeType,
+					WbReuse::getLabelProviderType( $services ),
 				),
 				new ValueType( WikibaseRepo::getDataTypeDefinitions( $services )->getGraphqlValueTypes() ),
 				new ValueTypeType()
 			),
-			new PropertyIdType()
+			new PropertyIdType(),
+			WbReuse::getLabelProviderType( $services ),
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
@@ -84,6 +84,19 @@ return [
 				new PrefetchingTermLookupBatchLabelsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
 			)
 		);
+	},
+	'WbReuse.LabelProviderType' => function( MediaWikiServices $services ): InterfaceType {
+		return new InterfaceType( [
+			'name' => 'LabelProvider',
+			'fields' => [
+				'label' => [
+					'type' => Type::string(),
+					'args' => [
+						'languageCode' => Type::nonNull( WbReuse::getLanguageCodeType( $services ) ),
+					],
+				],
+			],
+		] );
 	},
 	'WbReuse.LanguageCodeType' => function( MediaWikiServices $services ): LanguageCodeType {
 		return new LanguageCodeType( WikibaseRepo::getTermsLanguages( $services )->getLanguages() );

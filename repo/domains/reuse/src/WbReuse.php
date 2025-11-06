@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse;
 
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
@@ -34,6 +35,11 @@ class WbReuse {
 	public static function getPropertyLabelsResolver( ?ContainerInterface $services = null ): PropertyLabelsResolver {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.PropertyLabelsResolver' );
+	}
+
+	public static function getLabelProviderType( ?ContainerInterface $services = null ): InterfaceType {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.LabelProviderType' );
 	}
 
 	public static function getLanguageCodeType( ?ContainerInterface $services = null ): LanguageCodeType {
