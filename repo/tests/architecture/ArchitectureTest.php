@@ -68,6 +68,8 @@ class ArchitectureTest {
 			Selector::inNamespace( self::REGEX_DOMAIN_READMODEL, true ),
 			// search domain models (we don't have readmodels there)
 			Selector::inNamespace( 'Wikibase\Repo\Domains\Search\Domain\Model' ),
+			// reuse domain models (we don't have readmodels there)
+			Selector::inNamespace( 'Wikibase\Repo\Domains\Reuse\Domain\Model' ),
 		];
 	}
 
