@@ -20,7 +20,6 @@
 				<template v-for="statementGuid in createdStatementGuids" :key="statementGuid">
 					<wikibase-wbui2025-edit-statement
 						hide-remove-button
-						:property-id="propertyId"
 						:statement-id="statementGuid"
 					></wikibase-wbui2025-edit-statement>
 				</template>
