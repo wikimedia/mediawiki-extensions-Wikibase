@@ -252,49 +252,55 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		} );
 	} );
 
-	describe( 'the mounted component with a novalue statement', () => {
-		let wrapper, textInput, noValueSomeValuePlaceholder;
-		beforeEach( async () => {
-			const testPropertyId = 'P1';
-			const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
-			const testNoValueStatement = {
-				id: testNoValueStatementId,
-				mainsnak: {
-					hash: 'placeholder-hash',
-					snaktype: 'novalue',
-					datatype: 'string'
-				},
-				rank: 'normal'
-			};
+	describe.each(
+		[ 'string', 'tabular-data', 'geo-shape' ]
+	)( 'the mounted component with %s datatype', ( datatype ) => {
+		describe.each(
+			[ 'novalue', 'somevalue' ]
+		)( 'and %s snaktype', ( snaktype ) => {
 
-			const testingPinia = storeWithStatements( [ testNoValueStatement ] );
-			const editStatementsStore = useEditStatementsStore();
-			await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
-			const editStatementStore = useEditStatementStore( testNoValueStatementId )();
+			let wrapper, textInput, noValueSomeValuePlaceholder;
+			beforeEach( async () => {
+				const testPropertyId = 'P1';
+				const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
+				const testNoValueStatement = {
+					id: testNoValueStatementId,
+					mainsnak: {
+						hash: 'placeholder-hash',
+						snaktype,
+						datatype
+					},
+					rank: 'normal'
+				};
 
-			wrapper = await mount( editableSnakValueComponent, {
-				props: {
-					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
-				},
-				global: {
-					plugins: [ testingPinia ]
-				}
+				const testingPinia = storeWithStatements( [ testNoValueStatement ] );
+				const editStatementsStore = useEditStatementsStore();
+				await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
+				const editStatementStore = useEditStatementStore( testNoValueStatementId )();
+
+				wrapper = await mount( editableSnakValueComponent, {
+					props: {
+						propertyId: testPropertyId,
+						snakKey: editStatementStore.mainSnakKey
+					},
+					global: {
+						plugins: [ testingPinia ]
+					}
+				} );
+				await wrapper.vm.$nextTick();
+				textInput = wrapper.findComponent( CdxTextInput );
+				noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
 			} );
-			await wrapper.vm.$nextTick();
-			textInput = wrapper.findComponent( CdxTextInput );
-			noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
-		} );
 
-		it( 'mount its child components', () => {
-			expect( wrapper.exists() ).toBe( true );
-			expect( textInput.exists() ).toBe( false );
-			expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
-		} );
+			it( 'mount its child components', () => {
+				expect( wrapper.exists() ).toBe( true );
+				expect( textInput.exists() ).toBe( false );
+				expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
+			} );
 
-		it( 'loads and shows data correctly', () => {
-			expect( noValueSomeValuePlaceholder.text() ).toContain( 'wikibase-snakview-variations-novalue-label' );
+			it( 'loads and shows data correctly', () => {
+				expect( noValueSomeValuePlaceholder.text() ).toContain( `wikibase-snakview-variations-${ snaktype }-label` );
+			} );
 		} );
 	} );
-
 } );
