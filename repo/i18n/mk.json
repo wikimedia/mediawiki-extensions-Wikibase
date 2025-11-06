@@ -24,6 +24,7 @@
 	"wikibase-publish": "објави",
 	"wikibase-cancel": "откажи",
 	"wikibase-add": "додај",
+	"wikibase-addstatement": "додај исказ",
 	"wikibase-addqualifier": "додај определница",
 	"wikibase-addreference": "додај навод",
 	"wikibase-save-inprogress": "Зачувувам...",
