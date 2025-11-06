@@ -27,6 +27,8 @@
 	"wikibase-addreference": "Referenz derbäisetzen",
 	"wikibase-save-inprogress": "Späicheren...",
 	"wikibase-publish-inprogress": "Verëffentlechen...",
+	"wikibase-publishing-error": "Beim Späichere vun Ären Ännerungen ass eppes schif gaangen. Waart e Moment a probéiert nach eng Kéier.",
+	"wikibase-publishing-succeeded": "Är Ännerunge goufe gespäichert!",
 	"wikibase-remove-inprogress": "Ewechuelen...",
 	"wikibase-statementlistview-add": "Wäert derbäisetzen",
 	"wikibase-statementlistview-add-tooltip": "En neie Wäert derbäisetzen",

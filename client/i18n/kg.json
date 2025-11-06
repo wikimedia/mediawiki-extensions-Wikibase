@@ -7,14 +7,7 @@
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} kima",
-	"wikibase-editlinks": "Edit links",
-	"wikibase-addlinkstitle": "Add interlanguage links",
 	"wikibase-linkitem-addlinks": "Yika ba lien",
-	"wikibase-linkitem-title": "Link with page",
-	"wikibase-linkitem-linkpage": "Link with page",
-	"wikibase-linkitem-selectlink": "Please select a site and a page that you want to link to this page.",
 	"wikibase-linkitem-input-site": "Ndinga:",
-	"wikibase-linkitem-input-page": "Lutiti:",
-	"wikibase-rc-hide-wikidata-hide": "Hide",
-	"wikibase-otherprojects": "Na bisalu ya nkaka"
+	"wikibase-linkitem-input-page": "Lutiti:"
 }
