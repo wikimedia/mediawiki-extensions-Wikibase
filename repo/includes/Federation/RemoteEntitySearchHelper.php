@@ -19,16 +19,16 @@ use Wikibase\DataModel\Term\Term;
  */
 class RemoteEntitySearchHelper implements EntitySearchHelper {
 
-	private EntitySearchHelper $inner;
+	private EntitySearchHelper $localSearchHelper;
 	private RemoteEntitySearchClient $remoteEntitySearchClient;
 	private SettingsArray $settings;
 
 	public function __construct(
-		EntitySearchHelper $inner,
+		EntitySearchHelper $localSearchHelper,
 		RemoteEntitySearchClient $remoteEntitySearchClient,
 		SettingsArray $settings
 	) {
-		$this->inner = $inner;
+		$this->localSearchHelper = $localSearchHelper;
 		$this->remoteEntitySearchClient = $remoteEntitySearchClient;
 		$this->settings = $settings;
 	}
@@ -52,7 +52,7 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 	) {
 
 		// Always get local results first
-		$localResults = $this->inner->getRankedSearchResults(
+		$localResults = $this->localSearchHelper->getRankedSearchResults(
 			$text,
 			$languageCode,
 			$entityType,
