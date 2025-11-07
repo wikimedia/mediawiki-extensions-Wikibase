@@ -22,7 +22,6 @@ use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
@@ -31,9 +30,6 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
@@ -49,21 +45,11 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
  */
 class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 
-	private static Item $item1;
-	private static Item $item2;
-	private static Item $statementValueItem;
-	private static Item $qualifierValueItem;
-	private static Property $stringTypeProperty;
-	private static Property $itemTypeProperty;
-	private static Property $globeCoordinateTypeProperty;
-	private static Property $monolingualTextProperty;
-	private static Property $quantityProperty;
-	private static Property $timeProperty;
-	private static Property $propertyTypeProperty;
-	private static Property $propertyUsedAsValue;
-	private static Property $qualifierProperty;
-	private static Property $customEntityIdProperty;
-	private static Property $unknownTypeProperty;
+	/** @var Property[] */
+	private static array $properties = [];
+
+	/** @var Item[] */
+	private static array $items = [];
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
 	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
@@ -79,34 +65,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testQuery( string $query, array $expectedResult ): void {
 		$entityLookup = new InMemoryEntityLookup();
-		$entityLookup->addEntity( self::$item1 );
-		$entityLookup->addEntity( self::$item2 );
+		foreach ( self::$items as $item ) {
+			$entityLookup->addEntity( $item );
+		}
 
 		$siteIdProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
 		$siteIdProvider->method( 'getList' )->willReturn( self::ALLOWED_SITELINK_SITES );
 
 		$termLookup = new InMemoryPrefetchingTermLookup();
-		$termLookup->setData( [
-			self::$stringTypeProperty,
-			self::$qualifierProperty,
-			self::$statementValueItem,
-			self::$qualifierValueItem,
-			self::$propertyUsedAsValue,
-		] );
+		$termLookup->setData( [ ...self::$items, ...self::$properties ] );
 
 		$dataTypeLookup = new InMemoryDataTypeLookup();
-		foreach ( [
-			self::$qualifierProperty,
-			self::$stringTypeProperty,
-			self::$itemTypeProperty,
-			self::$globeCoordinateTypeProperty,
-			self::$monolingualTextProperty,
-			self::$quantityProperty,
-			self::$timeProperty,
-			self::$propertyTypeProperty,
-			self::$customEntityIdProperty,
-			self::$unknownTypeProperty,
-		] as $property ) {
+		foreach ( self::$properties as $property ) {
 			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
 		}
 
@@ -123,220 +93,26 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function queryProvider(): Generator {
-		$statementValueItemEnLabel = 'statement value item';
-		$itemValueItemId = 'Q4';
-		self::$statementValueItem = NewItem::withId( $itemValueItemId )
-			->andLabel( 'en', $statementValueItemEnLabel )
-			->build();
-
-		$qualifierValueItemEnLabel = 'statement value item';
-		$qualifierValueItemId = 'Q5';
-		self::$qualifierValueItem = NewItem::withId( $qualifierValueItemId )
-			->andLabel( 'en', $qualifierValueItemEnLabel )
-			->build();
-
-		$itemId = 'Q123';
 		$enLabel = 'potato';
 		$enDescription = 'root vegetable';
 		$enAliases = [ 'spud', 'tater' ];
 		$sitelinkSiteId = self::ALLOWED_SITELINK_SITES[0];
 		$otherSiteId = self::ALLOWED_SITELINK_SITES[1];
 		$sitelinkTitle = 'Potato';
-		$statementWithStringValuePropertyId = 'P1';
-		$qualifierPropertyId = 'P2';
-		$statementWithItemValuePropertyId = 'P3';
-		$statementWithNoValuePropertyId = 'P4';
-		$statementWithNoReferencesPropertyId = $statementWithNoValuePropertyId;
-		$statementWithSomeValuePropertyId = 'P5';
-		$statementWithGlobeCoordinateValuePropertyId = 'P6';
-		$statementWithMonolingualTextValuePropertyId = 'P7';
-		$statementWithQuantityValuePropertyId = 'P8';
-		$statementWithTimeValuePropertyId = 'P9';
-		$statementWithPropertyValuePropertyId = 'P10';
-		$statementWithCustomEntityIdValuePropertyId = 'P13';
-		$statementWithItemValueQualifierPropertyId = $statementWithItemValuePropertyId; // also type wikibase-item so we can just reuse it.
-		$statementReferencePropertyId = 'P11';
-		$unknownTypePropertyId = 'P12';
 		$unusedPropertyId = 'P9999';
-		$qualifierStringValue = 'qualifierStringValue';
-		$statementStringValue = 'statementStringValue';
-		$statementWithStringValue = NewStatement::forProperty( ( $statementWithStringValuePropertyId ) )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withRank( 1 )
-			->withQualifier( new NumericPropertyId( $qualifierPropertyId ), new StringValue( $qualifierStringValue ) )
-			->withReference( new Reference( [ new PropertySomeValueSnak( new NumericPropertyId( $statementReferencePropertyId ) ) ] ) )
-			->withValue( $statementStringValue )
-			->build();
 
-		$statementWithItemValue = NewStatement::forProperty( ( $statementWithItemValuePropertyId ) )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( new ItemId( $itemValueItemId ) )
-			->withQualifier( $statementWithItemValueQualifierPropertyId, self::$qualifierValueItem->getId() )
-			->build();
-		$globeCoordinateValue = new GlobeCoordinateValue( new LatLongValue( 52.516, 13.383 ) );
-		$statementWithGlobeCoordinateValue = NewStatement::forProperty( $statementWithGlobeCoordinateValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $globeCoordinateValue )
-			->build();
-		$monolingualTextValue = new MonolingualTextValue( 'en', 'potato' );
-		$statementWithMonolingualTextValue = NewStatement::forProperty( $statementWithMonolingualTextValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $monolingualTextValue )
-			->build();
-		$quantityValue = new QuantityValue(
-			new DecimalValue( '+0.111' ),
-			'https://wikibase.example/wiki/Q123',
-			new DecimalValue( '+0.1150' ),
-			new DecimalValue( '+0.1105' ),
+		$item = $this->createItem(
+			NewItem::withLabel( 'en', $enLabel )
+				->andDescription( 'en', $enDescription )
+				->andAliases( 'en', $enAliases )
+				->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
 		);
-		$unboundedQuantityValue = new UnboundedQuantityValue(
-			new DecimalValue( '+321' ),
-			'https://wikibase.example/wiki/Q321',
-		);
-		$statementWithQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $quantityValue )
-			->build();
-		$statementWithUnboundedQuantityValue = NewStatement::forProperty( $statementWithQuantityValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $unboundedQuantityValue )
-			->build();
-		$timeValue = new TimeValue(
-			timestamp: '+2001-01-01T00:00:00Z',
-			timezone: 60,
-			before: 0,
-			after: 1,
-			precision: TimeValue::PRECISION_MONTH,
-			calendarModel: 'http://www.wikidata.org/entity/Q1985727',
-		);
-		$statementWithTimeValue = NewStatement::forProperty( $statementWithTimeValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $timeValue )
-			->build();
-		self::$propertyUsedAsValue = new Property(
-			new NumericPropertyId( 'P789' ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'property used as value' ) ] ) ),
-			'string',
-		);
-		$statementWithPropertyValue = NewStatement::forProperty( $statementWithPropertyValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( new EntityIdValue( self::$propertyUsedAsValue->getId() ) )
-			->build();
-
-		self::$unknownTypeProperty = new Property( new NumericPropertyId( $unknownTypePropertyId ), null, 'unknown-type' );
-		$unknownValueData = [ 'some' => 'data' ];
-		$statementWithUnknownType = NewStatement::forProperty( $unknownTypePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			// Ideally we would just stub DataValue here, but that's not possible because it extends Serializable,
-			// which is deprecated and emits a warning.
-			->withValue( new UnDeserializableValue( $unknownValueData, null, 'test value' ) );
-
-		$deletedProperty = 'P999';
-		$valueUsedInStatementWithDeletedProperty = new StringValue( 'deleted value' );
-		$statementWithDeletedProperty = NewStatement::forProperty( $deletedProperty )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $valueUsedInStatementWithDeletedProperty );
-
-		$statementWithNoValue = NewStatement::noValueFor( ( $statementWithNoValuePropertyId ) )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->build();
-		$statementWithSomeValue = NewStatement::someValueFor( ( $statementWithSomeValuePropertyId ) )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->build();
-
-		$customEntityId = $this->createMock( EntityId::class );
-		$customEntityId->method( 'getSerialization' )
-			->willReturn( 'T3' );
-		$entityIdValue = new EntityIdValue( $customEntityId );
-		$statementWithCustomEntityIdValue = NewStatement::forProperty( $statementWithCustomEntityIdValuePropertyId )
-			->withSubject( $itemId )
-			->withSomeGuid()
-			->withValue( $entityIdValue )
-			->build();
+		$itemId = $item->getId();
 
 		self::$sitelinkSite = new MediaWikiSite();
 		self::$sitelinkSite->setLinkPath( 'https://wiki.example/wiki/$1' );
 		$expectedSitelinkUrl = "https://wiki.example/wiki/$sitelinkTitle";
 		self::$sitelinkSite->setGlobalId( $sitelinkSiteId );
-
-		self::$stringTypeProperty = new Property(
-			new NumericPropertyId( $statementWithStringValuePropertyId ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'statement prop' ) ] ) ),
-			'string',
-		);
-		self::$itemTypeProperty = new Property( new NumericPropertyId( $statementWithItemValuePropertyId ), null, 'wikibase-item' );
-		self::$globeCoordinateTypeProperty = new Property(
-			new NumericPropertyId( $statementWithGlobeCoordinateValuePropertyId ),
-			null,
-			'globe-coordinate',
-		);
-		self::$monolingualTextProperty = new Property(
-			new NumericPropertyId( $statementWithMonolingualTextValuePropertyId ),
-			null,
-			'monolingualtext',
-		);
-		self::$quantityProperty = new Property(
-			new NumericPropertyId( $statementWithQuantityValuePropertyId ),
-			null,
-			'quantity',
-		);
-		self::$timeProperty = new Property(
-			new NumericPropertyId( $statementWithTimeValuePropertyId ),
-			null,
-			'time',
-		);
-		self::$propertyTypeProperty = new Property(
-			new NumericPropertyId( $statementWithPropertyValuePropertyId ),
-			null,
-			'wikibase-property',
-		);
-		self::$qualifierProperty = new Property(
-			new NumericPropertyId( $qualifierPropertyId ),
-			new Fingerprint( new TermList( [ new Term( 'en', 'qualifier prop' ) ] ) ),
-			'string',
-		);
-		self::$customEntityIdProperty = new Property(
-			new NumericPropertyId( $statementWithCustomEntityIdValuePropertyId ),
-			null,
-			self::CUSTOM_ENTITY_DATA_TYPE
-		);
-
-		self::$item1 = NewItem::withId( $itemId )
-			->andLabel( 'en', $enLabel )
-			->andDescription( 'en', $enDescription )
-			->andAliases( 'en', $enAliases )
-			->andSiteLink( $sitelinkSiteId, $sitelinkTitle )
-			->andStatement( $statementWithStringValue )
-			->andStatement( $statementWithItemValue )
-			->andStatement( $statementWithGlobeCoordinateValue )
-			->andStatement( $statementWithMonolingualTextValue )
-			->andStatement( $statementWithQuantityValue )
-			->andStatement( $statementWithUnboundedQuantityValue )
-			->andStatement( $statementWithTimeValue )
-			->andStatement( $statementWithPropertyValue )
-			->andStatement( $statementWithNoValue )
-			->andStatement( $statementWithSomeValue )
-			->andStatement( $statementWithCustomEntityIdValue )
-			->andStatement( $statementWithUnknownType )
-			->andStatement( $statementWithDeletedProperty )
-			->build();
-
-		$item2Id = 'Q321';
-		self::$item2 = NewItem::withId( $item2Id )
-			->andLabel( 'en', 'another item' )
-			->build();
 
 		yield 'id only' => [
 			"{ item(id: \"$itemId\") { id } }",
@@ -377,9 +153,23 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$stringProperty = $this->createProperty( 'string', 'string property' );
+		$qualifierProperty = $this->createProperty( 'string', 'qualifier prop' );
+		$referenceProperty = $this->createProperty( 'string', 'reference prop' );
+		$statementStringValue = 'statementStringValue';
+		$qualifierStringValue = 'qualifierStringValue';
+		$statementWithStringValue = NewStatement::forProperty( $stringProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withQualifier( $qualifierProperty->getId(), new StringValue( $qualifierStringValue ) )
+			->withReference( new Reference( [ new PropertySomeValueSnak( $referenceProperty->getId() ) ] ) )
+			->withValue( $statementStringValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithStringValue );
 		yield 'statement with id and rank' => [
 			"{ item(id: \"$itemId\") {
-				$statementWithStringValuePropertyId: statements(propertyId: \"$statementWithStringValuePropertyId\") {
+				{$stringProperty->getId()}: statements(propertyId: \"{$stringProperty->getId()}\") {
 					id
 					rank
 					property { id dataType }
@@ -389,12 +179,12 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			[
 				'data' => [
 					'item' => [
-						$statementWithStringValuePropertyId => [
+						$stringProperty->getId()->getSerialization() => [
 							[
 								'id' => $statementWithStringValue->getGuid(),
 								'rank' => 'normal',
 								'property' => [
-									'id' => $statementWithStringValuePropertyId,
+									'id' => $stringProperty->getId()->getSerialization(),
 									'dataType' => 'string',
 								],
 							],
@@ -404,34 +194,78 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$itemProperty = $this->createProperty( 'wikibase-item' );
+		$statementValueItemEnLabel = 'statement value item';
+		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', $statementValueItemEnLabel ) );
+		$qualifierValueItemEnLabel = 'statement value item';
+		$itemUsedAsQualifierValue = $this->createItem( NewItem::withLabel( 'en', $qualifierValueItemEnLabel ) );
+		$statementWithItemValue = NewStatement::forProperty( $itemProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $itemUsedAsStatementValue->getId() )
+			->withQualifier( $itemProperty->getId(), $itemUsedAsQualifierValue->getId() )
+			->build();
+		$item->getStatements()->addStatement( $statementWithItemValue );
+		yield 'statements with StringValue and ItemValue' => [
+			"{ item(id: \"$itemId\") {
+				{$stringProperty->getId()}: statements(propertyId: \"{$stringProperty->getId()}\") {
+					value { ...on StringValue { content } }
+					valueType
+				}
+				{$itemProperty->getId()}: statements(propertyId: \"{$itemProperty->getId()}\") {
+					value { ...on ItemValue { id } }
+					valueType
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						$stringProperty->getId()->getSerialization() => [
+							[
+								'value' => [
+									'content' => $statementStringValue,
+								],
+								'valueType' => 'value',
+							],
+						],
+						$itemProperty->getId()->getSerialization() => [
+							[
+								'value' => [ 'id' => $itemUsedAsStatementValue->getId() ],
+								'valueType' => 'value',
+							],
+						],
+					],
+				],
+			],
+		];
 		yield 'statement with references' => [
 			"{ item(id: \"$itemId\") {
-			 	$statementWithStringValuePropertyId: statements(propertyId: \"$statementWithStringValuePropertyId\") {
-			 		references{
-			 			parts{
-							property { id dataType } 
+			 	{$stringProperty->getId()}: statements(propertyId: \"{$stringProperty->getId()}\") {
+			 		references {
+			 			parts {
+							property { id dataType }
 							value { ...on StringValue { content } }
 							valueType
 						}
 			 		}
 				}
-				$statementWithNoReferencesPropertyId: statements(propertyId: \"$statementWithNoReferencesPropertyId\") { 
-					references { parts { valueType }
-			 		}
-				 }
+				statementWithNoReferences: statements(propertyId: \"{$itemProperty->getId()}\") {
+					references { parts { valueType } }
+				}
 			} }",
 			[
 				'data' => [
 					'item' => [
-						$statementWithStringValuePropertyId => [
+						$stringProperty->getId()->getSerialization() => [
 							[
 								'references' => [
 									[
 										'parts' => [
 											[
 												'property' => [
-													'id' => $statementReferencePropertyId,
-													'dataType' => null,
+													'id' => $referenceProperty->getId()->getSerialization(),
+													'dataType' => 'string',
 												],
 												'value' => null,
 												'valueType' => 'somevalue',
@@ -441,15 +275,15 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								],
 							],
 						],
-						$statementWithNoReferencesPropertyId => [ [ 'references' => [] ] ],
+						'statementWithNoReferences' => [ [ 'references' => [] ] ],
 					],
 				],
 			],
 		];
 		yield 'statement with qualifier' => [
 			"{ item(id: \"$itemId\") {
-			 	statements(propertyId: \"$statementWithStringValuePropertyId\") {
-			 		$qualifierPropertyId: qualifiers(propertyId: \"$qualifierPropertyId\") {
+			 	statements(propertyId: \"{$stringProperty->getId()}\") {
+			 		{$qualifierProperty->getId()}: qualifiers(propertyId: \"{$qualifierProperty->getId()}\") {
 						property { id dataType }
 			 			value { ...on StringValue { content } }
 			 			valueType
@@ -464,10 +298,10 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					'item' => [
 						'statements' => [
 							[
-								$qualifierPropertyId => [
+								$qualifierProperty->getId()->getSerialization() => [
 									[
 										'property' => [
-											'id' => $qualifierPropertyId,
+											'id' => $qualifierProperty->getId()->getSerialization(),
 											'dataType' => 'string',
 										],
 										'value' => [
@@ -483,41 +317,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
-		yield 'statements with StringValue and ItemValue' => [
-			"{ item(id: \"$itemId\") {
-				$statementWithStringValuePropertyId: statements(propertyId: \"$statementWithStringValuePropertyId\") {
-					value { ...on StringValue { content } }
-					valueType
-				}
-				$statementWithItemValuePropertyId: statements(propertyId: \"$statementWithItemValuePropertyId\") {
-					value { ...on ItemValue { id } }
-					valueType
-				}
-			} }",
-			[
-				'data' => [
-					'item' => [
-						$statementWithStringValuePropertyId => [
-							[
-								'value' => [
-									'content' => $statementStringValue,
-								],
-								'valueType' => 'value',
-							],
-						],
-						$statementWithItemValuePropertyId => [
-							[
-								'value' => [ 'id' => $itemValueItemId ],
-								'valueType' => 'value',
-							],
-						],
-					],
-				],
-			],
-		];
+
+		$globeCoordinateProperty = $this->createProperty( 'globe-coordinate' );
+		$globeCoordinateValue = new GlobeCoordinateValue( new LatLongValue( 52.516, 13.383 ) );
+		$statementWithGlobeCoordinateValue = NewStatement::forProperty( $globeCoordinateProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $globeCoordinateValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithGlobeCoordinateValue );
 		yield 'statement with globe-coordinate value' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$statementWithGlobeCoordinateValuePropertyId\") {
+				statements(propertyId: \"{$globeCoordinateProperty->getId()}\") {
 					value {
 						... on GlobeCoordinateValue { latitude longitude precision globe }
 					}
@@ -540,9 +351,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$monolingualTextProperty = $this->createProperty( 'monolingualtext' );
+		$monolingualTextValue = new MonolingualTextValue( 'en', 'potato' );
+		$statementWithMonolingualTextValue = NewStatement::forProperty( $monolingualTextProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $monolingualTextValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithMonolingualTextValue );
 		yield 'statement with monolingualtext value' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$statementWithMonolingualTextValuePropertyId\") {
+				statements(propertyId: \"{$monolingualTextProperty->getId()}\") {
 					value {
 						... on MonolingualTextValue { language text }
 					}
@@ -563,9 +383,33 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$quantityProperty = $this->createProperty( 'quantity' );
+		$quantityValue = new QuantityValue(
+			new DecimalValue( '+0.111' ),
+			'https://wikibase.example/wiki/Q123',
+			new DecimalValue( '+0.1150' ),
+			new DecimalValue( '+0.1105' ),
+		);
+		$unboundedQuantityValue = new UnboundedQuantityValue(
+			new DecimalValue( '+321' ),
+			'https://wikibase.example/wiki/Q321',
+		);
+		$statementWithQuantityValue = NewStatement::forProperty( $quantityProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $quantityValue )
+			->build();
+		$statementWithUnboundedQuantityValue = NewStatement::forProperty( $quantityProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $unboundedQuantityValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithQuantityValue );
+		$item->getStatements()->addStatement( $statementWithUnboundedQuantityValue );
 		yield 'statement with quantity value' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$statementWithQuantityValuePropertyId\") {
+				statements(propertyId: \"{$quantityProperty->getId()}\") {
 					value {
 						... on QuantityValue { amount unit lowerBound upperBound }
 					}
@@ -596,9 +440,25 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$timeProperty = $this->createProperty( 'time' );
+		$timeValue = new TimeValue(
+			timestamp: '+2001-01-01T00:00:00Z',
+			timezone: 60,
+			before: 0,
+			after: 1,
+			precision: TimeValue::PRECISION_MONTH,
+			calendarModel: 'http://www.wikidata.org/entity/Q1985727',
+		);
+		$statementWithTimeValue = NewStatement::forProperty( $timeProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $timeValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithTimeValue );
 		yield 'statement with time value' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$statementWithTimeValuePropertyId\") {
+				statements(propertyId: \"{$timeProperty->getId()}\") {
 					value {
 						... on TimeValue { time timezone before after precision calendarModel }
 					}
@@ -623,9 +483,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$propertyProperty = $this->createProperty( 'wikibase-property' );
+		$propertyUsedAsValue = $this->createProperty( 'string', 'property used as value' );
+		$statementWithPropertyValue = NewStatement::forProperty( $propertyProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( new EntityIdValue( $propertyUsedAsValue->getId() ) )
+			->build();
+		$item->getStatements()->addStatement( $statementWithPropertyValue );
 		yield 'statement with property value' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$statementWithPropertyValuePropertyId\") {
+				statements(propertyId: \"{$propertyProperty->getId()}\") {
 					value {
 						... on PropertyValue {
 							id
@@ -640,8 +509,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'statements' => [
 							[
 								'value' => [
-									'id' => self::$propertyUsedAsValue->getId()->getSerialization(),
-									'label' => self::$propertyUsedAsValue->getLabels()->getByLanguage( 'en' )->getText(),
+									'id' => $propertyUsedAsValue->getId()->getSerialization(),
+									'label' => $propertyUsedAsValue->getLabels()->getByLanguage( 'en' )->getText(),
 								],
 							],
 						],
@@ -649,27 +518,35 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$noValueSomeValueProperty = $this->createProperty( 'string' );
+		$statementWithSomeValue = NewStatement::someValueFor( $noValueSomeValueProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->build();
+		$statementWithNoValue = NewStatement::noValueFor( $noValueSomeValueProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->build();
+		$item->getStatements()->addStatement( $statementWithSomeValue );
+		$item->getStatements()->addStatement( $statementWithNoValue );
 		yield 'statements with novalue and somevalue' => [
 			"{ item(id: \"$itemId\") {
-				$statementWithSomeValuePropertyId: statements(propertyId: \"$statementWithSomeValuePropertyId\") {
+				statements(propertyId: \"{$noValueSomeValueProperty->getId()}\") {
 					value { ...on StringValue { content } }
-					valueType
-				}
-				$statementWithNoValuePropertyId: statements(propertyId: \"$statementWithNoValuePropertyId\") {
 					valueType
 				}
 			} }",
 			[
 				'data' => [
 					'item' => [
-						$statementWithSomeValuePropertyId => [
+						'statements' => [
 							[
 								'value' => null,
 								'valueType' => 'somevalue',
 							],
-						],
-						$statementWithNoValuePropertyId => [
 							[
+								'value' => null,
 								'valueType' => 'novalue',
 							],
 						],
@@ -677,9 +554,20 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$unknownTypeProperty = $this->createProperty( 'unknown-type', 'unknown type property' );
+		$unknownValueData = [ 'some' => 'data' ];
+		$statementWithUnknownType = NewStatement::forProperty( $unknownTypeProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			// Ideally we would just stub DataValue here, but that's not possible because it extends Serializable,
+			// which is deprecated and emits a warning.
+			->withValue( new UnDeserializableValue( $unknownValueData, null, 'test value' ) )
+			->build();
+		$item->getStatements()->addStatement( $statementWithUnknownType );
 		yield 'statement with unknown value type' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"$unknownTypePropertyId\") {
+				statements(propertyId: \"{$unknownTypeProperty->getId()}\") {
 					value { ...on UnknownValue { content } }
 				}
 			} }",
@@ -693,6 +581,15 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$deletedProperty = 'P999';
+		$valueUsedInStatementWithDeletedProperty = new StringValue( 'deleted value' );
+		$statementWithDeletedProperty = NewStatement::forProperty( $deletedProperty )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $valueUsedInStatementWithDeletedProperty )
+			->build();
+		$item->getStatements()->addStatement( $statementWithDeletedProperty );
 		yield 'statement with deleted property' => [
 			"{ item(id: \"$itemId\") {
 				statements(propertyId: \"$deletedProperty\") {
@@ -711,11 +608,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		];
 		yield 'labels of predicate properties' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"{$statementWithStringValuePropertyId}\") {
+				statements(propertyId: \"{$stringProperty->getId()}\") {
 					property {
 						label(languageCode: \"en\")
 					}
-					qualifiers(propertyId: \"{$qualifierPropertyId}\") {
+					qualifiers(propertyId: \"{$qualifierProperty->getId()}\") {
 						property {
 							label(languageCode: \"en\")
 						}
@@ -727,11 +624,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 					'item' => [
 						'statements' => [
 							[
-								'property' => [ 'label' => self::$stringTypeProperty->getLabels()->getByLanguage( 'en' )->getText() ],
+								'property' => [ 'label' => $stringProperty->getLabels()->getByLanguage( 'en' )->getText() ],
 								'qualifiers' => [
 									[
 										'property' => [
-											'label' => self::$qualifierProperty->getLabels()->getByLanguage( 'en' )->getText(),
+											'label' => $qualifierProperty->getLabels()->getByLanguage( 'en' )->getText(),
 										],
 									],
 								],
@@ -743,13 +640,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		];
 		yield 'labels of item values' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"{$statementWithItemValuePropertyId}\") {
+				statements(propertyId: \"{$itemProperty->getId()}\") {
 					value {
 						... on ItemValue {
 							label(languageCode: \"en\")
 						}
 					}
-					qualifiers(propertyId: \"{$statementWithItemValueQualifierPropertyId}\") {
+					qualifiers(propertyId: \"{$itemProperty->getId()}\") {
 						value {
 							... on ItemValue {
 								label(languageCode: \"en\")
@@ -764,12 +661,12 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'statements' => [
 							[
 								'value' => [
-									'label' => self::$statementValueItem->getLabels()->getByLanguage( 'en' )->getText(),
+									'label' => $itemUsedAsStatementValue->getLabels()->getByLanguage( 'en' )->getText(),
 								],
 								'qualifiers' => [
 									[
 										'value' => [
-											'label' => self::$qualifierValueItem->getLabels()->getByLanguage( 'en' )->getText(),
+											'label' => $itemUsedAsQualifierValue->getLabels()->getByLanguage( 'en' )->getText(),
 										],
 									],
 								],
@@ -779,10 +676,22 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$customEntityTypeProperty = $this->createProperty( self::CUSTOM_ENTITY_DATA_TYPE );
+		$customEntityId = $this->createMock( EntityId::class );
+		$customEntityId->method( 'getSerialization' )
+			->willReturn( 'T3' );
+		$entityIdValue = new EntityIdValue( $customEntityId );
+		$statementWithCustomEntityIdValue = NewStatement::forProperty( $customEntityTypeProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( $entityIdValue )
+			->build();
+		$item->getStatements()->addStatement( $statementWithCustomEntityIdValue );
 		yield 'entity id value for which there is no data type specific GraphQL type' => [
 			"{ item(id: \"$itemId\") {
-				statements(propertyId: \"{$statementWithCustomEntityIdValuePropertyId}\") {
-					value {... on EntityValue { id } }
+				statements(propertyId: \"{$customEntityTypeProperty->getId()}\") {
+					value { ... on EntityValue { id } }
 				}
 			} }",
 			[
@@ -795,15 +704,17 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		$otherItem = $this->createItem( NewItem::withLabel( 'en', 'another item' ) );
 		yield 'multiple items at once' => [
 			"{
 				item1: item(id: \"$itemId\") { label(languageCode: \"en\") }
-				item2: item(id: \"$item2Id\") { label(languageCode: \"en\") }
+				item2: item(id: \"{$otherItem->getId()}\") { label(languageCode: \"en\") }
 			}",
 			[
 				'data' => [
-					'item1' => [ 'label' => self::$item1->getLabels()->getByLanguage( 'en' )->getText() ],
-					'item2' => [ 'label' => self::$item2->getLabels()->getByLanguage( 'en' )->getText() ],
+					'item1' => [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ],
+					'item2' => [ 'label' => $otherItem->getLabels()->getByLanguage( 'en' )->getText() ],
 				],
 			],
 		];
@@ -855,8 +766,8 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$propertyId = 'not-a-valid-property-id';
 		yield 'validates property ID' => [
 			"{ item(id: \"$itemId\") {
-			statements(propertyId: \"$propertyId\") { id }
-		 } }",
+				statements(propertyId: \"$propertyId\") { id }
+			 } }",
 			"Not a valid Property ID: \"$propertyId\"",
 		];
 
@@ -864,14 +775,40 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$validPropertyId = 'P123';
 		yield 'validates property ID for qualifiers' => [
 			"{ item(id: \"$itemId\") {
-			statements(propertyId: \"$validPropertyId\") {
-				qualifiers(propertyId: \"$qualifierPropertyId\") {
-					valueType
-				} 
-			 }
-		 } }",
+				statements(propertyId: \"$validPropertyId\") {
+					qualifiers(propertyId: \"$qualifierPropertyId\") {
+						valueType
+					}
+				}
+			 } }",
 			"Not a valid Property ID: \"$propertyId\"",
 		];
+	}
+
+	private function createProperty( string $dataType, ?string $enLabel = null ): Property {
+		// assign the ID here so that we don't have to worry about collisions
+		$nextId = empty( self::$properties ) ? 'P1' : 'P' . $this->getNextNumericId( self::$properties );
+		$property = new Property( new NumericPropertyId( $nextId ), null, $dataType );
+		if ( $enLabel ) {
+			$property->setLabel( 'en', $enLabel );
+		}
+		self::$properties[] = $property;
+
+		return $property;
+	}
+
+	private function createItem( NewItem $newItem ): Item {
+		// assign the ID here so that we don't have to worry about collisions
+		$nextId = empty( self::$items ) ? 'Q1' : 'Q' . $this->getNextNumericId( self::$items );
+		$item = $newItem->andId( $nextId )->build();
+		self::$items[] = $item;
+
+		return $item;
+	}
+
+	private function getNextNumericId( array $entities ): int {
+		$latestEntity = $entities[array_key_last( $entities )];
+		return (int)substr( $latestEntity->getId()->getSerialization(), 1 ) + 1;
 	}
 
 	private function newGraphQLService(
