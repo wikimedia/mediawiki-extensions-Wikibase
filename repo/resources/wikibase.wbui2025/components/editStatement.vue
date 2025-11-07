@@ -1,15 +1,17 @@
 <template>
 	<template v-if="showAddQualifierModal">
 		<wbui2025-add-qualifier
+			:statement-id="statementId"
 			@hide="showAddQualifierModal = false"
-			@add-qualifier="addQualifier"
+			@qualifier-added="qualifierAdded"
 		>
 		</wbui2025-add-qualifier>
 	</template>
 	<template v-if="showAddReferenceModal">
 		<wbui2025-add-reference
+			:statement-id="statementId"
 			@hide="showAddReferenceModal = false"
-			@add-reference="addReference"
+			@reference-added="referenceAdded"
 		>
 		</wbui2025-add-reference>
 	</template>
@@ -152,20 +154,9 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	methods: {
-		addQualifier( propertyId, snakData ) {
-			wbui2025.store
-				.useEditStatementStore( this.statementId )()
-				.addQualifier( propertyId, snakData );
+		qualifierAdded() {
 			this.showAddQualifierModal = false;
 		},
-
-		addReference( propertyId, snakData ) {
-			wbui2025.store
-				.useEditStatementStore( this.statementId )()
-				.addReference( propertyId, snakData );
-			this.showAddReferenceModal = false;
-		},
-
 		removeQualifierSnakFromProperty( propertyId, snakKey ) {
 			this.qualifiers[ propertyId ].splice( this.qualifiers[ propertyId ].indexOf( snakKey ), 1 );
 			if ( this.qualifiers[ propertyId ].length === 0 ) {
@@ -173,7 +164,9 @@ module.exports = exports = defineComponent( {
 				this.qualifiersOrder.splice( this.qualifiersOrder.indexOf( propertyId ), 1 );
 			}
 		},
-
+		referenceAdded() {
+			this.showAddReferenceModal = false;
+		},
 		removeReference( reference ) {
 			this.references.splice( this.references.indexOf( reference ), 1 );
 		},

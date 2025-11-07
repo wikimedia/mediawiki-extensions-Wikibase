@@ -53,11 +53,6 @@ const Wbui2025EditableReferencesSection = require( '../../../resources/wikibase.
 const Wbui2025EditableReference = require( '../../../resources/wikibase.wbui2025/components/editableReference.vue' );
 const { storeWithStatements } = require( '../piniaHelpers.js' );
 const { useEditStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
-const {
-	parseValue: mockedParseValue,
-	renderSnakValueHtml: mockRenderSnakValueHtml,
-	renderPropertyLinkHtml: mockRenderPropertyLinkHtml
-} = require( '../../../resources/wikibase.wbui2025/api/editEntity.js' );
 
 function snakKeysFromReference( reference ) {
 	return Object.values( reference.props( 'reference' ).snaks ).reduce(
@@ -287,39 +282,15 @@ describe( 'wikibase.wbui2025.editStatement', () => {
 				expect( addQualifierForm.exists() ).toBe( false );
 			} );
 
-			it( 'adds the new qualifier and hides the form when "add-qualifier" is emitted', async () => {
-				const snakData = {
-					snaktype: 'value',
-					hash: 'placeholder-hash',
-					property: 'P23',
-					datavalue: {
-						value: 'string value',
-						type: 'string'
-					},
-					datatype: 'string'
-				};
-				mockedParseValue.mockResolvedValue( { type: 'string', value: 'string value' } );
-				mockRenderPropertyLinkHtml.mockResolvedValueOnce( '<a>a property link</a>' );
-				mockRenderSnakValueHtml.mockResolvedValueOnce( '<a>string</a>' );
-				await addQualifierForm.vm.$emit( 'add-qualifier', 'P23', snakData );
-				// The 'add-qualifier' event listener is asynchronous. We need to wait some time here
-				// for the various promises in the addQualifier action to complete.
-				let wait = 0;
-				while ( wait < 5 ) {
-					await addQualifierForm.vm.$nextTick();
-					if ( !addQualifierForm.exists() ) {
-						break;
-					}
-					wait++;
-				}
+			it( 'adds the new qualifier and hides the form when "qualifier-added" is emitted', async () => {
+				await addQualifierForm.vm.$emit( 'qualifier-added' );
 				expect( addQualifierForm.exists() ).toBe( false );
 
 				const updatedQualifiers = wrapper.findAllComponents( Wbui2025EditableQualifiers );
 				const updatedQualifiersProps = updatedQualifiers[ 0 ].props( 'qualifiers' );
 
-				expect( updatedQualifiersProps ).toEqual( expect.objectContaining( {
-					P23: expect.any( Array )
-				} ) );
+				expect( updatedQualifiersProps ).toHaveProperty( 'P1' );
+				expect( updatedQualifiersProps.P1 ).toHaveLength( 1 );
 			} );
 		} );
 	} );

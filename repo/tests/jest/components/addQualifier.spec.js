@@ -39,6 +39,8 @@ const { CdxButton, CdxTextInput } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025AddQualifier = require( '../../../resources/wikibase.wbui2025/components/addQualifier.vue' );
 const Wbui2025PropertyLookup = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
+const { storeWithStatements } = require( '../piniaHelpers.js' );
+const { useParsedValueStore } = require( '../../../resources/wikibase.wbui2025/store/parsedValueStore.js' );
 
 describe( 'wikibase.wbui2025.addQualifier', () => {
 	it( 'defines component', async () => {
@@ -52,7 +54,16 @@ describe( 'wikibase.wbui2025.addQualifier', () => {
 
 		let wrapper, closeButton, addButton, propertyLookup;
 		beforeEach( async () => {
-			wrapper = await mount( Wbui2025AddQualifier );
+			wrapper = await mount( Wbui2025AddQualifier, {
+				props: {
+					statementId: 'test-statement-id'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [] )
+					]
+				}
+			} );
 			[ closeButton, addButton ] = wrapper.findAllComponents( CdxButton );
 			propertyLookup = wrapper.findComponent( Wbui2025PropertyLookup );
 		} );
@@ -108,6 +119,10 @@ describe( 'wikibase.wbui2025.addQualifier', () => {
 
 			describe( 'with a non-blank snak value', () => {
 				beforeEach( async () => {
+					useParsedValueStore().preloadParsedValue( 'P23', {
+						type: 'string',
+						value: 'a string value'
+					} );
 					await snakValueInput.vm.$emit( 'update:modelValue', 'a string value' );
 				} );
 
@@ -117,18 +132,7 @@ describe( 'wikibase.wbui2025.addQualifier', () => {
 
 				it( 'emits an event when the add button is clicked', async () => {
 					await addButton.trigger( 'click' );
-					expect( wrapper.emitted( 'add-qualifier' )[ 0 ] ).toEqual( [
-						'P23',
-						{
-							datatype: 'string',
-							datavalue: {
-								type: 'string',
-								value: 'a string value'
-							},
-							property: 'P23',
-							snaktype: 'value'
-						}
-					] );
+					expect( wrapper.emitted( 'qualifier-added' )[ 0 ] ).toEqual( [ ] );
 				} );
 			} );
 		} );

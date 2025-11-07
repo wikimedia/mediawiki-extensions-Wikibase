@@ -12,11 +12,18 @@
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 		>
-			<cdx-text-input v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'" v-model.trim="textvalue"></cdx-text-input>
+			<cdx-text-input
+				v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
+				ref="inputElement"
+				v-model.trim="textvalue"
+				:class="className"
+			></cdx-text-input>
 			<cdx-lookup
 				v-else-if="valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
+				ref="inputElement"
 				v-model:selected="lookupSelection"
 				v-model:input-value="lookupInputValue"
+				:class="className"
 				:menu-items="lookupMenuItems"
 				:menu-config="menuConfig"
 				@update:input-value="onUpdateInputValue"
@@ -65,6 +72,11 @@ module.exports = exports = defineComponent( {
 		snakKey: {
 			type: String,
 			required: true
+		},
+		className: {
+			type: String,
+			required: false,
+			default: 'wikibase-wbui2025-editable-snak-value-input'
 		}
 	},
 	emits: [ 'remove-snak' ],
@@ -136,6 +148,15 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
+		// eslint-disable-next-line vue/no-unused-properties
+		focus() {
+			if ( this.valueStrategy.isLookupDatatype() ) {
+				this.$refs.inputElement.textInput.focus();
+			} else {
+				this.$refs.inputElement.focus();
+			}
+		},
+
 		fetchLookupResults( searchTerm, offset = 0 ) {
 			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
 		},

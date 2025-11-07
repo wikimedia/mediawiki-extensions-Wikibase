@@ -7,6 +7,7 @@ export class AddReferenceFormPage {
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-add-reference-value input',
 		ADD_BUTTON: '.wikibase-wbui2025-add-reference-form .cdx-button',
 		PROPERTY_OPTIONS: '.wikibase-wbui2025-property-lookup .cdx-menu-item',
+		MENU_ITEM: '.wikibase-wbui2025-add-reference-form .cdx-menu-item',
 	};
 
 	public heading(): Chainable {
@@ -25,6 +26,10 @@ export class AddReferenceFormPage {
 		return cy.get( AddReferenceFormPage.SELECTORS.ADD_BUTTON );
 	}
 
+	public menuItems(): Chainable {
+		return cy.get( AddReferenceFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
+	}
+
 	public setProperty( searchTerm: string ): this {
 		this.propertyInput().type( searchTerm );
 		cy.get( AddReferenceFormPage.SELECTORS.PROPERTY_OPTIONS ).first().click();
@@ -32,6 +37,8 @@ export class AddReferenceFormPage {
 	}
 
 	public setSnakValue( inputText: string ): this {
+		this.snakValueInput().clear();
+		this.snakValueInput().click();
 		this.snakValueInput().type( inputText );
 		return this;
 	}
