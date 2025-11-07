@@ -168,7 +168,7 @@ final class RepoHooks implements
 		if ( $settings->getSetting( 'federationEnabled' ) ) {
 			// Load entity-search badges JS on all repo pages
 			// TODO: Federation - scope to only load on typeahead
-			$out->addModules( [ 'wikibase.federation.entitysearchBadges' ] );
+			$out->addModules( [ 'wikibase.federation.entityselector' ] );
 		}
 
 		if ( $settings->getSetting( 'wikibasePingback' ) ) {
@@ -972,13 +972,13 @@ final class RepoHooks implements
 		}
 
 		if ( $settings->getSetting( 'federationEnabled' ) ) {
-			$modules['wikibase.federation.entitysearchBadges'] = $moduleTemplate + [
+			$modules['wikibase.federation.entityselector'] = $moduleTemplate + [
 				'scripts' => [
-					'resources/wikibase.federation/entitysearchBadges.js',
+					'resources/wikibase.federation/wikibase.federation.entityselector.js',
 				],
 				'styles' => [
 					// optional, if you have styling for the badges / headers:
-					'resources/wikibase.federation/entitysearchBadges.less',
+					'resources/wikibase.federation/wikibase.federation.entityselector.less',
 				],
 				'dependencies' => [
 			    'jquery.wikibase.entityselector',

@@ -176,6 +176,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
+use Wikibase\Repo\Federation\RepositoryAwareEntityIdParser;
 use Wikibase\Repo\Federation\RemoteEntitySearchClient;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
@@ -830,20 +831,43 @@ return [
 
 	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
 		$settings = WikibaseRepo::getSettings( $services );
-		$dispatchingEntityIdParser = new DispatchingEntityIdParser(
-			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
-		);
 
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+		$entityIdBuilders = $entityTypeDefinitions->getEntityIdBuilders();
+
+		// Base parser: knows how to parse local Q/P/etc.
+		$parser = new DispatchingEntityIdParser( $entityIdBuilders );
+
+		// If federated properties are enabled, wrap the parser.
 		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
-			return new FederatedPropertiesAwareDispatchingEntityIdParser(
-				$dispatchingEntityIdParser,
+			$parser = new FederatedPropertiesAwareDispatchingEntityIdParser(
+				$parser,
 				new BaseUriExtractor(),
 				$entitySourceDefinitions
 			);
 		}
 
-		return $dispatchingEntityIdParser;
+		// If general federation (for values) is enabled, wrap again for remote entity ids.
+		if ( $settings->getSetting( 'federationEnabled' ) ) {
+			// For now, hard-code while prototyping.
+			// Later you can derive this from federationSources.
+			$repoNames = [ 'wikidata' ];
+
+			// Or if federationSources is something like:
+			// [ [ 'sourceName' => 'wikidata', ... ], ... ]
+			/*
+			$remoteRepos = $settings->getSetting( 'federationSources' ) ?? [];
+			$repoNames = array_map(
+				static fn ( array $sourceConfig ) => $sourceConfig['sourceName'],
+				$remoteRepos
+			);
+			*/
+
+			$parser = new RepositoryAwareEntityIdParser( $parser, $repoNames );
+		}
+
+		return $parser;
 	},
 
 	'WikibaseRepo.EntityLinkFormatterFactory' => function ( MediaWikiServices $services ): EntityLinkFormatterFactory {
