@@ -34,10 +34,10 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$serializerFactory = $this->createMock( SerializerFactory::class );
 		$serializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Serializer' )
-			->willReturn( [
+			->willReturn( match ( $entityType ) {
 				'item' => $this->createStub( ItemSerializer::class ),
 				'property' => $this->createStub( PropertySerializer::class ),
-			][$entityType] );
+			} );
 
 		return $serializerFactory;
 	}
@@ -51,10 +51,10 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$deserializerFactory = $this->createMock( DeserializerFactory::class );
 		$deserializerFactory->expects( $this->once() )
 			->method( 'new' . $entityType . 'Deserializer' )
-			->willReturn( [
+			->willReturn( match ( $entityType ) {
 				'item' => $this->createStub( ItemDeserializer::class ),
 				'property' => $this->createStub( PropertyDeserializer::class ),
-			][$entityType] );
+			} );
 
 		return $deserializerFactory;
 	}
