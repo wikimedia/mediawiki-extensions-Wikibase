@@ -1,11 +1,37 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ahmed-Najib-Biabani-Ibrahimkhel"
+			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"شاه زمان پټان"
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "تش",
+	"valueview-expert-globecoordinateinput-precision": "بيخي‌سمون:",
+	"valueview-expert-globecoordinateinput-nullprecision": "نامشخص‌شوی",
 	"valueview-expert-globecoordinateinput-customprecision": "ځانگړی ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "۱/۱۰۰۰۰'",
+	"valueview-expert-timevalue-calendar-gregorian": "گرېگوري",
+	"valueview-expert-timevalue-calendar-julian": "جوليان",
+	"valueview-expert-timeinput-precision": "بيخي‌سمون:",
+	"valueview-expert-timeinput-precision-year1g": "ميليارد کاله",
+	"valueview-expert-timeinput-precision-year100m": "سل میلیونه کاله",
+	"valueview-expert-timeinput-precision-year10m": "لس میلیونه کاله",
+	"valueview-expert-timeinput-precision-year1m": "ميليونه کاله",
+	"valueview-expert-timeinput-precision-year100k": "۱۰۰,۰۰۰ کاله",
+	"valueview-expert-timeinput-precision-year10k": "۱۰,۰۰۰ کاله",
+	"valueview-expert-timeinput-precision-year1k": "زریزه",
+	"valueview-expert-timeinput-precision-year100": "پېړۍ",
+	"valueview-expert-timeinput-precision-year10": "لسیزه",
+	"valueview-expert-timeinput-precision-year": "کال",
+	"valueview-expert-timeinput-precision-month": "مياشت",
+	"valueview-expert-timeinput-precision-day": "ورځ",
+	"valueview-expert-timeinput-precision-hour": "گړۍ",
+	"valueview-expert-timeinput-precision-minute": "دقيقه",
+	"valueview-expert-timeinput-precision-second": "ثانيه",
+	"valueview-expert-timeinput-calendar": "کليز:",
 	"valueview-expertextender-languageselector-label": "ژبه (لازمي):",
-	"valueview-expertextender-unitsuggester-label": "يوون (اختياري):"
+	"valueview-expertextender-unitsuggester-label": "يوون (اختياري):",
+	"valueview-preview-label": "په لاندې ډول به ښکاره شي:",
+	"valueview-preview-novalue": "هېڅ باوري ارزښت ونه پېژندل شو",
+	"valueview-listrotator-manually": "په لاسي ډول اوڼل"
 }
