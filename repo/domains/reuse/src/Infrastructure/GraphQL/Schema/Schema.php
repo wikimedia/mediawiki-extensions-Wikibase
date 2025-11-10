@@ -11,6 +11,7 @@ use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Reference;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -31,6 +32,7 @@ class Schema extends GraphQLSchema {
 							'id' => Type::nonNull( $this->types->getItemIdType() ),
 						],
 						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
+						'complexity' => fn() => GraphQLService::ITEM_FIELD_COMPLEXITY,
 					],
 				],
 			] ),
