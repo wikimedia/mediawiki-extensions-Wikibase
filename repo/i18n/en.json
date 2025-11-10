@@ -42,6 +42,7 @@
 	"wikibase-publishing-succeeded": "Your changes have been saved!",
 	"wikibase-remove-inprogress": "Removing…",
 	"wikibase-statementlistview-add": "add value",
+	"wikibase-addvalue": "Add value",
 	"wikibase-statementlistview-add-tooltip": "Add a new value",
 	"wikibase-statementgrouplistview-add": "add statement",
 	"wikibase-statementgrouplistview-add-tooltip": "Add a new statement",

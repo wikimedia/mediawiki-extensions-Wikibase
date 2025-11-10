@@ -143,7 +143,7 @@ describe( 'wbui2025 edit references', () => {
 				editFormPage.publishButton().click();
 
 				// Verify the edits
-				editFormPage.valueForms().should( 'not.exist' );
+				editFormPage.formRoot().should( 'not.exist' );
 				itemViewPage.referencesSections().first().then( ( element ) => {
 					itemViewPage.referencesAccordion( element ).click();
 					itemViewPage.references( element )
@@ -181,7 +181,7 @@ describe( 'wbui2025 edit references', () => {
 				editFormPage.publishButton().click();
 
 				// Verify the edits
-				editFormPage.valueForms().should( 'not.exist' );
+				editFormPage.formRoot().should( 'not.exist' );
 				itemViewPage.statementsSection().should( 'contain.text', '0 references' );
 
 				cy.task( 'MwApi:GetEntityData', { entityId: itemId } ).then( ( data ) => {

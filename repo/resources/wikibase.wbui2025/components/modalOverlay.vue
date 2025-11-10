@@ -1,9 +1,13 @@
 <template>
-	<teleport to="#mw-teleport-target">
+	<teleport to="#mw-teleport-target" :persist="false">
 		<transition name="wikibase-wbui2025-modal-slide-in" appear>
 			<div
 				class="wikibase-wbui2025-modal-overlay"
-				:class="{ 'wikibase-wbui2025-modal-overlay--minimal': minimalStyle }">
+				:class="[
+					modalClass,
+					{ 'wikibase-wbui2025-modal-overlay--minimal': minimalStyle }
+				]"
+			>
 				<slot>
 					<slot name="header">
 						<div class="wikibase-wbui2025-modal-overlay__header">
@@ -114,6 +118,11 @@ module.exports = exports = defineComponent( {
 			type: Boolean,
 			required: false,
 			default: false
+		},
+		modalClass: {
+			type: String,
+			required: false,
+			default: ''
 		},
 		showProgress: {
 			type: Boolean,
