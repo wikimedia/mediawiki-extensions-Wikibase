@@ -32,7 +32,7 @@ class SiteLinkGlobalIdentifiersProviderSiteIdsRetrieverTest extends MediaWikiInt
 		$site3->setGlobalId( 'some-other-site' );
 		$site3->setGroup( 'not-a-wikibase-sitelink-group' );
 
-		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( [ $site1, $site2, $site3 ] ), [] );
+		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( [ $site1, $site2, $site3 ] ), [ 'wiktionary' ], [] );
 		$validSiteIdsRetriever = new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
 			new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache(), [ 'wiktionary' ] ),
 		);

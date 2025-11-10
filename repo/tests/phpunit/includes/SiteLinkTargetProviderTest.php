@@ -24,8 +24,8 @@ class SiteLinkTargetProviderTest extends \PHPUnit\Framework\TestCase {
 		array $specialGroups,
 		array $expectedGlobalIds
 	) {
-		$provider = new SiteLinkTargetProvider( $this->getSiteLookup(), $specialGroups );
-		$siteList = $provider->getSiteList( $groups );
+		$provider = new SiteLinkTargetProvider( $this->getSiteLookup(), $groups, $specialGroups );
+		$siteList = $provider->getSiteList();
 
 		$globalIds = [];
 		/** @var Site $site */

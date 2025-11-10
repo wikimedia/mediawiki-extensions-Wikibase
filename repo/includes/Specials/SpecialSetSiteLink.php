@@ -44,11 +44,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	/**
 	 * @var string[]
 	 */
-	private $siteLinkGroups;
-
-	/**
-	 * @var string[]
-	 */
 	private $badgeItems;
 
 	/**
@@ -91,7 +86,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param AnonymousEditWarningBuilder $anonymousEditWarningBuilder
 	 * @param SiteLinkPageNormalizer $siteLinkPageNormalizer
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
-	 * @param string[] $siteLinkGroups
 	 * @param string[] $badgeItems
 	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
@@ -105,7 +99,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
-		array $siteLinkGroups,
 		array $badgeItems,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
@@ -122,7 +115,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
-		$this->siteLinkGroups = $siteLinkGroups;
 		$this->badgeItems = $badgeItems;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
@@ -156,7 +148,6 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$anonymousEditWarningBuilder,
 			$siteLinkPageNormalizer,
 			$siteLinkTargetProvider,
-			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$repoSettings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
 			$siteLinkChangeOpFactory
@@ -271,7 +262,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 */
 	private function isValidSiteId( $siteId ) {
 		return $siteId !== null
-			&& $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups )->hasSite( $siteId );
+			&& $this->siteLinkTargetProvider->getSiteList()->hasSite( $siteId );
 	}
 
 	/**
@@ -544,7 +535,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	}
 
 	private function getSiteLinkTargetSite( string $siteId ): ?Site {
-		$targetSites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$targetSites = $this->siteLinkTargetProvider->getSiteList();
 		if ( !$targetSites->hasSite( $siteId ) ) {
 			return null;
 		}

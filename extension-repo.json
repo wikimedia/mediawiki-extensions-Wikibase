@@ -110,7 +110,6 @@
 			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory",
 			"services": [
 				"WikibaseRepo.ApiHelperFactory",
-				"WikibaseRepo.Settings",
 				"WikibaseRepo.SiteLinkGlobalIdentifiersProvider",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.Store"

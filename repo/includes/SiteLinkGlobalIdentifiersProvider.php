@@ -28,7 +28,7 @@ class SiteLinkGlobalIdentifiersProvider {
 			return $list;
 		}
 
-		$list = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups )->getGlobalIdentifiers();
+		$list = $this->siteLinkTargetProvider->getSiteList()->getGlobalIdentifiers();
 		$this->cache->set( $cacheKey, $list, 3600 );
 		return $list;
 	}

@@ -25,7 +25,7 @@ class SiteLinkGlobalIdentifiersProviderTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLocalServerObjectCache' );
 		$this->mockService( 'WikibaseRepo.SiteLinkTargetProvider',
-			new SiteLinkTargetProvider( new HashSiteStore( [] ) )
+			new SiteLinkTargetProvider( new HashSiteStore( [] ), [] )
 		);
 
 		$this->serviceContainer
