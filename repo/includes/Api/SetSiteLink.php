@@ -52,6 +52,11 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @var string[]
 	 */
+	private array $siteLinkGroups;
+
+	/**
+	 * @var string[]
+	 */
 	private $sandboxEntityIds;
 
 	public function __construct(
@@ -61,6 +66,7 @@ class SetSiteLink extends ModifyEntity {
 		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
+		array $siteLinkGroups,
 		bool $federatedPropertiesEnabled,
 		array $sandboxEntityIds
 	) {
@@ -70,6 +76,7 @@ class SetSiteLink extends ModifyEntity {
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
+		$this->siteLinkGroups = $siteLinkGroups;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
 
@@ -91,6 +98,7 @@ class SetSiteLink extends ModifyEntity {
 			$siteLinkBadgeChangeOpSerializationValidator,
 			$siteLinkPageNormalizer,
 			$siteLinkTargetProvider,
+			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$repoSettings->getSetting( 'federatedPropertiesEnabled' ),
 			$repoSettings->getSetting( 'sandboxEntityIds' )
 		);
@@ -245,7 +253,7 @@ class SetSiteLink extends ModifyEntity {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return array_merge(
 			parent::getAllowedParams(),

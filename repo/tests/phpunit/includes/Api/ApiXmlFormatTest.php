@@ -204,7 +204,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 		$this->setService( 'WikibaseRepo.SiteLinkTargetProvider', $siteTargetProvider );
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache() );
+		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache(), [ 'wikipedia' ] );
 		$module->setServices( $siteLinkGlobalIdentifiersProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );
@@ -222,7 +222,7 @@ class ApiXmlFormatTest extends ApiFormatTestCase {
 
 		/** @var SetSiteLink $module */
 		$module = $this->getApiModule( SetSiteLink::class, 'wbsetsitelink', $params, true );
-		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache() );
+		$siteLinkGlobalIdentifiersProvider = new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache(), [ 'wikipedia' ] );
 		$module->setServices( $siteLinkGlobalIdentifiersProvider );
 		$result = $this->executeApiModule( $module );
 		$actual = $this->removePageInfoAttributes( $result, $entityId );

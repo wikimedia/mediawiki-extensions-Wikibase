@@ -61,11 +61,6 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @var string[]
 	 */
-	protected $siteLinkGroups;
-
-	/**
-	 * @var string[]
-	 */
 	protected $badgeItems;
 
 	/**
@@ -132,7 +127,6 @@ abstract class ModifyEntity extends ApiBase {
 		$this->revisionLookup = WikibaseRepo::getStore()->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED );
 		$this->permissionChecker = WikibaseRepo::getEntityPermissionChecker();
 		$this->titleLookup = WikibaseRepo::getEntityTitleStoreLookup();
-		$this->siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
@@ -470,7 +464,7 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return array[]
 	 */
 	private function getAllowedParamsForSiteLink(): array {
-		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return [
 			'site' => [

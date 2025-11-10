@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Domains\Crud\Domain\Services\SiteIdsRetriever;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
@@ -11,15 +10,10 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
  */
 class SiteLinkGlobalIdentifiersProviderSiteIdsRetriever implements SiteIdsRetriever {
 
-	public function __construct(
-		private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
-		private readonly SettingsArray $repoSettings
-	) {
+	public function __construct( private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider ) {
 	}
 
 	public function getValidSiteIds(): array {
-		return $this->siteLinkGlobalIdentifiersProvider->getList(
-			$this->repoSettings->getSetting( 'siteLinkGroups' )
-		);
+		return $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 	}
 }
