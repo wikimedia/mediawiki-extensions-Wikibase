@@ -17,7 +17,7 @@ class StringValueType extends ObjectType {
 			'fields' => [
 				'content' => [
 					'type' => Type::nonNull( Type::string() ),
-					'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->content->getValue(),
+					'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->getValue(),
 				],
 			],
 		] );

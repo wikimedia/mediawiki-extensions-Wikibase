@@ -38,7 +38,7 @@ const Wbui2025PropertyName = require( './wikibase.wbui2025.propertyName.vue' );
 const Wbui2025StatementView = require( './wikibase.wbui2025.statementView.vue' );
 const Wbui2025EditStatementGroup = require( './wikibase.wbui2025.editStatementGroup.vue' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
-const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -65,7 +65,7 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		statements() {
-			return getStatementsForProperty( this.propertyId );
+			return wbui2025.store.getStatementsForProperty( this.propertyId );
 		},
 		isUnsupportedDataType() {
 			if ( !this.statements || this.statements.length === 0 ) {

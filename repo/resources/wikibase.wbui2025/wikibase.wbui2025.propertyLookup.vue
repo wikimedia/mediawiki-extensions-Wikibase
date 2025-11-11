@@ -20,7 +20,7 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const { CdxLookup } = require( '../../codex.js' );
-const { api } = require( './api/api.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -61,7 +61,7 @@ module.exports = exports = defineComponent( {
 				params.continue = offset;
 			}
 
-			return api.get( params );
+			return wbui2025.api.api.get( params );
 		},
 		adaptApiResponse( results ) {
 			return results.map( ( { id, label, datatype, url, match, description, display = {} } ) => ( {

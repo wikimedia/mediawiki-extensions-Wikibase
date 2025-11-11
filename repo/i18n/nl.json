@@ -53,6 +53,7 @@
 	"wikibase-publish": "publiceren",
 	"wikibase-cancel": "annuleren",
 	"wikibase-add": "toevoegen",
+	"wikibase-addstatement": "verklaring toevoegen",
 	"wikibase-addqualifier": "kwalificatie toevoegen",
 	"wikibase-addreference": "bron toevoegen",
 	"wikibase-save-inprogress": "Bezig met opslaan...",

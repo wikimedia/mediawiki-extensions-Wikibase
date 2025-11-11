@@ -35,9 +35,10 @@ class GetBetaFeaturePreferencesHookHandler {
 		$betaFeatures[Wbui2025FeatureFlag::OPTION_NAME] = [
 			'label-message' => 'wikibase-mobile-editing-ui-beta-feature-message',
 			'desc-message' => 'wikibase-mobile-editing-ui-beta-feature-description',
-			// These links are required, but given we don't have community pages set up yet, link to Phab.
-			'info-link' => 'https://phabricator.wikimedia.org/T394621',
-			'discussion-link' => 'https://phabricator.wikimedia.org/T394621',
+			'info-link' =>
+				'https://www.wikidata.org/wiki/Wikidata:Usability_and_usefulness/Item_editing_experience/Mobile_editing_of_statements',
+			'discussion-link' =>
+				'https://www.wikidata.org/wiki/Wikidata_talk:Usability_and_usefulness/Item_editing_experience/Mobile_editing_of_statements',
 		];
 	}
 

@@ -80,14 +80,12 @@ const {
 	cdxIconAdd,
 	cdxIconTrash
 } = require( './icons.json' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025EditableReferencesSection = require( './wikibase.wbui2025.editableReferencesSection.vue' );
 const Wbui2025EditableQualifiers = require( './wikibase.wbui2025.editableQualifiers.vue' );
 const Wbui2025EditableSnakValue = require( './wikibase.wbui2025.editableSnakValue.vue' );
 const Wbui2025AddQualifier = require( './wikibase.wbui2025.addQualifier.vue' );
 const Wbui2025AddReference = require( './wikibase.wbui2025.addReference.vue' );
-const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './store/serverRenderedHtml.js' );
-const { useEditStatementStore, useEditSnakStore } = require( './store/editStatementsStore.js' );
-const { renderSnakValueHtml, renderPropertyLinkHtml } = require( './api/editEntity.js' );
 
 const rankSelectorPreferredIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="0" y="0" xlink:href="#a"/><use stroke="#36c" x="0" y="0" xlink:href="#b"/></svg>';
 const rankSelectorNormalIcon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="8" height="20"><defs><path d="M3.1,0 0,3.8 0,6 8,6 8,3.8 4.9,0zm8.2,7 -2.3,2 0,2 2.3,2 3.4,0 2.3,-2 0,-2 -2.3,-2zm6.7,7 0,2.2 3.1,3.8 1.8,0 3.1,-3.8 0,-2.2z" id="a"/><path d="m18.5,10.75 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0zm0,-6.75 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-12 0,1.5 7,0 0,-1.5 -2.875,-3.5 -1.25,0zm-9,12 0,-1.5 7,0 0,1.5 -2.875,3.5 -1.25,0zm0,-5.25 0,-1.5 2,-1.75 3,0 2,1.75 0,1.5 -2,1.75 -3,0z" id="b" fill="none"/></defs><use fill="#36c" x="-9" y="0" xlink:href="#a"/><use stroke="#36c" x="-9" y="0" xlink:href="#b"/></svg>';
@@ -124,7 +122,7 @@ module.exports = exports = defineComponent( {
 		 * store - we pass in the statementId to make a statement-specific store. This forces us to use
 		 * the Composition API to initialise the component.
 		 */
-		const editStatmentStore = useEditStatementStore( props.statementId );
+		const editStatmentStore = wbui2025.store.useEditStatementStore( props.statementId );
 		const computedStatementProperties = mapWritableState( editStatmentStore, [
 			'mainSnakKey',
 			'qualifiers',
@@ -165,15 +163,15 @@ module.exports = exports = defineComponent( {
 				this.qualifiers[ propertyId ] = [];
 				this.qualifiersOrder.push( propertyId );
 
-				renderPropertyLinkHtml( propertyId )
-					.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+				wbui2025.api.renderPropertyLinkHtml( propertyId )
+					.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( propertyId, result ) );
 			}
 
-			const editSnakStore = useEditSnakStore( snakData.hash )();
+			const editSnakStore = wbui2025.store.useEditSnakStore( snakData.hash )();
 			await editSnakStore.initializeWithSnak( snakData );
 			this.qualifiers[ propertyId ].push( snakData.hash );
-			renderSnakValueHtml( snakData.datavalue, propertyId )
-					.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+			wbui2025.api.renderSnakValueHtml( snakData.datavalue, propertyId )
+					.then( ( result ) => wbui2025.store.updateSnakValueHtmlForHash( snakData.hash, result ) );
 			if ( snakData.snaktype === 'value' ) {
 				editSnakStore.getValueStrategy().getParsedValue();
 			}
@@ -195,10 +193,10 @@ module.exports = exports = defineComponent( {
 
 			const snaks = {};
 
-			renderPropertyLinkHtml( propertyId )
-				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+			wbui2025.api.renderPropertyLinkHtml( propertyId )
+				.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( propertyId, result ) );
 
-			const editSnakStore = useEditSnakStore( snakData.hash )();
+			const editSnakStore = wbui2025.store.useEditSnakStore( snakData.hash )();
 			await editSnakStore.initializeWithSnak( snakData );
 
 			snaks[ propertyId ] = [ snakData.hash ];
@@ -208,8 +206,8 @@ module.exports = exports = defineComponent( {
 				'snaks-order': [ propertyId ]
 			} );
 
-			renderSnakValueHtml( snakData.datavalue )
-				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
+			wbui2025.api.renderSnakValueHtml( snakData.datavalue )
+				.then( ( result ) => wbui2025.store.updateSnakValueHtmlForHash( snakData.hash, result ) );
 
 			if ( snakData.snaktype === 'value' ) {
 				editSnakStore.getValueStrategy().getParsedValue();

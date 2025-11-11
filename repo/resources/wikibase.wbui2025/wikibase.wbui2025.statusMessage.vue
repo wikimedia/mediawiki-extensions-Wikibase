@@ -29,7 +29,7 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const { CdxMessage } = require( '../../codex.js' );
-const { useMessageStore } = require( './store/messageStore.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -45,12 +45,12 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		messageList() {
-			return useMessageStore().messages;
+			return wbui2025.store.useMessageStore().messages;
 		}
 	},
 	methods: {
 		deleteMessage( messageId ) {
-			useMessageStore().clearStatusMessage( messageId );
+			wbui2025.store.useMessageStore().clearStatusMessage( messageId );
 		}
 	},
 	watch: {

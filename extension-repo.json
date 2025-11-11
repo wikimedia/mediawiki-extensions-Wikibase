@@ -8,7 +8,7 @@
 	"descriptionmsg": "wikibase-desc",
 	"license-name": "GPL-2.0-or-later",
 	"requires": {
-		"MediaWiki": ">= 1.44"
+		"MediaWiki": ">= 1.46"
 	},
 	"APIModules": {
 		"wbavailablebadges": {
@@ -957,6 +957,7 @@
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\": "repo/domains/crud/tests/phpunit/",
 		"Wikibase\\Repo\\Tests\\Domains\\Crud\\Architecture\\": "repo/domains/crud/tests/architecture/",
 		"Wikibase\\Repo\\Tests\\Domains\\Reuse\\": "repo/domains/reuse/tests/phpunit/",
+		"Wikibase\\Repo\\Tests\\Domains\\Reuse\\Architecture\\": "repo/domains/reuse/tests/architecture/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\Unit\\": "lib/tests/phpunit/unit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",

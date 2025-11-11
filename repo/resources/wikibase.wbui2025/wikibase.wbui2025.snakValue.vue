@@ -9,7 +9,7 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { snakValueHtmlForHash } = require( './store/serverRenderedHtml.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -32,7 +32,7 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		snakValueHtmlForHash
+		snakValueHtmlForHash: wbui2025.store.snakValueHtmlForHash
 	},
 	mounted() {
 		if ( this.snak.datatype === 'globe-coordinate' ) {

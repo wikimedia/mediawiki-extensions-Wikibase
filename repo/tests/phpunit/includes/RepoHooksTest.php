@@ -389,6 +389,7 @@ XML
 		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( [
 			'tmpMobileEditingUI' => $tmpMobileEditingUI,
 			'tmpEnableMobileEditingUIBetaFeature' => $tmpEnableMobileEditingUIBetaFeature,
+			'disabledDataTypes' => [],
 		] ) );
 
 		( new RepoHooks )->onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );

@@ -18,8 +18,8 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { concat } = require( './wikibase.wbui2025.utils.js' );
 const Wbui2025StatementGroupView = require( './wikibase.wbui2025.statementGroupView.vue' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -42,7 +42,7 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		concat
+		concat: wbui2025.util.concat
 	}
 } );
 </script>

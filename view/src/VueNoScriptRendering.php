@@ -24,15 +24,6 @@ use WMDE\VueJsTemplating\App;
  */
 class VueNoScriptRendering {
 
-	/** Data types supported by the Vue statements view. */
-	public const WBUI2025_SUPPORTED_DATATYPES = [
-		'string',
-		'tabular-data',
-		'geo-shape',
-		'wikibase-item',
-		'wikibase-property',
-	];
-
 	private const VUE_TEMPLATE_FOLDER = __DIR__ . '/../../repo/resources/wikibase.wbui2025/';
 
 	private EntityIdFormatterFactory $entityIdFormatterFactory;
@@ -43,6 +34,7 @@ class VueNoScriptRendering {
 	private StatementSerializer $statementSerializer;
 	private SnakFormatter $snakFormatter;
 	private array $snakValueHtmlLookup;
+	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
 	private App $app;
 
 	public function __construct(
@@ -53,6 +45,7 @@ class VueNoScriptRendering {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		SerializerFactory $serializerFactory,
 		SnakFormatter $snakFormatter,
+		Wbui2025FeatureFlag $wbui2025FeatureFlag,
 	) {
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -61,6 +54,7 @@ class VueNoScriptRendering {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->statementSerializer = $serializerFactory->newStatementSerializer();
 		$this->snakFormatter = $snakFormatter;
+		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
 	}
 
 	public function loadStatementData( StatementList $allStatements ): void {
@@ -147,7 +141,7 @@ class VueNoScriptRendering {
 					fn ( $statement ) => $this->statementSerializer->serialize( $statement ),
 					$statementsByProperty
 				);
-				$data['isUnsupportedDataType'] = !in_array( $dataType, self::WBUI2025_SUPPORTED_DATATYPES, strict: true );
+				$data['isUnsupportedDataType'] = !in_array( $dataType, $this->wbui2025FeatureFlag->getSupportedDataTypes(), strict: true );
 				$data['showModalEditForm'] = false;
 				return $data;
 			}
@@ -318,5 +312,4 @@ class VueNoScriptRendering {
 			'entityId' => $entityId,
 		] );
 	}
-
 }

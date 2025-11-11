@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -277,7 +278,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			new SettingsArray( [
 				'tmpMobileEditingUI' => $tmpMobileEditingUI,
 				'tmpEnableMobileEditingUIBetaFeature' => false,
-			] )
+			] ),
+			$this->createMock( DataTypeDefinitions::class ),
 		);
 		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
 		$entityView = $this->createMock( EntityView::class );

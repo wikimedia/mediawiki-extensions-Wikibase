@@ -9,7 +9,7 @@
 			"Robin Owain"
 		]
 	},
-	"wikibase-client-desc": "Cleient ar gyfer yr estyniad Wikibase",
+	"wikibase-client-desc": "Cleient ar gyfer yr ychwanegyn Wicibase",
 	"tooltip-t-wikibase": "Cysylltu i eitem ystorfa gysylltiedig",
 	"wikibase-after-page-move": "Gallwch [$1 ddiweddaru]'r eitem berthnasol ar {{WBREPONAME}} er mwyn cynnal y cysylltiadau rhwng ieithoedd ar y dudalen a symudwyd.",
 	"wikibase-comment-add": "Crëwyd eitem {{WBREPONAME}}.",

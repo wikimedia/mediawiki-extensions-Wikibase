@@ -2232,6 +2232,7 @@ return [
 		return new Wbui2025FeatureFlag(
 			$services->getUserOptionsLookup(),
 			WikibaseRepo::getSettings( $services ),
+			WikibaseRepo::getDataTypeDefinitions( $services ),
 		);
 	},
 

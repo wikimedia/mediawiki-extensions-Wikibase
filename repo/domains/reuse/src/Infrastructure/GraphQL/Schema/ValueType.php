@@ -20,7 +20,7 @@ class ValueType extends UnionType {
 			'fields' => [
 				'content' => [
 					'type' => Type::nonNull( new JsonType() ),
-					'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->content->getArrayValue(),
+					'resolve' => fn( Statement|PropertyValuePair $valueProvider ) => $valueProvider->value->getArrayValue(),
 				],
 			],
 		] );
