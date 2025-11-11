@@ -63,7 +63,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider queryProvider
 	 */
-	public function testQuery( string $query, array $expectedResult ): void {
+	public function testQuery( string $query, array $expectedResult, array $variables = [] ): void {
 		$entityLookup = new InMemoryEntityLookup();
 		foreach ( self::$items as $item ) {
 			$entityLookup->addEntity( $item );
@@ -88,7 +88,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				$siteIdProvider,
 				$termLookup,
 				$dataTypeLookup,
-			)->query( $query )
+			)->query( $query, $variables )
 		);
 	}
 
@@ -721,6 +721,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		yield 'item does not exist' => [
 			'{ item(id: "Q9999999") { id } }',
 			[ 'data' => [ 'item' => null ] ],
+		];
+		yield 'query containing a variable' => [
+			'query WithVariable($id: ItemId!) {
+				item(id: $id) { id }
+			}',
+			[ 'data' => [ 'item' => [ 'id' => $itemId->getSerialization() ] ] ],
+			[ 'id' => $itemId->getSerialization() ],
 		];
 	}
 

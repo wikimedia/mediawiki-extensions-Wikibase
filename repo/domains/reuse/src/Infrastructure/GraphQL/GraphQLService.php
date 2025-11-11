@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 use Exception;
 use GraphQL\Error\DebugFlag;
 use GraphQL\GraphQL;
-use GraphQL\Validator\DocumentValidator;
 use MediaWiki\Config\Config;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 
@@ -22,11 +21,17 @@ class GraphQLService {
 	) {
 	}
 
-	public function query( string $query ): array {
-		DocumentValidator::addRule( new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY ) );
-
+	public function query( string $query, array $variables = [] ): array {
 		try {
-			$result = GraphQL::executeQuery( $this->schema, $query );
+			$result = GraphQL::executeQuery(
+				$this->schema,
+				$query,
+				variableValues: $variables,
+				validationRules: [
+					...GraphQL::getStandardValidationRules(),
+					new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY ),
+				],
+			);
 			$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
 			$output = $result->toArray(
 				$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
