@@ -54,6 +54,10 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'wb_items_per_site',
 			$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 		);
+		$updater->addExtensionTable(
+			'wb_remote_entity',
+			$this->getScriptPath( 'wb_remote_entity', $db->getType() )
+		);
 
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );

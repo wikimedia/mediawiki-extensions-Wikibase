@@ -177,13 +177,14 @@ use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 use Wikibase\Repo\Federation\BagOStuffSimpleCacheAdapter;
-use Wikibase\Repo\Federation\RemoteEntityIdLabelFormatterFactory;
 use Wikibase\Repo\Federation\RemoteEntityCache;
+use Wikibase\Repo\Federation\RemoteEntityIdLabelFormatterFactory;
 use Wikibase\Repo\Federation\RemoteEntityLookup;
 use Wikibase\Repo\Federation\RemoteEntitySearchClient;
 use Wikibase\Repo\Federation\RemoteEntityIdParser;
 use Wikibase\Repo\Federation\RemoteEntityIdHtmlLinkFormatter;
 use Wikibase\Repo\Federation\RemoteEntityIdValueFormatter;
+use Wikibase\Repo\Federation\RemoteEntityStore;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
@@ -264,6 +265,7 @@ use Wikibase\View\ViewFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\ObjectFactory\ObjectFactory;
+use Wikimedia\Rdbms\LBFactory;
 
 /** @phpcs-require-sorted-array */
 return [
@@ -1273,6 +1275,14 @@ return [
 			);
 	},
 
+	'WikibaseRepo.RemoteEntityStore' => function ( MediaWikiServices $services ): RemoteEntityStore {
+		/** @var LBFactory $lbFactory */
+		$lbFactory = $services->getDBLoadBalancerFactory();
+		$settings = WikibaseRepo::getSettings( $services );
+
+		return new RemoteEntityStore( $lbFactory, $settings );
+	},
+
 	'WikibaseRepo.FederatedPropertiesServiceFactory' => function ( MediaWikiServices $services ): ApiServiceFactory {
 		$settings = WikibaseRepo::getSettings( $services );
 
@@ -1868,9 +1878,9 @@ return [
 	'WikibaseRepo.RemoteEntityLookup' => function ( MediaWikiServices $services ): RemoteEntityLookup {
 		$settings = WikibaseRepo::getSettings( $services );
 		$httpFactory = $services->getHttpRequestFactory();
-		$cache = $services->get( 'WikibaseRepo.RemoteEntityCache' );
+		$store = $services->get( 'WikibaseRepo.RemoteEntityStore' );
 
-		return new RemoteEntityLookup( $httpFactory, $settings, $cache );
+		return new RemoteEntityLookup( $httpFactory, $settings, $store );
 	},
 
 	'WikibaseRepo.ScopedTypeaheadSearchConfig' => function( MediaWikiServices $services ): ScopedTypeaheadSearchConfig {
@@ -2254,13 +2264,6 @@ return [
 					$fallbackCodes,
 					[ 'en' ]
 				) ) );
-
-				wfDebugLog(
-					'federation',
-					"ValueFormatterFactory[{$dataTypeId}]: wrapping "
-					. get_class( $innerFormatter )
-					. ' with RemoteEntityIdValueFormatter (langs=' . implode( ',', $langCodes ) . ')'
-				);
 
 				return new RemoteEntityIdValueFormatter(
 					$innerFormatter,
