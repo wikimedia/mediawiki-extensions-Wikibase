@@ -21,12 +21,13 @@ class GraphQLService {
 	) {
 	}
 
-	public function query( string $query, array $variables = [] ): array {
+	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
 		try {
 			$result = GraphQL::executeQuery(
 				$this->schema,
 				$query,
 				variableValues: $variables,
+				operationName: $operationName,
 				validationRules: [
 					...GraphQL::getStandardValidationRules(),
 					new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY ),
