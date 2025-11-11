@@ -20,9 +20,9 @@ class WikibaseEntityRevisionLookupItemRevisionMetadataRetriever implements ItemR
 
 	public function getLatestRevisionMetadata( ItemId $itemId ): MetadataResult {
 		return $this->revisionLookup->getLatestRevisionId( $itemId )
-			->onConcreteRevision( fn( $id, $timestamp ) => MetadataResult::concreteRevision( $id, $timestamp ) )
+			->onConcreteRevision( MetadataResult::concreteRevision( ... ) )
 			->onRedirect( fn( int $revId, ItemId $redirectTarget ) => MetadataResult::redirect( $redirectTarget ) )
-			->onNonexistentEntity( fn() => MetadataResult::itemNotFound() )
+			->onNonexistentEntity( MetadataResult::itemNotFound( ... ) )
 			->map();
 	}
 }

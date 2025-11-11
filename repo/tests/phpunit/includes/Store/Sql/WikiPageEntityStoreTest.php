@@ -134,15 +134,9 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'custom-type' => 'wikibase-custom-type',
 				],
 				[
-					'item' => function() {
-						return WikibaseRepo::getItemHandler();
-					},
-					'property' => function() {
-						return WikibaseRepo::getPropertyHandler();
-					},
-					'custom-type' => function() {
-						return $this->newCustomEntityHandler();
-					},
+					'item' => WikibaseRepo::getItemHandler( ... ),
+					'property' => WikibaseRepo::getPropertyHandler( ... ),
+					'custom-type' => $this->newCustomEntityHandler( ... ),
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
@@ -968,12 +962,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 					'property' => PropertyContent::CONTENT_MODEL_ID,
 				],
 				[
-					'item' => function() {
-						return WikibaseRepo::getItemHandler();
-					},
-					'property' => function() {
-						return WikibaseRepo::getPropertyHandler();
-					},
+					'item' => WikibaseRepo::getItemHandler( ... ),
+					'property' => WikibaseRepo::getPropertyHandler( ... ),
 				]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
@@ -1006,14 +996,8 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$services = $this->getServiceContainer();
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
-				[
-					'custom-type' => 'wikibase-custom-type',
-				],
-				[
-					'custom-type' => function() {
-						return $this->newCustomEntityHandler();
-					},
-				]
+				[ 'custom-type' => 'wikibase-custom-type' ],
+				[ 'custom-type' => $this->newCustomEntityHandler( ... ) ]
 			),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			new SqlIdGenerator( $db ),

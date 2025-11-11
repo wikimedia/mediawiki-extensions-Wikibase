@@ -38,7 +38,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newEntityRevisionLookupReturningResult( $subjectId, $revisionIdResult ),
 			WikibaseRepo::getEntityIdParser(),
-			fn() => $subjectId->getSerialization(),
+			$subjectId->getSerialization( ... ),
 			new ConditionalHeaderUtil()
 		);
 
@@ -125,7 +125,7 @@ class RequestPreconditionCheckTest extends TestCase {
 		$preconditionCheck = new RequestPreconditionCheck(
 			$this->newEntityRevisionLookupReturningResult( $entityId, $revisionIdResult ),
 			WikibaseRepo::getEntityIdParser(),
-			fn() => $entityId->getSerialization(),
+			$entityId->getSerialization( ... ),
 			$conditionalHeaderUtil
 		);
 

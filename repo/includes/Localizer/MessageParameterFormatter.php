@@ -57,7 +57,7 @@ class MessageParameterFormatter implements ValueFormatter {
 			return $this->formatObject( $value );
 		} elseif ( is_array( $value ) ) {
 			return '{{#commaSeparatedList:' .
-				implode( '|', array_map( fn ( $item ) => $this->format( $item ), $value ) ) .
+				implode( '|', array_map( $this->format( ... ), $value ) ) .
 				'}}';
 		}
 

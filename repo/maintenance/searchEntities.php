@@ -142,9 +142,7 @@ class SearchEntities extends Maintenance {
 	 */
 	private function getSearchHelper( $engine ) {
 		$engines = [
-			'sql' => function() {
-				return WikibaseRepo::getEntitySearchHelper();
-			},
+			'sql' => WikibaseRepo::getEntitySearchHelper( ... ),
 		];
 
 		if ( !isset( $engines[$engine] ) ) {

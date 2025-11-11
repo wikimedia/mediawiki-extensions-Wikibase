@@ -21,9 +21,9 @@ class WikibaseEntityRevisionLookupStatementSubjectRevisionMetadataRetriever impl
 
 	public function getLatestRevisionMetadata( StatementGuid $statementId ): MetadataResult {
 		return $this->revisionLookup->getLatestRevisionId( $statementId->getEntityId() )
-			->onConcreteRevision( fn( $id, $timestamp ) => MetadataResult::concreteRevision( $id, $timestamp ) )
+			->onConcreteRevision( MetadataResult::concreteRevision( ... ) )
 			->onRedirect( fn( int $revId, ItemId $redirectTarget ) => MetadataResult::redirect( $redirectTarget ) )
-			->onNonexistentEntity( fn() => MetadataResult::subjectNotFound() )
+			->onNonexistentEntity( MetadataResult::subjectNotFound( ... ) )
 			->map();
 	}
 

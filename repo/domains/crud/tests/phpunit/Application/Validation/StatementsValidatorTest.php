@@ -201,7 +201,7 @@ class StatementsValidatorTest extends TestCase {
 				return in_array( $statement, $expectedValidatedStatements );
 			} ) );
 		$spyStatementValidator->method( 'getValidatedStatement' )
-			->willReturnCallback( fn() => $actualStatementValidator->getValidatedStatement() );
+			->willReturnCallback( $actualStatementValidator->getValidatedStatement( ... ) );
 
 		$statementsValidator = $this->newValidator( $spyStatementValidator );
 
