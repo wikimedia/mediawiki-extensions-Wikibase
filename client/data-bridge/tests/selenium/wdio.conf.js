@@ -136,11 +136,7 @@ exports.config = {
 	// resolved to continue.
 
 	beforeSuite() {
-		browser.call( () => WikibaseApi.initialize(
-			undefined,
-			browser.options.capabilities[ 'mw:user' ],
-			browser.options.capabilities[ 'mw:pwd' ]
-		) );
+		browser.call( () => WikibaseApi.initialize() );
 	},
 
 	/**

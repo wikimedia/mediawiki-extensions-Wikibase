@@ -18,16 +18,10 @@ jest.mock(
 	() => [ 'string', 'tabular-data', 'geo-shape' ],
 	{ virtual: true }
 );
-jest.mock(
-	'../../resources/wikibase.wbui2025/api/commons.js',
-	() => ( {
-		searchTabularData: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
-		searchGeoShapes: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
-		transformSearchResults: jest.fn( ( results ) => results )
-	} ),
-	{ virtual: true }
-);
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const languageCode = 'de';
 const mockConfig = {
 	wgUserLanguage: languageCode
@@ -35,6 +29,17 @@ const mockConfig = {
 mw.config = {
 	get: jest.fn( ( key ) => mockConfig[ key ] )
 };
+wbui2025.api = {
+	searchTabularData: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
+	searchGeoShapes: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
+	transformSearchResults: jest.fn( ( results ) => results )
+};
+wbui2025.store = Object.assign( wbui2025.store, {
+	snakValueStrategyFactory: {
+		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) )
+	}
+} );
+
 const editableSnakValueComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editableSnakValue.vue' );
 const { CdxLookup, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
@@ -102,9 +107,8 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		} );
 
 		it( 'calls searchTabularData when input value changes', async () => {
-			const { searchTabularData } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
 			await wrapper.vm.onUpdateInputValue( 'Test' );
-			expect( searchTabularData ).toHaveBeenCalledWith( 'Test', 0 );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).toHaveBeenCalledWith( 'tabular-data', 'Test', 0 );
 		} );
 
 		it( 'clears menu items when input is empty', async () => {
@@ -167,9 +171,8 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		} );
 
 		it( 'calls searchGeoShapes with geo-shape when input value changes', async () => {
-			const { searchGeoShapes } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
 			await wrapper.vm.onUpdateInputValue( 'Region' );
-			expect( searchGeoShapes ).toHaveBeenCalledWith( 'Region', 0 );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).toHaveBeenCalledWith( 'geo-shape', 'Region', 0 );
 		} );
 	} );
 
@@ -212,39 +215,36 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		} );
 
 		it( 'calls searchTabularData with offset on load more', async () => {
-			const { searchTabularData } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
 			wrapper.vm.lookupInputValue = 'Test';
 			wrapper.vm.lookupMenuItems = [ { label: 'Item1', value: 'Item1' } ];
 
 			await wrapper.vm.onLoadMore();
 
-			expect( searchTabularData ).toHaveBeenCalledWith( 'Test', 1 );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).toHaveBeenCalledWith( 'tabular-data', 'Test', 1 );
 		} );
 
 		it( 'does not call API if inputValue is empty', async () => {
-			const { searchTabularData } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
-			searchTabularData.mockClear();
+			wbui2025.store.snakValueStrategyFactory.searchByDatatype.mockClear();
 			wrapper.vm.lookupInputValue = '';
 
 			await wrapper.vm.onLoadMore();
 
-			expect( searchTabularData ).not.toHaveBeenCalled();
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).not.toHaveBeenCalled();
 		} );
 
 		it( 'appends new results to existing menu items', async () => {
-			const { searchTabularData, transformSearchResults } = require( '../../resources/wikibase.wbui2025/api/commons.js' );
 			const existingItems = [ { label: 'Item1', value: 'Item1' } ];
-			const newResults = [ { label: 'Item2', value: 'Item2' } ];
+			const newResults = [ { description: '', label: 'Item2', value: 'Item2' } ];
 
 			wrapper.vm.lookupInputValue = 'Test';
 			wrapper.vm.lookupMenuItems = [ ...existingItems ];
 
-			searchTabularData.mockResolvedValue( {
+			wbui2025.store.snakValueStrategyFactory.searchByDatatype.mockResolvedValue( {
 				query: {
 					search: [ { title: 'File:Item2' } ]
 				}
 			} );
-			transformSearchResults.mockReturnValue( newResults );
+			wbui2025.api.transformSearchResults.mockReturnValue( newResults );
 
 			await wrapper.vm.onLoadMore();
 
@@ -252,49 +252,55 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		} );
 	} );
 
-	describe( 'the mounted component with a novalue statement', () => {
-		let wrapper, textInput, noValueSomeValuePlaceholder;
-		beforeEach( async () => {
-			const testPropertyId = 'P1';
-			const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
-			const testNoValueStatement = {
-				id: testNoValueStatementId,
-				mainsnak: {
-					hash: 'placeholder-hash',
-					snaktype: 'novalue',
-					datatype: 'string'
-				},
-				rank: 'normal'
-			};
+	describe.each(
+		[ 'string', 'tabular-data', 'geo-shape' ]
+	)( 'the mounted component with %s datatype', ( datatype ) => {
+		describe.each(
+			[ 'novalue', 'somevalue' ]
+		)( 'and %s snaktype', ( snaktype ) => {
 
-			const testingPinia = storeWithStatements( [ testNoValueStatement ] );
-			const editStatementsStore = useEditStatementsStore();
-			await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
-			const editStatementStore = useEditStatementStore( testNoValueStatementId )();
+			let wrapper, textInput, noValueSomeValuePlaceholder;
+			beforeEach( async () => {
+				const testPropertyId = 'P1';
+				const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
+				const testNoValueStatement = {
+					id: testNoValueStatementId,
+					mainsnak: {
+						hash: 'placeholder-hash',
+						snaktype,
+						datatype
+					},
+					rank: 'normal'
+				};
 
-			wrapper = await mount( editableSnakValueComponent, {
-				props: {
-					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
-				},
-				global: {
-					plugins: [ testingPinia ]
-				}
+				const testingPinia = storeWithStatements( [ testNoValueStatement ] );
+				const editStatementsStore = useEditStatementsStore();
+				await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
+				const editStatementStore = useEditStatementStore( testNoValueStatementId )();
+
+				wrapper = await mount( editableSnakValueComponent, {
+					props: {
+						propertyId: testPropertyId,
+						snakKey: editStatementStore.mainSnakKey
+					},
+					global: {
+						plugins: [ testingPinia ]
+					}
+				} );
+				await wrapper.vm.$nextTick();
+				textInput = wrapper.findComponent( CdxTextInput );
+				noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
 			} );
-			await wrapper.vm.$nextTick();
-			textInput = wrapper.findComponent( CdxTextInput );
-			noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
-		} );
 
-		it( 'mount its child components', () => {
-			expect( wrapper.exists() ).toBe( true );
-			expect( textInput.exists() ).toBe( false );
-			expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
-		} );
+			it( 'mount its child components', () => {
+				expect( wrapper.exists() ).toBe( true );
+				expect( textInput.exists() ).toBe( false );
+				expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
+			} );
 
-		it( 'loads and shows data correctly', () => {
-			expect( noValueSomeValuePlaceholder.text() ).toContain( 'wikibase-snakview-variations-novalue-label' );
+			it( 'loads and shows data correctly', () => {
+				expect( noValueSomeValuePlaceholder.text() ).toContain( `wikibase-snakview-variations-${ snaktype }-label` );
+			} );
 		} );
 	} );
-
 } );

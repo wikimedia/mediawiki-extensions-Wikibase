@@ -21,6 +21,7 @@
 	"wikibase-publish": "publicar",
 	"wikibase-cancel": "cancellar",
 	"wikibase-add": "adder",
+	"wikibase-addstatement": "adder declaration",
 	"wikibase-addqualifier": "adder qualificator",
 	"wikibase-addreference": "adder referentia",
 	"wikibase-save-inprogress": "Salveguarda…",

@@ -7,12 +7,25 @@ namespace Wikibase\View;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\UserIdentity;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
  */
 class Wbui2025FeatureFlag {
+
+	/** Data types not supported by the Wbui2025 Feature statements view. */
+	public const WBUI2025_UNSUPPORTED_DATATYPES = [
+		'commonsMedia',
+		'url',
+		'external-id',
+		'globe-coordinate',
+		'monolingualtext',
+		'quantity',
+		'time',
+		'entity-schema',
+	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';
 	public const EXTENSION_DATA_KEY = 'wikibase-mobile';
@@ -22,14 +35,17 @@ class Wbui2025FeatureFlag {
 	private UserOptionsLookup $userOptionsLookup;
 	private bool $wbui2025Enabled;
 	private bool $wbui2025BetaFeatureEnabled;
+	private DataTypeDefinitions $dataTypeDefinitions;
 
 	public function __construct(
 		UserOptionsLookup $userOptionsLookup,
-		SettingsArray $settings
+		SettingsArray $settings,
+		DataTypeDefinitions $dataTypeDefinitions,
 	) {
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->wbui2025Enabled = (bool)$settings->getSetting( 'tmpMobileEditingUI' );
 		$this->wbui2025BetaFeatureEnabled = (bool)$settings->getSetting( 'tmpEnableMobileEditingUIBetaFeature' );
+		$this->dataTypeDefinitions = $dataTypeDefinitions;
 	}
 
 	public function generateWbMobileFlagValue( bool $isMobileSite, UserIdentity $userIdentity ): bool|string {
@@ -66,5 +82,14 @@ class Wbui2025FeatureFlag {
 			return false;
 		}
 		return (bool)$this->userOptionsLookup->getOption( $userIdentity, self::OPTION_NAME );
+	}
+
+	public function getSupportedDataTypes(): array {
+		return array_values(
+			array_filter(
+				array_keys( $this->dataTypeDefinitions->getValueTypes() ),
+				fn ( $dataType ) => !in_array( $dataType, self::WBUI2025_UNSUPPORTED_DATATYPES )
+			)
+		);
 	}
 }

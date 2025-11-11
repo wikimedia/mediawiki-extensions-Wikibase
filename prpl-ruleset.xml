@@ -39,6 +39,7 @@
 				<element key="repo/domains/crud/tests/architecture" value="Wikibase\Repo\Tests\Domains\Crud\Architecture"/>
 				<element key="repo/domains/reuse/src" value="Wikibase\Repo\Domains\Reuse"/>
 				<element key="repo/domains/reuse/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Reuse"/>
+				<element key="repo/domains/reuse/tests/architecture" value="Wikibase\Repo\Tests\Domains\Reuse\Architecture"/>
 			</property>
 		</properties>
 	</rule>

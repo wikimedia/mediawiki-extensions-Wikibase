@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib;
 
 use InvalidArgumentException;
@@ -7,9 +9,10 @@ use MediaWiki\Babel\Babel;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Language\Language;
 use MediaWiki\Language\LanguageConverter;
-use MediaWiki\Languages\LanguageConverterFactory;
-use MediaWiki\Languages\LanguageFactory;
-use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\Language\LanguageConverterFactory;
+use MediaWiki\Language\LanguageFactory;
+use MediaWiki\Language\LanguageFallback;
+use MediaWiki\Language\LanguageFallbackMode;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\User\User;
@@ -23,27 +26,19 @@ use MediaWiki\User\UserIdentity;
  */
 class LanguageFallbackChainFactory {
 
-	/** @var ContentLanguages */
-	private $termsLanguages;
+	private ContentLanguages $termsLanguages;
 
-	/** @var LanguageFactory */
-	private $languageFactory;
+	private LanguageFactory $languageFactory;
 
-	/** @var LanguageConverterFactory */
-	private $languageConverterFactory;
+	private LanguageConverterFactory $languageConverterFactory;
 
-	/** @var LanguageFallback */
-	private $languageFallback;
+	private LanguageFallback $languageFallback;
 
-	/**
-	 * @var TermLanguageFallbackChain[]
-	 */
-	private $languageCache = [];
+	/** @var TermLanguageFallbackChain[] */
+	private array $languageCache = [];
 
-	/**
-	 * @var array[]
-	 */
-	private $userLanguageCache = [];
+	/** @var array[] */
+	private array $userLanguageCache = [];
 
 	public function __construct(
 		?ContentLanguages $termsLanguages = null,
@@ -67,12 +62,8 @@ class LanguageFallbackChainFactory {
 
 	/**
 	 * Get the fallback chain based a single language.
-	 *
-	 * @param Language $language
-	 *
-	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromLanguage( Language $language ) {
+	public function newFromLanguage( Language $language ): TermLanguageFallbackChain {
 		$languageCode = $language->getCode();
 
 		if ( !isset( $this->languageCache[$languageCode] ) ) {
@@ -88,12 +79,8 @@ class LanguageFallbackChainFactory {
 
 	/**
 	 * Get the fallback chain based a single language code.
-	 *
-	 * @param string $languageCode
-	 *
-	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromLanguageCode( $languageCode ) {
+	public function newFromLanguageCode( string $languageCode ): TermLanguageFallbackChain {
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
 		if ( !isset( $this->languageCache[$languageCode] ) ) {
@@ -114,7 +101,7 @@ class LanguageFallbackChainFactory {
 	 * @param LanguageWithConversion[] &$chain the resulting chain
 	 * @param bool[] &$fetched language codes (as keys) that are already in the chain
 	 */
-	private function addLanguageToChain( $language, array &$chain, array &$fetched ): void {
+	private function addLanguageToChain( Language|string $language, array &$chain, array &$fetched ): void {
 		$languageCode = is_string( $language ) ? $language : $language->getCode();
 		if ( !isset( $fetched[$languageCode] ) ) {
 			$chain[] = LanguageWithConversion::factory( $language );
@@ -129,7 +116,7 @@ class LanguageFallbackChainFactory {
 	 * @param LanguageWithConversion[] &$chain the resulting chain
 	 * @param bool[] &$fetched language codes (as keys) that are already in the chain
 	 */
-	private function addLanguageAndVariantsToChain( $language, array &$chain, array &$fetched ): void {
+	private function addLanguageAndVariantsToChain( Language|string $language, array &$chain, array &$fetched ): void {
 		$languageCode = is_string( $language ) ? $language : $language->getCode();
 
 		$this->addLanguageToChain( $language, $chain, $fetched );
@@ -177,11 +164,11 @@ class LanguageFallbackChainFactory {
 	 * @param LanguageWithConversion[] &$chain the resulting chain
 	 * @param bool[] &$fetched language codes (as keys) that are already in the chain
 	 */
-	private function addLanguageAndVariantsAndFallbacksToChain( $language, array &$chain, array &$fetched ): void {
+	private function addLanguageAndVariantsAndFallbacksToChain( Language|string $language, array &$chain, array &$fetched ): void {
 		$this->addLanguageAndVariantsToChain( $language, $chain, $fetched );
 
 		$languageCode = is_string( $language ) ? $language : $language->getCode();
-		$fallbacks = $this->languageFallback->getAll( $languageCode, LanguageFallback::STRICT );
+		$fallbacks = $this->languageFallback->getAll( $languageCode, LanguageFallbackMode::STRICT );
 		foreach ( $fallbacks as $other ) {
 			$this->addLanguageAndVariantsToChain( $other, $chain, $fetched );
 		}
@@ -206,7 +193,7 @@ class LanguageFallbackChainFactory {
 	 * @param Language|string $language (code)
 	 * @return LanguageWithConversion[] the resulting chain
 	 */
-	private function buildFromLanguage( $language ): array {
+	private function buildFromLanguage( Language|string $language ): array {
 		$chain = [];
 		$fetched = [];
 		$this->addLanguageAndVariantsAndFallbacksToChain( $language, $chain, $fetched );
@@ -216,24 +203,15 @@ class LanguageFallbackChainFactory {
 
 	/**
 	 * Construct the fallback chain based on a context. Currently it just uses user and language info in it.
-	 *
-	 * @param IContextSource $context
-	 *
-	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromContext( IContextSource $context ) {
+	public function newFromContext( IContextSource $context ): TermLanguageFallbackChain {
 		return $this->newFromUserAndLanguageCode( $context->getUser(), $context->getLanguage()->getCode() );
 	}
 
 	/**
 	 * Construct the fallback chain based on a user and a language, currently from data provided by Extension:Babel.
-	 *
-	 * @param User $user
-	 * @param string $languageCode
-	 *
-	 * @return TermLanguageFallbackChain
 	 */
-	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
+	public function newFromUserAndLanguageCode( User $user, string $languageCode ): TermLanguageFallbackChain {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || !$user->isRegistered() ) {
 			return $this->newFromLanguageCode( $languageCode );
 		}
@@ -270,7 +248,7 @@ class LanguageFallbackChainFactory {
 				// Make the current language at the top of the chain.
 				$levelBabel = array_unique( array_merge(
 					[ $languageCode ],
-					Babel::getCachedUserLanguages( $user, $level )
+					Babel::getCachedUserLanguages( $user, (string)$level )
 				) );
 
 				$babel[$level] = array_diff( $levelBabel, $previousLevelBabel );
@@ -305,7 +283,7 @@ class LanguageFallbackChainFactory {
 	 *
 	 * @return LanguageWithConversion[]
 	 */
-	public function buildFromBabel( array $babel ) {
+	public function buildFromBabel( array $babel ): array {
 		$chain = [];
 		$fetched = [];
 

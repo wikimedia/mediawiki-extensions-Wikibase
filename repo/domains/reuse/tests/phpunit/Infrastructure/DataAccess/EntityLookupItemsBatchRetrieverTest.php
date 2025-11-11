@@ -166,7 +166,7 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 
 		$this->assertSame(
 			'stringValue',
-			$qualifiers[0]->value->content->getValue()
+			$qualifiers[0]->value->getValue()
 		);
 
 		$this->assertSame(
@@ -271,7 +271,7 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 
 		$this->assertSame(
 			'stringValue',
-			$statementWithStringValue[0]->value->content->getValue()
+			$statementWithStringValue[0]->value->getValue()
 		);
 
 		$this->assertSame(
@@ -286,7 +286,7 @@ class EntityLookupItemsBatchRetrieverTest extends TestCase {
 
 		$this->assertSame(
 			$itemValueItemId,
-			$statementWithItemValue[0]->value->content->getEntityId()->getSerialization()
+			$statementWithItemValue[0]->value->getEntityId()->getSerialization()
 		);
 
 		$this->assertSame(

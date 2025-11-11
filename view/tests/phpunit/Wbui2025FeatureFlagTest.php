@@ -7,6 +7,7 @@ namespace Wikibase\View\Tests;
 use MediaWiki\User\User;
 use MediaWiki\User\UserOptionsLookup;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\View\Wbui2025FeatureFlag;
 
@@ -48,7 +49,8 @@ class Wbui2025FeatureFlagTest extends TestCase {
 			new SettingsArray( [
 				'tmpMobileEditingUI' => $wbui2025Enabled,
 				'tmpEnableMobileEditingUIBetaFeature' => $wbui2025BetaFeatureEnabled,
-			] )
+			] ),
+			$this->createMock( DataTypeDefinitions::class ),
 		);
 		$user = $this->createMock( User::class );
 		$this->assertSame( $wbuiFlagValue, $flag->shouldRenderAsWbui2025( $user ) );

@@ -19,7 +19,7 @@ const { defineComponent } = require( 'vue' );
 const Wbui2025MainSnak = require( './wikibase.wbui2025.mainSnak.vue' );
 const Wbui2025References = require( './wikibase.wbui2025.references.vue' );
 const Wbui2025Qualifiers = require( './wikibase.wbui2025.qualifiers.vue' );
-const { getStatementById } = require( './store/savedStatementsStore.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -46,7 +46,7 @@ module.exports = exports = defineComponent( {
 			return this.statement[ 'qualifiers-order' ] ? this.statement[ 'qualifiers-order' ] : [];
 		},
 		statement() {
-			return getStatementById( this.statementId );
+			return wbui2025.store.getStatementById( this.statementId );
 		}
 	}
 } );

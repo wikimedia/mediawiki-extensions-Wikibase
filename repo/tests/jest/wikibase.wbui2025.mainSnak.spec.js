@@ -4,6 +4,8 @@ jest.mock(
 	{ virtual: true }
 );
 
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const mainSnakView = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.mainSnak.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithServerRenderedHtml } = require( './piniaHelpers.js' );

@@ -49,11 +49,11 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$languageDirectionalityLookup = $this->createMock( LanguageDirectionalityLookup::class );
 		$languageDirectionalityLookup->method( 'getDirectionality' )
 			->willReturnCallback( function( $languageCode ) {
-				return [
+				return match ( $languageCode ) {
 					'en' => 'ltr',
 					'arc' => 'rtl',
 					'qqx' => 'ltr',
-				][ $languageCode ];
+				};
 			} );
 
 		return new TermsListView(

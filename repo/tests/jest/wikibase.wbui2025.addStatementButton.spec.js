@@ -9,22 +9,8 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
-	'../../resources/wikibase.wbui2025/api/api.js',
-	() => ( { api: { get: jest.fn() } } )
-);
-
-jest.mock(
 	'../../resources/wikibase.wbui2025/supportedDatatypes.json',
 	() => [ 'string', 'tabular-data', 'geo-shape' ],
-	{ virtual: true }
-);
-
-jest.mock(
-	'../../resources/wikibase.wbui2025/repoSettings.json',
-	() => ( {
-		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
-		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
-	} ),
 	{ virtual: true }
 );
 
@@ -46,6 +32,9 @@ Object.defineProperty( globalThis, 'wikibase', {
 		}
 	}
 } );
+
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 
 const addStatementButtonComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addStatementButton.vue' );
 const propertyLookupComponent = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.propertyLookup.vue' );
