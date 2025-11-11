@@ -19,6 +19,8 @@ const mockConfig = {
 mw.config = {
 	get: jest.fn( ( key ) => mockConfig[ key ] )
 };
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const { CdxButton, CdxTextInput } = require( '../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025AddReference = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.addReference.vue' );

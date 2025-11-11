@@ -1,10 +1,13 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests;
 
 use InvalidArgumentException;
 use MediaWiki\Context\RequestContext;
-use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\Language\LanguageFallback;
+use MediaWiki\Language\LanguageFallbackMode;
 use MediaWiki\MainConfigNames;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
@@ -36,7 +39,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 * or an array of two strings, the actual and source language code.
 	 * @param LanguageWithConversion[] $chain
 	 */
-	private function assertChainEquals( array $expectedItems, array $chain ) {
+	private function assertChainEquals( array $expectedItems, array $chain ): void {
 		// format both chains into a string for a nice message in case of assertion failure
 		$expectedChain = implode( ',', array_map( function ( $expected ) {
 			if ( is_array( $expected ) ) {
@@ -70,11 +73,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param string[] $disabledVariants
 	 */
-	private function setupDisabledVariants( array $disabledVariants ) {
+	private function setupDisabledVariants( array $disabledVariants ): void {
 		$this->overrideConfigValue( MainConfigNames::DisabledVariants, $disabledVariants );
 	}
 
-	private function getLanguageFallbackChainFactory( bool $includeMul = false ) {
+	private function getLanguageFallbackChainFactory( bool $includeMul = false ): LanguageFallbackChainFactory {
 		$termsLanguages = WikibaseContentLanguages::getDefaultTermsLanguages();
 		if ( $includeMul ) {
 			$termsLanguages = new UnionContentLanguages( $termsLanguages, new StaticContentLanguages( [ 'mul' ] ) );
@@ -82,17 +85,17 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 		$languageFallback = $this->createMock( LanguageFallback::class );
 		$languageFallback->method( 'getAll' )
-			->willReturnCallback( function( $code, $mode = LanguageFallback::MESSAGES ) {
+			->willReturnCallback( function( $code, $mode = LanguageFallbackMode::MESSAGES ) {
 				return $this->getLanguageFallbacksForCallback( $code, $mode );
 			} );
 
 		return new LanguageFallbackChainFactory( $termsLanguages, null, null, $languageFallback );
 	}
 
-	private function getLanguageFallbacksForCallback( string $code, int $mode ): array {
+	private function getLanguageFallbacksForCallback( string $code, LanguageFallbackMode $mode ): array {
 		$fallbacks = $this->getStrictLanguageFallbacksForCallback( $code );
 
-		if ( $mode === LanguageFallback::MESSAGES && !in_array( 'en', $fallbacks ) ) {
+		if ( $mode === LanguageFallbackMode::MESSAGES && !in_array( 'en', $fallbacks ) ) {
 			$fallbacks[] = 'en';
 		}
 
@@ -139,7 +142,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromLanguage(
-		$languageCode,
+		string $languageCode,
 		array $expected,
 		array $disabledVariants = [],
 		bool $includeMul = false
@@ -155,7 +158,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromLanguageCode(
-		$languageCode,
+		string $languageCode,
 		array $expected,
 		array $disabledVariants = [],
 		bool $includeMul = false
@@ -166,7 +169,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
-	public static function providerNewFromLanguage() {
+	public static function providerNewFromLanguage(): iterable {
 		return [
 			[
 				'languageCode' => 'en',
@@ -288,13 +291,13 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideNewFromLanguageCodeException
 	 */
-	public function testNewFromLanguageCodeException( $languageCode ) {
+	public function testNewFromLanguageCodeException( string $languageCode ) {
 		$factory = $this->getLanguageFallbackChainFactory();
 		$this->expectException( InvalidArgumentException::class );
 		$factory->newFromLanguageCode( $languageCode );
 	}
 
-	public static function provideNewFromLanguageCodeException() {
+	public static function provideNewFromLanguageCodeException(): iterable {
 		return [
 			[ ':' ],
 			[ '/' ],
@@ -311,7 +314,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider providerNewFromLanguage
 	 */
 	public function testNewFromUserAndLanguageCode(
-		$languageCode,
+		string $languageCode,
 		array $expected,
 		array $disabledVariants = [],
 		bool $includeMul = false
@@ -344,7 +347,7 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 		$this->assertChainEquals( $expected, $chain );
 	}
 
-	public static function provideTestFromBabel() {
+	public static function provideTestFromBabel(): iterable {
 		return [
 			[
 				'babel' => [ 'N' => [ 'de-formal' ] ],

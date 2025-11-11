@@ -9,8 +9,8 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025SnakValue = require( './wikibase.wbui2025.snakValue.vue' );
-const { concat } = require( './wikibase.wbui2025.utils.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -30,7 +30,7 @@ module.exports = exports = defineComponent( {
 	},
 	setup() {
 		return {
-			concat
+			concat: wbui2025.util.concat
 		};
 	},
 	computed: {

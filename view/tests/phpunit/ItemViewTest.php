@@ -316,7 +316,8 @@ class ItemViewTest extends EntityViewTestCase {
 			$textProvider,
 			$propertyDataTypeLookup,
 			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
-			$snakFormatter
+			$snakFormatter,
+			$this->createMock( Wbui2025FeatureFlag::class ),
 		);
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,

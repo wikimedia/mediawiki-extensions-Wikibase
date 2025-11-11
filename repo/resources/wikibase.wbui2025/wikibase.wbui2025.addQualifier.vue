@@ -47,8 +47,7 @@ const { defineComponent } = require( 'vue' );
 const { CdxButton, CdxIcon, CdxLookup, CdxTextInput } = require( '../../codex.js' );
 const { cdxIconCheck } = require( './icons.json' );
 const supportedDatatypes = require( './supportedDatatypes.json' );
-const { transformSearchResults } = require( './api/commons.js' );
-const { snakValueStrategyFactory } = require( './store/snakValueStrategies.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './wikibase.wbui2025.propertyLookup.vue' );
@@ -107,7 +106,7 @@ module.exports = exports = defineComponent( {
 			this.lookupInputValue = '';
 		},
 		fetchLookupResults( searchTerm, offset = 0 ) {
-			return snakValueStrategyFactory.searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
+			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
 		},
 		onUpdateInputValue( value ) {
 			if ( !value ) {
@@ -126,7 +125,7 @@ module.exports = exports = defineComponent( {
 						return;
 					}
 
-					const results = transformSearchResults( data.query.search );
+					const results = wbui2025.api.transformSearchResults( data.query.search );
 					this.lookupMenuItems = results;
 				} )
 				.catch( () => {
@@ -144,7 +143,7 @@ module.exports = exports = defineComponent( {
 						return;
 					}
 
-					const newResults = transformSearchResults( data.query.search );
+					const newResults = wbui2025.api.transformSearchResults( data.query.search );
 					this.lookupMenuItems.push( ...newResults );
 				} );
 		}

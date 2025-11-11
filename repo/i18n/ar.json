@@ -59,6 +59,7 @@
 	"wikibase-publish": "انشر",
 	"wikibase-cancel": "إلغاء",
 	"wikibase-add": "أضِف",
+	"wikibase-addstatement": "أضِف بياناً",
 	"wikibase-addqualifier": "أضِف تصفيةً",
 	"wikibase-addreference": "أضِف مرجعاً",
 	"wikibase-save-inprogress": "جارٍ الحفظ...",

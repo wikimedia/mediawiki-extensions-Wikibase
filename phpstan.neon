@@ -8,6 +8,10 @@ services:
 		tags:
 			- phpat.test
 	-
+		class: Wikibase\Repo\Tests\Domains\Reuse\Architecture\ArchitectureTest
+		tags:
+			- phpat.test
+	-
 		class: Wikibase\Repo\Tests\Architecture\ArchitectureTest
 		tags:
 			- phpat.test
@@ -26,6 +30,8 @@ parameters:
 		- ./repo/domains/crud/tests/architecture/
 		- ./repo/domains/search/src/
 		- ./repo/domains/search/tests/architecture/
+		- ./repo/domains/reuse/src/
+		- ./repo/domains/reuse/tests/architecture/
 		- ./repo/rest-api/src/
 		- ./repo/rest-api/tests/architecture/
 

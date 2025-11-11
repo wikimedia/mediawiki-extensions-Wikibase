@@ -4,13 +4,17 @@ type Query {
 
 scalar ItemId
 
-type Item {
+type Item implements LabelProvider {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
   aliases(languageCode: LanguageCode!): [String]!
   sitelink(siteId: SiteId!): Sitelink
   statements(propertyId: PropertyId!): [Statement]!
+}
+
+interface LabelProvider {
+  label(languageCode: LanguageCode!): String
 }
 
 scalar LanguageCode
@@ -24,29 +28,23 @@ type Sitelink {
 
 scalar PropertyId
 
-type Statement {
+type Statement implements PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
   id: String!
   rank: Rank!
-  qualifiers(propertyId: PropertyId!): [PropertyValuePair]!
+  qualifiers(propertyId: PropertyId!): [Qualifier]!
   references: [Reference]!
+}
+
+interface PropertyValuePair {
   property: PredicateProperty!
   value: Value
   valueType: ValueType!
 }
 
-enum Rank {
-  deprecated
-  normal
-  preferred
-}
-
-type PropertyValuePair {
-  property: PredicateProperty!
-  value: Value
-  valueType: ValueType!
-}
-
-type PredicateProperty {
+type PredicateProperty implements LabelProvider {
   id: String!
   dataType: String
   label(languageCode: LanguageCode!): String
@@ -58,12 +56,12 @@ type StringValue {
   content: String!
 }
 
-type ItemValue {
+type ItemValue implements LabelProvider {
   id: String!
   label(languageCode: LanguageCode!): String
 }
 
-type PropertyValue {
+type PropertyValue implements LabelProvider {
   id: String!
   label(languageCode: LanguageCode!): String
 }
@@ -112,6 +110,24 @@ enum ValueType {
   value
 }
 
+enum Rank {
+  deprecated
+  normal
+  preferred
+}
+
+type Qualifier implements PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
+}
+
 type Reference {
-  parts: [PropertyValuePair]!
+  parts: [ReferencePart]!
+}
+
+type ReferencePart implements PropertyValuePair {
+  property: PredicateProperty!
+  value: Value
+  valueType: ValueType!
 }

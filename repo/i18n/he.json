@@ -37,6 +37,7 @@
 	"wikibase-publish": "פרסום",
 	"wikibase-cancel": "ביטול",
 	"wikibase-add": "הוספה",
+	"wikibase-addstatement": "הוספת קביעה",
 	"wikibase-addqualifier": "הוספת מבחין",
 	"wikibase-addreference": "הוספת מקור",
 	"wikibase-save-inprogress": "מתבצעת שמירה...",

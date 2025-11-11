@@ -21,11 +21,9 @@ The following query fetches the Item with the ID Q64, including its English labe
 				label(languageCode: "en")
 			}
 			value {
-				... on ItemIdValue {
-					content {
-						id
-						label(languageCode: "en")
-					}
+				... on ItemValue {
+					id
+					label(languageCode: "en")
 				}
 			}
 		}

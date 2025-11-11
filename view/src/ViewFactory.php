@@ -351,6 +351,7 @@ class ViewFactory {
 			$this->propertyDataTypeLookup,
 			$this->serializerFactory,
 			$snakFormatter,
+			$this->wbui2025FeatureFlag,
 		);
 
 		return new StatementSectionsView(

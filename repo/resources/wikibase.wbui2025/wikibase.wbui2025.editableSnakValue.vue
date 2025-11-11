@@ -14,7 +14,7 @@
 		>
 			<cdx-text-input v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'" v-model.trim="textvalue"></cdx-text-input>
 			<cdx-lookup
-				v-else-if="valueStrategy.isLookupDatatype()"
+				v-else-if="valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
 				v-model:selected="lookupSelection"
 				v-model:input-value="lookupInputValue"
 				:menu-items="lookupMenuItems"
@@ -43,9 +43,8 @@
 const { computed, defineComponent } = require( 'vue' );
 const { mapWritableState } = require( 'pinia' );
 const { cdxIconTrash } = require( './icons.json' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxButton, CdxIcon, CdxLookup, CdxMenuButton, CdxTextInput } = require( '../../codex.js' );
-const { useEditSnakStore } = require( './store/editStatementsStore.js' );
-const { snakValueStrategyFactory } = require( './store/snakValueStrategies.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -75,7 +74,7 @@ module.exports = exports = defineComponent( {
 	 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
 	 * the Composition API to initialise the component.
 	 */
-		const editSnakStoreGetter = useEditSnakStore( props.snakKey );
+		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue',
 			'selectionvalue',
@@ -138,7 +137,7 @@ module.exports = exports = defineComponent( {
 	},
 	methods: {
 		fetchLookupResults( searchTerm, offset = 0 ) {
-			return snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
+			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
 		},
 
 		onUpdateInputValue( value ) {

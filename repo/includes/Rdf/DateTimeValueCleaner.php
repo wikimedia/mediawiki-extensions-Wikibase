@@ -76,16 +76,24 @@ class DateTimeValueCleaner {
 
 		// check if the date "looks safe". If not, we do deeper check
 		if ( !( $d <= 28 || ( $m != 2 && $d <= 30 ) ) ) {
+			// clamp the day to the last day in the month according to PHP
+			// (note: $safeYear is only used for cal_days_in_month())
+
 			// PHP source docs say PHP gregorian calendar can work down to 4714 BC
 			// Use float conversion here since we don't care about precision but don't want overflows.
 			if ( $minus && (float)$y >= 4714 ) {
 				$safeYear = -4713;
 			} else {
-				$safeYear = (int)$y * ( $minus ? -1 : 1 );
+				// since PHP 8.3.25, PHP also requires a year less than 2147483646 (2^31), see T409269;
+				// as the Gregorian calendar has a 400-year period and 10000 is a clean multiple of 400,
+				// shift overlong years into the safe range [100000, 199999] without losing integer precision
+				$safeYear = (int)(
+					strlen( $y ) >= 10 ? '1' . substr( $y, -5 ) : $y
+				) * (
+					$minus ? -1 : 1
+				);
 			}
 
-			// This will convert $y to int. If it's not within sane range,
-			// Feb 29 may be mangled, but this will be rare.
 			$max = cal_days_in_month( CAL_GREGORIAN, $m, $safeYear );
 			// We just put it as the last day in month, won't bother further
 			if ( $d > $max ) {

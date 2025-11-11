@@ -50,6 +50,7 @@
 	"wikibase-publish": "pubblica",
 	"wikibase-cancel": "annulla",
 	"wikibase-add": "aggiungi",
+	"wikibase-addstatement": "aggiungi dichiarazione",
 	"wikibase-addqualifier": "aggiungi qualificatore",
 	"wikibase-addreference": "aggiungi riferimento",
 	"wikibase-save-inprogress": "Salvataggio in corso...",

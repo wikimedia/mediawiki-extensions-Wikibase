@@ -1,15 +1,12 @@
 /**
  * @license GPL-2.0-or-later
  */
-( function ( _wb ) {
+( function ( wikibase ) {
 	'use strict';
 
 	const Vue = require( 'vue' );
 	const Pinia = require( 'pinia' );
-	const { useServerRenderedHtml } = require( './store/serverRenderedHtml.js' );
-	const { useMessageStore } = require( './store/messageStore.js' );
-	const { useSavedStatementsStore, getPropertyIds } = require( './store/savedStatementsStore.js' );
-	const { useParsedValueStore } = require( './store/parsedValueStore.js' );
+	const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
@@ -20,8 +17,8 @@
 		// also loaded around the same time. If any of those (most notably, the Kartographer extension's
 		// frontend code) run before this one and modify the DOM, what's being imported may not actually
 		// be the untouched, server-rendered HTML.
-		useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
-		useMessageStore( pinia );
+		wbui2025.store.useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
+		wbui2025.store.useMessageStore( pinia );
 
 		const AddStatementButton = require( './wikibase.wbui2025.addStatementButton.vue' );
 		const StatusMessage = require( './wikibase.wbui2025.statusMessage.vue' );
@@ -29,12 +26,12 @@
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
-			const savedStatementStore = useSavedStatementsStore( pinia );
+			const savedStatementStore = wbui2025.store.useSavedStatementsStore( pinia );
 			savedStatementStore.populateWithClaims( data.claims );
-			const parsedValueStore = useParsedValueStore( pinia );
+			const parsedValueStore = wbui2025.store.useParsedValueStore( pinia );
 			parsedValueStore.populateWithStatements( data.claims );
 
-			for ( const propertyId of getPropertyIds() ) {
+			for ( const propertyId of wbui2025.store.getPropertyIds() ) {
 				const rootProps = {
 					propertyId,
 					entityId: data.id

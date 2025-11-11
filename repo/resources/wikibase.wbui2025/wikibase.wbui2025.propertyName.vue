@@ -10,7 +10,7 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
-const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -23,7 +23,7 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		propertyLinkHtml() {
-			return propertyLinkHtml( this.propertyId );
+			return wbui2025.store.propertyLinkHtml( this.propertyId );
 		}
 	}
 } );

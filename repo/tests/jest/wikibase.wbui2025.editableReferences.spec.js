@@ -24,6 +24,8 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+const { mockLibWbui2025 } = require( './libWbui2025Helpers.js' );
+mockLibWbui2025();
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025EditableReferencesSection = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editableReferencesSection.vue' );
 const Wbui2025EditableReference = require( '../../resources/wikibase.wbui2025/wikibase.wbui2025.editableReference.vue' );

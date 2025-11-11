@@ -40,10 +40,16 @@ exports.config = {
 	// Hooks
 	// =====
 	async beforeSuite() {
-		await WikibaseApi.initialize(
-			undefined,
-			browser.options.capabilities[ 'mw:user' ],
-			browser.options.capabilities[ 'mw:pwd' ]
-		);
+		await WikibaseApi.initialize();
+	},
+
+	onComplete() {
+		try {
+			return config.onComplete();
+		} catch ( _ ) {
+			// ignore TypeError: Cannot read properties of undefined (reading 'project') [T407831]
+			// remove this onComplete() override again once we’re on a version of wdio-mediawiki
+			// with a fix (maybe 6.0.1?)
+		}
 	}
 };

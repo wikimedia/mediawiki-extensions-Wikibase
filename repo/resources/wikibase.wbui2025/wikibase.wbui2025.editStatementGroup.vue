@@ -82,13 +82,10 @@ const {
 	cdxIconCheck,
 	cdxIconClose
 } = require( './icons.json' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const WikibaseWbui2025EditStatement = require( './wikibase.wbui2025.editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './wikibase.wbui2025.modalOverlay.vue' );
-const { propertyLinkHtml } = require( './store/serverRenderedHtml.js' );
-const { getStatementsForProperty } = require( './store/savedStatementsStore.js' );
-const { useEditStatementsStore } = require( './store/editStatementsStore.js' );
-const { useMessageStore } = require( './store/messageStore.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -123,14 +120,14 @@ module.exports = exports = defineComponent( {
 			editStatementDataLoaded: false
 		};
 	},
-	computed: Object.assign( mapState( useEditStatementsStore, {
+	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		editableStatementGuids: 'statementIds',
 		fullyParsed: 'isFullyParsed',
 		hasChanges: 'hasChanges'
 	} ),
 	{
 		propertyLinkHtml() {
-			return propertyLinkHtml( this.propertyId );
+			return wbui2025.store.propertyLinkHtml( this.propertyId );
 		},
 		saveMessage() {
 			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
@@ -138,7 +135,7 @@ module.exports = exports = defineComponent( {
 				: mw.msg( 'wikibase-save' );
 		},
 		statements() {
-			return getStatementsForProperty( this.propertyId );
+			return wbui2025.store.getStatementsForProperty( this.propertyId );
 		},
 		propertyDatatype() {
 			// eslint-disable-next-line vue/no-undef-properties
@@ -151,13 +148,13 @@ module.exports = exports = defineComponent( {
 			return !this.formSubmitted && this.fullyParsed && this.hasChanges === true;
 		}
 	} ),
-	methods: Object.assign( mapActions( useEditStatementsStore, {
+	methods: Object.assign( mapActions( wbui2025.store.useEditStatementsStore, {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
 		removeStatement: 'removeStatement',
 		saveChangedStatements: 'saveChangedStatements'
-	} ), mapActions( useMessageStore, [
+	} ), mapActions( wbui2025.store.useMessageStore, [
 		'addStatusMessage'
 	] ), {
 		createNewStatement() {
