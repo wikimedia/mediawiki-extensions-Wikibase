@@ -11,8 +11,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  * A simple wrapper that forwards formatting of an EntityIdValue object to an EntityIdFormatter.
  *
  * @license GPL-2.0-or-later
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Thiemo Kreuz
  */
 class EntityIdValueFormatter implements ValueFormatter {
 
@@ -26,15 +24,12 @@ class EntityIdValueFormatter implements ValueFormatter {
 	}
 
 	/**
-	 * @see ValueFormatter::format
-	 *
-	 * Format an EntityIdValue
+	 * Format an EntityIdValue.
 	 *
 	 * @param EntityIdValue $value
 	 *
 	 * @throws InvalidArgumentException
-	 * @return string Either plain text, wikitext or HTML, depending on the EntityIdFormatter
-	 *  provided.
+	 * @return string Either plain text, wikitext or HTML, depending on the EntityIdFormatter provided.
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {

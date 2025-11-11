@@ -74,7 +74,7 @@
 	 * like "wikidata:Q42" instead of plain "Q42" as early as possible in the
 	 * suggestion pipeline.
 	 *
-	 * This is the critical glue that lets the PHP-side RepositoryAwareEntityIdParser
+	 * This is the critical glue that lets the PHP-side RemoteEntityIdParser
 	 * see a namespaced id and return a RemoteEntityId.
 	 *
 	 * @param {Object} selectorProto $.wikibase.entityselector.prototype
@@ -106,14 +106,6 @@
 						suggestion = $.extend( {}, suggestion, {
 							id: repository + ':' + suggestion.id
 						} );
-
-						// Optional debug while developing; remove later if noisy.
-						if ( mw.log ) {
-							mw.log(
-								'federation: prefixed suggestion id to ' + suggestion.id,
-								suggestion
-							);
-						}
 					}
 
 					return suggestion;

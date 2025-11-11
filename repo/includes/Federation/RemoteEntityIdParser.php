@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
  * Decorator for EntityIdParser that understands "repoPrefix:Q123"
  * (or "repoPrefix:P123", etc.) as a remote entity id for configured repositories.
  */
-class RepositoryAwareEntityIdParser implements EntityIdParser {
+class RemoteEntityIdParser implements EntityIdParser {
 
 	private EntityIdParser $innerParser;
 

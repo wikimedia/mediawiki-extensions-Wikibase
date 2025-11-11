@@ -176,8 +176,14 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
-use Wikibase\Repo\Federation\RepositoryAwareEntityIdParser;
+use Wikibase\Repo\Federation\BagOStuffSimpleCacheAdapter;
+use Wikibase\Repo\Federation\RemoteEntityIdLabelFormatterFactory;
+use Wikibase\Repo\Federation\RemoteEntityCache;
+use Wikibase\Repo\Federation\RemoteEntityLookup;
 use Wikibase\Repo\Federation\RemoteEntitySearchClient;
+use Wikibase\Repo\Federation\RemoteEntityIdParser;
+use Wikibase\Repo\Federation\RemoteEntityIdHtmlLinkFormatter;
+use Wikibase\Repo\Federation\RemoteEntityIdValueFormatter;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
@@ -797,28 +803,76 @@ return [
 		);
 	},
 
-	'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' => function (
+	'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' => static function (
 		MediaWikiServices $services
 	): EntityIdFormatterFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		// Grab the raw per-entity-type callbacks from entity type definitions
+		$formatterCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK );
+
+		// If federation is enabled, wrap the *item* formatter callback so that
+		// RemoteEntityId gets a remote label instead of "Deleted item".
+		if ( $settings->getSetting( 'federationEnabled' ) ) {
+			$remoteLookup = $services->get( 'WikibaseRepo.RemoteEntityLookup' );
+
+			if ( isset( $formatterCallbacks['item'] ) ) {
+				$origItemCallback = $formatterCallbacks['item'];
+
+				$formatterCallbacks['item'] = static function ( Language $language ) use ( $origItemCallback, $remoteLookup ) {
+					// Base item HTML formatter (whatever core / other code provides)
+					$baseFormatter = $origItemCallback( $language );
+
+					// Language preference for remote labels: UI language, then 'en'
+					$langCodes = [ $language->getCode(), 'en' ];
+
+					return new RemoteEntityIdHtmlLinkFormatter(
+						$baseFormatter,
+						$remoteLookup,
+						$langCodes
+					);
+				};
+			}
+		}
+
+		// Now build the standard HTML link formatter factory with our (possibly wrapped) callbacks
 		$factory = new EntityIdHtmlLinkFormatterFactory(
 			WikibaseRepo::getEntityTitleLookup( $services ),
-			WikibaseRepo::getEntityTypeDefinitions( $services )
-				->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
+			$formatterCallbacks
 		);
 
-		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )
-			->getSetting( 'federatedPropertiesEnabled' );
+		// Preserve existing FederatedProperties behavior for properties
+		$federatedPropertiesEnabled = $settings->getSetting( 'federatedPropertiesEnabled' );
 
 		return $federatedPropertiesEnabled
 			? new WrappingEntityIdFormatterFactory( $factory )
 			: $factory;
 	},
 
-	'WikibaseRepo.EntityIdLabelFormatterFactory' => function (
-		MediaWikiServices $services
-	): EntityIdLabelFormatterFactory {
-		return new EntityIdLabelFormatterFactory(
+	'WikibaseRepo.EntityIdLabelFormatterFactory' => function ( MediaWikiServices $services ): EntityIdLabelFormatterFactory {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		// Base local factory
+		$localFactory = new EntityIdLabelFormatterFactory(
 			WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
+		);
+
+		// If federation is off, just use the local behavior.
+		if ( !$settings->getSetting( 'federationEnabled' ) ) {
+			return $localFactory;
+		}
+
+		$remoteLookup = $services->get( 'WikibaseRepo.RemoteEntityLookup' );
+
+		// Site content language + 'en' as generic fallback (tweak as needed)
+		$contLangCode = $services->getContentLanguage()->getCode();
+		$fallbackLanguages = [ $contLangCode, 'en' ];
+
+		return new RemoteEntityIdLabelFormatterFactory(
+			$localFactory,
+			$remoteLookup,
+			$fallbackLanguages
 		);
 	},
 
@@ -864,7 +918,7 @@ return [
 			);
 			*/
 
-			$parser = new RepositoryAwareEntityIdParser( $parser, $repoNames );
+			$parser = new RemoteEntityIdParser( $parser, $repoNames );
 		}
 
 		return $parser;
@@ -1801,6 +1855,24 @@ return [
 		);
 	},
 
+	'WikibaseRepo.RemoteEntityCache' => function ( MediaWikiServices $services ): RemoteEntityCache {
+		$settings = WikibaseRepo::getSettings( $services );
+
+		// Local server cache is fine for MVP; can be swapped to WAN cache later.
+		$bagOStuff = $services->getLocalServerObjectCache();
+		$psrCache = new BagOStuffSimpleCacheAdapter( $bagOStuff );
+
+		return new RemoteEntityCache( $psrCache, $settings );
+	},
+
+	'WikibaseRepo.RemoteEntityLookup' => function ( MediaWikiServices $services ): RemoteEntityLookup {
+		$settings = WikibaseRepo::getSettings( $services );
+		$httpFactory = $services->getHttpRequestFactory();
+		$cache = $services->get( 'WikibaseRepo.RemoteEntityCache' );
+
+		return new RemoteEntityLookup( $httpFactory, $settings, $cache );
+	},
+
 	'WikibaseRepo.ScopedTypeaheadSearchConfig' => function( MediaWikiServices $services ): ScopedTypeaheadSearchConfig {
 		return new ScopedTypeaheadSearchConfig(
 			WikibaseRepo::getHookRunner( $services ),
@@ -2139,9 +2211,64 @@ return [
 		return new ValidatorErrorLocalizer( $formatter );
 	},
 
+
 	'WikibaseRepo.ValueFormatterFactory' => function ( MediaWikiServices $services ): OutputFormatValueFormatterFactory {
 		$formatterFactoryCBs = WikibaseRepo::getDataTypeDefinitions( $services )
 			->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE );
+
+		$settings = WikibaseRepo::getSettings( $services );
+
+		// If federation is off, keep core behavior.
+		if ( !$settings->getSetting( 'federationEnabled' ) ) {
+			return new OutputFormatValueFormatterFactory(
+				$formatterFactoryCBs,
+				$services->getContentLanguage(),
+				WikibaseRepo::getLanguageFallbackChainFactory( $services )
+			);
+		}
+
+		$remoteLookup = $services->get( 'WikibaseRepo.RemoteEntityLookup' );
+
+		// Wrap only the wikibase-entityid formatter factory callbacks
+		foreach ( $formatterFactoryCBs as $dataTypeId => $callback ) {
+			$formatterFactoryCBs[$dataTypeId] = static function ( ...$args ) use ( $callback, $remoteLookup, $services, $dataTypeId ) {
+				// Call the original callback with whatever it expects.
+				$innerFormatter = $callback( ...$args );
+
+				// Only care about entity-id value formatters.
+				if ( !$innerFormatter instanceof EntityIdValueFormatter ) {
+					return $innerFormatter;
+				}
+
+				// Derive language priorities from site config, not from $args.
+				$contLang = $services->getContentLanguage();
+				$contLangCode = $contLang->getCode();
+
+				// Use the same fallback chain as the rest of Wikibase.
+				$fallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory( $services );
+				$fallbackChain = $fallbackChainFactory->newFromLanguage( $contLang );
+				$fallbackCodes = $fallbackChain->getFetchLanguageCodes();
+
+				$langCodes = array_values( array_unique( array_merge(
+					[ $contLangCode ],
+					$fallbackCodes,
+					[ 'en' ]
+				) ) );
+
+				wfDebugLog(
+					'federation',
+					"ValueFormatterFactory[{$dataTypeId}]: wrapping "
+					. get_class( $innerFormatter )
+					. ' with RemoteEntityIdValueFormatter (langs=' . implode( ',', $langCodes ) . ')'
+				);
+
+				return new RemoteEntityIdValueFormatter(
+					$innerFormatter,
+					$remoteLookup,
+					$langCodes
+				);
+			};
+		}
 
 		return new OutputFormatValueFormatterFactory(
 			$formatterFactoryCBs,
