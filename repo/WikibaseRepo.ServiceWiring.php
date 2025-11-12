@@ -178,12 +178,10 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
 use Wikibase\Repo\Federation\BagOStuffSimpleCacheAdapter;
 use Wikibase\Repo\Federation\RemoteEntityCache;
-use Wikibase\Repo\Federation\RemoteEntityIdLabelFormatterFactory;
+use Wikibase\Repo\Federation\RemoteEntityIdParser;
+use Wikibase\Repo\Federation\RemoteEntityIdValueFormatter;
 use Wikibase\Repo\Federation\RemoteEntityLookup;
 use Wikibase\Repo\Federation\RemoteEntitySearchClient;
-use Wikibase\Repo\Federation\RemoteEntityIdParser;
-use Wikibase\Repo\Federation\RemoteEntityIdHtmlLinkFormatter;
-use Wikibase\Repo\Federation\RemoteEntityIdValueFormatter;
 use Wikibase\Repo\Federation\RemoteEntityStore;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
@@ -805,76 +803,28 @@ return [
 		);
 	},
 
-	'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' => static function (
+	'WikibaseRepo.EntityIdHtmlLinkFormatterFactory' => function (
 		MediaWikiServices $services
 	): EntityIdFormatterFactory {
-		$settings = WikibaseRepo::getSettings( $services );
-
-		// Grab the raw per-entity-type callbacks from entity type definitions
-		$formatterCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK );
-
-		// If federation is enabled, wrap the *item* formatter callback so that
-		// RemoteEntityId gets a remote label instead of "Deleted item".
-		if ( $settings->getSetting( 'federationEnabled' ) ) {
-			$remoteLookup = $services->get( 'WikibaseRepo.RemoteEntityLookup' );
-
-			if ( isset( $formatterCallbacks['item'] ) ) {
-				$origItemCallback = $formatterCallbacks['item'];
-
-				$formatterCallbacks['item'] = static function ( Language $language ) use ( $origItemCallback, $remoteLookup ) {
-					// Base item HTML formatter (whatever core / other code provides)
-					$baseFormatter = $origItemCallback( $language );
-
-					// Language preference for remote labels: UI language, then 'en'
-					$langCodes = [ $language->getCode(), 'en' ];
-
-					return new RemoteEntityIdHtmlLinkFormatter(
-						$baseFormatter,
-						$remoteLookup,
-						$langCodes
-					);
-				};
-			}
-		}
-
-		// Now build the standard HTML link formatter factory with our (possibly wrapped) callbacks
 		$factory = new EntityIdHtmlLinkFormatterFactory(
 			WikibaseRepo::getEntityTitleLookup( $services ),
-			$formatterCallbacks
+			WikibaseRepo::getEntityTypeDefinitions( $services )
+				->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);
 
-		// Preserve existing FederatedProperties behavior for properties
-		$federatedPropertiesEnabled = $settings->getSetting( 'federatedPropertiesEnabled' );
+		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )
+			->getSetting( 'federatedPropertiesEnabled' );
 
 		return $federatedPropertiesEnabled
 			? new WrappingEntityIdFormatterFactory( $factory )
 			: $factory;
 	},
 
-	'WikibaseRepo.EntityIdLabelFormatterFactory' => function ( MediaWikiServices $services ): EntityIdLabelFormatterFactory {
-		$settings = WikibaseRepo::getSettings( $services );
-
-		// Base local factory
-		$localFactory = new EntityIdLabelFormatterFactory(
+	'WikibaseRepo.EntityIdLabelFormatterFactory' => function (
+		MediaWikiServices $services
+	): EntityIdLabelFormatterFactory {
+		return new EntityIdLabelFormatterFactory(
 			WikibaseRepo::getFallbackLabelDescriptionLookupFactory( $services )
-		);
-
-		// If federation is off, just use the local behavior.
-		if ( !$settings->getSetting( 'federationEnabled' ) ) {
-			return $localFactory;
-		}
-
-		$remoteLookup = $services->get( 'WikibaseRepo.RemoteEntityLookup' );
-
-		// Site content language + 'en' as generic fallback (tweak as needed)
-		$contLangCode = $services->getContentLanguage()->getCode();
-		$fallbackLanguages = [ $contLangCode, 'en' ];
-
-		return new RemoteEntityIdLabelFormatterFactory(
-			$localFactory,
-			$remoteLookup,
-			$fallbackLanguages
 		);
 	},
 

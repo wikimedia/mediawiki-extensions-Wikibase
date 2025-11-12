@@ -4,8 +4,11 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Federation;
 
+use MediaWiki\Html\Html;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * ValueFormatter decorator for EntityIdValue that knows how to format
@@ -38,7 +41,7 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 
 	/**
 	 * @param mixed $value
-	 * @return string
+	 * @return string HTML for the value
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {
@@ -48,7 +51,7 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 
 		$entityId = $value->getEntityId();
 
-		// Only treat remote entity IDs specially.
+		// Only treat *remote* entity IDs specially.
 		if ( !( $entityId instanceof RemoteEntityId ) ) {
 			return $this->inner->format( $value );
 		}
@@ -59,17 +62,51 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 		$entityData = $this->remoteLookup->getEntity( $repo, $localId );
 
 		if ( !is_array( $entityData ) ) {
+			// Remote lookup failed → fall back to normal behavior
+			// (which will show “Deleted Item”, etc.).
 			return $this->inner->format( $value );
 		}
 
 		$label = $this->pickLabel( $entityData );
-
 		if ( $label === '' ) {
-			return $this->inner->format( $value );
+			$label = $entityId->getSerialization();
 		}
 
-		// For now return plain text; HTML/linking is handled elsewhere.
-		return $label;
+		$href = $this->buildEntityUrl( $repo, $localId );
+
+		$linkAttrs = [
+			'class' => 'wb-remote-entity-link',
+		];
+
+		if ( $href !== null ) {
+			$linkAttrs['href'] = $href;
+			$linkAttrs['target'] = '_blank';
+			$linkAttrs['rel'] = 'noopener';
+		}
+
+		$linkHtml = Html::element(
+			'a',
+			$linkAttrs,
+			$label
+		);
+
+		$badgeHtml = Html::element(
+			'span',
+			[
+				'class' => 'wb-remote-entity-badge',
+				'data-repository' => $repo,
+			],
+			$repo
+		);
+
+		return Html::rawElement(
+			'span',
+			[
+				'class' => 'wb-remote-entity-wrapper',
+				'data-repository' => $repo,
+			],
+			$linkHtml . $badgeHtml
+		);
 	}
 
 	/**
@@ -87,5 +124,15 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 		}
 
 		return '';
+	}
+
+	private function buildEntityUrl( string $repository, string $localId ): ?string {
+		// MVP: static wiring. Later we can use federationRepositories.
+		if ( $repository === 'wikidata' ) {
+			return 'https://www.wikidata.org/wiki/' . $localId;
+		}
+
+		// Unknown repo → just show label with no link.
+		return null;
 	}
 }
