@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\Term;
  * EntitySearchHelper results, for configurable entity types.
  *
  * Controlled by:
- *  - federationEnabled (bool)
+ *  - federatedValuesEnabled (bool)
  */
 class RemoteEntitySearchHelper implements EntitySearchHelper {
 
@@ -156,10 +156,10 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 	}
 
 	private function isRemoteSearchEnabled(): bool {
-		if ( !$this->settings->hasSetting( 'federationEnabled' ) ) {
+		if ( !$this->settings->hasSetting( 'federatedValuesEnabled' ) ) {
 			return false;
 		}
 
-		return (bool)$this->settings->getSetting( 'federationEnabled' );
+		return (bool)$this->settings->getSetting( 'federatedValuesEnabled' );
 	}
 }

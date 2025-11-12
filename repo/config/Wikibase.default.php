@@ -17,7 +17,7 @@ global $wgCdnMaxAge;
 /** @phan-file-suppress PhanUnextractableAnnotation */
 return [
 	// New, generic federation config
-	'federationEnabled' => false,
+	'federatedValuesEnabled' => false,
 
 	// feature flag for federated properties
 	'federatedPropertiesEnabled' => false,

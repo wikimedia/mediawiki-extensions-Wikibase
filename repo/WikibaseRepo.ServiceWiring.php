@@ -853,7 +853,7 @@ return [
 		}
 
 		// If general federation (for values) is enabled, wrap again for remote entity ids.
-		if ( $settings->getSetting( 'federationEnabled' ) ) {
+		if ( $settings->getSetting( 'federatedValuesEnabled' ) ) {
 			// For now, hard-code while prototyping.
 			// Later you can derive this from federationSources.
 			$repoNames = [ 'wikidata' ];

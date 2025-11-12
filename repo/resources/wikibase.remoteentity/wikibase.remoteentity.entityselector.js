@@ -7,7 +7,7 @@
 	 * Simple feature flag check for federation UI behavior.
 	 */
 	function isRemoteEntityEnabled() {
-		return !!mw.config.get( 'wbFederationEnabled' );
+		return !!mw.config.get( 'wbFederatedValuesEnabled' );
 	}
 
 	/**
