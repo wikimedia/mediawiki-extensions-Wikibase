@@ -15,7 +15,6 @@ use Wikibase\DataModel\Term\Term;
  *
  * Controlled by:
  *  - federationEnabled (bool)
- *  - federationForEntityTypes (string[])
  */
 class RemoteEntitySearchHelper implements EntitySearchHelper {
 
@@ -61,10 +60,7 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			$profileContext
 		);
 
-		if (
-			!$this->isFederationEnabled() ||
-			!$this->isEntityTypeFederated( $entityType )
-		) {
+		if ( !$this->isRemoteSearchEnabled() ) {
 			return $localResults;
 		}
 
@@ -159,24 +155,11 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 		return $results;
 	}
 
-	private function isFederationEnabled(): bool {
+	private function isRemoteSearchEnabled(): bool {
 		if ( !$this->settings->hasSetting( 'federationEnabled' ) ) {
 			return false;
 		}
 
 		return (bool)$this->settings->getSetting( 'federationEnabled' );
-	}
-
-	private function isEntityTypeFederated( string $entityType ): bool {
-		if ( !$this->settings->hasSetting( 'federationForEntityTypes' ) ) {
-			return false;
-		}
-
-		$types = $this->settings->getSetting( 'federationForEntityTypes' );
-		if ( !is_array( $types ) ) {
-			return false;
-		}
-
-		return in_array( $entityType, $types, true );
 	}
 }

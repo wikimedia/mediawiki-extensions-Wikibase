@@ -21,7 +21,7 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
 class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideBooleans */
-	public function testBuild( bool $publish, bool $taintedRefs, bool $federationEnabled, array $wbFederationForEntityTypes ) {
+	public function testBuild( bool $publish, bool $taintedRefs, bool $federatedValuesEnabled ) {
 		$this->overrideConfigValue( MainConfigNames::EditSubmitButtonLabelPublish, $publish );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
@@ -36,8 +36,7 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			],
 			250,
 			$taintedRefs,
-			$federationEnabled,
-			$wbFederationForEntityTypes
+			$federatedValuesEnabled,
 		);
 
 		$expectedKey = $publish ? 'wikibase-publish' : 'wikibase-save';
@@ -56,18 +55,17 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			],
 			'wbMultiLingualStringLimit' => 250,
 			'wbTaintedReferencesEnabled' => $taintedRefs,
-			'wbFederatedValuesEnabled' => $federationEnabled,
-			'wbFederationForEntityTypes' => $wbFederationForEntityTypes
+			'wbFederatedValuesEnabled' => $federatedValuesEnabled,
 		];
 
 		$this->assertEquals( $expected, $configVars );
 	}
 
 	public static function provideBooleans(): iterable {
-		yield 'save, no tainted, federation off, federation type provided' => [ false, false, false, [ 'item' ] ];
-		yield 'save, tainted, federation on, federation type not provided'     => [ false, true,  true  ];
-		yield 'publish, no tainted, federation on, federation type provided' => [ true, false, true, [ 'item' ] ];
-		yield 'publish, tainted, federation off, federation type not provided'   => [ true, true,  false ];
+		yield 'save, no tainted, federated values off' => [ false, false, false ];
+		yield 'save, tainted, federated values on' => [ false, true,  true  ];
+		yield 'publish, no tainted, federated values on' => [ true, false, true ];
+		yield 'publish, tainted, federated values off' => [ true, true,  false ];
 	}
 
 	/**
