@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Federation;
+namespace Wikibase\Repo\RemoteEntity;
 
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\Lib\SettingsArray;

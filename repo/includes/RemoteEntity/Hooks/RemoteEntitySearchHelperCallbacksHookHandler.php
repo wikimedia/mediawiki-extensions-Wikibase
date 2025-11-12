@@ -2,11 +2,11 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Federation\Hooks;
+namespace Wikibase\Repo\RemoteEntity\Hooks;
 
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Federation\RemoteEntitySearchClient;
-use Wikibase\Repo\Federation\RemoteEntitySearchHelper;
+use Wikibase\Repo\RemoteEntity\RemoteEntitySearchClient;
+use Wikibase\Repo\RemoteEntity\RemoteEntitySearchHelper;
 use Wikibase\Repo\Hooks\WikibaseRepoEntitySearchHelperCallbacksHook;
 
 class RemoteEntitySearchHelperCallbacksHookHandler implements WikibaseRepoEntitySearchHelperCallbacksHook {

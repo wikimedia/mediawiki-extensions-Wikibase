@@ -9,7 +9,7 @@ use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Repo\Federation\RemoteEntityId;
+use Wikibase\Repo\RemoteEntity\RemoteEntityId;
 
 /**
  * EntityExistsValidator checks that a given entity exists.
