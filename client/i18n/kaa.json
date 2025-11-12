@@ -44,6 +44,7 @@
 	"pageswithbadges": "Nıshana berilgen maqalalar",
 	"entityusage": "Obyekttiń paydalanılıwı",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} elementi identifikatorı",
+	"wikibase-pageinfo-entity-id-none": "Hesh qanday",
 	"wikibase-pageinfo-description-central": "Ortalıq sıpatlama",
 	"wikibase-pageinfo-entity-usage": "Bul bette paydalanılǵan {{WBREPONAME}} obyektleri",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Túsindirme: $1",
