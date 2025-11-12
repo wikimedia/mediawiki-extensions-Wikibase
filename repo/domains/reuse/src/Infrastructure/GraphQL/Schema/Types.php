@@ -28,6 +28,7 @@ class Types {
 	private ?InterfaceType $labelProviderType = null;
 	private ?StringValueType $stringValueType = null;
 	private ?ObjectType $entityValueType = null;
+	private ?ItemType $itemType = null;
 
 	public function __construct(
 		private readonly array $validLanguageCodes,
@@ -87,5 +88,9 @@ class Types {
 			'resolveField' => fn( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) => $valueProvider->value
 				->getArrayValue()[ $info->fieldName ] ?? null,
 		] );
+	}
+
+	public function getItemType(): ItemType {
+		return $this->itemType ??= new ItemType( $this );
 	}
 }
