@@ -839,6 +839,9 @@ return [
 		$parser = new DispatchingEntityIdParser( $entityIdBuilders );
 
 		// If federated properties are enabled, wrap the parser.
+		// TODO: FederatedValues - If we don't remove federatedProperties with the federatedValues
+		// feature release then make sure this doesn't get overridden / isn't mutually exclusive
+		// with the new feature
 		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
 			$parser = new FederatedPropertiesAwareDispatchingEntityIdParser(
@@ -848,6 +851,8 @@ return [
 			);
 		}
 
+		// TODO: FederatedValues - Handle sources question / configurable
+		// TODO: FederatedValues - Decide whether we always parse RemoteEntity IDs or throw error when feature not enabled
 		// If general federation (for values) is enabled, wrap again for remote entity ids.
 		if ( $settings->getSetting( 'federatedValuesEnabled' ) ) {
 			// For now, hard-code while prototyping.

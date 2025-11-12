@@ -166,7 +166,7 @@ final class RepoHooks implements
 
 		if ( $settings->getSetting( 'federatedValuesEnabled' ) ) {
 			// Load entity-search badges JS on all repo pages
-			// TODO: Federation - scope to only load on typeahead
+			// TODO: FederatedValues - scope to only load on typeahead
 			$out->addModules( [ 'wikibase.remoteentity.entityselector' ] );
 		}
 
