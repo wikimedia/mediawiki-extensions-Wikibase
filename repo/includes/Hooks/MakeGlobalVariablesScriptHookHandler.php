@@ -54,9 +54,6 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 	/** @var bool */
 	private $federationEnabled;
 
-	/** @var string[] */
-	private $federationForEntityTypes;
-
 	public function __construct(
 		OutputPageEntityViewChecker $entityViewChecker,
 		OutputPageJsConfigBuilder $outputPageJsConfigBuilder,
@@ -68,8 +65,7 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		array $badgeItems,
 		int $stringLimit,
 		bool $taintedReferencesEnabled,
-		bool $federationEnabled,
-		array $federationForEntityTypes
+		bool $federationEnabled
 	) {
 		$this->entityViewChecker = $entityViewChecker;
 		$this->outputPageJsConfigBuilder = $outputPageJsConfigBuilder;
@@ -82,7 +78,6 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		$this->stringLimit = $stringLimit;
 		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
 		$this->federationEnabled = $federationEnabled;
-		$this->federationForEntityTypes = $federationForEntityTypes;
 	}
 
 	public static function factory(
@@ -109,7 +104,6 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 			$repoSettings->getSetting( 'string-limits' )['multilang']['length'],
 			$repoSettings->getSetting( 'taintedReferencesEnabled' ),
 			$repoSettings->getSetting( 'federationEnabled' ),
-			$repoSettings->getSetting( 'federationForEntityTypes' ),
 		);
 	}
 
@@ -143,8 +137,7 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 			$this->badgeItems,
 			$this->stringLimit,
 			$this->taintedReferencesEnabled,
-			$this->federationEnabled,
-			$this->federationForEntityTypes
+			$this->federationEnabled
 		);
 	}
 
