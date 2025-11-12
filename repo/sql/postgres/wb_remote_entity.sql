@@ -3,11 +3,10 @@
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
 CREATE TABLE wb_remote_entity (
-  re_repository VARCHAR(32) NOT NULL,
-  re_entity_id VARCHAR(64) NOT NULL,
+  re_concept_uri VARCHAR(512) NOT NULL,
   re_touched TIMESTAMPTZ NOT NULL,
   re_blob TEXT NOT NULL,
-  PRIMARY KEY(re_repository, re_entity_id)
+  PRIMARY KEY(re_concept_uri)
 );
 
 CREATE INDEX wb_remote_entity_touched ON wb_remote_entity (re_touched);

@@ -33,34 +33,26 @@ class RemoteEntityLookup {
 	}
 
 	/**
-	 * @param string $repository Logical repository name (e.g. "wikidata")
-	 * @param string $entityId   e.g. "Q42"
+	 * @param string $conceptUri e.g. "https://www.wikidata.org/entity/Q42"
 	 * @return array|null Decoded wbgetentities entity or null on failure
 	 */
-	public function getEntity( string $repository, string $entityId ): ?array {
+	public function getEntity( string $conceptUri ): ?array {
+		$entityId = basename( $conceptUri );
+		$host = (string)parse_url( $conceptUri, PHP_URL_HOST );
+
 		// 1) Try DB mirror first
-		\wfDebugLog(
-			'federation',
-			"RemoteEntityLookup::getEntity repo={$repository} id={$entityId} - checking DB mirror"
-		);
+		\wfDebugLog( 'federation', "RemoteEntityLookup::getEntity uri={$conceptUri} - checking DB mirror" );
 
-		$cached = $this->store->get( $repository, $entityId );
+		$cached = $this->store->get( $conceptUri );
 		if ( $cached !== null ) {
-			\wfDebugLog(
-				'federation',
-				"RemoteEntityLookup::getEntity repo={$repository} id={$entityId} - DB HIT"
-			);
-
+			\wfDebugLog( 'federation', "RemoteEntityLookup::getEntity uri={$conceptUri} - DB HIT" );
 			return $cached;
 		}
 
-		\wfDebugLog(
-			'federation',
-			"RemoteEntityLookup::getEntity repo={$repository} id={$entityId} - DB MISS, calling remote"
-		);
+		\wfDebugLog( 'federation', "RemoteEntityLookup::getEntity uri={$conceptUri} - DB MISS, calling remote" );
 
 		// 2) Fetch from remote
-		$apiUrl = $this->getApiUrlForRepository( $repository );
+		$apiUrl = $this->getApiUrlForHost( $host );
 		if ( $apiUrl === null ) {
 			return null;
 		}
@@ -93,11 +85,11 @@ class RemoteEntityLookup {
 		$entityData = $resp['entities'][$entityId];
 
 		// 3) Store in DB mirror for subsequent calls
-		$this->store->set( $repository, $entityId, $entityData );
+		$this->store->set( $conceptUri, $entityData );
 
 		\wfDebugLog(
 			'federation',
-			"RemoteEntityLookup::getEntity repo={$repository} id={$entityId} - stored in DB mirror"
+			"RemoteEntityLookup::getEntity uri={$conceptUri} - stored in DB mirror"
 		);
 
 		return $entityData;
@@ -106,16 +98,21 @@ class RemoteEntityLookup {
 	/**
 	 * @return string|null Full action API URL, e.g. "https://www.wikidata.org/w/api.php"
 	 */
-	private function getApiUrlForRepository( string $repository ): ?string {
+	private function getApiUrlForHost( string $host ): ?string {
+		// Prefer explicit mapping from settings
 		if ( $this->settings->hasSetting( 'federationRepositories' ) ) {
 			$repos = $this->settings->getSetting( 'federationRepositories' );
-			if ( is_array( $repos ) && isset( $repos[$repository] ) && is_string( $repos[$repository] ) ) {
-				return $repos[$repository];
+			if ( is_array( $repos ) ) {
+				foreach ( $repos as $apiUrl ) {
+					if ( is_string( $apiUrl ) && parse_url( $apiUrl, PHP_URL_HOST ) === $host ) {
+						return $apiUrl;
+					}
+				}
 			}
 		}
 
-		// MVP fallback
-		if ( $repository === 'wikidata' ) {
+		// MVP fallback: wikidata.org
+		if ( $host === 'www.wikidata.org' || $host === 'wikidata.org' ) {
 			return 'https://www.wikidata.org/w/api.php';
 		}
 

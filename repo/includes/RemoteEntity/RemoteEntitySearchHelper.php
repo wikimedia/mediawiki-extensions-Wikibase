@@ -5,16 +5,14 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\RemoteEntity;
 
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * Decorator that adds remote (federated) entity results on top of local
- * EntitySearchHelper results, for configurable entity types.
- *
- * Controlled by:
- *  - federatedValuesEnabled (bool)
+ * Decorator that adds remote (federated) entity results on top of local results.
+ * Type-agnostic: augments whatever $entityType the caller requests.
  */
 class RemoteEntitySearchHelper implements EntitySearchHelper {
 
@@ -49,8 +47,7 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 		$strictLanguage,
 		?string $profileContext
 	) {
-
-		// Always get local results first
+		// 1) Local results
 		$localResults = $this->localSearchHelper->getRankedSearchResults(
 			$text,
 			$languageCode,
@@ -60,11 +57,12 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			$profileContext
 		);
 
+		// 2) If federation off → return local only
 		if ( !$this->isRemoteSearchEnabled() ) {
 			return $localResults;
 		}
 
-		// Build remote params similar to wbsearchentities;
+		// 3) Remote results (same type as requested)
 		$remoteParams = [
 			'search'         => $text,
 			'language'       => $languageCode,
@@ -72,7 +70,6 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			'limit'          => $limit,
 			'strictlanguage' => $strictLanguage,
 			'profile'        => $profileContext,
-			// keep the “ignore remote continuation” behavior
 			'continue'       => 0,
 		];
 
@@ -84,71 +81,56 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 			$languageCode
 		);
 
-		// For now just append remote results at the end
+		// 4) Append remote below local
 		return array_merge( $localResults, $remoteResults );
 	}
 
 	/**
-	 * Turn remote wbsearchentities "search" entries into TermSearchResult objects.
-	 *
-	 * @param array[] $remoteEntries
-	 * @param string $languageCode
-	 * @return TermSearchResult[]
+	 * Map wbsearchentities entries → TermSearchResult, ensuring:
+	 *  - local entities keep plain IDs (Q… / P… / etc.)
+	 *  - remote entities expose conceptUri as id
 	 */
 	private function mapRemoteEntriesToTermSearchResults( array $remoteEntries, string $languageCode ): array {
 		$results = [];
+		$localBase = WikibaseRepo::getLocalEntitySource()->getConceptBaseUri();
 
 		foreach ( $remoteEntries as $entry ) {
-			$id = $entry['id'] ?? null;
+			$id = $entry['id'] ?? null; // local id on the remote (e.g. Q…/P…)
+			$conceptUri = $entry['concepturi'] ?? null;
 			$labelText = $entry['label'] ?? $id ?? '';
 			$descriptionText = $entry['description'] ?? null;
 
-			// Matched term: use the label if available, fall back to ID
-			$matchedTerm = new Term(
-				$languageCode,
-				$labelText !== '' ? $labelText : ( $id ?? '' )
-			);
+			$matchedTerm = new Term( $languageCode, $labelText !== '' ? $labelText : ( $id ?? '' ) );
+			$displayLabel = $labelText !== '' ? new Term( $languageCode, $labelText ) : null;
+			$displayDescription = $descriptionText !== null && $descriptionText !== '' ? new Term( $languageCode, $descriptionText ) : null;
 
-			$displayLabel = $labelText !== ''
-				? new Term( $languageCode, $labelText )
-				: null;
-
-			$displayDescription = $descriptionText !== null && $descriptionText !== ''
-				? new Term( $languageCode, $descriptionText )
-				: null;
-
-			// Start metadata with the remote entry
 			$meta = $entry;
 
-			// Ensure required metadata for the "entityId === null" path:
-			// id, title, pageid, url must exist.
-			if ( $id !== null ) {
-				$meta['id'] = $id;
+			// Determine local vs remote by concept URI base
+			$isRemote = is_string( $conceptUri ) && strpos( $conceptUri, $localBase ) !== 0;
+
+			if ( $conceptUri ) {
+				$meta['concepturi'] = $conceptUri;
+				$meta['url'] = $meta['url'] ?? $conceptUri;
 			}
 
-			if ( !isset( $meta['title'] ) && $id !== null ) {
-				$meta['title'] = $id;
-			}
+			// Use concept URI as id only for remote results; keep plain id for local.
+			$meta['id'] = ( $isRemote && $conceptUri ) ? $conceptUri : ( $id ?? '' );
 
+			if ( !isset( $meta['title'] ) ) {
+				$meta['title'] = $id ?? '';
+			}
 			if ( !isset( $meta['pageid'] ) ) {
 				$meta['pageid'] = 0;
 			}
 
-			if ( !isset( $meta['url'] ) && isset( $meta['concepturi'] ) ) {
-				$meta['url'] = $meta['concepturi'];
-			}
-
-			if ( !isset( $meta['repository'] ) ) {
-				$meta['repository'] = 'wikidata';
-			}
-
 			$results[] = new TermSearchResult(
-				$matchedTerm,        // Term
-				'label',             // matchedTermType
-				null,                // entityId (remote, not a local EntityId)
-				$displayLabel,       // displayLabel
-				$displayDescription, // displayDescription
-				$meta                // metaData
+				$matchedTerm,
+				'label',
+				null,                // remote → no local EntityId
+				$displayLabel,
+				$displayDescription,
+				$meta
 			);
 		}
 
@@ -159,7 +141,6 @@ class RemoteEntitySearchHelper implements EntitySearchHelper {
 		if ( !$this->settings->hasSetting( 'federatedValuesEnabled' ) ) {
 			return false;
 		}
-
 		return (bool)$this->settings->getSetting( 'federatedValuesEnabled' );
 	}
 }

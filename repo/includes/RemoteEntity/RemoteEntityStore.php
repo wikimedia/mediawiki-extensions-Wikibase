@@ -11,10 +11,9 @@ use Wikimedia\Rdbms\LBFactory;
  * DB-backed cache / mirror for remote entities.
  *
  * Table: wb_remote_entity
- *  - re_repository (PK)
- *  - re_entity_id  (PK)
- *  - re_touched    (MW timestamp)
- *  - re_blob       (JSON blob from wbgetentities)
+ *  - re_concept_uri (PK)
+ *  - re_touched     (MW timestamp)
+ *  - re_blob        (JSON blob from wbgetentities)
  *
  * TTL is controlled by the federationEntityCacheTTL setting (seconds).
  */
@@ -64,16 +63,13 @@ class RemoteEntityStore {
 	/**
 	 * @return array|null decoded entity blob, or null on miss/expired/bad data
 	 */
-	public function get( string $repository, string $entityId ): ?array {
+	public function get( string $conceptUri ): ?array {
 		$db = $this->lbFactory->getReplicaDatabase();
 
 		$row = $db->selectRow(
 			'wb_remote_entity',
 			[ 're_blob', 're_touched' ],
-			[
-				're_repository' => $repository,
-				're_entity_id'  => $entityId,
-			],
+			[ 're_concept_uri' => $conceptUri ],
 			__METHOD__
 		);
 
@@ -98,7 +94,7 @@ class RemoteEntityStore {
 	/**
 	 * @param array $entityData decoded wbgetentities entity blob
 	 */
-	public function set( string $repository, string $entityId, array $entityData ): void {
+	public function set( string $conceptUri, array $entityData ): void {
 		$dbw = $this->lbFactory->getPrimaryDatabase();
 
 		$blob = \FormatJson::encode( $entityData, false, \FormatJson::ALL_OK );
@@ -107,12 +103,11 @@ class RemoteEntityStore {
 		$dbw->upsert(
 			'wb_remote_entity',
 			[
-				're_repository' => $repository,
-				're_entity_id'  => $entityId,
-				're_touched'    => $touched,
-				're_blob'       => $blob,
+				're_concept_uri' => $conceptUri,
+				're_touched'     => $touched,
+				're_blob'        => $blob,
 			],
-			[ [ 're_repository', 're_entity_id' ] ],
+			[ 're_concept_uri' ],
 			[
 				're_touched' => $touched,
 				're_blob'    => $blob,
@@ -121,15 +116,12 @@ class RemoteEntityStore {
 		);
 	}
 
-	public function delete( string $repository, string $entityId ): void {
+	public function delete( string $conceptUri ): void {
 		$dbw = $this->lbFactory->getPrimaryDatabase();
 
 		$dbw->delete(
 			'wb_remote_entity',
-			[
-				're_repository' => $repository,
-				're_entity_id'  => $entityId,
-			],
+			[ 're_concept_uri' => $conceptUri ],
 			__METHOD__
 		);
 	}

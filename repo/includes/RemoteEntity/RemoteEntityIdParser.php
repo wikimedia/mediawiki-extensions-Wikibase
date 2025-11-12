@@ -8,42 +8,46 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 
 /**
- * Decorator for EntityIdParser that understands "repoPrefix:Q123"
- * (or "repoPrefix:P123", etc.) as a remote entity id for configured repositories.
+ * Decorator for EntityIdParser that understands concept URIs
+ * ("https://…/entity/Q123") as remote entity ids.
+ * Also accepts legacy "repoName:LocalId" and maps to a concept URI
+ * using configured concept bases.
  */
 class RemoteEntityIdParser implements EntityIdParser {
 
 	private EntityIdParser $innerParser;
 
-	/** @var string[] repoName => true */
-	private array $remoteRepos;
+	/** @var array<string,string> repoName => concept base URI (ends with /entity/) */
+	private array $repoConceptBases;
 
 	/**
 	 * @param EntityIdParser $innerParser existing parser for local ids
-	 * @param string[] $remoteRepos list of allowed repo prefixes, e.g. [ 'wd', 'commons' ]
+	 * @param array<string,string> $repoConceptBases e.g. [ 'wikidata' => 'https://www.wikidata.org/entity/' ]
 	 */
-	public function __construct( EntityIdParser $innerParser, array $remoteRepos ) {
+	public function __construct( EntityIdParser $innerParser, array $repoConceptBases ) {
 		$this->innerParser = $innerParser;
-		$this->remoteRepos = array_fill_keys( $remoteRepos, true );
+		$this->repoConceptBases = $repoConceptBases;
 	}
 
 	public function parse( $idSerialization ): EntityId {
 		if ( !is_string( $idSerialization ) ) {
-			// Let the inner parser handle weird inputs / errors.
 			return $this->innerParser->parse( $idSerialization );
 		}
 
-		// Look for "repo:LocalId" – e.g. "wd:Q123", "wd:P31"
+		// 1) Canonical: full concept URI (https://…/entity/Q123)
+		if ( preg_match( '~^https?://.+/entity/[A-Za-z]\d+$~', $idSerialization ) ) {
+			// Validate local part via inner parser; throws on bad ids.
+			$this->innerParser->parse( basename( $idSerialization ) );
+			return new RemoteEntityId( $idSerialization );
+		}
+
+		// 2) Legacy support: "repoName:LocalId" → map to concept URI
 		$parts = explode( ':', $idSerialization, 2 );
 		if ( count( $parts ) === 2 ) {
 			[ $repo, $localId ] = $parts;
-
-			if ( isset( $this->remoteRepos[$repo] ) ) {
-				// Use the inner parser to interpret the local id ("Q42", "P31", etc.)
-				// This gives us the right underlying EntityId type automatically.
-				$localEntityId = $this->innerParser->parse( $localId );
-
-				return new RemoteEntityId( $repo, $localEntityId );
+			if ( isset( $this->repoConceptBases[$repo] ) ) {
+				$this->innerParser->parse( $localId ); // validate
+				return new RemoteEntityId( $this->repoConceptBases[$repo] . $localId );
 			}
 		}
 

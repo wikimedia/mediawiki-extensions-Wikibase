@@ -1,48 +1,19 @@
 // repo/resources/wikibase.remoteEntity/wikibase.remoteEntity.entityselector.js
-
 ( function ( $, mw ) {
 	'use strict';
 
-	/**
-	 * Simple feature flag check for federation UI behavior.
-	 */
 	function isRemoteEntityEnabled() {
 		return !!mw.config.get( 'wbFederatedValuesEnabled' );
 	}
 
-	/**
-	 * Extract the repository name from a suggestion / entity stub.
-	 *
-	 * Back-end may set:
-	 *  - stub.repository, or
-	 *  - stub.meta.repository
-	 *
-	 * Returns null for local or missing repository info.
-	 *
-	 * @param {Object} stub
-	 * @return {string|null}
-	 */
-	function getSuggestionRepository( stub ) {
-		if ( !stub ) {
-			return null;
+	function getSuggestionHost( stub ) {
+		var concepturi = ( stub && ( stub.concepturi || ( stub.meta && stub.meta.concepturi ) ) ) || null;
+		if ( concepturi ) {
+			try { return new URL( concepturi ).host || null; } catch ( e ) {}
 		}
-
-		var repository = stub.repository ||
-			( stub.meta && stub.meta.repository );
-
-		if ( !repository || repository === 'local' ) {
-			return null;
-		}
-
-		return repository;
+		return null;
 	}
 
-	/**
-	 * Decorate suggestion labels in the entityselector to show a small
-	 * "remote" badge for federated entities.
-	 *
-	 * @param {Object} selectorProto $.wikibase.entityselector.prototype
-	 */
 	function decorateEntitySelectorLabelsForRemoteEntity( selectorProto ) {
 		var origCreateLabelFromSuggestion = selectorProto._createLabelFromSuggestion;
 
@@ -53,35 +24,22 @@
 				return $label;
 			}
 
-			var repository = getSuggestionRepository( entityStub );
-			if ( !repository ) {
-				return $label;
+			var host = getSuggestionHost( entityStub );
+			if ( !host || host === window.location.host ) {
+				return $label; // local → no badge
 			}
 
 			var $badge = $( '<span>' )
 				.addClass( 'wb-entityselector-remote-badge' )
-				.text( repository );
+				.text( host );
 
-			// Prepend so it appears left-most; CSS can adjust final placement.
 			$label.prepend( $badge );
-
 			return $label;
 		};
 	}
 
-	/**
-	 * Decorate the entityselector so that *remote* suggestions get an id
-	 * like "wikidata:Q42" instead of plain "Q42" as early as possible in the
-	 * suggestion pipeline.
-	 *
-	 * This is the critical glue that lets the PHP-side RemoteEntityIdParser
-	 * see a namespaced id and return a RemoteEntityId.
-	 *
-	 * @param {Object} selectorProto $.wikibase.entityselector.prototype
-	 */
 	function decorateEntitySelectorValuesForRemoteEntity( selectorProto ) {
 		var origCombineResults = selectorProto._combineResults;
-
 		if ( typeof origCombineResults !== 'function' ) {
 			return;
 		}
@@ -92,22 +50,14 @@
 
 			if ( isRemoteEntityEnabled() && Array.isArray( results ) ) {
 				results = results.map( function ( suggestion ) {
+					// Only rewrite IDs for REMOTE suggestions
+					var concepturi = suggestion.concepturi || ( suggestion.meta && suggestion.meta.concepturi );
+					var host = concepturi ? ( function () { try { return new URL( concepturi ).host; } catch (e) { return null; } } )() : null;
 
-					var repository = getSuggestionRepository( suggestion );
-
-					// Only prefix ids for remote suggestions that still look like "Q42".
-					if (
-						repository &&
-						suggestion &&
-						typeof suggestion.id === 'string' &&
-						suggestion.id.indexOf( ':' ) === -1
-					) {
-						// Shallow-clone so we don't mutate the original object in place.
-						suggestion = $.extend( {}, suggestion, {
-							id: repository + ':' + suggestion.id
-						} );
+					if ( concepturi && host && host !== window.location.host ) {
+						// Use concept URI as canonical id for remote selections.
+						suggestion = $.extend( {}, suggestion, { id: concepturi } );
 					}
-
 					return suggestion;
 				} );
 
@@ -118,22 +68,14 @@
 		};
 	}
 
-	/**
-	 * Entry point: apply all federation-related decorations to the
-	 * jQuery.wikibase.entityselector widget.
-	 */
 	function initRemoteEntitySelectorDecorators() {
 		if ( !$.wikibase || !$.wikibase.entityselector ) {
 			return;
 		}
-
 		var selectorProto = $.wikibase.entityselector.prototype;
-
 		decorateEntitySelectorLabelsForRemoteEntity( selectorProto );
 		decorateEntitySelectorValuesForRemoteEntity( selectorProto );
 	}
 
-	// Run after the core entityselector widget is available.
 	mw.loader.using( [ 'jquery.wikibase.entityselector' ] ).done( initRemoteEntitySelectorDecorators );
-
 }( jQuery, mediaWiki ) );

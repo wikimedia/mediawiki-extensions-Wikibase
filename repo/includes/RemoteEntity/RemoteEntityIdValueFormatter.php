@@ -7,8 +7,6 @@ namespace Wikibase\Repo\RemoteEntity;
 use MediaWiki\Html\Html;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * ValueFormatter decorator for EntityIdValue that knows how to format
@@ -45,7 +43,6 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {
-			// Not an entity-id value → just delegate.
 			return $this->inner->format( $value );
 		}
 
@@ -56,23 +53,22 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 			return $this->inner->format( $value );
 		}
 
-		$repo = $entityId->getRepositoryName();
+		$conceptUri = $entityId->getSerialization();
 		$localId = $entityId->getLocalEntityId()->getSerialization();
 
-		$entityData = $this->remoteLookup->getEntity( $repo, $localId );
+		$entityData = $this->remoteLookup->getEntity( $conceptUri );
 
 		if ( !is_array( $entityData ) ) {
 			// Remote lookup failed → fall back to normal behavior
-			// (which will show “Deleted Item”, etc.).
 			return $this->inner->format( $value );
 		}
 
 		$label = $this->pickLabel( $entityData );
 		if ( $label === '' ) {
-			$label = $entityId->getSerialization();
+			$label = $localId;
 		}
 
-		$href = $this->buildEntityUrl( $repo, $localId );
+		$href = $this->buildEntityUrl( $conceptUri );
 
 		$linkAttrs = [
 			'class' => 'wb-remote-entity-link',
@@ -94,16 +90,16 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 			'span',
 			[
 				'class' => 'wb-remote-entity-badge',
-				'data-repository' => $repo,
+				'data-host' => (string)parse_url( $conceptUri, PHP_URL_HOST ),
 			],
-			$repo
+			(string)parse_url( $conceptUri, PHP_URL_HOST )
 		);
 
 		return Html::rawElement(
 			'span',
 			[
 				'class' => 'wb-remote-entity-wrapper',
-				'data-repository' => $repo,
+				'data-concepturi' => $conceptUri,
 			],
 			$linkHtml . $badgeHtml
 		);
@@ -126,13 +122,8 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 		return '';
 	}
 
-	private function buildEntityUrl( string $repository, string $localId ): ?string {
-		// MVP: static wiring. Later we can use federationRepositories.
-		if ( $repository === 'wikidata' ) {
-			return 'https://www.wikidata.org/wiki/' . $localId;
-		}
-
-		// Unknown repo → just show label with no link.
-		return null;
+	private function buildEntityUrl( string $conceptUri ): ?string {
+		// Link to the concept URI by default; /entity/ is widely dereferenceable.
+		return $conceptUri;
 	}
 }

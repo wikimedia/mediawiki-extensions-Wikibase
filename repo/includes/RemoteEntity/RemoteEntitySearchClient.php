@@ -71,7 +71,7 @@ class RemoteEntitySearchClient {
 	 *
 	 * @param array $params
 	 * @return array Decoded wbsearchentities response, or [] on failure
-	 * @throws ApiUsageException
+	 * @throws \RuntimeException
 	 */
 	public function searchEntities( array $params ): array {
 		$remoteParams = $this->buildRemoteParams( $params );
