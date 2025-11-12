@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Federation;
+namespace Wikibase\Repo\RemoteEntity;
 
 use MediaWiki\Html\Html;
 use ValueFormatters\ValueFormatter;

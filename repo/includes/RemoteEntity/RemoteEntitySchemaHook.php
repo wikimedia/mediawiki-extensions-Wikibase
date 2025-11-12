@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Federation;
+namespace Wikibase\Repo\RemoteEntity;
 
 use MediaWiki\Installer\DatabaseUpdater;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
@@ -20,7 +20,7 @@ class RemoteEntitySchemaHook implements LoadExtensionSchemaUpdatesHook {
 	 * @param DatabaseUpdater $updater
 	 */
 	public function onLoadExtensionSchemaUpdates( $updater ): void {
-		// __DIR__ = .../extensions/Wikibase/repo/includes/Federation
+		// __DIR__ = .../extensions/Wikibase/repo/includes/RemoteEntity
 		// We want .../extensions/Wikibase/repo/sql
 		$sqlBaseDir = dirname( __DIR__, 2 ) . '/sql';
 		$dbType = $updater->getDB()->getType(); // 'mysql', 'postgres', 'sqlite', ...

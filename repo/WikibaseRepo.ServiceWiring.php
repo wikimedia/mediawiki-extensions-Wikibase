@@ -176,11 +176,11 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
-use Wikibase\Repo\Federation\RemoteEntityIdParser;
-use Wikibase\Repo\Federation\RemoteEntityIdValueFormatter;
-use Wikibase\Repo\Federation\RemoteEntityLookup;
-use Wikibase\Repo\Federation\RemoteEntitySearchClient;
-use Wikibase\Repo\Federation\RemoteEntityStore;
+use Wikibase\Repo\RemoteEntity\RemoteEntityIdParser;
+use Wikibase\Repo\RemoteEntity\RemoteEntityIdValueFormatter;
+use Wikibase\Repo\RemoteEntity\RemoteEntityLookup;
+use Wikibase\Repo\RemoteEntity\RemoteEntitySearchClient;
+use Wikibase\Repo\RemoteEntity\RemoteEntityStore;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\FederatedProperties\BaseUriExtractor;
 use Wikibase\Repo\FederatedProperties\DefaultFederatedPropertiesEntitySourceAdder;
@@ -1215,7 +1215,7 @@ return [
 		);
 	},
 
-	'WikibaseRepo.Federation.RemoteEntitySearchClient' =>
+	'WikibaseRepo.RemoteEntity.RemoteEntitySearchClient' =>
 		static function ( MediaWikiServices $services ): RemoteEntitySearchClient {
 			return new RemoteEntitySearchClient(
 				$services->getHttpRequestFactory(),

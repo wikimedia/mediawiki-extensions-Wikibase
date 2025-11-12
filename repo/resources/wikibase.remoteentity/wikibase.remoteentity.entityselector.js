@@ -1,4 +1,4 @@
-// repo/resources/wikibase.federation/wikibase.federation.entityselector.js
+// repo/resources/wikibase.remoteEntity/wikibase.remoteEntity.entityselector.js
 
 ( function ( $, mw ) {
 	'use strict';
@@ -6,7 +6,7 @@
 	/**
 	 * Simple feature flag check for federation UI behavior.
 	 */
-	function isFederationUiEnabled() {
+	function isRemoteEntityEnabled() {
 		return !!mw.config.get( 'wbFederationEnabled' );
 	}
 
@@ -43,13 +43,13 @@
 	 *
 	 * @param {Object} selectorProto $.wikibase.entityselector.prototype
 	 */
-	function decorateEntitySelectorLabelsForFederation( selectorProto ) {
+	function decorateEntitySelectorLabelsForRemoteEntity( selectorProto ) {
 		var origCreateLabelFromSuggestion = selectorProto._createLabelFromSuggestion;
 
 		selectorProto._createLabelFromSuggestion = function ( entityStub ) {
 			var $label = origCreateLabelFromSuggestion.call( this, entityStub );
 
-			if ( !isFederationUiEnabled() ) {
+			if ( !isRemoteEntityEnabled() ) {
 				return $label;
 			}
 
@@ -79,7 +79,7 @@
 	 *
 	 * @param {Object} selectorProto $.wikibase.entityselector.prototype
 	 */
-	function decorateEntitySelectorValuesForFederation( selectorProto ) {
+	function decorateEntitySelectorValuesForRemoteEntity( selectorProto ) {
 		var origCombineResults = selectorProto._combineResults;
 
 		if ( typeof origCombineResults !== 'function' ) {
@@ -90,7 +90,7 @@
 			var args = Array.prototype.slice.call( arguments );
 			var results = args[ 1 ];
 
-			if ( isFederationUiEnabled() && Array.isArray( results ) ) {
+			if ( isRemoteEntityEnabled() && Array.isArray( results ) ) {
 				results = results.map( function ( suggestion ) {
 
 					var repository = getSuggestionRepository( suggestion );
@@ -122,18 +122,18 @@
 	 * Entry point: apply all federation-related decorations to the
 	 * jQuery.wikibase.entityselector widget.
 	 */
-	function initFederatedEntitySelectorDecorators() {
+	function initRemoteEntitySelectorDecorators() {
 		if ( !$.wikibase || !$.wikibase.entityselector ) {
 			return;
 		}
 
 		var selectorProto = $.wikibase.entityselector.prototype;
 
-		decorateEntitySelectorLabelsForFederation( selectorProto );
-		decorateEntitySelectorValuesForFederation( selectorProto );
+		decorateEntitySelectorLabelsForRemoteEntity( selectorProto );
+		decorateEntitySelectorValuesForRemoteEntity( selectorProto );
 	}
 
 	// Run after the core entityselector widget is available.
-	mw.loader.using( [ 'jquery.wikibase.entityselector' ] ).done( initFederatedEntitySelectorDecorators );
+	mw.loader.using( [ 'jquery.wikibase.entityselector' ] ).done( initRemoteEntitySelectorDecorators );
 
 }( jQuery, mediaWiki ) );

@@ -2,14 +2,14 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Repo\Tests\Federation;
+namespace Wikibase\Repo\Tests\RemoteEntity;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Federation\RemoteEntityId;
+use Wikibase\Repo\RemoteEntity\RemoteEntityId;
 
 /**
- * @covers \Wikibase\Repo\Federation\RemoteEntityId
+ * @covers \Wikibase\Repo\RemoteEntity\RemoteEntityId
  */
 class RemoteEntityIdTest extends TestCase {
 

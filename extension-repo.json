@@ -1303,9 +1303,9 @@
 			"class": "\\Wikibase\\View\\ViewHooks"
 		},
 		"WikibaseRepoEntitySearchHelperCallbacks": {
-			"class": "Wikibase\\Repo\\Federation\\Hooks\\RemoteEntitySearchHelperCallbacksHookHandler",
+			"class": "Wikibase\\Repo\\RemoteEntity\\Hooks\\RemoteEntitySearchHelperCallbacksHookHandler",
 			"services": [
-				"WikibaseRepo.Federation.RemoteEntitySearchClient",
+				"WikibaseRepo.RemoteEntity.RemoteEntitySearchClient",
 				"WikibaseRepo.Settings"
 			]
 		}
