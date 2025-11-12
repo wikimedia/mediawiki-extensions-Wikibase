@@ -26,7 +26,7 @@ class RemoteEntitySearchHelperCallbacksHookHandler implements WikibaseRepoEntity
 	 * @param array<string,callable> &$callbacks
 	 */
 	public function onWikibaseRepoEntitySearchHelperCallbacks( array &$callbacks ): void {
-		if ( !$this->settings->getSetting( 'federationEnabled' ) ) {
+		if ( !$this->settings->getSetting( 'federatedValuesEnabled' ) ) {
 			return;
 		}
 
