@@ -2172,7 +2172,7 @@ return [
 		$settings = WikibaseRepo::getSettings( $services );
 
 		// If federation is off, keep core behavior.
-		if ( !$settings->getSetting( 'federationEnabled' ) ) {
+		if ( !$settings->getSetting( 'federatedValuesEnabled' ) ) {
 			return new OutputFormatValueFormatterFactory(
 				$formatterFactoryCBs,
 				$services->getContentLanguage(),
