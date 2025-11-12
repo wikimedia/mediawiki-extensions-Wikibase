@@ -1,5 +1,6 @@
 type Query {
   item(id: ItemId!): Item
+  itemsById(ids: [ItemId!]!): [Item]!
 }
 
 scalar ItemId

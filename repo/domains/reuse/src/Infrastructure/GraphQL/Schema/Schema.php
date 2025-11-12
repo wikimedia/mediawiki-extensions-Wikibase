@@ -28,6 +28,18 @@ class Schema extends GraphQLSchema {
 						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
 						'complexity' => fn() => GraphQLService::ITEM_FIELD_COMPLEXITY,
 					],
+					'itemsById' => [
+						// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+						'type' => Type::nonNull( Type::listOf( $this->types->getItemType() ) ),
+						'args' => [
+							// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+							'ids' => Type::nonNull( Type::listOf( Type::nonNull( $this->types->getItemIdType() ) ) ),
+						],
+						'resolve' => fn( $rootValue, array $args ) => array_map(
+							$itemResolver->resolveItem( ... ),
+							$args[ 'ids' ]
+						),
+					],
 				],
 			] ),
 		] );

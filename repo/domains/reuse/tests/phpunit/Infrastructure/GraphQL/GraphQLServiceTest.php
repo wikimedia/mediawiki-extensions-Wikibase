@@ -740,6 +740,27 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			[],
 			'Query2',
 		];
+
+		yield 'simple itemsById query' => [
+			"{ itemsById(ids: [ \"$itemId\", \"{$otherItem->getId()}\" ] ) {
+				id
+				label(languageCode: \"en\")
+			} }",
+			[
+				'data' => [
+					'itemsById' => [
+						[
+							'id' => $itemId,
+							'label' => $item->getLabels()->getByLanguage( 'en' )->getText(),
+						],
+						[
+							'id' => $otherItem->getId(),
+							'label' => $otherItem->getLabels()->getByLanguage( 'en' )->getText(),
+						],
+					],
+				],
+			],
+		];
 	}
 
 	/**
