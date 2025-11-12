@@ -3,6 +3,7 @@ import { Util } from 'cypress-wikibase-api';
 import { checkA11y } from '../../support/checkA11y';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
+import { AddStatementFormPage } from '../../support/pageObjects/AddStatementFormPage';
 
 describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
@@ -26,7 +27,6 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 		context( 'mobile view - ' + datatype + ' datatype', () => {
 			let propertyName: string;
 			let entityId: string;
-			let linkedEntityId: string;
 			let linkedEntityLabel: string;
 			let newLinkedEntityLabel: string;
 
@@ -34,35 +34,14 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				propertyName = Util.getTestString( datatype + '-property' + '-' );
 				linkedEntityLabel = Util.getTestString( 'linked-' + datatype + '-' );
 				newLinkedEntityLabel = Util.getTestString( 'new-linked-' + datatype + '-' );
-				createEntityForDatatype[ datatype ]( linkedEntityLabel ).then( ( newEntityId: string ) => {
-					linkedEntityId = newEntityId;
-				} );
+				createEntityForDatatype[ datatype ]( linkedEntityLabel );
 				createEntityForDatatype[ datatype ]( newLinkedEntityLabel );
 				cy.task( 'MwApi:CreateProperty', {
 					label: propertyName,
 					data: { datatype: 'wikibase-' + datatype },
-				} ).then( ( newPropertyId: string ) => {
-					const statementData = {
-						claims: [ {
-							mainsnak: {
-								snaktype: 'value',
-								property: newPropertyId,
-								datavalue: {
-									value: {
-										'entity-type': datatype,
-										id: linkedEntityId,
-									},
-									type: 'wikibase-entityid',
-								},
-								datatype: 'wikibase-' + datatype,
-							},
-							type: 'statement',
-							rank: 'normal',
-						} ],
-					};
+				} ).then( () => {
 					cy.task( 'MwApi:CreateItem', {
 						label: Util.getTestString( 'item-with-' + datatype + '-statement' ),
-						data: statementData,
 					} ).then( ( newItemId: string ) => {
 						entityId = newItemId;
 					} );
@@ -73,7 +52,32 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				cy.viewport( 375, 1280 );
 			} );
 
-			it( 'displays item statement and supports full editing workflow', () => {
+			it( 'allows adding ' + datatype + ' statement to empty item', () => {
+				const itemViewPage = new ItemViewPage( entityId );
+				itemViewPage.open().statementsSection();
+
+				itemViewPage.addStatementButton().click();
+
+				const addStatementFormPage = new AddStatementFormPage();
+				addStatementFormPage.propertyLookup().should( 'exist' );
+				addStatementFormPage.setProperty( propertyName );
+
+				addStatementFormPage.publishButton().should( 'be.disabled' );
+				addStatementFormPage.snakValueInput().should( 'exist' );
+
+				addStatementFormPage.setSnakValue( linkedEntityLabel );
+				addStatementFormPage.snakValueInput().focus();
+				addStatementFormPage.selectFirstSnakValueLookupItem();
+
+				addStatementFormPage.publishButton().click();
+				addStatementFormPage.form().should( 'not.exist' );
+
+				// TODO: Adding statements to otherwise empty items will be implemented in T406878.
+				// This test should be updated at that point.
+				// itemViewPage.mainSnakValues().first().should( 'contain.text', linkedEntityLabel );
+			} );
+
+			it( 'displays ' + datatype + ' statement and supports full editing workflow', () => {
 				const itemViewPage = new ItemViewPage( entityId );
 				itemViewPage.open().statementsSection();
 				checkA11y( ItemViewPage.STATEMENTS );
