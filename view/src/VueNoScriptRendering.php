@@ -98,7 +98,7 @@ class VueNoScriptRendering {
 
 	private function registerTemplates( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
-			'wbui2025-statement-sections', 'wikibase.wbui2025.statementSections.vue'
+			'wbui2025-statement-sections', 'statementSections.vue'
 		);
 		$this->registerMainSnakView();
 		$this->registerStatementGroupView( $allStatements );
@@ -112,7 +112,7 @@ class VueNoScriptRendering {
 	private function registerMainSnakView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-main-snak',
-			'wikibase.wbui2025.mainSnak.vue',
+			'mainSnak.vue',
 			function( array $data ) {
 				$data['rankTitleString'] = $this->textProvider->get(
 					// messages that can be used here:
@@ -129,7 +129,7 @@ class VueNoScriptRendering {
 	private function registerStatementGroupView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-group-view',
-			'wikibase.wbui2025.statementGroupView.vue',
+			'statementGroupView.vue',
 			function( array $data ) use ( $allStatements ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
@@ -151,7 +151,7 @@ class VueNoScriptRendering {
 	private function registerStatementView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-view',
-			'wikibase.wbui2025.statementView.vue',
+			'statementView.vue',
 			function ( array $data ) use ( $allStatements ): array {
 				$statementId = $data['statementId'];
 				$statementById = $allStatements->getFirstStatementWithGuid( $statementId );
@@ -169,7 +169,7 @@ class VueNoScriptRendering {
 	private function registerPropertyNameView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-property-name',
-			'wikibase.wbui2025.propertyName.vue',
+			'propertyName.vue',
 			function ( array $data ): array {
 				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
@@ -185,7 +185,7 @@ class VueNoScriptRendering {
 	private function registerReferencesView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-references',
-			'wikibase.wbui2025.references.vue',
+			'references.vue',
 			function ( array $data ): array {
 				$data['referenceCount'] = count( $data['references'] );
 				$data['hasReferences'] = $data['referenceCount'] > 0;
@@ -203,7 +203,7 @@ class VueNoScriptRendering {
 	private function registerQualifiersView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-qualifiers',
-			'wikibase.wbui2025.qualifiers.vue',
+			'qualifiers.vue',
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
 				$data['hasQualifiers'] = $qualifierCount > 0;
@@ -215,7 +215,7 @@ class VueNoScriptRendering {
 	private function registerSnakValueView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-snak-value',
-			'wikibase.wbui2025.snakValue.vue',
+			'snakValue.vue',
 			function ( array $data ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
