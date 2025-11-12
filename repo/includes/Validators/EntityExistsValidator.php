@@ -64,7 +64,6 @@ class EntityExistsValidator implements ValueValidator {
 			);
 		}
 
-		// ⬇️ NEW: skip local existence checks for remote entity IDs
 		if ( $value instanceof RemoteEntityId ) {
 			// For federated values, local EntityLookup cannot resolve them.
 			// We only enforce the entityType constraint above; if that's fine,
