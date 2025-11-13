@@ -48,18 +48,24 @@ class StringValueStrategy extends DefaultStrategy {
 		return transformSearchResults( data.query.search );
 	}
 
-	isLookupDatatype() {
+	isEntityDatatype() {
 		return false;
 	}
 
-	isEntityDatatype() {
-		return false;
+	triggerParse( newValue ) {
+		if ( this.editSnakStore.parseValueTimeout !== null ) {
+			clearTimeout( this.editSnakStore.parseValueTimeout );
+		}
+
+		this.editSnakStore.parseValueTimeout = setTimeout( () => {
+			this.getParsedValue( newValue );
+		}, 300 );
 	}
 }
 
 class LookupStringDatatypeStrategy extends StringValueStrategy {
-	isLookupDatatype() {
-		return true;
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableLookupSnakValue';
 	}
 }
 
@@ -86,6 +92,17 @@ class EntityValueStrategy extends LookupStringDatatypeStrategy {
 
 	getValueToParse() {
 		return this.editSnakStore.selectionvalue;
+	}
+
+	getParsedValue( newValue = undefined ) {
+		// Ignore the new value - will have been provided by the textvalue watcher
+		// in editableLookupSnakValue, but we want to parse the selected entity value
+		// ( selectionvalue )
+		return useParsedValueStore().getParsedValue(
+			this.editSnakStore.property,
+			this.getValueToParse(),
+			this.getParseOptions()
+		);
 	}
 
 	getParseOptions() {

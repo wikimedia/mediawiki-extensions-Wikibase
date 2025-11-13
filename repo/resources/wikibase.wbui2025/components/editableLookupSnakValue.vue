@@ -1,0 +1,161 @@
+<template>
+	<cdx-lookup
+		ref="inputElement"
+		v-model:selected="lookupSelection"
+		v-model:input-value="lookupInputValue"
+		:class="className"
+		:menu-items="lookupMenuItems"
+		:menu-config="menuConfig"
+		@update:input-value="onUpdateInputValue"
+		@load-more="onLoadMore"
+	>
+	</cdx-lookup>
+</template>
+
+<script>
+const { computed, defineComponent } = require( 'vue' );
+const { mapWritableState } = require( 'pinia' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const { CdxLookup } = require( '../../../codex.js' );
+
+// @vue/component
+module.exports = exports = defineComponent( {
+	name: 'WikibaseWbui2025EditableLookupSnakValue',
+	components: {
+		CdxLookup
+	},
+	props: {
+		snakKey: {
+			type: String,
+			required: true
+		},
+		className: {
+			type: String,
+			required: false,
+			default: 'wikibase-wbui2025-editable-snak-value-input'
+		}
+	},
+	emits: [ 'remove-snak' ],
+	setup( props ) {
+	/*
+	 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
+	 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
+	 * the Composition API to initialise the component.
+	 */
+		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
+		const computedProperties = mapWritableState( editSnakStoreGetter, [
+			'textvalue',
+			'selectionvalue',
+			'datatype'
+		] );
+		return {
+			textvalue: computed( computedProperties.textvalue ),
+			selectionvalue: computed( computedProperties.selectionvalue ),
+			datatype: computed( computedProperties.datatype ),
+			valueStrategy: editSnakStoreGetter().getValueStrategy()
+		};
+	},
+	data() {
+		return {
+			lookupMenuItems: [],
+			lookupSelection: null,
+			lookupInputValue: null,
+			menuConfig: {
+				visibleItemLimit: 6
+			}
+		};
+	},
+	methods: {
+		// eslint-disable-next-line vue/no-unused-properties
+		focus() {
+			this.$refs.inputElement.textInput.focus();
+		},
+
+		fetchLookupResults( searchTerm, offset = 0 ) {
+			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
+		},
+
+		onUpdateInputValue( value ) {
+			if ( !value ) {
+				this.lookupMenuItems = [];
+				return;
+			}
+
+			this.fetchLookupResults( value )
+				.then( ( data ) => {
+					if ( this.lookupInputValue !== value ) {
+						return;
+					}
+
+					this.lookupMenuItems = this.valueStrategy.transformSearchResults( data );
+				} )
+				.catch( ( error ) => {
+					this.lookupMenuItems = [];
+				} );
+		},
+		onLoadMore() {
+			if ( !this.lookupInputValue ) {
+				return;
+			}
+
+			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
+				.then( ( data ) => this.lookupMenuItems.push( ...this.valueStrategy.transformSearchResults( data ) ) );
+		}
+	},
+	watch: {
+		textvalue: {
+			handler( newValue ) {
+				if ( newValue === undefined ) {
+					return;
+				}
+				if ( this.lookupSelection !== newValue ) {
+					if ( this.valueStrategy.isEntityDatatype() ) {
+						if ( this.lookupSelection === null ) {
+							this.lookupMenuItems = [
+								{
+									value: '__init__',
+									label: newValue
+								}
+							];
+							this.lookupInputValue = newValue;
+							this.lookupSelection = '__init__';
+						} else {
+							this.lookupInputValue = newValue;
+						}
+					} else {
+						this.lookupSelection = newValue || null;
+						this.lookupInputValue = newValue || '';
+					}
+				}
+
+				this.valueStrategy.triggerParse( newValue );
+			},
+			immediate: true
+		},
+		lookupSelection( newSelection ) {
+			if ( newSelection && this.textvalue !== newSelection ) {
+				if ( this.valueStrategy.isEntityDatatype() ) {
+					const lookupItem = this.lookupMenuItems.find( ( item ) => item.value === newSelection );
+					this.textvalue = lookupItem.label || lookupItem.value;
+					this.selectionvalue = newSelection;
+					this.lookupInputValue = this.textvalue;
+				} else {
+					this.textvalue = newSelection;
+				}
+			}
+		}
+	} }
+);
+</script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+div.wikibase-wbui2025-edit-statement-snak-value {
+
+	div.cdx-lookup {
+		width: 100%;
+	}
+
+}
+</style>

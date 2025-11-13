@@ -1033,6 +1033,8 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/editableReferencesSection.vue',
 					'resources/wikibase.wbui2025/components/editableSnak.vue',
 					'resources/wikibase.wbui2025/components/editableSnakValue.vue',
+					'resources/wikibase.wbui2025/components/editableStringSnakValue.vue',
+					'resources/wikibase.wbui2025/components/editableLookupSnakValue.vue',
 					'resources/wikibase.wbui2025/components/editStatementGroup.vue',
 					'resources/wikibase.wbui2025/components/editStatement.vue',
 					'resources/wikibase.wbui2025/components/mainSnak.vue',
