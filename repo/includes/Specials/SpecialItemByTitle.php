@@ -56,13 +56,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	private $logger;
 
 	/**
-	 * site link groups
-	 *
-	 * @var string[]
-	 */
-	private $groups;
-
-	/**
 	 * @see SpecialWikibasePage::__construct
 	 *
 	 * @param EntityTitleLookup $titleLookup
@@ -71,7 +64,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinkTargetProvider $siteLinkTargetProvider
 	 * @param LoggerInterface $logger
-	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
 		EntityTitleLookup $titleLookup,
@@ -80,7 +72,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		SiteLinkLookup $siteLinkLookup,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		LoggerInterface $logger,
-		array $siteLinkGroups
 	) {
 		parent::__construct( 'ItemByTitle', '', true );
 
@@ -90,7 +81,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->logger = $logger;
-		$this->groups = $siteLinkGroups;
 	}
 
 	public static function factory(
@@ -103,7 +93,8 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	): self {
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
-			$repoSettings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'siteLinkGroups' ),
+			$repoSettings->getSetting( 'specialSiteLinkGroups' ),
 		);
 
 		return new self(
@@ -114,7 +105,6 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$store->newSiteLinkStore(),
 			$siteLinkTargetProvider,
 			$logger,
-			$repoSettings->getSetting( 'siteLinkGroups' )
 		);
 	}
 
@@ -189,7 +179,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 */
 	private function getSiteOptions() {
 		$options = [];
-		foreach ( $this->siteLinkTargetProvider->getSiteList( $this->groups ) as $site ) {
+		foreach ( $this->siteLinkTargetProvider->getSiteList() as $site ) {
 			$siteId = $site->getGlobalId();
 			$languageName = $this->languageNameLookup->getName( $site->getLanguageCode() );
 			$options["$languageName ($siteId)"] = $siteId;
@@ -205,7 +195,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 	 */
 	private function switchForm( $siteId, $page ) {
 		$siteExists = $siteId
-			&& $this->siteLinkTargetProvider->getSiteList( $this->groups )->hasSite( $siteId );
+			&& $this->siteLinkTargetProvider->getSiteList()->hasSite( $siteId );
 
 		$this->logger->debug(
 			'{method}: Site {siteId} exists: {siteExists}',

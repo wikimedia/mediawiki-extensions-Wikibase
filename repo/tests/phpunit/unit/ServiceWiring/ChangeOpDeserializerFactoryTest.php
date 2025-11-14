@@ -8,7 +8,6 @@ use Deserializers\Deserializer;
 use MediaWiki\Site\HashSiteStore;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -43,11 +42,6 @@ class ChangeOpDeserializerFactoryTest extends ServiceWiringTestCase {
 			->willReturn( $this->createMock( SiteLinkChangeOpFactory::class ) );
 		$this->mockService( 'WikibaseRepo.ChangeOpFactoryProvider',
 			$changeOpFactoryProvider );
-		$this->mockService( 'WikibaseRepo.Settings',
-			new SettingsArray( [
-				'specialSiteLinkGroups' => [],
-				'siteLinkGroups' => [],
-			] ) );
 		$this->mockService( 'WikibaseRepo.TermsLanguages',
 			new StaticContentLanguages( [] ) );
 		$this->mockService( 'WikibaseRepo.SiteLinkBadgeChangeOpSerializationValidator',
@@ -63,7 +57,7 @@ class ChangeOpDeserializerFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.SiteLinkPageNormalizer',
 			new SiteLinkPageNormalizer( [] ) );
 		$this->mockService( 'WikibaseRepo.SiteLinkTargetProvider',
-			new SiteLinkTargetProvider( new HashSiteStore() ) );
+			new SiteLinkTargetProvider( new HashSiteStore(), [], [] ) );
 
 		$this->assertInstanceOf(
 			ChangeOpDeserializerFactory::class,

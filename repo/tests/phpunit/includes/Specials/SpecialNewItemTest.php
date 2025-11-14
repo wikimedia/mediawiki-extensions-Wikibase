@@ -86,10 +86,9 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$this->getTermValidatorFactoryMock(),
 			WikibaseRepo::getItemTermsCollisionDetector(),
 			WikibaseRepo::getValidatorErrorLocalizer(),
-			new SiteLinkTargetProvider( $this->siteStore ),
+			new SiteLinkTargetProvider( $this->siteStore, [ 'wikiblah' ] ),
 			WikibaseRepo::getFallbackLabelDescriptionLookupFactory(),
 			WikibaseRepo::getSettings()->getSetting( 'badgeItems' ),
-			[ 'wikiblah' ],
 			false
 		);
 	}

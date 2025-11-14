@@ -44,11 +44,6 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	private $siteLinkTargetProvider;
 
 	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
@@ -71,7 +66,6 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param StringNormalizer $stringNormalizer
-	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
 		SiteLinkBadgeChangeOpSerializationValidator $badgeChangeOpSerializationValidator,
@@ -81,7 +75,6 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		StringNormalizer $stringNormalizer,
-		array $siteLinkGroups
 	) {
 		$this->badgeChangeOpSerializationValidator = $badgeChangeOpSerializationValidator;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
@@ -90,7 +83,6 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->stringNormalizer = $stringNormalizer;
-		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
 	/**
@@ -106,7 +98,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		$this->assertArray( $changeRequest['sitelinks'], 'List of sitelinks must be an array' );
 
 		$siteLinksChangeOps = new ChangeOps();
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteList();
 
 		foreach ( $changeRequest['sitelinks'] as $siteId => $serialization ) {
 			'@phan-var array $serialization';

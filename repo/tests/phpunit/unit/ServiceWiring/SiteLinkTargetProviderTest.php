@@ -22,6 +22,7 @@ class SiteLinkTargetProviderTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
+				'siteLinkGroups' => [],
 				'specialSiteLinkGroups' => [],
 			] ) );
 
