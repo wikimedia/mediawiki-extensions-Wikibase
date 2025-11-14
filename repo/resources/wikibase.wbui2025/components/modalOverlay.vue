@@ -40,6 +40,14 @@
 					</div>
 					<slot name="footer">
 						<div v-if="!hideFooter" class="wikibase-wbui2025-modal-overlay__footer">
+							<transition name="fade">
+								<cdx-progress-bar
+									v-if="showProgress"
+									:value="100"
+									inline
+									:aria-label="progressBarLabel"
+								></cdx-progress-bar>
+							</transition>
 							<!-- eslint-disable vue/no-unused-refs -->
 							<div ref="modalOverlayActionsRef" class="wikibase-wbui2025-modal-overlay__footer__actions">
 								<cdx-button
@@ -70,14 +78,15 @@
 <script>
 const { defineComponent } = require( 'vue' );
 const { cdxIconArrowPrevious, cdxIconCheck, cdxIconClose } = require( '../icons.json' );
-const { CdxButton, CdxIcon } = require( '../../../codex.js' );
+const { CdxButton, CdxIcon, CdxProgressBar } = require( '../../../codex.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025ModalOverlay',
 	components: {
 		CdxButton,
-		CdxIcon
+		CdxIcon,
+		CdxProgressBar
 	},
 	props: {
 		header: {
@@ -104,6 +113,16 @@ module.exports = exports = defineComponent( {
 			type: Boolean,
 			required: false,
 			default: false
+		},
+		showProgress: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		progressBarLabel: {
+			type: [ String, Object ],
+			required: false,
+			default: ''
 		}
 	},
 	emits: [ 'hide', 'save' ],
@@ -205,13 +224,16 @@ module.exports = exports = defineComponent( {
 		overflow-y: auto;
 	}
 
-	.wikibase-wbui2025-modal-overlay__footer{
+	.wikibase-wbui2025-modal-overlay__footer {
 		display: flex;
-		padding: @spacing-125 @spacing-400 @spacing-300 @spacing-400;
-		align-items: center;
-		justify-content: center;
+		flex: 0 0 auto;
+		flex-direction: column;
+		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
 
 		.wikibase-wbui2025-modal-overlay__footer__actions {
+			padding: @spacing-125 @spacing-400 @spacing-300 @spacing-400;
+			align-items: center;
+			justify-content: center;
 			display: flex;
 			gap: @spacing-200;
 		}
