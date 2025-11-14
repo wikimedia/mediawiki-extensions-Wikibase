@@ -7,7 +7,7 @@ wbui2025.api = Object.assign(
 	require( './api/api.js' ),
 	require( './api/commons.js' )
 );
-wbui2025.util = require( './wikibase.wbui2025.utils.js' );
+wbui2025.util = require( './utils.js' );
 wbui2025.store = Object.assign(
 	require( './store/snakValueStrategies.js' ),
 	require( './store/snakValueStrategyFactory.js' ),
