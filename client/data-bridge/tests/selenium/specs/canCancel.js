@@ -1,6 +1,6 @@
-const Api = require( 'wdio-mediawiki/Api' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
 
 describe( 'App', () => {
 	let title;
@@ -26,7 +26,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 	} );
 
 	beforeEach( 'open bridge', () => {

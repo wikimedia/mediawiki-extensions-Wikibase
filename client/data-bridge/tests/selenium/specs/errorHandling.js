@@ -1,14 +1,14 @@
-const assert = require( 'assert' ),
-	Api = require( 'wdio-mediawiki/Api' ),
-	LoginPage = require( 'wdio-mediawiki/LoginPage' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	ErrorSavingAssertUser = require( '../pageobjects/ErrorSavingAssertUser' ),
-	ErrorSavingEditConflict = require( '../pageobjects/ErrorSavingEditConflict' ),
-	WarningAnonymousEdit = require( '../pageobjects/WarningAnonymousEdit' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
-	DomUtil = require( './../DomUtil' ),
-	NetworkUtil = require( './../NetworkUtil' ),
-	WindowUtil = require( './../WindowUtil' );
+import assert from 'assert';
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import LoginPage from 'wdio-mediawiki/LoginPage.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import ErrorSavingAssertUser from '../pageobjects/ErrorSavingAssertUser.js';
+import ErrorSavingEditConflict from '../pageobjects/ErrorSavingEditConflict.js';
+import WarningAnonymousEdit from '../pageobjects/WarningAnonymousEdit.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
+import * as DomUtil from './../DomUtil.js';
+import * as NetworkUtil from './../NetworkUtil.js';
+import * as WindowUtil from './../WindowUtil.js';
 
 describe( 'App', () => {
 	it( 'shows ErrorUnknown when launching bridge for a non-existent entity', () => {
@@ -22,7 +22,7 @@ describe( 'App', () => {
 			editFlow: 'single-best-value',
 		} ] );
 
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 
@@ -55,7 +55,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.open( title );
 
@@ -93,7 +93,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 
@@ -147,7 +147,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 
@@ -211,7 +211,7 @@ describe( 'App', () => {
 				propertyId,
 				editFlow: 'single-best-value',
 			} ] );
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+			browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
 			DataBridgePage.bridge.waitForDisplayed();
@@ -342,7 +342,7 @@ describe( 'App', () => {
 				propertyId,
 				editFlow: 'single-best-value',
 			} ] );
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+			browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
 			DataBridgePage.bridge.waitForDisplayed();
@@ -358,7 +358,7 @@ describe( 'App', () => {
 			} );
 
 			// clear the item, removing the target statement
-			browser.call( () => Api.bot().then( ( bot ) => bot.request( {
+			browser.call( () => mwbot().then( ( bot ) => bot.request( {
 				action: 'wbeditentity',
 				id: entityId,
 				token: bot.editToken,

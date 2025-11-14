@@ -1,10 +1,8 @@
-'use strict';
-
-const Util = require( 'wdio-mediawiki/Util' );
-const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
-const EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );
-const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
-const Page = require( 'wdio-mediawiki/Page' );
+import { getTestString } from 'wdio-mediawiki/Util.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
+import EntityPage from 'wdio-wikibase/pageobjects/entity.page.js';
+import ItemPage from 'wdio-wikibase/pageobjects/item.page.js';
+import Page from 'wdio-mediawiki/Page.js';
 
 describe( 'item', () => {
 	it( 'can add a statement using the keyboard', async () => {
@@ -15,7 +13,7 @@ describe( 'item', () => {
 		// - add reference,
 		// - save
 
-		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T154869-' ) );
+		const itemId = await WikibaseApi.createItem( getTestString( 'T154869-' ) );
 		const propertyId = await WikibaseApi.getProperty( 'string' );
 
 		await EntityPage.open( itemId );
@@ -71,7 +69,7 @@ describe( 'item', () => {
 	} );
 
 	it( 'old revisions do not have an edit link', async () => {
-		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T95406-' ) );
+		const itemId = await WikibaseApi.createItem( getTestString( 'T95406-' ) );
 		const item = await WikibaseApi.getEntity( itemId );
 
 		await EntityPage.open( itemId );
@@ -89,7 +87,7 @@ describe( 'item', () => {
 	} );
 
 	it( 'has its label not rendered when linked on a Wikipage', async () => {
-		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T111346-' ) );
+		const itemId = await WikibaseApi.createItem( getTestString( 'T111346-' ) );
 		await EntityPage.open( itemId );
 
 		const {

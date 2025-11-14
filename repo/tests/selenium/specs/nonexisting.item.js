@@ -1,6 +1,4 @@
-'use strict';
-
-const NonExistingItemPage = require( 'wdio-wikibase/pageobjects/nonexisting.item' );
+import NonExistingItemPage from 'wdio-wikibase/pageobjects/nonexisting.item.js';
 
 describe( 'WikibaseRepoNonExistingItemPage', () => {
 

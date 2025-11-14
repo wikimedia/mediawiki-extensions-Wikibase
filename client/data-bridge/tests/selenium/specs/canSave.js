@@ -1,11 +1,11 @@
-const assert = require( 'assert' ),
-	Api = require( 'wdio-mediawiki/Api' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
-	DomUtil = require( './../DomUtil' );
+import assert from 'assert';
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
+import * as DomUtil from './../DomUtil.js';
 
 function createTag( tagname, reason ) {
-	return Api.bot().then( ( bot ) => bot.request( {
+	return mwbot().then( ( bot ) => bot.request( {
 		action: 'managetags',
 		operation: 'create',
 		tag: tagname,
@@ -15,7 +15,7 @@ function createTag( tagname, reason ) {
 }
 
 function getLatestRevisionTags( title ) {
-	return Api.bot().then( ( bot ) => {
+	return mwbot().then( ( bot ) => {
 		return bot.request( {
 			titles: title,
 			action: 'query',
@@ -71,7 +71,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 
@@ -150,7 +150,7 @@ describe( 'App', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 

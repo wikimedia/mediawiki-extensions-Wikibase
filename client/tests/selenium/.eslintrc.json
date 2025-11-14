@@ -5,5 +5,8 @@
 	],
 	"rules": {
 		"mocha/no-setup-in-describe": "warn"
+	},
+	"parserOptions": {
+		"sourceType": "module"
 	}
 }
