@@ -20,9 +20,9 @@
 		wbui2025.store.useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 		wbui2025.store.useMessageStore( pinia );
 
-		const AddStatementButton = require( './addStatementButton.vue' );
-		const StatusMessage = require( './statusMessage.vue' );
-		const StatementGroupView = require( './statementGroupView.vue' );
+		const AddStatementButton = require( './components/addStatementButton.vue' );
+		const StatusMessage = require( './components/statusMessage.vue' );
+		const StatementGroupView = require( './components/statementGroupView.vue' );
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
