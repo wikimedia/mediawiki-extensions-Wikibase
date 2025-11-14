@@ -1808,7 +1808,8 @@ return [
 				$services->getLocalServerObjectCache(),
 				'wikibase.siteLinkGlobalIdentifiersProvider.',
 				$cacheSecret
-			)
+			),
+			WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' ),
 		);
 	},
 

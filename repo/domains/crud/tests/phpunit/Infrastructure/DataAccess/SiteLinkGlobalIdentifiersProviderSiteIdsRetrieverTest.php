@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 use MediaWiki\Site\HashSiteStore;
 use MediaWikiIntegrationTestCase;
 use Site;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\FakeCache;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\SiteLinkGlobalIdentifiersProviderSiteIdsRetriever;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
@@ -35,8 +34,7 @@ class SiteLinkGlobalIdentifiersProviderSiteIdsRetrieverTest extends MediaWikiInt
 
 		$siteTargetProvider = new SiteLinkTargetProvider( new HashSiteStore( [ $site1, $site2, $site3 ] ), [] );
 		$validSiteIdsRetriever = new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
-			new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache() ),
-			new SettingsArray( [ 'siteLinkGroups' => [ 'wiktionary' ] ] )
+			new SiteLinkGlobalIdentifiersProvider( $siteTargetProvider, new FakeCache(), [ 'wiktionary' ] ),
 		);
 
 		$response = $validSiteIdsRetriever->getValidSiteIds();

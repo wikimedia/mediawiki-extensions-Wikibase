@@ -43,7 +43,6 @@ return [
 		return new Types(
 			WikibaseRepo::getTermsLanguages( $services )->getLanguages(),
 			WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
-			WikibaseRepo::getSettings( $services ),
 			WbReuse::getPropertyLabelsResolver( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
 		);

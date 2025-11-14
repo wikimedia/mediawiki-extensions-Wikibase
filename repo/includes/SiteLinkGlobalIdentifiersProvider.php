@@ -11,23 +11,15 @@ class SiteLinkGlobalIdentifiersProvider {
 
 	private const NO_VALUE = false;
 
-	/**
-	 * @var SiteLinkTargetProvider
-	 */
-	private $siteLinkTargetProvider;
-
-	/**
-	 * @var CacheInterface
-	 */
-	private $cache;
-
-	public function __construct( SiteLinkTargetProvider $siteLinkTargetProvider, CacheInterface $cache ) {
-		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
-		$this->cache = $cache;
+	public function __construct(
+		private readonly SiteLinkTargetProvider $siteLinkTargetProvider,
+		private readonly CacheInterface $cache,
+		private readonly array $siteLinkGroups,
+	) {
 	}
 
-	public function getList( array $groups ): array {
-		$cacheKey = 'list.' . implode( '_', $groups );
+	public function getSiteIds(): array {
+		$cacheKey = 'list.' . implode( '_', $this->siteLinkGroups );
 		$list = $this->cache->get(
 			$cacheKey,
 			self::NO_VALUE
@@ -36,7 +28,7 @@ class SiteLinkGlobalIdentifiersProvider {
 			return $list;
 		}
 
-		$list = $this->siteLinkTargetProvider->getSiteList( $groups )->getGlobalIdentifiers();
+		$list = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups )->getGlobalIdentifiers();
 		$this->cache->set( $cacheKey, $list, 3600 );
 		return $list;
 	}

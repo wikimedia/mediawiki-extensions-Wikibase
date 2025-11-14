@@ -70,7 +70,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$siteIdProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
-		$siteIdProvider->method( 'getList' )->willReturn( self::ALLOWED_SITELINK_SITES );
+		$siteIdProvider->method( 'getSiteIds' )->willReturn( self::ALLOWED_SITELINK_SITES );
 
 		$termLookup = new InMemoryPrefetchingTermLookup();
 		$termLookup->setData( [ ...self::$items, ...self::$properties ] );

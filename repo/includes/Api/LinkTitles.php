@@ -282,7 +282,7 @@ class LinkTitles extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return array_merge( parent::getAllowedParams(), $this->getCreateTempUserParams(), [
 			'tosite' => [
