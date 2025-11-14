@@ -94,7 +94,11 @@ module.exports = exports = defineComponent( {
 		createNewStatement() {
 			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
 
-			this.createNewBlankEditableStatement( statementId, this.propertyId );
+			this.createNewBlankEditableStatement(
+				statementId,
+				this.propertyId,
+				this.propertyData ? this.propertyData.datatype : null
+			);
 		},
 		onPropertySelection( propertyId, propertyData ) {
 			if ( this.createdStatementGuids && this.createdStatementGuids.length > 0 ) {

@@ -44,4 +44,9 @@ export class AddStatementFormPage {
 		return this;
 	}
 
+	public selectFirstSnakValueLookupItem(): this {
+		cy.get( '.wikibase-wbui2025-snak-value .cdx-menu-item:first' ).click();
+		return this;
+	}
+
 }
