@@ -98,7 +98,6 @@ abstract class RecentChangesModificationTestBase extends MediaWikiIntegrationTes
 			'rc_cur_id' => 0,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
-			'rc_type' => RC_EXTERNAL,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_patrolled' => 0,
 			'rc_ip' => '127.0.0.1',

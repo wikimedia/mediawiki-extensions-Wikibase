@@ -379,7 +379,6 @@ class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 			'rc_cur_id' => 52,
 			'rc_this_oldid' => 114,
 			'rc_last_oldid' => 114,
-			'rc_type' => 5,
 			'rc_patrolled' => 2,
 			'rc_ip' => '',
 			'rc_old_len' => 2,

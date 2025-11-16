@@ -172,7 +172,6 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$changeAttr = [
 			'rc_user' => 0,
 			'rc_user_text' => 'repo>RecentChangeFactoryTestUser',
-			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,
 			'rc_patrolled' => 2,
@@ -196,7 +195,6 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$preparedAttr = [
 			'rc_user' => 0,
 			'rc_user_text' => 'HungryKitten',
-			'rc_type' => RC_EXTERNAL,
 			'rc_minor' => true, // for now, always consider these minor
 			'rc_bot' => false,
 			'rc_patrolled' => 2,
