@@ -43,6 +43,7 @@ class TrivialHookHandler implements
 	 */
 	public function onBeforePageDisplay( $outputPage, $skin ): void {
 		$prefixedId = $outputPage->getProperty( 'wikibase_item' );
+		$outputPage->addModules( 'wikibase.databox.fromWikidata' );
 
 		if ( $prefixedId !== null ) {
 			$outputPage->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );

@@ -452,6 +452,9 @@
 		"remoteExtPath": "Wikibase/client/resources"
 	},
 	"ResourceModules": {
+		"wikibase.databox.fromWikidata": {
+			"scripts": "wikibase.databox.fromWikidata.js"
+		},
 		"wikibase.client.init": {
 			"skinStyles": {
 				"modern": "wikibase.client.css",
