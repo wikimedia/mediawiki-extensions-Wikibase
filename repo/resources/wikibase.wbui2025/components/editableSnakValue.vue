@@ -12,24 +12,13 @@
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 		>
-			<cdx-text-input
-				v-if="!valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
+			<component
+				:is="valueStrategy.getEditableSnakComponent()"
+				v-if="snakTypeSelection === 'value'"
 				ref="inputElement"
-				v-model.trim="textvalue"
+				:snak-key="snakKey"
 				:class="className"
-			></cdx-text-input>
-			<cdx-lookup
-				v-else-if="valueStrategy.isLookupDatatype() && snakTypeSelection === 'value'"
-				ref="inputElement"
-				v-model:selected="lookupSelection"
-				v-model:input-value="lookupInputValue"
-				:class="className"
-				:menu-items="lookupMenuItems"
-				:menu-config="menuConfig"
-				@update:input-value="onUpdateInputValue"
-				@load-more="onLoadMore"
-			>
-			</cdx-lookup>
+			></component>
 			<div v-else class="wikibase-wbui2025-novalue-somevalue-holder">
 				<p>{{ snakTypeSelectionMessage }}</p>
 			</div>
@@ -51,7 +40,9 @@ const { computed, defineComponent } = require( 'vue' );
 const { mapWritableState } = require( 'pinia' );
 const { cdxIconTrash } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
-const { CdxButton, CdxIcon, CdxLookup, CdxMenuButton, CdxTextInput } = require( '../../../codex.js' );
+const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
+const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue' );
+const { CdxButton, CdxIcon, CdxMenuButton } = require( '../../../codex.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -59,9 +50,9 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxLookup,
 		CdxMenuButton,
-		CdxTextInput
+		Wbui2025EditableStringSnakValue,
+		Wbui2025EditableLookupSnakValue
 	},
 	props: {
 		removable: {
@@ -89,15 +80,11 @@ module.exports = exports = defineComponent( {
 		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue',
-			'selectionvalue',
-			'datatype',
 			'snaktype',
 			'hash'
 		] );
 		return {
 			textvalue: computed( computedProperties.textvalue ),
-			selectionvalue: computed( computedProperties.selectionvalue ),
-			datatype: computed( computedProperties.datatype ),
 			snaktype: computed( computedProperties.snaktype ),
 			hash: computed( computedProperties.hash ),
 			valueStrategy: editSnakStoreGetter().getValueStrategy()
@@ -111,14 +98,7 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-snakview-variations-novalue-label' ), value: 'novalue' },
 				{ label: mw.msg( 'wikibase-snakview-variations-somevalue-label' ), value: 'somevalue' }
 			],
-			parseValueTimeout: null,
-			previousValue: null,
-			lookupMenuItems: [],
-			lookupSelection: null,
-			lookupInputValue: null,
-			menuConfig: {
-				visibleItemLimit: 6
-			}
+			previousValue: null
 		};
 	},
 	computed: {
@@ -150,97 +130,10 @@ module.exports = exports = defineComponent( {
 	methods: {
 		// eslint-disable-next-line vue/no-unused-properties
 		focus() {
-			if ( this.valueStrategy.isLookupDatatype() ) {
-				this.$refs.inputElement.textInput.focus();
-			} else {
-				this.$refs.inputElement.focus();
-			}
-		},
-
-		fetchLookupResults( searchTerm, offset = 0 ) {
-			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
-		},
-
-		onUpdateInputValue( value ) {
-			if ( !value ) {
-				this.lookupMenuItems = [];
-				return;
-			}
-
-			this.fetchLookupResults( value )
-				.then( ( data ) => {
-					if ( this.lookupInputValue !== value ) {
-						return;
-					}
-
-					this.lookupMenuItems = this.valueStrategy.transformSearchResults( data );
-				} )
-				.catch( ( error ) => {
-					this.lookupMenuItems = [];
-				} );
-		},
-		onLoadMore() {
-			if ( !this.lookupInputValue ) {
-				return;
-			}
-
-			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
-				.then( ( data ) => this.lookupMenuItems.push( ...this.valueStrategy.transformSearchResults( data ) ) );
+			this.$refs.inputElement.focus();
 		}
-	},
-	watch: {
-		textvalue: {
-			handler( newValue ) {
-				if ( newValue === undefined ) {
-					return;
-				}
-				if ( this.valueStrategy.isLookupDatatype() && this.lookupSelection !== newValue ) {
-					if ( this.valueStrategy.isEntityDatatype() ) {
-						if ( this.lookupSelection === null ) {
-							this.lookupMenuItems = [
-								{
-									value: '__init__',
-									label: newValue
-								}
-							];
-							this.lookupInputValue = newValue;
-							this.lookupSelection = '__init__';
-						} else {
-							this.lookupInputValue = newValue;
-						}
-					} else {
-						this.lookupSelection = newValue || null;
-						this.lookupInputValue = newValue || '';
-					}
-				}
-
-				if ( this.parseValueTimeout !== null ) {
-					clearTimeout( this.parseValueTimeout );
-				}
-				this.parseValueTimeout = setTimeout( () => {
-					if ( this.valueStrategy.isEntityDatatype() ) {
-						this.valueStrategy.getParsedValue();
-					} else {
-						this.valueStrategy.getParsedValue( newValue );
-					}
-				}, 300 );
-			},
-			immediate: true
-		},
-		lookupSelection( newSelection ) {
-			if ( newSelection && this.valueStrategy.isLookupDatatype() && this.textvalue !== newSelection ) {
-				if ( this.valueStrategy.isEntityDatatype() ) {
-					const lookupItem = this.lookupMenuItems.find( ( item ) => item.value === newSelection );
-					this.textvalue = lookupItem.label || lookupItem.value;
-					this.selectionvalue = newSelection;
-					this.lookupInputValue = this.textvalue;
-				} else {
-					this.textvalue = newSelection;
-				}
-			}
-		}
-	} }
-);
+	}
+} );
 </script>
 
 <style lang="less">
@@ -253,10 +146,6 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 
 	div.wikibase-wbui2025-snak-value {
 		width: 100%;
-
-		div.cdx-text-input {
-			width: 100%;
-		}
 	}
 
 	div.wikibase-wbui2025-novalue-somevalue-holder {
@@ -281,18 +170,6 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		position: relative;
 		padding: 0;
 		display: inline-block;
-	}
-
-	div.cdx-text-input {
-		width: 100%;
-
-		input {
-			width: 100%;
-		}
-	}
-
-	div.cdx-lookup {
-		width: 100%;
 	}
 }
 </style>
