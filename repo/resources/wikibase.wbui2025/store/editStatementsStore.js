@@ -63,7 +63,6 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 			};
 			if ( this.snaktype === 'value' ) {
 				snakJson.datavalue = await this.getValueStrategy().buildDataValue( this );
-				snakJson.datatype = this.valuetype;
 			}
 			return snakJson;
 		},
@@ -72,6 +71,9 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, {
 				return undefined;
 			}
 			return this.getValueStrategy().peekDataValue( this );
+		},
+		dispose() {
+			deleteStore( this );
 		}
 	}
 } );
@@ -150,63 +152,48 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			} );
 			await Promise.all( snakInitPromises );
 		},
+		async addQualifier( snakKey ) {
+			const editSnakStore = useEditSnakStore( snakKey )();
 
-		async addQualifier( propertyId, snakData ) {
-			if ( !snakData.hash ) {
-				snakData.hash = `${ this.$id }-qualifier-${ propertyId }-${ generateNextSnakKey() }`;
+			if ( !this.qualifiers[ editSnakStore.property ] ) {
+				this.qualifiers[ editSnakStore.property ] = [];
+				this.qualifiersOrder.push( editSnakStore.property );
+				renderPropertyLinkHtml( editSnakStore.property ).then( ( result ) => updatePropertyLinkHtml( editSnakStore.property, result ) );
 			}
-			if ( this.qualifiers[ propertyId ] === undefined ) {
-				this.qualifiers[ propertyId ] = [];
-				this.qualifiersOrder.push( propertyId );
+			this.qualifiers[ editSnakStore.property ].push( snakKey );
 
-				renderPropertyLinkHtml( propertyId )
-					.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
-			}
+			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property ).then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 
-			const editSnakStore = useEditSnakStore( snakData.hash )();
-			await editSnakStore.initializeWithSnak( snakData );
-			this.qualifiers[ propertyId ].push( snakData.hash );
-			renderSnakValueHtml( snakData.datavalue, propertyId )
-				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
-			if ( snakData.snaktype === 'value' ) {
+			if ( editSnakStore.snaktype === 'value' ) {
 				editSnakStore.getValueStrategy().getParsedValue();
 			}
 		},
+		async addReference( snakKey ) {
+			const editSnakStore = useEditSnakStore( snakKey )();
 
-		async addReference( propertyId, snakData ) {
-			if ( !snakData.hash ) {
-				snakData.hash = `${ this.$id }-reference-${ propertyId }-${ generateNextSnakKey() }`;
-			}
-			const snaks = {};
+			renderPropertyLinkHtml( editSnakStore.property ).then( ( result ) => updatePropertyLinkHtml( editSnakStore.property, result ) );
+			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property )
+				.then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 
-			renderPropertyLinkHtml( propertyId )
-				.then( ( result ) => updatePropertyLinkHtml( propertyId, result ) );
+			const newReference = {
+				hash: snakKey,
+				snaks: { [ editSnakStore.property ]: [ snakKey ] },
+				'snaks-order': [ editSnakStore.property ]
+			};
+			this.references.push( newReference );
 
-			const editSnakStore = useEditSnakStore( snakData.hash )();
-			await editSnakStore.initializeWithSnak( snakData );
-
-			snaks[ propertyId ] = [ snakData.hash ];
-
-			this.references.push( {
-				snaks,
-				'snaks-order': [ propertyId ]
-			} );
-
-			renderSnakValueHtml( snakData.datavalue )
-				.then( ( result ) => updateSnakValueHtmlForHash( snakData.hash, result ) );
-
-			if ( snakData.snaktype === 'value' ) {
+			if ( editSnakStore.valuetype === 'value' ) {
 				editSnakStore.getValueStrategy().getParsedValue();
 			}
 		},
 		disposeOfStatementStoreAndSnaks() {
-			deleteStore( useEditSnakStore( this.mainSnakKey )() );
+			useEditSnakStore( this.mainSnakKey )().dispose();
 			for ( const [ , statementList ] of Object.entries( this.qualifiers ) ) {
-				statementList.forEach( ( snakKey ) => deleteStore( useEditSnakStore( snakKey )() ) );
+				statementList.forEach( ( snakKey ) => useEditSnakStore( snakKey )().dispose() );
 			}
 			for ( const reference of this.references ) {
 				for ( const [ , statementList ] of Object.entries( reference.snaks || {} ) ) {
-					statementList.forEach( ( snakKey ) => deleteStore( useEditSnakStore( snakKey )() ) );
+					statementList.forEach( ( snakKey ) => useEditSnakStore( snakKey )().dispose() );
 				}
 			}
 			deleteStore( this );

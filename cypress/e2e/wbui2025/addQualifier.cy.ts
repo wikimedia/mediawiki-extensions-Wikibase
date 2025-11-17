@@ -10,6 +10,8 @@ import { ValueForm } from '../../support/pageObjects/ValueForm';
 describe( 'wbui2025 add qualifiers', () => {
 	context( 'mobile view', () => {
 		let itemViewPage: ItemViewPage;
+		let itemLabel: string;
+
 		beforeEach( () => {
 			const loginPage = new LoginPage();
 			cy.task(
@@ -19,6 +21,10 @@ describe( 'wbui2025 add qualifiers', () => {
 				loginPage.login( username, password );
 			} );
 
+			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'wikibase-item' } )
+				.then( ( propertyId: string ) => {
+					cy.wrap( propertyId ).as( 'itemPropertyId' );
+				} );
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'string' } )
 				.then( ( propertyId: string ) => {
 					cy.wrap( propertyId ).as( 'propertyId' );
@@ -36,7 +42,8 @@ describe( 'wbui2025 add qualifiers', () => {
 							rank: 'normal',
 						} ],
 					};
-					cy.task( 'MwApi:CreateItem', { label: Util.getTestString( 'item' ), data: statementData } )
+					itemLabel = Util.getTestString( 'item' );
+					cy.task( 'MwApi:CreateItem', { label: itemLabel, data: statementData } )
 						.then( ( itemId: string ) => {
 							itemViewPage = new ItemViewPage( itemId );
 						} );
@@ -101,6 +108,22 @@ describe( 'wbui2025 add qualifiers', () => {
 			/* Wait for the form to close, and check the value is gone */
 			editStatementFormPage.valueForms().should( 'not.exist' );
 			itemViewPage.qualifiersSections().should( 'not.exist' );
+
+			/*
+			 * Add item qualifier
+			 */
+			itemViewPage.editLinks().first().click();
+			editStatementFormPage.addQualifierButton().click();
+			addQualifierFormPage.heading().should( 'have.text', 'add qualifier' );
+
+			cy.get<string>( '@itemPropertyId' ).then( ( propertyId ) => {
+				addQualifierFormPage.setProperty( propertyId );
+			} );
+			addQualifierFormPage.setSnakValue( itemLabel );
+			addQualifierFormPage.menuItems().first().click();
+			addQualifierFormPage.addButton().click();
+			editStatementFormPage.publishButton().click();
+
 		} );
 	} );
 

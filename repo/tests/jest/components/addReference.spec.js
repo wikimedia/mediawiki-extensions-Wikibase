@@ -12,6 +12,14 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',
+		geoShapeStorageApiEndpointUrl: 'https://commons.test/w/api.php'
+	} ),
+	{ virtual: true }
+);
 
 const mockConfig = {
 	wgUserLanguage: 'en'
@@ -25,6 +33,8 @@ const { CdxButton, CdxTextInput } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025AddReference = require( '../../../resources/wikibase.wbui2025/components/addReference.vue' );
 const Wbui2025PropertyLookup = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
+const { storeWithStatements } = require( '../piniaHelpers.js' );
+const { useParsedValueStore } = require( '../../../resources/wikibase.wbui2025/store/parsedValueStore.js' );
 
 describe( 'wikibase.wbui2025.addReference', () => {
 	it( 'defines component', async () => {
@@ -38,7 +48,16 @@ describe( 'wikibase.wbui2025.addReference', () => {
 
 		let wrapper, closeButton, addButton, propertyLookup;
 		beforeEach( async () => {
-			wrapper = await mount( Wbui2025AddReference );
+			wrapper = await mount( Wbui2025AddReference, {
+				props: {
+					statementId: 'test-statement-id'
+				},
+				global: {
+					plugins: [
+						storeWithStatements( [] )
+					]
+				}
+			} );
 			[ closeButton, addButton ] = wrapper.findAllComponents( CdxButton );
 			propertyLookup = wrapper.findComponent( Wbui2025PropertyLookup );
 		} );
@@ -94,27 +113,26 @@ describe( 'wikibase.wbui2025.addReference', () => {
 
 			describe( 'with a non-blank snak value', () => {
 				beforeEach( async () => {
+					useParsedValueStore().preloadParsedValue( 'P23', {
+						type: 'string',
+						value: 'a string value'
+					} );
 					await snakValueInput.vm.$emit( 'update:modelValue', 'a string value' );
 				} );
 
-				it( 'when a snak value is entered, add button becomes active', () => {
+				it( 'when a snak value is entered, add button becomes active', async () => {
 					expect( addButton.isDisabled() ).toBe( false );
 				} );
 
 				it( 'emits an event when the add button is clicked', async () => {
 					await addButton.trigger( 'click' );
-					expect( wrapper.emitted( 'add-reference' )[ 0 ] ).toEqual( [
-						'P23',
-						{
-							datatype: 'string',
-							datavalue: {
-								type: 'string',
-								value: 'a string value'
-							},
-							property: 'P23',
-							snaktype: 'value'
+					for ( let i = 0; i < 5; i++ ) {
+						await wrapper.vm.$nextTick();
+						if ( wrapper.emitted( 'reference-added' ) ) {
+							break;
 						}
-					] );
+					}
+					expect( wrapper.emitted( 'reference-added' )[ 0 ] ).toEqual( [] );
 				} );
 			} );
 		} );

@@ -9,7 +9,7 @@
 				<cdx-button
 					action="progressive"
 					:disabled="addButtonDisabled"
-					@click="$emit( 'add-reference', selectedPropertyId, snakData )"
+					@click="submitSnakData"
 				>
 					<cdx-icon :icon="cdxIconCheck"></cdx-icon>
 					{{ $i18n( 'wikibase-add' ) }}
@@ -19,14 +19,13 @@
 					@update:selected="onPropertySelection"
 				>
 				</wikibase-wbui2025-property-lookup>
-				<cdx-text-input
-					v-if="selectedPropertyDatatype === 'string'"
-					ref="textInput"
-					v-model.trim="snakValue"
-					class="wikibase-wbui2025-add-reference-value"
-					:placeholder="$i18n( 'wikibase-addreference' ).text()"
-				>
-				</cdx-text-input>
+				<wikibase-wbui2025-editable-snak-value
+					v-if="snakKey"
+					ref="snakInput"
+					:snak-key="snakKey"
+					:removable="false"
+					class-name="wikibase-wbui2025-add-reference-value"
+				></wikibase-wbui2025-editable-snak-value>
 			</div>
 		</template>
 	</wikibase-wbui2025-modal-overlay>
@@ -34,53 +33,70 @@
 
 <script>
 const { defineComponent, nextTick } = require( 'vue' );
-const { CdxButton, CdxIcon, CdxTextInput } = require( '../../../codex.js' );
+const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 const { cdxIconCheck } = require( '../icons.json' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const WikibaseWbui2025ModalOverlay = require( './modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
+const WikibaseWbui2025EditableSnakValue = require( './editableSnakValue.vue' );
 
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025AddReference',
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxTextInput,
+		WikibaseWbui2025EditableSnakValue,
 		WikibaseWbui2025ModalOverlay,
 		WikibaseWbui2025PropertyLookup
 	},
-	emits: [ 'hide', 'add-reference' ],
+	props: {
+		statementId: {
+			type: String,
+			required: true
+		}
+	},
+	emits: [ 'hide', 'reference-added' ],
 	data() {
 		return {
 			cdxIconCheck,
-			selectedPropertyId: null,
-			selectedPropertyDatatype: null,
-			snakValue: ''
+			snakKey: null
 		};
 	},
 	computed: {
 		addButtonDisabled() {
-			return !( this.selectedPropertyId && this.snakValue );
-		},
-		snakData() {
-			return {
-				snaktype: 'value',
-				property: this.selectedPropertyId,
-				datavalue: {
-					value: this.snakValue,
-					type: this.selectedPropertyDatatype
-				},
-				datatype: this.selectedPropertyDatatype
-			};
+			if ( !this.snakKey ) {
+				return true;
+			}
+			return !wbui2025.store.useEditSnakStore( this.snakKey )().getValueStrategy().peekDataValue();
 		}
 	},
 	methods: {
-		onPropertySelection( propertyId, propertyData ) {
-			this.selectedPropertyId = propertyId;
-			this.selectedPropertyDatatype = propertyData.datatype;
+		async onPropertySelection( propertyId, propertyData ) {
+			if ( this.snakKey ) {
+				wbui2025.store.useEditSnakStore( this.snakKey )().dispose();
+			}
+			if ( !propertyId || !propertyData ) {
+				this.snakKey = null;
+				return;
+			}
+			this.snakKey = wbui2025.store.generateNextSnakKey();
 			nextTick( () => {
-				this.$refs.textInput.focus();
+				this.$refs.snakInput.focus();
 			} );
+			return wbui2025.store.useEditSnakStore( this.snakKey )().initializeWithSnak( {
+				property: propertyId,
+				snaktype: 'value',
+				datatype: propertyData.datatype,
+				datavalue: {
+					value: '',
+					type: 'string'
+				}
+			} );
+		},
+		submitSnakData() {
+			wbui2025.store.useEditStatementStore( this.statementId )().addReference( this.snakKey )
+					.then( () => this.$emit( 'reference-added' ) );
 		}
 	},
 	mounted() {

@@ -18,6 +18,12 @@ jest.mock(
 	() => [ 'string', 'tabular-data', 'geo-shape' ],
 	{ virtual: true }
 );
+jest.mock(
+	'../../../resources/wikibase.wbui2025/api/editEntity.js',
+	() => ( {
+		renderSnakValueText: jest.fn()
+	} )
+);
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
@@ -40,6 +46,7 @@ wbui2025.store = Object.assign( wbui2025.store, {
 	}
 } );
 
+const { renderSnakValueText: mockRenderSnakValueText } = require( '../../../resources/wikibase.wbui2025/api/editEntity.js' );
 const editableSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableSnakValue.vue' );
 const { CdxLookup, CdxTextInput } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
@@ -51,6 +58,100 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		expect( typeof editableSnakValueComponent ).toBe( 'object' );
 		expect( editableSnakValueComponent )
 			.toHaveProperty( 'name', 'WikibaseWbui2025EditableSnakValue' );
+	} );
+
+	describe( 'string datatype', () => {
+		let wrapper, textInput;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$string-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					snaktype: 'value',
+					datavalue: {
+						value: 'example string',
+						type: 'string'
+					},
+					datatype: 'string'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+			const testingPinia = storeWithStatements( [ testStatement ] );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
+			const editStatementStore = useEditStatementStore( testStatementId )();
+
+			wrapper = await mount( editableSnakValueComponent, {
+				props: {
+					propertyId: testPropertyId,
+					snakKey: editStatementStore.mainSnakKey
+				},
+				global: {
+					plugins: [ testingPinia ]
+				}
+			} );
+
+			textInput = wrapper.findComponent( CdxTextInput );
+		} );
+
+		it( 'should set the text-input to the current snak value', async () => {
+			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+		} );
+	} );
+
+	describe( 'item datatype', () => {
+		let wrapper, lookup;
+
+		beforeEach( async () => {
+			jest.mock(
+				'../../../resources/wikibase.wbui2025/api/editEntity.js',
+				() => require( '../../../resources/wikibase.wbui2025/api/editEntity.js' )
+			);
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$entity-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					snaktype: 'value',
+					datavalue: {
+						value: { id: 'Q1', 'numeric-id': 1, 'entity-type': 'item' },
+						type: 'wikibase-entity-id'
+					},
+					datatype: 'wikibase-item'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+			const testingPinia = storeWithStatements( [ testStatement ] );
+
+			mockRenderSnakValueText.mockResolvedValueOnce( 'Some Entity Label' );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
+			const editStatementStore = useEditStatementStore( testStatementId )();
+
+			wrapper = await mount( editableSnakValueComponent, {
+				props: {
+					propertyId: testPropertyId,
+					snakKey: editStatementStore.mainSnakKey
+				},
+				global: {
+					plugins: [ testingPinia ]
+				}
+			} );
+
+			lookup = wrapper.findComponent( CdxLookup );
+		} );
+
+		it( 'should set the text-input to the current snak value', async () => {
+			expect( lookup.props( 'inputValue' ) ).toBe( 'Some Entity Label' );
+		} );
 	} );
 
 	describe( 'tabular-data datatype', () => {

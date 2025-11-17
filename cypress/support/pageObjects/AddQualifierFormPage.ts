@@ -10,6 +10,7 @@ export class AddQualifierFormPage {
 		SNAK_VALUE_LOOKUP_INPUT: '.wikibase-wbui2025-add-qualifier-value .cdx-lookup__input input',
 		SNAK_VALUE_MENU_ITEMS: '.wikibase-wbui2025-add-qualifier-value .cdx-menu-item',
 		MENU: '.cdx-menu',
+		MENU_ITEM: '.wikibase-wbui2025-add-qualifier-form .cdx-menu-item',
 		ADD_BUTTON: '.wikibase-wbui2025-add-qualifier-form .cdx-button',
 		PROPERTY_OPTIONS: '.wikibase-wbui2025-property-lookup .cdx-menu-item',
 	};
@@ -20,6 +21,10 @@ export class AddQualifierFormPage {
 
 	public propertyInput(): Chainable {
 		return cy.get( AddQualifierFormPage.SELECTORS.PROPERTY_INPUT );
+	}
+
+	public menuItems(): Chainable {
+		return cy.get( AddQualifierFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
 	public snakValueInput(): Chainable {
@@ -57,6 +62,8 @@ export class AddQualifierFormPage {
 	}
 
 	public setSnakValue( inputText: string ): this {
+		this.snakValueInput().clear();
+		this.snakValueInput().click();
 		this.snakValueInput().type( inputText );
 		return this;
 	}

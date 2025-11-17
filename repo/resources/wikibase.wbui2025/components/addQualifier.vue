@@ -10,7 +10,7 @@
 				<cdx-button
 					action="progressive"
 					:disabled="addButtonDisabled"
-					@click="$emit( 'add-qualifier', selectedPropertyId, snakData )"
+					@click="submitSnakData"
 				>
 					<cdx-icon :icon="cdxIconCheck"></cdx-icon>
 					{{ $i18n( 'wikibase-add' ) }}
@@ -19,140 +19,84 @@
 					@update:selected="onPropertySelection"
 				>
 				</wikibase-wbui2025-property-lookup>
-				<cdx-text-input
-					v-if="selectedPropertyDatatype === 'string'"
-					v-model.trim="snakValue"
-					class="wikibase-wbui2025-add-qualifier-value"
-					:placeholder="$i18n( 'wikibase-addqualifier' ).text()"
-				>
-				</cdx-text-input>
-				<cdx-lookup
-					v-else-if="isTabularOrGeoShapeDatatype"
-					v-model:selected="lookupSelection"
-					v-model:input-value="lookupInputValue"
-					:menu-items="lookupMenuItems"
-					:menu-config="menuConfig"
-					class="wikibase-wbui2025-add-qualifier-value"
-					@update:input-value="onUpdateInputValue"
-					@load-more="onLoadMore"
-				>
-				</cdx-lookup>
+				<wikibase-wbui2025-editable-snak-value
+					v-if="snakKey"
+					ref="snakInput"
+					:snak-key="snakKey"
+					:removable="false"
+					class-name="wikibase-wbui2025-add-qualifier-value"
+				></wikibase-wbui2025-editable-snak-value>
 			</div>
 		</template>
 	</wikibase-wbui2025-modal-overlay>
 </template>
 
 <script>
-const { defineComponent } = require( 'vue' );
-const { CdxButton, CdxIcon, CdxLookup, CdxTextInput } = require( '../../../codex.js' );
+const { defineComponent, nextTick } = require( 'vue' );
+const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 const { cdxIconCheck } = require( '../icons.json' );
-const supportedDatatypes = require( '../supportedDatatypes.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const WikibaseWbui2025ModalOverlay = require( './modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
+const WikibaseWbui2025EditableSnakValue = require( './editableSnakValue.vue' );
 
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025AddQualifier',
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxLookup,
-		CdxTextInput,
+		WikibaseWbui2025EditableSnakValue,
 		WikibaseWbui2025ModalOverlay,
 		WikibaseWbui2025PropertyLookup
 	},
-	emits: [ 'hide', 'add-qualifier' ],
+	props: {
+		statementId: {
+			type: String,
+			required: true
+		}
+	},
+	emits: [ 'hide', 'qualifier-added' ],
 	data() {
 		return {
 			cdxIconCheck,
-			selectedPropertyId: null,
-			selectedPropertyDatatype: null,
-			snakValue: '',
-			lookupMenuItems: [],
-			lookupSelection: null,
-			lookupInputValue: '',
-			menuConfig: {
-				visibleItemLimit: 6
-			}
+			snakKey: null
 		};
 	},
 	computed: {
-		isTabularOrGeoShapeDatatype() {
-			return supportedDatatypes.includes( this.selectedPropertyDatatype ) &&
-				( this.selectedPropertyDatatype === 'tabular-data' || this.selectedPropertyDatatype === 'geo-shape' );
-		},
 		addButtonDisabled() {
-			return this.snakValue === '';
-		},
-		snakData() {
-			return {
-				snaktype: 'value',
-				property: this.selectedPropertyId,
-				datavalue: {
-					value: this.snakValue,
-					type: 'string'
-				},
-				datatype: this.selectedPropertyDatatype
-			};
+			if ( !this.snakKey ) {
+				return true;
+			}
+			return !wbui2025.store.useEditSnakStore( this.snakKey )().getValueStrategy().peekDataValue();
 		}
 	},
 	methods: {
 		onPropertySelection( propertyId, propertyData ) {
-			this.selectedPropertyId = propertyId;
-			this.selectedPropertyDatatype = propertyData && propertyData.datatype;
-			this.lookupMenuItems = [];
-			this.lookupSelection = null;
-			this.lookupInputValue = '';
-		},
-		fetchLookupResults( searchTerm, offset = 0 ) {
-			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.selectedPropertyDatatype, searchTerm, offset );
-		},
-		onUpdateInputValue( value ) {
-			if ( !value ) {
-				this.lookupMenuItems = [];
+			if ( this.snakKey ) {
+				wbui2025.store.useEditSnakStore( this.snakKey )().dispose();
+			}
+			if ( !propertyId || !propertyData ) {
+				this.snakKey = null;
 				return;
 			}
-
-			this.fetchLookupResults( value )
-				.then( ( data ) => {
-					if ( this.lookupInputValue !== value ) {
-						return;
-					}
-
-					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
-						this.lookupMenuItems = [];
-						return;
-					}
-
-					const results = wbui2025.api.transformSearchResults( data.query.search );
-					this.lookupMenuItems = results;
-				} )
-				.catch( () => {
-					this.lookupMenuItems = [];
-				} );
+			this.snakKey = wbui2025.store.generateNextSnakKey();
+			nextTick( () => {
+				this.$refs.snakInput.focus();
+			} );
+			return wbui2025.store.useEditSnakStore( this.snakKey )().initializeWithSnak( {
+				property: propertyId,
+				snaktype: 'value',
+				datatype: propertyData.datatype,
+				datavalue: {
+					value: '',
+					type: 'string'
+				}
+			} );
 		},
-		onLoadMore() {
-			if ( !this.lookupInputValue ) {
-				return;
-			}
-
-			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
-				.then( ( data ) => {
-					if ( !data.query || !data.query.search || data.query.search.length === 0 ) {
-						return;
-					}
-
-					const newResults = wbui2025.api.transformSearchResults( data.query.search );
-					this.lookupMenuItems.push( ...newResults );
-				} );
-		}
-	},
-	watch: {
-		lookupSelection( newSelection ) {
-			if ( newSelection && this.isTabularOrGeoShapeDatatype ) {
-				this.snakValue = newSelection;
-			}
+		submitSnakData() {
+			wbui2025.store.useEditStatementStore( this.statementId )().addQualifier( this.snakKey )
+					.then( () => this.$emit( 'qualifier-added' ) );
 		}
 	}
 } );
