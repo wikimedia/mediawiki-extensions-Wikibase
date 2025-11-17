@@ -42,9 +42,13 @@
 			display: table-cell;
 			width: 1px;
 			white-space: nowrap;
-			padding-right: @spacing-30;
+			padding-right: @spacing-75;
 			vertical-align: middle;
 			cursor: pointer;
+
+			.wikibase-wbui2025-link-heavy {
+				font-size: 1rem;
+			}
 
 			.cdx-icon {
 				vertical-align: inherit;
@@ -59,4 +63,5 @@
 
 .wikibase-wbui2025-icon-edit-small {
 	.cdx-mixin-css-icon( @cdx-icon-edit, @param-size-icon: @size-icon-small );
+	padding: 3px 0 3px 0;
 }
