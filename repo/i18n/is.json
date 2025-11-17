@@ -353,6 +353,7 @@
 	"wikibase-listdatatypes-quantity-body": "Bókstaflegur gagna reitur fyrir stærð sem tengist einhverri þekktri mælieiningu. Mælieiningin fer í gagna gildin sem eru slegin inn.\n* magn - mikilvægur þáttur strengsins (tengsl við mælieiningu er óljós)\n* Mælieining - mikilvægur þáttur strengsins sem er sjálfgefið \"1\" (tengsl við staðlaðar einingar eru óljósar)\n* efri mörk - efri mörk stærðarinnar\n* neðri mörk - neðri mörk stærðarinnar",
 	"wikibase-listdatatypes-monolingualtext-head": "Texti á einu máli",
 	"wikibase-listdatatypes-monolingualtext-body": "Bókstaflegur gagna reitur sem er ekki þýddur yfir á önnur tungumál. Þessi strengur er tilgreindur einu sinni og notaður á öllum tungumálum. Dæmigerð notkun eru landfræðileg nöfn sem eru skrifuð á upprunalegu tungumáli, auðkenni, efnaformúla eða fræðilegt latneskt heiti.\n* tungumál - sérstakt gildi til að bera kennsl á tungumálið fyrir textann\n* gildi - sérstakt gildi fyrir textann á gefnu tungumáli",
+	"wikibase-listdatatypes-multilingualtext-head": "Margtyngdur texti",
 	"wikibase-listdatatypes-string-head": "Strengur",
 	"wikibase-listdatatypes-string-body": "Bókstaflegur gagna reitur fyrir röð stafmerkja. Algeng notkun er auðkenni á skrifuðu formi sem er ekki þýðanlegt.\n* gildi - einstakt gildi fyrir ákveðna gerð af streng",
 	"wikibase-listdatatypes-time-head": "Tími",
