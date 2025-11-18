@@ -4,6 +4,7 @@ import { checkA11y } from '../../support/checkA11y';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { AddStatementFormPage } from '../../support/pageObjects/AddStatementFormPage';
+import { LoginPage } from '../../support/pageObjects/LoginPage';
 
 describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
@@ -49,6 +50,13 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 			} );
 
 			beforeEach( () => {
+				const loginPage = new LoginPage();
+				cy.task(
+					'MwApi:CreateUser',
+					{ usernamePrefix: 'mextest' },
+				).then( ( { username, password } ) => {
+					loginPage.login( username, password );
+				} );
 				cy.viewport( 375, 1280 );
 			} );
 
