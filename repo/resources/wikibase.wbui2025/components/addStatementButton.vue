@@ -114,7 +114,7 @@ module.exports = exports = defineComponent( {
 			this.createNewStatement();
 		},
 		submitForm() {
-			setTimeout( () => {
+			const progressTimeout = setTimeout( () => {
 				this.showProgress = true;
 			}, 300 );
 			this.formSubmitted = true;
@@ -129,6 +129,8 @@ module.exports = exports = defineComponent( {
 						type: 'success',
 						text: mw.msg( 'wikibase-publishing-succeeded' )
 					} );
+					clearTimeout( progressTimeout );
+					this.showProgress = false;
 				} )
 				.catch( () => {
 					this.addStatusMessage( {
@@ -137,6 +139,7 @@ module.exports = exports = defineComponent( {
 						attachTo: this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef
 					} );
 					this.formSubmitted = false;
+					clearTimeout( progressTimeout );
 					this.showProgress = false;
 				} );
 		},

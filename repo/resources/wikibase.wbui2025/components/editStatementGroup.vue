@@ -167,7 +167,7 @@ module.exports = exports = defineComponent( {
 			if ( this.editableStatementGuids.length === 0 ) {
 				return;
 			}
-			setTimeout( () => {
+			const progressTimeout = setTimeout( () => {
 				this.showProgress = true;
 			}, 300 );
 			this.saveChangedStatements( this.entityId )
@@ -178,6 +178,8 @@ module.exports = exports = defineComponent( {
 						type: 'success',
 						text: mw.msg( 'wikibase-publishing-succeeded' )
 					} );
+					clearTimeout( progressTimeout );
+					this.showProgress = false;
 				} )
 				.catch( () => {
 					this.addStatusMessage( {
@@ -185,6 +187,8 @@ module.exports = exports = defineComponent( {
 						attachTo: this.$refs.editFormActionsRef,
 						type: 'error'
 					} );
+					clearTimeout( progressTimeout );
+					this.showProgress = false;
 					this.formSubmitted = false;
 				} );
 		},
