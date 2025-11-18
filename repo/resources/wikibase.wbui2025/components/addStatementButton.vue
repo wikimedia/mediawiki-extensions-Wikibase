@@ -5,6 +5,8 @@
 			ref="modalOverlayRef"
 			:header="$i18n( 'wikibase-addstatement' )"
 			:save-button-disabled="formSubmitted || !fullyParsed || hasChanges !== true"
+			:show-progress="showProgress"
+			:progress-bar-label="$i18n( 'wikibase-publishing-progress' )"
 			@save="submitForm"
 			@hide="hide"
 		>
@@ -67,7 +69,8 @@ module.exports = exports = defineComponent( {
 		addStatementModalVisible: false,
 		propertyId: null,
 		propertyData: null,
-		formSubmitted: false
+		formSubmitted: false,
+		showProgress: false
 	} ),
 	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		createdStatementGuids: 'createdStatementIds',
@@ -111,6 +114,9 @@ module.exports = exports = defineComponent( {
 			this.createNewStatement();
 		},
 		submitForm() {
+			setTimeout( () => {
+				this.showProgress = true;
+			}, 300 );
 			this.formSubmitted = true;
 			if ( this.createdStatementGuids.length === 0 ) {
 				return;
@@ -131,6 +137,7 @@ module.exports = exports = defineComponent( {
 						attachTo: this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef
 					} );
 					this.formSubmitted = false;
+					this.showProgress = false;
 				} );
 		},
 		reset() {
