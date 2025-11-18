@@ -124,6 +124,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 			WikibaseRepo::getEntityIdParser(),
 			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 			WikibaseRepo::getEntityChangeOpProvider(),
+			WikibaseRepo::getEntityDiffer(),
 			new EditSummaryHelper(),
 			false,
 			[ 'mainItem' => 'Q42' ]
