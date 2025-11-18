@@ -322,6 +322,7 @@
 	"wikibase-redirect-cant-redirect-due-to-edit-filter-hook": "EditFilterHook stöðvaði stofnun tilvísunar",
 	"wikibase-redirect-cant-redirect": "Stofnun tilvísunar mistókst vegna tæknilegra örðugleika",
 	"wikibase-redirect-permissiondenied": "Heimild hafnað",
+	"wikibase-mylanguagefallbackchain-babel": "Þú getur breytt því með því að setja <nowiki> {{#babel: }}</nowiki> inn á [[Special:MyPage|notandasíðuna]] {{GENDER:$1| þína}}.",
 	"wikibase-api-unresolved-redirect": "Hið gefna einindaauðkenni vísar á tilvísun sem er ekki stutt í þessu samhengi.",
 	"wikibase-api-no-data": "Engin gögn til að byggja á.",
 	"wikibase-api-no-external-page": "Biðlara síðan \"$1\" gaf engar upplýsingar um síðuna \"$2\".",
