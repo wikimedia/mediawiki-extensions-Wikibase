@@ -12,8 +12,8 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
  * @license GPL-2.0-or-later
  */
 class GraphQLService {
-	public const ITEM_FIELD_COMPLEXITY = 10;
-	public const MAX_QUERY_COMPLEXITY = self::ITEM_FIELD_COMPLEXITY * 50;
+	public const LOAD_ITEM_COMPLEXITY = 10;
+	public const MAX_QUERY_COMPLEXITY = self::LOAD_ITEM_COMPLEXITY * 50;
 
 	public function __construct(
 		private readonly Schema $schema,

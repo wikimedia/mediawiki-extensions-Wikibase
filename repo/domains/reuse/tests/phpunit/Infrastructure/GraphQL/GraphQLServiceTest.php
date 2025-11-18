@@ -823,17 +823,40 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			"Not a valid Property ID: \"$propertyId\"",
 		];
 
-		$numberOfRequestedItems = 51;
-		$tooComplexQuery = '{';
-		for ( $i = 0; $i < $numberOfRequestedItems; $i++ ) {
-			$tooComplexQuery .= "item$i: item(id: \"$itemId\") { id }";
-		}
-		$tooComplexQuery .= '}';
+		$tooManyItems = 51;
 		$percentageOverMaxComplexity = ceil(
-			$numberOfRequestedItems * GraphQLService::ITEM_FIELD_COMPLEXITY / GraphQLService::MAX_QUERY_COMPLEXITY * 100
+			$tooManyItems * GraphQLService::LOAD_ITEM_COMPLEXITY / GraphQLService::MAX_QUERY_COMPLEXITY * 100
 		) - 100;
-		yield 'rejects queries that are too complex' => [
-			$tooComplexQuery,
+
+		$tooManyItemFieldsQuery = '{';
+		for ( $i = 0; $i < $tooManyItems; $i++ ) {
+			$tooManyItemFieldsQuery .= "item$i: item(id: \"$itemId\") { id }";
+		}
+		$tooManyItemFieldsQuery .= '}';
+		yield 'rejects queries using the `item` field too many times' => [
+			$tooManyItemFieldsQuery,
+			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		$makeItemListArg = fn( int $number ) => implode(
+			', ',
+			array_fill( 0, $number, "\"$itemId\"" )
+		);
+		yield 'rejects queries requesting too many items in itemsById field' => [
+			'{ itemsById(ids: [' . $makeItemListArg( $tooManyItems ) . ']) { id } }',
+			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		$itemsById = (int)floor( $tooManyItems / 2 );
+		$itemFieldUses = ceil( $tooManyItems / 2 );
+		$complexQuery = '{
+			itemsById(ids: [' . $makeItemListArg( $itemsById ) . ']) { id }';
+		for ( $i = 0; $i < $itemFieldUses; $i++ ) {
+			$complexQuery .= "\nitem$i: item(id: \"$itemId\") { id }";
+		}
+		$complexQuery .= '}';
+		yield 'rejects queries requesting too many items using both itemsById and item fields' => [
+			$complexQuery,
 			"The query complexity is $percentageOverMaxComplexity% over the limit.",
 		];
 	}

@@ -26,7 +26,7 @@ class Schema extends GraphQLSchema {
 							'id' => Type::nonNull( $this->types->getItemIdType() ),
 						],
 						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
-						'complexity' => fn() => GraphQLService::ITEM_FIELD_COMPLEXITY,
+						'complexity' => fn() => GraphQLService::LOAD_ITEM_COMPLEXITY,
 					],
 					'itemsById' => [
 						// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
@@ -39,6 +39,8 @@ class Schema extends GraphQLSchema {
 							$itemResolver->resolveItem( ... ),
 							$args[ 'ids' ]
 						),
+						'complexity' => fn( int $childrenComplexity, array $args ) => count( $args['ids'] ) *
+							GraphQLService::LOAD_ITEM_COMPLEXITY,
 					],
 				],
 			] ),
