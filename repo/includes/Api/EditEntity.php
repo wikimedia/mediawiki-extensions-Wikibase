@@ -65,11 +65,6 @@ class EditEntity extends ModifyEntity {
 	private $entityChangeOpProvider;
 
 	/**
-	 * @var EntityDiffer
-	 */
-	private $entityDiffer;
-
-	/**
 	 * @var EditSummaryHelper
 	 */
 	private $editSummaryHelper;
@@ -87,7 +82,6 @@ class EditEntity extends ModifyEntity {
 		EntityIdParser $idParser,
 		array $propertyDataTypes,
 		EntityChangeOpProvider $entityChangeOpProvider,
-		EntityDiffer $entityDiffer,
 		EditSummaryHelper $editSummaryHelper,
 		bool $federatedPropertiesEnabled,
 		array $sandboxEntityIds
@@ -100,7 +94,6 @@ class EditEntity extends ModifyEntity {
 		$this->propertyDataTypes = $propertyDataTypes;
 
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
-		$this->entityDiffer = $entityDiffer;
 		$this->editSummaryHelper = $editSummaryHelper;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
@@ -124,8 +117,7 @@ class EditEntity extends ModifyEntity {
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
 			$entityChangeOpProvider,
-			$entityDiffer,
-			new EditSummaryHelper(),
+			new EditSummaryHelper( $entityDiffer ),
 			$settings->getSetting( 'federatedPropertiesEnabled' ),
 			$settings->getSetting( 'sandboxEntityIds' )
 		);
@@ -263,35 +255,7 @@ class EditEntity extends ModifyEntity {
 			);
 		}
 
-		return $this->getSummary( $preparedParameters, $oldEntity, $entity );
-	}
-
-	private function getSummary(
-		array $preparedParameters,
-		EntityDocument $oldEntity,
-		EntityDocument $newEntity,
-	): Summary {
-		$summary = $this->createSummary( $preparedParameters );
-
-		if ( $this->isUpdatingExistingEntity( $preparedParameters ) ) {
-			if ( $preparedParameters[self::PARAM_CLEAR] !== false ) {
-				$summary->setAction( 'override' );
-			} else {
-				$entityDiff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
-				$this->editSummaryHelper->prepareEditSummary( $summary, $entityDiff );
-			}
-		} else {
-			$summary->setAction( 'create-' . $newEntity->getType() );
-		}
-
-		return $summary;
-	}
-
-	private function isUpdatingExistingEntity( array $preparedParameters ): bool {
-		$isTargetingEntity = isset( $preparedParameters['id'] );
-		$isTargetingPage = isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] );
-
-		return $isTargetingEntity xor $isTargetingPage;
+		return $this->editSummaryHelper->getEditSummary( $preparedParameters, $oldEntity, $entity );
 	}
 
 	/**
