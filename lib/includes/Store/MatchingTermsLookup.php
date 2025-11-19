@@ -15,7 +15,7 @@ interface MatchingTermsLookup {
 	 * @param string $termText The text to look up the term by
 	 * @param string $entityType One of Item::ENTITY_TYPE or Property::ENTITY_TYPE
 	 * @param string|string[]|null $searchLanguage The language(s) to search in, in order of pref
-	 * @param string|string[]|null $termType The type of term(s) to search for, @see TermTypes
+	 * @param string|string[]|null $termType The type of term(s) to search for, see {@link TermTypes}
 	 * @param array $options
 	 *        Accepted options are:
 	 *        - caseSensitive: boolean, default true

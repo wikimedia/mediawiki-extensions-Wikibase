@@ -263,8 +263,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 
 	public function testFormatResult() {
 		$skin = $this->createMock( Skin::class );
-		$result = new \stdClass();
-		$result->value = 1;
+		$result = (object)[ 'value' => 1 ];
 
 		$services = $this->getServiceContainer();
 		$namespaceInfo = $services->getNamespaceInfo();
