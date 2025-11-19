@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 
+use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
@@ -16,7 +17,6 @@ class PropertyValuePairType extends InterfaceType {
 	public function __construct(
 		PredicatePropertyType $predicateType,
 		ValueType $valueType,
-		ValueTypeType $valueTypeType
 	) {
 		parent::__construct( [
 			'fields' => [
@@ -30,11 +30,14 @@ class PropertyValuePairType extends InterfaceType {
 					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => $rootValue->value ? $rootValue : null,
 				],
 				'valueType' => [
-					'type' => Type::nonNull( $valueTypeType ),
+					'type' => Type::nonNull( new EnumType( [
+						'name' => 'ValueType',
+						'values' => [ 'VALUE', 'SOME_VALUE', 'NO_VALUE' ],
+					] ) ),
 					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => match ( $rootValue->valueType ) {
-						ValueTypeModel::TYPE_VALUE => ValueTypeType::VALUE,
-						ValueTypeModel::TYPE_NO_VALUE => ValueTypeType::NO_VALUE,
-						ValueTypeModel::TYPE_SOME_VALUE => ValueTypeType::SOME_VALUE,
+						ValueTypeModel::TYPE_VALUE => 'VALUE',
+						ValueTypeModel::TYPE_NO_VALUE => 'NO_VALUE',
+						ValueTypeModel::TYPE_SOME_VALUE => 'SOME_VALUE',
 					},
 				],
 			],
