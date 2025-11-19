@@ -6,6 +6,7 @@ use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\Type;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ValueType as ValueTypeModel;
 
 /**
  * @license GPL-2.0-or-later
@@ -30,7 +31,11 @@ class PropertyValuePairType extends InterfaceType {
 				],
 				'valueType' => [
 					'type' => Type::nonNull( $valueTypeType ),
-					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => $rootValue->valueType,
+					'resolve' => fn( PropertyValuePair|Statement $rootValue ) => match ( $rootValue->valueType ) {
+						ValueTypeModel::TYPE_VALUE => ValueTypeType::VALUE,
+						ValueTypeModel::TYPE_NO_VALUE => ValueTypeType::NO_VALUE,
+						ValueTypeModel::TYPE_SOME_VALUE => ValueTypeType::SOME_VALUE,
+					},
 				],
 			],
 		] );

@@ -102,8 +102,15 @@ class ItemType extends ObjectType {
 					'resolve' => fn( Statement $statement ) => $statement->id,
 				],
 				'rank' => [
-					'type' => Type::nonNull( $this->rankType() ),
-					'resolve' => fn( Statement $statement ) => $statement->rank->asInt(),
+					'type' => Type::nonNull( new EnumType( [
+						'name' => 'Rank',
+						'values' => [ 'PREFERRED', 'NORMAL', 'DEPRECATED' ],
+					] ) ),
+					'resolve' => fn( Statement $statement ) => match ( $statement->rank->asInt() ) {
+						StatementWriteModel::RANK_PREFERRED => 'PREFERRED',
+						StatementWriteModel::RANK_DEPRECATED => 'DEPRECATED',
+						default => 'NORMAL',
+					},
 				],
 				'qualifiers' => [
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
@@ -121,23 +128,6 @@ class ItemType extends ObjectType {
 				],
 			],
 			'interfaces' => [ $propertyValuePairType ],
-		] );
-	}
-
-	private function rankType(): EnumType {
-		return new EnumType( [
-			'name' => 'Rank',
-			'values' => [
-				'deprecated' => [
-					'value' => StatementWriteModel::RANK_DEPRECATED,
-				],
-				'normal' => [
-					'value' => StatementWriteModel::RANK_NORMAL,
-				],
-				'preferred' => [
-					'value' => StatementWriteModel::RANK_PREFERRED,
-				],
-			],
 		] );
 	}
 

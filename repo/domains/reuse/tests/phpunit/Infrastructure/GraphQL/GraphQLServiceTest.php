@@ -182,7 +182,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						$stringProperty->getId()->getSerialization() => [
 							[
 								'id' => $statementWithStringValue->getGuid(),
-								'rank' => 'normal',
+								'rank' => 'NORMAL',
 								'property' => [
 									'id' => $stringProperty->getId()->getSerialization(),
 									'dataType' => 'string',
@@ -226,13 +226,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								'value' => [
 									'content' => $statementStringValue,
 								],
-								'valueType' => 'value',
+								'valueType' => 'VALUE',
 							],
 						],
 						$itemProperty->getId()->getSerialization() => [
 							[
 								'value' => [ 'id' => $itemUsedAsStatementValue->getId() ],
-								'valueType' => 'value',
+								'valueType' => 'VALUE',
 							],
 						],
 					],
@@ -268,7 +268,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 													'dataType' => 'string',
 												],
 												'value' => null,
-												'valueType' => 'somevalue',
+												'valueType' => 'SOME_VALUE',
 											],
 										],
 									],
@@ -307,7 +307,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 										'value' => [
 											'content' => $qualifierStringValue,
 										],
-										'valueType' => 'value',
+										'valueType' => 'VALUE',
 									],
 								],
 								$unusedPropertyId => [],
@@ -543,11 +543,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'statements' => [
 							[
 								'value' => null,
-								'valueType' => 'somevalue',
+								'valueType' => 'SOME_VALUE',
 							],
 							[
 								'value' => null,
-								'valueType' => 'novalue',
+								'valueType' => 'NO_VALUE',
 							],
 						],
 					],
