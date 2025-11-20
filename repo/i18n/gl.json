@@ -342,7 +342,7 @@
 	"special-itemswithoutsitelinks": "Elementos sen ligazóns lingüísticas",
 	"special-entitydata": "Datos da entidade",
 	"wikibase-entitydata-not-found": "Non se atopou entidade ningunha co ID $1.",
-	"wikibase-entitydata-not-acceptable": "Non se atopou ningún formato que coincidise. Tipos de MIME soportados: $1",
+	"wikibase-entitydata-not-acceptable": "Non se atopou ningún formato coincidente. Tipos MIME compatibles: $1",
 	"wikibase-entitydata-bad-revision": "Non se pode amosar a revisión $2 da entidade $1.",
 	"wikibase-entitydata-bad-id": "ID non válido: $1.",
 	"wikibase-entitydata-bad-flavor": "Tipo de datos non válido \"$1\": debe ser {{PLURAL:$2|{{#commaseparatedlist:$3}}|un de {{#commaseparatedlist:$3}}}}.",

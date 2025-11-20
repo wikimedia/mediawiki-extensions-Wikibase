@@ -375,7 +375,7 @@
 	"wikibase-redirectentity-success": "$1 ohjattiin kohteeseen $2.",
 	"wikibase-redirectentity-fromid": "Tunniste, josta uudelleenohjataan",
 	"wikibase-redirectentity-toid": "Tunniste, jonne uudelleenohjataan",
-	"wikibase-redirectentity-submit": "Ohjaus",
+	"wikibase-redirectentity-submit": "Ohjaa",
 	"wikibase-redirect-origin-not-empty": "Ei-tyhjästä entiteetistä $1 ei voida luoda ohjausta",
 	"wikibase-redirect-no-such-entity": "Entiteettiä $1 ei löytynyt",
 	"wikibase-redirect-cant-load-entity-content": "Ei pääsyä sisältöön, versio on saatettu poistaa.",
