@@ -104,9 +104,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	private function getMockLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
 		$mockFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$mockFactory->method( 'newFromLanguageCode' )
-			->willReturnCallback( function( $langCode ) {
-				return $this->getMockLanguageFallbackChainFromLanguage( $langCode );
-			} );
+			->willReturnCallback( $this->getMockLanguageFallbackChainFromLanguage( ... ) );
 		return $mockFactory;
 	}
 

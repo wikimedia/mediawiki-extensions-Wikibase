@@ -129,7 +129,7 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 					$propertyLabelValidator,
 					$propertyLabelsContentsValidator,
 					PartiallyValidatedLabels::class,
-					fn() => $propertyLabelsContentsValidator->getValidatedLabels(),
+					$propertyLabelsContentsValidator->getValidatedLabels( ... ),
 				];
 			},
 		];
@@ -142,7 +142,7 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 					$propertyDescriptionValidator,
 					$propertyDescriptionsContentsValidator,
 					PartiallyValidatedDescriptions::class,
-					fn() => $propertyDescriptionsContentsValidator->getValidatedDescriptions(),
+					$propertyDescriptionsContentsValidator->getValidatedDescriptions( ... ),
 				];
 			},
 		];
@@ -155,7 +155,7 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 					$itemLabelValidator,
 					$itemLabelsContentsValidator,
 					PartiallyValidatedLabels::class,
-					fn() => $itemLabelsContentsValidator->getValidatedLabels(),
+					$itemLabelsContentsValidator->getValidatedLabels( ... ),
 				];
 			},
 		];
@@ -168,7 +168,7 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 					$itemDescriptionValidator,
 					$itemDescriptionsContentsValidator,
 					PartiallyValidatedDescriptions::class,
-					fn() => $itemDescriptionsContentsValidator->getValidatedDescriptions(),
+					$itemDescriptionsContentsValidator->getValidatedDescriptions( ... ),
 				];
 			},
 		];

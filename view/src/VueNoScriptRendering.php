@@ -136,10 +136,9 @@ class VueNoScriptRendering {
 					->parse( $data['propertyId'] );
 				'@phan-var PropertyId $propertyId';
 				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-				$statementsByProperty = $allStatements->getByPropertyId( $propertyId )->toArray();
 				$data['statements'] = array_map(
-					fn ( $statement ) => $this->statementSerializer->serialize( $statement ),
-					$statementsByProperty
+					$this->statementSerializer->serialize( ... ),
+					$allStatements->getByPropertyId( $propertyId )->toArray()
 				);
 				$data['isUnsupportedDataType'] = !in_array( $dataType, $this->wbui2025FeatureFlag->getSupportedDataTypes(), strict: true );
 				$data['showModalEditForm'] = false;

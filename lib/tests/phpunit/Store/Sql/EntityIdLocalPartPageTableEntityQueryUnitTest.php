@@ -42,9 +42,9 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 		$database->method( 'newSelectQueryBuilder' )
 			->willReturnCallback( fn() => new SelectQueryBuilder( $database ) );
 		$database->method( 'andExpr' )
-			->willReturnCallback( fn( $conds ) => $queryBuilderDb->andExpr( $conds ) );
+			->willReturnCallback( $queryBuilderDb->andExpr( ... ) );
 		$database->method( 'orExpr' )
-			->willReturnCallback( fn( $conds ) => $queryBuilderDb->orExpr( $conds ) );
+			->willReturnCallback( $queryBuilderDb->orExpr( ... ) );
 		// Extra fields, tables and joins passed to the method should also be requested
 		// No join on the slots table should happen, as we are not looking at a slotted entity
 		$selectArgs = [
@@ -109,11 +109,11 @@ class EntityIdLocalPartPageTableEntityQueryUnitTest extends TestCase {
 		$database->method( 'newSelectQueryBuilder' )
 			->willReturnCallback( fn() => new SelectQueryBuilder( $database ) );
 		$database->method( 'andExpr' )
-			->willReturnCallback( fn( $conds ) => $queryBuilderDb->andExpr( $conds ) );
+			->willReturnCallback( $queryBuilderDb->andExpr( ... ) );
 		$database->method( 'orExpr' )
-			->willReturnCallback( fn( $conds ) => $queryBuilderDb->orExpr( $conds ) );
+			->willReturnCallback( $queryBuilderDb->orExpr( ... ) );
 		$database->method( 'expr' )
-			->willReturnCallback( fn( $field, $op, $value ) => $queryBuilderDb->expr( $field, $op, $value ) );
+			->willReturnCallback( $queryBuilderDb->expr( ... ) );
 		// Extra fields, tables and joins passed to the method should also be requested
 		$selectArgs = [
 			[
