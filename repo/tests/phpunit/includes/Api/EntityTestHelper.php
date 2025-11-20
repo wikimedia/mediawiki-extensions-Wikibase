@@ -35,10 +35,6 @@ class EntityTestHelper {
 			"new" => "item",
 			"data" => [],
 		],
-		'Empty2' => [
-			"new" => "item",
-			"data" => [],
-		],
 		'StringProp' => [
 			"new" => "property",
 			"data" => [
@@ -174,31 +170,6 @@ class EntityTestHelper {
 					[ "language" => "en", "value" => "Capital city in Norway." ],
 					[ "language" => "nb", "value" => "Hovedsted i Norge." ],
 					[ "language" => "nn", "value" => "Hovudstad i Noreg." ],
-				],
-			],
-		],
-		'Episkopi' => [
-			"new" => "item",
-			"data" => [
-				"sitelinks" => [
-					[ "site" => "dewiki", "title" => "Episkopi Cantonment" ],
-					[ "site" => "enwiki", "title" => "Episkopi Cantonment" ],
-					[ "site" => "nlwiki", "title" => "Episkopi Cantonment" ],
-				],
-				"labels" => [
-					[ "language" => "de", "value" => "Episkopi Cantonment" ],
-					[ "language" => "en", "value" => "Episkopi Cantonment" ],
-					[ "language" => "nl", "value" => "Episkopi Cantonment" ],
-				],
-				"aliases" => [
-					[ "language" => "de", "value" => "Episkopi" ],
-					[ "language" => "en", "value" => "Episkopi" ],
-					[ "language" => "nl", "value" => "Episkopi" ],
-				],
-				"descriptions" => [
-					[ "language" => "de", "value" => "Sitz der Verwaltung der Mittelmeerinsel Zypern." ],
-					[ "language" => "en", "value" => "The capital of Akrotiri and Dhekelia." ],
-					[ "language" => "nl", "value" => "Het bestuurlijke centrum van Akrotiri en Dhekelia." ],
 				],
 			],
 		],
