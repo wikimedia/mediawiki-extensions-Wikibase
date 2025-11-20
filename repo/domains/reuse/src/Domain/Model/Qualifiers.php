@@ -19,10 +19,10 @@ class Qualifiers {
 	 * @return PropertyValuePair[]
 	 */
 	public function getQualifiersByPropertyId( PropertyId $id ): array {
-		return array_filter(
+		return array_values( array_filter(
 			$this->qualifiers,
 			fn( PropertyValuePair $q ) => $q->property->id->equals( $id )
-		);
+		) );
 	}
 
 }
