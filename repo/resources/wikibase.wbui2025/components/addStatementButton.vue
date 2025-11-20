@@ -47,6 +47,7 @@ const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025ModalOverlay = require( './modalOverlay.vue' );
 const WikibaseWbui2025EditStatement = require( './editStatement.vue' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
+const saveStatementsFormMixin = require( '../mixins/saveStatementsFormMixin.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -58,6 +59,7 @@ module.exports = exports = defineComponent( {
 		WikibaseWbui2025PropertyLookup,
 		WikibaseWbui2025EditStatement
 	},
+	mixins: [ saveStatementsFormMixin ],
 	props: {
 		entityId: {
 			type: String,
@@ -89,11 +91,8 @@ module.exports = exports = defineComponent( {
 	methods: Object.assign( mapActions( wbui2025.store.useEditStatementsStore, {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
-		createNewBlankEditableStatement: 'createNewBlankStatement',
-		saveChangedStatements: 'saveChangedStatements'
-	} ), mapActions( wbui2025.store.useMessageStore, [
-		'addStatusMessage'
-	] ), {
+		createNewBlankEditableStatement: 'createNewBlankStatement'
+	} ), {
 		createNewStatement() {
 			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
 
@@ -114,34 +113,8 @@ module.exports = exports = defineComponent( {
 			this.createNewStatement();
 		},
 		submitForm() {
-			const progressTimeout = setTimeout( () => {
-				this.showProgress = true;
-			}, 300 );
-			this.formSubmitted = true;
-			if ( this.createdStatementGuids.length === 0 ) {
-				return;
-			}
-			this.saveChangedStatements( this.entityId )
-				.then( () => {
-					// eslint-disable-next-line vue/no-undef-properties
-					this.hide();
-					this.addStatusMessage( {
-						type: 'success',
-						text: mw.msg( 'wikibase-publishing-succeeded' )
-					} );
-					clearTimeout( progressTimeout );
-					this.showProgress = false;
-				} )
-				.catch( () => {
-					this.addStatusMessage( {
-						text: mw.msg( 'wikibase-publishing-error' ),
-						type: 'error',
-						attachTo: this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef
-					} );
-					this.formSubmitted = false;
-					clearTimeout( progressTimeout );
-					this.showProgress = false;
-				} );
+			// eslint-disable-next-line vue/no-undef-properties
+			this.submitFormWithElementRef( this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef );
 		},
 		reset() {
 			this.disposeOfEditableStatementStores();
