@@ -22,7 +22,7 @@ export class ItemViewPage {
 
 	public static MAIN_SNAKS = '.wikibase-wbui2025-main-snak';
 
-	public static RANK_ICON = '.wikibase-rankselector span.ui-icon';
+	public static RANK_ICON = '.wikibase-wbui2025-rankselector span';
 
 	public static ADD_STATEMENT_BUTTON = '.wikibase-wbui2025-add-statement-button>.cdx-button';
 

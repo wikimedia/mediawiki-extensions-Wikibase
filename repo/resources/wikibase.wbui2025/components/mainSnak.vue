@@ -1,7 +1,7 @@
 <template>
 	<div class="wikibase-wbui2025-main-snak">
-		<div class="wikibase-rankselector ui-state-default">
-			<span :class="concat( 'ui-icon ui-icon-rankselector wikibase-rankselector-', rank )" :title="rankTitleString"></span>
+		<div class="wikibase-wbui2025-rankselector">
+			<span :class="concat( 'wikibase-rankselector-', rank )" :title="rankTitleString"></span>
 		</div>
 		<wbui2025-snak-value :snak="mainSnak"></wbui2025-snak-value>
 	</div>

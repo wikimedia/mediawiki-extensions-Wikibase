@@ -41,7 +41,7 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 			expect( snak.text() ).toEqual( 'p1' );
 			expect( snak.attributes()[ 'data-snak-hash' ] ).toEqual( 'ee6053a6982690ba0f5227d587394d9111eea401' );
 			expect( snak.attributes().class ).toEqual( 'wikibase-wbui2025-snak-value' );
-			const rankSelector = wrapper.find( '.wikibase-rankselector span' );
+			const rankSelector = wrapper.find( '.wikibase-wbui2025-rankselector span' );
 			expect( rankSelector.attributes().class ).toContain( 'wikibase-rankselector-deprecated' );
 		} );
 

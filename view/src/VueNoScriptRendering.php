@@ -224,6 +224,7 @@ class VueNoScriptRendering {
 
 				$data['snakValueClass'] = [
 					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
+					'wikibase-wbui2025-globe-coordinate-value' => $dataType == 'globe-coordinate',
 					'wikibase-wbui2025-time-value' => $dataType == 'time',
 				];
 

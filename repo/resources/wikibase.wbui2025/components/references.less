@@ -9,7 +9,7 @@
 		align-items: center;
 
 		span {
-			padding: @spacing-35 0 @spacing-35 @spacing-75;
+			padding: @spacing-35 @spacing-30 @spacing-35 @spacing-75;
 		}
 
 		.cdx-icon {
@@ -76,9 +76,13 @@
 
 	.wikibase-wbui2025-icon-expand-x-small {
 		.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
+		background-origin: content-box;
+		mask-origin: content-box;
 	}
 
 	.wikibase-wbui2025-icon-collapse-x-small {
 		.cdx-mixin-css-icon(@cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
+		background-origin: content-box;
+		mask-origin: content-box;
 	}
 }

@@ -978,7 +978,6 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/references.less',
 					'resources/wikibase.wbui2025/components/snakValue.less',
 					'resources/wikibase.wbui2025/components/mainSnak.less',
-					'../view/resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
 					'../view/resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				],
 			];
