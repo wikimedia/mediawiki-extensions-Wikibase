@@ -57,7 +57,6 @@ class Types {
 		return $this->propertyValuePairType ??= new PropertyValuePairType(
 			new PredicatePropertyType( $this->propertyLabelsResolver, $this->getLabelProviderType() ),
 			new ValueType( $this->dataTypeDefinitions->getGraphqlValueTypes() ),
-			new ValueTypeType(),
 		);
 	}
 
