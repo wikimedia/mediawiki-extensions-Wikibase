@@ -158,7 +158,6 @@ class EditSummaryHelper {
 			return $this->getGenericEditSummary();
 		}
 		$summaryBuilder = new ClaimSummaryBuilder(
-			'wbsetclaim',
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 		return $summaryBuilder->buildClaimSummary(

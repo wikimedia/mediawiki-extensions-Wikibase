@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -17,27 +16,11 @@ use Wikibase\Repo\Diff\ClaimDiffer;
 class ClaimSummaryBuilder {
 
 	/**
-	 * @var string
-	 */
-	private $apiModuleName;
-
-	/**
 	 * @var ClaimDiffer
 	 */
 	private $claimDiffer;
 
-	/**
-	 * @param string $apiModuleName
-	 * @param ClaimDiffer $claimDiffer
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function __construct( $apiModuleName, ClaimDiffer $claimDiffer ) {
-		if ( !is_string( $apiModuleName ) ) {
-			throw new InvalidArgumentException( '$apiModuleName needs to be a string' );
-		}
-
-		$this->apiModuleName = $apiModuleName;
+	public function __construct( ClaimDiffer $claimDiffer ) {
 		$this->claimDiffer = $claimDiffer;
 	}
 
@@ -52,7 +35,7 @@ class ClaimSummaryBuilder {
 	 * @return Summary
 	 */
 	public function buildClaimSummary( ?Statement $oldStatement, Statement $newStatement ) {
-		$summary = new Summary( $this->apiModuleName );
+		$summary = new Summary( 'wbsetclaim' );
 		// Only one statement touched, so we're always having singular here.
 		$summary->addAutoCommentArgs( 1 );
 		$summary->addAutoSummaryArgs( [
