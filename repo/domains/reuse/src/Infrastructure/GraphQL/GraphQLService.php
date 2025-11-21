@@ -22,10 +22,12 @@ class GraphQLService {
 	}
 
 	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
+		$context = new QueryContext();
 		try {
 			$result = GraphQL::executeQuery(
 				$this->schema,
 				$query,
+				contextValue: $context,
 				variableValues: $variables,
 				operationName: $operationName,
 				validationRules: [
@@ -33,6 +35,10 @@ class GraphQLService {
 					new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY ),
 				],
 			);
+			if ( $context->redirects ) {
+				$result->extensions[ QueryContext::KEY_MESSAGE ] = QueryContext::MESSAGE_REDIRECTS;
+				$result->extensions[ QueryContext::KEY_REDIRECTS ] = $context->redirects;
+			}
 			$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
 			$output = $result->toArray(
 				$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
