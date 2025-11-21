@@ -22,9 +22,6 @@ module.exports = [ {
 		'@graphql-eslint/strict-id-in-types': 'off',
 
 		// disabled because not all our types have a description
-		'@graphql-eslint/require-description': 'off',
-
-		// disabled because our enums violate the naming conventions
-		'@graphql-eslint/naming-convention': 'off'
+		'@graphql-eslint/require-description': 'off'
 	} )
 } ];

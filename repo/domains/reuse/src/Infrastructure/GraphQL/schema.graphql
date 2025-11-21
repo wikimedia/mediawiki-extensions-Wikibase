@@ -106,15 +106,15 @@ type UnknownValue {
 scalar Json
 
 enum ValueType {
-  novalue
-  somevalue
-  value
+  VALUE
+  SOME_VALUE
+  NO_VALUE
 }
 
 enum Rank {
-  deprecated
-  normal
-  preferred
+  PREFERRED
+  NORMAL
+  DEPRECATED
 }
 
 type Qualifier implements PropertyValuePair {
