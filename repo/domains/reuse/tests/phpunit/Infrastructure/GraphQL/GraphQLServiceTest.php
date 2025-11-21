@@ -718,10 +718,6 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
-		yield 'item does not exist' => [
-			'{ item(id: "Q9999999") { id } }',
-			[ 'data' => [ 'item' => null ] ],
-		];
 		yield 'query containing a variable' => [
 			'query WithVariable($id: ItemId!) {
 				item(id: $id) { id }
@@ -766,7 +762,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider errorsProvider
 	 */
-	public function testErrors( string $query, string $expectedErrorMessage ): void {
+	public function testErrors( string $query, string $expectedErrorMessage, ?array $expectedData = null ): void {
 		$itemId = 'Q123'; // same as the one in errorsProvider()
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
@@ -774,6 +770,9 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$result = $this->newGraphQLService( $entityLookup )->query( $query );
 
 		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
+		if ( $expectedData ) {
+			$this->assertSame( $expectedData, $result['data'] );
+		}
 	}
 
 	public static function errorsProvider(): Generator {
@@ -858,6 +857,18 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		yield 'rejects queries requesting too many items using both itemsById and item fields' => [
 			$complexQuery,
 			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		yield 'item does not exist - item field' => [
+			'{ item(id: "Q9999999") { id } }',
+			'Item "Q9999999" does not exist.',
+			[ 'item' => null ],
+		];
+
+		yield 'item does not exist - itemsById field' => [
+			"{ itemsById(ids: [\"Q666666\", \"$itemId\"]) { id } }",
+			'Item "Q666666" does not exist.',
+			[ 'itemsById' => [ null, [ 'id' => $itemId ] ] ],
 		];
 	}
 
