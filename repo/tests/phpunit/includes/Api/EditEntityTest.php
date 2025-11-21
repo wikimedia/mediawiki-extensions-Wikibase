@@ -617,7 +617,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			|| $expected['warning'] != 'edit-no-change'
 		) {
 			$this->assertRevisionSummary(
-				[ 'wbeditentity' ],
+				'!wbeditentity|wbsetclaim-update!',
 				$result['entity']['lastrevid']
 			);
 

@@ -2,11 +2,16 @@
 
 namespace Wikibase\Repo\Api;
 
+use Diff\Comparer\ComparableComparer;
+use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ClaimSummaryBuilder;
+use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -51,7 +56,12 @@ class EditSummaryHelper {
 		$labelsDiff = $entityDiff->getLabelsDiff();
 		$descriptionsDiff = $entityDiff->getDescriptionsDiff();
 		$aliasesDiff = $entityDiff->getAliasesDiff();
+		$claimsDiff = $entityDiff->getClaimsDiff();
 		$diffCount = $entityDiff->count();
+
+		if ( $claimsDiff->count() === $diffCount ) {
+			return $this->getEditSummaryForClaims( $claimsDiff );
+		}
 
 		$languagesDiffCount = $labelsDiff->count() + $descriptionsDiff->count() + $aliasesDiff->count();
 		if ( $languagesDiffCount > 0 ) {
@@ -64,6 +74,24 @@ class EditSummaryHelper {
 		} else {
 			return $this->getGenericEditSummary();
 		}
+	}
+
+	private function getEditSummaryForClaims( Diff $claimsDiff ): Summary {
+		if ( $claimsDiff->count() !== 1 ) { // TODO define messages for editing multiple statements (of the same property?)
+			return $this->getGenericEditSummary();
+		}
+		$claimDiff = array_first( $claimsDiff->getOperations() );
+		if ( !( $claimDiff instanceof DiffOpChange ) ) {
+			return $this->getGenericEditSummary();
+		}
+		$summaryBuilder = new ClaimSummaryBuilder(
+			'wbsetclaim',
+			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
+		);
+		return $summaryBuilder->buildClaimSummary(
+			$claimDiff->getOldValue(),
+			$claimDiff->getNewValue(),
+		);
 	}
 
 	private function getEditSummaryForLanguages(
