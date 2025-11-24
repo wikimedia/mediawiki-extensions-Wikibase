@@ -9,6 +9,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
@@ -36,14 +37,85 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		return [
+			'only one label changed' => [
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'en' => new DiffOpChange( 'old', 'new' ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetlabel', 'set', 'en', summaryArgs: [ 'new' ] ),
+			],
+			'only one label added' => [
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'en' => new DiffOpAdd( 'new' ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetlabel', 'add', 'en', summaryArgs: [ 'new' ] ),
+			],
+			'only one label removed' => [
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'en' => new DiffOpRemove( 'old' ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetlabel', 'remove', 'en', summaryArgs: [ 'old' ] ),
+			],
+			'only one description changed' => [
+				'entityDiff' => new EntityDiff( [
+					'description' => new Diff( [ 'de' => new DiffOpChange( 'alt', 'neu' ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetdescription', 'set', 'de', summaryArgs: [ 'neu' ] ),
+			],
+			'only aliases in one language changed' => [
+				'entityDiff' => new EntityDiff( [
+					'aliases' => new Diff( [ 'en' => new Diff( [
+						new DiffOpRemove( 'old' ),
+						new DiffOpAdd( 'new' ),
+					] ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetaliases', 'update', 'en',
+					summaryArgs: [ 'unchanged', 'new' ] ),
+				'newEntity' => NewItem::withAliases( 'en', [ 'unchanged', 'new' ] )->build(),
+			],
+			'only aliases in one language added' => [
+				'entityDiff' => new EntityDiff( [
+					'aliases' => new Diff( [ 'en' => new Diff( [
+						new DiffOpAdd( 'new 1' ),
+						new DiffOpAdd( 'new 2' ),
+						new DiffOpAdd( 'new 3' ),
+					] ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetaliases', 'add', 'en',
+					summaryArgs: [ 'new 1', 'new 2', 'new 3' ] ),
+			],
+			'only aliases in one language removed' => [
+				'entityDiff' => new EntityDiff( [
+					'aliases' => new Diff( [ 'en' => new Diff( [
+						new DiffOpRemove( 'old 1' ),
+						new DiffOpRemove( 'old 2' ),
+						new DiffOpRemove( 'old 3' ),
+					] ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetaliases', 'remove', 'en',
+					summaryArgs: [ 'old 1', 'old 2', 'old 3' ] ),
+			],
+			'several terms changed in one language' => [
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'en' => new DiffOpAdd( 'new' ) ], true ),
+					'description' => new Diff( [ 'en' => new DiffOpRemove( 'old' ) ], true ),
+				] ),
+				'expected' => new Summary( 'wbsetlabeldescriptionaliases', languageCode: 'en',
+					summaryArgs: [ 'new', '', [ 'unchanged' ] ] ),
+				'newEntity' => NewItem::withLabel( 'en', 'new' )
+					->andAliases( 'en', [ 'unchanged' ] )
+					->build(),
+			],
 			'only terms changed in less than 50 languages' => [
 				'entityDiff' => new EntityDiff( [
-					'label' => new Diff( [ 'en' => new DiffOpChange( 'old en label', 'new en label' ) ], true ),
+					'label' => new Diff( [
+						'en' => new DiffOpChange( 'old en label', 'new en label' ),
+						'en-gb' => new DiffOpChange( 'old en-gb label', 'new en-gb label' ),
+					], true ),
 				] ),
 				'expected' => new Summary(
 					'wbeditentity',
 					'update-languages-short',
-					commentArgs: [ [ 'en' ] ],
+					commentArgs: [ [ 'en', 'en-gb' ] ],
 				),
 			],
 			'terms in less than 50 languages and other parts changed' => [
@@ -258,9 +330,9 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testGetEditSummary(
 		EntityDiff $entityDiff,
 		Summary $expected,
+		$newEntity = new Item(),
 	) {
 		$oldEntity = new Item();
-		$newEntity = new Item();
 		$entityDiffer = $this->createMock( EntityDiffer::class );
 		$entityDiffer->expects( $this->once() )
 			->method( 'diffEntities' )
