@@ -2,7 +2,7 @@
 	<wikibase-wbui2025-modal-overlay>
 		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
-				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="hide"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<p class="heading">
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
@@ -47,7 +47,7 @@
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button
 						weight="quiet"
-						@click="cancelEditForm"
+						@click="hide"
 					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
@@ -84,6 +84,7 @@ const {
 } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
+const saveStatementsFormMixin = require( '../mixins/saveStatementsFormMixin.js' );
 const WikibaseWbui2025EditStatement = require( './editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './modalOverlay.vue' );
 
@@ -98,6 +99,7 @@ module.exports = exports = defineComponent( {
 		WikibaseWbui2025EditStatement,
 		WikibaseWbui2025ModalOverlay
 	},
+	mixins: [ saveStatementsFormMixin ],
 	props: {
 		propertyId: {
 			type: String,
@@ -152,47 +154,21 @@ module.exports = exports = defineComponent( {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
-		removeStatement: 'removeStatement',
-		saveChangedStatements: 'saveChangedStatements'
-	} ), mapActions( wbui2025.store.useMessageStore, [
-		'addStatusMessage'
-	] ), {
+		removeStatement: 'removeStatement'
+	} ), {
 		createNewStatement() {
 			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
 			// eslint-disable-next-line vue/no-undef-properties
 			this.createNewBlankEditableStatement( statementId, this.propertyId, this.propertyDatatype );
 		},
 		submitForm() {
-			this.formSubmitted = true;
 			if ( this.editableStatementGuids.length === 0 ) {
 				return;
 			}
-			const progressTimeout = setTimeout( () => {
-				this.showProgress = true;
-			}, 300 );
-			this.saveChangedStatements( this.entityId )
-				.then( () => {
-					this.$emit( 'hide' );
-					this.disposeOfEditableStatementStores();
-					this.addStatusMessage( {
-						type: 'success',
-						text: mw.msg( 'wikibase-publishing-succeeded' )
-					} );
-					clearTimeout( progressTimeout );
-					this.showProgress = false;
-				} )
-				.catch( () => {
-					this.addStatusMessage( {
-						text: mw.msg( 'wikibase-publishing-error' ),
-						attachTo: this.$refs.editFormActionsRef,
-						type: 'error'
-					} );
-					clearTimeout( progressTimeout );
-					this.showProgress = false;
-					this.formSubmitted = false;
-				} );
+			// eslint-disable-next-line vue/no-undef-properties
+			this.submitFormWithElementRef( this.$refs.editFormActionsRef );
 		},
-		cancelEditForm() {
+		hide() {
 			this.$emit( 'hide' );
 			this.disposeOfEditableStatementStores();
 		}

@@ -1037,6 +1037,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/editStatementGroup.vue',
 					'resources/wikibase.wbui2025/components/editStatement.vue',
 					'resources/wikibase.wbui2025/components/mainSnak.vue',
+					'resources/wikibase.wbui2025/mixins/saveStatementsFormMixin.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
 						'callback' => CodexModule::getIcons( ... ),
