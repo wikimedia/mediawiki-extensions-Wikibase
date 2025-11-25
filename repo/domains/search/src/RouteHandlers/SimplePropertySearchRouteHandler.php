@@ -114,4 +114,8 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 		];
 	}
 
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
 }

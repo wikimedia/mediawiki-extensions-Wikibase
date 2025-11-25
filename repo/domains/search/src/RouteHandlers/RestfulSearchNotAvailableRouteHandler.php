@@ -19,4 +19,8 @@ class RestfulSearchNotAvailableRouteHandler extends Handler {
 			'RESTful search is not available due to insufficient server configuration'
 		);
 	}
+
+	public function needsWriteAccess(): bool {
+		return false;
+	}
 }
