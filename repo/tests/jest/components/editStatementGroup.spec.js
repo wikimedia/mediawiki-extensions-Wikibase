@@ -44,11 +44,14 @@ Object.defineProperty( globalThis, 'wikibase', {
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const editStatementGroupComponent = require( '../../../resources/wikibase.wbui2025/components/editStatementGroup.vue' );
 const editStatementComponent = require( '../../../resources/wikibase.wbui2025/components/editStatement.vue' );
 const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithStatementsAndProperties } = require( '../piniaHelpers.js' );
+const { useParsedValueStore } = require( '../../../resources/wikibase.wbui2025/store/parsedValueStore.js' );
+const { useMessageStore } = require( '../../../resources/wikibase.wbui2025/store/messageStore.js' );
 
 describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	it( 'defines component', async () => {
@@ -65,19 +68,22 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 	};
 
 	describe( 'the mounted component', () => {
-		async function mountAndGetParts() {
-			const testStatement = {
-				id: 'Q1$6e87f6d3-444f-405a-8c17-96ff7df34b62',
-				mainsnak: {
-					snaktype: 'value',
-					datavalue: {
-						value: '',
-						type: 'string'
-					},
-					datatype: 'string'
+		const testStatementId = 'Q1$6e87f6d3-444f-405a-8c17-96ff7df34b62';
+		const testStatement = {
+			id: testStatementId,
+			mainsnak: {
+				snaktype: 'value',
+				property: 'P1',
+				datavalue: {
+					value: 'a string value',
+					type: 'string'
 				},
-				rank: 'normal'
-			};
+				datatype: 'string'
+			},
+			rank: 'normal'
+		};
+
+		async function mountAndGetParts() {
 			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1',
@@ -145,6 +151,81 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( wrapper.vm.editableStatementGuids.length ).toBe( 1 );
 			await statementForm.vm.$emit( 'remove', wrapper.vm.editableStatementGuids[ 0 ] );
 			expect( wrapper.vm.editableStatementGuids.length ).toBe( 0 );
+		} );
+
+		const updateStatementValue = async function ( publishButton, wrapper ) {
+			const editStatementStore = wbui2025.store.useEditStatementStore( testStatementId )();
+			const snakStore = wbui2025.store.useEditSnakStore( editStatementStore.mainSnakKey )();
+			expect( snakStore.textvalue ).toBe( 'a string value' );
+			const parsedValueStore = useParsedValueStore();
+			parsedValueStore.preloadParsedValue( 'P1', { value: 'a new string' } );
+			snakStore.textvalue = 'a new string';
+			await wrapper.vm.$nextTick();
+
+			expect( wrapper.vm.canSubmit ).toBe( true );
+			const messageStore = useMessageStore();
+
+			expect( messageStore.messages.size ).toBe( 0 );
+			await publishButton.trigger( 'click' );
+			await wrapper.vm.$nextTick();
+		};
+
+		it( 'shows a success message if publishing succeeds', async () => {
+			const { publishButton, wrapper } = await mountAndGetParts();
+
+			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
+			const editStatementsStore = wbui2025.store.useEditStatementsStore();
+			editStatementsStore.saveChangedStatements = jest.fn(
+				() => new Promise( ( resolve ) => {
+					setTimeout( resolve, 500 );
+				} )
+			);
+			await updateStatementValue( publishButton, wrapper );
+
+			const messageStore = useMessageStore();
+			let progressShown = false;
+			while ( messageStore.messages.size < 1 ) {
+				if ( wrapper.vm.showProgress ) {
+					progressShown = true;
+				}
+				await new Promise( ( resolve ) => {
+					setTimeout( resolve, 50 );
+				} );
+			}
+			expect( messageStore.messages.size ).toBe( 1 );
+			const message = messageStore.messages.values().next().value;
+			expect( message.type ).toBe( 'success' );
+			expect( progressShown ).toBe( true );
+			expect( wrapper.vm.showProgress ).toBe( false );
+		} );
+
+		it( 'shows an error message if publishing fails', async () => {
+			const { publishButton, wrapper } = await mountAndGetParts();
+
+			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
+			const editStatementsStore = wbui2025.store.useEditStatementsStore();
+			editStatementsStore.saveChangedStatements = jest.fn(
+				() => new Promise( ( _, reject ) => {
+					setTimeout( reject, 500 );
+				} )
+			);
+			await updateStatementValue( publishButton, wrapper );
+
+			const messageStore = useMessageStore();
+			let progressShown = false;
+			while ( messageStore.messages.size < 1 ) {
+				if ( wrapper.vm.showProgress ) {
+					progressShown = true;
+				}
+				await new Promise( ( resolve ) => {
+					setTimeout( resolve, 50 );
+				} );
+			}
+			expect( messageStore.messages.size ).toBe( 1 );
+			const message = messageStore.messages.values().next().value;
+			expect( message.type ).toBe( 'error' );
+			expect( progressShown ).toBe( true );
+			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
 	} );
 } );
