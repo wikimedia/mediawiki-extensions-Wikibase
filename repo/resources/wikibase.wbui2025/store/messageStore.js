@@ -17,6 +17,9 @@ const useMessageStore = defineStore( 'message', {
 				throw new RangeError( 'No such message ID: ' + messageId );
 			}
 			this.messages.delete( messageId );
+		},
+		clearStatusMessages() {
+			this.messages.clear();
 		}
 	}
 } );
