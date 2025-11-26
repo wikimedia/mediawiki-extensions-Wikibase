@@ -198,6 +198,14 @@ module.exports = exports = defineComponent( {
 	height: 100%;
 	width: 100%;
 
+	ul {
+		padding-left: 0;
+	}
+
+	li {
+		margin-bottom: 0;
+	}
+
 	.wikibase-wbui2025-edit-statement-heading {
 		position: relative;
 		display: flex;
