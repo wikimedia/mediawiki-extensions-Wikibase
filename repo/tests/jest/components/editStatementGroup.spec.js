@@ -1,3 +1,5 @@
+jest.useFakeTimers();
+
 jest.mock(
 	'../../../codex.js',
 	() => require( '@wikimedia/codex' ),
@@ -183,19 +185,12 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			await updateStatementValue( publishButton, wrapper );
 
 			const messageStore = useMessageStore();
-			let progressShown = false;
-			while ( messageStore.messages.size < 1 ) {
-				if ( wrapper.vm.showProgress ) {
-					progressShown = true;
-				}
-				await new Promise( ( resolve ) => {
-					setTimeout( resolve, 50 );
-				} );
-			}
+			await jest.advanceTimersByTime( 300 );
+			expect( wrapper.vm.showProgress ).toBe( true );
+			await jest.advanceTimersByTime( 200 );
 			expect( messageStore.messages.size ).toBe( 1 );
 			const message = messageStore.messages.values().next().value;
 			expect( message.type ).toBe( 'success' );
-			expect( progressShown ).toBe( true );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
 
@@ -212,19 +207,13 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			await updateStatementValue( publishButton, wrapper );
 
 			const messageStore = useMessageStore();
-			let progressShown = false;
-			while ( messageStore.messages.size < 1 ) {
-				if ( wrapper.vm.showProgress ) {
-					progressShown = true;
-				}
-				await new Promise( ( resolve ) => {
-					setTimeout( resolve, 50 );
-				} );
-			}
+			await jest.advanceTimersByTime( 300 );
+			expect( wrapper.vm.showProgress ).toBe( true );
+			await jest.advanceTimersByTime( 200 );
+			await Promise.resolve();
 			expect( messageStore.messages.size ).toBe( 1 );
 			const message = messageStore.messages.values().next().value;
 			expect( message.type ).toBe( 'error' );
-			expect( progressShown ).toBe( true );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
 	} );
