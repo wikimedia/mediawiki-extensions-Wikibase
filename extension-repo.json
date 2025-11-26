@@ -1307,6 +1307,15 @@
 				"WikibaseRepo.RemoteEntity.RemoteEntitySearchClient",
 				"WikibaseRepo.Settings"
 			]
+		},
+		"RemoteEntityStorage": {
+			"class": "Wikibase\\Repo\\RemoteEntity\\Hooks\\RemoteEntityStorageHookHandler",
+			"factory": "Wikibase\\Repo\\RemoteEntity\\Hooks\\RemoteEntityStorageHookHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.RemoteEntity.RemoteEntityLookup",
+				"WikibaseRepo.Settings"
+			]
 		}
 	},
 	"Hooks": {
@@ -1344,6 +1353,7 @@
 			"DeleteDispatcher",
 			"EntityDataPurger"
 		],
+		"PageSaveComplete": "RemoteEntityStorage",
 		"PageUndeleteComplete": "PageDeleteHooksHandler",
 		"PageHistoryLineEnding": "RepoHooks",
 		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",

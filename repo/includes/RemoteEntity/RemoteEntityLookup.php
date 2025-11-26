@@ -31,6 +31,28 @@ class RemoteEntityLookup {
 	}
 
 	/**
+	 * Fetch entity data for display purposes only (does NOT store in DB).
+	 *
+	 * Use this method when you need entity data for formatting/display
+	 * but don't want to persist it yet (e.g., during autocomplete preview).
+	 *
+	 * @param string $conceptUri e.g. "https://www.wikidata.org/entity/Q42"
+	 * @return array|null Decoded wbgetentities entity or null on failure
+	 */
+	public function fetchEntity( string $conceptUri ): ?array {
+		// Check DB mirror first (in case it was already stored)
+		$cached = $this->store->get( $conceptUri );
+		if ( $cached !== null ) {
+			\wfDebugLog( 'federation', "RemoteEntityLookup::fetchEntity uri={$conceptUri} - DB HIT" );
+			return $cached;
+		}
+
+		// Fetch from remote without storing
+		\wfDebugLog( 'federation', "RemoteEntityLookup::fetchEntity uri={$conceptUri} - fetching from remote (no store)" );
+		return $this->fetchFromRemote( $conceptUri );
+	}
+
+	/**
 	 * Get entity data, fetching from remote and storing in DB if not already cached.
 	 *
 	 * Use this method when you need to ensure the entity is persisted
@@ -66,6 +88,35 @@ class RemoteEntityLookup {
 		);
 
 		return $entityData;
+	}
+
+	/**
+	 * Ensure a remote entity is stored in the DB mirror.
+	 *
+	 * Call this when a statement referencing a remote entity is saved.
+	 *
+	 * @param string $conceptUri e.g. "https://www.wikidata.org/entity/Q42"
+	 * @return bool True if entity was stored (or already exists), false on failure
+	 */
+	public function ensureStored( string $conceptUri ): bool {
+		// Check if already stored
+		if ( $this->store->get( $conceptUri ) !== null ) {
+			return true;
+		}
+
+		// Fetch and store
+		$entityData = $this->fetchFromRemote( $conceptUri );
+		if ( $entityData === null ) {
+			return false;
+		}
+
+		$this->store->set( $conceptUri, $entityData );
+		\wfDebugLog(
+			'federation',
+			"RemoteEntityLookup::ensureStored uri={$conceptUri} - stored in DB mirror"
+		);
+
+		return true;
 	}
 
 	/**
