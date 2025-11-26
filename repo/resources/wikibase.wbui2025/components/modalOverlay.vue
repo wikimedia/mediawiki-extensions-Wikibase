@@ -165,7 +165,7 @@ module.exports = exports = defineComponent( {
 	flex-direction: column;
 	z-index: @z-index-overlay-backdrop;
 	width: @size-viewport-width-full;
-	height: @size-viewport-height-full;
+	height: 100%;
 
 	.sd{
 		display: flex;
