@@ -167,6 +167,14 @@ module.exports = exports = defineComponent( {
 	width: @size-viewport-width-full;
 	height: @size-viewport-height-full;
 
+	ul {
+		padding-left: 0;
+	}
+
+	li {
+		margin-bottom: 0;
+	}
+
 	.sd{
 		display: flex;
 		width: 375px;
