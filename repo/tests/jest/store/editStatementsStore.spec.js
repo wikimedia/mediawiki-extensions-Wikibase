@@ -1,6 +1,9 @@
 jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
-	() => ( { parseValue: jest.fn() } )
+	() => ( {
+		parseValue: jest.fn(),
+		renderSnakValueText: jest.fn()
+	} )
 );
 jest.mock(
 	'../../../resources/wikibase.wbui2025/repoSettings.json',
@@ -626,5 +629,118 @@ describe( 'Edit Statements Store', () => {
 
 			expect( editStatementsStore.hasChanges ).toBe( true );
 		} );
+	} );
+} );
+
+describe( 'Edit Snak Store', () => {
+	beforeEach( () => {
+		setActivePinia( createPinia() );
+	} );
+
+	describe( 'isIncomplete getter', () => {
+		it( 'empty snak is not incomplete', () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+
+			expect( editSnakStore.isIncomplete ).toBe( false );
+		} );
+
+		it( 'selectionvalue == null => incomplete', () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+			expect( editSnakStore.isIncomplete ).toBe( false );
+
+			editSnakStore.selectionvalue = null;
+
+			expect( editSnakStore.isIncomplete ).toBe( true );
+		} );
+
+		it( 'textvalue == "" => incomplete', () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+			expect( editSnakStore.isIncomplete ).toBe( false );
+
+			editSnakStore.textvalue = '';
+
+			expect( editSnakStore.isIncomplete ).toBe( true );
+		} );
+
+	} );
+
+	describe( 'resetToLastCompleteValue', () => {
+		it( 'resets textvalue', async () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+			const snak = {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datatype: 'string',
+				datavalue: {
+					type: 'string',
+					value: 'abc'
+				}
+			};
+			await editSnakStore.initializeWithSnak( snak );
+			editSnakStore.textvalue = '';
+			expect( editSnakStore.isIncomplete ).toBe( true );
+			editSnakStore.resetToLastCompleteValue();
+
+			expect( editSnakStore.textvalue ).toBe( 'abc' );
+			expect( editSnakStore.isIncomplete ).toBe( false );
+		} );
+
+		it( 'resets selectionvalue', async () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+			const snak = {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datavalue: {
+					value: { id: 'Q12345', 'numeric-id': 12345, 'entity-type': 'item' },
+					type: 'wikibase-entity-id'
+				},
+				datatype: 'wikibase-item'
+			};
+			await editSnakStore.initializeWithSnak( snak );
+			expect( editSnakStore.selectionvalue ).toBe( 'Q12345' );
+
+			editSnakStore.selectionvalue = null;
+			expect( editSnakStore.selectionvalue ).toBe( null );
+			expect( editSnakStore.isIncomplete ).toBe( true );
+
+			editSnakStore.resetToLastCompleteValue();
+			expect( editSnakStore.selectionvalue ).toBe( 'Q12345' );
+			expect( editSnakStore.isIncomplete ).toBe( false );
+		} );
+
+		it( 'resets to previous selectionvalue', async () => {
+			const editSnakStore = useEditSnakStore( generateNextSnakKey() )();
+			const snak = {
+				property: 'P1',
+				snaktype: 'value',
+				hash: '5b70b97920708f7e38b0ae3d0d2a0ddbf96899d7',
+				datavalue: {
+					value: { id: 'Q123456', 'numeric-id': 12345, 'entity-type': 'item' },
+					type: 'wikibase-entity-id'
+				},
+				datatype: 'wikibase-item'
+			};
+			await editSnakStore.initializeWithSnak( snak );
+
+			editSnakStore.selectionvalue = 'Q1';
+			editSnakStore.textvalue = 'Q1 label';
+			expect( editSnakStore.selectionvalue ).toBe( 'Q1' );
+			expect( editSnakStore.textvalue ).toBe( 'Q1 label' );
+			expect( editSnakStore.isIncomplete ).toBe( false );
+
+			editSnakStore.selectionvalue = null;
+			editSnakStore.textvalue = '';
+			expect( editSnakStore.selectionvalue ).toBe( null );
+			expect( editSnakStore.textvalue ).toBe( '' );
+			expect( editSnakStore.isIncomplete ).toBe( true );
+
+			editSnakStore.resetToLastCompleteValue();
+			expect( editSnakStore.selectionvalue ).toBe( 'Q1' );
+			expect( editSnakStore.textvalue ).toBe( 'Q1 label' );
+			expect( editSnakStore.isIncomplete ).toBe( false );
+		} );
+
 	} );
 } );

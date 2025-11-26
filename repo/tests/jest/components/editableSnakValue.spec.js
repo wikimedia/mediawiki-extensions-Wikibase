@@ -92,6 +92,33 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			expect( wrapper.emitted() ).toEqual( { 'remove-snak': [ [ snakKey ] ] } );
 		} );
 
+		it( 'allows changing snak type and restores value', async () => {
+			expect( textInput.exists() ).toBe( true );
+			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+
+			// Empty the string input
+			await textInput.vm.$emit( 'update:modelValue', '' );
+			expect( textInput.props( 'modelValue' ) ).toBe( '' );
+			expect( textInput.classes() ).not.toContain( 'cdx-text-input--status-error' );
+			// After a blur on the input, the field should indicate an error
+			await textInput.vm.$emit( 'blur' );
+			expect( textInput.classes() ).toContain( 'cdx-text-input--status-error' );
+
+			wrapper.vm.snakTypeSelection = 'novalue';
+			await wrapper.vm.$nextTick();
+			expect( textInput.exists() ).toBe( false );
+
+			// Restore the original value (should no longer be in an erroneous state)
+			wrapper.vm.snakTypeSelection = 'value';
+			// This needs two ticks to propagate from one child component to another
+			await wrapper.vm.$nextTick();
+			await wrapper.vm.$nextTick();
+			textInput = wrapper.findComponent( CdxTextInput );
+			expect( textInput.exists() ).toBe( true );
+			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+			expect( textInput.classes() ).not.toContain( 'cdx-text-input--status-error' );
+		} );
+
 		describe( 'when it is disabled', () => {
 			beforeEach( async () => {
 				await wrapper.setProps( { disabled: true } );
@@ -155,4 +182,5 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			} );
 		} );
 	} );
+
 } );
