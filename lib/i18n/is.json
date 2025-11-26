@@ -41,6 +41,7 @@
 	"datatypes-type-string": "Strengur",
 	"datatypes-type-quantity": "Fjöldi",
 	"datatypes-type-monolingualtext": "Texti á einu máli",
+	"datatypes-type-multilingualtext": "Margtyngdur texti",
 	"datatypes-type-number": "Tala",
 	"datatypes-type-unknown": "Óskilgreint",
 	"datatypes-type-boolean": "Bólskt",

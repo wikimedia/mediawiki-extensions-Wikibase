@@ -28,6 +28,7 @@
 	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
 	"wikibase-rcfilters-hide-wikibase-label": "Izmjene na Wikipodacima",
 	"wikibase-rcfilters-hide-wikibase-description": "Izmjene koje potiču s Wikipodataka",
+	"wikibase-watchlist-show-changes-pref": "Izmjene {{GRAMMAR:genitiv|{{WBREPONAME}}}} na listi praćenja",
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
 }
