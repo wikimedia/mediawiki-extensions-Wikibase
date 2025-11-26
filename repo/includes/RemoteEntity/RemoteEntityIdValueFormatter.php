@@ -7,6 +7,7 @@ namespace Wikibase\Repo\RemoteEntity;
 use MediaWiki\Html\Html;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\Lib\Formatters\SnakFormatter;
 
 /**
  * ValueFormatter decorator for EntityIdValue that knows how to format
@@ -21,25 +22,29 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 	private RemoteEntityLookup $remoteLookup;
 	/** @var string[] */
 	private array $languages;
+	private string $format;
 
 	/**
 	 * @param ValueFormatter $inner Base formatter (usually EntityIdValueFormatter)
 	 * @param RemoteEntityLookup $remoteLookup Remote entity fetcher + cache
 	 * @param string[] $languages Preferred language codes for labels (in order)
+	 * @param string $format Output format (see SnakFormatter::FORMAT_XXX)
 	 */
 	public function __construct(
 		ValueFormatter $inner,
 		RemoteEntityLookup $remoteLookup,
-		array $languages
+		array $languages,
+		string $format = SnakFormatter::FORMAT_HTML
 	) {
 		$this->inner = $inner;
 		$this->remoteLookup = $remoteLookup;
 		$this->languages = $languages;
+		$this->format = $format;
 	}
 
 	/**
 	 * @param mixed $value
-	 * @return string HTML for the value
+	 * @return string Formatted value (HTML or plain text depending on format)
 	 */
 	public function format( $value ) {
 		if ( !( $value instanceof EntityIdValue ) ) {
@@ -56,7 +61,9 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 		$conceptUri = $entityId->getSerialization();
 		$localId = $entityId->getLocalEntityId()->getSerialization();
 
-		$entityData = $this->remoteLookup->getEntity( $conceptUri );
+		// Use fetchEntity() to avoid storing in DB during display/formatting.
+		// Storage happens separately when the statement is actually saved.
+		$entityData = $this->remoteLookup->fetchEntity( $conceptUri );
 
 		if ( !is_array( $entityData ) ) {
 			// Remote lookup failed → fall back to normal behavior
@@ -68,6 +75,19 @@ class RemoteEntityIdValueFormatter implements ValueFormatter {
 			$label = $localId;
 		}
 
+		// For plain text format, just return the label
+		if ( $this->format === SnakFormatter::FORMAT_PLAIN ) {
+			return $label;
+		}
+
+		// For HTML formats, return full markup with link and badge
+		return $this->formatHtml( $label, $conceptUri );
+	}
+
+	/**
+	 * Format the remote entity as HTML with link and source badge.
+	 */
+	private function formatHtml( string $label, string $conceptUri ): string {
 		$href = $this->buildEntityUrl( $conceptUri );
 
 		$linkAttrs = [
