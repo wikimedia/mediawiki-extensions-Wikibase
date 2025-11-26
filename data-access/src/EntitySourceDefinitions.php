@@ -186,4 +186,50 @@ class EntitySourceDefinitions {
 		return $this->sourceToRdfPredicateNamespacePrefixMap;
 	}
 
+	/**
+	 * Get an API entity source by matching a concept URI against the source's concept base URI.
+	 *
+	 * The comparison is scheme-agnostic (http vs https) since different systems
+	 * may use different schemes for the same logical entity.
+	 *
+	 * @param string $conceptUri e.g. "https://www.wikidata.org/entity/Q42"
+	 * @return ApiEntitySource|null The matching API source, or null if not found
+	 */
+	public function getApiSourceForConceptUri( string $conceptUri ): ?ApiEntitySource {
+		// Normalize to compare without scheme (http vs https)
+		$normalizedUri = preg_replace( '~^https?://~', '', $conceptUri );
+
+		foreach ( $this->sources as $source ) {
+			if ( $source->getType() !== ApiEntitySource::TYPE ) {
+				continue;
+			}
+
+			$baseUri = $source->getConceptBaseUri();
+			$normalizedBase = preg_replace( '~^https?://~', '', $baseUri );
+
+			if ( str_starts_with( $normalizedUri, $normalizedBase ) ) {
+				// @phan-suppress-next-line PhanTypeMismatchReturn Checked by compare with ::TYPE
+				return $source;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get all API entity sources.
+	 *
+	 * @return ApiEntitySource[]
+	 */
+	public function getApiSources(): array {
+		$apiSources = [];
+		foreach ( $this->sources as $source ) {
+			if ( $source->getType() === ApiEntitySource::TYPE ) {
+				// @phan-suppress-next-line PhanTypeMismatchArgumentSuperType Checked by compare with ::TYPE
+				$apiSources[] = $source;
+			}
+		}
+		return $apiSources;
+	}
+
 }

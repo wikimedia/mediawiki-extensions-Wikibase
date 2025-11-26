@@ -176,6 +176,7 @@ use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\EntityTypesConfigFeddyPropsAugmenter;
+use Wikibase\Repo\RemoteEntity\DefaultWikidataEntitySourceAdder;
 use Wikibase\Repo\RemoteEntity\RemoteEntityIdParser;
 use Wikibase\Repo\RemoteEntity\RemoteEntityIdValueFormatter;
 use Wikibase\Repo\RemoteEntity\RemoteEntityLookup;
@@ -853,25 +854,16 @@ return [
 			);
 		}
 
-		// TODO: FederatedValues - Handle sources question / configurable
-		// TODO: FederatedValues - Decide whether we always parse RemoteEntity IDs or throw error when feature not enabled
 		// If general federation (for values) is enabled, wrap again for remote entity ids.
 		if ( $settings->getSetting( 'federatedValuesEnabled' ) ) {
-			// For now, hard-code while prototyping.
-			// Later you can derive this from federationSources.
-			$repoNames = [ 'wikidata' ];
+			// Derive repo concept bases from API entity sources in entitySources config
+			$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
+			$repoConceptBases = [];
+			foreach ( $entitySourceDefinitions->getApiSources() as $source ) {
+				$repoConceptBases[$source->getSourceName()] = $source->getConceptBaseUri();
+			}
 
-			// Or if federationSources is something like:
-			// [ [ 'sourceName' => 'wikidata', ... ], ... ]
-			/*
-			$remoteRepos = $settings->getSetting( 'federationSources' ) ?? [];
-			$repoNames = array_map(
-				static fn ( array $sourceConfig ) => $sourceConfig['sourceName'],
-				$remoteRepos
-			);
-			*/
-
-			$parser = new RemoteEntityIdParser( $parser, $repoNames );
+			$parser = new RemoteEntityIdParser( $parser, $repoConceptBases );
 		}
 
 		return $parser;
@@ -1039,13 +1031,17 @@ return [
 
 	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
 		$entityTypes = WikibaseRepo::getEntityTypeDefinitionsArray( $services );
+		$settings = WikibaseRepo::getSettings( $services );
 
 		$entityTypeDefinitionsBySourceType = [ DatabaseEntitySource::TYPE => new EntityTypeDefinitions( $entityTypes ) ];
 
-		if ( WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' ) ) {
+		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$entityTypeDefinitionsBySourceType[ApiEntitySource::TYPE] = new EntityTypeDefinitions(
 				EntityTypesConfigFeddyPropsAugmenter::factory()->override( $entityTypes )
 			);
+		} elseif ( $settings->getSetting( 'federatedValuesEnabled' ) ) {
+			// Federated values also uses ApiEntitySource for remote entity sources
+			$entityTypeDefinitionsBySourceType[ApiEntitySource::TYPE] = new EntityTypeDefinitions( $entityTypes );
 		}
 
 		return new EntitySourceAndTypeDefinitions(
@@ -1071,13 +1067,21 @@ return [
 			$subEntityTypesMapper
 		);
 
+		// Add default Wikidata source for federated properties if needed
 		$fedPropsSourceAdder = new DefaultFederatedPropertiesEntitySourceAdder(
 			$settings->getSetting( 'federatedPropertiesEnabled' ),
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 			$subEntityTypesMapper
 		);
+		$entitySourceDefinitions = $fedPropsSourceAdder->addDefaultIfRequired( $entitySourceDefinitions );
 
-		return $fedPropsSourceAdder->addDefaultIfRequired( $entitySourceDefinitions );
+		// Add default Wikidata source for federated values if needed
+		$wikidataSourceAdder = new DefaultWikidataEntitySourceAdder(
+			$settings->getSetting( 'federatedValuesEnabled' ),
+			$subEntityTypesMapper
+		);
+
+		return $wikidataSourceAdder->addDefaultIfRequired( $entitySourceDefinitions );
 	},
 
 	'WikibaseRepo.EntitySourceLookup' => function ( MediaWikiServices $services ): EntitySourceLookup {
@@ -1222,7 +1226,7 @@ return [
 		static function ( MediaWikiServices $services ): RemoteEntitySearchClient {
 			return new RemoteEntitySearchClient(
 				$services->getHttpRequestFactory(),
-				WikibaseRepo::getSettings( $services )
+				WikibaseRepo::getEntitySourceDefinitions( $services )
 			);
 	},
 
@@ -1817,11 +1821,11 @@ return [
 	},
 
 	'WikibaseRepo.RemoteEntityLookup' => function ( MediaWikiServices $services ): RemoteEntityLookup {
-		$settings = WikibaseRepo::getSettings( $services );
 		$httpFactory = $services->getHttpRequestFactory();
+		$entitySourceDefinitions = WikibaseRepo::getEntitySourceDefinitions( $services );
 		$store = $services->get( 'WikibaseRepo.RemoteEntityStore' );
 
-		return new RemoteEntityLookup( $httpFactory, $settings, $store );
+		return new RemoteEntityLookup( $httpFactory, $entitySourceDefinitions, $store );
 	},
 
 	'WikibaseRepo.ScopedTypeaheadSearchConfig' => function( MediaWikiServices $services ): ScopedTypeaheadSearchConfig {
@@ -2194,6 +2198,9 @@ return [
 					return $innerFormatter;
 				}
 
+				// First argument is the format (see WikibaseValueFormatterBuilders::newEntityIdFormatter)
+				$format = $args[0] ?? SnakFormatter::FORMAT_HTML;
+
 				// Derive language priorities from site config, not from $args.
 				$contLang = $services->getContentLanguage();
 				$contLangCode = $contLang->getCode();
@@ -2212,7 +2219,8 @@ return [
 				return new RemoteEntityIdValueFormatter(
 					$innerFormatter,
 					$remoteLookup,
-					$langCodes
+					$langCodes,
+					$format
 				);
 			};
 		}

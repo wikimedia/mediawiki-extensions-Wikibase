@@ -136,4 +136,22 @@ class ApiEntitySourceTest extends TestCase {
 		$entitySource = new ApiEntitySource( '', [ 'property' ], '', '', 'foo', '' );
 		$this->assertEquals( 'foo', $entitySource->getRdfPredicateNamespacePrefix() );
 	}
+
+	public function testGetRepoApiUrl_whenNotSet() {
+		$entitySource = new ApiEntitySource( '', [ 'property' ], '', '', '', '' );
+		$this->assertNull( $entitySource->getRepoApiUrl() );
+	}
+
+	public function testGetRepoApiUrl_whenSet() {
+		$entitySource = new ApiEntitySource(
+			'wikidata',
+			[ 'item' ],
+			'https://www.wikidata.org/entity/',
+			'wd',
+			'wdt',
+			'wikidata',
+			'https://www.wikidata.org/w/api.php'
+		);
+		$this->assertEquals( 'https://www.wikidata.org/w/api.php', $entitySource->getRepoApiUrl() );
+	}
 }

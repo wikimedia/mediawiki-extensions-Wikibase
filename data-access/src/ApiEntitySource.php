@@ -38,6 +38,11 @@ class ApiEntitySource implements EntitySource {
 	private $interwikiPrefix;
 
 	/**
+	 * @var string|null
+	 */
+	private $repoApiUrl;
+
+	/**
 	 * @param string $name Unique name for the source for a given configuration / site, used for indexing the sources internally.
 	 *        This does not have to be a wikiname, sitename or dbname, it can for example just be 'properties'.
 	 * @param array $entityTypes Array of entityTypes e.g [ 'property' ]
@@ -45,6 +50,7 @@ class ApiEntitySource implements EntitySource {
 	 * @param string $rdfNodeNamespacePrefix
 	 * @param string $rdfPredicateNamespacePrefix
 	 * @param string $interwikiPrefix
+	 * @param string|null $repoApiUrl Optional API URL for the remote repository (e.g. 'https://www.wikidata.org/w/api.php')
 	 */
 	public function __construct(
 		$name,
@@ -52,7 +58,8 @@ class ApiEntitySource implements EntitySource {
 		$conceptBaseUri,
 		$rdfNodeNamespacePrefix,
 		$rdfPredicateNamespacePrefix,
-		$interwikiPrefix
+		$interwikiPrefix,
+		?string $repoApiUrl = null
 	) {
 		Assert::parameterType( 'string', $name, '$name' );
 		Assert::parameterType( 'string', $conceptBaseUri, '$conceptBaseUri' );
@@ -68,6 +75,7 @@ class ApiEntitySource implements EntitySource {
 		$this->rdfNodeNamespacePrefix = $rdfNodeNamespacePrefix;
 		$this->rdfPredicateNamespacePrefix = $rdfPredicateNamespacePrefix;
 		$this->interwikiPrefix = $interwikiPrefix;
+		$this->repoApiUrl = $repoApiUrl;
 	}
 
 	public function getSourceName(): string {
@@ -96,5 +104,14 @@ class ApiEntitySource implements EntitySource {
 
 	public function getType(): string {
 		return self::TYPE;
+	}
+
+	/**
+	 * Get the API URL for this remote source.
+	 *
+	 * @return string|null The API URL (e.g. 'https://www.wikidata.org/w/api.php'), or null if not configured
+	 */
+	public function getRepoApiUrl(): ?string {
+		return $this->repoApiUrl;
 	}
 }

@@ -31,6 +31,15 @@ class RemoteEntityStore {
 	}
 
 	/**
+	 * Normalize a concept URI to a canonical form for storage.
+	 * Wikidata returns http:// URIs, so we normalize to http:// to ensure
+	 * consistent lookups regardless of how the URI was originally provided.
+	 */
+	private function normalizeConceptUri( string $conceptUri ): string {
+		return preg_replace( '~^https://~', 'http://', $conceptUri );
+	}
+
+	/**
 	 * @return int|null TTL in seconds, or null if disabled
 	 */
 	private function getTtl(): ?int {
@@ -64,12 +73,13 @@ class RemoteEntityStore {
 	 * @return array|null decoded entity blob, or null on miss/expired/bad data
 	 */
 	public function get( string $conceptUri ): ?array {
+		$normalizedUri = $this->normalizeConceptUri( $conceptUri );
 		$db = $this->lbFactory->getReplicaDatabase();
 
 		$row = $db->selectRow(
 			'wb_remote_entity',
 			[ 're_blob', 're_touched' ],
-			[ 're_concept_uri' => $conceptUri ],
+			[ 're_concept_uri' => $normalizedUri ],
 			__METHOD__
 		);
 
@@ -95,6 +105,7 @@ class RemoteEntityStore {
 	 * @param array $entityData decoded wbgetentities entity blob
 	 */
 	public function set( string $conceptUri, array $entityData ): void {
+		$normalizedUri = $this->normalizeConceptUri( $conceptUri );
 		$dbw = $this->lbFactory->getPrimaryDatabase();
 
 		$blob = \FormatJson::encode( $entityData, false, \FormatJson::ALL_OK );
@@ -103,7 +114,7 @@ class RemoteEntityStore {
 		$dbw->upsert(
 			'wb_remote_entity',
 			[
-				're_concept_uri' => $conceptUri,
+				're_concept_uri' => $normalizedUri,
 				're_touched'     => $touched,
 				're_blob'        => $blob,
 			],
@@ -117,11 +128,12 @@ class RemoteEntityStore {
 	}
 
 	public function delete( string $conceptUri ): void {
+		$normalizedUri = $this->normalizeConceptUri( $conceptUri );
 		$dbw = $this->lbFactory->getPrimaryDatabase();
 
 		$dbw->delete(
 			'wb_remote_entity',
-			[ 're_concept_uri' => $conceptUri ],
+			[ 're_concept_uri' => $normalizedUri ],
 			__METHOD__
 		);
 	}

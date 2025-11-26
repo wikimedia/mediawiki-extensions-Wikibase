@@ -5,12 +5,13 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\RemoteEntity;
 
 use MediaWiki\Http\HttpRequestFactory;
-use Wikibase\Lib\SettingsArray;
+use Wikibase\DataAccess\ApiEntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 
 class RemoteEntitySearchClient {
 
 	private HttpRequestFactory $httpRequestFactory;
-	private SettingsArray $settings;
+	private EntitySourceDefinitions $entitySourceDefinitions;
 
 	/**
 	 * Builds the query parameters for a remote wbsearchentities request.
@@ -59,10 +60,10 @@ class RemoteEntitySearchClient {
 
 	public function __construct(
 		HttpRequestFactory $httpRequestFactory,
-		SettingsArray $settings
+		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->settings = $settings;
+		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
 	/**
@@ -76,8 +77,12 @@ class RemoteEntitySearchClient {
 	public function searchEntities( array $params ): array {
 		$remoteParams = $this->buildRemoteParams( $params );
 
-		// TODO: FederatedValues - For now hard-coded; later read from federation config in $this->settings
-		$remoteUrl = 'https://www.wikidata.org/w/api.php?' . \wfArrayToCgi( $remoteParams );
+		$apiUrl = $this->getRemoteApiUrl();
+		if ( $apiUrl === null ) {
+			return [];
+		}
+
+		$remoteUrl = $apiUrl . '?' . \wfArrayToCgi( $remoteParams );
 
 		$req = $this->httpRequestFactory->create( $remoteUrl, [
 			'method'  => 'GET',
@@ -91,5 +96,25 @@ class RemoteEntitySearchClient {
 
 		$resp = \FormatJson::decode( $req->getContent(), true );
 		return is_array( $resp ) ? $resp : [];
+	}
+
+	/**
+	 * Get the API URL for the first configured API entity source.
+	 *
+	 * For MVP, we only support a single remote source (Wikidata).
+	 *
+	 * @return string|null The API URL, or null if no API source is configured
+	 */
+	private function getRemoteApiUrl(): ?string {
+		$apiSources = $this->entitySourceDefinitions->getApiSources();
+
+		foreach ( $apiSources as $source ) {
+			$apiUrl = $source->getRepoApiUrl();
+			if ( $apiUrl !== null ) {
+				return $apiUrl;
+			}
+		}
+
+		return null;
 	}
 }

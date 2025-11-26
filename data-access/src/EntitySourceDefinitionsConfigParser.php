@@ -61,7 +61,8 @@ class EntitySourceDefinitionsConfigParser {
 					$sourceData['baseUri'],
 					$sourceData['rdfNodeNamespacePrefix'],
 					$sourceData['rdfPredicateNamespacePrefix'],
-					$sourceData['interwikiPrefix']
+					$sourceData['interwikiPrefix'],
+					$sourceData['repoApiUrl'] ?? null
 				);
 			} else {
 				throw new InvalidArgumentException( 'Source data with wrong elements.' );

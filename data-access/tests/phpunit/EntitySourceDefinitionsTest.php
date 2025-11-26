@@ -206,4 +206,58 @@ class EntitySourceDefinitionsTest extends TestCase {
 		);
 	}
 
+	public function testGetApiSourceForConceptUri_returnsMatchingSource(): void {
+		$wikidataSource = new ApiEntitySource(
+			'wikidata',
+			[ 'item' ],
+			'https://www.wikidata.org/entity/',
+			'wd',
+			'wdt',
+			'wikidata',
+			'https://www.wikidata.org/w/api.php'
+		);
+
+		$sourceDefinitions = new EntitySourceDefinitions( [
+			$this->newItemSource(),
+			$wikidataSource,
+		], new SubEntityTypesMapper( [] ) );
+
+		$this->assertSame(
+			$wikidataSource,
+			$sourceDefinitions->getApiSourceForConceptUri( 'https://www.wikidata.org/entity/Q42' )
+		);
+	}
+
+	public function testGetApiSourceForConceptUri_returnsNullWhenNoMatch(): void {
+		$sourceDefinitions = new EntitySourceDefinitions( [
+			$this->newItemSource(),
+		], new SubEntityTypesMapper( [] ) );
+
+		$this->assertNull(
+			$sourceDefinitions->getApiSourceForConceptUri( 'https://www.wikidata.org/entity/Q42' )
+		);
+	}
+
+	public function testGetApiSources_returnsOnlyApiSources(): void {
+		$wikidataSource = new ApiEntitySource(
+			'wikidata',
+			[ 'item' ],
+			'https://www.wikidata.org/entity/',
+			'wd',
+			'wdt',
+			'wikidata'
+		);
+
+		$sourceDefinitions = new EntitySourceDefinitions( [
+			$this->newItemSource(),
+			$wikidataSource,
+			$this->newPropertySource(),
+		], new SubEntityTypesMapper( [] ) );
+
+		$apiSources = $sourceDefinitions->getApiSources();
+
+		$this->assertCount( 1, $apiSources );
+		$this->assertSame( $wikidataSource, $apiSources[0] );
+	}
+
 }
