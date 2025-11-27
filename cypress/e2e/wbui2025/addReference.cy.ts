@@ -4,14 +4,17 @@ import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { AddReferenceFormPage } from '../../support/pageObjects/AddReferenceFormPage';
 import { ValueForm } from '../../support/pageObjects/ValueForm';
-import { interceptCommonsSearch } from '../../support/apiMockHelpers';
+import { interceptCommonsSearch, interceptFormatValue, interceptSaveEntity } from '../../support/apiMockHelpers.js';
 import { LoginPage } from '../../support/pageObjects/LoginPage';
 
 describe( 'wbui2025 add reference', () => {
 	context( 'mobile view', () => {
 		let itemViewPage: ItemViewPage;
 		let itemLabel: string;
-		const tabularDataItem: string = 'Data:Ncei.noaa.gov/weather/New_York_City.tab';
+		let tabularDataPropertyId: string;
+		let itemPropertyId: string;
+		let stringPropertyId: string;
+		const tabularDataItem: string = 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab';
 
 		beforeEach( () => {
 			const loginPage = new LoginPage();
@@ -23,15 +26,15 @@ describe( 'wbui2025 add reference', () => {
 			} );
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'tabular-data' } )
 				.then( ( propertyId: string ) => {
-					cy.wrap( propertyId ).as( 'tabularDataPropertyId' );
+					tabularDataPropertyId = propertyId;
 				} );
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'wikibase-item' } )
 				.then( ( propertyId: string ) => {
-					cy.wrap( propertyId ).as( 'itemPropertyId' );
+					itemPropertyId = propertyId;
 				} );
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'string' } )
 				.then( ( propertyId: string ) => {
-					cy.wrap( propertyId ).as( 'stringPropertyId' );
+					stringPropertyId = propertyId;
 					const statementData = {
 						claims: [ {
 							mainsnak: {
@@ -59,7 +62,7 @@ describe( 'wbui2025 add reference', () => {
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Weather_data.tab',
+						title: 'Data:Stubbed_Weather_data.tab',
 						pageid: 11111,
 						size: 5000,
 						wordcount: 400,
@@ -68,7 +71,7 @@ describe( 'wbui2025 add reference', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Ncei.noaa.gov/weather/New_York_City.tab',
+						title: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
 						pageid: 22222,
 						size: 3500,
 						wordcount: 300,
@@ -77,7 +80,7 @@ describe( 'wbui2025 add reference', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Weather_stations.tab',
+						title: 'Data:Stubbed_Weather_stations.tab',
 						pageid: 33333,
 						size: 2800,
 						wordcount: 250,
@@ -104,9 +107,7 @@ describe( 'wbui2025 add reference', () => {
 			addReferenceFormPage.addButton().should( 'be.disabled' );
 			addReferenceFormPage.snakValueInput().should( 'not.exist' );
 
-			cy.get( '@stringPropertyId' ).then( ( propertyId ) => {
-				addReferenceFormPage.setProperty( propertyId );
-			} );
+			addReferenceFormPage.setProperty( stringPropertyId );
 			const referenceSnakValue = Util.getTestString( 'referenceSnak' );
 			addReferenceFormPage.setSnakValue( referenceSnakValue );
 			addReferenceFormPage.addButton().click();
@@ -126,9 +127,7 @@ describe( 'wbui2025 add reference', () => {
 			addReferenceFormPage.addButton().should( 'be.disabled' );
 			addReferenceFormPage.snakValueInput().should( 'not.exist' );
 
-			cy.get( '@itemPropertyId' ).then( ( propertyId ) => {
-				addReferenceFormPage.setProperty( propertyId );
-			} );
+			addReferenceFormPage.setProperty( itemPropertyId );
 			addReferenceFormPage.setSnakValue( itemLabel );
 			addReferenceFormPage.menuItems().first().click();
 			addReferenceFormPage.addButton().click();
@@ -148,9 +147,7 @@ describe( 'wbui2025 add reference', () => {
 			addReferenceFormPage.addButton().should( 'be.disabled' );
 			addReferenceFormPage.snakValueInput().should( 'not.exist' );
 
-			cy.get( '@tabularDataPropertyId' ).then( ( propertyId ) => {
-				addReferenceFormPage.setProperty( propertyId );
-			} );
+			addReferenceFormPage.setProperty( tabularDataPropertyId );
 			addReferenceFormPage.setSnakValue( tabularDataItem );
 			addReferenceFormPage.menuItems().eq( 1 ).click();
 			addReferenceFormPage.addButton().click();
@@ -158,6 +155,82 @@ describe( 'wbui2025 add reference', () => {
 			editStatementFormPage.references().last().then( ( element ) => {
 				const valueForm = new ValueForm( element );
 				valueForm.textInput().should( 'have.value', tabularDataItem );
+			} );
+
+			// Intercept wbformatvalue API
+			interceptFormatValue( { Q5150: itemLabel } );
+			const stringReferenceSnaks = {};
+			stringReferenceSnaks[ stringPropertyId ] = [
+				{
+					snaktype: 'value',
+					property: stringPropertyId,
+					hash: 'refsnakhash1',
+					datatype: 'string',
+					datavalue: {
+						value: referenceSnakValue,
+						type: 'string',
+					},
+				},
+			];
+			const itemReferenceSnaks = {};
+			itemReferenceSnaks[ itemPropertyId ] = [
+				{
+					snaktype: 'value',
+					property: itemPropertyId,
+					datatype: 'wikibase-item',
+					hash: 'refsnakhash2',
+					datavalue: {
+						value: {
+							'entity-type': 'item',
+							'numeric-id': 5150,
+							id: 'Q5150',
+						},
+						type: 'wikibase-entityid',
+					},
+				},
+			];
+			const tabularReferenceSnaks = {};
+			tabularReferenceSnaks[ tabularDataPropertyId ] = [
+				{
+					snaktype: 'value',
+					property: tabularDataPropertyId,
+					datatype: 'tabular-data',
+					hash: 'refsnakhash3',
+					datavalue: {
+						value: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
+						type: 'string',
+					},
+				},
+			];
+			// Intercept the POST request
+			interceptSaveEntity( {
+				itemId: itemViewPage.getItemId(),
+				propertyId: stringPropertyId,
+				datatype: 'string',
+				statements: [
+					{
+						statementId: '5284FB1A-4E4E-4B1D-B710-951F012D9CF4',
+						value: 'example string value',
+						references: [
+							{
+								'snaks-order': [ stringPropertyId ],
+								snaks: stringReferenceSnaks,
+							}, {
+								'snaks-order': [ itemPropertyId ],
+								snaks: itemReferenceSnaks,
+							},
+							{
+								'snaks-order': [ tabularDataPropertyId ],
+								snaks: tabularReferenceSnaks,
+							},
+						],
+						'qualifiers-order': [],
+						qualifiers: {},
+						type: 'statement',
+						rank: 'normal',
+					},
+				],
+				lastrevid: 12346,
 			} );
 
 			editStatementFormPage.publishButton().click();

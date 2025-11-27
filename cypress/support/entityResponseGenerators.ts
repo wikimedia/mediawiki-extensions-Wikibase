@@ -26,6 +26,7 @@ interface ClaimOptions {
 	statementId: string;
 	snaktype?: 'value' | 'novalue' | 'somevalue';
 	rank?: 'normal' | 'preferred' | 'deprecated';
+	references?: object[];
 }
 
 interface Claim {
@@ -33,12 +34,14 @@ interface Claim {
 	type: string;
 	id: string;
 	rank: string;
+	references?: object[];
 }
 
 interface Statement {
 	value: string;
 	hash: string;
 	statementId: string;
+	references?: object[];
 }
 
 interface EntityResponseOptions {
@@ -63,6 +66,7 @@ interface EntityResponse {
 	success: number;
 }
 
+let nextHash = 1;
 /**
  * Generates a snak object for Wikibase API responses
  *
@@ -72,10 +76,14 @@ interface EntityResponse {
 export function generateSnak( options: SnakOptions ): Snak {
 	const { property, value, hash, datatype, snaktype = 'value' } = options;
 
+	let hashValue = hash;
+	if ( !hashValue ) {
+		hashValue = 'hash' + nextHash++;
+	}
 	return {
 		snaktype,
 		property,
-		hash,
+		hash: hashValue,
 		datavalue: {
 			value,
 			type: 'string',
@@ -91,13 +99,14 @@ export function generateSnak( options: SnakOptions ): Snak {
  * @returns A claim object
  */
 export function generateClaim( options: ClaimOptions ): Claim {
-	const { itemId, statementId, rank = 'normal', property, value, hash, datatype, snaktype } = options;
+	const { itemId, statementId, rank = 'normal', property, value, hash, datatype, snaktype, references } = options;
 
 	return {
 		mainsnak: generateSnak( { property, value, hash, datatype, snaktype } ),
 		type: 'statement',
 		id: `${ itemId }$${ statementId }`,
 		rank,
+		references,
 	};
 }
 
@@ -117,6 +126,7 @@ export function generateEntityResponse( options: EntityResponseOptions ): Entity
 		hash: stmt.hash,
 		datatype,
 		statementId: stmt.statementId,
+		references: stmt.references,
 	} ) );
 
 	return {
