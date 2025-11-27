@@ -2,12 +2,10 @@
  * See also: http://webdriver.io/guide/testrunner/configurationfile.html
  */
 
-'use strict';
+import { config as mwConfig } from 'wdio-mediawiki/wdio-defaults.conf.js';
 
-const { config } = require( 'wdio-mediawiki/wdio-defaults.conf.js' );
-
-exports.config = {
-	...config,
+export const config = {
+	...mwConfig,
 
 	// ==================
 	// Test Files
@@ -21,7 +19,7 @@ exports.config = {
 	// ===================
 
 	capabilities: [ {
-		...config.capabilities[ 0 ],
+		...mwConfig.capabilities[ 0 ],
 
 		// Setting this enables automatic screenshots for when a browser command fails
 		// It is also used by afterTest for capturig failed assertions.
@@ -36,7 +34,7 @@ exports.config = {
 
 	onComplete() {
 		try {
-			return config.onComplete();
+			return mwConfig.onComplete();
 		} catch ( _ ) {
 			// ignore TypeError: Cannot read properties of undefined (reading 'project') [T407831]
 			// remove this onComplete() override again once we’re on a version of wdio-mediawiki

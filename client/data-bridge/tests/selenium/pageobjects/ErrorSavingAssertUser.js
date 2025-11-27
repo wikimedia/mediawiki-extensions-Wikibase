@@ -1,4 +1,4 @@
-const DataBridgePage = require( './dataBridge.page' );
+import DataBridgePage from './dataBridge.page.js';
 
 class ErrorSavingAssertUser {
 	get root() {
@@ -30,4 +30,4 @@ class ErrorSavingAssertUser {
 	}
 }
 
-module.exports = new ErrorSavingAssertUser();
+export default new ErrorSavingAssertUser();

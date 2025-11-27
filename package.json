@@ -62,8 +62,8 @@
 		"npm-run-all": "^4.1.5",
 		"pinia": "^2.0.16",
 		"stylelint-config-wikimedia": "0.18.0",
-		"wdio-mediawiki": "4.1.3",
-		"wdio-wikibase": "6.4.0"
+		"wdio-mediawiki": "5.1.0",
+		"wdio-wikibase": "7.0.0"
 	},
 	"eslintIgnore": [
 		"extensions/**",

@@ -1,8 +1,8 @@
-const assert = require( 'assert' ),
-	Api = require( 'wdio-mediawiki/Api' ),
-	BailoutActions = require( '../pageobjects/BailoutActions' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+import assert from 'assert';
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import BailoutActions from '../pageobjects/BailoutActions.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
 
 describe( 'bail-out', () => {
 	function testBailoutActions() {
@@ -35,7 +35,7 @@ describe( 'bail-out', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 		DataBridgePage.error.waitForDisplayed();

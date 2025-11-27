@@ -1,11 +1,11 @@
-const assert = require( 'assert' ),
-	Api = require( 'wdio-mediawiki/Api' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
-	LoginPage = require( 'wdio-mediawiki/LoginPage' );
+import assert from 'assert.js';
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
+import LoginPage from 'wdio-mediawiki/LoginPage.js';
 
 function blockUser( username, expiry ) {
-	browser.call( () => Api.bot().then( ( bot ) => {
+	browser.call( () => mwbot().then( ( bot ) => {
 		return bot.request( {
 			action: 'block',
 			user: username || browser.options.capabilities[ 'mw:user' ],
@@ -17,7 +17,7 @@ function blockUser( username, expiry ) {
 }
 
 function unblockUser( username ) {
-	browser.call( () => Api.bot().then( ( bot ) => {
+	browser.call( () => mwbot().then( ( bot ) => {
 		return bot.request( {
 			action: 'unblock',
 			user: username || browser.options.capabilities[ 'mw:user' ],
@@ -51,7 +51,7 @@ describe( 'permission checks', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 	} );
 
 	describe( 'if the client page is editable for the user', () => {
@@ -65,7 +65,7 @@ describe( 'permission checks', () => {
 		it( 'hide the editlink', () => {
 			// Protect the page
 			browser.call(
-				() => Api.bot().then( ( bot ) => {
+				() => mwbot().then( ( bot ) => {
 					return bot.request( {
 						action: 'protect',
 						title,

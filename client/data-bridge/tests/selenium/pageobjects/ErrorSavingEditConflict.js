@@ -1,4 +1,4 @@
-const DataBridgePage = require( './dataBridge.page' );
+import DataBridgePage from './dataBridge.page.js';
 
 class ErrorSavingEditConflict {
 	get root() {
@@ -14,4 +14,4 @@ class ErrorSavingEditConflict {
 	}
 }
 
-module.exports = new ErrorSavingEditConflict();
+export default new ErrorSavingEditConflict();

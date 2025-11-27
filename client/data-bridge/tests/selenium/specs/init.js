@@ -1,10 +1,10 @@
-const assert = require( 'assert' ),
-	Api = require( 'wdio-mediawiki/Api' ),
-	LoginPage = require( 'wdio-mediawiki/LoginPage' ),
-	Util = require( 'wdio-mediawiki/Util' ),
-	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WarningAnonymousEdit = require( '../pageobjects/WarningAnonymousEdit' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+import assert from 'assert';
+import { mwbot } from 'wdio-mediawiki/Api.js';
+import LoginPage from 'wdio-mediawiki/LoginPage.js';
+import { getTestString } from 'wdio-mediawiki/Util.js';
+import DataBridgePage from '../pageobjects/dataBridge.page.js';
+import WarningAnonymousEdit from '../pageobjects/WarningAnonymousEdit.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
 
 describe( 'init', () => {
 	beforeEach( () => {
@@ -31,7 +31,7 @@ describe( 'init', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openAppOnPage( title );
 
@@ -58,7 +58,7 @@ describe( 'init', () => {
 			propertyId,
 			editFlow: 'single-best-value',
 		} ] );
-		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+		browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.open( title );
 
@@ -101,7 +101,7 @@ describe( 'init', () => {
 				propertyId,
 				editFlow: 'single-best-value',
 			} ] );
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+			browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
 
@@ -167,7 +167,7 @@ describe( 'init', () => {
 				propertyId: stringPropertyId,
 				editFlow: 'single-best-value',
 			} ] );
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+			browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openAppOnPage( title );
 
@@ -211,7 +211,7 @@ describe( 'init', () => {
 					propertyId,
 					editFlow: 'single-best-value',
 				} ] );
-				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+				browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 				DataBridgePage.open( title );
 				browser.execute(
@@ -229,25 +229,25 @@ describe( 'init', () => {
 
 			it( 'uses the label from the page content language', () => {
 				const language = 'de',
-					label = Util.getTestString( 'Zieleigenschaft-' );
+					label = getTestString( 'Zieleigenschaft-' );
 				test( { labels: { [ language ]: { value: label, language } } }, language, label );
 			} );
 
 			it( 'uses the label from a non-English fallback language', () => {
 				const language = 'de',
-					label = Util.getTestString( 'Zieleigenschaft-' );
+					label = getTestString( 'Zieleigenschaft-' );
 				test( { labels: { [ language ]: { value: label, language } } }, 'de-formal', label );
 			} );
 
 			it( 'uses the label from the English fallback language', () => {
 				const language = 'en',
-					label = Util.getTestString( 'target-property-' );
+					label = getTestString( 'target-property-' );
 				test( { labels: { [ language ]: { value: label, language } } }, 'de', label );
 			} );
 
 			it( 'uses the property ID if no label in fallback chain found', () => {
 				const language = 'de',
-					label = Util.getTestString( 'Zieleigenschaft-' );
+					label = getTestString( 'Zieleigenschaft-' );
 				test( { labels: { [ language ]: { value: label, language } } }, 'he', null );
 			} );
 		} );
@@ -275,7 +275,7 @@ describe( 'init', () => {
 					propertyId,
 					editFlow: 'single-best-value',
 				} ] );
-				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+				browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
@@ -308,7 +308,7 @@ describe( 'init', () => {
 					propertyId,
 					editFlow: 'single-best-value',
 				} ] );
-				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+				browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 				DataBridgePage.open( title );
 				DataBridgePage.overloadedLink.click();
@@ -349,7 +349,7 @@ describe( 'init', () => {
 				propertyId,
 				editFlow: 'single-best-value',
 			} ] );
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+			browser.call( () => mwbot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();

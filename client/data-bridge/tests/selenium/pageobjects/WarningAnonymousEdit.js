@@ -22,4 +22,4 @@ class WarningAnonymousEdit {
 	}
 }
 
-module.exports = new WarningAnonymousEdit();
+export default new WarningAnonymousEdit();

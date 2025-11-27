@@ -1,13 +1,13 @@
 /**
  * See also: http://webdriver.io/guide/testrunner/configurationfile.html
  */
-const fs = require( 'fs' ),
-	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot,
-	videoUtil = require( './VideoUtil' ),
-	networkUtil = require( './NetworkUtil' );
-const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+import fs from 'fs';
+import { saveScreenshot } from 'wdio-mediawiki';
+import * as videoUtil from './VideoUtil.js';
+import * as networkUtil from './NetworkUtil.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
 
-exports.config = {
+export const config = {
 
 	// Set a base URL in order to shorten url command calls. If your `url` parameter starts
 	// with `/`, the base url gets prepended, not including the path portion of your baseUrl.

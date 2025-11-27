@@ -1,8 +1,6 @@
-'use strict';
-
-const MWBot = require( 'mwbot' );
-const Page = require( 'wdio-mediawiki/Page' );
-const LoginPage = require( 'wdio-mediawiki/LoginPage' );
+import MWBot from 'mwbot';
+import Page from 'wdio-mediawiki/Page.js';
+import LoginPage from 'wdio-mediawiki/LoginPage.js';
 
 const bot = new MWBot( {
 	apiUrl: browser.options.baseUrl + '/api.php'
