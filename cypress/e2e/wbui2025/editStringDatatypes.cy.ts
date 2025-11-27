@@ -10,35 +10,41 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 		let propertyName: string;
 		let propertyId: string;
 		let itemId: string;
+		let claimData: object;
 
 		before( () => {
+			// We want to test with a tabular-data property, but doing this will cause
+			// Wikibase to try and validate that the values exist in Commons. Since we
+			// are only testing the UI of the editStatement form, we can simply create
+			// a string property in the backend, and reload the editStatement form with
+			// claim data corresponding to a tabular-data property.
 			propertyName = Util.getTestString( 'tabular-property' );
 			cy.task( 'MwApi:CreateProperty', {
 				label: propertyName,
-				data: { datatype: 'tabular-data' },
+				data: { datatype: 'string' },
 			} ).then( ( newPropertyId: string ) => {
 				propertyId = newPropertyId;
-				const statementData = {
-					claims: [ {
-						mainsnak: {
-							snaktype: 'value',
-							property: newPropertyId,
-							datavalue: {
-								value: 'Data:Ncei.noaa.gov/weather/New_York_City.tab',
-								type: 'string',
-							},
-							datatype: 'tabular-data',
+				claimData = [ {
+					mainsnak: {
+						snaktype: 'value',
+						property: newPropertyId,
+						datavalue: {
+							value: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
+							type: 'string',
 						},
-						type: 'statement',
-						rank: 'normal',
-					} ],
-				};
+						datatype: 'string',
+					},
+					type: 'statement',
+					rank: 'normal',
+				} ];
 				cy.task( 'MwApi:CreateItem', {
 					label: Util.getTestString( 'tabular-item' ),
-					data: statementData,
+					data: { claims: claimData },
 				} ).then( ( newItemId: string ) => {
 					itemId = newItemId;
+					claimData[ 0 ].id = itemId + '$64fc215b-a4ba-4295-8adb-90a767191d4e';
 				} );
+				claimData[ 0 ].mainsnak.datatype = 'tabular-data';
 			} );
 		} );
 
@@ -52,7 +58,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Weather_data.tab',
+						title: 'Data:Stubbed_Weather_data.tab',
 						pageid: 11111,
 						size: 5000,
 						wordcount: 400,
@@ -61,7 +67,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Ncei.noaa.gov/weather/New_York_City.tab',
+						title: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
 						pageid: 22222,
 						size: 3500,
 						wordcount: 300,
@@ -70,7 +76,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Weather_stations.tab',
+						title: 'Data:Stubbed_Weather_stations.tab',
 						pageid: 33333,
 						size: 2800,
 						wordcount: 250,
@@ -90,12 +96,12 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				datatype: 'tabular-data',
 				statements: [
 					{
-						value: 'Data:Weather_data.tab',
+						value: 'Data:Stubbed_Weather_data.tab',
 						hash: 'testtabulardata123',
 						statementId: 'aaa111-bbbb-2222-cccc-333333333333',
 					},
 					{
-						value: 'Data:Weather_stations.tab',
+						value: 'Data:Stubbed_Weather_stations.tab',
 						hash: 'teesttabulardata123',
 						statementId: 'bbb222-cccc-3333-dddd-444444444444',
 					},
@@ -105,6 +111,15 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
+
+			// We trigger the `wikibase.entityPage.entityLoaded` hook again here with modified
+			// data so that we can test the editStatment UI for tabular-data without the backend
+			// property needing to be tabular-data
+			cy.window().then( ( win ) => {
+				const claims = {};
+				claims[ propertyId ] = claimData;
+				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims } );
+			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -117,7 +132,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				.should( 'exist' ).should( 'be.visible' );
 
 			editFormPage.lookupInput()
-				.should( 'have.value', 'Data:Ncei.noaa.gov/weather/New_York_City.tab' );
+				.should( 'have.value', 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab' );
 
 			editFormPage.lookupInput().clear();
 			editFormPage.lookupInput().type( 'Weather' );
@@ -126,7 +141,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			editFormPage.menu().should( 'exist' );
 
 			editFormPage.menuItems().eq( 0 ).click();
-			editFormPage.lookupInput().should( 'have.value', 'Data:Weather_data.tab' );
+			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Weather_data.tab' );
 
 			editFormPage.addValueButtons().first().click();
 			editFormPage.valueForms().should( 'have.length', 2 );
@@ -147,7 +162,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			editFormPage.valueForms()
 				.last()
 				.find( editFormPage.getLookupInputSelector() )
-				.should( 'have.value', 'Data:Weather_stations.tab' );
+				.should( 'have.value', 'Data:Stubbed_Weather_stations.tab' );
 
 			editFormPage.addQualifierButton().should( 'exist' );
 			editFormPage.rankSelect().should( 'exist' );
@@ -163,35 +178,41 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 		let propertyName: string;
 		let propertyId: string;
 		let itemId: string;
+		let claimData: object;
 
 		before( () => {
+			// We want to test with a geo-shape property, but doing this will cause
+			// Wikibase to try and validate that the values exist in Commons. Since we
+			// are only testing the UI of the editStatement form, we can simply create
+			// a string property in the backend, and reload the editStatement form with
+			// claim data corresponding to a geo-shape property.
 			propertyName = Util.getTestString( 'geo-property' );
 			cy.task( 'MwApi:CreateProperty', {
 				label: propertyName,
-				data: { datatype: 'geo-shape' },
+				data: { datatype: 'string' },
 			} ).then( ( newPropertyId: string ) => {
 				propertyId = newPropertyId;
-				const statementData = {
-					claims: [ {
-						mainsnak: {
-							snaktype: 'value',
-							property: newPropertyId,
-							datavalue: {
-								value: 'Data:New York Central Railroad.map',
-								type: 'string',
-							},
-							datatype: 'geo-shape',
+				claimData = [ {
+					mainsnak: {
+						snaktype: 'value',
+						property: newPropertyId,
+						datavalue: {
+							value: 'Data:Stubbed_New York Central Railroad.map',
+							type: 'string',
 						},
-						type: 'statement',
-						rank: 'normal',
-					} ],
-				};
+						datatype: 'string',
+					},
+					type: 'statement',
+					rank: 'normal',
+				} ];
 				cy.task( 'MwApi:CreateItem', {
 					label: Util.getTestString( 'geo-item' ),
-					data: statementData,
+					data: { claims: claimData },
 				} ).then( ( newItemId: string ) => {
 					itemId = newItemId;
+					claimData[ 0 ].id = itemId + '$17bf01aa-1407-45d1-ade6-62fc5a213f8e';
 				} );
+				claimData[ 0 ].mainsnak.datatype = 'geo-shape';
 			} );
 		} );
 
@@ -207,7 +228,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Hamburg.map',
+						title: 'Data:Stubbed_Hamburg.map',
 						pageid: 80473521,
 						size: 4101,
 						wordcount: 623,
@@ -216,7 +237,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
+						title: 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
 						pageid: 166797166,
 						size: 2255,
 						wordcount: 190,
@@ -236,12 +257,12 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				datatype: 'geo-shape',
 				statements: [
 					{
-						value: 'Data:Hamburg.map',
+						value: 'Data:Stubbed_Hamburg.map',
 						hash: 'xyz789geoshape012',
 						statementId: 'ccc333-dddd-4444-eeee-555555555555',
 					},
 					{
-						value: 'Data:Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
+						value: 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
 						hash: 'uvw345geoshape678',
 						statementId: 'ddd444-eeee-5555-ffff-666666666666',
 					},
@@ -253,6 +274,15 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			itemViewPage.open().statementsSection();
 
 			checkA11y( ItemViewPage.STATEMENTS );
+
+			// We trigger the `wikibase.entityPage.entityLoaded` hook again here with modified
+			// data so that we can test the editStatment UI for geo-shape data without the backend
+			// property needing to be of geo-shape type
+			cy.window().then( ( win ) => {
+				const claims = {};
+				claims[ propertyId ] = claimData;
+				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims } );
+			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -266,7 +296,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				.should( 'exist' );
 
 			editFormPage.lookupInput()
-				.should( 'have.value', 'Data:New York Central Railroad.map' );
+				.should( 'have.value', 'Data:Stubbed_New York Central Railroad.map' );
 
 			editFormPage.lookupInput().clear();
 			editFormPage.lookupInput().type( 'Hamburg' );
@@ -277,7 +307,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				.should( 'be.visible' );
 
 			editFormPage.menuItems().eq( 0 ).click();
-			editFormPage.lookupInput().should( 'have.value', 'Data:Hamburg.map' );
+			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Hamburg.map' );
 
 			editFormPage.addValueButtons().first().click();
 			editFormPage.valueForms().should( 'have.length', 2 );
@@ -298,7 +328,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			editFormPage.valueForms()
 				.last()
 				.find( editFormPage.getLookupInputSelector() )
-				.should( 'have.value', 'Data:Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map' );
+				.should( 'have.value', 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map' );
 
 			editFormPage.addQualifierButton().should( 'exist' );
 			editFormPage.rankSelect().should( 'exist' );
