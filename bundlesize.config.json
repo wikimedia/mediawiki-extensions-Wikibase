@@ -14,5 +14,9 @@
 	{
 		"resourceModule": "wikibase.vector.searchClient",
 		"maxSize": null
+	},
+	{
+		"resourceModule": "wikibase.databox.fromWikidata",
+		"maxSize": null
 	}
 ]
