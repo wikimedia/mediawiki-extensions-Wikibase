@@ -23,7 +23,7 @@
 		"selenium-test": "npm run cypress:install && npm run cypress:run && npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
 		"selenium-test:client": "wdio client/tests/selenium/wdio.conf.js",
-		"@selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
+		"@selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test # Disabled per T354841",
 		"test": "npm-run-all -p test-fast:*",
 		"test-fast:grunt": "grunt test",
 		"test-fast:bridge": "npm --prefix client/data-bridge test",
