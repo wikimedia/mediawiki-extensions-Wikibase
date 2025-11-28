@@ -13,7 +13,7 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 		properties: new Map()
 	} ),
 	actions: {
-		populateWithClaims( claims, renderMissingHtml = false ) {
+		async populateWithClaims( claims, renderMissingHtml = false ) {
 			this.statements = new Map();
 			this.properties = new Map();
 			const snaksWithoutHtml = [];
@@ -68,17 +68,21 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 				}
 				this.properties.set( propertyId, statementIdList );
 			}
+
 			if ( !renderMissingHtml ) {
-				return Promise.resolve();
+				return;
 			}
 
 			if ( propertiesWithoutHtml.size > 0 ) {
-				renderPropertyLinkHtml( Array.from( propertiesWithoutHtml ) )
-					.then( ( result ) => updatePropertyLinkHtml( result ) );
+				const propertyHtml = await renderPropertyLinkHtml( Array.from( propertiesWithoutHtml ) );
+				updatePropertyLinkHtml( propertyHtml );
 			}
 
-			snaksWithoutHtml.filter( ( snak ) => snak.snaktype !== 'value' )
-				.forEach( ( snak ) => {
+			for ( const snak of snaksWithoutHtml ) {
+				if ( snak.snaktype === 'value' ) {
+					const snakValueHtml = await renderSnakValueHtml( snak.datavalue, snak.property );
+					updateSnakValueHtmlForHash( snak.hash, snakValueHtml );
+				} else {
 					const messageKey = 'wikibase-snakview-variations-' + snak.snaktype + '-label';
 					// messages that can appear here:
 					// * wikibase-snakview-variations-novalue-label
@@ -87,16 +91,8 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 						snak.hash,
 						'<span class="wikibase-snakview-variation-' + snak.snaktype + 'snak">' + mw.msg( messageKey ) + '</span>'
 					);
-				} );
-
-			return Promise.all(
-				snaksWithoutHtml
-					.filter( ( snak ) => snak.snaktype === 'value' )
-					.map(
-						( snak ) => renderSnakValueHtml( snak.datavalue, snak.property )
-							.then( ( result ) => updateSnakValueHtmlForHash( snak.hash, result ) )
-					)
-			);
+				}
+			}
 		}
 	}
 } );
