@@ -15,6 +15,7 @@ export class EditStatementFormPage {
 		MENU: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu',
 		MENU_ITEM: '.wikibase-wbui2025-edit-statement-value-input .cdx-menu-item',
 		RANK_SELECT: '.wikibase-wbui2025-rank-input .cdx-select-vue',
+		SNAK_TYPE_SELECT: '.wikibase-wbui2025-edit-statement-value-input .wikibase-snaktypeselector .cdx-menu-button',
 		ADD_REFERENCE_BUTTON: '.wikibase-wbui2025-add-reference-button',
 		REFERENCES: '.wikibase-wbui2025-editable-reference',
 		REFERENCES_ACCORDION: '.wikibase-wbui2025-editable-references-section .cdx-accordion summary',
@@ -76,6 +77,10 @@ export class EditStatementFormPage {
 
 	public rankSelect(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.RANK_SELECT );
+	}
+
+	public snakTypeSelect(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.SNAK_TYPE_SELECT );
 	}
 
 	public menuItems(): Chainable {
