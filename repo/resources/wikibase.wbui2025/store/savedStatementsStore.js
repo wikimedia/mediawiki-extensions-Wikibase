@@ -10,7 +10,8 @@ const { renderPropertyLinkHtml, renderSnakValueHtml } = require( '../api/editEnt
 const useSavedStatementsStore = defineStore( 'savedStatements', {
 	state: () => ( {
 		statements: new Map(),
-		properties: new Map()
+		properties: new Map(),
+		propertyIdToStatementSection: new Map()
 	} ),
 	actions: {
 		async populateWithClaims( claims, renderMissingHtml = false ) {
@@ -69,6 +70,15 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 				this.properties.set( propertyId, statementIdList );
 			}
 
+			// Clear out properties from the statements section that no longer have claims.
+			// We don't have information about the statement grouping, so we cannot rebuild the
+			// `propertiesForStatementSection` Map here.
+			for ( const propertyId of this.propertyIdToStatementSection.keys() ) {
+				if ( !this.properties.get( propertyId ) ) {
+					this.propertyIdToStatementSection.delete( propertyId );
+				}
+			}
+
 			if ( !renderMissingHtml ) {
 				return;
 			}
@@ -93,6 +103,11 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 					);
 				}
 			}
+		},
+		setPropertyIdsForStatementSection( statementSection, propertyIds ) {
+			for ( const propertyId of propertyIds ) {
+				this.propertyIdToStatementSection.set( propertyId, statementSection );
+			}
 		}
 	}
 } );
@@ -100,6 +115,22 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 const getPropertyIds = function () {
 	const statementsStore = useSavedStatementsStore();
 	return statementsStore.properties.keys();
+};
+
+const getPropertyIdsForStatementSection = function ( targetSection ) {
+	const statementsStore = useSavedStatementsStore();
+	const propertyIds = [];
+	for ( const [ propertyId, statementSection ] of statementsStore.propertyIdToStatementSection ) {
+		if ( statementSection === targetSection && statementsStore.properties.get( propertyId ) ) {
+			propertyIds.push( propertyId );
+		}
+	}
+	return propertyIds;
+};
+
+const setStatementSectionForPropertyId = function ( propertyId, statementSection ) {
+	const statementsStore = useSavedStatementsStore();
+	statementsStore.propertyIdToStatementSection.set( propertyId, statementSection );
 };
 
 /**
@@ -130,6 +161,8 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 module.exports = {
 	useSavedStatementsStore,
 	getPropertyIds,
+	getPropertyIdsForStatementSection,
+	setStatementSectionForPropertyId,
 	getStatementsForProperty,
 	getStatementById,
 	setStatementIdsForProperty

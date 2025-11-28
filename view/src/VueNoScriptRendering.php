@@ -77,6 +77,9 @@ class VueNoScriptRendering {
 			'concat' => function( ...$args ) {
 				return implode( '', $args );
 			},
+			'implode' => function( $separator, $array ) {
+				return implode( $separator, $array );
+			},
 			'$i18n' => function ( string $messageKey, string ...$params ): string {
 				return $this->textProvider->get( $messageKey, $params );
 			},
@@ -97,9 +100,7 @@ class VueNoScriptRendering {
 	}
 
 	private function registerTemplates( StatementList $allStatements ): void {
-		$this->registerComponentTemplate(
-			'wbui2025-statement-sections', 'components/statementSections.vue'
-		);
+		$this->registerStatementSectionsView();
 		$this->registerMainSnakView();
 		$this->registerStatementGroupView( $allStatements );
 		$this->registerStatementView( $allStatements );
@@ -107,6 +108,18 @@ class VueNoScriptRendering {
 		$this->registerReferencesView();
 		$this->registerQualifiersView();
 		$this->registerSnakValueView();
+	}
+
+	private function registerStatementSectionsView(): void {
+		$this->registerComponentTemplate(
+			'wbui2025-statement-sections',
+			'components/statementSections.vue',
+			function ( array $data ) {
+				$data[ 'propertyIds' ] = $data[ 'propertyList' ];
+				$data[ 'javaScriptLoaded' ] = false;
+				return $data;
+			}
+		);
 	}
 
 	private function registerMainSnakView(): void {
@@ -275,22 +288,22 @@ class VueNoScriptRendering {
 
 	/**
 	 * @param string $entityId
+	 * @param string $sectionKey the identifier for this statement section
 	 * @param string $sectionHeadingHtml Section heading as HTML
 	 * @param StatementList $statementsList
 	 * @return string Rendered HTML
 	 */
 	public function renderStatementsSectionHtml(
 		string $entityId,
+		string $sectionKey,
 		string $sectionHeadingHtml,
 		StatementList $statementsList,
 	): string {
-		$propertyStatementMap = [];
 		$propertyList = [];
 		foreach ( $statementsList->getPropertyIds() as $propertyId ) {
 			$propertyStatements = $statementsList->getByPropertyId( $propertyId )->toArray();
 			$propertyList[] = $propertyId->getSerialization();
 
-			$statementsData = [];
 			foreach ( $propertyStatements as $statement ) {
 				$mainSnak = $statement->getMainSnak();
 				$statementData = $this->statementSerializer->serialize( $statement );
@@ -300,15 +313,13 @@ class VueNoScriptRendering {
 				if ( array_key_exists( 'hash', $statementData['mainsnak'] ) ) {
 					$this->snakValueHtmlLookup[$statementData['mainsnak']['hash']] = $this->snakFormatter->formatSnak( $mainSnak );
 				}
-				$statementsData[] = $statementData;
 			}
-			$propertyStatementMap[$propertyId->getSerialization()] = $statementsData;
 		}
 
 		return $this->app->renderComponent( 'wbui2025-statement-sections', [
 			'sectionHeadingHtml' => $sectionHeadingHtml,
+			'sectionKey' => $sectionKey,
 			'propertyList' => $propertyList,
-			'propertyStatementMap' => $propertyStatementMap,
 			'entityId' => $entityId,
 		] );
 	}

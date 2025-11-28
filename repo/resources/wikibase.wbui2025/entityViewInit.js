@@ -20,9 +20,8 @@
 		wbui2025.store.useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 		wbui2025.store.useMessageStore( pinia );
 
-		const AddStatementButton = require( './components/addStatementButton.vue' );
 		const StatusMessage = require( './components/statusMessage.vue' );
-		const StatementGroupView = require( './components/statementGroupView.vue' );
+		const StatementSectionsView = require( './components/statementSections.vue' );
 
 		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
@@ -31,23 +30,16 @@
 			const parsedValueStore = wbui2025.store.useParsedValueStore( pinia );
 			parsedValueStore.populateWithStatements( data.claims );
 
-			for ( const propertyId of wbui2025.store.getPropertyIds() ) {
-				const rootProps = {
-					propertyId,
-					entityId: data.id
+			for ( const statementSection of wbui2025StatementList.querySelectorAll( '.wikibase-wbui2025-statement-section' ) ) {
+				const sectionProps = {
+					sectionHeadingHtml: statementSection.getElementsByClassName( 'wikibase-wbui2025-statement-section-heading' )[ 0 ].innerHTML,
+					sectionKey: statementSection.dataset.sectionKey,
+					entityId: data.id,
+					propertyList: statementSection.dataset.props.split( ',' )
 				};
-				const rootContainer = wbui2025StatementList.querySelector( `#wikibase-wbui2025-statementwrapper-${ propertyId }` );
-				Vue.createMwApp( StatementGroupView, rootProps )
+				Vue.createMwApp( StatementSectionsView, sectionProps )
 					.use( pinia )
-					.mount( rootContainer );
-			}
-
-			for ( const addContainer of wbui2025StatementList.getElementsByClassName( 'wikibase-wbui2025-statement-section-add-wrapper' ) ) {
-				Vue.createMwApp( AddStatementButton, {
-					entityId: data.id
-				} )
-					.use( pinia )
-					.mount( addContainer );
+					.mount( statementSection );
 			}
 			const statusMessageContainer = document.getElementById( 'wikibase-wbui2025-status-message-mount-point' );
 			Vue.createMwApp( StatusMessage, {} )

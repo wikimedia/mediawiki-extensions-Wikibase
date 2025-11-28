@@ -4,7 +4,7 @@
 			v-if="addStatementModalVisible"
 			ref="modalOverlayRef"
 			:header="$i18n( 'wikibase-addstatement' )"
-			:save-button-disabled="formSubmitted || !fullyParsed || hasChanges !== true"
+			:save-button-disabled="!canSubmit"
 			:show-progress="showProgress"
 			:progress-bar-label="$i18n( 'wikibase-publishing-progress' )"
 			@save="submitForm"
@@ -64,6 +64,10 @@ module.exports = exports = defineComponent( {
 		entityId: {
 			type: String,
 			required: true
+		},
+		sectionKey: {
+			type: String,
+			required: true
 		}
 	},
 	data: () => ( {
@@ -81,6 +85,9 @@ module.exports = exports = defineComponent( {
 	} ), {
 		propertyDatatype() {
 			return this.propertyData ? this.propertyData.datatype : null;
+		},
+		canSubmit() {
+			return !this.formSubmitted && this.fullyParsed && this.hasChanges;
 		},
 		saveMessage() {
 			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
@@ -115,6 +122,9 @@ module.exports = exports = defineComponent( {
 		submitForm() {
 			// eslint-disable-next-line vue/no-undef-properties
 			this.submitFormWithElementRef( this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef );
+			wbui2025.store.setStatementSectionForPropertyId( this.propertyId, this.sectionKey );
+			wbui2025.api.renderPropertyLinkHtml( [ this.propertyId ] )
+					.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( this.propertyId, result ) );
 		},
 		reset() {
 			this.disposeOfEditableStatementStores();
@@ -125,6 +135,7 @@ module.exports = exports = defineComponent( {
 		hide() {
 			this.reset();
 			this.addStatementModalVisible = false;
+			this.formSubmitted = false;
 		},
 		showAddStatementModal() {
 			this.reset();

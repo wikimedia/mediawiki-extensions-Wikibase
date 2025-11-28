@@ -79,6 +79,7 @@ class StatementSectionsView {
 		foreach ( $this->iterateOverNonEmptyStatementSections( $groupedStatements ) as $key => $statementsList ) {
 			$rendered .= $this->vueNoScriptRendering->renderStatementsSectionHtml(
 				$entityId,
+				$key,
 				$this->getHtmlForSectionHeading( $key ),
 				$statementsList,
 			);

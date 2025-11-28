@@ -124,6 +124,7 @@ module.exports = exports = defineComponent( {
 	},
 	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		editableStatementGuids: 'statementIds',
+		removedStatementIds: 'removedStatementIds',
 		fullyParsed: 'isFullyParsed',
 		hasChanges: 'hasChanges'
 	} ),
@@ -162,7 +163,7 @@ module.exports = exports = defineComponent( {
 			this.createNewBlankEditableStatement( statementId, this.propertyId, this.propertyDatatype );
 		},
 		submitForm() {
-			if ( this.editableStatementGuids.length === 0 ) {
+			if ( this.editableStatementGuids.length === 0 && this.removedStatementIds.length === 0 ) {
 				return;
 			}
 			// eslint-disable-next-line vue/no-undef-properties

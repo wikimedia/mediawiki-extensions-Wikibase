@@ -58,7 +58,8 @@ describe( 'wikibase.wbui2025.references', () => {
 		beforeEach( async () => {
 			wrapper = await mount( addStatementButtonComponent, {
 				props: {
-					entityId: 'Q123'
+					entityId: 'Q123',
+					sectionKey: 'statements'
 				},
 				global: {
 					plugins: [

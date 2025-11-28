@@ -38,7 +38,8 @@ describe( 'wbui2025 item view edit statements', () => {
 			cy.viewport( 375, 1280 );
 		} );
 
-		it( 'loads the item view and shows a statement, which can be edited', () => {
+		it( 'loads the item view and shows a statement, which can be edited, '
+			+ 'and all statements can be removed', () => {
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
@@ -54,7 +55,20 @@ describe( 'wbui2025 item view edit statements', () => {
 			// The form should exist again
 			editFormPage.valueForms();
 			editFormPage.cancelButton().click();
+			// The form should be hidden
 			editFormPage.formHeading().should( 'not.exist' );
+
+			// Open the form again
+			itemViewPage.editLinks().first().click();
+			// The value form should be there
+			editFormPage.valueForms();
+			// Click all the remove buttons
+			editFormPage.removeValueButtons().click();
+			editFormPage.publishButton().click();
+			// The form should be hidden again
+			editFormPage.formHeading().should( 'not.exist' );
+			// The property should also have disappeared
+			itemViewPage.editLinks().should( 'not.exist' );
 		} );
 	} );
 } );

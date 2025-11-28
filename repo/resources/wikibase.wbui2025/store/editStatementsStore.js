@@ -492,6 +492,9 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 			return true;
 		},
 		createdStatementIds: ( state ) => state.createdStatements,
+		removedStatementIds( state ) {
+			return state.removedStatements.filter( ( s ) => !state.createdStatements.includes( s ) );
+		},
 		/**
 		 * @return {boolean|null} True or false if the statements are known to be different or the same
 		 * as the saved version in the savedStatementsStore, or null if it is not known

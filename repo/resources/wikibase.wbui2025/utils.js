@@ -3,6 +3,7 @@
 // duplicate definitions must exist in WMDE\VueJsTemplating\App::methods.
 module.exports = exports = {
 	concat: ( ...args ) => args.join( '' ),
+	implode: ( separator, array ) => array.join( separator ),
 
 	getCurrentPageLocation: () => ( {
 		title: mw.config.get( 'wgPageName' ),

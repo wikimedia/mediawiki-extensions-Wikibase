@@ -55,6 +55,7 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 			wrapper = await mount( statementSections, {
 				props: {
 					sectionHeadingHtml: '<h2>Heading</h2>',
+					sectionKey: 'statements',
 					propertyList: [ 'P1' ],
 					entityId: 'Q1'
 				},
