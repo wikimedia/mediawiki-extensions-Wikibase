@@ -45,7 +45,7 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
  *
  * @license GPL-2.0-or-later
  */
-class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
+class ItemQueryTest extends MediaWikiIntegrationTestCase {
 
 	/** @var Property[] */
 	private static array $properties = [];

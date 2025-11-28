@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
@@ -14,6 +17,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 class Schema extends GraphQLSchema {
 	public function __construct(
 		ItemResolver $itemResolver,
+		FacetedItemSearch $searchUseCase,
 		private readonly Types $types,
 	) {
 		parent::__construct( [
@@ -40,6 +44,19 @@ class Schema extends GraphQLSchema {
 								->resolveItems( $args['ids'], $context ),
 						'complexity' => fn( int $childrenComplexity, array $args ) => count( $args['ids'] ) *
 							GraphQLService::LOAD_ITEM_COMPLEXITY,
+					],
+					'searchItems' => [
+						// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+						'type' => Type::nonNull( Type::listOf( $this->types->getItemSearchResultType() ) ),
+						'args' => [
+							'query' => Type::nonNull( $this->types->getItemSearchFilterType() ),
+						],
+						'resolve' => fn( $rootValue, array $args ) => array_map(
+							fn( ItemSearchResult $searchResult ) => [ 'id' => $searchResult->itemId->getSerialization() ],
+							$searchUseCase->execute(
+								new FacetedItemSearchRequest( $args['query'] )
+							)->results
+						),
 					],
 				],
 			] ),

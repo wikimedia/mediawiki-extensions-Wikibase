@@ -1,6 +1,7 @@
 type Query {
   item(id: ItemId!): Item
   itemsById(ids: [ItemId!]!): [Item]!
+  searchItems(query: ItemSearchFilter!): [ItemSearchResult]!
 }
 
 scalar ItemId
@@ -131,4 +132,14 @@ type ReferencePart implements PropertyValuePair {
   property: PredicateProperty!
   value: Value
   valueType: ValueType!
+}
+
+input ItemSearchFilter {
+  and: [ItemSearchFilter!]
+  property: PropertyId
+  value: String
+}
+
+type ItemSearchResult {
+  id: ItemId!
 }

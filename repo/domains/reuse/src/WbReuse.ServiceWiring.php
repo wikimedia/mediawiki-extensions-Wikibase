@@ -4,6 +4,7 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGetItemLabels;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
@@ -13,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Types;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\Search\CirrusSearchFacetedSearchEngine;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -29,6 +31,12 @@ return [
 						WikibaseRepo::getPropertyDataTypeLookup( $services )
 					)
 				) )
+			),
+			new FacetedItemSearch(
+				new CirrusSearchFacetedSearchEngine(
+					$services->getSearchEngineFactory(),
+					WikibaseRepo::getEntityNamespaceLookup()
+				)
 			),
 			WbReuse::getGraphQLTypes( $services ),
 		);

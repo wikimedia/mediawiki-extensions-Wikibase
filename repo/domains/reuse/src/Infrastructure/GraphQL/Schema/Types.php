@@ -28,6 +28,8 @@ class Types {
 	private ?StringValueType $stringValueType = null;
 	private ?ObjectType $entityValueType = null;
 	private ?ItemType $itemType = null;
+	private ?ItemSearchFilterType $itemSearchFilterType = null;
+	private ?ObjectType $itemSearchResultType = null;
 
 	public function __construct(
 		private readonly array $validLanguageCodes,
@@ -89,5 +91,16 @@ class Types {
 
 	public function getItemType(): ItemType {
 		return $this->itemType ??= new ItemType( $this );
+	}
+
+	public function getItemSearchFilterType(): ItemSearchFilterType {
+		return $this->itemSearchFilterType ??= new ItemSearchFilterType( $this );
+	}
+
+	public function getItemSearchResultType(): ObjectType {
+		return $this->itemSearchResultType ??= new ObjectType( [
+			'name' => 'ItemSearchResult',
+			'fields' => [ 'id' => Type::nonNull( $this->getItemIdType() ) ],
+		] );
 	}
 }
