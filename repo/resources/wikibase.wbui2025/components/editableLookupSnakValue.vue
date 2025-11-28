@@ -59,7 +59,7 @@ module.exports = exports = defineComponent( {
 		return {
 			lookupMenuItems: [],
 			lookupSelection: null,
-			lookupInputValue: null,
+			lookupInputValue: '',
 			menuConfig: {
 				visibleItemLimit: 6
 			}
