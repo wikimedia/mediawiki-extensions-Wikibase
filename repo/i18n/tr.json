@@ -453,7 +453,7 @@
 	"wikibase-api-target-not-empty": "Yönlendirme yalnızca boş veya silinmiş varlığın üstünde oluşturulabilir.",
 	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır.",
 	"wikibase-api-target-is-incompatible": "Farklı türde bir varlığa yönlendirme denemesi.",
-	"wikibase-api-cant-redirect": "Yönlendirme oluşturulamıyor (muhtemelen bu türde varlıklar arasındaki yönlendirme desteklenmiyor).",
+	"wikibase-api-cant-redirect": "Yönlendirme oluşturulamıyor (olasılıkla bu türde varlıklar arasındaki yönlendirmeler desteklenmiyor).",
 	"wikibase-api-invalid-formatter-options-lang": "İzin verilmeyen \"seçenek\" verildi: \"lang\" bir dize olmalı (MediaWiki dil kodu).",
 	"wikibase-api-invalid-formatter-options-apply-rounding": "İzin verilmeyen \"seçenek\" verildi: \"applyRounding\" bir boole ya da dize olmalıdır.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "İzin verilmeyen \"seçenek\" verildi: \"applyUnit\" boole olmalıdır.",

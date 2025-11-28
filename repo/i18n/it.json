@@ -372,7 +372,7 @@
 	"wikibase-api-target-not-empty": "Il reindirizzamento può essere creato solo sopra a un'entità vuota o cancellata.",
 	"wikibase-api-target-is-redirect": "La destinazione del reindirizzamento non deve essere un redirect.",
 	"wikibase-api-target-is-incompatible": "Tentativo di reindirizzare a un'entità di tipo diverso.",
-	"wikibase-api-cant-redirect": "Non è possibile creare un redirect (forse perché i reindirizzamenti tra questo tipo di entità non sono supportati).",
+	"wikibase-api-cant-redirect": "Impossibile creare il reindirizzamento (probabilmente perché i reindirizzamenti tra entità di questo tipo non sono affatto supportati).",
 	"wikibase-self-conflict-patched": "La tua modifica è stata inserita nell'ultima versione, escludendo alcune delle tue modifiche intermedie.",
 	"wikibase-conflict-patched": "La tua modifica è stata inserita nell'ultima versione.",
 	"wikibase-restoreold": "ripristina",
