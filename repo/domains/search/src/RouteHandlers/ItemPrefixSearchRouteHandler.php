@@ -114,4 +114,8 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 		];
 	}
 
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
 }

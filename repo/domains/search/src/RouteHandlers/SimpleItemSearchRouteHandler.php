@@ -114,4 +114,8 @@ class SimpleItemSearchRouteHandler extends SimpleHandler {
 		];
 	}
 
+	public function needsWriteAccess(): bool {
+		return false;
+	}
+
 }

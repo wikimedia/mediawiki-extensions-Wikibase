@@ -15,6 +15,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
+use Wikibase\Repo\Domains\Search\RouteHandlers\RestfulSearchNotAvailableRouteHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -82,6 +83,26 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 		self::assertSame( UnexpectedErrorHandlerMiddleware::ERROR_CODE, json_decode( $response->getBody()->getContents() )->code );
 		self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+	}
+
+	/**
+	 * @dataProvider routeHandlersProvider
+	 */
+	public function testReadWriteAccess( array $routeHandlerData ): void {
+		$this->simulateSearchEnabled();
+		$this->setService( $routeHandlerData['serviceName'], $this->createStub( $routeHandlerData['useCase'] ) );
+
+		$routeHandler = $this->newHandlerWithValidRequest( $routeHandlerData );
+
+		self::assertTrue( $routeHandler->needsReadAccess() );
+		self::assertFalse( $routeHandler->needsWriteAccess() );
+	}
+
+	public function testSearchUnavailableReadWriteAccess(): void {
+		$routeHandler = new RestfulSearchNotAvailableRouteHandler();
+
+		self::assertTrue( $routeHandler->needsReadAccess() );
+		self::assertFalse( $routeHandler->needsWriteAccess() );
 	}
 
 	public static function routeHandlersProvider(): Generator {
