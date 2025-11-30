@@ -27,7 +27,9 @@ class SpecialWikibaseGraphQL extends SpecialPage {
 			true
 		);
 
-		$output = $this->graphQLService->query( $input['query'] ?? '' );
+		$variables = isset( $input['variables'] ) && is_array( $input['variables'] ) ? $input['variables'] : [];
+		$operationName = isset( $input['operationName'] ) && is_string( $input['operationName'] ) ? $input['operationName'] : null;
+		$output = $this->graphQLService->query( $input['query'] ?? '', $variables, $operationName );
 
 		$this->getOutput()->disable();
 		$response = $this->getRequest()->response();

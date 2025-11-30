@@ -96,7 +96,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$siteLinkChangeOpFactory = WikibaseRepo::getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			[ 'wikipedia' ],
+			$settings->getSetting( 'specialSiteLinkGroups' ),
 		);
 
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
@@ -110,7 +111,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			WikibaseRepo::getAnonymousEditWarningBuilder(),
 			WikibaseRepo::getSiteLinkPageNormalizer(),
 			$siteLinkTargetProvider,
-			[ 'wikipedia' ],
 			$settings->getSetting( 'badgeItems' ),
 			WikibaseRepo::getFallbackLabelDescriptionLookupFactory(),
 			$siteLinkChangeOpFactory

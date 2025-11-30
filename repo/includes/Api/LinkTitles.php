@@ -13,7 +13,6 @@ use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -54,11 +53,6 @@ class LinkTitles extends ApiBase {
 	private $errorReporter;
 
 	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $revisionLookup;
@@ -80,7 +74,6 @@ class LinkTitles extends ApiBase {
 		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		ApiErrorReporter $errorReporter,
-		array $siteLinkGroups,
 		EntityRevisionLookup $revisionLookup,
 		callable $resultBuilderInstantiator,
 		callable $entitySavingHelperInstantiator
@@ -91,7 +84,6 @@ class LinkTitles extends ApiBase {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->siteLinkGlobalIdentifiersProvider = $siteLinkGlobalIdentifiersProvider;
 		$this->errorReporter = $errorReporter;
-		$this->siteLinkGroups = $siteLinkGroups;
 		$this->revisionLookup = $revisionLookup;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
@@ -101,7 +93,6 @@ class LinkTitles extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		ApiHelperFactory $apiHelperFactory,
-		SettingsArray $repoSettings,
 		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		Store $store
@@ -115,7 +106,6 @@ class LinkTitles extends ApiBase {
 			$siteLinkGlobalIdentifiersProvider,
 			$siteLinkTargetProvider,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$store->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
@@ -136,7 +126,7 @@ class LinkTitles extends ApiBase {
 		$this->validateParameters( $params );
 
 		// Sites are already tested through allowed params ;)
-		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$sites = $this->siteLinkTargetProvider->getSiteList();
 
 		/** @var Site $fromSite */
 		[ $fromSite, $fromPage ] = $this->getSiteAndNormalizedPageName(
@@ -282,7 +272,7 @@ class LinkTitles extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return array_merge( parent::getAllowedParams(), $this->getCreateTempUserParams(), [
 			'tosite' => [

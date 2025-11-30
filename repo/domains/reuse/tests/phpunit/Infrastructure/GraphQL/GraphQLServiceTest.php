@@ -63,14 +63,14 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider queryProvider
 	 */
-	public function testQuery( string $query, array $expectedResult ): void {
+	public function testQuery( string $query, array $expectedResult, array $variables = [], ?string $operationName = null ): void {
 		$entityLookup = new InMemoryEntityLookup();
 		foreach ( self::$items as $item ) {
 			$entityLookup->addEntity( $item );
 		}
 
 		$siteIdProvider = $this->createStub( SiteLinkGlobalIdentifiersProvider::class );
-		$siteIdProvider->method( 'getList' )->willReturn( self::ALLOWED_SITELINK_SITES );
+		$siteIdProvider->method( 'getSiteIds' )->willReturn( self::ALLOWED_SITELINK_SITES );
 
 		$termLookup = new InMemoryPrefetchingTermLookup();
 		$termLookup->setData( [ ...self::$items, ...self::$properties ] );
@@ -88,7 +88,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				$siteIdProvider,
 				$termLookup,
 				$dataTypeLookup,
-			)->query( $query )
+			)->query( $query, $variables, $operationName )
 		);
 	}
 
@@ -182,7 +182,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						$stringProperty->getId()->getSerialization() => [
 							[
 								'id' => $statementWithStringValue->getGuid(),
-								'rank' => 'normal',
+								'rank' => 'NORMAL',
 								'property' => [
 									'id' => $stringProperty->getId()->getSerialization(),
 									'dataType' => 'string',
@@ -226,13 +226,13 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 								'value' => [
 									'content' => $statementStringValue,
 								],
-								'valueType' => 'value',
+								'valueType' => 'VALUE',
 							],
 						],
 						$itemProperty->getId()->getSerialization() => [
 							[
 								'value' => [ 'id' => $itemUsedAsStatementValue->getId() ],
-								'valueType' => 'value',
+								'valueType' => 'VALUE',
 							],
 						],
 					],
@@ -268,7 +268,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 													'dataType' => 'string',
 												],
 												'value' => null,
-												'valueType' => 'somevalue',
+												'valueType' => 'SOME_VALUE',
 											],
 										],
 									],
@@ -307,7 +307,7 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 										'value' => [
 											'content' => $qualifierStringValue,
 										],
-										'valueType' => 'value',
+										'valueType' => 'VALUE',
 									],
 								],
 								$unusedPropertyId => [],
@@ -543,11 +543,11 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 						'statements' => [
 							[
 								'value' => null,
-								'valueType' => 'somevalue',
+								'valueType' => 'SOME_VALUE',
 							],
 							[
 								'value' => null,
-								'valueType' => 'novalue',
+								'valueType' => 'NO_VALUE',
 							],
 						],
 					],
@@ -718,16 +718,51 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
-		yield 'item does not exist' => [
-			'{ item(id: "Q9999999") { id } }',
-			[ 'data' => [ 'item' => null ] ],
+		yield 'query containing a variable' => [
+			'query WithVariable($id: ItemId!) {
+				item(id: $id) { id }
+			}',
+			[ 'data' => [ 'item' => [ 'id' => $itemId->getSerialization() ] ] ],
+			[ 'id' => $itemId->getSerialization() ],
+		];
+		yield 'specific operation' => [
+			"query Query1 {
+				item(id: \"$itemId\") { id }
+			}
+			query Query2 {
+				item(id: \"{$otherItem->getId()}\") { id }
+			}",
+			[ 'data' => [ 'item' => [ 'id' => $otherItem->getId()->getSerialization() ] ] ],
+			[],
+			'Query2',
+		];
+
+		yield 'simple itemsById query' => [
+			"{ itemsById(ids: [ \"$itemId\", \"{$otherItem->getId()}\" ] ) {
+				id
+				label(languageCode: \"en\")
+			} }",
+			[
+				'data' => [
+					'itemsById' => [
+						[
+							'id' => $itemId,
+							'label' => $item->getLabels()->getByLanguage( 'en' )->getText(),
+						],
+						[
+							'id' => $otherItem->getId(),
+							'label' => $otherItem->getLabels()->getByLanguage( 'en' )->getText(),
+						],
+					],
+				],
+			],
 		];
 	}
 
 	/**
 	 * @dataProvider errorsProvider
 	 */
-	public function testErrors( string $query, string $expectedErrorMessage ): void {
+	public function testErrors( string $query, string $expectedErrorMessage, ?array $expectedData = null ): void {
 		$itemId = 'Q123'; // same as the one in errorsProvider()
 		$entityLookup = new InMemoryEntityLookup();
 		$entityLookup->addEntity( NewItem::withId( $itemId )->build() );
@@ -735,6 +770,9 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 		$result = $this->newGraphQLService( $entityLookup )->query( $query );
 
 		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
+		if ( $expectedData ) {
+			$this->assertSame( $expectedData, $result['data'] );
+		}
 	}
 
 	public static function errorsProvider(): Generator {
@@ -784,18 +822,53 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			"Not a valid Property ID: \"$propertyId\"",
 		];
 
-		$numberOfRequestedItems = 51;
-		$tooComplexQuery = '{';
-		for ( $i = 0; $i < $numberOfRequestedItems; $i++ ) {
-			$tooComplexQuery .= "item$i: item(id: \"$itemId\") { id }";
-		}
-		$tooComplexQuery .= '}';
+		$tooManyItems = 51;
 		$percentageOverMaxComplexity = ceil(
-			$numberOfRequestedItems * GraphQLService::ITEM_FIELD_COMPLEXITY / GraphQLService::MAX_QUERY_COMPLEXITY * 100
+			$tooManyItems * GraphQLService::LOAD_ITEM_COMPLEXITY / GraphQLService::MAX_QUERY_COMPLEXITY * 100
 		) - 100;
-		yield 'rejects queries that are too complex' => [
-			$tooComplexQuery,
+
+		$tooManyItemFieldsQuery = '{';
+		for ( $i = 0; $i < $tooManyItems; $i++ ) {
+			$tooManyItemFieldsQuery .= "item$i: item(id: \"$itemId\") { id }";
+		}
+		$tooManyItemFieldsQuery .= '}';
+		yield 'rejects queries using the `item` field too many times' => [
+			$tooManyItemFieldsQuery,
 			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		$makeItemListArg = fn( int $number ) => implode(
+			', ',
+			array_fill( 0, $number, "\"$itemId\"" )
+		);
+		yield 'rejects queries requesting too many items in itemsById field' => [
+			'{ itemsById(ids: [' . $makeItemListArg( $tooManyItems ) . ']) { id } }',
+			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		$itemsById = (int)floor( $tooManyItems / 2 );
+		$itemFieldUses = ceil( $tooManyItems / 2 );
+		$complexQuery = '{
+			itemsById(ids: [' . $makeItemListArg( $itemsById ) . ']) { id }';
+		for ( $i = 0; $i < $itemFieldUses; $i++ ) {
+			$complexQuery .= "\nitem$i: item(id: \"$itemId\") { id }";
+		}
+		$complexQuery .= '}';
+		yield 'rejects queries requesting too many items using both itemsById and item fields' => [
+			$complexQuery,
+			"The query complexity is $percentageOverMaxComplexity% over the limit.",
+		];
+
+		yield 'item does not exist - item field' => [
+			'{ item(id: "Q9999999") { id } }',
+			'Item "Q9999999" does not exist.',
+			[ 'item' => null ],
+		];
+
+		yield 'item does not exist - itemsById field' => [
+			"{ itemsById(ids: [\"Q666666\", \"$itemId\"]) { id } }",
+			'Item "Q666666" does not exist.',
+			[ 'itemsById' => [ null, [ 'id' => $itemId ] ] ],
 		];
 	}
 

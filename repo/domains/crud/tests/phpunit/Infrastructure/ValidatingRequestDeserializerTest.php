@@ -430,4 +430,3 @@ class NullValidator {
 		return null;
 	}
 }
-// phpcs:enable

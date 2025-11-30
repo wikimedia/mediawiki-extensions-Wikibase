@@ -39,12 +39,16 @@ class DefaultStrategy {
 		};
 	}
 
-	isLookupDatatype() {
+	isEntityDatatype() {
 		return false;
 	}
 
-	isEntityDatatype() {
-		return false;
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableStringSnakValue';
+	}
+
+	triggerParse( newValue ) {
+		// Nothing to parse
 	}
 }
 

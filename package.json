@@ -16,18 +16,20 @@
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"install:rest-api": "npm --prefix repo/rest-api ci",
+		"install:reuse": "npm --prefix repo/domains/reuse ci",
 		"postinstall": "npm-run-all -p install:*",
 		"selenium": "killall -0 chromedriver 2>/dev/null || chromedriver --url-base=/wd/hub --port=4444 & npm run selenium-test; killall chromedriver",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "npm run cypress:install && npm run cypress:run && npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
 		"selenium-test:client": "wdio client/tests/selenium/wdio.conf.js",
-		"@selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
+		"@selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test # Disabled per T354841",
 		"test": "npm-run-all -p test-fast:*",
 		"test-fast:grunt": "grunt test",
 		"test-fast:bridge": "npm --prefix client/data-bridge test",
 		"test-fast:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
 		"test-fast:rest-api": "npm --prefix repo/rest-api test",
+		"test-fast:reuse": "npm --prefix repo/domains/reuse run lint",
 		"test-fast:jest-repo": "jest -c repo/tests/jest/jest.config.js",
 		"coverage": "npm --prefix client/data-bridge run-script test-unit-coverage",
 		"fix": "grunt fix"
@@ -60,8 +62,8 @@
 		"npm-run-all": "^4.1.5",
 		"pinia": "^2.0.16",
 		"stylelint-config-wikimedia": "0.18.0",
-		"wdio-mediawiki": "4.1.3",
-		"wdio-wikibase": "6.4.0"
+		"wdio-mediawiki": "5.1.0",
+		"wdio-wikibase": "7.0.0"
 	},
 	"eslintIgnore": [
 		"extensions/**",

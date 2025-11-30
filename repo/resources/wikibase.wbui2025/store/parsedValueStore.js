@@ -38,6 +38,28 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 			return parsedValue.promise;
 		},
 		/**
+		 * Prime the parsedValue cache with a value
+		 *
+		 * @param {string} propertyId
+		 * @param {Object} dataValue
+		 */
+		preloadParsedValue( propertyId, dataValue ) {
+			let parsedValues = this.parsedValuesPerProperty.get( propertyId );
+			if ( parsedValues === undefined ) {
+				parsedValues = new Map();
+				this.parsedValuesPerProperty.set( propertyId, parsedValues );
+			}
+			const value = dataValue.value;
+			if ( parsedValues.has( value ) ) {
+				return;
+			}
+			const parsedValue = {
+				promise: Promise.resolve( dataValue ),
+				resolved: dataValue
+			};
+			parsedValues.set( value, parsedValue );
+		},
+		/**
 		 * Add parsed values from the given statements (including their qualifiers and references).
 		 *
 		 * @param {Object} statements
@@ -50,23 +72,7 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 				if ( snak.datatype !== 'string' ) {
 					return;
 				}
-				const dataValue = snak.datavalue;
-				// for data type "string", assume that parsing the value would yield the same data value again
-				const propertyId = snak.property;
-				let parsedValues = this.parsedValuesPerProperty.get( propertyId );
-				if ( parsedValues === undefined ) {
-					parsedValues = new Map();
-					this.parsedValuesPerProperty.set( propertyId, parsedValues );
-				}
-				const value = dataValue.value;
-				if ( parsedValues.has( value ) ) {
-					return;
-				}
-				const parsedValue = {
-					promise: Promise.resolve( dataValue ),
-					resolved: dataValue
-				};
-				parsedValues.set( value, parsedValue );
+				this.preloadParsedValue( snak.property, snak.datavalue );
 			};
 			for ( const [ , statementList ] of Object.entries( statements ) ) {
 				for ( const statement of statementList ) {

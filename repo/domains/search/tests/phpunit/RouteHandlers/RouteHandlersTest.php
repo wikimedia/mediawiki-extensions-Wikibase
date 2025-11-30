@@ -15,6 +15,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleItemSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
+use Wikibase\Repo\Domains\Search\RouteHandlers\RestfulSearchNotAvailableRouteHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**
@@ -46,19 +47,20 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	protected function setUp(): void {
+		parent::setUp();
+
+		// suppress error reporting to avoid CI failures caused by errors in the logs
+		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
+	}
+
 	/**
 	 * @dataProvider routeHandlersProvider
 	 */
 	public function testHandlesSearchNotAvailable( array $routeHandlerData ): void {
-		$this->setMwGlobals( 'wgSearchType', null );
-		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
-		$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
-			->willReturn( false );
-		$this->setService( 'ExtensionRegistry', $extensionRegistry );
+		$this->simulateSearchEnabled( false );
 
 		$this->setService( $routeHandlerData['serviceName'], $this->createStub( $routeHandlerData['useCase'] ) );
-		// suppress error reporting to avoid CI failures caused by errors in the logs
-		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
 
 		$response = $this->newHandlerWithValidRequest( $routeHandlerData )->execute();
 
@@ -70,25 +72,37 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider routeHandlersProvider
 	 */
 	public function testHandlesUnexpectedErrors( array $routeHandlerData ): void {
-		$this->setMwGlobals( 'wgSearchType', 'CirrusSearch' );
-		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
-		$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
-			->willReturnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' );
-		$this->setService( 'ExtensionRegistry', $extensionRegistry );
-
+		$this->simulateSearchEnabled();
 		$useCase = $this->createMock( $routeHandlerData[ 'useCase' ] );
 		$useCase->expects( $this->once() )
 			->method( 'execute' )
 			->willThrowException( new RuntimeException() );
 		$this->setService( $routeHandlerData[ 'serviceName' ], $useCase );
 
-		// suppress error reporting to avoid CI failures caused by errors in the logs
-		$this->setService( 'WbSearch.ErrorReporter', $this->createStub( ErrorReporter::class ) );
-
 		$response = $this->newHandlerWithValidRequest( $routeHandlerData )->execute();
 
 		self::assertSame( UnexpectedErrorHandlerMiddleware::ERROR_CODE, json_decode( $response->getBody()->getContents() )->code );
 		self::assertSame( [ 'en' ], $response->getHeader( 'Content-Language' ) );
+	}
+
+	/**
+	 * @dataProvider routeHandlersProvider
+	 */
+	public function testReadWriteAccess( array $routeHandlerData ): void {
+		$this->simulateSearchEnabled();
+		$this->setService( $routeHandlerData['serviceName'], $this->createStub( $routeHandlerData['useCase'] ) );
+
+		$routeHandler = $this->newHandlerWithValidRequest( $routeHandlerData );
+
+		self::assertTrue( $routeHandler->needsReadAccess() );
+		self::assertFalse( $routeHandler->needsWriteAccess() );
+	}
+
+	public function testSearchUnavailableReadWriteAccess(): void {
+		$routeHandler = new RestfulSearchNotAvailableRouteHandler();
+
+		self::assertTrue( $routeHandler->needsReadAccess() );
+		self::assertFalse( $routeHandler->needsWriteAccess() );
 	}
 
 	public static function routeHandlersProvider(): Generator {
@@ -149,5 +163,19 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$this->validateHandler( $routeHandler );
 
 		return $routeHandler;
+	}
+
+	private function simulateSearchEnabled( bool $enabled = true ): void {
+		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
+
+		$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
+			->will(
+				$enabled
+				? $this->returnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' )
+				: $this->returnValue( false )
+			);
+
+		$this->setMwGlobals( 'wgSearchType', $enabled ? 'CirrusSearch' : null );
+		$this->setService( 'ExtensionRegistry', $extensionRegistry );
 	}
 }

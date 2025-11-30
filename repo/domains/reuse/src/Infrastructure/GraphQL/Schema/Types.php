@@ -7,7 +7,6 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
@@ -28,11 +27,11 @@ class Types {
 	private ?InterfaceType $labelProviderType = null;
 	private ?StringValueType $stringValueType = null;
 	private ?ObjectType $entityValueType = null;
+	private ?ItemType $itemType = null;
 
 	public function __construct(
 		private readonly array $validLanguageCodes,
 		private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
-		private readonly SettingsArray $repoSettings,
 		private readonly PropertyLabelsResolver $propertyLabelsResolver,
 		private readonly DataTypeDefinitions $dataTypeDefinitions,
 	) {
@@ -51,14 +50,13 @@ class Types {
 	}
 
 	public function getSiteIdType(): SiteIdType {
-		return $this->siteIdType ??= new SiteIdType( $this->siteLinkGlobalIdentifiersProvider, $this->repoSettings );
+		return $this->siteIdType ??= new SiteIdType( $this->siteLinkGlobalIdentifiersProvider );
 	}
 
 	public function getPropertyValuePairType(): PropertyValuePairType {
 		return $this->propertyValuePairType ??= new PropertyValuePairType(
 			new PredicatePropertyType( $this->propertyLabelsResolver, $this->getLabelProviderType() ),
 			new ValueType( $this->dataTypeDefinitions->getGraphqlValueTypes() ),
-			new ValueTypeType(),
 		);
 	}
 
@@ -87,5 +85,9 @@ class Types {
 			'resolveField' => fn( Statement|PropertyValuePair $valueProvider, $args, $context, ResolveInfo $info ) => $valueProvider->value
 				->getArrayValue()[ $info->fieldName ] ?? null,
 		] );
+	}
+
+	public function getItemType(): ItemType {
+		return $this->itemType ??= new ItemType( $this );
 	}
 }

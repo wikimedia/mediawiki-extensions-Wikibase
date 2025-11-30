@@ -43,7 +43,7 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 	}
 
 	public function run(): Response {
-		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase() );
+		return $this->middlewareHandler->run( $this, $this->runUseCase( ... ) );
 	}
 
 	public function runUseCase(): Response {
@@ -112,6 +112,10 @@ class SimplePropertySearchRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_ISMULTI => false,
 			],
 		];
+	}
+
+	public function needsWriteAccess(): bool {
+		return false;
 	}
 
 }

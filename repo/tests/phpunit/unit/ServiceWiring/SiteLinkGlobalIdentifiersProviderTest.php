@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Site\HashSiteStore;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -24,13 +25,15 @@ class SiteLinkGlobalIdentifiersProviderTest extends ServiceWiringTestCase {
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLocalServerObjectCache' );
 		$this->mockService( 'WikibaseRepo.SiteLinkTargetProvider',
-			new SiteLinkTargetProvider( new HashSiteStore( [] ) )
+			new SiteLinkTargetProvider( new HashSiteStore( [] ), [] )
 		);
 
 		$this->serviceContainer
 			->expects( $this->once() )
 			->method( 'getMainConfig' )
 			->willReturn( new HashConfig( [ MainConfigNames::SecretKey => 'Foo' ] ) );
+
+		$this->mockService( 'WikibaseRepo.Settings', new SettingsArray( [ 'siteLinkGroups' => [] ] ) );
 
 		$this->assertInstanceOf(
 			SiteLinkGlobalIdentifiersProvider::class,

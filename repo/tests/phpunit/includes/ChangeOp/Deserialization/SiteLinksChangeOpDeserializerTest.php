@@ -40,7 +40,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 		$wiki->setGlobalId( self::SITE_ID );
 		$wiki->setGroup( 'testwikis' );
 
-		return new SiteLinkTargetProvider( new HashSiteStore( [ $wiki ] ) );
+		return new SiteLinkTargetProvider( new HashSiteStore( [ $wiki ] ), [ 'testwikis' ] );
 	}
 
 	private function newSiteLinksChangeOpDeserializer( ?Item $item = null ): SiteLinksChangeOpDeserializer {
@@ -59,7 +59,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdParser(),
 			$entityLookupMock,
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 	}
 
@@ -136,7 +135,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdParser(),
 			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 
 		ChangeOpDeserializationAssert::assertThrowsChangeOpDeserializationException(
@@ -164,11 +162,10 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class ),
 			new SiteLinkChangeOpFactory( [] ),
 			new SiteLinkPageNormalizer( [] ),
-			new SiteLinkTargetProvider( new HashSiteStore( [ $site ] ) ),
+			new SiteLinkTargetProvider( new HashSiteStore( [ $site ] ), [ 'testwikis' ] ),
 			new ItemIdParser(),
 			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 
 		$exception = null;
@@ -269,7 +266,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdParser(),
 			$this->createMock( EntityLookup::class ),
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 
 		$changeOp = $deserializer->createEntityChangeOp(
@@ -327,7 +323,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdParser(),
 			$entityLookupMock,
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 
 		$changeOp = $deserializer->createEntityChangeOp(
@@ -381,7 +376,6 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			new ItemIdParser(),
 			$entityLookup,
 			new StringNormalizer(),
-			[ 'testwikis' ]
 		);
 
 		$changeOp = $deserializer->createEntityChangeOp(

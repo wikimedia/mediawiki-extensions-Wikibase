@@ -1,0 +1,128 @@
+jest.mock(
+	'../../../codex.js',
+	() => require( '@wikimedia/codex' ),
+	{ virtual: true }
+);
+jest.mock(
+	'../../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconAdd: 'add',
+		cdxIconCheck: 'check',
+		cdxIconClose: 'close',
+		cdxIconTrash: 'trash'
+	} ),
+	{ virtual: true }
+);
+
+const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
+mockLibWbui2025();
+
+const editableSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableSnakValue.vue' );
+const { CdxTextInput } = require( '../../../codex.js' );
+const { mount } = require( '@vue/test-utils' );
+const { storeWithStatements } = require( '../piniaHelpers.js' );
+const { useEditStatementsStore, useEditStatementStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
+
+describe( 'wikibase.wbui2025.editableSnakValue', () => {
+	it( 'defines component', async () => {
+		expect( typeof editableSnakValueComponent ).toBe( 'object' );
+		expect( editableSnakValueComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025EditableSnakValue' );
+	} );
+
+	describe( 'string datatype', () => {
+		let wrapper, textInput;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$string-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					snaktype: 'value',
+					datavalue: {
+						value: 'example string',
+						type: 'string'
+					},
+					datatype: 'string'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+			const testingPinia = storeWithStatements( [ testStatement ] );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
+			const editStatementStore = useEditStatementStore( testStatementId )();
+
+			wrapper = await mount( editableSnakValueComponent, {
+				props: {
+					propertyId: testPropertyId,
+					snakKey: editStatementStore.mainSnakKey
+				},
+				global: {
+					plugins: [ testingPinia ]
+				}
+			} );
+
+			textInput = wrapper.findComponent( CdxTextInput );
+		} );
+
+		it( 'should set the text-input to the current snak value', async () => {
+			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+		} );
+	} );
+
+	describe.each(
+		[ 'string', 'tabular-data', 'geo-shape' ]
+	)( 'the mounted component with %s datatype', ( datatype ) => {
+		describe.each(
+			[ 'novalue', 'somevalue' ]
+		)( 'and %s snaktype', ( snaktype ) => {
+
+			let wrapper, textInput, noValueSomeValuePlaceholder;
+			beforeEach( async () => {
+				const testPropertyId = 'P1';
+				const testNoValueStatementId = 'Q1$98ce7596-5188-4218-9195-6d9ccdcc82bd';
+				const testNoValueStatement = {
+					id: testNoValueStatementId,
+					mainsnak: {
+						hash: 'placeholder-hash',
+						snaktype,
+						datatype
+					},
+					rank: 'normal'
+				};
+
+				const testingPinia = storeWithStatements( [ testNoValueStatement ] );
+				const editStatementsStore = useEditStatementsStore();
+				await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
+				const editStatementStore = useEditStatementStore( testNoValueStatementId )();
+
+				wrapper = await mount( editableSnakValueComponent, {
+					props: {
+						propertyId: testPropertyId,
+						snakKey: editStatementStore.mainSnakKey
+					},
+					global: {
+						plugins: [ testingPinia ]
+					}
+				} );
+				await wrapper.vm.$nextTick();
+				textInput = wrapper.findComponent( CdxTextInput );
+				noValueSomeValuePlaceholder = wrapper.find( 'div.wikibase-wbui2025-novalue-somevalue-holder' );
+			} );
+
+			it( 'mount its child components', () => {
+				expect( wrapper.exists() ).toBe( true );
+				expect( textInput.exists() ).toBe( false );
+				expect( noValueSomeValuePlaceholder.exists() ).toBe( true );
+			} );
+
+			it( 'loads and shows data correctly', () => {
+				expect( noValueSomeValuePlaceholder.text() ).toContain( `wikibase-snakview-variations-${ snaktype }-label` );
+			} );
+		} );
+	} );
+} );

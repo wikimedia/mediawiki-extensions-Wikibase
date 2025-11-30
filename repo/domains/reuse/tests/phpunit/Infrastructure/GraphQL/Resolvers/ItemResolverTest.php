@@ -16,6 +16,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\ItemNotFound;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -54,6 +55,22 @@ class ItemResolverTest extends TestCase {
 		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[0] ) ), $item1Promise->result );
 		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[1] ) ), $item2Promise->result );
 		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[2] ) ), $item3Promise->result );
+	}
+
+	public function testGivenRequestedItemDoesNotExist_throwsItemNotFound(): void {
+		$requestedItem = 'Q99999';
+		$batchGetItems = $this->createStub( BatchGetItems::class );
+		$batchGetItems->expects( $this->once() )
+			->method( 'execute' )
+			->willReturn( new BatchGetItemsResponse( new ItemsBatch( [ $requestedItem => null ] ) ) );
+
+		$resolver = new ItemResolver( $batchGetItems );
+
+		$promise = $resolver->resolveItem( $requestedItem );
+		SyncPromise::runQueue(); // resolves the promise above
+
+		$this->assertInstanceOf( ItemNotFound::class, $promise->result );
+		$this->assertSame( "Item \"$requestedItem\" does not exist.", $promise->result->getMessage() );
 	}
 
 	private function newItemsBatchForIds( array $itemIds ): ItemsBatch {

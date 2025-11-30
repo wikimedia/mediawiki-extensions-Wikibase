@@ -101,7 +101,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			[ 'rand\\str' ],
 			[ 'rand@str' ],
 			[ 'rand:str' ],
-			[ new \stdClass() ],
+			[ (object)[] ],
 			[ [ 'array' ] ],
 		];
 	}
@@ -119,7 +119,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			[ ' 1' ], // can be casted to a int
 			[ '12foo' ], // can be casted to a int
 			[ '025' ], // can be interpreted as hex
-			[ new \stdClass() ],
+			[ (object)[] ],
 			[ [ 'array' ] ],
 		];
 	}
@@ -149,7 +149,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			[ true ],
 			[ null ],
 			[ [ 'key' => 'value' ] ],
-			[ new \stdClass() ],
+			[ (object)[] ],
 		];
 	}
 
@@ -622,8 +622,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$object = new \stdClass();
-		$object->a = 'foo';
+		$object = (object)[ 'a' => 'foo' ];
 		$this->cache->set( 'key', $object );
 		$result = $this->cache->get( 'key' );
 		$this->assertTrue( is_object( $result ), 'Wrong data type. If we store object we must get an object back.' );
@@ -712,8 +711,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$obj = new \stdClass();
-		$obj->foo = 'value';
+		$obj = (object)[ 'foo' => 'value' ];
 		$this->assertEquals( $obj, $this->cache->get( 'key', $obj ) );
 	}
 
@@ -722,8 +720,7 @@ abstract class SimpleCacheTestCase extends TestCase {
 			$this->markTestSkipped( $this->skippedTests[__FUNCTION__] );
 		}
 
-		$obj = new \stdClass();
-		$obj->foo = 'value';
+		$obj = (object)[ 'foo' => 'value' ];
 		$this->cache->set( 'key', $obj );
 		$obj->foo = 'changed';
 

@@ -57,12 +57,8 @@ class ContentHandlerEntityIdLookupTest extends MediaWikiIntegrationTestCase {
 				'property' => PropertyContent::CONTENT_MODEL_ID,
 			],
 			[
-				'item' => function() {
-					return WikibaseRepo::getItemHandler();
-				},
-				'property' => function() {
-					return WikibaseRepo::getPropertyHandler();
-				},
+				'item' => WikibaseRepo::getItemHandler( ... ),
+				'property' => WikibaseRepo::getPropertyHandler( ... ),
 			]
 		);
 	}

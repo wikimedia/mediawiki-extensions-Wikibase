@@ -21,13 +21,13 @@ class WikibaseEntityRevisionLookupPropertyRevisionMetadataRetriever implements P
 
 	public function getLatestRevisionMetadata( NumericPropertyId $propertyId ): MetadataResult {
 		return $this->revisionLookup->getLatestRevisionId( $propertyId )
-			->onConcreteRevision( fn( $id, $timestamp ) => MetadataResult::concreteRevision( $id, $timestamp ) )
+			->onConcreteRevision( MetadataResult::concreteRevision( ... ) )
 			->onRedirect(
 				/** @return never */
 				function (): void {
 					throw new LogicException( 'Properties cannot be redirected' );
 				}
-			)->onNonexistentEntity( fn() => MetadataResult::propertyNotFound() )
+			)->onNonexistentEntity( MetadataResult::propertyNotFound( ... ) )
 			->map();
 	}
 }

@@ -1,4 +1,4 @@
-const DataBridgePage = require( './dataBridge.page' );
+import DataBridgePage from './dataBridge.page.js';
 
 class BailoutActions {
 	get root() {
@@ -14,4 +14,4 @@ class BailoutActions {
 	}
 }
 
-module.exports = new BailoutActions();
+export default new BailoutActions();

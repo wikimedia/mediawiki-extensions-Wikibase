@@ -93,33 +93,27 @@ return call_user_func( function() {
 
 		'mw.config.values.wbDataTypes' => $moduleTemplate + [
 			'class' => DataTypesModule::class,
-			'datatypefactory' => function() {
-				return WikibaseRepo::getDataTypeFactory();
-			},
+			'datatypefactory' => WikibaseRepo::getDataTypeFactory( ... ),
 			'datatypesconfigvarname' => 'wbDataTypes',
 		],
 
 		// Temporary, see: T199197
 		'mw.config.values.wbRefTabsEnabled' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
-			'getconfigvalueprovider' => function () {
-				return new SettingsValueProvider(
-					WikibaseRepo::getSettings(),
-					'wbRefTabsEnabled',
-					'enableRefTabs'
-				);
-			},
+			'getconfigvalueprovider' => static fn () => new SettingsValueProvider(
+				WikibaseRepo::getSettings(),
+				'wbRefTabsEnabled',
+				'enableRefTabs'
+			),
 		],
 
 		'mw.config.values.wbEnableMulLanguageCode' => $moduleTemplate + [
 			'class' => MediaWikiConfigModule::class,
-			'getconfigvalueprovider' => function () {
-				return new SettingsValueProvider(
-					WikibaseRepo::getSettings(),
-					'wbEnableMulLanguageCode',
-					'enableMulLanguageCode'
-				);
-			},
+			'getconfigvalueprovider' => static fn () => new SettingsValueProvider(
+				WikibaseRepo::getSettings(),
+				'wbEnableMulLanguageCode',
+				'enableMulLanguageCode'
+			),
 		],
 
 		'wikibase.entityPage.entityLoaded' => $moduleTemplate + [
@@ -138,11 +132,9 @@ return call_user_func( function() {
 
 				[
 					"name" => "config.json",
-					"callback" => function () {
-						return [
-							'entityTypes' => WikibaseRepo::getEntityTypesConfigValue(),
-						];
-					},
+					'callback' => static fn () => [
+						'entityTypes' => WikibaseRepo::getEntityTypesConfigValue(),
+					],
 				],
 			],
 			'dependencies' => [
@@ -156,9 +148,7 @@ return call_user_func( function() {
 				'wikibase.getUserLanguages.js',
 				[
 					'name' => 'termLanguages.json',
-					'callback' => function () {
-						return WikibaseRepo::getTermsLanguages()->getLanguages();
-					},
+					'callback' => static fn () => WikibaseRepo::getTermsLanguages()->getLanguages(),
 				],
 			],
 			'dependencies' => [
@@ -314,9 +304,7 @@ return call_user_func( function() {
 		],
 
 		'wikibase.experts.modules' => $moduleTemplate + [
-				'factory' => function () {
-					return WikibaseRepo::getPropertyValueExpertsModule();
-				},
+			'factory' => static fn () => WikibaseRepo::getPropertyValueExpertsModule(),
 		],
 
 		'wikibase.sites' => $moduleTemplate + [
@@ -335,12 +323,10 @@ return call_user_func( function() {
 					'wikibase.federatedPropertiesLeavingSiteNotice.js',
 					[
 						'name' => 'federatedPropertiesHostWikibase.json',
-						'callback' => function () {
-							return parse_url(
-								WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-								PHP_URL_HOST
-							);
-						},
+						'callback' => static fn () => parse_url(
+							WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+							PHP_URL_HOST
+						),
 					],
 				],
 				'dependencies' => [

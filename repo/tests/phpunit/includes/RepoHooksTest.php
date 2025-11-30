@@ -22,6 +22,7 @@ use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserOptionsLookup;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Api\EditEntity;
@@ -390,7 +391,9 @@ XML
 			'tmpMobileEditingUI' => $tmpMobileEditingUI,
 			'tmpEnableMobileEditingUIBetaFeature' => $tmpEnableMobileEditingUIBetaFeature,
 			'disabledDataTypes' => [],
+			'enableMulLanguageCode' => false,
 		] ) );
+		$this->setService( 'WikibaseRepo.LocalEntitySource', $this->createMock( DatabaseEntitySource::class ) );
 
 		( new RepoHooks )->onParserOptionsRegister( $defaults, $inCacheKey, $lazyOptions );
 

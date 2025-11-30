@@ -294,7 +294,6 @@ return [
 						new SiteIdValidator(
 							new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
 								WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
-								WikibaseRepo::getSettings( $services )
 							)
 						),
 						new SiteLinkLookupSitelinkValidator(
@@ -390,7 +389,6 @@ return [
 				new SiteIdValidator(
 					new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
 						WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
-						WikibaseRepo::getSettings( $services )
 					)
 				)
 			);
@@ -874,7 +872,6 @@ return [
 					new SiteIdValidator(
 						new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
 							WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
-							WikibaseRepo::getSettings( $services )
 						)
 					),
 					new SiteLinkLookupSitelinkValidator(
@@ -1104,7 +1101,6 @@ return [
 				new SiteIdValidator(
 					new SiteLinkGlobalIdentifiersProviderSiteIdsRetriever(
 						WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
-						WikibaseRepo::getSettings( $services )
 					)
 				),
 				new SiteLinkLookupSitelinkValidator(

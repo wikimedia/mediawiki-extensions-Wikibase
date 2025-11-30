@@ -640,7 +640,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_cur_id' => $title->getArticleID(),
 			'rc_this_oldid' => $title->getLatestRevID(),
 			'rc_last_oldid' => $title->getLatestRevID(),
-			'rc_type' => RC_EXTERNAL,
 			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
 			'rc_patrolled' => 2,
 			'rc_ip' => '127.0.0.1',

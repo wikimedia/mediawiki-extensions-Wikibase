@@ -383,7 +383,6 @@ return [
 
 	'WikibaseRepo.ChangeOpDeserializerFactory' => function ( MediaWikiServices $services ): ChangeOpDeserializerFactory {
 		$changeOpFactoryProvider = WikibaseRepo::getChangeOpFactoryProvider( $services );
-		$settings = WikibaseRepo::getSettings( $services );
 
 		return new ChangeOpDeserializerFactory(
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
@@ -397,7 +396,6 @@ return [
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getEntityLookup( $services ),
 			WikibaseRepo::getStringNormalizer( $services ),
-			$settings->getSetting( 'siteLinkGroups' )
 		);
 	},
 
@@ -1866,7 +1864,8 @@ return [
 				$services->getLocalServerObjectCache(),
 				'wikibase.siteLinkGlobalIdentifiersProvider.',
 				$cacheSecret
-			)
+			),
+			WikibaseRepo::getSettings( $services )->getSetting( 'siteLinkGroups' ),
 		);
 	},
 
@@ -1881,9 +1880,11 @@ return [
 	'WikibaseRepo.SiteLinkTargetProvider' => function (
 		MediaWikiServices $services
 	): SiteLinkTargetProvider {
+		$settings = WikibaseRepo::getSettings( $services );
 		return new SiteLinkTargetProvider(
 			$services->getSiteLookup(),
-			WikibaseRepo::getSettings( $services )->getSetting( 'specialSiteLinkGroups' )
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'specialSiteLinkGroups' ),
 		);
 	},
 

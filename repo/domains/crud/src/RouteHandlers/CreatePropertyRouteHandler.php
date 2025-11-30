@@ -79,7 +79,7 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 	}
 
 	public function run(): Response {
-		return $this->middlewareHandler->run( $this, fn() => $this->runUseCase() );
+		return $this->middlewareHandler->run( $this, $this->runUseCase( ... ) );
 	}
 
 	public function runUseCase(): Response {

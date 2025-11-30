@@ -8,7 +8,6 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
 /**
@@ -16,10 +15,7 @@ use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
  */
 class SiteIdType extends ScalarType {
 
-	public function __construct(
-		private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
-		private readonly SettingsArray $repoSettings,
-	) {
+	public function __construct( private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider ) {
 		parent::__construct();
 	}
 
@@ -52,8 +48,7 @@ class SiteIdType extends ScalarType {
 	}
 
 	private function isValidSiteId( mixed $id ): bool {
-		$validSiteIds = $this->siteLinkGlobalIdentifiersProvider
-			->getList( $this->repoSettings->getSetting( 'siteLinkGroups' ) );
+		$validSiteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return in_array( $id, $validSiteIds );
 	}

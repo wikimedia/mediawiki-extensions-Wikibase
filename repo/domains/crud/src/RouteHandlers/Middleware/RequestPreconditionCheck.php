@@ -63,8 +63,8 @@ class RequestPreconditionCheck {
 			->onConcreteRevision(
 				fn( $revisionId, $timestamp ) => $this->getCheckResultFromRequestAndMetadata( $request, $revisionId, $timestamp )
 			)
-			->onRedirect( fn() => RequestPreconditionCheckResult::newConditionUnmetResult() )
-			->onNonexistentEntity( fn() => RequestPreconditionCheckResult::newConditionUnmetResult() )
+			->onRedirect( RequestPreconditionCheckResult::newConditionUnmetResult( ... ) )
+			->onNonexistentEntity( RequestPreconditionCheckResult::newConditionUnmetResult( ... ) )
 			->map();
 	}
 

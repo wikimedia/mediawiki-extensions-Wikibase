@@ -5,12 +5,16 @@ const { requireExtensions } = require( './utils.js' );
 const germanLabel = 'a-German-label-' + utils.uniq();
 const englishLabel = 'an-English-label-' + utils.uniq();
 const englishPropertyLabel = 'an-English-Property-label-' + utils.uniq();
+const englishProperty2Label = 'another-English-Property-label-' + utils.uniq();
 const englishDescription = 'an-English-description-' + utils.uniq();
-const examplePropertyValue = 'an-example-string-' + utils.uniq();
+const examplePropertyValue = 'an-example-prop-string-' + utils.uniq();
+const exampleQualifierValue = 'an-example-qual-string-' + utils.uniq();
+const exampleRefValue = 'an-example-ref-string-' + utils.uniq();
 
 describe( 'Lua Wikibase integration', () => {
 	let mindy;
 	let testPropertyId;
+	let testProperty2Id;
 	let testItemId;
 	let redirectedItemId;
 	let module;
@@ -38,6 +42,21 @@ describe( 'Lua Wikibase integration', () => {
 		}, 'POST' );
 
 		testPropertyId = response.entity.id;
+	} );
+
+	before( 'create another property to be used in references or qualifiers', async () => {
+		const response = await mindy.action( 'wbeditentity', {
+			new: 'property',
+			token: await mindy.token( 'csrf' ),
+			data: JSON.stringify( {
+				datatype: 'string',
+				labels: {
+					en: { language: 'en', value: englishProperty2Label },
+				},
+			} ),
+		}, 'POST' );
+
+		testProperty2Id = response.entity.id;
 	} );
 
 	before( 'create test item', async () => {
@@ -86,9 +105,9 @@ describe( 'Lua Wikibase integration', () => {
 								{
 									hash: 'hash',
 									snaktype: 'value',
-									property: 'P3',
+									property: testProperty2Id,
 									datavalue: {
-										value: 'qualifier value',
+										value: exampleQualifierValue,
 										type: 'string',
 									},
 								},
@@ -101,9 +120,9 @@ describe( 'Lua Wikibase integration', () => {
 									P1: [
 										{
 											snaktype: 'value',
-											property: 'P3',
+											property: testProperty2Id,
 											datavalue: {
-												value: 'ref value',
+												value: exampleRefValue,
 												type: 'string',
 											},
 										},
@@ -149,14 +168,14 @@ describe( 'Lua Wikibase integration', () => {
 					if claims == nil then
 						return claims
 					end
-					return claims[1].qualifiers.P3[1].datavalue.value
+					return claims[1].qualifiers['${ testProperty2Id }'][1].datavalue.value
 				end
 				p.getEntity_claims_with_ref = function( frame )
 					local claims = mw.wikibase.getEntity( '${ testItemId }' ).claims[ frame.args[ 1 ] ]
 					if claims == nil then
 						return claims
 					end
-					return claims[1].references[1].snaks.P3[1].datavalue.value
+					return claims[1].references[1].snaks['${ testProperty2Id }'][1].datavalue.value
 				end
 				p.getEntity_aliases = function() return mw.wikibase.getEntity( '${ testItemId }' ).aliases.en[1].value end
 				p.getEntity_labels = function() return mw.wikibase.getEntity( '${ testItemId }' ).labels.de.value end
@@ -291,7 +310,7 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_qual|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ 'qualifier value' }\n</p>` );
+		assert.equal( pageText, `<p>${ exampleQualifierValue }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.include( usageAspects, `CQR.${ testPropertyId }` );
 	} );
@@ -300,7 +319,7 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_ref|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ 'ref value' }\n</p>` );
+		assert.equal( pageText, `<p>${ exampleRefValue }\n</p>` );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.include( usageAspects, `CQR.${ testPropertyId }` );
 	} );

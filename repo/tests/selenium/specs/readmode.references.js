@@ -1,13 +1,11 @@
-'use strict';
-
-const Util = require( 'wdio-mediawiki/Util' );
-const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
-const ItemPage = require( 'wdio-wikibase/pageobjects/item.page' );
+import { getTestString } from 'wdio-mediawiki/Util.js';
+import WikibaseApi from 'wdio-wikibase/wikibase.api.js';
+import ItemPage from 'wdio-wikibase/pageobjects/item.page.js';
 
 describe( 'WikibaseReferenceOnProtectedPage', () => {
 
 	it( 'can expand collapsed references on a protected page as unprivileged user', async () => {
-		const itemId = await WikibaseApi.createItem( Util.getTestString( 'T186006-' ) );
+		const itemId = await WikibaseApi.createItem( getTestString( 'T186006-' ) );
 		const propertyId = await WikibaseApi.getProperty( 'string' );
 
 		await ItemPage.open( itemId );

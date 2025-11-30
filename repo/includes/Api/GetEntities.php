@@ -53,11 +53,6 @@ class GetEntities extends ApiBase {
 	private $entityPrefetcher;
 
 	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
-
-	/**
 	 * @var ApiErrorReporter
 	 */
 	protected $errorReporter;
@@ -90,7 +85,6 @@ class GetEntities extends ApiBase {
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider
 	 * @param EntityPrefetcher $entityPrefetcher
-	 * @param string[] $siteLinkGroups
 	 * @param ApiErrorReporter $errorReporter
 	 * @param ResultBuilder $resultBuilder
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -108,7 +102,6 @@ class GetEntities extends ApiBase {
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		EntityPrefetcher $entityPrefetcher,
-		array $siteLinkGroups,
 		ApiErrorReporter $errorReporter,
 		ResultBuilder $resultBuilder,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -123,7 +116,6 @@ class GetEntities extends ApiBase {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->siteLinkGlobalIdentifiersProvider = $siteLinkGlobalIdentifiersProvider;
 		$this->entityPrefetcher = $entityPrefetcher;
-		$this->siteLinkGroups = $siteLinkGroups;
 		$this->errorReporter = $errorReporter;
 		$this->resultBuilder = $resultBuilder;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -155,7 +147,6 @@ class GetEntities extends ApiBase {
 			$siteLinkGlobalIdentifiersProvider,
 			// TODO move EntityPrefetcher to service container and inject that directly
 			$store->getEntityPrefetcher(),
-			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$entityRevisionLookup,
@@ -387,7 +378,7 @@ class GetEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	protected function getAllowedParams(): array {
-		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getList( $this->siteLinkGroups );
+		$siteIds = $this->siteLinkGlobalIdentifiersProvider->getSiteIds();
 
 		return array_merge( parent::getAllowedParams(), [
 			'ids' => [

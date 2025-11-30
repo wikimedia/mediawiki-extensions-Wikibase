@@ -58,11 +58,6 @@ class SpecialNewItem extends SpecialNewEntity {
 
 	private SiteLinkTargetProvider $siteLinkTargetProvider;
 
-	/**
-	 * @var string[]
-	 */
-	private array $siteLinkGroups;
-
 	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
 
 	/**
@@ -85,7 +80,6 @@ class SpecialNewItem extends SpecialNewEntity {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeItems,
-		array $siteLinkGroups,
 		bool $isMobileView
 	) {
 		parent::__construct(
@@ -105,7 +99,6 @@ class SpecialNewItem extends SpecialNewEntity {
 		$this->errorLocalizer = $errorLocalizer;
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
-		$this->siteLinkGroups = $siteLinkGroups;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeItems = $badgeItems;
 	}
@@ -146,7 +139,6 @@ class SpecialNewItem extends SpecialNewEntity {
 			$siteLinkTargetProvider,
 			$labelDescriptionLookupFactory,
 			$repoSettings->getSetting( 'badgeItems' ),
-			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$isMobileView
 		);
 	}
@@ -402,7 +394,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	}
 
 	private function getSiteLinkTargetSite( string $siteId ): ?Site {
-		$targetSites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
+		$targetSites = $this->siteLinkTargetProvider->getSiteList();
 		if ( !$targetSites->hasSite( $siteId ) ) {
 			return null;
 		}

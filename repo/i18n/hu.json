@@ -68,7 +68,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "leírás megadása $1 nyelven",
 	"wikibase-description-edit-placeholder-not-applicable": "nem alkalmazható",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Nem lehet alapértelmezett leírást beállítani az összes nyelvre",
-	"wikibase-item-description-edit-not-supported": "A leírások nem támogatottak ezen a nyelven. Adjon meg más nyelvű leírást az elem létrehozását követően.",
+	"wikibase-item-description-edit-not-supported": "A leírások nem támogatottak ezen a nyelven. Adj meg egy leírást egy másik nyelven az elem létrehozását követően.",
 	"wikibase-property-description-edit-not-supported": "A leírások nem támogatottak ezen a nyelven. Adjon meg más nyelvű leírást a tulajdonság létrehozását követően.",
 	"wikibase-description-not-applicable": "–",
 	"wikibase-description-not-applicable-title": "Nem lehet alapértelmezett leírást beállítani az összes nyelvre",

@@ -1,6 +1,6 @@
-const Page = require( 'wdio-mediawiki/Page' ),
-	Util = require( 'wdio-mediawiki/Util' ),
-	WarningAnonymousEdit = require( './WarningAnonymousEdit' );
+import Page from 'wdio-mediawiki/Page.js';
+import { getTestString, waitForModuleState } from 'wdio-mediawiki/Util.js';
+import WarningAnonymousEdit from './WarningAnonymousEdit.js';
 
 class DataBridgePage extends Page {
 	static get ARTICLE_ELEMENTS() {
@@ -104,7 +104,7 @@ class DataBridgePage extends Page {
 	}
 
 	getDummyTitle() {
-		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
+		return getTestString( 'Talk:Data-bridge-test-page-' );
 	}
 
 	/**
@@ -122,7 +122,7 @@ class DataBridgePage extends Page {
 
 	open( title ) {
 		await super.openTitle( title );
-		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', browser.options.waitforTimeout );
+		await waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', browser.options.waitforTimeout );
 	}
 
 	openAppOnPage( title ) {
@@ -306,4 +306,4 @@ class DataBridgePage extends Page {
 	}
 }
 
-module.exports = new DataBridgePage();
+export default new DataBridgePage();

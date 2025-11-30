@@ -4,7 +4,8 @@
 			"Alpkant",
 			"BaRaN6161 TURK",
 			"Hedda",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-query+wbentityusage-summary": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
@@ -44,7 +45,7 @@
 	"apihelp-query+description-example-central": "Varsa merkezi açıklamayı tercih ederek 'London' sayfasının açıklamasını alın.",
 	"apihelp-query+wikibase-summary": "Wikibase istemcisi hakkında bilgi alın ve Wikibase istemcisi ve ilgili Wikibase deposu hakkında bilgi alın.",
 	"apihelp-query+wikibase-example": "URL yolunu ve Wikibase istemcisi ve deposu hakkında diğer bilgileri alın.",
-	"apihelp-query+wikibase-param-prop": "Özelliklere sahip olanacağı:\n;<kbd>url</kbd>: Wikibase deposunun temel URL'si, betik yolu ve madde yolu.\n;<kbd>siteid</kbd>: Bu sitenin site kimliği.",
+	"apihelp-query+wikibase-param-prop": "Hangi özelliklere sahip olunur:",
 	"apihelp-wbformatreference-summary": "Kullanıcılara görüntüleme için bir kaynakça biçimlendirir.",
 	"apihelp-wbformatreference-example-1": "Veri Köprüsü stilini kullanarak boş bir kaynakçası HTML olarak biçimlendirin.",
 	"apihelp-wbformatreference-example-2": "Veri Köprüsü stilini kullanarak bir dize içeren bir kaynakçayı HTML olarak biçimlendirin.",

@@ -74,11 +74,6 @@ class ChangeOpDeserializerFactory {
 	private $stringNormalizer;
 
 	/**
-	 * @var string[]
-	 */
-	private $siteLinkGroups;
-
-	/**
 	 * @param FingerprintChangeOpFactory $fingerprintChangeOpFactory
 	 * @param StatementChangeOpFactory $statementChangeOpFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
@@ -90,7 +85,6 @@ class ChangeOpDeserializerFactory {
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param StringNormalizer $stringNormalizer
-	 * @param string[] $siteLinkGroups
 	 */
 	public function __construct(
 		FingerprintChangeOpFactory $fingerprintChangeOpFactory,
@@ -104,7 +98,6 @@ class ChangeOpDeserializerFactory {
 		EntityIdParser $entityIdParser,
 		EntityLookup $entityLookup,
 		StringNormalizer $stringNormalizer,
-		array $siteLinkGroups
 	) {
 		$this->fingerprintChangeOpFactory = $fingerprintChangeOpFactory;
 		$this->statementChangeOpFactory = $statementChangeOpFactory;
@@ -117,7 +110,6 @@ class ChangeOpDeserializerFactory {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
 		$this->stringNormalizer = $stringNormalizer;
-		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
 	public function getFingerprintChangeOpDeserializer(): FingerprintChangeOpDeserializer {
@@ -169,7 +161,6 @@ class ChangeOpDeserializerFactory {
 			$this->entityIdParser,
 			$this->entityLookup,
 			$this->stringNormalizer,
-			$this->siteLinkGroups
 		);
 	}
 

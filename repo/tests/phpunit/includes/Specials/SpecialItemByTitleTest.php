@@ -102,7 +102,7 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 		$siteLookup = $this->getMockSiteLookup();
 
-		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteLookup, [] );
+		$siteLinkTargetProvider = new SiteLinkTargetProvider( $siteLookup, [ 'wikipedia' ] );
 
 		$page = new SpecialItemByTitle(
 			$this->getMockTitleLookup(),
@@ -111,7 +111,6 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 			$this->getMockSiteLinkLookup(),
 			$siteLinkTargetProvider,
 			new NullLogger(),
-			[ 'wikipedia' ]
 		);
 
 		return $page;

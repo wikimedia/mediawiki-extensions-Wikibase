@@ -38,6 +38,7 @@
 	"wikibase-save-inprogress": "Чување…",
 	"wikibase-publish-inprogress": "Објављивање…",
 	"wikibase-publishing-progress": "Објављивање у току…",
+	"wikibase-publishing-succeeded": "Ваше измене су сачуване!",
 	"wikibase-remove-inprogress": "Уклањање...",
 	"wikibase-statementlistview-add": "додај вредност",
 	"wikibase-statementlistview-add-tooltip": "Додајте нову вредност",
