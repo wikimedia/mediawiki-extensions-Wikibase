@@ -38,6 +38,7 @@
 				"WikibaseRepo.EntityChangeOpProvider",
 				"WikibaseRepo.EntityDiffer",
 				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.Logger",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"
 			]

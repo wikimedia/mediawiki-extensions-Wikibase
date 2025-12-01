@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Title\Title;
+use Psr\Log\LoggerInterface;
 use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -106,6 +107,7 @@ class EditEntity extends ModifyEntity {
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EntityDiffer $entityDiffer,
 		EntityIdParser $entityIdParser,
+		LoggerInterface $logger,
 		SettingsArray $settings,
 		Store $store
 	): self {
@@ -117,7 +119,7 @@ class EditEntity extends ModifyEntity {
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
 			$entityChangeOpProvider,
-			new EditSummaryHelper( $entityDiffer ),
+			new EditSummaryHelper( $entityDiffer, $logger ),
 			$settings->getSetting( 'federatedPropertiesEnabled' ),
 			$settings->getSetting( 'sandboxEntityIds' )
 		);

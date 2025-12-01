@@ -5,10 +5,16 @@ namespace Wikibase\Repo\Api;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -24,6 +30,7 @@ class EditSummaryHelper {
 
 	public function __construct(
 		private readonly EntityDiffer $entityDiffer,
+		private readonly LoggerInterface $logger = new NullLogger(),
 	) {
 	}
 
@@ -77,11 +84,28 @@ class EditSummaryHelper {
 	}
 
 	private function getEditSummaryForClaims( Diff $claimsDiff ): Summary {
-		if ( $claimsDiff->count() !== 1 ) { // TODO define messages for editing multiple statements (of the same property?)
-			return $this->getGenericEditSummary();
+		if ( $claimsDiff->count() === 1 ) {
+			return $this->getEditSummaryForClaimDiff( array_first( $claimsDiff->getOperations() ) );
 		}
-		$claimDiff = array_first( $claimsDiff->getOperations() );
-		if ( !( $claimDiff instanceof DiffOpChange ) ) {
+		return $this->getGenericEditSummary(); // TODO define messages for editing multiple statements (of the same property?)
+	}
+
+	private function getEditSummaryForClaimDiff( DiffOp $claimDiff ): Summary {
+		if ( $claimDiff instanceof DiffOpRemove ) {
+			/** @var Statement $statement */
+			$statement = $claimDiff->getOldValue();
+			'@phan-var Statement $statement';
+			return new Summary(
+				'wbremoveclaims',
+				'remove',
+				summaryArgs: [ [ $statement->getPropertyId()->getSerialization() => $statement->getMainSnak() ] ]
+			);
+		} elseif ( !( $claimDiff instanceof DiffOpChange || $claimDiff instanceof DiffOpAdd ) ) {
+			// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
+			$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
+				'className' => get_class( $claimDiff ),
+				'diffOp' => $claimDiff,
+			] );
 			return $this->getGenericEditSummary();
 		}
 		$summaryBuilder = new ClaimSummaryBuilder(
@@ -89,7 +113,7 @@ class EditSummaryHelper {
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 		return $summaryBuilder->buildClaimSummary(
-			$claimDiff->getOldValue(),
+			$claimDiff instanceof DiffOpChange ? $claimDiff->getOldValue() : null,
 			$claimDiff->getNewValue(),
 		);
 	}

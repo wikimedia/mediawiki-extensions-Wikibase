@@ -3,7 +3,9 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -83,6 +85,27 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 					'update',
 					commentArgs: [ 1 ], // one statement changed
 					summaryArgs: [ [ 'P1' => $newStatement->getMainSnak() ] ],
+				),
+			],
+			'single statement added' => [
+				'entityDiff' => new EntityDiff( [ 'claim' => new Diff( [
+					$statementId => new DiffOpAdd( $newStatement ),
+				], true ) ] ),
+				'expected' => new Summary(
+					'wbsetclaim',
+					'create',
+					commentArgs:  [ 1 ], // one statement added
+					summaryArgs: [ [ 'P1' => $newStatement->getMainSnak() ] ],
+				),
+			],
+			'single statement removed' => [
+				'entityDiff' => new EntityDiff( [ 'claim' => new Diff( [
+					$statementId => new DiffOpRemove( $oldStatement ),
+				], true ) ] ),
+				'expected' => new Summary(
+					'wbremoveclaims',
+					'remove',
+					summaryArgs: [ [ 'P1' => $oldStatement->getMainSnak() ] ],
 				),
 			],
 			'multiple statements changed' => [
