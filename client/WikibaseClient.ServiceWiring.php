@@ -8,7 +8,6 @@ use DataValues\UnknownValue;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
 use MediaWiki\StubObject\StubObject;
@@ -548,7 +547,7 @@ return [
 
 		if (
 			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) // TODO T257586
+			$services->getExtensionRegistry()->isLoaded( 'Kartographer' )
 		) {
 			return new CachingKartographerEmbeddingHandler(
 				$services->getParserFactory()->create()
