@@ -1195,6 +1195,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\GetBetaFeaturePreferencesHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\GetBetaFeaturePreferencesHookHandler::factory",
 			"services": [
+				"MainConfig",
 				"WikibaseRepo.Settings"
 			]
 		},
