@@ -30,5 +30,7 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Izmjene koje potiču s Wikipodataka",
 	"wikibase-watchlist-show-changes-pref": "Izmjene {{GRAMMAR:genitiv|{{WBREPONAME}}}} na listi praćenja",
 	"wikibase-otherprojects": "Na drugim projektima",
-	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata"
+	"wikibase-otherprojects-beta-message": "Bočna traka drugih projekata",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s {{GRAMMAR:instrumental|{{WBREPONAME}}}}",
+	"echo-pref-tooltip-wikibase-action": "Obavještava vas kad netko poveže stranicu koju ste {{GENDER:|izradili}} sa stavkom na {{GRAMMAR:dativ|{{WBREPONAME}}}}."
 }
