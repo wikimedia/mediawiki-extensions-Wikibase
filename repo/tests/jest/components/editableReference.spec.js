@@ -51,7 +51,6 @@ describe( 'wikibase.wbui2025.editableReference', () => {
 		let editableSnaks;
 		let addButton, removeButton;
 		beforeEach( async () => {
-
 			wrapper = await mount( Wbui2025EditableReference, {
 				props: { reference },
 				shallow: true
@@ -85,6 +84,14 @@ describe( 'wikibase.wbui2025.editableReference', () => {
 			expect( wrapper.emitted( 'remove-reference-snak' )[ 0 ] ).toEqual(
 				[ reference, 'P6', 'snak3' ]
 			);
+		} );
+
+		it( 'emits "add-reference-snak" when clicking the add button', async () => {
+			await addButton.vm.$emit( 'click' );
+			expect( wrapper.emitted( 'add-reference-snak' ) ).toHaveLength( 1 );
+			expect( wrapper.emitted( 'add-reference-snak' )[ 0 ] ).toEqual( [
+				reference, expect.stringContaining( 'snak' )
+			] );
 		} );
 	} );
 } );

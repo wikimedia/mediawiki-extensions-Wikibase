@@ -20,9 +20,15 @@ export class ValueForm {
 
 	public static TEXT_INPUT = '.cdx-text-input input';
 
+	public static ADD_SNAK_BUTTON = 'button.wikibase-wbui2025-add-snak-button';
+
 	public static REMOVE_SNAK_BUTTON = '.wikibase-wbui2025-remove-snak';
 
 	public static REMOVE_REFERENCE_BUTTON = '.wikibase-wbui2025-editable-reference-remove-button-holder button';
+
+	public static PROPERTY_LOOKUP = '.wikibase-wbui2025-property-lookup';
+
+	public static LOOKUP_ITEM = '.cdx-menu .cdx-menu-item';
 
 	private rootElement: HTMLElement;
 
@@ -68,11 +74,30 @@ export class ValueForm {
 		return cy.get( ValueForm.TEXT_INPUT, { withinSubject: this.rootElement } );
 	}
 
+	public addSnakButton(): Chainable {
+		return cy.get( ValueForm.ADD_SNAK_BUTTON, { withinSubject: this.rootElement } );
+	}
+
 	public removeSnakButton(): Chainable {
 		return cy.get( ValueForm.REMOVE_SNAK_BUTTON, { withinSubject: this.rootElement } );
 	}
 
 	public removeReferenceButton(): Chainable {
 		return cy.get( ValueForm.REMOVE_REFERENCE_BUTTON, { withinSubject: this.rootElement } );
+	}
+
+	public propertyLookup(): Chainable {
+		return cy.get( ValueForm.PROPERTY_LOOKUP, { withinSubject: this.rootElement } );
+	}
+
+	public selectPropertyFromLookup( propertyLabel: string ): this {
+		this.propertyLookup().within( () => {
+			cy.get( ValueForm.TEXT_INPUT )
+				.should( 'be.visible' )
+				.invoke( 'val', propertyLabel );
+			cy.get( ValueForm.TEXT_INPUT ).type( '{moveToEnd}{backspace}' );
+			cy.contains( ValueForm.LOOKUP_ITEM, propertyLabel ).click();
+			return this;
+		} );
 	}
 }

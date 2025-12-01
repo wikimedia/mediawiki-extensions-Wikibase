@@ -31,18 +31,18 @@ module.exports = exports = defineComponent( {
 	},
 	emits: [ 'remove-snak' ],
 	setup( props ) {
-	/*
-	 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
-	 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
-	 * the Composition API to initialise the component.
-	 */
+		/*
+		 * Usually we use the Options API to map state and actions. In this case, we need a parameterised
+		 * store - we pass in the snakHash to make a snak-specific store. This forces us to use
+		 * the Composition API to initialise the component.
+		 */
 		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue'
 		] );
 		return {
 			textvalue: computed( computedProperties.textvalue ),
-			valueStrategy: editSnakStoreGetter().getValueStrategy()
+			valueStrategy: editSnakStoreGetter().valueStrategy
 		};
 	},
 	methods: {

@@ -52,8 +52,10 @@
 			</div>
 			<wbui2025-editable-references-section
 				:references="references"
+				@add-reference-snak="addReferenceSnak"
 				@remove-reference="removeReference"
 				@remove-reference-snak="removeReferenceSnak"
+				@remove-new-reference-snak="removeNewReferenceSnak"
 			></wbui2025-editable-references-section>
 			<div class="wikibase-wbui2025-button-holder">
 				<cdx-button
@@ -167,6 +169,12 @@ module.exports = exports = defineComponent( {
 		referenceAdded() {
 			this.showAddReferenceModal = false;
 		},
+		addReferenceSnak( reference, snakKey ) {
+			if ( !reference.newSnaks ) {
+				reference.newSnaks = [];
+			}
+			reference.newSnaks.push( snakKey );
+		},
 		removeReference( reference ) {
 			this.references.splice( this.references.indexOf( reference ), 1 );
 		},
@@ -175,6 +183,18 @@ module.exports = exports = defineComponent( {
 			if ( reference.snaks[ propertyId ].length === 0 ) {
 				delete reference.snaks[ propertyId ];
 				reference[ 'snaks-order' ].splice( reference[ 'snaks-order' ].indexOf( propertyId ), 1 );
+				if ( reference[ 'snaks-order' ].length === 0 && ( !reference.newSnaks || reference.newSnaks.length === 0 ) ) {
+					this.removeReference( reference );
+				}
+			}
+		},
+		removeNewReferenceSnak( reference, snakKey ) {
+			if ( !reference.newSnaks || reference.newSnaks.length === 0 ) {
+				return;
+			}
+			reference.newSnaks.splice( reference.newSnaks.indexOf( snakKey ), 1 );
+			if ( reference.newSnaks.length === 0 ) {
+				delete reference.newSnaks;
 				if ( reference[ 'snaks-order' ].length === 0 ) {
 					this.removeReference( reference );
 				}

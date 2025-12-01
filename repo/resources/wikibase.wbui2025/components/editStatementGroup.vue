@@ -311,5 +311,12 @@ module.exports = exports = defineComponent( {
 			gap: @spacing-200;
 		}
 	}
+
+	button .wikibase-snaktypeselector {
+		background-repeat: no-repeat;
+	}
+	button[disabled] .wikibase-snaktypeselector {
+		background-position: 0.125rem 0;
+	}
 }
 </style>

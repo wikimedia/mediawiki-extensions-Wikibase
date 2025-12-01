@@ -43,7 +43,7 @@ interface Statement {
 
 interface EntityResponseOptions {
 	itemId: string;
-	propertyName: string;
+	propertyId: string;
 	datatype: 'tabular-data' | 'geo-shape' | 'string';
 	statements: Statement[];
 	lastrevid?: number;
@@ -108,11 +108,11 @@ export function generateClaim( options: ClaimOptions ): Claim {
  * @returns Wikibase entity response object
  */
 export function generateEntityResponse( options: EntityResponseOptions ): EntityResponse {
-	const { itemId, propertyName, datatype, statements, lastrevid = 12345 } = options;
+	const { itemId, propertyId, datatype, statements, lastrevid = 12345 } = options;
 
 	const claims = statements.map( ( stmt ) => generateClaim( {
 		itemId,
-		property: propertyName,
+		property: propertyId,
 		value: stmt.value,
 		hash: stmt.hash,
 		datatype,
@@ -127,7 +127,7 @@ export function generateEntityResponse( options: EntityResponseOptions ): Entity
 			descriptions: {},
 			aliases: {},
 			claims: {
-				[ propertyName ]: claims,
+				[ propertyId ]: claims,
 			},
 			sitelinks: {},
 			lastrevid,

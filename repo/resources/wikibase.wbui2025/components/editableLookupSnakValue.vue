@@ -52,7 +52,7 @@ module.exports = exports = defineComponent( {
 			textvalue: computed( computedProperties.textvalue ),
 			selectionvalue: computed( computedProperties.selectionvalue ),
 			datatype: computed( computedProperties.datatype ),
-			valueStrategy: editSnakStoreGetter().getValueStrategy()
+			valueStrategy: editSnakStoreGetter().valueStrategy
 		};
 	},
 	data() {

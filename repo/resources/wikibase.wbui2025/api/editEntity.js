@@ -72,13 +72,27 @@ const renderSnakValueText = async function ( dataValue, propertyId = null ) {
 	return renderSnakValue( 'text/plain', dataValue, propertyId );
 };
 
-const renderPropertyLinkHtml = async function ( propertyId ) {
-	const fetchResult = await api.get( {
-		action: 'wbformatentities',
-		generate: 'text/html',
-		ids: [ propertyId ]
-	} );
-	return fetchResult.wbformatentities && fetchResult.wbformatentities[ propertyId ];
+/**
+ * @param {Array} propertyIds
+ * @returns {Promise<Object>} a mapping of each propertyId to its Html
+ */
+const renderPropertyLinkHtml = async function ( propertyIds ) {
+	const idsToFetch = propertyIds.slice();
+	const results = {};
+
+	// wbformatentities is limited to 50 entities, so make calls in batches of 50 or less
+	let batch;
+	while ( ( batch = idsToFetch.splice( 0, 50 ) ).length > 0 ) {
+		Object.assign(
+			results,
+			( await api.get( {
+				action: 'wbformatentities',
+				generate: 'text/html',
+				ids: batch
+			} ) ).wbformatentities
+		);
+	}
+	return results;
 };
 
 /**

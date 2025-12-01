@@ -54,9 +54,19 @@ function propertyLinkHtml( propertyId ) {
 	return serverRenderedHtml.propertyLinks.get( propertyId );
 }
 
-function updatePropertyLinkHtml( propertyId, html ) {
+/**
+ * Update link html for one or more properties
+ *
+ * @param {Object} propertyHtmlStrings a mapping of property ids to their link Html
+ */
+function updatePropertyLinkHtml( propertyHtmlStrings ) {
+	if ( typeof propertyHtmlStrings !== 'object' ) {
+		return;
+	}
 	const serverRenderedHtml = useServerRenderedHtml();
-	serverRenderedHtml.propertyLinks.set( propertyId, html );
+	for ( const [ propertyId, html ] of Object.entries( propertyHtmlStrings ) ) {
+		serverRenderedHtml.propertyLinks.set( propertyId, html );
+	}
 }
 
 /**

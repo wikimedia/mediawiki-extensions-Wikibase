@@ -8,6 +8,7 @@ import { interceptCommonsSearch, interceptFormatValue, interceptSaveEntity } fro
 describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 	context( 'mobile view - tabular-data datatype', () => {
 		let propertyName: string;
+		let propertyId: string;
 		let itemId: string;
 
 		before( () => {
@@ -16,6 +17,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				label: propertyName,
 				data: { datatype: 'tabular-data' },
 			} ).then( ( newPropertyId: string ) => {
+				propertyId = newPropertyId;
 				const statementData = {
 					claims: [ {
 						mainsnak: {
@@ -84,7 +86,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			// Intercept POST request.
 			interceptSaveEntity( {
 				itemId,
-				propertyName,
+				propertyId,
 				datatype: 'tabular-data',
 				statements: [
 					{
@@ -159,6 +161,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 
 	context( 'mobile view - geo-shape datatype', () => {
 		let propertyName: string;
+		let propertyId: string;
 		let itemId: string;
 
 		before( () => {
@@ -167,6 +170,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 				label: propertyName,
 				data: { datatype: 'geo-shape' },
 			} ).then( ( newPropertyId: string ) => {
+				propertyId = newPropertyId;
 				const statementData = {
 					claims: [ {
 						mainsnak: {
@@ -228,7 +232,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			// Intercept the POST request
 			interceptSaveEntity( {
 				itemId,
-				propertyName,
+				propertyId,
 				datatype: 'geo-shape',
 				statements: [
 					{
