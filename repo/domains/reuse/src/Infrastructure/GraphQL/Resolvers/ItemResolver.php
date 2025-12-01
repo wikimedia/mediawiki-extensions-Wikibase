@@ -9,6 +9,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\ItemNotFound;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,13 +21,13 @@ class ItemResolver {
 	public function __construct( private readonly BatchGetItems $batchGetItems ) {
 	}
 
-	public function resolveItem( string $itemId ): Deferred {
+	public function resolveItem( string $itemId, QueryContext $context ): Deferred {
 		$this->itemsToFetch[] = $itemId;
 
 		/**
 		 * @throws ItemNotFound
 		 */
-		return new Deferred( function() use ( $itemId ): Item {
+		return new Deferred( function() use ( $itemId, $context ): Item {
 			if ( !$this->itemsBatch ) {
 				$this->itemsBatch = $this->batchGetItems
 					->execute( new BatchGetItemsRequest( $this->itemsToFetch ) )
@@ -38,7 +39,18 @@ class ItemResolver {
 				throw new ItemNotFound( $itemId );
 			}
 
+			$resultId = $item->id->getSerialization();
+			if ( $resultId !== $itemId ) {
+				$context->redirects[$itemId] = $resultId;
+			}
 			return $item;
 		} );
+	}
+
+	public function resolveItems( array $ids, QueryContext $context ): array {
+		return array_map(
+			fn( $id ) => $this->resolveItem( $id, $context ),
+			$ids
+		);
 	}
 }

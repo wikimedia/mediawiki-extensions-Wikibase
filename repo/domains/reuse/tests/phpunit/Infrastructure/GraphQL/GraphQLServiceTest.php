@@ -22,6 +22,7 @@ use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Reference;
@@ -33,6 +34,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
@@ -869,6 +871,76 @@ class GraphQLServiceTest extends MediaWikiIntegrationTestCase {
 			"{ itemsById(ids: [\"Q666666\", \"$itemId\"]) { id } }",
 			'Item "Q666666" does not exist.',
 			[ 'itemsById' => [ null, [ 'id' => $itemId ] ] ],
+		];
+	}
+
+	/**
+	 * @dataProvider redirectProvider
+	 */
+	public function testRedirect( string $query, array $expectedResult, EntityLookup $lookup ): void {
+		$this->assertEquals(
+			$expectedResult,
+			$this->newGraphQLService( $lookup )->query( $query )
+		);
+	}
+
+	public function redirectProvider(): Generator {
+		$redirectSourceId = new ItemId( 'Q99' );
+		$redirectTargetId = new ItemId( 'Q100' );
+		$redirectTarget = new Item( $redirectTargetId );
+
+		$lookupMock = $this->createStub( EntityLookup::class );
+		$lookupMock->expects( $this->once() )
+			->method( 'getEntity' )
+			->with( $redirectSourceId )
+			->willReturn( $redirectTarget );
+
+		yield 'single redirected item' => [
+			"{ item(id: \"${redirectSourceId}\") { id } }",
+			[
+				'data' => [ 'item' => [ 'id' => $redirectTargetId ] ],
+				'extensions' => [
+					QueryContext::KEY_MESSAGE => QueryContext::MESSAGE_REDIRECTS,
+					QueryContext::KEY_REDIRECTS => [ "$redirectSourceId" => "$redirectTargetId" ],
+				],
+			],
+			$lookupMock,
+		];
+
+		$itemId = new ItemId( 'Q97' );
+		$item = new Item( $itemId );
+		$redirectSource1 = new ItemId( 'Q98' );
+		$redirectSource2 = new ItemId( 'Q99' );
+		$redirectTargetId1 = new ItemId( 'Q100' );
+		$redirectTargetId2 = new ItemId( 'Q101' );
+		$redirectTarget1 = new Item( $redirectTargetId1 );
+		$redirectTarget2 = new Item( $redirectTargetId2 );
+
+		$lookupMock = $this->createStub( EntityLookup::class );
+		$lookupMock->expects( $this->exactly( 3 ) )
+			->method( 'getEntity' )
+			->withConsecutive( [ $itemId ], [ $redirectSource1 ], [ $redirectSource2 ] )
+			->willReturnOnConsecutiveCalls( $item, $redirectTarget1, $redirectTarget2 );
+
+		yield 'redirects in itemsById' => [
+			"{ itemsById(ids: [ \"$itemId\", \"$redirectSource1\", \"$redirectSource2\" ] ) { id } }",
+			[
+				'data' => [
+					'itemsById' => [
+						[ 'id' => "$itemId" ],
+						[ 'id' => "$redirectTargetId1" ],
+						[ 'id' => "$redirectTargetId2" ],
+					],
+				],
+				'extensions' => [
+					QueryContext::KEY_MESSAGE => QueryContext::MESSAGE_REDIRECTS,
+					QueryContext::KEY_REDIRECTS => [
+						"$redirectSource1" => "$redirectTargetId1",
+						"$redirectSource2" => "$redirectTargetId2",
+					],
+				],
+			],
+			$lookupMock,
 		];
 	}
 

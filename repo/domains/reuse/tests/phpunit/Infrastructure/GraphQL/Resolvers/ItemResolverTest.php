@@ -17,6 +17,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\ItemNotFound;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
 /**
@@ -34,6 +35,7 @@ class ItemResolverTest extends TestCase {
 	}
 
 	public function testResolveItems(): void {
+		$context = new QueryContext();
 		$requestedItems = [ 'Q123', 'Q321', 'Q234' ];
 		$itemsBatch = $this->newItemsBatchForIds( $requestedItems );
 
@@ -46,9 +48,9 @@ class ItemResolverTest extends TestCase {
 
 		$resolver = new ItemResolver( $batchGetItems );
 
-		$item1Promise = $resolver->resolveItem( $requestedItems[0] );
-		$item2Promise = $resolver->resolveItem( $requestedItems[1] );
-		$item3Promise = $resolver->resolveItem( $requestedItems[2] );
+		$item1Promise = $resolver->resolveItem( $requestedItems[0], $context );
+		$item2Promise = $resolver->resolveItem( $requestedItems[1], $context );
+		$item3Promise = $resolver->resolveItem( $requestedItems[2], $context );
 
 		SyncPromise::runQueue(); // resolves the three promises above
 
@@ -66,7 +68,7 @@ class ItemResolverTest extends TestCase {
 
 		$resolver = new ItemResolver( $batchGetItems );
 
-		$promise = $resolver->resolveItem( $requestedItem );
+		$promise = $resolver->resolveItem( $requestedItem, new QueryContext() );
 		SyncPromise::runQueue(); // resolves the promise above
 
 		$this->assertInstanceOf( ItemNotFound::class, $promise->result );

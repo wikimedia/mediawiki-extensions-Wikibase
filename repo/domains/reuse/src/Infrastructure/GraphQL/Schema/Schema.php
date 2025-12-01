@@ -25,7 +25,8 @@ class Schema extends GraphQLSchema {
 						'args' => [
 							'id' => Type::nonNull( $this->types->getItemIdType() ),
 						],
-						'resolve' => fn( $rootValue, array $args ) => $itemResolver->resolveItem( $args['id'] ),
+						'resolve' => fn( $rootValue, array $args, $context ) => $itemResolver
+								->resolveItem( $args['id'], $context ),
 						'complexity' => fn() => GraphQLService::LOAD_ITEM_COMPLEXITY,
 					],
 					'itemsById' => [
@@ -35,10 +36,8 @@ class Schema extends GraphQLSchema {
 							// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 							'ids' => Type::nonNull( Type::listOf( Type::nonNull( $this->types->getItemIdType() ) ) ),
 						],
-						'resolve' => fn( $rootValue, array $args ) => array_map(
-							$itemResolver->resolveItem( ... ),
-							$args[ 'ids' ]
-						),
+						'resolve' => fn( $rootValue, array $args, $context ) => $itemResolver
+								->resolveItems( $args['ids'], $context ),
 						'complexity' => fn( int $childrenComplexity, array $args ) => count( $args['ids'] ) *
 							GraphQLService::LOAD_ITEM_COMPLEXITY,
 					],
