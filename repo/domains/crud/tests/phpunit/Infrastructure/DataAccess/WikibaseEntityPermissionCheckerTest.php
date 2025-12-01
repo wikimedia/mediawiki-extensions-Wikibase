@@ -176,8 +176,12 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 				Status::newFatal( 'protectedpagetext' ),
 				PermissionCheckResult::newPageProtected(),
 			],
-			'denied, user blocked' => [
+			'denied, user locally blocked' => [
 				Status::newFatal( 'blockedtext' ),
+				PermissionCheckResult::newUserBlocked(),
+			],
+			'denied, user globally blocked' => [
+				Status::newFatal( 'globalblocking-blockedtext-user' ),
 				PermissionCheckResult::newUserBlocked(),
 			],
 			'good status' => [ Status::newGood(), PermissionCheckResult::newAllowed() ],
