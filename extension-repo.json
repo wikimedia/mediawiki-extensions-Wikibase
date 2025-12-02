@@ -36,6 +36,7 @@
 				"StatsFactory",
 				"WikibaseRepo.DataTypeDefinitions",
 				"WikibaseRepo.EntityChangeOpProvider",
+				"WikibaseRepo.EntityDiffer",
 				"WikibaseRepo.EntityIdParser",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.Store"

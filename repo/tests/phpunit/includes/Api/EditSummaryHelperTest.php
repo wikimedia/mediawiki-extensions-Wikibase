@@ -2,13 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use Wikibase\DataModel\Entity\ItemId;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpChange;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
-use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\ChangeOpsResult;
-use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
-use Wikibase\Repo\Tests\ChangeOp\LanguageBoundChangeOpResultStub;
 
 /**
  * @group API
@@ -20,48 +19,50 @@ use Wikibase\Repo\Tests\ChangeOp\LanguageBoundChangeOpResultStub;
  */
 class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	public static function provideChangeOpResultsForPrepareEditSummary() {
-		$entityId = new ItemId( 'Q123' );
+		$statementId = 'Q123$00000000-0000-0000-0000-000000000000';
+		$oldStatement = NewStatement::noValueFor( 'P1' )->build();
+		$newStatement = NewStatement::someValueFor( 'P1' )->build();
+		$statementsDiff = new Diff( [
+			$statementId => new DiffOpChange( $oldStatement, $newStatement ),
+		], true );
 
-		$fiftyOneChangeOps = [];
+		$fiftyOneDiffs = [];
 		for ( $i = 1; $i <= 51; $i++ ) {
-			$fiftyOneChangeOps[] = new LanguageBoundChangeOpResultStub( $entityId, true, "en-x-$i" );
+			$fiftyOneDiffs["en-x-$i"] = new DiffOpChange( "old en-x-$i label", "new en-x-$i label" );
 		}
 
 		return [
 			'no terms changed' => [
-				'changeOpResult' => new ChangeOpsResult( $entityId, [] ),
+				'entityDiff' => new EntityDiff( [ 'claim' => $statementsDiff ] ),
 				'expectedAction' => 'update',
 				'expectedAutoCommentArgs' => [],
 			],
 			'only terms changed in less than 50 languages' => [
-				'changeOpResult' => new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'en' => new DiffOpChange( 'old en label', 'new en label' ) ], true ),
+				] ),
 				'expectedAction' => 'update-languages-short',
 				'expectedAutoCommentArgs' => [ [ 'en' ] ],
 			],
 			'terms in less than 50 languages and other parts changed' => [
-				'changeOpResult' => new ChangeOpsResult( $entityId, [
-					new ChangeOpsResult( $entityId, [
-						new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
-						new LanguageBoundChangeOpResultStub( $entityId, false, 'de' ),
-					] ),
-					new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
-					new ChangeOpResultStub( $entityId, true ),
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( [ 'fr' => new DiffOpChange( 'old fr label', 'new fr label' ) ], true ),
+					'claim' => $statementsDiff,
 				] ),
 				'expectedAction' => 'update-languages-and-other-short',
 				'expectedAutoCommentArgs' => [ [ 'fr' ] ],
 			],
 			'terms in more than 50 languages changed' => [
-				'changeOpResult' => new ChangeOpsResult( $entityId, [
-					...$fiftyOneChangeOps,
-					new ChangeOpResultStub( $entityId, false ),
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( $fiftyOneDiffs, true ),
 				] ),
 				'expectedAction' => 'update-languages',
 				'expectedAutoCommentArgs' => [ 51 ],
 			],
 			'terms in more than 50 languages and other parts changed' => [
-				'changeOpResult' => new ChangeOpsResult( $entityId, [
-					...$fiftyOneChangeOps,
-					new ChangeOpResultStub( $entityId, true ),
+				'entityDiff' => new EntityDiff( [
+					'label' => new Diff( $fiftyOneDiffs, true ),
+					'claim' => $statementsDiff,
 				] ),
 				'expectedAction' => 'update-languages-and-other',
 				'expectedAutoCommentArgs' => [ 51 ],
@@ -73,14 +74,14 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideChangeOpResultsForPrepareEditSummary
 	 */
 	public function testPrepareEditSummary(
-		ChangeOpResult $changeOpResult,
+		EntityDiff $entityDiff,
 		$expectedAction,
 		$expectedAutoCommentArgs
 	) {
 		$summary = new Summary();
 
 		$editSummaryHelper = new EditSummaryHelper();
-		$editSummaryHelper->prepareEditSummary( $summary, $changeOpResult );
+		$editSummaryHelper->prepareEditSummary( $summary, $entityDiff );
 
 		$this->assertEquals( $expectedAction, $summary->getMessageKey() );
 		$this->assertEquals( $expectedAutoCommentArgs, $summary->getCommentArgs() );

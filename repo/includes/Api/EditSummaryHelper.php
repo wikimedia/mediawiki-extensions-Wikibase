@@ -2,11 +2,10 @@
 
 namespace Wikibase\Repo\Api;
 
+use Diff\DiffOp\Diff\Diff;
+use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\ChangeOpResultTraversal;
-use Wikibase\Repo\ChangeOp\ChangeOpsResult;
-use Wikibase\Repo\ChangeOp\LanguageBoundChangeOpResult;
+use Wikimedia\Assert\Assert;
 
 /**
  * Helper methods for preparing summary instance for editing entity activity
@@ -14,46 +13,56 @@ use Wikibase\Repo\ChangeOp\LanguageBoundChangeOpResult;
  */
 class EditSummaryHelper {
 
-	use ChangeOpResultTraversal;
-
 	public const SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES = 50;
 
-	/**
-	 * Prepares edit summaries with appropriate action and comment args
-	 * based on what has changed on the entity.
-	 *
-	 * @param Summary $summary
-	 * @param ChangeOpResult $changeOpResult
-	 * @return void
-	 */
-	public function prepareEditSummary( Summary $summary, ChangeOpResult $changeOpResult ) {
-		$changedLanguagesAsKeys = [];
-		$nonLanguageBoundChangesCount = 0;
+	public function prepareEditSummary( Summary $summary, EntityDiff $entityDiff ): void {
+		$labelsDiff = $entityDiff->getLabelsDiff();
+		$descriptionsDiff = $entityDiff->getDescriptionsDiff();
+		$aliasesDiff = $entityDiff->getAliasesDiff();
+		$diffCount = $entityDiff->count();
 
-		foreach ( $this->makeRecursiveTraversable( $changeOpResult ) as $result ) {
-			if ( !$result->isEntityChanged() ) {
-				continue;
-			}
-			if ( $result instanceof LanguageBoundChangeOpResult ) {
-				$changedLanguagesAsKeys[$result->getLanguageCode()] = 1;
-			} elseif ( !$result instanceof ChangeOpsResult ) {
-				$nonLanguageBoundChangesCount += 1;
+		$languagesDiffCount = $labelsDiff->count() + $descriptionsDiff->count() + $aliasesDiff->count();
+		if ( $languagesDiffCount > 0 ) {
+			$this->prepareEditSummaryForLanguages(
+				$summary,
+				$labelsDiff,
+				$descriptionsDiff,
+				$aliasesDiff,
+				$diffCount !== $languagesDiffCount,
+			);
+		} else {
+			$this->prepareGenericEditSummary( $summary );
+		}
+	}
+
+	private function prepareEditSummaryForLanguages(
+		Summary $summary,
+		Diff $labelsDiff,
+		Diff $descriptionsDiff,
+		Diff $aliasesDiff,
+		bool $hasOtherChanges,
+	): void {
+		$changedLanguagesAsKeys = [];
+		foreach ( [ $labelsDiff, $descriptionsDiff, $aliasesDiff ] as $diff ) {
+			Assert::invariant( $diff->isAssociative(), '$diff->isAssociative()' );
+			foreach ( $diff->getOperations() as $languageCode => $diffOp ) {
+				$changedLanguagesAsKeys[$languageCode] = 1;
 			}
 		}
-
 		$changedLanguagesCount = count( $changedLanguagesAsKeys );
+		Assert::invariant( $changedLanguagesCount > 0, '$changedLanguagesCount > 0' );
 
-		if ( $changedLanguagesCount === 0 ) {
-			$action = 'update';
-		} elseif ( $changedLanguagesCount <= self::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
-			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other-short' : 'update-languages-short';
-
+		if ( $changedLanguagesCount <= self::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
+			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other-short' : 'update-languages-short' );
 			$summary->setAutoCommentArgs( [ array_keys( $changedLanguagesAsKeys ) ] );
 		} else {
-			$action = $nonLanguageBoundChangesCount > 0 ? 'update-languages-and-other' : 'update-languages';
-
+			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other' : 'update-languages' );
 			$summary->setAutoCommentArgs( [ $changedLanguagesCount ] );
 		}
-		$summary->setAction( $action );
 	}
+
+	private function prepareGenericEditSummary( Summary $summary ): void {
+		$summary->setAction( 'update' );
+	}
+
 }

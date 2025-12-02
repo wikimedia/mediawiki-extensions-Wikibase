@@ -13,6 +13,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -20,7 +21,6 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\Store\Store;
@@ -65,6 +65,11 @@ class EditEntity extends ModifyEntity {
 	private $entityChangeOpProvider;
 
 	/**
+	 * @var EntityDiffer
+	 */
+	private $entityDiffer;
+
+	/**
 	 * @var EditSummaryHelper
 	 */
 	private $editSummaryHelper;
@@ -82,6 +87,7 @@ class EditEntity extends ModifyEntity {
 		EntityIdParser $idParser,
 		array $propertyDataTypes,
 		EntityChangeOpProvider $entityChangeOpProvider,
+		EntityDiffer $entityDiffer,
 		EditSummaryHelper $editSummaryHelper,
 		bool $federatedPropertiesEnabled,
 		array $sandboxEntityIds
@@ -94,6 +100,7 @@ class EditEntity extends ModifyEntity {
 		$this->propertyDataTypes = $propertyDataTypes;
 
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
+		$this->entityDiffer = $entityDiffer;
 		$this->editSummaryHelper = $editSummaryHelper;
 		$this->sandboxEntityIds = $sandboxEntityIds;
 	}
@@ -104,6 +111,7 @@ class EditEntity extends ModifyEntity {
 		StatsFactory $statsFactory,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityChangeOpProvider $entityChangeOpProvider,
+		EntityDiffer $entityDiffer,
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings,
 		Store $store
@@ -116,6 +124,7 @@ class EditEntity extends ModifyEntity {
 			$entityIdParser,
 			$dataTypeDefinitions->getTypeIds(),
 			$entityChangeOpProvider,
+			$entityDiffer,
 			new EditSummaryHelper(),
 			$settings->getSetting( 'federatedPropertiesEnabled' ),
 			$settings->getSetting( 'sandboxEntityIds' )
@@ -224,14 +233,14 @@ class EditEntity extends ModifyEntity {
 			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.create' )->increment();
 		}
 
+		$oldEntity = clone $entity;
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
-			$oldEntity = clone $entity;
 			$entity->clear();
 
 			// Validate it only by applying the changeOp on the current entity
 			// instead of an empty one due avoid issues like T243158.
 			// We are going to save the cleared entity instead,
-			$changeOpResult = $this->applyChangeOp( $changeOp, $oldEntity );
+			$this->applyChangeOp( $changeOp, $oldEntity );
 
 			try {
 				$changeOp->apply( $entity );
@@ -240,7 +249,7 @@ class EditEntity extends ModifyEntity {
 			}
 
 		} else {
-			$changeOpResult = $this->applyChangeOp( $changeOp, $entity );
+			$this->applyChangeOp( $changeOp, $entity );
 		}
 
 		try {
@@ -254,13 +263,13 @@ class EditEntity extends ModifyEntity {
 			);
 		}
 
-		return $this->getSummary( $preparedParameters, $entity, $changeOpResult );
+		return $this->getSummary( $preparedParameters, $oldEntity, $entity );
 	}
 
 	private function getSummary(
 		array $preparedParameters,
-		EntityDocument $entity,
-		ChangeOpResult $changeOpResult
+		EntityDocument $oldEntity,
+		EntityDocument $newEntity,
 	): Summary {
 		$summary = $this->createSummary( $preparedParameters );
 
@@ -268,10 +277,11 @@ class EditEntity extends ModifyEntity {
 			if ( $preparedParameters[self::PARAM_CLEAR] !== false ) {
 				$summary->setAction( 'override' );
 			} else {
-				$this->editSummaryHelper->prepareEditSummary( $summary, $changeOpResult );
+				$entityDiff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
+				$this->editSummaryHelper->prepareEditSummary( $summary, $entityDiff );
 			}
 		} else {
-			$summary->setAction( 'create-' . $entity->getType() );
+			$summary->setAction( 'create-' . $newEntity->getType() );
 		}
 
 		return $summary;
