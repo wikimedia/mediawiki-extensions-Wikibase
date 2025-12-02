@@ -2,12 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
-use Wikibase\Repo\ChangeOp\DummyChangeOpResult;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
+use Wikibase\Repo\ChangeOp\ChangeOpResult;
+use Wikibase\Repo\ChangeOp\ChangeOpsResult;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
+use Wikibase\Repo\Tests\ChangeOp\LanguageBoundChangeOpResultStub;
 
 /**
  * @group API
@@ -19,39 +20,49 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
  */
 class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	public static function provideChangeOpResultsForPrepareEditSummary() {
+		$entityId = new ItemId( 'Q123' );
+
+		$fiftyOneChangeOps = [];
+		for ( $i = 1; $i <= 51; $i++ ) {
+			$fiftyOneChangeOps[] = new LanguageBoundChangeOpResultStub( $entityId, true, "en-x-$i" );
+		}
+
 		return [
 			'no terms changed' => [
-				'collectChangedLanguages' => [],
-				'changedLanguagesCount' => 0,
-				'nonLanguageBoundChangesCount' => 1,
+				'changeOpResult' => new ChangeOpsResult( $entityId, [] ),
 				'expectedAction' => 'update',
 				'expectedAutoCommentArgs' => [],
 			],
 			'only terms changed in less than 50 languages' => [
-				'collectChangedLanguages' => [ 'en' ],
-				'changedLanguagesCount' => 1,
-				'nonLanguageBoundChangesCount' => 0,
+				'changeOpResult' => new LanguageBoundChangeOpResultStub( $entityId, true, 'en' ),
 				'expectedAction' => 'update-languages-short',
 				'expectedAutoCommentArgs' => [ [ 'en' ] ],
 			],
-			' terms in less than 50 languages and other parts changed' => [
-				'collectChangedLanguages' => [ 'fr' ],
-				'changedLanguagesCount' => 1,
-				'nonLanguageBoundChangesCount' => 1,
+			'terms in less than 50 languages and other parts changed' => [
+				'changeOpResult' => new ChangeOpsResult( $entityId, [
+					new ChangeOpsResult( $entityId, [
+						new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
+						new LanguageBoundChangeOpResultStub( $entityId, false, 'de' ),
+					] ),
+					new LanguageBoundChangeOpResultStub( $entityId, true, 'fr' ),
+					new ChangeOpResultStub( $entityId, true ),
+				] ),
 				'expectedAction' => 'update-languages-and-other-short',
 				'expectedAutoCommentArgs' => [ [ 'fr' ] ],
 			],
 			'terms in more than 50 languages changed' => [
-				'collectChangedLanguages' => [ 'en', '...' ],
-				'changedLanguagesCount' => 51,
-				'nonLanguageBoundChangesCount' => 0,
+				'changeOpResult' => new ChangeOpsResult( $entityId, [
+					...$fiftyOneChangeOps,
+					new ChangeOpResultStub( $entityId, false ),
+				] ),
 				'expectedAction' => 'update-languages',
 				'expectedAutoCommentArgs' => [ 51 ],
 			],
-			'terms  in more than 50 languages and other parts changed' => [
-				'collectChangedLanguages' => [ 'en', '...' ],
-				'changedLanguagesCount' => 51,
-				'nonLanguageBoundChangesCount' => 3,
+			'terms in more than 50 languages and other parts changed' => [
+				'changeOpResult' => new ChangeOpsResult( $entityId, [
+					...$fiftyOneChangeOps,
+					new ChangeOpResultStub( $entityId, true ),
+				] ),
 				'expectedAction' => 'update-languages-and-other',
 				'expectedAutoCommentArgs' => [ 51 ],
 			],
@@ -62,35 +73,16 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideChangeOpResultsForPrepareEditSummary
 	 */
 	public function testPrepareEditSummary(
-		$collectChangedLanguages,
-		$changedLanguagesCount,
-		$nonLanguageBoundChangsCount,
+		ChangeOpResult $changeOpResult,
 		$expectedAction,
 		$expectedAutoCommentArgs
 	) {
 		$summary = new Summary();
 
-		$editSummaryHelper = $this->newEditSummaryHelper( $collectChangedLanguages, $changedLanguagesCount, $nonLanguageBoundChangsCount );
-		$editSummaryHelper->prepareEditSummary( $summary, new DummyChangeOpResult() );
+		$editSummaryHelper = new EditSummaryHelper();
+		$editSummaryHelper->prepareEditSummary( $summary, $changeOpResult );
 
 		$this->assertEquals( $expectedAction, $summary->getMessageKey() );
 		$this->assertEquals( $expectedAutoCommentArgs, $summary->getCommentArgs() );
-	}
-
-	private function newEditSummaryHelper( $collectChangedLanguages, $changedLanguagesCount, $nonLanguageBoundChangesCount ) {
-		$mockedChangedLanguagesCounter = $this->createMock( ChangedLanguagesCounter::class );
-		$mockedChangedLanguagesCounter->method( 'countChangedLanguages' )->willReturn( $changedLanguagesCount );
-
-		$mockedChangedLanguagesCollector = $this->createMock( ChangedLanguagesCollector::class );
-		$mockedChangedLanguagesCollector->method( 'collectChangedLanguages' )->willReturn( $collectChangedLanguages );
-
-		$mockedNonLanguageBoundChangesCounter = $this->createMock( NonLanguageBoundChangesCounter::class );
-		$mockedNonLanguageBoundChangesCounter->method( 'countChanges' )->willReturn( $nonLanguageBoundChangesCount );
-
-		return new EditSummaryHelper(
-			$mockedChangedLanguagesCollector,
-			$mockedChangedLanguagesCounter,
-			$mockedNonLanguageBoundChangesCounter
-		);
 	}
 }

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Domains\Crud\Infrastructure;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Summary;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
+use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\Domains\Crud\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Model\PatchPropertyEditSummary;
 
@@ -47,7 +47,7 @@ class WholeEntityEditSummaryToFormattableSummaryConverter {
 	private function setSummary( array $modifiedLanguages, bool $hasStatementsOrSitelinksChanged ): Summary {
 		$languagesCount = count( $modifiedLanguages );
 
-		if ( $languagesCount >= ChangedLanguagesCounter::SHORTENED_SUMMARY_MAX_EDIT ) {
+		if ( $languagesCount >= EditSummaryHelper::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
 			$actionName = $hasStatementsOrSitelinksChanged ? 'update-languages-and-other' : 'update-languages';
 			$commentArgs = [ (string)$languagesCount ];
 		} elseif ( $languagesCount > 0 ) {
