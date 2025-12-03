@@ -50,7 +50,7 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		fetchResults( offset = undefined ) {
+		fetchResultsImmediate( offset = undefined ) {
 			const params = {
 				action: 'wbsearchentities',
 				language: this.languageCode,
@@ -62,6 +62,14 @@ module.exports = exports = defineComponent( {
 			}
 
 			return wbui2025.api.api.get( params );
+		},
+		fetchResultsDebounced: mw.util.debounce( function ( resolve, reject, offset = undefined ) {
+			this.fetchResultsImmediate( offset ).then( resolve, reject );
+		}, 300 ),
+		fetchResults( offset = undefined ) {
+			return new Promise( ( resolve, reject ) => {
+				this.fetchResultsDebounced( resolve, reject, offset );
+			} );
 		},
 		adaptApiResponse( results ) {
 			return results.map( ( { id, label, datatype, url, match, description, display = {} } ) => ( {
@@ -112,7 +120,7 @@ module.exports = exports = defineComponent( {
 			}
 
 			try {
-				const response = await this.fetchResults( this.menuItems.length );
+				const response = await this.fetchResultsImmediate( this.menuItems.length );
 				// make sure the response is still relevant first
 				if ( this.currentSearchTerm !== value ) {
 					return;

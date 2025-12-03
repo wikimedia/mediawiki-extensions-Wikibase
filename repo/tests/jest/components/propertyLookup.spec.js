@@ -1,3 +1,5 @@
+jest.useFakeTimers();
+
 jest.mock(
 	'../../../codex.js',
 	() => require( '@wikimedia/codex' ),
@@ -131,6 +133,8 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 		it( 'text input causes an API call and updates menu items', async () => {
 			wbui2025.api.api.get.mockResolvedValueOnce( p123SearchResult );
 			await lookup.vm.$emit( 'update:input-value', 'search term' );
+			await jest.advanceTimersByTime( 300 );
+			await lookup.vm.$nextTick();
 			await lookup.vm.$nextTick();
 
 			expect( wbui2025.api.api.get ).toHaveBeenCalledTimes( 1 );
@@ -165,6 +169,7 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			beforeEach( async () => {
 				wbui2025.api.api.get.mockResolvedValueOnce( p123SearchResult );
 				await lookup.vm.$emit( 'update:input-value', 'search term' );
+				await jest.advanceTimersByTime( 300 );
 			} );
 
 			it( 'makes another api call when `load-more` is emitted and adds more menu items', async () => {

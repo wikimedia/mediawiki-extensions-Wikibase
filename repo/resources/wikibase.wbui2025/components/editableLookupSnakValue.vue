@@ -74,7 +74,11 @@ module.exports = exports = defineComponent( {
 		},
 
 		fetchLookupResults( searchTerm, offset = 0 ) {
-			return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
+			if ( offset > 0 ) {
+				return wbui2025.store.snakValueStrategyFactory.searchByDatatype( this.datatype, searchTerm, offset );
+			} else {
+				return wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced( this.datatype, searchTerm, offset );
+			}
 		},
 
 		onUpdateInputValue( value ) {

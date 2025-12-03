@@ -56,12 +56,21 @@ class SnakValueStrategyFactory {
 	constructor() {
 		this.strategiesByDatatype = {};
 		this.searchesByDatatype = {};
+		this.searchesByDatatypeDebounced = {};
 	}
 
 	registerStrategyForDatatype( datatype, strategyKlass, searchByDatatype = null ) {
 		this.strategiesByDatatype[ datatype ] = strategyKlass;
 		if ( searchByDatatype ) {
 			this.searchesByDatatype[ datatype ] = searchByDatatype;
+			const debouncedSearch = mw.util.debounce( function ( resolve, reject, ...args ) {
+				searchByDatatype.call( this, ...args ).then( resolve, reject );
+			}, 300 );
+			this.searchesByDatatypeDebounced[ datatype ] = function ( ...args ) {
+				return new Promise( ( resolve, reject ) => {
+					debouncedSearch.call( this, resolve, reject, ...args );
+				} );
+			};
 		}
 	}
 
@@ -79,6 +88,13 @@ class SnakValueStrategyFactory {
 			throw new Error( `Unsupported datatype for search: ${ datatype }` );
 		}
 		return this.searchesByDatatype[ datatype ]( searchTerm, offset );
+	}
+
+	searchByDatatypeDebounced( datatype, searchTerm, offset = 0 ) {
+		if ( !( datatype in this.searchesByDatatype ) ) {
+			throw new Error( `Unsupported datatype for search: ${ datatype }` );
+		}
+		return this.searchesByDatatypeDebounced[ datatype ]( searchTerm, offset );
 	}
 }
 
