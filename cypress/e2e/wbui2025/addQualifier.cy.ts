@@ -90,7 +90,13 @@ describe( 'wbui2025 add qualifiers', () => {
 				const valueForm = new ValueForm( element );
 				valueForm.qualifierInputs().first().clear().type( updatedQualifierSnakValue );
 			} );
-			editStatementFormPage.publishButton().click();
+
+			/* The publish button should be visible right away - it should not
+			 * be covered by, for example, the success message from the previous publish.
+			 * We give it 1000ms to be ready because we still need parseValue to run
+			 * (until which time the button is in the disabled state)
+			 */
+			editStatementFormPage.publishButton().click( { timeout: 1000 } );
 
 			/* Wait for the form to close, and check the value is changed */
 			editStatementFormPage.valueForms().should( 'not.exist' );

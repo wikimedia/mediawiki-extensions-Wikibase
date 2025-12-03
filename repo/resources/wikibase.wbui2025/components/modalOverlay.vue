@@ -79,6 +79,7 @@
 const { defineComponent } = require( 'vue' );
 const { cdxIconArrowPrevious, cdxIconCheck, cdxIconClose } = require( '../icons.json' );
 const { CdxButton, CdxIcon, CdxProgressBar } = require( '../../../codex.js' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -142,6 +143,7 @@ module.exports = exports = defineComponent( {
 	},
 	mounted() {
 		document.body.classList.add( 'wikibase-wbui2025-modal-open' );
+		wbui2025.store.useMessageStore().clearStatusMessages();
 	},
 	unmounted() {
 		const target = document.getElementById( 'mw-teleport-target' );
