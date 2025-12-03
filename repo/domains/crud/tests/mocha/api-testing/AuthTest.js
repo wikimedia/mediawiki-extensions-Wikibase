@@ -116,6 +116,37 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 						);
 					} );
 				} );
+
+				describe( 'Globally Blocked user', () => {
+					before( async () => {
+						await requireExtensions( [ 'GlobalBlocking' ] )();
+						await root.addGroups( root.username, [ 'steward' ] );
+						await root.action( 'globalblock', {
+							target: user.username,
+							reason: 'testing',
+							expiry: '1 hour',
+							token: await root.token()
+						}, 'POST' );
+					} );
+
+					after( async () => {
+						await root.action( 'globalblock', {
+							target: user.username,
+							reason: 'testing',
+							unblock: true,
+							token: await root.token()
+						}, 'POST' );
+					} );
+
+					it( 'cannot create/edit if blocked', async () => {
+						assertValidError(
+							await newRequestBuilder().withUser( user ).makeRequest(),
+							403,
+							'permission-denied',
+							{ denial_reason: 'blocked-user' }
+						);
+					} );
+				} );
 			}
 		);
 

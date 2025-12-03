@@ -76,7 +76,10 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 			return PermissionCheckResult::newAllowed();
 		} elseif ( $this->hasError( 'protectedpagetext', $status ) ) {
 			return PermissionCheckResult::newPageProtected();
-		} elseif ( $this->hasError( 'blockedtext', $status ) ) {
+		} elseif ( $this->hasErrors( [
+			'blockedtext',
+			'globalblocking-blockedtext-user',
+		], $status ) ) {
 			return PermissionCheckResult::newUserBlocked();
 		}
 
@@ -90,6 +93,17 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 				fn( MessageSpecifier $message ) => $message->getKey(),
 				$status->getMessages()
 			)
+		);
+	}
+
+	private function hasErrors( array $errors, Status $status ): bool {
+		return in_array(
+			true,
+			array_map(
+				fn( string $error ) => $this->hasError( $error, $status ),
+				$errors
+			),
+			true
 		);
 	}
 
