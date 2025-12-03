@@ -74,7 +74,8 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				}
 
 				editFormPage.lookupInput().clear();
-				editFormPage.lookupInput().type( newEntityLabel );
+				editFormPage.lookupInput().type( newEntityLabel, { parseSpecialCharSequences: false } );
+				editFormPage.lookupInput().should( 'have.value', newEntityLabel );
 				editFormPage.lookupInput().focus();
 
 				editFormPage.menu().should( 'be.visible' );

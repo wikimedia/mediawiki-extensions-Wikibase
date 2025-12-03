@@ -34,8 +34,14 @@ export class AddStatementFormPage {
 	}
 
 	public setProperty( searchTerm: string ): this {
-		this.propertyInput().type( searchTerm );
-		cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu-item:first' ).click();
+		this.propertyInput().clear();
+		this.propertyInput().type( searchTerm, { parseSpecialCharSequences: false } );
+		this.propertyInput().should( 'have.value', searchTerm );
+		this.propertyInput().focus();
+
+		cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu' ).should( 'be.visible' );
+		cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu-item:first:not(.cdx-menu__no-results)' ).click();
+
 		return this;
 	}
 
