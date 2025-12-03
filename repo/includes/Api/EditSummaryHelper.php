@@ -24,40 +24,20 @@ class EditSummaryHelper {
 
 	public function getEditSummary( array $preparedParameters, EntityDocument $oldEntity, EntityDocument $newEntity ): Summary {
 		$summary = new Summary( 'wbeditentity' );
-		$summary->setUserSummary( $preparedParameters[ModifyEntity::PARAM_SUMMARY] );
 
 		if ( $this->isUpdatingExistingEntity( $preparedParameters ) ) {
 			if ( $preparedParameters[EditEntity::PARAM_CLEAR] !== false ) {
 				$summary->setAction( 'override' );
 			} else {
 				$entityDiff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
-				$this->prepareEditSummary( $summary, $entityDiff );
+				$summary = $this->getEditSummaryForDiff( $entityDiff );
 			}
 		} else {
 			$summary->setAction( 'create-' . $newEntity->getType() );
 		}
 
+		$summary->setUserSummary( $preparedParameters[ModifyEntity::PARAM_SUMMARY] );
 		return $summary;
-	}
-
-	public function prepareEditSummary( Summary $summary, EntityDiff $entityDiff ): void {
-		$labelsDiff = $entityDiff->getLabelsDiff();
-		$descriptionsDiff = $entityDiff->getDescriptionsDiff();
-		$aliasesDiff = $entityDiff->getAliasesDiff();
-		$diffCount = $entityDiff->count();
-
-		$languagesDiffCount = $labelsDiff->count() + $descriptionsDiff->count() + $aliasesDiff->count();
-		if ( $languagesDiffCount > 0 ) {
-			$this->prepareEditSummaryForLanguages(
-				$summary,
-				$labelsDiff,
-				$descriptionsDiff,
-				$aliasesDiff,
-				$diffCount !== $languagesDiffCount,
-			);
-		} else {
-			$this->prepareGenericEditSummary( $summary );
-		}
 	}
 
 	private function isUpdatingExistingEntity( array $preparedParameters ): bool {
@@ -67,13 +47,31 @@ class EditSummaryHelper {
 		return $isTargetingEntity xor $isTargetingPage;
 	}
 
-	private function prepareEditSummaryForLanguages(
-		Summary $summary,
+	public function getEditSummaryForDiff( EntityDiff $entityDiff ): Summary {
+		$labelsDiff = $entityDiff->getLabelsDiff();
+		$descriptionsDiff = $entityDiff->getDescriptionsDiff();
+		$aliasesDiff = $entityDiff->getAliasesDiff();
+		$diffCount = $entityDiff->count();
+
+		$languagesDiffCount = $labelsDiff->count() + $descriptionsDiff->count() + $aliasesDiff->count();
+		if ( $languagesDiffCount > 0 ) {
+			return $this->getEditSummaryForLanguages(
+				$labelsDiff,
+				$descriptionsDiff,
+				$aliasesDiff,
+				$diffCount !== $languagesDiffCount,
+			);
+		} else {
+			return $this->getGenericEditSummary();
+		}
+	}
+
+	private function getEditSummaryForLanguages(
 		Diff $labelsDiff,
 		Diff $descriptionsDiff,
 		Diff $aliasesDiff,
 		bool $hasOtherChanges,
-	): void {
+	): Summary {
 		$changedLanguagesAsKeys = [];
 		foreach ( [ $labelsDiff, $descriptionsDiff, $aliasesDiff ] as $diff ) {
 			Assert::invariant( $diff->isAssociative(), '$diff->isAssociative()' );
@@ -84,6 +82,7 @@ class EditSummaryHelper {
 		$changedLanguagesCount = count( $changedLanguagesAsKeys );
 		Assert::invariant( $changedLanguagesCount > 0, '$changedLanguagesCount > 0' );
 
+		$summary = new Summary( 'wbeditentity' );
 		if ( $changedLanguagesCount <= self::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
 			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other-short' : 'update-languages-short' );
 			$summary->setAutoCommentArgs( [ array_keys( $changedLanguagesAsKeys ) ] );
@@ -91,10 +90,11 @@ class EditSummaryHelper {
 			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other' : 'update-languages' );
 			$summary->setAutoCommentArgs( [ $changedLanguagesCount ] );
 		}
+		return $summary;
 	}
 
-	private function prepareGenericEditSummary( Summary $summary ): void {
-		$summary->setAction( 'update' );
+	private function getGenericEditSummary(): Summary {
+		return new Summary( 'wbeditentity', 'update' );
 	}
 
 }

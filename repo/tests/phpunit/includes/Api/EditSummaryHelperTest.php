@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
 
 /**
@@ -19,7 +19,7 @@ use Wikibase\Repo\Api\EditSummaryHelper;
  * @license GPL-2.0-or-later
  */
 class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
-	public static function provideChangeOpResultsForPrepareEditSummary() {
+	public static function provideEntityDiffsForGetEditSummary() {
 		$statementId = 'Q123$00000000-0000-0000-0000-000000000000';
 		$oldStatement = NewStatement::noValueFor( 'P1' )->build();
 		$newStatement = NewStatement::someValueFor( 'P1' )->build();
@@ -35,14 +35,14 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 		return [
 			'no terms changed' => [
 				'entityDiff' => new EntityDiff( [ 'claim' => $statementsDiff ] ),
-				'expectedAction' => 'update',
+				'expectedAction' => 'wbeditentity-update',
 				'expectedAutoCommentArgs' => [],
 			],
 			'only terms changed in less than 50 languages' => [
 				'entityDiff' => new EntityDiff( [
 					'label' => new Diff( [ 'en' => new DiffOpChange( 'old en label', 'new en label' ) ], true ),
 				] ),
-				'expectedAction' => 'update-languages-short',
+				'expectedAction' => 'wbeditentity-update-languages-short',
 				'expectedAutoCommentArgs' => [ [ 'en' ] ],
 			],
 			'terms in less than 50 languages and other parts changed' => [
@@ -50,14 +50,14 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 					'label' => new Diff( [ 'fr' => new DiffOpChange( 'old fr label', 'new fr label' ) ], true ),
 					'claim' => $statementsDiff,
 				] ),
-				'expectedAction' => 'update-languages-and-other-short',
+				'expectedAction' => 'wbeditentity-update-languages-and-other-short',
 				'expectedAutoCommentArgs' => [ [ 'fr' ] ],
 			],
 			'terms in more than 50 languages changed' => [
 				'entityDiff' => new EntityDiff( [
 					'label' => new Diff( $fiftyOneDiffs, true ),
 				] ),
-				'expectedAction' => 'update-languages',
+				'expectedAction' => 'wbeditentity-update-languages',
 				'expectedAutoCommentArgs' => [ 51 ],
 			],
 			'terms in more than 50 languages and other parts changed' => [
@@ -65,26 +65,38 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 					'label' => new Diff( $fiftyOneDiffs, true ),
 					'claim' => $statementsDiff,
 				] ),
-				'expectedAction' => 'update-languages-and-other',
+				'expectedAction' => 'wbeditentity-update-languages-and-other',
 				'expectedAutoCommentArgs' => [ 51 ],
 			],
 		];
 	}
 
 	/**
-	 * @dataProvider provideChangeOpResultsForPrepareEditSummary
+	 * @dataProvider provideEntityDiffsForGetEditSummary
 	 */
-	public function testPrepareEditSummary(
+	public function testGetEditSummary(
 		EntityDiff $entityDiff,
-		$expectedAction,
-		$expectedAutoCommentArgs
+		string $expectedAction,
+		array $expectedAutoCommentArgs
 	) {
-		$summary = new Summary();
+		$oldEntity = new Item();
+		$newEntity = new Item();
+		$entityDiffer = $this->createMock( EntityDiffer::class );
+		$entityDiffer->expects( $this->once() )
+			->method( 'diffEntities' )
+			->with( $oldEntity, $newEntity )
+			->willReturn( $entityDiff );
+		$editSummaryHelper = new EditSummaryHelper( $entityDiffer );
 
-		$editSummaryHelper = new EditSummaryHelper( $this->createMock( EntityDiffer::class ) );
-		$editSummaryHelper->prepareEditSummary( $summary, $entityDiff );
+		$preparedParameters = [
+			'id' => 'Q1',
+			'clear' => false,
+			'summary' => 'user summary',
+		];
+		$summary = $editSummaryHelper->getEditSummary( $preparedParameters, $oldEntity, $newEntity );
 
 		$this->assertEquals( $expectedAction, $summary->getMessageKey() );
 		$this->assertEquals( $expectedAutoCommentArgs, $summary->getCommentArgs() );
+		$this->assertSame( 'user summary', $summary->getUserSummary() );
 	}
 }
