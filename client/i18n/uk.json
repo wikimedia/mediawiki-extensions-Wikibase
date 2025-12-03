@@ -108,6 +108,8 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Назва: $1",
 	"wikibase-pageinfo-entity-usage-D": "Деякі описи",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Опис: $1",
+	"wikibase-pageinfo-entity-usage-A": "Деякі альтернативні назви",
+	"wikibase-pageinfo-entity-usage-A-with-modifier": "Альтернативна назва: $1",
 	"wikibase-pageinfo-entity-usage-T": "Заголовок",
 	"wikibase-pageinfo-entity-usage-C": "Деякі твердження",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Твердження: $1",
