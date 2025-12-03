@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
@@ -80,7 +81,7 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$summary = new Summary();
 
-		$editSummaryHelper = new EditSummaryHelper();
+		$editSummaryHelper = new EditSummaryHelper( $this->createMock( EntityDiffer::class ) );
 		$editSummaryHelper->prepareEditSummary( $summary, $entityDiff );
 
 		$this->assertEquals( $expectedAction, $summary->getMessageKey() );

@@ -43,6 +43,8 @@ abstract class ModifyEntity extends ApiBase {
 	use FederatedPropertyApiValidatorTrait;
 	use ApiCreateTempUserTrait;
 
+	public const PARAM_SUMMARY = 'summary';
+
 	/**
 	 * @var StringNormalizer
 	 */
@@ -154,7 +156,7 @@ abstract class ModifyEntity extends ApiBase {
 	 */
 	protected function createSummary( array $params ): Summary {
 		$summary = new Summary( $this->getModuleName() );
-		$summary->setUserSummary( $params['summary'] );
+		$summary->setUserSummary( $params[self::PARAM_SUMMARY] );
 		return $summary;
 	}
 
@@ -484,7 +486,7 @@ abstract class ModifyEntity extends ApiBase {
 			'baserevid' => [
 				ParamValidator::PARAM_TYPE => 'integer',
 			],
-			'summary' => [
+			self::PARAM_SUMMARY => [
 				ParamValidator::PARAM_TYPE => 'string',
 			],
 			'tags' => [
