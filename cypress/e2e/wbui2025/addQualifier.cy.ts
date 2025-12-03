@@ -175,7 +175,7 @@ describe( 'wbui2025 add qualifiers', () => {
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Example.tab',
+						title: 'Data:StubbedExample.tab',
 						pageid: 123456,
 						size: 1000,
 						wordcount: 100,
@@ -184,7 +184,7 @@ describe( 'wbui2025 add qualifiers', () => {
 					},
 					{
 						ns: 486,
-						title: 'Data:Sample.tab',
+						title: 'Data:StubbedSample.tab',
 						pageid: 123457,
 						size: 1500,
 						wordcount: 150,

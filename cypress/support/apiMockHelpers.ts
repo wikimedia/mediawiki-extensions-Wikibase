@@ -28,6 +28,10 @@ interface CommonsSearchResponse {
 	};
 }
 
+type ItemLabelMap = {
+	[key: string]: string;
+};
+
 /**
  * Creates a mock intercept for the Commons search API
  *
@@ -54,21 +58,27 @@ export function interceptCommonsSearch( options: CommonsSearchOptions, alias: st
 /**
  * Creates a mock intercept for the wbformatvalue API that formats data values
  *
+ * @param itemLabelMap - mapping from item IDs to labels
  * @param alias - Cypress alias for the intercept (default: 'formatValue')
  */
-export function interceptFormatValue( alias: string = 'formatValue' ): void {
+export function interceptFormatValue( itemLabelMap: ItemLabelMap = {}, alias: string = 'formatValue' ): void {
 	cy.intercept( 'GET', '**/api.php?*action=wbformatvalue*', ( req ) => {
 		const url = new URL( req.url );
 		const datavalueParam = url.searchParams.get( 'datavalue' );
 
 		if ( datavalueParam ) {
 			const datavalue = JSON.parse( decodeURIComponent( datavalueParam ) );
-			const value = datavalue.value;
+			let value = datavalue.value;
+			let href = datavalue.value;
+			if ( typeof value === 'object' && value.id && itemLabelMap[ value.id ] ) {
+				value = itemLabelMap[ value.id ];
+				href = value.id;
+			}
 
 			req.reply( {
 				statusCode: 200,
 				body: {
-					result: `<a href="/wiki/${ value }">${ value }</a>`,
+					result: `<a href="/wiki/${ href }">${ value }</a>`,
 				},
 			} );
 		}

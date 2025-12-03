@@ -32,6 +32,10 @@ export class ItemViewPage {
 		this.itemId = itemId;
 	}
 
+	public getItemId(): string {
+		return this.itemId;
+	}
+
 	public open( lang: string = 'en' ): this {
 		// We force tests to be in English be default, to be able to make assertions
 		// about texts (especially, for example, selecting items from a Codex MenuButton
