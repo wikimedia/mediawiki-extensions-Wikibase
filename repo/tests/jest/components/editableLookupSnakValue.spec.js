@@ -20,7 +20,8 @@ wbui2025.api = {
 };
 wbui2025.store = Object.assign( wbui2025.store, {
 	snakValueStrategyFactory: {
-		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) )
+		searchByDatatype: jest.fn( () => Promise.resolve( { query: { search: [] } } ) ),
+		searchByDatatypeDebounced: jest.fn( () => Promise.resolve( { query: { search: [] } } ) )
 	}
 } );
 
@@ -137,9 +138,9 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			expect( wrapper.vm.menuConfig ).toEqual( { visibleItemLimit: 6 } );
 		} );
 
-		it( 'calls searchTabularData when input value changes', async () => {
+		it( 'calls searchByDatatypeDebounced when input value changes', async () => {
 			await wrapper.vm.onUpdateInputValue( 'Test' );
-			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).toHaveBeenCalledWith( 'tabular-data', 'Test', 0 );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced ).toHaveBeenCalledWith( 'tabular-data', 'Test', 0 );
 		} );
 
 		it( 'clears menu items when input is empty', async () => {
@@ -197,9 +198,9 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			expect( lookup.exists() ).toBe( true );
 		} );
 
-		it( 'calls searchGeoShapes with geo-shape when input value changes', async () => {
+		it( 'calls searchByDatatypeDebounced with geo-shape when input value changes', async () => {
 			await wrapper.vm.onUpdateInputValue( 'Region' );
-			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).toHaveBeenCalledWith( 'geo-shape', 'Region', 0 );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced ).toHaveBeenCalledWith( 'geo-shape', 'Region', 0 );
 		} );
 	} );
 
@@ -241,7 +242,7 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			} );
 		} );
 
-		it( 'calls searchTabularData with offset on load more', async () => {
+		it( 'calls searchByDatatype with offset on load more', async () => {
 			wrapper.vm.lookupInputValue = 'Test';
 			wrapper.vm.lookupMenuItems = [ { label: 'Item1', value: 'Item1' } ];
 
@@ -252,11 +253,13 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 		it( 'does not call API if inputValue is empty', async () => {
 			wbui2025.store.snakValueStrategyFactory.searchByDatatype.mockClear();
+			wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced.mockClear();
 			wrapper.vm.lookupInputValue = '';
 
 			await wrapper.vm.onLoadMore();
 
 			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatype ).not.toHaveBeenCalled();
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced ).not.toHaveBeenCalled();
 		} );
 
 		it( 'appends new results to existing menu items', async () => {
