@@ -178,13 +178,37 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 				Status::newFatal( 'protectedpagetext' ),
 				PermissionCheckResult::newPageProtected(),
 			],
-			'denied, user locally blocked' => [
+			'denied, user blocked' => [
 				Status::newFatal( new ApiMessage(
 					'blocked',
 					'blocked-code',
 					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_USER ] ] ]
 				) ),
 				PermissionCheckResult::newUserBlocked(),
+			],
+			'denied, ip blocked' => [
+				Status::newFatal( new ApiMessage(
+					'blocked',
+					'blocked-code',
+					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_IP ] ] ]
+				) ),
+				PermissionCheckResult::newIpBlocked(),
+			],
+			'denied, ip range blocked' => [
+				Status::newFatal( new ApiMessage(
+					'blocked',
+					'blocked-code',
+					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_RANGE ] ] ]
+				) ),
+				PermissionCheckResult::newIpBlocked(),
+			],
+			'denied, auto-blocked' => [
+				Status::newFatal( new ApiMessage(
+					'blocked',
+					'blocked-code',
+					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_AUTO ] ] ]
+				) ),
+				PermissionCheckResult::newIpBlocked(),
 			],
 			'good status' => [ Status::newGood(), PermissionCheckResult::newAllowed() ],
 		];
