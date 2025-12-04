@@ -4,7 +4,8 @@
 			"NehalDaveND",
 			"पर्वत सुबेदी",
 			"बिप्लब आनन्द",
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"बडा काजी"
 		]
 	},
 	"wikibase-error-unexpected": "त्रुटि: $1",
@@ -13,7 +14,7 @@
 	"wikibase-timedetails-time": "समय",
 	"wikibase-timedetails-isotime": "समयछाप",
 	"wikibase-timedetails-timezone": "समय क्षेत्र",
-	"wikibase-timedetails-calendar": "पंचाङ्ग",
+	"wikibase-timedetails-calendar": "पञ्चाङ्ग",
 	"wikibase-timedetails-precision": "यथार्थता",
 	"wikibase-timedetails-before": "पहिले",
 	"wikibase-timedetails-after": "पछि",

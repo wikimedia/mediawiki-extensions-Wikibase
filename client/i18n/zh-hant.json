@@ -119,6 +119,8 @@
 	"wikibase-pageinfo-entity-usage-T": "標題",
 	"wikibase-pageinfo-entity-usage-C": "一些陳述",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "陳述：$1",
+	"wikibase-pageinfo-entity-usage-CQR": "一些陳述（帶有修飾和參考文獻）",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "陳述（帶有修飾和參考文獻）：$1",
 	"wikibase-pageinfo-entity-usage-X": "所有實體資料",
 	"wikibase-pageinfo-entity-usage-O": "雜項（如實體存在等）",
 	"wikibase-property-render-error": "呈現屬性$1時失敗：$2",
