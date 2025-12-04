@@ -237,6 +237,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			->caller( __METHOD__ )->fetchRow();
 		if ( $highestId === false ) {
 			// Fresh instance, no need to rebuild anything
+			$updater->insertUpdateRow( __CLASS__ . '::rebuildItemTerms' );
 			return;
 		}
 		$highestId = (int)$highestId->id_value;
