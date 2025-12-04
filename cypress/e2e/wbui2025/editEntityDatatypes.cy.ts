@@ -9,24 +9,25 @@ import { LoginPage } from '../../support/pageObjects/LoginPage';
 describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
 	const createEntityForDatatype = {
-		item: ( label: string ) => cy.task( 'MwApi:CreateEntity', {
+		item: ( label: string, alias: string ) => cy.task( 'MwApi:CreateEntity', {
 			entityType: 'item',
 			label: label,
 			data: { claims: [] },
-		} ),
-		property: ( label: string ) => cy.task( 'MwApi:CreateEntity', {
+		} ).as( alias ),
+		property: ( label: string, alias: string ) => cy.task( 'MwApi:CreateEntity', {
 			entityType: 'property',
 			label: label,
 			data: {
 				datatype: 'string',
 				claims: [],
 			},
-		} ),
+		} ).as( alias ),
 	};
 
 	for ( const datatype of [ 'item', 'property' ] ) {
 		context( 'mobile view - ' + datatype + ' datatype', () => {
 			let propertyName: string;
+			let propertyId: string;
 			let entityId: string;
 			let linkedEntityLabel: string;
 			let newLinkedEntityLabel: string;
@@ -35,12 +36,13 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				propertyName = Util.getTestString( datatype + '-property' + '-' );
 				linkedEntityLabel = Util.getTestString( 'linked-' + datatype + '-' );
 				newLinkedEntityLabel = Util.getTestString( 'new-linked-' + datatype + '-' );
-				createEntityForDatatype[ datatype ]( linkedEntityLabel );
-				createEntityForDatatype[ datatype ]( newLinkedEntityLabel );
+				createEntityForDatatype[ datatype ]( linkedEntityLabel, 'linkedEntityId' );
+				createEntityForDatatype[ datatype ]( newLinkedEntityLabel, 'newLinkedEntityId' );
 				cy.task( 'MwApi:CreateProperty', {
 					label: propertyName,
 					data: { datatype: 'wikibase-' + datatype },
-				} ).then( () => {
+				} ).then( ( newPropertyId: string ) => {
+					propertyId = newPropertyId;
 					cy.task( 'MwApi:CreateItem', {
 						label: Util.getTestString( 'item-with-' + datatype + '-statement' ),
 					} ).then( ( newItemId: string ) => {
@@ -84,6 +86,25 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				editFormPage.lookupInput().should( 'have.value', newEntityLabel );
 			}
 
+			function selectEntityById(
+				editFormPage: EditStatementFormPage,
+				newEntityId: string,
+				newEntityLabel: string,
+			): void {
+				editFormPage.lookupComponent()
+					.should( 'exist' ).should( 'be.visible' );
+
+				editFormPage.lookupInput().clear();
+				editFormPage.lookupInput().type( newEntityId, { parseSpecialCharSequences: false } );
+				editFormPage.lookupInput().should( 'have.value', newEntityId );
+				editFormPage.lookupInput().focus();
+
+				editFormPage.menu().should( 'be.visible' );
+
+				editFormPage.menuItems().first().click();
+				editFormPage.lookupInput().should( 'have.value', newEntityLabel );
+			}
+
 			it( 'allows adding ' + datatype + ' statement to empty item, ' +
 				'displays statement and supports full editing workflow', () => {
 				const itemViewPage = new ItemViewPage( entityId );
@@ -93,7 +114,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
 				const addStatementFormPage = new AddStatementFormPage();
 				addStatementFormPage.propertyLookup().should( 'exist' );
-				addStatementFormPage.setProperty( propertyName );
+				addStatementFormPage.setProperty( propertyId );
 
 				addStatementFormPage.publishButton().should( 'be.disabled' );
 				addStatementFormPage.snakValueInput().should( 'exist' );
@@ -147,7 +168,9 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				editFormPage.snakTypeSelect().first().click();
 				editFormPage.menuItems().first().click();
 
-				selectEntityByLabel( editFormPage, linkedEntityLabel );
+				cy.get<string>( '@linkedEntityId' ).then( ( linkedEntityId ) => {
+					selectEntityById( editFormPage, linkedEntityId, linkedEntityLabel );
+				} );
 
 				editFormPage.publishButton().click();
 
