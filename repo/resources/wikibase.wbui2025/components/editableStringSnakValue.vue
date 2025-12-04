@@ -40,9 +40,10 @@ module.exports = exports = defineComponent( {
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue'
 		] );
+		const valueStrategy = editSnakStoreGetter().valueStrategy;
 		return {
 			textvalue: computed( computedProperties.textvalue ),
-			valueStrategy: editSnakStoreGetter().valueStrategy
+			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 )
 		};
 	},
 	methods: {
@@ -58,7 +59,7 @@ module.exports = exports = defineComponent( {
 					return;
 				}
 
-				this.valueStrategy.triggerParse( newValue );
+				this.debouncedTriggerParse( newValue );
 			},
 			immediate: true
 		}

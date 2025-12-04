@@ -53,13 +53,7 @@ class StringValueStrategy extends DefaultStrategy {
 	}
 
 	triggerParse( newValue ) {
-		if ( this.editSnakStore.parseValueTimeout !== null ) {
-			clearTimeout( this.editSnakStore.parseValueTimeout );
-		}
-
-		this.editSnakStore.parseValueTimeout = setTimeout( () => {
-			this.getParsedValue( newValue );
-		}, 300 );
+		this.getParsedValue( newValue );
 	}
 }
 

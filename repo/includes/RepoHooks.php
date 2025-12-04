@@ -1057,6 +1057,7 @@ final class RepoHooks implements
 					],
 				],
 				'dependencies' => [
+					'mediawiki.util',
 					'vue',
 					'wikibase',
 					'wikibase.wbui2025.entityView.styles',

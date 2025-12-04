@@ -48,11 +48,13 @@ module.exports = exports = defineComponent( {
 			'selectionvalue',
 			'datatype'
 		] );
+		const valueStrategy = editSnakStoreGetter().valueStrategy;
 		return {
 			textvalue: computed( computedProperties.textvalue ),
 			selectionvalue: computed( computedProperties.selectionvalue ),
 			datatype: computed( computedProperties.datatype ),
-			valueStrategy: editSnakStoreGetter().valueStrategy
+			valueStrategy,
+			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 )
 		};
 	},
 	data() {
@@ -128,7 +130,7 @@ module.exports = exports = defineComponent( {
 					}
 				}
 
-				this.valueStrategy.triggerParse( newValue );
+				this.debouncedTriggerParse( newValue );
 			},
 			immediate: true
 		},
