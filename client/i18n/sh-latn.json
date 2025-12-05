@@ -24,6 +24,7 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sakrij",
 	"wikibase-rc-hide-wikidata-show": "Prikaži",
+	"wikibase-rc-show-wikidata-pref": "Izmjene {{GRAMMAR:genitiv|{{WBREPONAME}}}} u nedavnim izmjenama",
 	"wikibase-rc-wikibase-edit-letter": "P",
 	"wikibase-rc-wikibase-edit-title": "Izmjena na Wikipodacima",
 	"wikibase-rcfilters-hide-wikibase-label": "Izmjene na Wikipodacima",
