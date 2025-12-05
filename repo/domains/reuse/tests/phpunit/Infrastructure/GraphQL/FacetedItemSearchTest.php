@@ -85,6 +85,26 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
+	/**
+	 * @dataProvider errorsProvider
+	 */
+	public function testErrors( string $query, string $expectedErrorMessage ): void {
+		$result = $this->newGraphQLService( new InMemoryEntityLookup() )->query( $query );
+
+		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
+	}
+
+	public static function errorsProvider(): Generator {
+		yield 'rejects queries with more than one search' => [
+			'{
+			  s1: searchItems(query: { property: "P1" } ) { id }
+			  s2: searchItems(query: { property: "P2" } ) { id }
+			  s3: searchItems(query: { property: "P3" } ) { id }
+			}',
+			'The query complexity is 200% over the limit.',
+		];
+	}
+
 	private function createProperty( string $dataType, ?string $enLabel = null ): Property {
 		// assign the ID here so that we don't have to worry about collisions
 		$nextId = empty( self::$properties ) ? 'P1' : 'P' . $this->getNextNumericId( self::$properties );

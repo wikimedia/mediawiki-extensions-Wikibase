@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 class GraphQLService {
 	public const LOAD_ITEM_COMPLEXITY = 10;
 	public const MAX_QUERY_COMPLEXITY = self::LOAD_ITEM_COMPLEXITY * 50;
+	public const SEARCH_ITEMS_COMPLEXITY = self::MAX_QUERY_COMPLEXITY;
 
 	public function __construct(
 		private readonly Schema $schema,
