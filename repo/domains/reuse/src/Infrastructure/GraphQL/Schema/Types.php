@@ -11,6 +11,7 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescriptionsResolver;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
@@ -39,6 +40,8 @@ class Types {
 		private readonly PropertyLabelsResolver $propertyLabelsResolver,
 		private readonly DataTypeDefinitions $dataTypeDefinitions,
 		private readonly ItemDescriptionsResolver $itemDescriptionsResolver,
+		private readonly ItemLabelsResolver $itemLabelsResolver,
+
 	) {
 	}
 
@@ -101,10 +104,16 @@ class Types {
 	}
 
 	public function getItemSearchResultType(): ObjectType {
+		$labelProviderType = $this->getLabelProviderType();
+		$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
+		$labelField->resolveFn = fn( array $rootValue, array $args ) => $this->itemLabelsResolver
+				->resolve( new ItemId( $rootValue['id'] ), $args[ 'languageCode' ] );
+
 		return $this->itemSearchResultType ??= new ObjectType( [
 			'name' => 'ItemSearchResult',
 			'fields' => [
 				'id' => Type::nonNull( $this->getItemIdType() ),
+				$labelField,
 				'description' => [
 					'type' => Type::string(),
 					'args' => [

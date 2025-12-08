@@ -87,6 +87,13 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		yield 'searchItems with label in search result' => [
+			"{  searchItems( query: {
+				property: \"{$itemProperty->getId()}\",
+			} ) { label(languageCode: \"en\") } }",
+			[ 'data' => [ 'searchItems' => [ [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ] ] ] ],
+		];
 	}
 
 	/**

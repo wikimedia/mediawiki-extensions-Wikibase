@@ -142,5 +142,6 @@ input ItemSearchFilter {
 
 type ItemSearchResult {
   id: ItemId!
+  label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
 }

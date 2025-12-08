@@ -59,7 +59,8 @@ return [
 			WikibaseRepo::getDataTypeDefinitions( $services ),
 			new ItemDescriptionsResolver( new BatchGetItemDescriptions(
 				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
-			) )
+			) ),
+			WbReuse::getItemLabelsResolver( $services ),
 		);
 	},
 	'WbReuse.ItemLabelsResolver' => function( MediaWikiServices $services ): ItemLabelsResolver {
