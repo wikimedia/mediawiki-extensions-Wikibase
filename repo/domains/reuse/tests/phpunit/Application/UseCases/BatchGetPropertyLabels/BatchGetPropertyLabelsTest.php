@@ -14,11 +14,11 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\Batc
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyLabelsBatch;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
 
 /**
  * @covers \Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels
- * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever
+ * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever
  *
  * @group Wikibase
  *
@@ -66,7 +66,7 @@ class BatchGetPropertyLabelsTest extends TestCase {
 
 	private function newUseCase(): BatchGetPropertyLabels {
 		return new BatchGetPropertyLabels(
-			new PrefetchingTermLookupBatchLabelsRetriever( $this->lookup )
+			new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( $this->lookup )
 		);
 	}
 }

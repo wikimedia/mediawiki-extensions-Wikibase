@@ -14,11 +14,11 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGet
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemLabelsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
 
 /**
  * @covers \Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGetItemLabels
- * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever
+ * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever
  *
  * @group Wikibase
  *
@@ -63,7 +63,7 @@ class BatchGetItemLabelsTest extends TestCase {
 
 	private function newUseCase(): BatchGetItemLabels {
 		return new BatchGetItemLabels(
-			new PrefetchingTermLookupBatchLabelsRetriever( $this->lookup )
+			new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( $this->lookup )
 		);
 	}
 

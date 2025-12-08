@@ -8,7 +8,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
@@ -60,14 +60,14 @@ return [
 	'WbReuse.ItemLabelsResolver' => function( MediaWikiServices $services ): ItemLabelsResolver {
 		return new ItemLabelsResolver(
 			new BatchGetItemLabels(
-				new PrefetchingTermLookupBatchLabelsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
 			)
 		);
 	},
 	'WbReuse.PropertyLabelsResolver' => function( MediaWikiServices $services ): PropertyLabelsResolver {
 		return new PropertyLabelsResolver(
 			new BatchGetPropertyLabels(
-				new PrefetchingTermLookupBatchLabelsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
 			)
 		);
 	},
