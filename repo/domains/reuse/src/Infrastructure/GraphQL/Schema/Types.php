@@ -6,9 +6,11 @@ use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescriptionsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
 
@@ -36,6 +38,7 @@ class Types {
 		private readonly SiteLinkGlobalIdentifiersProvider $siteLinkGlobalIdentifiersProvider,
 		private readonly PropertyLabelsResolver $propertyLabelsResolver,
 		private readonly DataTypeDefinitions $dataTypeDefinitions,
+		private readonly ItemDescriptionsResolver $itemDescriptionsResolver,
 	) {
 	}
 
@@ -100,7 +103,17 @@ class Types {
 	public function getItemSearchResultType(): ObjectType {
 		return $this->itemSearchResultType ??= new ObjectType( [
 			'name' => 'ItemSearchResult',
-			'fields' => [ 'id' => Type::nonNull( $this->getItemIdType() ) ],
+			'fields' => [
+				'id' => Type::nonNull( $this->getItemIdType() ),
+				'description' => [
+					'type' => Type::string(),
+					'args' => [
+						'languageCode' => Type::nonNull( $this->getLanguageCodeType() ),
+					],
+					'resolve' => fn( array $rootValue, array $args ) => $this->itemDescriptionsResolver
+						->resolve( new ItemId( $rootValue['id'] ), $args['languageCode'] ),
+				],
+			],
 		] );
 	}
 }

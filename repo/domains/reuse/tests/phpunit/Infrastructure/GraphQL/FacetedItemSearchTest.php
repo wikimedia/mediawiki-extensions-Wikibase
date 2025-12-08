@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 use Generator;
 use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
@@ -51,27 +52,40 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$statementValueItemEnLabel = 'statement value item';
 		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', $statementValueItemEnLabel ) );
 
-		$statementWithItemValue = NewStatement::forProperty( $itemProperty->getId() )
-			->withSomeGuid()
-			->withValue( $itemUsedAsStatementValue->getId() )
-			->build();
-
 		$item = $this->createItem(
 			NewItem::withLabel( 'en', 'some label' )
-			->andStatement( $statementWithItemValue )
+				->andDescription( 'en', 'some description' )
+				->andStatement(
+					NewStatement::forProperty( $itemProperty->getId() )
+						->withSomeGuid()
+						->withValue( $itemUsedAsStatementValue->getId() )
+				)
 		);
 
 		yield 'simple searchItems query without value' => [
-			"{  searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { id } }",
+			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { id } }",
 			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
 		];
 
 		yield 'simple searchItems query with value' => [
-			"{  searchItems( query: {
+			"{ searchItems( query: {
 				property: \"{$itemProperty->getId()}\",
 				value: \"{$itemUsedAsStatementValue->getId()}\"
 			} ) { id } }",
 			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
+		];
+
+		yield 'searchItems with description in search results' => [
+			"{  searchItems( query: { property: \"{$itemProperty->getId()}\" } ) {
+				description(languageCode: \"en\")
+			} }",
+			[
+				'data' => [
+					'searchItems' => [
+						[ 'description' => $item->getDescriptions()->getByLanguage( 'en' )->getText() ],
+					],
+				],
+			],
 		];
 	}
 
@@ -122,6 +136,10 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newGraphQLService(): GraphQLService {
+		$termLookup = new InMemoryPrefetchingTermLookup();
+		$termLookup->setData( self::$items );
+		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $termLookup );
+
 		$entityLookup = new InMemoryEntityLookup();
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
 
