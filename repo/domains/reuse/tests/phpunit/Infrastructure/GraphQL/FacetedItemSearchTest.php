@@ -4,17 +4,16 @@ namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use Generator;
 use GraphQL\GraphQL;
-use MediaWiki\Site\MediaWikiSite;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
+use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess\InMemoryFacetedItemSearchEngine;
 
 /**
  * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService
@@ -30,9 +29,6 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
 	/** @var Item[] */
 	private static array $items = [];
-	private static MediaWikiSite $sitelinkSite;
-	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
-	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -44,14 +40,9 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider searchProvider
 	 */
 	public function testQuery( string $query, array $expectedResult ): void {
-		$entityLookup = new InMemoryEntityLookup();
-		foreach ( self::$items as $item ) {
-			$entityLookup->addEntity( $item );
-		}
-
 		$this->assertEquals(
 			$expectedResult,
-			$this->newGraphQLService( $entityLookup )->query( $query )
+			$this->newGraphQLService()->query( $query )
 		);
 	}
 
@@ -65,15 +56,14 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			->withValue( $itemUsedAsStatementValue->getId() )
 			->build();
 
-		// TODO expect this item in search results
-		$this->createItem(
+		$item = $this->createItem(
 			NewItem::withLabel( 'en', 'some label' )
 			->andStatement( $statementWithItemValue )
 		);
 
 		yield 'simple searchItems query without value' => [
 			"{  searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { id } }",
-			[ 'data' => [ 'searchItems' => [] ] ], // TODO: actual search results
+			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
 		];
 
 		yield 'simple searchItems query with value' => [
@@ -81,7 +71,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				property: \"{$itemProperty->getId()}\",
 				value: \"{$itemUsedAsStatementValue->getId()}\"
 			} ) { id } }",
-			[ 'data' => [ 'searchItems' => [] ] ], // TODO: actual search results
+			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
 		];
 	}
 
@@ -111,8 +101,17 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		return (int)substr( $latestEntity->getId()->getSerialization(), 1 ) + 1;
 	}
 
-	private function newGraphQLService( EntityLookup $entityLookup ): GraphQLService {
+	private function newGraphQLService(): GraphQLService {
+		$entityLookup = new InMemoryEntityLookup();
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
+
+		$search = new InMemoryFacetedItemSearchEngine();
+		$this->setService( 'WbReuse.FacetedItemSearchEngine', $search );
+
+		foreach ( self::$items as $item ) {
+			$entityLookup->addEntity( $item );
+			$search->addItem( $item );
+		}
 
 		return WbReuse::getGraphQLService();
 	}

@@ -5,6 +5,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGet
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
+use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsRetriever;
@@ -20,6 +21,12 @@ use Wikibase\Repo\WikibaseRepo;
 
 /** @phpcs-require-sorted-array */
 return [
+	'WbReuse.FacetedItemSearchEngine' => function( MediaWikiServices $services ): FacetedItemSearchEngine {
+		return new CirrusSearchFacetedSearchEngine(
+			$services->getSearchEngineFactory(),
+			WikibaseRepo::getEntityNamespaceLookup()
+		);
+	},
 	'WbReuse.GraphQLSchema' => function( MediaWikiServices $services ): Schema {
 		return new Schema(
 			new ItemResolver(
@@ -32,12 +39,7 @@ return [
 					)
 				) )
 			),
-			new FacetedItemSearch(
-				new CirrusSearchFacetedSearchEngine(
-					$services->getSearchEngineFactory(),
-					WikibaseRepo::getEntityNamespaceLookup()
-				)
-			),
+			new FacetedItemSearch( WbReuse::getFacetedItemSearchEngine( $services ) ),
 			WbReuse::getGraphQLTypes( $services ),
 		);
 	},
