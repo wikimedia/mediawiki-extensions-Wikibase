@@ -4,7 +4,8 @@
 			"AryanSogd",
 			"Ibrahim",
 			"ToJack",
-			"Farorud"
+			"Farorud",
+			"ZulfiqorF"
 		]
 	},
 	"wikibase-desc": "Мавқеи захираи маълумоти структуравӣ",
@@ -16,7 +17,7 @@
 	"wikibase-save": "захиракунӣ",
 	"wikibase-publish": "нашр",
 	"wikibase-cancel": "тамом кардан",
-	"wikibase-add": "илова",
+	"wikibase-add": "афзудан",
 	"wikibase-addqualifier": "иловаи муайянкунанда",
 	"wikibase-addreference": "иловаи эзоҳ",
 	"wikibase-save-inprogress": "Дар ҳоли захиракунӣ...",
