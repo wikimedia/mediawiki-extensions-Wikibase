@@ -57,6 +57,7 @@ class Schema extends GraphQLSchema {
 								new FacetedItemSearchRequest( $args['query'] )
 							)->results
 						),
+						'complexity' => fn() => GraphQLService::SEARCH_ITEMS_COMPLEXITY,
 					],
 				],
 			] ),
