@@ -8,7 +8,7 @@ export class ItemViewPage {
 
 	public static EDIT_LINKS = '.wikibase-wbui2025-edit-link';
 
-	public static MAIN_SNAK_VALUES = '.wikibase-wbui2025-main-snak .wikibase-wbui2025-snak-value';
+	public static MAIN_SNAK_VALUES = '.wikibase-wbui2025-main-snak .wikibase-wbui2025-snak-value span.snakValue';
 
 	public static QUALIFIERS_SECTION = '.wikibase-wbui2025-qualifiers';
 
