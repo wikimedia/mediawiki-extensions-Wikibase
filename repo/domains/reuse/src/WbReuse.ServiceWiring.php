@@ -15,6 +15,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescription
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\SearchItemsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Types;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\Search\CirrusSearchFacetedSearchEngine;
@@ -41,7 +42,10 @@ return [
 					)
 				) )
 			),
-			new FacetedItemSearch( WbReuse::getFacetedItemSearchEngine( $services ) ),
+			new SearchItemsResolver(
+				new FacetedItemSearch( WbReuse::getFacetedItemSearchEngine( $services ) ),
+				$services->getExtensionRegistry()
+			),
 			WbReuse::getGraphQLTypes( $services ),
 		);
 	},

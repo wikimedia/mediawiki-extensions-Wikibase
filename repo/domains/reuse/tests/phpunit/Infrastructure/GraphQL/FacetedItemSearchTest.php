@@ -25,6 +25,8 @@ use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess\InMemoryFacetedI
  */
 class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
+	use SearchEnabledTestTrait;
+
 	/** @var Property[] */
 	private static array $properties = [];
 
@@ -35,6 +37,11 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		if ( !class_exists( GraphQL::class ) ) {
 			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
 		}
+	}
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->simulateSearchEnabled();
 	}
 
 	/**
@@ -100,7 +107,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider errorsProvider
 	 */
 	public function testErrors( string $query, string $expectedErrorMessage ): void {
-		$result = $this->newGraphQLService( new InMemoryEntityLookup() )->query( $query );
+		$result = $this->newGraphQLService()->query( $query );
 
 		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
 	}
@@ -114,6 +121,17 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			}',
 			'The query complexity is 200% over the limit.',
 		];
+	}
+
+	public function testHandlesSearchNotAvailable(): void {
+		$this->simulateSearchEnabled( false );
+
+		$expectedErrorMessage = 'Search is not available due to insufficient server configuration';
+		$query = '{ searchItems( query: { property: "P1" } ) { id } }';
+
+		$result = $this->newGraphQLService()->query( $query );
+
+		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
 	}
 
 	private function createProperty( string $dataType, ?string $enLabel = null ): Property {
@@ -160,4 +178,5 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
 		return WbReuse::getGraphQLService();
 	}
+
 }
