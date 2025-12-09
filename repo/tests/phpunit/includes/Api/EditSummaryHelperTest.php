@@ -34,10 +34,6 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 		}
 
 		return [
-			'no terms changed' => [
-				'entityDiff' => new EntityDiff( [ 'claim' => $statementsDiff ] ),
-				'expected' => new Summary( 'wbeditentity', 'update' ),
-			],
 			'only terms changed in less than 50 languages' => [
 				'entityDiff' => new EntityDiff( [
 					'label' => new Diff( [ 'en' => new DiffOpChange( 'old en label', 'new en label' ) ], true ),
@@ -79,6 +75,28 @@ class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 					'update-languages-and-other',
 					commentArgs: [ 51 ],
 				),
+			],
+			'single statement changed' => [
+				'entityDiff' => new EntityDiff( [ 'claim' => $statementsDiff ] ),
+				'expected' => new Summary(
+					'wbsetclaim',
+					'update',
+					commentArgs: [ 1 ], // one statement changed
+					summaryArgs: [ [ 'P1' => $newStatement->getMainSnak() ] ],
+				),
+			],
+			'multiple statements changed' => [
+				'entityDiff' => new EntityDiff( [ 'claims' => new Diff( [
+					'Q123$00000000-0000-0000-0000-000000000000' => new DiffOpChange(
+						$oldStatement,
+						$newStatement,
+					),
+					'Q123$00000000-0000-0000-0000-000000000001' => new DiffOpChange(
+						$oldStatement,
+						$newStatement,
+					),
+				] ) ] ),
+				'expected' => new Summary( 'wbeditentity', 'update' ),
 			],
 		];
 	}
