@@ -2,7 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
+use ApiMessage;
 use Generator;
+use MediaWiki\Block\Block;
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 use PHPUnit\Framework\TestCase;
@@ -177,11 +179,11 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 				PermissionCheckResult::newPageProtected(),
 			],
 			'denied, user locally blocked' => [
-				Status::newFatal( 'blockedtext' ),
-				PermissionCheckResult::newUserBlocked(),
-			],
-			'denied, user globally blocked' => [
-				Status::newFatal( 'globalblocking-blockedtext-user' ),
+				Status::newFatal( new ApiMessage(
+					'blocked',
+					'blocked-code',
+					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_USER ] ] ]
+				) ),
 				PermissionCheckResult::newUserBlocked(),
 			],
 			'good status' => [ Status::newGood(), PermissionCheckResult::newAllowed() ],

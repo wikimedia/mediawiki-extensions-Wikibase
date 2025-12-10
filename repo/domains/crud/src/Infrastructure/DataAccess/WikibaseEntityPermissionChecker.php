@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
+use IApiMessage;
+use MediaWiki\Block\Block;
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -76,14 +78,11 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 			return PermissionCheckResult::newAllowed();
 		} elseif ( $this->hasError( 'protectedpagetext', $status ) ) {
 			return PermissionCheckResult::newPageProtected();
-		} elseif ( $this->hasErrors( [
-			'blockedtext',
-			'globalblocking-blockedtext-user',
-		], $status ) ) {
-			return PermissionCheckResult::newUserBlocked();
 		}
-
-		return PermissionCheckResult::newDenialForUnknownReason();
+		return match ( $this->getBlockTargetType( $status ) ) {
+			Block::BLOCK_TYPES[ Block::TYPE_USER ] => PermissionCheckResult::newUserBlocked(),
+			default => PermissionCheckResult::newDenialForUnknownReason()
+		};
 	}
 
 	private function hasError( string $error, Status $status ): bool {
@@ -96,15 +95,17 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		);
 	}
 
-	private function hasErrors( array $errors, Status $status ): bool {
-		return in_array(
-			true,
-			array_map(
-				fn( string $error ) => $this->hasError( $error, $status ),
-				$errors
-			),
-			true
-		);
+	private function getBlockTargetType( Status $status ): ?string {
+		foreach ( $status->getMessages() as $message ) {
+			if (
+				$message instanceof IApiMessage &&
+				isset( $message->getApiData()['blockinfo']['blocktargettype'] )
+			) {
+				return $message->getApiData()['blockinfo']['blocktargettype'];
+			}
+		}
+
+		return null;
 	}
 
 }
