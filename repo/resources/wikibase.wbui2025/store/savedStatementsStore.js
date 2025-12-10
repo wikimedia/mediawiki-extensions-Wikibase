@@ -12,7 +12,8 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 		statements: new Map(),
 		properties: new Map(),
 		propertyIdToStatementSection: new Map(),
-		indicatorsForSnaks: new Map()
+		indicatorsForSnaks: new Map(),
+		popoverHtmlForSnaks: new Map()
 	} ),
 	actions: {
 		async populateWithClaims( claims, renderMissingHtml = false ) {
@@ -169,6 +170,16 @@ const setIndicatorsHtmlForSnakHash = function ( snakHash, indicators ) {
 	statementsStore.indicatorsForSnaks.set( snakHash, indicators );
 };
 
+const getPopoverContentForSnakHash = function ( snakHash ) {
+	const statementsStore = useSavedStatementsStore();
+	return statementsStore.popoverHtmlForSnaks.get( snakHash );
+};
+
+const setPopoverContentForSnakHash = function ( snakHash, popoverHtml ) {
+	const statementsStore = useSavedStatementsStore();
+	statementsStore.popoverHtmlForSnaks.set( snakHash, popoverHtml );
+};
+
 module.exports = {
 	useSavedStatementsStore,
 	getPropertyIds,
@@ -178,5 +189,7 @@ module.exports = {
 	getStatementById,
 	setStatementIdsForProperty,
 	getIndicatorsHtmlForSnakHash,
-	setIndicatorsHtmlForSnakHash
+	setIndicatorsHtmlForSnakHash,
+	getPopoverContentForSnakHash,
+	setPopoverContentForSnakHash
 };

@@ -3,11 +3,19 @@ jest.mock(
 	() => require( '@wikimedia/codex' ),
 	{ virtual: true }
 );
+jest.mock(
+	'../../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconClose: 'close'
+	} ),
+	{ virtual: true }
+);
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const wbui2025 = require( '../../../resources/wikibase.wbui2025/lib.js' );
 const snakValueVue = require( '../../../resources/wikibase.wbui2025/components/snakValue.vue' );
+const indicatorPopover = require( '../../../resources/wikibase.wbui2025/components/indicatorPopover.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithServerRenderedHtml } = require( '../piniaHelpers.js' );
 
@@ -94,6 +102,34 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			const snak = wrapper.find( '.wikibase-wbui2025-snak-value' );
 			const classes = snak.attributes().class.split( ' ' );
 			expect( classes ).not.toContain( 'wikibase-wbui2025-musical-notation-value' );
+		} );
+
+		it( 'allows indicators to be clicked, and displays popover in that case', async () => {
+			const wrapper = await mountSnakValue(
+				{
+					snak: {
+						datatype: 'string',
+						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+						property: 'P1',
+						datavalue: { value: 'p1', type: 'string' }
+					}
+				},
+				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
+			);
+			wbui2025.store.setIndicatorsHtmlForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>Icon1</span>' );
+			wbui2025.store.setPopoverContentForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401',
+				{
+					icon: '<span class="wikibase-wbui2025-icon-edit-small"></span>',
+					title: 'Popover Title',
+					bodyHtml: '<p>Popover Content</p>'
+				} );
+			await wrapper.vm.$nextTick();
+			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
+			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );
+			await snak.find( 'span.indicators' ).trigger( 'click' );
+			const popovers = wrapper.findAllComponents( indicatorPopover );
+			expect( popovers ).toHaveLength( 1 );
+			expect( popovers[ 0 ].props().snakHash ).toEqual( 'ee6053a6982690ba0f5227d587394d9111eea401' );
 		} );
 	} );
 

@@ -5,22 +5,43 @@
 		:class="snakValueClass"
 	>
 		<span class="snakValue" v-html="snakValueHtmlForHash( snak.hash )"></span>
-		<span class="indicators" v-html="indicatorsHtml"></span>
+		<span
+			ref="snakAnchor"
+			class="indicators"
+			@click="togglePopover"
+			v-html="indicatorsHtml"
+		></span>
+		<wbui2025-indicator-popover
+			v-if="popoverVisible"
+			:snak-hash="snak.hash"
+			:anchor="$refs.snakAnchor"
+			@close="popoverVisible = false"
+		>
+		</wbui2025-indicator-popover>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const Wbui2025IndicatorPopover = require( './indicatorPopover.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025SnakValue',
+	components: {
+		Wbui2025IndicatorPopover
+	},
 	props: {
 		snak: {
 			type: Object,
 			required: true
 		}
+	},
+	data() {
+		return {
+			popoverVisible: false
+		};
 	},
 	computed: {
 		snakValueClass() {
@@ -38,7 +59,10 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		snakValueHtmlForHash: wbui2025.store.snakValueHtmlForHash
+		snakValueHtmlForHash: wbui2025.store.snakValueHtmlForHash,
+		togglePopover() {
+			this.popoverVisible = !this.popoverVisible;
+		}
 	},
 	mounted() {
 		if ( this.snak.datatype === 'globe-coordinate' ) {
