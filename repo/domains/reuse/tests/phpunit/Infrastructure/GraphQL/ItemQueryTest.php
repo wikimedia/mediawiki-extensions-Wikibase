@@ -896,7 +896,7 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $redirectTarget );
 
 		yield 'single redirected item' => [
-			"{ item(id: \"${redirectSourceId}\") { id } }",
+			"{ item(id: \"{$redirectSourceId}\") { id } }",
 			[
 				'data' => [ 'item' => [ 'id' => $redirectTargetId ] ],
 				'extensions' => [
