@@ -11,7 +11,7 @@ class PropertyValueFilter {
 
 	public function __construct(
 		public readonly PropertyId $propertyId,
-		public readonly ?string $value,
+		public readonly ?string $value = null,
 	) {
 	}
 }
