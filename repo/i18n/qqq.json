@@ -597,6 +597,6 @@
 	"wikibase-scoped-search-search-entities-description": "Longer description of the function of the search box - that it allows different kinds of entities to be searched (see {{msg-mw|wikibase-scoped-search-search-entities}} for the short version)",
 	"wikibase-scoped-search-item-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Items scope",
 	"wikibase-scoped-search-property-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Properties scope",
-	"wikibase-mobile-editing-ui-beta-feature-message": "{{experimental}}\nName of the work in progress beta feature for the mobile editing UI.",
-	"wikibase-mobile-editing-ui-beta-feature-description": "{{experimental}}\nDescription of the work in progress beta feature for the mobile editing UI."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Name of the beta feature for the mobile editing UI.",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Description of the beta feature for the mobile editing UI."
 }
