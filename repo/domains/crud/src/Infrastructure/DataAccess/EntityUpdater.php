@@ -126,7 +126,7 @@ class EntityUpdater {
 		if ( !$status->isOK() ) {
 			if ( $status->hasMessage( 'wikibase-error-entity-too-big' ) ) {
 				throw new ResourceTooLargeException( $this->repoSettings->getSetting( 'maxSerializedEntitySize' ) );
-			} elseif ( $status->hasMessage( 'acct_creation_throttle_hit' ) ) {
+			} elseif ( $status->hasMessage( 'acct_creation_throttle_hit-temp' ) ) {
 				throw new TempAccountCreationLimitReached();
 			} elseif ( $status->hasMessage( 'actionthrottledtext' ) ) {
 				throw new RateLimitReached();

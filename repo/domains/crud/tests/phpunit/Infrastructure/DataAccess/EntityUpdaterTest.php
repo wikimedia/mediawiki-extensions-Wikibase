@@ -230,7 +230,7 @@ class EntityUpdaterTest extends TestCase {
 
 			yield "temp user creation limit reached ($entityType)" => [
 				$entity,
-				EditEntityStatus::newFatal( 'acct_creation_throttle_hit' ),
+				EditEntityStatus::newFatal( 'acct_creation_throttle_hit-temp' ),
 				new TempAccountCreationLimitReached(),
 			];
 
