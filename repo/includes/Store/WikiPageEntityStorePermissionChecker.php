@@ -2,8 +2,11 @@
 
 namespace Wikibase\Repo\Store;
 
+use IApiMessage;
 use InvalidArgumentException;
+use MediaWiki\Block\Block;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
@@ -194,10 +197,29 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		foreach ( $mediaWikiPermissions as $mwPermission ) {
 			$partialStatus = $this->permissionManager->getPermissionStatus(
 				$mwPermission, $user, $title, $rigor );
+			if ( $partialStatus->isBlocked() ) {
+				foreach ( $partialStatus->getMessages() as $msg ) {
+					if ( !$msg instanceof IApiMessage ) {
+						continue;
+					}
+					$this->setBlockTargetTypeInfo( $msg, $partialStatus );
+				}
+			}
 			$status->merge( $partialStatus );
 		}
 
 		return $status;
+	}
+
+	private function setBlockTargetTypeInfo( iApiMessage $msg, PermissionStatus $status ): void {
+		$blockTargetType = $status->getBlock()->getTarget()->getType();
+		$apiData = [
+			'blockinfo' => [
+				'blocktargettype' => Block::BLOCK_TYPES[$blockTargetType],
+			],
+		];
+
+		$msg->setApiData( array_merge_recursive( $msg->getApiData(), $apiData ) );
 	}
 
 	private function getMediaWikiPermissionsToCheck( string $action, string $entityType ): array {
