@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xð"
+			"Xð",
+			"MacTire02"
 		]
 	},
-	"wikibase-edit": "reagh"
+	"wikibase-edit": "reagh",
+	"wikibase-add": "cur rish",
+	"wikibase-label-empty": "Cha nel lipaid erbee meenit",
+	"wikibase-description-empty": "Cha nel cur-sheese erbee meenit",
+	"wikibase-sitelinks-special": "Ynnydyn-eggey elley"
 }

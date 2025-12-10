@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"MacTire02"
+		]
+	},
+	"wikibase-dataitem": "red {{WBREPONAME}}",
+	"wikibase-editlinks": "Reagh ny kianglaghyn",
+	"wikibase-addlinkstitle": "Cur kianglaghyn eddyrwiki rish",
+	"wikibase-linkitem-addlinks": "Cur kianglaghyn rish",
+	"wikibase-linkitem-title": "Kianglee rish duillag",
+	"wikibase-linkitem-linkpage": "Kianglee rish duillag",
+	"wikibase-linkitem-selectlink": "My sailt, reih ynnyd-eggey as duillag t’ou geearree dy chianglaghey rish y duillag shoh.",
+	"wikibase-linkitem-input-site": "Çhengey:",
+	"wikibase-linkitem-input-page": "Duillag:",
+	"wikibase-rc-hide-wikidata-hide": "Follee",
+	"wikibase-rc-hide-wikidata-show": "Taishbyn",
+	"wikibase-otherprojects": "Ayns shaleeyn elley"
+}

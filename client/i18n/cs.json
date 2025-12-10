@@ -68,7 +68,7 @@
 	"wikibase-error-deserialize-error": "Nepodařilo se deserializovat data.",
 	"wikibase-error-serialize-error": "Nepodařilo se zaserializovat data.",
 	"wikibase-error-invalid-entity-id": "Systém zadané ID „$2“ nezná. Použijte platné ID entity.",
-	"wikibase-error-exceeded-entity-access-limit": "Načteno příliš mnoho entit {{GRAMMAR:2sg|{{WBREPONAME}}}}.",
+	"wikibase-error-exceeded-entity-access-limit": "Načteno příliš mnoho entit {{GRAMMAR:2sg|{{WBREPONAME}}}}. Počet načtených entit: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Příliš mnoho volání „mw.wikibase.getReferencedEntityId“, {{PLURAL:$2|dovoleno|dovolena|dovoleno}} nejvýše $2.",
 	"unconnectedpages": "Stránky nepropojené s položkou",
 	"unconnectedpages-summary": "Tato stránka obsahuje seznam stránek, které nejsou propojeny s datovou položkou (ve jmenných prostorech, které toto propojení umožňují).",
