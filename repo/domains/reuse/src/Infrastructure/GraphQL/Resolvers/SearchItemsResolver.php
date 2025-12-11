@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\SearchNotAvailable;
 
 /**
@@ -28,10 +27,7 @@ class SearchItemsResolver {
 			throw new SearchNotAvailable();
 		}
 
-		return array_map(
-			fn( ItemSearchResult $searchResult ) => [ 'id' => $searchResult->itemId->getSerialization() ],
-			$this->searchUseCase->execute( new FacetedItemSearchRequest( $query ) )->results
-		);
+		return $this->searchUseCase->execute( new FacetedItemSearchRequest( $query ) )->results;
 	}
 
 	private function isSearchEnabled(): bool {

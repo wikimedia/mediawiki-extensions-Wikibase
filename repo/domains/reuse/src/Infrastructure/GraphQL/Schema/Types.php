@@ -6,8 +6,8 @@ use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescriptionsResolver;
@@ -106,21 +106,24 @@ class Types {
 	public function getItemSearchResultType(): ObjectType {
 		$labelProviderType = $this->getLabelProviderType();
 		$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
-		$labelField->resolveFn = fn( array $rootValue, array $args ) => $this->itemLabelsResolver
-				->resolve( new ItemId( $rootValue['id'] ), $args[ 'languageCode' ] );
+		$labelField->resolveFn = fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemLabelsResolver
+				->resolve( $itemSearchResult->itemId, $args[ 'languageCode' ] );
 
 		return $this->itemSearchResultType ??= new ObjectType( [
 			'name' => 'ItemSearchResult',
 			'fields' => [
-				'id' => Type::nonNull( $this->getItemIdType() ),
+				'id' => [
+					'type' => Type::nonNull( $this->getItemIdType() ),
+					'resolve' => fn( ItemSearchResult $itemSearchResult ) => $itemSearchResult->itemId->getSerialization(),
+				],
 				$labelField,
 				'description' => [
 					'type' => Type::string(),
 					'args' => [
 						'languageCode' => Type::nonNull( $this->getLanguageCodeType() ),
 					],
-					'resolve' => fn( array $rootValue, array $args ) => $this->itemDescriptionsResolver
-						->resolve( new ItemId( $rootValue['id'] ), $args['languageCode'] ),
+					'resolve' => fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemDescriptionsResolver
+						->resolve( $itemSearchResult->itemId, $args['languageCode'] ),
 				],
 			],
 		] );
