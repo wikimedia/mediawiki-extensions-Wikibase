@@ -554,6 +554,6 @@
 	"wikibase-scoped-search-search-entities-description": "Find different types of {{SITENAME}} entities",
 	"wikibase-scoped-search-item-scope-name": "Items",
 	"wikibase-scoped-search-property-scope-name": "Properties",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Mobile Editing UI",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Enable the new, experimental mobile editing UI."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Edit Wikidata Items on mobile devices",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Turn this feature on to edit Wikidata from your mobile device! This in-development project from the Wikidata Team enables editing Items from your smartphone with a mobile optimized experience."
 }
