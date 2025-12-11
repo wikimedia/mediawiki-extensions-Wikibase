@@ -35,11 +35,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
-	protected function setUp(): void {
-		parent::setUp();
-		$this->overrideConfigValue( 'ApplyGlobalBlocks', false );
-	}
-
 	public function testCreateItem(): void {
 		$newRevision = $this->newEntityUpdater()->create(
 			NewItem::withLabel( 'en', 'New Item' )->build(),
