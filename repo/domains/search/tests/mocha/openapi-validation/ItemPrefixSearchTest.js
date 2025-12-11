@@ -32,8 +32,8 @@ describe( 'Item prefix search', () => {
 	} );
 
 	it( '200 - non-empty search response', async () => {
-		// Remove the last 8 characters to ensure only a prefix match
-		const response = await newSearchRequest( 'en', itemEnLabel.slice( 0, -8 ) )
+		// Remove the last 3 characters to ensure only a prefix match
+		const response = await newSearchRequest( 'en', itemEnLabel.slice( 0, -3 ) )
 			.assertValidRequest()
 			.makeRequest();
 
