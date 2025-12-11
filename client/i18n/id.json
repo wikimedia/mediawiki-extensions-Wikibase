@@ -109,7 +109,7 @@
 	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-link-columnheading": "Halaman terkait",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Sambungan}} dengan {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Beri tahu saya saat seseorang menghubungkan halaman yang {{GENDER:|saya buat}} ke butir {{WBREPONAME}}.",
 	"notification-header-page-connection": "Halaman <strong>$3</strong> telah {{GENDER:$2|dihubungkan}} ke {{PLURAL:$4|-1=sebuah butir {{WBREPONAME}}|butir {{WBREPONAME}} $4}}, di mana data yang relevan dengan topik bisa dikumpulkan.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> dan {{PLURAL:$4|satu halaman lain|$4 halaman lain|100=99+ halaman lain}} telah {{GENDER:$2|dihubungkan}} ke butir {{WBREPONAME}}, di mana data yang relevan dengan topik bisa dikumpulkan.",
