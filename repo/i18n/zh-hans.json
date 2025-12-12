@@ -27,6 +27,7 @@
 			"Mywood",
 			"NigelSoft",
 			"Njzjz",
+			"Plana",
 			"Qiyue2001",
 			"Shirayuki",
 			"Shizhao",
@@ -573,6 +574,6 @@
 	"wikibase-scoped-search-search-entities-description": "查找不同类型的{{SITENAME}}实体",
 	"wikibase-scoped-search-item-scope-name": "项目",
 	"wikibase-scoped-search-property-scope-name": "属性",
-	"wikibase-mobile-editing-ui-beta-feature-message": "移动编辑用户界面",
+	"wikibase-mobile-editing-ui-beta-feature-message": "在移动设备上编辑 Wikidata 条目",
 	"wikibase-mobile-editing-ui-beta-feature-description": "启用新的实验性移动编辑用户界面。"
 }

@@ -566,6 +566,6 @@
 	"wikibase-scoped-search-search-entities-description": "Farklı türde {{SITENAME}} varlıklarını bulun",
 	"wikibase-scoped-search-item-scope-name": "Ögeler",
 	"wikibase-scoped-search-property-scope-name": "Özellikler",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Taşınabilir Düzenleme Kullanıcı Arayüzü",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Yeni, deneysel taşınabilir düzenleme kullanıcı arayüzünü etkinleştirin."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Taşınabilir aygıtlarda Vikiveri ögelerini düzenleyin",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Taşınabilir aygıtınızdan Vikiveri'yi düzenlemek için bu özelliği açın! Vikiveri Ekibi tarafından geliştirilmekte olan bu proje, akıllı telefonunuzdan ögeleri taşınabilir aygıtlar için uyarlanmış bir deneyimle düzenlemenizi sağlar."
 }

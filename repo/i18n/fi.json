@@ -486,6 +486,6 @@
 	"wikibase-scoped-search-search-entities-description": "Etsi erityyppisiä {{SITENAME}}-entiteettejä",
 	"wikibase-scoped-search-item-scope-name": "Kohteet",
 	"wikibase-scoped-search-property-scope-name": "Ominaisuudet",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Mobiilimuokkauskäyttöliittymä",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Ota käyttöön uusi mobiilimuokkauskäyttöliittymä."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Muokkaa Wikidata-kohteita mobiililaitteilla",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Ota käyttöön tämä ominaisuus muokataksesi Wikidataa mobiililaitteella. Tämä on Wikidatan käynnissä oleva kehityshanke, jonka tavoitteena on mahdollistaa kohteiden muokkaaminen älypuhelimilla mobiilioptimoidulla käyttöliittymällä."
 }
