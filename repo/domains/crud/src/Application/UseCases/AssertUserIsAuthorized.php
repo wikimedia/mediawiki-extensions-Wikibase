@@ -22,28 +22,22 @@ class AssertUserIsAuthorized {
 		$permissionCheckResult = $this->permissionChecker->canEdit( $user, $id );
 		if ( !$permissionCheckResult->isDenied() ) {
 			return;
-		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_PAGE_PROTECTED ) {
-			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED );
-		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
-			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
-		} else {
-			throw new UseCaseError(
-				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
-				'You have no permission to edit this resource'
-			);
 		}
+
+		$this->throwUseCaseError(
+			$permissionCheckResult->getDenialReason(),
+			'You have no permission to edit this resource'
+		);
 	}
 
 	public function checkCreateItemPermissions( User $user ): void {
 		$permissionCheckResult = $this->permissionChecker->canCreateItem( $user );
 		if ( !$permissionCheckResult->isDenied() ) {
 			return;
-		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
-			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
 		}
 
-		throw new UseCaseError(
-			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+		$this->throwUseCaseError(
+			$permissionCheckResult->getDenialReason(),
 			'You have no permission to create an item'
 		);
 	}
@@ -52,14 +46,30 @@ class AssertUserIsAuthorized {
 		$permissionCheckResult = $this->permissionChecker->canCreateProperty( $user );
 		if ( !$permissionCheckResult->isDenied() ) {
 			return;
-		} elseif ( $permissionCheckResult->getDenialReason() === PermissionCheckResult::DENIAL_REASON_USER_BLOCKED ) {
-			throw UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED );
 		}
 
-		throw new UseCaseError(
-			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+		$this->throwUseCaseError(
+			$permissionCheckResult->getDenialReason(),
 			'You have no permission to create a property'
 		);
+	}
+
+	private function throwUseCaseError( ?int $reason, string $defaultMessage ): never {
+		throw match ( $reason ) {
+			PermissionCheckResult::DENIAL_REASON_PAGE_PROTECTED => UseCaseError::newPermissionDenied(
+				UseCaseError::PERMISSION_DENIED_REASON_PAGE_PROTECTED
+			),
+			PermissionCheckResult::DENIAL_REASON_USER_BLOCKED => UseCaseError::newPermissionDenied(
+				UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED
+			),
+			PermissionCheckResult::DENIAL_REASON_IP_BLOCKED => UseCaseError::newPermissionDenied(
+				UseCaseError::PERMISSION_DENIED_REASON_IP_BLOCKED
+			),
+			default => new UseCaseError(
+				UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+				$defaultMessage
+			)
+		};
 	}
 
 }

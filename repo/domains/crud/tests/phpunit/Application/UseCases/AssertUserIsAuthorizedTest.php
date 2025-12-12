@@ -67,6 +67,11 @@ class AssertUserIsAuthorizedTest extends TestCase {
 			PermissionCheckResult::newUserBlocked(),
 			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
 		];
+
+		yield 'ip blocked' => [
+			PermissionCheckResult::newIpBlocked(),
+			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_IP_BLOCKED ),
+		];
 	}
 
 	public function testGivenUserIsAuthorizedToCreateProperty(): void {
@@ -112,6 +117,11 @@ class AssertUserIsAuthorizedTest extends TestCase {
 		yield 'user blocked' => [
 			PermissionCheckResult::newUserBlocked(),
 			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
+		];
+
+		yield 'ip blocked' => [
+			PermissionCheckResult::newIpBlocked(),
+			UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_IP_BLOCKED ),
 		];
 	}
 
@@ -176,6 +186,12 @@ class AssertUserIsAuthorizedTest extends TestCase {
 				$id,
 				PermissionCheckResult::newUserBlocked(),
 				UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_USER_BLOCKED ),
+			];
+
+			yield "{$id->getEntityType()} - permission denied, ip blocked" => [
+				$id,
+				PermissionCheckResult::newIpBlocked(),
+				UseCaseError::newPermissionDenied( UseCaseError::PERMISSION_DENIED_REASON_IP_BLOCKED ),
 			];
 		}
 	}

@@ -81,6 +81,9 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		}
 		return match ( $this->getBlockTargetType( $status ) ) {
 			Block::BLOCK_TYPES[ Block::TYPE_USER ] => PermissionCheckResult::newUserBlocked(),
+			Block::BLOCK_TYPES[ Block::TYPE_IP ],
+			Block::BLOCK_TYPES[ Block::TYPE_RANGE ],
+			Block::BLOCK_TYPES[ Block::TYPE_AUTO ] => PermissionCheckResult::newIpBlocked(),
 			default => PermissionCheckResult::newDenialForUnknownReason()
 		};
 	}
