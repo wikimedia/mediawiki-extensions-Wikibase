@@ -71,6 +71,7 @@ class EchoSetupHookHandler implements BeforeCreateEchoEventHook {
 			'section' => 'message',
 			'presentation-model' => PageConnectionPresentationModel::class,
 			'bundle' => [ 'web' => true, 'email' => false ],
+			'apply-page-link-mute' => true,
 		];
 
 		$icons[EchoNotificationsHandlers::NOTIFICATION_TYPE] = $this->echoIcon ?: [
