@@ -567,6 +567,6 @@
 	"wikibase-scoped-search-search-entities-description": "Verschillende soorten {{SITENAME}}-entiteiten zoeken",
 	"wikibase-scoped-search-item-scope-name": "Items",
 	"wikibase-scoped-search-property-scope-name": "Eigenschappen",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Mobiele bewerkingsinterface",
-	"wikibase-mobile-editing-ui-beta-feature-description": "De nieuwe, experimentele mobiele bewerkingsinterface activeren."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Wikidata-items op mobiele apparaten bewerken",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Zet deze functie aan om Wikidata te bewerken vanaf uw mobiele apparaat! Dit project is in ontwikkeling door het Wikidata-team en maakt het mogelijk om items te bewerken vanaf uw smartphone met een mobiel geoptimaliseerde ervaring."
 }
