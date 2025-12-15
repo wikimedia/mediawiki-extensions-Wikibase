@@ -9,6 +9,7 @@ use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -112,7 +113,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
 	}
 
-	public static function errorsProvider(): Generator {
+	public function errorsProvider(): Generator {
 		yield 'rejects queries with more than one search' => [
 			'{
 			  s1: searchItems(query: { property: "P1" } ) { id }
@@ -120,6 +121,39 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			  s3: searchItems(query: { property: "P3" } ) { id }
 			}',
 			'The query complexity is 200% over the limit.',
+		];
+
+		yield 'invalid search query: empty filter' => [
+			'{
+			  searchItems(query: {} ) { id }
+			}',
+			"Invalid search query: Query filters must contain either an 'and' or a 'property' field",
+		];
+
+		yield 'invalid search query: empty "and"' => [
+			'{
+			  searchItems(query: { and: [] } ) { id }
+			}',
+			"Invalid search query: 'and' fields must contain at least two elements",
+		];
+
+		$stringProperty = $this->createProperty( 'string' );
+		yield 'invalid search query: "and" and "property"' => [
+			"{
+				searchItems(query: {
+					and: [ { property: \"{$stringProperty->getId()}\" } ],
+					property: \"{$stringProperty->getId()}\"
+				} ) { id }
+			}",
+			"Invalid search query: Filters must not contain both an 'and' and a 'property' field",
+		];
+
+		$unsupportedProperty = $this->createProperty( 'wikibase-property' );
+		yield 'invalid search query: unsupported property data type' => [
+			"{
+			  searchItems(query: { property: \"{$unsupportedProperty->getId()}\" } ) { id }
+			}",
+			"Invalid search query: Data type of Property '{$unsupportedProperty->getId()}' is not supported",
 		];
 	}
 
@@ -175,6 +209,12 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			$entityLookup->addEntity( $item );
 			$search->addItem( $item );
 		}
+
+		$dataTypeLookup = new InMemoryDataTypeLookup();
+		foreach ( self::$properties as $property ) {
+			$dataTypeLookup->setDataTypeForProperty( $property->getId(), $property->getDataTypeId() );
+		}
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $dataTypeLookup );
 
 		return WbReuse::getGraphQLService();
 	}

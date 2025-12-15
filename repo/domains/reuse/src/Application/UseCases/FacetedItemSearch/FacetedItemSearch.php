@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch;
 
-use Wikibase\DataModel\Entity\NumericPropertyId;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 
 /**
@@ -13,34 +11,20 @@ use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 class FacetedItemSearch {
 
 	public function __construct(
-		private readonly FacetedItemSearchEngine $searchEngine
+		private readonly FacetedItemSearchValidator $validator,
+		private readonly FacetedItemSearchEngine $searchEngine,
 	) {
 	}
 
-	public function execute(
-		FacetedItemSearchRequest $request
-	): FacetedItemSearchResponse {
-		// TODO: validate
-		$query = $this->constructQuery( $request->query );
+	/**
+	 * @throws UseCaseError
+	 */
+	public function execute( FacetedItemSearchRequest $request ): FacetedItemSearchResponse {
+		$this->validator->validate( $request );
+		$query = $this->validator->getValidatedQuery();
 
 		return new FacetedItemSearchResponse(
 			$this->searchEngine->search( $query )
-		);
-	}
-
-	private function constructQuery( array $filter ): AndOperation|PropertyValueFilter {
-		if ( isset( $filter['property'] ) ) {
-			return new PropertyValueFilter(
-				new NumericPropertyId( $filter['property'] ),
-				$filter['value'] ?? null
-			);
-		}
-
-		return new AndOperation(
-			array_map(
-				$this->constructQuery( ... ),
-				$filter['and']
-			)
 		);
 	}
 }
