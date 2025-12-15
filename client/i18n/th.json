@@ -99,7 +99,7 @@
 	"notification-header-page-connection": "หน้า <strong>$3</strong> ได้ถูก{{GENDER:$2|เชื่อมต่อ}}ไปยัง{{PLURAL:$4|-1=รายการ {{WBREPONAME}}|รายการ {{WBREPONAME}} $4}} โดยสามารถรวบรวมข้อมูลที่เกี่ยวข้องกับหัวข้อได้",
 	"notification-link-text-view-item": "{{GENDER:$1|ดู}}สิ่งนี้",
 	"notification-subject-page-connection": "หน้าบน {{SITENAME}} ที่คุณ{{GENDER:$3|สร้าง}}ได้ถูก{{GENDER:$2|เชื่อมต่อ}}ไปยังรายการ {{WBREPONAME}}",
-	"connected-redirect-category": "หน้าเปลี่ยนทางที่เชื่อมต่อกับรายการ {{WBREPONAME}}",
+	"connected-redirect-category": "หน้าเปลี่ยนทางที่เชื่อมต่อกับรายการ{{WBREPONAME}}",
 	"wikibase-client-data-bridge-dialog-title": "แก้ไข $1",
 	"wikibase-client-data-bridge-permissions-error-info": "รายละเอียดเพิ่มเติม",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>ชื่อผู้ใช้หรือที่อยู่ไอพีของคุณถูกบล็อกบน {{WBREPONAME}}</strong>",

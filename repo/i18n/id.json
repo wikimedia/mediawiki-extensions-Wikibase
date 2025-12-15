@@ -477,7 +477,7 @@
 	"wikibase-search-namespace-mix": "Mencampurkan ruang nama entitas dan artikel dalam pencarian untuk saat ini tidak didukung. Hanya ruang nama entitas yang akan dicari.",
 	"wikibase-search-config-notfound": "Konfigurasi pencarian teks penuh tidak ditemukan: $1",
 	"wikibase-search-config-badclass": "Kelas pembangun kueri buruk: $1",
-	"wikibase-refresh-for-missing-datatype": "Tipe data $1 tidak ditemukan di skrip klien lokal. Ini bisa jadi disebabkan oleh skrip dengan singgahan yang tidak mutakhir. Coba segarkan peramban Anda, menghindari singgahan lokal (Ctrl-Shift-R atau Cmd-Shift-R di kebanyakan peramban) untuk menyelesaikan masalahnya.",
+	"wikibase-refresh-for-missing-datatype": "Jenis data $1 tidak ditemukan di skrip kelayan lokal. Ini bisa jadi disebabkan oleh skrip dengan singgahan yang tidak mutakhir. Coba segarkan peramban Anda, menghindari singgahan lokal (Ctrl-Shift-R atau Cmd-Shift-R di kebanyakan peramban) untuk menyelesaikan masalahnya.",
 	"wikibase-outdated-client-script": "Oh tidak, dibutuhkan penyegaran keras!",
 	"wikibase-shortcopyrightwarning-heading": "Atribusi Lisensi",
 	"wikibase-entity-save-error-heading": "Ada yang tidak beres",
