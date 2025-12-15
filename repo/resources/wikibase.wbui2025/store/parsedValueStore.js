@@ -2,6 +2,9 @@ const { defineStore } = require( 'pinia' );
 const { reactive } = require( 'vue' );
 const { parseValue } = require( '../api/editEntity.js' );
 
+const generateParsedValueCacheKey = ( value, parseOptions ) => value +
+	( parseOptions ? JSON.stringify( parseOptions ) : 'default' );
+
 const useParsedValueStore = defineStore( 'parsedValue', {
 	state: () => ( {
 		parsedValuesPerProperty: new Map()
@@ -24,7 +27,8 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 				parsedValues = new Map();
 				this.parsedValuesPerProperty.set( propertyId, parsedValues );
 			}
-			let parsedValue = parsedValues.get( value );
+			const parsedValueCacheKey = generateParsedValueCacheKey( value, parseOptions );
+			let parsedValue = parsedValues.get( parsedValueCacheKey );
 			if ( parsedValue === undefined ) {
 				parsedValue = reactive( {
 					promise: parseValue( value, parseOptions ).then( ( parsed ) => {
@@ -33,12 +37,13 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 					} ),
 					resolved: undefined
 				} );
-				parsedValues.set( value, parsedValue );
+				parsedValues.set( parsedValueCacheKey, parsedValue );
 			}
 			return parsedValue.promise;
 		},
 		/**
-		 * Prime the parsedValue cache with a value
+		 * Prime the parsedValue cache with a value.
+		 * We only do this in the case of a plain string value.
 		 *
 		 * @param {string} propertyId
 		 * @param {Object} dataValue
@@ -50,14 +55,19 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 				this.parsedValuesPerProperty.set( propertyId, parsedValues );
 			}
 			const value = dataValue.value;
-			if ( parsedValues.has( value ) ) {
+			// We need to set the parser options here in the same way they are set
+			// in the StringValueStrategy so that we warm the correct cache entry
+			const parsedValueCacheKey = generateParsedValueCacheKey( value, {
+				property: propertyId
+			} );
+			if ( parsedValues.has( parsedValueCacheKey ) ) {
 				return;
 			}
 			const parsedValue = {
 				promise: Promise.resolve( dataValue ),
 				resolved: dataValue
 			};
-			parsedValues.set( value, parsedValue );
+			parsedValues.set( parsedValueCacheKey, parsedValue );
 		},
 		/**
 		 * Add parsed values from the given statements (including their qualifiers and references).
@@ -94,16 +104,18 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 		 *
 		 * @param {string} propertyId
 		 * @param {string} value
+		 * @param {Object} parseOptions
 		 * @return {object|null|undefined} The parsed value (a data value object
 		 * with "type" and "value" keys), null if it could not be parsed,
 		 * or undefined if the parse was not yet requested or did not finish yet.
 		 */
-		peekParsedValue( propertyId, value ) {
+		peekParsedValue( propertyId, value, parseOptions ) {
+			const parsedValueCacheKey = generateParsedValueCacheKey( value, parseOptions );
 			const parsedValues = this.parsedValuesPerProperty.get( propertyId );
 			if ( parsedValues === undefined ) {
 				return undefined;
 			}
-			const parsedValue = parsedValues.get( value );
+			const parsedValue = parsedValues.get( parsedValueCacheKey );
 			if ( parsedValue === undefined ) {
 				return undefined;
 			}

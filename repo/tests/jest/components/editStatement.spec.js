@@ -30,6 +30,7 @@ jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
 	() => ( {
 		parseValue: jest.fn(),
+		renderSnakValueText: jest.fn(),
 		renderSnakValueHtml: jest.fn(),
 		renderPropertyLinkHtml: jest.fn()
 	} )

@@ -22,7 +22,6 @@ class Wbui2025FeatureFlag {
 		'globe-coordinate',
 		'monolingualtext',
 		'quantity',
-		'time',
 		'entity-schema',
 		'math',
 	];

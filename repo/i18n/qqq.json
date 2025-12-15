@@ -252,6 +252,8 @@
 	"wikibase-item-reference-edit-placeholder": "This is a generic text used as a placeholder while editing an item reference field.",
 	"wikibase-item-reference-edit-invalid-format": "Error message displayed when text entered in the form field that supposed to contain item id does not match expected format.",
 	"wikibase-item-reference-edit-nonexistent-item": "Error message displayed when item id entered in the form field that supposed to contain item id contains id of nonexistent item.",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "Label displayed above the preview of a value that is being entered by the user. The preview is the system's interpretation of the specified value and - since there is no strict definition for a user how to specify values - visualizes how the value will be displayed later on after the value has been saved.",
+	"wikibase-wbui2025-timeinput-precision-automatic": "Label to indicate that the precision of time or calendar values is being automatically managed\n{{Identical|Automatic}}",
 	"wikibase-wikibaserepopage-not-itemid": "Error message when an entity id, other than item id, is entered. The message advises users that the id is invalid.\n\nParameters:\n* $1 - the invalid id",
 	"wikibase-wikibaserepopage-invalid-langcode": "Response informing that the language code is not valid. Could give an example of a valid language code. Feel free to change \"en\" to your language code(s).\n\nParameters:\n* $1 - the invalid code\n\n\"language identifier\" is the same as \"language code\".\nSee also:\n* {{msg-mw|wikibase-validator-not-a-language}}",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Error message when user tries to edit aliases in special page in a language that contains pipe character.",

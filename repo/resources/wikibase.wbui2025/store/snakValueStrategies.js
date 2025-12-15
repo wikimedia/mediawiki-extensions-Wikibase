@@ -26,7 +26,8 @@ class StringValueStrategy extends DefaultStrategy {
 		const parsedValueStore = useParsedValueStore();
 		return parsedValueStore.peekParsedValue(
 			this.editSnakStore.property,
-			this.getValueToParse()
+			this.getValueToParse(),
+			this.getParseOptions()
 		);
 	}
 
@@ -66,7 +67,26 @@ class LookupStringDatatypeStrategy extends StringValueStrategy {
 
 class TimeValueStrategy extends StringValueStrategy {
 	async renderValueToText( valueObject ) {
-		return valueObject.value.time;
+		return renderSnakValueText( valueObject );
+	}
+
+	getParseOptions() {
+		const defaultOptions = super.getParseOptions();
+		const extraOptions = {};
+		if ( this.editSnakStore.precision !== undefined ) {
+			extraOptions.precision = this.editSnakStore.precision;
+		}
+		if ( this.editSnakStore.calendar !== undefined ) {
+			extraOptions.calendar = this.editSnakStore.calendar;
+		}
+		if ( Object.keys( extraOptions ).length === 0 ) {
+			return defaultOptions;
+		}
+		return Object.assign( defaultOptions, { options: JSON.stringify( extraOptions ) } );
+	}
+
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableTimeSnakValue';
 	}
 }
 
