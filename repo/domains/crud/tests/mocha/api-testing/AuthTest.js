@@ -118,8 +118,10 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 				} );
 
 				describe( 'Globally Blocked user', () => {
-					before( async () => {
-						await requireExtensions( [ 'GlobalBlocking' ] )();
+					let ranGlobalBlock = false;
+
+					before( async function () {
+						await requireExtensions( [ 'GlobalBlocking' ] ).call( this );
 						await root.addGroups( root.username, [ 'steward' ] );
 						await root.action( 'globalblock', {
 							target: user.username,
@@ -127,9 +129,15 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 							expiry: '1 hour',
 							token: await root.token()
 						}, 'POST' );
+
+						ranGlobalBlock = true;
 					} );
 
 					after( async () => {
+						if ( !ranGlobalBlock ) {
+							return;
+						}
+
 						await root.action( 'globalblock', {
 							target: user.username,
 							reason: 'testing',
