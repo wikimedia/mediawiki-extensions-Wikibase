@@ -14,7 +14,8 @@
 			"Snidata",
 			"Taylor",
 			"Veracious",
-			"පසිඳු කාවින්ද"
+			"පසිඳු කාවින්ද",
+			"Penyuwangi"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -108,7 +109,7 @@
 	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
 	"wikibase-sitelinks-link-columnheading": "Halaman terkait",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Sambungan}} dengan {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Beri tahu saya saat seseorang menghubungkan halaman yang {{GENDER:|saya buat}} ke butir {{WBREPONAME}}.",
 	"notification-header-page-connection": "Halaman <strong>$3</strong> telah {{GENDER:$2|dihubungkan}} ke {{PLURAL:$4|-1=sebuah butir {{WBREPONAME}}|butir {{WBREPONAME}} $4}}, di mana data yang relevan dengan topik bisa dikumpulkan.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> dan {{PLURAL:$4|satu halaman lain|$4 halaman lain|100=99+ halaman lain}} telah {{GENDER:$2|dihubungkan}} ke butir {{WBREPONAME}}, di mana data yang relevan dengan topik bisa dikumpulkan.",
@@ -134,7 +135,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Masuk log atau Buat akun",
 	"wikibase-client-data-bridge-license-heading": "Penggunaan dan lisensi",
 	"wikibase-client-data-bridge-bailout-heading": "Sebagai gantinya, Anda dapat melakukan hal berikut:",
-	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Edit nilai pada {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Suntingan nilai di {{WBREPONAME}}",
 	"wikibase-client-data-bridge-saving-error-heading": "Tidak dapat menyimpan perubahan",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "Konflik penyuntingan terdeteksi",
 	"wikibase-client-data-bridge-edit-conflict-error-message": "Pengguna lain baru saja menyunting nilai ini dan memublikasikan perubahannya terlebih dahulu. Perubahan Anda tak dapat diterapkan. Muat ulang halaman untuk mengambil nilai baru.",

@@ -465,7 +465,7 @@
 	"wikibase-conflict-patched": "您的編輯已修補成最新版本。",
 	"wikibase-save-unresolved-redirect": "當嘗試保存更改時，遭遇到從 $1 至 $2 的未處理重新導向。",
 	"wikibase-restoreold": "還原",
-	"wikibase-entity-summary-restore": "還原到[[Special:Contributions/$4|{{GENDER:$4|$4}}]]的版本[[Special:Permalink/$3|$3]]",
+	"wikibase-entity-summary-restore": "還原到[[Special:Contributions/$4|{{GENDER:$4|$4}}]]（[[User talk:$4|討論]]）的版本[[Special:Permalink/$3|$3]]",
 	"wikibase-entity-summary-undo": "復原[[Special:Contributions/$4|{{GENDER:$4|$4}}]]（[[User talk:$4|討論]]）的版本[[Special:Diff/$3|$3]]",
 	"wikibase-no-direct-editing": "命名空間 $1 已停用直接編輯",
 	"wikibase-noentity": "此實體不存在，您可 <span class=\"plainlinks\">[{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} 搜尋相關日誌]</span> 來查詢該項目去向。",

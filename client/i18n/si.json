@@ -6,7 +6,8 @@
 			"Shwetha",
 			"Singhalawap",
 			"පසිඳු කාවින්ද",
-			"හරිත"
+			"හරිත",
+			"BuddhikaW88"
 		]
 	},
 	"wikibase-client-desc": "විකිපාදක දිගුව සඳහා සේවාදායකයා",
@@ -18,7 +19,13 @@
 	"wikibase-dataitem": "{{WBREPONAME}} අයිතමය",
 	"wikibase-editlinks": "සබැඳි සංස්කරණය කරන්න",
 	"wikibase-editlinkstitle": "අන්තර්භාෂාමය සබැඳි සංස්කරණය කරන්න",
+	"wikibase-addlinkstitle": "අන්තර්භාෂා සබැඳි එක් කරන්න",
 	"wikibase-linkitem-addlinks": "බැඳියන් එක්කරන්න",
+	"wikibase-linkitem-title": "පිටුව සමඟ සබැඳිය",
+	"wikibase-linkitem-linkpage": "පිටුව සමඟ සබැඳිය",
+	"wikibase-linkitem-selectlink": "කරුණාකර ඔබට මෙම පිටුවට සම්බන්ධ කිරීමට අවශ්‍ය අඩවියක් සහ පිටුවක් තෝරන්න.",
+	"wikibase-linkitem-input-site": "භාෂාව:",
+	"wikibase-linkitem-input-page": "පිටුව:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "සඟවන්න",
 	"wikibase-rc-hide-wikidata-show": "පෙන්වන්න",
