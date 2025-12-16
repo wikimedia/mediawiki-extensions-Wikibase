@@ -5,7 +5,7 @@
 		"version": "1.4",
 		"description": "OpenAPI definition of Wikibase REST API",
 		"contact": {
-			"name": "Wikimedia Deutschland - Wikibase Product Platform Team",
+			"name": "Wikimedia Deutschland - Wikibase Reuse Team",
 			"url": "https://phabricator.wikimedia.org/project/board/6692/"
 		},
 		"license": {
