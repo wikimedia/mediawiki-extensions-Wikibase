@@ -21,6 +21,7 @@
 const { defineComponent } = require( 'vue' );
 const { CdxLookup } = require( '../../../codex.js' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const supportedDatatypes = require( '../supportedDatatypes.json' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -72,6 +73,13 @@ module.exports = exports = defineComponent( {
 			} );
 		},
 		adaptApiResponse( results ) {
+			const datatypeSupported = ( datatype ) => supportedDatatypes.includes( datatype );
+			const getSupportingText = ( datatype ) => {
+				if ( datatypeSupported( datatype ) ) {
+					return null;
+				}
+				return mw.msg( 'wikibase-addstatement-property-not-supported-on-mobile' );
+			};
 			return results.map( ( { id, label, datatype, url, match, description, display = {} } ) => ( {
 				value: id,
 				label,
@@ -83,6 +91,8 @@ module.exports = exports = defineComponent( {
 					match: match.type === 'alias' ? match.language : undefined,
 					description: display && display.description && display.description.language
 				},
+				supportingText: getSupportingText( datatype ),
+				disabled: !datatypeSupported( datatype ),
 				datatype
 			} ) );
 		},
