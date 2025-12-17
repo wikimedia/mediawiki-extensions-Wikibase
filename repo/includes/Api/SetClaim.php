@@ -257,7 +257,6 @@ class SetClaim extends ApiBase {
 	 */
 	private function getSummary( array $params, Statement $statement, StatementList $statementList ): Summary {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
-			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 

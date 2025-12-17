@@ -127,7 +127,6 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testBuildCreateClaimSummary() {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
-			'wbsetclaim',
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
@@ -153,7 +152,6 @@ class ClaimSummaryBuilderTest extends \PHPUnit\Framework\TestCase {
 		$action
 	) {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
-			'wbsetclaim',
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
 		);
 
