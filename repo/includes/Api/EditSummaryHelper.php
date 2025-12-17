@@ -15,6 +15,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\DataModel\Term\AliasesProvider;
+use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
@@ -42,7 +45,7 @@ class EditSummaryHelper {
 				$summary->setAction( 'override' );
 			} else {
 				$entityDiff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );
-				$summary = $this->getEditSummaryForDiff( $entityDiff );
+				$summary = $this->getEditSummaryForDiff( $entityDiff, $newEntity );
 			}
 		} else {
 			$summary->setAction( 'create-' . $newEntity->getType() );
@@ -59,7 +62,7 @@ class EditSummaryHelper {
 		return $isTargetingEntity xor $isTargetingPage;
 	}
 
-	public function getEditSummaryForDiff( EntityDiff $entityDiff ): Summary {
+	public function getEditSummaryForDiff( EntityDiff $entityDiff, EntityDocument $newEntity ): Summary {
 		$labelsDiff = $entityDiff->getLabelsDiff();
 		$descriptionsDiff = $entityDiff->getDescriptionsDiff();
 		$aliasesDiff = $entityDiff->getAliasesDiff();
@@ -77,6 +80,7 @@ class EditSummaryHelper {
 				$descriptionsDiff,
 				$aliasesDiff,
 				$diffCount !== $languagesDiffCount,
+				$newEntity,
 			);
 		} else {
 			return $this->getGenericEditSummary();
@@ -171,6 +175,7 @@ class EditSummaryHelper {
 		Diff $descriptionsDiff,
 		Diff $aliasesDiff,
 		bool $hasOtherChanges,
+		EntityDocument $newEntity,
 	): Summary {
 		$changedLanguagesAsKeys = [];
 		foreach ( [ $labelsDiff, $descriptionsDiff, $aliasesDiff ] as $diff ) {
@@ -182,6 +187,11 @@ class EditSummaryHelper {
 		$changedLanguagesCount = count( $changedLanguagesAsKeys );
 		Assert::invariant( $changedLanguagesCount > 0, '$changedLanguagesCount > 0' );
 
+		if ( $changedLanguagesCount === 1 && !$hasOtherChanges ) {
+			return $this->getEditSummaryForLanguage( array_key_first( $changedLanguagesAsKeys ),
+				$labelsDiff, $descriptionsDiff, $aliasesDiff, $newEntity );
+		}
+
 		$summary = new Summary( 'wbeditentity' );
 		if ( $changedLanguagesCount <= self::SHORTENED_SUMMARY_MAX_CHANGED_LANGUAGES ) {
 			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other-short' : 'update-languages-short' );
@@ -190,6 +200,84 @@ class EditSummaryHelper {
 			$summary->setAction( $hasOtherChanges ? 'update-languages-and-other' : 'update-languages' );
 			$summary->setAutoCommentArgs( [ $changedLanguagesCount ] );
 		}
+		return $summary;
+	}
+
+	private function getEditSummaryForLanguage(
+		string $languageCode,
+		Diff $labelsDiff,
+		Diff $descriptionsDiff,
+		Diff $aliasesDiff,
+		EntityDocument $newEntity,
+	): Summary {
+		$labelsDiffCount = $labelsDiff->count();
+		$descriptionsDiffCount = $descriptionsDiff->count();
+		$aliasesDiffCount = $aliasesDiff->count();
+
+		if ( $aliasesDiffCount > 0 && ( $labelsDiffCount + $descriptionsDiffCount ) === 0 ) {
+			$summary = new Summary( 'wbsetaliases' );
+			/** @var Diff $diff */
+			$diff = $aliasesDiff->getOperations()[$languageCode];
+			'@phan-var Diff $diff';
+			$addedAliases = $diff->getAddedValues();
+			$removedAliases = $diff->getRemovedValues();
+			if ( count( $addedAliases ) === $aliasesDiffCount ) {
+				$summary->setAction( 'add' );
+				$summary->addAutoSummaryArgs( ...$addedAliases );
+			} elseif ( count( $removedAliases ) === $aliasesDiffCount ) {
+				$summary->setAction( 'remove' );
+				$summary->addAutoSummaryArgs( ...$removedAliases );
+			} else {
+				$summary->setAction( 'update' );
+				Assert::parameterType( AliasesProvider::class, $newEntity, '$newEntity' );
+				/** @var AliasesProvider $newEntity */
+				'@phan-var AliasesProvider $newEntity';
+				$summary->addAutoSummaryArgs( $newEntity->getAliasGroups()->getByLanguage( $languageCode )->getAliases() );
+			}
+		} elseif ( $aliasesDiffCount === 0 && ( $labelsDiffCount + $descriptionsDiffCount ) === 1 ) {
+			if ( $labelsDiffCount === 1 ) {
+				$summary = new Summary( 'wbsetlabel' );
+				$singleDiffOp = $labelsDiff->getOperations()[$languageCode];
+			} else {
+				$summary = new Summary( 'wbsetdescription' );
+				$singleDiffOp = $descriptionsDiff->getOperations()[$languageCode];
+			}
+
+			if ( $singleDiffOp instanceof DiffOpAdd ) {
+				$summary->setAction( 'add' );
+				$summary->addAutoSummaryArgs( $singleDiffOp->getNewValue() );
+			} elseif ( $singleDiffOp instanceof DiffOpRemove ) {
+				$summary->setAction( 'remove' );
+				$summary->addAutoSummaryArgs( $singleDiffOp->getOldValue() );
+			} elseif ( $singleDiffOp instanceof DiffOpChange ) {
+				$summary->setAction( 'set' );
+				$summary->addAutoSummaryArgs( $singleDiffOp->getNewValue() );
+			} else {
+				// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
+				$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
+					'className' => get_class( $singleDiffOp ),
+					'diffOp' => $singleDiffOp,
+				] );
+				return $this->getGenericEditSummary();
+			}
+		} else {
+			$label = '';
+			$description = '';
+			$aliases = [];
+			if ( $newEntity instanceof LabelsProvider && $newEntity->getLabels()->hasTermForLanguage( $languageCode ) ) {
+				$label = $newEntity->getLabels()->getByLanguage( $languageCode )->getText();
+			}
+			if ( $newEntity instanceof DescriptionsProvider && $newEntity->getDescriptions()->hasTermForLanguage( $languageCode ) ) {
+				$description = $newEntity->getDescriptions()->getByLanguage( $languageCode )->getText();
+			}
+			if ( $newEntity instanceof AliasesProvider && $newEntity->getAliasGroups()->hasGroupForLanguage( $languageCode ) ) {
+				$aliases = $newEntity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
+			}
+			$summary = new Summary( 'wbsetlabeldescriptionaliases', );
+			$summary->addAutoSummaryArgs( $label, $description, $aliases );
+		}
+
+		$summary->setLanguage( $languageCode );
 		return $summary;
 	}
 

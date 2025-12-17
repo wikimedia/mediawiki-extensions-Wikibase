@@ -617,7 +617,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			|| $expected['warning'] != 'edit-no-change'
 		) {
 			$this->assertRevisionSummary(
-				'!wbeditentity|wbsetclaim-(create|update)|wbremoveclaims-remove!',
+				'!wbeditentity|wbsetclaim-(create|update)|wbremoveclaims-remove|wbset(label|description|aliases)-(add|remove|set)!',
 				$result['entity']['lastrevid']
 			);
 
@@ -648,7 +648,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update:0| */' ),
+				'/* wbeditentity-update:0| */',
 			],
 			'only one language changed, no other parts changed' => [
 				[
@@ -659,7 +659,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'aliases' => [],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-short:0||en */' ),
+				'/* wbsetlabel-add:1|en */ Foo',
 			],
 			'multiple languages changed, no other parts changed' => [
 				[
@@ -670,7 +670,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-short:0||en, de, es */' ),
+				'/* wbeditentity-update-languages-short:0||en, de, es */',
 			],
 			'some languages changed and other parts changed' => [
 				[
@@ -688,7 +688,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-and-other-short:0||en, de, es */' ),
+				'/* wbeditentity-update-languages-and-other-short:0||en, de, es */',
 			],
 			'more than 50 languages changed' => [
 				[
@@ -699,7 +699,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'aliases' => self::generateLanguageValuePairs( 50 ),
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages:0||52 */' ),
+				'/* wbeditentity-update-languages:0||52 */',
 			],
 			'more than 50 languages changed and other parts changed' => [
 				[
@@ -717,7 +717,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						],
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-and-other:0||52 */' ),
+				'/* wbeditentity-update-languages-and-other:0||52 */',
 			],
 		];
 	}
@@ -725,7 +725,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideItemIdParamsAndExpectedSummaryPatternForEditEntity
 	 */
-	public function testEditEntity_producesCorrectSummary( $params, $expectedSummaryPattern ) {
+	public function testEditEntity_producesCorrectSummary( $params, $expectedSummary ) {
 		// Saving entity couldn't be done in the provider because there the
 		// test database setup has not been done yet
 		$item = new Item();
@@ -735,7 +735,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 		[ $result ] = $this->doApiRequestWithToken( $params );
 
 		$this->assertRevisionSummary(
-			$expectedSummaryPattern,
+			'!^(?:' . preg_quote( $expectedSummary, '!' ) . ')$!',
 			$result['entity']['lastrevid']
 		);
 	}
