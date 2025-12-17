@@ -87,7 +87,56 @@ class EditSummaryHelper {
 		if ( $claimsDiff->count() === 1 ) {
 			return $this->getEditSummaryForClaimDiff( array_first( $claimsDiff->getOperations() ) );
 		}
-		return $this->getGenericEditSummary(); // TODO define messages for editing multiple statements (of the same property?)
+		$statementCountsByPropertyId = [];
+		$diffOpClasses = [];
+		foreach ( $claimsDiff->getOperations() as $diffOp ) {
+			$diffOpClasses[get_class( $diffOp )] = true;
+			/** @var Statement $statement */
+			if ( $diffOp instanceof DiffOpAdd || $diffOp instanceof DiffOpChange ) {
+				$statement = $diffOp->getNewValue();
+			} elseif ( $diffOp instanceof DiffOpRemove ) {
+				$statement = $diffOp->getOldValue();
+			} else {
+				// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
+				$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
+					'className' => get_class( $diffOp ),
+					'diffOp' => $diffOp,
+					'claimsDiff' => $claimsDiff,
+				] );
+				return $this->getGenericEditSummary();
+			}
+			'@phan-var Statement $statement';
+			$propertyId = $statement->getPropertyId();
+			$pid = $propertyId->getSerialization();
+			$statementCountsByPropertyId[$pid] = ( $statementCountsByPropertyId[$pid] ?? 0 ) + 1;
+		}
+		$subAction = 'update';
+		if ( count( $diffOpClasses ) == 1 ) {
+			if ( $diffOpClasses[DiffOpAdd::class] ?? false ) {
+				$subAction = 'add';
+			} elseif ( $diffOpClasses[DiffOpRemove::class] ?? false ) {
+				$subAction = 'remove';
+			}
+		}
+		if ( count( $statementCountsByPropertyId ) === 1 ) {
+			return new Summary(
+				'wbeditentity',
+				// possible actions: statements-single-property-add,
+				// statements-single-property-remove, statements-single-property-update
+				"statements-single-property-$subAction",
+				commentArgs: [ array_first( $statementCountsByPropertyId ) ],
+				// @phan-suppress-next-line PhanPossiblyUndeclaredVariable -- loop must have run at least once to reach here
+				summaryArgs: [ $propertyId ]
+			);
+		} else {
+			return new Summary(
+				'wbeditentity',
+				// possible actions: statements-multiple-properties-add,
+				// statements-multiple-properties-remove, statements-multiple-properties-update
+				"statements-multiple-properties-$subAction",
+				commentArgs: [ count( $statementCountsByPropertyId ) ]
+			);
+		}
 	}
 
 	private function getEditSummaryForClaimDiff( DiffOp $claimDiff ): Summary {
