@@ -6,6 +6,14 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
+	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
+	() => ( [
+		'string',
+		'wikibase-item'
+	] ),
+	{ virtual: true }
+);
+jest.mock(
 	'../../../resources/wikibase.wbui2025/icons.json',
 	() => ( { cdxIconCheck: 'check', cdxIconClose: 'close' } ),
 	{ virtual: true }
@@ -38,6 +46,8 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			label: 'eine Beschriftung',
 			match: '(search term)',
 			description: 'a description',
+			disabled: false,
+			supportingText: null,
 			language: {
 				label: 'de',
 				match: 'en',
@@ -79,6 +89,8 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			label: undefined,
 			match: '',
 			description: undefined,
+			disabled: false,
+			supportingText: null,
 			language: {
 				label: undefined,
 				match: undefined,
@@ -98,6 +110,49 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 						text: 'P456'
 					},
 					aliases: [ 'P456' ]
+				}
+			],
+			success: 1
+		};
+		const p789MenuItem = {
+			value: 'P789',
+			datatype: 'external-id',
+			label: 'eine Beschriftung',
+			match: '(search term)',
+			description: 'a description',
+			disabled: true,
+			supportingText: 'wikibase-addstatement-property-not-supported-on-mobile',
+			language: {
+				label: 'de',
+				match: 'en',
+				description: 'en'
+			}
+		};
+		const p789SearchResult = {
+			searchinfo: 'search term',
+			search: [
+				{
+					id: 'P789',
+					datatype: 'external-id',
+					url: 'unused',
+					label: 'eine Beschriftung',
+					description: 'a description',
+					display: {
+						label: {
+							value: 'eine Beschriftung',
+							language: 'de'
+						},
+						description: {
+							value: 'a description',
+							language: 'en'
+						}
+					},
+					match: {
+						type: 'alias',
+						language: 'en',
+						text: 'search term'
+					},
+					aliases: [ 'search term' ]
 				}
 			],
 			success: 1
@@ -146,6 +201,24 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			} );
 			expect( lookup.props( 'menuItems' ) )
 				.toEqual( [ p123MenuItem ] );
+		} );
+
+		it( 'marks unsupported datatypes as unsupported', async () => {
+			wbui2025.api.api.get.mockResolvedValueOnce( p789SearchResult );
+			await lookup.vm.$emit( 'update:input-value', 'search term' );
+			await jest.advanceTimersByTime( 300 );
+			await lookup.vm.$nextTick();
+			await lookup.vm.$nextTick();
+
+			expect( wbui2025.api.api.get ).toHaveBeenCalledTimes( 1 );
+			expect( wbui2025.api.api.get ).toHaveBeenCalledWith( {
+				action: 'wbsearchentities',
+				language: languageCode,
+				type: 'property',
+				search: 'search term'
+			} );
+			expect( lookup.props( 'menuItems' ) )
+				.toEqual( [ p789MenuItem ] );
 		} );
 
 		it( 'does not make an API call when the input is blank', async () => {

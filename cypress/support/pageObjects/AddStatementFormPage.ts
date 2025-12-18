@@ -40,9 +40,13 @@ export class AddStatementFormPage {
 		this.propertyInput().focus();
 
 		cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu' ).should( 'be.visible' );
-		cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu-item:first:not(.cdx-menu__no-results)' ).click();
+		this.getFirstPropertyLookupItem().click();
 
 		return this;
+	}
+
+	public getFirstPropertyLookupItem(): Chainable {
+		return cy.get( '.wikibase-wbui2025-property-lookup .cdx-menu-item:first:not(.cdx-menu__no-results)' );
 	}
 
 	public setSnakValue( inputText: string ): this {

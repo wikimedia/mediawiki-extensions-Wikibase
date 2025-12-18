@@ -10,6 +10,8 @@ describe( 'wbui2025 item view add statement', () => {
 		let itemViewPage: ItemViewPage;
 		const secondPropertyLabel: string = Util.getTestString( 'property' );
 		let seconondPropertyId: string;
+		const unsupportedPropertyLabel: string = Util.getTestString( 'unsupported-property' );
+		let unsupportedPropertyId: string;
 
 		before( () => {
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'string' } )
@@ -36,6 +38,10 @@ describe( 'wbui2025 item view add statement', () => {
 					cy.task( 'MwApi:CreateProperty', { label: secondPropertyLabel, datatype: 'string' } )
 						.then( ( newPropertyId: string ) => {
 							seconondPropertyId = newPropertyId;
+						} );
+					cy.task( 'MwApi:CreateProperty', { label: unsupportedPropertyLabel, datatype: 'external-id' } )
+						.then( ( newPropertyId: string ) => {
+							unsupportedPropertyId = newPropertyId;
 						} );
 				} );
 		} );
@@ -78,6 +84,10 @@ describe( 'wbui2025 item view add statement', () => {
 			addStatementFormPage.form().should( 'not.exist' );
 			itemViewPage.mainSnakValues().eq( 2 ).should( 'have.text', 'some other string' );
 
+			itemViewPage.addStatementButton().click();
+			addStatementFormPage.propertyLookup().should( 'exist' );
+			addStatementFormPage.setProperty( unsupportedPropertyId );
+			addStatementFormPage.getFirstPropertyLookupItem().should( 'contain.text', 'not supported on mobile' );
 		} );
 
 	} );

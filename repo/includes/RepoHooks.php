@@ -1067,6 +1067,7 @@ final class RepoHooks implements
 				'messages' => [
 					'wikibase-add',
 					'wikibase-addstatement',
+					'wikibase-addstatement-property-not-supported-on-mobile',
 					'wikibase-addqualifier',
 					'wikibase-addreference',
 					'wikibase-cancel',
