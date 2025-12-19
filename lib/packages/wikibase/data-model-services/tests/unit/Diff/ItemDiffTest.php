@@ -191,27 +191,23 @@ class ItemDiffTest extends EntityDiffOldTestCase {
 		}
 	}
 
-	public static function isEmptyProvider() {
-		$argLists = [];
+	public static function isEmptyProvider(): iterable {
+		yield 'no ops' => [ [], true ];
 
-		$argLists['no ops'] = [ [], true ];
-
-		$argLists['label changed'] = [
+		yield 'label changed' => [
 			[ 'label' => new Diff( [ 'x' => new DiffOpAdd( 'foo' ) ] ) ],
 			false,
 		];
 
-		$argLists['empty links diff'] = [
+		yield 'empty links diff' => [
 			[ 'links' => new Diff( [], true ) ],
 			true,
 		];
 
-		$argLists['non-empty links diff'] = [
+		yield 'non-empty links diff' => [
 			[ 'links' => new Diff( [ new DiffOpAdd( 'foo' ) ], true ) ],
 			false,
 		];
-
-		return $argLists;
 	}
 
 	/**

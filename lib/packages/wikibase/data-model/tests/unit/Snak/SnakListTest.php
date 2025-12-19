@@ -20,18 +20,6 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class SnakListTest extends \PHPUnit\Framework\TestCase {
 
-	public static function elementInstancesProvider() {
-		$id42 = new NumericPropertyId( 'P42' );
-
-		$argLists = [];
-
-		$argLists[] = [ [ new PropertyNoValueSnak( $id42 ) ] ];
-		$argLists[] = [ [ new PropertyNoValueSnak( new NumericPropertyId( 'P9001' ) ) ] ];
-		$argLists[] = [ [ new PropertyValueSnak( $id42, new StringValue( 'a' ) ) ] ];
-
-		return $argLists;
-	}
-
 	public static function instanceProvider() {
 		$id42 = new NumericPropertyId( 'P42' );
 		$id9001 = new NumericPropertyId( 'P9001' );
@@ -141,7 +129,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 	public function testAddSnak( SnakList $array ) {
 		$elementCount = $array->count();
 
-		$element = $this->elementInstancesProvider()[0][0][0];
+		$element = new PropertyNoValueSnak( new NumericPropertyId( 'P42' ) );
 
 		if ( !$array->hasSnak( $element ) ) {
 			++$elementCount;

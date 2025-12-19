@@ -22,12 +22,10 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpQualifierRemoveTest extends \PHPUnit\Framework\TestCase {
 
-	public static function invalidConstructorProvider() {
-		$args = [];
-		$args[] = [ '', '' ];
-		$args[] = [ 'foo', '' ];
-		$args[] = [ '', 'foo' ];
-		return $args;
+	public static function invalidConstructorProvider(): iterable {
+		yield [ '', '' ];
+		yield [ 'foo', '' ];
+		yield [ '', 'foo' ];
 	}
 
 	/**

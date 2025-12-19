@@ -23,11 +23,9 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpRemoveStatementTest extends \PHPUnit\Framework\TestCase {
 
-	public static function invalidConstructorProvider() {
-		$args = [];
-		$args[] = [ [ 'foo' ] ];
-		$args[] = [ '' ];
-		return $args;
+	public static function invalidConstructorProvider(): iterable {
+		yield [ [ 'foo' ] ];
+		yield [ '' ];
 	}
 
 	/**

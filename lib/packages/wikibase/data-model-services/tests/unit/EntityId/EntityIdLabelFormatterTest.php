@@ -21,21 +21,11 @@ use Wikibase\DataModel\Term\Term;
  */
 class EntityIdLabelFormatterTest extends TestCase {
 
-	/**
-	 * @return array
-	 */
-	public static function validProvider() {
-		$argLists = [];
-
-		$argLists[] = [ new ItemId( 'Q42' ), 'es', 'foo' ];
-
-		$argLists[] = [ new ItemId( 'Q9001' ), 'en', 'Q9001' ];
-
-		$argLists[] = [ new NumericPropertyId( 'P9001' ), 'en', 'P9001' ];
-
-		$argLists['unresolved-redirect'] = [ new ItemId( 'Q23' ), 'en', 'Q23' ];
-
-		return $argLists;
+	public static function validProvider(): iterable {
+		yield [ new ItemId( 'Q42' ), 'es', 'foo' ];
+		yield [ new ItemId( 'Q9001' ), 'en', 'Q9001' ];
+		yield [ new NumericPropertyId( 'P9001' ), 'en', 'P9001' ];
+		yield 'unresolved-redirect' => [ new ItemId( 'Q23' ), 'en', 'Q23' ];
 	}
 
 	/**

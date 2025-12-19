@@ -42,14 +42,11 @@ class ChangeOpMainSnakTest extends \PHPUnit\Framework\TestCase {
 		$this->mockProvider = new ChangeOpTestMockProvider( $this );
 	}
 
-	public static function invalidArgumentProvider() {
+	public static function invalidArgumentProvider(): iterable {
 		$validSnak = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 
-		$args = [];
-		$args[] = [ 123, $validSnak ];
-		$args[] = [ false, $validSnak ];
-
-		return $args;
+		yield [ 123, $validSnak ];
+		yield [ false, $validSnak ];
 	}
 
 	/**

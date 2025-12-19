@@ -16,18 +16,14 @@ use Wikibase\DataModel\Services\EntityId\PlainEntityIdFormatter;
  */
 class PlainEntityIdFormatterTest extends TestCase {
 
-	public static function validProvider() {
-		$argLists = [];
+	public static function validProvider(): iterable {
+		yield [ new ItemId( 'q42' ), 'Q42' ];
+		yield [ new ItemId( 'q9001' ), 'Q9001' ];
+		yield [ new ItemId( 'q1' ), 'Q1' ];
 
-		$argLists[] = [ new ItemId( 'q42' ), 'Q42' ];
-		$argLists[] = [ new ItemId( 'q9001' ), 'Q9001' ];
-		$argLists[] = [ new ItemId( 'q1' ), 'Q1' ];
-
-		$argLists[] = [ new NumericPropertyId( 'p42' ), 'P42' ];
-		$argLists[] = [ new NumericPropertyId( 'p9001' ), 'P9001' ];
-		$argLists[] = [ new NumericPropertyId( 'p1' ), 'P1' ];
-
-		return $argLists;
+		yield [ new NumericPropertyId( 'p42' ), 'P42' ];
+		yield [ new NumericPropertyId( 'p9001' ), 'P9001' ];
+		yield [ new NumericPropertyId( 'p1' ), 'P1' ];
 	}
 
 	/**

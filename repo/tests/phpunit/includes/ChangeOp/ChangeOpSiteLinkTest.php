@@ -28,14 +28,10 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
  */
 class ChangeOpSiteLinkTest extends TestCase {
 
-	public static function invalidConstructorProvider(): array {
-		$argLists = [];
-
-		$argLists[] = [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
-		$argLists[] = [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ];
-		$argLists[] = [ 'plwiki', 'Warszawa', [ new NumericPropertyId( 'P42' ) ] ];
-
-		return $argLists;
+	public static function invalidConstructorProvider(): iterable {
+		yield [ 'plwiki', 'Warszawa', [ 'FA', 'GA' ] ];
+		yield [ 'plwiki', 'Warszawa', [ new ItemId( 'Q42' ), 'FA' ] ];
+		yield [ 'plwiki', 'Warszawa', [ new NumericPropertyId( 'P42' ) ] ];
 	}
 
 	/**

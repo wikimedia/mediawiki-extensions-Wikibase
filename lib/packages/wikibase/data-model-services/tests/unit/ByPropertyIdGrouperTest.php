@@ -136,16 +136,12 @@ class ByPropertyIdGrouperTest extends TestCase {
 		$byPropertyIdGrouper->getByPropertyId( new NumericPropertyId( 'P11' ) );
 	}
 
-	public static function provideHasPropertyId() {
-		$cases = [];
-
-		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P42', true ];
-		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P23', true ];
-		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P15', true ];
-		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P10', true ];
-		$cases[] = [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P11', false ];
-
-		return $cases;
+	public static function provideHasPropertyId(): iterable {
+		yield [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P42', true ];
+		yield [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P23', true ];
+		yield [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P15', true ];
+		yield [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P10', true ];
+		yield [ fn ( self $self ) => $self->getPropertyIdProviders(), 'P11', false ];
 	}
 
 	/**

@@ -34,16 +34,12 @@ use Wikimedia\TestingAccessWrapper;
 class RemoveReferencesTest extends WikibaseApiTestCase {
 
 	/**
-	 * @return Snak[]
+	 * @return iterable<Snak>
 	 */
 	protected static function snakProvider(): iterable {
-		$snaks = [];
-
-		$snaks[] = new PropertyNoValueSnak( 42 );
-		$snaks[] = new PropertySomeValueSnak( 9001 );
-		$snaks[] = new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
-
-		return $snaks;
+		yield new PropertyNoValueSnak( 42 );
+		yield new PropertySomeValueSnak( 9001 );
+		yield new PropertyValueSnak( 7201010, new StringValue( 'o_O' ) );
 	}
 
 	/**

@@ -34,14 +34,10 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $siteId, $siteLink->getSiteId() );
 	}
 
-	public static function siteIdProvider() {
-		$argLists = [];
-
-		$argLists[] = [ 'enwiki' ];
-		$argLists[] = [ 'nlwiki' ];
-		$argLists[] = [ 'Nyan!' ];
-
-		return $argLists;
+	public static function siteIdProvider(): iterable {
+		yield [ 'enwiki' ];
+		yield [ 'nlwiki' ];
+		yield [ 'Nyan!' ];
 	}
 
 	/**
@@ -70,14 +66,10 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $pageName, $siteLink->getPageName() );
 	}
 
-	public static function pageNameProvider() {
-		$argLists = [];
-
-		$argLists[] = [ 'Wikidata' ];
-		$argLists[] = [ 'Nyan_Cat' ];
-		$argLists[] = [ 'NYAN DATA ALL ACROSS THE SKY ~=[,,_,,]:3' ];
-
-		return $argLists;
+	public static function pageNameProvider(): iterable {
+		yield [ 'Wikidata' ];
+		yield [ 'Nyan_Cat' ];
+		yield [ 'NYAN DATA ALL ACROSS THE SKY ~=[,,_,,]:3' ];
 	}
 
 	/**

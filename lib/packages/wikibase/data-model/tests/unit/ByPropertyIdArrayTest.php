@@ -256,59 +256,56 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		self::assertEquals( $objects, $indexedArray->toFlatArray() );
 	}
 
-	public static function moveProvider() {
+	public static function moveProvider(): iterable {
 		$c = self::statementsProvider();
-		$argLists = [];
 
-		$argLists[] = [ $c, $c[0], 0, $c ];
-		$argLists[] = [ $c, $c[0], 1, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[0], 2, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[0], 3, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
-		$argLists[] = [ $c, $c[0], 4, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
-		$argLists[] = [ $c, $c[0], 5, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
-		$argLists[] = [ $c, $c[0], 6, [ $c[2], $c[3], $c[4], $c[5], $c[1], $c[0] ] ];
+		yield [ $c, $c[0], 0, $c ];
+		yield [ $c, $c[0], 1, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
+		yield [ $c, $c[0], 2, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
+		yield [ $c, $c[0], 3, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
+		yield [ $c, $c[0], 4, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
+		yield [ $c, $c[0], 5, [ $c[2], $c[3], $c[4], $c[1], $c[0], $c[5] ] ];
+		yield [ $c, $c[0], 6, [ $c[2], $c[3], $c[4], $c[5], $c[1], $c[0] ] ];
 
-		$argLists[] = [ $c, $c[1], 0, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[1], 1, $c ];
-		$argLists[] = [ $c, $c[1], 2, $c ];
-		$argLists[] = [ $c, $c[1], 3, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[1], 4, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[1], 5, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[1], 6, [ $c[2], $c[3], $c[4], $c[5], $c[0], $c[1] ] ];
+		yield [ $c, $c[1], 0, [ $c[1], $c[0], $c[2], $c[3], $c[4], $c[5] ] ];
+		yield [ $c, $c[1], 1, $c ];
+		yield [ $c, $c[1], 2, $c ];
+		yield [ $c, $c[1], 3, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[1], 4, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[1], 5, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[1], 6, [ $c[2], $c[3], $c[4], $c[5], $c[0], $c[1] ] ];
 
-		$argLists[] = [ $c, $c[2], 0, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[2], 1, $c ];
-		$argLists[] = [ $c, $c[2], 2, $c ];
-		$argLists[] = [ $c, $c[2], 3, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[2], 4, [ $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ] ];
-		$argLists[] = [ $c, $c[2], 5, [ $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ] ];
-		$argLists[] = [ $c, $c[2], 6, [ $c[0], $c[1], $c[5], $c[3], $c[4], $c[2] ] ];
+		yield [ $c, $c[2], 0, [ $c[2], $c[3], $c[4], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[2], 1, $c ];
+		yield [ $c, $c[2], 2, $c ];
+		yield [ $c, $c[2], 3, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
+		yield [ $c, $c[2], 4, [ $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ] ];
+		yield [ $c, $c[2], 5, [ $c[0], $c[1], $c[3], $c[4], $c[2], $c[5] ] ];
+		yield [ $c, $c[2], 6, [ $c[0], $c[1], $c[5], $c[3], $c[4], $c[2] ] ];
 
-		$argLists[] = [ $c, $c[3], 0, [ $c[3], $c[2], $c[4], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[3], 1, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[3], 2, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
-		$argLists[] = [ $c, $c[3], 3, $c ];
-		$argLists[] = [ $c, $c[3], 4, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
-		$argLists[] = [ $c, $c[3], 5, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
-		$argLists[] = [ $c, $c[3], 6, [ $c[0], $c[1], $c[5], $c[2], $c[4], $c[3] ] ];
+		yield [ $c, $c[3], 0, [ $c[3], $c[2], $c[4], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[3], 1, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
+		yield [ $c, $c[3], 2, [ $c[0], $c[1], $c[3], $c[2], $c[4], $c[5] ] ];
+		yield [ $c, $c[3], 3, $c ];
+		yield [ $c, $c[3], 4, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
+		yield [ $c, $c[3], 5, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
+		yield [ $c, $c[3], 6, [ $c[0], $c[1], $c[5], $c[2], $c[4], $c[3] ] ];
 
-		$argLists[] = [ $c, $c[4], 0, [ $c[4], $c[2], $c[3], $c[0], $c[1], $c[5] ] ];
-		$argLists[] = [ $c, $c[4], 1, [ $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ] ];
-		$argLists[] = [ $c, $c[4], 2, [ $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ] ];
-		$argLists[] = [ $c, $c[4], 3, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
-		$argLists[] = [ $c, $c[4], 4, $c ];
-		$argLists[] = [ $c, $c[4], 5, $c ];
-		$argLists[] = [ $c, $c[4], 6, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
+		yield [ $c, $c[4], 0, [ $c[4], $c[2], $c[3], $c[0], $c[1], $c[5] ] ];
+		yield [ $c, $c[4], 1, [ $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ] ];
+		yield [ $c, $c[4], 2, [ $c[0], $c[1], $c[4], $c[2], $c[3], $c[5] ] ];
+		yield [ $c, $c[4], 3, [ $c[0], $c[1], $c[2], $c[4], $c[3], $c[5] ] ];
+		yield [ $c, $c[4], 4, $c ];
+		yield [ $c, $c[4], 5, $c ];
+		yield [ $c, $c[4], 6, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
 
-		$argLists[] = [ $c, $c[5], 0, [ $c[5], $c[0], $c[1], $c[2], $c[3], $c[4] ] ];
-		$argLists[] = [ $c, $c[5], 1, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
-		$argLists[] = [ $c, $c[5], 2, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
-		$argLists[] = [ $c, $c[5], 3, $c ];
-		$argLists[] = [ $c, $c[5], 4, $c ];
-		$argLists[] = [ $c, $c[5], 5, $c ];
-		$argLists[] = [ $c, $c[5], 6, $c ];
-
-		return $argLists;
+		yield [ $c, $c[5], 0, [ $c[5], $c[0], $c[1], $c[2], $c[3], $c[4] ] ];
+		yield [ $c, $c[5], 1, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
+		yield [ $c, $c[5], 2, [ $c[0], $c[1], $c[5], $c[2], $c[3], $c[4] ] ];
+		yield [ $c, $c[5], 3, $c ];
+		yield [ $c, $c[5], 4, $c ];
+		yield [ $c, $c[5], 5, $c ];
+		yield [ $c, $c[5], 6, $c ];
 	}
 
 	/**
@@ -358,35 +355,31 @@ class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 		$indexedArray->moveObjectToIndex( $statements[0], 9999 );
 	}
 
-	public static function addProvider() {
+	public static function addProvider(): iterable {
 		$c = self::statementsProvider();
 
-		$argLists = [];
-
-		$argLists[] = [ [], $c[0], null, [ $c[0] ] ];
-		$argLists[] = [ [], $c[0], 1, [ $c[0] ] ];
-		$argLists[] = [ [ $c[0] ], $c[2], 0, [ $c[2], $c[0] ] ];
-		$argLists[] = [ [ $c[2], $c[1] ], $c[0], 0, [ $c[0], $c[1], $c[2] ] ];
-		$argLists[] = [
+		yield [ [], $c[0], null, [ $c[0] ] ];
+		yield [ [], $c[0], 1, [ $c[0] ] ];
+		yield [ [ $c[0] ], $c[2], 0, [ $c[2], $c[0] ] ];
+		yield [ [ $c[2], $c[1] ], $c[0], 0, [ $c[0], $c[1], $c[2] ] ];
+		yield [
 			[ $c[0], $c[1], $c[3] ],
 			$c[5],
 			1,
 			[ $c[0], $c[1], $c[5], $c[3] ],
 		];
-		$argLists[] = [
+		yield [
 			[ $c[0], $c[1], $c[5], $c[3] ],
 			$c[2],
 			2,
 			[ $c[0], $c[1], $c[2], $c[3], $c[5] ],
 		];
-		$argLists[] = [
+		yield [
 			[ $c[0], $c[1], $c[2], $c[3], $c[5] ],
 			$c[4],
 			null,
 			[ $c[0], $c[1], $c[2], $c[3], $c[4], $c[5] ],
 		];
-
-		return $argLists;
 	}
 
 	/**

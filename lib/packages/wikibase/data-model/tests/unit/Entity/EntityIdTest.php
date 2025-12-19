@@ -23,16 +23,12 @@ use Wikibase\DataModel\Entity\SerializableEntityId;
  */
 class EntityIdTest extends \PHPUnit\Framework\TestCase {
 
-	public static function instanceProvider() {
-		$ids = [];
-
-		$ids[] = [ new ItemId( 'Q1' ), '' ];
-		$ids[] = [ new ItemId( 'Q42' ), '' ];
-		$ids[] = [ new ItemId( 'Q31337' ), '' ];
-		$ids[] = [ new ItemId( 'Q2147483647' ), '' ];
-		$ids[] = [ new NumericPropertyId( 'P101010' ), '' ];
-
-		return $ids;
+	public static function instanceProvider(): iterable {
+		yield [ new ItemId( 'Q1' ), '' ];
+		yield [ new ItemId( 'Q42' ), '' ];
+		yield [ new ItemId( 'Q31337' ), '' ];
+		yield [ new ItemId( 'Q2147483647' ), '' ];
+		yield [ new NumericPropertyId( 'P101010' ), '' ];
 	}
 
 	/**

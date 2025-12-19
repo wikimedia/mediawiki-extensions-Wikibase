@@ -38,14 +38,10 @@ class GuidGeneratorTest extends TestCase {
 		$this->assertIsGuidForId( (string)$guidGen->newStatementId( $id ), $id );
 	}
 
-	public static function entityIdProvider() {
-		$argLists = [];
-
-		$argLists[] = [ new ItemId( 'Q123' ) ];
-		$argLists[] = [ new ItemId( 'Q1' ) ];
-		$argLists[] = [ new NumericPropertyId( 'P31337' ) ];
-
-		return $argLists;
+	public static function entityIdProvider(): iterable {
+		yield [ new ItemId( 'Q123' ) ];
+		yield [ new ItemId( 'Q1' ) ];
+		yield [ new NumericPropertyId( 'P31337' ) ];
 	}
 
 	private function assertIsGuidForId( $guid, EntityId $id ) {
