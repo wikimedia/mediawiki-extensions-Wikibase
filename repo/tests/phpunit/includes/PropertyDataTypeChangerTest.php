@@ -144,13 +144,12 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 		return new PropertyDataTypeChanger( $entityRevisionLookup, $entityStore, $this->getDataTypeFactory() );
 	}
 
-	private function getDataTypeFactory() {
-		$dataTypes = [];
-		$dataTypes[] = new DataType( 'rustydata', 'kittens' );
-		$dataTypes[] = new DataType( 'shinydata', 'kittens' );
-		$dataTypes[] = new DataType( 'otherdatatype', 'puppies' );
-
-		return DataTypeFactory::newFromTypes( $dataTypes );
+	private function getDataTypeFactory(): DataTypeFactory {
+		return DataTypeFactory::newFromTypes( [
+			new DataType( 'rustydata', 'kittens' ),
+			new DataType( 'shinydata', 'kittens' ),
+			new DataType( 'otherdatatype', 'puppies' ),
+		] );
 	}
 
 }

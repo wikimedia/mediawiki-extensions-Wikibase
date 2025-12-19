@@ -74,14 +74,12 @@ class ItemDiffer implements EntityDifferStrategy {
 	}
 
 	private function toDiffArray( Item $item ): array {
-		$array = [];
-
-		$array['aliases'] = $item->getAliasGroups()->toTextArray();
-		$array['label'] = $item->getLabels()->toTextArray();
-		$array['description'] = $item->getDescriptions()->toTextArray();
-		$array['links'] = $this->getSiteLinksInDiffFormat( $item->getSiteLinkList() );
-
-		return $array;
+		return [
+			'aliases' => $item->getAliasGroups()->toTextArray(),
+			'label' => $item->getLabels()->toTextArray(),
+			'description' => $item->getDescriptions()->toTextArray(),
+			'links' => $this->getSiteLinksInDiffFormat( $item->getSiteLinkList() ),
+		];
 	}
 
 	private function getSiteLinksInDiffFormat( SiteLinkList $siteLinks ): array {

@@ -62,13 +62,12 @@ return [
 	},
 
 	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
-		$validators = [];
-		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new MembershipValidator( WikibaseRepo::getTermsLanguages()->getLanguages(), 'not-a-language' );
-		$validators[] = new NotMulValidator( MediaWikiServices::getInstance()->getLanguageNameUtils() );
-
 		return new LanguageCodeValidator(
-			new CompositeValidator( $validators )
+			new CompositeValidator( [
+				new TypeValidator( 'string' ),
+				new MembershipValidator( WikibaseRepo::getTermsLanguages()->getLanguages(), 'not-a-language' ),
+				new NotMulValidator( $services->getLanguageNameUtils() ),
+			] )
 		);
 	},
 

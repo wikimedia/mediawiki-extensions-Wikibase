@@ -96,9 +96,10 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $expectedClass
 	 */
 	public function testNewFromFieldData( $action, EntityId $entityId, $expectedClass ) {
-		$fields = [];
-		$fields['type'] = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
-		$fields['object_id'] = $entityId->getSerialization();
+		$fields = [
+			'type' => 'wikibase-' . $entityId->getEntityType() . '~' . $action,
+			'object_id' => $entityId->getSerialization(),
+		];
 
 		$factory = $this->getEntityChangeFactory();
 

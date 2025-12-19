@@ -88,14 +88,12 @@ class PropertyDiffer implements EntityDifferStrategy {
 	 *
 	 * @return array[]
 	 */
-	private function toDiffArray( Property $property ) {
-		$array = [];
-
-		$array['aliases'] = $property->getAliasGroups()->toTextArray();
-		$array['label'] = $property->getLabels()->toTextArray();
-		$array['description'] = $property->getDescriptions()->toTextArray();
-
-		return $array;
+	private function toDiffArray( Property $property ): array {
+		return [
+			'aliases' => $property->getAliasGroups()->toTextArray(),
+			'label' => $property->getLabels()->toTextArray(),
+			'description' => $property->getDescriptions()->toTextArray(),
+		];
 	}
 
 	/**

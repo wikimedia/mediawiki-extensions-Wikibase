@@ -327,9 +327,10 @@ class ValidatorBuilders {
 			new CompositeValidator( $timeStringValidators ) //Note: each validator is fatal
 		);
 
-		$precisionValidators = [];
-		$precisionValidators[] = new TypeValidator( 'integer' );
-		$precisionValidators[] = new NumberRangeValidator( TimeValue::PRECISION_YEAR1G, $maxPrecision );
+		$precisionValidators = [
+			new TypeValidator( 'integer' ),
+			new NumberRangeValidator( TimeValue::PRECISION_YEAR1G, $maxPrecision ),
+		];
 
 		$validators[] = new DataFieldValidator(
 			'precision',
@@ -372,15 +373,11 @@ class ValidatorBuilders {
 	 * @return ValueValidator[]
 	 */
 	private function getUrlValidators( array $urlSchemes, int $maxLength ): array {
-		$validators = [];
-		$validators[] = new TypeValidator( 'string' );
-		$validators[] = new StringLengthValidator( 2, $maxLength );
-
-		$urlValidatorsBuilder = new UrlSchemeValidators();
-		$urlValidators = $urlValidatorsBuilder->getValidators( $urlSchemes );
-		$validators[] = new UrlValidator( $urlValidators );
-
-		return $validators;
+		return [
+			new TypeValidator( 'string' ),
+			new StringLengthValidator( 2, $maxLength ),
+			new UrlValidator( ( new UrlSchemeValidators() )->getValidators( $urlSchemes ) ),
+		];
 	}
 
 	private function getEntityUriValidator(
