@@ -211,15 +211,12 @@ class ApiUserBlockedTest extends WikibaseApiTestCase {
 
 		$this->assertNotNull( $testuser->getBlock(), 'User is expected to be blocked' );
 
-		foreach ( $this->blockCases() as $case ) {
-			[ $apiKey, $otherApiData, $expectedErrors ] = $case;
-
-			foreach ( $otherApiData as $key => &$value ) {
-				if ( !is_array( $value ) ) {
-					continue;
+		foreach ( $this->blockCases() as [ $apiKey, $otherApiData, $expectedErrors ] ) {
+			foreach ( $otherApiData as &$value ) {
+				if ( is_array( $value ) ) {
+					$callable = array_shift( $value );
+					$value = $callable( ...$value );
 				}
-				$callable = array_shift( $value );
-				$value = $callable( ...$value );
 			}
 			unset( $value );
 
