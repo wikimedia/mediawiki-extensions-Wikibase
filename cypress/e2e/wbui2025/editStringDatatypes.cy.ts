@@ -118,7 +118,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			cy.window().then( ( win ) => {
 				const claims = {};
 				claims[ propertyId ] = claimData;
-				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims } );
+				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims, type: 'item' } );
 			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
@@ -281,7 +281,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 			cy.window().then( ( win ) => {
 				const claims = {};
 				claims[ propertyId ] = claimData;
-				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims } );
+				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims, type: 'item' } );
 			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
