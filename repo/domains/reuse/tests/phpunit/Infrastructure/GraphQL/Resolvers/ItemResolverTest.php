@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
-use GraphQL\Executor\Promise\Adapter\SyncPromise;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseQueue;
 use GraphQL\GraphQL;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -52,7 +52,7 @@ class ItemResolverTest extends TestCase {
 		$item2Promise = $resolver->resolveItem( $requestedItems[1], $context );
 		$item3Promise = $resolver->resolveItem( $requestedItems[2], $context );
 
-		SyncPromise::runQueue(); // resolves the three promises above
+		SyncPromiseQueue::run(); // resolves the three promises above
 
 		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[0] ) ), $item1Promise->result );
 		$this->assertEquals( $itemsBatch->getItem( new ItemId( $requestedItems[1] ) ), $item2Promise->result );
@@ -69,7 +69,7 @@ class ItemResolverTest extends TestCase {
 		$resolver = new ItemResolver( $batchGetItems );
 
 		$promise = $resolver->resolveItem( $requestedItem, new QueryContext() );
-		SyncPromise::runQueue(); // resolves the promise above
+		SyncPromiseQueue::run(); // resolves the promise above
 
 		$this->assertInstanceOf( ItemNotFound::class, $promise->result );
 		$this->assertSame( "Item \"$requestedItem\" does not exist.", $promise->result->getMessage() );

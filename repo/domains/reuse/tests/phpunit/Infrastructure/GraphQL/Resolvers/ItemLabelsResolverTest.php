@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
-use GraphQL\Executor\Promise\Adapter\SyncPromise;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseQueue;
 use GraphQL\GraphQL;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
@@ -48,7 +48,7 @@ class ItemLabelsResolverTest extends TestCase {
 		$promise3 = $resolver->resolve( $requestedItems[1], $requestedLanguages[0] );
 		$promise4 = $resolver->resolve( $requestedItems[1], $requestedLanguages[1] );
 
-		SyncPromise::runQueue(); // resolves the promises above
+		SyncPromiseQueue::run(); // resolves the promises above
 
 		$this->assertSame(
 			$itemLabelsBatch->getItemLabels( $requestedItems[0] )
