@@ -54,7 +54,7 @@ class DataTypeFactory {
 	 *
 	 * @return self
 	 */
-	public static function newFromTypes( array $dataTypes ) {
+	public static function newFromTypes( array $dataTypes ): self {
 		$factory = new self( [] );
 
 		foreach ( $dataTypes as $dataType ) {
