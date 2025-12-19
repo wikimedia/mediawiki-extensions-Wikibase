@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Specials;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Request\WebRequest;
+use MediaWiki\SpecialPage\SpecialPage;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookupFactory;
@@ -138,12 +139,12 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->getOutput()->addWikiMsg( 'wikibase-itemdisambiguation-nothing-found' );
 
 		if ( $languageCode === $this->getLanguage()->getCode() ) {
-			$searchLink = $this->getTitleFor( 'Search' );
+			$searchLink = SpecialPage::getTitleFor( 'Search' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-search',
 				$searchLink->getFullURL( [ 'search' => $label ] )
 			);
-			$createLink = $this->getTitleFor( 'NewItem' );
+			$createLink = SpecialPage::getTitleFor( 'NewItem' );
 			$this->getOutput()->addWikiMsg(
 				'wikibase-itemdisambiguation-create',
 				$createLink->getFullURL( [ 'label' => $label ] )
