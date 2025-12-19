@@ -51,6 +51,7 @@
 	"wikibase-cancel": "annulla",
 	"wikibase-add": "aggiungi",
 	"wikibase-addstatement": "aggiungi dichiarazione",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(non supportato su dispositivi mobili)",
 	"wikibase-addqualifier": "aggiungi qualificatore",
 	"wikibase-addreference": "aggiungi riferimento",
 	"wikibase-save-inprogress": "Salvataggio in corso...",

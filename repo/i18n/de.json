@@ -53,6 +53,7 @@
 	"wikibase-cancel": "abbrechen",
 	"wikibase-add": "hinzufügen",
 	"wikibase-addstatement": "Aussage hinzufügen",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(wird auf Mobilgeräten nicht unterstützt)",
 	"wikibase-addqualifier": "Qualifikator hinzufügen",
 	"wikibase-addreference": "Fundstelle hinzufügen",
 	"wikibase-save-inprogress": "Speichere …",
