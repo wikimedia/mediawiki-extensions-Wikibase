@@ -101,13 +101,7 @@ class EditSummaryHelper {
 			} elseif ( $diffOp instanceof DiffOpRemove ) {
 				$statement = $diffOp->getOldValue();
 			} else {
-				// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
-				$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
-					'className' => get_class( $diffOp ),
-					'diffOp' => $diffOp,
-					'claimsDiff' => $claimsDiff,
-				] );
-				return $this->getGenericEditSummary();
+				return $this->getFallbackEditSummary( $diffOp, [ 'claimsDiff' => $claimsDiff ] );
 			}
 			'@phan-var Statement $statement';
 			$propertyId = $statement->getPropertyId();
@@ -154,12 +148,7 @@ class EditSummaryHelper {
 				summaryArgs: [ [ $statement->getPropertyId()->getSerialization() => $statement->getMainSnak() ] ]
 			);
 		} elseif ( !( $claimDiff instanceof DiffOpChange || $claimDiff instanceof DiffOpAdd ) ) {
-			// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
-			$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
-				'className' => get_class( $claimDiff ),
-				'diffOp' => $claimDiff,
-			] );
-			return $this->getGenericEditSummary();
+			return $this->getFallbackEditSummary( $claimDiff );
 		}
 		$summaryBuilder = new ClaimSummaryBuilder(
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
@@ -253,12 +242,7 @@ class EditSummaryHelper {
 				$summary->setAction( 'set' );
 				$summary->addAutoSummaryArgs( $singleDiffOp->getNewValue() );
 			} else {
-				// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
-				$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
-					'className' => get_class( $singleDiffOp ),
-					'diffOp' => $singleDiffOp,
-				] );
-				return $this->getGenericEditSummary();
+				return $this->getFallbackEditSummary( $singleDiffOp );
 			}
 		} else {
 			$label = '';
@@ -279,6 +263,16 @@ class EditSummaryHelper {
 
 		$summary->setLanguage( $languageCode );
 		return $summary;
+	}
+
+	private function getFallbackEditSummary( DiffOp $diffOp, array $context = [] ): Summary {
+		// if this message is too noisy, feel free to remove it once a Phabricator task for the Wikidata team has been filed
+		$this->logger->warning( __METHOD__ . ': unexpected diff class {className}', [
+			'className' => get_class( $diffOp ),
+			'diffOp' => $diffOp,
+			...$context,
+		] );
+		return $this->getGenericEditSummary();
 	}
 
 	private function getGenericEditSummary(): Summary {
