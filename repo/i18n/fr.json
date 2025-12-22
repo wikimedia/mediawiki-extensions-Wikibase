@@ -89,6 +89,7 @@
 	"wikibase-cancel": "annuler",
 	"wikibase-add": "ajouter",
 	"wikibase-addstatement": "ajouter une déclaration",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(Non pris en charge sur mobile)",
 	"wikibase-addqualifier": "ajouter un qualificatif",
 	"wikibase-addreference": "ajouter une référence",
 	"wikibase-save-inprogress": "Enregistrement en cours...",
@@ -490,7 +491,7 @@
 	"wikibase-api-target-not-empty": "La redirection ne peut être créée qu’au-dessus d’une entité vide ou supprimée.",
 	"wikibase-api-target-is-redirect": "La cible d’une redirection ne doit pas également être une redirection.",
 	"wikibase-api-target-is-incompatible": "Tentative pour rediriger vers une entité d’un type différent.",
-	"wikibase-api-cant-redirect": "Impossible de créer la redirection (peut-être parce que les redirections entre entités de cette sorte ne sont pas du tout prise en charge).",
+	"wikibase-api-cant-redirect": "Impossible de créer la redirection (peut-être parce que les redirections entre entités de ce type sorte ne sont pas du tout prises en charge).",
 	"wikibase-api-invalid-formatter-options-lang": "« Option » illégale fournie : « lang » doit être une chaîne (code de langue MédiaWiki).",
 	"wikibase-api-invalid-formatter-options-apply-rounding": "« Option » illégale fournie : « applyRounding » doit être un booléen ou une chaîne.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "« Option » illégale fournie : « applyUnit » doit être un booléen.",
@@ -604,6 +605,6 @@
 	"wikibase-scoped-search-search-entities-description": "Trouver différents types d'entités {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Éléments",
 	"wikibase-scoped-search-property-scope-name": "Propriétés",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Interface d'édition mobile",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Activez la nouvelle interface d’édition mobile expérimentale."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Modifier les éléments Wikidata sur les appareils mobiles",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Activez cette fonctionnalité pour modifier Wikidata depuis votre appareil mobile ! Ce projet en cours de développement par l’équipe Wikidata permet de modifier des éléments depuis votre smartphone grâce à une expérience optimisée pour les mobiles."
 }

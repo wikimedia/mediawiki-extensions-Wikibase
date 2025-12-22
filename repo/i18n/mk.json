@@ -25,6 +25,7 @@
 	"wikibase-cancel": "откажи",
 	"wikibase-add": "додај",
 	"wikibase-addstatement": "додај исказ",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(неподдржано на мобилен)",
 	"wikibase-addqualifier": "додај определница",
 	"wikibase-addreference": "додај навод",
 	"wikibase-save-inprogress": "Зачувувам...",
@@ -427,7 +428,7 @@
 	"wikibase-api-target-not-empty": "Пренасочувањето може да се направи само врз празна или избришана единица.",
 	"wikibase-api-target-is-redirect": "Целта на пренасочувањето не смее самата да биде пренасочување.",
 	"wikibase-api-target-is-incompatible": "Се обидувате да пренасочите кон единица од друг тип.",
-	"wikibase-api-cant-redirect": "Не можам да го направам пренасочувањето (можеби бидејќи пренасочувањата од овој вид воопшто не се поддржани)",
+	"wikibase-api-cant-redirect": "Не можам да го направам пренасочувањето (можеби бидејќи единиците од овие видови воопшто не се поддржани)",
 	"wikibase-api-invalid-formatter-options-lang": "Укажан недозволен „options“: на „lang“ му треба низа (јазичен код по МедијаВики).",
 	"wikibase-api-invalid-formatter-options-apply-rounding": "Укажан недозволен „options“: „applyRounding“ треба да биде Булово или низа.",
 	"wikibase-api-invalid-formatter-options-apply-unit": "Укажан недозволен „options“: „applyUnit“ треба да биде Булово.",
@@ -540,6 +541,6 @@
 	"wikibase-scoped-search-search-entities-description": "Најди различни видови на единици од {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Предмети",
 	"wikibase-scoped-search-property-scope-name": "Својства",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Кориснички посредник за мобилно уредување",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Овозможете го новиот експериментален кориснички посредник за мобилно уредување."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Уредување на предмети на Википодатоците од мобилни уреди",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Вклучете ја оваа функција за да ги уредувате Википодатоците од мобилен уред! Ова е проект во развој на екипата на Википодатоците кој овозможува уредување на предмети од вашиот паметен телефон на наменски прилагоден начин."
 }

@@ -32,6 +32,7 @@
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "engadir",
 	"wikibase-addstatement": "engadir unha declaración",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(non compatible cos móbiles)",
 	"wikibase-addqualifier": "engadir un cualificativo",
 	"wikibase-addreference": "engadir unha referencia",
 	"wikibase-save-inprogress": "Gardando…",

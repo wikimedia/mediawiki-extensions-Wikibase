@@ -53,6 +53,7 @@
 	"wikibase-cancel": "iptal",
 	"wikibase-add": "ekle",
 	"wikibase-addstatement": "ifade ekle",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(taşınabilir aygıtlarda desteklenmiyor)",
 	"wikibase-addqualifier": "niteleyici еkle",
 	"wikibase-addreference": "kaynak ekle",
 	"wikibase-save-inprogress": "Kaydediliyor…",

@@ -60,6 +60,7 @@
 	"wikibase-cancel": "取消",
 	"wikibase-add": "新增",
 	"wikibase-addstatement": "添加陳述",
+	"wikibase-addstatement-property-not-supported-on-mobile": "（行動裝置不支援）",
 	"wikibase-addqualifier": "新增限定詞",
 	"wikibase-addreference": "新增參考文獻",
 	"wikibase-save-inprogress": "儲存中...",
@@ -575,6 +576,6 @@
 	"wikibase-scoped-search-search-entities-description": "尋找不同類型的 {{SITENAME}} 實體",
 	"wikibase-scoped-search-item-scope-name": "項目",
 	"wikibase-scoped-search-property-scope-name": "屬性",
-	"wikibase-mobile-editing-ui-beta-feature-message": "行動編輯使用者介面",
-	"wikibase-mobile-editing-ui-beta-feature-description": "啟用新的實驗性行動編輯介面。"
+	"wikibase-mobile-editing-ui-beta-feature-message": "在行動裝置上編輯維基數據項目",
+	"wikibase-mobile-editing-ui-beta-feature-description": "啟用此功能即可透過行動裝置編輯維基數據！這是維基數據團隊正在開發的專案，讓您能夠透過智慧型手機編輯項目，並獲得針對行動裝置的最佳化體驗。"
 }

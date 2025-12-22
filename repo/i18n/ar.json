@@ -60,6 +60,7 @@
 	"wikibase-cancel": "إلغاء",
 	"wikibase-add": "أضِف",
 	"wikibase-addstatement": "أضِف بياناً",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(غير مدعوم على الأجهزة المحمولة)",
 	"wikibase-addqualifier": "أضِف تصفيةً",
 	"wikibase-addreference": "أضِف مرجعاً",
 	"wikibase-save-inprogress": "جارٍ الحفظ...",
@@ -573,6 +574,6 @@
 	"wikibase-scoped-search-search-entities-description": "ابحث عن أنواع مختلفة من كيانات {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "العناصر",
 	"wikibase-scoped-search-property-scope-name": "الخواص",
-	"wikibase-mobile-editing-ui-beta-feature-message": "واجهة تحرير الهاتف المحمول",
-	"wikibase-mobile-editing-ui-beta-feature-description": "قم بتمكين واجهة المستخدم الجديدة لتحرير الهاتف المحمول التجريبية."
+	"wikibase-mobile-editing-ui-beta-feature-message": "تعديل عناصر ويكي بيانات على الأجهزة المحمولة",
+	"wikibase-mobile-editing-ui-beta-feature-description": "فعّل هذه الميزة لتعديل بيانات ويكي من جهازك المحمول! يتيح لك هذا المشروع قيد التطوير من فريق بيانات ويكي تعديل العناصر من هاتفك الذكي بتجربة مُحسّنة للأجهزة المحمولة."
 }
