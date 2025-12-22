@@ -11,7 +11,8 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 	state: () => ( {
 		statements: new Map(),
 		properties: new Map(),
-		propertyIdToStatementSection: new Map()
+		propertyIdToStatementSection: new Map(),
+		indicatorsForSnaks: new Map()
 	} ),
 	actions: {
 		async populateWithClaims( claims, renderMissingHtml = false ) {
@@ -158,6 +159,16 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 	statementsStore.properties.set( propertyId, statementIds );
 };
 
+const getIndicatorsHtmlForSnakHash = function ( snakHash ) {
+	const statementsStore = useSavedStatementsStore();
+	return statementsStore.indicatorsForSnaks.get( snakHash );
+};
+
+const setIndicatorsHtmlForSnakHash = function ( snakHash, indicators ) {
+	const statementsStore = useSavedStatementsStore();
+	statementsStore.indicatorsForSnaks.set( snakHash, indicators );
+};
+
 module.exports = {
 	useSavedStatementsStore,
 	getPropertyIds,
@@ -165,5 +176,7 @@ module.exports = {
 	setStatementSectionForPropertyId,
 	getStatementsForProperty,
 	getStatementById,
-	setStatementIdsForProperty
+	setStatementIdsForProperty,
+	getIndicatorsHtmlForSnakHash,
+	setIndicatorsHtmlForSnakHash
 };

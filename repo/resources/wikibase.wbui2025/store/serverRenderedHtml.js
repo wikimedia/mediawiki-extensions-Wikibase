@@ -28,7 +28,7 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 			}
 			for ( const snakValue of element.getElementsByClassName( 'wikibase-wbui2025-snak-value' ) ) {
 				const snakHash = snakValue.dataset.snakHash;
-				const html = snakValue.innerHTML;
+				const html = snakValue.querySelector( 'span.snakValue' ).innerHTML;
 				if ( this.snakValues.has( snakHash ) ) {
 					const previousHtml = this.snakValues.get( snakHash );
 					if ( previousHtml !== html ) {

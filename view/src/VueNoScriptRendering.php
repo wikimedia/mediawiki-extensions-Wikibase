@@ -240,6 +240,7 @@ class VueNoScriptRendering {
 					'wikibase-wbui2025-globe-coordinate-value' => $dataType == 'globe-coordinate',
 					'wikibase-wbui2025-time-value' => $dataType == 'time',
 				];
+				$data['indicatorsHtml'] = '';
 
 				return $data;
 			}
