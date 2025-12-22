@@ -9,7 +9,6 @@ use MediaWiki\Registration\ExtensionRegistry;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * @coversNothing
@@ -20,36 +19,9 @@ use Wikimedia\TestingAccessWrapper;
  */
 class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
-	/** @var ExtensionRegistry */
-	private $extensionRegistry;
-
-	/** @var array */
-	private $originalLoaded;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		// TODO overriding ExtensionRegistry’s loaded list is ugly (T257586)
-
-		$this->extensionRegistry = TestingAccessWrapper::newFromObject(
-			ExtensionRegistry::getInstance()
-		);
-
-		$this->originalLoaded = $this->extensionRegistry->loaded;
-
-		// pretend Kartographer is loaded by default
-		// (tests may change this by overriding the array again)
-		$this->extensionRegistry->loaded = [ 'Kartographer' => [] ];
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		$this->extensionRegistry->loaded = $this->originalLoaded;
-	}
-
 	public function testConstruction(): void {
 		$this->mockRepoSettings( true );
+		$this->mockExtensionRegistry( true );
 		$this->mockParserFactory( true );
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
@@ -59,6 +31,7 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testWithoutSetting(): void {
 		$this->mockRepoSettings( false );
+		$this->serviceContainer->expects( $this->never() )->method( 'getExtensionRegistry' );
 		$this->mockParserFactory( false );
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
@@ -68,8 +41,8 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testWithoutExtension(): void {
 		$this->mockRepoSettings( true );
+		$this->mockExtensionRegistry( false );
 		$this->mockParserFactory( false );
-		$this->extensionRegistry->loaded = [];
 
 		$handler = $this->getService( 'WikibaseRepo.KartographerEmbeddingHandler' );
 
@@ -81,6 +54,17 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 			new SettingsArray( [
 				'useKartographerGlobeCoordinateFormatter' => $useKartographerGlobeCoordinateFormatter,
 			] ) );
+	}
+
+	private function mockExtensionRegistry( bool $isKartographerLoaded ): void {
+		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
+		$extensionRegistry->expects( $this->once() )
+			->method( 'isLoaded' )
+			->with( 'Kartographer' )
+			->willReturn( $isKartographerLoaded );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getExtensionRegistry' )
+			->willReturn( $extensionRegistry );
 	}
 
 	private function mockParserFactory( bool $expectCall ): void {

@@ -14,7 +14,6 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\WikiMap\WikiMap;
@@ -1394,7 +1393,7 @@ return [
 
 		if (
 			$settings->getSetting( 'useKartographerGlobeCoordinateFormatter' ) &&
-			ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' )
+			$services->getExtensionRegistry()->isLoaded( 'Kartographer' )
 		) {
 			return new CachingKartographerEmbeddingHandler(
 				$services->getParserFactory()->create()

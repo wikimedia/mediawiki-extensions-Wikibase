@@ -22,6 +22,17 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 
 	public function testKartographerGlobeCoordinateFormatterDisabled(): void {
 		$this->mockClientSettings( false );
+		$this->serviceContainer->expects( $this->never() )->method( 'getExtensionRegistry' );
+		$this->mockParserFactory( false );
+
+		$this->assertNull(
+			$this->getService( 'WikibaseClient.KartographerEmbeddingHandler' )
+		);
+	}
+
+	public function testKartographerNotLoaded(): void {
+		$this->mockClientSettings( true );
+		$this->mockExtensionRegistry( false );
 		$this->mockParserFactory( false );
 
 		$this->assertNull(
@@ -30,8 +41,8 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 	}
 
 	public function testConstruction(): void {
-		$this->assumeKartographerIsLoaded();
 		$this->mockClientSettings( true );
+		$this->mockExtensionRegistry( true );
 		$this->mockParserFactory( true );
 
 		$this->assertInstanceOf(
@@ -40,20 +51,22 @@ class KartographerEmbeddingHandlerTest extends ServiceWiringTestCase {
 		);
 	}
 
-	private function assumeKartographerIsLoaded() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Kartographer' ) ) {
-			$this->markTestSkipped(
-				'ExtensionRegistry cannot be mocked (T257586) ' .
-				'and Kartographer is not loaded'
-			);
-		}
-	}
-
 	private function mockClientSettings( bool $useKartographerGlobeCoordinateFormatter ): void {
 		$this->mockService( 'WikibaseClient.Settings',
 			new SettingsArray( [
 				'useKartographerGlobeCoordinateFormatter' => $useKartographerGlobeCoordinateFormatter,
 			] ) );
+	}
+
+	private function mockExtensionRegistry( bool $isKartographerLoaded ): void {
+		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
+		$extensionRegistry->expects( $this->once() )
+			->method( 'isLoaded' )
+			->with( 'Kartographer' )
+			->willReturn( $isKartographerLoaded );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getExtensionRegistry' )
+			->willReturn( $extensionRegistry );
 	}
 
 	private function mockParserFactory( bool $expectCall ): void {
