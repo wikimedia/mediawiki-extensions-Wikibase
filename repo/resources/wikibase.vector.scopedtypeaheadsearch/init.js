@@ -15,7 +15,6 @@
 	 * element. The onFocus behaviour is managed by Vector - this module is dynamically
 	 * loaded and executed on focus.
 	 */
-	mw.log( 'Loading Scoped Typeahead Search...' );
 	Vue.createMwApp( App, { initialInput: searchInput ? searchInput.value : '' } ).mount( searchContainer );
 	document.querySelector( '#searchform .cdx-text-input__input' ).focus();
 	const animationContainer = document.querySelector(

@@ -23,7 +23,6 @@
 		const StatusMessage = require( './components/statusMessage.vue' );
 		const StatementSectionsView = require( './components/statementSections.vue' );
 
-		mw.log( 'Loading MobileUi Statement View...' );
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
 			const savedStatementStore = wbui2025.store.useSavedStatementsStore( pinia );
 			savedStatementStore.populateWithClaims( data.claims );
