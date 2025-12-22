@@ -8,7 +8,8 @@
 			"RXerself",
 			"Rachmat04",
 			"SaldırganSincap",
-			"Agam Riyandana"
+			"Agam Riyandana",
+			"Penyuwangi"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Kueri atas butir lencana yang tersedia",
@@ -221,7 +222,7 @@
 	"apihelp-wbsetclaim-description": "Buat atau perbaharui seluruh Pernyataan atau Klaim.",
 	"apihelp-wbsetclaim-summary": "Membuat atau Memperbarui seluruh Pernyataan atau Klaim.",
 	"apihelp-wbsetclaim-param-claim": "Serialisasi Pernyataan atau Klaim",
-	"apihelp-wbsetclaim-param-index": "Indeks dalam daftar pernyataan entias untuk dipindahkan ke pernyataan. Bukan keharusan. Perhatikan saat pengaturan penempatan sebuah indeks tidak boleh di samping sebuah pernyataan yang snak utamanya tidak memiliki ciri atribut yang sama. Semua grup pernyataan yang mempunyai ciri snak utama yang atributnya sama akan dipindah. Saat tidak tersedia, sebuah pernyataan yang sudah ada akan tetap pada tempatnya, sedangkan sebuah pernyataan baru akan ditambahkan ke posisi terakhir dari snak utama yang memiliki atribut yang sama.",
+	"apihelp-wbsetclaim-param-index": "Indeks dalam daftar pernyataan entias untuk dipindahkan ke pernyataan. Bukan keharusan. Perhatikan saat pengaturan penempatan sebuah indeks tidak boleh di samping sebuah pernyataan yang snak utamanya tidak memiliki ciri atribut yang sama. Semua kelompok pernyataan yang mempunyai ciri snak utama yang atributnya sama akan dipindah. Saat tidak tersedia, sebuah pernyataan yang sudah ada akan tetap pada tempatnya, sedangkan sebuah pernyataan baru akan ditambahkan ke posisi terakhir dari snak utama yang memiliki atribut yang sama.",
 	"apihelp-wbsetclaim-param-summary": "Ringkasan untuk penyuntingan.\nAkan dilampirkan dengan komentar yang dihasilkan secara otomatis. Batas panjang dari komentar otomatis dengan ringkasannya adalah 260 huruf. Perhatikan bahwa pemotongan akan dilakukan jika sudah melebihi batas.",
 	"apihelp-wbsetclaim-param-baserevid": "Penanda angka untuk perbaikan berdasarkan perubahan yang terjadi.\nIni digunakan untuk melacak konflik yang terjadi saat penyimpanan.",
 	"apihelp-wbsetclaim-param-bot": "Tandai suntingan ini sebagai bot. Panji Lokator Sumber Seragam (URL) hanya akan dipercaya jika pengguna masuk ke kelompok \"bot\".",

@@ -66,6 +66,7 @@
 	"wikibase-entityusage-submit": "Vis sider",
 	"wikibase-pageinfo-entity-id": "ID for {{WBREPONAME}}-element",
 	"wikibase-pageinfo-entity-id-none": "Ingen",
+	"wikibase-pageinfo-description-central": "Sentral skildring",
 	"wikibase-pageinfo-entity-usage": "Einingar frå {{WBREPONAME}} nytta på sida",
 	"wikibase-pageinfo-entity-usage-S": "Nettstadlenkje",
 	"wikibase-pageinfo-entity-usage-L": "Nokre merkelappar",

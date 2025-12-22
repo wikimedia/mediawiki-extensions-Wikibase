@@ -63,7 +63,7 @@
 	"wikibase-label-input-help-message": "Gitt d'Etikett vun dësem Objet op $1 an.",
 	"wikibase-entitytermsview-input-help-message": "Gitt pro Sprooch eng Etikett, eng kuerz Beschreiwung an Aliase fir dësen Objet an.",
 	"wikibase-statementsection-statements": "Aussoen",
-	"wikibase-statementsection-identifiers": "Identifikateuren",
+	"wikibase-statementsection-identifiers": "Identifianten",
 	"wikibase-sitelinks": "Linke vum Site",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|Element|Elementer}}",
 	"wikibase-sitelinks-empty": "Et ass keng Säit mat dësem Element verlinkt.",
