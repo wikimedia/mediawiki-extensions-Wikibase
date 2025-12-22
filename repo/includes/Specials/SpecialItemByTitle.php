@@ -6,6 +6,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
+use MediaWiki\SpecialPage\SpecialPage;
 use Psr\Log\LoggerInterface;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
@@ -240,7 +241,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		} elseif ( $siteExists && $page ) {
 			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-item' )->parse() );
 
-			$createLink = $this->getTitleFor( 'NewItem' );
+			$createLink = SpecialPage::getTitleFor( 'NewItem' );
 			$this->getOutput()->addHTML(
 				Html::openElement( 'div' )
 				. $this->msg(
