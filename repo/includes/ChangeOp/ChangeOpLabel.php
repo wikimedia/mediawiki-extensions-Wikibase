@@ -137,19 +137,22 @@ class ChangeOpLabel extends ChangeOpBase {
 			throw new InvalidArgumentException( '$entity must be a LabelsProvider' );
 		}
 
-		$languageValidator = $this->termValidatorFactory->getLabelLanguageValidator();
-		$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
+		$result = Result::newSuccess();
 
-		// check that the language is valid
-		$result = $languageValidator->validate( $this->languageCode );
+		if ( $this->label !== null ) {
+			// check that the language is valid
+			$languageValidator = $this->termValidatorFactory->getLabelLanguageValidator();
+			$result = $languageValidator->validate( $this->languageCode );
+			if ( !$result->isValid() ) {
+				return $result;
+			}
 
-		if ( $result->isValid() && $this->label !== null ) {
 			// Check that the new label is valid
+			$termValidator = $this->termValidatorFactory->getLabelValidator( $entity->getType() );
 			$result = $termValidator->validate( $this->label );
-		}
-
-		if ( !$result->isValid() ) {
-			return $result;
+			if ( !$result->isValid() ) {
+				return $result;
+			}
 		}
 
 		if ( $entity instanceof DescriptionsProvider ) {

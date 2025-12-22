@@ -40,6 +40,7 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
 		$args['set to null'] = [ [ 'en', null ], '' ];
 		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
+		$args['remove invalid'] = [ [ 'INVALID', null ], '' ];
 
 		return $args;
 	}
@@ -50,15 +51,17 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	public function testApply( array $changeOpLabelParams, string $expectedLabel ) {
 		$entity = $this->provideNewEntity();
 		$entity->setLabel( 'en', 'INVALID' );
+		$entity->setLabel( 'INVALID', 'INVALID' );
+		$expectedLanguageCode = $changeOpLabelParams[0];
 
 		$changeOpLabelParams[] = $this->getTermValidatorFactory();
 		$changeOpLabel = new ChangeOpLabel( ...$changeOpLabelParams );
 		$changeOpLabel->apply( $entity );
 
 		if ( $expectedLabel === '' ) {
-			$this->assertFalse( $entity->getLabels()->hasTermForLanguage( 'en' ) );
+			$this->assertFalse( $entity->getLabels()->hasTermForLanguage( $expectedLanguageCode ) );
 		} else {
-			$this->assertEquals( $expectedLabel, $entity->getLabels()->getByLanguage( 'en' )->getText() );
+			$this->assertEquals( $expectedLabel, $entity->getLabels()->getByLanguage( $expectedLanguageCode )->getText() );
 		}
 	}
 
@@ -132,10 +135,10 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	public static function validateProvider(): iterable {
 		$args = [];
 		$args['valid label'] = [ [ 'fr', 'valid' ], true ];
+		$args['remove invalid language'] = [ [ 'INVALID', null ], true ];
 		$args['invalid label'] = [ [ 'fr', 'INVALID' ], false ];
 		$args['duplicate label'] = [ [ 'fr', 'DUPE' ], false ];
 		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
-		$args['set bad language to null'] = [ [ 'INVALID', null ], false ];
 
 		return $args;
 	}

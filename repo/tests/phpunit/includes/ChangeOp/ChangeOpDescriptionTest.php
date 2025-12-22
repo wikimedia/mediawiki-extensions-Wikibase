@@ -40,6 +40,7 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
 		$args['set to null'] = [ [ 'en', null ], '' ];
 		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
+		$args['remove invalid'] = [ [ 'INVALID', null ], '' ];
 
 		return $args;
 	}
@@ -50,6 +51,8 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	public function testApply( array $changeOpDescriptionParams, string $expectedDescription ) {
 		$entity = $this->provideNewEntity();
 		$entity->setDescription( 'en', 'INVALID' );
+		$entity->setDescription( 'INVALID', 'INVALID' );
+		$expectedLanguageCode = $changeOpDescriptionParams[0];
 
 		$changeOpDescriptionParams[] = $this->getTermValidatorFactory();
 
@@ -57,9 +60,9 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 		$changeOpDescription->apply( $entity );
 
 		if ( $expectedDescription === '' ) {
-			$this->assertFalse( $entity->getDescriptions()->hasTermForLanguage( 'en' ) );
+			$this->assertFalse( $entity->getDescriptions()->hasTermForLanguage( $expectedLanguageCode ) );
 		} else {
-			$this->assertEquals( $expectedDescription, $entity->getDescriptions()->getByLanguage( 'en' )->getText() );
+			$this->assertEquals( $expectedDescription, $entity->getDescriptions()->getByLanguage( $expectedLanguageCode )->getText() );
 		}
 	}
 
@@ -133,10 +136,10 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	public static function validateProvider(): iterable {
 		$args = [];
 		$args['valid description'] = [ [ 'fr', 'valid' ], true ];
+		$args['remove invalid language'] = [ [ 'INVALID', null ], true ];
 		$args['invalid description'] = [ [ 'fr', 'INVALID' ], false ];
 		$args['duplicate description'] = [ [ 'fr', 'DUPE' ], false ];
 		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
-		$args['set bad language to null'] = [ [ 'INVALID', null ], false ];
 
 		return $args;
 	}

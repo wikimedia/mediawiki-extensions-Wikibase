@@ -59,15 +59,15 @@ class TermChangeOpSerializationValidator {
 			}
 		}
 
-		if ( !$this->termsLanguages->hasLanguage( $serialization['language'] ) ) {
-			$this->throwException(
-				'Unknown language: ' . $serialization['language'],
-				'not-recognized-language',
-				[ $serialization['language'] ]
-			);
-		}
-
 		if ( !array_key_exists( 'remove', $serialization ) ) {
+			if ( !$this->termsLanguages->hasLanguage( $serialization['language'] ) ) {
+				$this->throwException(
+					'Unknown language: ' . $serialization['language'],
+					'not-recognized-language',
+					[ $serialization['language'] ]
+				);
+			}
+
 			$this->assertString(
 				$serialization['value'],
 				'A string was expected, but not found in the term serialization '
