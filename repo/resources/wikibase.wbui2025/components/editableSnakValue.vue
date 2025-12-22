@@ -40,7 +40,7 @@
 
 <script>
 const { computed, defineComponent } = require( 'vue' );
-const { mapWritableState } = require( 'pinia' );
+const { mapWritableState, mapActions } = require( 'pinia' );
 const { cdxIconTrash } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
@@ -87,16 +87,18 @@ module.exports = exports = defineComponent( {
 		 */
 		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
-			'textvalue',
 			'snaktype',
 			'hash',
 			'valueStrategy'
 		] );
+		const computedActions = mapActions( editSnakStoreGetter, [
+			'resetToLastCompleteValue'
+		] );
 		return {
-			textvalue: computed( computedProperties.textvalue ),
 			snaktype: computed( computedProperties.snaktype ),
 			hash: computed( computedProperties.hash ),
-			valueStrategy: computed( computedProperties.valueStrategy )
+			valueStrategy: computed( computedProperties.valueStrategy ),
+			resetToLastCompleteValue: computedActions.resetToLastCompleteValue
 		};
 	},
 	data() {
@@ -106,8 +108,7 @@ module.exports = exports = defineComponent( {
 				{ label: mw.msg( 'wikibase-snakview-snaktypeselector-value' ), value: 'value' },
 				{ label: mw.msg( 'wikibase-snakview-variations-novalue-label' ), value: 'novalue' },
 				{ label: mw.msg( 'wikibase-snakview-variations-somevalue-label' ), value: 'somevalue' }
-			],
-			previousValue: null
+			]
 		};
 	},
 	computed: {
@@ -116,11 +117,8 @@ module.exports = exports = defineComponent( {
 				return this.snaktype;
 			},
 			set( newSnakTypeSelection ) {
-				if ( this.snaktype === 'value' ) {
-					this.previousValue = this.textvalue;
-				}
 				if ( newSnakTypeSelection === 'value' ) {
-					this.textvalue = this.previousValue;
+					this.resetToLastCompleteValue();
 				}
 				this.snaktype = newSnakTypeSelection;
 			}

@@ -2,13 +2,14 @@
 	<cdx-text-input
 		ref="inputElement"
 		v-model.trim="textvalue"
-		:class="className"
+		:class="activeClasses"
+		@blur="onBlur"
 	></cdx-text-input>
 </template>
 
 <script>
-const { computed, defineComponent } = require( 'vue' );
-const { mapWritableState } = require( 'pinia' );
+const { computed, defineComponent, ref } = require( 'vue' );
+const { mapState, mapWritableState } = require( 'pinia' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxTextInput } = require( '../../../codex.js' );
 
@@ -40,16 +41,31 @@ module.exports = exports = defineComponent( {
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'textvalue'
 		] );
+		const computedEditSnakStoreGetters = mapState( editSnakStoreGetter, [
+			'isIncomplete'
+		] );
 		const valueStrategy = editSnakStoreGetter().valueStrategy;
+		const inputHadFocus = ref( false );
 		return {
 			textvalue: computed( computedProperties.textvalue ),
-			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 )
+			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 ),
+			isIncomplete: computed( computedEditSnakStoreGetters.isIncomplete ),
+			inputHadFocus
 		};
+	},
+	computed: {
+		activeClasses() {
+			return [ { 'cdx-text-input--status-error': this.inputHadFocus && this.isIncomplete }, this.className ];
+		}
 	},
 	methods: {
 		// eslint-disable-next-line vue/no-unused-properties
 		focus() {
 			this.$refs.inputElement.focus();
+		},
+
+		onBlur() {
+			this.inputHadFocus = true;
 		}
 	},
 	watch: {

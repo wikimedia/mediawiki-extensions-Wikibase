@@ -3,18 +3,19 @@
 		ref="inputElement"
 		v-model:selected="lookupSelection"
 		v-model:input-value="lookupInputValue"
-		:class="className"
+		:class="activeClasses"
 		:menu-items="lookupMenuItems"
 		:menu-config="menuConfig"
 		@update:input-value="onUpdateInputValue"
 		@load-more="onLoadMore"
+		@blur="onBlur"
 	>
 	</cdx-lookup>
 </template>
 
 <script>
-const { computed, defineComponent } = require( 'vue' );
-const { mapWritableState } = require( 'pinia' );
+const { computed, defineComponent, ref } = require( 'vue' );
+const { mapWritableState, mapState } = require( 'pinia' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxLookup } = require( '../../../codex.js' );
 
@@ -49,12 +50,18 @@ module.exports = exports = defineComponent( {
 			'datatype'
 		] );
 		const valueStrategy = editSnakStoreGetter().valueStrategy;
+		const computedEditSnakStoreGetters = mapState( editSnakStoreGetter, [
+			'isIncomplete'
+		] );
+		const inputHadFocus = ref( false );
 		return {
 			textvalue: computed( computedProperties.textvalue ),
 			selectionvalue: computed( computedProperties.selectionvalue ),
 			datatype: computed( computedProperties.datatype ),
 			valueStrategy,
-			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 )
+			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 ),
+			isIncomplete: computed( computedEditSnakStoreGetters.isIncomplete ),
+			inputHadFocus
 		};
 	},
 	data() {
@@ -66,6 +73,11 @@ module.exports = exports = defineComponent( {
 				visibleItemLimit: 6
 			}
 		};
+	},
+	computed: {
+		activeClasses() {
+			return [ { 'cdx-text-input--status-error': this.inputHadFocus && this.isIncomplete }, this.className ];
+		}
 	},
 	methods: {
 		// eslint-disable-next-line vue/no-unused-properties
@@ -82,6 +94,7 @@ module.exports = exports = defineComponent( {
 		},
 
 		onUpdateInputValue( value ) {
+			this.selectionvalue = null;
 			if ( !value ) {
 				this.lookupMenuItems = [];
 				return;
@@ -106,6 +119,9 @@ module.exports = exports = defineComponent( {
 
 			this.fetchLookupResults( this.lookupInputValue, this.lookupMenuItems.length )
 				.then( ( data ) => this.lookupMenuItems.push( ...this.valueStrategy.transformSearchResults( data ) ) );
+		},
+		onBlur() {
+			this.inputHadFocus = true;
 		}
 	},
 	watch: {

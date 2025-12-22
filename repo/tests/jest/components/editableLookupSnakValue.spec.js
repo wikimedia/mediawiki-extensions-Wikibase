@@ -87,6 +87,13 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 		it( 'should set the text-input to the current snak value', async () => {
 			expect( lookup.props( 'inputValue' ) ).toBe( 'Some Entity Label' );
 		} );
+
+		it( 'indicates an error when the input changes and nothing is selected', async () => {
+			expect( wrapper.find( '.cdx-lookup' ).classes() ).not.toContain( 'cdx-text-input--status-error' );
+			lookup.vm.$emit( 'blur' );
+			await wrapper.vm.onUpdateInputValue( 'foo' );
+			expect( wrapper.find( '.cdx-lookup' ).classes() ).toContain( 'cdx-text-input--status-error' );
+		} );
 	} );
 
 	describe( 'tabular-data datatype', () => {
