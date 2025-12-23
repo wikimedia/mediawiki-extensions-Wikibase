@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bennylin",
 			"Naufal06",
 			"NoiX180",
 			"Pras"
@@ -33,8 +34,8 @@
 	"wikibase-linkitem-selectlink": "Mangga pilihen situs lan kaca sing arep panjenengan gayutaké nyang kaca iki.",
 	"wikibase-linkitem-input-site": "Basa:",
 	"wikibase-linkitem-input-page": "Kaca:",
-	"wikibase-linkitem-confirmitem-text": "Kaca sing panjenengan pilih wis nggayut [$1 wiji ing panyimpenan dhata sentralé awak dhéwé]. Mangga iyai manawa {{PLURAL:$2|kaca}} sing dituduhaké ing ngisor iki bener kaca sing péngin panjenengan gayutaké nyang kaca iki.",
-	"wikibase-linkitem-confirmitem-button": "Iyai",
+	"wikibase-linkitem-confirmitem-text": "Kaca sing panjenengan pilih wis nggayut [$1 wiji ing panyimpenan dhata sentralé awak dhéwé]. Mangga pesthèkaké manawa {{PLURAL:$2|kaca}} sing dituduhaké ing ngisor iki bener kaca sing péngin panjenengan gayutaké nyang kaca iki.",
+	"wikibase-linkitem-confirmitem-button": "Konfirmasi",
 	"wikibase-linkitem-not-loggedin-title": "Panjenengan kudu mlebu log",
 	"wikibase-linkitem-not-loggedin": "Panjenengan kudu mlebu log wiki iki lan ing [$1 répositori data séntral] saperlu nganggo fitur iki.",
 	"wikibase-linkitem-success-link": "Kaca wis kagayut. Panjenengan bisa nemokaké wiji sing macak pranala-pranala iku ing [$1 répositori data séntral]é awak dhéwé.",
