@@ -83,5 +83,10 @@
 	"wikibase-undo-revision-error": "weka la pakala",
 	"wikibase-validator-bad-url": "nimi linja ni li wile ala e sitelen ike: $1",
 	"wikibase-validator-url-scheme-missing": "nimi linja ni li wile e nimi open \"https://\": $1",
-	"wikibase-newentity-language": "toki:"
+	"wikibase-newentity-language": "toki:",
+	"right-item-term": "ijo la ona li ken ante e nimi, e sona, e nimi ante",
+	"right-item-merge": "ona li ken wan e ijo",
+	"right-item-redirect": "ona li ken nasin e ijo wan tawa ijo ante",
+	"right-property-term": "kule la ona li ken ante e nimi, e sona, e nimi ante",
+	"right-property-create": "ona li ken pali e kule"
 }
