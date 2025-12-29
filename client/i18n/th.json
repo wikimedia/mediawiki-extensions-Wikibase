@@ -13,7 +13,8 @@
 			"Thastp",
 			"Patsagorn Y.",
 			"RidJasper",
-			"Siam2019"
+			"Siam2019",
+			"Wutkh"
 		]
 	},
 	"wikibase-client-desc": "ไคลเอนต์สำหรับส่วนขยายวิกิเบส",
@@ -56,7 +57,7 @@
 	"wikibase-rc-show-wikidata-pref": "แสดงการแก้ไข {{WBREPONAME}} ในรายการปรับปรุงล่าสุด",
 	"wikibase-rc-wikibase-edit-letter": "ด",
 	"wikibase-rc-wikibase-edit-title": "การแก้ไข{{WBREPONAME}}",
-	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไข{{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไขบน{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "การแก้ไขบน{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "ตัวกรองนี้ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัว การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "ตัวกรอง \"การแก้ไขบน{{WBREPONAME}}\" ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัวกรอง การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}} ตัวกรองที่ขัดแย้งกันได้ถูกทำเครื่องหมายไว้ในส่วนของตัวกรองที่ใช้งานอยู่ด้านบน",

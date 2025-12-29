@@ -191,7 +191,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Butir dengan ID ini tidak ada",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" bukan merupakan penanda butir yang sahih.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Kode bahasa \"$1\" tidak diketahui. Gunakan kode bahasa yang dikenal sistem, misalnya \"en\".",
-	"wikibase-wikibaserepopage-pipe-in-alias": "Alias yang mengandung tanda pipa hanya bisa disunting di halaman entitas (dengan mengaktifkan JavaScript) atau melalui API",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Alias yang mengandung tanda pipa hanya bisa disunting di halaman entitas (dengan menyalakan JavaScript) atau melalui API",
 	"wikibase-wikibaserepopage-invalid-id": "Penanda \"$1\" tidak dikenali oleh sistem. Tolong gunakan penanda entitas yang sahih.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 adalah laman pengalihan.",
 	"wikibase-wikibaserepopage-storage-exception": "Galat terjadi saat mencoba memuat $1:$2.",
