@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Armando-Martin",
+			"Avengium",
 			"Dalton2",
 			"Dgstranz",
 			"Eulalio",
@@ -97,6 +98,12 @@
 	"wikibase-entity-summary-wbeditentity-create": "Se creó una entidad nueva",
 	"wikibase-entity-summary-wbeditentity-update": "Se cambió una entidad",
 	"wikibase-entity-summary-wbeditentity-override": "Se vació una entidad",
+	"wikibase-entity-summary-wbeditentity-statements-single-property-add": "Se {{PLURAL:$3|agregó una declaración|agregaron $3 declaraciones}}",
+	"wikibase-entity-summary-wbeditentity-statements-single-property-remove": "Se {{PLURAL:$3|eliminó una declaración|eliminaron $3 declaraciones}}",
+	"wikibase-entity-summary-wbeditentity-statements-single-property-update": "Se {{PLURAL:$3|cambió una declaración|cambiaron $3 declaraciones}}",
+	"wikibase-entity-summary-wbeditentity-statements-multiple-properties-add": "Declaraciones agregadas para {{PLURAL:$3|una propiedad|$3 propiedades}}",
+	"wikibase-entity-summary-wbeditentity-statements-multiple-properties-remove": "Declaraciones eliminadas para {{PLURAL:$3|una propiedad|$3 propiedades}}",
+	"wikibase-entity-summary-wbeditentity-statements-multiple-properties-update": "Declaraciones modificadas para {{PLURAL:$3|una propiedad|$3 propiedades}}",
 	"wikibase-entity-summary-wbsetreference": "Se estableció una referencia",
 	"wikibase-entity-summary-wbsetreference-add": "Referencia añadida a afirmación",
 	"wikibase-entity-summary-wbsetreference-set": "Referencia cambiada de afirmación",

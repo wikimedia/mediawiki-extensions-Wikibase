@@ -72,6 +72,7 @@
 	"wikibase-publish": "publicar",
 	"wikibase-cancel": "cancelar",
 	"wikibase-add": "añadir",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(no compatible con dispositivos móviles)",
 	"wikibase-addqualifier": "añadir un calificativo",
 	"wikibase-addreference": "añadir referencia",
 	"wikibase-save-inprogress": "Guardando...",
