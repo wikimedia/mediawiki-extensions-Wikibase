@@ -15,7 +15,7 @@ trait HttpResponseMockerTrait {
 	/**
 	 * Some test appear to want to simulate null status codes, hence the type hint
 	 */
-	private function newMockResponse( string $response, ?int $statusCode ): ResponseInterface {
+	private function newMockResponse( string $response, int $statusCode ): ResponseInterface {
 		$mockStream = $this->createMock( StreamInterface::class );
 		$mockStream->method( 'getContents' )
 			->willReturn( $response );

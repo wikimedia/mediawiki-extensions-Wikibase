@@ -239,7 +239,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 		string $langCode,
 		array $params,
 		string $responseDataFile,
-		?int $statusCode
+		int $statusCode
 	) {
 		$api = $this->setupTestApi( $params, $langCode, $responseDataFile, $statusCode );
 		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api );
@@ -284,7 +284,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'strictlanguage' => false,
 				],
 				'api-entity-search-helper-test-data-unexpectedResponse.json',
-				null,
+				400,
 			],
 		];
 	}
