@@ -22,6 +22,7 @@
 	"wikibase-cancel": "cancellar",
 	"wikibase-add": "adder",
 	"wikibase-addstatement": "adder declaration",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(non supportate sur mobile)",
 	"wikibase-addqualifier": "adder qualificator",
 	"wikibase-addreference": "adder referentia",
 	"wikibase-save-inprogress": "Salveguarda…",
