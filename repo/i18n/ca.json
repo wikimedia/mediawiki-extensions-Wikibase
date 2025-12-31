@@ -31,6 +31,7 @@
 	"wikibase-entity-property": "propietat",
 	"wikibase-entity-query": "consulta",
 	"nstab-item": "Element",
+	"nstab-property": "Propietat",
 	"wikibase-edit": "modifica",
 	"wikibase-save": "desa",
 	"wikibase-publish": "publica",
@@ -399,5 +400,9 @@
 	"wikibase-federated-properties-leaving-site-notice-header": "S'abandona el Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No tornis a mostrar-me el missatge",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Torna-ho a provar",
-	"wikibase-federated-properties-edit-request-failed-notice-header": "L'edició ha fallat"
+	"wikibase-federated-properties-edit-request-failed-notice-header": "L'edició ha fallat",
+	"wikibase-scoped-search-search-entities": "Cerca entitats",
+	"wikibase-scoped-search-search-entities-description": "Cercau diferents tipus d'entitats de {{SITENAME}}",
+	"wikibase-scoped-search-item-scope-name": "Ítems",
+	"wikibase-scoped-search-property-scope-name": "Propietats"
 }

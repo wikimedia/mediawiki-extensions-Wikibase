@@ -15,7 +15,8 @@
 			"Stryn",
 			"Thurs",
 			"Tölvuforritari",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Stefan2255"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",
@@ -74,7 +75,7 @@
 	"wikibase-error-deserialize-error": "Misslyckades med att avserialisera data.",
 	"wikibase-error-serialize-error": "Misslyckades att serialisera data.",
 	"wikibase-error-invalid-entity-id": "ID \"$2\" är okänt för systemet. Var god använd ett giltigt enhets-ID.",
-	"wikibase-error-exceeded-entity-access-limit": "Alltför många {{WBREPONAME}}-enheter hämtade.",
+	"wikibase-error-exceeded-entity-access-limit": "För många {{WBREPONAME}}-entiteter har använts. Antal inlästa entiteter: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "För många anrop till \"mw.wikibase.getReferencedEntityId\", endast upp till $2 {{PLURAL:$2|är tillåtet}}.",
 	"unconnectedpages": "Sidor som inte är anslutna till objekt",
 	"unconnectedpages-summary": "Denna sida listar sidor utan något anslutet dataobjekt (i namnrymder som stöder objekt).",

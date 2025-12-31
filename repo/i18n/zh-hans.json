@@ -56,7 +56,8 @@
 			"Key0121",
 			"Kcx36",
 			"ExoHyper2026",
-			"Plana"
+			"Plana",
+			"LBLaiSiNanHai"
 		]
 	},
 	"wikibase-desc": "结构化数据仓库",
@@ -447,6 +448,7 @@
 	"wikibase-api-no-common-item": "没有共用的项目。",
 	"wikibase-api-no-data": "没有数据要进行操作。",
 	"wikibase-api-no-external-page": "外部客户端站点“$1”未提供页面“$2”的页面信息。",
+	"wikibase-api-nosuchrevid": "找不到此修订版本的ID。",
 	"wikibase-api-no-such-claim": "找不到这样的声明。",
 	"wikibase-api-no-such-entity": "找不到任何ID为“$1”的实体。",
 	"wikibase-api-no-such-reference": "找不到这样的参考文献。",
@@ -470,6 +472,11 @@
 	"wikibase-api-target-is-redirect": "重定向目标必须不是重定向。",
 	"wikibase-api-target-is-incompatible": "尝试重定向到不同类型的实体。",
 	"wikibase-api-cant-redirect": "不能创建重定向（可能是因为此类实体之间的重定向尚不完全支持）。",
+	"wikibase-api-invalid-formatter-options-lang": "无效的“options”被提供：“lang”应当是字符串（MediaWiki语言代码）",
+	"wikibase-api-invalid-formatter-options-apply-rounding": "无效的“options”被提供：“applyRounding”应当是布尔值或字符串。",
+	"wikibase-api-invalid-formatter-options-apply-unit": "无效的“options”被提供：“applyUnit”应当是布尔值。",
+	"wikibase-api-invalid-formatter-options-showcalendar": "无效的“options”被提供：“showcalendar”应当是布尔值或“auto”。",
+	"wikibase-api-invalid-formatter-options-unknown-option": "不受支持的“options”被提供：未知的选项“$1”。",
 	"wikibase-self-conflict-patched": "您的编辑已被整合为最新版本，覆盖了您自己的一些中间更改。",
 	"wikibase-conflict-patched": "您的编辑已被整合为最新版本。",
 	"wikibase-save-unresolved-redirect": "尝试保存更改时遇到未解决的从$1重定向到$2的重定向。",
