@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AmazingJus",
 			"Peter57770",
 			"R12ntech"
 		]
@@ -8,9 +9,9 @@
 	"tooltip-t-wikibase": "Wamnáyaŋpi wóičhikȟoyake",
 	"wikibase-comment-update": "{{WBREPONAME}} yutȟókečapi",
 	"wikibase-dataitem": "{{WBREPONAME}} wamnáyaŋpi",
-	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča yo/ye",
-	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča yo/ye",
-	"wikibase-rc-hide-wikidata-show": "Pazó wo/we",
+	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-rc-hide-wikidata-show": "Pazó {{GENDER:|wo|we|wo/we}}",
 	"wikibase-rc-wikibase-edit-letter": "Y",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča"
 }
