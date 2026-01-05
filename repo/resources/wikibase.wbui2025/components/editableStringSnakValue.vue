@@ -2,6 +2,7 @@
 	<cdx-text-input
 		ref="inputElement"
 		v-model.trim="textvalue"
+		autocapitalize="off"
 		:class="activeClasses"
 		@blur="onBlur"
 	></cdx-text-input>

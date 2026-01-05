@@ -119,6 +119,10 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			expect( textInput.classes() ).not.toContain( 'cdx-text-input--status-error' );
 		} );
 
+		it( 'should set autocapitalize to "off" for the text input', async () => {
+			expect( textInput.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
+		} );
+
 		describe( 'when it is disabled', () => {
 			beforeEach( async () => {
 				await wrapper.setProps( { disabled: true } );
