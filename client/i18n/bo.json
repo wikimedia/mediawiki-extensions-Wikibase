@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dhondup",
 			"Phurbutsering",
 			"TayfunEt.",
 			"Tenzin Thoesam",
@@ -8,7 +9,9 @@
 		]
 	},
 	"wikibase-comment-unlink": "ཤོག་ངོས་འདི་{{WBREPONAME}} ནས་སྦྲེལ་མཐུད་བཅད་སོང། སྐད་ཡིག་སྦྲེལ་མཐུད་སྤོས་སོང།",
+	"wikibase-editlinks": "དྲ་ཐག་བསྐྱར་སྒྲིག",
 	"wikibase-addlinkstitle": "སྐད་ཡིག་འབྲེལ་བ་སྣོན་",
+	"wikibase-linkitem-addlinks": "དྲ་ཐག་ཞོག",
 	"wikibase-linkitem-title": "འབྲེལ་ཡོད་ཤོག་ངོས་དང་སྦྲེལ།",
 	"wikibase-linkitem-input-site": "སྐད་རིགས།:",
 	"wikibase-linkitem-input-page": "ཤོག་ངོས།:",

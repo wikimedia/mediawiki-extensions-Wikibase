@@ -393,6 +393,7 @@
 	"wikibase-mylanguagefallbackchain-verbatim-item": "$1 – $2",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 – $2, muunnettu kielestä $3 – $4",
 	"wikibase-api-unresolved-redirect": "Annettu entiteettitunniste viittaa uudelleenohjaukseen, mitä ei tueta tässä kontekstissa.",
+	"wikibase-api-editconflict": "Muokkausristiriita. Nykyistä versiota ei voitu paikata.",
 	"wikibase-api-failed-add-sitelink": "Sivustolinkkiä ei voitu tallentaa.",
 	"wikibase-api-failed-modify": "Kohteen muokkausyritys epäonnistui.",
 	"wikibase-api-failed-save": "Tallennus epäonnistui.",
