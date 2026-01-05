@@ -399,7 +399,7 @@
 	"wikibase-api-param-illegal": "Sekumpulan parameter ilegal digunakan.",
 	"wikibase-api-permissiondenied": "Anda tidak punya izin untuk melakukan tindakan ini.",
 	"wikibase-api-wrong-class": "Terdeteksi tipe kelas yang salah.",
-	"wikibase-api-tags-invalid": "Parameter tag tidak sah.",
+	"wikibase-api-tags-invalid": "Parameter tanda tidak sah.",
 	"wikibase-api-target-not-empty": "Pengalihan hanya bisa dibuat pada bagian teratas di laman entitas yang kosong atau terhapus.",
 	"wikibase-api-target-is-redirect": "Sasaran pengalihan tidak boleh merupakan laman pengalihan juga.",
 	"wikibase-api-target-is-incompatible": "Percobaan untuk mengalihan sebuah entitas dari jenis yang berbeda.",
