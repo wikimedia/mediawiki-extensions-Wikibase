@@ -29,119 +29,116 @@ function sameDataValue( dv1, dv2 ) {
 	}
 }
 
-const useEditSnakStore = ( snakKey ) => {
-	let storeInstance = null;
-	const useStore = defineStore( 'editSnak-' + snakKey, () => {
-		const value = ref( undefined );
-		const datavalue = ref( undefined );
-		const textvalue = ref( undefined );
-		const selectionvalue = ref( undefined );
-		const snaktype = ref( 'value' );
-		const property = ref( undefined );
-		const datatype = ref( 'string' );
-		const valuetype = ref( 'string' );
-		const hash = ref( undefined );
-		const lastCompleteTextvalue = ref( undefined );
-		const lastCompleteSelectionvalue = ref( undefined );
+const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () => {
+	const value = ref( undefined );
+	const datavalue = ref( undefined );
+	const textvalue = ref( undefined );
+	const selectionvalue = ref( undefined );
+	const snaktype = ref( 'value' );
+	const property = ref( undefined );
+	const datatype = ref( 'string' );
+	const valuetype = ref( 'string' );
+	const hash = ref( undefined );
+	const lastCompleteTextvalue = ref( undefined );
+	const lastCompleteSelectionvalue = ref( undefined );
 
-		// Getters
+	// Getters
 
-		/**
-		 * @return {boolean} True if the current field is known to be incomplete,
-		 * thus an empty text input or a lookup input with nothing selected.
-		 */
-		const isIncomplete = computed(
-			// selectionvalue is undefined for non-selection data values
-			() => textvalue.value === '' || selectionvalue.value === null
-		);
+	/**
+	 * @return {boolean} True if the current field is known to be incomplete,
+	 * thus an empty text input or a lookup input with nothing selected.
+	 */
+	const isIncomplete = computed(
+		// selectionvalue is undefined for non-selection data values
+		() => textvalue.value === '' || selectionvalue.value === null
+	);
 
-		const valueStrategy = computed( () => snakValueStrategyFactory.getStrategyForSnakStore( storeInstance ) );
+	const valueStrategy = computed(
+		() => snakValueStrategyFactory.getStrategyForSnakStore( useEditSnakStore( snakKey )() )
+	);
 
-		// Actions
+	// Actions
 
-		async function initializeWithSnak( snak ) {
-			snaktype.value = snak.snaktype;
-			datatype.value = snak.datatype;
-			property.value = snak.property;
-			if ( snaktype.value === 'value' ) {
-				textvalue.value = await valueStrategy.value.renderValueToText( snak.datavalue );
-				selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( snak.datavalue );
-				value.value = snak.datavalue.value;
-				valuetype.value = snak.datavalue.type;
-			}
-			hash.value = snak.hash;
+	async function initializeWithSnak( snak ) {
+		snaktype.value = snak.snaktype;
+		datatype.value = snak.datatype;
+		property.value = snak.property;
+		if ( snaktype.value === 'value' ) {
+			textvalue.value = await valueStrategy.value.renderValueToText( snak.datavalue );
+			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( snak.datavalue );
+			value.value = snak.datavalue.value;
+			valuetype.value = snak.datavalue.type;
 		}
-		async function buildSnakJson() {
-			const snakJson = {
-				snaktype: snaktype.value,
-				property: property.value,
-				datatype: datatype.value
-			};
-			if ( snaktype.value === 'value' ) {
-				snakJson.datavalue = await valueStrategy.value.buildDataValue( this );
-			}
-			return snakJson;
-		}
-		async function setNewPropertyAndDatatype( newProperty, newDatatype ) {
-			property.value = newProperty;
-			datatype.value = newDatatype;
-			if ( snaktype.value === 'value' ) {
-				const resetDatavalue = { value: '', type: 'string' };
-				textvalue.value = await valueStrategy.value.renderValueToText( resetDatavalue );
-				selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( resetDatavalue );
-				value.value = '';
-				valuetype.value = 'string';
-			}
-		}
-		function resetToLastCompleteValue() {
-			textvalue.value = lastCompleteTextvalue.value;
-			selectionvalue.value = lastCompleteSelectionvalue.value;
-		}
-		function currentDataValue() {
-			if ( snaktype.value !== 'value' ) {
-				return undefined;
-			}
-			return valueStrategy.value.peekDataValue( this );
-		}
-		function dispose() {
-			deleteStore( this );
-		}
-
-		watch( textvalue, recordLastCompleteValue, { flush: 'sync' } );
-		watch( selectionvalue, recordLastCompleteValue, { flush: 'sync' } );
-
-		function recordLastCompleteValue() {
-			if ( !isIncomplete.value ) {
-				lastCompleteTextvalue.value = textvalue.value;
-				lastCompleteSelectionvalue.value = selectionvalue.value;
-			}
-		}
-
-		return {
-			value,
-			datavalue,
-			textvalue,
-			selectionvalue,
-			snaktype,
-			property,
-			datatype,
-			valuetype,
-			hash,
-			valueStrategy,
-			isIncomplete,
-			initializeWithSnak,
-			buildSnakJson,
-			setNewPropertyAndDatatype,
-			resetToLastCompleteValue,
-			currentDataValue,
-			dispose,
-			lastCompleteTextvalue,
-			lastCompleteSelectionvalue
+		hash.value = snak.hash;
+	}
+	async function buildSnakJson() {
+		const snakJson = {
+			snaktype: snaktype.value,
+			property: property.value,
+			datatype: datatype.value
 		};
-	} );
-	storeInstance = useStore();
-	return useStore;
-};
+		if ( snaktype.value === 'value' ) {
+			snakJson.datavalue = await valueStrategy.value.buildDataValue( this );
+		}
+		return snakJson;
+	}
+	async function setNewPropertyAndDatatype( newProperty, newDatatype ) {
+		property.value = newProperty;
+		datatype.value = newDatatype;
+		if ( snaktype.value === 'value' ) {
+			const resetDatavalue = { value: '', type: 'string' };
+			textvalue.value = await valueStrategy.value.renderValueToText( resetDatavalue );
+			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( resetDatavalue );
+			value.value = '';
+			valuetype.value = 'string';
+		}
+	}
+	function resetToLastCompleteValue() {
+		textvalue.value = lastCompleteTextvalue.value;
+		selectionvalue.value = lastCompleteSelectionvalue.value;
+	}
+	function currentDataValue() {
+		if ( snaktype.value !== 'value' ) {
+			return undefined;
+		}
+		return valueStrategy.value.peekDataValue( this );
+	}
+	function dispose() {
+		deleteStore( this );
+	}
+
+	watch( textvalue, recordLastCompleteValue, { flush: 'sync' } );
+	watch( selectionvalue, recordLastCompleteValue, { flush: 'sync' } );
+
+	function recordLastCompleteValue() {
+		if ( !isIncomplete.value ) {
+			lastCompleteTextvalue.value = textvalue.value;
+			lastCompleteSelectionvalue.value = selectionvalue.value;
+		}
+	}
+
+	return {
+		value,
+		datavalue,
+		textvalue,
+		selectionvalue,
+		snaktype,
+		property,
+		datatype,
+		valuetype,
+		hash,
+		valueStrategy,
+		isIncomplete,
+		initializeWithSnak,
+		buildSnakJson,
+		setNewPropertyAndDatatype,
+		resetToLastCompleteValue,
+		currentDataValue,
+		dispose,
+		lastCompleteTextvalue,
+		lastCompleteSelectionvalue
+	};
+} );
 
 let nextSnakKey = 0;
 
