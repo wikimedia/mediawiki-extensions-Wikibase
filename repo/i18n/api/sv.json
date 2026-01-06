@@ -9,7 +9,8 @@
 			"Rockyfelle",
 			"Sabelöga",
 			"SaldırganSincap",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Stefan2255"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Frågar efter tillgängliga emblemföremål.",
@@ -156,7 +157,7 @@
 	"apihelp-wbsearchentities-param-profile": "Sökprofilen att använda.",
 	"apihelp-wbsearchentities-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
-	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
+	"apihelp-wbsearchentities-example-3": "Sök endast efter egenskaper för \"alfabet\" på engelska",
 	"apihelp-wbsearchentities-example-4": "Sök efter \"abc\" på engelska med en gräns på 2 och en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Sök efter \"alphabet\" på engelska och utelämna URL-parametrar",
 	"apihelp-wbsearchentities-example-6": "Sök efter \"Q1234\" på engelska för att matcha entitetens ID.",
@@ -186,7 +187,7 @@
 	"apihelp-query+wbsearch-paramvalue-profile-default": "Standardprofilen, lämplig för de flesta ändamålen.",
 	"apihelp-query+wbsearch-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-query+wbsearch-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
-	"apihelp-query+wbsearch-example-3": "Sök efter \"alphabet\" på engelska för typen egenskap",
+	"apihelp-query+wbsearch-example-3": "Sök endast efter egenskaper för \"alfabet\" på engelska",
 	"apihelp-query+wbsearch-example-4": "Sök efter \"alphabet\" på engelska som en generator",
 	"apihelp-query+wbsubscribers-summary": "Hämta prenumerationer till angivna entiteter.",
 	"apihelp-query+wbsubscribers-param-entities": "Entiteter att hämta prenumeranter",
