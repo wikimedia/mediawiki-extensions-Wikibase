@@ -153,5 +153,6 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
 
 module.exports = {
-	EntityValueStrategy
+	EntityValueStrategy,
+	StringValueStrategy
 };
