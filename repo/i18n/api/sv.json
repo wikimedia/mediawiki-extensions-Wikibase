@@ -9,7 +9,8 @@
 			"Rockyfelle",
 			"Sabelöga",
 			"SaldırganSincap",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Stefan2255"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Frågar efter tillgängliga emblemföremål.",
@@ -59,7 +60,7 @@
 	"apihelp-wbformatvalue-param-generate": "Det önskade utdataformatet som ska genereras.",
 	"apihelp-wbformatvalue-param-datatype": "Värdets datatyp. Detta är skiljt från värdets typ",
 	"apihelp-wbformatvalue-param-datavalue": "Det data som ska formateras. Detta måste vara JSON-serialiseringen eller ett DataValue-objekt.",
-	"apihelp-wbformatvalue-param-options": "Valen formateraren ska använda. Tillhandahålls som ett JSON-objekt.",
+	"apihelp-wbformatvalue-param-options": "Alternativen som formateraren ska använda. Tillhandahålls som ett JSON-objekt.\n\nDe alternativ som stöds är:\n; $1 : Språket som värdet ska formateras på (en MediaWiki-språkkod).\n; $2 : Om avrundning ska tillämpas på talet. Kan vara ett booleskt tal (automatisk / ingen avrundning) eller ett heltal (exponent för de sista signifikanta decimalsiffrorna). Endast användbart för kvantitetsvärden.\n; $3 : Om enheten ska inkluderas i utdata (ett booleskt tal). Endast användbart för kvantitetsvärden.\n; $4 : Om kalendermodellen ska visas. Kan vara ett booleskt tal (visas alltid / aldrig) eller strängen <code>\"auto\"</code> (bestämmer automatiskt om den ska visas). Endast användbart för tidsvärden.",
 	"apihelp-wbformatvalue-param-property": "Egenskaps-ID som datavärdet tillhör, borde användas istället för parametern <var>datatype</var>.",
 	"apihelp-wbformatvalue-example-1": "Formatera ett enkelt strängvärde.",
 	"apihelp-wbformatvalue-example-2": "Formatera ett strängvärde som en URL i HTML.",
@@ -156,7 +157,7 @@
 	"apihelp-wbsearchentities-param-profile": "Sökprofilen att använda.",
 	"apihelp-wbsearchentities-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-wbsearchentities-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
-	"apihelp-wbsearchentities-example-3": "Sök efter \"alphabet\" på engelska, för typen egenskap",
+	"apihelp-wbsearchentities-example-3": "Sök endast efter egenskaper för \"alfabet\" på engelska",
 	"apihelp-wbsearchentities-example-4": "Sök efter \"abc\" på engelska med en gräns på 2 och en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Sök efter \"alphabet\" på engelska och utelämna URL-parametrar",
 	"apihelp-wbsearchentities-example-6": "Sök efter \"Q1234\" på engelska för att matcha entitetens ID.",
@@ -186,7 +187,7 @@
 	"apihelp-query+wbsearch-paramvalue-profile-default": "Standardprofilen, lämplig för de flesta ändamålen.",
 	"apihelp-query+wbsearch-example-1": "Sök efter \"abc\" på engelska, med standardvärden för typ och begränsning",
 	"apihelp-query+wbsearch-example-2": "Sök efter \"abc\" på Engelska med en gräns på 50",
-	"apihelp-query+wbsearch-example-3": "Sök efter \"alphabet\" på engelska för typen egenskap",
+	"apihelp-query+wbsearch-example-3": "Sök endast efter egenskaper för \"alfabet\" på engelska",
 	"apihelp-query+wbsearch-example-4": "Sök efter \"alphabet\" på engelska som en generator",
 	"apihelp-query+wbsubscribers-summary": "Hämta prenumerationer till angivna entiteter.",
 	"apihelp-query+wbsubscribers-param-entities": "Entiteter att hämta prenumeranter",
