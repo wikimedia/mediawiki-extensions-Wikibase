@@ -61,6 +61,40 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );
 			expect( snak.text() ).toEqual( 'p1Icon1' );
 		} );
+
+		it( 'sets the musical-notation-value class for musical notation datatype', async () => {
+			const wrapper = await mountSnakValue( {
+				snak: {
+					datatype: 'musical-notation',
+					hash: 'musical1234567890123456789012345678901234567890',
+					property: 'P1',
+					datavalue: { value: '\\relative c\' { c4 e g c }', type: 'string' }
+				}
+			} );
+
+			expect( wrapper.exists() ).toBeTruthy();
+			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
+			const snak = wrapper.find( '.wikibase-wbui2025-snak-value' );
+			const classes = snak.attributes().class.split( ' ' );
+			expect( classes ).toContain( 'wikibase-wbui2025-snak-value' );
+			expect( classes ).toContain( 'wikibase-wbui2025-musical-notation-value' );
+		} );
+
+		it( 'does not set musical-notation-value class for other datatypes', async () => {
+			const wrapper = await mountSnakValue( {
+				snak: {
+					datatype: 'string',
+					hash: 'string1234567890123456789012345678901234567890',
+					property: 'P1',
+					datavalue: { value: 'test', type: 'string' }
+				}
+			} );
+
+			expect( wrapper.exists() ).toBeTruthy();
+			const snak = wrapper.find( '.wikibase-wbui2025-snak-value' );
+			const classes = snak.attributes().class.split( ' ' );
+			expect( classes ).not.toContain( 'wikibase-wbui2025-musical-notation-value' );
+		} );
 	} );
 
 	it( 'defines component', async () => {

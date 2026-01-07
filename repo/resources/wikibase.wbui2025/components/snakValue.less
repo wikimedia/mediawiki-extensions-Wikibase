@@ -38,9 +38,20 @@
 .wikibase-wbui2025-snak-value {
 	display: inline-flex;
 	justify-content: flex-start;
+	flex-grow: 1;
 	align-items: center;
 	margin: 0;
 	padding: @spacing-0 @spacing-0 @spacing-0 @spacing-30;
+
+	// Apply overflow constraints to base class so they work without JavaScript
+	// This prevents layout shift for all datatypes that may need horizontal scrolling
+	// The long string snack values are also wrapped in a span with this class
+	// Limiting to certain cases only.
+	// Without it, the .cdx-text-input might not trigger any dropdown menu properly
+	&:has( .mw-ext-score ),
+	&:has( .extiw ) {
+		overflow-x: auto;
+	}
 
 	.wikibase-snakview-variation-novaluesnak,
 	.wikibase-snakview-variation-somevaluesnak {
@@ -49,5 +60,17 @@
 		font-weight: 500;
 		font-size: 1rem;
 		line-height: 1.25;
+	}
+}
+
+.wikibase-wbui2025-musical-notation-value {
+	mask-image: linear-gradient( to left, transparent 0, @color-emphasized 3em );
+	mask-repeat: no-repeat;
+	mask-position: 100% 0;
+	padding-inline-end: 3em;
+
+	[ dir='rtl' ] & {
+		mask-image: linear-gradient( to right, transparent 0, @color-emphasized 3em );
+		direction: rtl;
 	}
 }
