@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Basharh"
+			"Basharh",
+			"Nabil Assury"
 		]
 	},
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ܫܘܚܠܦܐ|ܫܘܚܠܦ̈ܐ}}",
-	"wikibase-dataitem": "ܡܠܘܐܐ ܕܝܕ̈ܥܬܐ",
+	"wikibase-dataitem": "ܐܸܣܛܘܼܟܼܣܵܐ {{WBREPONAME}}",
 	"wikibase-editlinks": "ܫܚܠܦ ܐܣܘܪ̈ܐ",
 	"wikibase-linkitem-addlinks": "ܐܘܣܦ ܐܣܘܪ̈ܐ",
 	"wikibase-linkitem-input-site": "ܠܫܢܐ:",
