@@ -223,6 +223,64 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 		} );
 	} );
 
+	describe( 'commonsMedia datatype', () => {
+		let wrapper, lookup;
+
+		beforeEach( async () => {
+			const testPropertyId = 'P1';
+			const testStatementId = 'Q1$commonsMedia-statement-id';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: {
+					snaktype: 'value',
+					datavalue: {
+						value: 'Douglas adams portrait.jpg',
+						type: 'string'
+					},
+					datatype: 'commonsMedia'
+				},
+				rank: 'normal',
+				'qualifiers-order': [],
+				qualifiers: {},
+				references: []
+			};
+
+			const testingPinia = storeWithStatements( [ testStatement ] );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
+			const editStatementStore = useEditStatementStore( testStatementId )();
+
+			wrapper = await mount( editableLookupSnakValueComponent, {
+				props: {
+					propertyId: testPropertyId,
+					snakKey: editStatementStore.mainSnakKey
+				},
+				global: {
+					plugins: [
+						testingPinia
+					]
+				}
+			} );
+
+			lookup = wrapper.findComponent( CdxLookup );
+		} );
+
+		it( 'renders cdx-lookup instead of cdx-text-input for commonsMedia', async () => {
+			await wrapper.vm.$nextTick();
+			lookup = wrapper.findComponent( CdxLookup );
+			expect( lookup.exists() ).toBe( true );
+		} );
+
+		it( 'calls searchByDatatypeDebounced with commonsMedia when input value changes', async () => {
+			await wrapper.vm.onUpdateInputValue( 'Test.jpg' );
+			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced ).toHaveBeenCalledWith( 'commonsMedia', 'Test.jpg', 0 );
+		} );
+
+		it( 'should set autocapitalize to "off" for the text input', async () => {
+			expect( lookup.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
+		} );
+	} );
+
 	describe( 'lookup load more functionality', () => {
 		let wrapper;
 

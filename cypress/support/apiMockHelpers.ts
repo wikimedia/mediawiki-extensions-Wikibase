@@ -49,7 +49,7 @@ export function interceptCommonsSearch( options: CommonsSearchOptions, alias: st
 		},
 	};
 
-	cy.intercept( 'GET', '**/api.php?*action=query*format=json*list=search*srnamespace=486*', {
+	cy.intercept( 'GET', 'https://commons.wikimedia.org/w/api.php?*', {
 		statusCode: 200,
 		body,
 	} ).as( alias );

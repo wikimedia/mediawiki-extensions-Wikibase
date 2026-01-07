@@ -47,7 +47,7 @@ interface Statement {
 interface EntityResponseOptions {
 	itemId: string;
 	propertyId: string;
-	datatype: 'tabular-data' | 'geo-shape' | 'string';
+	datatype: 'commonsMedia' | 'tabular-data' | 'geo-shape' | 'string';
 	statements: Statement[];
 	lastrevid?: number;
 }

@@ -51,6 +51,24 @@ const searchGeoShapes = function ( searchTerm, offset = 0 ) {
 };
 
 /**
+ * Search for media (files) on Commons
+ *
+ * @param {string} searchTerm The search term
+ * @param {number} offset Optional result offset for pagination
+ * @returns {Promise<Object>} Promise resolving to search results
+ */
+const searchCommonsMedia = function ( searchTerm, offset ) {
+	return foreignApi( 'https://commons.wikimedia.org/w/api.php' ).get( {
+		action: 'query',
+		list: 'search',
+		srsearch: searchTerm,
+		srnamespace: 6, // NS_FILE
+		srlimit: 10,
+		sroffset: offset
+	} );
+};
+
+/**
  * Search the repo for entities with a matching label
  *
  * @param {string} searchTerm
@@ -106,6 +124,7 @@ module.exports = {
 	searchForEntities,
 	searchTabularData,
 	searchGeoShapes,
+	searchCommonsMedia,
 	transformSearchResults,
 	transformEntitySearchResults
 };

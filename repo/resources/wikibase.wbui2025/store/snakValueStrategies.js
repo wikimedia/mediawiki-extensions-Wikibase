@@ -3,6 +3,7 @@ const { renderSnakValueText } = require( '../api/editEntity.js' );
 const {
 	transformSearchResults,
 	transformEntitySearchResults,
+	searchCommonsMedia,
 	searchForEntities,
 	searchGeoShapes,
 	searchTabularData
@@ -129,6 +130,22 @@ class PropertyValueStrategy extends EntityValueStrategy {
 	}
 }
 
+class CommonsMediaValueStrategy extends LookupStringDatatypeStrategy {
+	constructor( editSnakStore ) {
+		super( editSnakStore );
+	}
+
+	transformSearchResults( data ) {
+		return super.transformSearchResults( data ).map( ( menuItem ) => Object.assign( {
+			thumbnail: {
+				// /wiki/Special:Filepath/${ file } with a redirect level or two already resolved
+				url: `https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/${ encodeURIComponent( menuItem.value.replace( / /g, '_' ) ) }&width=40`
+			},
+			showThumbnail: true
+		}, menuItem ) );
+	}
+}
+
 snakValueStrategyFactory.registerStrategyForDatatype(
 	'wikibase-item',
 	( store ) => new ItemValueStrategy( store ),
@@ -151,6 +168,10 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( searchTerm, offset ) => searchTabularData( searchTerm, offset )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'commonsMedia',
+	( store ) => new CommonsMediaValueStrategy( store ),
+	( searchTerm, offset ) => searchCommonsMedia( searchTerm, offset )
+);
 
 module.exports = {
 	EntityValueStrategy,
