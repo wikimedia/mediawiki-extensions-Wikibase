@@ -26,7 +26,6 @@ class Wbui2025FeatureFlag {
 		'time',
 		'entity-schema',
 		'math',
-		'musical-notation',
 	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';
