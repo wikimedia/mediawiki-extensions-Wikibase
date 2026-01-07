@@ -23,9 +23,9 @@ interface Change {
 	public function getType();
 
 	/**
-	 * Returns the time on which the change was made as a timestamp in TS_MW format.
+	 * Returns the time on which the change was made as a timestamp in TS::MW format.
 	 *
-	 * @return string TS_MW
+	 * @return string TS::MW
 	 */
 	public function getTime();
 
