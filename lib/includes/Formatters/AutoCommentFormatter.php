@@ -117,7 +117,7 @@ class AutoCommentFormatter {
 			return wfEscapeWikiText( $arg );
 		}, $args );
 		// render the autocomment
-		$auto = $msg->params( $args )->parse();
+		$auto = $msg->params( $args )->escaped();
 		return $icon . $auto;
 	}
 
