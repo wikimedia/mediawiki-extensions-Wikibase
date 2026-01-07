@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * RDF mapping for wikibase data model.
@@ -214,10 +216,10 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revision
-	 * @param string $timestamp in TS_MW format
+	 * @param string $timestamp in TS::MW format
 	 */
 	public function addEntityRevisionInfo( EntityId $entityId, int $revision, string $timestamp ): void {
-		$timestamp = wfTimestamp( TS_ISO_8601, $timestamp );
+		$timestamp = ConvertibleTimestamp::convert( TS::ISO_8601, $timestamp );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 		$entityRepositoryName = $this->vocabulary->getEntityRepositoryName( $entityId );
 
@@ -434,7 +436,9 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 			->a( 'owl', 'Ontology' )
 			->say( RdfVocabulary::NS_CC, 'license' )->is( $this->vocabulary->getLicenseUrl() )
 			->say( RdfVocabulary::NS_SCHEMA_ORG, 'softwareVersion' )->value( RdfVocabulary::FORMAT_VERSION )
-			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value( wfTimestamp( TS_ISO_8601, $timestamp ), 'xsd', 'dateTime' )
+			->say( RdfVocabulary::NS_SCHEMA_ORG, 'dateModified' )->value(
+				ConvertibleTimestamp::convert( TS::ISO_8601, $timestamp ), 'xsd', 'dateTime'
+			)
 			->say( 'owl', 'imports' )->is( RdfVocabulary::getOntologyURI() );
 	}
 

@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup
@@ -73,7 +74,7 @@ class EntityChangeLookupTest extends MediaWikiIntegrationTestCase {
 		}
 		$lookup = $this->newEntityChangeLookup();
 
-		$jan1st2013Timestamp = ConvertibleTimestamp::convert( TS_MW, 1356998400 );
+		$jan1st2013Timestamp = ConvertibleTimestamp::convert( TS::MW, 1356998400 );
 
 		$changes = $lookup->loadChangesBefore( $jan1st2013Timestamp, 500, 0 );
 

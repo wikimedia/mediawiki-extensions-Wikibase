@@ -22,6 +22,8 @@ use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @license GPL-2.0-or-later
@@ -160,7 +162,7 @@ class SetItemDescriptionRouteHandler extends SimpleHandler {
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 		$httpResponse->setHeader(
 			'Last-Modified',
-			wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() )
+			ConvertibleTimestamp::convert( TS::RFC2822, $useCaseResponse->getLastModified() )
 		);
 		$httpResponse->setBody(
 			new StringStream( json_encode( $useCaseResponse->getDescription()->getText() ) )

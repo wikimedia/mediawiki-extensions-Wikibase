@@ -13,6 +13,7 @@ use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeModification\DispatchChangesJob;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 // @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -41,7 +42,7 @@ class ResubmitChanges extends Maintenance {
 		}
 
 		$minimumAge = $this->getOption( 'minimum-age', 60 * 60 * 24 );
-		$thisTimeOrOlder = ConvertibleTimestamp::convert( TS_MW, time() - $minimumAge );
+		$thisTimeOrOlder = ConvertibleTimestamp::convert( TS::MW, time() - $minimumAge );
 		$services = MediaWikiServices::getInstance();
 		$mainConfig = $services->getMainConfig();
 

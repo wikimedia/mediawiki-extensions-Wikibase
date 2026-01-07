@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Rdf\RdfVocabulary;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Provider class for EntityData tests.
@@ -404,7 +406,7 @@ class EntityDataTestProvider {
 			'Q42.json', // subpage
 			[], // parameters
 			[ // headers
-				'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20000101000000' ),
+				'If-Modified-Since' => ConvertibleTimestamp::convert( TS::RFC2822, '20000101000000' ),
 			],
 			'!!', // output regex
 			200, // http code

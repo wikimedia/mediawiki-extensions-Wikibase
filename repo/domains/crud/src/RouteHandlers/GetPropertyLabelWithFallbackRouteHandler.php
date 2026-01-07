@@ -17,6 +17,8 @@ use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 use function json_encode;
 
 /**
@@ -91,7 +93,7 @@ class GetPropertyLabelWithFallbackRouteHandler extends SimpleHandler {
 	private function newSuccessResponse( GetPropertyLabelWithFallbackResponse $useCaseResponse ): Response {
 		$httpResponse = $this->getResponseFactory()->create();
 		$httpResponse->setHeader( 'Content-Type', 'application/json' );
-		$httpResponse->setHeader( 'Last-Modified', wfTimestamp( TS_RFC2822, $useCaseResponse->getLastModified() ) );
+		$httpResponse->setHeader( 'Last-Modified', ConvertibleTimestamp::convert( TS::RFC2822, $useCaseResponse->getLastModified() ) );
 		$httpResponse->setHeader( 'ETag', "\"{$useCaseResponse->getRevisionId()}\"" );
 		$httpResponse->setBody(
 			new StringStream( json_encode( $useCaseResponse->getLabel()->getText() ) )

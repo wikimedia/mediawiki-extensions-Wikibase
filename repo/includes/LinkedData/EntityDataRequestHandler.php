@@ -24,6 +24,8 @@ use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Rdf\UnknownFlavorException;
 use Wikimedia\Http\HttpAcceptNegotiator;
 use Wikimedia\Http\HttpAcceptParser;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Request handler implementing a linked data interface for Wikibase entities.
@@ -532,7 +534,7 @@ class EntityDataRequestHandler {
 		// handle If-Modified-Since
 		$imsHeader = $request->getHeader( 'IF-MODIFIED-SINCE' );
 		if ( $imsHeader !== false ) {
-			$ims = wfTimestamp( TS_MW, $imsHeader );
+			$ims = ConvertibleTimestamp::convert( TS::MW, $imsHeader );
 
 			if ( $entityRevision->getTimestamp() <= $ims ) {
 				$response = $output->getRequest()->response();
@@ -612,7 +614,7 @@ class EntityDataRequestHandler {
 		$response->header( 'Content-Type: ' . $contentType . '; charset=UTF-8' );
 
 		if ( $lastModified ) {
-			$response->header( 'Last-Modified: ' . wfTimestamp( TS_RFC2822, $lastModified ) );
+			$response->header( 'Last-Modified: ' . ConvertibleTimestamp::convert( TS::RFC2822, $lastModified ) );
 		}
 
 		//Set X-Frame-Options API results (bug T41180)

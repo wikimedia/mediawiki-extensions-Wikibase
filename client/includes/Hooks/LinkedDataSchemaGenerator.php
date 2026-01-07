@@ -18,6 +18,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @license GPL-2.0-or-later
@@ -126,11 +128,11 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		];
 
 		if ( $firstRevisionTimestamp ) {
-			$schema['datePublished'] = wfTimestamp( TS_ISO_8601, $firstRevisionTimestamp );
+			$schema['datePublished'] = ConvertibleTimestamp::convert( TS::ISO_8601, $firstRevisionTimestamp );
 		}
 
 		if ( $revisionTimestamp ) {
-			$schema['dateModified'] = wfTimestamp( TS_ISO_8601, $revisionTimestamp );
+			$schema['dateModified'] = ConvertibleTimestamp::convert( TS::ISO_8601, $revisionTimestamp );
 		}
 
 		if ( $imageFile ) {

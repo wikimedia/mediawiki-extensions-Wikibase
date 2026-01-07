@@ -12,6 +12,7 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Job that propagates changes to the visibility of an article's revisions to clients.
@@ -118,7 +119,7 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 	 */
 	private function getRevisionAge( string $timestamp ): int {
 		return intval(
-			( new ConvertibleTimestamp( $timestamp ) )->getTimestamp( TS_UNIX )
+			( new ConvertibleTimestamp( $timestamp ) )->getTimestamp( TS::UNIX )
 		);
 	}
 

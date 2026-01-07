@@ -10,6 +10,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Only for use in {@link EntityChangeLookup}. Use that class instead.
@@ -43,7 +44,7 @@ class EntityChangeSelectQueryBuilder extends SelectQueryBuilder {
 		foreach ( $this->fetchResultSet() as $row ) {
 			$data = [
 				'id' => (int)$row->change_id,
-				'time' => ConvertibleTimestamp::convert( TS_MW, $row->change_time ),
+				'time' => ConvertibleTimestamp::convert( TS::MW, $row->change_time ),
 				'info' => $row->change_info,
 				'user_id' => $row->change_user_id,
 				'revision_id' => $row->change_revision_id,
