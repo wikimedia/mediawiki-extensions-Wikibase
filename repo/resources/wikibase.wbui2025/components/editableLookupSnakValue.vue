@@ -3,6 +3,7 @@
 		ref="inputElement"
 		v-model:selected="lookupSelection"
 		v-model:input-value="lookupInputValue"
+		autocapitalize="off"
 		:class="activeClasses"
 		:menu-items="lookupMenuItems"
 		:menu-config="menuConfig"

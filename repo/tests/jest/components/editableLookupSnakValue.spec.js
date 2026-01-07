@@ -94,6 +94,10 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			await wrapper.vm.onUpdateInputValue( 'foo' );
 			expect( wrapper.find( '.cdx-lookup' ).classes() ).toContain( 'cdx-text-input--status-error' );
 		} );
+
+		it( 'should set autocapitalize to "off" for the text input', async () => {
+			expect( lookup.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
+		} );
 	} );
 
 	describe( 'tabular-data datatype', () => {
@@ -155,6 +159,10 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			await wrapper.vm.onUpdateInputValue( '' );
 			expect( wrapper.vm.lookupMenuItems ).toEqual( [] );
 		} );
+
+		it( 'should set autocapitalize to "off" for the text input', async () => {
+			expect( lookup.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
+		} );
 	} );
 
 	describe( 'geo-shape datatype', () => {
@@ -208,6 +216,10 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 		it( 'calls searchByDatatypeDebounced with geo-shape when input value changes', async () => {
 			await wrapper.vm.onUpdateInputValue( 'Region' );
 			expect( wbui2025.store.snakValueStrategyFactory.searchByDatatypeDebounced ).toHaveBeenCalledWith( 'geo-shape', 'Region', 0 );
+		} );
+
+		it( 'should set autocapitalize to "off" for the text input', async () => {
+			expect( lookup.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
 		} );
 	} );
 

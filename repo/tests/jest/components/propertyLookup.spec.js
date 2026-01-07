@@ -178,6 +178,10 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			expect( lookup.exists() ).toBe( true );
 		} );
 
+		it( 'should set autocapitalize to "off" for the text input', () => {
+			expect( lookup.find( 'input' ).element.getAttribute( 'autocapitalize' ) ).toBe( 'off' );
+		} );
+
 		it( 'sets the initial properties on the CdxLookup component', () => {
 			expect( lookup.props( 'menuItems' ) ).toEqual( [] );
 			expect( lookup.props( 'menuConfig' ) ).toEqual( {

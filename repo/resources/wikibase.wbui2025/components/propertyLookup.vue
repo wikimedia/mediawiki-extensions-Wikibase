@@ -3,6 +3,7 @@
 		ref="cdxLookup"
 		v-model:selected="selection"
 		v-model:input-value="inputValue"
+		autocapitalize="off"
 		class="wikibase-wbui2025-property-lookup"
 		:menu-items="menuItems"
 		:menu-config="menuConfig"
