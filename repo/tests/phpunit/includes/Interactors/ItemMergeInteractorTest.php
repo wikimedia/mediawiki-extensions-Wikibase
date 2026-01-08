@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Interactors;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Permissions\Authority;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Permissions\RateLimiter;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Status\Status;
@@ -101,9 +102,9 @@ class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 		$callback = function ( User $user ) {
 			if ( $user->getName() === self::USER_NAME_WITHOUT_PERMISSION ) {
-				return Status::newFatal( 'permissiondenied' );
+				return PermissionStatus::newFatal( 'permissiondenied' );
 			} else {
-				return Status::newGood();
+				return PermissionStatus::newGood();
 			}
 		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )

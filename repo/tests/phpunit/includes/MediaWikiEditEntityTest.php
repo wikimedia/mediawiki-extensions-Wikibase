@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -69,9 +70,9 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 			if ( $permissions === null
 				|| ( isset( $permissions[$action] ) && $permissions[$action] )
 			) {
-				return Status::newGood( true );
+				return PermissionStatus::newGood( true );
 			} else {
-				return Status::newFatal( 'badaccess-group0' );
+				return PermissionStatus::newFatal( 'badaccess-group0' );
 			}
 		};
 

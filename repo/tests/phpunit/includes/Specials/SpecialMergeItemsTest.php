@@ -9,6 +9,7 @@ use MediaWiki\Exception\PermissionsError;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Site\HashSiteStore;
@@ -246,9 +247,9 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		$callback = function ( User $user ) {
 			$name = 'UserWithoutPermission';
 			if ( $user->getName() === $name ) {
-				return Status::newFatal( 'permissiondenied' );
+				return PermissionStatus::newFatal( 'permissiondenied' );
 			} else {
-				return Status::newGood();
+				return PermissionStatus::newGood();
 			}
 		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )

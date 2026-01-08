@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Interactors;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
@@ -76,9 +77,9 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 				$userWithoutPermissionName = 'UserWithoutPermission';
 
 				if ( $user->getName() === $userWithoutPermissionName ) {
-					return Status::newFatal( 'permissiondenied' );
+					return PermissionStatus::newFatal( 'permissiondenied' );
 				} else {
-					return Status::newGood();
+					return PermissionStatus::newGood();
 				}
 			} );
 

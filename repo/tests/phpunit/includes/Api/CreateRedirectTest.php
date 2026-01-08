@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Status\Status;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
@@ -80,9 +81,9 @@ class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )
 			->willReturnCallback( function( User $user ) {
 				if ( $user->getName() === 'UserWithoutPermission' ) {
-					return Status::newFatal( 'permissiondenied' );
+					return PermissionStatus::newFatal( 'permissiondenied' );
 				} else {
-					return Status::newGood();
+					return PermissionStatus::newGood();
 				}
 			} );
 

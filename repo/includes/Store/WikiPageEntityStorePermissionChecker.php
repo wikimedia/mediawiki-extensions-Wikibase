@@ -2,12 +2,9 @@
 
 namespace Wikibase\Repo\Store;
 
-use IApiMessage;
 use InvalidArgumentException;
-use MediaWiki\Block\Block;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Permissions\PermissionStatus;
-use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -66,23 +63,14 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	}
 
 	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntity
-	 *
-	 * @param User $user
-	 * @param string $action
-	 * @param EntityDocument $entity
-	 * @param string $rigor
-	 *
-	 * @throws InvalidArgumentException if unknown permission is requested
-	 *
-	 * @return Status
+	 * @inheritDoc
 	 */
 	public function getPermissionStatusForEntity(
 		User $user,
-		$action,
+		string $action,
 		EntityDocument $entity,
-		$rigor = PermissionManager::RIGOR_SECURE
-	) {
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): PermissionStatus {
 		$id = $entity->getId();
 
 		if ( $id === null ) {
@@ -98,23 +86,14 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	}
 
 	/**
-	 * @see EntityPermissionChecker::getPermissionStatusForEntityId
-	 *
-	 * @param User $user
-	 * @param string $action
-	 * @param EntityId $entityId
-	 * @param string $rigor
-	 *
-	 * @throws InvalidArgumentException if unknown permission is requested
-	 *
-	 * @return Status
+	 * @inheritDoc
 	 */
 	public function getPermissionStatusForEntityId(
 		User $user,
-		$action,
+		string $action,
 		EntityId $entityId,
-		$rigor = PermissionManager::RIGOR_SECURE
-	) {
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): PermissionStatus {
 		$title = $this->titleLookup->getTitleForId( $entityId );
 
 		if ( $title === null || !$title->exists() ) {
@@ -150,14 +129,14 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	 *
 	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
-	 * @return Status a status object representing the check's result.
+	 * @return PermissionStatus a status object representing the check's result.
 	 */
 	private function getPermissionStatusForEntityType(
 		User $user,
 		array $actions,
 		$type,
 		$rigor = PermissionManager::RIGOR_SECURE
-	) {
+	): PermissionStatus {
 		$title = $this->getPageTitleInEntityNamespace( $type );
 
 		return $this->checkPermissionsForActions( $user, $actions, $title, $type, $rigor );
@@ -180,9 +159,8 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		Title $title,
 		string $entityType,
 		string $rigor = PermissionManager::RIGOR_SECURE
-	): Status {
-		$status = Status::newGood();
-
+	): PermissionStatus {
+		$status = PermissionStatus::newEmpty();
 		$mediaWikiPermissions = [];
 
 		foreach ( $actions as $action ) {
@@ -197,29 +175,10 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 		foreach ( $mediaWikiPermissions as $mwPermission ) {
 			$partialStatus = $this->permissionManager->getPermissionStatus(
 				$mwPermission, $user, $title, $rigor );
-			if ( $partialStatus->isBlocked() ) {
-				foreach ( $partialStatus->getMessages() as $msg ) {
-					if ( !$msg instanceof IApiMessage ) {
-						continue;
-					}
-					$this->setBlockTargetTypeInfo( $msg, $partialStatus );
-				}
-			}
-			$status->merge( $partialStatus );
+			$this->mergeStatus( $status, $partialStatus );
 		}
 
 		return $status;
-	}
-
-	private function setBlockTargetTypeInfo( iApiMessage $msg, PermissionStatus $status ): void {
-		$blockTargetType = $status->getBlock()->getTarget()->getType();
-		$apiData = [
-			'blockinfo' => [
-				'blocktargettype' => Block::BLOCK_TYPES[$blockTargetType],
-			],
-		];
-
-		$msg->setApiData( array_merge_recursive( $msg->getApiData(), $apiData ) );
 	}
 
 	private function getMediaWikiPermissionsToCheck( string $action, string $entityType ): array {
@@ -278,6 +237,14 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 
 	private function mediawikiPermissionExists( string $permission ): bool {
 		return in_array( $permission, $this->availableRights );
+	}
+
+	private function mergeStatus( PermissionStatus $mergeTarget, PermissionStatus $mergeSource ): void {
+		$mergeTarget->merge( $mergeSource );
+		$sourceBlock = $mergeSource->getBlock();
+		if ( !$mergeTarget->getBlock() && $sourceBlock ) {
+			$mergeTarget->setBlock( $sourceBlock ); // preserve block data if any
+		}
 	}
 
 }

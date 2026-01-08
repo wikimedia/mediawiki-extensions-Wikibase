@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
@@ -86,7 +87,7 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 	private function getEntityPermissionChecker(): EntityPermissionChecker {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
-			->willReturn( Status::newGood() );
+			->willReturn( PermissionStatus::newGood() );
 
 		return $entityPermissionChecker;
 	}

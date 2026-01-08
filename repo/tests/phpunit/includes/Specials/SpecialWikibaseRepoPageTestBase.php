@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use DataValues\DataValue;
 use MediaWiki\Language\Language;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\SiteLookup;
-use MediaWiki\Status\Status;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use SpecialPageTestBase;
@@ -87,7 +87,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	protected function getEntityPermissionChecker() {
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 
-		$ok = Status::newGood();
+		$ok = PermissionStatus::newGood();
 
 		$permissionChecker->method( 'getPermissionStatusForEntity' )
 			->willReturn( $ok );
