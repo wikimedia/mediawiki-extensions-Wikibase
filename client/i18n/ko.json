@@ -17,7 +17,8 @@
 			"그냥기여자",
 			"렌즈",
 			"밝은소년",
-			"아라"
+			"아라",
+			"YeBoy371"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
@@ -105,7 +106,7 @@
 	"wikibase-pageinfo-entity-usage-C": "특정 서술",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "서술: $1",
 	"wikibase-pageinfo-entity-usage-X": "모든 엔티티 데이터",
-	"wikibase-pageinfo-entity-usage-O": "기타 (예: 다른 이름, 엔티티 존재)",
+	"wikibase-pageinfo-entity-usage-O": "기타 (예: 엔티티 존재)",
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
 	"wikibase-otherprojects": "다른 프로젝트",
 	"wikibase-otherprojects-beta-message": "다른 프로젝트 사이드바",

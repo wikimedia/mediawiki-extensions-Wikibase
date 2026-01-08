@@ -43,11 +43,15 @@
 	"wikibase-addreference": "lägg till referens",
 	"wikibase-save-inprogress": "Sparar...",
 	"wikibase-publish-inprogress": "Publicerar...",
+	"wikibase-publishing-error": "Något gick fel när dina ändringar skulle sparas. Vänta en stund och försök igen.",
+	"wikibase-publishing-progress": "Slutför dina ändringar…",
+	"wikibase-publishing-succeeded": "Dina ändringar har sparats!",
 	"wikibase-remove-inprogress": "Tar bort...",
 	"wikibase-statementlistview-add": "lägg till värde",
 	"wikibase-statementlistview-add-tooltip": "Lägg till ett nytt värde",
 	"wikibase-statementgrouplistview-add": "lägg till uttalande",
 	"wikibase-statementgrouplistview-add-tooltip": "Lägg till ett nytt uttalande",
+	"wikibase-statementgrouplistview-edit": "redigera {{PLURAL:$1|uttalande|uttalanden}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Fler språk",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigurera",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Visa etiketter, alias och beskrivningar på alla mina språk vid sidladdning",
@@ -543,5 +547,9 @@
 	"special-setdescription-parameterized": "Ange beskrivning för $1",
 	"special-setlabeldescriptionaliases-parameterized": "Ange etikett, beskrivning och alias för $1",
 	"wikibase-federated-properties-federated-property-api-error-message": "Du kan inte interagera med federerade egenskaper med detta API.",
-	"wikibase-federated-properties-failed-request-api-error-message": "Begäran misslyckades på grund av en misslyckad begäran till federationskällwikin."
+	"wikibase-federated-properties-failed-request-api-error-message": "Begäran misslyckades på grund av en misslyckad begäran till federationskällwikin.",
+	"wikibase-scoped-search-search-entities": "Sök entiteter",
+	"wikibase-scoped-search-search-entities-description": "Hitta olika typer av {{SITENAME}}-entitet",
+	"wikibase-scoped-search-item-scope-name": "Objekt",
+	"wikibase-scoped-search-property-scope-name": "Egenskaper"
 }
