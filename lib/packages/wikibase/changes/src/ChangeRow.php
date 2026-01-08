@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -53,13 +54,13 @@ abstract class ChangeRow implements Change {
 	 * @return int Seconds
 	 */
 	public function getAge() {
-		return time() - (int)ConvertibleTimestamp::convert( TS_UNIX, $this->getField( self::TIME ) );
+		return time() - (int)ConvertibleTimestamp::convert( TS::UNIX, $this->getField( self::TIME ) );
 	}
 
 	/**
 	 * @see Change::getTime
 	 *
-	 * @return string TS_MW
+	 * @return string TS::MW
 	 */
 	public function getTime() {
 		return $this->getField( self::TIME );

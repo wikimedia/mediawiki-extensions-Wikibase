@@ -4,6 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Changes;
 
 use InvalidArgumentException;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * Factory for RepoRevisionIdentifier objects.
@@ -26,7 +28,7 @@ class RepoRevisionIdentifierFactory {
 
 		return new RepoRevisionIdentifier(
 			$data['entityIdSerialization'],
-			wfTimestamp( TS_MW, $data['revisionTimestamp'] ),
+			ConvertibleTimestamp::convert( TS::MW, $data['revisionTimestamp'] ),
 			$data['revisionId']
 		);
 	}

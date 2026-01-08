@@ -147,7 +147,7 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @param string $timestamp Timestamp in TS_MW format
+	 * @param string $timestamp Timestamp in TS::MW format
 	 */
 	public function setTimestamp( string $timestamp ): void {
 		$this->setField( ChangeRow::TIME, $timestamp );
