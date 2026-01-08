@@ -4,6 +4,8 @@ namespace Wikibase\Repo;
 
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @license GPL-2.0-or-later
@@ -32,7 +34,7 @@ class AddPageInfo {
 		$record['ns'] = $title->getNamespace();
 		$record['title'] = $title->getPrefixedText();
 		$record['lastrevid'] = $entityRevision->getRevisionId();
-		$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
+		$record['modified'] = ConvertibleTimestamp::convert( TS::ISO_8601, $entityRevision->getTimestamp() );
 		return $record;
 	}
 }

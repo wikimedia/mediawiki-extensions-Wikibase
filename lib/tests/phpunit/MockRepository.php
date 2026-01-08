@@ -35,6 +35,8 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\StorageException;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @deprecated Try to use a simpler fake. The complexity and coupling of this
@@ -217,7 +219,7 @@ class MockRepository implements
 		$revision = new EntityRevision(
 			$entity->copy(), // note: always clone
 			$revisionId,
-			wfTimestamp( TS_MW, $timestamp )
+			ConvertibleTimestamp::convert( TS::MW, $timestamp )
 		);
 
 		if ( $user !== null ) {
@@ -266,7 +268,7 @@ class MockRepository implements
 		$this->redirects[$key] = new RedirectRevision(
 			$redirect, // EntityRedirect is immutable
 			$revisionId,
-			wfTimestamp( TS_MW, $timestamp )
+			ConvertibleTimestamp::convert( TS::MW, $timestamp )
 		);
 	}
 

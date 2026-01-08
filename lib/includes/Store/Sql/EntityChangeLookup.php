@@ -64,7 +64,7 @@ class EntityChangeLookup {
 	}
 
 	/**
-	 * @param string $thisTimeOrOlder maximum timestamp of changes to returns (TS_MW format)
+	 * @param string $thisTimeOrOlder maximum timestamp of changes to returns (TS::MW format)
 	 * @param int $batchSize maximum number of changes to return
 	 * @param int $offset skip this many changes
 	 *

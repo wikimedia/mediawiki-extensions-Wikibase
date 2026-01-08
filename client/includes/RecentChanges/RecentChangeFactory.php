@@ -16,6 +16,8 @@ use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Message\MessageParam;
 use Wikimedia\Message\MessageSpecifier;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @license GPL-2.0-or-later
@@ -149,7 +151,7 @@ class RecentChangeFactory {
 			$userText = '';
 		}
 
-		$time = $metadata['time'] ?? wfTimestamp( TS_MW );
+		$time = $metadata['time'] ?? ConvertibleTimestamp::now( TS::MW );
 
 		$params = [
 			'wikibase-repo-change' => $metadata,

@@ -14,6 +14,8 @@ use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRevisionMetadataRetriever;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck
@@ -57,7 +59,7 @@ class RequestPreconditionCheckTest extends TestCase {
 			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 304 ),
 		];
 		yield 'If-Modified-Since - not modified since specified date' => [
-			'headers' => [ 'If-Modified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
+			'headers' => [ 'If-Modified-Since' => ConvertibleTimestamp::convert( TS::RFC2822, '20201111070707' ) ],
 			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111060606' ),
 			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 304 ),
 		];
@@ -79,7 +81,7 @@ class RequestPreconditionCheckTest extends TestCase {
 			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 412 ),
 		];
 		yield 'If-Unmodified-Since - item has been modified since specified date' => [
-			'headers' => [ 'If-Unmodified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
+			'headers' => [ 'If-Unmodified-Since' => ConvertibleTimestamp::convert( TS::RFC2822, '20201111070707' ) ],
 			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111080808' ),
 			'expectedResult' => RequestPreconditionCheckResult::newConditionMetResult( 42, 412 ),
 		];
@@ -89,7 +91,7 @@ class RequestPreconditionCheckTest extends TestCase {
 			'expectedResult' => RequestPreconditionCheckResult::newConditionUnmetResult(),
 		];
 		yield 'If-Unmodified-Since - not modified since specified date' => [
-			'headers' => [ 'If-Unmodified-Since' => wfTimestamp( TS_RFC2822, '20201111070707' ) ],
+			'headers' => [ 'If-Unmodified-Since' => ConvertibleTimestamp::convert( TS::RFC2822, '20201111070707' ) ],
 			'revisionIdResult' => LatestRevisionIdResult::concreteRevision( 42, '20201111070707' ),
 			'expectedResult' => RequestPreconditionCheckResult::newConditionUnmetResult(),
 		];

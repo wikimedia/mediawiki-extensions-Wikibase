@@ -15,6 +15,8 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Timestamp\ConvertibleTimestamp;
+use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SqlChangeStore
@@ -46,7 +48,7 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 	public static function saveChangeInsertProvider() {
 		$factory = self::getEntityChangeFactory();
 
-		$time = wfTimestamp( TS_MW );
+		$time = ConvertibleTimestamp::now( TS::MW );
 
 		$simpleChange = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 
@@ -131,8 +133,8 @@ class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertEqualsWithDelta(
 			// wfTimestamp returns string, assertEqualsWithDelta requires int
-			(int)wfTimestamp( TS_UNIX, $expected['change_time'] ),
-			(int)wfTimestamp( TS_UNIX, $row['change_time'] ),
+			(int)ConvertibleTimestamp::convert( TS::UNIX, $expected['change_time'] ),
+			(int)ConvertibleTimestamp::convert( TS::UNIX, $row['change_time'] ),
 			60 * 60, // 1 hour
 			'Change time'
 		);
