@@ -45,6 +45,7 @@
 	"wikibase-cancel": "peruuta",
 	"wikibase-add": "lisää",
 	"wikibase-addstatement": "lisää esitys",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(ei tueta mobiilissa)",
 	"wikibase-addqualifier": "lisää tarkenne",
 	"wikibase-addreference": "lisää lähde",
 	"wikibase-save-inprogress": "Tallennetaan...",
