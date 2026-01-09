@@ -59,12 +59,15 @@ describe( 'wikibase.wbui2025.references', () => {
 			wrapper = await mount( addStatementButtonComponent, {
 				props: {
 					entityId: 'Q123',
+					visible: true,
 					sectionKey: 'statements'
 				},
 				global: {
 					plugins: [
-						storeWithStatements( [ ] )
-					] }
+						storeWithStatements( [] )
+					],
+					disableTeleport: true
+				}
 			} );
 			addButton = wrapper.findComponent( CdxButton );
 			propertyLookup = wrapper.findComponent( propertyLookupComponent );

@@ -1,8 +1,9 @@
 <template>
-	<wikibase-wbui2025-modal-overlay>
+	<wikibase-wbui2025-modal-overlay
+		modal-class="wikibase-wbui2025-edit-statement-group-modal">
 		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
-				<cdx-icon :icon="cdxIconArrowPrevious" @click="hide"></cdx-icon>
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<p class="heading">
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
@@ -11,14 +12,25 @@
 				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
-				<template v-for="statementGuid in editableStatementGuids" :key="statementGuid">
-					<wikibase-wbui2025-edit-statement
-						:statement-id="statementGuid"
-						@remove="removeStatement"
-					></wikibase-wbui2025-edit-statement>
+				<template v-if="editStatementDataLoaded">
+					<div
+						v-for="statementGuid in editableStatementGuidsWithoutNewStatement"
+						:key="statementGuid"
+						class="wikibase-wbui2025-edit-statement-value-form-modal"
+					>
+						<wikibase-wbui2025-edit-statement
+							:statement-id="statementGuid"
+							@remove="removeStatement"
+						></wikibase-wbui2025-edit-statement>
+					</div>
 				</template>
+				<div
+					v-else
+					class="wikibase-wbui2025-edit-statement-value-form loading-placeholder"
+				>
+				</div>
 				<div class="wikibase-wbui2025-add-value">
-					<cdx-button @click="createNewStatement">
+					<cdx-button @click="startAddValue">
 						<cdx-icon :icon="cdxIconAdd"></cdx-icon>
 						{{ $i18n( 'wikibase-statementlistview-add' ) }}
 					</cdx-button>
@@ -47,7 +59,7 @@
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button
 						weight="quiet"
-						@click="hide"
+						@click="cancelEditForm"
 					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
@@ -65,9 +77,16 @@
 			</div>
 		</div>
 	</wikibase-wbui2025-modal-overlay>
+	<wikibase-wbui2025-add-statement-value
+		v-if="showAddValueModal"
+		:statement-id="newStatementId"
+		@add="finishAddValue"
+		@cancel="cancelAddValue"
+	></wikibase-wbui2025-add-statement-value>
 </template>
 
 <script>
+const { nextTick } = require( 'vue' );
 const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
 const {
@@ -87,6 +106,7 @@ const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const saveStatementsFormMixin = require( '../mixins/saveStatementsFormMixin.js' );
 const WikibaseWbui2025EditStatement = require( './editStatement.vue' );
 const WikibaseWbui2025ModalOverlay = require( './modalOverlay.vue' );
+const WikibaseWbui2025AddStatementValue = require( './addStatementValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -97,7 +117,8 @@ module.exports = exports = defineComponent( {
 		CdxMessage,
 		CdxProgressBar,
 		WikibaseWbui2025EditStatement,
-		WikibaseWbui2025ModalOverlay
+		WikibaseWbui2025ModalOverlay,
+		WikibaseWbui2025AddStatementValue
 	},
 	mixins: [ saveStatementsFormMixin ],
 	props: {
@@ -119,12 +140,15 @@ module.exports = exports = defineComponent( {
 			cdxIconClose,
 			showProgress: false,
 			formSubmitted: false,
-			editStatementDataLoaded: false
+			editStatementDataLoaded: false,
+			newStatementId: null,
+			showEditStatementModal: true,
+			showAddValueModal: false,
+			progressTimeout: null
 		};
 	},
 	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		editableStatementGuids: 'statementIds',
-		removedStatementIds: 'removedStatementIds',
 		fullyParsed: 'isFullyParsed',
 		hasChanges: 'hasChanges'
 	} ),
@@ -140,12 +164,23 @@ module.exports = exports = defineComponent( {
 		statements() {
 			return wbui2025.store.getStatementsForProperty( this.propertyId );
 		},
+		editableStatementGuidsWithoutNewStatement() {
+			// Filter 'newStatementId' from the list so that we do not display the empty
+			// statement while the addValue modal is loading.
+			return this.editableStatementGuids.filter( ( statement ) => statement !== this.newStatementId );
+		},
 		propertyDatatype() {
+			if (
 			// eslint-disable-next-line vue/no-undef-properties
-			if ( this.statements && this.statements.length > 0 ) {
+				this.statements &&
+				this.statements.length > 0 &&
+				this.statements[ 0 ] &&
+				this.statements[ 0 ].mainsnak &&
+				this.statements[ 0 ].mainsnak.datatype
+			) {
 				return this.statements[ 0 ].mainsnak.datatype;
 			}
-			return null;
+			return 'string';
 		},
 		canSubmit() {
 			return !this.formSubmitted && this.fullyParsed && this.hasChanges === true;
@@ -155,23 +190,74 @@ module.exports = exports = defineComponent( {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
-		removeStatement: 'removeStatement'
-	} ), {
-		createNewStatement() {
-			const statementId = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
-			// eslint-disable-next-line vue/no-undef-properties
-			this.createNewBlankEditableStatement( statementId, this.propertyId, this.propertyDatatype );
+		removeStatement: 'removeStatement',
+		saveChangedStatements: 'saveChangedStatements'
+	} ), mapActions( wbui2025.store.useMessageStore, [
+		'addStatusMessage'
+	] ), {
+		startAddValue() {
+			const guid = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
+			this.newStatementId = guid;
+			this.createNewBlankEditableStatement(
+				guid,
+				this.propertyId,
+				// eslint-disable-next-line vue/no-undef-properties
+				this.propertyDatatype
+			).then( () => {
+				this.showEditStatementModal = false;
+				this.showAddValueModal = true;
+			} );
+		},
+		finishAddValue() {
+			this.newStatementId = null;
+			this.showAddValueModal = false;
+			this.showEditStatementModal = true;
+		},
+		cancelAddValue() {
+			if ( this.newStatementId ) {
+				this.removeStatement( this.newStatementId );
+			}
+			this.newStatementId = null;
+			this.showAddValueModal = false;
+			this.showEditStatementModal = true;
 		},
 		submitForm() {
-			if ( this.editableStatementGuids.length === 0 && this.removedStatementIds.length === 0 ) {
-				return;
-			}
-			// eslint-disable-next-line vue/no-undef-properties
-			this.submitFormWithElementRef( this.$refs.editFormActionsRef );
+			this.formSubmitted = true;
+			setTimeout( () => {
+				this.showProgress = true;
+			}, 300 );
+			this.saveChangedStatements( this.entityId )
+			.then( () => {
+				clearTimeout( this.progressTimeout );
+				this.$emit( 'hide' );
+				this.disposeOfEditableStatementStores();
+				this.addStatusMessage( {
+					type: 'success',
+					text: mw.msg( 'wikibase-publishing-succeeded' )
+				} );
+				this.showProgress = false;
+				this.showEditStatementModal = false;
+			} )
+			.catch( () => {
+				clearTimeout( this.progressTimeout );
+				this.addStatusMessage( {
+					text: mw.msg( 'wikibase-publishing-error' ),
+					attachTo: this.$refs.editFormActionsRef,
+					type: 'error'
+				} );
+				this.formSubmitted = false;
+				this.showProgress = false;
+			} );
 		},
-		hide() {
+		cancelEditForm() {
+			this.showAddValueModal = false;
+			this.showEditStatementModal = false;
+
 			this.$emit( 'hide' );
-			this.disposeOfEditableStatementStores();
+
+			nextTick( () => {
+				this.disposeOfEditableStatementStores();
+			} );
 		}
 	} ),
 	beforeMount: function () {

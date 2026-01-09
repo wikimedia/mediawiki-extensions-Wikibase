@@ -3,7 +3,9 @@ import Chainable = Cypress.Chainable;
 export class EditStatementFormPage {
 
 	public static SELECTORS = {
+		MODAL_ROOT: '.wikibase-wbui2025-edit-statement-group-modal',
 		FORM: '.wikibase-wbui2025-edit-statement',
+		FORM_HEADING: '.wikibase-wbui2025-edit-statement-heading',
 		PROPERTY_NAME: '.wikibase-wbui2025-property-name > a',
 		REMOVE_VALUE_BUTTONS: '.wikibase-wbui2025-remove-value > .cdx-button',
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
@@ -20,32 +22,15 @@ export class EditStatementFormPage {
 		REFERENCES: '.wikibase-wbui2025-editable-reference',
 		REFERENCE_SNAKS: '.wikibase-wbui2025-editable-reference-snak',
 		REFERENCES_ACCORDION: '.wikibase-wbui2025-editable-references-section .cdx-accordion summary',
+		VALUE_FORMS: '.wikibase-wbui2025-edit-statement-value-form',
 	};
 
-	public static FORM_HEADING = '.wikibase-wbui2025-edit-statement-heading';
-
-	public static VALUE_FORMS = '.wikibase-wbui2025-edit-statement-value-form';
-
-	public static FORM_ACTIONS = '.wikibase-wbui2025-edit-form-actions';
-
 	public propertyName(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.PROPERTY_NAME );
+		return this.root().find( EditStatementFormPage.SELECTORS.PROPERTY_NAME );
 	}
 
 	public formHeading(): Chainable {
-		return cy.get( EditStatementFormPage.FORM_HEADING );
-	}
-
-	public addValueButtons(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.ADD_VALUE_BUTTONS );
-	}
-
-	public removeValueButtons(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.REMOVE_VALUE_BUTTONS );
-	}
-
-	public valueForms(): Chainable {
-		return cy.get( EditStatementFormPage.VALUE_FORMS );
+		return cy.get( EditStatementFormPage.SELECTORS.FORM_HEADING );
 	}
 
 	public addQualifierButton(): Chainable {
@@ -100,19 +85,36 @@ export class EditStatementFormPage {
 		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES_ACCORDION );
 	}
 
-	public getLookupComponentSelector(): string {
-		return EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT;
+	public addReferenceButton(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.ADD_REFERENCE_BUTTON );
+	}
+
+	private root(): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.MODAL_ROOT );
+	}
+
+	public valueForms(): Chainable {
+		return this.root().find( EditStatementFormPage.SELECTORS.VALUE_FORMS );
+	}
+
+	public addValueButtons(): Chainable {
+		return this.root().find( EditStatementFormPage.SELECTORS.ADD_VALUE_BUTTONS );
+	}
+
+	public removeValueButtons(): Chainable {
+		return this.root().find( EditStatementFormPage.SELECTORS.REMOVE_VALUE_BUTTONS );
 	}
 
 	public getLookupInputSelector(): string {
 		return EditStatementFormPage.SELECTORS.LOOKUP_INPUT;
 	}
 
-	public addReferenceButton(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.ADD_REFERENCE_BUTTON );
+	public getLookupComponentSelector(): string {
+		return EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT;
 	}
 
-	public form(): Chainable {
+	public formRoot(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.FORM );
 	}
+
 }

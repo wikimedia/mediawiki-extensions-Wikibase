@@ -94,7 +94,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 				global: {
 					plugins: [
 						storeWithStatementsAndProperties( { P1: [ testStatement ] } )
-					]
+					],
+					disableTeleport: true
 				}
 			} );
 			await wrapper.setData( { editStatementDataLoaded: true } );

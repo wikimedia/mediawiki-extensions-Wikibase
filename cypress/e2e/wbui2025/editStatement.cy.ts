@@ -47,16 +47,12 @@ describe( 'wbui2025 item view edit statements', () => {
 			const editFormPage = new EditStatementFormPage();
 			editFormPage.propertyName().should( 'have.text', propertyName );
 			editFormPage.textInput().should( 'have.value', 'ExampleString' );
-			// Check that the value form is present (i.e. one 'add value' form is present)
-			editFormPage.valueForms();
+			editFormPage.valueForms().should( 'have.length', 1 );
 			editFormPage.removeValueButtons().first().click();
-			editFormPage.valueForms().should( 'not.exist' );
-			editFormPage.addValueButtons().first().click();
-			// The form should exist again
-			editFormPage.valueForms();
+			editFormPage.valueForms().should( 'have.length', 0 );
 			editFormPage.cancelButton().click();
 			// The form should be hidden
-			editFormPage.formHeading().should( 'not.exist' );
+			itemViewPage.editLinks().should( 'exist' );
 
 			// Open the form again
 			itemViewPage.editLinks().first().click();
@@ -65,10 +61,10 @@ describe( 'wbui2025 item view edit statements', () => {
 			// Click all the remove buttons
 			editFormPage.removeValueButtons().click();
 			editFormPage.publishButton().click();
-			// The form should be hidden again
-			editFormPage.formHeading().should( 'not.exist' );
-			// The property should also have disappeared
-			itemViewPage.editLinks().should( 'not.exist' );
+			// The edit form/modal is hidden
+			editFormPage.formRoot().should( 'not.exist' );
+			// The statement values for this property are gone in the item view
+			itemViewPage.statementsSection().should( 'not.contain', 'ExampleString' );
 		} );
 	} );
 } );

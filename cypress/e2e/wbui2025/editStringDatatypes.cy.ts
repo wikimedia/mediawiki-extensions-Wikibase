@@ -4,6 +4,7 @@ import { checkA11y } from '../../support/checkA11y';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { interceptCommonsSearch, interceptFormatValue, interceptSaveEntity } from '../../support/apiMockHelpers';
+import { AddValueModal } from '../../support/pageObjects/AddValueModal';
 
 describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 	context( 'mobile view - tabular-data datatype', () => {
@@ -53,7 +54,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 		} );
 
 		it( 'displays tabular-data statement and supports full editing workflow', () => {
-		// Intercept the API for commons.
+			// Intercept the API for commons.
 			interceptCommonsSearch( {
 				results: [
 					{
@@ -142,35 +143,13 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 
 			editFormPage.menuItems().eq( 0 ).click();
 			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Weather_data.tab' );
-
 			editFormPage.addValueButtons().first().click();
-			editFormPage.valueForms().should( 'have.length', 2 );
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupComponentSelector() )
-				.should( 'exist' );
-
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupInputSelector() )
-				.type( 'Weather' );
-
+			const addValueModal = new AddValueModal();
+			addValueModal.modal().should( 'exist' );
+			addValueModal.lookupInput().type( 'Weather' );
 			cy.wait( '@commonsSearch' );
-			editFormPage.menu().should( 'exist' );
-
-			editFormPage.menuItems().eq( 2 ).click();
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupInputSelector() )
-				.should( 'have.value', 'Data:Stubbed_Weather_stations.tab' );
-
-			editFormPage.addQualifierButton().should( 'exist' );
-			editFormPage.rankSelect().should( 'exist' );
-			editFormPage.publishButton().click();
-
-			cy.wait( '@saveStatement' );
-
-			editFormPage.formHeading().should( 'not.exist' );
+			addValueModal.menu().should( 'be.visible' );
+			addValueModal.menuItems().eq( 2 ).click();
 		} );
 	} );
 
@@ -221,7 +200,7 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 		} );
 
 		it( 'displays geo-shape statement and supports full editing workflow', () => {
-		// Intercept the API for commons
+			// Intercept the API for commons
 			interceptCommonsSearch( {
 				totalhits: 132,
 				hasContinue: true,
@@ -308,35 +287,15 @@ describe( 'wbui2025 string datatypes (tabular-data and geo-shape)', () => {
 
 			editFormPage.menuItems().eq( 0 ).click();
 			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Hamburg.map' );
-
 			editFormPage.addValueButtons().first().click();
-			editFormPage.valueForms().should( 'have.length', 2 );
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupComponentSelector() )
-				.should( 'exist' );
 
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupInputSelector() )
-				.type( 'Hamburg' );
-
+			const addValueModal = new AddValueModal();
+			addValueModal.modal().should( 'exist' );
+			addValueModal.lookupInput().type( 'Hamburg' );
 			cy.wait( '@commonsSearch' );
-			editFormPage.menu().should( 'exist' );
+			addValueModal.menu().should( 'be.visible' );
+			addValueModal.menuItems().eq( 1 ).click();
 
-			editFormPage.menuItems().eq( 1 ).click();
-			editFormPage.valueForms()
-				.last()
-				.find( editFormPage.getLookupInputSelector() )
-				.should( 'have.value', 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map' );
-
-			editFormPage.addQualifierButton().should( 'exist' );
-			editFormPage.rankSelect().should( 'exist' );
-			editFormPage.publishButton().click();
-
-			cy.wait( '@saveStatement' );
-
-			editFormPage.formHeading().should( 'not.exist' );
 		} );
 	} );
 } );

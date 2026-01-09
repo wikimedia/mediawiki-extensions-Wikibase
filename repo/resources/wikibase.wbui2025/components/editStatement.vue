@@ -23,6 +23,7 @@
 				:data-snak-key="mainSnakKey"
 			>
 				<wbui2025-editable-snak-value
+					ref="snakInput"
 					:snak-key="mainSnakKey"
 				></wbui2025-editable-snak-value>
 			</div>
@@ -117,6 +118,11 @@ module.exports = exports = defineComponent( {
 			type: Boolean,
 			required: false,
 			default: false
+		},
+		focusOnMount: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	emits: [ 'remove' ],
@@ -199,6 +205,11 @@ module.exports = exports = defineComponent( {
 					this.removeReference( reference );
 				}
 			}
+		}
+	},
+	mounted() {
+		if ( this.focusOnMount ) {
+			this.$refs.snakInput.focus();
 		}
 	}
 } );
