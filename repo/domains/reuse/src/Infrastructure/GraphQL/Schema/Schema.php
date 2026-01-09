@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema as GraphQLSchema;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\SearchItemsResolver;
@@ -48,8 +49,17 @@ class Schema extends GraphQLSchema {
 						'type' => Type::nonNull( Type::listOf( $this->types->getItemSearchResultType() ) ),
 						'args' => [
 							'query' => Type::nonNull( $this->types->getItemSearchFilterType() ),
+							'first' => [
+								'type' => Type::nonNull( Type::int() ),
+								'defaultValue' => FacetedItemSearchRequest::DEFAULT_LIMIT,
+							],
+							'after' => Type::string(),
 						],
-						'resolve' => fn( $rootValue, array $args ) => $searchItemsResolver->resolve( $args['query'] ),
+						'resolve' => fn( $rootValue, array $args ) => $searchItemsResolver->resolve(
+							$args['query'],
+							$args['first'],
+							$args['after'] ?? null,
+						),
 						'complexity' => fn() => GraphQLService::SEARCH_ITEMS_COMPLEXITY,
 					],
 				],

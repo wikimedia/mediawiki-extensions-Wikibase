@@ -13,8 +13,10 @@ interface FacetedItemSearchEngine {
 
 	/**
 	 * @param AndOperation|PropertyValueFilter $query
+	 * @param int $limit
+	 * @param int $offset
 	 *
 	 * @return ItemSearchResult[]
 	 */
-	public function search( AndOperation|PropertyValueFilter $query ): array;
+	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): array;
 }

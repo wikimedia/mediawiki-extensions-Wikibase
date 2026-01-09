@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
+use Generator;
 use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
@@ -11,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\SearchNotAvailable;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\SearchItemsResolver;
 use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\SearchEnabledTestTrait;
 
@@ -24,6 +26,7 @@ use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\SearchEnabledTestTr
 class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 
 	use SearchEnabledTestTrait;
+	use PaginationCursorCodec;
 
 	public static function setUpBeforeClass(): void {
 		if ( !class_exists( GraphQL::class ) ) {
@@ -31,19 +34,27 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function testResolve(): void {
+	/**
+	 * @dataProvider paginationCursorProvider
+	 */
+	public function testResolve( ?string $cursor, int $offset ): void {
 		$this->simulateSearchEnabled();
 
 		$facetedItemSearch = $this->createMock( FacetedItemSearch::class );
 		$facetedItemSearch->expects( $this->once() )
 			->method( 'execute' )
-			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ] ) )
+			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, $offset ) )
 			->willReturn( new FacetedItemSearchResponse( [] ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
-			->resolve( [ 'property' => 'P1' ] );
+			->resolve( [ 'property' => 'P1' ], 50, $cursor );
 
 		$this->assertSame( [], $result );
+	}
+
+	public function paginationCursorProvider(): Generator {
+		yield 'with cursor' => [ $this->encodeOffsetAsCursor( 10 ), 10 ];
+		yield 'without cursor' => [ null, 0 ];
 	}
 
 	public function testGivenInvalidQueryUseCaseError_rethrowsAsInvalidQuery(): void {
@@ -56,7 +67,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( InvalidSearchQuery::class );
 		$this->expectExceptionMessage( 'Invalid search query: some reason' );
 
-		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ] );
+		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );
 	}
 
 	public function testHandlesSearchNotAvailable(): void {
@@ -69,7 +80,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( SearchNotAvailable::class );
 		$this->expectExceptionMessage( 'Search is not available due to insufficient server configuration' );
 
-		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ] );
+		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );
 	}
 
 	private function newResolver( FacetedItemSearch $facetedItemSearch ): SearchItemsResolver {
