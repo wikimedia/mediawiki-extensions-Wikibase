@@ -12,7 +12,7 @@ const {
 const { assertValidError } = require( '../helpers/responseValidator' );
 const { createUniqueStringProperty } = require( '../helpers/entityHelper' );
 const { requireExtensions } = require( '../../../../../../tests/api-testing/utils' );
-const config = require( 'api-testing/lib/config' )();
+const config = require( 'api-testing/lib/config' );
 
 /**
  * AbuseFilter doesn't have an API to create filters. This is a very hacky way around the issue:
