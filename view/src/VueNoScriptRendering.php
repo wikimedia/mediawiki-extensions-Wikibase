@@ -241,6 +241,7 @@ class VueNoScriptRendering {
 					'wikibase-wbui2025-time-value' => $dataType == 'time',
 				];
 				$data['indicatorsHtml'] = '';
+				$data['popoverVisible'] = false;
 
 				return $data;
 			}
