@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use MediaWiki\Cache\LinkBatch;
-use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Page\LinkBatchFactory;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

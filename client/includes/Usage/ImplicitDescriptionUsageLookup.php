@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Usage;
 
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Title\TitleFactory;
 use Traversable;
 use Wikibase\Client\Store\DescriptionLookup;

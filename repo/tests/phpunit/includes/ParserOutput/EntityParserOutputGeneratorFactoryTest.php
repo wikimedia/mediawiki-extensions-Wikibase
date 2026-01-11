@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\LanguageFactory;
 use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Parser\ParserOptions;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;

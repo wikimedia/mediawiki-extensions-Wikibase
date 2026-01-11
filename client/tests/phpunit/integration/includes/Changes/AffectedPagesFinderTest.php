@@ -8,7 +8,7 @@ use ArrayIterator;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use MediaWiki\Cache\LinkBatch;
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageSelectQueryBuilder;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Page\PageStoreRecord;
