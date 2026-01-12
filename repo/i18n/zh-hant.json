@@ -70,6 +70,7 @@
 	"wikibase-publishing-succeeded": "已儲存您做出的變更！",
 	"wikibase-remove-inprogress": "移除中...",
 	"wikibase-statementlistview-add": "新增屬性值",
+	"wikibase-addvalue": "新增值",
 	"wikibase-statementlistview-add-tooltip": "新增屬性值",
 	"wikibase-statementgrouplistview-add": "添加陳述",
 	"wikibase-statementgrouplistview-add-tooltip": "添加新的陳述",

@@ -63,6 +63,7 @@
 	"wikibase-publishing-succeeded": "Deine Änderungen wurden gespeichert!",
 	"wikibase-remove-inprogress": "Entferne …",
 	"wikibase-statementlistview-add": "Wert hinzufügen",
+	"wikibase-addvalue": "Wert hinzufügen",
 	"wikibase-statementlistview-add-tooltip": "Einen neuen Wert hinzufügen",
 	"wikibase-statementgrouplistview-add": "Aussage hinzufügen",
 	"wikibase-statementgrouplistview-add-tooltip": "Eine neue Aussage hinzufügen",

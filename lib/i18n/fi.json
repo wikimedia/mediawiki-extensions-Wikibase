@@ -140,7 +140,7 @@
 	"wikibase-entity-summary-wbsetclaim-update": "Muutettu {{PLURAL:$3|väitettä|väitteet}}",
 	"wikibase-entity-summary-wbsetclaim-create": "Luotu {{PLURAL:$3|väite|väitteet}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "Muutettu {{PLURAL:$3|väitteen|väitteiden}} {{PLURAL:$4|yhtä tarkennetta|$4 tarkennetta}}",
-	"wikibase-entity-summary-wbsetclaim-update-references": "Muutettu {{PLURAL:$3|väitteen|väitteiden}} {{PLURAL:$4|yhtä lähdettä|$4 lähteitä}}",
+	"wikibase-entity-summary-wbsetclaim-update-references": "Muutettu {{PLURAL:$3|väitteen|väitteiden}} {{PLURAL:$4|yhtä lähdettä|$4 lähdettä}}",
 	"wikibase-entity-summary-wbsetclaim-update-rank": "Muutettu {{PLURAL:$3|väitteen|väitteiden}} sijoitusta",
 	"wikibase-entity-summary-clientsitelink-update": "Sivu [$3] siirretty nimelle [$4]",
 	"wikibase-entity-summary-clientsitelink-remove": "Sivu sivustolla [$3] poistettu",

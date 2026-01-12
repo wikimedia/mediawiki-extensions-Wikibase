@@ -30,6 +30,7 @@
 	"wikibase-cancel": "avbryt",
 	"wikibase-add": "legg til",
 	"wikibase-addstatement": "legg til utsagn",
+	"wikibase-addstatement-property-not-supported-on-mobile": "(støttes ikke på mobil)",
 	"wikibase-addqualifier": "Legg til kvalifikator",
 	"wikibase-addreference": "legg til referanse",
 	"wikibase-save-inprogress": "Lagrer…",
@@ -544,6 +545,6 @@
 	"wikibase-scoped-search-search-entities-description": "Finn forskjellige typer {{SITENAME}}-entiteter",
 	"wikibase-scoped-search-item-scope-name": "Elementer",
 	"wikibase-scoped-search-property-scope-name": "Egenskaper",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Grensesnitt for mobilredigering",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiver det nye, eksperimentelle grensesnittet for mobilredigering."
+	"wikibase-mobile-editing-ui-beta-feature-message": "Rediger Wikidata-elementer på mobile enheter",
+	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiver denne funksjonen for å redigere Wikidata fra mobilenheten din. Denne funksjonaliteten, som er under utvikling, lar deg redigere med et grensesnitt tilpasset smarttelefoner."
 }

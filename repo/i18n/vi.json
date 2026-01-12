@@ -42,6 +42,7 @@
 	"wikibase-publish": "đăng",
 	"wikibase-cancel": "hủy bỏ",
 	"wikibase-add": "thêm",
+	"wikibase-addstatement": "thêm lời phát biểu",
 	"wikibase-addqualifier": "thêm từ hạn định",
 	"wikibase-addreference": "thêm chú thích",
 	"wikibase-save-inprogress": "Đang lưu…",
