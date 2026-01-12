@@ -13,6 +13,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
@@ -212,6 +213,43 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			  searchItems(query: { property: \"{$unsupportedProperty->getId()}\" } ) { id }
 			}",
 			"Invalid search query: Data type of Property '{$unsupportedProperty->getId()}' is not supported",
+		];
+
+		yield 'invalid "first" param - less than 1' => [
+			"{
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 0) { id }
+			}",
+			'"first" must not be less than 1 or greater than ' . FacetedItemSearchRequest::MAX_LIMIT,
+		];
+
+		yield 'invalid "first" param - above the maximum' => [
+			"{
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 51) { id }
+			}",
+			'"first" must not be less than 1 or greater than ' . FacetedItemSearchRequest::MAX_LIMIT,
+		];
+
+		yield 'invalid cursor: not an encoded int' => [
+			"{
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"potato\") { id }
+			}",
+			'"after" does not contain a valid cursor',
+		];
+
+		$cursor = $this->encodeOffsetAsCursor( -1 );
+		yield 'invalid cursor: offset below min' => [
+			"{
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { id }
+			}",
+			'"after" does not contain a valid cursor',
+		];
+
+		$cursor = $this->encodeOffsetAsCursor( FacetedItemSearchRequest::MAX_OFFSET + 1 );
+		yield 'invalid cursor: offset above max' => [
+			"{
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { id }
+			}",
+			'"after" does not contain a valid cursor',
 		];
 	}
 

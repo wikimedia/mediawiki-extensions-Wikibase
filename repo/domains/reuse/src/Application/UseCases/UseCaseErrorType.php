@@ -7,4 +7,6 @@ namespace Wikibase\Repo\Domains\Reuse\Application\UseCases;
  */
 enum UseCaseErrorType {
 	case INVALID_SEARCH_QUERY;
+	case INVALID_SEARCH_LIMIT;
+	case INVALID_SEARCH_OFFSET;
 }

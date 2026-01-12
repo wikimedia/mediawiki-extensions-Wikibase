@@ -27,6 +27,8 @@ class FacetedItemSearchValidator {
 	 * @throws UseCaseError
 	 */
 	public function validate( FacetedItemSearchRequest $req ): void {
+		$this->validateLimit( $req->limit );
+		$this->validateOffset( $req->offset );
 		$this->query = $this->constructQuery( $req->query );
 	}
 
@@ -96,5 +98,23 @@ class FacetedItemSearchValidator {
 			new NumericPropertyId( $filter['property'] ),
 			$filter['value'] ?? null
 		);
+	}
+
+	/**
+	 * @throws UseCaseError
+	 */
+	private function validateLimit( int $limit ): void {
+		if ( $limit < 1 || $limit > FacetedItemSearchRequest::MAX_LIMIT ) {
+			throw new UseCaseError( UseCaseErrorType::INVALID_SEARCH_LIMIT, "Invalid limit: $limit" );
+		}
+	}
+
+	/**
+	 * @throws UseCaseError
+	 */
+	private function validateOffset( int $offset ): void {
+		if ( $offset < 0 || $offset > FacetedItemSearchRequest::MAX_OFFSET ) {
+			throw new UseCaseError( UseCaseErrorType::INVALID_SEARCH_OFFSET, "Invalid offset: $offset" );
+		}
 	}
 }
