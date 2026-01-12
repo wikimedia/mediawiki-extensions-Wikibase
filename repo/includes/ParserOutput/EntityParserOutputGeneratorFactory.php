@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\ParserOutput;
 
-use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\Math\MathDataUpdater;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\Language;
 use MediaWiki\Language\LanguageFactory;
 use MediaWiki\Language\LanguageNameUtils;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Registration\ExtensionRegistry;
 use PageImages\PageImages;

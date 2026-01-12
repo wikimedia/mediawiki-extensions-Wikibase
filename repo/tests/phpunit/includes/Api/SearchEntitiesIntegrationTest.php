@@ -5,8 +5,8 @@ declare( strict_types  = 1 );
 namespace Wikibase\Repo\Tests\Api;
 
 use MediaWiki\Api\ApiMain;
-use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Revision\SlotRecord;
 use MediaWikiIntegrationTestCase;

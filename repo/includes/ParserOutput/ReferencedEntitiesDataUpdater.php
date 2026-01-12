@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\ParserOutput;
 
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityDocument;

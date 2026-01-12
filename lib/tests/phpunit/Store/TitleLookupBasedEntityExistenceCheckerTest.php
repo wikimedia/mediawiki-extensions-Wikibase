@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store;
 
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Title\Title;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
