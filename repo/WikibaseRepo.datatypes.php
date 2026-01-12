@@ -106,9 +106,11 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.CommonsMediaType',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				// Don't go for commons during unit tests.
+				// Don't go for commons during tests.
 				return $factory->buildMediaValidators(
-					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
+					defined( 'MW_PHPUNIT_TEST' ) || defined( 'MW_QUIBBLE_CI' )
+						? 'doNotCheckExistence'
+						: 'checkExistence'
 				);
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
@@ -139,9 +141,11 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.GeoShape',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				// Don't go for commons during unit tests.
+				// Don't go for commons during tests.
 				return $factory->buildGeoShapeValidators(
-					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
+					defined( 'MW_PHPUNIT_TEST' ) || defined( 'MW_QUIBBLE_CI' )
+						? 'doNotCheckExistence'
+						: 'checkExistence'
 				);
 			},
 			'formatter-factory-callback' => function( $format ) {
@@ -165,9 +169,11 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.TabularData',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				// Don't go for commons during unit tests.
+				// Don't go for commons during tests.
 				return $factory->buildTabularDataValidators(
-					defined( 'MW_PHPUNIT_TEST' ) ? 'doNotCheckExistence' : 'checkExistence'
+					defined( 'MW_PHPUNIT_TEST' ) || defined( 'MW_QUIBBLE_CI' )
+						? 'doNotCheckExistence'
+						: 'checkExistence'
 				);
 			},
 			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {

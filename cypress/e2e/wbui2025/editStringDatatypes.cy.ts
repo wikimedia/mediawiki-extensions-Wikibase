@@ -6,6 +6,19 @@ import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFo
 import { interceptCommonsSearch, interceptFormatValue, interceptSaveEntity } from '../../support/apiMockHelpers';
 import { AddValueModal } from '../../support/pageObjects/AddValueModal';
 
+function annotateTestFailures(): void {
+	cy.on( 'fail', ( e ): never => {
+		if ( e.message.includes( 'does not exist' ) ) {
+			e.message = 'Wikibase reported an error that a Commons page used by the test does not exist.\n' +
+				'If you currently don’t have a stable internet connection, you can bypass this error\n' +
+				'by adding `define( "MW_QUIBBLE_CI", 1 )` to your LocalSettings.php file.\n' +
+				'Otherwise, the test may need an update to change the pages being referenced.\n\n' +
+				e.message;
+		}
+		throw e;
+	} );
+}
+
 describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', () => {
 	context( 'mobile view - tabular-data datatype', () => {
 		let propertyName: string;
@@ -14,15 +27,10 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 		let claimData: object;
 
 		before( () => {
-			// We want to test with a tabular-data property, but doing this will cause
-			// Wikibase to try and validate that the values exist in Commons. Since we
-			// are only testing the UI of the editStatement form, we can simply create
-			// a string property in the backend, and reload the editStatement form with
-			// claim data corresponding to a tabular-data property.
 			propertyName = Util.getTestString( 'tabular-property' );
 			cy.task( 'MwApi:CreateProperty', {
 				label: propertyName,
-				data: { datatype: 'string' },
+				data: { datatype: 'tabular-data' },
 			} ).then( ( newPropertyId: string ) => {
 				propertyId = newPropertyId;
 				claimData = [ {
@@ -30,14 +38,15 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 						snaktype: 'value',
 						property: newPropertyId,
 						datavalue: {
-							value: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
+							value: 'Data:DateI18n.tab',
 							type: 'string',
 						},
-						datatype: 'string',
+						datatype: 'tabular-data',
 					},
 					type: 'statement',
 					rank: 'normal',
 				} ];
+				annotateTestFailures();
 				cy.task( 'MwApi:CreateItem', {
 					label: Util.getTestString( 'tabular-item' ),
 					data: { claims: claimData },
@@ -45,7 +54,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					itemId = newItemId;
 					claimData[ 0 ].id = itemId + '$64fc215b-a4ba-4295-8adb-90a767191d4e';
 				} );
-				claimData[ 0 ].mainsnak.datatype = 'tabular-data';
 			} );
 		} );
 
@@ -59,7 +67,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Stubbed_Weather_data.tab',
+						title: 'Data:I18n/EditAt.tab',
 						pageid: 11111,
 						size: 5000,
 						wordcount: 400,
@@ -68,7 +76,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					},
 					{
 						ns: 486,
-						title: 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab',
+						title: 'Data:DateI18n.tab',
 						pageid: 22222,
 						size: 3500,
 						wordcount: 300,
@@ -77,7 +85,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					},
 					{
 						ns: 486,
-						title: 'Data:Stubbed_Weather_stations.tab',
+						title: 'Data:Artwork types.tab',
 						pageid: 33333,
 						size: 2800,
 						wordcount: 250,
@@ -97,12 +105,12 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				datatype: 'tabular-data',
 				statements: [
 					{
-						value: 'Data:Stubbed_Weather_data.tab',
+						value: 'Data:I18n/EditAt.tab',
 						hash: 'testtabulardata123',
 						statementId: 'aaa111-bbbb-2222-cccc-333333333333',
 					},
 					{
-						value: 'Data:Stubbed_Weather_stations.tab',
+						value: 'Data:Artwork types.tab',
 						hash: 'teesttabulardata123',
 						statementId: 'bbb222-cccc-3333-dddd-444444444444',
 					},
@@ -112,15 +120,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
-
-			// We trigger the `wikibase.entityPage.entityLoaded` hook again here with modified
-			// data so that we can test the editStatment UI for tabular-data without the backend
-			// property needing to be tabular-data
-			cy.window().then( ( win ) => {
-				const claims = {};
-				claims[ propertyId ] = claimData;
-				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims, type: 'item' } );
-			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -133,7 +132,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				.should( 'exist' ).should( 'be.visible' );
 
 			editFormPage.lookupInput()
-				.should( 'have.value', 'Data:Stubbed_Ncei.noaa.gov/weather/New_York_City.tab' );
+				.should( 'have.value', 'Data:DateI18n.tab' );
 
 			editFormPage.lookupInput().clear();
 			editFormPage.lookupInput().type( 'Weather' );
@@ -142,7 +141,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			editFormPage.menu().should( 'exist' );
 
 			editFormPage.menuItems().eq( 0 ).click();
-			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Weather_data.tab' );
+			editFormPage.lookupInput().should( 'have.value', 'Data:I18n/EditAt.tab' );
 			editFormPage.addValueButtons().first().click();
 			const addValueModal = new AddValueModal();
 			addValueModal.modal().should( 'exist' );
@@ -160,15 +159,10 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 		let claimData: object;
 
 		before( () => {
-			// We want to test with a geo-shape property, but doing this will cause
-			// Wikibase to try and validate that the values exist in Commons. Since we
-			// are only testing the UI of the editStatement form, we can simply create
-			// a string property in the backend, and reload the editStatement form with
-			// claim data corresponding to a geo-shape property.
 			propertyName = Util.getTestString( 'geo-property' );
 			cy.task( 'MwApi:CreateProperty', {
 				label: propertyName,
-				data: { datatype: 'string' },
+				data: { datatype: 'geo-shape' },
 			} ).then( ( newPropertyId: string ) => {
 				propertyId = newPropertyId;
 				claimData = [ {
@@ -176,14 +170,15 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 						snaktype: 'value',
 						property: newPropertyId,
 						datavalue: {
-							value: 'Data:Stubbed_New York Central Railroad.map',
+							value: 'Data:Neighbourhoods/New York City.map',
 							type: 'string',
 						},
-						datatype: 'string',
+						datatype: 'geo-shape',
 					},
 					type: 'statement',
 					rank: 'normal',
 				} ];
+				annotateTestFailures();
 				cy.task( 'MwApi:CreateItem', {
 					label: Util.getTestString( 'geo-item' ),
 					data: { claims: claimData },
@@ -191,7 +186,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					itemId = newItemId;
 					claimData[ 0 ].id = itemId + '$17bf01aa-1407-45d1-ade6-62fc5a213f8e';
 				} );
-				claimData[ 0 ].mainsnak.datatype = 'geo-shape';
 			} );
 		} );
 
@@ -207,7 +201,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				results: [
 					{
 						ns: 486,
-						title: 'Data:Stubbed_Hamburg.map',
+						title: 'Data:Rhein-Radweg Hochrhein.map',
 						pageid: 80473521,
 						size: 4101,
 						wordcount: 623,
@@ -216,7 +210,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					},
 					{
 						ns: 486,
-						title: 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
+						title: 'Data:Rhein-Radweg Mittelrhein.map',
 						pageid: 166797166,
 						size: 2255,
 						wordcount: 190,
@@ -236,12 +230,12 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				datatype: 'geo-shape',
 				statements: [
 					{
-						value: 'Data:Stubbed_Hamburg.map',
+						value: 'Data:Rhein-Radweg Hochrhein.map',
 						hash: 'xyz789geoshape012',
 						statementId: 'ccc333-dddd-4444-eeee-555555555555',
 					},
 					{
-						value: 'Data:Stubbed_Protected areas/Germany/HH/Naturschutzgebiet Stapelfelder Moor (Hamburg).map',
+						value: 'Data:Rhein-Radweg Mittelrhein.map',
 						hash: 'uvw345geoshape678',
 						statementId: 'ddd444-eeee-5555-ffff-666666666666',
 					},
@@ -253,15 +247,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			itemViewPage.open().statementsSection();
 
 			checkA11y( ItemViewPage.STATEMENTS );
-
-			// We trigger the `wikibase.entityPage.entityLoaded` hook again here with modified
-			// data so that we can test the editStatment UI for geo-shape data without the backend
-			// property needing to be of geo-shape type
-			cy.window().then( ( win ) => {
-				const claims = {};
-				claims[ propertyId ] = claimData;
-				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims, type: 'item' } );
-			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -275,7 +260,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				.should( 'exist' );
 
 			editFormPage.lookupInput()
-				.should( 'have.value', 'Data:Stubbed_New York Central Railroad.map' );
+				.should( 'have.value', 'Data:Neighbourhoods/New York City.map' );
 
 			editFormPage.lookupInput().clear();
 			editFormPage.lookupInput().type( 'Hamburg' );
@@ -286,7 +271,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				.should( 'be.visible' );
 
 			editFormPage.menuItems().eq( 0 ).click();
-			editFormPage.lookupInput().should( 'have.value', 'Data:Stubbed_Hamburg.map' );
+			editFormPage.lookupInput().should( 'have.value', 'Data:Rhein-Radweg Hochrhein.map' );
 			editFormPage.addValueButtons().first().click();
 
 			const addValueModal = new AddValueModal();
@@ -306,15 +291,10 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 		let claimData: object;
 
 		before( () => {
-			// We want to test with a commonsMedia property, but doing this will cause
-			// Wikibase to try and validate that the values exist in Commons. Since we
-			// are only testing the UI of the editStatement form, we can simply create
-			// a string property in the backend, and reload the editStatement form with
-			// claim data corresponding to a commonsMedia property.
 			propertyName = Util.getTestString( 'commonsMedia-property' );
 			cy.task( 'MwApi:CreateProperty', {
 				label: propertyName,
-				data: { datatype: 'string' },
+				data: { datatype: 'commonsMedia' },
 			} ).then( ( newPropertyId: string ) => {
 				propertyId = newPropertyId;
 				claimData = [ {
@@ -322,14 +302,15 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 						snaktype: 'value',
 						property: newPropertyId,
 						datavalue: {
-							value: 'Stubbed Test.gif',
+							value: 'Commons-logo.svg',
 							type: 'string',
 						},
-						datatype: 'string',
+						datatype: 'commonsMedia',
 					},
 					type: 'statement',
 					rank: 'normal',
 				} ];
+				annotateTestFailures();
 				cy.task( 'MwApi:CreateItem', {
 					label: Util.getTestString( 'commonsMedia-item' ),
 					data: { claims: claimData },
@@ -337,7 +318,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					itemId = newItemId;
 					claimData[ 0 ].id = itemId + '$17bf01aa-1407-45d1-ade6-62fc5a213f8e';
 				} );
-				claimData[ 0 ].mainsnak.datatype = 'commonsMedia';
 			} );
 		} );
 
@@ -353,7 +333,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				results: [
 					{
 						ns: 486,
-						title: 'Stubbed PNG Test.png',
+						title: 'Wikipedia-logo-v2.svg',
 						pageid: 56855503,
 						size: 98,
 						wordcount: 48,
@@ -362,7 +342,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 					},
 					{
 						ns: 486,
-						title: 'Stubbed JPG Test.jpg',
+						title: 'Wikidata-logo.svg',
 						pageid: 56856129,
 						size: 143,
 						wordcount: 61,
@@ -382,12 +362,12 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				datatype: 'commonsMedia',
 				statements: [
 					{
-						value: 'Stubbed PNG Test.png',
+						value: 'Wikipedia-logo-v2.svg',
 						hash: 'testCommonsMedia1',
 						statementId: 'aaaa1111-bb22-cc33-dd44-eeeeee555555',
 					},
 					{
-						value: 'Stubbed JPG Test.jpg',
+						value: 'Wikidata-logo.svg',
 						hash: 'testCommonsMedia2',
 						statementId: 'ffff6666-gg77-hh88-ii99-jjjjjj000000',
 					},
@@ -399,15 +379,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			itemViewPage.open().statementsSection();
 
 			checkA11y( ItemViewPage.STATEMENTS );
-
-			// We trigger the `wikibase.entityPage.entityLoaded` hook again here with modified
-			// data so that we can test the editStatment UI for commonsMedia data without the backend
-			// property needing to be of commonsMedia type
-			cy.window().then( ( win ) => {
-				const claims = {};
-				claims[ propertyId ] = claimData;
-				win.mw.hook( 'wikibase.entityPage.entityLoaded' ).fire( { id: itemId, claims, type: 'item' } );
-			} );
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -421,7 +392,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				.should( 'exist' ).should( 'be.visible' );
 
 			editFormPage.lookupInput()
-				.should( 'have.value', 'Stubbed Test.gif' );
+				.should( 'have.value', 'Commons-logo.svg' );
 
 			editFormPage.lookupInput().clear();
 			editFormPage.lookupInput().type( 'Test' );
@@ -435,7 +406,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 				.should( 'be.visible' );
 
 			editFormPage.menuItems().eq( 0 ).click();
-			editFormPage.lookupInput().should( 'have.value', 'Stubbed PNG Test.png' );
+			editFormPage.lookupInput().should( 'have.value', 'Wikipedia-logo-v2.svg' );
 
 			editFormPage.addValueButtons().first().click();
 			const addValueModal = new AddValueModal();
@@ -445,7 +416,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			addValueModal.menu().should( 'be.visible' );
 			addValueModal.menuItems().eq( 1 ).click();
 
-			addValueModal.lookupInput().should( 'have.value', 'Stubbed JPG Test.jpg' );
+			addValueModal.lookupInput().should( 'have.value', 'Wikidata-logo.svg' );
 			addValueModal.confirmButton().click();
 			editFormPage.publishButton().click();
 
