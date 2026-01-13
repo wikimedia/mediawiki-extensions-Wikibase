@@ -97,7 +97,7 @@ class DataUpdateHookHandler implements
 		$this->jobScheduler = $jobScheduler;
 		$this->usageLookup = $usageLookup;
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/** @inheritDoc */

@@ -33,7 +33,7 @@ class DatabaseInnerTermStoreCleaner {
 	public function __construct(
 		?LoggerInterface $logger = null
 	) {
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

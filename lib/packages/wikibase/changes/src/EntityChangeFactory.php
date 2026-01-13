@@ -59,7 +59,7 @@ class EntityChangeFactory {
 		$this->idParser = $idParser;
 		$this->changeClasses = $changeClasses;
 		$this->defaultEntityChange = $defaultEntityChange;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

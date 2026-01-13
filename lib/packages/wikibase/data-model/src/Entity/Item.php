@@ -68,9 +68,9 @@ class Item implements
 		?StatementList $statements = null
 	) {
 		$this->id = $id;
-		$this->fingerprint = $fingerprint ?: new Fingerprint();
-		$this->siteLinks = $siteLinks ?: new SiteLinkList();
-		$this->statements = $statements ?: new StatementList();
+		$this->fingerprint = $fingerprint ?? new Fingerprint();
+		$this->siteLinks = $siteLinks ?? new SiteLinkList();
+		$this->statements = $statements ?? new StatementList();
 	}
 
 	/**

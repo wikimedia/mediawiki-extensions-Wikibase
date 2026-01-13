@@ -80,7 +80,7 @@ class AffectedPagesFinder {
 		$this->pageStore = $pageStore;
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->siteId = $siteId;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

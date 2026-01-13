@@ -32,7 +32,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		?LoggerInterface $logger = null
 	) {
 		$this->termsDb = $termsDb;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	public function resolveTermInLangIds(

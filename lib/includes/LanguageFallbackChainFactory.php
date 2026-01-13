@@ -47,16 +47,16 @@ class LanguageFallbackChainFactory {
 		?LanguageFallback $languageFallback = null
 	) {
 		// note: this is lib code, so we can’t get the default term languages from the repo or client services
-		$this->termsLanguages = $termsLanguages ?:
+		$this->termsLanguages = $termsLanguages ??
 			WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 		// note: do not extract MediaWikiServices::getInstance() into a variable –
 		// if all three services are given, the service container should never be loaded
 		// (important in unit tests, where it isn’t set up)
-		$this->languageFactory = $languageFactory ?:
+		$this->languageFactory = $languageFactory ??
 			MediaWikiServices::getInstance()->getLanguageFactory();
-		$this->languageConverterFactory = $languageConverterFactory ?:
+		$this->languageConverterFactory = $languageConverterFactory ??
 			MediaWikiServices::getInstance()->getLanguageConverterFactory();
-		$this->languageFallback = $languageFallback ?:
+		$this->languageFallback = $languageFallback ??
 			MediaWikiServices::getInstance()->getLanguageFallback();
 	}
 

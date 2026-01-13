@@ -45,7 +45,7 @@ class TimeParserFactory {
 		?ParserOptions $options = null,
 		?MonthNameProvider $monthNameProvider = null
 	) {
-		$this->options = ( $options ?: new ParserOptions() )
+		$this->options = ( $options ?? new ParserOptions() )
 			->withDefaultOption( ValueParser::OPT_LANG, self::CANONICAL_LANGUAGE_CODE );
 		// $this->getDigitGroupSeparator needs ValueParser::OPT_LANG to have been set
 		// for $this->options
@@ -53,7 +53,7 @@ class TimeParserFactory {
 				YearTimeParser::OPT_DIGIT_GROUP_SEPARATOR,
 				$this->getDigitGroupSeparator()
 			);
-		$this->monthNameProvider = $monthNameProvider ?: new MediaWikiMonthNameProvider();
+		$this->monthNameProvider = $monthNameProvider ?? new MediaWikiMonthNameProvider();
 	}
 
 	/**

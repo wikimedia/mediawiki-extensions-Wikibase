@@ -67,8 +67,8 @@ class Statement implements PropertyIdProvider {
 		?string $guid = null
 	) {
 		$this->mainSnak = $mainSnak;
-		$this->qualifiers = $qualifiers ?: new SnakList();
-		$this->references = $references ?: new ReferenceList();
+		$this->qualifiers = $qualifiers ?? new SnakList();
+		$this->references = $references ?? new ReferenceList();
 		$this->setGuid( $guid );
 	}
 

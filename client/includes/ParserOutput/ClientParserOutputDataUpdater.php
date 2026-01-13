@@ -93,7 +93,7 @@ class ClientParserOutputDataUpdater {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->usageAccumulatorFactory = $usageAccumulatorFactory;
 		$this->siteId = $siteId;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 		$this->revisionLookup = $revisionLookup;
 		$this->termLookup = $termLookup;
 	}

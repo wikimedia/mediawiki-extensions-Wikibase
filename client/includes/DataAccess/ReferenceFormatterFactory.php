@@ -34,7 +34,7 @@ class ReferenceFormatterFactory {
 	) {
 		$this->snakFormatterFactory = $snakFormatterFactory;
 		$this->properties = $properties;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	public function newDataBridgeReferenceFormatter(
