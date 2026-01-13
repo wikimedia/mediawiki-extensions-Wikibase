@@ -19,9 +19,6 @@ class Wbui2025FeatureFlag {
 	 * Data types not supported by the Wbui2025 Feature statements view.
 	 * TODO: remove when all datatypes are supported (T417413)
 	 */
-	public const WBUI2025_UNSUPPORTED_DATATYPES = [
-		'globe-coordinate',
-	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';
 	public const EXTENSION_DATA_KEY = 'wikibase-mobile';
@@ -82,11 +79,6 @@ class Wbui2025FeatureFlag {
 
 	// TODO: remove this function and its uses (T417413)
 	public function getSupportedDataTypes(): array {
-		return array_values(
-			array_filter(
-				array_keys( $this->dataTypeDefinitions->getValueTypes() ),
-				fn ( $dataType ) => !in_array( $dataType, self::WBUI2025_UNSUPPORTED_DATATYPES )
-			)
-		);
+		return array_keys( $this->dataTypeDefinitions->getValueTypes() );
 	}
 }

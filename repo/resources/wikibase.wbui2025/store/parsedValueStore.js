@@ -22,6 +22,9 @@ const useParsedValueStore = defineStore( 'parsedValue', {
 		 * (a data value object with "type" and "value" keys), or null if it could not be parsed.
 		 */
 		getParsedValue( propertyId, value, parseOptions ) {
+			if ( !parseOptions ) {
+				parseOptions = { property: propertyId };
+			}
 			let parsedValues = this.parsedValuesPerProperty.get( propertyId );
 			if ( parsedValues === undefined ) {
 				parsedValues = new Map();
