@@ -138,7 +138,7 @@ class RebuildItemTerms extends Maintenance {
 			return (int)$this->getOption( 'to-id' );
 		}
 
-		$highestId = WikibaseRepo::getRepoDomainDbFactory()
+		return (int)WikibaseRepo::getRepoDomainDbFactory()
 			->newRepoDb()
 			->connections()
 			->getReadConnection()
@@ -146,8 +146,8 @@ class RebuildItemTerms extends Maintenance {
 			->select( 'id_value' )
 			->from( 'wb_id_counters' )
 			->where( [ 'id_type' => 'wikibase-item' ] )
-			->caller( __METHOD__ )->fetchRow();
-		return (int)$highestId->id_value;
+			->caller( __METHOD__ )
+			->fetchField();
 	}
 
 	private function getReporter(): MessageReporter {
