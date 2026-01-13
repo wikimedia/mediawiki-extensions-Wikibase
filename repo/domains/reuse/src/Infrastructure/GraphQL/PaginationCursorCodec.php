@@ -9,7 +9,10 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchCurso
  */
 trait PaginationCursorCodec {
 	private function encodeOffsetAsCursor( int $offset ): string {
-		return base64_encode( (string)$offset );
+		return base64_encode(
+			// padding the offset so that cursors have a more consistent length
+			str_pad( (string)$offset, 10, '0', STR_PAD_LEFT )
+		);
 	}
 
 	/**
