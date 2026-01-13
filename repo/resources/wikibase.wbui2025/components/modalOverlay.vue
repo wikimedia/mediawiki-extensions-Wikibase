@@ -262,19 +262,11 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-modal-overlay--minimal {
 	.wikibase-wbui2025-modal-overlay__header {
 		align-self: stretch;
-		padding: @spacing-100 @spacing-100 @spacing-200;
+		padding: @spacing-75 @spacing-75 @spacing-100;
 		border-bottom: @border-width-base @border-style-base @border-color-subtle;
 		flex-direction: column;
 		box-shadow: unset;
-
-		h2 {
-			padding: @spacing-0;
-			font-family: @font-family-base;
-			text-align: center;
-			font-weight: 400;
-			font-size: @font-size-xx-large;
-			line-height: @line-height-small;
-		}
+		gap: @spacing-12;
 
 		&__close-button {
 			width: 100%;
