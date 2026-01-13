@@ -87,13 +87,11 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 		$languageChain = $this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes();
 		$this->prefetchingTermLookup->prefetchTerms( $itemIds, [ 'description', 'label' ], $languageChain );
 
-		$html = Html::openElement( 'ol' );
+		$html = '';
 		foreach ( $itemIds as $id ) {
 			$html .= $this->makeBadgeHtml( $id, $this->badgeItems[$id->getSerialization()], $languageCode );
 		}
-		$html .= Html::closeElement( 'ol' );
-
-		return $html;
+		return Html::rawElement( 'ol', [], $html );
 	}
 
 	/**

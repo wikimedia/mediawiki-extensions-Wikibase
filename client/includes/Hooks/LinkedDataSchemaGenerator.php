@@ -92,10 +92,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 			$title, $revisionTimestamp, $firstRevisionTimestamp, $entityConceptUri, $imageFile, $description
 		);
 
-		$html = Html::openElement( 'script', [ 'type' => 'application/ld+json' ] );
-		$html .= json_encode( $schema );
-		$html .= Html::closeElement( 'script' );
-		return $html;
+		return Html::rawElement( 'script', [ 'type' => 'application/ld+json' ], json_encode( $schema ) );
 	}
 
 	private function createSchema(
