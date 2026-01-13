@@ -50,6 +50,7 @@
 	"wikibase-publishing-succeeded": "Dina ändringar har sparats!",
 	"wikibase-remove-inprogress": "Tar bort...",
 	"wikibase-statementlistview-add": "lägg till värde",
+	"wikibase-addvalue": "Lägg till värde",
 	"wikibase-statementlistview-add-tooltip": "Lägg till ett nytt värde",
 	"wikibase-statementgrouplistview-add": "lägg till uttalande",
 	"wikibase-statementgrouplistview-add-tooltip": "Lägg till ett nytt uttalande",

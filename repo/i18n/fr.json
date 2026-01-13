@@ -99,6 +99,7 @@
 	"wikibase-publishing-succeeded": "Vos modifications ont été enregistrées !",
 	"wikibase-remove-inprogress": "Suppression en cours...",
 	"wikibase-statementlistview-add": "ajouter une valeur",
+	"wikibase-addvalue": "Ajouter une valeur",
 	"wikibase-statementlistview-add-tooltip": "Ajouter une nouvelle valeur",
 	"wikibase-statementgrouplistview-add": "ajouter une déclaration",
 	"wikibase-statementgrouplistview-add-tooltip": "Ajouter une nouvelle déclaration",

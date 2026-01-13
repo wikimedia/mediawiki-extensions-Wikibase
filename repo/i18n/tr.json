@@ -63,6 +63,7 @@
 	"wikibase-publishing-succeeded": "Değişiklikleriniz saklandı!",
 	"wikibase-remove-inprogress": "Kaldırılıyor…",
 	"wikibase-statementlistview-add": "değer ekle",
+	"wikibase-addvalue": "Değer ekle",
 	"wikibase-statementlistview-add-tooltip": "Yeni bir değer ekle",
 	"wikibase-statementgrouplistview-add": "ifade ekle",
 	"wikibase-statementgrouplistview-add-tooltip": "Yeni bir ifade ekle",
