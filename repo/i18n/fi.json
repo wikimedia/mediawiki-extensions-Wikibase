@@ -394,6 +394,7 @@
 	"wikibase-api-failed-save": "Tallennus epäonnistui.",
 	"wikibase-api-invalid-property-id": "Virheellinen ominaisuustunniste.",
 	"wikibase-api-invalid-entity-id": "Virheellinen entiteettitunniste.",
+	"wikibase-api-no-external-page": "Ulkoinen asiakassivusto ”$1” ei toimittanut sivun tietoja sivusta ”$2”.",
 	"wikibase-api-nosuchrevid": "Versiota annetulla tunnisteella ei löytynyt.",
 	"wikibase-api-no-such-claim": "Annettua väitettä ei löytynyt.",
 	"wikibase-api-no-such-entity": "Entiteettiä tunnisteella ”$1” ei löydy.",
