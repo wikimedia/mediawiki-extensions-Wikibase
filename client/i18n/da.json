@@ -13,7 +13,8 @@
 			"Saederup92",
 			"Sarrus",
 			"Steenth",
-			"Weblars"
+			"Weblars",
+			"Zakawer2"
 		]
 	},
 	"wikibase-client-desc": "Klient til Wikibase-udvidelsen",
@@ -41,7 +42,7 @@
 	"wikibase-linkitem-failed-modify": "Kunne ikke linke sider: kunne ikke flette tilsvarende elementer på {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Link til side",
 	"wikibase-linkitem-linkpage": "Link til side",
-	"wikibase-linkitem-selectlink": "Vælg et websted og en side, du vil sammenkæde denne side med.",
+	"wikibase-linkitem-selectlink": "Vælg et websted og en side som du vil sammenkæde denne side med.",
 	"wikibase-linkitem-input-site": "Sprog:",
 	"wikibase-linkitem-input-page": "Side:",
 	"wikibase-linkitem-confirmitem-text": "Den side, du har valgt, er allerede knyttet til et [$1 emne i vores centrale datadepot]. Bekræft venligst, at {{PLURAL:$2|siden|siderne}} der vises nedenfor {{PLURAL:$2|er}} {{PLURAL:$2|den|dem}}, som du vil sammenkæde med.",
