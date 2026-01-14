@@ -46,6 +46,7 @@ module.exports = exports = defineComponent( {
 	computed: {
 		snakValueClass() {
 			return {
+				'wikibase-wbui2025-snak-value--popover-visible': this.popoverVisible,
 				'wikibase-wbui2025-media-value': this.snak.datatype === 'commonsMedia',
 				'wikibase-wbui2025-time-value': this.snak.datatype === 'time',
 				'wikibase-wbui2025-globe-coordinate-value': this.snak.datatype === 'globe-coordinate',
