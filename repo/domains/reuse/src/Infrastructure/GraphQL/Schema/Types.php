@@ -32,7 +32,9 @@ class Types {
 	private ?ObjectType $entityValueType = null;
 	private ?ItemType $itemType = null;
 	private ?ItemSearchFilterType $itemSearchFilterType = null;
-	private ?ObjectType $itemSearchResultType = null;
+	private ?ObjectType $itemSearchResultConnectionType = null;
+	private ?ObjectType $itemSearchResultNodeType = null;
+	private ?ObjectType $itemSearchResultEdgeType = null;
 
 	public function __construct(
 		private readonly array $validLanguageCodes,
@@ -103,14 +105,34 @@ class Types {
 		return $this->itemSearchFilterType ??= new ItemSearchFilterType( $this );
 	}
 
-	public function getItemSearchResultType(): ObjectType {
+	public function getItemSearchResultConnectionType(): ObjectType {
+		return $this->itemSearchResultConnectionType ??= new ObjectType( [
+			'name' => 'ItemSearchResultConnection',
+			'fields' => [
+				// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+				'edges' => Type::nonNull( Type::listOf( Type::nonNull( $this->getItemSearchResultEdgeType() ) ) ),
+			],
+		] );
+	}
+
+	public function getItemSearchResultEdgeType(): ObjectType {
+		return $this->itemSearchResultEdgeType ??= new ObjectType( [
+			'name' => 'ItemSearchResultEdge',
+			'fields' => [
+				'node' => Type::nonNull( $this->getItemSearchResultNodeType() ),
+				'cursor' => Type::nonNull( Type::string() ),
+			],
+		] );
+	}
+
+	public function getItemSearchResultNodeType(): ObjectType {
 		$labelProviderType = $this->getLabelProviderType();
 		$labelField = clone $labelProviderType->getField( 'label' ); // cloned to not override the resolver in other places
 		$labelField->resolveFn = fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemLabelsResolver
 				->resolve( $itemSearchResult->itemId, $args[ 'languageCode' ] );
 
-		return $this->itemSearchResultType ??= new ObjectType( [
-			'name' => 'ItemSearchResult',
+		return $this->itemSearchResultNodeType ??= new ObjectType( [
+			'name' => 'ItemSearchResultNode',
 			'fields' => [
 				'id' => [
 					'type' => Type::nonNull( $this->getItemIdType() ),

@@ -45,8 +45,7 @@ class Schema extends GraphQLSchema {
 							GraphQLService::LOAD_ITEM_COMPLEXITY,
 					],
 					'searchItems' => [
-						// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
-						'type' => Type::nonNull( Type::listOf( $this->types->getItemSearchResultType() ) ),
+						'type' => Type::nonNull( $this->types->getItemSearchResultConnectionType() ),
 						'args' => [
 							'query' => Type::nonNull( $this->types->getItemSearchFilterType() ),
 							'first' => [

@@ -83,26 +83,59 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		);
 
 		yield 'simple searchItems query without value' => [
-			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { id } }",
-			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
+			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { edges { node { id } } } }",
+			[ 'data' =>
+				[ 'searchItems' =>
+					[ 'edges' =>
+						[
+							[ 'node' => [ 'id' => $item->getId() ] ],
+						],
+					],
+				],
+			],
+		];
+
+		yield 'simple searchItems query with cursor' => [
+			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) { edges { node { id } cursor } } }",
+			[
+				'data' => [
+					'searchItems' => [
+						'edges' => [
+							[ 'node' => [ 'id' => $item->getId() ], 'cursor' => $this->encodeOffsetAsCursor( 1 ) ],
+						],
+					],
+				],
+			],
 		];
 
 		yield 'simple searchItems query with value' => [
 			"{ searchItems( query: {
 				property: \"{$itemProperty->getId()}\",
 				value: \"{$itemUsedAsStatementValue->getId()}\"
-			} ) { id } }",
-			[ 'data' => [ 'searchItems' => [ [ 'id' => $item->getId() ] ] ] ],
+			} ) { edges { node { id } } } }",
+			[
+				'data' => [
+					'searchItems' => [
+						'edges' => [
+							[ 'node' => [ 'id' => $item->getId() ] ],
+						],
+					],
+				],
+			],
 		];
 
 		yield 'searchItems with description in search results' => [
 			"{  searchItems( query: { property: \"{$itemProperty->getId()}\" } ) {
-				description(languageCode: \"en\")
+				edges { node { description(languageCode: \"en\") } }
 			} }",
 			[
 				'data' => [
 					'searchItems' => [
-						[ 'description' => $item->getDescriptions()->getByLanguage( 'en' )->getText() ],
+						'edges' => [
+							[ 'node' =>
+								[ 'description' => $item->getDescriptions()->getByLanguage( 'en' )->getText() ],
+							],
+						],
 					],
 				],
 			],
@@ -111,20 +144,32 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		yield 'searchItems with label in search result' => [
 			"{  searchItems( query: {
 				property: \"{$itemProperty->getId()}\",
-			} ) { label(languageCode: \"en\") } }",
-			[ 'data' => [ 'searchItems' => [ [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ] ] ] ],
+			} ) { edges { node { label(languageCode: \"en\") } } } }",
+			[
+				'data' => [
+					'searchItems' => [
+						'edges' => [
+							[ 'node' =>
+								[ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ],
+							],
+						],
+					],
+				],
+			],
 		];
 
 		yield 'pagination - with limit' => [
 			"{  searchItems(
 				query: { property: \"{$stringProperty->getId()}\" },
 				first: 2
-			) { id } }",
+			) { edges { node { id } } } }",
 			[
 				'data' => [
 					'searchItems' => [
-						[ 'id' => $item->getId() ],
-						[ 'id' => $item2->getId() ],
+						'edges' => [
+							[ 'node' => [ 'id' => $item->getId() ] ],
+							[ 'node' => [ 'id' => $item2->getId() ] ],
+						],
 					],
 				],
 			],
@@ -135,12 +180,14 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			"{  searchItems(
 				query: { property: \"{$stringProperty->getId()}\" },
 				after: \"{$offset}\"
-			) { id } }",
+			) { edges { node { id } } } }",
 			[
 				'data' => [
 					'searchItems' => [
-						[ 'id' => $item2->getId() ],
-						[ 'id' => $item3->getId() ],
+						'edges' => [
+							[ 'node' => [ 'id' => $item2->getId() ] ],
+							[ 'node' => [ 'id' => $item3->getId() ] ],
+						],
 					],
 				],
 			],
@@ -152,11 +199,13 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				query: { property: \"{$stringProperty->getId()}\" },
 				first: 1,
 				after: \"{$offset}\"
-			) { id } }",
+			) { edges { node { id } } } }",
 			[
 				'data' => [
 					'searchItems' => [
-						[ 'id' => $item2->getId() ],
+						'edges' => [
+							[ 'node' => [ 'id' => $item2->getId() ] ],
+						],
 					],
 				],
 			],
@@ -175,23 +224,23 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	public function errorsProvider(): Generator {
 		yield 'rejects queries with more than one search' => [
 			'{
-			  s1: searchItems(query: { property: "P1" } ) { id }
-			  s2: searchItems(query: { property: "P2" } ) { id }
-			  s3: searchItems(query: { property: "P3" } ) { id }
+			  s1: searchItems(query: { property: "P1" } ) { edges { node { id } } }
+			  s2: searchItems(query: { property: "P2" } ) { edges { node { id } } }
+			  s3: searchItems(query: { property: "P3" } ) { edges { node { id } } }
 			}',
 			'The query complexity is 200% over the limit.',
 		];
 
 		yield 'invalid search query: empty filter' => [
 			'{
-			  searchItems(query: {} ) { id }
+			  searchItems(query: {} ) { edges { node { id } } }
 			}',
 			"Invalid search query: Query filters must contain either an 'and' or a 'property' field",
 		];
 
 		yield 'invalid search query: empty "and"' => [
 			'{
-			  searchItems(query: { and: [] } ) { id }
+			  searchItems(query: { and: [] } ) { edges { node { id } } }
 			}',
 			"Invalid search query: 'and' fields must contain at least two elements",
 		];
@@ -202,7 +251,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				searchItems(query: {
 					and: [ { property: \"{$stringProperty->getId()}\" } ],
 					property: \"{$stringProperty->getId()}\"
-				} ) { id }
+				} ) { edges { node { id } } }
 			}",
 			"Invalid search query: Filters must not contain both an 'and' and a 'property' field",
 		];
@@ -210,28 +259,28 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$unsupportedProperty = $this->createProperty( 'wikibase-property' );
 		yield 'invalid search query: unsupported property data type' => [
 			"{
-			  searchItems(query: { property: \"{$unsupportedProperty->getId()}\" } ) { id }
+			  searchItems(query: { property: \"{$unsupportedProperty->getId()}\" } ) { edges { node { id } } }
 			}",
 			"Invalid search query: Data type of Property '{$unsupportedProperty->getId()}' is not supported",
 		];
 
 		yield 'invalid "first" param - less than 1' => [
 			"{
-			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 0) { id }
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 0) { edges { node { id } } }
 			}",
 			'"first" must not be less than 1 or greater than ' . FacetedItemSearchRequest::MAX_LIMIT,
 		];
 
 		yield 'invalid "first" param - above the maximum' => [
 			"{
-			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 51) { id }
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, first: 51) { edges { node { id } } }
 			}",
 			'"first" must not be less than 1 or greater than ' . FacetedItemSearchRequest::MAX_LIMIT,
 		];
 
 		yield 'invalid cursor: not an encoded int' => [
 			"{
-			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"potato\") { id }
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"potato\") { edges { node { id } } }
 			}",
 			'"after" does not contain a valid cursor',
 		];
@@ -239,7 +288,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$cursor = $this->encodeOffsetAsCursor( -1 );
 		yield 'invalid cursor: offset below min' => [
 			"{
-			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { id }
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { edges { node { id } } }
 			}",
 			'"after" does not contain a valid cursor',
 		];
@@ -247,7 +296,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$cursor = $this->encodeOffsetAsCursor( FacetedItemSearchRequest::MAX_OFFSET + 1 );
 		yield 'invalid cursor: offset above max' => [
 			"{
-			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { id }
+			  searchItems(query: { property: \"{$stringProperty->getId()}\" }, after: \"$cursor\") { edges { node { id } } }
 			}",
 			'"after" does not contain a valid cursor',
 		];
@@ -257,7 +306,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$this->simulateSearchEnabled( false );
 
 		$expectedErrorMessage = 'Search is not available due to insufficient server configuration';
-		$query = '{ searchItems( query: { property: "P1" } ) { id } }';
+		$query = '{ searchItems( query: { property: "P1" } ) { edges { node { id } } } }';
 
 		$result = $this->newGraphQLService()->query( $query );
 

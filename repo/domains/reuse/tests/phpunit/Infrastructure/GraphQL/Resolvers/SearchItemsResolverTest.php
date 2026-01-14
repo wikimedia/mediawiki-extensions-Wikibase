@@ -49,7 +49,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$result = $this->newResolver( $facetedItemSearch )
 			->resolve( [ 'property' => 'P1' ], 50, $cursor );
 
-		$this->assertSame( [], $result );
+		$this->assertSame( [ 'edges' => [] ], $result );
 	}
 
 	public function paginationCursorProvider(): Generator {

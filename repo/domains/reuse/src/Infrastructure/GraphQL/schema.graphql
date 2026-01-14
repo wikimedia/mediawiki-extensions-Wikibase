@@ -1,7 +1,7 @@
 type Query {
   item(id: ItemId!): Item
   itemsById(ids: [ItemId!]!): [Item]!
-  searchItems(query: ItemSearchFilter!, first: Int! = 10, after: String): [ItemSearchResult]!
+  searchItems(query: ItemSearchFilter!, first: Int! = 10, after: String): ItemSearchResultConnection!
 }
 
 scalar ItemId
@@ -140,7 +140,16 @@ input ItemSearchFilter {
   value: String
 }
 
-type ItemSearchResult {
+type ItemSearchResultConnection {
+  edges: [ItemSearchResultEdge!]!
+}
+
+type ItemSearchResultEdge {
+  node: ItemSearchResultNode!
+  cursor: String!
+}
+
+type ItemSearchResultNode {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
