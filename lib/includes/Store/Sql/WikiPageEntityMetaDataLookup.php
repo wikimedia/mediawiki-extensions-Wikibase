@@ -51,7 +51,7 @@ class WikiPageEntityMetaDataLookup implements WikiPageEntityMetaDataAccessor {
 		$this->pageTableEntityQuery = $pageTableEntityConditionGenerator;
 		$this->entitySource = $entitySource;
 		$this->repoDb = $repoDb;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

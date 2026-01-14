@@ -66,11 +66,11 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 		?FormatterOptions $options = null,
 		?RepoGroup $repoGroup = null
 	) {
-		$this->options = $options ?: new FormatterOptions();
+		$this->options = $options ?? new FormatterOptions();
 
 		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$this->language = $languageFactory->getLanguage( $languageCode );
-		$this->repoGroup = $repoGroup ?: MediaWikiServices::getInstance()->getRepoGroup();
+		$this->repoGroup = $repoGroup ?? MediaWikiServices::getInstance()->getRepoGroup();
 		$this->parserOptions = $parserOptions;
 		$this->thumbLimits = $thumbLimits;
 	}

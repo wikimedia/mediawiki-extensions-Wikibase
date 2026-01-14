@@ -35,7 +35,7 @@ class ValueSnakRdfBuilderFactory {
 		Assert::parameterElementType( 'callable', $factoryCallbacks, '$factoryCallbacks' );
 
 		$this->factoryCallbacks = $factoryCallbacks;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

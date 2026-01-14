@@ -103,13 +103,13 @@ class WikibasePingback {
 		?RepoDomainDb $repoDomainDb = null,
 		?string $key = null
 	) {
-		$this->config = $config ?: RequestContext::getMain()->getConfig();
-		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
-		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
-		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getSettings();
-		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
-		$this->objectCacheFactory = $objectCacheFactory ?: MediaWikiServices::getInstance()->getObjectCacheFactory();
-		$this->repoConnections = $repoDomainDb ? $repoDomainDb->connections() :
+		$this->config = $config ?? RequestContext::getMain()->getConfig();
+		$this->logger = $logger ?? LoggerFactory::getInstance( __CLASS__ );
+		$this->extensionRegistry = $extensionRegistry ?? ExtensionRegistry::getInstance();
+		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?? WikibaseRepo::getSettings();
+		$this->requestFactory = $requestFactory ?? MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$this->objectCacheFactory = $objectCacheFactory ?? MediaWikiServices::getInstance()->getObjectCacheFactory();
+		$this->repoConnections = $repoDomainDb?->connections() ??
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections();
 
 		$this->key = $key ?: 'WikibasePingback-' . MW_VERSION;

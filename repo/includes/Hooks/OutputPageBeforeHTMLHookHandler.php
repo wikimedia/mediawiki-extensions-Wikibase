@@ -101,7 +101,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->userOptionsLookup = $userOptionsLookup;
 		$this->languageDirectionalityLookup = $languageDirectionalityLookup;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	public static function factory(

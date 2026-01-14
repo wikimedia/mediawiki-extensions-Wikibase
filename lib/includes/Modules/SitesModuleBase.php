@@ -46,8 +46,8 @@ abstract class SitesModuleBase extends RL\Module {
 		?SettingsArray $repoSettings,
 		LanguageNameLookupFactory $languageNameLookupFactory
 	) {
-		$this->clientSettings = $clientSettings ?: new SettingsArray();
-		$this->repoSettings = $repoSettings ?: new SettingsArray();
+		$this->clientSettings = $clientSettings ?? new SettingsArray();
+		$this->repoSettings = $repoSettings ?? new SettingsArray();
 		$this->languageNameLookupFactory = $languageNameLookupFactory;
 	}
 

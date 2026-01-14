@@ -40,7 +40,7 @@ class ComplexValueRdfHelper {
 	public function __construct( RdfVocabulary $vocabulary, RdfWriter $valueNodeWriter, ?DedupeBag $dedupeBag = null ) {
 		$this->valueNodeWriter = $valueNodeWriter;
 		$this->vocabulary = $vocabulary;
-		$this->dedupeBag = $dedupeBag ?: new HashDedupeBag();
+		$this->dedupeBag = $dedupeBag ?? new HashDedupeBag();
 	}
 
 	/**

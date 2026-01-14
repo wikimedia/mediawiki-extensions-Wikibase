@@ -33,7 +33,7 @@ class MediaWikiContentLanguages implements ContentLanguages {
 		?LanguageNameUtils $languageNameUtils = null,
 		string $languageNameUtilsInclude = LanguageNameUtils::DEFINED
 	) {
-		$this->languageNameUtils = $languageNameUtils ?:
+		$this->languageNameUtils = $languageNameUtils ??
 			MediaWikiServices::getInstance()->getLanguageNameUtils();
 		$this->languageNameUtilsInclude = $languageNameUtilsInclude;
 	}

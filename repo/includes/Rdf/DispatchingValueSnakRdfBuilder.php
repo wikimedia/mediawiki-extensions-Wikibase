@@ -35,7 +35,7 @@ class DispatchingValueSnakRdfBuilder implements ValueSnakRdfBuilder {
 		Assert::parameterElementType( ValueSnakRdfBuilder::class, $valueBuilders, '$valueBuilders' );
 
 		$this->valueBuilders = $valueBuilders;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**

@@ -108,7 +108,7 @@ class EntityAccessor {
 		$this->termFallbackChain = $termFallbackChain;
 		$this->language = $language;
 		$this->termsLanguages = $termsLanguages;
-		$this->logger = $logger ?: new NullLogger();
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**
