@@ -29,16 +29,19 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		root = await action.root();
 	} );
 
-	const editRequests = [
+	const editRoutes = [
 		...getItemEditRequests( itemRequestInputs ),
 		...getPropertyEditRequests( propertyRequestInputs )
 	];
-	const allRoutes = [
-		...editRequests,
-		...getItemGetRequests( itemRequestInputs ),
-		...getPropertyGetRequests( propertyRequestInputs ),
+	const editAndCreateRoutes = [
+		...editRoutes,
 		getItemCreateRequest( itemRequestInputs ),
 		getPropertyCreateRequest( propertyRequestInputs )
+	];
+	const allRoutes = [
+		...editAndCreateRoutes,
+		...getItemGetRequests( itemRequestInputs ),
+		...getPropertyGetRequests( propertyRequestInputs ),
 	];
 
 	describe( 'Authentication', () => {
@@ -66,101 +69,89 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	} );
 
 	describe( 'Authorization', () => {
-		describeEachRouteWithReset(
-			[
-				...editRequests,
-				getItemCreateRequest( itemRequestInputs ),
-				getPropertyCreateRequest( propertyRequestInputs )
-			],
-			( newRequestBuilder ) => {
-				it( 'Unauthorized bot edit', async () => {
+		describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
+			it( 'Unauthorized bot edit', async () => {
+				assertValidError(
+					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
+					403,
+					'permission-denied',
+					{ denial_reason: 'unauthorized-bot-edit' }
+				);
+			} );
+		} );
+
+		describe( 'Blocked user', () => {
+			before( async () => {
+				await root.action( 'block', {
+					user: user.username,
+					reason: 'testing',
+					token: await root.token()
+				}, 'POST' );
+			} );
+
+			after( async () => {
+				await root.action( 'unblock', {
+					user: user.username,
+					token: await root.token()
+				}, 'POST' );
+			} );
+
+			describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
+				it( 'cannot create/edit if blocked', async () => {
 					assertValidError(
-						await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
+						await newRequestBuilder().withUser( user ).makeRequest(),
 						403,
 						'permission-denied',
-						{ denial_reason: 'unauthorized-bot-edit' }
+						{ denial_reason: 'blocked-user' }
 					);
 				} );
-			}
-		);
+			} );
+		} );
 
-		describeEachRouteWithReset(
-			[
-				...editRequests,
-				getItemCreateRequest( itemRequestInputs ),
-				getPropertyCreateRequest( propertyRequestInputs )
-			],
-			( newRequestBuilder ) => {
-				describe( 'Blocked user', () => {
-					before( async () => {
-						await root.action( 'block', {
-							user: user.username,
-							reason: 'testing',
-							token: await root.token()
-						}, 'POST' );
-					} );
+		describe( 'Globally Blocked user', () => {
+			let ranGlobalBlock = false;
 
-					after( async () => {
-						await root.action( 'unblock', {
-							user: user.username,
-							token: await root.token()
-						}, 'POST' );
-					} );
+			before( async function () {
+				await requireExtensions( [ 'GlobalBlocking' ] ).call( this );
+				await root.addGroups( root.username, [ 'steward' ] );
+				await root.action( 'globalblock', {
+					target: user.username,
+					reason: 'testing',
+					expiry: '1 hour',
+					token: await root.token()
+				}, 'POST' );
 
-					it( 'cannot create/edit if blocked', async () => {
-						assertValidError(
-							await newRequestBuilder().withUser( user ).makeRequest(),
-							403,
-							'permission-denied',
-							{ denial_reason: 'blocked-user' }
-						);
-					} );
+				ranGlobalBlock = true;
+			} );
+
+			after( async () => {
+				if ( !ranGlobalBlock ) {
+					return;
+				}
+
+				await root.action( 'globalblock', {
+					target: user.username,
+					reason: 'testing',
+					unblock: true,
+					token: await root.token()
+				}, 'POST' );
+			} );
+
+			describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
+				it( 'cannot create/edit if blocked', async () => {
+					assertValidError(
+						await newRequestBuilder().withUser( user ).makeRequest(),
+						403,
+						'permission-denied',
+						{ denial_reason: 'blocked-user' }
+					);
 				} );
-
-				describe( 'Globally Blocked user', () => {
-					let ranGlobalBlock = false;
-
-					before( async function () {
-						await requireExtensions( [ 'GlobalBlocking' ] ).call( this );
-						await root.addGroups( root.username, [ 'steward' ] );
-						await root.action( 'globalblock', {
-							target: user.username,
-							reason: 'testing',
-							expiry: '1 hour',
-							token: await root.token()
-						}, 'POST' );
-
-						ranGlobalBlock = true;
-					} );
-
-					after( async () => {
-						if ( !ranGlobalBlock ) {
-							return;
-						}
-
-						await root.action( 'globalblock', {
-							target: user.username,
-							reason: 'testing',
-							unblock: true,
-							token: await root.token()
-						}, 'POST' );
-					} );
-
-					it( 'cannot create/edit if blocked', async () => {
-						assertValidError(
-							await newRequestBuilder().withUser( user ).makeRequest(),
-							403,
-							'permission-denied',
-							{ denial_reason: 'blocked-user' }
-						);
-					} );
-				} );
-			}
-		);
+			} );
+		} );
 
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
-		editRequests.forEach( ( { newRequestBuilder, requestInputs } ) => {
+		editRoutes.forEach( ( { newRequestBuilder, requestInputs } ) => {
 			describe( `Protected entity page - ${newRequestBuilder().getRouteDescription()}`, () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
