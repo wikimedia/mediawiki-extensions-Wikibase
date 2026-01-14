@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
@@ -83,7 +84,7 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 	private function getEntityPermissionChecker(): EntityPermissionChecker {
 		$entityPermissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$entityPermissionChecker->method( 'getPermissionStatusForEntity' )
-				->willReturn( Status::newGood() );
+				->willReturn( PermissionStatus::newGood() );
 
 		return $entityPermissionChecker;
 	}

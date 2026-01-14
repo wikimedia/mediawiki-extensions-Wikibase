@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Languages\LanguageNameUtils;
-use MediaWiki\Status\Status;
+use MediaWiki\Permissions\PermissionStatus;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
@@ -190,12 +190,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		return $summary;
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return Status
-	 */
-	private function checkTermChangePermissions( EntityId $entityId ) {
+	private function checkTermChangePermissions( EntityId $entityId ): PermissionStatus {
 		return $this->permissionChecker->getPermissionStatusForEntityId(
 			$this->getUser(),
 			EntityPermissionChecker::ACTION_EDIT_TERMS,

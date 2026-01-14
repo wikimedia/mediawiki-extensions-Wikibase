@@ -121,7 +121,7 @@ abstract class EntityRedirectCreationInteractor {
 		if ( !$status->isOK() ) {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
 			// Perhaps we should get rid of RedirectCreationException and use Status throughout.
-			throw new RedirectCreationException( $status->getWikiText(), 'permissiondenied' );
+			throw new RedirectCreationException( (string)$status, 'permissiondenied' );
 		}
 	}
 

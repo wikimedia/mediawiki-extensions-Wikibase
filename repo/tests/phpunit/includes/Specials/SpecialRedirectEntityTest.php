@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Tests\Specials;
 use Exception;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebResponse;
 use MediaWiki\Status\Status;
@@ -177,9 +178,9 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			->willReturnCallback( function( User $user ) {
 				$name = 'UserWithoutPermission';
 				if ( $user->getName() === $name ) {
-					return Status::newFatal( 'permissiondenied' );
+					return PermissionStatus::newFatal( 'permissiondenied' );
 				} else {
-					return Status::newGood();
+					return PermissionStatus::newGood();
 				}
 			} );
 

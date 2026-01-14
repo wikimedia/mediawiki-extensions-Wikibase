@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Request\WebRequest;
@@ -386,7 +387,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	private function newSpecialPageWithForbiddingPermissionChecker() {
 		$copyrightView = new SpecialPageCopyrightView( new CopyrightMessageBuilder(), '', '' );
 
-		$error = Status::newFatal( 'permission error' );
+		$error = PermissionStatus::newFatal( 'permission error' );
 
 		$permissionChecker = $this->createMock( EntityPermissionChecker::class );
 		$permissionChecker->method( $this->anything() )

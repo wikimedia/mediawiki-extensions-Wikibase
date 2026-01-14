@@ -2,11 +2,16 @@
 
 namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
-use ApiMessage;
 use Generator;
-use MediaWiki\Block\Block;
-use MediaWiki\Status\Status;
+use MediaWiki\Block\AnonIpBlockTarget;
+use MediaWiki\Block\AutoBlockTarget;
+use MediaWiki\Block\BlockTarget;
+use MediaWiki\Block\RangeBlockTarget;
+use MediaWiki\Block\SystemBlock;
+use MediaWiki\Block\UserBlockTarget;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\User\UserFactory;
+use MediaWiki\User\UserIdentityValue;
 use PHPUnit\Framework\TestCase;
 use User as MediaWikiUser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -31,7 +36,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
-	public function testCanCreateAnItemAsRegisteredUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanCreateAnItemAsRegisteredUser( PermissionStatus $permissionStatus, PermissionCheckResult $result ): void {
 		$user = User::withUsername( 'user123' );
 
 		$mwUser = $this->createStub( MediaWikiUser::class );
@@ -55,7 +60,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
-	public function testCanCreateAnItemAsAnonymousUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanCreateAnItemAsAnonymousUser( PermissionStatus $permissionStatus, PermissionCheckResult $result ): void {
 		$mwUser = $this->createStub( MediaWikiUser::class );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userFactory->expects( $this->once() )
@@ -76,7 +81,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
-	public function testCanCreatePropertyAsRegisteredUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanCreatePropertyAsRegisteredUser( PermissionStatus $permissionStatus, PermissionCheckResult $result ): void {
 		$user = User::withUsername( 'user123' );
 
 		$mwUser = $this->createStub( MediaWikiUser::class );
@@ -100,7 +105,7 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider providePermissionStatusForCreatingAnEntity
 	 */
-	public function testCanCreatePropertyAsAnonymousUser( Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanCreatePropertyAsAnonymousUser( PermissionStatus $permissionStatus, PermissionCheckResult $result ): void {
 		$mwUser = $this->createStub( MediaWikiUser::class );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userFactory->expects( $this->once() )
@@ -121,7 +126,11 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityIdAndPermissionStatus
 	 */
-	public function testCanEditAsRegisteredUser( EntityId $entityIdToEdit, Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanEditAsRegisteredUser(
+		EntityId $entityIdToEdit,
+		PermissionStatus $permissionStatus,
+		PermissionCheckResult $result
+	): void {
 		$user = User::withUsername( 'potato' );
 
 		$mwUser = $this->createStub( MediaWikiUser::class );
@@ -145,7 +154,11 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	/**
 	 * @dataProvider provideEntityIdAndPermissionStatus
 	 */
-	public function testCanEditAsAnonymousUser( EntityId $entityIdToEdit, Status $permissionStatus, PermissionCheckResult $result ): void {
+	public function testCanEditAsAnonymousUser(
+		EntityId $entityIdToEdit,
+		PermissionStatus $permissionStatus,
+		PermissionCheckResult $result
+	): void {
 		$mwUser = $this->createStub( MediaWikiUser::class );
 		$userFactory = $this->createMock( UserFactory::class );
 		$userFactory->expects( $this->once() )
@@ -171,46 +184,30 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 
 		$permissionStatuses = [
 			'denied, unknown reason' => [
-				Status::newFatal( 'insufficient permissions' ),
+				PermissionStatus::newFatal( 'insufficient permissions' ),
 				PermissionCheckResult::newDenialForUnknownReason(),
 			],
 			'denied, page protected' => [
-				Status::newFatal( 'protectedpagetext' ),
+				PermissionStatus::newFatal( 'protectedpagetext' ),
 				PermissionCheckResult::newPageProtected(),
 			],
 			'denied, user blocked' => [
-				Status::newFatal( new ApiMessage(
-					'blocked',
-					'blocked-code',
-					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_USER ] ] ]
-				) ),
+				self::newBlockedStatus( new UserBlockTarget( new UserIdentityValue( 0, 'test' ) ) ),
 				PermissionCheckResult::newUserBlocked(),
 			],
 			'denied, ip blocked' => [
-				Status::newFatal( new ApiMessage(
-					'blocked',
-					'blocked-code',
-					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_IP ] ] ]
-				) ),
+				self::newBlockedStatus( new AnonIpBlockTarget( '1.2.3.4' ) ),
 				PermissionCheckResult::newIpBlocked(),
 			],
 			'denied, ip range blocked' => [
-				Status::newFatal( new ApiMessage(
-					'blocked',
-					'blocked-code',
-					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_RANGE ] ] ]
-				) ),
+				self::newBlockedStatus( new RangeBlockTarget( '1.2.3.4/16', [] ) ),
 				PermissionCheckResult::newIpBlocked(),
 			],
 			'denied, auto-blocked' => [
-				Status::newFatal( new ApiMessage(
-					'blocked',
-					'blocked-code',
-					[ 'blockinfo' => [ 'blocktargettype' => Block::BLOCK_TYPES[ Block::TYPE_AUTO ] ] ]
-				) ),
+				self::newBlockedStatus( new AutoBlockTarget( 0 ) ),
 				PermissionCheckResult::newIpBlocked(),
 			],
-			'good status' => [ Status::newGood(), PermissionCheckResult::newAllowed() ],
+			'good status' => [ PermissionStatus::newGood(), PermissionCheckResult::newAllowed() ],
 		];
 
 		$dataSet = [];
@@ -224,9 +221,19 @@ class WikibaseEntityPermissionCheckerTest extends TestCase {
 	}
 
 	public static function providePermissionStatusForCreatingAnEntity(): Generator {
-		yield [ Status::newFatal( 'insufficient permissions' ), PermissionCheckResult::newDenialForUnknownReason() ];
+		yield [ PermissionStatus::newFatal( 'insufficient permissions' ), PermissionCheckResult::newDenialForUnknownReason() ];
 
-		yield [ Status::newGood(), PermissionCheckResult::newAllowed() ];
+		yield [ PermissionStatus::newGood(), PermissionCheckResult::newAllowed() ];
+	}
+
+	public static function newBlockedStatus( BlockTarget $blockTarget ): PermissionStatus {
+		$block = new SystemBlock();
+		$block->setTarget( $blockTarget );
+
+		$status = PermissionStatus::newEmpty();
+		$status->setBlock( $block );
+
+		return $status;
 	}
 
 }

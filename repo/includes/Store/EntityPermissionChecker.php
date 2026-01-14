@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Store;
 
 use InvalidArgumentException;
 use MediaWiki\Permissions\PermissionManager;
-use MediaWiki\Status\Status;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\User\User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -46,13 +46,14 @@ interface EntityPermissionChecker {
 	 *
 	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
-	 * @return Status a status object representing the check's result.
+	 * @return PermissionStatus a status object representing the check's result.
 	 */
 	public function getPermissionStatusForEntity(
 		User $user,
-		$action,
+		string $action,
 		EntityDocument $entity,
-		$rigor = PermissionManager::RIGOR_SECURE );
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): PermissionStatus;
 
 	/**
 	 * Check whether the given user has the permission to perform the given action on an entity.
@@ -71,12 +72,13 @@ interface EntityPermissionChecker {
 	 *
 	 * @throws InvalidArgumentException if unknown permission is requested
 	 *
-	 * @return Status a status object representing the check's result.
+	 * @return PermissionStatus a status object representing the check's result.
 	 */
 	public function getPermissionStatusForEntityId(
 		User $user,
-		$action,
+		string $action,
 		EntityId $entityId,
-		$rigor = PermissionManager::RIGOR_SECURE );
+		string $rigor = PermissionManager::RIGOR_SECURE
+	): PermissionStatus;
 
 }

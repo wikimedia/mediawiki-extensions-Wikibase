@@ -8,6 +8,7 @@ use MediaWiki\Api\ApiMain;
 use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Languages\LanguageNameUtils;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\SiteLookup;
@@ -96,9 +97,9 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
 		$callback = function ( User $user, $permission ) {
 			if ( $user->getName() === 'UserWithoutPermission' && $permission === 'edit' ) {
-				return Status::newFatal( 'permissiondenied' );
+				return PermissionStatus::newFatal( 'permissiondenied' );
 			} else {
-				return Status::newGood();
+				return PermissionStatus::newGood();
 			}
 		};
 		$permissionChecker->method( 'getPermissionStatusForEntityId' )

@@ -2,9 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
-use IApiMessage;
 use MediaWiki\Block\Block;
-use MediaWiki\Status\Status;
+use MediaWiki\Permissions\PermissionStatus;
 use MediaWiki\User\UserFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -73,22 +72,22 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		);
 	}
 
-	private function newPermissionCheckResultFromStatus( Status $status ): PermissionCheckResult {
+	private function newPermissionCheckResultFromStatus( PermissionStatus $status ): PermissionCheckResult {
 		if ( $status->isGood() ) {
 			return PermissionCheckResult::newAllowed();
 		} elseif ( $this->hasError( 'protectedpagetext', $status ) ) {
 			return PermissionCheckResult::newPageProtected();
 		}
-		return match ( $this->getBlockTargetType( $status ) ) {
-			Block::BLOCK_TYPES[ Block::TYPE_USER ] => PermissionCheckResult::newUserBlocked(),
-			Block::BLOCK_TYPES[ Block::TYPE_IP ],
-			Block::BLOCK_TYPES[ Block::TYPE_RANGE ],
-			Block::BLOCK_TYPES[ Block::TYPE_AUTO ] => PermissionCheckResult::newIpBlocked(),
+		return match ( $this->getBlockType( $status ) ) {
+			Block::TYPE_USER => PermissionCheckResult::newUserBlocked(),
+			Block::TYPE_IP,
+			Block::TYPE_RANGE,
+			Block::TYPE_AUTO => PermissionCheckResult::newIpBlocked(),
 			default => PermissionCheckResult::newDenialForUnknownReason()
 		};
 	}
 
-	private function hasError( string $error, Status $status ): bool {
+	private function hasError( string $error, PermissionStatus $status ): bool {
 		return in_array(
 			$error,
 			array_map(
@@ -98,17 +97,10 @@ class WikibaseEntityPermissionChecker implements PermissionChecker {
 		);
 	}
 
-	private function getBlockTargetType( Status $status ): ?string {
-		foreach ( $status->getMessages() as $message ) {
-			if (
-				$message instanceof IApiMessage &&
-				isset( $message->getApiData()['blockinfo']['blocktargettype'] )
-			) {
-				return $message->getApiData()['blockinfo']['blocktargettype'];
-			}
-		}
-
-		return null;
+	private function getBlockType( PermissionStatus $status ): ?int {
+		return $status->getBlock()
+			?->getTarget()
+			->getType();
 	}
 
 }

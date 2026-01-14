@@ -84,7 +84,7 @@ class ItemMergeInteractor {
 		if ( !$status->isOK() ) {
 			// XXX: This is silly, we really want to pass the Status object to the API error handler.
 			// Perhaps we should get rid of ItemMergeException and use Status throughout.
-			throw new ItemMergeException( $status->getWikiText(), 'permissiondenied' );
+			throw new ItemMergeException( (string)$status, 'permissiondenied' );
 		}
 	}
 
