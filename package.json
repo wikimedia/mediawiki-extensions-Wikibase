@@ -50,7 +50,7 @@
 		"cross-fetch": "^3.1.5",
 		"cypress": "^14.5.3",
 		"cypress-axe": "^1.6.0",
-		"cypress-wikibase-api": "^0.0.6",
+		"cypress-wikibase-api": "^0.0.9",
 		"eslint-config-wikimedia": "0.31.0",
 		"grunt": "1.6.1",
 		"grunt-banana-checker": "0.13.0",
