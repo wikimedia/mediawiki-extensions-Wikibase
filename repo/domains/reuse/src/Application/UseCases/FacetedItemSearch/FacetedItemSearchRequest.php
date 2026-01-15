@@ -8,6 +8,8 @@ namespace Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch;
 class FacetedItemSearchRequest {
 	public const DEFAULT_LIMIT = 10;
 	public const DEFAULT_OFFSET = 0;
+	public const MAX_LIMIT = 50;
+	public const MAX_OFFSET = 9999;
 
 	/**
 	 * @param array<string,mixed> $query

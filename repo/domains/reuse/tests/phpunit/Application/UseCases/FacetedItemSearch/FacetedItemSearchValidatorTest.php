@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchValidator;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
+use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\WikibaseRepo;
@@ -34,6 +35,7 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			$this->newValidator()->validate( new FacetedItemSearchRequest( $query ) );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
+			$this->assertSame( UseCaseErrorType::INVALID_SEARCH_QUERY, $e->type );
 			$this->assertSame( $expectedError, $e->getMessage() );
 		}
 	}
@@ -73,6 +75,26 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			[ 'property' => 'P99999' ],
 			"Data type of Property 'P99999' is not supported",
 		];
+	}
+
+	/**
+	 * @dataProvider invalidLimitOrOffsetProvider
+	 */
+	public function testGivenInvalidLimitOrOffset_validateThrows( int $limit, int $offset, UseCaseErrorType $expectedError ): void {
+		try {
+			$this->newValidator()->validate( new FacetedItemSearchRequest( [ 'property' => 'P1' ], $limit, $offset ) );
+			$this->fail( 'Expected exception was not thrown' );
+		} catch ( UseCaseError $e ) {
+			$this->assertSame( $expectedError, $e->type );
+		}
+	}
+
+	public static function invalidLimitOrOffsetProvider(): Generator {
+		yield 'limit less than 1' => [ 0, 0, UseCaseErrorType::INVALID_SEARCH_LIMIT ];
+		yield 'limit greater than the max' => [ FacetedItemSearchRequest::MAX_LIMIT + 1, 0, UseCaseErrorType::INVALID_SEARCH_LIMIT ];
+
+		yield 'offset less than 0' => [ 1, -1, UseCaseErrorType::INVALID_SEARCH_OFFSET ];
+		yield 'offset greater than the max' => [ 1, FacetedItemSearchRequest::MAX_OFFSET + 1, UseCaseErrorType::INVALID_SEARCH_OFFSET ];
 	}
 
 	/**
