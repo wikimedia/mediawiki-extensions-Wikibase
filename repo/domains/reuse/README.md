@@ -61,5 +61,5 @@ Please run the following commands from the Wikibase repository's root directory 
 * running all tests: `mw dev mw exec -- composer -d ../.. phpunit:entrypoint extensions/Wikibase/repo/domains/reuse/tests/phpunit/`
 * generating the GraphQL schema SDL: `mw dev mediawiki mwscript ./extensions/Wikibase/repo/domains/reuse/src/Infrastructure/GraphQL/GenerateSDL.php`
 * linting:
-  * `mw dev mw composer phpcs:prpl`
+  * `mw dev mw composer phpcs:reuse`
   * `mw dev mw composer phpcs repo/domains/reuse/`
