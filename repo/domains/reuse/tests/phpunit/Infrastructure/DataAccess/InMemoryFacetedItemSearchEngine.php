@@ -31,14 +31,14 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 	 */
 	private array $items = [];
 
-	public function search( AndOperation|PropertyValueFilter $query ): array {
+	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): array {
 		$result = [];
 		foreach ( $this->items as $item ) {
 			if ( $this->matchesQuery( $query, $item ) ) {
 				$result[] = new ItemSearchResult( $item->getId() );
 			}
 		}
-		return $result;
+		return array_slice( $result, $offset, $limit );
 	}
 
 	public function addItem( Item $item ): void {

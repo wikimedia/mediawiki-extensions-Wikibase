@@ -38,7 +38,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 
 		$this->assertEquals(
 			$expectedResults,
-			$search->search( $filter )
+			$search->search( $filter, 50, 0 )
 		);
 	}
 

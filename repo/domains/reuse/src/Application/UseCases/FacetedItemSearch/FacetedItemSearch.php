@@ -24,7 +24,7 @@ class FacetedItemSearch {
 		$query = $this->validator->getValidatedQuery();
 
 		return new FacetedItemSearchResponse(
-			$this->searchEngine->search( $query )
+			$this->searchEngine->search( $query, $request->limit, $request->offset )
 		);
 	}
 }

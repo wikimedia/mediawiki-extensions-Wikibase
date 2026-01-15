@@ -17,8 +17,6 @@ use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
  */
 class CirrusSearchFacetedSearchEngine implements FacetedItemSearchEngine {
 
-	private const RESULTS_LIMIT = 50;
-
 	public function __construct(
 		private readonly SearchEngineFactory $searchEngineFactory,
 		private readonly EntityNamespaceLookup $entityNamespaceLookup,
@@ -29,12 +27,12 @@ class CirrusSearchFacetedSearchEngine implements FacetedItemSearchEngine {
 	/**
 	 * @inheritDoc
 	 */
-	public function search( AndOperation|PropertyValueFilter $query ): array {
+	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): array {
 		$searchEngine = $this->searchEngineFactory->create();
 		$searchEngine->setNamespaces(
 			[ $this->entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE ) ]
 		);
-		$searchEngine->setLimitOffset( self::RESULTS_LIMIT );
+		$searchEngine->setLimitOffset( $limit, $offset );
 		$searchQuery = $this->criteriaToSearchQuery( $query );
 		$resultSet = $searchEngine->searchText( $searchQuery );
 		if ( !$resultSet || !( $resultSet->getValue() instanceof ISearchResultSet ) ) {

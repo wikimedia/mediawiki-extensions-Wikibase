@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess\InMemoryFacetedItemSearchEngine;
 
@@ -27,6 +28,7 @@ use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess\InMemoryFacetedI
 class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
 	use SearchEnabledTestTrait;
+	use PaginationCursorCodec;
 
 	/** @var Property[] */
 	private static array $properties = [];
@@ -56,9 +58,9 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function searchProvider(): Generator {
+		$stringProperty = $this->createProperty( 'string' );
 		$itemProperty = $this->createProperty( 'wikibase-item' );
-		$statementValueItemEnLabel = 'statement value item';
-		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', $statementValueItemEnLabel ) );
+		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', 'value item' ) );
 
 		$item = $this->createItem(
 			NewItem::withLabel( 'en', 'some label' )
@@ -68,6 +70,15 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						->withSomeGuid()
 						->withValue( $itemUsedAsStatementValue->getId() )
 				)
+				->andStatement( NewStatement::forProperty( $stringProperty->getId() )->withValue( 'potato' ) )
+		);
+		$item2 = $this->createItem(
+			NewItem::withLabel( 'en', 'item 2' )
+				->andStatement( NewStatement::someValueFor( $stringProperty->getId() )->withSomeGuid() )
+		);
+		$item3 = $this->createItem(
+			NewItem::withLabel( 'en', 'item 3' )
+				->andStatement( NewStatement::someValueFor( $stringProperty->getId() )->withSomeGuid() )
 		);
 
 		yield 'simple searchItems query without value' => [
@@ -101,6 +112,53 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				property: \"{$itemProperty->getId()}\",
 			} ) { label(languageCode: \"en\") } }",
 			[ 'data' => [ 'searchItems' => [ [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ] ] ] ],
+		];
+
+		yield 'pagination - with limit' => [
+			"{  searchItems(
+				query: { property: \"{$stringProperty->getId()}\" },
+				first: 2
+			) { id } }",
+			[
+				'data' => [
+					'searchItems' => [
+						[ 'id' => $item->getId() ],
+						[ 'id' => $item2->getId() ],
+					],
+				],
+			],
+		];
+
+		$offset = $this->encodeOffsetAsCursor( 1 );
+		yield 'pagination - with offset' => [
+			"{  searchItems(
+				query: { property: \"{$stringProperty->getId()}\" },
+				after: \"{$offset}\"
+			) { id } }",
+			[
+				'data' => [
+					'searchItems' => [
+						[ 'id' => $item2->getId() ],
+						[ 'id' => $item3->getId() ],
+					],
+				],
+			],
+		];
+
+		$offset = $this->encodeOffsetAsCursor( 1 );
+		yield 'pagination - with offset and limit' => [
+			"{  searchItems(
+				query: { property: \"{$stringProperty->getId()}\" },
+				first: 1,
+				after: \"{$offset}\"
+			) { id } }",
+			[
+				'data' => [
+					'searchItems' => [
+						[ 'id' => $item2->getId() ],
+					],
+				],
+			],
 		];
 	}
 
