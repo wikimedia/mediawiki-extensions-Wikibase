@@ -1043,6 +1043,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/editStatement.vue',
 					'resources/wikibase.wbui2025/components/mainSnak.vue',
 					'resources/wikibase.wbui2025/components/newReferenceSnak.vue',
+					'resources/wikibase.wbui2025/components/stepper.vue',
 					'resources/wikibase.wbui2025/mixins/saveStatementsFormMixin.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/icons.json',
@@ -1052,6 +1053,8 @@ final class RepoHooks implements
 							'cdxIconArrowPrevious',
 							'cdxIconCheck',
 							'cdxIconClose',
+							'cdxIconNext',
+							'cdxIconPrevious',
 							'cdxIconTrash',
 							'cdxIconInfo',
 						],
@@ -1115,6 +1118,10 @@ final class RepoHooks implements
 					'wikibase-statementview-references-counter',
 					'wikibase-wbui2025-editable-snak-value-preview-label',
 					'wikibase-wbui2025-timeinput-precision-automatic',
+					'wikibase-stepper-progress',
+					'wikibase-indicator-popover-multiple-issue-title',
+					'wikibase-indicator-popover-multiple-issue-previous',
+					'wikibase-indicator-popover-multiple-issue-next',
 				],
 				'codexComponents' => [
 					'CdxAccordion',

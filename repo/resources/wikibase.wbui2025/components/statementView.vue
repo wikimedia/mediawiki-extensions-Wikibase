@@ -1,5 +1,5 @@
 <template>
-	<div class="wikibase-wbui2025-statement-view">
+	<div :id="statementId" class="wikibase-wbui2025-statement-view">
 		<wbui2025-main-snak
 			:main-snak="statement.mainsnak"
 			:rank="statement.rank"

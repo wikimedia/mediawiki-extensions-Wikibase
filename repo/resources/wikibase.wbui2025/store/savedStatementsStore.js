@@ -172,12 +172,16 @@ const setIndicatorsHtmlForSnakHash = function ( snakHash, indicators ) {
 
 const getPopoverContentForSnakHash = function ( snakHash ) {
 	const statementsStore = useSavedStatementsStore();
-	return statementsStore.popoverHtmlForSnaks.get( snakHash );
+	return statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
 };
 
-const setPopoverContentForSnakHash = function ( snakHash, popoverHtml ) {
+const setPopoverContentForSnakHash = function ( snakHash, popoverContentItems ) {
 	const statementsStore = useSavedStatementsStore();
-	statementsStore.popoverHtmlForSnaks.set( snakHash, popoverHtml );
+	statementsStore.popoverHtmlForSnaks.set(
+		snakHash,
+		// TODO: (T414193) remove this ternary once I72db32b4 is merged in WikibaseQualityConstraints
+		Array.isArray( popoverContentItems ) ? popoverContentItems : [ popoverContentItems ]
+	);
 };
 
 module.exports = {
