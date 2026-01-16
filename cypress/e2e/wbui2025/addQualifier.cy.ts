@@ -335,7 +335,6 @@ describe( 'wbui2025 add qualifiers', () => {
 		it( 'shows dropdown menu when typing in geo-shape qualifier lookup', () => {
 			interceptCommonsSearch( {
 				totalhits: 132,
-				hasContinue: true,
 				results: [
 					{
 						ns: 486,

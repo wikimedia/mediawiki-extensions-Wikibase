@@ -13,7 +13,6 @@ interface CommonsSearchResult {
 interface CommonsSearchOptions {
 	totalhits?: number;
 	results: CommonsSearchResult[];
-	hasContinue?: boolean;
 }
 
 interface CommonsSearchResponse {
