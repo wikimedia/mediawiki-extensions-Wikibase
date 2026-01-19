@@ -61,7 +61,7 @@ class ExtensionLoadHandler {
 		//
 		// recent changes / watchlist hooks
 		$this->hookContainer->register( 'ChangesListSpecialPageStructuredFilters',
-			ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters' );
+			ChangesListSpecialPageHookHandler::onChangesListSpecialPageStructuredFilters( ... ) );
 	}
 
 	public function getApiFormatReferenceSpec( array $clientSettings ): ?array {

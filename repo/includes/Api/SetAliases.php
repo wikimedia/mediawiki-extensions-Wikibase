@@ -173,23 +173,9 @@ class SetAliases extends ModifyEntity {
 	 * @return string[]
 	 */
 	private function normalizeAliases( array $aliases ): array {
-		$stringNormalizer = $this->stringNormalizer;
-
-		$aliases = array_map(
-			function( $str ) use ( $stringNormalizer ) {
-				return $stringNormalizer->trimToNFC( $str );
-			},
-			$aliases
-		);
-
-		$aliases = array_filter(
-			$aliases,
-			function( $str ) {
-				return $str !== '';
-			}
-		);
-
-		return $aliases;
+		$aliases = array_map( $this->stringNormalizer->trimToNFC( ... ), $aliases );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
+		return array_filter( $aliases, strlen( ... ) );
 	}
 
 	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {

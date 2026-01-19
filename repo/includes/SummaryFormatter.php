@@ -123,23 +123,10 @@ class SummaryFormatter {
 	 * @return string The auto summary arguments comma-separated
 	 */
 	public function formatAutoSummary( FormatableSummary $summary ) {
-		$summaryArgs = $summary->getAutoSummaryArgs();
-		$parts = $this->formatArgList( $summaryArgs );
-
-		$count = count( $parts );
-
-		if ( $count === 0 ) {
-			return '';
-		} else {
-			$parts = array_filter(
-				$parts,
-				function ( $arg ) {
-					return $arg !== '';
-				}
-			);
-
-			return $this->language->commaList( $parts );
-		}
+		$parts = $this->formatArgList( $summary->getAutoSummaryArgs() );
+		// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
+		$parts = array_filter( $parts, strlen( ... ) );
+		return $parts ? $this->language->commaList( $parts ) : '';
 	}
 
 	/**
