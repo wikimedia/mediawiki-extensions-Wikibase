@@ -10,8 +10,7 @@ The functionality described here is provided by the Wikibase GraphQL API which i
 
 Queries of this type allow users to request labels of entities that are used in Statements, such as the Statement Property or Items in Statement values.
 
-Example request:
-The following query fetches the Item with the ID Q64, including its English label, all P31 statements, the English label of the Statement Property and the IDs and labels of items used as the Statement value.
+Example: The following query fetches the Item with the ID Q64, including its English label, all P31 statements, the English label of the Statement Property and the IDs and labels of items used as the Statement value.
 ```graphql
 {
 	item(id: "Q64") {
@@ -29,6 +28,44 @@ The following query fetches the Item with the ID Q64, including its English labe
 		}
 	}
 }
+```
+
+### Batch reading items
+
+Queries of this type allow users to retrieve multiple items in one request.
+
+Note: All subfields that are available in the single `item` field are also available in the `itemsById` field.
+
+
+Example: The following query fetches the items with the IDs Q1 and Q2, including their English labels. A maximum of 50 items can be requested at once.
+
+```graphql
+{
+  itemsById(ids: ["Q1", "Q2"]) {
+    id
+    label(languageCode: "en")
+  }
+}
+```
+###  Searching items by statement property and value
+Queries of this type allows users to find a particular set of items to match statement properties and values.
+
+Example: The following query searches for items that have a statement using property P1 with value Q1 and a statement using property P2 with value Q5.
+
+```graphql
+{
+  searchItems(
+    query: {
+      and: [
+        { property: "P1", value: "Q1" },
+        { property: "P2", value: "Q5" }]
+    }
+  ) {
+    id
+    label(languageCode: "en")
+  }
+}
+
 ```
 
 ## Development
@@ -49,7 +86,7 @@ $wgWBRepoSettings['tmpEnableGraphQL'] = true;
 	- `Domain/`
 		- `Model/`: Entities and value objects
 		- `Services/`: Secondary ports, i.e. persistence interfaces such as retrievers
-    - `Infrastructure/`: Secondary adapters, i.e. implementations of interfaces defined in the application core
+	- `Infrastructure/`: Secondary adapters, i.e. implementations of interfaces defined in the application core
 		- `DataAccess/`: Implementations of persistence services
 		- `GraphQL/`: The GraphQL service implementation, resolvers, schema and types
 - `tests/`
