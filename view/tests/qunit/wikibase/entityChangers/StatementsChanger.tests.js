@@ -155,15 +155,19 @@
 			fireHook
 		);
 		var guid = 'Q1$ffbcf247-0c66-4f97-81a0-9d25822104b8';
+		const lastRevID = 2;
 
 		statementsChanger.remove( newNoValueSnakStatement( guid ) );
 
 		assert.true( fireHook.notCalled, 'hook should only fire when API call returns' );
 
-		deferred.resolve( { pageinfo: { lastrevid: 2 } } );
+		deferred.resolve( { pageinfo: { lastrevid: lastRevID } } );
 
 		assert.true( fireHook.calledOnce, 'hook should have fired' );
-		assert.true( fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid ), 'hook should have correct arguments' );
+		assert.true(
+			fireHook.calledWith( 'wikibase.statement.removed', 'Q1', guid, lastRevID ),
+			'hook should have correct arguments'
+		);
 	} );
 
 	QUnit.test( 'remove properly updates StatementsChangerState', ( assert ) => {
@@ -314,6 +318,7 @@
 			fireHook
 		);
 		var guid = 'Q1$a69d8233-b677-43e6-a7c6-519f525eab0c';
+		const lastRevID = 123;
 
 		var statement = newNoValueSnakStatement( guid );
 		statementsChanger.save( statement );
@@ -326,7 +331,7 @@
 				id: guid,
 				rank: 'normal'
 			},
-			pageinfo: {}
+			pageinfo: { lastrevid: lastRevID }
 		} );
 
 		assert.true( fireHook.calledOnce, 'hook should have fired' );
@@ -336,7 +341,8 @@
 				'Q1',
 				guid,
 				null,
-				statement
+				statement,
+				lastRevID
 			),
 			'hook should have correct arguments'
 		);

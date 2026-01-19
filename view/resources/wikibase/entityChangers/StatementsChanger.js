@@ -16,7 +16,7 @@
 	 * @param {wikibase.entityChangers.StatementsChangerState} statementsChangerState
 	 * @param {wikibase.serialization.StatementSerializer} statementSerializer
 	 * @param {wikibase.serialization.StatementDeserializer} statementDeserializer
-	 * @param {Function} [fireHook] called after a statement has been saved (wikibase.statement.saved) or deleted (wikibase.statement.deleted), with the hook name (wikibase.…), entity ID and statement ID as arguments.
+	 * @param {Function} [fireHook] called after a statement has been saved (wikibase.statement.saved) or removed (wikibase.statement.removed), with the hook name (wikibase.…), entity ID and statement ID as arguments.
 	 */
 	MODULE.StatementsChanger = class {
 		constructor(
@@ -82,7 +82,8 @@
 				self._fireHook(
 					'wikibase.statement.removed',
 					self._statementsChangerState.getEntityId(),
-					guid
+					guid,
+					response.pageinfo.lastrevid
 				);
 
 				self._updateChangerStateOnRemoval( propertyId, guid );
@@ -172,7 +173,8 @@
 					self._statementsChangerState.getEntityId(),
 					guid,
 					oldStatement,
-					savedStatement
+					savedStatement,
+					pageInfo.lastrevid
 				);
 
 				self._updateChangerStateOnSetClaim( savedStatement, propertyId, guid );
