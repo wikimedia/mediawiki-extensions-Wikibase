@@ -33,4 +33,17 @@ export class LoginPage {
 			.then( () => this.getLoginButton().click() );
 	}
 
+	public loginWithSession( username: string, password: string ): Chainable {
+		return cy.session(
+			[ username, password ],
+			() => {
+				this.open()
+					.then( () => this.setUsername( username ) )
+					.then( () => this.setPassword( password ) )
+					.then( () => this.getLoginButton().click() );
+			},
+			{ cacheAcrossSpecs: true },
+		);
+	}
+
 }

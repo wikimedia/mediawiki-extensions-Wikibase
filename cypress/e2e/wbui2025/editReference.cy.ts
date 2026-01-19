@@ -10,9 +10,10 @@ describe( 'wbui2025 edit references', () => {
 		const snakToDelete = 'single snak to delete';
 		let propertyName1: string;
 		let propertyName2: string;
+		let testUsername: string;
+		let testPassword: string;
 
-		beforeEach( () => {
-			const loginPage = new LoginPage();
+		before( () => {
 			propertyName1 = Util.getTestString( 'string-property' );
 			propertyName2 = Util.getTestString( 'string-property' );
 			cy.task( 'MwApi:CreateProperty', {
@@ -28,7 +29,10 @@ describe( 'wbui2025 edit references', () => {
 				'MwApi:CreateUser',
 				{ usernamePrefix: 'mextest' },
 			).then( ( { username, password } ) => {
-				loginPage.login( username, password );
+				testUsername = username;
+				testPassword = password;
+				const loginPage = new LoginPage();
+				loginPage.loginWithSession( testUsername, testPassword );
 			} );
 
 			cy.get( '@propertyId1' ).then( ( propertyId1 ) => {
