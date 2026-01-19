@@ -19,35 +19,35 @@ jobs:
             LANG: ru
             WB: both
             IPMASKING: enabled
-          php-versions: '8.1.32'
+          php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: en
             WB: client
             IPMASKING: disabled
-          php-versions: '8.1.32'
+          php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: repo
             IPMASKING: enabled
-          php-versions: '8.1.32'
+          php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
             DBTYPE: sqlite
             LANG: ar
             WB: both
             IPMASKING: disabled
-          php-versions: '8.1.32'
+          php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
             DBTYPE: mysql
             LANG: en
             WB: both
             IPMASKING: enabled
-          php-versions: '8.1.32'
+          php-versions: '8.3.30'
     steps:
     - name: Checkout
       uses: actions/checkout@v3

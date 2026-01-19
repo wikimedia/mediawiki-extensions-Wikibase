@@ -355,6 +355,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			'anon' => [ 1, 60 ],
 			'user' => [ 1, 60 ],
 		] ] );
+		$this->mergeMwGlobalArrayValue( 'wgAutoCreateTempUser', [ 'enabled' => false ] );
 
 		$formData = [
 			SpecialNewItem::FIELD_LANG => 'en',
