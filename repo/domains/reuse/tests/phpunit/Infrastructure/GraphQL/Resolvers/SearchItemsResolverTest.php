@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
-use Generator;
 use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
@@ -34,27 +33,42 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider paginationCursorProvider
-	 */
-	public function testResolve( ?string $cursor, int $offset ): void {
+	public function testResolveWithCursor(): void {
 		$this->simulateSearchEnabled();
 
+		$cursor = $this->encodeOffsetAsCursor( 10 );
 		$facetedItemSearch = $this->createMock( FacetedItemSearch::class );
 		$facetedItemSearch->expects( $this->once() )
 			->method( 'execute' )
-			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, $offset ) )
+			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, 10 ) )
 			->willReturn( new FacetedItemSearchResponse( [] ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
 			->resolve( [ 'property' => 'P1' ], 50, $cursor );
 
-		$this->assertSame( [ 'edges' => [] ], $result );
+		$this->assertSame( [
+			'edges' => [],
+			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => true, 'startCursor' => null ],
+		], $result );
 	}
 
-	public function paginationCursorProvider(): Generator {
-		yield 'with cursor' => [ $this->encodeOffsetAsCursor( 10 ), 10 ];
-		yield 'without cursor' => [ null, 0 ];
+	public function testResolveWithoutCursor(): void {
+		$this->simulateSearchEnabled();
+
+		$cursor = null;
+		$facetedItemSearch = $this->createMock( FacetedItemSearch::class );
+		$facetedItemSearch->expects( $this->once() )
+			->method( 'execute' )
+			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, 0 ) )
+			->willReturn( new FacetedItemSearchResponse( [] ) );
+
+		$result = $this->newResolver( $facetedItemSearch )
+			->resolve( [ 'property' => 'P1' ], 50, $cursor );
+
+		$this->assertSame( [
+			'edges' => [],
+			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => false, 'startCursor' => null ],
+		], $result );
 	}
 
 	public function testGivenInvalidQueryUseCaseError_rethrowsAsInvalidQuery(): void {

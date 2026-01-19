@@ -53,6 +53,7 @@ class SearchItemsResolver {
 
 		return [
 			'edges' => $this->resolveEdges( $searchResults, $offset ),
+			'pageInfo' => $this->resolvePageInfo( $searchResults, $offset ),
 		];
 	}
 
@@ -74,5 +75,13 @@ class SearchItemsResolver {
 			$searchResults,
 			array_keys( $searchResults ),
 		);
+	}
+
+	private function resolvePageInfo( array $searchResults, int $offset ): array {
+		return [
+			'endCursor' => count( $searchResults ) > 0 ? $this->encodeOffsetAsCursor( count( $searchResults ) + $offset ) : null,
+			'hasPreviousPage' => $offset > 0,
+			'startCursor' => count( $searchResults ) > 0 ? $this->encodeOffsetAsCursor( $offset + 1 ) : null,
+		];
 	}
 }
