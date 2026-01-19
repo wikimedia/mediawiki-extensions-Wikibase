@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo;
 
 use Wikibase\DataModel\Statement\Statement;
@@ -15,26 +17,15 @@ use Wikibase\Repo\Diff\ClaimDiffer;
  */
 class ClaimSummaryBuilder {
 
-	/**
-	 * @var ClaimDiffer
-	 */
-	private $claimDiffer;
-
-	public function __construct( ClaimDiffer $claimDiffer ) {
-		$this->claimDiffer = $claimDiffer;
+	public function __construct( private readonly ClaimDiffer $claimDiffer ) {
 	}
 
 	/**
 	 * Checks what has actually changed inside a statement by looking at a ClaimDifference,
 	 * constructs an edit-summary based upon that information and returns
 	 * a Summary object holding this edit-summary
-	 *
-	 * @param Statement|null $oldStatement
-	 * @param Statement $newStatement
-	 *
-	 * @return Summary
 	 */
-	public function buildClaimSummary( ?Statement $oldStatement, Statement $newStatement ) {
+	public function buildClaimSummary( ?Statement $oldStatement, Statement $newStatement ): Summary {
 		$summary = new Summary( 'wbsetclaim' );
 		// Only one statement touched, so we're always having singular here.
 		$summary->addAutoCommentArgs( 1 );
