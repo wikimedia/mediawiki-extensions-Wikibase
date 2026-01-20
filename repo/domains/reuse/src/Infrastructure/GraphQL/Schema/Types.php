@@ -35,6 +35,7 @@ class Types {
 	private ?ObjectType $itemSearchResultConnectionType = null;
 	private ?ObjectType $itemSearchResultNodeType = null;
 	private ?ObjectType $itemSearchResultEdgeType = null;
+	private ?ObjectType $pageInfoType = null;
 
 	public function __construct(
 		private readonly array $validLanguageCodes,
@@ -111,6 +112,18 @@ class Types {
 			'fields' => [
 				// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 				'edges' => Type::nonNull( Type::listOf( Type::nonNull( $this->getItemSearchResultEdgeType() ) ) ),
+				'pageInfo' => Type::nonNull( $this->getPageInfoType() ),
+			],
+		] );
+	}
+
+	public function getPageInfoType(): ObjectType {
+		return $this->pageInfoType ??= new ObjectType( [
+			'name' => 'PageInfo',
+			'fields' => [
+				'endCursor' => Type::string(),
+				'hasPreviousPage' => Type::nonNull( Type::boolean() ),
+				'startCursor' => Type::string(),
 			],
 		] );
 	}

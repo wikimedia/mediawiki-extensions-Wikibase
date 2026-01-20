@@ -142,6 +142,7 @@ input ItemSearchFilter {
 
 type ItemSearchResultConnection {
   edges: [ItemSearchResultEdge!]!
+  pageInfo: PageInfo!
 }
 
 type ItemSearchResultEdge {
@@ -153,4 +154,10 @@ type ItemSearchResultNode {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
+}
+
+type PageInfo {
+  endCursor: String
+  hasPreviousPage: Boolean!
+  startCursor: String
 }
