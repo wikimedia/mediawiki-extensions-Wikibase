@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 
@@ -31,14 +32,14 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 	 */
 	private array $items = [];
 
-	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): array {
+	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): ItemSearchResultSet {
 		$result = [];
 		foreach ( $this->items as $item ) {
 			if ( $this->matchesQuery( $query, $item ) ) {
 				$result[] = new ItemSearchResult( $item->getId() );
 			}
 		}
-		return array_slice( $result, $offset, $limit );
+		return new ItemSearchResultSet( array_slice( $result, $offset, $limit ), count( $result ) );
 	}
 
 	public function addItem( Item $item ): void {

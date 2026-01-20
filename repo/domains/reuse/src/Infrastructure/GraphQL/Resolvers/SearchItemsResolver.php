@@ -9,6 +9,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchCursor;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchLimit;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
@@ -52,7 +53,7 @@ class SearchItemsResolver {
 		}
 
 		return [
-			'edges' => $this->resolveEdges( $searchResults, $offset ),
+			'edges' => $this->resolveEdges( $searchResults->results, $offset ),
 			'pageInfo' => $this->resolvePageInfo( $searchResults, $offset ),
 		];
 	}
@@ -77,11 +78,17 @@ class SearchItemsResolver {
 		);
 	}
 
-	private function resolvePageInfo( array $searchResults, int $offset ): array {
+	private function resolvePageInfo( ItemSearchResultSet $searchResults, int $offset ): array {
+		$numResults = count( $searchResults->results );
+		$hasResults = $numResults > 0;
+		$endOffset = $numResults + $offset;
+
 		return [
-			'endCursor' => count( $searchResults ) > 0 ? $this->encodeOffsetAsCursor( count( $searchResults ) + $offset ) : null,
+			'endCursor' => $hasResults ? $this->encodeOffsetAsCursor( $endOffset ) : null,
 			'hasPreviousPage' => $offset > 0,
-			'startCursor' => count( $searchResults ) > 0 ? $this->encodeOffsetAsCursor( $offset + 1 ) : null,
+			'hasNextPage' => $searchResults->totalResults > $endOffset,
+			'startCursor' => $hasResults ? $this->encodeOffsetAsCursor( $offset + 1 ) : null,
 		];
 	}
+
 }

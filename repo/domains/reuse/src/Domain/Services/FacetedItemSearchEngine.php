@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Domains\Reuse\Domain\Services;
 
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 
 /**
@@ -11,12 +11,5 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
  */
 interface FacetedItemSearchEngine {
 
-	/**
-	 * @param AndOperation|PropertyValueFilter $query
-	 * @param int $limit
-	 * @param int $offset
-	 *
-	 * @return ItemSearchResult[]
-	 */
-	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): array;
+	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): ItemSearchResultSet;
 }

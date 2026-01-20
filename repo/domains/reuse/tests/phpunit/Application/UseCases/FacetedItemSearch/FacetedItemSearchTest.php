@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 
@@ -43,7 +44,7 @@ class FacetedItemSearchTest extends TestCase {
 			->method( 'getValidatedQuery' )
 			->willReturn( $searchQuery );
 
-		$searchResult = [ new ItemSearchResult( new ItemId( 'Q1' ) ) ];
+		$searchResult = new ItemSearchResultSet( [ new ItemSearchResult( new ItemId( 'Q1' ) ) ], 1 );
 		$this->searchEngine = $this->createMock( FacetedItemSearchEngine::class );
 		$this->searchEngine->expects( $this->once() )
 			->method( 'search' )
