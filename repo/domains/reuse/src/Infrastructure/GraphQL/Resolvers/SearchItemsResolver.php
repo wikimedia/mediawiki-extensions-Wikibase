@@ -8,6 +8,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchCursor;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchLimit;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
@@ -40,7 +41,7 @@ class SearchItemsResolver {
 		$offset = $cursor ? $this->decodeOffsetFromCursor( $cursor ) : 0;
 
 		try {
-			return $this->searchUseCase->execute( new FacetedItemSearchRequest( $query, $limit, $offset ) )->results;
+			$searchResults = $this->searchUseCase->execute( new FacetedItemSearchRequest( $query, $limit, $offset ) )->results;
 		} catch ( UseCaseError $e ) {
 			throw match ( $e->type ) {
 				UseCaseErrorType::INVALID_SEARCH_QUERY => new InvalidSearchQuery( $e->getMessage() ),
@@ -49,6 +50,10 @@ class SearchItemsResolver {
 				default => new LogicException( "Unexpected error type: '{$e->type->name}'" ),
 			};
 		}
+
+		return [
+			'edges' => $this->resolveEdges( $searchResults, $offset ),
+		];
 	}
 
 	private function isSearchEnabled(): bool {
@@ -58,5 +63,16 @@ class SearchItemsResolver {
 		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch' || $wgWBCSUseCirrus;
 
 		return $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
+	}
+
+	private function resolveEdges( array $searchResults, int $offset ): array {
+		return array_map(
+			fn( ItemSearchResult $result, int $key ) => [
+				'node' => $result,
+				'cursor' => $this->encodeOffsetAsCursor( $offset + $key + 1 ),
+			],
+			$searchResults,
+			array_keys( $searchResults ),
+		);
 	}
 }
