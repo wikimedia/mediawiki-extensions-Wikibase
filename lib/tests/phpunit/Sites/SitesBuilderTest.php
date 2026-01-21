@@ -34,7 +34,7 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedSiteList, $store->getSites() );
 	}
 
-	public static function buildSitesProvider() {
+	public static function buildSitesProvider(): iterable {
 		$sitesData = self::getSitesData();
 		$sites = self::getSites( $sitesData );
 		$expectedSites = $sites;
@@ -46,13 +46,11 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 			}
 		}
 
-		$data = [];
-
-		$data[] = [ $sites, 'wikidata', null, $expectedSites ];
-		$data[] = [ $sites, 'commons', null, $expectedSites ];
-		$data[] = [ $sites, 'wikipedia', null, $expectedSites ];
-		$data[] = [ $sites, null, 'enwiki', $expectedSites ];
-		$data[] = [ $sites, null, 'commonswiki', $expectedSites ];
+		yield [ $sites, 'wikidata', null, $expectedSites ];
+		yield [ $sites, 'commons', null, $expectedSites ];
+		yield [ $sites, 'wikipedia', null, $expectedSites ];
+		yield [ $sites, null, 'enwiki', $expectedSites ];
+		yield [ $sites, null, 'commonswiki', $expectedSites ];
 
 		$expectedSites2 = $sites;
 
@@ -63,15 +61,13 @@ class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
 			}
 		}
 
-		$data[] = [ $sites, 'wikivoyage', null, $expectedSites2 ];
-		$data[] = [ $sites, null, 'enwikivoyage', $expectedSites2 ];
-		$data[] = [ $sites, 'wikivoyage', 'enwiki', $expectedSites2 ];
+		yield [ $sites, 'wikivoyage', null, $expectedSites2 ];
+		yield [ $sites, null, 'enwikivoyage', $expectedSites2 ];
+		yield [ $sites, 'wikivoyage', 'enwiki', $expectedSites2 ];
 
-		$data[] = [ $sites, 'kittens', null, $sites ];
-		$data[] = [ $sites, 'kittens', 'enwiki', $sites ];
-		$data[] = [ $sites, null, 'kittenswiki', $sites ];
-
-		return $data;
+		yield [ $sites, 'kittens', null, $sites ];
+		yield [ $sites, 'kittens', 'enwiki', $sites ];
+		yield [ $sites, null, 'kittenswiki', $sites ];
 	}
 
 	private static function getSitesData() {

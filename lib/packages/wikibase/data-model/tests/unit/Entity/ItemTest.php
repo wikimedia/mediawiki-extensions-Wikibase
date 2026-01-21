@@ -111,25 +111,21 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		return $argLists;
 	}
 
-	public static function simpleSiteLinksProvider() {
-		$argLists = [];
+	public static function simpleSiteLinksProvider(): iterable {
+		yield [];
 
-		$argLists[] = [];
+		yield [ new SiteLink( 'enwiki', 'Wikidata', [ new ItemId( 'Q42' ) ] ) ];
 
-		$argLists[] = [ new SiteLink( 'enwiki', 'Wikidata', [ new ItemId( 'Q42' ) ] ) ];
-
-		$argLists[] = [
+		yield [
 			new SiteLink( 'enwiki', 'Wikidata' ),
 			new SiteLink( 'nlwiki', 'Wikidata', [ new ItemId( 'Q3' ) ] ),
 		];
 
-		$argLists[] = [
+		yield [
 			new SiteLink( 'enwiki', 'Wikidata' ),
 			new SiteLink( 'nlwiki', 'Wikidata' ),
 			new SiteLink( 'foo bar', 'baz bah', [ new ItemId( 'Q2' ) ] ),
 		];
-
-		return $argLists;
 	}
 
 	public function testHasLinkToSiteForFalse() {
@@ -487,40 +483,27 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $item->getAliasGroups()->hasGroupForLanguage( 'en' ) );
 	}
 
-	public static function instanceProvider() {
-		$entities = [];
-
+	public static function instanceProvider(): iterable {
 		// empty
 		$entity = self::getNewEmpty();
-		$entities[] = $entity;
+		yield [ $entity ];
 
 		// ID only
 		$entity = clone $entity;
 		$entity->setId( new ItemId( 'Q44' ) );
-
-		$entities[] = $entity;
+		yield [ $entity ];
 
 		// with labels and stuff
 		$entity = self::getNewEmpty();
 		$entity->setAliases( 'en', [ 'o', 'noez' ] );
 		$entity->setLabel( 'de', 'spam' );
 		$entity->setDescription( 'en', 'foo bar baz' );
-
-		$entities[] = $entity;
+		yield [ $entity ];
 
 		// with labels etc and ID
 		$entity = clone $entity;
 		$entity->setId( new ItemId( 'Q42' ) );
-
-		$entities[] = $entity;
-
-		$argLists = [];
-
-		foreach ( $entities as $entity ) {
-			$argLists[] = [ $entity ];
-		}
-
-		return $argLists;
+		yield [ $entity ];
 	}
 
 	/**

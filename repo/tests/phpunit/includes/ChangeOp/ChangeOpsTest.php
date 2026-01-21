@@ -43,12 +43,9 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function changeOpProvider(): iterable {
-		$ops = [];
-		$ops[] = [ ChangeOpLabel::class, [ 'en', 'myNewLabel' ] ];
-		$ops[] = [ ChangeOpDescription::class, [ 'de', 'myNewDescription' ] ];
-		$ops[] = [ ChangeOpLabel::class, [ 'en', null ] ];
-
-		return $ops;
+		yield [ ChangeOpLabel::class, [ 'en', 'myNewLabel' ] ];
+		yield [ ChangeOpDescription::class, [ 'de', 'myNewDescription' ] ];
+		yield [ ChangeOpLabel::class, [ 'en', null ] ];
 	}
 
 	/**

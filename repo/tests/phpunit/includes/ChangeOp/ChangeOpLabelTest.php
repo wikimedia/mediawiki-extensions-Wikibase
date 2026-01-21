@@ -36,13 +36,10 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function changeOpLabelProvider(): iterable {
-		$args = [];
-		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
-		$args['set to null'] = [ [ 'en', null ], '' ];
-		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
-		$args['remove invalid'] = [ [ 'INVALID', null ], '' ];
-
-		return $args;
+		yield 'update' => [ [ 'en', 'myNew' ], 'myNew' ];
+		yield 'set to null' => [ [ 'en', null ], '' ];
+		yield 'noop' => [ [ 'en', 'DUPE' ], 'DUPE' ];
+		yield 'remove invalid' => [ [ 'INVALID', null ], '' ];
 	}
 
 	/**
@@ -133,14 +130,11 @@ class ChangeOpLabelTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function validateProvider(): iterable {
-		$args = [];
-		$args['valid label'] = [ [ 'fr', 'valid' ], true ];
-		$args['remove invalid language'] = [ [ 'INVALID', null ], true ];
-		$args['invalid label'] = [ [ 'fr', 'INVALID' ], false ];
-		$args['duplicate label'] = [ [ 'fr', 'DUPE' ], false ];
-		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
-
-		return $args;
+		yield 'valid label' => [ [ 'fr', 'valid' ], true ];
+		yield 'remove invalid language' => [ [ 'INVALID', null ], true ];
+		yield 'invalid label' => [ [ 'fr', 'INVALID' ], false ];
+		yield 'duplicate label' => [ [ 'fr', 'DUPE' ], false ];
+		yield 'invalid language' => [ [ 'INVALID', 'valid' ], false ];
 	}
 
 	/**

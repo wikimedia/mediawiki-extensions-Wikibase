@@ -36,13 +36,10 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function changeOpDescriptionProvider(): iterable {
-		$args = [];
-		$args['update'] = [ [ 'en', 'myNew' ], 'myNew' ];
-		$args['set to null'] = [ [ 'en', null ], '' ];
-		$args['noop'] = [ [ 'en', 'DUPE' ], 'DUPE' ];
-		$args['remove invalid'] = [ [ 'INVALID', null ], '' ];
-
-		return $args;
+		yield 'update' => [ [ 'en', 'myNew' ], 'myNew' ];
+		yield 'set to null' => [ [ 'en', null ], '' ];
+		yield 'noop' => [ [ 'en', 'DUPE' ], 'DUPE' ];
+		yield 'remove invalid' => [ [ 'INVALID', null ], '' ];
 	}
 
 	/**
@@ -134,14 +131,11 @@ class ChangeOpDescriptionTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function validateProvider(): iterable {
-		$args = [];
-		$args['valid description'] = [ [ 'fr', 'valid' ], true ];
-		$args['remove invalid language'] = [ [ 'INVALID', null ], true ];
-		$args['invalid description'] = [ [ 'fr', 'INVALID' ], false ];
-		$args['duplicate description'] = [ [ 'fr', 'DUPE' ], false ];
-		$args['invalid language'] = [ [ 'INVALID', 'valid' ], false ];
-
-		return $args;
+		yield 'valid description' => [ [ 'fr', 'valid' ], true ];
+		yield 'remove invalid language' => [ [ 'INVALID', null ], true ];
+		yield 'invalid description' => [ [ 'fr', 'INVALID' ], false ];
+		yield 'duplicate description' => [ [ 'fr', 'DUPE' ], false ];
+		yield 'invalid language' => [ [ 'INVALID', 'valid' ], false ];
 	}
 
 	/**

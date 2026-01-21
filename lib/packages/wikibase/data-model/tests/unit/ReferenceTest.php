@@ -23,51 +23,31 @@ use Wikibase\DataModel\Snak\SnakList;
  */
 class ReferenceTest extends \PHPUnit\Framework\TestCase {
 
-	public static function snakListProvider() {
-		$snakLists = [];
+	public static function snakListProvider(): iterable {
+		yield [ new SnakList() ];
 
-		$snakLists[] = new SnakList();
-
-		$snakLists[] = new SnakList(
+		yield [ new SnakList(
 			[ new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ) ]
-		);
+		) ];
 
-		$snakLists[] = new SnakList( [
+		yield [ new SnakList( [
 			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
 			new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
 			new PropertyNoValueSnak( new NumericPropertyId( 'P3' ) ),
-		] );
-
-		$argLists = [];
-
-		foreach ( $snakLists as $snakList ) {
-			$argLists[] = [ $snakList ];
-		}
-
-		return $argLists;
+		] ) ];
 	}
 
-	public static function instanceProvider() {
-		$references = [];
+	public static function instanceProvider(): iterable {
+		yield [ new Reference() ];
 
-		$references[] = new Reference();
-
-		$references[] = new Reference( [
+		yield [ new Reference( [
 			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
-		] );
+		] ) ];
 
-		$references[] = new Reference( [
+		yield [ new Reference( [
 			new PropertyValueSnak( new NumericPropertyId( 'P1' ), new StringValue( 'a' ) ),
 			new PropertySomeValueSnak( new NumericPropertyId( 'P2' ) ),
-		] );
-
-		$argLists = [];
-
-		foreach ( $references as $reference ) {
-			$argLists[] = [ $reference ];
-		}
-
-		return $argLists;
+		] ) ];
 	}
 
 	/**

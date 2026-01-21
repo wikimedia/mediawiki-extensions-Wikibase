@@ -28,21 +28,19 @@ class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSameSize( $settings, $settingsArray );
 	}
 
-	public static function settingProvider() {
-		$argLists = [];
+	public static function settingProvider(): iterable {
+		yield [ [] ];
 
-		$argLists[] = [ [] ];
-
-		$argLists[] = [ [
+		yield [ [
 			'foo' => 'bar',
 		] ];
 
-		$argLists[] = [ [
+		yield [ [
 			'foo' => 'bar',
 			'baz' => 'bah',
 		] ];
 
-		$argLists[] = [ [
+		yield [ [
 			'foo' => 'bar',
 			'baz' => 'bah',
 			'blah' => 'bah',
@@ -51,8 +49,6 @@ class SettingsArrayTest extends \PHPUnit\Framework\TestCase {
 			'spam' => false,
 			'hax' => null,
 		] ];
-
-		return $argLists;
 	}
 
 	/**

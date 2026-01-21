@@ -29,31 +29,13 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class SnakTest extends \PHPUnit\Framework\TestCase {
 
-	public static function snakProvider() {
-		$snaks = [];
-
+	public static function snakProvider(): iterable {
 		$id42 = new NumericPropertyId( 'p42' );
 
-		$snaks[] = new PropertyNoValueSnak( $id42 );
-
-		$snaks[] = new PropertySomeValueSnak( $id42 );
-
-		$values = [];
-
-		$values[] = new StringValue( 'Ohi there!' );
-		$values[] = new NumberValue( 42 );
-
-		foreach ( $values as $value ) {
-			$snaks[] = new PropertyValueSnak( $id42, $value );
-		}
-
-		$argLists = [];
-
-		foreach ( $snaks as $snak ) {
-			$argLists[] = [ $snak ];
-		}
-
-		return $argLists;
+		yield [ new PropertyNoValueSnak( $id42 ) ];
+		yield [ new PropertySomeValueSnak( $id42 ) ];
+		yield [ new PropertyValueSnak( $id42, new StringValue( 'Ohi there!' ) ) ];
+		yield [ new PropertyValueSnak( $id42, new NumberValue( 42 ) ) ];
 	}
 
 	/**

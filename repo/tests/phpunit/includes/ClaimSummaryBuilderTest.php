@@ -13,6 +13,7 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Summary;
@@ -30,6 +31,9 @@ use Wikibase\Repo\Diff\ClaimDiffer;
  */
 class ClaimSummaryBuilderTest extends TestCase {
 
+	/**
+	 * @return iterable<Snak>
+	 */
 	protected static function snakProvider(): iterable {
 		yield 'novalue' => new PropertyNoValueSnak( 42 );
 		yield 'somevalue' => new PropertySomeValueSnak( 9001 );
