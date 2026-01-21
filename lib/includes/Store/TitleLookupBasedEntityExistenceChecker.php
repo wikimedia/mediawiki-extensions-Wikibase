@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**

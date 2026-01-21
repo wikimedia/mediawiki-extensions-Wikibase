@@ -6,7 +6,7 @@ namespace Wikibase\Client\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageRecord;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Title\Title;
