@@ -11,6 +11,7 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 
 /**
@@ -28,7 +29,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 	public function testSearch(
 		array $items,
 		PropertyValueFilter|AndOperation $filter,
-		array $expectedResults
+		ItemSearchResultSet $expectedResults
 	): void {
 		$search = new InMemoryFacetedItemSearchEngine();
 
@@ -51,7 +52,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 		yield 'no items returns empty array' => [
 			'items' => [],
 			'filter' => new PropertyValueFilter( $property1Id, null ),
-			'expectedResults' => [],
+			'expectedResults' => new ItemSearchResultSet( [], 0 ),
 		];
 
 		yield 'property filter without value returns matching item' => [
@@ -62,7 +63,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 					->build(),
 			],
 			'filter' => new PropertyValueFilter( $property1Id, null ),
-			'expectedResults' => [ new ItemSearchResult( $item1Id ) ],
+			'expectedResults' => new ItemSearchResultSet( [ new ItemSearchResult( $item1Id ) ], 1 ),
 		];
 
 		$statement = NewStatement::forProperty( $property1Id )->withValue( new EntityIdValue( $item2Id ) )->build();
@@ -72,7 +73,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 				NewItem::withId( $item2Id )->andStatement( NewStatement::noValueFor( $property1Id ) )->build(),
 			],
 			'filter' => new PropertyValueFilter( $property1Id, 'stringValue' ),
-			'expectedResults' => [],
+			'expectedResults' => new ItemSearchResultSet( [], 0 ),
 		];
 
 		$stringValue = 'stringValue';
@@ -84,7 +85,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 				NewItem::withId( $item2Id )->andStatement( $statementWithStringValue )->build(),
 			],
 			'filter' => new PropertyValueFilter( $property1Id, $stringValue ),
-			'expectedResults' => [ new ItemSearchResult( $item1Id ), new ItemSearchResult( $item2Id ) ],
+			'expectedResults' => new ItemSearchResultSet( [ new ItemSearchResult( $item1Id ), new ItemSearchResult( $item2Id ) ], 2 ),
 		];
 
 		yield 'nested filters without value returns matching item' => [
@@ -99,7 +100,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 				new PropertyValueFilter( $property1Id, null ),
 				new AndOperation( [ new PropertyValueFilter( $property2Id, null ) ] ),
 			] ),
-			'expectedResults' => [ new ItemSearchResult( $item1Id ) ],
+			'expectedResults' => new ItemSearchResultSet( [ new ItemSearchResult( $item1Id ) ], 1 ),
 		];
 
 		$itemIdValue = 'Q3';
@@ -118,9 +119,7 @@ class InMemoryFacetedItemSearchEngineTest extends TestCase {
 				new PropertyValueFilter( $property1Id, null ),
 				new AndOperation( [ new PropertyValueFilter( $property2Id, $itemIdValue ) ] ),
 			] ),
-			'expectedResults' => [
-				new ItemSearchResult( $item1Id ),
-			],
+			'expectedResults' => new ItemSearchResultSet( [ new ItemSearchResult( $item1Id ) ], 1 ),
 		];
 	}
 }

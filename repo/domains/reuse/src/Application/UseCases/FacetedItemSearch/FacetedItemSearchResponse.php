@@ -2,18 +2,15 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch;
 
-use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 
 /**
  * @license GPL-2.0-or-later
  */
 class FacetedItemSearchResponse {
 
-	/**
-	 * @param ItemSearchResult[] $results
-	 */
 	public function __construct(
-		public readonly array $results
+		public readonly ItemSearchResultSet $results
 	) {
 	}
 }

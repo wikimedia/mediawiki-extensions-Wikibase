@@ -123,6 +123,7 @@ class Types {
 			'fields' => [
 				'endCursor' => Type::string(),
 				'hasPreviousPage' => Type::nonNull( Type::boolean() ),
+				'hasNextPage' => Type::nonNull( Type::boolean() ),
 				'startCursor' => Type::string(),
 			],
 		] );

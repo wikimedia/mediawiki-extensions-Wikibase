@@ -9,6 +9,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchResponse;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\SearchNotAvailable;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
@@ -41,14 +42,14 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$facetedItemSearch->expects( $this->once() )
 			->method( 'execute' )
 			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, 10 ) )
-			->willReturn( new FacetedItemSearchResponse( [] ) );
+			->willReturn( new FacetedItemSearchResponse( new ItemSearchResultSet( [], 0 ) ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
 			->resolve( [ 'property' => 'P1' ], 50, $cursor );
 
 		$this->assertSame( [
 			'edges' => [],
-			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => true, 'startCursor' => null ],
+			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => true, 'hasNextPage' => false, 'startCursor' => null ],
 		], $result );
 	}
 
@@ -60,14 +61,14 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$facetedItemSearch->expects( $this->once() )
 			->method( 'execute' )
 			->with( new FacetedItemSearchRequest( [ 'property' => 'P1' ], 50, 0 ) )
-			->willReturn( new FacetedItemSearchResponse( [] ) );
+			->willReturn( new FacetedItemSearchResponse( new ItemSearchResultSet( [], 0 ) ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
 			->resolve( [ 'property' => 'P1' ], 50, $cursor );
 
 		$this->assertSame( [
 			'edges' => [],
-			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => false, 'startCursor' => null ],
+			'pageInfo' => [ 'endCursor' => null, 'hasPreviousPage' => false, 'hasNextPage' => false, 'startCursor' => null ],
 		], $result );
 	}
 

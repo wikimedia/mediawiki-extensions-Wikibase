@@ -96,8 +96,18 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		];
 
 		yield 'simple searchItems query with cursor' => [
-			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) 
-			{ edges { node { id } cursor } pageInfo { endCursor hasPreviousPage startCursor } } }",
+			"{ searchItems( query: { property: \"{$itemProperty->getId()}\" } ) {
+				 edges {
+					node { id }
+					cursor
+				}
+				 pageInfo {
+					endCursor
+					hasPreviousPage
+					hasNextPage
+					startCursor
+				 }
+			  } }",
 			[
 				'data' => [
 					'searchItems' => [
@@ -107,6 +117,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						'pageInfo' => [
 							'endCursor' => $this->encodeOffsetAsCursor( 1 ),
 							'hasPreviousPage' => false,
+							'hasNextPage' => false,
 							'startCursor' => $this->encodeOffsetAsCursor( 1 ),
 						],
 					],
@@ -168,7 +179,15 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			"{  searchItems(
 				query: { property: \"{$stringProperty->getId()}\" },
 				first: 2
-			) { edges { node { id } } pageInfo { endCursor hasPreviousPage startCursor } } }",
+				) {
+				edges { node { id } }
+				pageInfo {
+					endCursor
+					hasPreviousPage
+					hasNextPage
+					startCursor
+				}
+			 } }",
 			[
 				'data' => [
 					'searchItems' => [
@@ -179,6 +198,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						'pageInfo' => [
 							'endCursor' => $this->encodeOffsetAsCursor( 2 ),
 							'hasPreviousPage' => false,
+							'hasNextPage' => true,
 							'startCursor' => $this->encodeOffsetAsCursor( 1 ),
 						],
 					],
@@ -191,7 +211,15 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			"{  searchItems(
 				query: { property: \"{$stringProperty->getId()}\" },
 				after: \"{$offset}\"
-			) { edges { node { id } } pageInfo { endCursor hasPreviousPage startCursor } } }",
+			) {
+				edges { node { id } }
+				pageInfo {
+					endCursor
+					hasPreviousPage
+					hasNextPage
+					startCursor
+				}
+			  } }",
 			[
 				'data' => [
 					'searchItems' => [
@@ -202,6 +230,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						'pageInfo' => [
 							'endCursor' => $this->encodeOffsetAsCursor( 3 ),
 							'hasPreviousPage' => true,
+							'hasNextPage' => false,
 							'startCursor' => $this->encodeOffsetAsCursor( 2 ),
 						],
 					],
@@ -215,7 +244,15 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				query: { property: \"{$stringProperty->getId()}\" },
 				first: 1,
 				after: \"{$offset}\"
-			) { edges { node { id } } pageInfo { endCursor hasPreviousPage startCursor } } }",
+			) {
+				edges { node { id } }
+				pageInfo {
+					endCursor
+					hasPreviousPage
+					hasNextPage
+					startCursor
+				}
+			 } }",
 			[
 				'data' => [
 					'searchItems' => [
@@ -225,6 +262,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						'pageInfo' => [
 							'endCursor' => $this->encodeOffsetAsCursor( 2 ),
 							'hasPreviousPage' => true,
+							'hasNextPage' => true,
 							'startCursor' => $this->encodeOffsetAsCursor( 2 ),
 						],
 					],
@@ -238,6 +276,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 				pageInfo {
 					startCursor
 					endCursor
+					hasNextPage
 					hasPreviousPage
 				}
 			} }",
@@ -247,6 +286,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						'pageInfo' => [
 							'endCursor' => null,
 							'hasPreviousPage' => false,
+							'hasNextPage' => false,
 							'startCursor' => null,
 						],
 					],
