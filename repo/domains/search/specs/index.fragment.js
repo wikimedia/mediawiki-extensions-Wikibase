@@ -15,7 +15,7 @@ const openapi = {
 		}
 	],
 	"paths": {
-		"/v0/search/items": {
+		"/v1/search/items": {
 			"get": {
 				"operationId": "simpleItemSearch",
 				"tags": [ "item search" ],
@@ -35,7 +35,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v0/search/properties": {
+		"/v1/search/properties": {
 			"get": {
 				"operationId": "simplePropertySearch",
 				"tags": [ "property search" ],
@@ -55,7 +55,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v0/suggest/items": {
+		"/v1/suggest/items": {
 			"get": {
 				"operationId": "suggestItems",
 				"tags": [ "item search" ],
@@ -75,7 +75,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v0/suggest/properties": {
+		"/v1/suggest/properties": {
 			"get": {
 				"operationId": "suggestProperties",
 				"tags": [ "property search" ],

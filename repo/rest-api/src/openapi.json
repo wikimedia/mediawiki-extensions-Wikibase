@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "1.4",
+    "version": "1.5",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Reuse Team",
@@ -32972,7 +32972,7 @@
         }
       }
     },
-    "/v0/search/items": {
+    "/v1/search/items": {
       "get": {
         "operationId": "simpleItemSearch",
         "tags": [
@@ -33205,7 +33205,7 @@
         }
       }
     },
-    "/v0/search/properties": {
+    "/v1/search/properties": {
       "get": {
         "operationId": "simplePropertySearch",
         "tags": [
@@ -33438,7 +33438,7 @@
         }
       }
     },
-    "/v0/suggest/items": {
+    "/v1/suggest/items": {
       "get": {
         "operationId": "suggestItems",
         "tags": [
@@ -33671,7 +33671,7 @@
         }
       }
     },
-    "/v0/suggest/properties": {
+    "/v1/suggest/properties": {
       "get": {
         "operationId": "suggestProperties",
         "tags": [

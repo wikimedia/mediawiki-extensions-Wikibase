@@ -13,7 +13,7 @@ async function createProperty( property ) {
 
 function newSearchRequest( language, searchTerm ) {
 	return new RequestBuilder()
-		.withRoute( 'GET', '/v0/suggest/properties' )
+		.withRoute( 'GET', '/v1/suggest/properties' )
 		.withQueryParam( 'language', language )
 		.withQueryParam( 'q', searchTerm );
 }
