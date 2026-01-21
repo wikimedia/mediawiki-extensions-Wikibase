@@ -13,5 +13,6 @@
 	"wikibase-linkitem-selectlink": "Selecciona un sitio i unha página que quéira enlazal a ésta página.",
 	"wikibase-linkitem-input-site": "Léngua:",
 	"wikibase-linkitem-input-page": "Página:",
-	"wikibase-rc-hide-wikidata-hide": "Ocultal"
+	"wikibase-rc-hide-wikidata-hide": "Ocultal",
+	"wikibase-rc-hide-wikidata-show": "Mostral"
 }

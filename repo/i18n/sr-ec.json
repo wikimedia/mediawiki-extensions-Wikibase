@@ -41,6 +41,7 @@
 	"wikibase-publishing-succeeded": "Ваше измене су сачуване!",
 	"wikibase-remove-inprogress": "Уклањање...",
 	"wikibase-statementlistview-add": "додај вредност",
+	"wikibase-addvalue": "Додај вредност",
 	"wikibase-statementlistview-add-tooltip": "Додајте нову вредност",
 	"wikibase-statementgrouplistview-add": "додај изјаву",
 	"wikibase-statementgrouplistview-add-tooltip": "Додајте нову изјаву",
