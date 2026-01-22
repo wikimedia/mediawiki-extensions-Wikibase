@@ -3,8 +3,8 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
-use MediaWiki\Cache\LinkBatch;
 use MediaWiki\FileRepo\RepoGroup;
+use MediaWiki\Page\LinkBatch;
 use MediaWiki\Page\LinkBatchFactory;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
