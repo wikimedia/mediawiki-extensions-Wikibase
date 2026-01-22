@@ -33,6 +33,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
@@ -52,6 +54,8 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 
 	/** @var Item[] */
 	private static array $items = [];
+	private static ?ItemId $redirectSource = null;
+	private static ?ItemId $redirectTarget = null;
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
 	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
@@ -759,6 +763,35 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
+
+		self::$redirectSource = new ItemId( 'Q9999999' );
+		self::$redirectTarget = $item->getId();
+		$itemWithRedirectValue = self::createItem( NewItem::withLabel( 'en', 'redirect value test' ) );
+		$itemWithRedirectValue->getStatements()->addStatement(
+			NewStatement::forProperty( $itemProperty->getId() )
+				->withSubject( $itemWithRedirectValue->getId() )
+				->withSomeGuid()
+				->withValue( self::$redirectSource )
+				->build()
+		);
+		yield 'redirected item value' => [
+			"{ item(id: \"{$itemWithRedirectValue->getId()}\") {
+				statements(propertyId: \"{$itemProperty->getId()}\") {
+					value {
+						...on ItemValue { label(languageCode: \"en\") }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [ [
+							'value' => [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ],
+						] ],
+					],
+				],
+			],
+		];
 	}
 
 	/**
@@ -990,6 +1023,14 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 			'WikibaseRepo.PrefetchingTermLookup',
 			$termLookup ?? $this->createStub( PrefetchingTermLookup::class ),
 		);
+
+		$revisionLookup = $this->createStub( EntityRevisionLookup::class );
+		$revisionLookup->method( 'getLatestRevisionId' )->willReturnCallback(
+			fn( ItemId $id ) => $id->equals( self::$redirectSource )
+				? LatestRevisionIdResult::redirect( 321, self::$redirectTarget )
+				: LatestRevisionIdResult::concreteRevision( 1, '20260101001122' )
+		);
+		$this->setService( 'WikibaseRepo.EntityRevisionLookup', $revisionLookup );
 
 		$this->setTemporaryHook( 'WikibaseRepoDataTypes', function ( array &$dataTypes ): void {
 			$dataTypes['PT:' . self::CUSTOM_ENTITY_DATA_TYPE] = [
