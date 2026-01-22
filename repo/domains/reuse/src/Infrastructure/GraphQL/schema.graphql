@@ -61,6 +61,7 @@ type StringValue {
 type ItemValue implements LabelProvider {
   id: String!
   label(languageCode: LanguageCode!): String
+  description(languageCode: LanguageCode!): String
 }
 
 type PropertyValue implements LabelProvider {

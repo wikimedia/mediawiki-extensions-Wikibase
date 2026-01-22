@@ -202,10 +202,11 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 		];
 
 		$itemProperty = $this->createProperty( 'wikibase-item' );
-		$statementValueItemEnLabel = 'statement value item';
-		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', $statementValueItemEnLabel ) );
-		$qualifierValueItemEnLabel = 'statement value item';
-		$itemUsedAsQualifierValue = $this->createItem( NewItem::withLabel( 'en', $qualifierValueItemEnLabel ) );
+		$itemUsedAsStatementValue = $this->createItem(
+			NewItem::withLabel( 'en', 'statement value item label' )
+				->andDescription( 'en', 'statement value item description' )
+		);
+		$itemUsedAsQualifierValue = $this->createItem( NewItem::withLabel( 'en', 'qualifier value item label' ) );
 		$statementWithItemValue = NewStatement::forProperty( $itemProperty->getId() )
 			->withSubject( $itemId )
 			->withSomeGuid()
@@ -644,12 +645,13 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 				],
 			],
 		];
-		yield 'labels of item values' => [
+		yield 'labels and descriptions of item values' => [
 			"{ item(id: \"$itemId\") {
 				statements(propertyId: \"{$itemProperty->getId()}\") {
 					value {
 						... on ItemValue {
 							label(languageCode: \"en\")
+							description(languageCode: \"en\")
 						}
 					}
 					qualifiers(propertyId: \"{$itemProperty->getId()}\") {
@@ -668,6 +670,7 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 							[
 								'value' => [
 									'label' => $itemUsedAsStatementValue->getLabels()->getByLanguage( 'en' )->getText(),
+									'description' => $itemUsedAsStatementValue->getDescriptions()->getByLanguage( 'en' )->getText(),
 								],
 								'qualifiers' => [
 									[
