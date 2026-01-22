@@ -13,16 +13,15 @@
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
 				<template v-if="editStatementDataLoaded">
-					<div
+					<template
 						v-for="statementGuid in editableStatementGuidsWithoutNewStatement"
 						:key="statementGuid"
-						class="wikibase-wbui2025-edit-statement-value-form-modal"
 					>
 						<wikibase-wbui2025-edit-statement
 							:statement-id="statementGuid"
 							@remove="removeStatement"
 						></wikibase-wbui2025-edit-statement>
-					</div>
+					</template>
 				</template>
 				<div
 					v-else
