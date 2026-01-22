@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use ArrayIterator;
-use MediaWiki\Cache\LinkBatch;
 use MediaWiki\Language\Language;
+use MediaWiki\Page\LinkBatch;
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
