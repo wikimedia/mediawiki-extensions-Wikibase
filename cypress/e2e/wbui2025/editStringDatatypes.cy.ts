@@ -197,7 +197,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			// Intercept the API for commons
 			interceptCommonsSearch( {
 				totalhits: 132,
-				hasContinue: true,
 				results: [
 					{
 						ns: 486,
@@ -329,7 +328,6 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			// Intercept the API for commons
 			interceptCommonsSearch( {
 				totalhits: 239292,
-				hasContinue: true,
 				results: [
 					{
 						ns: 486,
