@@ -500,7 +500,7 @@
 	"wikibase-save-unresolved-redirect": "Redirection non résolue rencontrée de $1 vers $2 en essayant d’enregistrer une modification.",
 	"wikibase-restoreold": "restaurer",
 	"wikibase-entity-summary-restore": "Révision [[Special:Permalink/$3|$3]] par [[Special:Contributions/$4|{{GENDER:$4|}}$4]] ([[User talk:$4|Discuter]]) restaurée",
-	"wikibase-entity-summary-undo": "Révision [[Special:Diff/$3|$3]] par [[Special:Contributions/$4|{{GENDER:$4|}}$4]] ([[User talk:$4|Discuter]]) annulée",
+	"wikibase-entity-summary-undo": "Annulation de la [[Special:Diff/$3|modification]] de [[Special:Contributions/$4|{{GENDER:$4|}}$4]] ([[User talk:$4|Discuter]])",
 	"wikibase-no-direct-editing": "La modification directe est désactivée dans l’espace de noms $1",
 	"wikibase-noentity": "Cette entité n’existe pas. Vous pouvez [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} rechercher dans les journaux concernés] pour savoir où elle est allée.",
 	"wikibase-noentity-createone": "Vous pouvez aussi [[$1|en créer une nouvelle]].",

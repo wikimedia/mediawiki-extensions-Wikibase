@@ -5,14 +5,18 @@
 			"TayfunEt.",
 			"Tenzin Thoesam",
 			"Zolgoyo",
-			"Dhondup"
+			"Dhondup",
+			"Pecha-Tsewang"
 		]
 	},
 	"wikibase-comment-unlink": "ཤོག་ངོས་འདི་{{WBREPONAME}} ནས་སྦྲེལ་མཐུད་བཅད་སོང། སྐད་ཡིག་སྦྲེལ་མཐུད་སྤོས་སོང།",
+	"wikibase-dataitem": "{{WBREPONAME}} དོན་ཚན།",
 	"wikibase-editlinks": "དྲ་ཐག་བསྐྱར་སྒྲིག",
 	"wikibase-addlinkstitle": "སྐད་ཡིག་འབྲེལ་བ་སྣོན་",
 	"wikibase-linkitem-addlinks": "དྲ་ཐག་ཞོག",
 	"wikibase-linkitem-title": "འབྲེལ་ཡོད་ཤོག་ངོས་དང་སྦྲེལ།",
+	"wikibase-linkitem-linkpage": "ཤོག་ངོས་དང་སྦྲེལ་མཐུད་བྱོས།",
+	"wikibase-linkitem-selectlink": "ཤོག་ངོས་འདི་དང་སྦྲེལ་མཐུད་བྱེད་པར་འདོད་པའི་དྲ་ཚིགས་དང་ཤོག་ངོས་ཤིག་གདམ་ཀ་བྱེད་རོགས།",
 	"wikibase-linkitem-input-site": "སྐད་རིགས།:",
 	"wikibase-linkitem-input-page": "ཤོག་ངོས།:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
