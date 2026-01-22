@@ -50,7 +50,9 @@ export class AddStatementFormPage {
 	}
 
 	public setSnakValue( inputText: string ): this {
-		this.snakValueInput().type( inputText );
+		this.snakValueInput().clear();
+		this.snakValueInput().type( inputText, { parseSpecialCharSequences: false } );
+		this.snakValueInput().should( 'have.value', inputText );
 		return this;
 	}
 
