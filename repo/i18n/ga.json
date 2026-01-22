@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aindriu80",
 			"Kscanne",
 			"Kwekubo",
 			"MinecraftAustralia",
@@ -12,6 +13,7 @@
 	"wikibase-save": "Sábháil",
 	"wikibase-cancel": "Cealaigh",
 	"wikibase-add": "cuir leis",
+	"wikibase-label-empty": "Gan lipéad sainmhínithe",
 	"wikibase-description-empty": "Níl aon chur síos ann",
 	"wikibase-sitelinks-special": "Suíomhanna eile",
 	"wikibase-itembytitle-lookup-page": "Leathanach:",
