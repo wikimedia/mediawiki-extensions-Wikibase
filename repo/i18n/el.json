@@ -383,7 +383,7 @@
 	"wikibase-redirect-permissiondenied": "Δεν έχετε δικαίωμα πρόσβασης.",
 	"special-mylanguagefallbackchain": "Η αλυσίδα γλωσσικών υποκατάστατών μου",
 	"wikibase-mylanguagefallbackchain-text": "Η αλυσίδα γλωσσικών υποκατάστατων που χρησιμοποιείται για την εμφάνιση ετικετών οντοτήτων για εσάς φαίνεται παρακάτω.",
-	"wikibase-mylanguagefallbackchain-babel": "Μπορείτε να την επεξεργαστείτε βάζοντας<nowiki>{{#babel: }}</nowiki> στην [[Special:MyPage|σελίδα χρήστη]]{{GENDER:$1| σας}}.",
+	"wikibase-mylanguagefallbackchain-babel": "Μπορείτε να την επεξεργαστείτε βάζοντας <nowiki>{{#babel: }}</nowiki> στην [[Special:MyPage|σελίδα {{GENDER:$1| χρήστη}}]] σας.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, μετατράπηκε από $3 - $4",
 	"wikibase-api-claim-value-missing": "Πρέπει να παρέχεται μια τιμή κατά τη δημιουργία ισχυρισμού με το snak PropertyValueSnak.",
 	"wikibase-api-claim-value-unexpected": "Δεν μπορείτε να παρέχετε μια τιμή όταν δημιουργείτε έναν ισχυρισμό χωρίς το PropertyValueSnak ως κύριο snak.",
