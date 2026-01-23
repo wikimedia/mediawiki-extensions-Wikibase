@@ -100,7 +100,9 @@ $wgWBRepoSettings['tmpEnableGraphQL'] = true;
 
 Please run the following commands from the Wikibase repository's root directory using [mwcli](https://www.mediawiki.org/wiki/Cli):
 * running all tests: `mw dev mw exec -- composer -d ../.. phpunit:entrypoint extensions/Wikibase/repo/domains/reuse/tests/phpunit/`
-* generating the GraphQL schema SDL: `mw dev mediawiki mwscript ./extensions/Wikibase/repo/domains/reuse/src/Infrastructure/GraphQL/GenerateSDL.php`
 * linting:
   * `mw dev mw composer phpcs:reuse`
   * `mw dev mw composer phpcs repo/domains/reuse/`
+* generating the GraphQL schema SDL: `mw dev mediawiki mwscript ./extensions/Wikibase/repo/domains/reuse/src/Infrastructure/GraphQL/GenerateSDL.php`
+  * To generate the GraphQL schema SDL, your workspace must include at least one extension that provides an `EntityValue` type (e.g. EntitySchema or Lexeme).
+  This ensures that there is at least one data type using the generic `EntityValue` type, so the schema generator does not produce different schemas depending on which extensions are installed.
