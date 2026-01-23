@@ -224,6 +224,7 @@ class FormatEntities extends ApiBase {
 			'ids' => [
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_ISMULTI => true,
+				ParamValidator::PARAM_REQUIRED => true,
 			],
 			'generate' => [
 				ParamValidator::PARAM_TYPE => [
