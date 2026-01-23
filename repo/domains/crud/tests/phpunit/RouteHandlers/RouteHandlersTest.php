@@ -164,19 +164,17 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
-		$notExcluded = fn( $route ) => (
-			str_starts_with( $route['path'], '/wikibase/v1/entities' ) ||
-			str_starts_with( $route['path'], '/wikibase/v1/statements' )
-		);
+		$crudRoutes = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/entities' )
+			|| str_starts_with( $route['path'], '/wikibase/v1/statements' );
 		self::$prodRoutesData = array_filter(
 			json_decode( file_get_contents( __DIR__ . '/../../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
-			$notExcluded
+			$crudRoutes
 		);
 		self::$routesData = array_merge(
 			self::$prodRoutesData,
 			array_filter(
 				json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/routes.dev.json' ), true ),
-				$notExcluded
+				$crudRoutes
 			)
 		);
 	}

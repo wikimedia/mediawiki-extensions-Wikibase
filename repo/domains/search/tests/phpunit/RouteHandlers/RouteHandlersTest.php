@@ -33,7 +33,8 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
-		$searchRoutes = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v0' );
+		$searchRoutes = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/search' )
+			|| str_starts_with( $route['path'], '/wikibase/v1/suggest' );
 		$prodRoutes = array_filter(
 			json_decode( file_get_contents( __DIR__ . '/../../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
 			$searchRoutes
@@ -109,25 +110,25 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		// phpcs:disable Generic.Arrays.ArrayIndent.CloseBraceNotNewLine
 		yield 'SimpleItemSearch' => [ [
 			'useCase' => SimpleItemSearch::class,
-			'path' => '/wikibase/v0/search/items',
+			'path' => '/wikibase/v1/search/items',
 			'serviceName' => 'WbSearch.SimpleItemSearch',
 		] ];
 
 		yield 'SimplePropertySearch' => [ [
 			'useCase' => SimplePropertySearch::class,
-			'path' => '/wikibase/v0/search/properties',
+			'path' => '/wikibase/v1/search/properties',
 			'serviceName' => 'WbSearch.SimplePropertySearch',
 		] ];
 
 		yield 'ItemPrefixSearch' => [ [
 			'useCase' => ItemPrefixSearch::class,
-			'path' => '/wikibase/v0/suggest/items',
+			'path' => '/wikibase/v1/suggest/items',
 			'serviceName' => 'WbSearch.ItemPrefixSearch',
 		] ];
 
 		yield 'PropertyPrefixSearch' => [ [
 			'useCase' => PropertyPrefixSearch::class,
-			'path' => '/wikibase/v0/suggest/properties',
+			'path' => '/wikibase/v1/suggest/properties',
 			'serviceName' => 'WbSearch.PropertyPrefixSearch',
 		] ];
 	}
