@@ -295,33 +295,44 @@ module.exports = exports = defineComponent( {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-.content .cdx-popover__header p {
-	padding: 0;
-	margin: 0;
-	font-size: 0.875rem;
-	line-height: 1.4rem;
-	letter-spacing: -0.00263rem;
-}
+.wikibase-wbui2025-edit-statement-snak-value {
 
-.cdx-popover__header__button-wrapper {
-	position: absolute;
-	top: @spacing-25;
-	right: @spacing-50;
-}
+	.wikibase-wbui2025-snak-value {
 
-.cdx-popover {
-	padding: 0.75rem @spacing-100 @spacing-50 @spacing-100;
-}
-
-div.time-options {
-	p.option-and-select {
-		justify-content: space-between;
-		display: flex;
-		gap: 5px;
-
-		select {
-			margin-left: auto;
+		.cdx-text-input {
+			width: 100%;
 		}
+
+		.content .cdx-popover__header p {
+			padding: 0;
+			margin: 0;
+			font-size: 0.875rem;
+			line-height: 1.4rem;
+			letter-spacing: -0.00263rem;
+		}
+
+		.cdx-popover__header__button-wrapper {
+			position: absolute;
+			top: @spacing-25;
+			right: @spacing-50;
+		}
+
+		.cdx-popover {
+			padding: 0.75rem @spacing-100 @spacing-50 @spacing-100;
+		}
+
+		div.time-options {
+			p.option-and-select {
+				justify-content: space-between;
+				display: flex;
+				gap: 5px;
+
+				select {
+					margin-left: auto;
+				}
+			}
+		}
+
 	}
 }
 </style>
