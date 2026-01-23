@@ -209,6 +209,8 @@
 	"wikibase-item-reference-edit-placeholder": "Enter Item ID e.g. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Entered Item ID has invalid format",
 	"wikibase-item-reference-edit-nonexistent-item": "Item with this ID does not exist",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "will be displayed as:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatic",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" is not a valid Item ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "The language code \"$1\" is unknown. Please use a language code known to the system, such as \"en\".",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliases that contain pipes can only be edited on the page of the entity itself (with JavaScript enabled) or via the API",

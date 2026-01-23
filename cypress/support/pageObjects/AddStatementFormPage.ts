@@ -7,6 +7,7 @@ export class AddStatementFormPage {
 		SUBMIT_BUTTONS: '.wikibase-wbui2025-modal-overlay__footer__actions > .cdx-button',
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-edit-statement-snak-value input',
 		FORM: '.wikibase-wbui2025-add-statement-form',
+		TIME_OPTION_SELECT: '.time-options .option-and-select select',
 	};
 
 	public propertyLookup(): Chainable {
@@ -53,6 +54,16 @@ export class AddStatementFormPage {
 		this.snakValueInput().clear();
 		this.snakValueInput().type( inputText, { parseSpecialCharSequences: false } );
 		this.snakValueInput().should( 'have.value', inputText );
+		return this;
+	}
+
+	public setCalendar( calendarValue: string ): this {
+		cy.get( AddStatementFormPage.SELECTORS.TIME_OPTION_SELECT ).last().select( calendarValue );
+		return this;
+	}
+
+	public setPrecision( precision: string ): this {
+		cy.get( AddStatementFormPage.SELECTORS.TIME_OPTION_SELECT ).first().select( precision );
 		return this;
 	}
 

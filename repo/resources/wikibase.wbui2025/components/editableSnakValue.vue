@@ -18,7 +18,7 @@
 				v-if="snakTypeSelection === 'value'"
 				ref="inputElement"
 				:snak-key="snakKey"
-				:class="className"
+				:class-name="className"
 				:disabled="disabled"
 			></component>
 			<div v-else class="wikibase-wbui2025-novalue-somevalue-holder">
@@ -44,6 +44,7 @@ const { mapWritableState, mapActions } = require( 'pinia' );
 const { cdxIconTrash } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
+const Wbui2025EditableTimeSnakValue = require( './editableTimeSnakValue.vue' );
 const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue' );
 const { CdxButton, CdxIcon, CdxMenuButton } = require( '../../../codex.js' );
 
@@ -55,6 +56,7 @@ module.exports = exports = defineComponent( {
 		CdxIcon,
 		CdxMenuButton,
 		Wbui2025EditableStringSnakValue,
+		Wbui2025EditableTimeSnakValue,
 		Wbui2025EditableLookupSnakValue
 	},
 	props: {

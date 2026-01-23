@@ -44,6 +44,25 @@ describe( 'parsed value store', () => {
 			expect( parsedValue3 ).toEqual( { type: 'string', value: 'parsed P123:def' } );
 		} );
 
+		it( 'sends separate requests for different parser options', async () => {
+			const parsedValueStore = useParsedValueStore();
+			mockedParseValue.mockImplementation( ( value, options ) => Promise.resolve( {
+				type: 'string',
+				value: `parsed ${ value }:${ JSON.stringify( options ) }`
+			} ) );
+
+			const parsedValue1 = await parsedValueStore.getParsedValue( 'P123', 'abc', { property: 'P123' } );
+			const parsedValue3 = await parsedValueStore.getParsedValue(
+				'P123',
+				'abc',
+				{ property: 'P123', options: '{ "precision": 1 }' }
+			);
+
+			expect( mockedParseValue ).toHaveBeenCalledTimes( 2 );
+			expect( parsedValue1 ).toEqual( { type: 'string', value: 'parsed abc:{"property":"P123"}' } );
+			expect( parsedValue3 ).toEqual( { type: 'string', value: 'parsed abc:{"property":"P123","options":"{ \\"precision\\": 1 }"}' } );
+		} );
+
 	} );
 
 	describe( 'populateWithStatements', () => {
@@ -77,15 +96,15 @@ describe( 'parsed value store', () => {
 				]
 			} );
 
-			expect( parsedValueStore.peekParsedValue( 'P1', 'P1 main snak' ) )
+			expect( parsedValueStore.peekParsedValue( 'P1', 'P1 main snak', { property: 'P1' } ) )
 				.toEqual( { type: 'string', value: 'P1 main snak' } );
-			expect( parsedValueStore.peekParsedValue( 'P2', 'P1 qualifier P2' ) )
+			expect( parsedValueStore.peekParsedValue( 'P2', 'P1 qualifier P2', { property: 'P2' } ) )
 				.toEqual( { type: 'string', value: 'P1 qualifier P2' } );
-			expect( parsedValueStore.peekParsedValue( 'P3', 'P1 reference P3' ) )
+			expect( parsedValueStore.peekParsedValue( 'P3', 'P1 reference P3', { property: 'P3' } ) )
 				.toEqual( { type: 'string', value: 'P1 reference P3' } );
-			expect( parsedValueStore.peekParsedValue( 'P2', 'P2 main snak 1' ) )
+			expect( parsedValueStore.peekParsedValue( 'P2', 'P2 main snak 1', { property: 'P2' } ) )
 				.toEqual( { type: 'string', value: 'P2 main snak 1' } );
-			expect( parsedValueStore.peekParsedValue( 'P2', 'P2 main snak 2' ) )
+			expect( parsedValueStore.peekParsedValue( 'P2', 'P2 main snak 2', { property: 'P2' } ) )
 				.toEqual( { type: 'string', value: 'P2 main snak 2' } );
 		} );
 

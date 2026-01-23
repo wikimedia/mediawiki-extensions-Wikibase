@@ -62,12 +62,12 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
-			await parsedValueStore.getParsedValue( 'P1', v1 );
+			await parsedValueStore.getParsedValue( 'P1', v1, { property: 'P1' } );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v2 } );
-			await parsedValueStore.getParsedValue( 'P1', v2 );
+			await parsedValueStore.getParsedValue( 'P1', v2, { property: 'P1' } );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
@@ -121,7 +121,7 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
-			await parsedValueStore.getParsedValue( 'P1', v1 );
+			await parsedValueStore.getParsedValue( 'P1', v1, { property: 'P1' } );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
@@ -154,7 +154,7 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
-			await parsedValueStore.getParsedValue( 'P1', v1 );
+			await parsedValueStore.getParsedValue( 'P1', v1, { property: 'P1' } );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );
@@ -186,7 +186,7 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.isFullyParsed ).toBe( false );
 
 			mockedParseValue.mockResolvedValueOnce( { type: 'string', value: v1 } );
-			await parsedValueStore.getParsedValue( 'P1', v1 );
+			await parsedValueStore.getParsedValue( 'P1', v1, { property: 'P1' } );
 
 			expect( editStatementsStore.isFullyParsed ).toBe( true );
 		} );

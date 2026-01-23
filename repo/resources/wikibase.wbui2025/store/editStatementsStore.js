@@ -23,6 +23,10 @@ function sameDataValue( dv1, dv2 ) {
 			return dv1.value === dv2.value;
 		case 'wikibase-entityid':
 			return dv1.value.id === dv2.value.id && dv1.value[ 'entity-type' ] === dv2.value[ 'entity-type' ];
+		case 'time':
+			return dv1.value.time === dv2.value.time &&
+				dv1.value.calendarmodel === dv2.value.calendarmodel &&
+				dv1.value.precision === dv2.value.precision;
 		// TODO add cases for other data value types as we implement them (T407324)
 		default:
 			throw new Error( `Unsupported data value type ${ dv1.type }` );
@@ -41,6 +45,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	const hash = ref( undefined );
 	const lastCompleteTextvalue = ref( undefined );
 	const lastCompleteSelectionvalue = ref( undefined );
+	const precision = ref( undefined );
+	const calendar = ref( undefined );
 
 	// Getters
 
@@ -68,6 +74,10 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( snak.datavalue );
 			value.value = snak.datavalue.value;
 			valuetype.value = snak.datavalue.type;
+			if ( snak.datavalue.type === 'time' ) {
+				precision.value = snak.datavalue.value.precision;
+				calendar.value = snak.datavalue.value.calendarmodel;
+			}
 		}
 		hash.value = snak.hash;
 	}
@@ -126,6 +136,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		property,
 		datatype,
 		valuetype,
+		precision,
+		calendar,
 		hash,
 		valueStrategy,
 		isIncomplete,
