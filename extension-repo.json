@@ -660,6 +660,26 @@
 			"path": "/wikibase/v0/suggest/properties",
 			"method": "GET",
 			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\PropertyPrefixSearchRouteHandler::factory"
+		},
+		{
+			"path": "/wikibase/v1/search/items",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
+		},
+		{
+			"path": "/wikibase/v1/search/properties",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler::factory"
+		},
+		{
+			"path": "/wikibase/v1/suggest/items",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\ItemPrefixSearchRouteHandler::factory"
+		},
+		{
+			"path": "/wikibase/v1/suggest/properties",
+			"method": "GET",
+			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\PropertyPrefixSearchRouteHandler::factory"
 		}
 	],
 	"SpecialPages": {

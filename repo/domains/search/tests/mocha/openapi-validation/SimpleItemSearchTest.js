@@ -13,7 +13,7 @@ async function createItem( item ) {
 
 function newSearchRequest( language, searchTerm ) {
 	return new RequestBuilder()
-		.withRoute( 'GET', '/v0/search/items' )
+		.withRoute( 'GET', '/v1/search/items' )
 		.withQueryParam( 'language', language )
 		.withQueryParam( 'q', searchTerm );
 }
