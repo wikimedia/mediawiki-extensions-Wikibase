@@ -58,14 +58,18 @@ Example: The following query searches for items that have a statement using prop
     query: {
       and: [
         { property: "P1", value: "Q1" },
-        { property: "P2", value: "Q5" }]
+        { property: "P2", value: "Q5" }
+      ]
     }
   ) {
-    id
-    label(languageCode: "en")
+    edges {
+      node {
+        id
+        label(languageCode: "en")
+      }
+    }
   }
 }
-
 ```
 
 ## Development
