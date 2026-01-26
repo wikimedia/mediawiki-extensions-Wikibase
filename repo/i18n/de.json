@@ -225,6 +225,8 @@
 	"wikibase-item-reference-edit-placeholder": "Objektkennung eingeben, z.&nbsp;B. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Die eingegebene Objektkennung hat ein ungültiges Format",
 	"wikibase-item-reference-edit-nonexistent-item": "Das Objekt mit dieser Kennung ist nicht vorhanden",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "wird angezeigt als:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatisch",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ ist keine gültige Objektkennung.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Der Sprachcode „$1“ ist unbekannt. Bitte {{#FORMAL:nutze|nutzen Sie}} einen gültigen Sprachcode, wie bspw. „de“.",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliasse, die Pipes enthalten, können nur auf der Seite der Entität selbst (bei aktiviertem JavaScript) oder über die API bearbeitet werden.",

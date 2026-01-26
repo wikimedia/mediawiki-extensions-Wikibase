@@ -406,7 +406,7 @@
 	"wikibase-api-target-not-empty": "Přesměrování lze založit jen z prázdné nebo smazané entity.",
 	"wikibase-api-target-is-redirect": "Cíl přesměrování nesmí být sám přesměrováním.",
 	"wikibase-api-target-is-incompatible": "Pokus o přesměrování na entitu jiného typu.",
-	"wikibase-api-cant-redirect": "Nepodařilo se vytvořit přesměrování (možná kvůli tomu, že přesměrování mezi entitami těchto typů není vůbec podporováno)",
+	"wikibase-api-cant-redirect": "Nepodařilo se vytvořit přesměrování (možná kvůli tomu, že přesměrování mezi entitami těchto typů není vůbec podporováno).",
 	"wikibase-self-conflict-patched": "Do poslední verze byla začleněna vaše změna, která však přepsala některé z vašich mezilehlých změn.",
 	"wikibase-conflict-patched": "Vaše úprava byla začleněna do nejnovější verze.",
 	"wikibase-save-unresolved-redirect": "Při pokusu o uložení změny nalezeno neprovedené přesměrování z $1 na $2.",

@@ -204,6 +204,8 @@
 	"wikibase-item-reference-edit-placeholder": "Introduce o identificador do elemento; por exemplo, Q10",
 	"wikibase-item-reference-edit-invalid-format": "O identificador de elemento introducido ten un formato non válido",
 	"wikibase-item-reference-edit-nonexistent-item": "Non existe ningún elemento con este identificador",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "vaise amosar así:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automático",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non é un identificador de elemento válido.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Descoñécese o código de lingua \"$1\". Utiliza un código de lingua coñecido para o sistema, como \"gl\".",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Os pseudónimos que conteñen barras verticais só se poden editar na páxina da propia entidade (co JavaScript activado) ou a través da API",

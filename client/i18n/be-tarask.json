@@ -4,6 +4,7 @@
 			"Nieszczarda2",
 			"Red Winged Duck",
 			"Renessaince",
+			"Ucukor",
 			"Wizardist",
 			"Zedlik"
 		]
@@ -76,7 +77,7 @@
 	"entityusage": "Выкарыстаньне аб’ектаў",
 	"entityusage-summary": "Гэтая старонка пералічвае старонкі, што выкарыстоўваюць дадзены элемэнт (напр. Q42). Сьпіс сартаваны паводле адваротнага парадку ідэнтыфікатараў, таму навейшыя старонкі знаходзяцца ў ягоным пачатку.",
 	"wikibase-entityusage-invalid-id": "$1 не зьяўляецца слушным ідэнтыфікатарам элемэнту",
-	"wikibase-entityusage-legend": "Сьпіс старонак, што выкарыстоўваюць дадзены элемэнт",
+	"wikibase-entityusage-legend": "Сьпіс старонак, што ўжываюць дадзены элемэнт",
 	"wikibase-entityusage-entity": "Элемэнт:",
 	"wikibase-entityusage-submit": "Паказаць старонкі",
 	"wikibase-pageinfo-entity-id": "Ідэнтыфікатар аб’екта {{WBREPONAME}}",

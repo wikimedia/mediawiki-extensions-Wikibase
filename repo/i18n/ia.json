@@ -194,6 +194,8 @@
 	"wikibase-item-reference-edit-placeholder": "Insere le ID del elemento, p.ex. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Le ID de elemento inserite ha un formato non valide",
 	"wikibase-item-reference-edit-nonexistent-item": "Necun elemento con iste ID existe",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "essera monstrate como:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatic",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non es un ID de elemento valide.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Le codice de lingua \"$1\" es incognite. Per favor usa un codice de lingua que le systema cognosce, p.ex. \"en\".",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliases que contine barras vertical pote solmente esser modificate sur le pagina del entitate mesme (con JavaScript activate) o per medio del API.",
