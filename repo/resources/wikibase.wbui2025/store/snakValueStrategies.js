@@ -65,8 +65,42 @@ class LookupStringDatatypeStrategy extends StringValueStrategy {
 	}
 }
 
+class QuantityValueStrategy extends StringValueStrategy {
+	getParseOptions() {
+		const options = {
+			property: this.editSnakStore.property
+		};
+		if ( this.editSnakStore.unitconcepturi ) {
+			options.options = JSON.stringify( {
+				unit: this.editSnakStore.unitconcepturi
+			} );
+		}
+		return options;
+	}
+
+	async renderValueForTextInput( valueObject ) {
+		if ( !valueObject.value.amount ) {
+			return '';
+		}
+		const valueWithoutUnits = Object.assign(
+			{}, valueObject,
+			{
+				value: Object.assign(
+					{}, valueObject.value,
+					{ unit: '1' }
+				)
+			}
+		);
+		return renderSnakValueText( valueWithoutUnits );
+	}
+
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableQuantitySnakValue';
+	}
+}
+
 class TimeValueStrategy extends StringValueStrategy {
-	async renderValueToText( valueObject ) {
+	async renderValueForTextInput( valueObject ) {
 		return renderSnakValueText( valueObject );
 	}
 
@@ -98,10 +132,10 @@ class EntityValueStrategy extends LookupStringDatatypeStrategy {
 	}
 
 	getSelectionValueForSavedValue( valueObject ) {
-		return valueObject.value.id;
+		return valueObject.value ? valueObject.value.id : null;
 	}
 
-	async renderValueToText( valueObject ) {
+	async renderValueForTextInput( valueObject ) {
 		return renderSnakValueText( valueObject );
 	}
 
@@ -176,6 +210,7 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( store ) => new PropertyValueStrategy( store ),
 	( searchTerm, offset ) => searchForEntities( searchTerm, 'property', offset )
 );
+snakValueStrategyFactory.registerStrategyForDatatype( 'quantity', ( store ) => new QuantityValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'time', ( store ) => new TimeValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype(
 	'geo-shape',

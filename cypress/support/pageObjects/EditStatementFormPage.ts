@@ -74,6 +74,11 @@ export class EditStatementFormPage {
 		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
+	public menuItemByName( name: string ): Chainable {
+		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM )
+			.filter( ':visible' ).contains( name ).first();
+	}
+
 	public menuItemThumbnails(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM_THUMBNAIL );
 	}

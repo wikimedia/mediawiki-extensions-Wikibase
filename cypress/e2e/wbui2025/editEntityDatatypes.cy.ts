@@ -82,7 +82,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
 				editFormPage.menu().should( 'be.visible' );
 
-				editFormPage.menuItems().first().click();
+				editFormPage.menuItemByName( newEntityLabel ).click();
 				editFormPage.lookupInput().should( 'have.value', newEntityLabel );
 			}
 
@@ -101,7 +101,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 
 				editFormPage.menu().should( 'be.visible' );
 
-				editFormPage.menuItems().first().click();
+				editFormPage.menuItemByName( newEntityLabel ).click();
 				editFormPage.lookupInput().should( 'have.value', newEntityLabel );
 			}
 

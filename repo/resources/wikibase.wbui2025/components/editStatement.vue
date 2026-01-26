@@ -236,7 +236,6 @@ module.exports = exports = defineComponent( {
 
 		.wikibase-wbui2025-edit-statement-value-input {
 			width: 100%;
-			display: flex;
 		}
 
 		.wikibase-wbui2025-rank-input {

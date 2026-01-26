@@ -20,7 +20,6 @@ class Wbui2025FeatureFlag {
 		'external-id',
 		'globe-coordinate',
 		'monolingualtext',
-		'quantity',
 		'entity-schema',
 		'math',
 	];

@@ -14,6 +14,7 @@
 const { computed, defineComponent } = require( 'vue' );
 const { mapWritableState } = require( 'pinia' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const Wbui2025EditableQuantitySnakValue = require( './editableQuantitySnakValue.vue' );
 const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
 const Wbui2025EditableTimeSnakValue = require( './editableTimeSnakValue.vue' );
 const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue' );
@@ -22,6 +23,7 @@ const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue'
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025EditableAnyDatatypeSnakValue',
 	components: {
+		Wbui2025EditableQuantitySnakValue,
 		Wbui2025EditableStringSnakValue,
 		Wbui2025EditableTimeSnakValue,
 		Wbui2025EditableLookupSnakValue

@@ -3,7 +3,11 @@ const { useSavedStatementsStore, getStatementById } = require( './savedStatement
 const { snakValueStrategyFactory } = require( './snakValueStrategyFactory.js' );
 require( './snakValueStrategies.js' );
 const { updateStatements, renderSnakValueHtml, renderPropertyLinkHtml } = require( '../api/editEntity.js' );
-const { updateSnakValueHtmlForHash, updatePropertyLinkHtml } = require( './serverRenderedHtml.js' );
+const {
+	updateSnakValueHtmlForHash,
+	updatePropertyLinkHtml,
+	snakValueHtmlForHash
+} = require( './serverRenderedHtml.js' );
 const { watch, computed, ref } = require( 'vue' );
 
 /**
@@ -27,6 +31,11 @@ function sameDataValue( dv1, dv2 ) {
 			return dv1.value.time === dv2.value.time &&
 				dv1.value.calendarmodel === dv2.value.calendarmodel &&
 				dv1.value.precision === dv2.value.precision;
+		case 'quantity':
+			return dv1.value.amount === dv2.value.amount &&
+				dv1.value.unit === dv2.value.unit &&
+				dv1.value.lowerBound === dv2.value.lowerBound &&
+				dv1.value.upperBound === dv2.value.upperBound;
 		// TODO add cases for other data value types as we implement them (T407324)
 		default:
 			throw new Error( `Unsupported data value type ${ dv1.type }` );
@@ -37,6 +46,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	const value = ref( undefined );
 	const datavalue = ref( undefined );
 	const textvalue = ref( undefined );
+	const unittextvalue = ref( '' );
+	const unitconcepturi = ref( null );
 	const selectionvalue = ref( undefined );
 	const snaktype = ref( 'value' );
 	const property = ref( undefined );
@@ -44,7 +55,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	const valuetype = ref( 'string' );
 	const hash = ref( undefined );
 	const lastCompleteTextvalue = ref( undefined );
-	const lastCompleteSelectionvalue = ref( undefined );
+	const lastCompleteSelectionvalue = ref( null );
 	const precision = ref( undefined );
 	const calendar = ref( undefined );
 
@@ -70,13 +81,26 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		datatype.value = snak.datatype;
 		property.value = snak.property;
 		if ( snaktype.value === 'value' ) {
-			textvalue.value = await valueStrategy.value.renderValueToText( snak.datavalue );
+			textvalue.value = await valueStrategy.value.renderValueForTextInput( snak.datavalue );
 			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( snak.datavalue );
 			value.value = snak.datavalue.value;
 			valuetype.value = snak.datavalue.type;
 			if ( snak.datavalue.type === 'time' ) {
 				precision.value = snak.datavalue.value.precision;
 				calendar.value = snak.datavalue.value.calendarmodel;
+			}
+			if ( snak.datavalue.type === 'quantity' ) {
+				const htmlValue = await snakValueHtmlForHash( snak.hash );
+				// This based on the code in {QuantityInput.js}. There's probably a nicer way to do this.
+				const tempNode = document.createElement( 'div' );
+				tempNode.innerHTML = htmlValue;
+				const unitTextNodes = tempNode.getElementsByClassName( 'wb-unit' );
+				if ( unitTextNodes.length > 0 ) {
+					unittextvalue.value = unitTextNodes[ 0 ].textContent;
+				} else {
+					unittextvalue.value = '';
+				}
+				unitconcepturi.value = snak.datavalue.value.unit;
 			}
 		}
 		hash.value = snak.hash;
@@ -97,7 +121,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		datatype.value = newDatatype;
 		if ( snaktype.value === 'value' ) {
 			const resetDatavalue = { value: '', type: 'string' };
-			textvalue.value = await valueStrategy.value.renderValueToText( resetDatavalue );
+			textvalue.value = await valueStrategy.value.renderValueForTextInput( resetDatavalue );
 			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( resetDatavalue );
 			value.value = '';
 			valuetype.value = 'string';
@@ -116,7 +140,9 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	function dispose() {
 		deleteStore( this );
 	}
-
+	function updateConceptUri( newUri ) {
+		unitconcepturi.value = newUri;
+	}
 	watch( textvalue, recordLastCompleteValue, { flush: 'sync' } );
 	watch( selectionvalue, recordLastCompleteValue, { flush: 'sync' } );
 
@@ -139,6 +165,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		precision,
 		calendar,
 		hash,
+		unittextvalue,
+		unitconcepturi,
 		valueStrategy,
 		isIncomplete,
 		initializeWithSnak,
@@ -148,7 +176,9 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		currentDataValue,
 		dispose,
 		lastCompleteTextvalue,
-		lastCompleteSelectionvalue
+		lastCompleteSelectionvalue,
+		updateConceptUri,
+		snakKey
 	};
 } );
 

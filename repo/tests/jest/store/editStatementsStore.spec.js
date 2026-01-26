@@ -2,7 +2,9 @@ jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
 	() => ( {
 		parseValue: jest.fn(),
-		renderSnakValueText: jest.fn()
+		renderSnakValueText: jest.fn(
+			( value ) => value.type === 'quantity' ? value.value.amount : value.value
+		)
 	} )
 );
 jest.mock(
@@ -626,6 +628,62 @@ describe( 'Edit Statements Store', () => {
 
 			const editStatementStore = useEditStatementStore( id )();
 			editStatementStore.references[ 0 ].newSnaks = [ 'snak500' ];
+
+			expect( editStatementsStore.hasChanges ).toBe( true );
+		} );
+
+		it( 'changing bounds on a quantity is a change once it’s parsed', async () => {
+			const id = 'Q1$00000000-0000-0000-0000-000000000001';
+			const initialQuantityValue = {
+				amount: '+1',
+				unit: '1'
+			};
+			const statements = { P1: [ {
+				id,
+				rank: 'normal',
+				mainsnak: {
+					property: 'P1',
+					snaktype: 'value',
+					hash: '857817e5ad03a3013ebcaa57e39331e3',
+					datatype: 'quantity',
+					datavalue: {
+						type: 'quantity',
+						value: initialQuantityValue
+					}
+				}
+			} ] };
+			useSavedStatementsStore().populateWithClaims( statements );
+			const editStatementsStore = useEditStatementsStore();
+			await editStatementsStore.initializeFromStatementStore( [ id ], 'P1' );
+			const parsedValueStore = useParsedValueStore();
+
+			const snak = useEditSnakStore( useEditStatementStore( id )().mainSnakKey )();
+			snak.textvalue += '+-1';
+			const updatedValue = Object.assign( {
+				lowerBound: '+0',
+				upperBound: '+2'
+			}, initialQuantityValue );
+			snak.value = updatedValue;
+
+			expect( editStatementsStore.hasChanges ).toBe( null );
+			expect( mockedParseValue ).not.toHaveBeenCalled();
+
+			let resolveParsePromise;
+			const parsePromise = new Promise( ( resolve ) => {
+				resolveParsePromise = resolve;
+			} );
+			mockedParseValue.mockReturnValueOnce( parsePromise );
+
+			parsedValueStore.getParsedValue( 'P1', '+1+-1', { property: 'P1', options: '{"unit":"1"}' } );
+			expect( mockedParseValue ).toHaveBeenCalledWith( '+1+-1', { property: 'P1', options: '{"unit":"1"}' } );
+
+			expect( editStatementsStore.hasChanges ).toBe( null );
+
+			resolveParsePromise( {
+				type: 'quantity',
+				value: updatedValue
+			} );
+			await Promise.resolve(); // sleep a microtick to let the promise resolution propagate
 
 			expect( editStatementsStore.hasChanges ).toBe( true );
 		} );
