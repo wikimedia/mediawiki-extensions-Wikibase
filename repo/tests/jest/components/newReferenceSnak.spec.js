@@ -22,7 +22,7 @@ const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 const WikibaseWbui2025NewReferenceSnak = require( '../../../resources/wikibase.wbui2025/components/newReferenceSnak.vue' );
 const WikibaseWbui2025PropertyLookup = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
-const WikibaseWbui2025EditableSnakValue = require( '../../../resources/wikibase.wbui2025/components/editableSnakValue.vue' );
+const WikibaseWbui2025EditableAnyDatatypeSnakValue = require( '../../../resources/wikibase.wbui2025/components/editableAnyDatatypeSnakValue.vue' );
 const { CdxButton } = require( '../../../codex.js' );
 
 describe( 'wikibase.wbui2025.newReferenceSnak', () => {
@@ -39,14 +39,14 @@ describe( 'wikibase.wbui2025.newReferenceSnak', () => {
 				props: { snakKey },
 				shallow: false,
 				global: {
-					stubs: { WikibaseWbui2025EditableSnakValue: true },
+					stubs: { WikibaseWbui2025EditableAnyDatatypeSnakValue: true },
 					plugins: [
 						createTestingPinia()
 					]
 				}
 			} );
 			propertyLookup = wrapper.findComponent( WikibaseWbui2025PropertyLookup );
-			editableSnakValue = wrapper.findComponent( WikibaseWbui2025EditableSnakValue );
+			editableSnakValue = wrapper.findComponent( WikibaseWbui2025EditableAnyDatatypeSnakValue );
 
 			// Note: Since the WikibaseWbui2025EditableSnakValue component is stubbed, we can safely
 			// assume that the only button found by the next line is the one we intend.

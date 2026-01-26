@@ -13,14 +13,7 @@
 			class="wikibase-wbui2025-snak-value"
 			:data-snak-hash="hash"
 		>
-			<component
-				:is="valueStrategy.getEditableSnakComponent()"
-				v-if="snakTypeSelection === 'value'"
-				ref="inputElement"
-				:snak-key="snakKey"
-				:class-name="className"
-				:disabled="disabled"
-			></component>
+			<slot v-if="snakTypeSelection === 'value'"></slot>
 			<div v-else class="wikibase-wbui2025-novalue-somevalue-holder">
 				<p>{{ snakTypeSelectionMessage }}</p>
 			</div>
@@ -36,6 +29,7 @@
 			</div>
 		</div>
 	</div>
+	<slot v-if="snakTypeSelection === 'value'" name="secondary-input"></slot>
 </template>
 
 <script>
@@ -43,21 +37,15 @@ const { computed, defineComponent } = require( 'vue' );
 const { mapWritableState, mapActions } = require( 'pinia' );
 const { cdxIconTrash } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
-const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
-const Wbui2025EditableTimeSnakValue = require( './editableTimeSnakValue.vue' );
-const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue' );
 const { CdxButton, CdxIcon, CdxMenuButton } = require( '../../../codex.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
-	name: 'WikibaseWbui2025EditableSnakValue',
+	name: 'WikibaseWbui2025EditableNoValueSomeValueSnakValue',
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxMenuButton,
-		Wbui2025EditableStringSnakValue,
-		Wbui2025EditableTimeSnakValue,
-		Wbui2025EditableLookupSnakValue
+		CdxMenuButton
 	},
 	props: {
 		removable: {
@@ -68,11 +56,6 @@ module.exports = exports = defineComponent( {
 		snakKey: {
 			type: String,
 			required: true
-		},
-		className: {
-			type: String,
-			required: false,
-			default: 'wikibase-wbui2025-editable-snak-value-input'
 		},
 		disabled: {
 			type: Boolean,
@@ -90,8 +73,7 @@ module.exports = exports = defineComponent( {
 		const editSnakStoreGetter = wbui2025.store.useEditSnakStore( props.snakKey );
 		const computedProperties = mapWritableState( editSnakStoreGetter, [
 			'snaktype',
-			'hash',
-			'valueStrategy'
+			'hash'
 		] );
 		const computedActions = mapActions( editSnakStoreGetter, [
 			'resetToLastCompleteValue'
@@ -99,7 +81,6 @@ module.exports = exports = defineComponent( {
 		return {
 			snaktype: computed( computedProperties.snaktype ),
 			hash: computed( computedProperties.hash ),
-			valueStrategy: computed( computedProperties.valueStrategy ),
 			resetToLastCompleteValue: computedActions.resetToLastCompleteValue
 		};
 	},

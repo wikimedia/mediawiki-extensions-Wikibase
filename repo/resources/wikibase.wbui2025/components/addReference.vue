@@ -19,13 +19,13 @@
 					@update:selected="onPropertySelection"
 				>
 				</wikibase-wbui2025-property-lookup>
-				<wikibase-wbui2025-editable-snak-value
+				<wikibase-wbui2025-editable-any-datatype-snak-value
 					v-if="snakKey"
 					ref="snakInput"
 					:snak-key="snakKey"
 					:removable="false"
 					class-name="wikibase-wbui2025-add-reference-value"
-				></wikibase-wbui2025-editable-snak-value>
+				></wikibase-wbui2025-editable-any-datatype-snak-value>
 			</div>
 		</template>
 	</wikibase-wbui2025-modal-overlay>
@@ -39,14 +39,14 @@ const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const WikibaseWbui2025ModalOverlay = require( './modalOverlay.vue' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
-const WikibaseWbui2025EditableSnakValue = require( './editableSnakValue.vue' );
+const WikibaseWbui2025EditableAnyDatatypeSnakValue = require( './editableAnyDatatypeSnakValue.vue' );
 
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025AddReference',
 	components: {
 		CdxButton,
 		CdxIcon,
-		WikibaseWbui2025EditableSnakValue,
+		WikibaseWbui2025EditableAnyDatatypeSnakValue,
 		WikibaseWbui2025ModalOverlay,
 		WikibaseWbui2025PropertyLookup
 	},

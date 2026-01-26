@@ -22,10 +22,10 @@
 				class="wikibase-wbui2025-edit-statement-value-input"
 				:data-snak-key="mainSnakKey"
 			>
-				<wbui2025-editable-snak-value
+				<wbui2025-editable-any-datatype-snak-value
 					ref="snakInput"
 					:snak-key="mainSnakKey"
-				></wbui2025-editable-snak-value>
+				></wbui2025-editable-any-datatype-snak-value>
 			</div>
 			<div class="wikibase-wbui2025-rank-input">
 				<cdx-select
@@ -88,7 +88,7 @@ const {
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025EditableReferencesSection = require( './editableReferencesSection.vue' );
 const Wbui2025EditableQualifiers = require( './editableQualifiers.vue' );
-const Wbui2025EditableSnakValue = require( './editableSnakValue.vue' );
+const Wbui2025EditableAnyDatatypeSnakValue = require( './editableAnyDatatypeSnakValue.vue' );
 const Wbui2025AddQualifier = require( './addQualifier.vue' );
 const Wbui2025AddReference = require( './addReference.vue' );
 
@@ -106,7 +106,7 @@ module.exports = exports = defineComponent( {
 		Wbui2025AddQualifier,
 		Wbui2025EditableReferencesSection,
 		Wbui2025EditableQualifiers,
-		Wbui2025EditableSnakValue,
+		Wbui2025EditableAnyDatatypeSnakValue,
 		Wbui2025AddReference
 	},
 	props: {
