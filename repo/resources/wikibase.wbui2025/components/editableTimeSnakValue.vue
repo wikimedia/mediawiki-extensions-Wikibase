@@ -329,6 +329,9 @@ module.exports = exports = defineComponent( {
 
 				select {
 					margin-left: auto;
+					width: 6rem;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 			}
 		}
