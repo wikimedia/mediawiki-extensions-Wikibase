@@ -150,7 +150,7 @@ type ItemSearchResultEdge {
   cursor: String!
 }
 
-type ItemSearchResultNode {
+type ItemSearchResultNode implements LabelProvider {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String

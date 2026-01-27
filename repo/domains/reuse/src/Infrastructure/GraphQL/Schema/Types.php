@@ -162,6 +162,7 @@ class Types {
 						->resolve( $itemSearchResult->itemId, $args['languageCode'] ),
 				],
 			],
+			'interfaces' => [ $labelProviderType ],
 		] );
 	}
 }
