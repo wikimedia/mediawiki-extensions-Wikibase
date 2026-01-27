@@ -41,10 +41,10 @@ Example: The following query fetches the items with the IDs Q1 and Q2, including
 
 ```graphql
 {
-  itemsById(ids: ["Q1", "Q2"]) {
-    id
-    label(languageCode: "en")
-  }
+	itemsById(ids: ["Q1", "Q2"]) {
+		id
+		label(languageCode: "en")
+	}
 }
 ```
 ###  Searching items by statement property and value
@@ -54,21 +54,21 @@ Example: The following query searches for items that have a statement using prop
 
 ```graphql
 {
-  searchItems(
-    query: {
-      and: [
-        { property: "P1", value: "Q1" },
-        { property: "P2", value: "Q5" }
-      ]
-    }
-  ) {
-    edges {
-      node {
-        id
-        label(languageCode: "en")
-      }
-    }
-  }
+	searchItems(
+		query: {
+			and: [
+				{ property: "P1", value: "Q1" },
+				{ property: "P2", value: "Q5" }
+			]
+		}
+	) {
+		edges {
+			node {
+				id
+				label(languageCode: "en")
+			}
+		}
+	}
 }
 ```
 
@@ -101,8 +101,8 @@ $wgWBRepoSettings['tmpEnableGraphQL'] = true;
 Please run the following commands from the Wikibase repository's root directory using [mwcli](https://www.mediawiki.org/wiki/Cli):
 * running all tests: `mw dev mw exec -- composer -d ../.. phpunit:entrypoint extensions/Wikibase/repo/domains/reuse/tests/phpunit/`
 * linting:
-  * `mw dev mw composer phpcs:reuse`
-  * `mw dev mw composer phpcs repo/domains/reuse/`
+	* `mw dev mw composer phpcs:reuse`
+	* `mw dev mw composer phpcs repo/domains/reuse/`
 * generating the GraphQL schema SDL: `mw dev mediawiki mwscript ./extensions/Wikibase/repo/domains/reuse/src/Infrastructure/GraphQL/GenerateSDL.php`
-  * To generate the GraphQL schema SDL, your workspace must include at least one extension that provides an `EntityValue` type (e.g. EntitySchema or Lexeme).
-  This ensures that there is at least one data type using the generic `EntityValue` type, so the schema generator does not produce different schemas depending on which extensions are installed.
+	* To generate the GraphQL schema SDL, your workspace must include at least one extension that provides an `EntityValue` type (e.g. EntitySchema or Lexeme).
+	This ensures that there is at least one data type using the generic `EntityValue` type, so the schema generator does not produce different schemas depending on which extensions are installed.
