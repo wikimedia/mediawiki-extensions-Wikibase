@@ -232,6 +232,8 @@
 	"wikibase-item-reference-edit-placeholder": "輸入項目 ID，例如：Q10",
 	"wikibase-item-reference-edit-invalid-format": "所輸入項目 ID 有無效格式",
 	"wikibase-item-reference-edit-nonexistent-item": "帶此 ID 的項目不存在",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "將顯示為：",
+	"wikibase-wbui2025-timeinput-precision-automatic": "自動",
 	"wikibase-wikibaserepopage-not-itemid": "''$1'' 不是一個有效的項目 ID。",
 	"wikibase-wikibaserepopage-invalid-langcode": "語言代碼 \"$1\" 不明。 請使用系統能夠辨識的語言代碼，如 \"en\"。",
 	"wikibase-wikibaserepopage-pipe-in-alias": "包含豎線的別名僅能在實體本身的頁面上（需啟用JavaScript）或是透過API來編輯",

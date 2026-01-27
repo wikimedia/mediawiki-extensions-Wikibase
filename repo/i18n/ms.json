@@ -168,6 +168,7 @@
 	"wikibase-item-reference-edit-placeholder": "Masukkan ID Butir. Contohnya, Q10",
 	"wikibase-item-reference-edit-invalid-format": "Telah memasukkan ID Butir yang mempunyai format tidak sah",
 	"wikibase-item-reference-edit-nonexistent-item": "Butir dengan ID ini tidak wujud",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatik",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" bukan ID perkara yang sah.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Kod bahasa \"$1\" tidak diketahui. Sila gunakan kod bahasa yang dikenali oleh sistem, contohnya \"ms\".",
 	"wikibase-wikibaserepopage-invalid-id": "ID \"$1\" tidak dikenali oleh sistem. Sila gunakan ID entiti yang sah.",

@@ -198,6 +198,8 @@
 	"wikibase-item-reference-edit-placeholder": "Внесете назнака на предметот, на пр. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Внесената назнака има неважечки формат",
 	"wikibase-item-reference-edit-nonexistent-item": "Не постои предмет со таква назнака",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "ќе се прикажува како:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "автоматски",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ не претставува важечка назнака на предмет.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Јазичниот код „$1“ е непознат. Внесете јазичен код што му е позната на системот, како на пр. „mk“.",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Истозначниците кои содржат праци црти можат да се уредуваат само на страницата на самиот предмет (со овозможен JavaScript) или преку приложникот",
