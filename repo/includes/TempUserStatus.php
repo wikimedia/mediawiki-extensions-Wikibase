@@ -5,24 +5,24 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
 use MediaWiki\Context\IContextSource;
-use MediaWiki\Status\Status;
 use MediaWiki\User\UserIdentity;
+use StatusValue;
 use Wikimedia\Assert\Assert;
 
 // @phan-file-suppress PhanGenericConstructorTypes -- this class has no constructor
 
 /**
- * A Status that may have resulted in a temporary user being created.
+ * A status that may have resulted in a temporary user being created.
  *
  * On success, the value is an array that contains the saved temp user (if any),
  * a context that should be used for any further actions,
  * and arbitrary other data.
  *
  * @template T Must be a subtype of array{savedTempUser:?UserIdentity,context:IContextSource}
- * @inherits Status<T>
+ * @inherits StatusValue<T>
  * @license GPL-2.0-or-later
  */
-class TempUserStatus extends Status {
+class TempUserStatus extends StatusValue {
 
 	protected static function newTempUserStatus(
 		array $data,

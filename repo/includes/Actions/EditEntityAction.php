@@ -21,6 +21,7 @@ use OOUI\FieldLayout;
 use OOUI\HtmlSnippet;
 use OOUI\TextInputWidget;
 use RuntimeException;
+use StatusValue;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
@@ -218,7 +219,7 @@ class EditEntityAction extends ViewEntityAction {
 	/**
 	 * Output an error page showing the given status
 	 */
-	protected function showUndoErrorPage( Status $status ): void {
+	protected function showUndoErrorPage( StatusValue $status ): void {
 		$this->getOutput()->prepareErrorPage();
 		$this->getOutput()->setPageTitleMsg(
 			$this->msg( 'wikibase-undo-revision-error' )
@@ -227,7 +228,7 @@ class EditEntityAction extends ViewEntityAction {
 			$this->msg( 'errorpagetitle' )
 		);
 
-		$this->getOutput()->addHTML( $status->getMessage()->parse() );
+		$this->getOutput()->addHTML( Status::cast( $status )->getMessage()->parse() );
 
 		$this->getOutput()->returnToMain();
 	}

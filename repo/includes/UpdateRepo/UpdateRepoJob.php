@@ -7,6 +7,7 @@ namespace Wikibase\Repo\UpdateRepo;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\JobQueue\Job;
+use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\Item;
@@ -153,7 +154,7 @@ abstract class UpdateRepoJob extends Job {
 				[
 					'method' => __METHOD__,
 					'itemIdSerialization' => $itemId->getSerialization(),
-					'msgText' => $status->getMessage()->text(),
+					'msgText' => Status::cast( $status )->getMessage()->text(),
 				]
 			);
 		}

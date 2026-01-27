@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use Exception;
 use MediaWiki\Status\Status;
 use RuntimeException;
+use StatusValue;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,18 +14,18 @@ use RuntimeException;
 class StorageException extends RuntimeException {
 
 	/**
-	 * @var Status|null
+	 * @var StatusValue|null
 	 */
 	private $status = null;
 
 	/**
-	 * @param string|Status $status
+	 * @param string|StatusValue $status
 	 * @param int $code
 	 * @param Exception|null $previous
 	 */
 	public function __construct( $status = "", $code = 0, ?Exception $previous = null ) {
-		if ( $status instanceof Status ) {
-			$message = $status->getWikiText();
+		if ( $status instanceof StatusValue ) {
+			$message = Status::cast( $status )->getWikiText();
 			$this->status = $status;
 		} else {
 			$message = $status;
@@ -34,7 +35,7 @@ class StorageException extends RuntimeException {
 	}
 
 	/**
-	 * @return Status|null
+	 * @return StatusValue|null
 	 */
 	public function getStatus() {
 		return $this->status;

@@ -12,6 +12,7 @@ use MediaWiki\Api\ApiUsageException;
 use MediaWiki\Exception\MWContentSerializationException;
 use MediaWiki\Status\Status;
 use MediaWiki\User\User;
+use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -407,7 +408,7 @@ abstract class ModifyEntity extends ApiBase {
 		return $status;
 	}
 
-	private function addToOutput( EntityDocument $entity, Status $status, int $oldRevId ): void {
+	private function addToOutput( EntityDocument $entity, StatusValue $status, int $oldRevId ): void {
 		$params = $this->extractRequestParams();
 		$paramsForRedirect = $params;
 		if ( isset( $params['new'] ) && !isset( $paramsForRedirect['returnto'] ) ) {

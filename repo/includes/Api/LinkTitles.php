@@ -9,7 +9,7 @@ use MediaWiki\Api\ApiCreateTempUserTrait;
 use MediaWiki\Api\ApiMain;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteList;
-use MediaWiki\Status\Status;
+use StatusValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -222,7 +222,7 @@ class LinkTitles extends ApiBase {
 		return [ $siteObj, $page ];
 	}
 
-	private function getAttemptSaveStatus( Item $item, Summary $summary, int $flags ): Status {
+	private function getAttemptSaveStatus( Item $item, Summary $summary, int $flags ): StatusValue {
 		// Do the actual save, or if it don't exist yet create it.
 		return $this->entitySavingHelper->attemptSaveEntity(
 			$item,
@@ -233,7 +233,7 @@ class LinkTitles extends ApiBase {
 		);
 	}
 
-	private function buildResult( Item $item, Status $status, array $params ): void {
+	private function buildResult( Item $item, StatusValue $status, array $params ): void {
 		$this->resultBuilder->addRevisionIdFromStatusToResult( $status, 'entity' );
 		$this->resultBuilder->addBasicEntityInformation( $item->getId(), 'entity' );
 

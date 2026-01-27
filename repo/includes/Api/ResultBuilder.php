@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Api;
 
 use MediaWiki\Api\ApiResult;
 use MediaWiki\Site\SiteLookup;
-use MediaWiki\Status\Status;
 use MediaWiki\User\UserIdentity;
 use Serializers\Serializer;
+use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -1052,22 +1052,22 @@ class ResultBuilder {
 	}
 
 	/**
-	 * Adds the ID of the new revision from the Status object to the API result structure.
+	 * Adds the ID of the new revision from the status object to the API result structure.
 	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
 	 * resp WikiPage::doUserEditContent() do it: as an array, with an EntityRevision object in the
 	 *  'revision' field. If $oldRevId is set and the latest edit was null, a 'nochange' flag
 	 *  is also added.
 	 *
-	 * If no revision is found in the Status object, this method does nothing.
+	 * If no revision is found in the status object, this method does nothing.
 	 *
 	 * @see ApiResult::addValue()
 	 *
-	 * @param Status<array> $status The status to get the revision ID from.
+	 * @param StatusValue<array> $status The status to get the revision ID from.
 	 * @param string|null|array $path Where in the result to put the revision id
 	 * @param int|null $oldRevId The id of the latest revision of the entity before
 	 *        the last (possibly null) edit
 	 */
-	public function addRevisionIdFromStatusToResult( Status $status, $path, ?int $oldRevId = null ) {
+	public function addRevisionIdFromStatusToResult( StatusValue $status, $path, ?int $oldRevId = null ) {
 		$value = $status->getValue();
 
 		if ( isset( $value['revision'] ) ) {
@@ -1088,16 +1088,16 @@ class ResultBuilder {
 	}
 
 	/**
-	 * Add the temp username if the Status object contains a temp user
+	 * Add the temp username if the status object contains a temp user
 	 *
-	 * @param Status<array> $status As returned by {@link \Wikibase\Repo\EditEntity\EditEntity::attemptSave()}
+	 * @param StatusValue<array> $status As returned by {@link \Wikibase\Repo\EditEntity\EditEntity::attemptSave()}
 	 * @param callable $getTempUserRedirectUrl When called with a temp user, should return a redirect URL;
 	 * callers should use the {@link ApiCreateTempUserTrait} and pass this as
 	 * `fn( $user ) => $this->getTempUserRedirectUrl( $params, $user )`
 	 * @return void
 	 */
 	public function addTempUser(
-		Status $status,
+		StatusValue $status,
 		callable $getTempUserRedirectUrl
 	) {
 		/** @var ?UserIdentity $savedTempUser */
