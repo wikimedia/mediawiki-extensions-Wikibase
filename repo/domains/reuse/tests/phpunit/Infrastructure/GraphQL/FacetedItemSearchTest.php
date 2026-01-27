@@ -7,12 +7,15 @@ use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
@@ -429,6 +432,12 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
 		$entityLookup = new InMemoryEntityLookup();
 		$this->setService( 'WikibaseRepo.EntityLookup', $entityLookup );
+
+		$revisionLookup = $this->createStub( EntityRevisionLookup::class );
+		$revisionLookup->method( 'getLatestRevisionId' )->willReturnCallback(
+			fn( ItemId $id ) => LatestRevisionIdResult::concreteRevision( 1, '20260101001122' )
+		);
+		$this->setService( 'WikibaseRepo.EntityRevisionLookup', $revisionLookup );
 
 		$search = new InMemoryFacetedItemSearchEngine();
 		$this->setService( 'WbReuse.FacetedItemSearchEngine', $search );

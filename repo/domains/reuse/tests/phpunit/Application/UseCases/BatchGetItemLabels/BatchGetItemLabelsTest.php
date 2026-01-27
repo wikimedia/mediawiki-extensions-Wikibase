@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItemLabels\BatchGet
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemLabelsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
+use Wikibase\Repo\Domains\Reuse\Domain\Services\ItemRedirectResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
 
 /**
@@ -47,23 +48,31 @@ class BatchGetItemLabelsTest extends TestCase {
 	}
 
 	public function testGetItemLabelsBatch(): void {
+		$q1Labels = new Labels( new Label( 'en', 'Potato' ), new Label( 'ar', 'بطاطا' ) );
 		$expectedLabelsBatch = new ItemLabelsBatch( [
-			'Q1' => new Labels( new Label( 'en', 'Potato' ), new Label( 'ar', 'بطاطا' ) ),
+			'Q1' => $q1Labels,
 			'Q2' => new Labels( new Label( 'en', 'Apple' ) ),
 			'Q3' => new Labels( new Label( 'ar', 'خبز' ) ),
+			'Q4' => $q1Labels, // Q4 is a redirect to Q1
 		] );
+
+		$redirectResolver = $this->createStub( ItemRedirectResolver::class );
+		$redirectResolver->method( 'resolveRedirect' )->willReturnCallback(
+			fn( ItemId $id ) => $id->getSerialization() === 'Q4' ? new ItemId( 'Q1' ) : $id
+		);
 
 		$this->assertEquals(
 			$expectedLabelsBatch,
-			$this->newUseCase()->execute(
-				new BatchGetItemLabelsRequest( [ 'Q1', 'Q2', 'Q3' ], [ 'ar', 'en' ] )
+			$this->newUseCase( $redirectResolver )->execute(
+				new BatchGetItemLabelsRequest( [ 'Q1', 'Q2', 'Q3', 'Q4' ], [ 'ar', 'en' ] )
 			)->batch
 		);
 	}
 
-	private function newUseCase(): BatchGetItemLabels {
+	private function newUseCase( ItemRedirectResolver $redirectResolver ): BatchGetItemLabels {
 		return new BatchGetItemLabels(
-			new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( $this->lookup )
+			new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( $this->lookup ),
+			$redirectResolver,
 		);
 	}
 
