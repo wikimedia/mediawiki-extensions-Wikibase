@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Caro de Segeda"
+		]
+	},
+	"wikibase-dataitem": "Eleméntu de {{WBREPONAME}}",
+	"wikibase-editlinks": "Edital enlacis",
+	"wikibase-addlinkstitle": "Agregal enlacis interlingüísticus",
+	"wikibase-linkitem-addlinks": "Agregal enlacis",
+	"wikibase-linkitem-title": "Enlazal as páginas",
+	"wikibase-linkitem-linkpage": "Enlazal as páginas",
+	"wikibase-linkitem-selectlink": "Selecciona un sitio i unha página que quéira enlazal a ésta página.",
+	"wikibase-linkitem-input-site": "Léngua:",
+	"wikibase-linkitem-input-page": "Página:",
+	"wikibase-rc-hide-wikidata-hide": "Ocultal",
+	"wikibase-rc-hide-wikidata-show": "Mostral",
+	"wikibase-otherprojects": "En ótrus proyéctus"
+}

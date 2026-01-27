@@ -5,12 +5,14 @@
 			"Kwekubo",
 			"MinecraftAustralia",
 			"Nmacu",
-			"Tem"
+			"Tem",
+			"Aindriu80"
 		]
 	},
 	"wikibase-dataitem": "Mír {{WBREPONAME}}",
 	"wikibase-editlinks": "Athraigh naisc",
 	"wikibase-editlinkstitle": "Athraigh na naisc idirtheanga",
+	"wikibase-addlinkstitle": "Cuir naisc idirtheangacha leis",
 	"wikibase-linkitem-addlinks": "Nasc le teangacha eile",
 	"wikibase-linkitem-title": "Nasc le leathanach",
 	"wikibase-linkitem-linkpage": "Nasc le leathanach",
