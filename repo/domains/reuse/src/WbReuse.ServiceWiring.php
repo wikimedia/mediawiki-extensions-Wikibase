@@ -62,6 +62,7 @@ return [
 		return new GraphQLService(
 			WbReuse::getGraphQLSchema( $services ),
 			$services->getMainConfig(),
+			$services->getStatsFactory(),
 		);
 	},
 	'WbReuse.GraphQLTypes' => function( MediaWikiServices $services ): Types {

@@ -7,6 +7,7 @@ use GraphQL\Error\DebugFlag;
 use GraphQL\GraphQL;
 use MediaWiki\Config\Config;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -19,6 +20,7 @@ class GraphQLService {
 	public function __construct(
 		private readonly Schema $schema,
 		private readonly Config $config,
+		private readonly StatsFactory $stats,
 	) {
 	}
 
@@ -54,6 +56,26 @@ class GraphQLService {
 			];
 		}
 
+		$this->trackGraphQLHit( $output );
+
 		return $output;
+	}
+
+	private function trackGraphQLHit( array $output ): void {
+		$hasData = isset( $output['data'] );
+		$hasError = isset( $output['errors'] );
+		if ( $hasData && $hasError ) {
+			$this->incrementHitMetric( 'partial_success' );
+		} elseif ( $hasData ) {
+			$this->incrementHitMetric( 'success' );
+		} else {
+			$this->incrementHitMetric( 'error' );
+		}
+	}
+
+	private function incrementHitMetric( string $status ): void {
+		$this->stats->getCounter( 'wikibase_graphql_hit_total' )
+			->setLabel( 'status', $status )
+			->increment();
 	}
 }
