@@ -26,7 +26,7 @@
 	"wikibase-error-ui-no-external-page": "Stránka „$2“ nebyla na „$1“ nalezena.",
 	"wikibase-error-ui-edit-conflict": "Tato hodnota byla mezitím upravena, čímž došlo k editačnímu konfliktu. Prosím obnovte stránku.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterováno)",
-	"wikibase-language-name-for-terms-mul": "výchozí hodnoty pro všechny jazyky",
+	"wikibase-language-name-for-terms-mul": "výchozí pro všechny jazyky",
 	"wikibase-quantitydetails-amount": "Množství",
 	"wikibase-quantitydetails-upperbound": "Horní mez",
 	"wikibase-quantitydetails-lowerbound": "Dolní mez",

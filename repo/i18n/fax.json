@@ -4,5 +4,9 @@
 			"Caro de Segeda"
 		]
 	},
-	"wikibase-edit": "edital"
+	"wikibase-edit": "edital",
+	"wikibase-add": "añadil",
+	"wikibase-label-empty": "Niñunha etiquéta definia",
+	"wikibase-description-empty": "Niñunha descripción definia",
+	"wikibase-sitelinks-special": "En ótrus proyéctus"
 }

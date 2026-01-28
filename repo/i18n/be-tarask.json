@@ -133,7 +133,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Я згодны зьдзяйсьняць наступныя праўкі паводле гэтых умоваў. Не паказвайце больш гэтае паведамленьне.",
 	"wikibase-entityselector-more": "болей",
 	"wikibase-entityselector-notfound": "Супадзеньняў ня знойдзена",
-	"wikibase-anonymouseditwarning": "Папярэджаньне: вы не ўвайшлі ў сыстэму. Ваш [https://be-tarask.wikipedia.org/wiki/IP-адрас IP-адрас] будзе публічна бачны, калі вы зробіце любую праўку. Калі вы <strong>[$1 ўвойдзеце ў сыстэму]</strong> ці <strong>[$2 створыце ўліковы запіс]</strong>, сярод іншых перавагаў вашыя праўкі будуць падпісаныя імем удзельніка.",
+	"wikibase-anonymouseditwarning": "Папярэджаньне: вы не ўвайшлі ў сыстэму. Ваш [https://be-tarask.wikipedia.org/wiki/IP-адрас IP-адрас] будзе публічна бачны, калі вы зробіце любую праўку. Калі вы <strong>[$1 ўвойдзеце ў сыстэму]</strong> ці <strong>[$2 створыце рахунак]</strong>, сярод іншых перавагаў вашыя праўкі будуць падпісаныя імем удзельніка.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Рэдагаваць без уваходу",
 	"wikibase-move-error": "Вы ня можаце пераносіць старонкі, якія знаходзяцца ў прасторы назваў зьвестак, як і ня можаце пераносіць старонкі ў прастору.",
 	"wikibase-validator-invalid": "Няслушнае значэньне",

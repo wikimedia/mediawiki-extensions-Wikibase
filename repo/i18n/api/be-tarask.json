@@ -3,7 +3,8 @@
 		"authors": [
 			"Red Winged Duck",
 			"Renessaince",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"Ucukor"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Запытвае даступныя элемэнты адзнакаў.",
@@ -105,7 +106,7 @@
 	"apihelp-wbmergeitems-example-3": "Аб’ядноўвае зьвесткі з <samp>$1</samp> у <samp>$2</samp> і пры гэтым ігнаруе канфлікты спасылак",
 	"apihelp-wbmergeitems-example-4": "Аб’ядноўвае зьвесткі з <samp>$1</samp> у <samp>$2</samp> і ігнаруе канфлікты спасылак і апісаньняў",
 	"apihelp-wbparsevalue-summary": "Аналізуе значэньні з дапамогай <code>ValueParser</code>.",
-	"apihelp-wbparsevalue-param-parser": "Ідэнтыфікатар <code>ValueParser</code> для ўжываньня. <span class=\"apihelp-deprecated\">Састарэлы</span>. Замест яго выкарыстоўвайце парамэтар <var>datatype</var>.",
+	"apihelp-wbparsevalue-param-parser": "Ідэнтыфікатар <code>ValueParser</code> для ўжываньня. <span class=\"apihelp-deprecated\">Састарэлы</span>. Замест яго ўжывайце парамэтар <var>datatype</var>.",
 	"apihelp-wbparsevalue-param-datatype": "Тып зьвестак значэньня для аналізу. Вызначае, які аналізатар выкарыстоўваць.",
 	"apihelp-wbparsevalue-param-validate": "Ці правяраць дадаткова пададзеныя зьвесткі.",
 	"apihelp-wbparsevalue-param-values": "Значэньні для аналізу",
