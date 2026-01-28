@@ -17,7 +17,6 @@
 					:class="titleIconClass"
 					icon="none"
 				></cdx-icon>
-				<span v-else-if="titleIcon" v-html="titleIcon"></span>
 				<div class="cdx-popover__header__title">
 					{{ title }}
 				</div>
@@ -129,13 +128,6 @@ module.exports = exports = defineComponent( {
 		},
 		titleIconClass() {
 			return this.multipleIssues ? null : this.currentIssue.iconClass;
-		},
-		// TODO: (T414193) remove this method after I72db32b4 is merged (WikibaseQualityConstraints)
-		titleIcon() {
-			if ( !this.multipleIssues && !this.currentIssue.iconClass ) {
-				return this.currentIssue.icon;
-			}
-			return null;
 		},
 		bodyContent() {
 			return this.currentIssue.bodyHtml;

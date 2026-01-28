@@ -191,11 +191,7 @@ const getPopoverContentForSnakHash = function ( snakHash ) {
 
 const setPopoverContentForSnakHash = function ( snakHash, popoverContentItems ) {
 	const statementsStore = useSavedStatementsStore();
-	statementsStore.popoverHtmlForSnaks.set(
-		snakHash,
-		// TODO: (T414193) remove this ternary once I72db32b4 is merged in WikibaseQualityConstraints
-		Array.isArray( popoverContentItems ) ? popoverContentItems : [ popoverContentItems ]
-	);
+	statementsStore.popoverHtmlForSnaks.set( snakHash, popoverContentItems );
 };
 
 module.exports = {
