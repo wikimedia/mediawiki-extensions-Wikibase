@@ -1,11 +1,19 @@
 <template>
-	<cdx-text-input
-		ref="inputElement"
-		v-model.trim="textvalue"
-		autocapitalize="off"
-		:class="activeClasses"
-		@blur="onBlur"
-	></cdx-text-input>
+	<wikibase-wbui2025-editable-no-value-some-value-snak-value
+		:snak-key="snakKey"
+		:removable="removable"
+		:disabled="disabled"
+		@remove-snak="$emit( 'remove-snak', snakKey )"
+	>
+		<cdx-text-input
+			ref="inputElement"
+			v-model.trim="textvalue"
+			autocapitalize="off"
+			:disabled="disabled"
+			:class="activeClasses"
+			@blur="onBlur"
+		></cdx-text-input>
+	</wikibase-wbui2025-editable-no-value-some-value-snak-value>
 </template>
 
 <script>
@@ -13,14 +21,25 @@ const { computed, defineComponent, ref } = require( 'vue' );
 const { mapState, mapWritableState } = require( 'pinia' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxTextInput } = require( '../../../codex.js' );
+const WikibaseWbui2025EditableNoValueSomeValueSnakValue = require( './editableNoValueSomeValueSnakValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025EditableStringSnakValue',
 	components: {
-		CdxTextInput
+		CdxTextInput,
+		WikibaseWbui2025EditableNoValueSomeValueSnakValue
 	},
 	props: {
+		removable: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		disabled: {
+			type: Boolean,
+			required: true
+		},
 		snakKey: {
 			type: String,
 			required: true

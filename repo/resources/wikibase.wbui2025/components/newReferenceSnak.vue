@@ -12,13 +12,13 @@
 			<cdx-icon :icon="cdxIconTrash"></cdx-icon>
 		</cdx-button>
 	</div>
-	<wikibase-wbui2025-editable-snak-value
+	<wikibase-wbui2025-editable-any-datatype-snak-value
 		:snak-key="snakKey"
 		:removable="true"
 		:disabled="snakValueDisabled"
 		@remove-snak="removeSnak"
 	>
-	</wikibase-wbui2025-editable-snak-value>
+	</wikibase-wbui2025-editable-any-datatype-snak-value>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ const { defineComponent, nextTick } = require( 'vue' );
 const { cdxIconTrash } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
-const WikibaseWbui2025EditableSnakValue = require( './editableSnakValue.vue' );
+const WikibaseWbui2025EditableAnyDatatypeSnakValue = require( './editableAnyDatatypeSnakValue.vue' );
 const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 
 module.exports = exports = defineComponent( {
@@ -35,7 +35,7 @@ module.exports = exports = defineComponent( {
 		CdxButton,
 		CdxIcon,
 		WikibaseWbui2025PropertyLookup,
-		WikibaseWbui2025EditableSnakValue
+		WikibaseWbui2025EditableAnyDatatypeSnakValue
 	},
 	props: {
 		snakKey: {

@@ -4,6 +4,13 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
+	'../../../resources/wikibase.wbui2025/icons.json',
+	() => ( {
+		cdxIconTrash: 'trash'
+	} ),
+	{ virtual: true }
+);
+jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
 	() => ( {
 		renderSnakValueText: jest.fn()
@@ -74,7 +81,8 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: editStatementStore.mainSnakKey,
+					disabled: false
 				},
 				global: {
 					plugins: [ testingPinia ]
@@ -129,7 +137,8 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: editStatementStore.mainSnakKey,
+					disabled: false
 				},
 				global: {
 					plugins: [ testingPinia ]
@@ -195,7 +204,8 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: editStatementStore.mainSnakKey,
+					disabled: false
 				},
 				global: {
 					plugins: [
@@ -253,7 +263,8 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: editStatementStore.mainSnakKey,
+					disabled: false
 				},
 				global: {
 					plugins: [
@@ -311,7 +322,8 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
-					snakKey: editStatementStore.mainSnakKey
+					snakKey: editStatementStore.mainSnakKey,
+					disabled: false
 				},
 				global: {
 					plugins: [ testingPinia ]

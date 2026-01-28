@@ -17,7 +17,8 @@ jest.mock(
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 
-const editableSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableSnakValue.vue' );
+const editableAnyDatatypeSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableAnyDatatypeSnakValue.vue' );
+const editableNoValueSomeValueSnakValueComponent = require( '../../../resources/wikibase.wbui2025/components/editableNoValueSomeValueSnakValue.vue' );
 const { CdxButton, CdxMenuButton, CdxTextInput } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithStatements } = require( '../piniaHelpers.js' );
@@ -25,13 +26,13 @@ const { useEditStatementsStore, useEditStatementStore } = require( '../../../res
 
 describe( 'wikibase.wbui2025.editableSnakValue', () => {
 	it( 'defines component', async () => {
-		expect( typeof editableSnakValueComponent ).toBe( 'object' );
-		expect( editableSnakValueComponent )
-			.toHaveProperty( 'name', 'WikibaseWbui2025EditableSnakValue' );
+		expect( typeof editableAnyDatatypeSnakValueComponent ).toBe( 'object' );
+		expect( editableAnyDatatypeSnakValueComponent )
+			.toHaveProperty( 'name', 'WikibaseWbui2025EditableAnyDatatypeSnakValue' );
 	} );
 
 	describe( 'string datatype', () => {
-		let wrapper, textInput, removeButton, snakTypeSelector, snakKey;
+		let wrapper, textInput, removeButton, innerSnakValue, snakTypeSelector, snakKey;
 
 		const testPropertyId = 'P1';
 		const testStatementId = 'Q1$string-statement-id';
@@ -58,7 +59,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			const editStatementStore = useEditStatementStore( testStatementId )();
 
 			snakKey = editStatementStore.mainSnakKey;
-			wrapper = await mount( editableSnakValueComponent, {
+			wrapper = await mount( editableAnyDatatypeSnakValueComponent, {
 				props: {
 					propertyId: testPropertyId,
 					snakKey: snakKey,
@@ -72,6 +73,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			textInput = wrapper.findComponent( CdxTextInput );
 			removeButton = wrapper.findComponent( CdxButton );
 			snakTypeSelector = wrapper.findComponent( CdxMenuButton );
+			innerSnakValue = wrapper.findComponent( editableNoValueSomeValueSnakValueComponent );
 		} );
 
 		it( 'should set the text-input to the current snak value', async () => {
@@ -104,15 +106,15 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			await textInput.vm.$emit( 'blur' );
 			expect( textInput.classes() ).toContain( 'cdx-text-input--status-error' );
 
-			wrapper.vm.snakTypeSelection = 'novalue';
-			await wrapper.vm.$nextTick();
+			innerSnakValue.vm.snakTypeSelection = 'novalue';
+			await innerSnakValue.vm.$nextTick();
 			expect( textInput.exists() ).toBe( false );
 
 			// Restore the original value (should no longer be in an erroneous state)
-			wrapper.vm.snakTypeSelection = 'value';
+			innerSnakValue.vm.snakTypeSelection = 'value';
 			// This needs two ticks to propagate from one child component to another
-			await wrapper.vm.$nextTick();
-			await wrapper.vm.$nextTick();
+			await innerSnakValue.vm.$nextTick();
+			await innerSnakValue.vm.$nextTick();
 			textInput = wrapper.findComponent( CdxTextInput );
 			expect( textInput.exists() ).toBe( true );
 			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
@@ -161,7 +163,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 				await editStatementsStore.initializeFromStatementStore( [ testNoValueStatement.id ], testPropertyId );
 				const editStatementStore = useEditStatementStore( testNoValueStatementId )();
 
-				wrapper = await mount( editableSnakValueComponent, {
+				wrapper = await mount( editableAnyDatatypeSnakValueComponent, {
 					props: {
 						propertyId: testPropertyId,
 						snakKey: editStatementStore.mainSnakKey

@@ -1,64 +1,71 @@
 <template>
-	<cdx-text-input
-		ref="inputElement"
-		v-model.trim="textvalue"
-		autocapitalize="off"
-		:class="className"
+	<wikibase-wbui2025-editable-no-value-some-value-snak-value
+		:snak-key="snakKey"
+		:removable="removable"
 		:disabled="disabled"
-		@focus="handleFocus"
-	></cdx-text-input>
-	<cdx-popover
-		v-model:open="showPopup"
-		:use-close-button="true"
-		:use-primary-action="false"
-		:use-default-action="false"
-		:render-in-place="true"
-		:anchor="inputElement"
-		placement="bottom-end"
-		@update:open="closePopup"
+		@remove-snak="$emit( 'remove-snak', snakKey )"
 	>
-		<template #header>
-			<p>{{ $i18n( 'wikibase-wbui2025-editable-snak-value-preview-label' ) }}</p>
-			<div class="cdx-popover__header__button-wrapper">
-				<cdx-button
-					class="cdx-popover__header__close-button"
-					weight="quiet"
-					type="button"
-					:aria-label="$i18n( 'cdx-popover-close-button-label' )"
-					@click="closePopup"
-				>
-					<cdx-icon :icon="cdxIconClose"></cdx-icon>
-				</cdx-button>
+		<cdx-text-input
+			ref="inputElement"
+			v-model.trim="textvalue"
+			autocapitalize="off"
+			:class="className"
+			:disabled="disabled"
+			@focus="handleFocus"
+		></cdx-text-input>
+		<cdx-popover
+			v-model:open="showPopup"
+			:use-close-button="true"
+			:use-primary-action="false"
+			:use-default-action="false"
+			:render-in-place="true"
+			:anchor="inputElement"
+			placement="bottom-end"
+			@update:open="closePopup"
+		>
+			<template #header>
+				<p>{{ $i18n( 'wikibase-wbui2025-editable-snak-value-preview-label' ) }}</p>
+				<div class="cdx-popover__header__button-wrapper">
+					<cdx-button
+						class="cdx-popover__header__close-button"
+						weight="quiet"
+						type="button"
+						:aria-label="$i18n( 'cdx-popover-close-button-label' )"
+						@click="closePopup"
+					>
+						<cdx-icon :icon="cdxIconClose"></cdx-icon>
+					</cdx-button>
+				</div>
+			</template>
+			<div class="time-options">
+				<p v-html="formattedValue"></p>
+				<p class="option-and-select">
+					<b>{{ $i18n( 'valueview-expert-timeinput-precision' ).text() }}</b>{{ currentPrecision }}
+					<select v-model="selectedPrecision">
+						<option
+							v-for="option in getPrecisionSelectValues()"
+							:key="option.value"
+							:value="option.value"
+						>
+							{{ option.label }}
+						</option>
+					</select>
+				</p>
+				<p class="option-and-select">
+					<b>{{ $i18n( 'valueview-expert-timeinput-calendar' ).text() }}</b>{{ currentCalendar }}
+					<select v-model="selectedCalendar">
+						<option
+							v-for="option in getCalendarSelectValues()"
+							:key="option.value"
+							:value="option.value"
+						>
+							{{ option.label }}
+						</option>
+					</select>
+				</p>
 			</div>
-		</template>
-		<div class="time-options">
-			<p v-html="formattedValue"></p>
-			<p class="option-and-select">
-				<b>{{ $i18n( 'valueview-expert-timeinput-precision' ).text() }}</b>{{ currentPrecision }}
-				<select v-model="selectedPrecision">
-					<option
-						v-for="option in getPrecisionSelectValues()"
-						:key="option.value"
-						:value="option.value"
-					>
-						{{ option.label }}
-					</option>
-				</select>
-			</p>
-			<p class="option-and-select">
-				<b>{{ $i18n( 'valueview-expert-timeinput-calendar' ).text() }}</b>{{ currentCalendar }}
-				<select v-model="selectedCalendar">
-					<option
-						v-for="option in getCalendarSelectValues()"
-						:key="option.value"
-						:value="option.value"
-					>
-						{{ option.label }}
-					</option>
-				</select>
-			</p>
-		</div>
-	</cdx-popover>
+		</cdx-popover>
+	</wikibase-wbui2025-editable-no-value-some-value-snak-value>
 </template>
 
 <script>
@@ -99,6 +106,7 @@ const { mapWritableState } = require( 'pinia' );
 const { CdxPopover, CdxButton, CdxIcon, CdxTextInput } = require( '../../../codex.js' );
 const { cdxIconClose } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const WikibaseWbui2025EditableNoValueSomeValueSnakValue = require( './editableNoValueSomeValueSnakValue.vue' );
 
 const getCalendarIdByItem = ( item ) => calendars.find( ( c ) => c.item === item ).id;
 
@@ -151,12 +159,18 @@ module.exports = exports = defineComponent( {
 		CdxPopover,
 		CdxButton,
 		CdxIcon,
-		CdxTextInput
+		CdxTextInput,
+		WikibaseWbui2025EditableNoValueSomeValueSnakValue
 	},
 	props: {
 		snakKey: {
 			type: String,
 			required: true
+		},
+		removable: {
+			type: Boolean,
+			required: false,
+			default: false
 		},
 		disabled: {
 			type: Boolean,

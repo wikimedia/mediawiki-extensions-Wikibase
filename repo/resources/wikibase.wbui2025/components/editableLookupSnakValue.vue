@@ -1,17 +1,24 @@
 <template>
-	<cdx-lookup
-		ref="inputElement"
-		v-model:selected="lookupSelection"
-		v-model:input-value="lookupInputValue"
-		autocapitalize="off"
-		:class="activeClasses"
-		:menu-items="lookupMenuItems"
-		:menu-config="menuConfig"
-		@update:input-value="onUpdateInputValue"
-		@load-more="onLoadMore"
-		@blur="onBlur"
+	<wikibase-wbui2025-editable-no-value-some-value-snak-value
+		:snak-key="snakKey"
+		:removable="removable"
+		:disabled="disabled"
+		@remove-snak="$emit( 'remove-snak', snakKey )"
 	>
-	</cdx-lookup>
+		<cdx-lookup
+			ref="inputElement"
+			v-model:selected="lookupSelection"
+			v-model:input-value="lookupInputValue"
+			autocapitalize="off"
+			:class="activeClasses"
+			:menu-items="lookupMenuItems"
+			:menu-config="menuConfig"
+			@update:input-value="onUpdateInputValue"
+			@load-more="onLoadMore"
+			@blur="onBlur"
+		>
+		</cdx-lookup>
+	</wikibase-wbui2025-editable-no-value-some-value-snak-value>
 </template>
 
 <script>
@@ -19,14 +26,25 @@ const { computed, defineComponent, ref } = require( 'vue' );
 const { mapWritableState, mapState } = require( 'pinia' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxLookup } = require( '../../../codex.js' );
+const WikibaseWbui2025EditableNoValueSomeValueSnakValue = require( './editableNoValueSomeValueSnakValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025EditableLookupSnakValue',
 	components: {
-		CdxLookup
+		CdxLookup,
+		WikibaseWbui2025EditableNoValueSomeValueSnakValue
 	},
 	props: {
+		removable: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		disabled: {
+			type: Boolean,
+			required: true
+		},
 		snakKey: {
 			type: String,
 			required: true
