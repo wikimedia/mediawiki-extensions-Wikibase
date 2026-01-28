@@ -550,6 +550,7 @@ return call_user_func( function() {
 
 					return $itemLabelsResolver->resolve( $itemId, $args['languageCode'] );
 				};
+				$itemDescriptionsResolver = WbReuse::getItemDescriptionsResolver();
 
 				return new ObjectType( [
 					'name' => 'ItemValue',
@@ -565,6 +566,22 @@ return call_user_func( function() {
 							},
 						],
 						$labelField,
+						'description' => [
+							'type' => Type::string(),
+							'args' => [
+								'languageCode' => Type::nonNull( WbReuse::getGraphQLTypes()->getLanguageCodeType() ),
+							],
+							'resolve' => function( Statement|PropertyValuePair $valueProvider, array $args )
+							use( $itemDescriptionsResolver ) {
+								/** @var EntityIdValue $idValue */
+								$idValue = $valueProvider->value;
+								'@phan-var EntityIdValue $idValue';
+								/** @var ItemId $itemId */
+								$itemId = $idValue->getEntityId();
+								'@phan-var ItemId $itemId';
+								return $itemDescriptionsResolver->resolve( $itemId, $args['languageCode'] );
+							},
+						],
 					],
 					'interfaces' => [ $labelProviderType ],
 				] );

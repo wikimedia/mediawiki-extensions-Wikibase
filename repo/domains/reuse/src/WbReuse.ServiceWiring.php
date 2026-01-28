@@ -70,10 +70,15 @@ return [
 			WikibaseRepo::getSiteLinkGlobalIdentifiersProvider( $services ),
 			WbReuse::getPropertyLabelsResolver( $services ),
 			WikibaseRepo::getDataTypeDefinitions( $services ),
-			new ItemDescriptionsResolver( new BatchGetItemDescriptions(
-				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
-			) ),
+			WbReuse::getItemDescriptionsResolver( $services ),
 			WbReuse::getItemLabelsResolver( $services ),
+		);
+	},
+	'WbReuse.ItemDescriptionsResolver' => function( MediaWikiServices $services ): ItemDescriptionsResolver {
+		return new ItemDescriptionsResolver(
+			new BatchGetItemDescriptions(
+				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+			)
 		);
 	},
 	'WbReuse.ItemLabelsResolver' => function( MediaWikiServices $services ): ItemLabelsResolver {

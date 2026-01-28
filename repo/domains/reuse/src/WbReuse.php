@@ -6,6 +6,7 @@ use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescriptionsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
@@ -28,6 +29,11 @@ class WbReuse {
 	public static function getGraphQLTypes( ?ContainerInterface $services = null ): Types {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbReuse.GraphQLTypes' );
+	}
+
+	public static function getItemDescriptionsResolver( ?ContainerInterface $services = null ): ItemDescriptionsResolver {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WbReuse.ItemDescriptionsResolver' );
 	}
 
 	public static function getItemLabelsResolver( ?ContainerInterface $services = null ): ItemLabelsResolver {
