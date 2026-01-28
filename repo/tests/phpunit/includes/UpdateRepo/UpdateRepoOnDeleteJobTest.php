@@ -10,12 +10,13 @@ use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
@@ -44,7 +45,14 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 			[
 				'siteId' => 'SiteID',
 				'title' => 'Test',
-			]
+			],
+			$this->getServiceContainer()->getFormatterFactory(),
+			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( EntityStore::class ),
+			new SettingsArray( [ 'updateRepoTags' => [] ] ),
+			$this->createMock( EntityLookup::class ),
+			$this->createMock( SummaryFormatter::class ),
+			$this->createMock( SiteLookup::class ),
 		);
 
 		$summary = $job->getSummary();
@@ -140,13 +148,10 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 		];
 		$tags = [ 'tag 1', 'tag 2' ];
 
-		$job = new UpdateRepoOnDeleteJob( Title::newMainPage(), $params );
-		$job->initServices(
-			$mockRepository,
-			$mockRepository,
-			$this->getSummaryFormatter(),
-			new NullLogger(),
-			$this->getSiteLookup( $titleExists ),
+		$job = new UpdateRepoOnDeleteJob(
+			Title::newMainPage(),
+			$params,
+			$this->getServiceContainer()->getFormatterFactory(),
 			new MediaWikiEditEntityFactory(
 				$this->getEntityTitleLookup( $item->getId() ),
 				$mockRepository,
@@ -161,9 +166,13 @@ class UpdateRepoOnDeleteJobTest extends MediaWikiIntegrationTestCase {
 				PHP_INT_MAX,
 				[ 'item', 'property' ]
 			),
+			$mockRepository,
 			new SettingsArray( [
 				'updateRepoTags' => $tags,
-			] )
+			] ),
+			$mockRepository,
+			$this->getSummaryFormatter(),
+			$this->getSiteLookup( $titleExists ),
 		);
 
 		$job->run();

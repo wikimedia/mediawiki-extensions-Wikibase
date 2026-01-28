@@ -12,7 +12,6 @@ use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -52,7 +51,14 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				'siteId' => 'SiteID',
 				'oldTitle' => 'Test',
 				'newTitle' => 'MoarTest',
-			]
+			],
+			$this->getServiceContainer()->getFormatterFactory(),
+			$this->createMock( MediaWikiEditEntityFactory::class ),
+			$this->createMock( EntityStore::class ),
+			new SettingsArray( [ 'updateRepoTags' => [] ] ),
+			$this->createMock( EntityLookup::class ),
+			$this->createMock( SummaryFormatter::class ),
+			$this->createMock( SiteLookup::class ),
 		);
 
 		$summary = $job->getSummary();
@@ -138,13 +144,10 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 			$editEntityStore = $entityStore;
 		}
 
-		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
-		$job->initServices(
-			$entityLookup,
-			$entityStore,
-			$summaryFormatter,
-			new NullLogger(),
-			$this->getSiteLookup( $normalizedPageName ),
+		return new UpdateRepoOnMoveJob(
+			Title::newMainPage(),
+			$params,
+			$this->getServiceContainer()->getFormatterFactory(),
 			new MediaWikiEditEntityFactory(
 				$this->getEntityTitleLookup( $titleItem->getId() ),
 				$editEntityLookup,
@@ -159,11 +162,14 @@ class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 				PHP_INT_MAX,
 				[ 'item', 'property' ]
 			),
+			$entityStore,
 			new SettingsArray( [
 				'updateRepoTags' => $tags,
-			] )
+			] ),
+			$entityLookup,
+			$summaryFormatter,
+			$this->getSiteLookup( $normalizedPageName ),
 		);
-		return $job;
 	}
 
 	/**
