@@ -77,7 +77,8 @@ return [
 	'WbReuse.ItemDescriptionsResolver' => function( MediaWikiServices $services ): ItemDescriptionsResolver {
 		return new ItemDescriptionsResolver(
 			new BatchGetItemDescriptions(
-				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) )
+				new PrefetchingTermLookupBatchLabelsDescriptionsRetriever( WikibaseRepo::getPrefetchingTermLookup( $services ) ),
+				new EntityRevisionLookupItemRedirectResolver( WikibaseRepo::getEntityRevisionLookup( $services ) ),
 			)
 		);
 	},

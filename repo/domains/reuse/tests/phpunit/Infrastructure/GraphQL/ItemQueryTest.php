@@ -781,7 +781,10 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 			"{ item(id: \"{$itemWithRedirectValue->getId()}\") {
 				statements(propertyId: \"{$itemProperty->getId()}\") {
 					value {
-						...on ItemValue { label(languageCode: \"en\") }
+						...on ItemValue {
+						label(languageCode: \"en\")
+						description(languageCode: \"en\")
+						}
 					}
 				}
 			} }",
@@ -789,7 +792,10 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 				'data' => [
 					'item' => [
 						'statements' => [ [
-							'value' => [ 'label' => $item->getLabels()->getByLanguage( 'en' )->getText() ],
+							'value' => [
+								'label' => $item->getLabels()->getByLanguage( 'en' )->getText(),
+								'description' => $item->getDescriptions()->getByLanguage( 'en' )->getText(),
+							],
 						] ],
 					],
 				],
