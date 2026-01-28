@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Actions;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\Page\Article;
 use MediaWiki\Permissions\PermissionManager;
@@ -27,7 +28,6 @@ use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
-use Wikibase\Repo\Diff\EntityDiffVisualizer;
 use Wikibase\Repo\Diff\EntityDiffVisualizerFactory;
 use Wikibase\Repo\SummaryFormatter;
 
@@ -50,6 +50,7 @@ class EditEntityAction extends ViewEntityAction {
 	public const SPEC = [
 		'class' => self::class,
 		'services' => [
+			'FormatterFactory',
 			'PermissionManager',
 			'RevisionLookup',
 			'WikibaseRepo.AnonymousEditWarningBuilder',
@@ -58,31 +59,17 @@ class EditEntityAction extends ViewEntityAction {
 		],
 	];
 
-	protected PermissionManager $permissionManager;
-	private RevisionLookup $revisionLookup;
-	private EntityDiffVisualizer $entityDiffVisualizer;
-	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
-	private SummaryFormatter $summaryFormatter;
-
 	public function __construct(
 		Article $article,
 		IContextSource $context,
-		PermissionManager $permissionManager,
-		RevisionLookup $revisionLookup,
-		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
-		EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
-		SummaryFormatter $summaryFormatter
+		private readonly FormatterFactory $formatterFactory,
+		protected readonly PermissionManager $permissionManager,
+		private readonly RevisionLookup $revisionLookup,
+		private readonly AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
+		private readonly EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
+		private readonly SummaryFormatter $summaryFormatter
 	) {
 		parent::__construct( $article, $context );
-
-		$this->permissionManager = $permissionManager;
-		$this->revisionLookup = $revisionLookup;
-		$this->entityDiffVisualizer = new DispatchingEntityDiffVisualizer(
-			$entityDiffVisualizerFactory,
-			$this->getContext()
-		);
-		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
-		$this->summaryFormatter = $summaryFormatter;
 	}
 
 	public function getName(): string {
@@ -228,7 +215,10 @@ class EditEntityAction extends ViewEntityAction {
 			$this->msg( 'errorpagetitle' )
 		);
 
-		$this->getOutput()->addHTML( Status::cast( $status )->getMessage()->parse() );
+		$this->getOutput()->addHTML(
+			$this->formatterFactory->getStatusFormatter( $this )
+				->getMessage( $status )->parse()
+		);
 
 		$this->getOutput()->returnToMain();
 	}
@@ -438,7 +428,12 @@ class EditEntityAction extends ViewEntityAction {
 		);
 		$this->getOutput()->addHTML( Html::closeElement( 'tr' ) );
 
-		$this->getOutput()->addHTML( $this->entityDiffVisualizer->visualizeEntityContentDiff( $diff ) );
+		$this->getOutput()->addHTML(
+			( new DispatchingEntityDiffVisualizer(
+				$this->entityDiffVisualizerFactory,
+				$this->getContext()
+			) )->visualizeEntityContentDiff( $diff )
+		);
 
 		$this->getOutput()->addHTML( Html::closeElement( 'tbody' ) );
 		$this->getOutput()->addHTML( Html::closeElement( 'table' ) );
