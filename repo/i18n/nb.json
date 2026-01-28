@@ -202,6 +202,8 @@
 	"wikibase-item-reference-edit-placeholder": "Skriv inn elementets ID, f.eks. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Element-ID-en har et ugyldig format",
 	"wikibase-item-reference-edit-nonexistent-item": "Elementet med denne ID-en finnes ikke",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "vises som:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatisk",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» er ikke en gyldig element-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliaser som inneholder vertikalstreker kan kun redigeres på siden til entiteten selv (med JavaScript slått på) eller via API-et",
