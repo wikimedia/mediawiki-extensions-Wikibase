@@ -7,7 +7,13 @@ jest.mock(
 );
 
 const { setActivePinia, createPinia } = require( 'pinia' );
-const { useSavedStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
+const {
+	getIndicatorsHtmlForSnakHash,
+	getPopoverContentForSnakHash,
+	setIndicatorsHtmlForSnakHash,
+	setPopoverContentForSnakHash,
+	useSavedStatementsStore
+} = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
 const { api } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 
@@ -103,7 +109,7 @@ describe( 'Statements Store', () => {
 		const apiSpy = jest.spyOn( api, 'get' );
 		apiSpy.mockImplementation( ( args ) => {
 			if ( args.action === 'wbformatvalue' ) {
-				return '<p>FakeData</p>';
+				return { result: '<p>FakeData</p>' };
 			} else if ( args.action === 'wbformatentities' ) {
 				return { wbformatentities: {} };
 			}
@@ -115,5 +121,52 @@ describe( 'Statements Store', () => {
 		expect( apiSpy ).toHaveBeenNthCalledWith( 2, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '{"value":"test value"' ) } ) );
 		expect( apiSpy ).toHaveBeenNthCalledWith( 3, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '{"value":"Ofc it\'s a string reference"' ) } ) );
 		expect( apiSpy ).toHaveBeenNthCalledWith( 4, expect.objectContaining( { action: 'wbformatvalue', datavalue: expect.stringContaining( '+1999-00-00T00:00:00Z' ) } ) );
+	} );
+
+	describe( 'getIndicatorsHtmlForSnakHash', () => {
+
+		it( 'gets HTML set by setIndicatorsHtmlForSnakHash', () => {
+			const hash = 'abcd1234';
+			const html = '<span class="indicator"></span>';
+			setIndicatorsHtmlForSnakHash( hash, html );
+
+			expect( getIndicatorsHtmlForSnakHash( hash ) ).toBe( html );
+		} );
+
+		it( 'gets error icon if snak HTML has error', () => {
+			const hash = '1234abcd';
+			const extensionIndicator = '<span class="indicator-from-extension"></span>';
+			setIndicatorsHtmlForSnakHash( hash, extensionIndicator );
+			updateSnakValueHtmlForHash( hash, '<div class="cdx-message--error"></div>' );
+
+			expect( getIndicatorsHtmlForSnakHash( hash ) )
+				.toBe( '<span class="wikibase-wbui2025-indicator-icon--error"></span>' );
+		} );
+
+	} );
+
+	describe( 'getPopoverContentForSnakHash', () => {
+
+		it( 'gets content set by setPopoverContentForSnakHash', () => {
+			const hash = 'abcd1234';
+			const content = [ { bodyHtml: 'html 1' }, { bodyHtml: 'html 2' } ];
+			setPopoverContentForSnakHash( hash, content );
+
+			expect( getPopoverContentForSnakHash( hash ) ).toEqual( content );
+		} );
+
+		it( 'prepends custom issue if snak HTML has error', () => {
+			const hash = '1234abcd';
+			const content = [ { bodyHtml: 'html 1' }, { bodyHtml: 'html 2' } ];
+			setPopoverContentForSnakHash( hash, content );
+			const errorHtml = '<div class="cdx-message--error"></div>';
+			updateSnakValueHtmlForHash( hash, errorHtml );
+
+			const fullContent = getPopoverContentForSnakHash( hash );
+
+			expect( fullContent.slice( 1 ) ).toEqual( content );
+			expect( fullContent[ 0 ] ).toEqual( { bodyHtml: errorHtml } );
+		} );
+
 	} );
 } );

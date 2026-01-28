@@ -42,6 +42,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "unknown value",
 	"wikibase-snakview-snaktypeselector-novalue": "no value",
 	"wikibase-undeserializable-value": "The value is invalid and cannot be displayed.",
+	"wikibase-undisplayable-value": "Unable to display the value.",
 	"datatypes-type-string": "String",
 	"datatypes-type-quantity": "Quantity",
 	"datatypes-type-monolingualtext": "Monolingual text",

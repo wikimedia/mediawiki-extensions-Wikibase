@@ -65,6 +65,11 @@
 	span.indicators {
 		cursor: pointer;
 		padding-left: @spacing-125;
+
+		.wikibase-wbui2025-indicator-icon--error {
+			.cdx-mixin-css-icon( @cdx-icon-error, @color-icon-error );
+			padding: 3px 0 3px 0;
+		}
 	}
 }
 
@@ -78,4 +83,8 @@
 		mask-image: linear-gradient( to right, transparent 0, @color-emphasized 3em );
 		direction: rtl;
 	}
+}
+
+.wikibase-wbui2025-snak-value--error-message {
+	color: @color-placeholder;
 }
