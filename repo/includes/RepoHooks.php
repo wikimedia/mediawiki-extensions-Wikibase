@@ -1000,6 +1000,7 @@ final class RepoHooks implements
 						'content' => [
 							'tabularDataStorageApiEndpointUrl' => $settings->getSetting( 'tabularDataStorageApiEndpointUrl' ),
 							'geoShapeStorageApiEndpointUrl' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' ),
+							'viewUiTags' => $settings->getSetting( 'viewUiTags' ),
 						],
 					],
 				],

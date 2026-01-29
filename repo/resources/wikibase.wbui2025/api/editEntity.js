@@ -4,6 +4,9 @@ const {
 	addReturnToParams,
 	handleTempUserRedirect
 } = require( '../utils.js' );
+const {
+	viewUiTags
+} = require( '../repoSettings.json' );
 
 /**
  * Updating statements and checking for TempUserAccount
@@ -19,6 +22,10 @@ const updateStatements = async function ( entityId, statements ) {
 		id: entityId,
 		data: JSON.stringify( { claims: statements } )
 	};
+
+	if ( viewUiTags.length ) {
+		params.tags = viewUiTags;
+	}
 
 	// Add return-to parameters for temporary account redirect support (T407335)
 	params = addReturnToParams( params, location );

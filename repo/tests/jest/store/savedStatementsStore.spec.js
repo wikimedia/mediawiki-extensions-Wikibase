@@ -1,3 +1,11 @@
+jest.mock(
+	'../../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		viewUiTags: []
+	} ),
+	{ virtual: true }
+);
+
 const { setActivePinia, createPinia } = require( 'pinia' );
 const { useSavedStatementsStore } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );

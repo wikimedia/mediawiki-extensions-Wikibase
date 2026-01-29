@@ -33,6 +33,8 @@ config.global.directives = {
 
 function ApiMock() {}
 ApiMock.prototype.get = jest.fn();
+ApiMock.prototype.assertCurrentUser = jest.fn();
+ApiMock.prototype.postWithEditToken = jest.fn();
 
 function TitleMock() {}
 TitleMock.prototype.getMainText = jest.fn();

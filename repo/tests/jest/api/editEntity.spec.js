@@ -1,5 +1,14 @@
+jest.mock(
+	'../../../resources/wikibase.wbui2025/repoSettings.json',
+	() => ( {
+		viewUiTags: []
+	} ),
+	{ virtual: true }
+);
+
 const { api } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 const editEntity = require( '../../../resources/wikibase.wbui2025/api/editEntity.js' );
+const { viewUiTags: mockViewUiTags } = require( '../../../resources/wikibase.wbui2025/repoSettings.json' );
 
 describe( 'renderPropertyLinkHtml', () => {
 	const formattedEntities = {
@@ -69,6 +78,46 @@ describe( 'renderPropertyLinkHtml', () => {
 				P52: '<a>P52</a>',
 				P101: '<a>P101</a>'
 			} );
+		} );
+	} );
+} );
+
+describe( 'updateStatements', () => {
+	const assertCurrentUserSpy = jest.spyOn( api, 'assertCurrentUser' );
+	api.postWithEditToken.mockResolvedValue( {
+		entity: {
+			claims: 'ignored'
+		}
+	} );
+
+	it( 'calls the wbeditentity api without viewUiTags', async () => {
+		await editEntity.updateStatements( 'Q1', [] );
+		expect( assertCurrentUserSpy ).toHaveBeenCalledWith( {
+			action: 'wbeditentity',
+			id: 'Q1',
+			data: JSON.stringify( { claims: [] } )
+		} );
+	} );
+
+	it( 'calls the wbeditentity api with one entry in viewUiTags', async () => {
+		mockViewUiTags.push( 'a-tag' );
+		await editEntity.updateStatements( 'Q2', [] );
+		expect( assertCurrentUserSpy ).toHaveBeenCalledWith( {
+			action: 'wbeditentity',
+			id: 'Q2',
+			data: JSON.stringify( { claims: [] } ),
+			tags: [ 'a-tag' ]
+		} );
+	} );
+
+	it( 'calls the wbeditentity api with multiple entries in viewUiTags', async () => {
+		mockViewUiTags.push( 'b-tag' );
+		await editEntity.updateStatements( 'Q3', [] );
+		expect( assertCurrentUserSpy ).toHaveBeenCalledWith( {
+			action: 'wbeditentity',
+			id: 'Q3',
+			data: JSON.stringify( { claims: [] } ),
+			tags: [ 'a-tag', 'b-tag' ]
 		} );
 	} );
 } );
