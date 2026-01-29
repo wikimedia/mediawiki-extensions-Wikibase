@@ -79,6 +79,7 @@
 	"echo-pref-tooltip-wikibase-action": "Известяване, когато някой свърже страница, която съм {{GENDER:|създал}}, с елемент от {{WBREPONAME}}.",
 	"exceeded-entity-limit-category": "Страници с твърде много посетени обекти на {{WBREPONAME}}",
 	"exceeded-entity-limit-category-desc": "Тази категория съдържа страници, които са с твърде много посетени обекти на {{WBREPONAME}}.",
+	"notification-header-page-connection": "Страница <strong>$3</strong> е {{GENDER:$2|свързана}} с {{PLURAL:$4|-1=обект от {{WBREPONAME}}|обект $4 от {{WBREPONAME}}}}, към който данните свързани с темата могат да бъдат добавяни.",
 	"unresolved-property-category": "Страници с недостъпни свойства",
 	"unresolved-property-category-desc": "Тази категория обхваща страници с референции към свойства на {{WBREPONAME}}, които не могат да бъдат намерени нито чрез идентификационния номер на свойството, нито чрез етикета.",
 	"connected-redirect-category": "Пренасочвания, свързани към обект на {{WBREPONAME}}",
