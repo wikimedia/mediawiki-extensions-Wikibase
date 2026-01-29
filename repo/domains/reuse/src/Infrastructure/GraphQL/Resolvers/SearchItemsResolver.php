@@ -10,10 +10,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchCursor;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchLimit;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\SearchNotAvailable;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
 
 /**
@@ -29,14 +26,11 @@ class SearchItemsResolver {
 	}
 
 	/**
-	 * @throws SearchNotAvailable
-	 * @throws InvalidSearchQuery
-	 * @throws InvalidSearchLimit
-	 * @throws InvalidSearchCursor
+	 * @throws GraphQLError
 	 */
 	public function resolve( array $query, int $limit, ?string $cursor ): array {
 		if ( !$this->isSearchEnabled() ) {
-			throw new SearchNotAvailable();
+			throw GraphQLError::searchNotAvailable();
 		}
 
 		$offset = $cursor ? $this->decodeOffsetFromCursor( $cursor ) : 0;
@@ -45,9 +39,9 @@ class SearchItemsResolver {
 			$searchResults = $this->searchUseCase->execute( new FacetedItemSearchRequest( $query, $limit, $offset ) )->results;
 		} catch ( UseCaseError $e ) {
 			throw match ( $e->type ) {
-				UseCaseErrorType::INVALID_SEARCH_QUERY => new InvalidSearchQuery( $e->getMessage() ),
-				UseCaseErrorType::INVALID_SEARCH_LIMIT => new InvalidSearchLimit(),
-				UseCaseErrorType::INVALID_SEARCH_OFFSET => new InvalidSearchCursor(),
+				UseCaseErrorType::INVALID_SEARCH_QUERY => GraphQLError::invalidSearchQuery( $e->getMessage() ),
+				UseCaseErrorType::INVALID_SEARCH_LIMIT => GraphQLError::invalidSearchLimit(),
+				UseCaseErrorType::INVALID_SEARCH_OFFSET => GraphQLError::invalidSearchCursor(),
 				default => new LogicException( "Unexpected error type: '{$e->type->name}'" ),
 			};
 		}

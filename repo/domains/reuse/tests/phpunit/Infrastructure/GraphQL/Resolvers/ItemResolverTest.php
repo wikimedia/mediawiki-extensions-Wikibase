@@ -16,7 +16,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\ItemNotFound;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 
@@ -71,7 +71,7 @@ class ItemResolverTest extends TestCase {
 		$promise = $resolver->resolveItem( $requestedItem, new QueryContext() );
 		SyncPromiseQueue::run(); // resolves the promise above
 
-		$this->assertInstanceOf( ItemNotFound::class, $promise->result );
+		$this->assertInstanceOf( GraphQLError::class, $promise->result );
 		$this->assertSame( "Item \"$requestedItem\" does not exist.", $promise->result->getMessage() );
 	}
 
