@@ -38,5 +38,30 @@ module.exports = exports = {
 
 		location.href = response.tempuserredirect;
 		return true;
+	},
+
+	/**
+	 * Extracts a user-friendly error message from an API error object.
+	 *
+	 * @param {Object} errorObj The error object from the API wrapper { code, error }
+	 * @param {string} fallbackMessage The default message to use if no specific error is found
+	 * @returns {string} A user-friendly error message
+	 */
+	extractErrorMessage: ( errorObj, fallbackMessage ) => {
+		if ( !errorObj || !errorObj.errorData ) {
+			return fallbackMessage;
+		}
+
+		const apiError = errorObj.errorData;
+
+		if ( apiError.errors && Array.isArray( apiError.errors ) && apiError.errors.length > 0 ) {
+			const firstError = apiError.errors[ 0 ];
+
+			if ( firstError.text ) {
+				return mw.msg( 'wikibase-error-save-generic' ) + '\n' + firstError.text;
+			}
+		}
+
+		return fallbackMessage;
 	}
 };

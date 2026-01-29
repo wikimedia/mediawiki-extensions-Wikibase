@@ -105,7 +105,7 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			expect( classes ).toContain( 'wikibase-wbui2025-musical-notation-value' );
 		} );
 
-		it( 'does not set musical-notation-value class for other datatypes', async () => {
+		it( 'does not set musical-notation-value or math-value class for other datatypes', async () => {
 			const wrapper = await mountSnakValue( {
 				snak: {
 					datatype: 'string',
@@ -119,6 +119,7 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			const snak = wrapper.find( '.wikibase-wbui2025-snak-value' );
 			const classes = snak.attributes().class.split( ' ' );
 			expect( classes ).not.toContain( 'wikibase-wbui2025-musical-notation-value' );
+			expect( classes ).not.toContain( 'wikibase-wbui2025-math-value' );
 		} );
 
 		it( 'allows indicators to be clicked, and displays popover in that case', async () => {
@@ -169,6 +170,24 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );
 			expect( snak.find( '.snakValue' ).text() ).toEqual( 'wikibase-undisplayable-value' );
 			expect( snak.attributes().class.split( ' ' ) ).toContain( 'wikibase-wbui2025-snak-value--error-message' );
+		} );
+
+		it( 'sets the math-value class for mathematical expression datatype', async () => {
+			const wrapper = await mountSnakValue( {
+				snak: {
+					datatype: 'math',
+					hash: 'math1234567890123456789012345678901234567890',
+					property: 'P1',
+					datavalue: { value: 'e=mc^2', type: 'string' }
+				}
+			} );
+
+			expect( wrapper.exists() ).toBeTruthy();
+			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
+			const snak = wrapper.find( '.wikibase-wbui2025-snak-value' );
+			const classes = snak.attributes().class.split( ' ' );
+			expect( classes ).toContain( 'wikibase-wbui2025-snak-value' );
+			expect( classes ).toContain( 'wikibase-wbui2025-math-value' );
 		} );
 	} );
 

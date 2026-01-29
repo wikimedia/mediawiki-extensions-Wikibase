@@ -201,8 +201,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			editStatementsStore.saveChangedStatements = jest.fn(
 				() => new Promise( ( _, reject ) => {
 					const rejectWithException = () => {
-						const errorHtml = { text: jest.fn( () => apiGeneratedErrorMessage ) };
-						reject( new ErrorObject( 'modification-failure', errorHtml, {} ) );
+						const errorData = { errors: [ { code: 'modification-failed', text: apiGeneratedErrorMessage } ] };
+						reject( new ErrorObject( 'modification-failure', apiGeneratedErrorMessage, errorData ) );
 					};
 					setTimeout( rejectWithException, 500 );
 				} )
@@ -217,7 +217,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( messageStore.messages.size ).toBe( 1 );
 			const message = messageStore.messages.values().next().value;
 			expect( message.type ).toBe( 'error' );
-			expect( message.text ).toBe( apiGeneratedErrorMessage );
+			expect( message.text ).toBe( 'wikibase-error-save-generic' + '\n' + apiGeneratedErrorMessage );
+			await jest.advanceTimersByTime( 300 );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
 	} );

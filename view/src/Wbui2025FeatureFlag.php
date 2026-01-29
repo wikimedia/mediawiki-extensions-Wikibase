@@ -24,7 +24,6 @@ class Wbui2025FeatureFlag {
 		'monolingualtext',
 		'quantity',
 		'entity-schema',
-		'math',
 	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';

@@ -27,9 +27,10 @@ const saveStatementsFormMixin = {
 						clearTimeout( progressTimeout );
 						this.showProgress = false;
 					} )
-					.catch( ( e ) => {
+					.catch( ( errorObj ) => {
+						const errorText = wbui2025.util.extractErrorMessage( errorObj, mw.msg( 'wikibase-publishing-error' ) );
 						this.addStatusMessage( {
-							text: e.$errorHtml.text(),
+							text: errorText,
 							attachTo: currentFormRef,
 							type: 'error'
 						} );
