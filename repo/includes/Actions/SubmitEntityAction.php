@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Actions;
 use LogicException;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\IContextSource;
+use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Permissions\PermissionManager;
@@ -44,6 +45,7 @@ class SubmitEntityAction extends EditEntityAction {
 	public const SPEC = [
 		'class' => self::class,
 		'services' => [
+			'FormatterFactory',
 			'PermissionManager',
 			'RevisionLookup',
 			'TempUserCreator',
@@ -57,41 +59,31 @@ class SubmitEntityAction extends EditEntityAction {
 		],
 	];
 
-	private TempUserCreator $tempUserCreator;
-	private UserOptionsLookup $userOptionsLookup;
-	private WatchlistManager $watchlistManager;
-	private WikiPageFactory $wikiPageFactory;
-	private EditFilterHookRunner $editFilterHookRunner;
-
 	public function __construct(
 		Article $article,
 		IContextSource $context,
+		FormatterFactory $formatterFactory,
 		PermissionManager $permissionManager,
 		RevisionLookup $revisionLookup,
-		TempUserCreator $tempUserCreator,
-		UserOptionsLookup $userOptionsLookup,
-		WatchlistManager $watchlistManager,
-		WikiPageFactory $wikiPageFactory,
+		private readonly TempUserCreator $tempUserCreator,
+		private readonly UserOptionsLookup $userOptionsLookup,
+		private readonly WatchlistManager $watchlistManager,
+		private readonly WikiPageFactory $wikiPageFactory,
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
-		EditFilterHookRunner $editFilterHookRunner,
+		private readonly EditFilterHookRunner $editFilterHookRunner,
 		EntityDiffVisualizerFactory $entityDiffVisualizerFactory,
 		SummaryFormatter $summaryFormatter
 	) {
 		parent::__construct(
 			$article,
 			$context,
+			$formatterFactory,
 			$permissionManager,
 			$revisionLookup,
 			$anonymousEditWarningBuilder,
 			$entityDiffVisualizerFactory,
 			$summaryFormatter
 		);
-
-		$this->tempUserCreator = $tempUserCreator;
-		$this->userOptionsLookup = $userOptionsLookup;
-		$this->watchlistManager = $watchlistManager;
-		$this->wikiPageFactory = $wikiPageFactory;
-		$this->editFilterHookRunner = $editFilterHookRunner;
 	}
 
 	public function getName(): string {
