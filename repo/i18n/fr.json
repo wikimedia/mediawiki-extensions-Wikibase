@@ -261,6 +261,7 @@
 	"wikibase-item-reference-edit-placeholder": "Saisir l’identifiant de l’élément, par ex. Q10",
 	"wikibase-item-reference-edit-invalid-format": "L’identifiant d’élément saisi a un format incorrect",
 	"wikibase-item-reference-edit-nonexistent-item": "Aucun élément n’existe avec cet identifiant",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatique",
 	"wikibase-wikibaserepopage-not-itemid": "« $1 » n’est pas un identifiant d’élément valide.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Le code de langue « $1 » n’est pas connu. Veuillez utiliser un code de langue connu du système, tel que « fr ».",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Les alias qui contiennent des barres verticales peuvent seulement être modifiés sur la page de l’entité elle-même (avec JavaScript activé) ou via l’API.",
