@@ -238,7 +238,7 @@ class SubmitEntityAction extends EditEntityAction {
 	): SubmitEntityStatus {
 		$status = $this->getEditTokenStatus( $editToken );
 		if ( !$status->isOK() ) {
-			return SubmitEntityStatus::wrap( $status );
+			return SubmitEntityStatus::cast( $status );
 		}
 
 		$status = $this->getTempUserStatus();
@@ -298,7 +298,7 @@ class SubmitEntityAction extends EditEntityAction {
 		if ( $this->tempUserCreator->shouldAutoCreate( $this->getUser(), 'edit' ) ) {
 			$status = $this->tempUserCreator->create( null, $this->getRequest() );
 			if ( !$status->isOK() ) {
-				return SubmitEntityStatus::wrap( $status );
+				return SubmitEntityStatus::cast( $status );
 			}
 			$user = $status->getUser();
 			$context = new DerivativeContext( $this->getContext() );

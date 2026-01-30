@@ -117,8 +117,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$submitStatus = $form->tryAuthorizedSubmit();
 
 		if ( $submitStatus && $submitStatus->isGood() ) {
-			// wrap it, in case HTMLForm turned it into a generic Status
-			$submitStatus = EditEntityStatus::wrap( $submitStatus );
+			// cast it back in case HTMLForm turned it into a generic Status
+			$submitStatus = EditEntityStatus::cast( $submitStatus );
 			$this->redirectToEntityPage( $submitStatus );
 
 			return;

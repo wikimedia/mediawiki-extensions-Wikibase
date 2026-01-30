@@ -13,6 +13,7 @@ use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -50,7 +51,6 @@ use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
  * @license GPL-2.0-or-later
  */
 class EntityUpdaterTest extends TestCase {
-
 	private const MAX_ENTITY_SIZE = 1;
 
 	private IContextSource $context;
@@ -203,7 +203,7 @@ class EntityUpdaterTest extends TestCase {
 	 */
 	public function testGivenSaveReturnsErrorStatus_throwsCorrespondingException(
 		EntityDocument $entity,
-		Status $status,
+		StatusValue $status,
 		Exception $expectedException
 	): void {
 		$editEntity = $this->createStub( EditEntity::class );

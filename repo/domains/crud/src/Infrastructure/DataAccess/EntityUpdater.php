@@ -6,10 +6,10 @@ use LogicException;
 use MediaWiki\Api\IApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
-use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
+use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -145,7 +145,7 @@ class EntityUpdater {
 	/**
 	 * @throws EditPrevented
 	 */
-	private function throwIfPreventedEdit( Status $status ): void {
+	private function throwIfPreventedEdit( StatusValue $status ): void {
 		foreach ( $status->getMessages() as $message ) {
 			if ( $message instanceof IApiMessage ) {
 				throw new EditPrevented( $message->getApiCode(), $message->getApiData() );
