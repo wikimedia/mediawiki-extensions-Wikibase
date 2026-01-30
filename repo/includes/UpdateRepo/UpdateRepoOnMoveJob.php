@@ -4,12 +4,13 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\UpdateRepo;
 
+use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\SiteLookup;
 use MediaWiki\Title\Title;
 use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
@@ -21,7 +22,6 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\SummaryFormatter;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Job for updating the repo after a page on the client has been moved.
@@ -30,11 +30,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Marius Hoch < hoo@online.de >
  */
 class UpdateRepoOnMoveJob extends UpdateRepoJob {
-
-	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
 
 	/**
 	 * @var string|bool|null
@@ -47,56 +42,61 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	 * @note This is for use by Job::factory, don't call it directly;
 	 *           use newFrom*() instead.
 	 *
-	 * @note the constructor's signature is dictated by Job::factory, so we'll have to
-	 *           live with it even though it's rather ugly for our use case.
-	 *
 	 * @see Job::factory
 	 * @see UpdateRepoJob::__construct
-	 *
-	 * @param Title $title
-	 * @param array $params
 	 */
-	public function __construct( Title $title, array $params = [] ) {
-		parent::__construct( 'UpdateRepoOnMove', $title, $params );
-
-		$this->initRepoJobServicesFromGlobalState();
-	}
-
-	protected function initRepoJobServicesFromGlobalState(): void {
-		$services = MediaWikiServices::getInstance();
-
-		$this->initServices(
-			WikibaseRepo::getStore( $services )->getEntityLookup(
-				Store::LOOKUP_CACHING_DISABLED,
-				LookupConstants::LATEST_FROM_MASTER
-			),
-			WikibaseRepo::getEntityStore( $services ),
-			WikibaseRepo::getSummaryFormatter( $services ),
-			LoggerFactory::getInstance( 'UpdateRepo' ),
-			$services->getSiteLookup(),
-			WikibaseRepo::getEditEntityFactory( $services ),
-			WikibaseRepo::getSettings( $services )
-		);
-	}
-
-	public function initServices(
-		EntityLookup $entityLookup,
-		EntityStore $entityStore,
-		SummaryFormatter $summaryFormatter,
-		LoggerInterface $logger,
-		SiteLookup $siteLookup,
+	public function __construct(
+		Title $title,
+		array $params,
+		FormatterFactory $formatterFactory,
 		MediaWikiEditEntityFactory $editEntityFactory,
-		SettingsArray $settings
-	): void {
-		$this->initRepoJobServices(
-			$entityLookup,
+		EntityStore $entityStore,
+		SettingsArray $repoSettings,
+		EntityLookup $entityLookup,
+		SummaryFormatter $summaryFormatter,
+		private readonly SiteLookup $siteLookup,
+		LoggerInterface $logger = new NullLogger(),
+	) {
+		parent::__construct(
+			'UpdateRepoOnMove',
+			$title,
+			$params,
+			$formatterFactory,
+			$editEntityFactory,
 			$entityStore,
+			$repoSettings,
+			$entityLookup,
 			$summaryFormatter,
 			$logger,
-			$editEntityFactory,
-			$settings
 		);
-		$this->siteLookup = $siteLookup;
+	}
+
+	public static function newFromGlobalState(
+		Title $title,
+		array $params,
+		FormatterFactory $formatterFactory,
+		SiteLookup $siteLookup,
+		MediaWikiEditEntityFactory $editEntityFactory,
+		EntityStore $entityStore,
+		SettingsArray $repoSettings,
+		Store $store,
+		SummaryFormatter $summaryFormatter,
+	): self {
+		return new self(
+			$title,
+			$params,
+			$formatterFactory,
+			$editEntityFactory,
+			$entityStore,
+			$repoSettings,
+			$store->getEntityLookup(
+				Store::LOOKUP_CACHING_DISABLED,
+				LookupConstants::LATEST_FROM_MASTER,
+			),
+			$summaryFormatter,
+			$siteLookup,
+			LoggerFactory::getInstance( 'UpdateRepo' ),
+		);
 	}
 
 	/**
