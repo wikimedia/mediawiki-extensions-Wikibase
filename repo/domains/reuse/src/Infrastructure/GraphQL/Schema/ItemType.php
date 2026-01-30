@@ -21,6 +21,11 @@ class ItemType extends ObjectType {
 		$labelField->resolveFn = fn( Item $item, array $args ) => $item->labels
 			->getLabelInLanguage( $args['languageCode'] )?->text;
 
+		$descriptionProviderType = $types->getDescriptionProviderType();
+		$descriptionField = clone $descriptionProviderType->getField( 'description' ); // cloned to not override resolver
+		$descriptionField->resolveFn = fn( Item $item, array $args ) => $item->descriptions
+			->getDescriptionInLanguage( $args['languageCode'] )?->text;
+
 		parent::__construct( [
 			'fields' => [
 				'id' => [
@@ -28,14 +33,7 @@ class ItemType extends ObjectType {
 					'resolve' => fn( Item $item ) => $item->id->getSerialization(),
 				],
 				$labelField,
-				'description' => [
-					'type' => Type::string(),
-					'args' => [
-						'languageCode' => Type::nonNull( $types->getLanguageCodeType() ),
-					],
-					'resolve' => fn( Item $item, array $args ) => $item->descriptions
-						->getDescriptionInLanguage( $args['languageCode'] )?->text,
-				],
+				$descriptionField,
 				'aliases' => [
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'type' => Type::nonNull( Type::listOf( Type::string() ) ),
@@ -74,7 +72,7 @@ class ItemType extends ObjectType {
 						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
 			],
-			'interfaces' => [ $labelProviderType ],
+			'interfaces' => [ $labelProviderType, $descriptionProviderType ],
 		] );
 	}
 

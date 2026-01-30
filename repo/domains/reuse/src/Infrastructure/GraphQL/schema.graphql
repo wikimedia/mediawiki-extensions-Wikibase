@@ -6,7 +6,7 @@ type Query {
 
 scalar ItemId
 
-type Item implements LabelProvider {
+type Item implements LabelProvider & DescriptionProvider {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
@@ -20,6 +20,10 @@ interface LabelProvider {
 }
 
 scalar LanguageCode
+
+interface DescriptionProvider {
+  description(languageCode: LanguageCode!): String
+}
 
 scalar SiteId
 
@@ -58,7 +62,7 @@ type StringValue {
   content: String!
 }
 
-type ItemValue implements LabelProvider {
+type ItemValue implements LabelProvider & DescriptionProvider {
   id: String!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
@@ -151,7 +155,7 @@ type ItemSearchResultEdge {
   cursor: String!
 }
 
-type ItemSearchResultNode implements LabelProvider {
+type ItemSearchResultNode implements LabelProvider & DescriptionProvider {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
