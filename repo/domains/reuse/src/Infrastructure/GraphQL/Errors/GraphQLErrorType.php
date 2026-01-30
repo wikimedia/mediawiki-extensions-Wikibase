@@ -11,4 +11,9 @@ enum GraphQLErrorType {
 	case INVALID_SEARCH_LIMIT;
 	case INVALID_SEARCH_QUERY;
 	case SEARCH_NOT_AVAILABLE;
+
+	// used only as error codes for tracking
+	case INVALID_QUERY;
+	case QUERY_TOO_COMPLEX;
+	case UNKNOWN;
 }
