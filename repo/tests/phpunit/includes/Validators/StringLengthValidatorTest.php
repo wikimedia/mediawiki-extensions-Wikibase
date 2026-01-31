@@ -20,12 +20,12 @@ class StringLengthValidatorTest extends \PHPUnit\Framework\TestCase {
 
 	public static function provideValidate() {
 		return [
-			[ 1, 10, 'strlen', 'foo', true, "normal fit" ],
-			[ 0, 10, 'strlen', '', true, "empty ok" ],
-			[ 1, 10, 'strlen', '', false, "empty not allowed" ],
-			[ 1, 2, 'strlen', str_repeat( 'a', 33 ), false, 'too long' ],
-			[ 1, 2, 'strlen', 'ää', false, "byte measure" ], // assumes utf-8, latin1 will fail
-			[ 1, 2, 'mb_strlen', 'ää', true, "char measure" ],
+			[ 1, 10, strlen( ... ), 'foo', true, 'normal fit' ],
+			[ 0, 10, strlen( ... ), '', true, 'empty ok' ],
+			[ 1, 10, strlen( ... ), '', false, 'empty not allowed' ],
+			[ 1, 2, strlen( ... ), str_repeat( 'a', 33 ), false, 'too long' ],
+			[ 1, 2, strlen( ... ), 'ää', false, 'byte measure' ], // assumes utf-8, latin1 will fail
+			[ 1, 2, mb_strlen( ... ), 'ää', true, 'char measure' ],
 		];
 	}
 

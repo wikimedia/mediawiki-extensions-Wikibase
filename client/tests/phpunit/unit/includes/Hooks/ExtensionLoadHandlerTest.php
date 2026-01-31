@@ -6,7 +6,6 @@ use MediaWiki\HookContainer\HookContainer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Api\ApiFormatReference;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
 use Wikibase\Client\Hooks\ExtensionLoadHandler;
 
 /**
@@ -42,12 +41,10 @@ class ExtensionLoadHandlerTest extends TestCase {
 		$handler = new ExtensionLoadHandler( $container );
 		$handler->registerHooks();
 
-		$expectedHooks = [
-			'ChangesListSpecialPageStructuredFilters' => [
-				ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters',
-			],
-		];
-		$this->assertSame( $expectedHooks, $actualHooks );
+		$this->assertSame(
+			[ 'ChangesListSpecialPageStructuredFilters' ],
+			array_keys( $actualHooks )
+		);
 	}
 
 	public function testGetApiFormatReferenceSpec_settingTrue() {

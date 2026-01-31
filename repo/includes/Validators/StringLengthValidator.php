@@ -38,7 +38,7 @@ class StringLengthValidator implements ValueValidator {
 	/**
 	 * @param int $minLength
 	 * @param int $maxLength
-	 * @param callable|string $measure The function to use to measure the string's length.
+	 * @param callable|callable-string $measure The function to use to measure the string's length.
 	 *                        Use 'strlen' for byte length and 'mb_strlen' for character length.
 	 *                        A callable can be used to provide an alternative measure.
 	 * @param string $errorCodePrefix
