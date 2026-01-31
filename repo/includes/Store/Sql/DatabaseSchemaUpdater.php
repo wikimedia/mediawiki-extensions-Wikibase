@@ -241,17 +241,17 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		);
 
-		$highestId = $updater->getDB()->newSelectQueryBuilder()
+		$highestId = (int)$updater->getDB()->newSelectQueryBuilder()
 			->select( 'id_value' )
 			->from( 'wb_id_counters' )
 			->where( [ 'id_type' => 'wikibase-item' ] )
-			->caller( __METHOD__ )->fetchRow();
-		if ( $highestId === false ) {
+			->caller( __METHOD__ )
+			->fetchField();
+		if ( !$highestId ) {
 			// Fresh instance, no need to rebuild anything
 			$updater->insertUpdateRow( __CLASS__ . '::rebuildItemTerms' );
 			return;
 		}
-		$highestId = (int)$highestId->id_value;
 
 		// Tables have potentially only just been created and we may need to wait, T268944
 		$db = WikibaseRepo::getRepoDomainDbFactory()->newForEntitySource( $itemSource );

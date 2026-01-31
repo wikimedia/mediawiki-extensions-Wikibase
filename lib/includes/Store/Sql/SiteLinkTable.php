@@ -238,7 +238,7 @@ class SiteLinkTable implements SiteLinkStore {
 
 		$dbr = $this->db->connections()->getReadConnection();
 
-		$result = $dbr->newSelectQueryBuilder()
+		$result = (int)$dbr->newSelectQueryBuilder()
 			->select( 'ips_item_id' )
 			->from( $this->table )
 			->where( [
@@ -246,9 +246,9 @@ class SiteLinkTable implements SiteLinkStore {
 				'ips_site_page' => $pageTitle,
 			] )
 			->caller( __METHOD__ )
-			->fetchRow();
+			->fetchField();
 
-		return $result === false ? null : ItemId::newFromNumber( (int)$result->ips_item_id );
+		return $result ? ItemId::newFromNumber( $result ) : null;
 	}
 
 	public function getItemIdForSiteLink( SiteLink $siteLink ): ?ItemId {

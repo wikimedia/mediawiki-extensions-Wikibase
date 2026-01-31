@@ -79,10 +79,11 @@ class SqlIdGenerator implements IdGenerator {
 			->from( 'wb_id_counters' )
 			->where( [ 'id_type' => $type ] )
 			->forUpdate()
-			->caller( __METHOD__ )->fetchRow();
+			->caller( __METHOD__ )
+			->fetchField();
 
-		if ( is_object( $currentId ) ) {
-			$id = $currentId->id_value + 1;
+		if ( $currentId ) {
+			$id = $currentId + 1;
 			$database->newUpdateQueryBuilder()
 				->update( 'wb_id_counters' )
 				->set( [ 'id_value' => $id ] )
