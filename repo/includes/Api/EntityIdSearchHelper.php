@@ -179,13 +179,11 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 *
 	 * @return Term[] array with keys 'label' and 'description'
 	 */
-	private function getDisplayTerms( EntityId $entityId ) {
-		$displayTerms = [];
-
-		$displayTerms['label'] = $this->labelDescriptionLookup->getLabel( $entityId );
-		$displayTerms['description'] = $this->labelDescriptionLookup->getDescription( $entityId );
-
-		return $displayTerms;
+	private function getDisplayTerms( EntityId $entityId ): array {
+		return [
+			'label' => $this->labelDescriptionLookup->getLabel( $entityId ),
+			'description' => $this->labelDescriptionLookup->getDescription( $entityId ),
+		];
 	}
 
 }
