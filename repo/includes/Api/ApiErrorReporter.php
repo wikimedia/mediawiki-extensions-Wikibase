@@ -184,7 +184,7 @@ class ApiErrorReporter {
 	/**
 	 * @see ApiBase::dieWithError
 	 *
-	 * @param string|string[]|MessageSpecifier $msg
+	 * @param string|array|MessageSpecifier $msg
 	 * @param string $errorCode A code identifying the error.
 	 * @param int $httpRespCode The HTTP error code to send to the client
 	 * @param array|null $extraData Any extra data to include in the error report

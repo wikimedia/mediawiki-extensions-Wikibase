@@ -27,12 +27,12 @@ class DatabaseEntitySource implements EntitySource {
 	private $entityTypes = [];
 
 	/**
-	 * @var int[]
+	 * @var array<string,int> maps entity type to namespace id
 	 */
 	private $entityNamespaceIds = [];
 
 	/**
-	 * @var string[]
+	 * @var array<string,string> maps entity type to slot name
 	 */
 	private $entitySlots = [];
 
