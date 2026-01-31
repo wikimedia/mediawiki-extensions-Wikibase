@@ -141,9 +141,7 @@ class GetClaimsTest extends ApiTestCase {
 	}
 
 	public function testValidRequests() {
-		foreach ( $this->validRequestProvider() as $argList ) {
-			[ $params, $statements ] = $argList;
-
+		foreach ( $this->validRequestProvider() as [ $params, $statements ] ) {
 			$this->doTestValidRequest( $params, $statements );
 		}
 	}
