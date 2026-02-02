@@ -73,14 +73,16 @@ const searchCommonsMedia = function ( searchTerm, offset ) {
  *
  * @param {string} searchTerm
  * @param {string} entityType
+ * @param {number} [offset]
  * @returns {Promise<*>}
  */
-const searchForEntities = async function ( searchTerm, entityType ) {
+const searchForEntities = async function ( searchTerm, entityType, offset ) {
 	return api.get( api.assertCurrentUser( {
 		action: 'wbsearchentities',
 		search: searchTerm,
 		type: entityType,
-		language: mw.config.get( 'wgUserLanguage' )
+		language: mw.config.get( 'wgUserLanguage' ),
+		continue: offset
 	} ) ).then( ( response ) => response.search );
 };
 
