@@ -169,12 +169,12 @@ class CommonsMediaValueStrategy extends LookupStringDatatypeStrategy {
 snakValueStrategyFactory.registerStrategyForDatatype(
 	'wikibase-item',
 	( store ) => new ItemValueStrategy( store ),
-	( searchTerm, offset ) => searchForEntities( searchTerm, 'item' )
+	( searchTerm, offset ) => searchForEntities( searchTerm, 'item', offset )
 );
 snakValueStrategyFactory.registerStrategyForDatatype(
 	'wikibase-property',
 	( store ) => new PropertyValueStrategy( store ),
-	( searchTerm, offset ) => searchForEntities( searchTerm, 'property' )
+	( searchTerm, offset ) => searchForEntities( searchTerm, 'property', offset )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'time', ( store ) => new TimeValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype(
