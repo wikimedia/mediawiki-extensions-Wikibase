@@ -226,6 +226,8 @@
 	"wikibase-item-reference-edit-placeholder": "Voeg identificatienummer van item in, bijvoorbeeld Q10",
 	"wikibase-item-reference-edit-invalid-format": "Ingevoegd identificatienummer heeft een ongeldig formaat",
 	"wikibase-item-reference-edit-nonexistent-item": "Er bestaat geen item met dit ID",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "wordt weergegeven als:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automatisch",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" is geen geldig item-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "De taalcode \"$1\" is onbekend. Gebruik een taalcode die bekend is in het systeem, zoals \"nl\".",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliassen die sluistekens bevatten, kunnen alleen worden bewerkt op de pagina van de entiteit zelf (met JavaScript ingeschakeld) of via de API",
