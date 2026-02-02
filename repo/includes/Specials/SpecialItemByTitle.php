@@ -242,14 +242,12 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-item' )->parse() );
 
 			$createLink = SpecialPage::getTitleFor( 'NewItem' );
-			$this->getOutput()->addHTML(
-				Html::openElement( 'div' )
-				. $this->msg(
+			$this->getOutput()->addHTML( Html::rawElement( 'div', [],
+				$this->msg(
 					'wikibase-itembytitle-create',
 					$createLink->getFullURL( [ 'site' => $siteId, 'page' => $page ] )
 				)->parse()
-				. Html::closeElement( 'div' )
-			);
+			) );
 		}
 	}
 
