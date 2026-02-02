@@ -11,7 +11,7 @@ export class AddQualifierFormPage {
 		SNAK_VALUE_MENU_ITEMS: '.wikibase-wbui2025-add-qualifier-value .cdx-menu-item',
 		MENU: '.cdx-menu',
 		MENU_ITEM: '.wikibase-wbui2025-add-qualifier-form .cdx-menu-item',
-		ADD_BUTTON: '.wikibase-wbui2025-add-qualifier-form .cdx-button',
+		ADD_BUTTON: '.wikibase-wbui2025-add-qualifier-form > .cdx-button',
 		PROPERTY_OPTIONS: '.wikibase-wbui2025-property-lookup .cdx-menu-item',
 	};
 

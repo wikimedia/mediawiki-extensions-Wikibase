@@ -6,7 +6,7 @@ export class ValueForm {
 
 	public static QUALIFIER_INPUT_SELECTOR = '.wikibase-wbui2025-qualifiers .cdx-text-input input';
 
-	public static QUALIFIER_REMOVE_BUTTON = '.wikibase-wbui2025-qualifiers button.cdx-button';
+	public static QUALIFIER_REMOVE_BUTTON = '.wikibase-wbui2025-qualifiers .wikibase-wbui2025-remove-snak button.cdx-button';
 
 	public static RANK_SELECTOR = '.cdx-select-vue';
 
