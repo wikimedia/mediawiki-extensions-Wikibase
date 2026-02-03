@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
 use GraphQL\Executor\Promise\Adapter\SyncPromiseQueue;
-use GraphQL\GraphQL;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetPropertyLabels\BatchGetPropertyLabels;
@@ -22,11 +21,6 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\PropertyLabelsR
  * @license GPL-2.0-or-later
  */
 class PropertyLabelsResolverTest extends TestCase {
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	public function testResolve(): void {
 		$requestedProperties = [ new NumericPropertyId( 'P123' ), new NumericPropertyId( 'P321' ) ];

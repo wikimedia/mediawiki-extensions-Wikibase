@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use Generator;
-use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Tests\NewItem;
@@ -21,12 +20,6 @@ use Wikimedia\Stats\StatsFactory;
 class TrackingTest extends MediaWikiIntegrationTestCase {
 
 	private const EXISTING_ITEM_ID = 'Q123';
-
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	/**
 	 * @dataProvider queryProvider

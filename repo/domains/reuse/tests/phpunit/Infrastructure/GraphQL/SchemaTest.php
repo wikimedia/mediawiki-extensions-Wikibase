@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
-use GraphQL\GraphQL;
 use GraphQL\Utils\SchemaPrinter;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
@@ -15,12 +14,6 @@ use Wikibase\Repo\Domains\Reuse\WbReuse;
  * @license GPL-2.0-or-later
  */
 class SchemaTest extends MediaWikiIntegrationTestCase {
-
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	public function testSchemaIsUpToDate(): void {
 		// This ensures that there is at least one data type using the generic EntityValue type to avoid generating different schemas

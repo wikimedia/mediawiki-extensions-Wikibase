@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
 use GraphQL\Executor\Promise\Adapter\SyncPromiseQueue;
-use GraphQL\GraphQL;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
@@ -28,11 +27,6 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
  * @license GPL-2.0-or-later
  */
 class ItemResolverTest extends TestCase {
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	public function testResolveItems(): void {
 		$context = new QueryContext();
