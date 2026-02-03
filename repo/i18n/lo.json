@@ -9,6 +9,7 @@
 	},
 	"wikibase-edit": "ດັດແກ້",
 	"wikibase-add": "ເພີ່ມ",
+	"wikibase-label-empty": "ບໍ່ໄດ້ກຳນົດປ້າຍກຳກັບໄວ້",
 	"wikibase-description-empty": "ບໍ່ໄດ້ກໍານົດຄໍາອະທິບາຍ",
 	"wikibase-sitelinks-special": "ໄຊຕ໌ອື່ນ",
 	"wikibase-itemdisambiguation-lookup-language": "ລະຫັດພາສາ:",
