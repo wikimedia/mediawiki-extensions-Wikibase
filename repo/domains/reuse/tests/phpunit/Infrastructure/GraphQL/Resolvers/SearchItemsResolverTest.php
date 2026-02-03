@@ -10,8 +10,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchQuery;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\SearchNotAvailable;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\SearchItemsResolver;
 use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\SearchEnabledTestTrait;
@@ -79,7 +78,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$facetedItemSearch->method( 'execute' )
 			->willThrowException( new UseCaseError( UseCaseErrorType::INVALID_SEARCH_QUERY, 'some reason' ) );
 
-		$this->expectException( InvalidSearchQuery::class );
+		$this->expectException( GraphQLError::class );
 		$this->expectExceptionMessage( 'Invalid search query: some reason' );
 
 		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );
@@ -92,7 +91,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$facetedItemSearch->expects( $this->never() )
 		->method( 'execute' )->willReturn( $this->createStub( FacetedItemSearchResponse::class ) );
 
-		$this->expectException( SearchNotAvailable::class );
+		$this->expectException( GraphQLError::class );
 		$this->expectExceptionMessage( 'Search is not available due to insufficient server configuration' );
 
 		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );

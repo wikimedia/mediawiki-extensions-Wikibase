@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\InvalidSearchCursor;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 
 /**
  * @license GPL-2.0-or-later
@@ -16,12 +16,12 @@ trait PaginationCursorCodec {
 	}
 
 	/**
-	 * @throws InvalidSearchCursor
+	 * @throws GraphQLError
 	 */
 	private function decodeOffsetFromCursor( string $cursor ): int {
 		$offsetString = base64_decode( $cursor );
 		if ( !ctype_digit( $offsetString ) ) {
-			throw new InvalidSearchCursor();
+			throw GraphQLError::invalidSearchCursor();
 		}
 
 		return (int)$offsetString;

@@ -8,7 +8,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItemsRequest;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\ItemNotFound;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 
 /**
@@ -25,7 +25,7 @@ class ItemResolver {
 		$this->itemsToFetch[] = $itemId;
 
 		/**
-		 * @throws ItemNotFound
+		 * @throws GraphQLError
 		 */
 		return new Deferred( function() use ( $itemId, $context ): Item {
 			if ( !$this->itemsBatch ) {
@@ -36,7 +36,7 @@ class ItemResolver {
 
 			$item = $this->itemsBatch->getItem( new ItemId( $itemId ) );
 			if ( !$item ) {
-				throw new ItemNotFound( $itemId );
+				throw GraphQLError::itemNotFound( $itemId );
 			}
 
 			$resultId = $item->id->getSerialization();
