@@ -26,6 +26,7 @@ class GraphQLService {
 		private readonly Schema $schema,
 		private readonly Config $config,
 		private readonly StatsFactory $stats,
+		private readonly GraphQLFieldCollector $graphQLFieldCollector,
 	) {
 		$this->queryComplexityRule = new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY );
 	}
@@ -66,6 +67,9 @@ class GraphQLService {
 		}
 
 		$this->trackGraphQLHit( $output );
+		if ( isset( $output['data'] ) ) {
+			$this->trackFieldUsage( $query, $operationName );
+		}
 
 		return $output;
 	}
@@ -119,5 +123,14 @@ class GraphQLService {
 		}
 
 		return GraphQLErrorType::UNKNOWN;
+	}
+
+	private function trackFieldUsage( string $query, ?string $operationName ): void {
+		$fields = $this->graphQLFieldCollector->getRequestedFieldPaths( $query, $operationName );
+		foreach ( $fields as $field ) {
+			$this->stats->getCounter( 'wikibase_graphql_field_usage_total' )
+				->setLabel( 'field', $field )
+				->increment();
+		}
 	}
 }
