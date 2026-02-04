@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use Generator;
-use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
 use Wikibase\DataModel\Entity\Item;
@@ -39,12 +38,6 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 
 	/** @var Item[] */
 	private static array $items = [];
-
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	protected function setUp(): void {
 		parent::setUp();

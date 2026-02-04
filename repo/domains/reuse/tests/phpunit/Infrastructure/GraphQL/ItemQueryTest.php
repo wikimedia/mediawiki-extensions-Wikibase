@@ -12,7 +12,6 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use Generator;
-use GraphQL\GraphQL;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\SiteLookup;
@@ -59,12 +58,6 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 	private static MediaWikiSite $sitelinkSite;
 	private const ALLOWED_SITELINK_SITES = [ 'examplewiki', 'otherwiki' ];
 	private const CUSTOM_ENTITY_DATA_TYPE = 'test-type';
-
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	/**
 	 * @dataProvider queryProvider

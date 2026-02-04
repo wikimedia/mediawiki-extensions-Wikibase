@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
-use GraphQL\GraphQL;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
@@ -26,12 +25,6 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 
 	use SearchEnabledTestTrait;
 	use PaginationCursorCodec;
-
-	public static function setUpBeforeClass(): void {
-		if ( !class_exists( GraphQL::class ) ) {
-			self::markTestSkipped( 'Needs webonyx/graphql-php to run' );
-		}
-	}
 
 	public function testResolveWithCursor(): void {
 		$this->simulateSearchEnabled();
