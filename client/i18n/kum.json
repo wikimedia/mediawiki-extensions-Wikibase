@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Arsenekoumyk"
+			"Arsenekoumyk",
+			"Кумнац"
 		]
 	},
 	"tooltip-t-wikibase": "Маълюмат репозиторидеги гесегине байланыв",
@@ -9,6 +10,13 @@
 	"wikibase-dataitem": "{{WBREPONAME}} гесеги",
 	"wikibase-editlinks": "Байланывланы тюзлемек",
 	"wikibase-editlinkstitle": "Тилара байланывланы тюзлемек",
+	"wikibase-addlinkstitle": "Къошув тил арасы байланывланы",
+	"wikibase-linkitem-addlinks": "Байланывланы къошув",
+	"wikibase-linkitem-title": "Сагьифагьа байланыв",
+	"wikibase-linkitem-linkpage": "Сагьифагъа байланыв",
+	"wikibase-linkitem-selectlink": "Тилейбиз, оьзюгюзге герекли сайтны ва бетни сайлагъыз",
+	"wikibase-linkitem-input-site": "Тил",
+	"wikibase-linkitem-input-page": "Сагьифа",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Яшырмакъ",
 	"wikibase-rc-hide-wikidata-show": "Гёрсетмек",

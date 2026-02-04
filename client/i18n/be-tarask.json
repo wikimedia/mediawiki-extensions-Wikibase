@@ -58,7 +58,7 @@
 	"wikibase-rcfilters-hide-wikibase-conflicts-major-global": "Усе праўкі {{grammar:родны|{{WBREPONAME}}}} пазначаюцца як «дробныя», таму фільтар «Праўкі {{grammar:родны|{{WBREPONAME}}}}» канфліктуе зь фільтрам «Нядробныя праўкі».",
 	"wikibase-rcfilters-major-conflicts-hide-wikibase": "Усе праўкі {{grammar:родны|{{WBREPONAME}}}} пазначаюцца як «дробныя», таму фільтар «Праўкі {{grammar:родны|{{WBREPONAME}}}}» канфліктуе зь фільтрам «Нядробныя праўкі».",
 	"wikibase-rcfilters-hide-wikibase-conflicts-major": "Усе праўкі {{grammar:родны|{{WBREPONAME}}}} пазначаюцца як «дробныя», таму фільтар «Праўкі {{grammar:родны|{{WBREPONAME}}}}» канфліктуе зь фільтрам «Нядробныя праўкі».",
-	"wikibase-replicationnote": "Зьвярніце ўвагу, што зьмены могуць зьявіцца ва ўсіх вікі-праектах толькі празь некалькі хвілінаў.",
+	"wikibase-replicationnote": "Зьвярніце ўвагу, што зьмены могуць зьявіцца ва ўсіх вікі-праектах толькі праз колькі хвілінаў.",
 	"wikibase-watchlist-show-changes-pref": "Паказваць зьмены {{WBREPONAME}} у Вашым сьпісе назіраньня",
 	"wikibase-error-deserialize-error": "Не атрымалася дэсэрыялізаваць зьвесткі.",
 	"wikibase-error-serialize-error": "Не ўдалося сэрыялізаваць зьвесткі",
