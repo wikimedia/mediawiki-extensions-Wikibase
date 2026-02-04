@@ -6,6 +6,7 @@
 	>
 		<span class="snakValue" v-html="snakValueHtmlForHash( snak.hash )"></span>
 		<span
+			v-if="indicatorsHtml"
 			ref="snakAnchor"
 			class="indicators"
 			@click="togglePopover"

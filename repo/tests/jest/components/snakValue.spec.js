@@ -51,6 +51,22 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			expect( snak.attributes().class ).toEqual( 'wikibase-wbui2025-snak-value' );
 		} );
 
+		it( 'does not include the indicator span when it lacks content', async () => {
+			const wrapper = await mountSnakValue(
+				{
+					snak: {
+						datatype: 'string',
+						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+						property: 'P1',
+						datavalue: { value: 'p1', type: 'string' }
+					}
+				},
+				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
+			);
+			await wrapper.vm.$nextTick();
+			expect( wrapper.find( { ref: 'snakAnchor' } ).exists() ).toBeFalsy();
+		} );
+
 		it( 'displays indicators if they are set', async () => {
 			const wrapper = await mountSnakValue(
 				{
@@ -66,8 +82,9 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			wbui2025.store.setIndicatorsHtmlForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>Icon1</span>' );
 			await wrapper.vm.$nextTick();
 			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
-			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );
-			expect( snak.text() ).toEqual( 'p1Icon1' );
+			const indicatorSpan = wrapper.find( { ref: 'snakAnchor' } );
+			expect( indicatorSpan.exists() ).toBeTruthy();
+			expect( indicatorSpan.text() ).toEqual( 'Icon1' );
 		} );
 
 		it( 'sets the musical-notation-value class for musical notation datatype', async () => {
@@ -118,11 +135,11 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			);
 			wbui2025.store.setIndicatorsHtmlForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>Icon1</span>' );
 			wbui2025.store.setPopoverContentForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401',
-				{
+				[ {
 					icon: '<span class="wikibase-wbui2025-icon-edit-small"></span>',
 					title: 'Popover Title',
 					bodyHtml: '<p>Popover Content</p>'
-				} );
+				} ] );
 			await wrapper.vm.$nextTick();
 			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
 			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );

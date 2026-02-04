@@ -602,5 +602,10 @@
 	"wikibase-scoped-search-item-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Items scope",
 	"wikibase-scoped-search-property-scope-name": "The label shown in the scope dropdown of the scoped typeahead search for the Properties scope",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Name of the beta feature for the mobile editing UI.",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Description of the beta feature for the mobile editing UI."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Description of the beta feature for the mobile editing UI.",
+	"wikibase-stepper-progress": "Indicates the progress through a set of steps\n\nParameters:\n* $1 — The current step number.\n* $2 — The total step count.",
+	"wikibase-indicator-popover-multiple-issue-title": "Title for a popover that displays more than one problem or suggestion for a statement",
+	"wikibase-indicator-popover-multiple-issue-previous": "ARIA label for a navigation button for the previous issue in a multiple-issue popover\n\n{{Identical|Previous}}",
+	"wikibase-indicator-popover-multiple-issue-next": "ARIA label for a navigation button for the next issue in a multiple-issue popover\n\n{{Identical|Next}}"
+
 }
