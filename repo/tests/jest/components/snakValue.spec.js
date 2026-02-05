@@ -21,11 +21,11 @@ const { storeWithServerRenderedHtml } = require( '../piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.snakValue', () => {
 	describe( 'the mounted component', () => {
-		function mountSnakValue( props = {}, snakHashToHtmlMap = {} ) {
+		function mountSnakValue( props = {}, snakHashToHtmlMap = {}, propertyToHtmlMap = {}, snakHashWithErrorSet = [] ) {
 			return mount( snakValueVue, {
 				props,
 				global: {
-					plugins: [ storeWithServerRenderedHtml( snakHashToHtmlMap ) ]
+					plugins: [ storeWithServerRenderedHtml( snakHashToHtmlMap, propertyToHtmlMap, snakHashWithErrorSet ) ]
 				}
 			} );
 		}
@@ -147,6 +147,28 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			const popovers = wrapper.findAllComponents( indicatorPopover );
 			expect( popovers ).toHaveLength( 1 );
 			expect( popovers[ 0 ].props().snakHash ).toEqual( 'ee6053a6982690ba0f5227d587394d9111eea401' );
+		} );
+
+		it( 'shows message and adds class if snak HTML has error', async () => {
+			const wrapper = await mountSnakValue(
+				{
+					snak: {
+						datatype: 'string',
+						hash: 'ee742552ad17e320360d4d17fb60fdd22fe0b6dd',
+						property: 'P1',
+						datavalue: { value: '\\invalid {', type: 'string' }
+					}
+				},
+				{ ee742552ad17e320360d4d17fb60fdd22fe0b6dd:
+						'<div class="cdx-message--error mw-ext-score-error cdx-message cdx-message--block"></div>' },
+				{},
+				[ 'ee742552ad17e320360d4d17fb60fdd22fe0b6dd' ]
+			);
+			await wrapper.vm.$nextTick();
+			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
+			const snak = wrapper.find( ' .wikibase-wbui2025-snak-value' );
+			expect( snak.find( '.snakValue' ).text() ).toEqual( 'wikibase-undisplayable-value' );
+			expect( snak.attributes().class.split( ' ' ) ).toContain( 'wikibase-wbui2025-snak-value--error-message' );
 		} );
 	} );
 

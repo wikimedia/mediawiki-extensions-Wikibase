@@ -50,7 +50,7 @@ describe( 'wikibase.wbui2025.addQualifier', () => {
 	} );
 
 	describe( 'the mounted component', () => {
-		mw.Api.prototype.get = jest.fn().mockResolvedValue( {} );
+		mw.Api.prototype.get = jest.fn().mockResolvedValue( { result: '' } );
 
 		let wrapper, closeButton, addButton, propertyLookup;
 		beforeEach( async () => {

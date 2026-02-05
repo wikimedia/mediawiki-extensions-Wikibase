@@ -3,7 +3,8 @@ const {
 	propertyLinkHtml,
 	updatePropertyLinkHtml,
 	snakValueHtmlForHash,
-	updateSnakValueHtmlForHash
+	updateSnakValueHtmlForHash,
+	snakValueHtmlForHashHasError
 } = require( './serverRenderedHtml.js' );
 const { renderPropertyLinkHtml, renderSnakValueHtml } = require( '../api/editEntity.js' );
 
@@ -161,6 +162,9 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 };
 
 const getIndicatorsHtmlForSnakHash = function ( snakHash ) {
+	if ( snakValueHtmlForHashHasError( snakHash ) ) {
+		return '<span class="wikibase-wbui2025-indicator-icon--error"></span>';
+	}
 	const statementsStore = useSavedStatementsStore();
 	return statementsStore.indicatorsForSnaks.get( snakHash );
 };
@@ -172,7 +176,17 @@ const setIndicatorsHtmlForSnakHash = function ( snakHash, indicators ) {
 
 const getPopoverContentForSnakHash = function ( snakHash ) {
 	const statementsStore = useSavedStatementsStore();
-	return statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
+	const popoverContentItems = statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
+	if ( snakValueHtmlForHashHasError( snakHash ) ) {
+		return [
+			{
+				bodyHtml: snakValueHtmlForHash( snakHash )
+			},
+			...popoverContentItems
+		];
+	} else {
+		return popoverContentItems;
+	}
 };
 
 const setPopoverContentForSnakHash = function ( snakHash, popoverContentItems ) {

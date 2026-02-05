@@ -1,9 +1,22 @@
 const { defineStore } = require( 'pinia' );
 
+function setSnakValueHtmlForHash( store, hash, html ) {
+	store.snakValues.set( hash, html );
+	store.snakValuesWithErrors.delete( hash );
+
+	if ( html.includes( 'cdx-message--error' ) ) {
+		const dom = new DOMParser().parseFromString( html, 'text/html' );
+		if ( dom.querySelector( '.cdx-message--error' ) !== null ) {
+			store.snakValuesWithErrors.add( hash );
+		}
+	}
+}
+
 const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 	state: () => ( {
 		propertyLinks: new Map(),
-		snakValues: new Map()
+		snakValues: new Map(),
+		snakValuesWithErrors: new Set()
 	} ),
 	actions: {
 		/**
@@ -38,7 +51,7 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 						);
 					}
 				} else {
-					this.snakValues.set( snakHash, html );
+					setSnakValueHtmlForHash( this, snakHash, html );
 				}
 			}
 		}
@@ -83,7 +96,18 @@ function snakValueHtmlForHash( hash ) {
 
 function updateSnakValueHtmlForHash( hash, html ) {
 	const serverRenderedHtml = useServerRenderedHtml();
-	serverRenderedHtml.snakValues.set( hash, html );
+	setSnakValueHtmlForHash( serverRenderedHtml, hash, html );
+}
+
+/**
+ * Check whether the HTML for the snak with the given hash contains an error message.
+ *
+ * @param {string} hash
+ * @returns {boolean}
+ */
+function snakValueHtmlForHashHasError( hash ) {
+	const serverRenderedHtml = useServerRenderedHtml();
+	return serverRenderedHtml.snakValuesWithErrors.has( hash );
 }
 
 module.exports = {
@@ -91,5 +115,6 @@ module.exports = {
 	propertyLinkHtml,
 	updatePropertyLinkHtml,
 	snakValueHtmlForHash,
-	updateSnakValueHtmlForHash
+	updateSnakValueHtmlForHash,
+	snakValueHtmlForHashHasError
 };

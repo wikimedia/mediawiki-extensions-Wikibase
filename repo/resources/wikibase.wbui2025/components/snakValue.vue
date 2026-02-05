@@ -47,6 +47,7 @@ module.exports = exports = defineComponent( {
 	computed: {
 		snakValueClass() {
 			return {
+				'wikibase-wbui2025-snak-value--error-message': wbui2025.store.snakValueHtmlForHashHasError( this.snak.hash ),
 				'wikibase-wbui2025-snak-value--popover-visible': this.popoverVisible,
 				'wikibase-wbui2025-media-value': this.snak.datatype === 'commonsMedia',
 				'wikibase-wbui2025-time-value': this.snak.datatype === 'time',
@@ -61,7 +62,12 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		snakValueHtmlForHash: wbui2025.store.snakValueHtmlForHash,
+		snakValueHtmlForHash( hash ) {
+			if ( wbui2025.store.snakValueHtmlForHashHasError( hash ) ) {
+				return mw.message( 'wikibase-undisplayable-value' ).parse();
+			}
+			return wbui2025.store.snakValueHtmlForHash( hash );
+		},
 		togglePopover() {
 			this.popoverVisible = !this.popoverVisible;
 		}

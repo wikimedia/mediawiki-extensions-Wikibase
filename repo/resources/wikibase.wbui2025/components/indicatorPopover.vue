@@ -44,7 +44,10 @@
 					:class="currentIssue.iconClass"
 					icon="none"
 				></cdx-icon>
-				<div class="cdx-popover__header__title">
+				<div
+					v-if="currentIssue.title"
+					class="cdx-popover__header__title"
+				>
 					{{ currentIssue.title }}
 				</div>
 			</template>

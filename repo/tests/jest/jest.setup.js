@@ -45,6 +45,7 @@ global.mw = {
 	Api: ApiMock,
 	ForeignApi: ApiMock,
 	msg: jest.fn( ( key ) => key ),
+	message: $i18nMock,
 	Title: TitleMock,
 	config: new Map(),
 	util: { debounce }
