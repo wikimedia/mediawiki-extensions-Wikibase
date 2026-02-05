@@ -34,4 +34,4 @@ Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 	return cy.window();
 } );
 
-Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { mobileaction: 'toggle_view_mobile' } ) );
+Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { useformat: 'mobile' } ) );
