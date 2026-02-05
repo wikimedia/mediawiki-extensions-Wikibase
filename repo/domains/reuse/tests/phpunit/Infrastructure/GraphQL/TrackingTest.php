@@ -119,6 +119,55 @@ class TrackingTest extends MediaWikiIntegrationTestCase {
 		// TODO add a test for multiple errors once there is another non-fatal type like ITEM_NOT_FOUND
 	}
 
+	/**
+	 * @dataProvider fieldUsageQueryProvider
+	 */
+	public function testFieldUsageTracking( string $query, array $expectedMetrics ): void {
+		$statsHelper = StatsFactory::newUnitTestingHelper();
+
+		$this->newGraphQLService( $statsHelper->getStatsFactory() )
+			->query( $query );
+
+		foreach ( $expectedMetrics as $metricName => $count ) {
+			$this->assertSame( $count, $statsHelper->count( $metricName ) );
+		}
+
+		$otherMetrics = array_diff( $statsHelper->getAllFormatted(), $expectedMetrics );
+		foreach ( $otherMetrics as $metric ) {
+			$this->assertStringStartsNotWith(
+				'wikibase_graphql_field_usage_total',
+				$metric,
+				"$metric was not expected to be tracked",
+			);
+		}
+	}
+
+	public function fieldUsageQueryProvider(): Generator {
+		yield 'only errors, no field usage tracked' => [
+			'{ fieldDoesNotExist }',
+			[],
+		];
+
+		yield 'tracks field usage on partial success' => [
+			'{ item(id: "Q999999") { id } }',
+			[
+				'wikibase_graphql_field_usage_total{field="item"}' => 1,
+				'wikibase_graphql_field_usage_total{field="item_id"}' => 1,
+			],
+		];
+
+		yield 'tracks field usage on success' => [
+			'{
+				item1: item(id: "' . self::EXISTING_ITEM_ID . '") { id }
+				item2: item(id: "' . self::EXISTING_ITEM_ID . '") { id }
+			}',
+			[
+				'wikibase_graphql_field_usage_total{field="item"}' => 2,
+				'wikibase_graphql_field_usage_total{field="item_id"}' => 2,
+			],
+		];
+	}
+
 	private function newGraphQLService( StatsFactory $stats ): GraphQLService {
 		$entityLookup = $this->createStub( EntityLookup::class );
 		$entityLookup->method( 'getEntity' )->willReturnCallback( function ( ItemId $id ) {
