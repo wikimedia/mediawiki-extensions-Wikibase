@@ -571,5 +571,9 @@
 	"wikibase-scoped-search-item-scope-name": "Objekte",
 	"wikibase-scoped-search-property-scope-name": "Eigenschaften",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Wikidata-Einträge auf Mobilgeräten bearbeiten",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiviere diese Funktion, um Wikidata von deinem Mobilgerät aus zu bearbeiten! Dieses Projekt des Wikidata-Teams, das sich noch in der Entwicklung befindet, ermöglicht die Bearbeitung von Einträgen auf deinem Smartphone mit einer für Mobilgeräte optimierten Benutzeroberfläche."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiviere diese Funktion, um Wikidata von deinem Mobilgerät aus zu bearbeiten! Dieses Projekt des Wikidata-Teams, das sich noch in der Entwicklung befindet, ermöglicht die Bearbeitung von Einträgen auf deinem Smartphone mit einer für Mobilgeräte optimierten Benutzeroberfläche.",
+	"wikibase-stepper-progress": "$1 von $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Probleme & Vorschläge",
+	"wikibase-indicator-popover-multiple-issue-previous": "Vorherige",
+	"wikibase-indicator-popover-multiple-issue-next": "Nächste"
 }

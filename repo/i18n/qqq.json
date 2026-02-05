@@ -607,5 +607,4 @@
 	"wikibase-indicator-popover-multiple-issue-title": "Title for a popover that displays more than one problem or suggestion for a statement",
 	"wikibase-indicator-popover-multiple-issue-previous": "ARIA label for a navigation button for the previous issue in a multiple-issue popover\n\n{{Identical|Previous}}",
 	"wikibase-indicator-popover-multiple-issue-next": "ARIA label for a navigation button for the next issue in a multiple-issue popover\n\n{{Identical|Next}}"
-
 }

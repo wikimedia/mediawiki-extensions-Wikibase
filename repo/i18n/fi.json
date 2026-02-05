@@ -498,5 +498,9 @@
 	"wikibase-scoped-search-item-scope-name": "Kohteet",
 	"wikibase-scoped-search-property-scope-name": "Ominaisuudet",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Muokkaa Wikidata-kohteita mobiililaitteilla",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Ota käyttöön tämä ominaisuus muokataksesi Wikidataa mobiililaitteella. Tämä on Wikidatan käynnissä oleva kehityshanke, jonka tavoitteena on mahdollistaa kohteiden muokkaaminen älypuhelimilla mobiilioptimoidulla käyttöliittymällä."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Ota käyttöön tämä ominaisuus muokataksesi Wikidataa mobiililaitteella. Tämä on Wikidatan käynnissä oleva kehityshanke, jonka tavoitteena on mahdollistaa kohteiden muokkaaminen älypuhelimilla mobiilioptimoidulla käyttöliittymällä.",
+	"wikibase-stepper-progress": "$1 / $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Ongelmat ja ehdotukset",
+	"wikibase-indicator-popover-multiple-issue-previous": "Edellinen",
+	"wikibase-indicator-popover-multiple-issue-next": "Seuraava"
 }
