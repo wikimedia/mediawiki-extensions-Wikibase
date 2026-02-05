@@ -15,7 +15,6 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\AtEase\AtEase;
 
 // @codeCoverageIgnoreStart
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -244,9 +243,8 @@ abstract class DumpEntities extends Maintenance {
 		} );
 
 		$idStream = $this->makeIdStream( $entityTypes, $exceptionReporter );
-		AtEase::suppressWarnings();
-		$dumper->generateDump( $idStream );
-		AtEase::restoreWarnings();
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		@$dumper->generateDump( $idStream );
 
 		if ( $idStream instanceof EntityIdReader ) {
 			// close stream / free resources

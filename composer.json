@@ -30,7 +30,6 @@
 		"data-values/time": "^1.1.2",
 		"data-values/serialization": "^1.2.5",
 		"diff/diff": "^3.2.0",
-		"wikimedia/at-ease": "^2.0.0 || ^3.0.0",
 		"wikimedia/purtle": "^2.0.0",
 		"wikimedia/timestamp": "^5.1.0",
 		"wmde/php-vuejs-templating": "^2.2.0-beta.6",
