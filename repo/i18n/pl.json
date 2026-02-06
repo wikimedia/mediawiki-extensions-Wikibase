@@ -561,5 +561,9 @@
 	"wikibase-scoped-search-item-scope-name": "Elementy",
 	"wikibase-scoped-search-property-scope-name": "Właściwości",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Edytuj elementy Wikidanych na urządzeniach mobilnych",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Włącz tę funkcję, aby edytować Wikidane ze swojego urządzenia mobilnego! Ten projekt, rozwijany przez zespół odpowiedzialny za Wikidane, umożliwia edycję elementów ze smartfona, z obsługą zoptymalizowaną pod kątem urządzeń mobilnych."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Włącz tę funkcję, aby edytować Wikidane ze swojego urządzenia mobilnego! Ten projekt, rozwijany przez zespół odpowiedzialny za Wikidane, umożliwia edycję elementów ze smartfona, z obsługą zoptymalizowaną pod kątem urządzeń mobilnych.",
+	"wikibase-stepper-progress": "$1 z $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Problemy i sugestie",
+	"wikibase-indicator-popover-multiple-issue-previous": "Poprzedni",
+	"wikibase-indicator-popover-multiple-issue-next": "Następny"
 }

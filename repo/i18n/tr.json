@@ -225,6 +225,8 @@
 	"wikibase-item-reference-edit-placeholder": "Öge kimliği girin örn. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Girilen öge kimliği geçersiz biçime sahip",
 	"wikibase-item-reference-edit-nonexistent-item": "Bu kimlik ile öge bulunmuyor",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "görünecek hâli:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "otomatik",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" geçerli bir kimlik değil.",
 	"wikibase-wikibaserepopage-invalid-langcode": "\"$1\" dil kodu bilinmiyor. Lütfen \"tr\" gibi bilinen bir dil kodu kullanın.",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Boru içeren takma adlar yalnızca varlığın sayfasında (JavaScript etkinken) veya API aracılığıyla düzenlenebilir",
@@ -569,5 +571,9 @@
 	"wikibase-scoped-search-item-scope-name": "Ögeler",
 	"wikibase-scoped-search-property-scope-name": "Özellikler",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Taşınabilir aygıtlarda Vikiveri ögelerini düzenleyin",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Taşınabilir aygıtınızdan Vikiveri'yi düzenlemek için bu özelliği açın! Vikiveri Ekibi tarafından geliştirilmekte olan bu proje, akıllı telefonunuzdan ögeleri taşınabilir aygıtlar için uyarlanmış bir deneyimle düzenlemenizi sağlar."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Taşınabilir aygıtınızdan Vikiveri'yi düzenlemek için bu özelliği açın! Vikiveri Ekibi tarafından geliştirilmekte olan bu proje, akıllı telefonunuzdan ögeleri taşınabilir aygıtlar için uyarlanmış bir deneyimle düzenlemenizi sağlar.",
+	"wikibase-stepper-progress": "$1/$2",
+	"wikibase-indicator-popover-multiple-issue-title": "Sorunlar ve Öneriler",
+	"wikibase-indicator-popover-multiple-issue-previous": "Önceki",
+	"wikibase-indicator-popover-multiple-issue-next": "Sonraki"
 }

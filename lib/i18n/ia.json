@@ -37,6 +37,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "valor incognite",
 	"wikibase-snakview-snaktypeselector-novalue": "sin valor",
 	"wikibase-undeserializable-value": "Le valor es invalide e non pote esser visualisate.",
+	"wikibase-undisplayable-value": "Impossibile monstrar le valor.",
 	"datatypes-type-string": "Catena de characteres",
 	"datatypes-type-quantity": "Quantitate",
 	"datatypes-type-monolingualtext": "Texto monolingue",

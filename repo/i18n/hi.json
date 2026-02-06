@@ -511,5 +511,6 @@
 	"special-setdescription-parameterized": "$1 का विवरण सेट करें",
 	"special-setlabeldescriptionaliases-parameterized": "$1 के लेबल, विवरण और उपनाम सेट करें",
 	"wikibase-federated-properties-federated-property-api-error-message": "आप इस API की मदद से संघीय गुणधर्मों का इस्तेमाल नहीं कर सकते।",
-	"wikibase-federated-properties-failed-request-api-error-message": "संघीय स्रोत विकि तक अनुरोध न पहुँचने की वजह से अनुरोध असफल रहा।"
+	"wikibase-federated-properties-failed-request-api-error-message": "संघीय स्रोत विकि तक अनुरोध न पहुँचने की वजह से अनुरोध असफल रहा।",
+	"wikibase-indicator-popover-multiple-issue-next": "अगला"
 }

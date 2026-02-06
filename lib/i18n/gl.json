@@ -42,6 +42,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "valor descoñecido",
 	"wikibase-snakview-snaktypeselector-novalue": "sen valor",
 	"wikibase-undeserializable-value": "O valor non é válido e non se pode amosar.",
+	"wikibase-undisplayable-value": "Non se pode amosar o valor.",
 	"datatypes-type-string": "Cadea de caracteres",
 	"datatypes-type-quantity": "Cantidade",
 	"datatypes-type-monolingualtext": "Texto monolingüe",

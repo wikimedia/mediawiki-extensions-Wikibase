@@ -47,6 +47,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "Unbekannter Wert",
 	"wikibase-snakview-snaktypeselector-novalue": "Kein Wert",
 	"wikibase-undeserializable-value": "Der Wert ist ungültig und kann nicht angezeigt werden.",
+	"wikibase-undisplayable-value": "Der Wert kann nicht angezeigt werden.",
 	"datatypes-type-string": "Zeichenkette",
 	"datatypes-type-quantity": "Menge",
 	"datatypes-type-monolingualtext": "Einsprachiger Text",
