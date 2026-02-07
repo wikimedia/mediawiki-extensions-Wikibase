@@ -74,7 +74,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		LoggerInterface $logger,
 	) {
-		parent::__construct( 'ItemByTitle', '', true );
+		parent::__construct( 'ItemByTitle' );
 
 		$this->titleLookup = $titleLookup;
 		$this->languageNameLookup = $languageNameLookup;

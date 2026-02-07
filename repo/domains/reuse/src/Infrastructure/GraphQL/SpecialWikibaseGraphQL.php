@@ -3,17 +3,17 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use FormatJson;
-use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\SpecialPage\UnlistedSpecialPage;
 
 /**
  * @license GPL-2.0-or-later
  */
-class SpecialWikibaseGraphQL extends SpecialPage {
+class SpecialWikibaseGraphQL extends UnlistedSpecialPage {
 
 	public const SPECIAL_PAGE_NAME = 'WikibaseGraphQL';
 
 	public function __construct( private readonly GraphQLService $graphQLService ) {
-		parent::__construct( self::SPECIAL_PAGE_NAME, listed: false );
+		parent::__construct( self::SPECIAL_PAGE_NAME );
 	}
 
 	/**
