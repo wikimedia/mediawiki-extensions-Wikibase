@@ -123,7 +123,7 @@ return call_user_func( function() {
 		// mobile-only
 		'wikibase.mobile' => $moduleTemplate + [
 			'styles' => [
-				'wikibase/wikibase.mobile.css',
+				'wikibase/wikibase.mobile.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
 			],
 		],
