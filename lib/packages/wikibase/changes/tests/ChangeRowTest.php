@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Changes;
 use Exception;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\Lib\Changes\ChangeRow
@@ -96,9 +95,8 @@ class ChangeRowTest extends \PHPUnit\Framework\TestCase {
 			'info' => 's:5:"value";',
 		] );
 
-		AtEase::suppressWarnings();
-		$info = $change->getInfo();
-		AtEase::restoreWarnings();
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		$info = @$change->getInfo();
 
 		$this->assertSame( [], $info );
 	}

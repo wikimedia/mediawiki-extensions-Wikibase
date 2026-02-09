@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use MediaWiki\Revision\SlotRecord;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
-use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\DataAccess\DatabaseEntitySource
@@ -30,20 +29,16 @@ class DatabaseEntitySourceTest extends TestCase {
 		$interwikiPrefix
 	) {
 		$this->expectException( InvalidArgumentException::class );
-		AtEase::suppressWarnings();
-		try {
-			new DatabaseEntitySource(
-				$slotName,
-				$databaseName,
-				$entityNamespaceIdsAndSlots,
-				$conceptBaseUri,
-				$validRdfNodeNamespacePrefix,
-				$validRdfPredicateNamespacePrefix,
-				$interwikiPrefix
-			);
-		} finally {
-			AtEase::restoreWarnings();
-		}
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		@new DatabaseEntitySource(
+			$slotName,
+			$databaseName,
+			$entityNamespaceIdsAndSlots,
+			$conceptBaseUri,
+			$validRdfNodeNamespacePrefix,
+			$validRdfPredicateNamespacePrefix,
+			$interwikiPrefix
+		);
 	}
 
 	public static function provideInvalidConstructorArguments() {
