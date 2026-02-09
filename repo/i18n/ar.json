@@ -578,5 +578,9 @@
 	"wikibase-scoped-search-item-scope-name": "العناصر",
 	"wikibase-scoped-search-property-scope-name": "الخواص",
 	"wikibase-mobile-editing-ui-beta-feature-message": "تعديل عناصر ويكي بيانات على الأجهزة المحمولة",
-	"wikibase-mobile-editing-ui-beta-feature-description": "فعّل هذه الميزة لتعديل بيانات ويكي من جهازك المحمول! يتيح لك هذا المشروع قيد التطوير من فريق بيانات ويكي تعديل العناصر من هاتفك الذكي بتجربة مُحسّنة للأجهزة المحمولة."
+	"wikibase-mobile-editing-ui-beta-feature-description": "فعّل هذه الميزة لتعديل بيانات ويكي من جهازك المحمول! يتيح لك هذا المشروع قيد التطوير من فريق بيانات ويكي تعديل العناصر من هاتفك الذكي بتجربة مُحسّنة للأجهزة المحمولة.",
+	"wikibase-stepper-progress": "$1 من $2",
+	"wikibase-indicator-popover-multiple-issue-title": "القضايا والاقتراحات",
+	"wikibase-indicator-popover-multiple-issue-previous": "السابق",
+	"wikibase-indicator-popover-multiple-issue-next": "التالي"
 }

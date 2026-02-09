@@ -41,6 +41,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "непозната вредност",
 	"wikibase-snakview-snaktypeselector-novalue": "нема вредност",
 	"wikibase-undeserializable-value": "Вредноста е неважечка и затоа не може да се прикаже.",
+	"wikibase-undisplayable-value": "Не можам да ја прикажам вредноста.",
 	"datatypes-type-string": "Низа",
 	"datatypes-type-quantity": "Количина",
 	"datatypes-type-monolingualtext": "Еднојазичен текст",

@@ -559,5 +559,7 @@
 	"wikibase-mobile-editing-ui-beta-feature-message": "עריכת פריטי ויקינתונים במכשירים ניידים",
 	"wikibase-mobile-editing-ui-beta-feature-description": "התכונה הזאת מאפשרת את העריכה של ויקינתונים מהמכשיר הנייד שלך! הפרויקט הזה, שנמצא בפיתוח על־ידי צוות ויקינתונים, מאפשר לערוך פריטים מהטלפון החכם שלך עם חוויה מותאמת לנייד.",
 	"wikibase-stepper-progress": "$1 מתוך $2",
+	"wikibase-indicator-popover-multiple-issue-title": "בעיות והצעות",
+	"wikibase-indicator-popover-multiple-issue-previous": "הקודם",
 	"wikibase-indicator-popover-multiple-issue-next": "הבא"
 }

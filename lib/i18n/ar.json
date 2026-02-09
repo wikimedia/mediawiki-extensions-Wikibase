@@ -60,6 +60,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "قيمة مجهولة",
 	"wikibase-snakview-snaktypeselector-novalue": "لا قيمة",
 	"wikibase-undeserializable-value": "القيمة غير صالحة ولا يمكن عرضها.",
+	"wikibase-undisplayable-value": "تعذر عرض القيمة.",
 	"datatypes-type-string": "نص",
 	"datatypes-type-quantity": "كمية",
 	"datatypes-type-monolingualtext": "نص بلغة وحيدة",

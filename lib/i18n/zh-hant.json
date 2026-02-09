@@ -58,6 +58,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "未知數值",
 	"wikibase-snakview-snaktypeselector-novalue": "無數值",
 	"wikibase-undeserializable-value": "此數值無效，無法顯示。",
+	"wikibase-undisplayable-value": "無法顯示該值。",
 	"datatypes-type-string": "字串",
 	"datatypes-type-quantity": "數量",
 	"datatypes-type-monolingualtext": "單語言文字",

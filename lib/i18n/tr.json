@@ -49,6 +49,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "bilinmeyen değer",
 	"wikibase-snakview-snaktypeselector-novalue": "değer yok",
 	"wikibase-undeserializable-value": "Değer geçersiz ve görüntülenemiyor.",
+	"wikibase-undisplayable-value": "Değer görüntülenemiyor.",
 	"datatypes-type-string": "Dize",
 	"datatypes-type-quantity": "Miktar",
 	"datatypes-type-monolingualtext": "Tek dilli metin",

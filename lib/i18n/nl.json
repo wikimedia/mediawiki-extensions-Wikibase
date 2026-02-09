@@ -54,6 +54,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "onbekende waarde",
 	"wikibase-snakview-snaktypeselector-novalue": "geen waarde",
 	"wikibase-undeserializable-value": "De waarde is ongeldig en kan niet weergegeven worden.",
+	"wikibase-undisplayable-value": "De waarde kan niet worden weergegeven.",
 	"datatypes-type-string": "Tekenreeks",
 	"datatypes-type-quantity": "Hoeveelheid",
 	"datatypes-type-monolingualtext": "Enkeltalige tekst",

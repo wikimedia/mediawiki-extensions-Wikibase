@@ -545,5 +545,9 @@
 	"wikibase-scoped-search-item-scope-name": "Предмети",
 	"wikibase-scoped-search-property-scope-name": "Својства",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Уредување на предмети на Википодатоците од мобилни уреди",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Вклучете ја оваа функција за да ги уредувате Википодатоците од мобилен уред! Ова е проект во развој на екипата на Википодатоците кој овозможува уредување на предмети од вашиот паметен телефон на наменски прилагоден начин."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Вклучете ја оваа функција за да ги уредувате Википодатоците од мобилен уред! Ова е проект во развој на екипата на Википодатоците кој овозможува уредување на предмети од вашиот паметен телефон на наменски прилагоден начин.",
+	"wikibase-stepper-progress": "$1 од $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Проблеми и предлози",
+	"wikibase-indicator-popover-multiple-issue-previous": "Претходно",
+	"wikibase-indicator-popover-multiple-issue-next": "Следно"
 }

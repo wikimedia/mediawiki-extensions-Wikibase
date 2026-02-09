@@ -52,6 +52,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "tuntematon arvo",
 	"wikibase-snakview-snaktypeselector-novalue": "ei arvoa",
 	"wikibase-undeserializable-value": "Arvo on virheellinen, eikä sitä voida näyttää.",
+	"wikibase-undisplayable-value": "Arvon näyttäminen ei onnistu.",
 	"datatypes-type-string": "Merkkijono",
 	"datatypes-type-quantity": "Määrä",
 	"datatypes-type-monolingualtext": "Yksikielinen teksti",

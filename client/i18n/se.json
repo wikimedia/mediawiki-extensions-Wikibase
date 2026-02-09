@@ -81,7 +81,7 @@
 	"wikibase-entityusage-legend": "Listu siidduin mat geavahit dihto entitehta",
 	"wikibase-entityusage-entity": "Entitehta:",
 	"wikibase-entityusage-submit": "Čájet siidduid",
-	"wikibase-pageinfo-entity-id": "ID {{WBREPONAME}}-elementtii",
+	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-elemeantta gilkor",
 	"wikibase-pageinfo-entity-id-none": "Ii liŋka",
 	"wikibase-pageinfo-description-local": "Báikkálaš govvádus",
 	"wikibase-pageinfo-description-central": "Guovddáš čilgehus",

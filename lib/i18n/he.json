@@ -43,6 +43,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "ערך בלתי־ידוע",
 	"wikibase-snakview-snaktypeselector-novalue": "אין ערך",
 	"wikibase-undeserializable-value": "הערך אינו תקין ואינו יכול להיות מוצג.",
+	"wikibase-undisplayable-value": "לא ניתן להציג את הערך.",
 	"datatypes-type-string": "מחרוזת",
 	"datatypes-type-quantity": "כמות",
 	"datatypes-type-monolingualtext": "טקסט חד־לשוני",
