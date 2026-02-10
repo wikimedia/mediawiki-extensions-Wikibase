@@ -423,7 +423,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public static function getEditSiteLinkChangeTagMatchers() {
 		return [
 			'edit-difflink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'diff' ) ),
-			'edit-histlink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( wfMessage( 'hist' )->text() ) ),
+			'edit-histlink' => both( withTagName( 'a' ) )->andAlso( havingTextContents( 'hist' ) ),
 			'edit-changeslist-separator' => allOf(
 				withTagName( 'span' ),
 				withClass( 'mw-changeslist-separator' ),
