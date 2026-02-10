@@ -7,6 +7,7 @@
 			"Anto",
 			"Beta16",
 			"Darth Kule",
+			"Dream Indigo",
 			"F. Cosoleto",
 			"FRacco",
 			"Gianfranco",
@@ -451,5 +452,6 @@
 	"special-setaliases-parameterized": "Imposta alias per $1",
 	"special-setlabel-parameterized": "Imposta etichetta per $1",
 	"special-setdescription-parameterized": "Imposta descrizione per $1",
-	"special-setlabeldescriptionaliases-parameterized": "Imposta etichetta, descrizione e alias per $1"
+	"special-setlabeldescriptionaliases-parameterized": "Imposta etichetta, descrizione e alias per $1",
+	"wikibase-stepper-progress": "$1 di $2"
 }

@@ -383,5 +383,7 @@
 	"special-setdescription-parameterized": "Beschreiwung fir $1 festleeën",
 	"wikibase-scoped-search-item-scope-name": "Elementer",
 	"wikibase-scoped-search-property-scope-name": "Eegenschaften",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Wikidata-Elementer op mobillen Apparater änneren"
+	"wikibase-mobile-editing-ui-beta-feature-message": "Wikidata-Elementer op mobillen Apparater änneren",
+	"wikibase-stepper-progress": "$1 vu(n) $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Problemer & Virschléi"
 }
