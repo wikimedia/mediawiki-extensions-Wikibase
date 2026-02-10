@@ -12,7 +12,7 @@
 	},
 	"wikibase-client-desc": "د ويکي‌بنسټ پراختيا لپاره پېرودونکي",
 	"tooltip-t-wikibase": "د نښلېدلي اومتوک زېرمتون توکي سره تړنه",
-	"wikibase-after-page-move": "ستاسو لېږد بايد اوس  د [{{WBREPONAME}} توکي ژبتړ $1 کې ښکاره شي]. موږ غوښتنه کوو چې وگورئ چې دا پېښ شوي دي.",
+	"wikibase-after-page-move": "ستاسو لېږد بايد اوس  د [{{WBREPONAME}} $1 توکي] ژبتړ  کې ښکاره شي. هيله کوو؛ وگورئ چې دا پېښ شوې دي.",
 	"wikibase-after-page-delete": "د دې مخ وېبتړ بايد له [$1 اړوند {{WBREPONAME}} توکي] څخه لرې شوی وای. موږ له تاسو پوښتو چې وگورئ چې داسې پېښ شوې دي.",
 	"wikibase-comment-add": "{{WBREPONAME}} توکی جوړ شوی",
 	"wikibase-comment-remove": "{{WBREPONAME}} سره تړلی توکی ړنگ شوی. ژبتړنې لرې شوې.",
