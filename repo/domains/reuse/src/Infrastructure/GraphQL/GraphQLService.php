@@ -66,23 +66,31 @@ class GraphQLService {
 			];
 		}
 
-		$this->trackGraphQLHit( $output );
-		if ( isset( $output['data'] ) ) {
-			$this->trackFieldUsage( $query, $operationName );
-		}
+		$this->trackUsage( $output, $query, $operationName );
 
 		return $output;
 	}
 
-	private function trackGraphQLHit( array $output ): void {
-		$hasData = isset( $output['data'] );
-		$hasError = isset( $output['errors'] );
-		if ( $hasData && $hasError ) {
-			$this->incrementHitMetric( 'partial_success' );
-		} elseif ( $hasData ) {
-			$this->incrementHitMetric( 'success' );
-		} else {
+	private function trackUsage( array $output, string $query, ?string $operationName ): void {
+		if ( !( isset( $output['data'] ) ) ) {
 			$this->incrementHitMetric( 'error' );
+			return;
+		}
+
+		$usedFields = $this->graphQLFieldCollector->getRequestedFieldPaths( $query, $operationName );
+		$isIntrospectionQuery = !array_intersect( $this->schema->fieldNames, $usedFields );
+		if ( $isIntrospectionQuery ) {
+			$this->incrementHitMetric( 'introspection' );
+			return;
+		}
+
+		// field usage is tracked for (partial) success, but not introspection-only or error-only
+		$this->trackFieldUsage( $usedFields );
+
+		if ( isset( $output['errors'] ) ) {
+			$this->incrementHitMetric( 'partial_success' );
+		} else {
+			$this->incrementHitMetric( 'success' );
 		}
 	}
 
@@ -125,8 +133,7 @@ class GraphQLService {
 		return GraphQLErrorType::UNKNOWN;
 	}
 
-	private function trackFieldUsage( string $query, ?string $operationName ): void {
-		$fields = $this->graphQLFieldCollector->getRequestedFieldPaths( $query, $operationName );
+	private function trackFieldUsage( array $fields ): void {
 		foreach ( $fields as $field ) {
 			$this->stats->getCounter( 'wikibase_graphql_field_usage_total' )
 				->setLabel( 'field', $field )

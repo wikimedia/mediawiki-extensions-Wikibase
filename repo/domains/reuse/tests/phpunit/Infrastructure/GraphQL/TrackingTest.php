@@ -45,6 +45,11 @@ class TrackingTest extends MediaWikiIntegrationTestCase {
 			[ 'wikibase_graphql_hit_total{status="success"}' ],
 		];
 
+		yield 'introspection' => [
+			'{ __typename }',
+			[ 'wikibase_graphql_hit_total{status="introspection"}' ],
+		];
+
 		yield 'error - invalid query' => [
 			'{ fieldDoesNotExist }',
 			[ 'wikibase_graphql_hit_total{status="error"}' ],
@@ -165,6 +170,11 @@ class TrackingTest extends MediaWikiIntegrationTestCase {
 				'wikibase_graphql_field_usage_total{field="item"}' => 2,
 				'wikibase_graphql_field_usage_total{field="item_id"}' => 2,
 			],
+		];
+
+		yield 'does not track field usage for introspection queries' => [
+			'{ __typename }',
+			[],
 		];
 	}
 
