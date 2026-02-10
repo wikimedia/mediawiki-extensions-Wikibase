@@ -24,6 +24,7 @@ class Schema extends GraphQLSchema {
 		$fieldDefinitions = [
 			'item' => [
 				'type' => $this->types->getItemType(),
+				'description' => 'Fetch a single item by its ID, including labels, descriptions, aliases, sitelinks, and statements.',
 				'args' => [
 					'id' => Type::nonNull( $this->types->getItemIdType() ),
 				],
@@ -34,6 +35,8 @@ class Schema extends GraphQLSchema {
 			'itemsById' => [
 				// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 				'type' => Type::nonNull( Type::listOf( $this->types->getItemType() ) ),
+				// phpcs:ignore Generic.Files.LineLength.TooLong
+				'description' => 'Fetch multiple items by their IDs, including labels, descriptions, aliases, sitelinks, and statements.',
 				'args' => [
 					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
 					'ids' => Type::nonNull( Type::listOf( Type::nonNull( $this->types->getItemIdType() ) ) ),
@@ -45,13 +48,23 @@ class Schema extends GraphQLSchema {
 			],
 			'searchItems' => [
 				'type' => Type::nonNull( $this->types->getItemSearchResultConnectionType() ),
+				'description' => 'Search for items that match one or more statements-based filters',
 				'args' => [
-					'query' => Type::nonNull( $this->types->getItemSearchFilterType() ),
+					'query' => [
+						'type' => Type::nonNull( $this->types->getItemSearchFilterType() ),
+						'description' => 'Filter describing which statement properties and values must match.',
+					],
 					'first' => [
 						'type' => Type::nonNull( Type::int() ),
+						// phpcs:ignore Generic.Files.LineLength.TooLong
+						'description' => 'The maximum number of items to return (up to ' . FacetedItemSearchRequest::MAX_LIMIT . ')',
 						'defaultValue' => FacetedItemSearchRequest::DEFAULT_LIMIT,
 					],
-					'after' => Type::string(),
+					'after' => [
+						'type' => Type::string(),
+						// phpcs:ignore Generic.Files.LineLength.TooLong
+						'description' => 'Cursor that defines the position after which results should be returned. Usually the value of endCursor from the previous request',
+					],
 				],
 				'resolve' => fn( $rootValue, array $args ) => $searchItemsResolver->resolve(
 					$args['query'],

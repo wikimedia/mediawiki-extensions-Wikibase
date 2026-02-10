@@ -22,6 +22,14 @@ module.exports = [ {
 		'@graphql-eslint/strict-id-in-types': 'off',
 
 		// disabled because not all our types have a description
-		'@graphql-eslint/require-description': 'off'
+		'@graphql-eslint/require-description': 'off',
+
+		// GraphQL\Utils\SchemaPrinter uses inline comments for type descriptions
+		'@graphql-eslint/description-style': [
+			'error',
+			{
+				style: 'inline'
+			}
+		]
 	} )
 } ];
