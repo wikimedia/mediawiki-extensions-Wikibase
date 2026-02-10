@@ -4,7 +4,7 @@ Making Wikimedia's linked open data accessible to the world, enabling the knowle
 
 ## Features
 
-The functionality described here is provided by the Wikibase GraphQL API which is primarily intended for data reusers. The endpoint can be found on the wiki's `Special:WikibaseGraphQL` special page.
+The functionality described here is provided by the Wikibase GraphQL API which is primarily intended for data reusers. The endpoint can be found as an internal Action API module under `/w/api.php?action=wbgraphql&format=json`.
 
 
 ### Labels and/or descriptions of linked entities

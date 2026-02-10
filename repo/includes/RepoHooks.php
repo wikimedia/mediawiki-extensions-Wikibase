@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 use MediaWiki\Api\ApiEditPage;
 use MediaWiki\Api\ApiQuery;
 use MediaWiki\Api\Hook\ApiCheckCanExecuteHook;
+use MediaWiki\Api\Hook\ApiMain__moduleManagerHook;
 use MediaWiki\Api\Hook\ApiMain__onExceptionHook;
 use MediaWiki\Api\Hook\ApiQuery__moduleManagerHook;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
@@ -60,6 +61,7 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\ActionWikibaseGraphQL;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\SpecialWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
@@ -82,6 +84,7 @@ use Wikimedia\Rdbms\IDBAccessObject;
 final class RepoHooks implements
 	APIQuerySiteInfoGeneralInfoHook,
 	ApiCheckCanExecuteHook,
+	ApiMain__moduleManagerHook,
 	ApiMain__onExceptionHook,
 	ApiQuery__moduleManagerHook,
 	BeforePageDisplayHook,
@@ -1240,6 +1243,22 @@ final class RepoHooks implements
 					'services' => [
 						'WikibaseRepo.Settings',
 					],
+				]
+			);
+		}
+	}
+
+	/** @inheritDoc */
+	public function onApiMain__moduleManager( $moduleManager ) {
+		global $wgWBRepoSettings;
+
+		if ( isset( $wgWBRepoSettings['tmpEnableGraphQL'] ) && $wgWBRepoSettings['tmpEnableGraphQL'] ) {
+			$moduleManager->addModule(
+				'wbgraphql',
+				'action',
+				[
+					'class' => ActionWikibaseGraphQL::class,
+					'services' => [ "WbReuse.GraphQLService" ],
 				]
 			);
 		}

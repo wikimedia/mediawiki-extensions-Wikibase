@@ -1355,6 +1355,7 @@
 		"ApiCheckCanExecute": "RepoHooks",
 		"ApiMain::onException": "RepoHooks",
 		"ApiQuery::moduleManager": "RepoHooks",
+		"ApiMain::moduleManager": "RepoHooks",
 		"ArticleRevisionVisibilitySet": [
 			"ArticleRevisionVisibilitySet",
 			"EntityDataPurger"

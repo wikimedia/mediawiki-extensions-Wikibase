@@ -111,6 +111,7 @@
 	"apihelp-wbgetentities-example-11": "Get the item for page \"<var>Berlin</var>\" on the site \"<var>enwiki</var>\" after normalizing the title from \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Get the sitelinks for item <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Get entities with ID <samp>Q42</samp> showing only sitelinks from \"<var>enwiki</var>\"",
+	"apihelp-wbgraphql-summary": "Experimental GraphQL module.",
 	"apihelp-wblinktitles-summary": "Associates two pages on two different wikis with a Wikibase item.",
 	"apihelp-wblinktitles-param-tosite": "An identifier for the site on which the page resides.\nUse together with <var>totitle</var> to make a complete sitelink.",
 	"apihelp-wblinktitles-param-totitle": "Title of the page to associate.\nUse together with <var>tosite</var> to make a complete sitelink.",

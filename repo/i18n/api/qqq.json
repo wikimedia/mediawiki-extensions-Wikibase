@@ -134,6 +134,7 @@
 	"apihelp-wbgetentities-example-11": "{{doc-apihelp-example|wbgetentities}}",
 	"apihelp-wbgetentities-example-12": "{{doc-apihelp-example|wbgetentities}}",
 	"apihelp-wbgetentities-example-13": "{{doc-apihelp-example|wbgetentities}}",
+	"apihelp-wbgraphql-summary": "{{doc-apihelp-example|wbgraphql}}",
 	"apihelp-wblinktitles-summary": "{{doc-apihelp-summary|wblinktitles}}",
 	"apihelp-wblinktitles-param-tosite": "{{doc-apihelp-param|wblinktitles|tosite}}",
 	"apihelp-wblinktitles-param-totitle": "{{doc-apihelp-param|wblinktitles|totitle}}",
