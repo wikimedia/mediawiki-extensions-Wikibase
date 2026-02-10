@@ -1,7 +1,6 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
 
 env:
   COMPOSER_HOME: ${{ github.workspace }}/.composer
