@@ -7,7 +7,7 @@
 	>
 		<cdx-text-input
 			ref="inputElement"
-			v-model.trim="textvalue"
+			v-model="textvalue"
 			autocapitalize="off"
 			:disabled="disabled"
 			:class="activeClasses"
