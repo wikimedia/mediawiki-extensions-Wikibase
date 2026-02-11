@@ -6,6 +6,7 @@
 		"api-testing": "npm-run-all -p api-testing:*",
 		"api-testing:wikibase": "mocha --timeout 0 --recursive tests/api-testing",
 		"api-testing:rest-api": "npm --prefix repo/rest-api run api-testing",
+		"api-testing:reuse": "mocha --timeout 0 --recursive repo/domains/reuse/tests/api-testing",
 		"cypress:install": "CYPRESS_CACHE_FOLDER=./cypress/.cache cypress install",
 		"cypress:open": "CYPRESS_CACHE_FOLDER=./cypress/.cache cypress open",
 		"cypress:run": "CYPRESS_CACHE_FOLDER=./cypress/.cache cypress run",

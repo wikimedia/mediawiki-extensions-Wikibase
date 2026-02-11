@@ -52,3 +52,6 @@ $configOverrides = json_decode( RequestContext::getMain()->getRequest()->getHead
 foreach ( $configOverrides as $name => $value ) {
 	$GLOBALS[$name] = is_array( $value ) ? array_merge( $GLOBALS[$name] ?? [], $value ) : $value;
 }
+
+// enable GraphQL API
+$wgWBRepoSettings['tmpEnableGraphQL'] = true;
