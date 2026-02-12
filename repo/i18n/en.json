@@ -376,6 +376,7 @@
 	"wikibase-parse-error-quantity": "The quantity value is malformed.",
 	"wikibase-parse-error-time": "The time value is malformed.",
 	"wikibase-quantitydetails-unit-optional": "Unit (optional)",
+	"wikibase-monolingualtextcode-mandatory": "Language (mandatory)",
 	"special-redirectentity": "Redirect an entity",
 	"wikibase-redirectentity-success": "$1 was redirected to $2.",
 	"wikibase-redirectentity-fromid": "The ID to redirect from",

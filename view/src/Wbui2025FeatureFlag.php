@@ -21,7 +21,6 @@ class Wbui2025FeatureFlag {
 	 */
 	public const WBUI2025_UNSUPPORTED_DATATYPES = [
 		'globe-coordinate',
-		'monolingualtext',
 		'entity-schema',
 	];
 

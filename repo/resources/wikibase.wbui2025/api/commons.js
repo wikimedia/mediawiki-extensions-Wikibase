@@ -37,6 +37,44 @@ const searchTabularData = function ( searchTerm, offset = 0 ) {
 };
 
 /**
+ * Search for languages
+ *
+ * @param {string} searchTerm The search term
+ * @param {number} offset Optional result offset for pagination
+ * @return {Promise<Object>} Promise resolving to search results
+ */
+const searchLanguages = function ( searchTerm, offset = 0 ) {
+	return api.get( api.assertCurrentUser( {
+		action: 'languagesearch',
+		search: searchTerm,
+		language: mw.config.get( 'wgUserLanguage' ),
+		continue: offset
+	} ) ).then( ( response ) => response.languagesearch );
+};
+
+/**
+ * Transform language search results into menu items format
+ *
+ * @param {Object} searchResults Array of search results from API
+ * @return {Array} Array of menu items with label, value, and description
+ */
+const transformLanguageSearchResults = function ( searchResults ) {
+	if ( !searchResults || searchResults.length === 0 ) {
+		return [];
+	}
+
+	const result = [];
+	for ( const langCode of Object.keys( searchResults ) ) {
+		const lang = searchResults[ langCode ];
+		result.push( {
+			label: lang,
+			value: langCode
+		} );
+	}
+	return result;
+};
+
+/**
  * Search for geographic shapes on Commons
  *
  * @param {string} searchTerm The search term
@@ -145,8 +183,10 @@ module.exports = {
 	searchForEntities,
 	searchTabularData,
 	searchGeoShapes,
+	searchLanguages,
 	searchCommonsMedia,
 	transformSearchResults,
 	transformEntitySearchResults,
-	transformEntityByConceptUriSearchResults
+	transformEntityByConceptUriSearchResults,
+	transformLanguageSearchResults
 };

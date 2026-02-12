@@ -18,6 +18,7 @@ const Wbui2025EditableQuantitySnakValue = require( './editableQuantitySnakValue.
 const Wbui2025EditableStringSnakValue = require( './editableStringSnakValue.vue' );
 const Wbui2025EditableTimeSnakValue = require( './editableTimeSnakValue.vue' );
 const Wbui2025EditableLookupSnakValue = require( './editableLookupSnakValue.vue' );
+const Wbui2025EditableMonolingualTextSnakValue = require( './editableMonolingualTextSnakValue.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -26,7 +27,8 @@ module.exports = exports = defineComponent( {
 		Wbui2025EditableQuantitySnakValue,
 		Wbui2025EditableStringSnakValue,
 		Wbui2025EditableTimeSnakValue,
-		Wbui2025EditableLookupSnakValue
+		Wbui2025EditableLookupSnakValue,
+		Wbui2025EditableMonolingualTextSnakValue
 	},
 	props: {
 		removable: {

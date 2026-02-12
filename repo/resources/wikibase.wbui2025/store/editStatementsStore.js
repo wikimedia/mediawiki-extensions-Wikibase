@@ -8,6 +8,8 @@ const {
 	updatePropertyLinkHtml,
 	snakValueHtmlForHash
 } = require( './serverRenderedHtml.js' );
+const { searchLanguages } = require( '../api/commons.js' );
+
 const { watch, computed, ref } = require( 'vue' );
 
 /**
@@ -36,6 +38,9 @@ function sameDataValue( dv1, dv2 ) {
 				dv1.value.unit === dv2.value.unit &&
 				dv1.value.lowerBound === dv2.value.lowerBound &&
 				dv1.value.upperBound === dv2.value.upperBound;
+		case 'monolingualtext':
+			return dv1.value.text === dv2.value.text &&
+				dv1.value.language === dv2.value.language;
 		// TODO add cases for other data value types as we implement them (T407324)
 		default:
 			throw new Error( `Unsupported data value type ${ dv1.type }` );
@@ -58,6 +63,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	const lastCompleteSelectionvalue = ref( null );
 	const precision = ref( undefined );
 	const calendar = ref( undefined );
+	const monolingualtextlanguagecode = ref( null );
+	const monolingualtextlanguagecodeText = ref( '' );
 
 	// Getters
 
@@ -102,6 +109,9 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 				}
 				unitconcepturi.value = snak.datavalue.value.unit;
 			}
+			if ( snak.datavalue.type === 'monolingualtext' ) {
+				await updateMonolingualTextLanguageCode( snak.datavalue.value.language );
+			}
 		}
 		hash.value = snak.hash;
 	}
@@ -143,6 +153,13 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	function updateConceptUri( newUri ) {
 		unitconcepturi.value = newUri;
 	}
+	async function updateMonolingualTextLanguageCode( newCode ) {
+		monolingualtextlanguagecode.value = newCode;
+		const languageSearchResult = await searchLanguages( newCode );
+		if ( languageSearchResult[ newCode ] ) {
+			monolingualtextlanguagecodeText.value = languageSearchResult[ newCode ];
+		}
+	}
 	watch( textvalue, recordLastCompleteValue, { flush: 'sync' } );
 	watch( selectionvalue, recordLastCompleteValue, { flush: 'sync' } );
 
@@ -167,6 +184,8 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		hash,
 		unittextvalue,
 		unitconcepturi,
+		monolingualtextlanguagecode,
+		monolingualtextlanguagecodeText,
 		valueStrategy,
 		isIncomplete,
 		initializeWithSnak,
@@ -178,6 +197,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		lastCompleteTextvalue,
 		lastCompleteSelectionvalue,
 		updateConceptUri,
+		updateMonolingualTextLanguageCode,
 		snakKey
 	};
 } );

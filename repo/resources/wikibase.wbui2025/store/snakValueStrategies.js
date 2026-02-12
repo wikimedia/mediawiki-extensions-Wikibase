@@ -6,7 +6,8 @@ const {
 	searchCommonsMedia,
 	searchForEntities,
 	searchGeoShapes,
-	searchTabularData
+	searchTabularData,
+	searchLanguages
 } = require( '../api/commons.js' );
 const { snakValueStrategyFactory, DefaultStrategy } = require( './snakValueStrategyFactory.js' );
 
@@ -96,6 +97,28 @@ class QuantityValueStrategy extends StringValueStrategy {
 
 	getEditableSnakComponent() {
 		return 'Wbui2025EditableQuantitySnakValue';
+	}
+}
+
+class MonolingualTextValueStrategy extends StringValueStrategy {
+	getParseOptions() {
+		const options = {
+			parser: 'monolingualtext'
+		};
+		if ( this.editSnakStore.monolingualtextlanguagecode ) {
+			options.options = JSON.stringify( {
+				valuelang: this.editSnakStore.monolingualtextlanguagecode
+			} );
+		}
+		return options;
+	}
+
+	async renderValueForTextInput( valueObject ) {
+		return renderSnakValueText( valueObject );
+	}
+
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableMonolingualTextSnakValue';
 	}
 }
 
@@ -211,6 +234,11 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( searchTerm, offset ) => searchForEntities( searchTerm, 'property', offset )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'quantity', ( store ) => new QuantityValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype(
+	'monolingualtext',
+	( store ) => new MonolingualTextValueStrategy( store ),
+	( searchTerm, offset ) => searchLanguages( searchTerm, offset )
+);
 snakValueStrategyFactory.registerStrategyForDatatype( 'time', ( store ) => new TimeValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype(
 	'geo-shape',
