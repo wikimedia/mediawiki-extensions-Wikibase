@@ -13,7 +13,16 @@ function foreignApi( apiUrl ) {
 	}, apiOptions ) );
 }
 
+class ErrorObject {
+	constructor( errorCode, $errorHtml, errorData ) {
+		this.errorCode = errorCode;
+		this.$errorHtml = $errorHtml;
+		this.errorData = errorData;
+	}
+}
+
 module.exports = {
+	ErrorObject,
 	api,
 	foreignApi
 };

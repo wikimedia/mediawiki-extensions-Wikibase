@@ -17,7 +17,6 @@ class Wbui2025FeatureFlag {
 
 	/** Data types not supported by the Wbui2025 Feature statements view. */
 	public const WBUI2025_UNSUPPORTED_DATATYPES = [
-		'url',
 		'external-id',
 		'globe-coordinate',
 		'monolingualtext',

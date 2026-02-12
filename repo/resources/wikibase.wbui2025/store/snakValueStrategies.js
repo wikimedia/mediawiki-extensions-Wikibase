@@ -188,6 +188,7 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( searchTerm, offset ) => searchTabularData( searchTerm, offset )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new StringValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'commonsMedia',
 	( store ) => new CommonsMediaValueStrategy( store ),
 	( searchTerm, offset ) => searchCommonsMedia( searchTerm, offset )
