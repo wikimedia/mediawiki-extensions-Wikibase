@@ -74,6 +74,7 @@ module.exports = exports = defineComponent( {
 			} );
 		},
 		adaptApiResponse( results ) {
+			// TODO: clean up after all datatypes are supported (T417413)
 			const datatypeSupported = ( datatype ) => supportedDatatypes.includes( datatype );
 			const getSupportingText = ( datatype ) => {
 				if ( datatypeSupported( datatype ) ) {

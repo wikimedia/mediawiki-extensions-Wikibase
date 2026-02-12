@@ -67,6 +67,7 @@ module.exports = exports = defineComponent( {
 		statements() {
 			return wbui2025.store.getStatementsForProperty( this.propertyId );
 		},
+		// TODO: clean up after all datatypes are supported (T417413)
 		isUnsupportedDataType() {
 			if ( !this.statements || this.statements.length === 0 ) {
 				return false;
