@@ -173,6 +173,14 @@ class VueNoScriptRendering {
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
 				$data['qualifiersOrder'] =
 					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
+				$data['activeClasses'] = [ 'wikibase-wbui2025-statement-view' ];
+				if ( array_key_exists( 'rank', $data['statement'] ) ) {
+					if ( $data['statement']['rank'] === 'preferred' ) {
+						$data['activeClasses'][] = 'wb-preferred';
+					} elseif ( $data['statement']['rank'] === 'deprecated' ) {
+						$data['activeClasses'][] = 'wb-deprecated';
+					}
+				}
 				return $data;
 			}
 		);
