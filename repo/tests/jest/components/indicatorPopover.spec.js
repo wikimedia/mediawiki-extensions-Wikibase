@@ -27,7 +27,9 @@ let pinia;
 
 describe( 'wikibase.wbui2025.indicatorPopover', () => {
 	describe( 'the mounted component', () => {
-		const snakHash = 'ad11db2dbfd7099ea788fc26a68dac40';
+		const snakHash = 'ad11db2dbfd7099ea788fc26a68dac40',
+			statementId = 'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
+			referenceHash = '1e638f52eb8d0d3a9453aa05143fa059657dd9d3';
 
 		beforeEach( () => {
 			pinia = createTestingPinia();
@@ -43,17 +45,17 @@ describe( 'wikibase.wbui2025.indicatorPopover', () => {
 			} );
 		}
 
-		describe( 'with a single issue', () => {
+		describe( 'with a single issue on the main snak', () => {
 			let wrapper, cdxPopover;
 			beforeEach( async () => {
-				wbui2025.store.setPopoverContentForSnakHash( snakHash, [ {
+				wbui2025.store.setPopoverContentForMainSnak( statementId, [ {
 					iconClass: 'wikibase-wbui2025-icon-edit-small',
 					title: 'single issue title',
 					bodyHtml: '<p>Popover Content</p>',
 					footerHtml: '<p>links placeholder</p>'
 				} ] );
 
-				wrapper = await mountIndicatorPopover( { snakHash } );
+				wrapper = await mountIndicatorPopover( { snakHash, statementId } );
 				cdxPopover = wrapper.findComponent( CdxPopover );
 			} );
 
@@ -71,6 +73,44 @@ describe( 'wikibase.wbui2025.indicatorPopover', () => {
 				// there should just be one button - the close button
 				expect( wrapper.findAllComponents( CdxButton ).length ).toBe( 1 );
 			} );
+		} );
+
+		it( 'displays a single issue on a qualifier', async () => {
+			wbui2025.store.setPopoverContentForQualifier( statementId, snakHash, [ {
+				iconClass: 'wikibase-wbui2025-icon-edit-small',
+				title: 'single issue title',
+				bodyHtml: '<p>Popover Content</p>',
+				footerHtml: '<p>links placeholder</p>'
+			} ] );
+
+			const wrapper = await mountIndicatorPopover( { snakHash, statementId, isQualifier: true } );
+			const cdxPopover = wrapper.findComponent( CdxPopover );
+
+			expect( wrapper.exists() ).toBeTruthy();
+			expect( cdxPopover.exists() ).toBeTruthy();
+			expect( cdxPopover.text() ).toContain( 'single issue title' );
+			expect( cdxPopover.find( '.wikibase-wbui2025-icon-edit-small' ).exists() ).toBeTruthy();
+			expect( cdxPopover.html() ).toContain( '<p>Popover Content</p>' );
+			expect( cdxPopover.html() ).toContain( '<p>links placeholder</p>' );
+		} );
+
+		it( 'displays a single issue on a reference', async () => {
+			wbui2025.store.setPopoverContentForReferenceSnak( statementId, referenceHash, snakHash, [ {
+				iconClass: 'wikibase-wbui2025-icon-edit-small',
+				title: 'single issue title',
+				bodyHtml: '<p>Popover Content</p>',
+				footerHtml: '<p>links placeholder</p>'
+			} ] );
+
+			const wrapper = await mountIndicatorPopover( { snakHash, statementId, referenceHash } );
+			const cdxPopover = wrapper.findComponent( CdxPopover );
+
+			expect( wrapper.exists() ).toBeTruthy();
+			expect( cdxPopover.exists() ).toBeTruthy();
+			expect( cdxPopover.text() ).toContain( 'single issue title' );
+			expect( cdxPopover.find( '.wikibase-wbui2025-icon-edit-small' ).exists() ).toBeTruthy();
+			expect( cdxPopover.html() ).toContain( '<p>Popover Content</p>' );
+			expect( cdxPopover.html() ).toContain( '<p>links placeholder</p>' );
 		} );
 
 		describe( 'with multiple issues', () => {
@@ -94,11 +134,11 @@ describe( 'wikibase.wbui2025.indicatorPopover', () => {
 				footerHtml: '<a>help-3</a> | <a>discuss</a>'
 			};
 			beforeEach( async () => {
-				wbui2025.store.setPopoverContentForSnakHash(
-					snakHash,
+				wbui2025.store.setPopoverContentForMainSnak(
+					statementId,
 					[ issue1, issue2, issue3 ]
 				);
-				wrapper = await mountIndicatorPopover( { snakHash } );
+				wrapper = await mountIndicatorPopover( { snakHash, statementId } );
 				cdxPopover = wrapper.findComponent( CdxPopover );
 				stepper = wrapper.findComponent( Wbui2025Stepper );
 				[ prevButton, nextButton ] = wrapper.findAllComponents( '.wikibase-wbui2025-indicator-popover-multistep-navigation button' );

@@ -19,6 +19,8 @@ const { storeWithServerRenderedHtml } = require( '../piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.mainSnak', () => {
 	describe( 'the mounted component', () => {
+		const statementId = 'Q1$789eef0c-4108-cdda-1a63-505cdd324564';
+
 		function mountMainSnakView( props = {}, snakHashToHtmlMap = {} ) {
 			return mount( mainSnakView, {
 				props,
@@ -37,7 +39,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
 					},
-					rank: 'deprecated'
+					rank: 'deprecated',
+					statementId
 				},
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
@@ -60,7 +63,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 					property: 'P1',
 					datavalue: { value: 'p1', type: 'string' }
 				},
-				rank: 'normal'
+				rank: 'normal',
+				statementId
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
@@ -77,7 +81,8 @@ describe( 'wikibase.wbui2025.mainSnak', () => {
 					property: 'P1',
 					datavalue: { value: 'p1', type: 'time' }
 				},
-				rank: 'normal'
+				rank: 'normal',
+				statementId
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();

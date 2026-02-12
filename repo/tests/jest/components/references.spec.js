@@ -76,7 +76,8 @@ describe( 'wikibase.wbui2025.references', () => {
 							},
 							'snaks-order': [ 'P3' ]
 						}
-					]
+					],
+					statementId: 'Q1$789eef0c-4108-cdda-1a63-505cdd324564'
 				},
 				global: {
 					plugins: [

@@ -15,6 +15,9 @@
 		<wbui2025-indicator-popover
 			v-if="popoverVisible"
 			:snak-hash="snak.hash"
+			:statement-id="statementId"
+			:is-qualifier="isQualifier"
+			:reference-hash="referenceHash"
 			:anchor="$refs.snakAnchor"
 			@close="popoverVisible = false"
 		>
@@ -37,6 +40,18 @@ module.exports = exports = defineComponent( {
 		snak: {
 			type: Object,
 			required: true
+		},
+		statementId: {
+			type: String,
+			required: true
+		},
+		isQualifier: {
+			type: Boolean,
+			default: false
+		},
+		referenceHash: {
+			type: String,
+			default: null
 		}
 	},
 	data() {
@@ -58,7 +73,22 @@ module.exports = exports = defineComponent( {
 			};
 		},
 		indicatorsHtml() {
-			return wbui2025.store.getIndicatorsHtmlForSnakHash( this.snak.hash );
+			if ( this.referenceHash !== null ) {
+				return wbui2025.store.getIndicatorHtmlForReferenceSnak(
+					this.statementId,
+					this.referenceHash,
+					this.snak.hash
+				);
+			}
+			if ( this.isQualifier ) {
+				return wbui2025.store.getIndicatorHtmlForQualifier(
+					this.statementId,
+					this.snak.hash
+				);
+			}
+			return wbui2025.store.getIndicatorHtmlForMainSnak(
+				this.statementId
+			);
 		}
 	},
 	methods: {

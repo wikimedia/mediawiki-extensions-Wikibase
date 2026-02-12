@@ -10,7 +10,11 @@
 				class="wikibase-wbui2025-qualifier"
 			>
 				<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-				<wbui2025-snak-value :snak="snak"></wbui2025-snak-value>
+				<wbui2025-snak-value
+					:snak="snak"
+					:statement-id="statementId"
+					:is-qualifier="true"
+				></wbui2025-snak-value>
 			</div>
 		</template>
 	</div>
@@ -35,6 +39,10 @@ module.exports = exports = defineComponent( {
 		},
 		qualifiersOrder: {
 			type: Array,
+			required: true
+		},
+		statementId: {
+			type: String,
 			required: true
 		}
 	},
