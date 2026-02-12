@@ -61,7 +61,6 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			snakKey = editStatementStore.mainSnakKey;
 			wrapper = await mount( editableAnyDatatypeSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: snakKey,
 					removable: true
 				},
@@ -165,7 +164,6 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 
 				wrapper = await mount( editableAnyDatatypeSnakValueComponent, {
 					props: {
-						propertyId: testPropertyId,
 						snakKey: editStatementStore.mainSnakKey
 					},
 					global: {
