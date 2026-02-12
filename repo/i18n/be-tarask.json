@@ -116,7 +116,7 @@
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
 	"wikibase-statementview-rank-tooltip-normal": "Слушнае значэньне, але, магчыма, гістарычнае",
 	"wikibase-statementview-rank-deprecated": "Састарэлы ранг",
-	"wikibase-statementview-rank-tooltip-deprecated": "Вядома, што значэньне памылковае, але яго лічаць агульнапрынятым",
+	"wikibase-statementview-rank-tooltip-deprecated": "Вядома, што значэньне памылковае, але яго ўважаюць (ці ўважалі) агульнапрынятым",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|крыніца|крыніцы|крыніцаў}}",
 	"wikibase-snakview-property-input-placeholder": "уласьцівасьць",
 	"wikibase-snakview-unsupportedsnaktype": "Злучнік тыпу «$1». Апрацоўка падобнага злучніка яшчэ не падтрымліваецца.",
