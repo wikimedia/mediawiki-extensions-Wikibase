@@ -1402,7 +1402,6 @@
 		"SidebarBeforeOutput": "RepoHooks",
 		"SkinPageReadyConfig": "RepoHooks",
 		"SkinTemplateNavigation::Universal": "RepoHooks",
-		"SpecialPage_initList": "RepoHooks",
 		"TitleGetRestrictionTypes": "RepoHooks",
 		"UnitTestsList": [
 			"RepoHooks",
