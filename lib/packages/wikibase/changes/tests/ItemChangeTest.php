@@ -71,7 +71,8 @@ class ItemChangeTest extends EntityChangeTest {
 		// substructures even in recursive mode. Make sure we can handle them
 		// if we happen to load them from the database or such.
 
-		$diff = new ItemDiff( [
+		// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+		$diff = @new ItemDiff( [
 			'links' => new DiffOpChange(
 				[ 'foowiki' => 'X', 'barwiki' => 'Y' ],
 				[ 'barwiki' => 'Y', 'foowiki' => 'X' ]
