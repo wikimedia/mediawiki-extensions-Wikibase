@@ -221,8 +221,10 @@ module.exports = exports = defineComponent( {
 			this.showEditStatementModal = true;
 		},
 		submitForm() {
+			// TODO: Find out why this is no longer a call to saveStatementsFormMixin::submitFormWithElementRef
+			// and fix it if necessary T409452
 			this.formSubmitted = true;
-			setTimeout( () => {
+			this.progressTimeout = setTimeout( () => {
 				this.showProgress = true;
 			}, 300 );
 			this.saveChangedStatements( this.entityId )
