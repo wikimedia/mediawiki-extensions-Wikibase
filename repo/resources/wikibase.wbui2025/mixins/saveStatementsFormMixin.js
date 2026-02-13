@@ -27,9 +27,9 @@ const saveStatementsFormMixin = {
 						clearTimeout( progressTimeout );
 						this.showProgress = false;
 					} )
-					.catch( () => {
+					.catch( ( e ) => {
 						this.addStatusMessage( {
-							text: mw.msg( 'wikibase-publishing-error' ),
+							text: e.$errorHtml.text(),
 							attachTo: currentFormRef,
 							type: 'error'
 						} );

@@ -17,10 +17,6 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
-	'../../../resources/wikibase.wbui2025/api/api.js',
-	() => ( { api: { get: jest.fn() } } )
-);
-jest.mock(
 	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
 	() => [ 'string', 'tabular-data', 'geo-shape' ],
 	{ virtual: true }
@@ -44,6 +40,7 @@ Object.defineProperty( globalThis, 'wikibase', {
 	}
 } );
 
+const { ErrorObject } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
@@ -198,11 +195,16 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		it( 'shows an error message if publishing fails', async () => {
 			const { publishButton, wrapper } = await mountAndGetParts();
 
+			const apiGeneratedErrorMessage = 'Wikibase API reports error for request';
 			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
 			const editStatementsStore = wbui2025.store.useEditStatementsStore();
 			editStatementsStore.saveChangedStatements = jest.fn(
 				() => new Promise( ( _, reject ) => {
-					setTimeout( reject, 500 );
+					const rejectWithException = () => {
+						const errorHtml = { text: jest.fn( () => apiGeneratedErrorMessage ) };
+						reject( new ErrorObject( 'modification-failure', errorHtml, {} ) );
+					};
+					setTimeout( rejectWithException, 500 );
 				} )
 			);
 			await updateStatementValue( publishButton, wrapper );
@@ -215,6 +217,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( messageStore.messages.size ).toBe( 1 );
 			const message = messageStore.messages.values().next().value;
 			expect( message.type ).toBe( 'error' );
+			expect( message.text ).toBe( apiGeneratedErrorMessage );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
 	} );

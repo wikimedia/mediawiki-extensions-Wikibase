@@ -239,10 +239,10 @@ module.exports = exports = defineComponent( {
 				this.showProgress = false;
 				this.showEditStatementModal = false;
 			} )
-			.catch( () => {
+			.catch( ( e ) => {
 				clearTimeout( this.progressTimeout );
 				this.addStatusMessage( {
-					text: mw.msg( 'wikibase-publishing-error' ),
+					text: e.$errorHtml.text(),
 					attachTo: this.$refs.editFormActionsRef,
 					type: 'error'
 				} );

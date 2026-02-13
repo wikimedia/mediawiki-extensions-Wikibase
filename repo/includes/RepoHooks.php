@@ -1100,6 +1100,9 @@ final class RepoHooks implements
 					'wikibase-entityselector-notfound',
 					'wikibase-parse-error-time',
 					'wikibase-publish',
+					// This message isn't currently in use (removed in T417041) but since it has already
+					// been widely translated, let's keep it around for now until we are done handling errors
+					// in wbui2025 / MEX (T417377)
 					'wikibase-publishing-error',
 					'wikibase-publishing-progress',
 					'wikibase-publishing-succeeded',

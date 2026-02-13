@@ -1,4 +1,7 @@
-const { api } = require( './api.js' );
+const {
+	api,
+	ErrorObject
+} = require( './api.js' );
 const {
 	getCurrentPageLocation,
 	addReturnToParams,
@@ -30,7 +33,11 @@ const updateStatements = async function ( entityId, statements ) {
 	// Add return-to parameters for temporary account redirect support (T407335)
 	params = addReturnToParams( params, location );
 
-	const response = await api.postWithEditToken( api.assertCurrentUser( params ) );
+	const response = await api.postWithEditToken( api.assertCurrentUser( params ) )
+		.then( ( data ) => data )
+		.catch( ( code, data ) => {
+			throw new ErrorObject( code, api.getErrorMessage( data ), data );
+		} );
 
 	if ( handleTempUserRedirect( response ) ) {
 		return new Promise( () => {} );
