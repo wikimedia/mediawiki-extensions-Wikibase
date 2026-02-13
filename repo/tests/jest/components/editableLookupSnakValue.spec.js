@@ -80,7 +80,6 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: editStatementStore.mainSnakKey,
 					disabled: false
 				},
@@ -136,7 +135,6 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: editStatementStore.mainSnakKey,
 					disabled: false
 				},
@@ -203,7 +201,6 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: editStatementStore.mainSnakKey,
 					disabled: false
 				},
@@ -262,7 +259,6 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: editStatementStore.mainSnakKey,
 					disabled: false
 				},
@@ -321,7 +317,6 @@ describe( 'wikibase.wbui2025.editableLookupSnakValue', () => {
 
 			wrapper = await mount( editableLookupSnakValueComponent, {
 				props: {
-					propertyId: testPropertyId,
 					snakKey: editStatementStore.mainSnakKey,
 					disabled: false
 				},
