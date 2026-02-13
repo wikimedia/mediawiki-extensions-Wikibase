@@ -77,6 +77,8 @@ Example: The following query searches for items that have a statement using prop
 
 ## Development
 
+* @subpage reuse_adr_index
+
 ### Configuration
 
 During this initial development phase, the GraphQL API can be enabled with the `tmpEnableGraphQL` feature toggle setting.
