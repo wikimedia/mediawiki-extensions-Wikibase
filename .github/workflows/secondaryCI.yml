@@ -48,15 +48,16 @@ jobs:
             WB: both
             IPMASKING: enabled
           php-versions: '8.3.30'
+    services:
+      mariadb:
+        image: mariadb
+        ports:
+          - 3306:3306
+        env:
+          MARIADB_ROOT_PASSWORD: root
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Set up MySQL
-      uses: mirromutth/mysql-action@v1.1
-      with:
-        mysql version: '5.7'
-        mysql database: 'test_db_wiki'
-        mysql root password: 'root'
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
