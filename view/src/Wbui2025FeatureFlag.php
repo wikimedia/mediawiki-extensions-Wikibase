@@ -15,9 +15,11 @@ use Wikibase\Lib\SettingsArray;
  */
 class Wbui2025FeatureFlag {
 
-	/** Data types not supported by the Wbui2025 Feature statements view. */
+	/**
+	 * Data types not supported by the Wbui2025 Feature statements view.
+	 * TODO: remove when all datatypes are supported (T417413)
+	 */
 	public const WBUI2025_UNSUPPORTED_DATATYPES = [
-		'external-id',
 		'globe-coordinate',
 		'monolingualtext',
 		'quantity',
@@ -82,6 +84,7 @@ class Wbui2025FeatureFlag {
 		return (bool)$this->userOptionsLookup->getOption( $userIdentity, self::OPTION_NAME );
 	}
 
+	// TODO: remove this function and its uses (T417413)
 	public function getSupportedDataTypes(): array {
 		return array_values(
 			array_filter(

@@ -1059,6 +1059,7 @@ final class RepoHooks implements
 							'cdxIconInfo',
 						],
 					],
+					// TODO: remove in T417413
 					[
 						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
 						'content' => WikibaseRepo::getWbui2025FeatureFlag()->getSupportedDataTypes(),

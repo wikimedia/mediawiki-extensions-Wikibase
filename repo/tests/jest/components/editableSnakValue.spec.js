@@ -137,7 +137,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 	} );
 
 	describe.each(
-		[ 'string', 'url', 'time', 'tabular-data', 'geo-shape' ]
+		[ 'string', 'url', 'time', 'tabular-data', 'geo-shape', 'external-id' ]
 	)( 'the mounted component with %s datatype', ( datatype ) => {
 		describe.each(
 			[ 'novalue', 'somevalue' ]
