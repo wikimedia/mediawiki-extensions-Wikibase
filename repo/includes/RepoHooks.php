@@ -41,7 +41,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Skins\Hook\SkinPageReadyConfigHook;
-use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
 use MediaWiki\StubObject\StubUserLang;
 use MediaWiki\Title\Title;
 use RuntimeException;
@@ -62,7 +61,6 @@ use Wikibase\Repo\Api\ModifyEntity;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\ActionWikibaseGraphQL;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\SpecialWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -109,8 +107,7 @@ final class RepoHooks implements
 	TitleGetRestrictionTypesHook,
 	UnitTestsListHook,
 	WikibaseContentLanguagesHook,
-	GetPreferencesHook,
-	SpecialPage_initListHook
+	GetPreferencesHook
 {
 	/**
 	 * We implement this solely to replace the standard message that
@@ -1392,20 +1389,5 @@ final class RepoHooks implements
 		}
 		// @phan-suppress-next-line PhanTypeMismatchReturnProbablyReal Hook interface needs update T390760
 		return true;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function onSpecialPage_initList( &$list ) {
-		$settings = WikibaseRepo::getSettings();
-		if ( $settings->getSetting( 'tmpEnableGraphQL' ) === true ) {
-			$list[SpecialWikibaseGraphQL::SPECIAL_PAGE_NAME] = [
-				'class' => SpecialWikibaseGraphQL::class,
-				'services' => [
-					'WbReuse.GraphQLService',
-				],
-			];
-		}
 	}
 }

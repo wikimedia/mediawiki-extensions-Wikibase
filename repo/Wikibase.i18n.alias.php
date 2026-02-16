@@ -31,7 +31,6 @@ $specialPageAliases['en'] = [
 	'SetLabel' => [ 'SetLabel' ],
 	'SetLabelDescriptionAliases' => [ 'SetLabelDescriptionAliases' ],
 	'SetSiteLink' => [ 'SetSiteLink' ],
-	'WikibaseGraphQL' => [ 'WikibaseGraphQL' ],
 ];
 
 /** Arabic (العربية) */
