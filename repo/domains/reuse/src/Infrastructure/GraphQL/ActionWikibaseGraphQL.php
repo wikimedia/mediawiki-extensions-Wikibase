@@ -25,11 +25,14 @@ class ActionWikibaseGraphQL extends ApiBase {
 		$variables = isset( $data['variables'] ) && is_array( $data['variables'] ) ? $data['variables'] : [];
 		$operationName = isset( $data['operationName'] ) && is_string( $data['operationName'] ) ? $data['operationName'] : null;
 
-		$this->getResult()->addValue(
-			null,
-			$this->getModuleName(),
-			$this->graphQLService->query( $data['query'] ?? '', $variables, $operationName )
-		);
+		$result = $this->graphQLService->query( $data['query'] ?? '', $variables, $operationName );
+		foreach ( $result as $resultKey => $value ) {
+			$this->getResult()->addValue(
+				null,
+				$resultKey,
+				$value,
+			);
+		}
 	}
 
 	/**
