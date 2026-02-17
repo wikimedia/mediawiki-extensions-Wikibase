@@ -1248,9 +1248,7 @@ final class RepoHooks implements
 
 	/** @inheritDoc */
 	public function onApiMain__moduleManager( $moduleManager ) {
-		global $wgWBRepoSettings;
-
-		if ( isset( $wgWBRepoSettings['tmpEnableGraphQL'] ) && $wgWBRepoSettings['tmpEnableGraphQL'] ) {
+		if ( WikibaseRepo::getSettings()->getSetting( 'tmpEnableGraphQL' ) ) {
 			$moduleManager->addModule(
 				'wbgraphql',
 				'action',
