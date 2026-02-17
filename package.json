@@ -14,7 +14,6 @@
 		"disabled-T400036-doc:data-bridge-dist-size": "node build/dist-size/analyze docs/data-bridge-dist-size wikimedia mediawiki-extensions-Wikibase client/data-bridge/dist/data-bridge.init.js client/data-bridge/dist/data-bridge.common.js client/data-bridge/dist/data-bridge.app.js client/data-bridge/dist/data-bridge.app.modern.js client/data-bridge/dist/vendor-chunks.js client/data-bridge/dist/css/data-bridge.app.css client/data-bridge/dist/data-bridge.css",
 		"disabled-T400036-doc:tainted-ref-dist-size": "node build/dist-size/analyze docs/tainted-ref-dist-size wikimedia mediawiki-extensions-Wikibase view/lib/wikibase-tainted-ref/dist/tainted-ref.init.js view/lib/wikibase-tainted-ref/dist/tainted-ref.common.js view/lib/wikibase-tainted-ref/dist/tainted-ref.app.css",
 		"doc:rest-api": "npm --prefix repo/rest-api run build",
-		"doc:gql-explorer": "VITE_GQL_ENDPOINT_URL='https://www.wikidata.beta.wmcloud.org/w/api.php?action=wbgraphql&format=json&origin=*' npm --prefix repo/domains/reuse/graphiql-explorer run build",
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"install:rest-api": "npm --prefix repo/rest-api ci",
