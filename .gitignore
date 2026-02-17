@@ -38,6 +38,7 @@ docs/*.tmp
 /docs/data-bridge-dist-size/
 /docs/tainted-ref-dist-size/
 /docs/rest-api/
+/docs/graphql-explorer/
 
 # Editors
 *.kate-swp
