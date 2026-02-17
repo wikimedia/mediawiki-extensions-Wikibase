@@ -124,10 +124,17 @@ class Types {
 	public function getItemSearchResultConnectionType(): ObjectType {
 		return $this->itemSearchResultConnectionType ??= new ObjectType( [
 			'name' => 'ItemSearchResultConnection',
+			'description' => 'The result of a search query for items.',
 			'fields' => [
-				// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
-				'edges' => Type::nonNull( Type::listOf( Type::nonNull( $this->getItemSearchResultEdgeType() ) ) ),
-				'pageInfo' => Type::nonNull( $this->getPageInfoType() ),
+				'edges' => [
+					// @phan-suppress-next-line PhanUndeclaredInvokeInCallable
+					'type' => Type::nonNull( Type::listOf( Type::nonNull( $this->getItemSearchResultEdgeType() ) ) ),
+					'description' => 'List of search result edges for the current page.',
+				],
+				'pageInfo' => [
+					'type' => Type::nonNull( $this->getPageInfoType() ),
+					'description' => 'Pagination information about the current page of result set.',
+				],
 			],
 		] );
 	}
@@ -135,11 +142,24 @@ class Types {
 	public function getPageInfoType(): ObjectType {
 		return $this->pageInfoType ??= new ObjectType( [
 			'name' => 'PageInfo',
+			'description' => 'Pagination information about the current page of results.',
 			'fields' => [
-				'endCursor' => Type::string(),
-				'hasPreviousPage' => Type::nonNull( Type::boolean() ),
-				'hasNextPage' => Type::nonNull( Type::boolean() ),
-				'startCursor' => Type::string(),
+				'endCursor' => [
+					'type' => Type::string(),
+					'description' => 'Cursor of the last result in the current page.',
+				],
+				'hasPreviousPage' => [
+					'type' => Type::nonNull( Type::boolean() ),
+					'description' => 'Indicates whether there are more results available before the current page.',
+				],
+				'hasNextPage' => [
+					'type' => Type::nonNull( Type::boolean() ),
+					'description' => 'Indicates whether there are more results available after the current page.',
+				],
+				'startCursor' => [
+					'type' => Type::string(),
+					'description' => 'Cursor of the first result in the current page.',
+				],
 			],
 		] );
 	}
@@ -147,9 +167,16 @@ class Types {
 	public function getItemSearchResultEdgeType(): ObjectType {
 		return $this->itemSearchResultEdgeType ??= new ObjectType( [
 			'name' => 'ItemSearchResultEdge',
+			'description' => 'An edge in the search result containing a matched item and its pagination cursor.',
 			'fields' => [
-				'node' => Type::nonNull( $this->getItemSearchResultNodeType() ),
-				'cursor' => Type::nonNull( Type::string() ),
+				'node' => [
+					'type' => Type::nonNull( $this->getItemSearchResultNodeType() ),
+					'description' => 'The matched result item.',
+				],
+				'cursor' => [
+					'type' => Type::nonNull( Type::string() ),
+					'description' => 'Cursor identifying this result within the result set, used for pagination.',
+				],
 			],
 		] );
 	}
@@ -167,6 +194,7 @@ class Types {
 
 		return $this->itemSearchResultNodeType ??= new ObjectType( [
 			'name' => 'ItemSearchResultNode',
+			'description' => 'The matched item returned by the search.',
 			'fields' => [
 				'id' => [
 					'type' => Type::nonNull( $this->getItemIdType() ),

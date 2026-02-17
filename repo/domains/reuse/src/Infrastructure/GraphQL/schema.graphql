@@ -1,7 +1,21 @@
 type Query {
+  "Fetch a single item by its ID, including labels, descriptions, aliases, sitelinks, and statements."
   item(id: ItemId!): Item
+
+  "Fetch multiple items by their IDs, including labels, descriptions, aliases, sitelinks, and statements."
   itemsById(ids: [ItemId!]!): [Item]!
-  searchItems(query: ItemSearchFilter!, first: Int! = 10, after: String): ItemSearchResultConnection!
+
+  "Search for items that match one or more statements-based filters"
+  searchItems(
+    "Filter describing which statement properties and values must match."
+    query: ItemSearchFilter!
+
+    "The maximum number of items to return (up to 50)"
+    first: Int! = 10
+
+    "Cursor that defines the position after which results should be returned. Usually the value of endCursor from the previous request"
+    after: String
+  ): ItemSearchResultConnection!
 }
 
 scalar ItemId
@@ -139,31 +153,50 @@ type ReferencePart implements PropertyValuePair {
   valueType: ValueType!
 }
 
+"Filter used to match items by their statements. Supports simple property/value matching or combining multiple filters with AND."
 input ItemSearchFilter {
+  "Combine multiple filters using AND operator. All filters must match, requires at least two filter and cannot be used together with the property field."
   and: [ItemSearchFilter!]
   property: PropertyId
   value: String
 }
 
+"The result of a search query for items."
 type ItemSearchResultConnection {
+  "List of search result edges for the current page."
   edges: [ItemSearchResultEdge!]!
+
+  "Pagination information about the current page of result set."
   pageInfo: PageInfo!
 }
 
+"An edge in the search result containing a matched item and its pagination cursor."
 type ItemSearchResultEdge {
+  "The matched result item."
   node: ItemSearchResultNode!
+
+  "Cursor identifying this result within the result set, used for pagination."
   cursor: String!
 }
 
+"The matched item returned by the search."
 type ItemSearchResultNode implements LabelProvider & DescriptionProvider {
   id: ItemId!
   label(languageCode: LanguageCode!): String
   description(languageCode: LanguageCode!): String
 }
 
+"Pagination information about the current page of results."
 type PageInfo {
+  "Cursor of the last result in the current page."
   endCursor: String
+
+  "Indicates whether there are more results available before the current page."
   hasPreviousPage: Boolean!
+
+  "Indicates whether there are more results available after the current page."
   hasNextPage: Boolean!
+
+  "Cursor of the first result in the current page."
   startCursor: String
 }
