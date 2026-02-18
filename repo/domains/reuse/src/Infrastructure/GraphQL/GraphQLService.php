@@ -4,7 +4,11 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;
+use GraphQL\Error\FormattedError;
+use GraphQL\Error\SyntaxError;
 use GraphQL\GraphQL;
+use GraphQL\Language\AST\DocumentNode;
+use GraphQL\Language\Parser;
 use MediaWiki\Config\Config;
 use Psr\Log\LoggerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
@@ -33,10 +37,27 @@ class GraphQLService {
 	}
 
 	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
+		if ( trim( $query ) === '' ) {
+			$this->trackValidationError( GraphQLErrorType::MISSING_QUERY->name );
+
+			return $this->formatErrorResponse( [ 'message' => "The 'query' field is required and must not be empty" ] );
+		}
+
+		try {
+			$parsedQuery = Parser::parse( $query );
+		} catch ( SyntaxError $e ) {
+			$this->trackValidationError( GraphQLErrorType::INVALID_QUERY->name );
+
+			$formattedError = FormattedError::createFromException( $e );
+			$formattedError['message'] = 'Invalid query - ' . $e->getMessage();
+
+			return $this->formatErrorResponse( $formattedError );
+		}
+
 		$context = new QueryContext();
 		$result = GraphQL::executeQuery(
 			$this->schema,
-			$query,
+			$parsedQuery,
 			contextValue: $context,
 			variableValues: $variables,
 			operationName: $operationName,
@@ -60,18 +81,17 @@ class GraphQLService {
 			$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
 		);
 
-		$this->trackUsage( $output, $query, $operationName );
-
+		$this->trackUsage( $output, $parsedQuery, $operationName );
 		return $output;
 	}
 
-	private function trackUsage( array $output, string $query, ?string $operationName ): void {
+	private function trackUsage( array $output, DocumentNode $doc, ?string $operationName ): void {
 		if ( !( isset( $output['data'] ) ) ) {
 			$this->incrementHitMetric( 'error' );
 			return;
 		}
 
-		$usedFields = $this->graphQLFieldCollector->getRequestedFieldPaths( $query, $operationName );
+		$usedFields = $this->graphQLFieldCollector->getRequestedFieldPaths( $doc, $operationName );
 		$isIntrospectionQuery = !array_intersect( $this->schema->fieldNames, $usedFields );
 		if ( $isIntrospectionQuery ) {
 			$this->incrementHitMetric( 'introspection' );
@@ -92,6 +112,17 @@ class GraphQLService {
 		$this->stats->getCounter( 'wikibase_graphql_hit_total' )
 			->setLabel( 'status', $status )
 			->increment();
+	}
+
+	public function trackValidationError( string $errorType ): void {
+		$this->stats->getCounter( 'wikibase_graphql_error_total' )
+			->setLabel( 'type', $errorType )
+			->increment();
+		$this->incrementHitMetric( 'error' );
+	}
+
+	private function formatErrorResponse( array $error ): array {
+		return [ 'errors' => [ $error ] ];
 	}
 
 	private function trackErrors( array $errors ): void {

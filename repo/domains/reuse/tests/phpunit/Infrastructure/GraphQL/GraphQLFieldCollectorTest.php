@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL;
 
 use Generator;
+use GraphQL\Language\Parser;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLFieldCollector;
 
@@ -20,10 +21,10 @@ class GraphQLFieldCollectorTest extends TestCase {
 	 */
 	public function testQuery( string $query, array $expectedResult, ?string $operationName = null ): void {
 		$fieldTracker = new GraphQLFieldCollector();
-
+		$doc = Parser::parse( $query );
 		$this->assertEquals(
 			$expectedResult,
-			$fieldTracker->getRequestedFieldPaths( $query, $operationName )
+			$fieldTracker->getRequestedFieldPaths( $doc, $operationName )
 		);
 	}
 
@@ -103,4 +104,5 @@ class GraphQLFieldCollectorTest extends TestCase {
 			[],
 		];
 	}
+
 }

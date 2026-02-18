@@ -8,7 +8,6 @@ use GraphQL\Language\AST\FragmentSpreadNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
 use GraphQL\Language\AST\OperationDefinitionNode;
-use GraphQL\Language\Parser;
 use GraphQL\Language\Visitor;
 
 /**
@@ -21,9 +20,7 @@ class GraphQLFieldCollector {
 	private array $currentPathWithAliases;
 	private array $pathsWithAliasesMap;
 
-	public function getRequestedFieldPaths( string $query, ?string $operationName ): array {
-		$doc = Parser::parse( $query );
-
+	public function getRequestedFieldPaths( DocumentNode $doc, ?string $operationName ): array {
 		$operation = $this->getQueryOperation( $doc, $operationName );
 		if ( !$operation ) {
 			return [];

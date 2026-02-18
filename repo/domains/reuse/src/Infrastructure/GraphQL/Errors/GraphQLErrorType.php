@@ -14,6 +14,7 @@ enum GraphQLErrorType {
 
 	// used only as error codes for tracking
 	case INVALID_QUERY;
+	case MISSING_QUERY;
 	case QUERY_TOO_COMPLEX;
 	case UNKNOWN;
 }
