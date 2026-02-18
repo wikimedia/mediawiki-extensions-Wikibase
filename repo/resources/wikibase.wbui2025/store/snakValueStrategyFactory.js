@@ -8,7 +8,7 @@ class DefaultStrategy {
 		return this.editSnakStore;
 	}
 
-	async renderValueToText( valueObject ) {
+	async renderValueForTextInput( valueObject ) {
 		return valueObject.value;
 	}
 

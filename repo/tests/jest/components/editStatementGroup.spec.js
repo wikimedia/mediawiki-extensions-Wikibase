@@ -22,6 +22,14 @@ jest.mock(
 	{ virtual: true }
 );
 
+jest.mock(
+	'../../../resources/wikibase.wbui2025/api/editEntity.js',
+	() => Object.assign(
+		jest.requireActual( '../../../resources/wikibase.wbui2025/api/editEntity.js' ),
+		{ renderSnakValueText: jest.fn() }
+	)
+);
+
 const crypto = require( 'crypto' );
 // eslint-disable-next-line no-undef
 Object.defineProperty( globalThis, 'wikibase', {
@@ -43,6 +51,10 @@ Object.defineProperty( globalThis, 'wikibase', {
 const { ErrorObject } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
+const {
+	renderSnakValueText: mockRenderSnakValueText
+} = require( '../../../resources/wikibase.wbui2025/api/editEntity.js' );
+
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const editStatementGroupComponent = require( '../../../resources/wikibase.wbui2025/components/editStatementGroup.vue' );
 const editStatementComponent = require( '../../../resources/wikibase.wbui2025/components/editStatement.vue' );
@@ -82,7 +94,24 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			rank: 'normal'
 		};
 
-		async function mountAndGetParts() {
+		const testQuantityStatement = {
+			id: testStatementId,
+			mainsnak: {
+				snaktype: 'value',
+				property: 'P1',
+				datavalue: {
+					value: {
+						amount: '+123',
+						unit: '1'
+					},
+					type: 'quantity'
+				},
+				datatype: 'quantity'
+			},
+			rank: 'normal'
+		};
+
+		async function mountAndGetParts( statement = testStatement ) {
 			const wrapper = await mount( editStatementGroupComponent, {
 				props: {
 					propertyId: 'P1',
@@ -90,7 +119,7 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 				},
 				global: {
 					plugins: [
-						storeWithStatementsAndProperties( { P1: [ testStatement ] } )
+						storeWithStatementsAndProperties( { P1: [ statement ] } )
 					],
 					disableTeleport: true
 				}
@@ -144,6 +173,21 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( wrapper.vm.editableStatementGuids.length ).toBe( 1 );
 			await addValueButton.trigger( 'click' );
 			expect( wrapper.vm.editableStatementGuids.length ).toBe( 2 );
+		} );
+
+		it( 'adds a new value when add value is clicked for a quantity-datatype statement', async () => {
+			const { wrapper, addValueButton } = await mountAndGetParts( testQuantityStatement );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 1 );
+			expect( mockRenderSnakValueText ).toHaveBeenCalledWith( {
+				type: 'quantity',
+				value: {
+					amount: '+123',
+					unit: '1'
+				}
+			} );
+			await addValueButton.trigger( 'click' );
+			expect( wrapper.vm.editableStatementGuids.length ).toBe( 2 );
+			expect( mockRenderSnakValueText ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'removes a value when remove is triggered', async () => {

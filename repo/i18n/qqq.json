@@ -418,6 +418,7 @@
 	"wikibase-parse-error-entity-id": "An error used by the API (in particular, by wbparsevalue) to indicate that the user input could not be parsed as an entity id",
 	"wikibase-parse-error-quantity": "An error used by the API (in particular, by wbparsevalue) to indicate that the user input could not be parsed as a quantity",
 	"wikibase-parse-error-time": "An error used by the API (in particular, by wbparsevalue) to indicate that the user input could not be parsed as a time",
+	"wikibase-quantitydetails-unit-optional": "Label used for the \"unit\" input field of a quantity value when showing the quantity in the wbui2025 statement edit view. See also:\n* {{msg-mw|wikibase-quantitydetails-unit}}",
 	"special-redirectentity": "{{doc-special|RedirectEntity}}",
 	"wikibase-redirectentity-success": "Message shown when an entity has successfully been redirect to another entity.\nParameters:\n* $1: the ID of the entity being redirect from\n* $2: the ID of the target entity",
 	"wikibase-redirectentity-fromid": "Label for the input field to select the ID of the entity to redirect from. See also:\n* {{msg-mw|Wikibase-redirectentity-toid}}",

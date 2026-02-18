@@ -41,9 +41,3 @@ module.exports = exports = defineComponent( {
 	}
 } );
 </script>
-
-<style lang="less">
-div.wikibase-wbui2025-editable-snak-holder {
-	display: flex;
-}
-</style>

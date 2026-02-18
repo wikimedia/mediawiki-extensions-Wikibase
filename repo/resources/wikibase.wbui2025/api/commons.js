@@ -105,6 +105,25 @@ const transformEntitySearchResults = function ( searchResults ) {
 };
 
 /**
+ * Transform entity search results into menu items format using the conceptUri as
+ * the menu item value
+ *
+ * @param {Array} searchResults Array of search results from API
+ * @return {Array} Array of menu items with label, value, and description
+ */
+const transformEntityByConceptUriSearchResults = function ( searchResults ) {
+	if ( !searchResults || searchResults.length === 0 ) {
+		return [];
+	}
+
+	return searchResults.map( ( result ) => ( {
+		label: result.label,
+		value: result.concepturi,
+		description: result.description
+	} ) );
+};
+
+/**
  * Transform search results into menu items format
  *
  * @param {Array} searchResults Array of search results from API
@@ -128,5 +147,6 @@ module.exports = {
 	searchGeoShapes,
 	searchCommonsMedia,
 	transformSearchResults,
-	transformEntitySearchResults
+	transformEntitySearchResults,
+	transformEntityByConceptUriSearchResults
 };

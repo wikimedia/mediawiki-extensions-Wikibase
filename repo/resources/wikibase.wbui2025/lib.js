@@ -5,7 +5,8 @@ const wbui2025 = {};
 wbui2025.api = Object.assign(
 	require( './api/editEntity.js' ),
 	require( './api/api.js' ),
-	require( './api/commons.js' )
+	require( './api/commons.js' ),
+	require( './api/lookupSource.js' )
 );
 wbui2025.util = require( './utils.js' );
 wbui2025.store = Object.assign(
