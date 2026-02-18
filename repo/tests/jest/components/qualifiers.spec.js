@@ -58,7 +58,8 @@ describe( 'wikibase.wbui2025.qualifiers', () => {
 							}
 						]
 					},
-					qualifiersOrder: [ 'P2', 'P1' ]
+					qualifiersOrder: [ 'P2', 'P1' ],
+					statementId: 'Q1$789eef0c-4108-cdda-1a63-505cdd324564'
 				},
 				global: {
 					plugins: [

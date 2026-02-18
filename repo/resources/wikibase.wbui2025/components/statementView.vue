@@ -3,13 +3,16 @@
 		<wbui2025-main-snak
 			:main-snak="statement.mainsnak"
 			:rank="statement.rank"
+			:statement-id="statementId"
 		></wbui2025-main-snak>
 		<wbui2025-qualifiers
 			:qualifiers="qualifiers"
-			:qualifiers-order="qualifiersOrder">
-		</wbui2025-qualifiers>
+			:qualifiers-order="qualifiersOrder"
+			:statement-id="statementId"
+		></wbui2025-qualifiers>
 		<wbui2025-references
 			:references="references"
+			:statement-id="statementId"
 		></wbui2025-references>
 	</div>
 </template>

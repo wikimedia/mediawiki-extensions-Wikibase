@@ -21,6 +21,8 @@ const { storeWithServerRenderedHtml } = require( '../piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.snakValue', () => {
 	describe( 'the mounted component', () => {
+		const statementId = 'Q1$789eef0c-4108-cdda-1a63-505cdd324564';
+
 		function mountSnakValue( props = {}, snakHashToHtmlMap = {}, propertyToHtmlMap = {}, snakHashWithErrorSet = [] ) {
 			return mount( snakValueVue, {
 				props,
@@ -38,7 +40,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
+					},
+					statementId
 				},
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
@@ -59,7 +62,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
+					},
+					statementId
 				},
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
@@ -67,19 +71,48 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 			expect( wrapper.find( { ref: 'snakAnchor' } ).exists() ).toBeFalsy();
 		} );
 
-		it( 'displays indicators if they are set', async () => {
+		it.each( [
+			[
+				'main snak',
+				{},
+				() => wbui2025.store.setIndicatorHtmlForMainSnak(
+					'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
+					'<span>Icon1</span>'
+				)
+			],
+			[
+				'qualifier',
+				{ isQualifier: true },
+				() => wbui2025.store.setIndicatorHtmlForQualifier(
+					'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
+					'ee6053a6982690ba0f5227d587394d9111eea401',
+					'<span>Icon1</span>'
+				)
+			],
+			[
+				'reference',
+				{ referenceHash: '1e638f52eb8d0d3a9453aa05143fa059657dd9d3' },
+				() => wbui2025.store.setIndicatorHtmlForReferenceSnak(
+					'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
+					'1e638f52eb8d0d3a9453aa05143fa059657dd9d3',
+					'ee6053a6982690ba0f5227d587394d9111eea401',
+					'<span>Icon1</span>'
+				)
+			]
+		] )( 'displays indicators on %s if they are set', async ( _kind, props, storeSetup ) => {
 			const wrapper = await mountSnakValue(
-				{
+				Object.assign( {
 					snak: {
 						datatype: 'string',
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
-				},
+					},
+					statementId
+				}, props ),
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
-			wbui2025.store.setIndicatorsHtmlForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>Icon1</span>' );
+			storeSetup();
 			await wrapper.vm.$nextTick();
 			expect( wrapper.findAll( '.wikibase-wbui2025-snak-value' ) ).toHaveLength( 1 );
 			const indicatorSpan = wrapper.find( { ref: 'snakAnchor' } );
@@ -94,7 +127,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 					hash: 'musical1234567890123456789012345678901234567890',
 					property: 'P1',
 					datavalue: { value: '\\relative c\' { c4 e g c }', type: 'string' }
-				}
+				},
+				statementId
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
@@ -112,7 +146,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 					hash: 'string1234567890123456789012345678901234567890',
 					property: 'P1',
 					datavalue: { value: 'test', type: 'string' }
-				}
+				},
+				statementId
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
@@ -129,12 +164,17 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 						hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
 						property: 'P1',
 						datavalue: { value: 'p1', type: 'string' }
-					}
+					},
+					statementId
 				},
 				{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' }
 			);
-			wbui2025.store.setIndicatorsHtmlForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401', '<span>Icon1</span>' );
-			wbui2025.store.setPopoverContentForSnakHash( 'ee6053a6982690ba0f5227d587394d9111eea401',
+			wbui2025.store.setIndicatorHtmlForMainSnak(
+				'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
+				'<span>Icon1</span>'
+			);
+			wbui2025.store.setPopoverContentForMainSnak(
+				'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
 				[ {
 					icon: '<span class="wikibase-wbui2025-icon-edit-small"></span>',
 					title: 'Popover Title',
@@ -157,7 +197,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 						hash: 'ee742552ad17e320360d4d17fb60fdd22fe0b6dd',
 						property: 'P1',
 						datavalue: { value: '\\invalid {', type: 'string' }
-					}
+					},
+					statementId
 				},
 				{ ee742552ad17e320360d4d17fb60fdd22fe0b6dd:
 						'<div class="cdx-message--error mw-ext-score-error cdx-message cdx-message--block"></div>' },

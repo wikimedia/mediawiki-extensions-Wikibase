@@ -3,7 +3,10 @@
 		<div class="wikibase-wbui2025-rankselector">
 			<span :class="concat( 'wikibase-rankselector-', rank )" :title="rankTitleString"></span>
 		</div>
-		<wbui2025-snak-value :snak="mainSnak"></wbui2025-snak-value>
+		<wbui2025-snak-value
+			:snak="mainSnak"
+			:statement-id="statementId"
+		></wbui2025-snak-value>
 	</div>
 </template>
 
@@ -24,6 +27,10 @@ module.exports = exports = defineComponent( {
 			required: true
 		},
 		rank: {
+			type: String,
+			required: true
+		},
+		statementId: {
 			type: String,
 			required: true
 		}

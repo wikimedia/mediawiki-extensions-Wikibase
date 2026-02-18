@@ -96,6 +96,18 @@ module.exports = exports = defineComponent( {
 		snakHash: {
 			type: String,
 			required: true
+		},
+		statementId: {
+			type: String,
+			required: true
+		},
+		isQualifier: {
+			type: Boolean,
+			default: false
+		},
+		referenceHash: {
+			type: String,
+			default: null
 		}
 	},
 	emits: [ 'close' ],
@@ -116,7 +128,22 @@ module.exports = exports = defineComponent( {
 			return this.issues.length > 1;
 		},
 		issues() {
-			return wbui2025.store.getPopoverContentForSnakHash( this.snakHash );
+			if ( this.referenceHash !== null ) {
+				return wbui2025.store.getPopoverContentForReferenceSnak(
+					this.statementId,
+					this.referenceHash,
+					this.snakHash
+				);
+			}
+			if ( this.isQualifier ) {
+				return wbui2025.store.getPopoverContentForQualifier(
+					this.statementId,
+					this.snakHash
+				);
+			}
+			return wbui2025.store.getPopoverContentForMainSnak(
+				this.statementId
+			);
 		},
 		currentIssue() {
 			return this.issues[ this.currentIndex ];
