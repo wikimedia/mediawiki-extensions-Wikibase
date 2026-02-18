@@ -31,6 +31,8 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 			let entityId: string;
 			let linkedEntityLabel: string;
 			let newLinkedEntityLabel: string;
+			let testUsername: string;
+			let testPassword: string;
 
 			before( () => {
 				propertyName = Util.getTestString( datatype + '-property' + '-' );
@@ -49,16 +51,20 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 						entityId = newItemId;
 					} );
 				} );
-			} );
 
-			beforeEach( () => {
-				const loginPage = new LoginPage();
 				cy.task(
 					'MwApi:CreateUser',
 					{ usernamePrefix: 'mextest' },
 				).then( ( { username, password } ) => {
-					loginPage.login( username, password );
+					testUsername = username;
+					testPassword = password;
+
+					const loginPage = new LoginPage();
+					loginPage.loginWithSession( testUsername, testPassword );
 				} );
+			} );
+
+			beforeEach( () => {
 				cy.viewport( 375, 1280 );
 			} );
 

@@ -8,18 +8,27 @@ import { interceptCommonsSearch } from '../../support/apiMockHelpers';
 import { ValueForm } from '../../support/pageObjects/ValueForm';
 
 describe( 'wbui2025 add qualifiers', () => {
+	let testUsername: string;
+	let testPassword: string;
+
+	before( () => {
+		cy.task(
+			'MwApi:CreateUser',
+			{ usernamePrefix: 'mextest' },
+		).then( ( { username, password } ) => {
+			testUsername = username;
+			testPassword = password;
+			const loginPage = new LoginPage();
+			loginPage.loginWithSession( testUsername, testPassword );
+		} );
+		cy.viewport( 375, 1280 );
+	} );
+
 	context( 'mobile view', () => {
 		let itemViewPage: ItemViewPage;
 		let itemLabel: string;
 
 		beforeEach( () => {
-			const loginPage = new LoginPage();
-			cy.task(
-				'MwApi:CreateUser',
-				{ usernamePrefix: 'mextest' },
-			).then( ( { username, password } ) => {
-				loginPage.login( username, password );
-			} );
 
 			cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'wikibase-item' } )
 				.then( ( propertyId: string ) => {
@@ -48,7 +57,6 @@ describe( 'wbui2025 add qualifiers', () => {
 							itemViewPage = new ItemViewPage( itemId );
 						} );
 				} );
-			cy.viewport( 375, 1280 );
 		} );
 
 		it( 'is possible to add and edit a qualifier', () => {
@@ -167,7 +175,6 @@ describe( 'wbui2025 add qualifiers', () => {
 						} );
 					} );
 				} );
-			cy.viewport( 375, 1280 );
 		} );
 
 		it( 'can add a tabular-data qualifier with lookup', () => {
@@ -267,7 +274,6 @@ describe( 'wbui2025 add qualifiers', () => {
 						} );
 					} );
 				} );
-			cy.viewport( 375, 1280 );
 		} );
 
 		it( 'can add a geo-shape qualifier with lookup', () => {

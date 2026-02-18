@@ -4,70 +4,58 @@ import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFo
 import { AddValueModal } from '../../support/pageObjects/AddValueModal';
 
 describe( 'wbui2025 item view add additional value to existing statement', () => {
-	let propertyName1: string;
 	let itemId1: string;
-	let propertyName2: string;
 	let itemId2: string;
 
 	before( () => {
-		propertyName1 = Util.getTestString( 'modal-property' );
-		cy.task( 'MwApi:CreateProperty', {
-			label: propertyName1,
-			data: { datatype: 'string' },
-		} ).then( ( newPropertyId: string ) => {
-			const statementData = {
-				claims: [
-					{
-						mainsnak: {
-							snaktype: 'value',
-							property: newPropertyId,
-							datavalue: { value: 'ExampleString', type: 'string' },
+		cy.task( 'MwApi:GetOrCreatePropertyIdByDataType', { datatype: 'string' } )
+			.then( ( propertyId: string ) => {
+				const statementData1 = {
+					claims: [
+						{
+							mainsnak: {
+								snaktype: 'value',
+								property: propertyId,
+								datavalue: { value: 'ExampleString', type: 'string' },
+							},
+							type: 'statement',
+							rank: 'normal',
 						},
-						type: 'statement',
-						rank: 'normal',
-					},
-				],
-			};
-			cy.task( 'MwApi:CreateItem', {
-				label: Util.getTestString( 'modal-item' ),
-				data: statementData,
-			} ).then( ( newItemId: string ) => {
-				itemId1 = newItemId;
+					],
+				};
+				const statementData2 = {
+					claims: [
+						{
+							mainsnak: {
+								snaktype: 'value',
+								property: propertyId,
+								datavalue: { value: 'CancelString', type: 'string' },
+							},
+							type: 'statement',
+							rank: 'normal',
+						},
+					],
+				};
+				cy.task( 'MwApi:CreateItem', {
+					label: Util.getTestString( 'modal-item' ),
+					data: statementData1,
+				} ).then( ( newItemId: string ) => {
+					itemId1 = newItemId;
+				} );
+				cy.task( 'MwApi:CreateItem', {
+					label: Util.getTestString( 'modal-item-cancel' ),
+					data: statementData2,
+				} ).then( ( id: string ) => {
+					itemId2 = id;
+				} );
 			} );
-		} );
+	} );
 
-		propertyName2 = Util.getTestString( 'modal-property-cancel' );
-		cy.task( 'MwApi:CreateProperty', {
-			label: propertyName2,
-			data: { datatype: 'string' },
-		} ).then( ( newPropertyId: string ) => {
-			const statementData = {
-				claims: [
-					{
-						mainsnak: {
-							snaktype: 'value',
-							property: newPropertyId,
-							datavalue: { value: 'CancelString', type: 'string' },
-						},
-						type: 'statement',
-						rank: 'normal',
-					},
-				],
-			};
-			cy.task( 'MwApi:CreateItem', {
-				label: Util.getTestString( 'modal-item-cancel' ),
-				data: statementData,
-			} ).then( ( id: string ) => {
-				itemId2 = id;
-			} );
-		} );
+	beforeEach( () => {
+		cy.viewport( 375, 1280 );
 	} );
 
 	context( 'full add-value workflow', () => {
-		beforeEach( () => {
-			cy.viewport( 375, 1280 );
-		} );
-
 		it( 'opens the add-value modal, searches, selects, and confirms value', () => {
 			const itemPage = new ItemViewPage( itemId1 );
 			itemPage.open().statementsSection();
@@ -85,10 +73,6 @@ describe( 'wbui2025 item view add additional value to existing statement', () =>
 	} );
 
 	context( 'cancel behavior', () => {
-		beforeEach( () => {
-			cy.viewport( 375, 1280 );
-		} );
-
 		it( 'opens the add-value modal and cancels cleanly', () => {
 			const itemPage = new ItemViewPage( itemId2 );
 			itemPage.open().statementsSection();
