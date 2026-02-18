@@ -6,6 +6,7 @@ module.exports = {
 		"wikimedia/mocha"
 	],
 	rules: {
+		camelcase: "off",
 		"no-unused-expressions": "off",
 		"prefer-arrow-callback": "off",
 		"mocha/no-setup-in-describe": 0,
