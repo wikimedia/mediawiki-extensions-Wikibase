@@ -23,7 +23,6 @@ class Wbui2025FeatureFlag {
 		'globe-coordinate',
 		'monolingualtext',
 		'entity-schema',
-		'math',
 	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';

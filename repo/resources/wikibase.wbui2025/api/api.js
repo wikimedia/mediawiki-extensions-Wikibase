@@ -1,6 +1,7 @@
 const apiOptions = {
 	parameters: {
-		errorformat: 'html',
+		formatversion: 2,
+		errorformat: 'plaintext',
 		uselang: mw.config.get( 'wgUserLanguage' )
 	}
 };
@@ -14,9 +15,9 @@ function foreignApi( apiUrl ) {
 }
 
 class ErrorObject {
-	constructor( errorCode, $errorHtml, errorData ) {
+	constructor( errorCode, errorMessage, errorData ) {
 		this.errorCode = errorCode;
-		this.$errorHtml = $errorHtml;
+		this.errorMessage = errorMessage;
 		this.errorData = errorData;
 	}
 }

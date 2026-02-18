@@ -239,15 +239,21 @@ module.exports = exports = defineComponent( {
 				this.showProgress = false;
 				this.showEditStatementModal = false;
 			} )
-			.catch( ( e ) => {
+			.catch( ( errorObj ) => {
 				clearTimeout( this.progressTimeout );
+				const errorText = wbui2025.util.extractErrorMessage(
+					errorObj,
+					mw.msg( 'wikibase-publishing-error' )
+				);
 				this.addStatusMessage( {
-					text: e.$errorHtml.text(),
+					text: errorText,
 					attachTo: this.$refs.editFormActionsRef,
 					type: 'error'
 				} );
 				this.formSubmitted = false;
-				this.showProgress = false;
+				this.progressTimeout = setTimeout( () => {
+					this.showProgress = false;
+				}, 300 );
 			} );
 		},
 		cancelEditForm() {

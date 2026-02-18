@@ -75,7 +75,8 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		activeClasses() {
-			return [ { 'cdx-text-input--status-error': this.inputHadFocus && this.isIncomplete }, this.className ];
+			const hasError = this.inputHadFocus && this.isIncomplete;
+			return [ { 'cdx-text-input--status-error': hasError }, this.className ];
 		}
 	},
 	methods: {

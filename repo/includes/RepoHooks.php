@@ -1131,6 +1131,7 @@ final class RepoHooks implements
 					'wikibase-indicator-popover-multiple-issue-previous',
 					'wikibase-indicator-popover-multiple-issue-next',
 					'wikibase-undisplayable-value',
+					'wikibase-error-save-generic',
 				],
 				'codexComponents' => [
 					'CdxAccordion',

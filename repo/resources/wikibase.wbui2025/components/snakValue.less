@@ -49,7 +49,8 @@
 	// Limiting to certain cases only.
 	// Without it, the .cdx-text-input might not trigger any dropdown menu properly
 	&:has( .mw-ext-score ),
-	&:has( .extiw ) {
+	&:has( .extiw ),
+	&:has( .mwe-math-element ) {
 		overflow-x: auto;
 	}
 
@@ -73,7 +74,8 @@
 	}
 }
 
-.wikibase-wbui2025-musical-notation-value:not( .wikibase-wbui2025-snak-value--popover-visible ) {
+.wikibase-wbui2025-musical-notation-value:not( .wikibase-wbui2025-snak-value--popover-visible ),
+.wikibase-wbui2025-math-value:not( .wikibase-wbui2025-snak-value--popover-visible ) {
 	mask-image: linear-gradient( to left, transparent 0, @color-emphasized 3em );
 	mask-repeat: no-repeat;
 	mask-position: 100% 0;
