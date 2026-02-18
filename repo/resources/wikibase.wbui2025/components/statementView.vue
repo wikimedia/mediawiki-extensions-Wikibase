@@ -1,5 +1,5 @@
 <template>
-	<div :id="statementId" class="wikibase-wbui2025-statement-view">
+	<div :id="statementId" :class="activeClasses">
 		<wbui2025-main-snak
 			:main-snak="statement.mainsnak"
 			:rank="statement.rank"
@@ -47,6 +47,12 @@ module.exports = exports = defineComponent( {
 		},
 		statement() {
 			return wbui2025.store.getStatementById( this.statementId );
+		},
+		activeClasses() {
+			return [
+				'wikibase-wbui2025-statement-view',
+				{ 'wb-preferred': this.statement.rank === 'preferred', 'wb-deprecated': this.statement.rank === 'deprecated' }
+			];
 		}
 	}
 } );

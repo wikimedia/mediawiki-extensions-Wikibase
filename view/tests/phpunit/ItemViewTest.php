@@ -95,6 +95,11 @@ class ItemViewTest extends EntityViewTestCase {
 		];
 	}
 
+	private static function getStatementWithRank( Statement $statement, int $rank ): Statement {
+		$statement->setRank( $rank );
+		return $statement;
+	}
+
 	public static function provideTestVueStatementsView(): iterable {
 		$guidGenerator = new GuidGenerator();
 		return [
@@ -106,19 +111,18 @@ class ItemViewTest extends EntityViewTestCase {
 			[
 				'viewFactory' => fn ( self $self ) => $self->newItemView( [], true ),
 				'item' => self::newEntityForStatements( [
-					new Statement( new PropertyValueSnak(
-						new NumericPropertyId( 'P1' ),
-						new StringValue( 'p1' ),
-					), new SnakList( [
-						new PropertyValueSnak(
-							new NumericPropertyId( 'P10' ),
-							new StringValue( 'qualifier10' )
-						),
-					]
-					),
-					null,
+					self::getStatementWithRank( new Statement( new PropertyValueSnak(
+							new NumericPropertyId( 'P1' ),
+							new StringValue( 'p1' ),
+						), new SnakList( [
+							new PropertyValueSnak(
+								new NumericPropertyId( 'P10' ),
+								new StringValue( 'qualifier10' )
+							),
+						] ),
+						null,
 						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
-					),
+					), Statement::RANK_DEPRECATED ),
 					new Statement(
 						new PropertyValueSnak(
 							new NumericPropertyId( 'P2' ),
@@ -137,7 +141,7 @@ class ItemViewTest extends EntityViewTestCase {
 						] ),
 						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
 					),
-					new Statement(
+					self::getStatementWithRank( new Statement(
 						new PropertyValueSnak(
 							new NumericPropertyId( self::EXTERNAL_ID_PROPERTY_ID ),
 							new StringValue( 'https://www.example.com/url' )
@@ -145,7 +149,7 @@ class ItemViewTest extends EntityViewTestCase {
 						null,
 						null,
 						$guidGenerator->newStatementId( new ItemId( 'Q1234' ) )
-					),
+					), Statement::RANK_PREFERRED ),
 					new Statement(
 						new PropertyValueSnak(
 							new NumericPropertyId( self::TIME_VALUE_PROPERTY_ID ),
@@ -266,6 +270,44 @@ class ItemViewTest extends EntityViewTestCase {
 			$this->assertStringContainsString( '<div>a value snak: DataValues\TimeValue</div>', $html );
 		} else {
 			$this->assertStringNotContainsString( 'wikibase-wbui2025-main-snak', $html );
+		}
+	}
+
+	/** @dataProvider provideTestVueStatementsView */
+	public function testVueRankClass( callable $viewFactory, Item $item, bool $vueStatementsExpected ) {
+		$view = $viewFactory( $this );
+		$output = $view->getContent( $item, null );
+		$html = $output->getHtml();
+		if ( $vueStatementsExpected ) {
+			foreach ( $item->getStatements()->getByRank( Statement::RANK_PREFERRED ) as $statement ) {
+				$this->assertMatchesRegularExpression(
+					'/id="' . preg_quote( $statement->getGuid(), '/' ) . '" [^>]*class="[^"]*' . 'wb-preferred/',
+					$html
+				);
+				$this->assertDoesNotMatchRegularExpression(
+					'/id="' . preg_quote( $statement->getGuid(), '/' ) . '" [^>]*class="[^"]*' . 'wb-deprecated/',
+					$html
+				);
+			}
+			foreach ( $item->getStatements()->getByRank( Statement::RANK_DEPRECATED ) as $statement ) {
+				$this->assertMatchesRegularExpression(
+					'/id="' . preg_quote( $statement->getGuid(), '/' ) . '" [^>]*class="[^"]*' . 'wb-deprecated/',
+					$html
+				);
+				$this->assertDoesNotMatchRegularExpression(
+					'/id="' . preg_quote( $statement->getGuid(), '/' ) . '" [^>]*class="[^"]*' . 'wb-preferred/',
+					$html
+				);
+			}
+			foreach ( $item->getStatements()->getByRank( Statement::RANK_NORMAL ) as $statement ) {
+				$this->assertDoesNotMatchRegularExpression(
+					'/id="' . preg_quote( $statement->getGuid(), '/' ) . '" [^>]*class="[^"]*' . 'wb-(preferred|deprecated)/',
+					$html
+				);
+			}
+		} else {
+			$this->assertStringNotContainsString( 'wb-deprecated', $html );
+			$this->assertStringNotContainsString( 'wb-preferred', $html );
 		}
 	}
 

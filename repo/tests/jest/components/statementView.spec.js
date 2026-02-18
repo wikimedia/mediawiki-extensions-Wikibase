@@ -114,5 +114,62 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			expect( referencesWrappers ).toHaveLength( 1 );
 			expect( referencesWrappers[ 0 ].props( 'references' ) ).toEqual( references );
 		} );
+
+		it( 'correctly sets classes for normal statements', () => {
+			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: { snaktype: 'somevalue' },
+				rank: 'normal'
+			};
+			const wrapper = mount( statementViewComponent, {
+				props: {
+					statementId: testStatementId
+				},
+				global: globalOptions( [ testStatement ] )
+			} );
+
+			expect( wrapper.exists() ).toBe( true );
+			expect( wrapper.classes() ).not.toContain( 'wb-deprecated' );
+			expect( wrapper.classes() ).not.toContain( 'wb-preferred' );
+		} );
+
+		it( 'correctly sets classes for preferred statements', () => {
+			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: { snaktype: 'somevalue' },
+				rank: 'preferred'
+			};
+			const wrapper = mount( statementViewComponent, {
+				props: {
+					statementId: testStatementId
+				},
+				global: globalOptions( [ testStatement ] )
+			} );
+
+			expect( wrapper.exists() ).toBe( true );
+			expect( wrapper.classes() ).not.toContain( 'wb-deprecated' );
+			expect( wrapper.classes() ).toContain( 'wb-preferred' );
+		} );
+
+		it( 'correctly sets classes for deprecated statements', () => {
+			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
+			const testStatement = {
+				id: testStatementId,
+				mainsnak: { snaktype: 'somevalue' },
+				rank: 'deprecated'
+			};
+			const wrapper = mount( statementViewComponent, {
+				props: {
+					statementId: testStatementId
+				},
+				global: globalOptions( [ testStatement ] )
+			} );
+
+			expect( wrapper.exists() ).toBe( true );
+			expect( wrapper.classes() ).toContain( 'wb-deprecated' );
+			expect( wrapper.classes() ).not.toContain( 'wb-preferred' );
+		} );
 	} );
 } );
