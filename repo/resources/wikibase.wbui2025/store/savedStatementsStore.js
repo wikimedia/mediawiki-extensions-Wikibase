@@ -13,8 +13,6 @@ const useSavedStatementsStore = defineStore( 'savedStatements', {
 		statements: new Map(),
 		properties: new Map(),
 		propertyIdToStatementSection: new Map(),
-		indicatorsForSnaks: new Map(),
-		popoverHtmlForSnaks: new Map(),
 		/** statementId -> HTML string */
 		indicatorHtmlForMainSnaks: new Map(),
 		/** `${ statementId }|${ snakHash }` -> HTML string */
@@ -173,27 +171,13 @@ const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 	statementsStore.properties.set( propertyId, statementIds );
 };
 
-const getIndicatorsHtmlForSnakHash = function ( snakHash ) {
-	if ( snakValueHtmlForHashHasError( snakHash ) ) {
-		return '<span class="wikibase-wbui2025-indicator-icon--error"></span>';
-	}
-	const statementsStore = useSavedStatementsStore();
-	return statementsStore.indicatorsForSnaks.get( snakHash );
-};
-
-const setIndicatorsHtmlForSnakHash = function ( snakHash, indicators ) {
-	const statementsStore = useSavedStatementsStore();
-	statementsStore.indicatorsForSnaks.set( snakHash, indicators );
-};
-
 const getIndicatorHtmlForMainSnak = function ( statementId ) {
 	const statementsStore = useSavedStatementsStore();
 	const snakHash = ( statementsStore.statements.get( statementId ) || { mainsnak: {} } ).mainsnak.hash;
 	if ( snakHash && snakValueHtmlForHashHasError( snakHash ) ) {
 		return '<span class="wikibase-wbui2025-indicator-icon--error"></span>';
 	}
-	return statementsStore.indicatorHtmlForMainSnaks.get( statementId ) ||
-		statementsStore.indicatorsForSnaks.get( snakHash );
+	return statementsStore.indicatorHtmlForMainSnaks.get( statementId );
 };
 
 const setIndicatorHtmlForMainSnak = function ( statementId, indicatorHtml ) {
@@ -206,8 +190,7 @@ const getIndicatorHtmlForQualifier = function ( statementId, snakHash ) {
 		return '<span class="wikibase-wbui2025-indicator-icon--error"></span>';
 	}
 	const statementsStore = useSavedStatementsStore();
-	return statementsStore.indicatorHtmlForQualifiers.get( `${ statementId }|${ snakHash }` ) ||
-		statementsStore.indicatorsForSnaks.get( snakHash );
+	return statementsStore.indicatorHtmlForQualifiers.get( `${ statementId }|${ snakHash }` );
 };
 
 const setIndicatorHtmlForQualifier = function ( statementId, snakHash, indicatorHtml ) {
@@ -220,8 +203,7 @@ const getIndicatorHtmlForReferenceSnak = function ( statementId, referenceHash, 
 		return '<span class="wikibase-wbui2025-indicator-icon--error"></span>';
 	}
 	const statementsStore = useSavedStatementsStore();
-	return statementsStore.indicatorHtmlForReferenceSnaks.get( `${ statementId }|${ referenceHash }|${ snakHash }` ) ||
-		statementsStore.indicatorsForSnaks.get( snakHash );
+	return statementsStore.indicatorHtmlForReferenceSnaks.get( `${ statementId }|${ referenceHash }|${ snakHash }` );
 };
 
 const setIndicatorHtmlForReferenceSnak = function ( statementId, referenceHash, snakHash, indicatorHtml ) {
@@ -229,9 +211,10 @@ const setIndicatorHtmlForReferenceSnak = function ( statementId, referenceHash, 
 	statementsStore.indicatorHtmlForReferenceSnaks.set( `${ statementId }|${ referenceHash }|${ snakHash }`, indicatorHtml );
 };
 
-const getPopoverContentForSnakHash = function ( snakHash ) {
+const getPopoverContentForMainSnak = function ( statementId ) {
 	const statementsStore = useSavedStatementsStore();
-	const popoverContentItems = statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
+	const popoverContentItems = statementsStore.popoverHtmlForMainSnaks.get( statementId ) || [];
+	const snakHash = ( statementsStore.statements.get( statementId ) || { mainsnak: {} } ).mainsnak.hash;
 	if ( snakValueHtmlForHashHasError( snakHash ) ) {
 		return [
 			{
@@ -244,29 +227,6 @@ const getPopoverContentForSnakHash = function ( snakHash ) {
 	}
 };
 
-const setPopoverContentForSnakHash = function ( snakHash, popoverContentItems ) {
-	const statementsStore = useSavedStatementsStore();
-	statementsStore.popoverHtmlForSnaks.set( snakHash, popoverContentItems );
-};
-
-const getPopoverContentForMainSnak = function ( statementId ) {
-	const statementsStore = useSavedStatementsStore();
-	const popoverContentItems = statementsStore.popoverHtmlForMainSnaks.get( statementId ) || [];
-	const snakHash = ( statementsStore.statements.get( statementId ) || { mainsnak: {} } ).mainsnak.hash;
-	const compatItems = statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
-	if ( snakValueHtmlForHashHasError( snakHash ) ) {
-		return [
-			{
-				bodyHtml: snakValueHtmlForHash( snakHash )
-			},
-			...popoverContentItems,
-			...compatItems
-		];
-	} else {
-		return popoverContentItems.concat( compatItems );
-	}
-};
-
 const setPopoverContentForMainSnak = function ( statementId, popoverContentItems ) {
 	const statementsStore = useSavedStatementsStore();
 	statementsStore.popoverHtmlForMainSnaks.set( statementId, popoverContentItems );
@@ -275,17 +235,15 @@ const setPopoverContentForMainSnak = function ( statementId, popoverContentItems
 const getPopoverContentForQualifier = function ( statementId, snakHash ) {
 	const statementsStore = useSavedStatementsStore();
 	const popoverContentItems = statementsStore.popoverHtmlForQualifiers.get( `${ statementId }|${ snakHash }` ) || [];
-	const compatItems = statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
 	if ( snakValueHtmlForHashHasError( snakHash ) ) {
 		return [
 			{
 				bodyHtml: snakValueHtmlForHash( snakHash )
 			},
-			...popoverContentItems,
-			...compatItems
+			...popoverContentItems
 		];
 	} else {
-		return popoverContentItems.concat( compatItems );
+		return popoverContentItems;
 	}
 };
 
@@ -297,17 +255,15 @@ const setPopoverContentForQualifier = function ( statementId, snakHash, popoverC
 const getPopoverContentForReferenceSnak = function ( statementId, referenceHash, snakHash ) {
 	const statementsStore = useSavedStatementsStore();
 	const popoverContentItems = statementsStore.popoverHtmlForReferenceSnaks.get( `${ statementId }|${ referenceHash }|${ snakHash }` ) || [];
-	const compatItems = statementsStore.popoverHtmlForSnaks.get( snakHash ) || [];
 	if ( snakValueHtmlForHashHasError( snakHash ) ) {
 		return [
 			{
 				bodyHtml: snakValueHtmlForHash( snakHash )
 			},
-			...popoverContentItems,
-			...compatItems
+			...popoverContentItems
 		];
 	} else {
-		return popoverContentItems.concat( compatItems );
+		return popoverContentItems;
 	}
 };
 
@@ -324,10 +280,6 @@ module.exports = {
 	getStatementsForProperty,
 	getStatementById,
 	setStatementIdsForProperty,
-	getIndicatorsHtmlForSnakHash,
-	setIndicatorsHtmlForSnakHash,
-	getPopoverContentForSnakHash,
-	setPopoverContentForSnakHash,
 	getIndicatorHtmlForMainSnak,
 	setIndicatorHtmlForMainSnak,
 	getIndicatorHtmlForQualifier,
