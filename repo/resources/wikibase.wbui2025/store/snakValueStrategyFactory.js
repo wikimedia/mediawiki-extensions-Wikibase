@@ -39,10 +39,6 @@ class DefaultStrategy {
 		};
 	}
 
-	isEntityDatatype() {
-		return false;
-	}
-
 	getEditableSnakComponent() {
 		return 'Wbui2025EditableStringSnakValue';
 	}

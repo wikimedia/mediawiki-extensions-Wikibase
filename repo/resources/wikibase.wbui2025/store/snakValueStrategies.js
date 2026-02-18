@@ -50,10 +50,6 @@ class StringValueStrategy extends DefaultStrategy {
 		return transformSearchResults( data.query.search );
 	}
 
-	isEntityDatatype() {
-		return false;
-	}
-
 	triggerParse( newValue ) {
 		this.getParsedValue( newValue );
 	}
@@ -165,10 +161,6 @@ class EntityValueStrategy extends LookupStringDatatypeStrategy {
 			return [];
 		}
 		return transformEntitySearchResults( data );
-	}
-
-	isEntityDatatype() {
-		return true;
 	}
 }
 
