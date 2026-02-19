@@ -8,7 +8,7 @@
 			:show-progress="showProgress"
 			:progress-bar-label="$i18n( 'wikibase-publishing-progress' )"
 			@save="submitForm"
-			@hide="hide"
+			@hide="cancelForm"
 		>
 			<template #content>
 				<div class="wikibase-wbui2025-add-statement-form">
@@ -132,7 +132,7 @@ module.exports = exports = defineComponent( {
 			this.propertyId = null;
 			this.propertyData = null;
 		},
-		hide() {
+		cancelForm() {
 			this.reset();
 			this.addStatementModalVisible = false;
 			this.formSubmitted = false;

@@ -8,7 +8,6 @@ const saveStatementsFormMixin = {
 			'addStatusMessage'
 		] ),
 		mapActions( wbui2025.store.useEditStatementsStore, {
-			disposeOfEditableStatementStores: 'disposeOfStores',
 			saveChangedStatements: 'saveChangedStatements'
 		} ),
 		{
@@ -19,7 +18,7 @@ const saveStatementsFormMixin = {
 				}, 300 );
 				return this.saveChangedStatements( this.entityId )
 					.then( () => {
-						this.hide();
+						this.cancelForm();
 						this.addStatusMessage( {
 							type: 'success',
 							text: mw.msg( 'wikibase-publishing-succeeded' )
