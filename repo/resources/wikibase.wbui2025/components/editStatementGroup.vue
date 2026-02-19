@@ -3,7 +3,7 @@
 		modal-class="wikibase-wbui2025-edit-statement-group-modal">
 		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
-				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelEditForm"></cdx-icon>
+				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelForm"></cdx-icon>
 				<div class="wikibase-wbui2025-edit-statement-headline">
 					<p class="heading">
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
@@ -58,7 +58,7 @@
 				<div class="wikibase-wbui2025-edit-form-actions">
 					<cdx-button
 						weight="quiet"
-						@click="cancelEditForm"
+						@click="cancelForm"
 					>
 						<cdx-icon :icon="cdxIconClose"></cdx-icon>
 						{{ $i18n( 'wikibase-cancel' ) }}
@@ -142,8 +142,7 @@ module.exports = exports = defineComponent( {
 			editStatementDataLoaded: false,
 			newStatementId: null,
 			showEditStatementModal: true,
-			showAddValueModal: false,
-			progressTimeout: null
+			showAddValueModal: false
 		};
 	},
 	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
@@ -189,11 +188,8 @@ module.exports = exports = defineComponent( {
 		disposeOfEditableStatementStores: 'disposeOfStores',
 		initializeEditStatementStoreFromStatementStore: 'initializeFromStatementStore',
 		createNewBlankEditableStatement: 'createNewBlankStatement',
-		removeStatement: 'removeStatement',
-		saveChangedStatements: 'saveChangedStatements'
-	} ), mapActions( wbui2025.store.useMessageStore, [
-		'addStatusMessage'
-	] ), {
+		removeStatement: 'removeStatement'
+	} ), {
 		startAddValue() {
 			const guid = new wikibase.utilities.ClaimGuidGenerator( this.entityId ).newGuid();
 			this.newStatementId = guid;
@@ -221,42 +217,10 @@ module.exports = exports = defineComponent( {
 			this.showEditStatementModal = true;
 		},
 		submitForm() {
-			// TODO: Find out why this is no longer a call to saveStatementsFormMixin::submitFormWithElementRef
-			// and fix it if necessary T409452
-			this.formSubmitted = true;
-			this.progressTimeout = setTimeout( () => {
-				this.showProgress = true;
-			}, 300 );
-			this.saveChangedStatements( this.entityId )
-			.then( () => {
-				clearTimeout( this.progressTimeout );
-				this.$emit( 'hide' );
-				this.disposeOfEditableStatementStores();
-				this.addStatusMessage( {
-					type: 'success',
-					text: mw.msg( 'wikibase-publishing-succeeded' )
-				} );
-				this.showProgress = false;
-				this.showEditStatementModal = false;
-			} )
-			.catch( ( errorObj ) => {
-				clearTimeout( this.progressTimeout );
-				const errorText = wbui2025.util.extractErrorMessage(
-					errorObj,
-					mw.msg( 'wikibase-publishing-error' )
-				);
-				this.addStatusMessage( {
-					text: errorText,
-					attachTo: this.$refs.editFormActionsRef,
-					type: 'error'
-				} );
-				this.formSubmitted = false;
-				this.progressTimeout = setTimeout( () => {
-					this.showProgress = false;
-				}, 300 );
-			} );
+			// eslint-disable-next-line vue/no-undef-properties
+			this.submitFormWithElementRef( this.$refs.editFormActionsRef );
 		},
-		cancelEditForm() {
+		cancelForm() {
 			this.showAddValueModal = false;
 			this.showEditStatementModal = false;
 
