@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
-use Exception;
 use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;
 use GraphQL\GraphQL;
@@ -33,38 +32,30 @@ class GraphQLService {
 
 	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
 		$context = new QueryContext();
-		try {
-			$result = GraphQL::executeQuery(
-				$this->schema,
-				$query,
-				contextValue: $context,
-				variableValues: $variables,
-				operationName: $operationName,
-				validationRules: [
-					...GraphQL::getStandardValidationRules(),
-					$this->queryComplexityRule,
-				],
-			)->setErrorsHandler( function ( array $errors, callable $formatter ): array {
-				$this->trackErrors( $errors );
-				return array_map( $formatter, $errors );
-			} );
-			if ( $context->redirects ) {
-				$result->extensions[ QueryContext::KEY_MESSAGE ] = QueryContext::MESSAGE_REDIRECTS;
-				$result->extensions[ QueryContext::KEY_REDIRECTS ] = $context->redirects;
-			}
-			$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
-			$output = $result->toArray(
-				$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
-			);
-		} catch ( Exception $e ) {
-			$output = [
-				'errors' => [
-					[
-						'message' => $e->getMessage(),
-					],
-				],
-			];
+		$result = GraphQL::executeQuery(
+			$this->schema,
+			$query,
+			contextValue: $context,
+			variableValues: $variables,
+			operationName: $operationName,
+			validationRules: [
+				...GraphQL::getStandardValidationRules(),
+				$this->queryComplexityRule,
+			],
+		)->setErrorsHandler( function ( array $errors, callable $formatter ): array {
+			$this->trackErrors( $errors );
+			return array_map( $formatter, $errors );
+		} );
+
+		if ( $context->redirects ) {
+			$result->extensions[ QueryContext::KEY_MESSAGE ] = QueryContext::MESSAGE_REDIRECTS;
+			$result->extensions[ QueryContext::KEY_REDIRECTS ] = $context->redirects;
 		}
+
+		$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
+		$output = $result->toArray(
+			$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
+		);
 
 		$this->trackUsage( $output, $query, $operationName );
 
