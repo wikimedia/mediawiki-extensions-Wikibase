@@ -23,6 +23,9 @@ require_once __DIR__ . '/Wikibase.example.php';
 $hasOpenSearch = getenv( 'QUIBBLE_OPENSEARCH' ) === 'true';
 $wgWBCSUseCirrus = $hasOpenSearch;
 $wgCirrusSearchDisableUpdate = !$hasOpenSearch;
+$wgWBRepoSettings['searchIndexTypes'] = [ // data types of statements to be indexed
+	'string', 'external-id', 'url', 'wikibase-item', 'wikibase-property',
+];
 
 // use mysql-upsert if CI is using a MySQL database to avoid deadlocks from parallel tests
 $wgWBRepoSettings['idGenerator'] = 'auto';
