@@ -6,6 +6,7 @@ use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;
 use GraphQL\GraphQL;
 use MediaWiki\Config\Config;
+use Psr\Log\LoggerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
@@ -26,6 +27,7 @@ class GraphQLService {
 		private readonly Config $config,
 		private readonly StatsFactory $stats,
 		private readonly GraphQLFieldCollector $graphQLFieldCollector,
+		private readonly LoggerInterface $logger,
 	) {
 		$this->queryComplexityRule = new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY );
 	}
@@ -44,6 +46,7 @@ class GraphQLService {
 			],
 		)->setErrorsHandler( function ( array $errors, callable $formatter ): array {
 			$this->trackErrors( $errors );
+			$this->logUnexpectedErrors( $errors );
 			return array_map( $formatter, $errors );
 		} );
 
@@ -129,6 +132,24 @@ class GraphQLService {
 			$this->stats->getCounter( 'wikibase_graphql_field_usage_total' )
 				->setLabel( 'field', $field )
 				->increment();
+		}
+	}
+
+	private function logUnexpectedErrors( array $errors ): void {
+		/**
+		 * Exceptions thrown in the query execution process get caught within {@link GraphQL::executeQuery} and rethrown as {@link Error}
+		 * wrapping the original exception. Expected exceptions thrown within our code extend {@link GraphQLError}, so any other type of
+		 * exception is unexpected and should be logged.
+		 */
+		foreach ( $errors as $error ) {
+			/** @var Error $error */
+			$previousError = $error->getPrevious();
+			$isUnexpected = $previousError && !( $previousError instanceof GraphQLError );
+			if ( $isUnexpected ) {
+				$this->logger->error( $previousError->getMessage(), [
+					'trace' => $previousError->getTraceAsString(),
+				] );
+			}
 		}
 	}
 }

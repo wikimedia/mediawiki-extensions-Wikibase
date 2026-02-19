@@ -65,6 +65,7 @@ return [
 			$services->getMainConfig(),
 			$services->getStatsFactory(),
 			new GraphQLFieldCollector(),
+			WikibaseRepo::getLogger( $services ),
 		);
 	},
 	'WbReuse.GraphQLTypes' => function( MediaWikiServices $services ): Types {
