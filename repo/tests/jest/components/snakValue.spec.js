@@ -220,7 +220,8 @@ describe( 'wikibase.wbui2025.snakValue', () => {
 					hash: 'math1234567890123456789012345678901234567890',
 					property: 'P1',
 					datavalue: { value: 'e=mc^2', type: 'string' }
-				}
+				},
+				statementId
 			} );
 
 			expect( wrapper.exists() ).toBeTruthy();
