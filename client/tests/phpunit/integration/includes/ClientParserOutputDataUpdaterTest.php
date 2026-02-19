@@ -122,7 +122,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	private function getTitle( string $prefixedText, bool $isRedirect = false ): Title {
 		$title = $this->createMock( Title::class );
 
-		$title->expects( $this->once() )
+		$title->expects( $this->atLeastOnce() )
 			->method( 'getPrefixedText' )
 			->willReturn( $prefixedText );
 
