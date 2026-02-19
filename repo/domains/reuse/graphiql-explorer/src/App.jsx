@@ -2,13 +2,14 @@ import { GraphiQL } from 'graphiql';
 import 'graphiql/style.css';
 
 function getQueryFromUrlParam() {
-	const params = new URLSearchParams( window.location.search );
-	return params.get( 'query' );
+	const queryParam = new URLSearchParams( window.location.search ).get( 'query' );
+	return queryParam && atob( queryParam );
 }
 
 function updateQueryInUrl( query ) {
 	const url = new URL( window.location.href );
-	url.searchParams.set( 'query', query );
+	// base64-encoding the query to avoid issues with control characters such as line breaks
+	url.searchParams.set( 'query', btoa( query ) );
 	window.history.replaceState({}, '', url);
 }
 
