@@ -50,7 +50,17 @@ class TrackingTest extends MediaWikiIntegrationTestCase {
 			[ 'wikibase_graphql_hit_total{status="introspection"}' ],
 		];
 
-		yield 'error - invalid query' => [
+		yield 'error - empty query' => [
+			'',
+			[ 'wikibase_graphql_hit_total{status="error"}' ],
+		];
+
+		yield 'error - invalid query - syntax error' => [
+			'{ fieldDoesNotExist',
+			[ 'wikibase_graphql_hit_total{status="error"}' ],
+		];
+
+		yield 'error - invalid query - unknown field' => [
 			'{ fieldDoesNotExist }',
 			[ 'wikibase_graphql_hit_total{status="error"}' ],
 		];
@@ -88,6 +98,12 @@ class TrackingTest extends MediaWikiIntegrationTestCase {
 		yield 'no errors' => [
 			'{ item(id: "' . self::EXISTING_ITEM_ID . '") { id } }',
 			[],
+		];
+
+		yield 'invalid query - empty query' => [
+			'
+			',
+			[ 'wikibase_graphql_error_total{type="' . GraphQLErrorType::MISSING_QUERY->name . '"}' ],
 		];
 
 		yield 'invalid query - syntactically invalid' => [
