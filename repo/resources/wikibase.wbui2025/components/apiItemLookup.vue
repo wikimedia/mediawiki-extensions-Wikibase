@@ -1,8 +1,10 @@
 <template>
+	<!-- Use @input here instead of v-model:input because v-model breaks when switching
+			value types. see T416977 -->
 	<cdx-lookup
 		ref="inputElement"
 		v-model:selected="lookupSelection"
-		v-model:input-value="lookupInputValue"
+		:input-value="lookupInputValue"
 		autocapitalize="off"
 		:class="activeClasses"
 		:menu-items="lookupMenuItems"
@@ -65,11 +67,6 @@ module.exports = exports = defineComponent( {
 			this.$refs.inputElement.textInput.focus();
 		},
 		onInput( value ) {
-			// TODO: T416977 The connection between input changes on CdxLookup's CdxTextInput and
-			// changes to the lookupInputValue should be established by the v-model:inputValue
-			// property on CdxLookup. This works if the component is loaded when the form opens,
-			// but seems to break if we open the editForm with the snak having 'novalue' and switch
-			// to 'somevalue'.
 			// eslint-disable-next-line vue/no-mutating-props
 			this.lookupSource.lookupInputValue.value = value;
 		},
