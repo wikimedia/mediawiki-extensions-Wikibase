@@ -21,7 +21,6 @@ class Wbui2025FeatureFlag {
 	 */
 	public const WBUI2025_UNSUPPORTED_DATATYPES = [
 		'globe-coordinate',
-		'entity-schema',
 	];
 
 	public const OPTION_NAME = 'wikibase-mobile-editing-ui';
