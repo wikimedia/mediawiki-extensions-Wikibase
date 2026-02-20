@@ -197,4 +197,32 @@ describe( 'Wikibase GraphQL', () => {
 			}
 		);
 	} );
+
+	it( 'supports introspection', async () => {
+		const response = await queryGraphQL( `
+			{
+				__schema {
+					queryType {
+						fields { name }
+					}
+				}
+			}` );
+
+		assert.deepEqual(
+			{
+				data: {
+					__schema: {
+						queryType: {
+							fields: [
+								{ name: 'item' },
+								{ name: 'itemsById' },
+								{ name: 'searchItems' }
+							]
+						}
+					}
+				}
+			},
+			response.body
+		);
+	} );
 } );
