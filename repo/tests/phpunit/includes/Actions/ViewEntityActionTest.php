@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Page\WikiPage;
 use MediaWiki\Request\FauxResponse;
@@ -98,7 +97,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( 'Berlin' );
 
 		$latest = $page->getRevisionRecord();
-		$previous = MediaWikiServices::getInstance()
+		$previous = $this->getServiceContainer()
 			->getRevisionLookup()
 			->getPreviousRevision( $latest );
 
@@ -118,7 +117,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( 'Berlin' );
 
 		$latest = $page->getRevisionRecord();
-		$previous = MediaWikiServices::getInstance()
+		$previous = $this->getServiceContainer()
 			->getRevisionLookup()
 			->getPreviousRevision( $latest );
 

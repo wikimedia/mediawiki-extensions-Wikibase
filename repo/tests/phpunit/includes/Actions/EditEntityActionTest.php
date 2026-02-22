@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use MediaWiki\Context\IContextSource;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\WikiPage;
 use MediaWiki\Status\Status;
 use MediaWiki\Tests\User\TempUser\TempUserTestTrait;
@@ -92,7 +91,7 @@ class EditEntityActionTest extends ActionTestCase {
 			return;
 		}
 
-		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$revLookup = $this->getServiceContainer()->getRevisionLookup();
 		for ( $i = abs( $ofs ); $i > 0; $i -= 1 ) {
 			$rev = $revLookup->getPreviousRevision( $rev );
 			if ( !$rev ) {
