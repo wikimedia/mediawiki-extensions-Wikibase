@@ -102,7 +102,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Мова",
 	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|1=Злучэньне|Злучэньні}} з {{PLURAL:$1|1=элемэнтам|элемэнтамі}} {{GRAMMAR:родны|{{WBREPONAME}}}}",
-	"echo-pref-tooltip-wikibase-action": "Паведамляць мне, калі нехта злучае {{GENDER:|створаную мной}} старонку з элемэнтам {{GRAMMAR:родны|{{WBREPONAME}}}}.",
+	"echo-pref-tooltip-wikibase-action": "Абвяшчаць мяне, калі нехта злучае {{GENDER:|створаную мной}} старонку з элемэнтам {{GRAMMAR:родны|{{WBREPONAME}}}}.",
 	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|далучаная}} да {{PLURAL:$4|-1=элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}|элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}} $4}}, дзе могуць быць знойдзеныя зьвесткі датычныя тэмы.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> і {{PLURAL:$4|1=адна іншыя старонка была {{GENDER:$2|далучаная}}|$4 іншыя старонкі былі {{GENDER:$2|далучаныя}}|$4 іншых старонак былі {{GENDER:$2|далучаныя}}|100=99+ іншых старонак былі {{GENDER:$2|далучаныя}}}} да элемэнтаў {{GRAMMAR:родны|{{WBREPONAME}}}}, дзе могуць зьбірацца зьвесткі, датычныя гэтых тэмаў.",
 	"notification-link-text-view-item": "{{GENDER:$1|Праглядзець}} элемэнт",
