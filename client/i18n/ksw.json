@@ -4,7 +4,8 @@
 			"Jaeminlovetaejoon",
 			"Khing",
 			"Rul1902",
-			"SawJaemin"
+			"SawJaemin",
+			"SawEKP"
 		]
 	},
 	"wikibase-comment-update": "{{WBREPONAME}} တၢ်တမံၤလၢဆီတလဲလံ",
@@ -12,6 +13,8 @@
 	"wikibase-editlinks": "အဲၣ်ဒံၣ် လ့ၣ်ခ်တဖၣ်",
 	"wikibase-addlinkstitle": "ထၢနုာ် ကျိာ်အဂၤတဖၣ်",
 	"wikibase-linkitem-addlinks": "မၤအါထီၣ် လ့ၣ်ခ်တဖၣ်",
+	"wikibase-linkitem-input-site": "ကျိာ်",
+	"wikibase-linkitem-input-page": "ကဘျံးပၤ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ပာ်ဘၢ",
 	"wikibase-rc-hide-wikidata-show": "နဲၣ်ဖျါ",

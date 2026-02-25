@@ -4,6 +4,15 @@
 			"Jmgurey"
 		]
 	},
+	"wikibase-dataitem": "{{WBREPONAME}} nuwatta",
+	"wikibase-editlinks": "Dhibbashle eymemec",
+	"wikibase-addlinkstitle": "Aki luqhahi dhibbashlel os",
+	"wikibase-linkitem-addlinks": "Dhibbashlel os",
+	"wikibase-linkitem-title": "Garbaalih iyrhibbish",
+	"wikibase-linkitem-linkpage": "Garbaalih iyrhibbish",
+	"wikibase-linkitem-selectlink": "Ku beezza ta garbaalih tayrhabbasho fadhdha kalo hido garba dor",
 	"wikibase-linkitem-input-site": "Af:",
-	"wikibase-linkitem-input-page": "Garba:"
+	"wikibase-linkitem-input-page": "Garba:",
+	"wikibase-rc-hide-wikidata-hide": "Sucus",
+	"wikibase-rc-hide-wikidata-show": "Uybullu"
 }

@@ -1,6 +1,8 @@
 {
 	"@metadata": {
-		"authors": []
+		"authors": [
+			"Ayaat123"
+		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} آئٹم",
 	"wikibase-editlinks": "اؠڈِٹ کُنٛڈٕ",
@@ -12,7 +14,7 @@
 	"wikibase-linkitem-input-site": "زَبان:",
 	"wikibase-linkitem-input-page": "صَفہٕ:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "کٔھٹِتھ تھاون",
+	"wikibase-rc-hide-wikidata-hide": "کھٔٹِتھ تھاوُن",
 	"wikibase-rc-hide-wikidata-show": "وُچھِو",
 	"wikibase-rc-wikibase-edit-letter": "ڑ",
 	"wikibase-pageinfo-entity-usage-S": "سایِٹ لِنک",

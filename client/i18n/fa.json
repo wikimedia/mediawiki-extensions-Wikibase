@@ -63,7 +63,7 @@
 	"wikibase-linkitem-not-loggedin-title": "باید وارد سامانه شوید.",
 	"wikibase-linkitem-not-loggedin": "شما باید در این ویکی و [$1 مخزن مرکزی داده‌ها] برای استفاده از این ویژگی وارد شده باشید",
 	"wikibase-linkitem-success-link": "صفحه‌ها به هم پیوند داده شدند. شما می‌توانید آیتم شامل پیوندها را در [$1 مخزن مرکزی داده‌ها] پیدا کنید.",
-	"limitreport-entityaccesscount": "تعداد مدخل‌های ویکی‌پایه بارگیری شد",
+	"limitreport-entityaccesscount": "تعداد مدخل‌های ویکی‌پایه بارگیری‌شده",
 	"wikibase-property-notfound": "ویژگی $1 یافت نشد.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "نهفتن",

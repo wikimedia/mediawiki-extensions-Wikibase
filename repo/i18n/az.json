@@ -60,6 +60,8 @@
 	"wikibase-description-edit-placeholder-not-applicable": "istifadə olunmur",
 	"wikibase-description-edit-mul-not-applicable-accessibility-label": "Bütün dillər üçün standart təsvir təyin etmək mümkün deyil",
 	"wikibase-item-description-edit-not-supported": "Təsvirlər bu dil üçün dəstəklənmir. Element yaradıldıqdan sonra başqa dildə təsviri təqdim edin.",
+	"wikibase-content-language-edit-label": "Dil:",
+	"wikibase-content-language-edit-not-recognized-language": "Təqdim edilən dil kodu tanınmadı.",
 	"wikibase-diffview-description": "izahı",
 	"wikibase-sitelink-page-edit-placeholder": "səhifə",
 	"wikibase-statementsection-statements": "Müddəalar",
