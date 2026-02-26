@@ -5,14 +5,7 @@ jest.mock(
 	() => require( '@wikimedia/codex' ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => ( [
-		'string',
-		'wikibase-item'
-	] ),
-	{ virtual: true }
-);
+
 jest.mock(
 	'../../../resources/wikibase.wbui2025/icons.json',
 	() => ( { cdxIconCheck: 'check', cdxIconClose: 'close' } ),
@@ -46,8 +39,6 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			label: 'eine Beschriftung',
 			match: '(search term)',
 			description: 'a description',
-			disabled: false,
-			supportingText: null,
 			language: {
 				label: 'de',
 				match: 'en',
@@ -89,8 +80,6 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			label: undefined,
 			match: '',
 			description: undefined,
-			disabled: false,
-			supportingText: null,
 			language: {
 				label: undefined,
 				match: undefined,
@@ -120,8 +109,6 @@ describe( 'wikibase.wbui2025.propertySelector', () => {
 			label: 'eine Beschriftung',
 			match: '(search term)',
 			description: 'a description',
-			disabled: true,
-			supportingText: 'wikibase-addstatement-property-not-supported-on-mobile',
 			language: {
 				label: 'de',
 				match: 'en',

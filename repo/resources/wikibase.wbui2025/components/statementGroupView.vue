@@ -14,7 +14,6 @@
 				</p>
 				<div
 					class="wikibase-wbui2025-link wikibase-wbui2025-edit-link"
-					:class="{ 'wikibase-wbui2025-edit-link-unsupported': isUnsupportedDataType, 'is-red-link': isUnsupportedDataType }"
 					@click="showEditForm"
 				>
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
@@ -37,7 +36,6 @@ const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './propertyName.vue' );
 const Wbui2025StatementView = require( './statementView.vue' );
 const Wbui2025EditStatementGroup = require( './editStatementGroup.vue' );
-const supportedDatatypes = require( '../supportedDatatypes.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 // @vue/component
@@ -66,21 +64,10 @@ module.exports = exports = defineComponent( {
 	computed: {
 		statements() {
 			return wbui2025.store.getStatementsForProperty( this.propertyId );
-		},
-		// TODO: clean up after all datatypes are supported (T417413)
-		isUnsupportedDataType() {
-			if ( !this.statements || this.statements.length === 0 ) {
-				return false;
-			}
-			const datatype = this.statements[ 0 ].mainsnak.datatype;
-			return !supportedDatatypes.includes( datatype );
 		}
 	},
 	methods: {
 		showEditForm() {
-			if ( this.isUnsupportedDataType ) {
-				return;
-			}
 			this.showModalEditForm = true;
 		},
 		hideEditForm() {

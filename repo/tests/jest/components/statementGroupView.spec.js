@@ -14,11 +14,6 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => [ 'string' ],
-	{ virtual: true }
-);
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
@@ -108,56 +103,4 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			expect( wrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( true );
 		} );
 	} );
-
-	describe( 'statement with uneditable data type', () => {
-		let wrapper;
-		const mockStatement = {
-			mainsnak: {
-				snaktype: 'value',
-				property: 'P2',
-				hash: '1725f8bd2897fb1a3491f94bf04869dbc4f68df5',
-				datavalue: { value: 'https://example.com/', type: 'string' },
-				datatype: 'url'
-			},
-			type: 'statement',
-			id: 'Q1$52f7d93d-9146-41b2-b12c-7520302ce998',
-			rank: 'normal'
-		};
-
-		beforeEach( async () => {
-			wrapper = await mount( statementGroupViewComponent, {
-				props: {
-					propertyId: 'P2',
-					entityId: 'Q1'
-				},
-				global: {
-					plugins: [
-						storeWithHtmlAndStatements(
-							storeContentsWithServerRenderedHtml(
-								{ '1725f8bd2897fb1a3491f94bf04869dbc4f68df5': '<a href="https://example.com/">https://example.com/</a>' },
-								{ P2: '<a href="mock-property-url">P2</a>' }
-							),
-							storeContentWithStatementsAndProperties( {
-								P2: [ mockStatement ]
-							} )
-						)
-					]
-				}
-			} );
-		} );
-
-		it( 'has appropriate CSS classes', async () => {
-			expect( wrapper.exists() ).toBe( true );
-			const editLink = wrapper.find( '.wikibase-wbui2025-edit-link' );
-			expect( editLink.exists() ).toBe( true );
-			expect( editLink.classes() ).toContain( 'wikibase-wbui2025-edit-link-unsupported' );
-			expect( editLink.classes() ).toContain( 'is-red-link' );
-		} );
-
-		it( 'does nothing when clicking edit link', async () => {
-			await wrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
-			expect( wrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( false );
-		} );
-	} );
-
 } );

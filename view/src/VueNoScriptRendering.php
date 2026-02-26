@@ -153,7 +153,6 @@ class VueNoScriptRendering {
 					$this->statementSerializer->serialize( ... ),
 					$allStatements->getByPropertyId( $propertyId )->toArray()
 				);
-				$data['isUnsupportedDataType'] = !in_array( $dataType, $this->wbui2025FeatureFlag->getSupportedDataTypes(), strict: true );
 				$data['showModalEditForm'] = false;
 				return $data;
 			}

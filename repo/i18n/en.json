@@ -32,7 +32,6 @@
 	"wikibase-cancel": "cancel",
 	"wikibase-add": "add",
 	"wikibase-addstatement": "add statement",
-	"wikibase-addstatement-property-not-supported-on-mobile": "(not supported on mobile)",
 	"wikibase-addqualifier": "add qualifier",
 	"wikibase-addreference": "add reference",
 	"wikibase-save-inprogress": "Saving…",

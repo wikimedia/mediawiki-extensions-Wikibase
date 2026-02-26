@@ -14,11 +14,6 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => [ 'string' ],
-	{ virtual: true }
-);
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();

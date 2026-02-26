@@ -13,13 +13,6 @@ jest.mock(
 	{ virtual: true }
 );
 jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => ( [
-		'string'
-	] ),
-	{ virtual: true }
-);
-jest.mock(
 	'../../../resources/wikibase.wbui2025/repoSettings.json',
 	() => ( {
 		tabularDataStorageApiEndpointUrl: 'https://commons.test/w/api.php',

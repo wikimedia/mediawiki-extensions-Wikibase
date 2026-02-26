@@ -1064,11 +1064,6 @@ final class RepoHooks implements
 							'cdxIconInfo',
 						],
 					],
-					// TODO: remove in T417413
-					[
-						'name' => 'resources/wikibase.wbui2025/supportedDatatypes.json',
-						'content' => WikibaseRepo::getWbui2025FeatureFlag()->getSupportedDataTypes(),
-					],
 				],
 				'dependencies' => [
 					'mediawiki.util',
@@ -1104,7 +1099,6 @@ final class RepoHooks implements
 					'valueview-expert-timevalue-calendar-gregorian',
 					'wikibase-add',
 					'wikibase-addstatement',
-					'wikibase-addstatement-property-not-supported-on-mobile',
 					'wikibase-addqualifier',
 					'wikibase-addreference',
 					'wikibase-addvalue',

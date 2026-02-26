@@ -11,11 +11,6 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => [ 'string', 'tabular-data', 'geo-shape' ],
-	{ virtual: true }
-);
 
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();

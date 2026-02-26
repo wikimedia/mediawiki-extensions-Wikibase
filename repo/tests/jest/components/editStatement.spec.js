@@ -13,11 +13,7 @@ jest.mock(
 	} ),
 	{ virtual: true }
 );
-jest.mock(
-	'../../../resources/wikibase.wbui2025/supportedDatatypes.json',
-	() => [ 'string', 'tabular-data', 'geo-shape' ],
-	{ virtual: true }
-);
+
 jest.mock(
 	'../../../resources/wikibase.wbui2025/api/commons.js',
 	() => ( {
