@@ -74,7 +74,7 @@
 	"wikibase-partial-undo": "Změna da so zdźěla cofnyć.",
 	"wikibase-omitted-undo-ops": "$1 {{PLURAL:$1|změna je so wuwostajiła|změnje stej so wuwostajiłoj|změny su so wuwostajili|změnow je so wuwostajiło}}, dokelž {{PLURAL:$1|wotpowědna hódnota je so změniła|wotpowědnej hodnoće stej so změniłoj|wotpowědne hódnoty su so změnili|wotpowědne změny su so změnili}} wot toho časa.",
 	"wikibase-empty-undo": "Njeje ničo, zo da so cofnyć.",
-	"wikibase-undo-revision-error": "Cofnjenje je so njeporadźiło",
+	"wikibase-undo-revision-error": "Cofnjenje je zwrěščiło",
 	"wikibase-undo-samerev": "Změna njeda so cofnyć, dokelž wuchadna wersija je identiska z cilowej wersiju.",
 	"wikibase-undo-badpage": "Wopačna wersija: Wersija $2 k [[:$1]] njesłuša.",
 	"wikibase-undo-firstrev": "Wutworjenje strony njeda so cofnyć",

@@ -3,9 +3,13 @@
 		"authors": [
 			"TayfunEt.",
 			"Tenzin Thoesam",
-			"Zolgoyo"
+			"Zolgoyo",
+			"Dhondup"
 		]
 	},
 	"wikibase-edit": "རྩོམ་སྒྲིག",
-	"wikibase-add": "སྣོན་"
+	"wikibase-add": "སྣོན་",
+	"wikibase-label-empty": "བྱང་བུ་གཏན་འབེབས་བྱས་མེད།",
+	"wikibase-description-empty": "གསལ་བཤད་གཏན་འབེབས་བྱས་མེད།",
+	"wikibase-sitelinks-special": "དྲ་ཚིགས་གཞན།"
 }

@@ -5,11 +5,13 @@
 			"Jason924tw",
 			"Macofe",
 			"SolidBlock",
-			"StephDC"
+			"StephDC",
+			"Ouclie"
 		]
 	},
 	"wikibase-edit": "纂",
 	"wikibase-add": "增",
+	"wikibase-description-empty": "無述定矣",
 	"wikibase-sitelinks-special": "他站",
 	"wikibase-itemdisambiguation-lookup-language": "語言之碼：",
 	"wikibase-modifyterm-language": "語言之碼："

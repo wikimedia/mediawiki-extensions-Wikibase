@@ -3,7 +3,8 @@
 		"authors": [
 			"Peter57770",
 			"R12ntech",
-			"AmazingJus"
+			"AmazingJus",
+			"Tuwewanzi"
 		]
 	},
 	"tooltip-t-wikibase": "Wamnáyaŋpi wóičhikȟoyake",
@@ -11,6 +12,9 @@
 	"wikibase-dataitem": "{{WBREPONAME}} wamnáyaŋpi",
 	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
 	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-linkitem-input-site": "Iyapi:",
+	"wikibase-linkitem-input-page": "Oyúblaye:",
+	"wikibase-rc-hide-wikidata-hide": "Naȟmá",
 	"wikibase-rc-hide-wikidata-show": "Pazó {{GENDER:|wo|we|wo/we}}",
 	"wikibase-rc-wikibase-edit-letter": "Y",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča"
