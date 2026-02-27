@@ -654,10 +654,10 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 				$action,
 				$entity->getId()
 			);
-			$this->assertTrue( $statusForId->isOK() );
+			$this->assertStatusOK( $statusForId );
 		}
 
-		$this->assertTrue( $statusForEntity->isOK() );
+		$this->assertStatusOK( $statusForEntity );
 	}
 
 	/**
@@ -680,10 +680,10 @@ class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestC
 				$action,
 				$entity->getId()
 			);
-			$this->assertFalse( $statusForId->isOK() );
+			$this->assertStatusNotOK( $statusForId );
 		}
 
-		$this->assertFalse( $statusForEntity->isOK() );
+		$this->assertStatusNotOK( $statusForEntity );
 	}
 
 }

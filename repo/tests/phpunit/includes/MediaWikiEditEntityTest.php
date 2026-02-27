@@ -319,7 +319,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $expectedOk, $status->isOK(), 'unresolved conflict?' );
 
 		if ( $expectedData !== null ) {
-			$this->assertTrue( $status->isOK(), '$status->isOK()' );
+			$this->assertStatusOK( $status );
 
 			$revision = $status->getRevision();
 			$newEntity = $revision->getEntity();

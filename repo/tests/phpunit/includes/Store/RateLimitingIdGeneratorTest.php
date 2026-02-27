@@ -62,9 +62,7 @@ class RateLimitingIdGeneratorTest extends MediaWikiIntegrationTestCase {
 			$this->fail( 'Should have thrown StorageException' );
 		} catch ( StorageException $exception ) {
 			$status = $exception->getStatus();
-			$this->assertFalse( $status->isOK(), 'status must be fatal' );
-			$key = $status->getMessage()->getKey();
-			$this->assertSame( 'actionthrottledtext', $key );
+			$this->assertStatusError( 'actionthrottledtext', $status );
 		}
 	}
 
