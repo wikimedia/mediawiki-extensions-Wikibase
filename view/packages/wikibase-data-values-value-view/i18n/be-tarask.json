@@ -3,6 +3,7 @@
 		"authors": [
 			"Red Winged Duck",
 			"Renessaince",
+			"Ucukor",
 			"Wizardist"
 		]
 	},
@@ -41,5 +42,5 @@
 	"valueview-expertextender-unitsuggester-label": "Адзінка вымярэньня (неабавязкова):",
 	"valueview-preview-label": "будзе адлюстроўвацца як:",
 	"valueview-preview-novalue": "слушнае значэньне не распазнанае",
-	"valueview-listrotator-manually": "усталяваць уручную"
+	"valueview-listrotator-manually": "усталяваць уласнаруч"
 }
