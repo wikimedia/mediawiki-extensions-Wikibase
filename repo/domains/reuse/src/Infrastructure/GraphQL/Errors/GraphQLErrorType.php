@@ -16,5 +16,6 @@ enum GraphQLErrorType {
 	case INVALID_QUERY;
 	case MISSING_QUERY;
 	case QUERY_TOO_COMPLEX;
+	case UNSUPPORTED_MEDIA_TYPE;
 	case UNKNOWN;
 }
