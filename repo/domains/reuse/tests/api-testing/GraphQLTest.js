@@ -239,4 +239,16 @@ describe( 'Wikibase GraphQL', () => {
 			response.body
 		);
 	} );
+
+	it( 'rejects requests with unsupported content-type', async () => {
+		const response = await clientFactory.getHttpClient()
+			.post( config.base_uri + 'api.php?action=wbgraphql&format=json' )
+			.type( 'form' )
+			.send( { query: '' } );
+
+		assert.deepEqual(
+			{ errors: [ { message: "Requests must be sent as 'application/json' or 'application/graphql+json'" } ] },
+			response.body
+		);
+	} );
 } );
