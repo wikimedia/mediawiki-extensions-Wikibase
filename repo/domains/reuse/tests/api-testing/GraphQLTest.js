@@ -18,12 +18,12 @@ async function createProperty( property ) {
 		.makeRequest() ).body;
 }
 
-function queryGraphQL( query ) {
+function queryGraphQL( requestBody ) {
 	return clientFactory.getHttpClient()
 		.post( config.base_uri + 'api.php?action=wbgraphql&format=json' )
 		.set( 'X-Config-Override', JSON.stringify( { wgSearchType: 'CirrusSearch' } ) )
 		.type( 'json' )
-		.send( { query } );
+		.send( requestBody );
 }
 
 describe( 'Wikibase GraphQL', () => {
@@ -78,7 +78,7 @@ describe( 'Wikibase GraphQL', () => {
 	} );
 
 	it( 'can get labels of linked entities with item', async () => {
-		const response = await queryGraphQL( `
+		const response = await queryGraphQL( { query: `
 			{
 				item(id: "${ item2.id }") {
 					id
@@ -92,7 +92,7 @@ describe( 'Wikibase GraphQL', () => {
 						}
 					}
 				}
-			}` );
+			}` } );
 
 		assert.deepEqual(
 			response.body,
@@ -115,7 +115,7 @@ describe( 'Wikibase GraphQL', () => {
 	} );
 
 	it( 'can get labels of linked entities of multiple items with itemsById', async () => {
-		const response = await queryGraphQL( `
+		const response = await queryGraphQL( { query: `
 			{
 				itemsById(ids: ["${ item2.id }", "${ item1.id }"]) {
 					id
@@ -129,7 +129,7 @@ describe( 'Wikibase GraphQL', () => {
 						}
 					}
 				}
-			}` );
+			}` } );
 
 		assert.deepEqual(
 			response.body,
@@ -165,7 +165,7 @@ describe( 'Wikibase GraphQL', () => {
 			this.skip();
 		}
 
-		const response = await queryGraphQL( `
+		const response = await queryGraphQL( { query: `
 			{
 				searchItems(
 					query: {
@@ -182,7 +182,7 @@ describe( 'Wikibase GraphQL', () => {
 						}
 					}
 				}
-			}` );
+			}` } );
 
 		assert.deepEqual(
 			response.body,
@@ -204,14 +204,14 @@ describe( 'Wikibase GraphQL', () => {
 	} );
 
 	it( 'supports introspection', async () => {
-		const response = await queryGraphQL( `
+		const response = await queryGraphQL( { query: `
 			{
 				__schema {
 					queryType {
 						fields { name }
 					}
 				}
-			}` );
+			}` } );
 
 		assert.deepEqual(
 			{
@@ -231,8 +231,43 @@ describe( 'Wikibase GraphQL', () => {
 		);
 	} );
 
+	it( 'supports operationName parameter, required only if multiple operations are present in the query', async () => {
+		const response = await queryGraphQL( {
+			query: `query item1 { item(id: "${ item1.id }") { id } }
+			        query item2 { item(id: "${ item2.id }"){ id } }`,
+			operationName: 'item1'
+		} );
+
+		assert.deepEqual(
+			response.body,
+			{
+				data: {
+					item: {
+						id: item1.id
+					}
+				}
+			} );
+	} );
+
+	it( 'supports variables parameter', async () => {
+		const response = await queryGraphQL( {
+			query: 'query item($id: ItemId!) { item(id : $id) { id } }',
+			variables: { id: item1.id }
+		} );
+
+		assert.deepEqual(
+			response.body,
+			{
+				data: {
+					item: {
+						id: item1.id
+					}
+				}
+			} );
+	} );
+
 	it( 'throws an error when query is missing', async () => {
-		const response = await queryGraphQL( '' );
+		const response = await queryGraphQL( { query: '' } );
 
 		assert.deepEqual(
 			{ errors: [ { message: "The 'query' field is required and must not be empty" } ] },
