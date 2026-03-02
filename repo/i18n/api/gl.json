@@ -92,6 +92,7 @@
 	"apihelp-wbgetentities-example-11": "Obtén o elemento da páxina \"<var>Berlin</var>\" no sitio \"<var>enwiki</var>\" despois de normalizar o título a \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Obter as ligazóns de sitio do elemento <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Obter as entidades con identificador <samp>Q42</samp> que só teñen ligazóns de sitio de \"<var>enwiki</var>\"",
+	"apihelp-wbgraphql-summary": "Módulo experimental de GraphQL.",
 	"apihelp-wblinktitles-summary": "Asocia dúas páxinas en dous wikis diferentes cun elemento de Wikibase.",
 	"apihelp-wblinktitles-param-tosite": "Un identificador para o sitio no que reside a páxina.\nÚseo xunto con <var>totitle</var> para crear unha ligazón completa ó sitio.",
 	"apihelp-wblinktitles-param-totitle": "Título da páxina a asociar.\nÚseo xunto con <var>tosite</var> para crear unha ligazón completa ó sitio.",
