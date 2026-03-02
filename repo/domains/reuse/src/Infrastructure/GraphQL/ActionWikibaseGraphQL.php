@@ -28,7 +28,7 @@ class ActionWikibaseGraphQL extends ApiBase {
 			$this->getMain()->markParamsUsed( 'query' );
 			$this->graphQLService->trackValidationError( GraphQLErrorType::UNSUPPORTED_MEDIA_TYPE->name );
 			$this->getResult()->addValue( null, 'errors', [
-				[ 'message' => "Requests must be sent as 'application/json' or 'application/graphql+json'" ],
+				[ 'message' => "Requests must be sent as 'application/json'" ],
 			] );
 
 			return;
@@ -103,6 +103,6 @@ class ActionWikibaseGraphQL extends ApiBase {
 		$contentType = $request->getHeader( 'Content-Type' ) ?: '';
 		$mediaType = strtolower( trim( explode( ';', $contentType, 2 )[0] ) );
 
-		return in_array( $mediaType, [ 'application/graphql+json', 'application/json' ] );
+		return $mediaType === 'application/json';
 	}
 }

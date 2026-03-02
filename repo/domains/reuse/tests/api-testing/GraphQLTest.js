@@ -247,7 +247,7 @@ describe( 'Wikibase GraphQL', () => {
 			.send( { query: '' } );
 
 		assert.deepEqual(
-			{ errors: [ { message: "Requests must be sent as 'application/json' or 'application/graphql+json'" } ] },
+			{ errors: [ { message: "Requests must be sent as 'application/json'" } ] },
 			response.body
 		);
 	} );
