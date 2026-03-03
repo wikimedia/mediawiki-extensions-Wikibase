@@ -61,18 +61,15 @@ return [
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
-		$schema = WbReuse::getGraphQLSchema( $services );
 		return new GraphQLService(
-			$schema,
+			WbReuse::getGraphQLSchema( $services ),
 			$services->getMainConfig(),
 			WikibaseRepo::getLogger( $services ),
-			$services->getStatsFactory(),
-			new GraphQLTracking(
-				$schema,
-				$services->getStatsFactory(),
-				new GraphQLFieldCollector(),
-			),
+			WbReuse::getGraphQLTracking( $services ),
 		);
+	},
+	'WbReuse.GraphQLTracking' => function( MediaWikiServices $services ): GraphQLTracking {
+		return new GraphQLTracking( WbReuse::getGraphQLSchema( $services ), $services->getStatsFactory(), new GraphQLFieldCollector() );
 	},
 	'WbReuse.GraphQLTypes' => function( MediaWikiServices $services ): Types {
 		return new Types(

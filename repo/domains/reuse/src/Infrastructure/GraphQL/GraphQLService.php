@@ -13,7 +13,6 @@ use Psr\Log\LoggerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
-use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,7 +28,6 @@ class GraphQLService {
 		private readonly Schema $schema,
 		private readonly Config $config,
 		private readonly LoggerInterface $logger,
-		private readonly StatsFactory $stats,
 		private readonly GraphQLTracking $tracking,
 	) {
 		$this->queryComplexityRule = new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY );
@@ -37,7 +35,7 @@ class GraphQLService {
 
 	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
 		if ( trim( $query ) === '' ) {
-			$this->trackValidationError( GraphQLErrorType::MISSING_QUERY->name );
+			$this->tracking->trackValidationError( GraphQLErrorType::MISSING_QUERY->name );
 
 			return $this->formatErrorResponse( [ 'message' => "The 'query' field is required and must not be empty" ] );
 		}
@@ -45,7 +43,7 @@ class GraphQLService {
 		try {
 			$parsedQuery = Parser::parse( $query );
 		} catch ( SyntaxError $e ) {
-			$this->trackValidationError( GraphQLErrorType::INVALID_QUERY->name );
+			$this->tracking->trackValidationError( GraphQLErrorType::INVALID_QUERY->name );
 
 			$formattedError = FormattedError::createFromException( $e );
 			$formattedError['message'] = 'Invalid query - ' . $e->getMessage();
@@ -82,19 +80,6 @@ class GraphQLService {
 
 		$this->tracking->trackUsage( $output, $parsedQuery, $operationName );
 		return $output;
-	}
-
-	private function incrementHitMetric( string $status ): void {
-		$this->stats->getCounter( 'wikibase_graphql_hit_total' )
-			->setLabel( 'status', $status )
-			->increment();
-	}
-
-	public function trackValidationError( string $errorType ): void {
-		$this->stats->getCounter( 'wikibase_graphql_error_total' )
-			->setLabel( 'type', $errorType )
-			->increment();
-		$this->incrementHitMetric( 'error' );
 	}
 
 	private function formatErrorResponse( array $error ): array {
