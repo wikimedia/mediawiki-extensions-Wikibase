@@ -14,6 +14,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityRevisionLookupIt
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLFieldCollector;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLTracking;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemDescriptionsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemLabelsResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
@@ -60,12 +61,17 @@ return [
 		);
 	},
 	'WbReuse.GraphQLService' => function( MediaWikiServices $services ): GraphQLService {
+		$schema = WbReuse::getGraphQLSchema( $services );
 		return new GraphQLService(
-			WbReuse::getGraphQLSchema( $services ),
+			$schema,
 			$services->getMainConfig(),
-			$services->getStatsFactory(),
-			new GraphQLFieldCollector(),
 			WikibaseRepo::getLogger( $services ),
+			$services->getStatsFactory(),
+			new GraphQLTracking(
+				$schema,
+				$services->getStatsFactory(),
+				new GraphQLFieldCollector(),
+			),
 		);
 	},
 	'WbReuse.GraphQLTypes' => function( MediaWikiServices $services ): Types {
