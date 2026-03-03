@@ -211,6 +211,8 @@
 	"wikibase-item-reference-edit-placeholder": "Vložte ID položky, např. Q10",
 	"wikibase-item-reference-edit-invalid-format": "Zadané ID položky je zformátované nesprávně",
 	"wikibase-item-reference-edit-nonexistent-item": "Položka s tímto ID neexistuje",
+	"wikibase-wbui2025-editable-snak-value-preview-label": "bude zobrazeno jako:",
+	"wikibase-wbui2025-timeinput-precision-automatic": "automaticky",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ není platný identifikátor položky",
 	"wikibase-wikibaserepopage-invalid-langcode": "Neznámý kód jazyka „$1“. Použijte kód jazyka, který systém zná, například „en“.",
 	"wikibase-wikibaserepopage-pipe-in-alias": "Aliasy, které obsahují svislítka, lze editovat pouze přímo na stránce entity (se zapnutým JavaScriptem) nebo přes API",
@@ -373,6 +375,8 @@
 	"wikibase-parse-error-entity-id": "ID entity nemá správný formát.",
 	"wikibase-parse-error-quantity": "Množství nemá správný formát.",
 	"wikibase-parse-error-time": "Časový údaj nemá správný formát.",
+	"wikibase-quantitydetails-unit-optional": "Jednotka (volitelná)",
+	"wikibase-monolingualtextcode-mandatory": "Jazyk (povinný)",
 	"special-redirectentity": "Přesměrovat entitu",
 	"wikibase-redirectentity-success": "$1 bylo přesměrováno na $2.",
 	"wikibase-redirectentity-fromid": "ID odkud přesměrovat",
@@ -511,5 +515,9 @@
 	"wikibase-scoped-search-item-scope-name": "Položky",
 	"wikibase-scoped-search-property-scope-name": "Vlastnosti",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Editace položek Wikidat na mobilních zařízeních",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Zapnutím této funkce můžete editovat Wikidata z mobilního zařízení!\nTento projekt vyvíjeným týmem Wikidat umožňuje editaci položek z chytrého telefonu pomocí funkčností optimalizovaných pro mobily."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Zapnutím této funkce můžete editovat Wikidata z mobilního zařízení!\nTento projekt vyvíjeným týmem Wikidat umožňuje editaci položek z chytrého telefonu pomocí funkčností optimalizovaných pro mobily.",
+	"wikibase-stepper-progress": "$1 z $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Problémy a návrhy",
+	"wikibase-indicator-popover-multiple-issue-previous": "Předchozí",
+	"wikibase-indicator-popover-multiple-issue-next": "Další"
 }
