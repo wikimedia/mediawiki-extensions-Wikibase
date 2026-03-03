@@ -2,23 +2,26 @@
 	"@metadata": {
 		"authors": [
 			"Quintino Lopes Castro Tavares",
-			"Waldyrious"
+			"Waldyrious",
+			"GrogeXaKaba",
+			"Letra.berdi"
 		]
 	},
-	"tooltip-t-wikibase": "Ligason pa elementu na repositóriu di dadus",
-	"wikibase-dataitem": "Elementu {{WBREPONAME}}",
-	"wikibase-editlinks": "Muda liganson di iperlinks",
-	"wikibase-editlinkstitle": "Edita ligasons interlínguas",
-	"wikibase-linkitem-addlinks": "Adisiona ligasons",
+	"tooltip-t-wikibase": "Ligason pa ilimentu di rapuzitóri di dadus kunetadu",
+	"wikibase-dataitem": "Ilimentu {{WBREPONAME}}",
+	"wikibase-editlinks": "Idita ligansons",
+	"wikibase-editlinkstitle": "Idita ligasons interlingas",
+	"wikibase-addlinkstitle": "Disona linkis di interlingas",
+	"wikibase-linkitem-addlinks": "Disona ligasons",
 	"wikibase-linkitem-title": "Liga ku pájina",
 	"wikibase-linkitem-linkpage": "Liga ku pájina",
-	"wikibase-linkitem-selectlink": "Skodji un website i un pájina ki bu kre liga ku kel pájina li.",
-	"wikibase-linkitem-input-site": "Língua:",
+	"wikibase-linkitem-selectlink": "Skodji un sáiti i un pájina ki bu kre liga ku es pájina li.",
+	"wikibase-linkitem-input-site": "Linga:",
 	"wikibase-linkitem-input-page": "Pájina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Sukundi",
-	"wikibase-rc-hide-wikidata-show": "Mostra",
+	"wikibase-rc-hide-wikidata-show": "Mustra",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Mudansa di {{WBREPONAME}}",
-	"wikibase-otherprojects": "Na otus projetus"
+	"wikibase-rc-wikibase-edit-title": "Idison di {{WBREPONAME}}",
+	"wikibase-otherprojects": "Na otu prujétus"
 }

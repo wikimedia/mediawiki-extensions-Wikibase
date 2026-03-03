@@ -4,7 +4,8 @@
 			"Khanmarat",
 			"Sorbat",
 			"TayfunEt.",
-			"Zolgoyo"
+			"Zolgoyo",
+			"Арбыуын"
 		]
 	},
 	"tooltip-t-wikibase": "Пелешмәле репозиторийтағы пәйләнкән элементҡа ссылка",
@@ -12,6 +13,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}ның элементы",
 	"wikibase-editlinks": "Ссылкаларны төсәткәле",
 	"wikibase-editlinkstitle": "Пашҡа телләртәге ссылкаларны төсәткәле",
+	"wikibase-addlinkstitle": "Пашҡа телләргә ссылкаларны ҡушҡалы",
 	"wikibase-linkitem-addlinks": "Сылтамалар ҡушҡалы",
 	"wikibase-linkitem-title": "Пит пелән пәйләү",
 	"wikibase-linkitem-linkpage": "Пит пелән пәйләгәле",
