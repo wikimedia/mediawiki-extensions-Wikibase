@@ -390,6 +390,8 @@
 	"wikibase-parse-error-entity-id": "Het entiteit-ID is verkeerd opgemaakt.",
 	"wikibase-parse-error-quantity": "De kwantiteitswaarde is verkeerd opgemaakt.",
 	"wikibase-parse-error-time": "De tijdwaarde is verkeerd opgemaakt.",
+	"wikibase-quantitydetails-unit-optional": "Eenheid (optioneel)",
+	"wikibase-monolingualtextcode-mandatory": "Taal (verplicht)",
 	"special-redirectentity": "Een entiteit doorverwijzen",
 	"wikibase-redirectentity-success": "$1 is doorverwezen naar $2.",
 	"wikibase-redirectentity-fromid": "Het ID waarvandaan door te verwijzen",
