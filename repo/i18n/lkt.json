@@ -3,10 +3,13 @@
 		"authors": [
 			"AmazingJus",
 			"Peter57770",
-			"R12ntech"
+			"R12ntech",
+			"Tuwewanzi"
 		]
 	},
 	"wikibase-edit": "yutȟókeča {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-add": "táku yeyá {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-sitelinks-special": "Otȟáwokaške uƞmá",
 	"wikibase-itembytitle-submit": "Wóle",
 	"wikibase-itemdisambiguation-submit": "Wóle"
 }
