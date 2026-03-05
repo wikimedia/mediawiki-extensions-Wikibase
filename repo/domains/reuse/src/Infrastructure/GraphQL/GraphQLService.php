@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\Error\DebugFlag;
 use GraphQL\Error\Error;
-use GraphQL\Error\FormattedError;
 use GraphQL\Error\SyntaxError;
 use GraphQL\GraphQL;
 use GraphQL\Language\Parser;
 use MediaWiki\Config\Config;
 use Psr\Log\LoggerInterface;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorResponse;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 
@@ -37,7 +37,7 @@ class GraphQLService {
 		if ( trim( $query ) === '' ) {
 			$this->tracking->trackValidationError( GraphQLErrorType::MISSING_QUERY->name );
 
-			return $this->formatErrorResponse( [ 'message' => "The 'query' field is required and must not be empty" ] );
+			return GraphQLErrorResponse::fromArray( [ 'message' => "The 'query' field is required and must not be empty" ] );
 		}
 
 		try {
@@ -45,10 +45,7 @@ class GraphQLService {
 		} catch ( SyntaxError $e ) {
 			$this->tracking->trackValidationError( GraphQLErrorType::INVALID_QUERY->name );
 
-			$formattedError = FormattedError::createFromException( $e );
-			$formattedError['message'] = 'Invalid query - ' . $e->getMessage();
-
-			return $this->formatErrorResponse( $formattedError );
+			return GraphQLErrorResponse::fromSyntaxError( $e );
 		}
 
 		$context = new QueryContext();
@@ -80,10 +77,6 @@ class GraphQLService {
 
 		$this->tracking->trackUsage( $output, $parsedQuery, $operationName );
 		return $output;
-	}
-
-	private function formatErrorResponse( array $error ): array {
-		return [ 'errors' => [ $error ] ];
 	}
 
 	private function logUnexpectedErrors( array $errors ): void {
