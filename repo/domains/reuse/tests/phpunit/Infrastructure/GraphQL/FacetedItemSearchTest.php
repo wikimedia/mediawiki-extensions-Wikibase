@@ -57,6 +57,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 	public function searchProvider(): Generator {
 		$stringProperty = $this->createProperty( 'string' );
 		$itemProperty = $this->createProperty( 'wikibase-item' );
+		$otherItemProperty = $this->createProperty( 'wikibase-item' );
 		$itemUsedAsStatementValue = $this->createItem( NewItem::withLabel( 'en', 'value item' ) );
 
 		$item = $this->createItem(
@@ -72,6 +73,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$item2 = $this->createItem(
 			NewItem::withLabel( 'en', 'item 2' )
 				->andStatement( NewStatement::someValueFor( $stringProperty->getId() )->withSomeGuid() )
+				->andStatement( NewStatement::someValueFor( $otherItemProperty->getId() )->withSomeGuid() )
 		);
 		$item3 = $this->createItem(
 			NewItem::withLabel( 'en', 'item 3' )
@@ -137,6 +139,46 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			],
 		];
 
+		yield 'searchItems with "and"' => [
+			"{ searchItems( query: {
+				and: [
+					{ property: \"{$itemProperty->getId()}\", value: \"{$itemUsedAsStatementValue->getId()}\" },
+					{ property: \"{$stringProperty->getId()}\", value: \"potato\" }
+				]
+			} ) { edges { node { id } } } }",
+			[ 'data' => [ 'searchItems' => [ 'edges' => [
+				[ 'node' => [ 'id' => $item->getId() ] ],
+			] ] ] ],
+		];
+
+		yield 'searchItems with "or"' => [
+			"{ searchItems( query: {
+				or: [
+					{ property: \"{$itemProperty->getId()}\" },
+					{ property: \"{$otherItemProperty->getId()}\" }
+				]
+			} ) { edges { node { id } } } }",
+			[ 'data' => [ 'searchItems' => [ 'edges' => [
+				[ 'node' => [ 'id' => $item->getId() ] ],
+				[ 'node' => [ 'id' => $item2->getId() ] ],
+			] ] ] ],
+		];
+
+		yield 'searchItems with "and" and "or"' => [
+			"{ searchItems( query: {
+				and: [
+					{ property: \"{$itemProperty->getId()}\" }
+					{ or: [
+						{ property: \"{$stringProperty->getId()}\" },
+						{ property: \"{$otherItemProperty->getId()}\" }
+					] }
+				]
+			} ) { edges { node { id } } } }",
+			[ 'data' => [ 'searchItems' => [ 'edges' => [
+				[ 'node' => [ 'id' => $item->getId() ] ],
+			] ] ] ],
+		];
+
 		yield 'searchItems with description in search results' => [
 			"{  searchItems( query: { property: \"{$itemProperty->getId()}\" } ) {
 				edges { node { description(languageCode: \"en\") } }
@@ -200,18 +242,6 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 					],
 				],
 			],
-		];
-
-		yield 'searchItems with and' => [
-			"{ searchItems( query: {
-        and: [
-            { property: \"{$itemProperty->getId()}\", value: \"{$itemUsedAsStatementValue->getId()}\" },
-            { property: \"{$stringProperty->getId()}\", value: \"potato\" }
-        ]
-    } ) { edges { node { id } } } }",
-			[ 'data' => [ 'searchItems' => [ 'edges' => [
-				[ 'node' => [ 'id' => $item->getId() ] ],
-			] ] ] ],
 		];
 
 		$offset = $this->encodeOffsetAsCursor( 1 );
@@ -326,7 +356,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			'{
 			  searchItems(query: {} ) { edges { node { id } } }
 			}',
-			"Invalid search query: Query filters must contain either an 'and' or a 'property' field",
+			'Invalid search query: Query filters must contain either an operator field or a property/value condition',
 		];
 
 		yield 'invalid search query: empty "and"' => [
@@ -344,7 +374,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 					property: \"{$stringProperty->getId()}\"
 				} ) { edges { node { id } } }
 			}",
-			"Invalid search query: Filters must not contain both an 'and' and a 'property' field",
+			'Invalid search query: Query filters must only contain a single operator field or a property/value condition',
 		];
 
 		$stringProperty = $this->createProperty( 'string' );
@@ -358,7 +388,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 					]
 				}) { edges { node { id } } }
 			}",
-			'Field "and" is not defined by type "ItemSearchCondition".',
+			'Field "and" is not defined by type "AndOperationCondition".',
 		];
 
 		$unsupportedProperty = $this->createProperty( 'wikibase-property' );

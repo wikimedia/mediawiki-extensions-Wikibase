@@ -9,8 +9,10 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 
@@ -32,7 +34,7 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 	 */
 	private array $items = [];
 
-	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): ItemSearchResultSet {
+	public function search( ItemSearchFilter $query, int $limit, int $offset ): ItemSearchResultSet {
 		$result = [];
 		foreach ( $this->items as $item ) {
 			if ( $this->matchesQuery( $query, $item ) ) {
@@ -50,11 +52,20 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 		$this->items[] = $item;
 	}
 
-	private function matchesQuery( AndOperation|PropertyValueFilter $query, Item $item ): bool {
+	private function matchesQuery( ItemSearchFilter $query, Item $item ): bool {
 		if ( $query instanceof PropertyValueFilter ) {
 			return $this->matchesPropertyValueFilter( $query, $item );
+		} elseif ( $query instanceof OrOperation ) {
+			foreach ( $query->filters as $filter ) {
+				if ( $this->matchesPropertyValueFilter( $filter, $item ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
+		/** @var AndOperation $query */
 		foreach ( $query->filters as $filter ) {
 			if ( !$this->matchesQuery( $filter, $item ) ) {
 				return false;

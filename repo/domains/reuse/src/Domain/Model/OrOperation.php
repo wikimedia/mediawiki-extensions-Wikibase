@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Domains\Reuse\Domain\Model;
 /**
  * @license GPL-2.0-or-later
  */
-class AndOperation implements ItemSearchFilter {
+class OrOperation implements ItemSearchFilter {
 
 	/**
-	 * @param ItemSearchFilter[] $filters
+	 * @param PropertyValueFilter[] $filters
 	 */
 	public function __construct( public readonly array $filters ) {
 	}

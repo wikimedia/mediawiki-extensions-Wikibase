@@ -1,6 +1,7 @@
 'use strict';
 
 const { assert, clientFactory, utils, wiki } = require( 'api-testing' );
+const { expect } = require( 'chai' );
 const config = require( 'api-testing/lib/config' );
 const { RequestBuilder } = require( '../../../../rest-api/tests/mocha/helpers/RequestBuilder.js' );
 
@@ -37,11 +38,6 @@ describe( 'Wikibase GraphQL', () => {
 	const property2label = `hasRelationship ${ utils.uniq() }`;
 
 	before( async () => {
-
-		item1 = await createItem( {
-			labels: { en: item1label }
-		} );
-
 		property1 = await createProperty( {
 			data_type: 'wikibase-item',
 			labels: { en: property1label }
@@ -50,6 +46,19 @@ describe( 'Wikibase GraphQL', () => {
 		property2 = await createProperty( {
 			data_type: 'wikibase-item',
 			labels: { en: property2label }
+		} );
+
+		// item with label "vegetable", and one statement: hasRelationship->somevalue
+		item1 = await createItem( {
+			labels: { en: item1label },
+			statements: {
+				[ property2.id ]: [
+					{
+						property: { id: property2.id },
+						value: { type: 'somevalue' }
+					}
+				]
+			}
 		} );
 
 		// Create item with two statements, potato: isType -> vegetable, hasRelationship->vegetable
@@ -159,48 +168,77 @@ describe( 'Wikibase GraphQL', () => {
 		);
 	} );
 
-	it( 'property value pair match with searchItems', async function () {
-		// Skip search tests in CI if OpenSearch is not available
-		if ( process.env.QUIBBLE_OPENSEARCH && process.env.QUIBBLE_OPENSEARCH !== 'true' ) {
-			this.skip();
-		}
+	describe( 'searchItems', () => {
+		before( async function () {
+			// Skip search tests in CI if OpenSearch is not available
+			if ( process.env.QUIBBLE_OPENSEARCH && process.env.QUIBBLE_OPENSEARCH !== 'true' ) {
+				this.skip();
+			}
+		} );
 
-		const response = await queryGraphQL( { query: `
-			{
-				searchItems(
-					query: {
-						and: [
-							{ property: "${ property1.id }", value: "${ item1.id }" }
-							{ property: "${ property2.id }", value: "${ item1.id }" }
-						]
+		it( 'property value pair match with "and"', async function () {
+			const response = await queryGraphQL( { query: `
+				{
+					searchItems(
+						query: {
+							and: [
+								{ property: "${ property1.id }", value: "${ item1.id }" }
+								{ property: "${ property2.id }", value: "${ item1.id }" }
+							]
+						}
+					) {
+						edges {
+							node {
+								id
+								label(languageCode: "en")
+							}
+						}
 					}
-				) {
-					edges {
-						node {
-							id
-							label(languageCode: "en")
+				}` } );
+
+			assert.deepEqual(
+				response.body,
+				{
+					data: {
+						searchItems: {
+							edges: [
+								{
+									node: {
+										id: item2.id,
+										label: item2label
+									}
+								}
+							]
 						}
 					}
 				}
-			}` } );
+			);
+		} );
 
-		assert.deepEqual(
-			response.body,
-			{
-				data: {
-					searchItems: {
-						edges: [
-							{
-								node: {
-									id: item2.id,
-									label: item2label
-								}
-							}
-						]
+		it( 'property value pair match with "or"', async function () {
+			const response = await queryGraphQL( { query: `
+				{
+					searchItems(
+						query: {
+							or: [
+								{ property: "${ property1.id }" }
+								{ property: "${ property2.id }" }
+							]
+						}
+					) {
+						edges {
+							node { id }
+						}
 					}
-				}
-			}
-		);
+				}` } );
+
+			// the order of search results is not guaranteed, so we just test that it contains the two expected elements
+			// in any order
+			const results = response.body.data.searchItems.edges;
+			assert.lengthOf( results, 2 );
+			expect( results ).to.deep.include( { node: { id: item1.id } } );
+			expect( results ).to.deep.include( { node: { id: item2.id } } );
+		} );
 	} );
 
 	it( 'supports introspection', async () => {
