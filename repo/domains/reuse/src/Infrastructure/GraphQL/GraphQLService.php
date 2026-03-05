@@ -3,13 +3,10 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\Error\DebugFlag;
-use GraphQL\Error\SyntaxError;
 use GraphQL\GraphQL;
-use GraphQL\Language\Parser;
 use MediaWiki\Config\Config;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorResponse;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Validation\InvalidResult;
 
 /**
  * @license GPL-2.0-or-later
@@ -31,19 +28,14 @@ class GraphQLService {
 	}
 
 	public function query( string $query, array $variables = [], ?string $operationName = null ): array {
-		if ( trim( $query ) === '' ) {
-			$this->tracking->trackValidationError( GraphQLErrorType::MISSING_QUERY->name );
+		$validationResult = GraphQLQueryValidator::validate( $query );
 
-			return GraphQLErrorResponse::fromArray( [ 'message' => "The 'query' field is required and must not be empty" ] );
+		if ( $validationResult instanceof InvalidResult ) {
+			$this->tracking->trackValidationError( $validationResult->errorType );
+			return $validationResult->errorResponse;
 		}
 
-		try {
-			$parsedQuery = Parser::parse( $query );
-		} catch ( SyntaxError $e ) {
-			$this->tracking->trackValidationError( GraphQLErrorType::INVALID_QUERY->name );
-
-			return GraphQLErrorResponse::fromSyntaxError( $e );
-		}
+		$parsedQuery = $validationResult->documentNode;
 
 		$context = new QueryContext();
 		$result = GraphQL::executeQuery(
