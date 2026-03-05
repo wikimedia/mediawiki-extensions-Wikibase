@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityLookupItemsBatchRetriever;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\EntityRevisionLookupItemRedirectResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\DataAccess\PrefetchingTermLookupBatchLabelsDescriptionsRetriever;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLErrorLogger;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLFieldCollector;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLTracking;
@@ -64,7 +65,7 @@ return [
 		return new GraphQLService(
 			WbReuse::getGraphQLSchema( $services ),
 			$services->getMainConfig(),
-			WikibaseRepo::getLogger( $services ),
+			new GraphQLErrorLogger( WikibaseRepo::getLogger( $services ) ),
 			WbReuse::getGraphQLTracking( $services ),
 		);
 	},

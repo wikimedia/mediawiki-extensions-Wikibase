@@ -3,13 +3,10 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL;
 
 use GraphQL\Error\DebugFlag;
-use GraphQL\Error\Error;
 use GraphQL\Error\SyntaxError;
 use GraphQL\GraphQL;
 use GraphQL\Language\Parser;
 use MediaWiki\Config\Config;
-use Psr\Log\LoggerInterface;
-use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorResponse;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLErrorType;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
@@ -27,7 +24,7 @@ class GraphQLService {
 	public function __construct(
 		private readonly Schema $schema,
 		private readonly Config $config,
-		private readonly LoggerInterface $logger,
+		private readonly GraphQLErrorLogger $errorLogger,
 		private readonly GraphQLTracking $tracking,
 	) {
 		$this->queryComplexityRule = new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY );
@@ -61,7 +58,7 @@ class GraphQLService {
 			],
 		)->setErrorsHandler( function ( array $errors, callable $formatter ): array {
 			$this->tracking->trackErrors( $this->queryComplexityRule, $errors );
-			$this->logUnexpectedErrors( $errors );
+			$this->errorLogger->logUnexpectedErrors( $errors );
 			return array_map( $formatter, $errors );
 		} );
 
@@ -79,21 +76,4 @@ class GraphQLService {
 		return $output;
 	}
 
-	private function logUnexpectedErrors( array $errors ): void {
-		/**
-		 * Exceptions thrown in the query execution process get caught within {@link GraphQL::executeQuery} and rethrown as {@link Error}
-		 * wrapping the original exception. Expected exceptions thrown within our code extend {@link GraphQLError}, so any other type of
-		 * exception is unexpected and should be logged.
-		 */
-		foreach ( $errors as $error ) {
-			/** @var Error $error */
-			$previousError = $error->getPrevious();
-			$isUnexpected = $previousError && !( $previousError instanceof GraphQLError );
-			if ( $isUnexpected ) {
-				$this->logger->error( $previousError->getMessage(), [
-					'trace' => $previousError->getTraceAsString(),
-				] );
-			}
-		}
-	}
 }
