@@ -5,13 +5,15 @@
 			"Dicto23456",
 			"Gramo6",
 			"KHMELNYTSKYIA",
-			"Tkalyn"
+			"Tkalyn",
+			"Cevioch"
 		]
 	},
 	"tooltip-t-wikibase": "Посилання на пов’язаний елемент сховища даних",
 	"wikibase-dataitem": "Елемент {{grammar:genitive|{{WBREPONAME}}}}",
 	"wikibase-editlinks": "Едітовати одказы",
 	"wikibase-editlinkstitle": "Редіґовати меджіязыковы одказы",
+	"wikibase-addlinkstitle": "Редіґовати меджіязыковы одказы",
 	"wikibase-linkitem-addlinks": "Придати одказы",
 	"wikibase-linkitem-close": "Заперти діалоґ і обновити сторінку",
 	"wikibase-linkitem-title": "Звязати зо сторінков",
