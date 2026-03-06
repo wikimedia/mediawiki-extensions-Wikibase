@@ -73,17 +73,19 @@ describe( 'wbui2025 item view add additional value to existing statement', () =>
 	} );
 
 	context( 'cancel behavior', () => {
-		it( 'opens the add-value modal and cancels cleanly', () => {
+		it( 'opens the add-value modal and cancels cleanly without enabling the save button', () => {
 			const itemPage = new ItemViewPage( itemId2 );
 			itemPage.open().statementsSection();
 			itemPage.editLinks().first().click();
 			const edit = new EditStatementFormPage();
+			edit.publishButton().should( 'be.disabled' );
 			edit.addValueButtons().first().click();
 			const modal = new AddValueModal();
 			modal.modal().should( 'be.visible' );
 			modal.cancelButton().click();
 			cy.get( AddValueModal.SELECTORS.ROOT ).should( 'not.exist' );
 			edit.formRoot().should( 'be.visible' );
+			edit.publishButton().should( 'be.disabled' );
 		} );
 	} );
 } );

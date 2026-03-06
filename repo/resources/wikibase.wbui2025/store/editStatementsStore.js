@@ -612,7 +612,9 @@ const useEditStatementsStore = defineStore( 'editStatements', {
 		 * it is not defined whether null or true will be returned.
 		 */
 		hasChanges( state ) {
-			if ( state.createdStatements.length > 0 || state.removedStatements.length > 0 ) {
+			const netCreated = state.createdStatements.filter( ( statementId ) => !state.removedStatements.includes( statementId ) );
+			const netRemoved = state.removedStatements.filter( ( statementId ) => !state.createdStatements.includes( statementId ) );
+			if ( netCreated.length > 0 || netRemoved.length > 0 ) {
 				return true;
 			}
 			for ( const statementId of state.statements ) {
