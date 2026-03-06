@@ -65,7 +65,7 @@ class GraphQLService {
 				$this->queryComplexityRule,
 			],
 		)->setErrorsHandler( function ( array $errors, callable $formatter ): array {
-			$this->trackErrors( $errors );
+			$this->tracking->trackErrors( $this->queryComplexityRule, $errors );
 			$this->logUnexpectedErrors( $errors );
 			return array_map( $formatter, $errors );
 		} );
@@ -99,39 +99,6 @@ class GraphQLService {
 
 	private function formatErrorResponse( array $error ): array {
 		return [ 'errors' => [ $error ] ];
-	}
-
-	private function trackErrors( array $errors ): void {
-		$errorTypes = array_unique( array_map(
-			fn( Error $e ) => $this->getErrorType( $e )->name,
-			$errors,
-		) );
-
-		foreach ( $errorTypes as $type ) {
-			$this->stats->getCounter( 'wikibase_graphql_error_total' )
-				->setLabel( 'type', $type )
-				->increment();
-		}
-	}
-
-	private function getErrorType( Error $error ): GraphQLErrorType {
-		if ( $this->queryComplexityRule->wasChecked()
-			&& $this->queryComplexityRule->getQueryComplexity() > $this->queryComplexityRule->getMaxQueryComplexity() ) {
-			return GraphQLErrorType::QUERY_TOO_COMPLEX;
-		}
-
-		$previousError = $error->getPrevious();
-		if ( $previousError instanceof GraphQLError ) {
-			return $previousError->type;
-		}
-
-		// If there is no previous error, it means that the GraphQL engine itself rejected the query
-		// e.g. because the query was malformed, or an invalid field or operation name.
-		if ( $previousError === null ) {
-			return GraphQLErrorType::INVALID_QUERY;
-		}
-
-		return GraphQLErrorType::UNKNOWN;
 	}
 
 	private function logUnexpectedErrors( array $errors ): void {
