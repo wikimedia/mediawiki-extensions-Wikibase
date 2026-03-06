@@ -7,7 +7,6 @@ use GraphQL\Error\Error;
 use GraphQL\Error\FormattedError;
 use GraphQL\Error\SyntaxError;
 use GraphQL\GraphQL;
-use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Language\Parser;
 use MediaWiki\Config\Config;
 use Psr\Log\LoggerInterface;
@@ -29,9 +28,9 @@ class GraphQLService {
 	public function __construct(
 		private readonly Schema $schema,
 		private readonly Config $config,
-		private readonly StatsFactory $stats,
-		private readonly GraphQLFieldCollector $graphQLFieldCollector,
 		private readonly LoggerInterface $logger,
+		private readonly StatsFactory $stats,
+		private readonly GraphQLTracking $tracking,
 	) {
 		$this->queryComplexityRule = new QueryComplexityRule( self::MAX_QUERY_COMPLEXITY );
 	}
@@ -81,31 +80,8 @@ class GraphQLService {
 			$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
 		);
 
-		$this->trackUsage( $output, $parsedQuery, $operationName );
+		$this->tracking->trackUsage( $output, $parsedQuery, $operationName );
 		return $output;
-	}
-
-	private function trackUsage( array $output, DocumentNode $doc, ?string $operationName ): void {
-		if ( !( isset( $output['data'] ) ) ) {
-			$this->incrementHitMetric( 'error' );
-			return;
-		}
-
-		$usedFields = $this->graphQLFieldCollector->getRequestedFieldPaths( $doc, $operationName );
-		$isIntrospectionQuery = !array_intersect( $this->schema->fieldNames, $usedFields );
-		if ( $isIntrospectionQuery ) {
-			$this->incrementHitMetric( 'introspection' );
-			return;
-		}
-
-		// field usage is tracked for (partial) success, but not introspection-only or error-only
-		$this->trackFieldUsage( $usedFields );
-
-		if ( isset( $output['errors'] ) ) {
-			$this->incrementHitMetric( 'partial_success' );
-		} else {
-			$this->incrementHitMetric( 'success' );
-		}
 	}
 
 	private function incrementHitMetric( string $status ): void {
@@ -156,14 +132,6 @@ class GraphQLService {
 		}
 
 		return GraphQLErrorType::UNKNOWN;
-	}
-
-	private function trackFieldUsage( array $fields ): void {
-		foreach ( $fields as $field ) {
-			$this->stats->getCounter( 'wikibase_graphql_field_usage_total' )
-				->setLabel( 'field', $field )
-				->increment();
-		}
 	}
 
 	private function logUnexpectedErrors( array $errors ): void {
