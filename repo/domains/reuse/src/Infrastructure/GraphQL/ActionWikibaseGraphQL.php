@@ -17,6 +17,7 @@ class ActionWikibaseGraphQL extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		private readonly GraphQLService $graphQLService,
+		private readonly GraphQLTracking $tracking,
 	) {
 		parent::__construct( $mainModule, $moduleName );
 	}
@@ -26,7 +27,7 @@ class ActionWikibaseGraphQL extends ApiBase {
 			// Mark the `query` parameter as used to prevent warnings about unrecognized parameters
 			// when it's sent as a request parameter with an unsupported media type (e.g., multipart/form-data)
 			$this->getMain()->markParamsUsed( 'query' );
-			$this->graphQLService->trackValidationError( GraphQLErrorType::UNSUPPORTED_MEDIA_TYPE->name );
+			$this->tracking->trackValidationError( GraphQLErrorType::UNSUPPORTED_MEDIA_TYPE->name );
 			$this->getResult()->addValue( null, 'errors', [
 				[ 'message' => "Requests must be sent as 'application/json'" ],
 			] );

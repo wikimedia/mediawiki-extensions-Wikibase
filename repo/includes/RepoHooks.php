@@ -1261,7 +1261,7 @@ final class RepoHooks implements
 				'action',
 				[
 					'class' => ActionWikibaseGraphQL::class,
-					'services' => [ "WbReuse.GraphQLService" ],
+					'services' => [ "WbReuse.GraphQLService", "WbReuse.GraphQLTracking" ],
 				]
 			);
 		}

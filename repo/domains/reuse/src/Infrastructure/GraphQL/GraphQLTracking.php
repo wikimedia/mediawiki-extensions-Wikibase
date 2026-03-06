@@ -90,4 +90,11 @@ class GraphQLTracking {
 
 		return GraphQLErrorType::UNKNOWN;
 	}
+
+	public function trackValidationError( string $errorType ): void {
+		$this->stats->getCounter( 'wikibase_graphql_error_total' )
+			->setLabel( 'type', $errorType )
+			->increment();
+		$this->incrementHitMetric( 'error' );
+	}
 }
