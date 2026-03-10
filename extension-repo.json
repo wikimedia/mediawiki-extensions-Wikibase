@@ -843,7 +843,7 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityData",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
 			"services": [
-				"HtmlCacheUpdater",
+				"HTMLCacheUpdater",
 				"WikibaseRepo.EntityDataFormatProvider",
 				"WikibaseRepo.EntityDataSerializationService",
 				"WikibaseRepo.EntityDataUriManager",
@@ -1230,7 +1230,7 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger",
 			"factory": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger::factory",
 			"services": [
-				"HtmlCacheUpdater",
+				"HTMLCacheUpdater",
 				"JobQueueGroup",
 				"TitleFactory",
 				"WikibaseRepo.EntityDataUriManager",
