@@ -7,15 +7,20 @@
 			"Tuwewanzi"
 		]
 	},
-	"tooltip-t-wikibase": "Wamnáyaŋpi wóičhikȟoyake",
+	"tooltip-t-wikibase": "Wíhoši owógnake wóičhikȟoyake",
 	"wikibase-comment-update": "{{WBREPONAME}} yutȟókečapi",
-	"wikibase-dataitem": "{{WBREPONAME}} wamnáyaŋpi",
+	"wikibase-dataitem": "{{WBREPONAME}} táku waŋ",
 	"wikibase-editlinks": "Wóičhikȟoyake kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
 	"wikibase-editlinkstitle": "Wóyuiyeska kiŋ yutȟókča {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-linkitem-addlinks": "Wóičhikȟoyake yeyá {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-linkitem-title": "Oyúblaye waƞ lel aíkȟoyaka",
+	"wikibase-linkitem-linkpage": "Oyúblaye waƞ lel aíkȟoyaka",
+	"wikibase-linkitem-selectlink": "Oyúblaye waƞ na otȟáwokaške waƞ oyúblaye kiƞ le lel aíkȟoyaka yačhiƞ kiƞ kaȟniǧa {{GENDER:|yo|ye|yo/ye}}.",
 	"wikibase-linkitem-input-site": "Iyapi:",
 	"wikibase-linkitem-input-page": "Oyúblaye:",
-	"wikibase-rc-hide-wikidata-hide": "Naȟmá",
+	"wikibase-rc-hide-wikidata-hide": "Naȟmá {{GENDER:|yo|ye|yo/ye}}",
 	"wikibase-rc-hide-wikidata-show": "Pazó {{GENDER:|wo|we|wo/we}}",
 	"wikibase-rc-wikibase-edit-letter": "Y",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} yutȟókeča",
+	"wikibase-otherprojects": "Wičhóȟ'aƞ uƞmá el"
 }

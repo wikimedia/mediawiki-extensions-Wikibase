@@ -4,7 +4,8 @@
 			"Chinneeb",
 			"Elvonudinium",
 			"Enkhsaihan2005",
-			"MongolWiki"
+			"MongolWiki",
+			"Zorigt"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} зүйл",
@@ -21,6 +22,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Нуух",
 	"wikibase-rc-hide-wikidata-show": "Үзүүлэх",
 	"wikibase-rc-wikibase-edit-letter": "ө",
-	"wikibase-rc-wikibase-edit-title": "Вики өгөгдөл засвар",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} засварлах",
 	"wikibase-otherprojects": "Бусад төсөл"
 }
