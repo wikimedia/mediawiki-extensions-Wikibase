@@ -72,7 +72,11 @@ type PredicateProperty implements LabelProvider {
 
 union Value = StringValue | ItemValue | PropertyValue | GlobeCoordinateValue | MonolingualTextValue | QuantityValue | TimeValue | EntityValue | UnknownValue
 
-type StringValue {
+type StringValue implements StringContentProvider {
+  content: String!
+}
+
+interface StringContentProvider {
   content: String!
 }
 
