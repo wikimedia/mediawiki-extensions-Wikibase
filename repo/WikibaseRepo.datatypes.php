@@ -164,6 +164,7 @@ return call_user_func( function() {
 			'rdf-data-type' => function() {
 				return PropertySpecificComponentsRdfBuilder::OBJECT_PROPERTY;
 			},
+			'graphql-value-type' => static fn() => WbReuse::getGraphQLTypes()->getGeoShapeValueType(),
 		],
 		'PT:tabular-data' => [
 			'expert-module' => 'jquery.valueview.experts.TabularData',

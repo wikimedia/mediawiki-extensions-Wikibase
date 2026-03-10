@@ -38,6 +38,7 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\SiteLinkGlobalIdentifiersProvider;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService
@@ -476,6 +477,39 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 									'after' => $timeValue->getAfter(),
 									'precision' => $timeValue->getPrecision(),
 									'calendarModel' => $timeValue->getCalendarModel(),
+								],
+							],
+						],
+					],
+				],
+			],
+		];
+
+		$geoShapeProperty = $this->createProperty( 'geo-shape' );
+		$geoShapeContent = 'Data:Neighbourhoods/New York City.map';
+		$statementWithGeoShapeValue = NewStatement::forProperty( $geoShapeProperty->getId() )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withValue( new StringValue( $geoShapeContent ) )
+			->build();
+		$item->getStatements()->addStatement( $statementWithGeoShapeValue );
+		$geoShapeBaseUrl = WikibaseRepo::getSettings()->getSetting( 'geoShapeStorageBaseUrl' );
+		yield 'statement with geo-shape value' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"{$geoShapeProperty->getId()}\") {
+					value {
+						... on GeoShapeValue { content url }
+					}
+				}
+			} }",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[
+								'value' => [
+									'content' => $geoShapeContent,
+									'url' => $geoShapeBaseUrl . str_replace( ' ', '_', $geoShapeContent ),
 								],
 							],
 						],
