@@ -208,6 +208,18 @@ describe( 'Edit Statements Store', () => {
 			expect( editStatementsStore.hasChanges ).toBe( true );
 		} );
 
+		it( 'creating a new blank statement and then removing it (cancelling add value) is not a change', async () => {
+			const editStatementsStore = useEditStatementsStore();
+			const id = 'Q1$00000000-0000-0000-0000-000000000001';
+			await editStatementsStore.createNewBlankStatement( id, 'P1' );
+
+			expect( editStatementsStore.hasChanges ).toBe( true );
+
+			editStatementsStore.removeStatement( id );
+
+			expect( editStatementsStore.hasChanges ).toBe( false );
+		} );
+
 		it( 'removing a statement is a change', async () => {
 			const savedStatementsStore = useSavedStatementsStore();
 			const id = 'Q1$00000000-0000-0000-0000-000000000001';
