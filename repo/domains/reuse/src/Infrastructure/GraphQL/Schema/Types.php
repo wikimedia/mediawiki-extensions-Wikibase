@@ -29,6 +29,9 @@ class Types {
 	private ?PropertyValuePairType $propertyValuePairType = null;
 	private ?InterfaceType $labelProviderType = null;
 	private ?InterfaceType $descriptionProviderType = null;
+	private ?InterfaceType $stringContentProviderType = null;
+	private ?InterfaceType $urlProviderType = null;
+
 	private ?StringValueType $stringValueType = null;
 	private ?ObjectType $entityValueType = null;
 	private ?ItemType $itemType = null;
@@ -101,8 +104,32 @@ class Types {
 		] );
 	}
 
+	public function getStringContentProviderType(): InterfaceType {
+		return $this->stringContentProviderType ??= new InterfaceType( [
+			'name' => 'StringContentProvider',
+			'fields' => [
+				'content' => [
+					'type' => Type::nonNull( Type::string() ),
+				],
+			],
+		] );
+	}
+
+	public function getUrlProviderType(): InterfaceType {
+		return $this->urlProviderType ??= new InterfaceType( [
+			'name' => 'UrlProvider',
+			'fields' => [
+				'url' => [
+					'type' => Type::string(),
+				],
+			],
+		] );
+	}
+
 	public function getStringValueType(): StringValueType {
-		return $this->stringValueType ??= new StringValueType();
+		return $this->stringValueType ??= new StringValueType(
+			$this
+		);
 	}
 
 	public function getEntityValueType(): ObjectType {
