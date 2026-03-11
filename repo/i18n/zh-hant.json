@@ -40,7 +40,8 @@
 			"神樂坂秀吉",
 			"飞舞回堂前",
 			"아라",
-			"SupaplexTW"
+			"SupaplexTW",
+			"Leo768"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -182,12 +183,12 @@
 	"wikibase-validator-bad-type": "使用「$2」替代「$1」",
 	"wikibase-validator-too-long": "不可超過$1{{PLURAL:$1|字元}}",
 	"wikibase-validator-label-too-long": "標籤最多不可超過 {{PLURAL:$1|1 個字元|$1 個字元}}長度",
-	"wikibase-validator-label-too-short": "標籤至少長{{PLURAL:$1|字元}}",
+	"wikibase-validator-label-too-short": "標籤至少長{{PLURAL:$1|$1字元}}",
 	"wikibase-validator-description-too-long": "描述最多不可超過 {{PLURAL:$1|1 個字元|$1 個字元}}長度",
-	"wikibase-validator-description-too-short": "描述至少長{{PLURAL:$1|字元}}",
+	"wikibase-validator-description-too-short": "描述至少長{{PLURAL:$1|$1字元}}",
 	"wikibase-validator-alias-too-long": "各別名最多不可超過 {{PLURAL:$1|1 個字元|$1 個字元}}長度",
-	"wikibase-validator-alias-too-short": "各別名至少要{{PLURAL:$1|字元}}",
-	"wikibase-validator-too-short": "長度至少要{{PLURAL:$1|一字元|$1字元}}",
+	"wikibase-validator-alias-too-short": "各別名至少要{{PLURAL:$1|$1字元}}",
+	"wikibase-validator-too-short": "長度至少要{{PLURAL:$1|$1字元}}",
 	"wikibase-validator-too-high": "超出範圍，不可高於 $1",
 	"wikibase-validator-too-low": "超出範圍，不可低於 $1",
 	"wikibase-validator-malformed-value": "輸入格式不正確：$1",
