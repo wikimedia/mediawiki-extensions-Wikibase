@@ -269,6 +269,28 @@ describe( 'Wikibase GraphQL', () => {
 		);
 	} );
 
+	it( 'retains boolean fields', async () => {
+		const response = await queryGraphQL( { query: `
+		{
+			searchItems( query: { property: "${ property2.id }" }, first: 1 ) {
+				pageInfo { hasPreviousPage, hasNextPage }
+			}
+		}` } );
+
+		assert.deepEqual(
+			response.body,
+			{
+				data: {
+					searchItems: {
+						pageInfo: {
+							hasPreviousPage: false,
+							hasNextPage: true
+						}
+					}
+				}
+			} );
+	} );
+
 	it( 'supports operationName parameter, required only if multiple operations are present in the query', async () => {
 		const response = await queryGraphQL( {
 			query: `query item1 { item(id: "${ item1.id }") { id } }
