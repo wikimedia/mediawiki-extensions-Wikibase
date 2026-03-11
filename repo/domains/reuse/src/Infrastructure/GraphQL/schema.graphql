@@ -157,10 +157,21 @@ type ReferencePart implements PropertyValuePair {
   valueType: ValueType!
 }
 
-"Filter used to match items by their statements. Supports simple property/value matching or combining multiple filters with AND."
+"Filter used to match items by their statements. Supports simple property/value matching or combining multiple filters with an operator."
 input ItemSearchFilter {
-  "Combine multiple conditions using AND operator. Requires at least two conditions, all of which must match. Cannot be used together with the property field."
-  and: [ItemSearchCondition!]
+  "Combine multiple conditions using AND operator. Requires at least two conditions, all of which must match. Cannot be used together with any other field."
+  and: [AndOperationCondition!]
+
+  "Combine multiple conditions using OR operator. Requires at least two conditions, one of which must match. Cannot be used together with any other field."
+  or: [ItemSearchCondition!]
+  property: PropertyId
+  value: String
+}
+
+"A condition within an AND operation used in item search. Supports simple property/value matching or combining multiple filters with OR."
+input AndOperationCondition {
+  "Combine multiple conditions using OR operator. Requires at least two conditions, one of which must match. Cannot be used together with any other field."
+  or: [ItemSearchCondition!]
   property: PropertyId
   value: String
 }

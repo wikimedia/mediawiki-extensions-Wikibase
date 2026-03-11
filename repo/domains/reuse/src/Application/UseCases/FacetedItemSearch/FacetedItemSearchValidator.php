@@ -9,13 +9,15 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 
 /**
  * @license GPL-2.0-or-later
  */
 class FacetedItemSearchValidator {
-	private AndOperation|PropertyValueFilter|null $query = null;
+	private ?ItemSearchFilter $query = null;
 
 	public function __construct(
 		private readonly PropertyDataTypeLookup $dataTypeLookup,
@@ -32,7 +34,7 @@ class FacetedItemSearchValidator {
 		$this->query = $this->constructQuery( $req->query );
 	}
 
-	public function getValidatedQuery(): AndOperation|PropertyValueFilter {
+	public function getValidatedQuery(): ItemSearchFilter {
 		if ( $this->query === null ) {
 			throw new LogicException( 'Must not call getValidatedQuery() before validate()' );
 		}
@@ -43,19 +45,31 @@ class FacetedItemSearchValidator {
 	/**
 	 * @throws UseCaseError
 	 */
-	private function constructQuery( array $filter ): AndOperation|PropertyValueFilter {
-		if ( !isset( $filter['property'] ) && !isset( $filter['and'] ) ) {
-			$this->throwInvalidQuery( "Query filters must contain either an 'and' or a 'property' field" );
+	private function constructQuery( array $filter ): ItemSearchFilter {
+		if ( !isset( $filter['property'] ) && !isset( $filter['and'] ) && !isset( $filter['or'] ) ) {
+			$this->throwInvalidQuery( 'Query filters must contain either an operator field or a property/value condition' );
 		}
-		if ( isset( $filter['property'] ) && isset( $filter['and'] ) ) {
-			$this->throwInvalidQuery( "Filters must not contain both an 'and' and a 'property' field" );
+		if ( count( array_intersect( [ 'property', 'and', 'or' ], array_keys( $filter ) ) ) > 1 ) {
+			$this->throwInvalidQuery( 'Query filters must only contain a single operator field or a property/value condition' );
 		}
 		if ( isset( $filter['and'] ) && count( $filter['and'] ) < 2 ) {
 			$this->throwInvalidQuery( "'and' fields must contain at least two elements" );
 		}
+		if ( isset( $filter['or'] ) && count( $filter['or'] ) < 2 ) {
+			$this->throwInvalidQuery( "'or' fields must contain at least two elements" );
+		}
 
 		if ( isset( $filter['property'] ) ) {
 			return $this->constructPropertyValueFilter( $filter );
+		}
+
+		if ( isset( $filter['or'] ) ) {
+			return new OrOperation(
+				array_map(
+					$this->constructPropertyValueFilter( ... ),
+					$filter['or']
+				)
+			);
 		}
 
 		return new AndOperation(

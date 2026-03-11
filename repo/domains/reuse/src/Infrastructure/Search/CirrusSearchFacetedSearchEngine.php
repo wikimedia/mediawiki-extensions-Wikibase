@@ -8,8 +8,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
 
@@ -25,7 +27,7 @@ class CirrusSearchFacetedSearchEngine implements FacetedItemSearchEngine {
 	) {
 	}
 
-	public function search( AndOperation|PropertyValueFilter $query, int $limit, int $offset ): ItemSearchResultSet {
+	public function search( ItemSearchFilter $query, int $limit, int $offset ): ItemSearchResultSet {
 		$searchEngine = $this->searchEngineFactory->create();
 		$searchEngine->setNamespaces(
 			[ $this->entityNamespaceLookup->getEntityNamespace( Item::ENTITY_TYPE ) ]
@@ -47,12 +49,23 @@ class CirrusSearchFacetedSearchEngine implements FacetedItemSearchEngine {
 		);
 	}
 
-	private function criteriaToSearchQuery( AndOperation|PropertyValueFilter $criteria ): string {
+	private function criteriaToSearchQuery( ItemSearchFilter $criteria ): string {
 		if ( $criteria instanceof PropertyValueFilter ) {
 			return $criteria->value === null
 				? "haswbstatement:{$criteria->propertyId}"
 				: "haswbstatement:{$criteria->propertyId}={$criteria->value}";
+		} elseif ( $criteria instanceof OrOperation ) {
+			return 'haswbstatement:' . implode(
+				'|',
+				array_map(
+					fn( PropertyValueFilter $f ) => $f->value === null ? $f->propertyId : "{$f->propertyId}={$f->value}",
+					$criteria->filters
+				)
+			);
 		}
+
+		/** @var AndOperation $criteria */
+		'@phan-var AndOperation $criteria';
 		return implode(
 			' ',
 			array_map( $this->criteriaToSearchQuery( ... ), $criteria->filters )

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyValueFilter {
+class PropertyValueFilter implements ItemSearchFilter {
 
 	public function __construct(
 		public readonly PropertyId $propertyId,

@@ -11,6 +11,8 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedIt
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,12 +45,12 @@ class FacetedItemSearchValidatorTest extends TestCase {
 	public static function invalidQueryProvider(): Generator {
 		yield 'no fields' => [
 			[],
-			"Query filters must contain either an 'and' or a 'property' field",
+			'Query filters must contain either an operator field or a property/value condition',
 		];
 
 		yield 'no fields in nested filter' => [
 			[ 'and' => [ [], [ 'property' => self::STRING_PROPERTY ] ] ],
-			"Query filters must contain either an 'and' or a 'property' field",
+			'Query filters must contain either an operator field or a property/value condition',
 		];
 
 		yield 'empty "and"' => [
@@ -61,9 +63,32 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			"'and' fields must contain at least two elements",
 		];
 
+		yield 'empty "or"' => [
+			[ 'or' => [] ],
+			"'or' fields must contain at least two elements",
+		];
+
+		yield '"or" with only one element' => [
+			[ 'or' => [ [ 'property' => 'P1' ] ] ],
+			"'or' fields must contain at least two elements",
+		];
+
 		yield 'both "property" and "and"' => [
 			[ 'property' => 'P1', 'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ] ],
-			"Filters must not contain both an 'and' and a 'property' field",
+			'Query filters must only contain a single operator field or a property/value condition',
+		];
+
+		yield 'both "property" and "or"' => [
+			[ 'property' => 'P1', 'or' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ] ],
+			'Query filters must only contain a single operator field or a property/value condition',
+		];
+
+		yield 'both "and" and "or"' => [
+			[
+				'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
+				'or' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
+			],
+			'Query filters must only contain a single operator field or a property/value condition',
 		];
 
 		yield 'unsupported property data type' => [
@@ -100,7 +125,7 @@ class FacetedItemSearchValidatorTest extends TestCase {
 	/**
 	 * @dataProvider validQueryProvider
 	 */
-	public function testGivenValidQuery_getValidatedQueryReturnsQuery( array $rawQuery, AndOperation|PropertyValueFilter $expected ): void {
+	public function testGivenValidQuery_getValidatedQueryReturnsQuery( array $rawQuery, ItemSearchFilter $expected ): void {
 		$validator = $this->newValidator();
 		$validator->validate( new FacetedItemSearchRequest( $rawQuery ) );
 		$this->assertEquals( $expected, $validator->getValidatedQuery() );
@@ -127,6 +152,46 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
 		];
 
+		yield 'simple "and" query' => [
+			[ 'and' => [
+				[ 'property' => self::STRING_PROPERTY, 'value' => 'potato' ],
+				[ 'property' => self::STRING_PROPERTY, 'value' => 'tomato' ],
+			] ],
+			new AndOperation( [
+				new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
+				new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'tomato' ),
+			] ),
+		];
+
+		yield 'simple "or" query' => [
+			[ 'or' => [
+				[ 'property' => self::STRING_PROPERTY, 'value' => 'potato' ],
+				[ 'property' => self::STRING_PROPERTY, 'value' => 'tomato' ],
+			] ],
+			new OrOperation( [
+				new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
+				new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'tomato' ),
+			] ),
+		];
+
+		yield 'query with "or" nested in "and"' => [
+			[ 'and' => [
+				[ 'property' => self::ITEM_PROPERTY ],
+				[ 'or' => [
+					[ 'property' => self::STRING_PROPERTY, 'value' => 'potato' ],
+					[ 'property' => self::STRING_PROPERTY, 'value' => 'tomato' ],
+				] ],
+			] ],
+			new AndOperation( [
+				new PropertyValueFilter( new NumericPropertyId( self::ITEM_PROPERTY ) ),
+				new OrOperation( [
+					new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
+					new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'tomato' ),
+				] ),
+			] ),
+		];
+
+		// This query is not currently supported by the GraphQL schema
 		yield 'nested query' => [
 			[
 				'and' => [
