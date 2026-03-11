@@ -33,6 +33,7 @@
 	"wikibase-publish": "објави",
 	"wikibase-cancel": "откажи",
 	"wikibase-add": "додај",
+	"wikibase-addstatement": "додај изјаву",
 	"wikibase-addqualifier": "додај квалификатор",
 	"wikibase-addreference": "додај референцу",
 	"wikibase-save-inprogress": "Чување…",
@@ -321,6 +322,7 @@
 	"wikibase-parse-error-entity-id": "ID ентитета је неисправно формирана.",
 	"wikibase-parse-error-quantity": "Вредност количине је неисправно формирана.",
 	"wikibase-parse-error-time": "Вредност за време је погрешно форматирана.",
+	"wikibase-quantitydetails-unit-optional": "Јединица (необавезно)",
 	"wikibase-monolingualtextcode-mandatory": "Језик (обавезно)",
 	"special-redirectentity": "Преусмеравање ентитета",
 	"wikibase-redirectentity-success": "$1 је преусмерено на $2.",
@@ -380,6 +382,7 @@
 	"wikibase-listdatatypes-time-head": "време",
 	"wikibase-listdatatypes-url-head": "адреса",
 	"wikibase-listdatatypes-external-id-head": "спољашњи идентификатор",
+	"wikibase-listdatavaluetypes-name-string": "низ",
 	"wikibase-listdatavaluetypes-name-globecoordinate": "географске координате",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "једнојезички текст",
 	"wikibase-listdatavaluetypes-name-quantity": "количина",
@@ -424,5 +427,6 @@
 	"wikibase-scoped-search-item-scope-name": "Ставке",
 	"wikibase-scoped-search-property-scope-name": "Својства",
 	"wikibase-stepper-progress": "$1 од $2",
-	"wikibase-indicator-popover-multiple-issue-previous": "Претходно"
+	"wikibase-indicator-popover-multiple-issue-previous": "Претходно",
+	"wikibase-indicator-popover-multiple-issue-next": "Следеће"
 }

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kaszeba",
-			"Kirsan"
+			"Kirsan",
+			"Orbitminis"
 		]
 	},
 	"tooltip-t-wikibase": "Lënk do sparłączonegò elementu w repòzytorëjach pòdôwków",
@@ -10,6 +11,13 @@
 	"wikibase-dataitem": "Element Wikipòdôwków",
 	"wikibase-editlinks": "Editëjë lënczi",
 	"wikibase-editlinkstitle": "Editëjë lënczi midzy jãzëkòwima wersëjama",
+	"wikibase-addlinkstitle": "Dodôj lënczi midzy jãzëkòwima wersëjama",
+	"wikibase-linkitem-addlinks": "Dodôj lënczi",
+	"wikibase-linkitem-title": "Sparłączë ze starną",
+	"wikibase-linkitem-linkpage": "Sparłączë ze starną",
+	"wikibase-linkitem-selectlink": "Wëbierzë sąstawã ë starnã, z chtërną chcesz sparłãczëc tã starnã.",
+	"wikibase-linkitem-input-site": "Jãzëk:",
+	"wikibase-linkitem-input-page": "Starna:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Zatacë",
 	"wikibase-rc-hide-wikidata-show": "Pòkôżë",
