@@ -103,19 +103,3 @@ module.exports = exports = defineComponent( {
 	} }
 );
 </script>
-
-<style lang="less">
-@import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-edit-statement-snak-value {
-
-	.wikibase-wbui2025-snak-value {
-
-		.cdx-text-input {
-			width: 100%;
-		}
-
-	}
-
-}
-</style>
