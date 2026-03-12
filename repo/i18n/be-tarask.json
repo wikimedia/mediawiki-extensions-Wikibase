@@ -344,7 +344,7 @@
 	"wikibase-redirect-cant-redirect": "Стварэньне перанакіраваньня не атрымалася праз тэхнічныя праблемы",
 	"wikibase-redirect-permissiondenied": "Доступ забаронены",
 	"special-mylanguagefallbackchain": "Мой парадак запасных моваў",
-	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх адлюстроўваюцца меткі аб’ектаў.",
+	"wikibase-mylanguagefallbackchain-text": "Ніжэй пералічаны парадак запасных моваў, на якіх паказваюцца меткі аб’ектаў.",
 	"wikibase-mylanguagefallbackchain-babel": "Вы можаце зьмяніць яго, дадаўшы <nowiki>{{#babel: }}</nowiki> на [[Special:MyPage|Вашую старонку {{GENDER:$1|ўдзельніка|ўдзельніцы}}]].",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 — $2, ператворана з $3 — $4",
 	"wikibase-api-claim-value-missing": "Трэба падаць значэньне, калі ствараеце сьцьверджаньне з снэкам PropertyValueSnak",

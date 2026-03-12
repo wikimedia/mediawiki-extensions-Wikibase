@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Festina90",
+			"HanV",
 			"Hex",
 			"Mainframe98",
 			"Mar(c)",
@@ -97,6 +98,7 @@
 	"apihelp-wbgetentities-example-11": "Haal het item op voor pagina \"<var>Berlin</var>\" op de site \"<var>enwiki</var>\" nadat de titel is genormaliseerd van \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Haal sitekoppelingen op voor item <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Haal entiteiten op met ID <samp>Q42</samp> en geef alleen sitekoppelingen van \"<var>enwiki</var>\" weer",
+	"apihelp-wbgraphql-summary": "Experimentele GraphQL-module.",
 	"apihelp-wblinktitles-summary": "Koppelt twee pagina’s op twee verschillende wiki’s aan elkaar door middel van een Wikibase-item.",
 	"apihelp-wblinktitles-param-tosite": "Een ID voor de site waarop de pagina zich bevindt.\nGebruik samen met <var>totitle</var> om een complete sitekoppeling te maken.",
 	"apihelp-wblinktitles-param-totitle": "Titel van de pagina die gekoppeld moet worden.\nGebruik samen met <var>tosite</var> om een complete sitekoppeling te maken.",
