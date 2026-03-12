@@ -1,6 +1,5 @@
 'use strict';
 
-const { debounce } = require( 'lodash' );
 const { config } = require( '@vue/test-utils' );
 /**
  * Mock for the calls to Core's $i18n plugin which returns a mw.Message object.
@@ -48,5 +47,7 @@ global.mw = {
 	message: $i18nMock,
 	Title: TitleMock,
 	config: new Map(),
-	util: { debounce }
+	util: {
+		debounce: jest.fn( ( callback ) => callback )
+	}
 };

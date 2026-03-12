@@ -53,6 +53,10 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		};
 
 		beforeEach( async () => {
+			// TODO: remove this workaround after fixing tests that rely on it (T419592)
+			const { debounce } = require( 'lodash' );
+			mw.util.debounce = debounce;
+
 			const testingPinia = storeWithStatements( [ testStatement ] );
 			const editStatementsStore = useEditStatementsStore();
 			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
@@ -117,6 +121,9 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			textInput = wrapper.findComponent( CdxTextInput );
 			expect( textInput.exists() ).toBe( true );
 			expect( textInput.props( 'modelValue' ) ).toBe( 'example string' );
+			// this expectation somehow relies on debounce being mocked with lodash. This has been
+			// changed in jest.setup.js, but is overridden with the old behavior in this file.
+			// TODO: fix this test so it doesn't require the debounce override (T419592)
 			expect( textInput.classes() ).not.toContain( 'cdx-text-input--status-error' );
 		} );
 

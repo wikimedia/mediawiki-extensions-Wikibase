@@ -29,10 +29,10 @@ jest.mock(
 jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
 	() => ( {
-		parseValue: jest.fn(),
-		renderSnakValueText: jest.fn(),
-		renderSnakValueHtml: jest.fn(),
-		renderPropertyLinkHtml: jest.fn()
+		parseValue: jest.fn( () => Promise.resolve() ),
+		renderSnakValueText: jest.fn( () => Promise.resolve() ),
+		renderSnakValueHtml: jest.fn( () => Promise.resolve() ),
+		renderPropertyLinkHtml: jest.fn( () => Promise.resolve() )
 	} )
 );
 
