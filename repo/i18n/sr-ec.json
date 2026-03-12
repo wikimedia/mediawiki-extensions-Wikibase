@@ -377,6 +377,7 @@
 	"wikibase-listdatatypes-time-head": "време",
 	"wikibase-listdatatypes-url-head": "адреса",
 	"wikibase-listdatatypes-external-id-head": "спољашњи идентификатор",
+	"wikibase-listdatavaluetypes-name-string": "низ",
 	"wikibase-listdatavaluetypes-name-globecoordinate": "географске координате",
 	"wikibase-listdatavaluetypes-name-monolingualtext": "једнојезички текст",
 	"wikibase-listdatavaluetypes-name-quantity": "количина",
