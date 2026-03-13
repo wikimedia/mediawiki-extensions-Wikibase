@@ -138,17 +138,6 @@ class HTMLAliasesField extends HTMLTextField {
 	 *
 	 * @return string
 	 */
-	public function getVForm( $value ) {
-		$value = $this->arrayToString( $value );
-
-		return parent::getVForm( $value );
-	}
-
-	/**
-	 * @param array $value
-	 *
-	 * @return string
-	 */
 	public function getInline( $value ) {
 		$value = $this->arrayToString( $value );
 
