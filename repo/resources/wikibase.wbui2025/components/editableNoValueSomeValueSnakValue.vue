@@ -136,6 +136,10 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 
 	div.wikibase-wbui2025-snak-value {
 		width: 100%;
+
+		.cdx-text-input {
+			width: 100%;
+		}
 	}
 
 	div.wikibase-wbui2025-novalue-somevalue-holder {

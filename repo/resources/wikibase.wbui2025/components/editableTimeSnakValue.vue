@@ -313,11 +313,6 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-edit-statement-snak-value {
 
 	.wikibase-wbui2025-snak-value {
-
-		.cdx-text-input {
-			width: 100%;
-		}
-
 		.time-value-popover {
 			// Fallback property for browsers without CSS 'min' support
 			min-width: 90%;

@@ -327,12 +327,4 @@ module.exports = exports = defineComponent( {
 .wikibase-coordinate-popover__precision-select {
 	font-size: 12px;
 }
-
-.wikibase-wbui2025-edit-statement-snak-value {
-	.wikibase-wbui2025-snak-value {
-		.cdx-text-input {
-			width: 100%;
-		}
-	}
-}
 </style>
