@@ -37,6 +37,10 @@ const { storeWithStatements } = require( '../piniaHelpers.js' );
 const { useEditStatementsStore, useEditStatementStore, useEditSnakStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
 
+// TODO: remove this workaround after fixing tests that rely on it (T419592)
+const { debounce } = require( 'lodash' );
+mw.util.debounce = debounce;
+
 describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 	it( 'defines component', async () => {
 		expect( typeof editableTimeSnakValueComponent ).toBe( 'object' );
