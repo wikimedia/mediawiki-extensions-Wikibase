@@ -33,6 +33,15 @@ function sameDataValue( dv1, dv2 ) {
 			return dv1.value.time === dv2.value.time &&
 				dv1.value.calendarmodel === dv2.value.calendarmodel &&
 				dv1.value.precision === dv2.value.precision;
+		case 'globecoordinate':
+			if ( !dv1.value || !dv2.value ) {
+				return dv1.value === dv2.value;
+			}
+
+			return dv1.value.latitude === dv2.value.latitude &&
+				dv1.value.longitude === dv2.value.longitude &&
+				dv1.value.globe === dv2.value.globe &&
+				dv1.value.precision === dv2.value.precision;
 		case 'quantity':
 			return dv1.value.amount === dv2.value.amount &&
 				dv1.value.unit === dv2.value.unit &&
@@ -67,20 +76,27 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	const monolingualtextlanguagecodeText = ref( '' );
 
 	// Getters
+	const valueStrategy = computed(
+		() => snakValueStrategyFactory.getStrategyForSnakStore( useEditSnakStore( snakKey )() )
+	);
 
 	/**
 	 * @return {boolean} True if the current field is known to be incomplete,
 	 * thus an empty text input or a lookup input with nothing selected.
 	 */
-	const isIncomplete = computed(
+	const isIncomplete = computed( () => {
 		// selectionvalue is undefined for non-selection data values
-		() => textvalue.value === '' || selectionvalue.value === null
-	);
-
-	const valueStrategy = computed(
-		() => snakValueStrategyFactory.getStrategyForSnakStore( useEditSnakStore( snakKey )() )
-	);
-
+		if ( textvalue.value === '' || selectionvalue.value === null ) {
+			return true;
+		}
+		if ( snaktype.value === 'value' && valueStrategy.value ) {
+			const parsed = valueStrategy.value.peekDataValue();
+			if ( parsed === null ) {
+				return true;
+			}
+		}
+		return false;
+	} );
 	// Actions
 
 	async function initializeWithSnak( snak ) {
@@ -90,7 +106,6 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		if ( snaktype.value === 'value' ) {
 			textvalue.value = await valueStrategy.value.renderValueForTextInput( snak.datavalue );
 			selectionvalue.value = valueStrategy.value.getSelectionValueForSavedValue( snak.datavalue );
-			value.value = snak.datavalue.value;
 			valuetype.value = snak.datavalue.type;
 			if ( snak.datavalue.type === 'time' ) {
 				precision.value = snak.datavalue.value.precision;
@@ -111,6 +126,9 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 			}
 			if ( snak.datavalue.type === 'monolingualtext' ) {
 				await updateMonolingualTextLanguageCode( snak.datavalue.value.language );
+			}
+			if ( snak.datavalue.type === 'globecoordinate' ) {
+				precision.value = snak.datavalue.value.precision;
 			}
 		}
 		hash.value = snak.hash;
@@ -171,7 +189,6 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 	}
 
 	return {
-		value,
 		datavalue,
 		textvalue,
 		selectionvalue,
@@ -306,7 +323,7 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			};
 			this.references.push( newReference );
 
-			if ( editSnakStore.valuetype === 'value' ) {
+			if ( editSnakStore.snaktype === 'value' ) {
 				editSnakStore.valueStrategy.getParsedValue();
 			}
 		},

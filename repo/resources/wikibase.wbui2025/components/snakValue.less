@@ -12,18 +12,24 @@
 }
 
 .wikibase-wbui2025-globe-coordinate-value {
-	>div {
+	> .snakValue {
+		flex: 1 1 auto;
+		display: block;
+		min-width: 0;
+	}
+
+	> .snakValue > div {
 		display: flex;
 		flex-direction: column;
 	}
 
 	.wikibase-kartographer-caption {
-		order: 0;
+		order: 1;
 		line-height: 1.25rem;
 	}
 
 	.mw-parser-output {
-		order: 1;
+		order: 0;
 	}
 
 	a.mw-kartographer-map {

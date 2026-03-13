@@ -143,6 +143,26 @@ class TimeValueStrategy extends StringValueStrategy {
 	}
 }
 
+class GlobeCoordinateValueStrategy extends StringValueStrategy {
+	async renderValueForTextInput( valueObject ) {
+		return renderSnakValueText( valueObject );
+	}
+
+	getEditableSnakComponent() {
+		return 'Wbui2025EditableGlobeCoordinateSnakValue';
+	}
+
+	getParseOptions() {
+		const options = super.getParseOptions();
+		if ( this.editSnakStore.precision && this.editSnakStore.precision !== 'auto' ) {
+			options.options = JSON.stringify( {
+				precision: Number( this.editSnakStore.precision )
+			} );
+		}
+		return options;
+	}
+}
+
 class EntityValueStrategy extends LookupStringDatatypeStrategy {
 
 	constructor( editSnakStore, parser ) {
@@ -242,6 +262,10 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( store ) => new LookupStringDatatypeStrategy( store ),
 	( searchTerm, offset ) => searchTabularData( searchTerm, offset )
 );
+snakValueStrategyFactory.registerStrategyForDatatype(
+	'globe-coordinate',
+	( store ) => new GlobeCoordinateValueStrategy( store )
+);
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new StringValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'math', ( store ) => new StringValueStrategy( store ) );
@@ -253,5 +277,6 @@ snakValueStrategyFactory.registerStrategyForDatatype( 'external-id', ( store ) =
 
 module.exports = {
 	EntityValueStrategy,
-	StringValueStrategy
+	StringValueStrategy,
+	GlobeCoordinateValueStrategy
 };
