@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Dağlı95",
+			"Gadir",
 			"Interfase",
 			"NMW03",
 			"Nemoralis",
@@ -53,7 +54,7 @@
 	"wikibase-rc-hide-wikidata-show": "Göstər",
 	"wikibase-rc-show-wikidata-pref": "Son dəyişikliklərdə {{WBREPONAME}} dəyişikliklərini göstər",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redaktəsi",
+	"wikibase-rc-wikibase-edit-title": "Vikidata redaktəsi",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} redaktələri",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}}dən qaynaqlanan redaktələr.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Bu filtr bir və ya daha çox Töhfə Keyfiyyəti və ya İstifadəçi Niyyəti filtrləri ilə ziddiyyət təşkil edir. Keyfiyyət və Niyyət proqnozları {{WBREPONAME}} redaktələri üçün əlçatan deyil.",
