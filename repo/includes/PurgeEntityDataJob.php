@@ -57,7 +57,7 @@ class PurgeEntityDataJob extends Job {
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getEntityDataUriManager( $services ),
 			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
-			$services->getHtmlCacheUpdater(),
+			$services->getHTMLCacheUpdater(),
 			$services->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			$params
 		);
