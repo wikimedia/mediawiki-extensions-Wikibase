@@ -62,7 +62,7 @@ class ItemStubRdfBuilder implements PrefetchingEntityStubRdfBuilder {
 
 		$entityLName = $this->vocabulary->getEntityLName( $id );
 		$entityRepoName = $this->vocabulary->getEntityRepositoryName( $id );
-		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityRepoName];
+		$entityNamespace = $this->vocabulary->entityNamespaceNames[$entityRepoName ?? ''];
 
 		$this->addLabels(
 			$entityNamespace,

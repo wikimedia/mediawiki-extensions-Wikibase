@@ -68,7 +68,9 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer = new NTriplesRdfWriter();
 		$writer->prefix( 'www', "http://www/" );
 		$writer->prefix( 'acme', "http://acme/" );
-		$writer->prefix( $typeBase, "http://$typeBase/" );
+		if ( $typeBase !== null ) {
+			$writer->prefix( $typeBase, "http://$typeBase/" );
+		}
 
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
