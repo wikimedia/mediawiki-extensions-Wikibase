@@ -22,7 +22,7 @@
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|хийцам}}",
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} чуьра элемент",
 	"wikibase-editlinks": "Хьажоргаш нисйар",
-	"wikibase-editlinkstitle": "Меттанийн йукъара хьажоргаш нисйар",
+	"wikibase-editlinkstitle": "Меттанийн хьажоргаш нисйар",
 	"wikibase-addlinkstitle": "ТӀетоха йукъаравикийн-хьажоргаш",
 	"wikibase-linkitem-addlinks": "ТӀетоха хьажоргаш",
 	"wikibase-linkitem-alreadylinked": "Ахьа кхечу Википедешкара агӀонашах тосуш йолу агӀо [$1 кхузахь] йолуш йу, хӀокхунна [[$2]] тӀе хьажийна. Элементан чохь хӀора Википеди чуьра ца агӀо бе хуьлийла дац. Дехар до кхин агӀо къастайе кхечу Википедеш чуьра агӀонашах таса.",

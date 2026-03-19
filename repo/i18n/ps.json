@@ -179,7 +179,7 @@
 	"special-gotolinkedpage": "تړلي مخ ته ورشئ",
 	"wikibase-gotolinkedpage-lookup-fieldset": "د وېبځي او توکي له مخې تړلي مخ ته ورشئ",
 	"wikibase-gotolinkedpage-lookup-site": "وېبځی:",
-	"wikibase-gotolinkedpage-lookup-item": "توکی پېژند:",
+	"wikibase-gotolinkedpage-lookup-item": "توکي پېژند:",
 	"wikibase-gotolinkedpage-submit": "ورځه",
 	"wikibase-gotolinkedpage-error-page-not-found": "د توکي او وېبځي د گډوالي اړوند هيڅ مخ ونه موندل شو",
 	"wikibase-gotolinkedpage-error-item-id-invalid": "د توکي ننويستی پېژند ناسم دی",
