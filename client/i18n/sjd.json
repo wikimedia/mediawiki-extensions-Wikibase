@@ -5,6 +5,7 @@
 			"Merrahtar"
 		]
 	},
+	"tooltip-t-wikibase": "Ушш ко̄рръя да̄ннэе репозиторьй элеменнта",
 	"wikibase-comment-update": "{{WBREPONAME}} воа̄йхувэ",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|воа̄йхэсс|воа̄йхэз|воа̄йхэссэ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} элеменнт",
