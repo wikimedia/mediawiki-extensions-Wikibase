@@ -69,7 +69,8 @@
 			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ",
 			"EmDashUser002",
 			"Escargot bleu",
-			"WillyM"
+			"WillyM",
+			"Lenchanteur"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -90,8 +91,8 @@
 	"wikibase-add": "ajouter",
 	"wikibase-addqualifier": "ajouter un qualificatif",
 	"wikibase-addreference": "ajouter une référence",
-	"wikibase-save-inprogress": "Enregistrement en cours...",
-	"wikibase-publish-inprogress": "Publication en cours...",
+	"wikibase-save-inprogress": "Enregistrement...",
+	"wikibase-publish-inprogress": "Publication...",
 	"wikibase-remove-inprogress": "Suppression en cours...",
 	"wikibase-statementlistview-add": "ajouter une valeur",
 	"wikibase-statementlistview-add-tooltip": "Ajouter une nouvelle valeur",

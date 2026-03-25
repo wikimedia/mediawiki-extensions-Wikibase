@@ -7,11 +7,13 @@
 		]
 	},
 	"wikibase-error-unexpected": "Feilâ: $1.",
+	"wikibase-language-name-for-terms-mul": "nabdos puoh kieláid",
 	"wikibase-timedetails-time": "Äigi",
 	"wikibase-timedetails-calendar": "Kalender",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"wikibase-snakview-snaktypeselector-somevalue": "tubdâmettum árvu",
 	"datatypes-type-string": "Merkkâráiđu",
 	"datatypes-type-number": "Nummeer",
+	"wikibase-entity-summary-wbsetdescription-add": "[$2]-valdâlem lasettum",
 	"wikibase-reference-formatter-snak-retrieved": "Čujottum $1"
 }
