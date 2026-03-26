@@ -69,7 +69,8 @@
 			"Wyz",
 			"Yasten",
 			"Zolo",
-			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ"
+			"ꠢꠣꠍꠘ ꠞꠣꠎꠣ",
+			"Lenchanteur"
 		]
 	},
 	"wikibase-desc": "Référentiel de données structurées",
@@ -90,8 +91,8 @@
 	"wikibase-add": "ajouter",
 	"wikibase-addqualifier": "ajouter un qualificatif",
 	"wikibase-addreference": "ajouter une référence",
-	"wikibase-save-inprogress": "Enregistrement en cours...",
-	"wikibase-publish-inprogress": "Publication en cours...",
+	"wikibase-save-inprogress": "Enregistrement...",
+	"wikibase-publish-inprogress": "Publication...",
 	"wikibase-publishing-error": "Une erreur s'est produite lors de l'enregistrement de vos modifications. Veuillez patienter un instant et réessayer.",
 	"wikibase-publishing-progress": "Finalisation de vos modifications…",
 	"wikibase-publishing-succeeded": "Vos modifications ont été enregistrées !",

@@ -50,7 +50,8 @@
 			"Чаховіч Уладзіслаў",
 			"Ядерный Трамвай",
 			"EneshTranslates",
-			"Vonavy"
+			"Vonavy",
+			"Маринад"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -73,6 +74,7 @@
 	"wikibase-addreference": "добавить источник",
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-publish-inprogress": "Записывается...",
+	"wikibase-publishing-error": "Произошла ошибка при сохранении ваших изменений. Подождите немного и попробуйте снова.",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-statementlistview-add": "добавить значение",
 	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",

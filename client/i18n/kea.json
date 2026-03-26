@@ -8,6 +8,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Ligason pa ilimentu di rapuzitóri di dadus kunetadu",
+	"wikibase-comment-update": "Ilimentu {{WBREPONAME}} alteradu",
 	"wikibase-dataitem": "Ilimentu {{WBREPONAME}}",
 	"wikibase-editlinks": "Idita ligasons",
 	"wikibase-editlinkstitle": "Idita ligasons nterlinga",
@@ -23,5 +24,15 @@
 	"wikibase-rc-hide-wikidata-show": "Mustra",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Idison di {{WBREPONAME}}",
-	"wikibase-otherprojects": "Na otus prujétu"
+	"wikibase-otherprojects": "Na otus prujétu",
+	"wikibase-client-data-bridge-references-heading": "Rafirénsas",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Bu ka sta kunetadu",
+	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Bu ka sta kunetadu. Si bu <strong>kuneta</strong> o <strong>kiria un kónta</strong>, bus idison ta ser rajistadu ku bu nómi di uzuári, i bu inda ta ten otus binifísi.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Kuneta o kiria un kónta",
+	"wikibase-client-data-bridge-license-heading": "Uzu i lisénsa",
+	"wikibase-client-data-bridge-error-reload-bridge": "Rakaraga",
+	"wikibase-client-data-bridge-error-reload-page": "Rakaraga pájina",
+	"wikibase-client-data-bridge-error-go-back": "Bolta tras",
+	"wikibase-client-data-bridge-error-retry-save": "Tenta garda otu bes",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Bu ka sta kunetadu"
 }
