@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ella Lachow"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "mela",
+	"valueview-expert-timeinput-precision-year1g": "biiloone layttata",
+	"valueview-expert-timeinput-precision-year100m": "xeetu miiloone layttata",
+	"valueview-expert-timeinput-precision-year10m": "tammu miiloone layttata",
+	"valueview-expert-timeinput-precision-year1m": "miiloone layttata",
+	"valueview-expert-timeinput-precision-year100k": "100,000 layttata",
+	"valueview-expert-timeinput-precision-year10k": "10,000 layttata",
+	"valueview-expert-timeinput-precision-year1k": "Miiliinemiya",
+	"valueview-expert-timeinput-precision-year": "layttaa",
+	"valueview-expert-timeinput-precision-month": "aginaa",
+	"valueview-expert-timeinput-precision-day": "gallassaa",
+	"valueview-expert-timeinput-precision-hour": "saatiya",
+	"valueview-expert-timeinput-precision-minute": "daqiiqaa"
+}
