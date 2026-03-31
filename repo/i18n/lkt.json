@@ -7,10 +7,32 @@
 			"Tuwewanzi"
 		]
 	},
+	"wikibase-entity-query": "Wówala",
+	"nstab-query": "Wówala",
+	"tooltip-ca-nstab-query": "Wówala waŋyáŋka",
 	"wikibase-edit": "yutȟókeča",
+	"wikibase-save": "égnaka",
+	"wikibase-publish": "yeyá",
+	"wikibase-cancel": "yužúžu",
 	"wikibase-add": "táku yeyá {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-save-inprogress": "Éwagnake...",
+	"wikibase-publish-inprogress": "Bleyá....",
+	"wikibase-remove-inprogress": "Yuȟéyab iwáču...",
+	"wikibase-entitytermsforlanguagelistview-language": "Iyápi",
 	"wikibase-description-empty": "Táku wóyakapi waníča",
+	"wikibase-content-language-edit-label": "Iyápi:",
 	"wikibase-sitelinks-special": "Otȟáwokaške uƞmá",
+	"wikibase-entityselector-more": "sáŋpȟa",
+	"wikibase-itembytitle-lookup-page": "Oyúblaye:",
 	"wikibase-itembytitle-submit": "Wóle",
-	"wikibase-itemdisambiguation-submit": "Wóle"
+	"wikibase-gotolinkedpage-lookup-site": "Otȟáwokaške:",
+	"wikibase-gotolinkedpage-submit": "Yá {{GENDER:|yo|ye|yo/ye}}",
+	"wikibase-itemdisambiguation-submit": "Wóle",
+	"wikibase-newentity-language": "Iyápi:",
+	"datatypes-type-url": "URL",
+	"content-model-wikibase-query": "Wikibase Wówala",
+	"wikibase-pageinfo-subscription-none": "Waníča",
+	"wikibase-tainted-ref-popper-help-link-text": "Wóokiye",
+	"wikibase-tainted-ref-popper-remove-warning": "Wóiwaktaye yuȟéyab ičú {{GENDER:|wo|we|wo/we}}",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Yužúžu {{GENDER:|wo|we|wo/we}}"
 }
