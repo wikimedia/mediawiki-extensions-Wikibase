@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Neronno"
+		]
+	},
+	"tooltip-t-wikibase": "Ferbinnen tau 't data repository",
+	"wikibase-comment-update": "{{WBREPONAME}} Dingeräis annert",
+	"wikibase-dataitem": "{{WBREPONAME}} ding",
+	"wikibase-editlinks": "Links beaarbaiden",
+	"wikibase-editlinkstitle": "Bīräid intertóólsk ferbinnens",
+	"wikibase-addlinkstitle": "Links nóó siiden up anner tóólen taufaugen.",
+	"wikibase-linkitem-addlinks": "Links taufaugen",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Wīs",
+	"wikibase-rc-wikibase-edit-letter": "B",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} bīräidens"
+}
