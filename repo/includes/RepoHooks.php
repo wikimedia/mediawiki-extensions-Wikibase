@@ -37,7 +37,6 @@ use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Skin\Hook\SkinPageReadyConfigHook;
 use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Skin\Skin;
@@ -64,7 +63,6 @@ use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\ActionWikibaseGraphQL;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
-use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -101,7 +99,6 @@ final class RepoHooks implements
 	ParserOptionsRegisterHook,
 	ResourceLoaderRegisterModulesHook,
 	RevisionFromEditCompleteHook,
-	SidebarBeforeOutputHook,
 	SkinPageReadyConfigHook,
 	SkinTemplateNavigation__UniversalHook,
 	TitleGetRestrictionTypesHook,
@@ -832,29 +829,6 @@ final class RepoHooks implements
 				);
 			}
 		}
-	}
-
-	/**
-	 * Add Concept URI link to the toolbox section of the sidebar.
-	 *
-	 * @inheritDoc
-	 */
-	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
-		$hookHandler = new SidebarBeforeOutputHookHandler(
-			WikibaseRepo::getLocalEntitySource()->getConceptBaseUri(),
-			WikibaseRepo::getEntityIdLookup(),
-			WikibaseRepo::getEntityLookup(),
-			WikibaseRepo::getEntityNamespaceLookup(),
-			WikibaseRepo::getLogger()
-		);
-
-		$conceptUriLink = $hookHandler->buildConceptUriLink( $skin );
-
-		if ( $conceptUriLink === null ) {
-			return;
-		}
-
-		$sidebar['TOOLBOX']['wb-concept-uri'] = $conceptUriLink;
 	}
 
 	/** @inheritDoc */
