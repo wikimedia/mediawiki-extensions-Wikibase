@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Neronno",
+			"VanModers",
+			"WikiFayo95"
+		]
+	},
+	"tooltip-t-wikibase": "Link nóó 't ferbunnen objekt mit dóótenrepositoorium",
+	"wikibase-comment-update": "Dat {{WBREPONAME}}-objekt is annert worden",
+	"wikibase-dataitem": "{{WBREPONAME}}-dóótenobjekt",
+	"wikibase-editlinks": "Links beaarbaiden",
+	"wikibase-editlinkstitle": "Links nóó artikkels up anner tóólen",
+	"wikibase-addlinkstitle": "Links nóó siiden up anner tóólen taufaugen",
+	"wikibase-linkitem-addlinks": "Links taufaugen",
+	"wikibase-linkitem-title": "Mit däi siid ferlinken",
+	"wikibase-linkitem-linkpage": "Mit däi siid ferlinken",
+	"wikibase-linkitem-selectlink": "Bitte 'n websiid un 'n siid uutweelen, däi mit disser siid ferlinkt worden sal.",
+	"wikibase-linkitem-input-site": "Tóól:",
+	"wikibase-linkitem-input-page": "Siid:",
+	"wikibase-rc-hide-wikidata": "{{WBREPONAME}} $1",
+	"wikibase-rc-hide-wikidata-hide": "uutblennen",
+	"wikibase-rc-hide-wikidata-show": "wiisen",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-beaarbaiden",
+	"wikibase-otherprojects": "In anner projekten"
+}
