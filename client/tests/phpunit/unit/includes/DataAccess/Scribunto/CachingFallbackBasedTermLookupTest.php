@@ -287,9 +287,7 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 		$enTerm = self::getTermFallback( 'cat', 'en' );
 
 		$this->contentLanguages->method( 'hasLanguage' )
-			->willReturnCallback( function ( $languageCode ) {
-				return $languageCode === 'en';
-			} );
+			->willReturnCallback( static fn ( $code ) => $code === 'en' );
 		$this->mockHasContentLanguage( true );
 		$this->mockCacheEmpty( $itemId );
 		$internalLookup = $this->getInternalLookupWithContent( $itemId, $enTerm, $getOne );

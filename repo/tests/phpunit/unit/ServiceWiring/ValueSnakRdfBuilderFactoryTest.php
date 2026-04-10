@@ -22,9 +22,7 @@ class ValueSnakRdfBuilderFactoryTest extends ServiceWiringTestCase {
 		$this->mockService( 'WikibaseRepo.DataTypeDefinitions',
 			new DataTypeDefinitions( [
 				'VT:test' => [
-					'rdf-builder-factory-callback' => function () {
-						return null;
-					},
+					'rdf-builder-factory-callback' => static fn () => null,
 				],
 			] ) );
 		$this->mockService( 'WikibaseRepo.Logger',

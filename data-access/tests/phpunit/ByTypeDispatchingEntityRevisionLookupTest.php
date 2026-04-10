@@ -129,9 +129,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 		$shouldNotBeCalled = function () {
 			$this->fail( 'Should not be called' );
 		};
-		$returnTrue = function () {
-			return true;
-		};
+		$returnTrue = static fn () => true;
 
 		$nonExistentEntityReturned = $lookup->getLatestRevisionId( new NumericPropertyId( 'P1' ) )
 			->onConcreteRevision( $shouldNotBeCalled )

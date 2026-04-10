@@ -23,11 +23,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 
 	public function testGivenInvalidCallback_getTitleForIdFails() {
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
-			[
-				'property' => function ( EntityTitleStoreLookup $defaultService ) {
-					return (object)[];
-				},
-			],
+			[ 'property' => static fn () => (object)[] ],
 			$this->newDefaultService()
 		);
 

@@ -40,13 +40,9 @@ class DispatchingEntityMetaTagsCreatorFactoryTest extends TestCase {
 	}
 
 	public function testNoEntityMetaTagsReturned() {
-		$factory = new DispatchingEntityMetaTagsCreatorFactory(
-			[
-				'dummy-entity-type' => function() {
-					return null;
-				},
-			]
-		);
+		$factory = new DispatchingEntityMetaTagsCreatorFactory( [
+			'dummy-entity-type' => static fn () => null,
+		] );
 
 		$this->expectException( LogicException::class );
 		$factory->newEntityMetaTags(

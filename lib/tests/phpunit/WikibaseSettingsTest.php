@@ -93,17 +93,13 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		yield 'no default setting, array' => [ $default, $custom, $expected ];
 		unset( $custom );
 
-		$default = [ 'key' => function () {
-			return 'value';
-		} ];
+		$default = [ 'key' => static fn () => 'value' ];
 		$custom['key'] = 'custom value';
 		$expected = [ 'key' => 'custom value' ];
 		yield "['key'], callable->scalar" => [ $default, $custom, $expected ];
 		unset( $custom );
 
-		$default = [ 'key' => function () {
-			return [ 'one', 'two' ];
-		} ];
+		$default = [ 'key' => static fn () => [ 'one', 'two' ] ];
 		$custom['key'] = [ 'ONE', 'TWO' ];
 		$expected = [ 'key' => [ 'ONE', 'TWO' ] ];
 		yield "['key'], callable->array" => [ $default, $custom, $expected ];

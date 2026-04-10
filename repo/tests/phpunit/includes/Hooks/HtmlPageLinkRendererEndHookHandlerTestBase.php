@@ -234,9 +234,7 @@ abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiLangT
 	private function getInterwikiLookup() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
-			->willReturnCallback( function( $interwiki ) {
-				return $interwiki === self::FOREIGN_REPO_PREFIX;
-			} );
+			->willReturnCallback( static fn ( $prefix ) => $prefix === self::FOREIGN_REPO_PREFIX );
 		return $lookup;
 	}
 

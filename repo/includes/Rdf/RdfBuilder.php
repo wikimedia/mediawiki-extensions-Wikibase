@@ -348,19 +348,11 @@ class RdfBuilder implements EntityRdfBuilder, EntityStubRdfBuilder, EntityMentio
 			}
 
 			$lookupResult = $this->entityRevisionLookup->getLatestRevisionId( $id );
-			$lookupStatus = $lookupResult->onNonexistentEntity(
-				function () {
-					return 'nonexistent';
-				}
-			)->onConcreteRevision(
-				function () {
-					return 'concrete revision';
-				}
-			)->onRedirect(
-				function ( $revisionId, $redirectsTo ) {
-					return $redirectsTo;
-				}
-			)->map();
+			$lookupStatus = $lookupResult
+				->onNonexistentEntity( static fn () => 'nonexistent' )
+				->onConcreteRevision( static fn () => 'concrete revision' )
+				->onRedirect( static fn ( $revisionId, $redirectsTo ) => $redirectsTo )
+				->map();
 
 			switch ( $lookupStatus ) {
 				case 'nonexistent':

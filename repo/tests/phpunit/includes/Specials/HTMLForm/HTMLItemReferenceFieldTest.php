@@ -72,11 +72,7 @@ class HTMLItemReferenceFieldTest extends MediaWikiIntegrationTestCase {
 	public function testValidationCallbackExecuted_WhenReferencedItemExists() {
 		$this->givenItemExists( $existingItemId = 'Q1' );
 		$field = $this->createField(
-			[
-				'validation-callback' => function () {
-					return wfMessage( 'some-message' );
-				},
-			]
+			[ 'validation-callback' => static fn () => wfMessage( 'some-message' ) ]
 		);
 
 		/** @var Message $failureMessage */

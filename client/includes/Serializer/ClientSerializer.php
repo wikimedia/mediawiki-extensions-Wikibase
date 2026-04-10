@@ -50,9 +50,7 @@ abstract class ClientSerializer implements Serializer {
 	protected function omitEmptyArrays( array $serialization ) {
 		return array_filter(
 			$serialization,
-			function( $value ) {
-				return $value !== [];
-			}
+			static fn ( $value ) => $value !== []
 		);
 	}
 

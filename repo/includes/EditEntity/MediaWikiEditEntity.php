@@ -192,14 +192,10 @@ class MediaWikiEditEntity implements EditEntity {
 					$id,
 					$this->getReplicaMode()
 				);
-				$returnZero = static function () {
-					return 0;
-				};
+				$returnZero = static fn () => 0;
 				$this->latestRevId = $result->onNonexistentEntity( $returnZero )
 					->onRedirect( $returnZero )
-					->onConcreteRevision( function ( $revId ) {
-						return $revId;
-					} )
+					->onConcreteRevision( static fn ( $revId ) => $revId )
 					->map();
 			}
 		}

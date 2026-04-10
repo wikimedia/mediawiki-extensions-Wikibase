@@ -101,13 +101,10 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 		if ( $entityRevision !== null ) {
 			if ( $revisionId === 0 && $this->shouldVerifyRevision ) {
 				$latestRevisionIdResult = $this->lookup->getLatestRevisionId( $entityId, $mode );
-				$returnFalse = function () {
-					return false;
-				};
+				$returnFalse = static fn () => false;
 
-				$latestRevision = $latestRevisionIdResult->onConcreteRevision( function ( $revId ) {
-					return $revId;
-				} )
+				$latestRevision = $latestRevisionIdResult
+					->onConcreteRevision( static fn ( $revId ) => $revId )
 					->onRedirect( $returnFalse )
 					->onNonexistentEntity( $returnFalse )
 					->map();

@@ -43,9 +43,7 @@ class FulltextSearchTypesTest extends ServiceWiringTestCase {
 	public function testReturnsCallbackResults(): void {
 		$mockFulltextContextStrings = [
 			'something' => 'test-context',
-			'another' => function () {
-				return 'another-context';
-			},
+			'another' => static fn () => 'another-context',
 		];
 
 		$this->mockService(

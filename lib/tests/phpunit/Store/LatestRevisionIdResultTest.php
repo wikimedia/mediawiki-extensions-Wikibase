@@ -60,9 +60,7 @@ class LatestRevisionIdResultTest extends TestCase {
 
 		$result = $nonexistentEntity->onConcreteRevision( $shouldNotBeCalled )
 			->onRedirect( $shouldNotBeCalled )
-			->onNonexistentEntity( function () {
-				return 'nonexistent';
-			} )
+			->onNonexistentEntity( static fn () => 'nonexistent' )
 			->map();
 
 		$this->assertEquals( 'nonexistent', $result );
@@ -78,9 +76,7 @@ class LatestRevisionIdResultTest extends TestCase {
 
 		$result = $redirectResult->onConcreteRevision( $shouldNotBeCalled )
 			->onNonexistentEntity( $shouldNotBeCalled )
-			->onRedirect( function () {
-				return 'redirect';
-			} )
+			->onRedirect( static fn () => 'redirect' )
 			->map();
 
 		$this->assertEquals( 'redirect', $result );
@@ -94,9 +90,7 @@ class LatestRevisionIdResultTest extends TestCase {
 
 		$result = $concreteRevisionResult->onRedirect( $shouldNotBeCalled )
 			->onNonexistentEntity( $shouldNotBeCalled )
-			->onConcreteRevision( function () {
-				return 'concrete revision';
-			} )
+			->onConcreteRevision( static fn () => 'concrete revision' )
 			->map();
 
 		$this->assertEquals( 'concrete revision', $result );

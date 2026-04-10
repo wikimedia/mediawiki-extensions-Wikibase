@@ -139,9 +139,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 
 		$this->overrideMwServices(
 			null,
-			[ 'WikibaseRepo.MobileSite' => function () {
-				return true;
-			} ]
+			[ 'WikibaseRepo.MobileSite' => static fn () => true ]
 		);
 
 		$context = new DerivativeContext( RequestContext::getMain() );

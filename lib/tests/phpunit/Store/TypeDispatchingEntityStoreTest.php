@@ -58,11 +58,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenInvalidCallback_saveEntityFails() {
 		$store = new TypeDispatchingEntityStore(
-			[
-				'property' => function ( EntityStore $defaultService ) {
-					return (object)[];
-				},
-			],
+			[ 'property' => static fn () => (object)[] ],
 			$this->newDefaultService( 'saveEntity' ),
 			$this->newEntityRevisionLookup()
 		);

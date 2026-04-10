@@ -48,13 +48,9 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNoEntityViewReturned() {
-		$factory = new DispatchingEntityViewFactory(
-			[
-				'foo' => function() {
-					return null;
-				},
-			]
-		);
+		$factory = new DispatchingEntityViewFactory( [
+			'foo' => static fn () => null,
+		] );
 
 		$unknownEntity = $this->createMock( EntityDocument::class );
 		$unknownEntity->expects( $this->once() )

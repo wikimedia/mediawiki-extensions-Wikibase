@@ -2130,9 +2130,7 @@ return [
 			$callbacks['globecoordinate'] = $prefixedCallbacks['VT:globecoordinate'];
 		}
 		// 'null' is not a datatype. Kept for backwards compatibility.
-		$callbacks['null'] = function () {
-			return new NullParser();
-		};
+		$callbacks['null'] = static fn () => new NullParser();
 
 		return new ValueParserFactory( $callbacks );
 	},

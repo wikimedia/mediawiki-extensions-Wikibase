@@ -42,9 +42,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'PT:bar' => [
 				'value-type' => 'BAR',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getBarFormatter',
-				'rdf-data-type' => function () {
-					return 'acme-test-2';
-				},
+				'rdf-data-type' => static fn () => 'acme-test-2',
 			],
 		];
 	}

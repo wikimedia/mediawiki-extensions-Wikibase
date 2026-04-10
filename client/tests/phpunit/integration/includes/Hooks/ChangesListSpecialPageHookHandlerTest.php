@@ -489,9 +489,7 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 		$databaseBase = $this->createMock( IDatabase::class );
 
 		$databaseBase->method( 'addQuotes' )
-			->willReturnCallback( static function ( $input ) {
-				return "'$input'";
-			} );
+			->willReturnCallback( static fn ( $input ) => "'$input'" );
 
 		return $databaseBase;
 	}

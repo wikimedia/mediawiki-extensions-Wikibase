@@ -26,11 +26,7 @@ class TokenCheckInteractorTest extends \PHPUnit\Framework\TestCase {
 	private function getMockUser() {
 		$user = $this->createMock( User::class );
 		$user->method( 'matchEditToken' )
-			->willReturnCallback(
-				function ( $token ) {
-					return $token === 'VALID';
-				}
-			);
+			->willReturnCallback( static fn ( $val ) => $val === 'VALID' );
 
 		return $user;
 	}

@@ -50,9 +50,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 		$validDefinition = [
 			'datatypesconfigvarname' => 'foo',
-			'datatypefactory' => function() {
-				return new DataTypeFactory( [] );
-			},
+			'datatypefactory' => static fn () => new DataTypeFactory( [] ),
 		];
 
 		return [
@@ -70,22 +68,16 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 				[],
 			],
 			'Instantiation raises exception in case "datatypefactory" field has value of wrong type' => [
-				array_merge(
-					$validDefinition,
-					[
-						'datatypefactory' => 123,
-					]
-				),
+				[
+					...$validDefinition,
+					'datatypefactory' => 123,
+				],
 			],
 			'Instantiation raises exception in case "datatypefactory" callback does not return a DataTypeFactory instance' => [
-				array_merge(
-					$validDefinition,
-					[
-						'datatypefactory' => function() {
-							return null;
-						},
-					]
-				),
+				[
+					...$validDefinition,
+					'datatypefactory' => static fn () => null,
+				],
 			],
 		];
 	}

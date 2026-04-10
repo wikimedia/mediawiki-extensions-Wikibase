@@ -34,9 +34,7 @@ class RedirectResolvingLatestRevisionLookup {
 		}
 
 		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
-		$returnNull = function () {
-			return null;
-		};
+		$returnNull = static fn () => null;
 
 		$resolutionResult = $revisionIdResult
 			->onConcreteRevision( function ( $revisionId ) use ( $entityId ) {

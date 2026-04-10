@@ -30,24 +30,18 @@ class BuilderBasedDataTypeValidatorFactoryTest extends \PHPUnit\Framework\TestCa
 	}
 
 	public function testInvalidValidatorsArray() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
-			return 'invalid';
-		} ] );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => static fn () => 'invalid' ] );
 		$this->expectException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}
 
 	public function testEmptyValidatorsArray() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
-			return [];
-		} ] );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => static fn () => [] ] );
 		$this->assertSame( [], $factory->getValidators( 'id' ) );
 	}
 
 	public function testInvalidValidatorObject() {
-		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => function() {
-			return [ 'invalid' ];
-		} ] );
+		$factory = new BuilderBasedDataTypeValidatorFactory( [ 'id' => static fn () => [ 'invalid' ] ] );
 		$this->expectException( PostconditionException::class );
 		$factory->getValidators( 'id' );
 	}

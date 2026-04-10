@@ -35,11 +35,8 @@ class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 			return LanguageWithConversion::factory( $langCode );
 		}, $chainOfTestLanguageCodes );
 		$stubContentLanguages = $this->createStub( ContentLanguages::class );
-		$stubContentLanguages->method( 'hasLanguage' )->willReturnCallback(
-			function ( $langCode ) {
-				return $langCode === 'de' || $langCode === 'en';
-			}
-		);
+		$stubContentLanguages->method( 'hasLanguage' )
+			->willReturnCallback( static fn ( $code ) => $code === 'de' || $code === 'en' );
 		$chain = new TermLanguageFallbackChain( $chainOfLanguages, $stubContentLanguages );
 		$actualFallbackChain = array_map( function ( LanguageWithConversion $lang ) {
 			return $lang->getLanguageCode();
