@@ -1,0 +1,533 @@
+{
+	"mwapi": "1.1.0",
+	"moduleId": "wikibase/v1",
+	"info": {
+		"version": "1.0.0",
+		"title": "Wikibase API",
+		"x-i18n-title": "rest-module-wikibase.v1-title",
+		"x-i18n-description": "rest-module-wikibase.v1-desc"
+	},
+	"paths": {
+		"/entities/items/{item_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entities-item",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entities-item",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entities-item",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entities-item",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchItemRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items": {
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-post-wikibase-entities-items",
+				"x-i18n-summary": "rest-endpoint-summ-post-wikibase-entities-items",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\CreateItemRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entities-property",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entities-property",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entities-property",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entities-property",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchPropertyRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties": {
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-post-wikibase-entities-properties",
+				"x-i18n-summary": "rest-endpoint-summ-post-wikibase-entities-properties",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\CreatePropertyRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/statements": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-statements",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-statements",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemStatementsRouteHandler::factory"
+				}
+			},
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-post-wikibase-entities-item-statements",
+				"x-i18n-summary": "rest-endpoint-summ-post-wikibase-entities-item-statements",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\AddItemStatementRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/statements": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-statements",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-statements",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyStatementsRouteHandler::factory"
+				}
+			},
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-post-wikibase-entitites-properties-statements",
+				"x-i18n-summary": "rest-endpoint-summ-post-wikibase-entitites-properties-statements",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\AddPropertyStatementRouteHandler::factory"
+				}
+			}
+		},
+		"/statements/{statement_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-statement",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetStatementRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-statement",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\ReplaceStatementRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-statement",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchStatementRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-statement",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemoveStatementRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/statements/{statement_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-statement",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemStatementRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-item-statement",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-item-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\ReplaceItemStatementRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-item-statement",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-item-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchItemStatementRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-item-statement",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-item-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemoveItemStatementRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/statements/{statement_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-statement",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyStatementRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-property-statement",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-property-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\ReplacePropertyStatementRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-property-statement",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-property-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchPropertyStatementRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-property-statement",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-property-statement",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemovePropertyStatementRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/labels": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-labels",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-labels",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemLabelsRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-item-labels",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-item-labels",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchItemLabelsRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/labels": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-labels",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-labels",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyLabelsRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-property-labels",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-property-labels",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchPropertyLabelsRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/labels/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemLabelRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-item-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-item-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SetItemLabelRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-item-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-item-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemoveItemLabelRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-labels-with-fallback-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-labels-with-fallback-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemLabelWithFallbackRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/labels/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyLabelRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-property-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-property-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SetPropertyLabelRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-property-labels-code",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-property-labels-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemovePropertyLabelRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property/labels-with-fallback-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property/labels-with-fallback-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyLabelWithFallbackRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/descriptions": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-descriptions",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-descriptions",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemDescriptionsRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-item-descriptions",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-item-descriptions",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchItemDescriptionsRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/descriptions": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-descriptions",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-descriptions",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyDescriptionsRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-property-descriptions",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-property-descriptions",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchPropertyDescriptionsRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/descriptions/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemDescriptionRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-item-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-item-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SetItemDescriptionRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-item-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-item-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemoveItemDescriptionRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-descriptions-with-fallback-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-descriptions-with-fallback-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemDescriptionWithFallbackRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/descriptions/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyDescriptionRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-property-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-property-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SetPropertyDescriptionRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-property-descriptions-code",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-property-descriptions-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemovePropertyDescriptionRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-descriptions-with-fallback-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-descriptions-with-fallback-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyDescriptionWithFallbackRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/aliases": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-aliases",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-aliases",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemAliasesRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-item-aliases",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-item-aliases",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchItemAliasesRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/aliases": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-aliases",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-aliases",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyAliasesRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-property-aliases",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-property-aliases",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchPropertyAliasesRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/aliases/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-aliases-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-aliases-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetItemAliasesInLanguageRouteHandler::factory"
+				}
+			},
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-post-wikibase-entitites-item-aliases-code",
+				"x-i18n-summary": "rest-endpoint-summ-post-wikibase-entitites-item-aliases-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\AddItemAliasesInLanguageRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/properties/{property_id}/aliases/{language_code}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-aliases-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-aliases-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyAliasesInLanguageRouteHandler::factory"
+				}
+			},
+			"post": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-property-aliases-code",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-property-aliases-code",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\AddPropertyAliasesInLanguageRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/sitelinks": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-sitelinks",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-sitelinks",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetSitelinksRouteHandler::factory"
+				}
+			},
+			"patch": {
+				"x-i18n-description": "rest-endpoint-desc-patch-wikibase-entitites-item-sitelinks",
+				"x-i18n-summary": "rest-endpoint-summ-patch-wikibase-entitites-item-sitelinks",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\PatchSitelinksRouteHandler::factory"
+				}
+			}
+		},
+		"/entities/items/{item_id}/sitelinks/{site_id}": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-entitites-item-sitelink",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-entitites-item-sitelink",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetSitelinkRouteHandler::factory"
+				}
+			},
+			"put": {
+				"x-i18n-description": "rest-endpoint-desc-put-wikibase-entitites-item-sitelink",
+				"x-i18n-summary": "rest-endpoint-summ-put-wikibase-entitites-item-sitelink",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\SetSitelinkRouteHandler::factory"
+				}
+			},
+			"delete": {
+				"x-i18n-description": "rest-endpoint-desc-delete-wikibase-entitites-item-sitelink",
+				"x-i18n-summary": "rest-endpoint-summ-delete-wikibase-entitites-item-sitelink",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\RemoveSitelinkRouteHandler::factory"
+				}
+			}
+		},
+		"/openapi.json": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-openapi",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-openapi",
+				"handler": {
+					"factory": "Wikibase\\Repo\\RestApi\\GetOpenApiDocRouteHandler::factory"
+				}
+			}
+		},
+		"/property-data-types": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-property-data-types",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-property-data-types",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyDataTypesHandler::factory"
+				}
+			}
+		},
+		"/search/items": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-search-items",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-search-items",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
+				}
+			}
+		},
+		"/search/properties": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-search-properties",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-search-properties",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimplePropertySearchRouteHandler::factory"
+				}
+			}
+		},
+		"/suggest/items": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-suggest-items",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-suggest-items",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\ItemPrefixSearchRouteHandler::factory"
+				}
+			}
+		},
+		"/suggest/properties": {
+			"get": {
+				"x-i18n-description": "rest-endpoint-desc-get-wikibase-suggest-properties",
+				"x-i18n-summary": "rest-endpoint-summ-get-wikibase-suggest-properties",
+				"handler": {
+					"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\PropertyPrefixSearchRouteHandler::factory"
+				}
+			}
+		}
+	}
+}
