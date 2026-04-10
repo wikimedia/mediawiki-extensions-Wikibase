@@ -77,13 +77,6 @@ class PageConnectionPresentationModel extends EchoEventPresentationModel {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getSubjectMessageKey() {
-		return "notification-subject-{$this->type}";
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function getPrimaryLink() {
 		$title = $this->event->getTitle();
 		return [
