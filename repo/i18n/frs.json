@@ -5,5 +5,8 @@
 		]
 	},
 	"wikibase-edit": "beaarbaiden",
-	"wikibase-add": "taufaugen"
+	"wikibase-add": "taufaugen",
+	"wikibase-label-empty": "Kiin betäiken f'rhannen",
+	"wikibase-description-empty": "Kiin beskriiven f'rhannen",
+	"wikibase-sitelinks-special": "Anner websiiden"
 }

@@ -4,7 +4,8 @@
 			"GwikorFrank",
 			"Kw-Moon",
 			"MinecraftAustralia",
-			"Nrowe"
+			"Nrowe",
+			"Flynn"
 		]
 	},
 	"tooltip-t-wikibase": "Kevrenna dhe elven kovskrifva dhata junyes",
@@ -12,6 +13,13 @@
 	"wikibase-dataitem": "Elven {{WBREPONAME}}",
 	"wikibase-editlinks": "Golegi kevrennow",
 	"wikibase-editlinkstitle": "Golegi kevrennow treusyethek",
+	"wikibase-addlinkstitle": "Keworra kevrennow treusyethek",
+	"wikibase-linkitem-addlinks": "Keworra kevrennow",
+	"wikibase-linkitem-title": "Keskelmi gans folen",
+	"wikibase-linkitem-linkpage": "Keskelmi gans folen",
+	"wikibase-linkitem-selectlink": "Dewisewgh gwiasva ha folen may mynnowgh keskelmi dhe'n folen ma.",
+	"wikibase-linkitem-input-site": "Yeth:",
+	"wikibase-linkitem-input-page": "Folen:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Kudha",
 	"wikibase-rc-hide-wikidata-show": "Diskwedhes",

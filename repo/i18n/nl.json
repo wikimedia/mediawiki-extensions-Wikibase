@@ -541,7 +541,7 @@
 	"wikibase-editentity-warning-serializeresult": "Kan entiteitsgegevens voor resultaat niet serialiseren.",
 	"wikibase-federated-properties-search-api-error-message": "Eigenschappen tijdelijk niet beschikbaar",
 	"wikibase-federated-properties-save-api-error-message": "Het opslaan is mislukt vanwege een mislukt verzoek aan de federatiebronwiki.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "Verklaringen over dit item zijn tijdelijk niet beschikbaar vanwege een mislukt verzoek aan de federatiebronwiki. Gelieve de pagina te vernieuwen.",
+	"wikibase-federated-properties-source-wiki-api-error-message": "Verklaringen over dit item zijn tijdelijk niet beschikbaar vanwege een mislukt verzoek aan de federatiebronwiki. Vernieuw de pagina.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Deze Wikibase maakt gebruik van federatieve eigenschappen van een externe bron. U heeft toegang tot de $1.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lijst van eigenschappen op $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Annuleren",
