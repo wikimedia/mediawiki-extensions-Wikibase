@@ -6,15 +6,15 @@
 			"Wikibilig"
 		]
 	},
-	"wikibase-dataitem": "ᠪᠤᠰᠤᠳ ᠬᠡᠯᠡᠨ ᠦ ᠬᠣᠯᠪᠣᠭᠠᠰᠤ",
-	"wikibase-editlinks": "ᠣᠨᠣᠭᠠᠨ ᠬᠣᠯᠪᠣᠬᠤ",
+	"wikibase-dataitem": "{{WBREPONAME}} ᠵᠦᠢᠯ",
+	"wikibase-editlinks": "ᠬᠣᠯᠪᠣᠭᠠᠰᠤ ᠵᠠᠰᠠᠬᠤ",
 	"wikibase-addlinkstitle": "ᠦᠭᠡᠷ᠎ᠡ ᠬᠡᠯᠡ ᠲᠡᠢ ᠬᠤᠯᠪᠤᠬᠤ",
-	"wikibase-linkitem-addlinks": "ᠲᠠᠲᠠᠨ ᠬᠤᠯᠪᠤᠬᠤ",
-	"wikibase-linkitem-title": "ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠤᠭᠠᠰᠤ",
-	"wikibase-linkitem-linkpage": "ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠤᠭᠠᠰᠤ",
-	"wikibase-linkitem-selectlink": "ᠡᠨᠡ ᠬᠠᠭᠤᠳᠠᠰᠤ ᠢᠢ ᠬᠣᠯᠪᠤᠬᠤ ᠴᠠᠬᠢᠮ ᠬᠠᠶᠢᠭ ᠪᠤᠶᠤ ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ ᠢᠢ ᠰᠣᠩᠭᠤ",
-	"wikibase-linkitem-input-site": "ᠬᠡᠯᠡ",
-	"wikibase-linkitem-input-page": "ᠥᠭᠦᠯᠡᠯ:",
+	"wikibase-linkitem-addlinks": "ᠬᠣᠯᠪᠣᠭᠠᠰᠤ ᠨᠡᠮᠡᠬᠦ",
+	"wikibase-linkitem-title": "ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ᠲᠠᠢ ᠬᠣᠯᠪᠤᠬᠤ",
+	"wikibase-linkitem-linkpage": "ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ᠲᠠᠢ ᠬᠣᠯᠪᠤᠬᠤ",
+	"wikibase-linkitem-selectlink": "ᠡᠨᠡ ᠬᠠᠭᠤᠳᠠᠰᠤ ᠤᠷᠤᠭᠤ ᠬᠣᠯᠪᠣᠬᠤ᠎ᠶᠢ ᠬᠦᠰᠡᠭᠰᠡᠨ ᠰᠠᠢᠲ ᠪᠣᠯᠤᠨ ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ᠪᠠᠨ ᠰᠣᠩᠭᠣᠨ᠎ᠠ ᠤᠤ᠃",
+	"wikibase-linkitem-input-site": "ᠬᠡᠯᠡ᠄",
+	"wikibase-linkitem-input-page": "ᠬᠠᠭᠤᠳᠠᠰᠤ᠄",
 	"wikibase-rc-hide-wikidata-hide": "ᠨᠢᠭᠤᠬᠤ",
 	"wikibase-rc-hide-wikidata-show": "ᠬᠠᠷᠠᠬᠠᠤ"
 }

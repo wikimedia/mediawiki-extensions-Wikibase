@@ -80,6 +80,7 @@
 	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",
 	"wikibase-statementgrouplistview-add": "добавить утверждение",
 	"wikibase-statementgrouplistview-add-tooltip": "Добавить новое утверждение",
+	"wikibase-statementgrouplistview-edit": "редактирование {{PLURAL:$1|утверждения|утверждений}}",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На других языках",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показывать метки, синонимы и описания сразу на всех моих языках",
