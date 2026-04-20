@@ -1,6 +1,7 @@
 <template>
 	<wikibase-wbui2025-modal-overlay
-		modal-class="wikibase-wbui2025-edit-statement-group-modal">
+		modal-class="wikibase-wbui2025-edit-statement-group-modal"
+		@hide="onModalHide">
 		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
 			<div class="wikibase-wbui2025-edit-statement-heading">
 				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelForm"></cdx-icon>
@@ -229,6 +230,14 @@ module.exports = exports = defineComponent( {
 			this.newStatementId = null;
 			this.showAddValueModal = false;
 			this.showEditStatementModal = true;
+		},
+		onModalHide() {
+			if ( this.showAddValueModal ) {
+				// eslint-disable-next-line vue/no-undef-properties
+				this.cancelAddValue();
+				return;
+			}
+			this.$emit( 'hide' );
 		},
 		submitForm() {
 			// eslint-disable-next-line vue/no-undef-properties

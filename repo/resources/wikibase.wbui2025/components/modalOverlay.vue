@@ -15,14 +15,14 @@
 								v-if="!minimalStyle"
 								weight="quiet"
 								:aria-label="$i18n( 'wikibase-cancel' )"
-								@click="$emit( 'hide' )">
+								@click="requestHide">
 								<cdx-icon :icon="cdxIconArrowPrevious"></cdx-icon>
 							</cdx-button>
 							<div v-if="minimalStyle" class="wikibase-wbui2025-modal-overlay__header__close-button">
 								<cdx-button
 									:aria-label="$i18n( 'wikibase-cancel' )"
 									weight="quiet"
-									@click="$emit( 'hide' )"
+									@click="requestHide"
 								>
 									<cdx-icon :icon="cdxIconClose"></cdx-icon>
 								</cdx-button>
@@ -56,7 +56,7 @@
 							<div ref="modalOverlayActionsRef" class="wikibase-wbui2025-modal-overlay__footer__actions">
 								<cdx-button
 									weight="quiet"
-									@click="$emit( 'hide' )"
+									@click="requestHide"
 								>
 									<cdx-icon :icon="cdxIconClose"></cdx-icon>
 									{{ $i18n( 'wikibase-cancel' ) }}
@@ -84,6 +84,15 @@ const { defineComponent } = require( 'vue' );
 const { cdxIconArrowPrevious, cdxIconCheck, cdxIconClose } = require( '../icons.json' );
 const { CdxButton, CdxIcon, CdxProgressBar } = require( '../../../codex.js' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+
+const modalStack = [];
+
+function onPopState() {
+	const topModal = modalStack[ modalStack.length - 1 ];
+	if ( topModal ) {
+		topModal.hide();
+	}
+}
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -140,7 +149,10 @@ module.exports = exports = defineComponent( {
 		return {
 			cdxIconArrowPrevious,
 			cdxIconCheck,
-			cdxIconClose
+			cdxIconClose,
+			modalStackEntry: {
+				hide: () => this.$emit( 'hide' )
+			}
 		};
 	},
 	computed: {
@@ -150,11 +162,31 @@ module.exports = exports = defineComponent( {
 				: mw.msg( 'wikibase-save' );
 		}
 	},
+	methods: {
+		requestHide() {
+			window.history.back();
+		}
+	},
 	mounted() {
 		document.body.classList.add( 'wikibase-wbui2025-modal-open' );
 		wbui2025.store.useMessageStore().clearStatusMessages();
+		modalStack.push( this.modalStackEntry );
+
+		if ( modalStack.length === 1 ) {
+			window.addEventListener( 'popstate', onPopState );
+		}
+		window.history.pushState( {}, '' );
 	},
 	unmounted() {
+		if ( this.modalStackEntry ) {
+			const index = modalStack.indexOf( this.modalStackEntry );
+			if ( index !== -1 ) {
+				modalStack.splice( index, 1 );
+			}
+		}
+		if ( modalStack.length === 0 ) {
+			window.removeEventListener( 'popstate', onPopState );
+		}
 		const target = document.getElementById( 'mw-teleport-target' );
 		if ( target && target.querySelectorAll( '.wikibase-wbui2025-modal-overlay' ).length === 0 ) {
 			document.body.classList.remove( 'wikibase-wbui2025-modal-open' );

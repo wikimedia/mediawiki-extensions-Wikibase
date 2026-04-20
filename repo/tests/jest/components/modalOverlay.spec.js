@@ -76,5 +76,28 @@ describe( 'wikibase.wbui2025.modalOverlay', () => {
 			await modal2.unmount();
 			expect( document.body.className ).toEqual( '' );
 		} );
+
+		it( 'closes modal on browser back', async () => {
+			const modal = await mountModalComponent();
+			window.dispatchEvent( new PopStateEvent( 'popstate' ) );
+			expect( modal.emitted( 'hide' ) ).toBeTruthy();
+		} );
+
+		it( 'only closes the topmost modal on browser back', async () => {
+			const modal1 = await mountModalComponent();
+			const modal2 = await mountModalComponent();
+
+			window.dispatchEvent( new PopStateEvent( 'popstate' ) );
+
+			expect( modal1.emitted( 'hide' ) ).toBeFalsy();
+			expect( modal2.emitted( 'hide' ) ).toBeTruthy();
+		} );
+
+		it( 'uses browser history when closed via UI', async () => {
+			const backSpy = jest.spyOn( window.history, 'back' ).mockImplementation( () => {} );
+			const modal = await mountModalComponent();
+			await modal.vm.requestHide();
+			expect( backSpy ).toHaveBeenCalled();
+		} );
 	} );
 } );

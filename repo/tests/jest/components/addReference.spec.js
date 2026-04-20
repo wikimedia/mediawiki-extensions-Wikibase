@@ -77,9 +77,10 @@ describe( 'wikibase.wbui2025.addReference', () => {
 			expect( wrapper.findComponent( '.wikibase-wbui2025-add-reference-value' ).exists() ).toBe( false );
 		} );
 
-		it( 'emits "hide" when the close button is clicked', async () => {
+		it( 'uses browser history when the close button is clicked', async () => {
+			const backSpy = jest.spyOn( window.history, 'back' ).mockImplementation( () => {} );
 			await closeButton.trigger( 'click' );
-			expect( wrapper.emitted( 'hide' ) ).toHaveLength( 1 );
+			expect( backSpy ).toHaveBeenCalled();
 		} );
 
 		describe( 'when a property with string datatype is selected', () => {
