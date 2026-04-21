@@ -62,7 +62,7 @@
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Να μην εμφανιστεί ξανά",
 	"wikibase-label-empty": "Δεν έχει ορισθεί ετικέτα",
 	"wikibase-label-edit-placeholder": "προσθέστε ετικέτα",
-	"wikibase-label-edit-placeholder-language-aware": "Εισαγάγετε ετικέτα στο $1",
+	"wikibase-label-edit-placeholder-language-aware": "Εισαγάγετε ετικέτα στα $1",
 	"wikibase-label-edit-placeholder-mul": "προσθέστε προεπιλεγμένη ετικέτα",
 	"wikibase-description-empty": "Δεν ορίστηκε περιγραφή",
 	"wikibase-description-edit-placeholder": "προσθέστε περιγραφή",

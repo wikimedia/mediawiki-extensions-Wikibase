@@ -5,7 +5,8 @@
 			"Filipinayzd",
 			"Geopoet",
 			"Kunokuno",
-			"ShimunUfesoj"
+			"ShimunUfesoj",
+			"ShiminUfesoj"
 		]
 	},
 	"tooltip-t-wikibase": "Takod sa konektadong bagay sa repositoryo nin datus",
@@ -13,6 +14,7 @@
 	"wikibase-dataitem": "Item na {{WBREPONAME}}",
 	"wikibase-editlinks": "Baguhon an mga link",
 	"wikibase-editlinkstitle": "Liwaton an mga interlengwaheng takod",
+	"wikibase-addlinkstitle": "Magdugang nin mga takod sa tanga nin mga tataramon",
 	"wikibase-linkitem-addlinks": "Magdagdag nin link",
 	"wikibase-linkitem-title": "Itakod sa pahina",
 	"wikibase-linkitem-linkpage": "Itakod sa pahina",
