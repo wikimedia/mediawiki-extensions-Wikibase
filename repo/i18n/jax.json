@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pitchrigi"
+			"Pitchrigi",
+			"Muhamad Izzul Fiqih"
 		]
 	},
-	"wikibase-edit": "sunting"
+	"wikibase-edit": "sunting",
+	"wikibase-add": "tambah",
+	"wikibase-description-empty": "Katek deskripsi",
+	"wikibase-sitelinks-special": "Situs lain"
 }
