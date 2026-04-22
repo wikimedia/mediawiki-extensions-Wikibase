@@ -3,11 +3,6 @@
 const { action, assert, utils, wiki } = require( 'api-testing' );
 
 const api = action.getAnon();
-const apiForItemControllerTest = action.getAnon();
-apiForItemControllerTest.req.set(
-	'X-Config-Override',
-	JSON.stringify( { wgWBRepoSettings: { tmpTestingItemController: true } } )
-);
 const ITEM_EN_LABEL = 'e2e-item-en-' + utils.uniq();
 const ITEM_EN_ALIAS = 'e2e-item-alias-' + utils.uniq();
 const ITEM_DE_LABEL = 'e2e-item-de-' + utils.uniq();
@@ -58,27 +53,6 @@ async function isMulLanguageEnabled() {
 	return response.query.languages.some( ( l ) => l.code === 'mul' );
 }
 
-/**
- * Runs the same test against both the regular wbsearchentities and then again against a version
- * of it that uses the WbSearchEntitiesItemController implementation. This will no longer be
- * needed once T421994 is completed.
- *
- * @param {string} testName
- * @param {Function} testCallback
- */
-async function withItemController( testName, testCallback ) {
-	const apis = {
-		'with regular api': api,
-		'with ItemWbSearchEntitiesController': apiForItemControllerTest
-	};
-
-	for ( const [ type, client ] of Object.entries( apis ) ) {
-		it( `${ type } - ${ testName }`, async function () {
-			await testCallback( client );
-		} );
-	}
-}
-
 describe( 'wbsearchentities', () => {
 	let testItemId;
 	let testPropertyId;
@@ -106,8 +80,8 @@ describe( 'wbsearchentities', () => {
 		testItemConceptUri = await getConceptUri( testItemId );
 	} );
 
-	withItemController( 'returns empty results when no matches are found', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'returns empty results when no matches are found', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: 'nonexistent',
 			language: 'en',
 			type: 'item',
@@ -116,8 +90,8 @@ describe( 'wbsearchentities', () => {
 		assert.isEmpty( response.search );
 	} );
 
-	withItemController( 'response contains the expected fields and result shape', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'response contains the expected fields and result shape', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: testItemId,
 			language: 'en',
 			type: 'item',
@@ -140,8 +114,8 @@ describe( 'wbsearchentities', () => {
 		] );
 	} );
 
-	withItemController( 'finds item by English label', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds item by English label', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: ITEM_EN_LABEL,
 			language: 'en',
 			type: 'item',
@@ -156,8 +130,8 @@ describe( 'wbsearchentities', () => {
 		assert.equal( result.display.label.language, 'en' );
 	} );
 
-	withItemController( 'finds items by English alias', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds items by English alias', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: ITEM_EN_ALIAS,
 			language: 'en',
 			type: 'item',
@@ -185,8 +159,8 @@ describe( 'wbsearchentities', () => {
 		assert.equal( result.match.text, PROP_EN_LABEL );
 	} );
 
-	withItemController( 'finds item by entity ID', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds item by entity ID', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: testItemId,
 			language: 'en',
 			type: 'item',
@@ -197,8 +171,8 @@ describe( 'wbsearchentities', () => {
 		assert.notProperty( response.search[ 0 ].match, 'language' );
 	} );
 
-	withItemController( 'finds item by concept URI', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds item by concept URI', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: testItemConceptUri,
 			language: 'en',
 			type: 'item',
@@ -208,8 +182,8 @@ describe( 'wbsearchentities', () => {
 		assert.equal( response.search[ 0 ].match.type, 'entityId' );
 	} );
 
-	withItemController( 'finds items when no type is specified (defaults to item)', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds items when no type is specified (defaults to item)', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: ITEM_EN_LABEL,
 			language: 'en',
 			// no 'type' param – the API defaults to 'item'
@@ -219,8 +193,8 @@ describe( 'wbsearchentities', () => {
 		assert.isOk( itemResult, 'item should appear in search results' );
 	} );
 
-	withItemController( 'finds item by label in other languages', async ( client ) => {
-		const response = await client.action( 'wbsearchentities', {
+	it( 'finds item by label in other languages', async () => {
+		const response = await api.action( 'wbsearchentities', {
 			search: ITEM_DE_LABEL,
 			language: 'de',
 			type: 'item',
@@ -244,8 +218,8 @@ describe( 'wbsearchentities', () => {
 			await flushJobs();
 		} );
 
-		withItemController( 'limit controls the number of results', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'limit controls the number of results', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: LIMIT_LABEL_PREFIX,
 				language: 'en',
 				type: 'item',
@@ -256,14 +230,14 @@ describe( 'wbsearchentities', () => {
 			assert.equal( response[ 'search-continue' ], 2 );
 		} );
 
-		withItemController( 'continue offsets the results', async ( client ) => {
-			const firstPageResponse = await client.action( 'wbsearchentities', {
+		it( 'continue offsets the results', async () => {
+			const firstPageResponse = await api.action( 'wbsearchentities', {
 				search: LIMIT_LABEL_PREFIX,
 				language: 'en',
 				type: 'item',
 				limit: 2,
 			} );
-			const secondPageResponse = await client.action( 'wbsearchentities', {
+			const secondPageResponse = await api.action( 'wbsearchentities', {
 				search: LIMIT_LABEL_PREFIX,
 				language: 'en',
 				type: 'item',
@@ -307,8 +281,8 @@ describe( 'wbsearchentities', () => {
 			await flushJobs();
 		} );
 
-		withItemController( 'returns items via language fallback when strictlanguage is not set', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'returns items via language fallback when strictlanguage is not set', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: FALLBACK_LABEL,
 				language: 'fr',
 				type: 'item',
@@ -349,8 +323,8 @@ describe( 'wbsearchentities', () => {
 			assert.equal( result.match.language, 'mul' );
 		} );
 
-		withItemController( 'returns both items via language fallback when strictlanguage is not set', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'returns both items via language fallback when strictlanguage is not set', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: FALLBACK_LABEL,
 				language: 'de',
 				type: 'item',
@@ -392,8 +366,8 @@ describe( 'wbsearchentities', () => {
 			);
 		} );
 
-		withItemController( 'uselang controls the result language independently of the search language', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'uselang controls the result language independently of the search language', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: ITEM_EN_LABEL,
 				language: 'en',
 				type: 'item',
