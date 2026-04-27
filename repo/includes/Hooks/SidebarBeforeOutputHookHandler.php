@@ -8,8 +8,11 @@ use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -43,7 +46,6 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 	 * @var LoggerInterface
 	 */
 	private $logger;
-
 	private SettingsArray $wikibaseRepoSettings;
 
 	public function __construct(
@@ -119,14 +121,20 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 		$links = [];
 		foreach ( $wikiProjectsConfig as $projectConfig ) {
 			if (
-				!isset( $projectConfig[ 'propertyIds' ] ) ||
 				!isset( $projectConfig[ 'text' ] ) ||
-				!isset( $projectConfig[ 'href' ] ) ||
-				!is_array( $projectConfig[ 'propertyIds' ] )
+				!isset( $projectConfig[ 'href' ] )
 			) {
 				continue;
 			}
-			if ( count( array_intersect( array_keys( $properties ), $projectConfig[ 'propertyIds' ] ) ) > 0 ) {
+
+			$matchesProperty = isset( $projectConfig[ 'propertyIds' ] ) &&
+				is_array( $projectConfig[ 'propertyIds' ] ) &&
+				count( array_intersect( array_keys( $properties ), $projectConfig[ 'propertyIds' ] ) ) > 0;
+
+			if (
+				$matchesProperty ||
+				$this->itemMatchesWikiProject( $entity, $projectConfig )
+			) {
 				$links[] = [
 					// TODO determine if/how to use translated titles rather than monolingual text from the config T425437
 					'text' => $projectConfig[ 'text' ],
@@ -142,6 +150,40 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 		if ( count( $links ) > 0 ) {
 			$sidebar[ 'wikibase-wikiprojects-sidebar-section' ] = $links;
 		}
+	}
+
+	private function itemMatchesWikiProject( StatementListProvider $entity, array $wikiProject ): bool {
+		foreach ( $wikiProject[ 'statements' ] ?? [] as $propertyId => $entityIds ) {
+			$statements = $entity->getStatements()->getByPropertyId(
+				new NumericPropertyId( $propertyId )
+			);
+
+			foreach ( $statements as $statement ) {
+				$mainSnak = $statement->getMainSnak();
+
+				if ( !$mainSnak instanceof PropertyValueSnak ) {
+					continue;
+				}
+
+				$dataValue = $mainSnak->getDataValue();
+
+				if ( !$dataValue instanceof EntityIdValue ) {
+					continue;
+				}
+
+				if (
+					in_array(
+						$dataValue->getEntityId()->getSerialization(),
+						$entityIds,
+						true
+					)
+				) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	/**

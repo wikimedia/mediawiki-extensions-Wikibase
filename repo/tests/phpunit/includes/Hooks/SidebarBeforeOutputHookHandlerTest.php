@@ -9,12 +9,14 @@ use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
@@ -128,6 +130,15 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P2' ) ) ) );
 		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( new NumericPropertyId( 'P222' ) ) ) );
 
+		$item->getStatements()->addStatement(
+			new Statement(
+				new PropertyValueSnak(
+					new NumericPropertyId( 'P2539' ),
+					new EntityIdValue( new ItemId( 'Q2592' ) )
+				)
+			)
+		);
+
 		$itemWithoutStatements = new Item( new ItemId( 'Q2' ) );
 
 		$matchingProject1 = [
@@ -146,6 +157,31 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'propertyIds' => [ 'P4' ],
 			'href' => 'project-url-3',
 			'text' => 'WikiProject Third',
+		];
+
+		$matchingStatementProject = [
+			'statements' => [
+				'P2539' => [ 'Q2592' ],
+			],
+			'href' => 'project-url-statement',
+			'text' => 'WikiProject Statement Match',
+		];
+
+		$nonmatchingStatementProject = [
+			'statements' => [
+				'P2539' => [ 'Q999' ],
+			],
+			'href' => 'project-url-statement-no-match',
+			'text' => 'WikiProject Statement No Match',
+		];
+
+		$propertyMatchWithInvalidStatementProject = [
+			'propertyIds' => [ 'P2' ],
+			'statements' => [
+				'not-a-property-id' => [ 'Q1' ],
+			],
+			'href' => 'project-url-short-circuit',
+			'text' => 'WikiProject Short Circuit',
 		];
 
 		return [
@@ -195,6 +231,65 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 			],
 			'without projects' => [ $item, [], false, [] ],
 			'item without statements' => [ $itemWithoutStatements, [ $matchingProject1 ], false, [] ],
+			'with matching statement value' => [
+				$item,
+				[ $matchingStatementProject ],
+				true,
+				[
+					[
+						'href' => 'project-url-statement',
+						'text' => 'WikiProject Statement Match',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+				],
+			],
+			'without matching statement value' => [
+				$item,
+				[ $nonmatchingStatementProject ],
+				false,
+				[],
+			],
+			'with propertyIds and statements matching' => [
+				$item,
+				[ $matchingProject1, $matchingStatementProject ],
+				true,
+				[
+					[
+						'href' => 'project-url-1',
+						'text' => 'WikiProject First',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+					[
+						'href' => 'project-url-statement',
+						'text' => 'WikiProject Statement Match',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+				],
+			],
+			'property match short-circuits invalid statement config' => [
+				$item,
+				[ $propertyMatchWithInvalidStatementProject ],
+				true,
+				[
+					[
+						'href' => 'project-url-short-circuit',
+						'text' => 'WikiProject Short Circuit',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+				],
+			],
 			'no entity' => [ null, [ $matchingProject1 ], false, [] ],
 		];
 	}
@@ -212,7 +307,6 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->getHookHandler(
 			[ 'tmpWikiProjectsLinking' => $wikiProjectConfig ]
 		)->onSidebarBeforeOutput( $this->skin, $sidebar );
-
 		if ( $linksIncluded ) {
 			$this->assertArrayHasKey( 'wikibase-wikiprojects-sidebar-section', $sidebar );
 			$this->assertArrayEquals( $expectedArray, $sidebar[ 'wikibase-wikiprojects-sidebar-section' ] );
