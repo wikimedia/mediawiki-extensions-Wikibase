@@ -4,11 +4,12 @@
 			"Brazal.dang",
 			"Daramlagon",
 			"Geopoet",
-			"ShimunUfesoj"
+			"ShimunUfesoj",
+			"ShiminUfesoj"
 		]
 	},
-	"wikibase-edit": "baguhon",
-	"wikibase-add": "magdagdag",
+	"wikibase-edit": "liwaton",
+	"wikibase-add": "magdugang",
 	"wikibase-label-empty": "Mayong label",
 	"wikibase-description-empty": "Mayong paglaladawan",
 	"wikibase-sitelinks-special": "Iba pang mga site",
