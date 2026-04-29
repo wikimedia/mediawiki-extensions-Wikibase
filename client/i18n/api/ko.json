@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
 	"apihelp-query+wbentityusage-param-prop": "결과에 추가할 속성입니다.",
@@ -11,6 +12,7 @@
 	"apihelp-query+wblistentityusage-example-url": "URL을 포함하여 <kbd>Q2</kbd> 엔티티를 사용하는 문서를 가져옵니다.",
 	"apihelp-query+pageterms-example-simple": "사용자 언어로 'London' 문서와 관련된 모든 용어를 가져옵니다.",
 	"apihelp-query+pageterms-example-label-en": "영어로 'London' 문서와 관련된 레이블과 다른 이름을 가져옵니다.",
+	"apihelp-query+description-summary": "대상 문서가 무엇인지를 설명하는 짧은 설명, 즉 부제를 가져옵니다.",
 	"apihelp-query+description-example": "'London' 문서의 설명을 가져옵니다.",
 	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML 마크업입니다."
 }
