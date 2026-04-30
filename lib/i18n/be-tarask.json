@@ -6,7 +6,8 @@
 			"Red Winged Duck",
 			"Renessaince",
 			"Wizardist",
-			"Zedlik"
+			"Zedlik",
+			"Ucukor"
 		]
 	},
 	"specialpages-group-wikibase": "Вікібаза",
@@ -81,7 +82,7 @@
 	"wikibase-entity-summary-wbcreateredirect": "Перанакіраваны на $4",
 	"wikibase-entity-summary-wbeditentity": "Створаная новая існасьць",
 	"wikibase-entity-summary-wbeditentity-create": "Створаная новая існасьць",
-	"wikibase-entity-summary-wbeditentity-update": "Зьмененая ўласьцівасьць",
+	"wikibase-entity-summary-wbeditentity-update": "Зьмененая існасьць",
 	"wikibase-entity-summary-wbeditentity-override": "Ачышчаная існасьць",
 	"wikibase-entity-summary-wbeditentity-update-languages": "Зьмененыя метка, апісаньне і/або сынонімы $3 {{PLURAL:$3|мовай|мовамі}}",
 	"wikibase-entity-summary-wbeditentity-update-languages-short": "Зьмененыя метка, апісаньне і/або сынонімы мовамі: {{#commaseparatedlist: $3}}",
