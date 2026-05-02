@@ -1027,7 +1027,7 @@
 		"Wikibase": "repo/i18n",
 		"WikibaseApi": "repo/i18n/api",
 		"WikibaseLib": "lib/i18n",
-		"WikibaseView": "view/lib/wikibase-data-values-value-view/i18n"
+		"WikibaseView": "view/packages/wikibase-data-values-value-view/i18n"
 	},
 	"ExtensionMessagesFiles": {
 		"WikibaseAlias": "repo/Wikibase.i18n.alias.php",
@@ -1047,8 +1047,8 @@
 			"repo/tests/qunit/index.js",
 			"view/tests/qunit/wikibase/wikibase.tests.js",
 			"view/tests/qunit/getMockListItemAdapter.js",
-			"view/lib/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.testExpert.js",
-			"view/lib/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.MockViewState.js",
+			"view/packages/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.testExpert.js",
+			"view/packages/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.MockViewState.js",
 			"lib/tests/qunit/wikibase.Site.tests.js",
 			"view/tests/qunit/experts/wikibase.experts.modules.tests.js",
 			"view/tests/qunit/jquery/ui/jquery.ui.closeable.tests.js",

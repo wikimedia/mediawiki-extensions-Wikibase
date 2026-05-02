@@ -12,10 +12,10 @@
 	require( '../jquery.event.special.eachchange.js' );
 
 	// wikibase.api module
-	require( '../../../lib/resources/wikibase-api/src/namespace.js' );
-	require( '../../../lib/resources/wikibase-api/src/RepoApi.js' );
-	require( '../../../lib/resources/wikibase-api/src/getLocationAgnosticMwApi.js' );
-	require( '../../../lib/resources/wikibase-api/src/RepoApiError.js' );
+	require( '../../../lib/resources/packages/wikibase-api/src/namespace.js' );
+	require( '../../../lib/resources/packages/wikibase-api/src/RepoApi.js' );
+	require( '../../../lib/resources/packages/wikibase-api/src/getLocationAgnosticMwApi.js' );
+	require( '../../../lib/resources/packages/wikibase-api/src/RepoApiError.js' );
 
 	/**
 	 * This widget allows linking articles with Wikibase items or creating new wikibase items directly
