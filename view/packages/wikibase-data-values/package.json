@@ -1,0 +1,49 @@
+{
+	"name": "wikibase-data-values",
+	"description": "JavaScript implementations of all basic DataValue classes, associated parsers and formatters",
+	"keywords": [
+		"datavalues",
+		"wikidata"
+	],
+	"version": "0.10.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/wmde/DataValuesJavaScript"
+	},
+	"contributors": [
+		{
+			"name": "Daniel Werner",
+			"url": "https://www.mediawiki.org/wiki/User:Danwe"
+		},
+		{
+			"name": "H. Snater",
+			"url": "http://www.snater.com"
+		},
+		{
+			"name": "Jeroen De Dauw",
+			"email": "jeroendedauw@gmail.com",
+			"homepage": "http://jeroendedauw.com"
+		}
+	],
+	"bugs": {
+		"url": "https://phabricator.wikimedia.org/"
+	},
+	"license": "GPL-2.0+",
+	"dependencies": {
+		"jquery": "^3.2.1"
+	},
+	"devDependencies": {
+		"eslint": "^4.18.2",
+		"eslint-config-wikimedia": "0.4.0",
+		"karma": "^6.1.0",
+		"karma-cli": "^1.0.1",
+		"karma-chrome-launcher": "^3.1.0",
+		"karma-qunit": "^4.1.2",
+		"qunit": "^2.14.0"
+	},
+	"scripts": {
+		"test": "npm run eslint && npm run run-tests",
+		"eslint": "eslint .",
+		"run-tests": "karma start --single-run"
+	}
+}
