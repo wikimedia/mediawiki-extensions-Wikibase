@@ -1,10 +1,8 @@
 # Upstream code
 /view/resources/jquery/ui/
 /view/lib/
-/view/packages/
 /client/data-bridge/
 /lib/resources/wikibase-api/
-/lib/resources/packages/
 /lib/packages/wikibase/*/tests/**/*.json
 
 # Build tooling
