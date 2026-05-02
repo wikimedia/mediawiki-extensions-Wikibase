@@ -1,0 +1,24 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/mediawiki",
+		"wikimedia/jquery"
+	],
+	"globals": {
+		"wikibase": "readonly"
+	},
+	"rules": {
+		"max-len": "off",
+		"no-underscore-dangle": "off",
+		"no-var": "warn",
+		"operator-linebreak": "off",
+		"prefer-arrow-callback": "warn",
+		"jsdoc/check-alignment": "off",
+		"jsdoc/newline-after-description": "off",
+		"jsdoc/require-returns": "off",
+		"jsdoc/require-returns-check": "off",
+		"no-jquery/no-extend": "warn",
+		"no-jquery/no-done-fail": "warn"
+	}
+}

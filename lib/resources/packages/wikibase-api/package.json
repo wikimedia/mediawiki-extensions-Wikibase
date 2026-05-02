@@ -1,0 +1,39 @@
+{
+	"name": "wikibase-api",
+	"description": "JavaScript client for the Wikibase Repository web API",
+	"version": "3.1.1",
+	"license": "GPL-2.0+",
+	"contributors": [
+		{
+			"name": "H. Snater",
+			"url": "http://www.snater.com"
+		},
+		{
+			"name": "Adrian Lang",
+			"email": "adrian.lang@wikimedia.de"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://gerrit.wikimedia.org/r/wikibase/javascript-api"
+	},
+	"bugs": {
+		"url": "https://phabricator.wikimedia.org/"
+	},
+	"scripts": {
+		"test": "grunt test"
+	},
+	"dependencies": {
+		"jquery": "3.6.0",
+		"wikibase-data-values": "^0.10.0"
+	},
+	"devDependencies": {
+		"eslint-config-wikimedia": "0.31.0",
+		"grunt": "1.6.1",
+		"grunt-contrib-qunit": "^5.1.0",
+		"grunt-eslint": "24.3.0",
+		"phantomjs-prebuilt": "^2.1.16",
+		"qunit": "2.24.1",
+		"sinon": "^15.0.1"
+	}
+}
