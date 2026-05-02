@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"BRUTE",
+			"David1010"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ცარიელი",
+	"valueview-expert-globecoordinateinput-precision": "სიზუსტე:",
+	"valueview-expert-globecoordinateinput-nullprecision": "არ არის მითითებული",
+	"valueview-expert-timevalue-calendar-gregorian": "გრიგორიანული",
+	"valueview-expert-timevalue-calendar-julian": "იულიუსის",
+	"valueview-expert-timeinput-precision": "სიზუსტე:",
+	"valueview-expert-timeinput-calendar": "კალენდარი:",
+	"valueview-expertextender-languageselector-label": "ენა (სავალდებულო):",
+	"valueview-expertextender-unitsuggester-label": "ერთეული (არასავალდებულო):",
+	"valueview-preview-label": "ნაჩვენები იქნება როგორც:"
+}

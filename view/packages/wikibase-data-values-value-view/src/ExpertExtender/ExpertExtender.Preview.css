@@ -1,0 +1,9 @@
+.ui-inputextender-extension .ui-preview {
+	margin-top: 0;
+	width: 100%;
+}
+.ui-inputextender-extension .ui-preview-value {
+	margin-top: 0.2em;
+	font-size: 150%;
+	font-weight: bold;
+}

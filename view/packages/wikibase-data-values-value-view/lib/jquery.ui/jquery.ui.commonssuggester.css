@@ -1,0 +1,28 @@
+/**
+ * @license GNU GPL v2+
+ */
+.ui-commonssuggester-list a {
+	max-width: 50em;
+	overflow: hidden;
+	padding-left: 0;
+	-o-text-overflow: ellipsis; /* Opera 9 to 10 */
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ui-commonssuggester-list a .ui-commonssuggester-thumbnail {
+	background-color: #eee;
+	background-position: center;
+	background-size: auto 50px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) inset;
+	color: #999;
+	display: inline-block;
+	height: 50px;
+	line-height: 50px;
+	margin-right: 0.5em;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 50px;
+}

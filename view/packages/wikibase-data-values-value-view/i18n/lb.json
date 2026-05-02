@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Les Meloures",
+			"Robby",
+			"Volvox"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "eidel",
+	"valueview-expert-globecoordinateinput-precision": "Prezisioun:",
+	"valueview-expert-globecoordinateinput-nullprecision": "net uginn",
+	"valueview-expert-globecoordinateinput-customprecision": "Spezial ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "op eng Bousekonn genee",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "op 1/10 vun enger Bousekonn genee",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "op 1/100 vun enger Bousekonn genee",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "op 1/1000 vun enger Bousekonn genee",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorianesch",
+	"valueview-expert-timevalue-calendar-julian": "Julianesch",
+	"valueview-expert-timeinput-precision": "Prezisioun:",
+	"valueview-expert-timeinput-precision-year1g": "Milliarde Joer",
+	"valueview-expert-timeinput-precision-year100m": "honnert Millioune Joer",
+	"valueview-expert-timeinput-precision-year10m": "zéng Millioune Joer",
+	"valueview-expert-timeinput-precision-year1m": "Millioun Joer",
+	"valueview-expert-timeinput-precision-year100k": "100.000 Joer",
+	"valueview-expert-timeinput-precision-year10k": "10.000 Joer",
+	"valueview-expert-timeinput-precision-year1k": "Joerdausend",
+	"valueview-expert-timeinput-precision-year100": "Joerhonnert",
+	"valueview-expert-timeinput-precision-year10": "Joerzéngt",
+	"valueview-expert-timeinput-precision-year": "Joer",
+	"valueview-expert-timeinput-precision-month": "Mount",
+	"valueview-expert-timeinput-precision-day": "Dag",
+	"valueview-expert-timeinput-precision-hour": "Stonn",
+	"valueview-expert-timeinput-precision-minute": "Minutt",
+	"valueview-expert-timeinput-precision-second": "Sekonn",
+	"valueview-expert-timeinput-calendar": "Kalenner:",
+	"valueview-expertextender-languageselector-label": "Sprooch (obligatoresch)",
+	"valueview-expertextender-unitsuggester-label": "Eenheet (fakultativ)",
+	"valueview-preview-label": "gëtt gewisen als:",
+	"valueview-preview-novalue": "kee gültege Wäert erkannt",
+	"valueview-listrotator-manually": "manuell astellen"
+}

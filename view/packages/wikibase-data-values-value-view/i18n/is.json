@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar",
+			"Sveinn í Felli"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Gildið „$1” er ekki enn stutt.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Meðhöndlun á gildum af gagnagerð „$1” er ekki studd ennþá.",
+	"valueview-expert-emptyvalue-empty": "tómt",
+	"valueview-expert-globecoordinateinput-precision": "Nákvæmni:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ótilgreint",
+	"valueview-expert-globecoordinateinput-customprecision": "sérstakt ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoríanskt",
+	"valueview-expert-timevalue-calendar-julian": "Júlíanskt",
+	"valueview-expert-timeinput-precision": "Nákvæmni:",
+	"valueview-expert-timeinput-calendar": "Dagatal:",
+	"valueview-expertextender-languageselector-label": "Tungumál (skilyrði):",
+	"valueview-expertextender-unitsuggester-label": "Eining (valkvætt):",
+	"valueview-preview-label": "verður birt sem:"
+}

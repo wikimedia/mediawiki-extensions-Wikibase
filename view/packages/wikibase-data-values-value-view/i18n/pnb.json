@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Abbas dhothar"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "خالی",
+	"valueview-expert-globecoordinateinput-nullprecision": "غیر درجہ بند",
+	"valueview-expert-globecoordinateinput-customprecision": "خاص($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "گریگوری",
+	"valueview-expert-timevalue-calendar-julian": "جولیئن",
+	"valueview-expert-timeinput-precision": "درستی:",
+	"valueview-expert-timeinput-calendar": "کیلنڈر",
+	"valueview-expertextender-languageselector-label": "بولی (نمائندہ)",
+	"valueview-expertextender-unitsuggester-label": "یونٹ (اختیاری)"
+}

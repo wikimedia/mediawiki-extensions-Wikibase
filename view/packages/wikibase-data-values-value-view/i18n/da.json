@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Byrial",
+			"C960657",
+			"Joedalton",
+			"Jorn Ari",
+			"Peter Alberti",
+			"Saederup92"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Håndtering af værdier af $1 understøttes ikke endnu.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Håndtering af værdier for datatypen $1 understøttes ikke endnu.",
+	"valueview-expert-emptyvalue-empty": "tom",
+	"valueview-expert-globecoordinateinput-precision": "Præcision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "uspecificeret",
+	"valueview-expert-globecoordinateinput-customprecision": "speciel ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "gregoriansk",
+	"valueview-expert-timevalue-calendar-julian": "juliansk",
+	"valueview-expert-timeinput-precision": "Præcision:",
+	"valueview-expert-timeinput-precision-year": "år",
+	"valueview-expert-timeinput-precision-month": "måned",
+	"valueview-expert-timeinput-precision-day": "dag",
+	"valueview-expert-timeinput-precision-hour": "time",
+	"valueview-expert-timeinput-precision-minute": "minut",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",
+	"valueview-expertextender-unitsuggester-label": "Enhed (valgfrit):",
+	"valueview-preview-label": "vil blive vist som:",
+	"valueview-preview-novalue": "ingen gyldig værdi blev genkendt",
+	"valueview-listrotator-manually": "angiv manuelt"
+}
