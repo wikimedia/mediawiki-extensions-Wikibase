@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Chaduvari",
+			"Veeven"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" విలువల వాడకానికి ఇంకా మద్దతు లేదు.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" డేటా రకానికి విలువల వాడకానికి ఇంకా మద్దతు లేదు.",
+	"valueview-expert-emptyvalue-empty": "ఖాళీ",
+	"valueview-expert-globecoordinateinput-customprecision": "ప్రత్యేక ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "గ్రెగోరియన్",
+	"valueview-expert-timevalue-calendar-julian": "జూలియన్",
+	"valueview-expert-timeinput-precision-year100m": "పది కోట్ల సంవత్సరాలు",
+	"valueview-expert-timeinput-precision-year10m": "కోటి సంవత్సరాలు",
+	"valueview-expert-timeinput-precision-year1m": "పది లక్షల సంవత్సరాలు",
+	"valueview-expert-timeinput-precision-year100k": "100,000 సంవత్సరాలు",
+	"valueview-expert-timeinput-precision-year10k": "10,000 సంవత్సరాలు",
+	"valueview-expert-timeinput-precision-year1k": "సహస్రాబ్ది",
+	"valueview-expert-timeinput-precision-year100": "శతాబ్దం",
+	"valueview-expert-timeinput-precision-year10": "దశాబ్దం",
+	"valueview-expert-timeinput-precision-year": "సంవత్సరం",
+	"valueview-expert-timeinput-precision-month": "నెల",
+	"valueview-expert-timeinput-precision-day": "రోజు",
+	"valueview-expert-timeinput-precision-hour": "గంట",
+	"valueview-expert-timeinput-precision-minute": "నిమిషం",
+	"valueview-expert-timeinput-calendar": "క్యాలెండరు:",
+	"valueview-expertextender-languageselector-label": "భాష (తప్పనిసరి):",
+	"valueview-expertextender-unitsuggester-label": "కొలమానం (ఐచ్ఛికం):",
+	"valueview-preview-label": "ఇలాఅ చూపిస్తాం:"
+}

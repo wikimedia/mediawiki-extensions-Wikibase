@@ -1,0 +1,37 @@
+{
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/mediawiki"
+	],
+	"env": {
+		"jquery": true,
+		"commonjs": true
+	},
+	"globals": {
+		"dataValues": false,
+		"globeCoordinate": false,
+		"mediaWiki": false,
+		"util": false,
+		"valueFormatters": false,
+		"valueParsers": false
+	},
+	"rules": {
+		"array-bracket-spacing": "off",
+		"comma-spacing": "off",
+		"computed-property-spacing": "off",
+		"indent": "off",
+		"max-len": "off",
+		"no-underscore-dangle": "off",
+		"no-unused-vars": "off",
+		"one-var": "off",
+		"operator-linebreak": "off",
+		"space-before-function-paren": "off",
+		"valid-jsdoc": "off",
+		"vars-on-top": "off",
+		"wrap-iife": "off",
+		"no-shadow": "warn",
+		"mediawiki/class-doc": "warn",
+		"prefer-const": "warn"
+	}
+}

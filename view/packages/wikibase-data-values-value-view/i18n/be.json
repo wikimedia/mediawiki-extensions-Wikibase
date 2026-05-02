@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Artsiom91"
+		]
+	},
+	"valueview-expert-globecoordinateinput-precision": "Дакладнасць:",
+	"valueview-expert-timevalue-calendar-gregorian": "Грыгарыянскі",
+	"valueview-expert-timevalue-calendar-julian": "Юліянскі",
+	"valueview-expert-timeinput-precision": "Дакладнасць:",
+	"valueview-expert-timeinput-calendar": "Каляндар:",
+	"valueview-expertextender-languageselector-label": "Мова (абавязкова):",
+	"valueview-expertextender-unitsuggester-label": "Адзінка вымярэння (неабавязкова):",
+	"valueview-preview-label": "будзе адлюстравана як:",
+	"valueview-listrotator-manually": "вызначыць уручную"
+}

@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fohanno",
+			"Fulup",
+			"StanProg",
+			"Y-M D"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "goullo",
+	"valueview-expert-globecoordinateinput-precision": "Resisted :",
+	"valueview-expert-globecoordinateinput-nullprecision": "Anspisaet",
+	"valueview-expert-globecoordinateinput-customprecision": "dibar($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "",
+	"valueview-expert-timevalue-calendar-julian": "Juluan",
+	"valueview-expert-timeinput-precision": "Resisted :",
+	"valueview-expert-timeinput-calendar": "Deiziadur :",
+	"valueview-expertextender-languageselector-label": "Yezh (ret) :",
+	"valueview-expertextender-unitsuggester-label": "Unanenn(diret) :",
+	"valueview-preview-label": "diskwelet evel :",
+	"valueview-preview-novalue": "N'eus bet anavezet talvoud reizh ebet",
+	"valueview-listrotator-manually": "resisaat gant an dorn"
+}

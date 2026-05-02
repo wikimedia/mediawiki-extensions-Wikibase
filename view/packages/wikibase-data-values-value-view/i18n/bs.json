@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Srdjan m",
+			"Srđan"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "prazno",
+	"valueview-expert-globecoordinateinput-precision": "Preciznost:",
+	"valueview-expert-globecoordinateinput-nullprecision": "neodređeno",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorijanski",
+	"valueview-expert-timevalue-calendar-julian": "Julijanski",
+	"valueview-expert-timeinput-precision": "Preciznost:",
+	"valueview-expert-timeinput-calendar": "Kalendar:",
+	"valueview-expertextender-languageselector-label": "Jezik (obavezno):",
+	"valueview-expertextender-unitsuggester-label": "Jedinica (neobavezno):"
+}

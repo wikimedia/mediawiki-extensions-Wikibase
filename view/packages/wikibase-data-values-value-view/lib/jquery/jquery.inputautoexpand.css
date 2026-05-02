@@ -1,0 +1,17 @@
+.inputAutoexpand_RulerX, .inputAutoexpand_RulerY {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+.inputAutoexpand_RulerX {
+	width: auto;
+	whiteSpace: nowrap;
+	visibility: hidden;
+	display: none;
+}
+
+.inputAutoexpand_RulerY {
+	right: auto;
+	bottom: auto;
+}

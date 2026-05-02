@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elefentiste"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "vacua",
+	"valueview-expert-timevalue-calendar-gregorian": "gregorian",
+	"valueview-expert-timeinput-precision-year100": "sentenio",
+	"valueview-expert-timeinput-precision-year10": "desenio",
+	"valueview-expert-timeinput-precision-year": "anio",
+	"valueview-expert-timeinput-precision-month": "mense",
+	"valueview-expert-timeinput-precision-day": "dia",
+	"valueview-expert-timeinput-precision-hour": "ora",
+	"valueview-expert-timeinput-precision-minute": "minuto",
+	"valueview-expert-timeinput-precision-second": "secondo",
+	"valueview-expert-timeinput-calendar": "Calendario:"
+}

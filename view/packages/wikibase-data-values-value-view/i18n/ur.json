@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"BukhariSaeed",
+			"Obaid Raza",
+			"Zainab Meher"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "خالی",
+	"valueview-expert-globecoordinateinput-precision": "درستی:",
+	"valueview-expert-globecoordinateinput-nullprecision": "غیر تصریح",
+	"valueview-expert-globecoordinateinput-customprecision": "خاص ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "گریگوری",
+	"valueview-expert-timevalue-calendar-julian": "جولین",
+	"valueview-expert-timeinput-precision": "درستی",
+	"valueview-expert-timeinput-calendar": "تقویم:",
+	"valueview-expertextender-languageselector-languagetemplate": "  $1($2)",
+	"valueview-expertextender-languageselector-label": "زبان (ہدایتی):",
+	"valueview-expertextender-unitsuggester-label": "اکائی (اختیاری):",
+	"valueview-preview-label": "یہ کچھ یوں ظاہر ہو گا:"
+}

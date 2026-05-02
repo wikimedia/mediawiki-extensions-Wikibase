@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Работата со вредности од типот „$1“ сè уште не е поддржана.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Работата со вредности за податочниот тип „$1“ сè уште не е поддржана.",
+	"valueview-expert-emptyvalue-empty": "празно",
+	"valueview-expert-globecoordinateinput-precision": "Уточнетост:",
+	"valueview-expert-globecoordinateinput-nullprecision": "неукажано",
+	"valueview-expert-globecoordinateinput-customprecision": "посебна ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "до лачна минута",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "до лачна секунда",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "до 1/10 лачна секунда",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "до 1/100 лачна секунда",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "до 1/1000 лачна секунда",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "грегоријански",
+	"valueview-expert-timevalue-calendar-julian": "јулијански",
+	"valueview-expert-timeinput-precision": "Уточнетост:",
+	"valueview-expert-timeinput-precision-year1g": "милијарди години",
+	"valueview-expert-timeinput-precision-year100m": "сто милијарди години",
+	"valueview-expert-timeinput-precision-year10m": "десет милиони години",
+	"valueview-expert-timeinput-precision-year1m": "милион години",
+	"valueview-expert-timeinput-precision-year100k": "100.000 години",
+	"valueview-expert-timeinput-precision-year10k": "10.000 години",
+	"valueview-expert-timeinput-precision-year1k": "илјадалетие",
+	"valueview-expert-timeinput-precision-year100": "век",
+	"valueview-expert-timeinput-precision-year10": "десетлетие",
+	"valueview-expert-timeinput-precision-year": "година",
+	"valueview-expert-timeinput-precision-month": "месец",
+	"valueview-expert-timeinput-precision-day": "ден",
+	"valueview-expert-timeinput-precision-hour": "час",
+	"valueview-expert-timeinput-precision-minute": "минута",
+	"valueview-expert-timeinput-precision-second": "секунда",
+	"valueview-expert-timeinput-calendar": "Календар:",
+	"valueview-expertextender-languageselector-label": "Јазик (задолж.)",
+	"valueview-expertextender-unitsuggester-label": "Единица (незадолж.)",
+	"valueview-preview-label": "ќе се прикажува како:",
+	"valueview-preview-novalue": "не препознав важечка вредност",
+	"valueview-listrotator-manually": "задај рачно"
+}

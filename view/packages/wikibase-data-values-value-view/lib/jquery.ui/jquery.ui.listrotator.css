@@ -1,0 +1,97 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater < mediawiki@snater.com >
+ */
+.ui-listrotator-caption {
+	clear: both;
+	float: left;
+	margin-right: 0.4em;
+	margin-top: 1px; /* to mirror the border-top: 1px of the .ui-listrotator-curr on the right */
+}
+
+.ui-listrotator {
+	background: none;
+	white-space: nowrap;
+	border: none;
+}
+
+/* Override the users "underline" setting, see ResourceLoaderUserCSSPrefsModule::getStyles. */
+.ui-listrotator a {
+	text-decoration: none;
+}
+.ui-listrotator .ui-listrotator-label {
+	background: none;
+	border: none;
+	cursor: pointer;
+	min-width: 8em; /* same as .ui-suggester-list */
+}
+.ui-listrotator .ui-listrotator-label.ui-state-default:hover {
+	color: black;
+	text-decoration: none;
+}
+.ui-listrotator .ui-listrotator-label.ui-state-disabled {
+	cursor: default;
+}
+
+.ui-listrotator .ui-listrotator-curr.ui-state-active {
+	background: white;
+}
+.ui-listrotator .ui-state-active .ui-listrotator-label {
+	color: black;
+	overflow: hidden;
+}
+
+.ui-listrotator .ui-listrotator-manually {
+	cursor: pointer;
+	float: right;
+	margin-left: 0.4em;
+}
+.ui-listrotator .ui-listrotator-manually input {
+	vertical-align: middle;
+}
+
+.ui-listrotator .ui-listrotator-curr {
+	/* Fail in jquery.ui.core.css */
+	cursor: pointer !important;
+	float: left;
+	padding: 0 5px 0 0.4em;
+	background: none;
+	border: 1px solid silver;
+}
+.ui-listrotator .ui-listrotator-curr > * {
+	float: left;
+}
+.ui-listrotator .ui-listrotator-curr.ui-state-disabled {
+	opacity: 1;
+	border-color: transparent;
+}
+.ui-listrotator .ui-listrotator-curr.ui-state-disabled .ui-listrotator-label {
+	color: #0645ad;
+}
+.ui-listrotator .ui-listrotator-curr:hover.ui-state-disabled .ui-listrotator-label {
+	text-decoration: underline;
+}
+.ui-listrotator .ui-listrotator-curr.ui-state-disabled .ui-icon {
+	visibility: hidden;
+}
+
+.ui-listrotator .ui-icon {
+	display: inline-block;
+}
+
+.ui-listrotator-menu {
+	border-radius: 0;
+	font-size: 84%;
+	padding: 0;
+	position: absolute;
+	z-index: 3; /* needed for MonoBook, inputextender is 1 below */
+}
+
+.ui-listrotator-menu .ui-menu-item {
+	font-size: 84%;
+}
+
+.ui-listrotator-menu li.ui-state-active {
+	background: #b6c8ec;
+	border: none;
+}

@@ -1,0 +1,13 @@
+{
+	"extends": [
+		"wikimedia/qunit",
+		"../.eslintrc.json"
+	],
+	"globals": {
+		"sinon": false
+	},
+	"rules": {
+		"qunit/no-loose-assertions": "warn",
+		"prefer-const": "warn"
+	}
+}

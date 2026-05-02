@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Pavanaja"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ಖಾಲಿ",
+	"valueview-expert-timevalue-calendar-julian": "ಜೂಲಿಯನ್",
+	"valueview-expert-timeinput-precision": "ನಿಖರತೆ",
+	"valueview-expert-timeinput-calendar": "ಪಂಚಾಂಗ"
+}

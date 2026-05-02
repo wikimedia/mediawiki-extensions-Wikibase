@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Belkacem77"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Asexdem n wazalen n isefka \"$1\" ur yettwasefrak ara yakan.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Aseqdec n wazalen i wanaw n isefka \"$1\" ur yettwasefrak ara yakan.",
+	"valueview-expert-emptyvalue-empty": "ilem",
+	"valueview-expert-globecoordinateinput-precision": "Tiseddi:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ur yettwammel ara",
+	"valueview-expert-globecoordinateinput-customprecision": "uzzig ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Agriguryan",
+	"valueview-expert-timevalue-calendar-julian": "Ajulyan",
+	"valueview-expert-timeinput-precision": "Tiseddi:",
+	"valueview-expert-timeinput-calendar": "Awitay:",
+	"valueview-expertextender-languageselector-label": "Tutlayt (tlaq):",
+	"valueview-expertextender-unitsuggester-label": "Tayunt (afrayan):",
+	"valueview-preview-label": "Ad d-yettwasken am:",
+	"valueview-preview-novalue": "ulac azal ameɣtu yettwafen",
+	"valueview-listrotator-manually": "sbadu s ufus"
+}
