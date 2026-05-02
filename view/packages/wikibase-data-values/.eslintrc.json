@@ -1,5 +1,10 @@
 {
-	"extends": "wikimedia",
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery",
+		"wikimedia/mediawiki"
+	],
 	"env": {
 		"browser": true,
 		"jquery": true
@@ -16,17 +21,26 @@
 		"wikibase": false
 	},
 	"rules": {
+		"brace-style": "off",
 		"computed-property-spacing": "off",
+		"eol-last": "off",
 		"indent": "off",
 		"keyword-spacing": "off",
+		"no-jquery/no-each-util": "off",
+		"no-jquery/no-extend": "off",
+		"no-jquery/no-in-array": "off",
 		"no-loop-func": "off",
+		"no-prototype-builtins": "off",
+		"no-shadow": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
+		"prefer-arrow-callback": "off",
 		"quote-props": "off",
 		"space-before-function-paren": "off",
 		"space-infix-ops": "off",
+		"unicorn/prefer-string-slice": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off"
 	}
