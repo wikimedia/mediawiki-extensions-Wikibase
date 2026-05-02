@@ -1,0 +1,52 @@
+{
+  "name": "wikibase-serialization",
+  "description": "Wikibase datamodel serialization implementation in JavaScript",
+  "version": "5.0.0",
+  "license": "GPL-2.0+",
+  "contributors": [
+    {
+      "name": "H. Snater",
+      "url": "http://www.snater.com"
+    },
+    {
+      "name": "Adrian Lang",
+      "email": "adrian.lang@wikimedia.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wmde/WikibaseSerializationJavaScript"
+  },
+  "bugs": {
+    "url": "https://phabricator.wikimedia.org/"
+  },
+  "directories": {
+    "lib": "src",
+    "test": "tests"
+  },
+  "support": {
+    "url": "https://phabricator.wikimedia.org/"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "wikibase-data-model": "^6.0.0",
+    "wikibase-data-values": "^0.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-wikimedia": "0.15.0",
+    "eslint-plugin-mediawiki": "^0.2.1",
+    "karma": "^1.7.1",
+    "karma-cli": "^1.0.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-qunit": "^1.2.1",
+    "karma-webpack": "^4.0.2",
+    "qunit": "^1.0.0",
+    "webpack": "^4.40.2"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run run-tests",
+    "eslint": "eslint .",
+    "run-tests": "karma start --single-run"
+  }
+}
