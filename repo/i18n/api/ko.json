@@ -17,7 +17,7 @@
 	"apihelp-wbgetentities-example-12": "항목 <samp>Q42</samp>의 사이트링크를 가져옵니다",
 	"apihelp-wbmergeitems-summary": "여러 항목을 병합합니다.",
 	"apihelp-wbmergeitems-param-tags": "이 판에 적용할 변경 태그입니다.",
-	"apihelp-wbmergeitems-example-1": "<samp>Q42</samp>의 데이터를 <samp>Q222</samp>로 병합합니다",
+	"apihelp-wbmergeitems-example-1": "<samp>$1</samp>의 데이터를 <samp>$2</samp>로 병합합니다",
 	"apihelp-wbparsevalue-summary": "<code>ValueParser</code>를 사용하여 값의 구문을 분석합니다.",
 	"apihelp-wbparsevalue-param-values": "구문을 분석할 값",
 	"apihelp-wbparsevalue-param-options": "파서가 사용하면 좋을 옵션입니다. JSON 객체로 제공됩니다.",
