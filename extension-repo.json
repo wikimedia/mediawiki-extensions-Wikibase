@@ -642,26 +642,6 @@
 			"factory": "Wikibase\\Repo\\Domains\\Crud\\RouteHandlers\\GetPropertyDataTypesHandler::factory"
 		},
 		{
-			"path": "/wikibase/v0/search/items",
-			"method": "GET",
-			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\V0RouteHandler::factory"
-		},
-		{
-			"path": "/wikibase/v0/search/properties",
-			"method": "GET",
-			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\V0RouteHandler::factory"
-		},
-		{
-			"path": "/wikibase/v0/suggest/items",
-			"method": "GET",
-			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\V0RouteHandler::factory"
-		},
-		{
-			"path": "/wikibase/v0/suggest/properties",
-			"method": "GET",
-			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\V0RouteHandler::factory"
-		},
-		{
 			"path": "/wikibase/v1/search/items",
 			"method": "GET",
 			"factory": "Wikibase\\Repo\\Domains\\Search\\RouteHandlers\\SimpleItemSearchRouteHandler::factory"
