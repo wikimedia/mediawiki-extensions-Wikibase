@@ -39,7 +39,7 @@
 		"psr/http-message": "^1.0.1",
 		"onoi/message-reporter": "~1.4",
 		"swaggest/json-diff": "^3.11.0",
-		"webonyx/graphql-php": "^15.20"
+		"webonyx/graphql-php": "^15.32.3"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "48.0.2",
