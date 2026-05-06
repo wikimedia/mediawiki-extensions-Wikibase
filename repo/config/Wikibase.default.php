@@ -489,9 +489,6 @@ return [
 	 */
 	'tmpEnableGraphQL' => false,
 
-	// this will be removed once T421994 is done
-	'tmpTestingItemController' => false,
-
 	/**
 	 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
 	 */
