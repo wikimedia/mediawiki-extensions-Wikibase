@@ -24,6 +24,7 @@ use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchE
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermsTablesEntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SearchExceptionMiddleware;
 use Wikibase\Repo\Domains\Search\WbSearch;
@@ -48,7 +49,7 @@ return [
 	},
 
 	'WbSearch.EntitySearchHelperFactory' => function ( MediaWikiServices $services ): EntitySearchHelperFactory {
-		return new EntitySearchHelperFactory(
+		return new TermsTablesEntitySearchHelperFactory(
 			WikibaseRepo::getEntityLookup( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getEntitySourceDefinitions( $services ),
@@ -56,7 +57,7 @@ return [
 			WikibaseRepo::getEnabledEntityTypes( $services ),
 			WikibaseRepo::getMatchingTermsLookupFactory( $services ),
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
-			WikibaseRepo::getPrefetchingTermLookup( $services )
+			WikibaseRepo::getPrefetchingTermLookup( $services ),
 		);
 	},
 
@@ -102,7 +103,7 @@ return [
 		}
 
 		return WbSearch::getEntitySearchHelperFactory( $services )
-			->newEntitySearchHelper( Item::ENTITY_TYPE, $context->getLanguage() );
+			->newEntitySearchHelper( Item::ENTITY_TYPE, $context->getLanguage(), $context->getRequest() );
 	},
 
 	'WbSearch.LanguageCodeValidator' => function ( MediaWikiServices $services ): SearchLanguageValidator {
@@ -151,7 +152,8 @@ return [
 			) :
 			WbSearch::getEntitySearchHelperFactory( $services )->newEntitySearchHelper(
 				Property::ENTITY_TYPE,
-				$context->getLanguage()
+				$context->getLanguage(),
+				$context->getRequest()
 			);
 
 		$localPropertySearch = new PropertyDataTypeSearchHelper( $searchHelper, WikibaseRepo::getPropertyDataTypeLookup( $services ) );
