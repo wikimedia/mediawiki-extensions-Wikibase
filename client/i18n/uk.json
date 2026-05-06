@@ -113,6 +113,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Заголовок",
 	"wikibase-pageinfo-entity-usage-C": "Деякі твердження",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Твердження: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Деякі твердження (з кваліфікаторами та посиланнями на джерела)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Твердження (з кваліфікаторами та посиланнями на джерела): $1",
 	"wikibase-pageinfo-entity-usage-X": "Всі дані сутності",
 	"wikibase-pageinfo-entity-usage-O": "Інше (наприклад, існування сутності)",
 	"wikibase-property-render-error": "Не вдалося відобразити властивість $1: $2",
