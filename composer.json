@@ -38,7 +38,7 @@
 		"psr/http-message": "^2.0.0",
 		"onoi/message-reporter": "~1.4",
 		"swaggest/json-diff": "^3.11.0",
-		"webonyx/graphql-php": "^15.20"
+		"webonyx/graphql-php": "^15.32.3"
 	},
 	"require-dev": {
 		"fig/log-test": "^1.0",
