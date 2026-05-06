@@ -493,4 +493,17 @@ return [
 	 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
 	 */
 	'enableWikidataIconsInClientWatchlist' => false,
+
+	/**
+	 * @note This config option is primarily added for the Wikidata transition use-case
+	 * and must be considered temporary. It will be removed in the future with no warning.
+	 *
+	 * @var array<string, mixed> an array of configurations for individual WikiProjects, containing:
+	 *   'propertyIds' => string[]
+	 *   'href' => string (url for the WikiProject)
+	 *   'text' => string (name of the WikiProject)
+	 *
+	 * @see https://phabricator.wikimedia.org/T329284
+	 */
+	'tmpWikiProjectsLinking' => [],
 ];

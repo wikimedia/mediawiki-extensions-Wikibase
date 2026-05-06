@@ -2,22 +2,26 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 
 /**
  * @license GPL-2.0-or-later
  *
- * If in appropriate namespace and page, create a Concept URI link
- * for later addition to the sidebar.
+ * If in appropriate namespace and page, create additional links, including
+ * Concept URI and WikiProject links for later addition to the sidebar.
  */
-class SidebarBeforeOutputHookHandler {
+class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 
 	/**
 	 * @var string
@@ -40,40 +44,100 @@ class SidebarBeforeOutputHookHandler {
 	 */
 	private $logger;
 
+	private SettingsArray $wikibaseRepoSettings;
+
 	public function __construct(
-		string $baseConceptUri,
 		EntityIdLookup $idLookup,
 		EntityLookup $entityLookup,
 		EntityNamespaceLookup $nsLookup,
-		LoggerInterface $logger
+		DatabaseEntitySource $localEntitySource,
+		LoggerInterface $logger,
+		SettingsArray $wikibaseRepoSettings
 	) {
-		$this->baseConceptUri = $baseConceptUri;
+		$this->baseConceptUri = $localEntitySource->getConceptBaseUri();
 		$this->idLookup = $idLookup;
 		$this->entityLookup = $entityLookup;
 		$this->nsLookup = $nsLookup;
 		$this->logger = $logger;
+		$this->wikibaseRepoSettings = $wikibaseRepoSettings;
 	}
 
 	/**
-	 * Build concept URI link for the sidebar toolbox.
+	 * When appropriate, add Concept URI link to the toolbox section, and add
+	 * links to related Wikiprojects
 	 *
 	 * @param Skin $skin
-	 * @return string[]|null Array of link elements or Null if link cannot be created.
+	 * @param string[] &$sidebar
+	 * @return void
 	 */
-	public function buildConceptUriLink( Skin $skin ): ?array {
-		$title = $skin->getTitle();
-		$entityId = $this->getValidEntityId( $title );
+	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
+		$entityId = $this->getValidEntityId( $skin->getTitle() );
 
-		if ( $title === null || $entityId === null ) {
-			return null;
+		if ( $entityId === null ) {
+			return;
 		}
 
-		return [
+		$this->addConceptUriLink( $skin, $sidebar, $entityId );
+		$this->addWikiProjectLinks( $sidebar, $entityId );
+	}
+
+	/**
+	 * Builds and adds a concept URI link for the sidebar toolbox.
+	 *
+	 * @param Skin $skin
+	 * @param string[] &$sidebar
+	 * @param EntityId $entityId
+	 */
+	private function addConceptUriLink( Skin $skin, array &$sidebar, EntityId $entityId ): void {
+		$sidebar[ 'TOOLBOX' ][ 'wb-concept-uri' ] = [
 			'id' => 't-wb-concept-uri',
 			'text' => $skin->msg( 'wikibase-concept-uri' )->text(),
 			'href' => $this->baseConceptUri . $entityId->getSerialization(),
 			'title' => $skin->msg( 'wikibase-concept-uri-tooltip' )->text(),
 		];
+	}
+
+	/**
+	 * Determines which WikiProjects are relevant to the given Entity and if there are any, adds links to
+	 * them in the sidebar.
+	 *
+	 * @param array &$sidebar
+	 * @param EntityId $entityId
+	 */
+	private function addWikiProjectLinks( array &$sidebar, EntityId $entityId ): void {
+		$wikiProjectsConfig = $this->wikibaseRepoSettings->getSetting( 'tmpWikiProjectsLinking' );
+		if ( !$wikiProjectsConfig ) {
+			return;
+		}
+
+		$entity = $this->entityLookup->getEntity( $entityId );
+		if ( !( $entity instanceof StatementListProvider ) ) {
+			return;
+		}
+
+		$properties = $entity->getStatements()->getPropertyIds();
+		$links = [];
+		foreach ( $wikiProjectsConfig as $projectConfig ) {
+			if (
+				!isset( $projectConfig[ 'propertyIds' ] ) ||
+				!isset( $projectConfig[ 'text' ] ) ||
+				!isset( $projectConfig[ 'href' ] ) ||
+				!is_array( $projectConfig[ 'propertyIds' ] )
+			) {
+				continue;
+			}
+			if ( count( array_intersect( array_keys( $properties ), $projectConfig[ 'propertyIds' ] ) ) > 0 ) {
+				$links[] = [
+					// TODO determine if/how to use translated titles rather than monolingual text from the config T425437
+					'text' => $projectConfig[ 'text' ],
+					'href' => $projectConfig[ 'href' ],
+				];
+			}
+		}
+
+		if ( count( $links ) > 0 ) {
+			$sidebar[ 'wikibase-wikiprojects-sidebar-section' ] = $links;
+		}
 	}
 
 	/**

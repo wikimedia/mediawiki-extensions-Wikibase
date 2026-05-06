@@ -1316,6 +1316,17 @@
 		"RepoHooks": {
 			"class": "\\Wikibase\\Repo\\RepoHooks"
 		},
+		"SidebarBeforeOutputHookHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\SidebarBeforeOutputHookHandler",
+			"services": [
+				"WikibaseRepo.EntityIdLookup",
+				"WikibaseRepo.EntityLookup",
+				"WikibaseRepo.EntityNamespaceLookup",
+				"WikibaseRepo.LocalEntitySource",
+				"WikibaseRepo.Logger",
+				"WikibaseRepo.Settings"
+			]
+		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
 			"services": [
@@ -1379,7 +1390,7 @@
 		"RevisionFromEditComplete": "RepoHooks",
 		"ShowSearchHit": "ShowSearchHit",
 		"ShowSearchHitTitle": "ShowSearchHit",
-		"SidebarBeforeOutput": "RepoHooks",
+		"SidebarBeforeOutput": "SidebarBeforeOutputHookHandler",
 		"SkinPageReadyConfig": "RepoHooks",
 		"SkinTemplateNavigation::Universal": "RepoHooks",
 		"TitleGetRestrictionTypes": "RepoHooks",
