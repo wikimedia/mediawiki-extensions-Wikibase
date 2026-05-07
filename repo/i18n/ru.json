@@ -51,7 +51,8 @@
 			"Ядерный Трамвай",
 			"EneshTranslates",
 			"Vonavy",
-			"Маринад"
+			"Маринад",
+			"Mitte27"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -75,6 +76,7 @@
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-publish-inprogress": "Записывается...",
 	"wikibase-publishing-error": "Произошла ошибка при сохранении ваших изменений. Подождите немного и попробуйте снова.",
+	"wikibase-publishing-succeeded": "Ваши изменения были сохранены!",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-statementlistview-add": "добавить значение",
 	"wikibase-statementlistview-add-tooltip": "Добавить новое значение",
