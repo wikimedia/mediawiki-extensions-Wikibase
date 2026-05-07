@@ -49,6 +49,11 @@ return [
 	},
 
 	'WbSearch.EntitySearchHelperFactory' => function ( MediaWikiServices $services ): EntitySearchHelperFactory {
+		if ( $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' )
+			&& $services->getMainConfig()->get( 'WBCSUseCirrus' ) ) {
+			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
+			return WikibaseCirrusSearch::getEntitySearchHelperFactory( $services );
+		}
 		return new TermsTablesEntitySearchHelperFactory(
 			WikibaseRepo::getEntityLookup( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
@@ -94,14 +99,6 @@ return [
 
 	'WbSearch.ItemSearchHelper' => function( MediaWikiServices $services ): EntitySearchHelper {
 		$context = RequestContext::getMain();
-
-		if ( $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' )
-			&& $services->getMainConfig()->get( 'WBCSUseCirrus' ) ) {
-			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
-			return WikibaseCirrusSearch::getEntitySearchHelperFactory( $services )
-				->newItemPropertySearchHelper( $context->getRequest(), $context->getLanguage() );
-		}
-
 		return WbSearch::getEntitySearchHelperFactory( $services )
 			->newEntitySearchHelper( Item::ENTITY_TYPE, $context->getLanguage(), $context->getRequest() );
 	},
@@ -141,22 +138,12 @@ return [
 	'WbSearch.PropertySearchHelper' => function( MediaWikiServices $services ): EntitySearchHelper {
 		$context = RequestContext::getMain();
 		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' );
-		$cirrusSearchEnabled = $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' )
-			&& $services->getMainConfig()->get( 'WBCSUseCirrus' );
 
-		$searchHelper = $cirrusSearchEnabled ?
-			// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
-			WikibaseCirrusSearch::getEntitySearchHelperFactory( $services )->newItemPropertySearchHelper(
-				$context->getRequest(),
-				$context->getLanguage()
-			) :
-			WbSearch::getEntitySearchHelperFactory( $services )->newEntitySearchHelper(
-				Property::ENTITY_TYPE,
-				$context->getLanguage(),
-				$context->getRequest()
-			);
-
-		$localPropertySearch = new PropertyDataTypeSearchHelper( $searchHelper, WikibaseRepo::getPropertyDataTypeLookup( $services ) );
+		$localPropertySearch = new PropertyDataTypeSearchHelper(
+			WbSearch::getEntitySearchHelperFactory( $services )
+				->newEntitySearchHelper( Property::ENTITY_TYPE, $context->getLanguage(), $context->getRequest() ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services )
+		);
 
 		if ( $federatedPropertiesEnabled ) {
 			return new CombinedEntitySearchHelper( [
