@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\DataAccess;
 
 use Generator;
 use MediaWiki\Language\LanguageFactory;
-use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\WebRequest;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -21,8 +20,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
-use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @covers \Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine
@@ -32,12 +31,6 @@ use Wikibase\Search\Elastic\EntitySearchHelperFactory;
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
-
-	public static function setUpBeforeClass(): void {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseCirrusSearch' ) ) {
-			self::markTestSkipped( 'CirrusSearch needs to be enabled to run this test' );
-		}
-	}
 
 	/**
 	 * @dataProvider itemSearchResultsProvider
@@ -334,7 +327,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 
 	public function newSearchEngine( EntitySearchHelper $entitySearchHelper ): EntitySearchHelperPrefixSearchEngine {
 		$searchHelperFactory = $this->createMock( EntitySearchHelperFactory::class );
-		$searchHelperFactory->method( 'newItemPropertySearchHelper' )
+		$searchHelperFactory->method( 'newEntitySearchHelper' )
 			->willReturn( $entitySearchHelper );
 		$searchProfiles = [ 'default' => null, 'custom' => 'some_profile_context' ];
 
