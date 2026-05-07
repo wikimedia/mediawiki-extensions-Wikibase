@@ -347,7 +347,7 @@
 	"wikibase-tokencheck-mustposttoken": "Bewerken is alleen mogelijk door middel van POST-verzoeken.",
 	"wikibase-tokencheck-badtoken": "Onjuist bewerkingstoken (wellicht is uw sessie verlopen).",
 	"special-dispatchstats": "Statistieken over wijzigingenverwerking",
-	"wikibase-dispatchstats-intro": "Op deze pagina worden statistieken weergegeven over de verzending van wijzigingen aan de clients.\nEen wikiclient krijgt een notificatie van een wijziging op {{SITENAME}}, zodra de wijziging is verzonden op die wiki, en de wachtrij op die wiki die notificatie heeft verwerkt.",
+	"wikibase-dispatchstats-intro": "Op deze pagina worden statistieken weergegeven over de verzending van wijzigingen aan de clients.\nEen wikiclient krijgt een melding van een wijziging op {{SITENAME}}, zodra de wijziging is verzonden op die wiki, en de wachtrij op die wiki die melding heeft verwerkt.",
 	"wikibase-dispatchstats-empty-queue": "Er zijn geen wijzigingen in de wachtrij voor wijzigingsverzending.",
 	"wikibase-dispatchstats-oldest": "De oudste nog niet verzonden wijziging is van $1.",
 	"wikibase-dispatchstats-newest": "De nieuwste nog niet verzonden wijziging is van $1.",

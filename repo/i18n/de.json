@@ -577,5 +577,6 @@
 	"wikibase-stepper-progress": "$1 von $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Probleme & Vorschläge",
 	"wikibase-indicator-popover-multiple-issue-previous": "Vorherige",
-	"wikibase-indicator-popover-multiple-issue-next": "Nächste"
+	"wikibase-indicator-popover-multiple-issue-next": "Nächste",
+	"wikibase-wikiprojects-sidebar-section": "Verwandte Wiki-Projekte"
 }
