@@ -175,7 +175,7 @@ module.exports = exports = defineComponent( {
 	display: flex;
 	flex-direction: column;
 	width: @size-viewport-width-full;
-	height: @size-viewport-height-full;
+	height: 100%;
 
 	ul {
 		padding-left: 0;
