@@ -45,6 +45,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "ukjent verdi",
 	"wikibase-snakview-snaktypeselector-novalue": "ingen verdi",
 	"wikibase-undeserializable-value": "Verdien er ugyldig og kan ikke vises.",
+	"wikibase-undisplayable-value": "Kunne ikke vise verdien.",
 	"datatypes-type-string": "Streng",
 	"datatypes-type-quantity": "Størrelse",
 	"datatypes-type-monolingualtext": "Enspråklig tekst",

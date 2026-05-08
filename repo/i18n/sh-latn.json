@@ -67,8 +67,8 @@
 	"wikibase-snakview-variations-somevalue-label": "nepoznata vrijednost",
 	"wikibase-snakview-variations-novalue-label": "bez vrijednosti",
 	"wikibase-snakview-snaktypeselector-value": "uobičajena vrijednost",
-	"wikibase-shortcopyrightwarning": "Klikom na \"$1\" pristajete na [[$2|uslove korištenja]] i trajno pristajete izdati svoj doprinos pod [$3 $4].",
-	"wikibase-copyrighttooltip-acknowledge": "Prihvaćam ove uslove za moja buduća uređivanja. Ne pokazujte više ovu poruku.",
+	"wikibase-shortcopyrightwarning": "Klikom na \"$1\" pristajete na [[$2|uvjete korištenja]] i trajno pristajete izdati svoj doprinos pod [$3 $4].",
+	"wikibase-copyrighttooltip-acknowledge": "Prihvatam ove uvjete za moja buduća uređivanja. Ne pokazujte više ovu poruku.",
 	"wikibase-entityselector-more": "više",
 	"wikibase-move-error": "Ne možete premjestiti stranice koje se nalaze u imenskom prostoru podataka niti premjestiti stranice u taj imenski prostor.",
 	"wikibase-validator-label-conflict": "Oznaka \"$1\" je već povezana sa jezičnim kodom $2 kod nekog drugog svojstva ($3).",
@@ -141,9 +141,9 @@
 	"content-model-wikibase-item": "Wikibazina stavka",
 	"content-model-wikibase-property": "Wikibazino polje",
 	"content-model-wikibase-query": "Wikibazin upit",
-	"right-item-term": "Mijenjanje uslova predmeta (natpisi, opisi, istoznačnice)",
+	"right-item-term": "Mijenjanje uvjeta predmeta (natpisi, opisi, istoznačnice)",
 	"right-item-merge": "Spajanje predmeta",
 	"right-item-redirect": "Pravljenje preusmjerenja predmeta",
-	"right-property-term": "Mijenjanje uslova svojstava (natpisi, opisi, istoznačnice)",
+	"right-property-term": "Mijenjanje uvjeta svojstava (natpisi, opisi, istoznačnice)",
 	"right-property-create": "Pravljenje svojstava"
 }

@@ -51,7 +51,8 @@
 			"Маринад",
 			"Умар",
 			"Чаховіч Уладзіслаў",
-			"Ядерный Трамвай"
+			"Ядерный Трамвай",
+			"Mitte27"
 		]
 	},
 	"wikibase-desc": "Хранилище структурированных данных",
@@ -76,6 +77,7 @@
 	"wikibase-save-inprogress": "Сохранение…",
 	"wikibase-publish-inprogress": "Записывается...",
 	"wikibase-publishing-error": "Произошла ошибка при сохранении ваших изменений. Подождите немного и попробуйте снова.",
+	"wikibase-publishing-succeeded": "Ваши изменения были сохранены!",
 	"wikibase-remove-inprogress": "Удаление…",
 	"wikibase-statementlistview-add": "добавить значение",
 	"wikibase-addvalue": "Добавить значение",

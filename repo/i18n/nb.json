@@ -202,6 +202,7 @@
 	"wikibase-item-reference-edit-invalid-format": "Element-ID-en har et ugyldig format",
 	"wikibase-item-reference-edit-nonexistent-item": "Elementet med denne ID-en finnes ikke",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "vises som:",
+	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "Automatisk",
 	"wikibase-wbui2025-timeinput-precision-automatic": "automatisk",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» er ikke en gyldig element-ID.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Språkkoden «$1» er ukjent. Vennligst bruk en språkkode som kan gjenkjennes av systemet, slik som «nb».",
@@ -365,6 +366,8 @@
 	"wikibase-parse-error-entity-id": "Entitets-ID-en er feilformatert.",
 	"wikibase-parse-error-quantity": "Størrelsesverdien er feilformatert.",
 	"wikibase-parse-error-time": "Tidsverdien er feilformatert",
+	"wikibase-quantitydetails-unit-optional": "Enhet (valgfritt)",
+	"wikibase-monolingualtextcode-mandatory": "Språk (obligatorisk)",
 	"special-redirectentity": "Omdiriger en entitet",
 	"wikibase-redirectentity-success": "$1 ble omdirigert til $2.",
 	"wikibase-redirectentity-fromid": "ID-en det skal omdirigeres fra",
@@ -548,5 +551,9 @@
 	"wikibase-scoped-search-item-scope-name": "Elementer",
 	"wikibase-scoped-search-property-scope-name": "Egenskaper",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Rediger Wikidata-elementer på mobile enheter",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiver denne funksjonen for å redigere Wikidata fra mobilenheten din. Denne funksjonaliteten, som er under utvikling, lar deg redigere med et grensesnitt tilpasset smarttelefoner."
+	"wikibase-mobile-editing-ui-beta-feature-description": "Aktiver denne funksjonen for å redigere Wikidata fra mobilenheten din. Denne funksjonaliteten, som er under utvikling, lar deg redigere med et grensesnitt tilpasset smarttelefoner.",
+	"wikibase-stepper-progress": "$1 av $2",
+	"wikibase-indicator-popover-multiple-issue-title": "Problemer og forslag",
+	"wikibase-indicator-popover-multiple-issue-previous": "Forrige",
+	"wikibase-indicator-popover-multiple-issue-next": "Neste"
 }

@@ -92,6 +92,7 @@
 	"apihelp-wbgetentities-example-11": "Hent elementet for siden «<var>Berlin</var>» på nettstedet «<var>enwiki</var>» etter å ha normalisert tittelen fra «<var>berlin</var>»",
 	"apihelp-wbgetentities-example-12": "Hent sidelenker for elementet <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Hent entiteter med ID <samp>Q42</samp> som viser kun sidelenker fra «<var>enwiki</var>»",
+	"apihelp-wbgraphql-summary": "Eksperimentell GraphQL-modul.",
 	"apihelp-wblinktitles-summary": "Kobler to sider på to forskjellige wikier med et Wikibase-element.",
 	"apihelp-wblinktitles-param-tosite": "En identifikator for nettstedet hvor siden ligger.\nBruk sammen med <var>totitle</var> for å lage en komplett sidelenke.",
 	"apihelp-wblinktitles-param-totitle": "Tittelen på siden som skal assosieres.\nBruk sammen med <var>tosite</var> for å lage en komplett sidelenke.",
