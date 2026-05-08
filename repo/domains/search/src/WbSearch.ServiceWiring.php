@@ -88,8 +88,7 @@ return [
 		return new ItemPrefixSearch(
 			new ItemPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
 			new EntitySearchHelperPrefixSearchEngine(
-				// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
-				WikibaseCirrusSearch::getEntitySearchHelperFactory( $services ),
+				WbSearch::getEntitySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),
 				RequestContext::getMain()->getRequest(),
 				$searchProfiles

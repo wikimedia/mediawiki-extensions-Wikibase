@@ -1,6 +1,5 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\ControllerRegistry;
@@ -20,19 +19,9 @@ use Wikibase\Repo\WikibaseRepo;
 return [
 	Item::ENTITY_TYPE => [
 		ControllerRegistry::WB_SEARCH_ENTITIES_CONTROLLER => static function () {
-			$mwServices = MediaWikiServices::getInstance();
-			$cirrusSearchEnabled = $mwServices->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' )
-								   && $mwServices->getMainConfig()->get( 'WBCSUseCirrus' );
-
-			return $cirrusSearchEnabled ?
-				new ItemWbSearchEntitiesController(
-					WbSearch::getItemPrefixSearch(),
-					WikibaseRepo::getEntitySourceLookup()
-				) :
-				new FallbackEntitySearchHelperController(
-				Item::ENTITY_TYPE,
-				WbSearch::getItemSearchHelper(),
-				WikibaseRepo::getEntitySourceLookup()
+			return new ItemWbSearchEntitiesController(
+				WbSearch::getItemPrefixSearch(),
+				WikibaseRepo::getEntitySourceLookup(),
 			);
 		},
 	],

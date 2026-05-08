@@ -16,14 +16,12 @@ use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
-use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, PropertyPrefixSearchEngine {
 	public function __construct(
-		// @phan-suppress-next-line PhanUndeclaredTypeParameter, PhanUndeclaredTypeProperty WikibaseCirrusSearch is ok here
 		private EntitySearchHelperFactory $searchHelperFactory,
 		private LanguageFactory $languageFactory,
 		private WebRequest $request,
@@ -77,10 +75,10 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		?string $profileContext = null
 	): array {
 		return array_slice(
-			// @phan-suppress-next-line PhanUndeclaredClassMethod
-			$this->searchHelperFactory->newItemPropertySearchHelper(
-				$this->request,
-				$this->languageFactory->getLanguage( $resultLanguageCode ?? $languageCode )
+			$this->searchHelperFactory->newEntitySearchHelper(
+				$entityType,
+				$this->languageFactory->getLanguage( $resultLanguageCode ?? $languageCode ),
+				$this->request
 			)->getRankedSearchResults(
 				$searchTerm,
 				$languageCode,
