@@ -3,6 +3,7 @@
 		class="wikibase-wbui2025-snak-value"
 		:data-snak-hash="snak.hash"
 		:class="snakValueClass"
+		tabindex="0"
 	>
 		<span class="snakValue" v-html="snakValueHtmlForHash( snak.hash )"></span>
 		<span
@@ -70,7 +71,8 @@ module.exports = exports = defineComponent( {
 				'wikibase-wbui2025-tabular-data-value': this.snak.datatype === 'tabular-data',
 				'wikibase-wbui2025-geo-shape-value': this.snak.datatype === 'geo-shape',
 				'wikibase-wbui2025-musical-notation-value': this.snak.datatype === 'musical-notation',
-				'wikibase-wbui2025-math-value': this.snak.datatype === 'math'
+				'wikibase-wbui2025-math-value': this.snak.datatype === 'math',
+				'wikibase-wbui2025-quantity-value': this.snak.datatype === 'quantity'
 			};
 		},
 		indicatorsHtml() {
