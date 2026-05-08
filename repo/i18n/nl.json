@@ -197,7 +197,7 @@
 	"wikibase-validator-no-such-property": "Eigenschap $1 niet gevonden",
 	"wikibase-validator-bad-value": "Gegevenswaarde beschadigd: $1",
 	"wikibase-validator-bad-value-type": "Onjuist waardetype $1, verwacht was $2",
-	"wikibase-validator-bad-data-type": "Ongeldig gegevenstype: $1",
+	"wikibase-validator-bad-data-type": "Onjuist gegevenstype: $1",
 	"wikibase-validator-bad-prefix": "Foute waarde $1, moest beginnen met $2",
 	"wikibase-validator-bad-url": "URL's mogen bepaalde tekens zoals spaties en vierkante haken niet bevatten: $1",
 	"wikibase-validator-url-scheme-missing": "Deze URL mist een protocol zoals \"https://\" of \"mailto:\": $1",
@@ -456,7 +456,7 @@
 	"wikibase-api-param-illegal": "Er is een ongeldige verzameling parameters gebruikt.",
 	"wikibase-api-permissiondenied": "U beschikt niet over de benodigde rechten om deze handeling te verrichten.",
 	"wikibase-api-wrong-class": "Verkeerd klassetype gedetecteerd.",
-	"wikibase-api-tags-invalid": "Tags-parameter ongeldig.",
+	"wikibase-api-tags-invalid": "Tags-parameter onjuist.",
 	"wikibase-api-target-not-empty": "De doorverwijzing kan alleen worden aangemaakt op een lege of verwijderde entiteit.",
 	"wikibase-api-target-is-redirect": "Het doel van de doorverwijzing moet zelf geen doorverwijzing zijn.",
 	"wikibase-api-target-is-incompatible": "Poging tot doorverwijzen naar een ander type entiteit.",
@@ -532,7 +532,7 @@
 	"wikibase-pageinfo-subscription-none": "Geen",
 	"wikibase-pageinfo-wb-claims": "Aantal verklaringen in deze entiteit",
 	"wikibase-pageinfo-wb-identifiers": "Aantal externe identificatiecode-verklaringen in deze entiteit",
-	"wikibase-search-bad-entity-type": "Ongeldig entiteitstype: $1",
+	"wikibase-search-bad-entity-type": "Onjuist entiteitstype: $1",
 	"wikibase-search-bad-profile-name": "Foute naam zoekprofiel: $1",
 	"wikibase-search-namespace-mix": "Het combineren van entiteits- en artikelnaamruimten in de zoekopdracht wordt momenteel niet ondersteund. Er wordt alleen gezocht in entiteitsnaamruimten.",
 	"wikibase-search-config-notfound": "Zoekconfiguratie volledige tekst niet gevonden: $1",
@@ -578,5 +578,6 @@
 	"wikibase-stepper-progress": "$1 van $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Vragen en suggesties",
 	"wikibase-indicator-popover-multiple-issue-previous": "Vorige",
-	"wikibase-indicator-popover-multiple-issue-next": "Volgende"
+	"wikibase-indicator-popover-multiple-issue-next": "Volgende",
+	"wikibase-wikiprojects-sidebar-section": "Gerelateerde WikiProjecten"
 }

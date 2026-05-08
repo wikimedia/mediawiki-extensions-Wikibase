@@ -457,5 +457,6 @@
 	"special-setlabeldescriptionaliases-parameterized": "Imposta etichetta, descrizione e alias per $1",
 	"wikibase-stepper-progress": "$1 di $2",
 	"wikibase-indicator-popover-multiple-issue-previous": "Precedente",
-	"wikibase-indicator-popover-multiple-issue-next": "Successivo"
+	"wikibase-indicator-popover-multiple-issue-next": "Successivo",
+	"wikibase-wikiprojects-sidebar-section": "Progetti wiki correlati"
 }

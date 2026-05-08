@@ -504,5 +504,6 @@
 	"wikibase-stepper-progress": "$1 / $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Ongelmat ja ehdotukset",
 	"wikibase-indicator-popover-multiple-issue-previous": "Edellinen",
-	"wikibase-indicator-popover-multiple-issue-next": "Seuraava"
+	"wikibase-indicator-popover-multiple-issue-next": "Seuraava",
+	"wikibase-wikiprojects-sidebar-section": "Liittyvät wikiprojektit"
 }
