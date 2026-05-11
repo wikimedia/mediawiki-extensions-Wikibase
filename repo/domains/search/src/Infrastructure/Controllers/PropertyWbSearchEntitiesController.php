@@ -2,11 +2,14 @@
 
 namespace Wikibase\Repo\Domains\Search\Infrastructure\Controllers;
 
+use MediaWiki\Status\Status;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
+use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 
 /**
@@ -21,17 +24,31 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 	}
 
 	public function search( WbSearchEntitiesRequest $request ): array {
-		$response = $this->propertyPrefixSearch->execute(
-			new PropertyPrefixSearchRequest(
-				$request->text,
-				$request->searchLanguageCode,
-				$request->limit,
-				0,
-				$request->resultLanguage,
-			)
-		);
+		try {
+			$response = $this->propertyPrefixSearch->execute(
+				new PropertyPrefixSearchRequest(
+					$request->text,
+					$request->searchLanguageCode,
+					$request->limit,
+					0,
+					$request->resultLanguage,
+				)
+			);
+		} catch ( UseCaseError $e ) {
+			throw new EntitySearchException( $this->useCaseErrorToStatus( $e ) );
+		}
 
 		return array_map( $this->convertResult( ... ), iterator_to_array( $response->results ) );
+	}
+
+	private function useCaseErrorToStatus( UseCaseError $e ): Status {
+		return match ( $e->getErrorCode() ) {
+			UseCaseError::INVALID_QUERY_PARAMETER => Status::newFatal(
+				'apierror-badparameter',
+				$e->getErrorContext()[UseCaseError::CONTEXT_PARAMETER]
+			),
+			default => Status::newFatal( 'apierror-unknownerror' ),
+		};
 	}
 
 	private function convertResult( PropertyPrefixSearchResult $result ): TermSearchResult {

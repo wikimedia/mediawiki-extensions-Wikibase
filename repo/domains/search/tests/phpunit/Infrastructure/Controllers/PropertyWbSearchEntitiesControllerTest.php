@@ -8,9 +8,11 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
+use Wikibase\Repo\Domains\Search\Application\Validation\ValidationError;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
@@ -85,6 +87,29 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		$this->assertCount( 1, $results );
 		$this->assertSame( 'pid', $results[0]->getMatchedTerm()->getLanguageCode() );
 		$this->assertSame( 'P42', $results[0]->getMatchedTerm()->getText() );
+	}
+
+	public function testInvalidLanguageThrowsEntitySearchException(): void {
+		$rejectingValidator = $this->createStub( SearchLanguageValidator::class );
+		$rejectingValidator->method( 'validate' )->willReturn(
+			new ValidationError(
+				SearchLanguageValidator::CODE_INVALID_LANGUAGE_CODE,
+				[ SearchLanguageValidator::CONTEXT_LANGUAGE_CODE => 'xyz' ]
+			)
+		);
+
+		$useCase = new PropertyPrefixSearch(
+			new PropertyPrefixSearchValidator( $rejectingValidator ),
+			$this->createStub( PropertyPrefixSearchEngine::class )
+		);
+
+		$controller = new PropertyWbSearchEntitiesController(
+			$useCase,
+			$this->createStub( EntitySourceLookup::class )
+		);
+
+		$this->expectException( EntitySearchException::class );
+		$controller->search( new WbSearchEntitiesRequest( 'test', 'xyz', 'xyz', 5, false, null ) );
 	}
 
 	public function testEmptyResults(): void {
