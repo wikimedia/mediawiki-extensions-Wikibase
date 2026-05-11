@@ -22,10 +22,6 @@ EXCLUDE               += vendor
 EXCLUDE_PATTERNS       = */node_modules/* \
                          */lib/resources/*/*.md \
                          */build/federated-properties/*.md \
-                         */view/lib/wikibase-data-model/*.md \
-                         */view/lib/wikibase-data-values/*.md \
-                         */view/lib/wikibase-data-values-value-view/*.md \
-                         */view/lib/wikibase-serialization/*.md \
                          */view/lib/wikibase-tainted-ref/*.md \
                          */view/lib/wikibase-termbox/*.md \
                          */tests/* \

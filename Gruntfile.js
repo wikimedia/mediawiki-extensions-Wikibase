@@ -28,7 +28,6 @@ module.exports = function ( grunt ) {
 				'!extensions/**',
 				'!client/data-bridge/**',
 				'!docs/**',
-				'!lib/resources/wikibase-api/**',
 				'!repo/rest-api/**'
 			]
 		},
