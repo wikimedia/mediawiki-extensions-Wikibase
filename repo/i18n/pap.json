@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Irus",
+			"Kallmemel",
 			"ObaTango"
 		]
 	},
 	"wikibase-edit": "editá",
-	"wikibase-add": "añadí",
+	"wikibase-add": "vug",
 	"wikibase-label-empty": "No a definí ningun etikèt",
 	"wikibase-description-empty": "No a definí deskripshon",
 	"wikibase-sitelinks-special": "Otro sitio",
