@@ -1,4 +1,4 @@
-# 34) Merge legacy frontend libraries, formerly git submodules, to Wikibase repository {#adr_0033}
+# 34) Merge legacy frontend libraries, formerly git submodules, to Wikibase repository {#adr_0034}
 
 Date: 2026-03-02
 
