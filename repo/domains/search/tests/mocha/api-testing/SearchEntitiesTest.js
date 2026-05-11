@@ -12,6 +12,7 @@ const ITEM_EN_LABEL = 'e2e-item-en-' + utils.uniq();
 const ITEM_EN_ALIAS = 'e2e-item-alias-' + utils.uniq();
 const ITEM_DE_LABEL = 'e2e-item-de-' + utils.uniq();
 const PROP_EN_LABEL = 'e2e-prop-en-' + utils.uniq();
+const PROP_DE_LABEL = 'e2e-prop-de-' + utils.uniq();
 const LIMIT_LABEL_PREFIX = 'e2e-limit-' + utils.uniq();
 const FALLBACK_LABEL = 'e2e-fallback-' + utils.uniq();
 
@@ -99,6 +100,7 @@ describe( 'wbsearchentities', () => {
 			datatype: 'string',
 			labels: {
 				en: { language: 'en', value: PROP_EN_LABEL },
+				de: { language: 'de', value: PROP_DE_LABEL },
 			},
 		} );
 
@@ -479,6 +481,20 @@ describe( 'wbsearchentities', () => {
 
 			assert.equal( response.search[ 0 ].id, testPropertyId );
 			assert.equal( response.search[ 0 ].match.type, 'entityId' );
+		} );
+
+		withPropertyController( 'for property search uselang controls the result language', async ( client ) => {
+			const response = await client.action( 'wbsearchentities', {
+				search: PROP_EN_LABEL,
+				language: 'en',
+				type: 'property',
+				uselang: 'de',
+			} );
+
+			const result = response.search.find( ( r ) => r.id === testPropertyId );
+			assert.isOk( result, 'property should appear in search results' );
+			assert.equal( result.display.label.language, 'de' );
+			assert.equal( result.display.label.value, PROP_DE_LABEL );
 		} );
 	} );
 } );
