@@ -5,6 +5,7 @@
 			"Tensama0415"
 		]
 	},
+	"apihelp-query+wbentityusage-summary": "지정된 문서에서 사용된 모든 개체 ID를 반환합니다.",
 	"apihelp-query+wbentityusage-param-prop": "결과에 추가할 속성입니다.",
 	"apihelp-query+wblistentityusage-summary": "주어진 개체 ID를 사용하는 모든 문서를 반환합니다.",
 	"apihelp-query+wblistentityusage-paramvalue-prop-url": "활성화하면 엔티티의 URL이 결과에 추가됩니다.",
@@ -14,5 +15,7 @@
 	"apihelp-query+pageterms-example-label-en": "영어로 'London' 문서와 관련된 레이블과 다른 이름을 가져옵니다.",
 	"apihelp-query+description-summary": "대상 문서가 무엇인지를 설명하는 짧은 설명, 즉 부제를 가져옵니다.",
 	"apihelp-query+description-example": "'London' 문서의 설명을 가져옵니다.",
+	"apihelp-query+wikibase-paramvalue-prop-siteid": "이 사이트의 siteid입니다.",
+	"apihelp-wbformatreference-param-reference": "JSON 객체로써의 각주입니다.",
 	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML 마크업입니다."
 }
