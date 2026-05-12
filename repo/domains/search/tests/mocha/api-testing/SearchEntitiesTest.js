@@ -3,6 +3,11 @@
 const { action, assert, utils, wiki } = require( 'api-testing' );
 
 const api = action.getAnon();
+const apiForPropertyControllerTest = action.getAnon();
+apiForPropertyControllerTest.req.set(
+	'X-Config-Override',
+	JSON.stringify( { wgWBRepoSettings: { tmpTestingPropertyController: true } } )
+);
 const ITEM_EN_LABEL = 'e2e-item-en-' + utils.uniq();
 const ITEM_EN_ALIAS = 'e2e-item-alias-' + utils.uniq();
 const ITEM_DE_LABEL = 'e2e-item-de-' + utils.uniq();
@@ -51,6 +56,27 @@ async function isMulLanguageEnabled() {
 		siprop: 'languages',
 	} );
 	return response.query.languages.some( ( l ) => l.code === 'mul' );
+}
+
+/**
+ * Runs the same test against both the regular wbsearchentities and then again against a version
+ * of it that uses the PropertyWbSearchEntitiesController implementation. This will no longer be
+ * needed once T424817 is completed.
+ *
+ * @param {string} testName
+ * @param {Function} testCallback
+ */
+async function withPropertyController( testName, testCallback ) {
+	const apis = {
+		'with regular api': api,
+		'with PropertyWbSearchEntitiesController': apiForPropertyControllerTest
+	};
+
+	for ( const [ type, client ] of Object.entries( apis ) ) {
+		it( `${ type } - ${ testName }`, async function () {
+			await testCallback( client );
+		} );
+	}
 }
 
 describe( 'wbsearchentities', () => {
@@ -145,8 +171,8 @@ describe( 'wbsearchentities', () => {
 		assert.include( result.aliases, ITEM_EN_ALIAS );
 	} );
 
-	it( 'finds property by English label', async () => {
-		const response = await api.action( 'wbsearchentities', {
+	withPropertyController( 'finds property by English label', async ( client ) => {
+		const response = await client.action( 'wbsearchentities', {
 			search: PROP_EN_LABEL,
 			language: 'en',
 			type: 'property',
