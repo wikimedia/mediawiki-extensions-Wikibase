@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Thakurji"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "khaali",
+	"valueview-expert-globecoordinateinput-customprecision": "khaas ($1)",
+	"valueview-expertextender-languageselector-label": "Bhasa (mandatory):",
+	"valueview-preview-label": "jaise dekhaawe, waise rahii:",
+	"valueview-preview-novalue": "koi valid value ke nai dkha gais hai",
+	"valueview-listrotator-manually": "manually set karo"
+}

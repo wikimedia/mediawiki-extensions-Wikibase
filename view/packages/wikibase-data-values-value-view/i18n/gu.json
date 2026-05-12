@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ashok modhvadia",
+			"CptViraj",
+			"KartikMistry"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "ખાલી",
+	"valueview-expert-timeinput-precision-year100k": "૧૦૦,૦૦૦ વર્ષો",
+	"valueview-expert-timeinput-precision-year10k": "૧૦,૦૦૦ વર્ષો"
+}

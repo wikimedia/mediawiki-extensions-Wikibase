@@ -1,0 +1,10 @@
+*~
+*.kate-swp
+
+!.*
+.idea/
+
+vendor/
+build/
+node_modules/
+/.eslintcache

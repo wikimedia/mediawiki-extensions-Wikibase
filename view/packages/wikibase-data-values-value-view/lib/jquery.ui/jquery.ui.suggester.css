@@ -1,0 +1,36 @@
+/**
+ * @license GNU GPL v2+
+ * @author H. Snater <mediawiki@snater.com>
+ */
+
+.ui-widget.ui-suggester-list {
+	font-family: sans-serif; /* reset the "Smoothness" jQuery UI theme */
+	font-size: 0.8125rem; /* results in 13px with the Vector skin */
+}
+
+.ui-widget.ui-suggester-list {
+	background: var( --background-color-base, #fff );
+	border-color: var( --border-color-base, #a2a9b1 );
+	min-width: 8em; /* same as .ui-listrotator-label */
+}
+
+.ui-suggester-list .ui-state-hover {
+	border: none;
+	background: var( --background-color-progressive-subtle, #f1f4fd );
+}
+
+.ui-suggester-list .ui-state-hover a,
+.ui-suggester-list .ui-state-hover a:hover {
+	color: var( --color-base, #202122 );
+}
+
+.ui-suggester-list {
+	padding: 0;
+	position: absolute;
+}
+
+.ui-suggester-list a {
+	color: var( --color-base, #202122 );
+	padding: 0 0.2em;
+	text-decoration: none;
+}

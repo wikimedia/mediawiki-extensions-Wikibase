@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ильгиз"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" мәгълүматлар тибындагы кыйммәтләрне әлегә кулланып булмый.",
+	"valueview-expert-emptyvalue-empty": "буш",
+	"valueview-expert-globecoordinateinput-precision": "Төгәллек:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ачыкланмаган",
+	"valueview-expert-globecoordinateinput-customprecision": "махсус ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "arcminute берәмлекләрендә",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "arcsecond берәмлекләрендә",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "1/10 arcsecond берәмлекләрендә",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "1/100 arcsecond берәмлекләрендә",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "1/1000 arcsecond берәмлекләрендә",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "Григориан",
+	"valueview-expert-timevalue-calendar-julian": "Юлиан",
+	"valueview-expert-timeinput-precision": "Төгәллек:",
+	"valueview-expert-timeinput-precision-year1g": "миллиард ел",
+	"valueview-expert-timeinput-precision-year100m": "йөз миллион ел",
+	"valueview-expert-timeinput-precision-year10m": "ун миллион ел",
+	"valueview-expert-timeinput-precision-year1m": "миллион ел",
+	"valueview-expert-timeinput-precision-year100k": "100 000 ел",
+	"valueview-expert-timeinput-precision-year10k": "10 000 ел",
+	"valueview-expert-timeinput-precision-year1k": "меңъеллык",
+	"valueview-expert-timeinput-precision-year100": "йөзъеллык",
+	"valueview-expert-timeinput-precision-year10": "унъеллык",
+	"valueview-expert-timeinput-precision-year": "ел",
+	"valueview-expert-timeinput-precision-month": "ай",
+	"valueview-expert-timeinput-precision-day": "көн",
+	"valueview-expert-timeinput-precision-hour": "сәгать",
+	"valueview-expert-timeinput-precision-minute": "минут",
+	"valueview-expert-timeinput-precision-second": "секунд",
+	"valueview-expert-timeinput-calendar": "Тәкъвим:",
+	"valueview-expertextender-languageselector-label": "Тел (мәҗбүри):",
+	"valueview-expertextender-unitsuggester-label": "Үлчәү берәмлеге (мәҗбүри түгел):",
+	"valueview-preview-label": "Менә болай күрсәтеләчәк:"
+}

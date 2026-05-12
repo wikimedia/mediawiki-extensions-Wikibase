@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Mirzali",
+			"Orbot707"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "veng",
+	"valueview-expert-timeinput-precision-year100": "seserre",
+	"valueview-expert-timeinput-precision-year10": "desserre",
+	"valueview-expert-timeinput-precision-year": "serre",
+	"valueview-expert-timeinput-precision-month": "aşme",
+	"valueview-expert-timeinput-precision-day": "roce",
+	"valueview-expert-timeinput-precision-hour": "saete",
+	"valueview-expert-timeinput-precision-minute": "deqiqa",
+	"valueview-expert-timeinput-precision-second": "saniya",
+	"valueview-expert-timeinput-calendar": "Teqwim:"
+}

@@ -1,0 +1,39 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jopparn",
+			"Sabelöga",
+			"Tobulos1",
+			"WikiPhoenix"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Hantering av \"$1\"-värden stöds ännu inte.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Hantering av värden för \"$1\"-datatyper stöds ännu inte.",
+	"valueview-expert-emptyvalue-empty": "tom",
+	"valueview-expert-globecoordinateinput-precision": "Precision:",
+	"valueview-expert-globecoordinateinput-nullprecision": "ospecificerad",
+	"valueview-expert-globecoordinateinput-customprecision": "special ($1)",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
+	"valueview-expert-timevalue-calendar-julian": "Juliansk",
+	"valueview-expert-timeinput-precision": "Precision:",
+	"valueview-expert-timeinput-precision-year1g": "biljoner år",
+	"valueview-expert-timeinput-precision-year100m": "hundra miljoner år",
+	"valueview-expert-timeinput-precision-year10m": "tiomiljoner år",
+	"valueview-expert-timeinput-precision-year1m": "miljoner år",
+	"valueview-expert-timeinput-precision-year100k": "100,000 år",
+	"valueview-expert-timeinput-precision-year10k": "10,000 år",
+	"valueview-expert-timeinput-precision-year1k": "årtusende",
+	"valueview-expert-timeinput-precision-year100": "århundrade",
+	"valueview-expert-timeinput-precision-year10": "årtionde",
+	"valueview-expert-timeinput-precision-year": "år",
+	"valueview-expert-timeinput-precision-month": "månad",
+	"valueview-expert-timeinput-precision-day": "dag",
+	"valueview-expert-timeinput-precision-hour": "timme",
+	"valueview-expert-timeinput-precision-minute": "minut",
+	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-languageselector-label": "Språk (obligatoriskt):",
+	"valueview-expertextender-unitsuggester-label": "Enhet (valfritt):",
+	"valueview-preview-label": "kommer att visas som:",
+	"valueview-preview-novalue": "inget giltigt värde erkänns",
+	"valueview-listrotator-manually": "ställ in manuellt"
+}

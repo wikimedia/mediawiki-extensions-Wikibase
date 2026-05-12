@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Къарачайлы"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" типли магъаналаны хайырланыуу алкъын дагъансызды.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" билги типи ючюн магъаналаны хайырланыуу алкъын дагъансызды.",
+	"valueview-expert-emptyvalue-empty": "бош",
+	"valueview-expert-globecoordinateinput-precision": "Кескинлик:",
+	"valueview-expert-globecoordinateinput-nullprecision": "белгиленмегенди",
+	"valueview-expert-globecoordinateinput-customprecision": "энчи ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "аркминутха",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "арксекундха",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "арксекунду 1/10 дери",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "арксекунду 1/100 дери",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "арксекунду 1/1000 дери",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "Григориан",
+	"valueview-expert-timevalue-calendar-julian": "Юлиан",
+	"valueview-expert-timeinput-precision": "Кескинлик:",
+	"valueview-expert-timeinput-precision-year1g": "миллиард джыл",
+	"valueview-expert-timeinput-precision-year100m": "джюз миллион джыл",
+	"valueview-expert-timeinput-precision-year10m": "он миллион джыл",
+	"valueview-expert-timeinput-precision-year1m": "миллион джыл",
+	"valueview-expert-timeinput-precision-year100k": "100 000 джыл",
+	"valueview-expert-timeinput-precision-year10k": "10 000 джыл",
+	"valueview-expert-timeinput-precision-year1k": "мингджыллыкъ",
+	"valueview-expert-timeinput-precision-year100": "джюзджыллыкъ",
+	"valueview-expert-timeinput-precision-year10": "онджыллыкъ",
+	"valueview-expert-timeinput-precision-year": "джыл",
+	"valueview-expert-timeinput-precision-month": "ай",
+	"valueview-expert-timeinput-precision-day": "кюн",
+	"valueview-expert-timeinput-precision-hour": "сагъат",
+	"valueview-expert-timeinput-precision-minute": "минут",
+	"valueview-expert-timeinput-precision-second": "секунд",
+	"valueview-expert-timeinput-calendar": "Орузлама:",
+	"valueview-expertextender-languageselector-label": "Тил (амалсызды):",
+	"valueview-expertextender-unitsuggester-label": "Бирим (амалсыз тюлдю):",
+	"valueview-preview-label": "былай кёрюннюкдю:",
+	"valueview-preview-novalue": "джараулу магъана танылмады",
+	"valueview-listrotator-manually": "къол бла къур"
+}

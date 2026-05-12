@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Praveenp"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "\"$1\" വിലകളുടെ കൈകാര്യം ഇതുവരെ പിന്തുണച്ചിട്ടില്ല.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "\"$1\" ഡേറ്റാ ഇനത്തിന്റെ വിലകളുടെ കൈകാര്യം ഇതുവരെ പിന്തുണച്ചിട്ടില്ല.",
+	"valueview-expert-emptyvalue-empty": "ശൂന്യം",
+	"valueview-expert-globecoordinateinput-precision": "കൃത്യത:",
+	"valueview-expert-timevalue-calendar-gregorian": "ഗ്രിഗോറിയൻ",
+	"valueview-expert-timevalue-calendar-julian": "ജൂലിയൻ",
+	"valueview-expert-timeinput-precision": "കൃത്യത:",
+	"valueview-expert-timeinput-calendar": "കാലഗണനാരീതി:",
+	"valueview-preview-label": "ഇങ്ങനെ കാണപ്പെടും:",
+	"valueview-preview-novalue": "സാധുതയുള്ള വിലകളൊന്നും കണ്ടെത്താനായില്ല"
+}

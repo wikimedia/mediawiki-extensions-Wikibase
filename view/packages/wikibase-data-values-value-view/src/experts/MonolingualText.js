@@ -1,0 +1,66 @@
+module.exports = ( function( vv ) {
+	'use strict';
+
+	const PARENT = vv.experts.StringValue,
+		LanguageSelector = require( '../ExpertExtender/ExpertExtender.LanguageSelector.js' );
+
+	/**
+	 * @class jQuery.valueview.experts.MonolingualText
+	 * @extends jQuery.valueview.experts.StringValue
+	 * @since 0.6
+	 * @license GNU GPL v2+
+	 * @author Adrian Heine <adrian.heine@wikimedia.de>
+	 */
+	vv.experts.MonolingualText = vv.expert( 'MonolingualText', PARENT, function() {
+		PARENT.apply( this, arguments );
+
+		const self = this;
+
+		this._languageSelector = new LanguageSelector(
+			this._options.contentLanguages,
+			this._messageProvider,
+			( () => {
+				const value = self.viewState().value();
+				return value && value.getLanguageCode();
+			} ),
+			( () => {
+				self._viewNotifier.notify( 'change' );
+			} )
+		);
+
+		const inputExtender = new vv.ExpertExtender(
+			this.$input,
+			[
+				this._languageSelector
+			]
+		);
+
+		this.addExtension( inputExtender );
+	}, {
+		/**
+		 * @property {jQuery.valueview.ExpertExtender.LanguageSelector}
+		 * @private
+		 */
+		_languageSelector: null,
+
+		/**
+		 * @inheritdoc
+		 */
+		valueCharacteristics: function() {
+			return {
+				valuelang: this._languageSelector.getValue()
+			};
+		},
+
+		/**
+		 * @inheritdoc
+		 */
+		destroy: function() {
+			PARENT.prototype.destroy.call( this );
+			this._languageSelector = null;
+		}
+	} );
+
+	return vv.experts.MonolingualText;
+
+}( jQuery.valueview ) );

@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"J budissin",
+			"Michawiki"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Wobdźěłowanje hódnotow \"$1\" so hišće njepodpěruje.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Wobdźěłowanje hódnotow za datowy typ \"$1\" hišće so njepodpěruje.",
+	"valueview-expert-emptyvalue-empty": "prózdny",
+	"valueview-expert-globecoordinateinput-precision": "Dokładnosć:",
+	"valueview-expert-timevalue-calendar-gregorian": "Gregorianska",
+	"valueview-expert-timevalue-calendar-julian": "Julianska",
+	"valueview-expert-timeinput-precision": "Dokładnosć:",
+	"valueview-expert-timeinput-calendar": "Protyka",
+	"valueview-expertextender-languageselector-label": "Rěč (winowatostna):",
+	"valueview-expertextender-unitsuggester-label": "jednotka (opcionalnje):",
+	"valueview-preview-label": "zwobrazni so jako:",
+	"valueview-preview-novalue": "žana płaćiwa hódnota spóznata"
+}
