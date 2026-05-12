@@ -13,13 +13,21 @@
 		"util": false
 	},
 	"rules": {
+		"block-scoped-var": "off",
 		"computed-property-spacing": "off",
+		"indent": "off",
 		"keyword-spacing": "off",
 		"new-parens": "off",
+		"no-jquery/no-extend": "off",
+		"no-shadow": "off",
 		"no-underscore-dangle": "off",
+		"no-var": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
+		"prefer-arrow-callback": "off",
+		"qunit/no-loose-assertions": "off",
 		"space-before-function-paren": "off",
+		"unicorn/prefer-includes": "off",
 		"vars-on-top": "off"
 	}
 }

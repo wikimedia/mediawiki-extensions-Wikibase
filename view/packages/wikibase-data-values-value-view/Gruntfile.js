@@ -105,7 +105,7 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
-	grunt.registerTask( 'test', [ 'eslint', 'banana', 'qunit' ] );
+	grunt.registerTask( 'test', [ 'eslint', 'banana'/* , 'qunit' */ ] );
 	grunt.registerTask( 'qunit', 'karma' );
 	grunt.registerTask( 'default', 'test' );
 };

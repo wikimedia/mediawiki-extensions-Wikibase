@@ -1,7 +1,9 @@
 {
-	"extends": "wikimedia",
-	"plugins": [
-		"mediawiki"
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery",
+		"wikimedia/mediawiki"
 	],
 	"env": {
 		"browser": true,
@@ -14,17 +16,27 @@
 	},
 	"rules": {
 		"mediawiki/valid-package-file-require": "error",
+		"block-scoped-var": "off",
 		"computed-property-spacing": "off",
 		"indent": "off",
 		"keyword-spacing": "off",
+		"lines-between-class-members": "off",
+		"no-jquery/no-each-util": "off",
+		"no-jquery/no-extend": "off",
+		"no-jquery/no-in-array": "off",
+		"no-shadow": "off",
 		"no-underscore-dangle": "off",
 		"no-unused-vars": "off",
+		"no-use-before-define": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",
+		"prefer-arrow-callback": "off",
 		"quote-props": "off",
 		"space-before-function-paren": "off",
 		"space-infix-ops": "off",
 		"valid-jsdoc": "off",
-		"vars-on-top": "off"
+		"vars-on-top": "off",
+		"@stylistic/indent": "off",
+		"@typescript-eslint/explicit-member-accessibility": "off"
 	}
 }
