@@ -22,6 +22,7 @@ module.exports = function ( grunt ) {
 				'**/*.{css,less}',
 				'!view/resources/jquery/ui/**',
 				'!view/lib/**',
+				'!view/packages/wikibase-data-values-value-view/**',
 				'!node_modules/**',
 				'!vendor/**',
 				'!extensions/**',
