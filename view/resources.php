@@ -23,25 +23,25 @@ return call_user_func( function() {
 	];
 
 	$wikibaseDatavaluesSrcPaths = [
-		'localBasePath' => __DIR__ . '/lib/wikibase-data-values/src',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values/src',
+		'localBasePath' => __DIR__ . '/packages/wikibase-data-values/src',
+		'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-values/src',
 	];
 	$wikibaseDatavaluesPaths = [
-		'localBasePath' => __DIR__ . '/lib/wikibase-data-values',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values',
+		'localBasePath' => __DIR__ . '/packages/wikibase-data-values',
+		'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-values',
 	];
 
 	$wikibaseDatavaluesValueviewLibPaths = [
-		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view/lib',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/lib',
+		'localBasePath' => __DIR__ . '/packages/wikibase-data-values-value-view/lib',
+		'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-values-value-view/lib',
 	];
 	$wikibaseDatavaluesValueviewSrcPaths = [
-		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view/src',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view/src',
+		'localBasePath' => __DIR__ . '/packages/wikibase-data-values-value-view/src',
+		'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-values-value-view/src',
 	];
 	$wikibaseDatavaluesValueviewPaths = [
-		'localBasePath' => __DIR__ . '/lib/wikibase-data-values-value-view',
-		'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-values-value-view',
+		'localBasePath' => __DIR__ . '/packages/wikibase-data-values-value-view',
+		'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-values-value-view',
 	];
 
 	$wikibaseTermboxSubmodulePaths = [
@@ -50,8 +50,8 @@ return call_user_func( function() {
 	];
 
 	$wikibaseApiPaths = [
-		'localBasePath' => __DIR__ . '/../lib/resources/wikibase-api/src',
-		'remoteExtPath' => 'Wikibase/lib/resources/wikibase-api/src',
+		'localBasePath' => __DIR__ . '/../lib/resources/packages/wikibase-api/src',
+		'remoteExtPath' => 'Wikibase/lib/resources/packages/wikibase-api/src',
 	];
 
 	$modules = [
@@ -252,7 +252,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/jquery.wikibase.siteselector.js',
 				'resources/jquery/ui/jquery.ui.tagadata.js',
 				'resources/jquery/jquery.removeClassByRegex.js',
-				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
+				'packages/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.js',
 				'resources/wikibase/utilities/wikibase.utilities.ui.js',
 			],
 			'styles' => [
@@ -272,7 +272,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.mw-pulsating-dot.less',
 				'resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.less',
-				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
+				'packages/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
 				'resources/wikibase/utilities/wikibase.utilities.ui.css',
 				'resources/jquery/ui/jquery.ui.closeable.css',
@@ -428,8 +428,8 @@ return call_user_func( function() {
 				'util.inherit',
 				'dataValues.DataValue',
 			],
-			'localBasePath' => __DIR__ . '/lib/wikibase-data-model/src',
-			'remoteExtPath' => 'Wikibase/view/lib/wikibase-data-model/src',
+			'localBasePath' => __DIR__ . '/packages/wikibase-data-model/src',
+			'remoteExtPath' => 'Wikibase/view/packages/wikibase-data-model/src',
 		],
 
 		'dataValues' => $wikibaseDatavaluesSrcPaths + [
@@ -671,8 +671,8 @@ return call_user_func( function() {
 				'dataValues',
 				'dataValues.values',
 			],
-			'localBasePath' => __DIR__ . '/lib/wikibase-serialization/src',
-			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
+			'localBasePath' => __DIR__ . '/packages/wikibase-serialization/src',
+			'remoteExtPath' => 'Wikibase/view/packages/wikibase-serialization/src',
 		],
 
 		'util.inherit' => $wikibaseDatavaluesPaths + [

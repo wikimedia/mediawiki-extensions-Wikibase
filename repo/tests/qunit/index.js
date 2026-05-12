@@ -7,8 +7,8 @@
 ( function () {
 	require( '../../../view/tests/qunit/wikibase/wikibase.tests.js' );
 	require( '../../../view/tests/qunit/getMockListItemAdapter.js' );
-	require( '../../../view/lib/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.testExpert.js' );
-	require( '../../../view/lib/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.MockViewState.js' );
+	require( '../../../view/packages/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.testExpert.js' );
+	require( '../../../view/packages/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.MockViewState.js' );
 	require( '../../../lib/tests/qunit/wikibase.Site.tests.js' );
 	require( '../../../view/tests/qunit/experts/wikibase.experts.modules.tests.js' );
 	require( '../../../view/tests/qunit/jquery/ui/jquery.ui.closeable.tests.js' );

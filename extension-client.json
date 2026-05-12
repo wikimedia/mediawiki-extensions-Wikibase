@@ -521,10 +521,10 @@
 				"client/resources/jquery.util.getscrollbarwidth.js",
 				"client/resources/util.inherit.js",
 				"client/resources/jquery.event.special.eachchange.js",
-				"lib/resources/wikibase-api/src/namespace.js",
-				"lib/resources/wikibase-api/src/RepoApi.js",
-				"lib/resources/wikibase-api/src/getLocationAgnosticMwApi.js",
-				"lib/resources/wikibase-api/src/RepoApiError.js"
+				"lib/resources/packages/wikibase-api/src/namespace.js",
+				"lib/resources/packages/wikibase-api/src/RepoApi.js",
+				"lib/resources/packages/wikibase-api/src/getLocationAgnosticMwApi.js",
+				"lib/resources/packages/wikibase-api/src/RepoApiError.js"
 			],
 			"styles": [
 				"client/resources/jquery.wikibase/jquery.wikibase.linkitem.css",

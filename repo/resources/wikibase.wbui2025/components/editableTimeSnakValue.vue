@@ -73,7 +73,7 @@
 /**
  * Hard-coded list of precisions matching the precisions on the server-side.
  *
- * @see view/lib/wikibase-data-values/src/values/TimeValue.js
+ * @see view/packages/wikibase-data-values/src/values/TimeValue.js
  * @see repo/includes/Parsers/MwTimeIsoParser.php
  * @type {string[]}
  */
@@ -95,7 +95,7 @@ const precisions = [
 /**
  * Hard-coded list of calendars and their Wikidata items.
  *
- * @see view/lib/wikibase-data-values/src/values/TimeValue.js
+ * @see view/packages/wikibase-data-values/src/values/TimeValue.js
  * @type {{ id: string, item: string }[]}
  */
 const calendars = [
