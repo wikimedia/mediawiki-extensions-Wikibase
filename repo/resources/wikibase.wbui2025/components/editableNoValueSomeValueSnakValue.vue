@@ -137,6 +137,11 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 	div.wikibase-wbui2025-snak-value {
 		width: 100%;
 
+		// The base style for the reading-mode makes long values scrollable, and indicates
+		// this with a gradient. These styles are unnecessary in edit mode, and cause problems
+		overflow-x: revert;
+		mask: revert;
+
 		.cdx-text-input, .cdx-text-area {
 			width: 100%;
 		}
