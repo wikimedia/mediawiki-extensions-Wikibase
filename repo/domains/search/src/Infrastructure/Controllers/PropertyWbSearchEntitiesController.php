@@ -32,6 +32,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 					$request->searchLanguageCode,
 					$request->limit,
 					0,
+					$request->strictLanguage,
 					$request->resultLanguage,
 				)
 			);
