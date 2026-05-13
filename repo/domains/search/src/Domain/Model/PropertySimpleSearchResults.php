@@ -7,9 +7,9 @@ use ArrayIterator;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertySearchResults extends ArrayIterator {
+class PropertySimpleSearchResults extends ArrayIterator {
 
-	public function __construct( PropertySearchResult ...$results ) {
+	public function __construct( PropertySimpleSearchResult ...$results ) {
 		parent::__construct( array_values( $results ) );
 	}
 

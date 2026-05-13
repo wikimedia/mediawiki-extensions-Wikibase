@@ -7,7 +7,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\Simpl
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
 
 /**
@@ -24,7 +24,7 @@ class SimplePropertySearchTest extends TestCase {
 		$language = 'en';
 		$limit = 10;
 		$offset = 0;
-		$expectedResults = $this->createStub( PropertySearchResults::class );
+		$expectedResults = $this->createStub( PropertySimpleSearchResults::class );
 
 		$validator = $this->createStub( SimplePropertySearchValidator::class );
 		$searchEngine = $this->createMock( PropertySearchEngine::class );

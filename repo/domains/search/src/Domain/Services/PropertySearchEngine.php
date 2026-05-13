@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Domain\Services;
 
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResults;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,5 +13,5 @@ interface PropertySearchEngine {
 		string $languageCode,
 		int $limit,
 		int $offset
-	): PropertySearchResults;
+	): PropertySimpleSearchResults;
 }

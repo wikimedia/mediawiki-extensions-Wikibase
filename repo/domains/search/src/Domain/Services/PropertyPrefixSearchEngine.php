@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Domain\Services;
 
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 
 /**
  * @license GPL-2.0-or-later
@@ -14,5 +14,5 @@ interface PropertyPrefixSearchEngine {
 		int $limit,
 		int $offset,
 		?string $resultLanguageCode,
-	): PropertySearchResults;
+	): PropertyPrefixSearchResults;
 }

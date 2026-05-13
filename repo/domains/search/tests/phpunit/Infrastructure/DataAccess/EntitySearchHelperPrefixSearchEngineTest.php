@@ -18,8 +18,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 
@@ -190,7 +190,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 	 */
 	public function testPropertySearch(
 		array $results,
-		PropertySearchResults $expected,
+		PropertyPrefixSearchResults $expected,
 		int $limit = 10,
 		int $offset = 0
 	): void {
@@ -211,7 +211,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 	}
 
 	public static function propertySearchResultsProvider(): Generator {
-		yield 'no results' => [ [], new PropertySearchResults() ];
+		yield 'no results' => [ [], new PropertyPrefixSearchResults() ];
 		yield 'some results' => [
 			[
 				new TermSearchResult(
@@ -229,14 +229,14 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 					new Term( 'en', 'property 2 description' )
 				),
 			],
-			new PropertySearchResults(
-				new PropertySearchResult(
+			new PropertyPrefixSearchResults(
+				new PropertyPrefixSearchResult(
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property label' ),
 					new Description( 'en', 'property description' ),
 					new MatchedData( 'label', 'en', 'property label' )
 				),
-				new PropertySearchResult(
+				new PropertyPrefixSearchResult(
 					new NumericPropertyId( 'P321' ),
 					new Label( 'en', 'property 2 label' ),
 					new Description( 'en', 'property 2 description' ),
@@ -254,8 +254,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 					new Term( 'en', 'property description' )
 				),
 			],
-			new PropertySearchResults(
-				new PropertySearchResult(
+			new PropertyPrefixSearchResults(
+				new PropertyPrefixSearchResult(
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property alias' ),
 					new Description( 'en', 'property description' ),
@@ -284,9 +284,9 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertySearchResults(
+			new PropertyPrefixSearchResults(
 				...array_map(
-					fn( array $property ) => new PropertySearchResult(
+					fn( array $property ) => new PropertyPrefixSearchResult(
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),
@@ -310,9 +310,9 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertySearchResults(
+			new PropertyPrefixSearchResults(
 				...array_map(
-					fn( array $property ) => new PropertySearchResult(
+					fn( array $property ) => new PropertyPrefixSearchResult(
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),

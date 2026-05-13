@@ -12,8 +12,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 
@@ -62,10 +62,10 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		string $languageCode,
 		int $limit,
 		int $offset,
-		?string $resultLanguageCode
-		): PropertySearchResults {
-		return new PropertySearchResults( ...array_map(
-			$this->convertResult( PropertySearchResult::class ),
+		?string $resultLanguageCode = null,
+	): PropertyPrefixSearchResults {
+		return new PropertyPrefixSearchResults( ...array_map(
+			$this->convertResult( PropertyPrefixSearchResult::class ),
 			$this->suggestEntities( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset, false, $resultLanguageCode )
 		) );
 	}

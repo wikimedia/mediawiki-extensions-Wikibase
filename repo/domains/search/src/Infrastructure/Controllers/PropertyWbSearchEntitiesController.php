@@ -7,7 +7,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 
 /**
  * @license GPL-2.0-or-later
@@ -34,12 +34,14 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 		return array_map( $this->convertResult( ... ), iterator_to_array( $response->results ) );
 	}
 
-	private function convertResult( PropertySearchResult $result ): TermSearchResult {
-		$matchedData = $result->getMatchedData();
-		$entityId = $result->getPropertyId();
+	private function convertResult( PropertyPrefixSearchResult $result ): TermSearchResult {
+		$matchedData = $result->matchedData;
+		$entityId = $result->propertyId;
 
-		$label = $result->getLabel();
-		$description = $result->getDescription();
+		$label = $result->label;
+		$description = $result->description;
+		$conceptUri = $this->entitySourceLookup->getEntitySourceById( $entityId )->getConceptBaseUri()
+					  . wfUrlencode( $entityId->getSerialization() );
 
 		return new TermSearchResult(
 			new Term( $matchedData->getLanguageCode() ?? 'pid', $matchedData->getText() ),
@@ -47,9 +49,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 			$entityId,
 			$label ? new Term( $label->getLanguageCode(), $label->getText() ) : null,
 			$description ? new Term( $description->getLanguageCode(), $description->getText() ) : null,
-			[ TermSearchResult::CONCEPTURI_META_DATA_KEY =>
-				$this->entitySourceLookup->getEntitySourceById( $entityId )->getConceptBaseUri()
-				. wfUrlencode( $entityId->getSerialization() ) ]
+			[ TermSearchResult::CONCEPTURI_META_DATA_KEY => $conceptUri ]
 		);
 	}
 

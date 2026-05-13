@@ -14,8 +14,8 @@ use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PropertyWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
@@ -31,14 +31,14 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 
 	public function testSearchWithFullResult(): void {
 		$propertyId = new NumericPropertyId( 'P42' );
-		$searchResult = new PropertySearchResult(
+		$searchResult = new PropertyPrefixSearchResult(
 			$propertyId,
 			new Label( 'en', 'instance of' ),
 			new Description( 'en', 'type to which this subject belongs' ),
 			new MatchedData( 'label', 'en', 'instance of' )
 		);
 
-		$controller = $this->newController( new PropertySearchResults( $searchResult ) );
+		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
 		$results = $controller->search( new WbSearchEntitiesRequest( 'instance', 'en', 'en', 5, false, null ) );
 
 		$this->assertCount( 1, $results );
@@ -56,14 +56,14 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 	}
 
 	public function testNullLabelAndDescription(): void {
-		$searchResult = new PropertySearchResult(
+		$searchResult = new PropertyPrefixSearchResult(
 			new NumericPropertyId( 'P1' ),
 			null,
 			null,
 			new MatchedData( 'label', 'en', 'test' )
 		);
 
-		$controller = $this->newController( new PropertySearchResults( $searchResult ) );
+		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
 		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null ) );
 
 		$this->assertCount( 1, $results );
@@ -72,14 +72,14 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 	}
 
 	public function testEntityIdMatch(): void {
-		$searchResult = new PropertySearchResult(
+		$searchResult = new PropertyPrefixSearchResult(
 			new NumericPropertyId( 'P42' ),
 			null,
 			null,
 			new MatchedData( 'entityId', null, 'P42' )
 		);
 
-		$controller = $this->newController( new PropertySearchResults( $searchResult ) );
+		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
 		$results = $controller->search( new WbSearchEntitiesRequest( 'P42', 'en', 'en', 5, false, null ) );
 
 		$this->assertCount( 1, $results );
@@ -88,13 +88,13 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 	}
 
 	public function testEmptyResults(): void {
-		$controller = $this->newController( new PropertySearchResults() );
+		$controller = $this->newController( new PropertyPrefixSearchResults() );
 		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null ) );
 
 		$this->assertSame( [], $results );
 	}
 
-	private function newController( PropertySearchResults $searchResults ): PropertyWbSearchEntitiesController {
+	private function newController( PropertyPrefixSearchResults $searchResults ): PropertyWbSearchEntitiesController {
 		$searchEngine = $this->createStub( PropertyPrefixSearchEngine::class );
 		$searchEngine->method( 'suggestProperties' )->willReturn( $searchResults );
 

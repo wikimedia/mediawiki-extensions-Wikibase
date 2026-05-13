@@ -10,8 +10,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
 use Wikibase\Search\Elastic\InLabelSearch;
@@ -49,10 +49,10 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		string $languageCode,
 		int $limit,
 		int $offset
-	): PropertySearchResults {
-		return new PropertySearchResults(
+	): PropertySimpleSearchResults {
+		return new PropertySimpleSearchResults(
 			...array_values( array_map(
-				$this->convertResult( PropertySearchResult::class ),
+				$this->convertResult( PropertySimpleSearchResult::class ),
 				// @phan-suppress-next-line PhanUndeclaredClassMethod
 				$this->inLabelSearch->search( $searchTerm, $languageCode, Property::ENTITY_TYPE, $limit, $offset )
 			) )

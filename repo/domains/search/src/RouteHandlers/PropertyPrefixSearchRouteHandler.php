@@ -8,8 +8,8 @@ use MediaWiki\Rest\SimpleHandler;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -63,22 +63,22 @@ class PropertyPrefixSearchRouteHandler extends SimpleHandler {
 		);
 	}
 
-	private function formatResults( PropertySearchResults $results ): array {
+	private function formatResults( PropertyPrefixSearchResults $results ): array {
 		return array_map(
-			fn( PropertySearchResult $result ) => [
-				'id' => $result->getPropertyId()->getSerialization(),
-				'display-label' => $result->getLabel() ? [
-					'language' => $result->getLabel()->getLanguageCode(),
-					'value' => $result->getLabel()->getText(),
+			fn( PropertyPrefixSearchResult $result ) => [
+				'id' => $result->propertyId->getSerialization(),
+				'display-label' => $result->label ? [
+					'language' => $result->label->getLanguageCode(),
+					'value' => $result->label->getText(),
 				] : null,
-				'description' => $result->getDescription() ? [
-					'language' => $result->getDescription()->getLanguageCode(),
-					'value' => $result->getDescription()->getText(),
+				'description' => $result->description ? [
+					'language' => $result->description->getLanguageCode(),
+					'value' => $result->description->getText(),
 				] : null,
 				'match' => array_filter( [
-					'type' => $result->getMatchedData()->getType(),
-					'language' => $result->getMatchedData()->getLanguageCode(),
-					'text' => $result->getMatchedData()->getText(),
+					'type' => $result->matchedData->getType(),
+					'language' => $result->matchedData->getLanguageCode(),
+					'text' => $result->matchedData->getText(),
 				] ),
 			],
 			iterator_to_array( $results )

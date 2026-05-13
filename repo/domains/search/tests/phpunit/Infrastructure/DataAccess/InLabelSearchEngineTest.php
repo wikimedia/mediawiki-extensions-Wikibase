@@ -16,8 +16,8 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResult;
-use Wikibase\Repo\Domains\Search\Domain\Model\PropertySearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResult;
+use Wikibase\Repo\Domains\Search\Domain\Model\PropertySimpleSearchResults;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Search\Elastic\InLabelSearch;
 
@@ -181,7 +181,7 @@ class InLabelSearchEngineTest extends TestCase {
 	 */
 	public function testPropertySearch(
 		array $results,
-		PropertySearchResults $expected,
+		PropertySimpleSearchResults $expected,
 		int $limit = 10,
 		int $offset = 0
 	): void {
@@ -201,7 +201,7 @@ class InLabelSearchEngineTest extends TestCase {
 	}
 
 	public static function propertySearchResultsProvider(): Generator {
-		yield 'no results' => [ [], new PropertySearchResults() ];
+		yield 'no results' => [ [], new PropertySimpleSearchResults() ];
 		yield 'some results' => [
 			[
 				new TermSearchResult(
@@ -219,14 +219,14 @@ class InLabelSearchEngineTest extends TestCase {
 					new Term( 'en', 'property 2 description' )
 				),
 			],
-			new PropertySearchResults(
-				new PropertySearchResult(
+			new PropertySimpleSearchResults(
+				new PropertySimpleSearchResult(
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property label' ),
 					new Description( 'en', 'property description' ),
 					new MatchedData( 'label', 'en', 'property label' )
 				),
-				new PropertySearchResult(
+				new PropertySimpleSearchResult(
 					new NumericPropertyId( 'P321' ),
 					new Label( 'en', 'property 2 label' ),
 					new Description( 'en', 'property 2 description' ),
@@ -244,8 +244,8 @@ class InLabelSearchEngineTest extends TestCase {
 					new Term( 'en', 'property description' )
 				),
 			],
-			new PropertySearchResults(
-				new PropertySearchResult(
+			new PropertySimpleSearchResults(
+				new PropertySimpleSearchResult(
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property alias' ),
 					new Description( 'en', 'property description' ),
@@ -274,9 +274,9 @@ class InLabelSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertySearchResults(
+			new PropertySimpleSearchResults(
 				...array_map(
-					fn( array $property ) => new PropertySearchResult(
+					fn( array $property ) => new PropertySimpleSearchResult(
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),
@@ -300,9 +300,9 @@ class InLabelSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertySearchResults(
+			new PropertySimpleSearchResults(
 				...array_map(
-					fn( array $property ) => new PropertySearchResult(
+					fn( array $property ) => new PropertySimpleSearchResult(
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),
