@@ -14,7 +14,7 @@ interface ItemPrefixSearchEngine {
 		int $limit,
 		int $offset,
 		bool $disableLanguageFallback,
-		?string $resultLanguageCode,
+		string $resultLanguageCode,
 		?string $profile
 	): ItemSearchResults;
 }

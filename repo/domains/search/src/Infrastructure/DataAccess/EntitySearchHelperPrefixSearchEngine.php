@@ -35,7 +35,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		int $limit,
 		int $offset,
 		bool $disableLanguageFallback,
-		?string $resultLanguageCode,
+		string $resultLanguageCode,
 		?string $profile
 	): ItemSearchResults {
 		$profileName = $profile ?? array_key_first( $this->searchProfiles );
@@ -62,7 +62,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		string $languageCode,
 		int $limit,
 		int $offset,
-		?string $resultLanguageCode = null,
+		string $resultLanguageCode,
 	): PropertyPrefixSearchResults {
 		return new PropertyPrefixSearchResults( ...array_map(
 			$this->convertResult( PropertyPrefixSearchResult::class ),
@@ -76,14 +76,14 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		string $languageCode,
 		int $limit,
 		int $offset,
-		bool $disableLanguageFallback = false,
-		?string $resultLanguageCode = null,
+		bool $disableLanguageFallback,
+		string $resultLanguageCode,
 		?string $profileContext = null
 	): array {
 		return array_slice(
 			$this->searchHelperFactory->newEntitySearchHelper(
 				$entityType,
-				$this->languageFactory->getLanguage( $resultLanguageCode ?? $languageCode ),
+				$this->languageFactory->getLanguage( $resultLanguageCode ),
 				$this->request
 			)->getRankedSearchResults(
 				$searchTerm,
