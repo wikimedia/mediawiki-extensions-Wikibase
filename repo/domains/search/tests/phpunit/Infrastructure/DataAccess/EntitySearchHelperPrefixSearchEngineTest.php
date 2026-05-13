@@ -196,6 +196,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 	): void {
 		$searchTerm = 'subcla';
 		$language = 'en';
+		$resultLanguage = 'de';
 
 		$entitySearchHelper = $this->createMock( EntitySearchHelper::class );
 		$entitySearchHelper->expects( $this->once() )
@@ -205,7 +206,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 
 			$this->assertEquals(
 				$expected,
-				$this->newSearchEngine( $entitySearchHelper )->suggestProperties( $searchTerm, $language, $limit, $offset )
+				$this->newSearchEngine( $entitySearchHelper )->suggestProperties( $searchTerm, $language, $limit, $offset, $resultLanguage )
 			);
 	}
 

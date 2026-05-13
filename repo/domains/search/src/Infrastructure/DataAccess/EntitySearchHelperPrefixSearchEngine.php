@@ -57,10 +57,16 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		) );
 	}
 
-	public function suggestProperties( string $searchTerm, string $languageCode, int $limit, int $offset ): PropertySearchResults {
+	public function suggestProperties(
+		string $searchTerm,
+		string $languageCode,
+		int $limit,
+		int $offset,
+		?string $resultLanguageCode
+		): PropertySearchResults {
 		return new PropertySearchResults( ...array_map(
 			$this->convertResult( PropertySearchResult::class ),
-			$this->suggestEntities( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset )
+			$this->suggestEntities( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset, false, $resultLanguageCode )
 		) );
 	}
 

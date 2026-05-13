@@ -12,6 +12,7 @@ interface PropertyPrefixSearchEngine {
 		string $searchTerm,
 		string $languageCode,
 		int $limit,
-		int $offset
+		int $offset,
+		?string $resultLanguageCode,
 	): PropertySearchResults;
 }

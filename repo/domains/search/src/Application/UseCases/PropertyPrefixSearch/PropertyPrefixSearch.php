@@ -26,7 +26,8 @@ class PropertyPrefixSearch {
 			$searchRequest->query,
 			$searchRequest->language,
 			$searchRequest->limit,
-			$searchRequest->offset
+			$searchRequest->offset,
+			$searchRequest->resultLanguage,
 		) );
 	}
 }
