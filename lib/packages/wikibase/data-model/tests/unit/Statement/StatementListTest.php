@@ -311,7 +311,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$statementId = new StatementGuid( new ItemId( 'Q42' ), 'this-guid-does-not-exist' );
 
 		$this->expectException( StatementNotFoundException::class );
-		$this->expectExceptionMessageMatches( '/' . preg_quote( (string)$statementId ) . '/' );
+		$this->expectExceptionMessageMatches( '/' . preg_quote( (string)$statementId, '/' ) . '/' );
 
 		$list->replaceStatement( $statementId, new Statement( new PropertyNoValueSnak( 42 ) ) );
 	}
