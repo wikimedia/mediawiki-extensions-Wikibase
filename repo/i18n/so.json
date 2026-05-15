@@ -1,11 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abdullahi"
+			"Abdullahi",
+			"AhmedG612"
 		]
 	},
 	"wikibase-edit": "wax ka badal",
 	"wikibase-add": "ku dar",
 	"wikibase-sitelinks-special": "Bogag kale",
-	"wikibase-statementview-rank-normal": "Darajo caadi ah"
+	"wikibase-statementview-rank-normal": "Darajo caadi ah",
+	"wikibase-quantitydetails-unit-optional": "Unug (ikhtiyaari)",
+	"wikibase-monolingualtextcode-mandatory": "Luqad (waajib)"
 }

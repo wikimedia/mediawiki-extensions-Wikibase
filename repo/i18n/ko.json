@@ -366,7 +366,7 @@
 	"wikibase-entitydata-storage-error": "$1 엔티티 불러오기를 실패했습니다.",
 	"wikibase-entitydata-title": "개체 데이터",
 	"wikibase-entitydata-text": "이 문서는 개체 값에 연결된 데이터 인터페이스를 제공합니다. 하위 문서 구문을 사용하여 URL에 있는 개체 ID를 입력하세요.\n* 콘텐츠 협상은 클라이언트의 Accept 헤더에 따라 적용됩니다. 즉, 개체 데이터는 클라이언트가 선호하는 형식으로 제공됩니다. 웹 브라우저의 경우 HTML 형식으로 제공되므로 브라우저는 일반 개체 문서로 넘겨집니다.\n* 개체 ID에 적절한 파일 확장자를 추가하여 특정 데이터 형식을 명시적으로 요청할 수 있습니다: Q23.json은 JSON 형식의 데이터를 반환하고, Q23.ttl은 RDF/Turtle 형식의 데이터를 반환하는 등 입니다. 지원되는 형식은 다음과 같습니다: $1.",
-	"wikibase-entitydata-unresolvable-sub-entity-redirect": "\"$1\"에 대한 넘겨주기를 해결할 수 없습니다. 부모 개체는 \"$2\"(으)로 넘겨주기 되었습니다.",
+	"wikibase-entitydata-unresolvable-sub-entity-redirect": "\"$1\"에 대한 넘겨주기를 해결할 수 없습니다. 상위 개체는 \"$2\"(으)로 넘겨주기 되었습니다.",
 	"special-entitypage": "개체 문서",
 	"wikibase-entitypage-title": "개체 문서",
 	"wikibase-entitypage-text": "이 문서는 해당 저장소의 개체 문서로 넘겨집니다. 하위 문서 구문을 사용하여 URL에 개체 ID를 제공하세요.",
