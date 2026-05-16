@@ -56,32 +56,28 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		return [
-			[
+			'Instantiation raises exception in case missing "datatypefactory" field' => [
 				[
 					'datatypesconfigvarname' => 'foo',
 				],
-				'missing "datatypefactory" field',
 			],
-			[
+			'Instantiation raises exception in case missing "datatypesconfigvarname" field' => [
 				[
 					'datatypefactory' => $dataTypeFactory,
 				],
-				'missing "datatypesconfigvarname" field',
 			],
-			[
+			'Instantiation raises exception in case all fields missing' => [
 				[],
-				'all fields missing',
 			],
-			[
+			'Instantiation raises exception in case "datatypefactory" field has value of wrong type' => [
 				array_merge(
 					$validDefinition,
 					[
 						'datatypefactory' => 123,
 					]
 				),
-				'"datatypefactory" field has value of wrong type',
 			],
-			[
+			'Instantiation raises exception in case "datatypefactory" callback does not return a DataTypeFactory instance' => [
 				array_merge(
 					$validDefinition,
 					[
@@ -90,7 +86,6 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 						},
 					]
 				),
-				'"datatypefactory" callback does not return a DataTypeFactory instance',
 			],
 		];
 	}
@@ -113,10 +108,8 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideInvalidResourceDefinition
 	 *
 	 * @param array $definition
-	 * @param string $caseDescription
 	 */
-	public function testConstructorErrors( array $definition, $caseDescription ) {
-		$this->setName( 'Instantiation raises exception in case ' . $caseDescription );
+	public function testConstructorErrors( array $definition ) {
 		$this->expectException( Exception::class );
 
 		new DataTypesModule( $definition );
