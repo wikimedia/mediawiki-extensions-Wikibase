@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Abdullahi",
-			"Abshirdheere"
+			"Abshirdheere",
+			"AhmedG612"
 		]
 	},
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"datatypes-type-quantity": "Tayo",
-	"datatypes-type-number": "Tiro"
+	"datatypes-type-number": "Tiro",
+	"wikibase-entity-summary-wbremovereferences-remove": "Laga saaray {{PLURAL:$3|tixraac|tixraacyo}} sheegashada"
 }

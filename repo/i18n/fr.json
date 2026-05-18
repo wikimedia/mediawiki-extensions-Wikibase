@@ -33,6 +33,7 @@
 			"Jean-Frédéric",
 			"Jhammock",
 			"Jitrixis",
+			"Jérémy-Günther-Heinz Jähnick",
 			"Laddo",
 			"Lenchanteur",
 			"Linedwell",
@@ -616,5 +617,6 @@
 	"wikibase-stepper-progress": "$1 sur $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problèmes et suggestions",
 	"wikibase-indicator-popover-multiple-issue-previous": "Précédent",
-	"wikibase-indicator-popover-multiple-issue-next": "Suivant"
+	"wikibase-indicator-popover-multiple-issue-next": "Suivant",
+	"wikibase-wikiprojects-sidebar-section": "Wikiprojets associés"
 }
