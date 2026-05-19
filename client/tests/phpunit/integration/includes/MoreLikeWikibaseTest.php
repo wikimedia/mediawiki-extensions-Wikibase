@@ -60,7 +60,7 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 						] )
 						->setFields( [ 'text' ] )
 						->setLike( [
-							[ '_id' => '12345' ],
+							[ '_id' => '12345', '_index' => 'mywiki_content' ],
 						] )
 					),
 				true,
@@ -72,13 +72,15 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider applyProvider
 	 */
 	public function testApply( $term, $expectedQuery, $mltUsed ) {
-		$this->markTestSkipped();
 		// Inject fake pages for MoreLikeFeature::collectTitles() to find
 		$this->addGoodLinkObject( 12345, Title::makeTitle( NS_MAIN, 'Some page' ) );
 		$this->addGoodLinkObject( 23456, Title::makeTitle( NS_MAIN, 'Other page' ) );
 
 		// @todo Use a HashConfig with explicit values?
-		$config = new HashSearchConfig( [ 'CirrusSearchMoreLikeThisTTL' => 600 ], [ 'inherit' ] );
+		$config = new HashSearchConfig(
+			[ 'CirrusSearchMoreLikeThisTTL' => 600, 'CirrusSearchIndexBaseName' => 'mywiki' ],
+			[ 'inherit' ]
+		);
 
 		$context = new SearchContext( $config );
 
