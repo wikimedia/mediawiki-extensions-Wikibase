@@ -25,6 +25,9 @@ jest.mock(
 	)
 );
 
+class MockJQuery extends Array {}
+global.$ = MockJQuery;
+
 const crypto = require( 'crypto' );
 // eslint-disable-next-line no-undef
 Object.defineProperty( globalThis, 'wikibase', {
@@ -234,14 +237,16 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		it( 'shows an error message if publishing fails', async () => {
 			const { publishButton, wrapper } = await mountAndGetParts();
 
-			const apiGeneratedErrorMessage = 'Wikibase API reports error for request';
+			const apiGeneratedErrorMessage = '<div>Wikibase API reports error for request</div>';
 			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
 			const editStatementsStore = wbui2025.store.useEditStatementsStore();
 			editStatementsStore.saveChangedStatements = jest.fn(
 				() => new Promise( ( _, reject ) => {
 					const rejectWithException = () => {
 						const errorData = { errors: [ { code: 'modification-failed', text: apiGeneratedErrorMessage } ] };
-						reject( new ErrorObject( 'modification-failure', apiGeneratedErrorMessage, errorData ) );
+						const errorMessage = new global.$();
+						errorMessage.push( { outerHTML: apiGeneratedErrorMessage } );
+						reject( new ErrorObject( 'modification-failure', errorMessage, errorData ) );
 					};
 					setTimeout( rejectWithException, 500 );
 				} )
@@ -256,7 +261,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( messageStore.messages.size ).toBe( 1 );
 			const message = messageStore.messages.values().next().value;
 			expect( message.type ).toBe( 'error' );
-			expect( message.text ).toBe( 'wikibase-error-save-generic' + '\n' + apiGeneratedErrorMessage );
+			expect( message.html ).toBe( apiGeneratedErrorMessage );
+			expect( message.text ).toBeNull();
 			await jest.advanceTimersByTime( 300 );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );

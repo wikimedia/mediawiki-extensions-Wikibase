@@ -1,6 +1,7 @@
 const { mapActions } = require( 'pinia' );
 
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+const ErrorObject = wbui2025.api.ErrorObject;
 
 const saveStatementsFormMixin = {
 	methods: Object.assign(
@@ -27,24 +28,21 @@ const saveStatementsFormMixin = {
 						this.showProgress = false;
 					} )
 					.catch( ( errorObj ) => {
-						const errorHtml = errorObj &&
-						errorObj.errorData &&
-						errorObj.errorData.errors &&
-						errorObj.errorData.errors.length > 0 &&
-						typeof errorObj.errorData.errors[ 0 ].html === 'string'
-							? errorObj.errorData.errors[ 0 ].html
-							: null;
-
-						const errorText = errorHtml ? null : wbui2025.util.extractErrorMessage(
-							errorObj,
-							mw.msg( 'wikibase-publishing-error' )
-						);
+						const errorHtml = errorObj instanceof ErrorObject &&
+						errorObj.errorMessage instanceof $ ?
+							// TODO use $( '<div>' ).append( errorObj.errorMessage ).html() once T304945 is fixed
+							errorObj.errorMessage[ 0 ].outerHTML :
+							null;
 						this.addStatusMessage( {
 							type: 'error',
 							attachTo: currentFormRef,
 							html: errorHtml,
-							text: errorText
+							text: errorHtml ? null : wbui2025.util.extractErrorMessage(
+								errorObj,
+								mw.msg( 'wikibase-publishing-error' )
+							)
 						} );
+
 						clearTimeout( progressTimeout );
 						this.showProgress = false;
 						this.formSubmitted = false;
