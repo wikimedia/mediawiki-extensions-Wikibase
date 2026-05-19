@@ -7,7 +7,8 @@ const ui = SwaggerUI( {
 	spec,
 	dom_id: '#swagger', // eslint-disable-line camelcase
 	deepLinking: true,
-	showCommonExtensions: true
+	showCommonExtensions: true,
+	supportedSubmitMethods: []
 } );
 
 ui.initOAuth( {
