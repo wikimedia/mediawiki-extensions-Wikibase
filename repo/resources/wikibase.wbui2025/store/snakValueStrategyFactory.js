@@ -53,6 +53,7 @@ class SnakValueStrategyFactory {
 		this.strategiesByDatatype = {};
 		this.searchesByDatatype = {};
 		this.searchesByDatatypeDebounced = {};
+		this.errorPopoverFormattersByDatatype = {};
 	}
 
 	registerStrategyForDatatype( datatype, strategyKlass, searchByDatatype = null ) {
@@ -84,6 +85,17 @@ class SnakValueStrategyFactory {
 			throw new Error( `Unsupported datatype for search: ${ datatype }` );
 		}
 		return this.searchesByDatatype[ datatype ]( searchTerm, offset );
+	}
+
+	registerErrorPopoverFormatter( datatype, formatter ) {
+		this.errorPopoverFormattersByDatatype[ datatype ] = formatter;
+	}
+
+	formatErrorForPopover( datatype, rawHtml ) {
+		if ( datatype && datatype in this.errorPopoverFormattersByDatatype ) {
+			return this.errorPopoverFormattersByDatatype[ datatype ]( rawHtml );
+		}
+		return { bodyHtml: rawHtml };
 	}
 
 	searchByDatatypeDebounced( datatype, searchTerm, offset = 0 ) {

@@ -7,6 +7,7 @@ const {
 	snakValueHtmlForHashHasError
 } = require( './serverRenderedHtml.js' );
 const { renderPropertyLinkHtml, renderSnakValueHtml } = require( '../api/editEntity.js' );
+const { snakValueStrategyFactory } = require( './snakValueStrategyFactory.js' );
 
 const useSavedStatementsStore = defineStore( 'savedStatements', {
 	state: () => ( {
@@ -211,20 +212,49 @@ const setIndicatorHtmlForReferenceSnak = function ( statementId, referenceHash, 
 	statementsStore.indicatorHtmlForReferenceSnaks.set( `${ statementId }|${ referenceHash }|${ snakHash }`, indicatorHtml );
 };
 
+function findSnakDatatypeByHash( statement, snakHash ) {
+	if ( !statement ) {
+		return undefined;
+	}
+	if ( statement.mainsnak && statement.mainsnak.hash === snakHash ) {
+		return statement.mainsnak.datatype;
+	}
+	for ( const qualifierSnaks of Object.values( statement.qualifiers || {} ) ) {
+		for ( const qualifier of qualifierSnaks ) {
+			if ( qualifier.hash === snakHash ) {
+				return qualifier.datatype;
+			}
+		}
+	}
+	for ( const reference of statement.references || [] ) {
+		for ( const snaks of Object.values( reference.snaks || {} ) ) {
+			for ( const snak of snaks ) {
+				if ( snak.hash === snakHash ) {
+					return snak.datatype;
+				}
+			}
+		}
+	}
+	return undefined;
+}
+
+function prependErrorIfNeeded( popoverContentItems, statement, snakHash ) {
+	if ( snakValueHtmlForHashHasError( snakHash ) ) {
+		const datatype = findSnakDatatypeByHash( statement, snakHash );
+		return [
+			snakValueStrategyFactory.formatErrorForPopover( datatype, snakValueHtmlForHash( snakHash ) ),
+			...popoverContentItems
+		];
+	}
+	return popoverContentItems;
+}
+
 const getPopoverContentForMainSnak = function ( statementId ) {
 	const statementsStore = useSavedStatementsStore();
 	const popoverContentItems = statementsStore.popoverHtmlForMainSnaks.get( statementId ) || [];
-	const snakHash = ( statementsStore.statements.get( statementId ) || { mainsnak: {} } ).mainsnak.hash;
-	if ( snakValueHtmlForHashHasError( snakHash ) ) {
-		return [
-			{
-				bodyHtml: snakValueHtmlForHash( snakHash )
-			},
-			...popoverContentItems
-		];
-	} else {
-		return popoverContentItems;
-	}
+	const statement = statementsStore.statements.get( statementId );
+	const snakHash = ( statement || { mainsnak: {} } ).mainsnak.hash;
+	return prependErrorIfNeeded( popoverContentItems, statement, snakHash );
 };
 
 const setPopoverContentForMainSnak = function ( statementId, popoverContentItems ) {
@@ -241,16 +271,8 @@ const clearPopoverContentAndIndicatorForMainSnak = function ( statementId ) {
 const getPopoverContentForQualifier = function ( statementId, snakHash ) {
 	const statementsStore = useSavedStatementsStore();
 	const popoverContentItems = statementsStore.popoverHtmlForQualifiers.get( `${ statementId }|${ snakHash }` ) || [];
-	if ( snakValueHtmlForHashHasError( snakHash ) ) {
-		return [
-			{
-				bodyHtml: snakValueHtmlForHash( snakHash )
-			},
-			...popoverContentItems
-		];
-	} else {
-		return popoverContentItems;
-	}
+	const statement = statementsStore.statements.get( statementId );
+	return prependErrorIfNeeded( popoverContentItems, statement, snakHash );
 };
 
 const setPopoverContentForQualifier = function ( statementId, snakHash, popoverContentItems ) {
@@ -268,16 +290,8 @@ const clearPopoverContentAndIndicatorForQualifier = function ( statementId, snak
 const getPopoverContentForReferenceSnak = function ( statementId, referenceHash, snakHash ) {
 	const statementsStore = useSavedStatementsStore();
 	const popoverContentItems = statementsStore.popoverHtmlForReferenceSnaks.get( `${ statementId }|${ referenceHash }|${ snakHash }` ) || [];
-	if ( snakValueHtmlForHashHasError( snakHash ) ) {
-		return [
-			{
-				bodyHtml: snakValueHtmlForHash( snakHash )
-			},
-			...popoverContentItems
-		];
-	} else {
-		return popoverContentItems;
-	}
+	const statement = statementsStore.statements.get( statementId );
+	return prependErrorIfNeeded( popoverContentItems, statement, snakHash );
 };
 
 const setPopoverContentForReferenceSnak = function ( statementId, referenceHash, snakHash, popoverContentItems ) {
