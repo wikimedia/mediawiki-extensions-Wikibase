@@ -164,17 +164,33 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
-		$crudRoutes = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/entities' )
+		$isCrudRoute = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/entities' )
 			|| str_starts_with( $route['path'], '/wikibase/v1/statements' );
+		$getFlattenedRoutes = static function( array $moduleInfo ) {
+			$routes = [];
+			foreach ( $moduleInfo['paths'] as $path => $infoByMethod ) {
+				foreach ( $infoByMethod as $method => $routeInfo ) {
+					$routes[] = array_merge(
+						[
+							'path' => '/' . $moduleInfo['moduleId'] . $path,
+							'method' => strtoupper( $method ),
+						],
+						$routeInfo['handler']
+					);
+				}
+			}
+
+			return $routes;
+		};
 		self::$prodRoutesData = array_filter(
-			json_decode( file_get_contents( __DIR__ . '/../../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
-			$crudRoutes
+			$getFlattenedRoutes( json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/wikibase.v1.json' ), true ) ),
+			$isCrudRoute
 		);
 		self::$routesData = array_merge(
 			self::$prodRoutesData,
 			array_filter(
 				json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/routes.dev.json' ), true ),
-				$crudRoutes
+				$isCrudRoute
 			)
 		);
 	}

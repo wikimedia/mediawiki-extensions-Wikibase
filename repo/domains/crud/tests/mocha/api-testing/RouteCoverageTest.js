@@ -2,7 +2,7 @@
 
 const assert = require( 'assert' );
 const happyPathBuilders = require( '../helpers/happyPathRequestBuilders' );
-const extensionRepoConfig = require( '../../../../../../extension-repo.json' );
+const repoModuleDefinition = require( '../../../../../rest-api/wikibase.v1.json' );
 
 describe( 'Route Coverage Tests', () => {
 	const mockInputs = {
@@ -18,8 +18,24 @@ describe( 'Route Coverage Tests', () => {
 		return `${route.method} ${route.path}`;
 	}
 
+	function getFlattenedRoutes( moduleInfo ) {
+		const routes = [];
+		for ( const path in moduleInfo.paths ) {
+			for ( const method in moduleInfo.paths[ path ] ) {
+				const route = {
+					path: '/' + moduleInfo.moduleId + path,
+					method: method.toUpperCase(),
+				};
+				Object.assign( route, moduleInfo.paths[ path ][ method ].handler );
+				routes.push( route );
+			}
+		}
+
+		return routes;
+	}
+
 	function getAllProductionRoutes() {
-		return extensionRepoConfig.RestRoutes.map(
+		return getFlattenedRoutes( repoModuleDefinition ).map(
 			( route ) => ( {
 				method: route.method,
 				path: route.path.split( '/wikibase' )[ 1 ]

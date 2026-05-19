@@ -33,17 +33,33 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		parent::setUpBeforeClass();
-		$searchRoutes = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/search' )
+		$isSearchRoute = fn( $route ) => str_starts_with( $route['path'], '/wikibase/v1/search' )
 			|| str_starts_with( $route['path'], '/wikibase/v1/suggest' );
+		$getFlattenedRoutes = static function( array $moduleInfo ) {
+			$routes = [];
+			foreach ( $moduleInfo['paths'] as $path => $infoByMethod ) {
+				foreach ( $infoByMethod as $method => $routeInfo ) {
+					$routes[] = array_merge(
+						[
+							'path' => '/' . $moduleInfo['moduleId'] . $path,
+							'method' => strtoupper( $method ),
+						],
+						$routeInfo['handler']
+					);
+				}
+			}
+
+			return $routes;
+		};
 		$prodRoutes = array_filter(
-			json_decode( file_get_contents( __DIR__ . '/../../../../../../extension-repo.json' ), true )[ 'RestRoutes' ],
-			$searchRoutes
+			$getFlattenedRoutes( json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/wikibase.v1.json' ), true ) ),
+			$isSearchRoute
 		);
 		self::$searchRoutesData = array_merge(
 			$prodRoutes,
 			array_filter(
 				json_decode( file_get_contents( __DIR__ . '/../../../../../rest-api/routes.dev.json' ), true ),
-				$searchRoutes
+				$isSearchRoute
 			)
 		);
 	}
