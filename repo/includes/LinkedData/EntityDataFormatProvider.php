@@ -246,9 +246,7 @@ class EntityDataFormatProvider {
 	private static function getApiFormatName( $format ) {
 		$format = trim( strtolower( $format ) );
 
-		if ( $format === 'application/vnd.php.serialized' ) {
-			$format = 'php';
-		} elseif ( $format === 'text/text' || $format === 'text/plain' ) {
+		if ( $format === 'text/text' || $format === 'text/plain' ) {
 			$format = 'txt';
 		} else {
 			// hack: just trip the major part of the mime type
@@ -270,9 +268,6 @@ class EntityDataFormatProvider {
 		$type = null;
 
 		switch ( $format ) {
-			case 'php':
-				return [ 'application/vnd.php.serialized' ];
-
 			case 'txt':
 				return [ "text/text", "text/plain" ];
 

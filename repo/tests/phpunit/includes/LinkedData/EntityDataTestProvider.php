@@ -142,6 +142,18 @@ class EntityDataTestProvider {
 			],
 		];
 
+		$cases['php mime type not supported'] = [
+			'', // subpage
+			[ // parameters
+				'id' => 'Q42',
+				'format' => 'php',
+			],
+			[], // headers
+			'!Unsupported Media Type!s', // output regex
+			415, // http code
+			[],
+		];
+
 		$cases['bad format'] = [
 			'', // subpage
 			[ // parameters

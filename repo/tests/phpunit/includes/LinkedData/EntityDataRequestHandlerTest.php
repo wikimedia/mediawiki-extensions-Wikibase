@@ -170,7 +170,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			[
 				// using the API
 				'json', // default
-				'php',
 
 				// using purtle
 				'rdfxml',
@@ -184,7 +183,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$extensions = [
 			// using the API
 			'json' => 'json', // default
-			'php' => 'php',
 
 			// using purtle
 			'rdfxml' => 'rdf',
