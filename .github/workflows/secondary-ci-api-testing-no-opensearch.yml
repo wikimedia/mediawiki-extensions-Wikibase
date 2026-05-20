@@ -1,0 +1,128 @@
+name: Wikibase Secondary CI API Testing without OpenSearch
+on:
+    workflow_dispatch:
+    push:
+        branches: [ master ]
+
+env:
+    COMPOSER_HOME: ${{ github.workspace }}/.composer
+
+jobs:
+    secondary-ci-api-testing-no-opensearch:
+        runs-on: ubuntu-latest
+        env:
+            MW_BRANCH: master
+            DBTYPE: sqlite
+            LANG: en
+            WB: both
+            IPMASKING: disabled
+            QUIBBLE_OPENSEARCH: 'false'
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.3.30'
+                  extensions: pdo_sqlite, mysqlnd
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '24.x'
+                  cache: npm
+
+            - name: Cache Composer cache
+              uses: actions/cache@v4.2.3
+              with:
+                  path: ${{ env.COMPOSER_HOME }}/cache
+                  key: composer-cache-php8.3.30
+
+            - name: Install MediaWiki and Wikibase
+              run: bash ./build/ci-scripts/install.sh
+
+            - name: Apply WB settings
+              run: bash ./build/ci-scripts/mw-apply-wb-settings.sh
+
+            - name: Relax default rate limits and throttles and add X-Config-Overrides for testing
+              run: |
+                  cat >> ../mediawiki/LocalSettings.php << 'PHP'
+                  require __DIR__ . '/includes/DevelopmentSettings.php';
+                  $wgMainCacheType = CACHE_NONE;
+                  require __DIR__ . '/extensions/Wikibase/repo/config/Wikibase.ci.php';
+                  PHP
+
+            - name: Update DB
+              run: bash ./build/ci-scripts/update-db.sh
+
+            - name: Register site for sitelinks
+              working-directory: ../mediawiki
+              run: |
+                  php maintenance/run.php addSite \
+                    enwiki CI \
+                    --interwiki-id enwiki \
+                    --pagepath 'http://127.0.0.1:8080/index.php?title=$1' \
+                    --language en \
+                    --filepath 'http://127.0.0.1:8080/$1'
+
+            - name: Install root test dependencies
+              run: npm ci --ignore-scripts
+
+            - name: Install REST API test dependencies
+              run: npm --prefix repo/rest-api ci --ignore-scripts
+
+            - name: Create api-testing config
+              run: |
+                  SECRET_KEY=$(sed -nE 's/^\$wgSecretKey *= *["'"'"']([^"'"'"']+)["'"'"'];/\1/p' ../mediawiki/LocalSettings.php)
+                  ADMIN_USER=$(sed -nE 's/^\s+TestWiki\s+(\S+).*/\1/p' build/ci-scripts/install.sh)
+                  ADMIN_PASS=$(sed -nE 's/^\s+--pass\s+(\S+).*/\1/p' build/ci-scripts/install.sh)
+                  cat > .api-testing.config.json <<EOF
+                  {
+                      "base_uri": "http://127.0.0.1:8080/",
+                      "main_page": "Main_Page",
+                      "root_user": {
+                          "name": "${ADMIN_USER}",
+                          "password": "${ADMIN_PASS}"
+                      },
+                      "secret_key": "${SECRET_KEY}"
+                  }
+                  EOF
+                  cp .api-testing.config.json repo/rest-api/.api-testing.config.json
+
+
+            - name: Start MediaWiki web server
+              working-directory: ../mediawiki
+              run: |
+                  nohup env PHP_CLI_SERVER_WORKERS=4 php -S 127.0.0.1:8080 -t . >/tmp/php-server.log 2>&1 &
+                  echo $! > /tmp/php-server.pid
+                  sleep 2
+                  ps -p "$(cat /tmp/php-server.pid)" || (cat /tmp/php-server.log && exit 1)
+
+            - name: Wait for MediaWiki
+              run: |
+                  for i in $(seq 1 30); do
+                     curl -fsS "http://127.0.0.1:8080/api.php?action=query&format=json&titles=Main_Page" >/dev/null && \
+                    exit 0
+                    sleep 1
+                  done
+                  cat /tmp/php-server.log
+                  exit 1
+
+            - name: Run api tests
+              run: npm run api-testing
+
+            - name: Send mail
+              if: ${{ failure() }}
+              uses: dawidd6/action-send-mail@v3.7.1
+              with:
+                  server_address: smtp.gmail.com
+                  server_port: 465
+                  username: ${{secrets.WMDE_CI_MAIL_USERNAME}}
+                  password: ${{secrets.WMDE_CI_MAIL_PASSWORD}}
+                  subject: Github Action job failed for Wikibase - Secondary CI API Testing
+                  html_body: |
+                      Job secondary-ci-api-testing-no-opensearch failed!
+                      The failed job can be found in <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">here</a>
+                  to: wikidata-ci-status@wikimedia.de
+                  from: Wikibase Github Action CI
