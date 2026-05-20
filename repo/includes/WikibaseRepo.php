@@ -690,6 +690,16 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.CompactBaseDataModelSerializerFactory' );
 	}
 
+	/**
+	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
+	 *  they are made of, but no other entity types. Returns serializers that generate objects where
+	 *  empty PHP arrays are represented by empty PHP objects where the JSON serialization expects that
+	 */
+	public static function getJsonFriendlyDataModelSerializerFactory( ?ContainerInterface $services = null ): SerializerFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.JsonFriendlyDataModelSerializerFactory' );
+	}
+
 	public static function getAllTypesEntityDeserializer(
 		?ContainerInterface $services = null
 	): DispatchableDeserializer {
@@ -712,6 +722,14 @@ class WikibaseRepo {
 	public static function getAllTypesEntitySerializer( ?ContainerInterface $services = null ): Serializer {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.AllTypesEntitySerializer' );
+	}
+
+	/**
+	 * Entity serializer that generates the full serialization, using stdClass for empty PHP arrays
+	 */
+	public static function getAllTypesJsonFriendlyEntitySerializer( ?ContainerInterface $services = null ): Serializer {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.AllTypesJsonFriendlyEntitySerializer' );
 	}
 
 	/**

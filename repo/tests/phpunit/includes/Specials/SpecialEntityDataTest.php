@@ -11,7 +11,6 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\Site\HashSiteStore;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Tests\Specials\SpecialPageTestBase;
 use MediaWiki\Title\Title;
@@ -19,6 +18,7 @@ use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\SubEntityTypesMapper;
@@ -84,6 +84,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturn( 'string' );
 
+		$entityIdParser = $this->createMock( EntityIdParser::class );
+
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
@@ -119,14 +121,12 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$mockRepository
 		);
 		$serializationService = new EntityDataSerializationService(
+			$serializerFactory->newEntitySerializer(),
+			$entityDataFormatProvider,
+			$rdfBuilderFactory,
 			$entityTitleStoreLookup,
 			$dataTypeLookup,
-			$entityDataFormatProvider,
-			$serializerFactory,
-			$serializerFactory->newItemSerializer(),
-			new HashSiteStore(),
-			$rdfBuilderFactory,
-			WikibaseRepo::getEntityIdParser()
+			$entityIdParser,
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];
