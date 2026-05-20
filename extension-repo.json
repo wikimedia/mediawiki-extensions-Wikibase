@@ -401,7 +401,7 @@
 		"ItemDisambiguation": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
 			"services": [
-				"WikibaseRepo.EntitySearchHelper",
+				"WbSearch.ItemSearchHelper",
 				"WikibaseRepo.ItemDisambiguationFactory",
 				"WikibaseRepo.LanguageNameLookupFactory",
 				"WikibaseRepo.TermsLanguages"
