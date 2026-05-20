@@ -119,7 +119,7 @@ abstract class NoBadUsageTestBase extends TestCase {
 			if ( $absolutePath === $thisFile ) {
 				continue;
 			}
-			$relativePath = substr( $absolutePath, strlen( $baseDir ) + 1 ); // + 1 for /
+			$relativePath = str_replace( '\\', '/', substr( $absolutePath, strlen( $baseDir ) + 1 ) ); // + 1 for /
 
 			$text = file_get_contents( $absolutePath );
 			$text = self::removeComments( $text );
