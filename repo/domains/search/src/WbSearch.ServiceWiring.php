@@ -91,7 +91,8 @@ return [
 				WbSearch::getEntitySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),
 				RequestContext::getMain()->getRequest(),
-				$searchProfiles
+				$searchProfiles,
+				WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			),
 		);
 	},
@@ -125,11 +126,11 @@ return [
 		return new PropertyPrefixSearch(
 			new PropertyPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
 			new EntitySearchHelperPrefixSearchEngine(
-				// @phan-suppress-next-line PhanUndeclaredClassMethod WikibaseCirrusSearch is ok here
-				WikibaseCirrusSearch::getEntitySearchHelperFactory( $services ),
+				WbSearch::getEntitySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),
 				RequestContext::getMain()->getRequest(),
-				$searchProfiles
+				$searchProfiles,
+				WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			)
 		);
 	},

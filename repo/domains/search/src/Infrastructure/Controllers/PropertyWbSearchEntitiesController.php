@@ -7,6 +7,7 @@ use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchException;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
@@ -66,7 +67,10 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 			$entityId,
 			$label ? new Term( $label->getLanguageCode(), $label->getText() ) : null,
 			$description ? new Term( $description->getLanguageCode(), $description->getText() ) : null,
-			[ TermSearchResult::CONCEPTURI_META_DATA_KEY => $conceptUri ]
+			[
+				TermSearchResult::CONCEPTURI_META_DATA_KEY => $conceptUri,
+				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result->dataType,
+			]
 		);
 	}
 

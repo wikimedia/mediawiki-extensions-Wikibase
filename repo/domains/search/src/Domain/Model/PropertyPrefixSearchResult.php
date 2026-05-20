@@ -13,7 +13,8 @@ class PropertyPrefixSearchResult {
 		public readonly PropertyId $propertyId,
 		public readonly ?Label $label,
 		public readonly ?Description $description,
-		public readonly MatchedData $matchedData
+		public readonly MatchedData $matchedData,
+		public readonly string $dataType,
 	) {
 	}
 }

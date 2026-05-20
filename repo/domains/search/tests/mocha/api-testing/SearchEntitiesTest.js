@@ -449,8 +449,8 @@ describe( 'wbsearchentities', () => {
 			assert.equal( result.display.label.language, 'en' );
 		} );
 
-		it( 'includes the data type in property search results', async () => {
-			const response = await api.action( 'wbsearchentities', {
+		withPropertyController( 'includes the data type in property search results', async ( client ) => {
+			const response = await client.action( 'wbsearchentities', {
 				search: PROP_EN_LABEL,
 				language: 'en',
 				type: 'property',

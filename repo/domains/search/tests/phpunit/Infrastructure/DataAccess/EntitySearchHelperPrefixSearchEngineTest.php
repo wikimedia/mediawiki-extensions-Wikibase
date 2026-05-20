@@ -10,6 +10,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -31,6 +33,8 @@ use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPre
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
+
+	private const DEFAULT_DATA_TYPE = 'string';
 
 	/**
 	 * @dataProvider itemSearchResultsProvider
@@ -234,13 +238,15 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property label' ),
 					new Description( 'en', 'property description' ),
-					new MatchedData( 'label', 'en', 'property label' )
+					new MatchedData( 'label', 'en', 'property label' ),
+					self::DEFAULT_DATA_TYPE,
 				),
 				new PropertyPrefixSearchResult(
 					new NumericPropertyId( 'P321' ),
 					new Label( 'en', 'property 2 label' ),
 					new Description( 'en', 'property 2 description' ),
-					new MatchedData( 'label', 'en', 'property 2 label' )
+					new MatchedData( 'label', 'en', 'property 2 label' ),
+					self::DEFAULT_DATA_TYPE,
 				)
 			),
 		];
@@ -259,7 +265,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 					new NumericPropertyId( 'P123' ),
 					new Label( 'en', 'property alias' ),
 					new Description( 'en', 'property description' ),
-					new MatchedData( 'alias', 'en', 'property alias' )
+					new MatchedData( 'alias', 'en', 'property alias' ),
+					self::DEFAULT_DATA_TYPE,
 				)
 			),
 		];
@@ -290,7 +297,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),
-						new MatchedData( 'label', 'en', $property['label'] )
+						new MatchedData( 'label', 'en', $property['label'] ),
+						self::DEFAULT_DATA_TYPE,
 					),
 					array_slice( $propertyList, 0, 5 )
 				)
@@ -316,7 +324,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 						new NumericPropertyId( $property['id'] ),
 						new Label( 'en', $property['label'] ),
 						new Description( 'en', $property['description'] ),
-						new MatchedData( 'label', 'en', $property['label'] )
+						new MatchedData( 'label', 'en', $property['label'] ),
+						self::DEFAULT_DATA_TYPE,
 					),
 					array_slice( $propertyList, 5, 5 )
 				)
@@ -326,17 +335,49 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 		];
 	}
 
-	public function newSearchEngine( EntitySearchHelper $entitySearchHelper ): EntitySearchHelperPrefixSearchEngine {
+	public function testPropertySearchIncludesDataType(): void {
+		$propertyId = new NumericPropertyId( 'P123' );
+
+		$entitySearchHelper = $this->createStub( EntitySearchHelper::class );
+		$entitySearchHelper->method( 'getRankedSearchResults' )->willReturn( [
+			new TermSearchResult(
+				new Term( 'en', 'property label' ),
+				'label',
+				$propertyId,
+				new Term( 'en', 'property label' ),
+				null
+			),
+		] );
+
+		$propertyDataTypeLookup = new InMemoryDataTypeLookup();
+		$propertyDataTypeLookup->setDataTypeForProperty( $propertyId, 'wikibase-item' );
+
+		$results = $this->newSearchEngine( $entitySearchHelper, $propertyDataTypeLookup )
+			->suggestProperties( 'prop', 'en', 10, 0, 'en' );
+
+		$this->assertSame( 'wikibase-item', $results[0]->dataType );
+	}
+
+	private function newSearchEngine(
+		EntitySearchHelper $entitySearchHelper,
+		?PropertyDataTypeLookup $propertyDataTypeLookup = null
+	): EntitySearchHelperPrefixSearchEngine {
 		$searchHelperFactory = $this->createMock( EntitySearchHelperFactory::class );
 		$searchHelperFactory->method( 'newEntitySearchHelper' )
 			->willReturn( $entitySearchHelper );
 		$searchProfiles = [ 'default' => null, 'custom' => 'some_profile_context' ];
 
+		if ( $propertyDataTypeLookup === null ) {
+			$propertyDataTypeLookup = $this->createStub( PropertyDataTypeLookup::class );
+			$propertyDataTypeLookup->method( 'getDataTypeIdForProperty' )->willReturn( self::DEFAULT_DATA_TYPE );
+		}
+
 		return new EntitySearchHelperPrefixSearchEngine(
 			$searchHelperFactory,
 			$this->createStub( LanguageFactory::class ),
 			$this->createStub( WebRequest::class ),
-			$searchProfiles
+			$searchProfiles,
+			$propertyDataTypeLookup,
 		);
 	}
 

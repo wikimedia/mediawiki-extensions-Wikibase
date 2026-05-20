@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchException;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
@@ -37,7 +38,8 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 			$propertyId,
 			new Label( 'en', 'instance of' ),
 			new Description( 'en', 'type to which this subject belongs' ),
-			new MatchedData( 'label', 'en', 'instance of' )
+			new MatchedData( 'label', 'en', 'instance of' ),
+			'wikibase-item',
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
@@ -51,7 +53,10 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 				$propertyId,
 				new Term( 'en', 'instance of' ),
 				new Term( 'en', 'type to which this subject belongs' ),
-				[ TermSearchResult::CONCEPTURI_META_DATA_KEY => 'http://www.wikidata.org/entity/P42' ]
+				[
+					TermSearchResult::CONCEPTURI_META_DATA_KEY => 'http://www.wikidata.org/entity/P42',
+					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => 'wikibase-item',
+				]
 			),
 			$results[0]
 		);
@@ -62,7 +67,8 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 			new NumericPropertyId( 'P1' ),
 			null,
 			null,
-			new MatchedData( 'label', 'en', 'test' )
+			new MatchedData( 'label', 'en', 'test' ),
+			'string',
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
@@ -78,7 +84,8 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 			new NumericPropertyId( 'P42' ),
 			null,
 			null,
-			new MatchedData( 'entityId', null, 'P42' )
+			new MatchedData( 'entityId', null, 'P42' ),
+			'string',
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
