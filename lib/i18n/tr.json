@@ -13,12 +13,13 @@
 			"Rapsar",
 			"Sayginer",
 			"Stultiwikia",
-			"Violetanka"
+			"Violetanka",
+			"Wooze"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Silinmiş Öğe",
-	"wikibase-deletedentity-property": "Silinmiş Mülk",
+	"wikibase-deletedentity-property": "Silinmiş Özellik",
 	"wikibase-deletedentity-query": "Silinen sorgu",
 	"wikibase-error-unexpected": "Hata: $1.",
 	"wikibase-error-unknown": "Bir hata oluştu.",

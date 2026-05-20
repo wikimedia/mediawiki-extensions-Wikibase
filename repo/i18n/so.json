@@ -1,11 +1,21 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abdullahi"
+			"Abdullahi",
+			"AhmedG612"
 		]
 	},
 	"wikibase-edit": "wax ka badal",
+	"wikibase-save": "keydi",
+	"wikibase-publish": "daabac",
 	"wikibase-add": "ku dar",
+	"wikibase-content-language-edit-label": "Luqadda:",
+	"wikibase-diffview-link-name": "magaca",
 	"wikibase-sitelinks-special": "Bogag kale",
-	"wikibase-statementview-rank-normal": "Darajo caadi ah"
+	"wikibase-statementview-rank-normal": "Darajo caadi ah",
+	"wikibase-shortcopyrightwarning": "Markaad gujiso \"$1\", waxaad oggolaanaysaa [[$2|shuruudaha isticmaalka]], sidoo kalena waxaad si aan laga noqon karin ugu raacsan tahay inaad ku sii dayso wax-ku-biirintaada iyadoo hoos imanaysa [$3 $4].",
+	"special-dispatchstats": "Beddel tirakoobka dirista",
+	"wikibase-noentity": "Qaybtan ma jirto. Waxaad [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} ka raadin kartaa diiwaannada la xiriira] si aad u ogaato halka ay tagtay.",
+	"wikibase-pageinfo-subscription": "Wiki-yada ku xiran shaygan",
+	"wikibase-pageinfo-subscription-none": "Midna"
 }

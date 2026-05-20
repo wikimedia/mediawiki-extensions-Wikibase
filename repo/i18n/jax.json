@@ -7,6 +7,7 @@
 	},
 	"wikibase-edit": "sunting",
 	"wikibase-add": "tambah",
+	"wikibase-label-empty": "Dak ado labél",
 	"wikibase-description-empty": "Katek deskripsi",
 	"wikibase-sitelinks-special": "Situs lain"
 }

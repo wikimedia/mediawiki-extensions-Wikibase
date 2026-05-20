@@ -8,8 +8,21 @@
 	"wikibase-edit": "воа̄йхэ",
 	"wikibase-publish": "элмсаһтӭ",
 	"wikibase-add": "лажьхэ",
+	"wikibase-addqualifier": "лажьхэ квалификатэр",
+	"wikibase-addreference": "лажьхэ ка̄йв",
+	"wikibase-statementlistview-add": "лажьхэ а̄рв",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Мудта кӣлэнҍ",
+	"wikibase-entitytermsforlanguagelistview-description": "Оа̄нтшаһтҍмушш",
+	"wikibase-entitytermsforlanguagelistview-label": "Нэ̄мм",
+	"wikibase-entitytermsforlanguagelistview-language": "Кӣлл",
+	"wikibase-description-empty": "Оа̄нтшаһтҍмушш элля кырьйха",
+	"wikibase-content-language-edit-label": "Кӣлл:",
+	"wikibase-diffview-reference": "ка̄ййв",
+	"wikibase-diffview-qualifier": "квалификатэр",
+	"wikibase-statementsection-identifiers": "Идэнтификатэр",
 	"wikibase-sitelinks-special": "Мудта са̄йт",
 	"wikibase-referenceview-tabs-manual": "Выгкмушш",
-	"wikibase-itemdisambiguation-lookup-language": "Кӣл ко̄дт:"
+	"wikibase-itemdisambiguation-lookup-language": "Кӣл ко̄дт:",
+	"wikibase-newentity-language": "Кӣлл:",
+	"wikibase-setdescription-submit": "Оа̄нтшаһтҍмуж пыйе"
 }
