@@ -23,8 +23,9 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
-use Wikibase\Repo\Api\EntityTermSearchHelper;
 use Wikibase\Repo\Api\QuerySearchEntities;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
 
 /**
  * @covers \Wikibase\Repo\Api\QuerySearchEntities
@@ -74,31 +75,30 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	/**
-	 * @param array $params
-	 * @param TermSearchResult[] $matches
-	 * @param Status|null $failureStatus
-	 * @return EntityTermSearchHelper
-	 */
-	private function getMockEntitySearchHelper( array $params, array $matches, ?Status $failureStatus ): EntityTermSearchHelper {
-		$mock = $this->createMock( EntityTermSearchHelper::class );
-		$invocation = $mock->expects( $this->atLeastOnce() )
-			->method( 'getRankedSearchResults' )
-			->with(
-				$params['wbssearch'],
-				$params['wbslanguage'],
-				$params['wbstype'],
-				$params['wbslimit'],
-				false,
-				null
-			);
+	private function getMockSearchController(
+		array $params,
+		array $matches,
+		?Status $failureStatus
+	): DispatchingWbSearchEntitiesController {
+		$controller = $this->createMock( WbSearchEntitiesController::class );
+		$invocation = $controller->expects( $this->atLeastOnce() )
+			->method( 'search' )
+			->with( $this->callback( fn( $request ) => $request->text === $params['wbssearch']
+				&& $request->searchLanguageCode === $params['wbslanguage']
+				&& $request->limit === $params['wbslimit']
+				&& $request->strictLanguage === false ) );
 		if ( $failureStatus !== null ) {
 			$invocation->willThrowException( new EntitySearchException( $failureStatus ) );
 		} else {
 			$invocation->willReturn( $matches );
 		}
 
-		return $mock;
+		$dispatchingController = $this->createMock( DispatchingWbSearchEntitiesController::class );
+		$dispatchingController->method( 'getControllerForEntityType' )
+			->with( $params['wbstype'] )
+			->willReturn( $controller );
+
+		return $dispatchingController;
 	}
 
 	/**
@@ -145,7 +145,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			$this->getApiQuery( $params ),
 			'wbsearch',
 			$this->createMock( LinkBatchFactory::class ),
-			$this->getMockEntitySearchHelper( $params, $matches, $failureStatus ),
+			$this->getMockSearchController( $params, $matches, $failureStatus ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
