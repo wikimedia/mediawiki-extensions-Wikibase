@@ -50,6 +50,7 @@ $cfg['directory_list'] = array_merge(
 		'lib/packages/wikibase/internal-serialization/src/',
 		'../../extensions/Babel/',
 		'../../extensions/CirrusSearch/',
+		'../../extensions/ConfirmEdit/',
 		'../../extensions/Echo/',
 		'../../extensions/GeoData/',
 		'../../extensions/Math/',
@@ -69,6 +70,7 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 	[
 		'../../extensions/Babel/',
 		'../../extensions/CirrusSearch/',
+		'../../extensions/ConfirmEdit/',
 		'../../extensions/Echo/',
 		'../../extensions/GeoData/',
 		'../../extensions/Math/',

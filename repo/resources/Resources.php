@@ -297,6 +297,12 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.special.newEntity.captcha.styles' => $moduleTemplate + [
+			'styles' => [
+				'wikibase.special/wikibase.special.newEntity.captcha.less',
+			],
+		],
+
 		'wikibase.special.mergeItems' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.special/wikibase.special.mergeItems.js',

@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Site\Site;
@@ -80,7 +81,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeItems,
-		bool $isMobileView
+		bool $isMobileView,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'NewItem',
@@ -90,7 +92,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
-			$isMobileView
+			$isMobileView,
+			$captchaFactory
 		);
 		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
 		$this->termValidatorFactory = $termValidatorFactory;
@@ -115,7 +118,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		SummaryFormatter $summaryFormatter,
 		TermValidatorFactory $termValidatorFactory,
-		ValidatorErrorLocalizer $errorLocalizer
+		ValidatorErrorLocalizer $errorLocalizer,
+		?CaptchaFactory $captchaFactory = null
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -138,7 +142,8 @@ class SpecialNewItem extends SpecialNewEntity {
 			$siteLinkTargetProvider,
 			$labelDescriptionLookupFactory,
 			$repoSettings->getSetting( 'badgeItems' ),
-			$isMobileView
+			$isMobileView,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

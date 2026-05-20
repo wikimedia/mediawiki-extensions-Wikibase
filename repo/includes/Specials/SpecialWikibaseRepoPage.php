@@ -2,6 +2,10 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
+use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
+use MediaWiki\Html\Html;
+use MediaWiki\Session\SessionManager;
 use MediaWiki\Title\Title;
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -53,6 +57,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 */
 	private $editEntity = null;
 
+	private ?CaptchaFactory $captchaFactory;
+
 	/**
 	 * @param string $title The title of the special page
 	 * @param string[] $tags List of tags to add to edits
@@ -60,6 +66,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @param SummaryFormatter $summaryFormatter
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
+	 * @param CaptchaFactory|null $captchaFactory Null when ConfirmEdit is not installed.
 	 */
 	public function __construct(
 		$title,
@@ -67,7 +74,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		SpecialPageCopyrightView $copyrightView,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediaWikiEditEntityFactory $editEntityFactory
+		MediaWikiEditEntityFactory $editEntityFactory,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct( $title );
 		$this->tags = $tags;
@@ -75,6 +83,36 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		$this->summaryFormatter = $summaryFormatter;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->editEntityFactory = $editEntityFactory;
+		$this->captchaFactory = $captchaFactory;
+	}
+
+	protected function hasCaptchaFactory(): bool {
+		return $this->captchaFactory !== null;
+	}
+
+	/** @return SimpleCaptcha|null Null if no captcha is required. */
+	protected function getTriggeredCaptcha( string $action, Title $title ): ?SimpleCaptcha {
+		if ( $this->captchaFactory === null ) {
+			return null;
+		}
+		$captcha = $this->captchaFactory->getGlobalInstance( $action );
+		if ( $captcha->canSkipCaptcha( $this->getUser() ) ) {
+			return null;
+		}
+		return $captcha->triggersCaptcha( $action, $title ) ? $captcha : null;
+	}
+
+	protected function renderCaptcha( SimpleCaptcha $captcha, string $action, string $trigger ): string {
+		// Some captcha implementations rely on session state.
+		SessionManager::getGlobalSession()->persist();
+		$captcha->setTrigger( $trigger );
+		$captcha->setAction( $action );
+		$output = $this->getOutput();
+		$formInformation = $captcha->getFormInformation( 1, $output );
+		$formMetainfo = $formInformation;
+		unset( $formMetainfo['html'] );
+		$captcha->addFormInformationToOutput( $output, $formMetainfo );
+		return Html::rawElement( 'div', [ 'class' => 'captcha' ], $formInformation['html'] );
 	}
 
 	/**

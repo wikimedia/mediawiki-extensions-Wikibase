@@ -357,6 +357,9 @@
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermValidatorFactory",
 				"WikibaseRepo.ValidatorErrorLocalizer"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"NewProperty": {
@@ -374,6 +377,9 @@
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermValidatorFactory",
 				"WikibaseRepo.ValidatorErrorLocalizer"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"ItemByTitle": {
