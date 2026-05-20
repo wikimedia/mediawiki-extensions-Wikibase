@@ -76,7 +76,6 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 			$this->isRepoEntityNamespaceMain,
 			$this->mockLookup,
 			parse_url( $this->settings->getSetting( 'repoUrl' ), PHP_URL_HOST ),
-			$this->context->getTitle()
 		);
 	}
 
@@ -145,7 +144,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, "linkType", $this->context->getTitle() );
 		$this->assertEquals( $originalText, $text );
 	}
 
@@ -160,7 +159,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, "linkType", $this->context->getTitle() );
 		$this->assertEquals( $originalText, $text );
 	}
 
@@ -179,7 +178,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, "linkType", $this->context->getTitle() );
 		$this->assertEquals( $originalText, $text );
 	}
 
@@ -198,7 +197,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, "linkType", $this->context->getTitle() );
 		$this->assertEquals( $originalText, $text );
 	}
 
@@ -210,7 +209,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$attribs = [];
 		$link = "link";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, "linkType" );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, "linkType", $this->context->getTitle() );
 		$this->assertEquals( $originalText, $text );
 	}
 
@@ -281,7 +280,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$link = "link";
 		$linkType = "linkType";
 		$myHookHandler = $this->getHookHandler();
-		$myHookHandler->onLinkerMakeExternalLink( $url, $text, $link, $attribs, $linkType );
+		$myHookHandler->onLinkerMakeExternalLinkWithContext( $url, $text, $attribs, $linkType, $this->context->getTitle() );
 		$this->assertEquals( $expectedText, $text );
 		$this->assertArrayHasKey( 'title', $attribs );
 		$this->assertEquals( $expectedTitleAttribs, $attribs['title'] );

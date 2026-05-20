@@ -6,7 +6,7 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
-use MediaWiki\Linker\Hook\LinkerMakeExternalLinkHook;
+use MediaWiki\Linker\Hook\LinkerMakeExternalLinkWithContextHook;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\Formatter\ClientEntityLinkFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -20,18 +20,18 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
+use Wikimedia\Parsoid\Core\LinkTarget;
 
 /**
  * @license GPL-2.0-or-later
  */
-class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
+class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithContextHook {
 	private Language $contentLanguage;
 	private EntityIdParser $entityIdParser;
 	private string $repoUrlHost;
 	private bool $isRepoEntityNamespaceMain;
 	private ClientEntityLinkFormatter $clientEntityLinkFormatter;
 	private FallbackLabelDescriptionLookup $labelDescriptionLookup;
-	private ?Title $currentPageTitle;
 
 	public function __construct(
 		Language $contentLanguage,
@@ -40,7 +40,6 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		bool $isRepoEntityNamespaceMain,
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		string $repoUrlHost,
-		?Title $title
 	) {
 		$this->contentLanguage = $contentLanguage;
 		$this->entityIdParser = $entityIdParser;
@@ -48,7 +47,6 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		$this->clientEntityLinkFormatter = $clientEntityLinkFormatter;
 		$this->repoUrlHost = $repoUrlHost;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
-		$this->currentPageTitle = $title;
 	}
 
 	public static function factory(
@@ -72,35 +70,37 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 			$isRepoEntityNamespaceMain,
 			$labelDescriptionLookup,
 			$repoUrlHost,
-			$context->getTitle()
 		);
 	}
 
-	/**
-	 * @param string $url
-	 * @return bool
-	 */
-	public function isRepoUrl( string $url ): bool {
+	public function isRepoUrl( ?string $url ): bool {
+		if ( $url === null ) {
+			return false;
+		}
 		$parsedUrlHost = parse_url( $url, PHP_URL_HOST );
 
 		return $parsedUrlHost === $this->repoUrlHost;
 	}
 
-	public function isRecentChangeOrWatchlist(): bool {
-		return $this->currentPageTitle !== null && $this->currentPageTitle->isSpecialPage() &&
-			( $this->currentPageTitle->isSpecial( 'Recentchanges' ) || $this->currentPageTitle->isSpecial( 'Watchlist' ) );
+	public function isRecentChangeOrWatchlist( Title $currentPageTitle ): bool {
+		return $currentPageTitle->isSpecialPage() &&
+			( $currentPageTitle->isSpecial( 'Recentchanges' ) || $currentPageTitle->isSpecial( 'Watchlist' ) );
 	}
 
 	/**
-	 * @param string &$url Link URL
+	 * @param ?string &$url Link URL
 	 * @param string &$text Link text
-	 * @param string &$link New link HTML (if returning false)
 	 * @param string[] &$attribs Attributes to be applied
 	 * @param string $linkType External link type
+	 * @param LinkTarget $contextTitle The page on which this link appears
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public function onLinkerMakeExternalLink( &$url, &$text, &$link, &$attribs, $linkType ) {
-		if ( !$this->isRecentChangeOrWatchlist() || !$this->isRepoUrl( $url ) ) {
+	public function onLinkerMakeExternalLinkWithContext(
+		?string &$url, string &$text, array &$attribs, string $linkType,
+		LinkTarget $contextTitle
+	) {
+		$contextTitle = Title::newFromLinkTarget( $contextTitle );
+		if ( !$this->isRecentChangeOrWatchlist( $contextTitle ) || !$this->isRepoUrl( $url ) ) {
 			return;
 		}
 
