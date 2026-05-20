@@ -3,7 +3,8 @@ const {
 	snakValueHtmlForHash,
 	snakValueHtmlForHashHasError,
 	updateSnakValueHtmlForHash,
-	useServerRenderedHtml
+	useServerRenderedHtml,
+	isDeletedProperty
 } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
 
 describe( 'Server-rendered HTML Store', () => {
@@ -45,5 +46,30 @@ describe( 'Server-rendered HTML Store', () => {
 			expect( snakValueHtmlForHashHasError( hash ) ).toBe( true );
 		} );
 
+	} );
+
+	describe( 'isDeletedProperty', () => {
+		it( 'returns false for unknown property', () => {
+			expect( isDeletedProperty( 'P1' ) ).toBe( false );
+		} );
+
+		it( 'returns true after importFromElement finds data-deleted-property attribute', () => {
+			const store = useServerRenderedHtml();
+			const element = document.createElement( 'div' );
+			element.innerHTML = `<span class="wikibase-wbui2025-property-name-link"
+				data-property-id="P1" data-deleted-property="true">
+				<a href="#">P1</a></span>`;
+			store.importFromElement( element );
+			expect( isDeletedProperty( 'P1' ) ).toBe( true );
+		} );
+
+		it( 'returns false after importFromElement for property without data-deleted-property', () => {
+			const store = useServerRenderedHtml();
+			const element = document.createElement( 'div' );
+			element.innerHTML = `<span class="wikibase-wbui2025-property-name-link"
+				data-property-id="P2"><a href="#">P2</a></span>`;
+			store.importFromElement( element );
+			expect( isDeletedProperty( 'P2' ) ).toBe( false );
+		} );
 	} );
 } );

@@ -15,6 +15,7 @@ use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -60,6 +61,11 @@ class ViewFactory {
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
+
+	/**
+	 * @var EntityExistenceChecker
+	 */
+	private $entityExistenceChecker;
 
 	/**
 	 * @var PropertyOrderProvider
@@ -143,6 +149,7 @@ class ViewFactory {
 	 * @param StatementGrouper $statementGrouper
 	 * @param SerializerFactory $serializerFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param EntityExistenceChecker $entityExistenceChecker
 	 * @param PropertyOrderProvider $propertyOrderProvider
 	 * @param SiteLookup $siteLookup
 	 * @param DataTypeFactory $dataTypeFactory
@@ -168,6 +175,7 @@ class ViewFactory {
 		StatementGrouper $statementGrouper,
 		SerializerFactory $serializerFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityExistenceChecker $entityExistenceChecker,
 		PropertyOrderProvider $propertyOrderProvider,
 		SiteLookup $siteLookup,
 		DataTypeFactory $dataTypeFactory,
@@ -195,6 +203,7 @@ class ViewFactory {
 		$this->htmlSnakFormatterFactory = $htmlSnakFormatterFactory;
 		$this->statementGrouper = $statementGrouper;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->serializerFactory = $serializerFactory;
 		$this->propertyOrderProvider = $propertyOrderProvider;
 		$this->siteLookup = $siteLookup;
@@ -351,6 +360,7 @@ class ViewFactory {
 			$language,
 			$textProvider,
 			$this->propertyDataTypeLookup,
+			$this->entityExistenceChecker,
 			$this->serializerFactory,
 			$snakFormatter,
 			$this->wbui2025FeatureFlag,

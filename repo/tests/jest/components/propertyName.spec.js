@@ -50,5 +50,45 @@ describe( 'wikibase.wbui2025.propertyName', () => {
 			expect( propertyName.find( '.wikibase-wbui2025-property-name-link>a' ).element.href )
 				.toContain( 'mock-property-url' );
 		} );
+
+		it( 'does not add --deleted class for a non-deleted property', async () => {
+			expect( wrapper.find( '.wikibase-wbui2025-property-name' ).classes() )
+				.not.toContain( 'wikibase-wbui2025-property-name--deleted' );
+		} );
+
+		it( 'sets data-deleted-property attribute to false for a non-deleted property', async () => {
+			const link = wrapper.find( '.wikibase-wbui2025-property-name-link' );
+			expect( link.attributes( 'data-deleted-property' ) ).toBe( 'false' );
+		} );
+	} );
+
+	describe( 'deleted property', () => {
+		let deletedWrapper;
+
+		beforeEach( async () => {
+			deletedWrapper = await mount( propertyNameComponent, {
+				props: { propertyId: 'P1' },
+				global: {
+					plugins: [
+						storeWithServerRenderedHtml(
+							{},
+							{ P1: '<a href="mock-property-url">P1</a>' },
+							[],
+							[ 'P1' ]
+						)
+					]
+				}
+			} );
+		} );
+
+		it( 'adds --deleted modifier class', async () => {
+			expect( deletedWrapper.find( '.wikibase-wbui2025-property-name' ).classes() )
+				.toContain( 'wikibase-wbui2025-property-name--deleted' );
+		} );
+
+		it( 'sets data-deleted-property attribute to true', async () => {
+			const link = deletedWrapper.find( '.wikibase-wbui2025-property-name-link' );
+			expect( link.attributes( 'data-deleted-property' ) ).toBe( 'true' );
+		} );
 	} );
 } );

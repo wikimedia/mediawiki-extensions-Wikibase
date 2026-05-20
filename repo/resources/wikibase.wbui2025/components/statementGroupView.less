@@ -53,8 +53,22 @@
 			.cdx-icon {
 				vertical-align: inherit;
 			}
+
+			&--deleted-property {
+				color: @color-disabled;
+				cursor: default;
+
+				.wikibase-wbui2025-icon-edit-small {
+					.cdx-mixin-css-icon( @cdx-icon-edit, @color-disabled, @param-size-icon: @size-icon-small );
+				}
+			}
 		}
 	}
+}
+
+.wikibase-wbui2025-property-name--deleted .wikibase-wbui2025-property-name-link :link,
+.wikibase-wbui2025-property-name--deleted .wikibase-wbui2025-property-name-link :visited {
+	color: @color-error;
 }
 
 .wikibase-wbui2025-icon-edit-small {

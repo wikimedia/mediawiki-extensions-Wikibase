@@ -1,8 +1,12 @@
 <template>
-	<span class="wikibase-wbui2025-property-name">
+	<span
+		class="wikibase-wbui2025-property-name"
+		:class="{ 'wikibase-wbui2025-property-name--deleted': isDeletedProperty }"
+	>
 		<span
 			class="wikibase-wbui2025-property-name-link"
 			:data-property-id="propertyId"
+			:data-deleted-property="isDeletedProperty"
 			v-html="propertyLinkHtml"
 		></span>
 	</span>
@@ -24,6 +28,9 @@ module.exports = exports = defineComponent( {
 	computed: {
 		propertyLinkHtml() {
 			return wbui2025.store.propertyLinkHtml( this.propertyId );
+		},
+		isDeletedProperty() {
+			return wbui2025.store.isDeletedProperty( this.propertyId );
 		}
 	}
 } );

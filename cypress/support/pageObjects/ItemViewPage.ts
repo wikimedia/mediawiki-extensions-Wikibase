@@ -8,7 +8,13 @@ export class ItemViewPage {
 
 	public static EDIT_LINKS = '.wikibase-wbui2025-edit-link';
 
+	public static EDIT_LINKS_DELETED_PROPERTY = ' .wikibase-wbui2025-edit-link--deleted-property';
+
+	public static PROPERTY_NAME_DELETED = ' .wikibase-wbui2025-property-name--deleted';
+
 	public static MAIN_SNAK_VALUES = '.wikibase-wbui2025-main-snak .wikibase-wbui2025-snak-value span.snakValue';
+
+	public static INVALID_SNAK_VALUE_ERROR = ' .wikibase-wbui2025-snak-value .wb-format-error';
 
 	public static QUALIFIERS_SECTION = '.wikibase-wbui2025-qualifiers';
 
@@ -55,6 +61,18 @@ export class ItemViewPage {
 
 	public editLinks(): Chainable {
 		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.EDIT_LINKS );
+	}
+
+	public deletedPropertyName(): Chainable {
+		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ItemViewPage.PROPERTY_NAME_DELETED );
+	}
+
+	public invalidSnakValueError(): Chainable {
+		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ItemViewPage.INVALID_SNAK_VALUE_ERROR );
+	}
+
+	public editLinksDeletedProperty(): Chainable {
+		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ItemViewPage.EDIT_LINKS_DELETED_PROPERTY );
 	}
 
 	public mainSnakValues(): Chainable {

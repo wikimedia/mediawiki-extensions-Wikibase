@@ -21,6 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
@@ -128,6 +129,7 @@ class PropertyViewTest extends EntityViewTestCase {
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			$textProvider,
 			$propertyDataTypeLookup,
+			$this->createMock( EntityExistenceChecker::class ),
 			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
 			$snakFormatter,
 			$this->createMock( Wbui2025FeatureFlag::class ),

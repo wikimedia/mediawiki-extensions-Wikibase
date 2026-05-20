@@ -33,21 +33,21 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		expect( statementGroupViewComponent ).toHaveProperty( 'name', 'WikibaseWbui2025StatementGroupView' );
 	} );
 
+	const mockStatement = {
+		mainsnak: {
+			snaktype: 'value',
+			property: 'P1',
+			hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
+			datavalue: { value: 'p1', type: 'string' },
+			datatype: 'string'
+		},
+		type: 'statement',
+		id: 'Q1$eb7fdbb4-45d1-f59d-bb3b-013935de1085',
+		rank: 'normal'
+	};
+
 	describe( 'the mounted component', () => {
 		let wrapper;
-
-		const mockStatement = {
-			mainsnak: {
-				snaktype: 'value',
-				property: 'P1',
-				hash: 'ee6053a6982690ba0f5227d587394d9111eea401',
-				datavalue: { value: 'p1', type: 'string' },
-				datatype: 'string'
-			},
-			type: 'statement',
-			id: 'Q1$eb7fdbb4-45d1-f59d-bb3b-013935de1085',
-			rank: 'normal'
-		};
 		const mockStatement2 = {
 			mainsnak: { snaktype: 'somevalue', datavalue: { type: 'string', value: '' }, datatype: 'string' },
 			type: 'statement',
@@ -101,6 +101,59 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			mw.config = { get: () => false };
 			await wrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
 			expect( wrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( true );
+		} );
+
+		it( 'edit link has wikibase-wbui2025-link class for non-deleted property', async () => {
+			expect( wrapper.find( '.wikibase-wbui2025-edit-link' ).classes() )
+				.toContain( 'wikibase-wbui2025-link' );
+		} );
+
+		it( 'edit link does not have --deleted-property class for non-deleted property', async () => {
+			expect( wrapper.find( '.wikibase-wbui2025-edit-link' ).classes() )
+				.not.toContain( 'wikibase-wbui2025-edit-link--deleted-property' );
+		} );
+	} );
+
+	describe( 'deleted property', () => {
+		let deletedWrapper;
+
+		beforeEach( async () => {
+			deletedWrapper = await mount( statementGroupViewComponent, {
+				props: {
+					propertyId: 'P1',
+					entityId: 'Q1'
+				},
+				global: {
+					plugins: [
+						storeWithHtmlAndStatements(
+							storeContentsWithServerRenderedHtml(
+								{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' },
+								{ P1: '<a href="mock-property-url">P1</a>' },
+								[],
+								[ 'P1' ]
+							),
+							storeContentWithStatementsAndProperties( {
+								P1: [ mockStatement ]
+							} )
+						)
+					]
+				}
+			} );
+		} );
+
+		it( 'edit link has --deleted-property class', async () => {
+			expect( deletedWrapper.find( '.wikibase-wbui2025-edit-link' ).classes() )
+				.toContain( 'wikibase-wbui2025-edit-link--deleted-property' );
+		} );
+
+		it( 'edit link does not have wikibase-wbui2025-link class', async () => {
+			expect( deletedWrapper.find( '.wikibase-wbui2025-edit-link' ).classes() )
+				.not.toContain( 'wikibase-wbui2025-link' );
+		} );
+
+		it( 'does not open modal edit form when clicking edit link', async () => {
+			await deletedWrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
+			expect( deletedWrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( false );
 		} );
 	} );
 } );

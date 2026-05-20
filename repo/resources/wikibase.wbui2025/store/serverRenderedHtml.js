@@ -16,7 +16,8 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 	state: () => ( {
 		propertyLinks: new Map(),
 		snakValues: new Map(),
-		snakValuesWithErrors: new Set()
+		snakValuesWithErrors: new Set(),
+		deletedPropertyIds: new Set()
 	} ),
 	actions: {
 		/**
@@ -27,6 +28,9 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 			for ( const propertyLink of element.getElementsByClassName( 'wikibase-wbui2025-property-name-link' ) ) {
 				const propertyId = propertyLink.dataset.propertyId;
 				const linkHtml = propertyLink.innerHTML;
+				if ( propertyLink.hasAttribute( 'data-deleted-property' ) ) {
+					this.deletedPropertyIds.add( propertyId );
+				}
 				if ( this.propertyLinks.has( propertyId ) ) {
 					const previousLinkHtml = this.propertyLinks.get( propertyId );
 					if ( previousLinkHtml !== linkHtml ) {
@@ -41,7 +45,11 @@ const useServerRenderedHtml = defineStore( 'serverRenderedHtml', {
 			}
 			for ( const snakValue of element.getElementsByClassName( 'wikibase-wbui2025-snak-value' ) ) {
 				const snakHash = snakValue.dataset.snakHash;
-				const html = snakValue.querySelector( 'span.snakValue' ).innerHTML;
+				const snakValueSpan = snakValue.querySelector( 'span.snakValue' );
+				if ( snakValueSpan === null ) {
+					continue;
+				}
+				const html = snakValueSpan.innerHTML;
 				if ( this.snakValues.has( snakHash ) ) {
 					const previousHtml = this.snakValues.get( snakHash );
 					if ( previousHtml !== html ) {
@@ -110,11 +118,23 @@ function snakValueHtmlForHashHasError( hash ) {
 	return serverRenderedHtml.snakValuesWithErrors.has( hash );
 }
 
+/**
+ * Check whether the given property has been deleted.
+ *
+ * @param {string} propertyId
+ * @returns {boolean}
+ */
+function isDeletedProperty( propertyId ) {
+	const serverRenderedHtml = useServerRenderedHtml();
+	return serverRenderedHtml.deletedPropertyIds.has( propertyId );
+}
+
 module.exports = {
 	useServerRenderedHtml,
 	propertyLinkHtml,
 	updatePropertyLinkHtml,
 	snakValueHtmlForHash,
 	updateSnakValueHtmlForHash,
-	snakValueHtmlForHashHasError
+	snakValueHtmlForHashHasError,
+	isDeletedProperty
 };

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\StatementGroupListView;
@@ -54,6 +55,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'en' ),
 			new DummyLocalizedTextProvider(),
 			$this->createMock( PropertyDataTypeLookup::class ),
+			$this->createMock( EntityExistenceChecker::class ),
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( SnakFormatter::class ),
 			$this->createMock( Wbui2025FeatureFlag::class ),

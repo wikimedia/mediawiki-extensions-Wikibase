@@ -40,19 +40,20 @@ const storeWithStatementsAndProperties = function ( propertyStatementMap ) {
 	} );
 };
 
-const storeContentsWithServerRenderedHtml = function ( snakHashToHtmlMap, propertyToHtmlMap = {}, snakHashWithErrorSet = [] ) {
+const storeContentsWithServerRenderedHtml = function ( snakHashToHtmlMap, propertyToHtmlMap = {}, snakHashWithErrorSet = [], deletedPropertyIdsArray = [] ) {
 	return {
 		serverRenderedHtml: {
 			snakValues: new Map( Object.entries( snakHashToHtmlMap ) ),
 			propertyLinks: new Map( Object.entries( propertyToHtmlMap ) ),
-			snakValuesWithErrors: new Set( snakHashWithErrorSet )
+			snakValuesWithErrors: new Set( snakHashWithErrorSet ),
+			deletedPropertyIds: new Set( deletedPropertyIdsArray )
 		}
 	};
 };
 
-const storeWithServerRenderedHtml = function ( snakHashToHtmlMap, propertyToHtmlMap = {}, snakHashWithErrorSet = [] ) {
+const storeWithServerRenderedHtml = function ( snakHashToHtmlMap, propertyToHtmlMap = {}, snakHashWithErrorSet = [], deletedPropertyIdsArray = [] ) {
 	return createTestingPinia( {
-		initialState: storeContentsWithServerRenderedHtml( snakHashToHtmlMap, propertyToHtmlMap, snakHashWithErrorSet ),
+		initialState: storeContentsWithServerRenderedHtml( snakHashToHtmlMap, propertyToHtmlMap, snakHashWithErrorSet, deletedPropertyIdsArray ),
 		stubActions: false
 	} );
 };

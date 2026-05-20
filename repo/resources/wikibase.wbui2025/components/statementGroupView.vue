@@ -13,7 +13,11 @@
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				</p>
 				<div
-					class="wikibase-wbui2025-link wikibase-wbui2025-edit-link"
+					class="wikibase-wbui2025-edit-link"
+					:class="{
+						'wikibase-wbui2025-link': !isDeletedProperty,
+						'wikibase-wbui2025-edit-link--deleted-property': isDeletedProperty
+					}"
 					@click="showEditForm"
 				>
 					<span class="wikibase-wbui2025-icon-edit-small"></span>
@@ -64,11 +68,16 @@ module.exports = exports = defineComponent( {
 	computed: {
 		statements() {
 			return wbui2025.store.getStatementsForProperty( this.propertyId );
+		},
+		isDeletedProperty() {
+			return wbui2025.store.isDeletedProperty( this.propertyId );
 		}
 	},
 	methods: {
 		showEditForm() {
-			this.showModalEditForm = true;
+			if ( !this.isDeletedProperty ) {
+				this.showModalEditForm = true;
+			}
 		},
 		hideEditForm() {
 			this.showModalEditForm = false;
