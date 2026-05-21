@@ -28,16 +28,6 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriev
  * @license GPL-2.0-or-later
  */
 class EntityUpdaterStatementRemoverTest extends TestCase {
-	private EntityUpdater $entityUpdater;
-	private StatementSubjectRetriever $statementSubjectRetriever;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->entityUpdater = $this->createStub( EntityUpdater::class );
-		$this->statementSubjectRetriever = $this->createStub( StatementSubjectRetriever::class );
-	}
-
 	/**
 	 * @dataProvider provideStatementIdAndEntityWithStatement
 	 */
@@ -52,26 +42,32 @@ class EntityUpdaterStatementRemoverTest extends TestCase {
 			$expectedRevisionTimestamp
 		);
 
-		$this->entityUpdater->expects( $this->once() )
+		$entityUpdater = $this->createMock( EntityUpdater::class );
+		$entityUpdater->expects( $this->once() )
 			->method( 'update' )
 			->with( $statementSubject, $editMetaData )
 			->willReturn( $entityRevision );
 
-		$this->statementSubjectRetriever->method( 'getStatementSubject' )
+		$statementSubjectRetriever = $this->createStub( StatementSubjectRetriever::class );
+		$statementSubjectRetriever->method( 'getStatementSubject' )
 			->willReturn( $statementSubject );
 
-		$this->newStatementRemover()->remove( $statementId, $editMetaData );
+		$this->newStatementRemover( $statementSubjectRetriever, $entityUpdater )
+			->remove( $statementId, $editMetaData );
 	}
 
 	public function testRemoveStatementWithNotFoundSubject_throws(): void {
 		$statementId = new StatementGuid( new ItemId( 'Q999999' ), 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
 		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
 
-		$this->statementSubjectRetriever->method( 'getStatementSubject' )
+		$entityUpdater = $this->createStub( EntityUpdater::class );
+		$statementSubjectRetriever = $this->createStub( StatementSubjectRetriever::class );
+		$statementSubjectRetriever->method( 'getStatementSubject' )
 			->willReturn( null );
 
 		$this->expectException( StatementSubjectDisappeared::class );
-		$this->newStatementRemover()->remove( $statementId, $editMetaData );
+		$this->newStatementRemover( $statementSubjectRetriever, $entityUpdater )
+			->remove( $statementId, $editMetaData );
 	}
 
 	public static function provideStatementIdAndEntityWithStatement(): Generator {
@@ -92,10 +88,13 @@ class EntityUpdaterStatementRemoverTest extends TestCase {
 		yield 'property with statement' => [ $statementId, $property ];
 	}
 
-	private function newStatementRemover(): EntityUpdaterStatementRemover {
+	private function newStatementRemover(
+		StatementSubjectRetriever $statementSubjectRetriever,
+		EntityUpdater $entityUpdater
+	): EntityUpdaterStatementRemover {
 		return new EntityUpdaterStatementRemover(
-			$this->statementSubjectRetriever,
-			$this->entityUpdater
+			$statementSubjectRetriever,
+			$entityUpdater
 		);
 	}
 
