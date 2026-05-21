@@ -201,16 +201,18 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 		$searchTerm = 'subcla';
 		$language = 'en';
 		$resultLanguage = 'de';
+		$disableLanguageFallback = false;
 
 		$entitySearchHelper = $this->createMock( EntitySearchHelper::class );
 		$entitySearchHelper->expects( $this->once() )
 			->method( 'getRankedSearchResults' )
-			->with( $searchTerm, $language, Property::ENTITY_TYPE, $limit + $offset + 1, false, null )
+			->with( $searchTerm, $language, Property::ENTITY_TYPE, $limit + $offset + 1, $disableLanguageFallback, null )
 			->willReturn( $results );
 
 			$this->assertEquals(
 				$expected,
-				$this->newSearchEngine( $entitySearchHelper )->suggestProperties( $searchTerm, $language, $limit, $offset, $resultLanguage )
+				$this->newSearchEngine( $entitySearchHelper )
+					->suggestProperties( $searchTerm, $language, $limit, $offset, $disableLanguageFallback, $resultLanguage )
 			);
 	}
 
@@ -353,7 +355,7 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 		$propertyDataTypeLookup->setDataTypeForProperty( $propertyId, 'wikibase-item' );
 
 		$results = $this->newSearchEngine( $entitySearchHelper, $propertyDataTypeLookup )
-			->suggestProperties( 'prop', 'en', 10, 0, 'en' );
+			->suggestProperties( 'prop', 'en', 10, 0, false, 'en' );
 
 		$this->assertSame( 'wikibase-item', $results[0]->dataType );
 	}

@@ -65,11 +65,20 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		string $languageCode,
 		int $limit,
 		int $offset,
-		string $resultLanguageCode,
+		bool $disableLanguageFallback,
+		string $resultLanguageCode
 	): PropertyPrefixSearchResults {
 		return new PropertyPrefixSearchResults( ...array_map(
 			$this->convertPropertyResult( ... ),
-			$this->suggestEntities( Property::ENTITY_TYPE, $searchTerm, $languageCode, $limit, $offset, false, $resultLanguageCode )
+			$this->suggestEntities(
+				Property::ENTITY_TYPE,
+				$searchTerm,
+				$languageCode,
+				$limit,
+				$offset,
+				$disableLanguageFallback,
+				$resultLanguageCode
+			)
 		) );
 	}
 

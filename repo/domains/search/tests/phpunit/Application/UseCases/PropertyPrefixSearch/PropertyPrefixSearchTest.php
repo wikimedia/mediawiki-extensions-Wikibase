@@ -25,12 +25,13 @@ class PropertyPrefixSearchTest extends TestCase {
 		$limit = 10;
 		$offset = 0;
 		$resultLanguage = 'de';
+		$disableLanguageFallback = false;
 		$expectedResults = $this->createStub( PropertyPrefixSearchResults::class );
 
 		$searchEngine = $this->createMock( PropertyPrefixSearchEngine::class );
 		$searchEngine->expects( $this->once() )
 			->method( 'suggestProperties' )
-			->with( $query, $language, $limit, $offset, $resultLanguage )
+			->with( $query, $language, $limit, $offset, $disableLanguageFallback, $resultLanguage )
 			->willReturn( $expectedResults );
 
 		$this->assertEquals(
@@ -38,8 +39,15 @@ class PropertyPrefixSearchTest extends TestCase {
 			$this->newUseCase(
 				$this->createStub( PropertyPrefixSearchValidator::class ),
 				$searchEngine
-			)->execute( new PropertyPrefixSearchRequest( $query, $language, $limit, $offset, $resultLanguage ) )
-				->results
+			)->execute( new PropertyPrefixSearchRequest(
+				$query,
+				$language,
+				$limit,
+				$offset,
+				$disableLanguageFallback,
+				$resultLanguage,
+				null
+			) )->results
 		);
 	}
 

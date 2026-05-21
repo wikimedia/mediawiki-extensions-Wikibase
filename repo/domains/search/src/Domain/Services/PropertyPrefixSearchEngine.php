@@ -13,6 +13,7 @@ interface PropertyPrefixSearchEngine {
 		string $languageCode,
 		int $limit,
 		int $offset,
+		bool $disableLanguageFallback,
 		string $resultLanguageCode,
 	): PropertyPrefixSearchResults;
 }
