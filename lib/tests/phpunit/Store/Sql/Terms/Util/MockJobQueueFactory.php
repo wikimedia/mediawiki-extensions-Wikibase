@@ -7,7 +7,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 use MediaWiki\JobQueue\IJobSpecification;
 use MediaWiki\JobQueue\JobQueueGroup;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\ReturnCallback;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 
@@ -29,19 +28,17 @@ class MockJobQueueFactory {
 		$jobQueueGroupMock = $this->getMockJobQueue();
 
 		if ( $expectedTermInLangIdsToClean != null ) {
-			$returnCallbacks = [];
-			foreach ( $expectedTermInLangIdsToClean as $index => $termInLangId ) {
-				$returnCallbacks[] = new ReturnCallback( function ( IJobSpecification $jobSpec ) use ( $termInLangId ) {
+			$jobQueueGroupMock
+				->expects( $this->test->atMost( count( $expectedTermInLangIdsToClean ) ) )
+				->method( 'push' )
+				->willReturnCallback( function ( IJobSpecification $jobSpec ) use ( &$expectedTermInLangIdsToClean ) {
+					$termInLangId = array_shift( $expectedTermInLangIdsToClean );
 					$this->test->assertInstanceOf( CleanTermsIfUnusedJob::class, $jobSpec );
 					$this->test->assertEquals(
 						[ $termInLangId ],
 						$jobSpec->getParams()[ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS ]
 					);
 				} );
-			}
-			$jobQueueGroupMock
-				->method( 'push' )
-				->willReturnOnConsecutiveCalls( ...$returnCallbacks );
 		}
 
 		return $jobQueueGroupMock;

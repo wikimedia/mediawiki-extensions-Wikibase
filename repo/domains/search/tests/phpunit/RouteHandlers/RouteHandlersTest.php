@@ -185,12 +185,13 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 	private function simulateSearchEnabled( bool $enabled = true ): void {
 		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
 
-		$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
-			->will(
-				$enabled
-				? $this->returnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' )
-				: $this->returnValue( false )
-			);
+		if ( $enabled ) {
+			$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
+				->willReturnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' );
+		} else {
+			$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
+				->willReturn( false );
+		}
 
 		$this->setMwGlobals( 'wgSearchType', $enabled ? 'CirrusSearch' : null );
 		$this->setService( 'ExtensionRegistry', $extensionRegistry );

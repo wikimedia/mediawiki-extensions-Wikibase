@@ -161,8 +161,11 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 		$this->client->method( 'query' )
 			->willReturnOnConsecutiveCalls( $values, $statements );
 
-		$this->uc->method( 'toStandardUnits' )->will( $converted
-			? $this->returnValue( $converted ) : $this->returnArgument( 0 ) );
+		if ( $converted ) {
+			$this->uc->method( 'toStandardUnits' )->willReturn( $converted );
+		} else {
+			$this->uc->method( 'toStandardUnits' )->willReturnArgument( 0 );
+		}
 
 		$values = 'Q1';
 		$this->script->processUnit( $values );

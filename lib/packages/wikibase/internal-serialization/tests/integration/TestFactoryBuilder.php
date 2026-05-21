@@ -47,7 +47,7 @@ class TestFactoryBuilder {
 		$dataValueDeserializer->expects( $testCase->any() )
 			->method( 'deserialize' )
 			->with( $testCase->equalTo( [ 'type' => 'string', 'value' => 'foo' ] ) )
-			->will( $testCase->returnValue( new StringValue( 'foo' ) ) );
+			->willReturn( new StringValue( 'foo' ) );
 
 		return $dataValueDeserializer;
 	}
