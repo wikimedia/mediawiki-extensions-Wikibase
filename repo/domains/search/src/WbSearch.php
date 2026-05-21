@@ -13,6 +13,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\Simpl
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\PropertySearchHelperFactory;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
@@ -35,6 +36,10 @@ class WbSearch {
 
 	public static function getItemSearchHelper( ?ContainerInterface $services = null ): EntitySearchHelper {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.ItemSearchHelper' );
+	}
+
+	public static function getPropertySearchHelperFactory( ?ContainerInterface $services = null ): PropertySearchHelperFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbSearch.PropertySearchHelperFactory' );
 	}
 
 	public static function getPropertySearchHelper( ?ContainerInterface $services = null ): EntitySearchHelper {

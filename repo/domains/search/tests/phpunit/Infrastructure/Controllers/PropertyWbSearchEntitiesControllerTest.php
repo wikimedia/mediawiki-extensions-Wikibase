@@ -3,8 +3,6 @@
 namespace Wikibase\Repo\Tests\Domains\Search\Infrastructure\Controllers;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -20,6 +18,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PropertyConceptUriBuilder;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PropertyWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 
@@ -112,7 +111,7 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 
 		$controller = new PropertyWbSearchEntitiesController(
 			$useCase,
-			$this->createStub( EntitySourceLookup::class )
+			$this->createStub( PropertyConceptUriBuilder::class )
 		);
 
 		$this->expectException( EntitySearchException::class );
@@ -130,18 +129,16 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		$searchEngine = $this->createStub( PropertyPrefixSearchEngine::class );
 		$searchEngine->method( 'suggestProperties' )->willReturn( $searchResults );
 
-		$entitySource = $this->createStub( EntitySource::class );
-		$entitySource->method( 'getConceptBaseUri' )->willReturn( 'http://www.wikidata.org/entity/' );
-
-		$entitySourceLookup = $this->createStub( EntitySourceLookup::class );
-		$entitySourceLookup->method( 'getEntitySourceById' )->willReturn( $entitySource );
+		$propertyConceptUriBuilder = $this->createStub( PropertyConceptUriBuilder::class );
+		$propertyConceptUriBuilder->method( 'buildConceptUri' )
+			->willReturnCallback( fn( $id ) => 'http://www.wikidata.org/entity/' . $id->getSerialization() );
 
 		return new PropertyWbSearchEntitiesController(
 			new PropertyPrefixSearch(
 				new PropertyPrefixSearchValidator( $this->newAllowingLanguageValidator() ),
 				$searchEngine
 			),
-			$entitySourceLookup
+			$propertyConceptUriBuilder
 		);
 	}
 
