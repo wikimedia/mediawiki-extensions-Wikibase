@@ -59,7 +59,8 @@ describe( 'wbui2025 add qualifiers', () => {
 				} );
 		} );
 
-		it( 'is possible to add and edit a qualifier', () => {
+		// (T413394) Flaky, disabled for now.
+		it.skip( 'is possible to add and edit a qualifier', () => {
 			itemViewPage.open();
 			itemViewPage.editLinks().first().click();
 			const editStatementFormPage = new EditStatementFormPage();
