@@ -61,6 +61,7 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->localEntitySource->method( 'getConceptBaseUri' )->willReturn( 'http://foo' );
 
 		$this->mockEntityId = $this->createMock( EntityId::class );
+		$this->mockEntityId->method( 'getSerialization' )->willReturn( 'Q1' );
 
 		$this->entityLookup = $this->createMock( EntityLookup::class );
 
@@ -68,10 +69,11 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$this->entityNamespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 
+		$this->mockTitle = $this->createMock( Title::class );
+
 		$this->skin = $this->createMock( Skin::class );
 		$this->skin->method( 'msg' )->willReturn( $this->createMock( Message::class ) );
-
-		$this->mockTitle = $this->createMock( Title::class );
+		$this->skin->method( 'getTitle' )->willReturn( $this->mockTitle );
 
 		$this->logger = $this->createMock( LoggerInterface::class );
 
@@ -151,7 +153,16 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 				$item,
 				[ $matchingProject1 ],
 				true,
-				[ [ 'href' => 'project-url-1', 'text' => 'WikiProject First' ] ],
+				[
+					[
+						'href' => 'project-url-1',
+						'text' => 'WikiProject First',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+				],
 			],
 			'without properties of interest' => [
 				$item,
@@ -164,8 +175,22 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 				[ $matchingProject2, $matchingProject1 ],
 				true,
 				[
-					[ 'href' => 'project-url-2', 'text' => 'WikiProject Second' ],
-					[ 'href' => 'project-url-1', 'text' => 'WikiProject First' ],
+					[
+						'href' => 'project-url-2',
+						'text' => 'WikiProject Second',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
+					[
+						'href' => 'project-url-1',
+						'text' => 'WikiProject First',
+						'data' => [
+							'mw-tracking-link-type' => 'wikiproject',
+							'mw-source-entity-id' => 'Q1',
+						],
+					],
 				],
 			],
 			'without projects' => [ $item, [], false, [] ],

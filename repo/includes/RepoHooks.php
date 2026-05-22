@@ -178,6 +178,10 @@ final class RepoHooks implements
 				$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
 			}
 		}
+
+		if ( !WikibaseRepo::getMobileSite() && $settings->getSetting( 'tmpWikiProjectsLinking' ) ) {
+			$out->addModules( 'wikibase.wikiprojects.tracking' );
+		}
 	}
 
 	/**
@@ -1126,6 +1130,14 @@ final class RepoHooks implements
 				'WikibaseRepoWbui2025InitResourceDependenciesHook',
 				[ &$modules['wikibase.wbui2025.entityViewInit']['dependencies'] ]
 			);
+		}
+
+		if ( !WikibaseRepo::getMobileSite() && $settings->getSetting( 'tmpWikiProjectsLinking' ) ) {
+			$modules['wikibase.wikiprojects.tracking'] = $moduleTemplate + [
+				'packageFiles' => [
+					'wikibase.wikiprojects.tracking.js',
+				],
+			];
 		}
 
 		$rl->register( $modules );

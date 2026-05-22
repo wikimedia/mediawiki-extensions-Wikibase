@@ -131,6 +131,10 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 					// TODO determine if/how to use translated titles rather than monolingual text from the config T425437
 					'text' => $projectConfig[ 'text' ],
 					'href' => $projectConfig[ 'href' ],
+					'data' => [
+						'mw-tracking-link-type' => 'wikiproject',
+						'mw-source-entity-id' => $entityId->getSerialization(),
+					],
 				];
 			}
 		}
