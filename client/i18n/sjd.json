@@ -25,5 +25,6 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{grammar:genitive|{{WBREPONAME}}}} воа̄йхэз",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} элемент идэнтификатэр",
 	"wikibase-pageinfo-entity-usage-S": "Ушш са̄ййта",
-	"wikibase-otherprojects": "Мудта проэктэнҍ"
+	"wikibase-otherprojects": "Мудта проэктэнҍ",
+	"wikibase-sitelinks-sitename-columnheading": "Кӣлл"
 }
