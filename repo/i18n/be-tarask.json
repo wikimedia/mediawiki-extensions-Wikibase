@@ -284,7 +284,7 @@
 	"wikibase-itemmerge-failed-modify": "Не атрымалася аб’яднаць элемэнты, калі ласка, спачатку разьвяжыце ўсе канфлікты.",
 	"wikibase-itemmerge-no-such-entity": "Элемэнт ня знойдзены.",
 	"wikibase-itemmerge-cant-load-entity-content": "Не атрымалася загрузіць элемэнт.",
-	"wikibase-itemmerge-cant-merge-self": "Немагчыма аб’яднаць элемэнт з самім сабой.",
+	"wikibase-itemmerge-cant-merge-self": "Немагчыма зьяднаць элемэнт з самім сабой.",
 	"wikibase-itemmerge-cant-create-temp-user": "Немагчыма стварыць часовага карыстальніка",
 	"wikibase-tokencheck-missingtoken": "Патрэбны токен рэдагаваньня.",
 	"wikibase-tokencheck-mustposttoken": "Рэдагаваньне магчымае толькі з дапамогай POST-запытаў.",
