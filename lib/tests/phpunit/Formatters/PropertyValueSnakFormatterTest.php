@@ -64,17 +64,16 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getMockDataTypeLookup( $dataType ) {
-		if ( $dataType !== '' ) {
-			$getDataTypeIdForPropertyResult = $this->returnValue( $dataType );
-		} else {
-			$getDataTypeIdForPropertyResult = $this->throwException(
-				new PropertyDataTypeLookupException( new NumericPropertyId( 'P666' ) ) );
-		}
-
 		$typeLookup = $this->createMock( PropertyDataTypeLookup::class );
-		$typeLookup->expects( $this->atLeastOnce() )
-			->method( 'getDataTypeIdForProperty' )
-			->will( $getDataTypeIdForPropertyResult );
+		if ( $dataType !== '' ) {
+			$typeLookup->expects( $this->atLeastOnce() )
+				->method( 'getDataTypeIdForProperty' )
+				->willReturn( $dataType );
+		} else {
+			$typeLookup->expects( $this->atLeastOnce() )
+				->method( 'getDataTypeIdForProperty' )
+				->willThrowException( new PropertyDataTypeLookupException( new NumericPropertyId( 'P666' ) ) );
+		}
 
 		return $typeLookup;
 	}
@@ -86,17 +85,14 @@ class PropertyValueSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 	 * @return DataTypeFactory
 	 */
 	private function getMockDataTypeFactory( $dataType, $valueType ) {
-		if ( $valueType !== '' ) {
-			$getValueTypeIdForPropertyResult = $this->returnValue( new DataType( $dataType, $valueType ) );
-		} else {
-			$getValueTypeIdForPropertyResult = $this->throwException(
-				new OutOfBoundsException( 'unknown datatype ' . $dataType ) );
-		}
-
 		$typeFactory = $this->createMock( DataTypeFactory::class );
-
-		$typeFactory->method( 'getType' )
-			->will( $getValueTypeIdForPropertyResult );
+		if ( $valueType !== '' ) {
+			$typeFactory->method( 'getType' )
+				->willReturn( new DataType( $dataType, $valueType ) );
+		} else {
+			$typeFactory->method( 'getType' )
+				->willThrowException( new OutOfBoundsException( 'unknown datatype ' . $dataType ) );
+		}
 
 		return $typeFactory;
 	}
