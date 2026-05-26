@@ -17,9 +17,29 @@ jest.mock(
 jest.mock(
 	'../../../resources/wikibase.wbui2025/api/editEntity.js',
 	() => ( {
-		renderSnakValueText: jest.fn( ( datavalue ) => datavalue.value.text ),
+		renderSnakValueText: jest.fn( ( datavalue ) => {
+			if ( datavalue.type === 'string' ) {
+				return datavalue.value;
+			}
+			return datavalue.value.text;
+		} ),
 		renderSnakValueHtml: jest.fn( () => Promise.resolve( '' ) ),
-		parseValue: jest.fn( () => Promise.resolve( {} ) )
+		parseValue: jest.fn( ( value, options ) => {
+			/* We need a more complete implementation of the server-side parse here
+			 * to be able to test the different possible input error states (T426663)
+			 */
+			if ( value === '' ) {
+				return Promise.resolve( '' );
+			}
+			if ( !options.options ) {
+				return Promise.resolve( null );
+			}
+			const result = {
+				text: value,
+				language: JSON.parse( options.options ).valuelang
+			};
+			return Promise.resolve( result );
+		} )
 	} )
 );
 
@@ -156,5 +176,124 @@ describe( 'wikibase.wbui2025.editableMonolingualTextSnakValue', () => {
 
 		wrapper.vm.lookupSource.lookupSelection.value = 'tr';
 		expect( editSnakStore.monolingualtextlanguagecode ).toBe( 'tr' );
+	} );
+
+	it( 'shows the error state for the text input if the text input is incomplete when focus is lost', async () => {
+		const newStatementId = 'Q1$new-quantity-stmt-nan';
+		const newStatement = createStatement( newStatementId );
+
+		const testingPinia = storeWithStatements( [ newStatement ] );
+		const editStatementsStore = useEditStatementsStore();
+		await editStatementsStore.initializeFromStatementStore( [ newStatement.id ], 'P1' );
+		const editStatementStore = useEditStatementStore( newStatementId )();
+
+		const wrapper = await mount( editableMonolingualTextSnakValueComponent, {
+			props: {
+				snakKey: editStatementStore.mainSnakKey,
+				disabled: false
+			},
+			global: { plugins: [ testingPinia ] }
+		} );
+
+		const textarea = wrapper.findComponent( CdxTextArea );
+		wrapper.vm.focus();
+		expect( textarea.props( 'modelValue' ) ).toBe( '' );
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		textarea.vm.$emit( 'blur' );
+		await wrapper.vm.$nextTick();
+		expect( textarea.props( 'status' ) ).toBe( 'error' );
+	} );
+
+	it( 'shows the default state for the text input if the text input is valid (but language unset) when focus is lost', async () => {
+		const newStatementId = 'Q1$new-quantity-stmt-nan';
+		const newStatement = createStatement( newStatementId );
+
+		const testingPinia = storeWithStatements( [ newStatement ] );
+		const editStatementsStore = useEditStatementsStore();
+		await editStatementsStore.initializeFromStatementStore( [ newStatement.id ], 'P1' );
+		const editStatementStore = useEditStatementStore( newStatementId )();
+
+		const wrapper = await mount( editableMonolingualTextSnakValueComponent, {
+			props: {
+				snakKey: editStatementStore.mainSnakKey,
+				disabled: false
+			},
+			global: { plugins: [ testingPinia ] }
+		} );
+
+		const textarea = wrapper.findComponent( CdxTextArea );
+		wrapper.vm.focus();
+		expect( textarea.props( 'modelValue' ) ).toBe( '' );
+		await textarea.vm.$emit( 'update:modelValue', 'frog' );
+		expect( textarea.props( 'modelValue' ) ).toBe( 'frog' );
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		textarea.vm.$emit( 'blur' );
+		await wrapper.vm.$nextTick();
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+	} );
+
+	it( 'shows the error state for the lookup if the language is unset when focus is lost', async () => {
+		const newStatementId = 'Q1$new-quantity-stmt-nan';
+		const newStatement = createStatement( newStatementId );
+
+		const testingPinia = storeWithStatements( [ newStatement ] );
+		const editStatementsStore = useEditStatementsStore();
+		await editStatementsStore.initializeFromStatementStore( [ newStatement.id ], 'P1' );
+		const editStatementStore = useEditStatementStore( newStatementId )();
+
+		const wrapper = await mount( editableMonolingualTextSnakValueComponent, {
+			props: {
+				snakKey: editStatementStore.mainSnakKey,
+				disabled: false
+			},
+			global: { plugins: [ testingPinia ] }
+		} );
+
+		const textarea = wrapper.findComponent( CdxTextArea );
+		const lookup = wrapper.findComponent( CdxLookup );
+		lookup.wrapperElement.focus();
+		await textarea.vm.$emit( 'update:modelValue', 'frog' );
+		expect( textarea.props( 'modelValue' ) ).toBe( 'frog' );
+		expect( lookup.props( 'modelValue' ) ).toBe( undefined );
+		expect( lookup.props( 'status' ) ).toBe( 'default' );
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		lookup.vm.$emit( 'blur' );
+		await wrapper.vm.$nextTick();
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		expect( lookup.props( 'status' ) ).toBe( 'error' );
+	} );
+
+	it( 'shows the default state for the lookup if the language is set when focus is lost', async () => {
+		const newStatementId = 'Q1$new-quantity-stmt-nan';
+		const newStatement = createStatement( newStatementId );
+
+		const testingPinia = storeWithStatements( [ newStatement ] );
+		const editStatementsStore = useEditStatementsStore();
+		await editStatementsStore.initializeFromStatementStore( [ newStatement.id ], 'P1' );
+		const editStatementStore = useEditStatementStore( newStatementId )();
+
+		const wrapper = await mount( editableMonolingualTextSnakValueComponent, {
+			props: {
+				snakKey: editStatementStore.mainSnakKey,
+				disabled: false
+			},
+			global: { plugins: [ testingPinia ] }
+		} );
+
+		const textarea = wrapper.findComponent( CdxTextArea );
+		const lookup = wrapper.findComponent( CdxLookup );
+		lookup.wrapperElement.focus();
+		await textarea.vm.$emit( 'update:modelValue', 'frog' );
+		wrapper.vm.lookupSource.lookupMenuItems.value = [ { value: 'tr', label: 'Türkçe' } ];
+		await lookup.vm.$emit( 'update:input-value', 'tr' );
+		await lookup.vm.$emit( 'update:selected', 'tr' );
+		expect( textarea.props( 'modelValue' ) ).toBe( 'frog' );
+		expect( lookup.props( 'selected' ) ).toBe( 'tr' );
+		expect( lookup.props( 'status' ) ).toBe( 'default' );
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		lookup.vm.$emit( 'blur' );
+		await wrapper.vm.$nextTick();
+		expect( textarea.props( 'status' ) ).toBe( 'default' );
+		expect( lookup.props( 'status' ) ).toBe( 'default' );
 	} );
 } );
