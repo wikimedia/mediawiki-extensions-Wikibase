@@ -128,7 +128,19 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		status() {
-			return this.inputHadFocus && this.isIncomplete ? 'error' : 'default';
+			if ( this.inputHadFocus && this.isIncomplete ) {
+				/* We don't want to show the text input as error if it has a value and no language
+				 * is currently set. Because no language is set, the parse of any string will fail,
+				 * and `isIncomplete` will be set, but we will ignore this until a language has
+				 * been selected.
+				 */
+				if ( this.textvalue !== '' && this.lookupSource.lookupSelection.value === null ) {
+					return 'default';
+				}
+				// If the language has been set, we treat parse errors as issue with this text field.
+				return 'error';
+			}
+			return 'default';
 		}
 	},
 	methods: {
