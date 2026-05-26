@@ -1135,7 +1135,7 @@ final class RepoHooks implements
 		if ( !WikibaseRepo::getMobileSite() && $settings->getSetting( 'tmpWikiProjectsLinking' ) ) {
 			$modules['wikibase.wikiprojects.tracking'] = $moduleTemplate + [
 				'packageFiles' => [
-					'wikibase.wikiprojects.tracking.js',
+					'resources/wikibase.wikiprojects.tracking.js',
 				],
 			];
 		}
