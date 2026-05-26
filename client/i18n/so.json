@@ -23,5 +23,6 @@
 	"wikibase-pageinfo-description-central": "Sharaxaad dhexe",
 	"wikibase-pageinfo-entity-usage": "Qaybaha {{WBREPONAME}} ee lagu isticmaalay boggan",
 	"wikibase-pageinfo-entity-usage-S": "Xiriir bog",
-	"wikibase-pageinfo-entity-usage-D": "Sharaxaadyo qaar"
+	"wikibase-pageinfo-entity-usage-D": "Sharaxaadyo qaar",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Digniin:</strong> Ma aadan soo gelin. Cinwaankaaga IP-ga ayaa si guud loo arki doonaa haddii aad sameyso wax ka beddel. Haddii aad <strong>gasho</strong> ama <strong>sameysato akoon</strong>, wax ka beddeladaada waxaa lagu xiriirin doonaa magacaaga isticmaale, iyo faa’iidooyin kale."
 }
