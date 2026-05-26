@@ -30,9 +30,6 @@ return [
 		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
 			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntityTitleTextLookup();
 		},
-		Def::ENTITY_SEARCH_CALLBACK => function() {
-			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
-		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function() {
 			return WikibaseRepo::getFederatedPropertiesServiceFactory()->newApiPrefetchingTermLookup();
 		},

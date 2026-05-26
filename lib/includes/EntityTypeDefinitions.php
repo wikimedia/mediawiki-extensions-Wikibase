@@ -41,7 +41,6 @@ class EntityTypeDefinitions {
 	public const CHANGEOP_DESERIALIZER_CALLBACK = 'changeop-deserializer-callback';
 	public const RDF_BUILDER_FACTORY_CALLBACK = 'rdf-builder-factory-callback';
 	public const RDF_BUILDER_STUB_FACTORY_CALLBACK = 'rdf-builder-stub-factory-callback';
-	public const ENTITY_SEARCH_CALLBACK = 'entity-search-callback';
 	public const SUB_ENTITY_TYPES = 'sub-entity-types';
 	public const LINK_FORMATTER_CALLBACK = 'link-formatter-callback';
 	public const ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK = 'entity-id-html-link-formatter-callback';
