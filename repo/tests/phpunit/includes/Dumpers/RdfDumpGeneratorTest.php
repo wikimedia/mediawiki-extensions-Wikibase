@@ -8,7 +8,6 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
-use MediaWikiIntegrationTestCase;
 use stdClass;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -54,7 +53,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
+class RdfDumpGeneratorTest extends DumpGeneratorTestBase {
 
 	private const URI_BASE = 'http://acme.test/';
 	private const URI_DATA = 'http://data.acme.test/';
@@ -354,8 +353,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider idProvider
 	 */
 	public function testGenerateDump( array $ids, string $flavor, string $dumpname ): void {
-		$jsonTest = new JsonDumpGeneratorTest();
-		$entityRevisions = $jsonTest->makeEntityRevisions( $ids );
+		$entityRevisions = $this->makeEntityRevisions( $ids );
 		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
 		$dumper = $this->newDumpGenerator( $flavor, $entityRevisions, $redirects );
 		$dumper->setTimestamp( 1000000 );
@@ -365,8 +363,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 		$callbackChecker->expects( $this->atLeastOnce() )
 			->method( 'callback' );
 		$dumper->setBatchCallback( [ $callbackChecker, 'callback' ] );
-		$jsonTest = new JsonDumpGeneratorTest();
-		$pager = $jsonTest->makeIdPager( $ids );
+		$pager = $this->makeIdPager( $ids );
 
 		ob_start();
 		$dumper->generateDump( $pager );
@@ -392,8 +389,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 		$dumper = $this->newDumpGenerator( 'full-dump', $entityRevisions );
 		$dumper->setTimestamp( 1000000 );
-		$jsonTest = new JsonDumpGeneratorTest();
-		$pager = $jsonTest->makeIdPager( [ new ItemId( 'Q7' ), new ItemId( 'Q9' ) ] );
+		$pager = $this->makeIdPager( [ new ItemId( 'Q7' ), new ItemId( 'Q9' ) ] );
 
 		ob_start();
 		$dumper->generateDump( $pager );
