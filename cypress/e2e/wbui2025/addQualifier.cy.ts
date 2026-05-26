@@ -178,6 +178,14 @@ describe( 'wbui2025 add qualifiers', () => {
 				} );
 		} );
 
+		afterEach( function () {
+			if ( this.currentTest.state === 'failed' ) {
+				return cy.get( '#mw-content-text' ).then( ( $content ) => {
+					cy.task( 'log', $content.html() );
+				} );
+			}
+		} );
+
 		it( 'can add a tabular-data qualifier with lookup', () => {
 			interceptCommonsSearch( {
 				results: [
