@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress';
-import { unlinkSync } from 'fs';
+import { unlinkSync, existsSync } from 'fs';
 
 const envLogDir = process.env.LOG_DIR ? process.env.LOG_DIR + '/Wikibase' : null;
 
@@ -65,12 +65,16 @@ export default defineConfig( {
 					);
 					if ( !failures ) {
 						// delete the video if the spec passed and no tests retried
-						// eslint-disable-next-line security/detect-non-literal-fs-filename
-						unlinkSync( results.video );
+						/* eslint-disable security/detect-non-literal-fs-filename */
+						if ( existsSync( results.video ) ) {
+							unlinkSync( results.video );
+						}
 						// Cypress creates a zero-byte "compressed" video file even if you disable compression.
 						// Delete that file
-						// eslint-disable-next-line security/detect-non-literal-fs-filename
-						unlinkSync( compressedVideoPath( results.video ) );
+						if ( existsSync( results.video ) ) {
+							unlinkSync( compressedVideoPath( results.video ) );
+						}
+						/* eslint-enable security/detect-non-literal-fs-filename */
 					}
 				}
 			} );

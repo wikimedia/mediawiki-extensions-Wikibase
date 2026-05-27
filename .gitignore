@@ -12,6 +12,7 @@ node_modules/
 repo/tests/selenium/log/
 client/tests/selenium/log/
 easyrdf/
+runner-results/
 
 .idea/
 
