@@ -179,7 +179,10 @@ final class RepoHooks implements
 			}
 		}
 
-		if ( !WikibaseRepo::getMobileSite() && $settings->getSetting( 'tmpWikiProjectsLinking' ) ) {
+		if ( $isEntityTitle
+			&& !WikibaseRepo::getMobileSite()
+			&& $settings->getSetting( 'tmpWikiProjectsLinking' )
+		) {
 			$out->addModules( 'wikibase.wikiprojects.tracking' );
 		}
 	}
