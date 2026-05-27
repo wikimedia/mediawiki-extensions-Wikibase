@@ -7,9 +7,7 @@ use MediaWiki\Rest\Reporter\ErrorReporter;
 use MediaWiki\Rest\Reporter\MWErrorReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\ControllerRegistry;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
@@ -24,6 +22,7 @@ use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchE
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\PropertySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermsTablesEntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SearchExceptionMiddleware;
@@ -92,7 +91,6 @@ return [
 				$services->getLanguageFactory(),
 				RequestContext::getMain()->getRequest(),
 				$searchProfiles,
-				WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			),
 		);
 	},
@@ -126,33 +124,29 @@ return [
 		return new PropertyPrefixSearch(
 			new PropertyPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
 			new EntitySearchHelperPrefixSearchEngine(
-				WbSearch::getEntitySearchHelperFactory( $services ),
+				WbSearch::getPropertySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),
 				RequestContext::getMain()->getRequest(),
 				$searchProfiles,
-				WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			)
+			),
 		);
 	},
 
 	'WbSearch.PropertySearchHelper' => function( MediaWikiServices $services ): EntitySearchHelper {
 		$context = RequestContext::getMain();
+		return WbSearch::getPropertySearchHelperFactory( $services )
+			->newEntitySearchHelper( Property::ENTITY_TYPE, $context->getLanguage(), $context->getRequest() );
+	},
+
+	'WbSearch.PropertySearchHelperFactory' => function( MediaWikiServices $services ): PropertySearchHelperFactory {
 		$federatedPropertiesEnabled = WikibaseRepo::getSettings( $services )->getSetting( 'federatedPropertiesEnabled' );
-
-		$localPropertySearch = new PropertyDataTypeSearchHelper(
-			WbSearch::getEntitySearchHelperFactory( $services )
-				->newEntitySearchHelper( Property::ENTITY_TYPE, $context->getLanguage(), $context->getRequest() ),
-			WikibaseRepo::getPropertyDataTypeLookup( $services )
+		return new PropertySearchHelperFactory(
+			WbSearch::getEntitySearchHelperFactory( $services ),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
+			$federatedPropertiesEnabled
+				? WikibaseRepo::getFederatedPropertiesServiceFactory( $services )->newApiEntitySearchHelper()
+				: null,
 		);
-
-		if ( $federatedPropertiesEnabled ) {
-			return new CombinedEntitySearchHelper( [
-				$localPropertySearch,
-				WikibaseRepo::getFederatedPropertiesServiceFactory( $services )->newApiEntitySearchHelper(),
-			] );
-		}
-
-		return $localPropertySearch;
 	},
 
 	'WbSearch.SimpleItemSearch' => function( MediaWikiServices $services ): SimpleItemSearch {

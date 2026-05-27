@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Search\Infrastructure\Controllers;
 
 use MediaWiki\Status\Status;
-use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchException;
@@ -20,7 +19,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 
 	public function __construct(
 		private readonly PropertyPrefixSearch $propertyPrefixSearch,
-		private readonly EntitySourceLookup $entitySourceLookup,
+		private readonly PropertyConceptUriBuilder $propertyConceptUriBuilder,
 	) {
 	}
 
@@ -59,8 +58,6 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 
 		$label = $result->label;
 		$description = $result->description;
-		$conceptUri = $this->entitySourceLookup->getEntitySourceById( $entityId )->getConceptBaseUri()
-					  . wfUrlencode( $entityId->getSerialization() );
 
 		return new TermSearchResult(
 			new Term( $matchedData->getLanguageCode() ?? 'pid', $matchedData->getText() ),
@@ -69,7 +66,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 			$label ? new Term( $label->getLanguageCode(), $label->getText() ) : null,
 			$description ? new Term( $description->getLanguageCode(), $description->getText() ) : null,
 			[
-				TermSearchResult::CONCEPTURI_META_DATA_KEY => $conceptUri,
+				TermSearchResult::CONCEPTURI_META_DATA_KEY => $this->propertyConceptUriBuilder->buildConceptUri( $entityId ),
 				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result->dataType,
 			]
 		);

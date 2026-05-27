@@ -7,8 +7,8 @@ use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Domains\Search\Domain\Model\Description;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
@@ -28,7 +28,6 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		private LanguageFactory $languageFactory,
 		private WebRequest $request,
 		private array $searchProfiles,
-		private PropertyDataTypeLookup $propertyDataTypeLookup,
 	) {
 	}
 
@@ -101,7 +100,7 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 					$result->getMatchedTerm()->getLanguageCode(),
 				$result->getMatchedTerm()->getText()
 			),
-			$this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId ),
+			$result->getMetaData()[PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY],
 		);
 	}
 

@@ -3,11 +3,7 @@
 const { action, assert, utils, wiki } = require( 'api-testing' );
 
 const api = action.getAnon();
-const apiForPropertyControllerTest = action.getAnon();
-apiForPropertyControllerTest.req.set(
-	'X-Config-Override',
-	JSON.stringify( { wgWBRepoSettings: { tmpTestingPropertyController: true } } )
-);
+
 const ITEM_EN_LABEL = 'e2e-item-en-' + utils.uniq();
 const ITEM_EN_ALIAS = 'e2e-item-alias-' + utils.uniq();
 const ITEM_DE_LABEL = 'e2e-item-de-' + utils.uniq();
@@ -57,27 +53,6 @@ async function isMulLanguageEnabled() {
 		siprop: 'languages',
 	} );
 	return response.query.languages.some( ( l ) => l.code === 'mul' );
-}
-
-/**
- * Runs the same test against both the regular wbsearchentities and then again against a version
- * of it that uses the PropertyWbSearchEntitiesController implementation. This will no longer be
- * needed once T424817 is completed.
- *
- * @param {string} testName
- * @param {Function} testCallback
- */
-async function withPropertyController( testName, testCallback ) {
-	const apis = {
-		'with regular api': api,
-		'with PropertyWbSearchEntitiesController': apiForPropertyControllerTest
-	};
-
-	for ( const [ type, client ] of Object.entries( apis ) ) {
-		it( `${ type } - ${ testName }`, async function () {
-			await testCallback( client );
-		} );
-	}
 }
 
 describe( 'wbsearchentities', () => {
@@ -400,8 +375,8 @@ describe( 'wbsearchentities', () => {
 	} );
 
 	describe( 'property search', () => {
-		withPropertyController( 'returns empty results when no matches are found', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'returns empty results when no matches are found', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: 'nonexistent',
 				language: 'en',
 				type: 'property',
@@ -410,8 +385,8 @@ describe( 'wbsearchentities', () => {
 			assert.isEmpty( response.search );
 		} );
 
-		withPropertyController( 'response contains the expected fields and result shape', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'response contains the expected fields and result shape', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: testPropertyId,
 				language: 'en',
 				type: 'property',
@@ -433,8 +408,8 @@ describe( 'wbsearchentities', () => {
 			] );
 		} );
 
-		withPropertyController( 'finds property by English label', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'finds property by English label', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: PROP_EN_LABEL,
 				language: 'en',
 				type: 'property',
@@ -449,8 +424,8 @@ describe( 'wbsearchentities', () => {
 			assert.equal( result.display.label.language, 'en' );
 		} );
 
-		withPropertyController( 'includes the data type in property search results', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'includes the data type in property search results', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: PROP_EN_LABEL,
 				language: 'en',
 				type: 'property',
@@ -460,8 +435,8 @@ describe( 'wbsearchentities', () => {
 			assert.equal( result.datatype, 'string' );
 		} );
 
-		withPropertyController( 'finds property by entity ID', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'finds property by entity ID', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: testPropertyId,
 				language: 'en',
 				type: 'property',
@@ -472,8 +447,8 @@ describe( 'wbsearchentities', () => {
 			assert.notProperty( response.search[ 0 ].match, 'language' );
 		} );
 
-		withPropertyController( 'finds property by concept URI', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'finds property by concept URI', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: testPropertyConceptUri,
 				language: 'en',
 				type: 'property',
@@ -483,8 +458,8 @@ describe( 'wbsearchentities', () => {
 			assert.equal( response.search[ 0 ].match.type, 'entityId' );
 		} );
 
-		withPropertyController( 'for property search uselang controls the result language', async ( client ) => {
-			const response = await client.action( 'wbsearchentities', {
+		it( 'for property search uselang controls the result language', async () => {
+			const response = await api.action( 'wbsearchentities', {
 				search: PROP_EN_LABEL,
 				language: 'en',
 				type: 'property',
