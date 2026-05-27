@@ -33,8 +33,8 @@ use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\FallbackEntitySearchHelperController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -139,7 +139,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$this->createMock( LinkBatchFactory::class ),
-			new DispatchingWbSearchEntitiesController( [
+			new WbSearchEntitiesControllerDispatcher( [
 				$entityType => static fn() => new FallbackEntitySearchHelperController(
 					$entityType,
 					$searchHelper,
@@ -457,7 +457,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$this->createMock( LinkBatchFactory::class ),
-			new DispatchingWbSearchEntitiesController( [
+			new WbSearchEntitiesControllerDispatcher( [
 				'kitten' => static fn() => new FallbackEntitySearchHelperController( 'kitten', $searchHelper, $entitySourceLookup ),
 			] ),
 			$this->getContentLanguages(),

@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * @license GPL-2.0-or-later
  */
-class DispatchingWbSearchEntitiesController {
+class WbSearchEntitiesControllerDispatcher {
 
 	/**
 	 * @param callable[] $callbacks entity type string => callable returning WbSearchEntitiesController

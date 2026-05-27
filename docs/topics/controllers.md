@@ -76,10 +76,10 @@ Extensions that add new entity types register their callbacks via the [WikibaseR
 
 ### 4. Dispatcher
 
-The entry point — here the [SearchEntities](@ref Wikibase::Repo::Api::SearchEntities) Action API module — does not depend on any single implementation. It uses a dispatcher that resolves the right controller per entity type via [ControllerRegistry::get()](@ref Wikibase::Repo::ControllerRegistry::get()). See [DispatchingWbSearchEntitiesController](@ref Wikibase::Repo::Domains::Search::Infrastructure::Controllers::DispatchingWbSearchEntitiesController):
+The entry point — here the [SearchEntities](@ref Wikibase::Repo::Api::SearchEntities) Action API module — does not depend on any single implementation. It uses a dispatcher that resolves the right controller per entity type via [ControllerRegistry::get()](@ref Wikibase::Repo::ControllerRegistry::get()). See [WbSearchEntitiesControllerDispatcher](@ref Wikibase::Repo::Domains::Search::Infrastructure::Controllers::WbSearchEntitiesControllerDispatcher):
 
 ```php
-class DispatchingWbSearchEntitiesController {
+class WbSearchEntitiesControllerDispatcher {
     public function __construct( private readonly array $callbacks ) {}
 
     public function getControllerForEntityType( string $entityType ): WbSearchEntitiesController {

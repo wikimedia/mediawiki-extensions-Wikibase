@@ -20,7 +20,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch\SimpleIte
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearch;
 use Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch\SimplePropertySearchValidator;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
@@ -41,13 +41,6 @@ use Wikibase\Search\Elastic\WikibaseCirrusSearch;
 
 /** @phpcs-require-sorted-array */
 return [
-	'WbSearch.DispatchingWbSearchEntitiesController' => function( MediaWikiServices $services ): DispatchingWbSearchEntitiesController {
-		return new DispatchingWbSearchEntitiesController(
-			WikibaseRepo::getControllerRegistry( $services )
-				->get( ControllerRegistry::WB_SEARCH_ENTITIES_CONTROLLER )
-		);
-	},
-
 	'WbSearch.EntitySearchHelperFactory' => function ( MediaWikiServices $services ): EntitySearchHelperFactory {
 		if ( $services->getExtensionRegistry()->isLoaded( 'WikibaseCirrusSearch' )
 			&& $services->getMainConfig()->get( 'WBCSUseCirrus' ) ) {
@@ -171,5 +164,12 @@ return [
 
 	'WbSearch.UnexpectedErrorHandlerMiddleware' => function( MediaWikiServices $services ): UnexpectedErrorHandlerMiddleware {
 		return new UnexpectedErrorHandlerMiddleware( WbSearch::getErrorReporter( $services ) );
+	},
+
+	'WbSearch.WbSearchEntitiesControllerDispatcher' => function( MediaWikiServices $services ): WbSearchEntitiesControllerDispatcher {
+		return new WbSearchEntitiesControllerDispatcher(
+			WikibaseRepo::getControllerRegistry( $services )
+				->get( ControllerRegistry::WB_SEARCH_ENTITIES_CONTROLLER )
+		);
 	},
 ];

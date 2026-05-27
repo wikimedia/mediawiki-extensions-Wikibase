@@ -21,7 +21,7 @@ use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
@@ -54,7 +54,7 @@ class SearchEntities extends ApiBase {
 
 	private LinkBatchFactory $linkBatchFactory;
 
-	private DispatchingWbSearchEntitiesController $searchController;
+	private WbSearchEntitiesControllerDispatcher $searchControllerDispatcher;
 
 	private ContentLanguages $termsLanguages;
 
@@ -82,7 +82,7 @@ class SearchEntities extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		LinkBatchFactory $linkBatchFactory,
-		DispatchingWbSearchEntitiesController $searchController,
+		WbSearchEntitiesControllerDispatcher $searchControllerDispatcher,
 		ContentLanguages $termLanguages,
 		EntitySourceLookup $entitySourceLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -95,9 +95,8 @@ class SearchEntities extends ApiBase {
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
-		$this->searchController = $searchController;
-
 		$this->linkBatchFactory = $linkBatchFactory;
+		$this->searchControllerDispatcher = $searchControllerDispatcher;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceLookup = $entitySourceLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -113,7 +112,7 @@ class SearchEntities extends ApiBase {
 		ApiMain $mainModule,
 		string $moduleName,
 		LinkBatchFactory $linkBatchFactory,
-		DispatchingWbSearchEntitiesController $searchController,
+		WbSearchEntitiesControllerDispatcher $searchControllerDispatcher,
 		ApiHelperFactory $apiHelperFactory,
 		array $enabledEntityTypes,
 		EntityArticleIdLookup $entityArticleIdLookup,
@@ -129,7 +128,7 @@ class SearchEntities extends ApiBase {
 			$mainModule,
 			$moduleName,
 			$linkBatchFactory,
-			$searchController,
+			$searchControllerDispatcher,
 			$termsLanguages,
 			$entitySourceLookup,
 			$entityTitleLookup,
@@ -155,7 +154,7 @@ class SearchEntities extends ApiBase {
 	 */
 	private function getSearchResults( array $params ): array {
 		try {
-			return $this->searchController
+			return $this->searchControllerDispatcher
 				->getControllerForEntityType( $params['type'] )
 				->search( new WbSearchEntitiesRequest(
 					$params['search'],
