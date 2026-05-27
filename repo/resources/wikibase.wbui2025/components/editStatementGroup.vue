@@ -9,7 +9,15 @@
 						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
 					</p>
 				</div>
-				<div class="wikibase-wbui2025-property-name" v-html="propertyLinkHtml"></div>
+				<div
+					class="wikibase-wbui2025-property-name"
+					:class="{ 'wikibase-wbui2025-property-name--deleted': isDeletedProperty }"
+					v-html="propertyLinkHtml"
+				></div>
+				<span
+					v-if="isDeletedProperty"
+					class="wikibase-wbui2025-deleted-property-label"
+				>{{ $i18n( 'wikibase-wbui2025-deleted-property-label' ) }}</span>
 			</div>
 			<div class="wikibase-wbui2025-edit-form-body">
 				<template v-if="editStatementDataLoaded">
@@ -156,6 +164,9 @@ module.exports = exports = defineComponent( {
 	{
 		propertyLinkHtml() {
 			return wbui2025.store.propertyLinkHtml( this.propertyId );
+		},
+		isDeletedProperty() {
+			return wbui2025.store.isDeletedProperty( this.propertyId );
 		},
 		saveMessage() {
 			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )

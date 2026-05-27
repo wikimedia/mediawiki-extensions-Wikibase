@@ -2174,6 +2174,7 @@ return [
 			$statementGrouperBuilder->getStatementGrouper(),
 			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
 			$propertyDataTypeLookup,
+			WikibaseRepo::getEntityExistenceChecker( $services ),
 			$propertyOrderProvider,
 			$services->getSiteLookup(),
 			WikibaseRepo::getDataTypeFactory( $services ),

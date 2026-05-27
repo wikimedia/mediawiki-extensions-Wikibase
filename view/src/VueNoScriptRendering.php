@@ -10,9 +10,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikimedia\Assert\Assert;
 use WMDE\VueJsTemplating\App;
 
@@ -31,9 +33,11 @@ class VueNoScriptRendering {
 	private Language $language;
 	private LocalizedTextProvider $textProvider;
 	private PropertyDataTypeLookup $propertyDataTypeLookup;
+	private EntityExistenceChecker $entityExistenceChecker;
 	private StatementSerializer $statementSerializer;
 	private SnakFormatter $snakFormatter;
 	private array $snakValueHtmlLookup;
+	private array $propertyExistence;
 	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
 	private App $app;
 
@@ -43,6 +47,7 @@ class VueNoScriptRendering {
 		Language $language,
 		LocalizedTextProvider $textProvider,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
+		EntityExistenceChecker $entityExistenceChecker,
 		SerializerFactory $serializerFactory,
 		SnakFormatter $snakFormatter,
 		Wbui2025FeatureFlag $wbui2025FeatureFlag,
@@ -52,6 +57,7 @@ class VueNoScriptRendering {
 		$this->language = $language;
 		$this->textProvider = $textProvider;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
+		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->statementSerializer = $serializerFactory->newStatementSerializer();
 		$this->snakFormatter = $snakFormatter;
 		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
@@ -59,6 +65,9 @@ class VueNoScriptRendering {
 
 	public function loadStatementData( StatementList $allStatements ): void {
 		$this->snakValueHtmlLookup = [];
+		$this->propertyExistence = $this->entityExistenceChecker->existsBatch(
+			$allStatements->getPropertyIds()
+		);
 		$this->app = new App( $this->globalTemplateFunctions() );
 		$this->registerTemplates( $allStatements );
 	}
@@ -148,7 +157,7 @@ class VueNoScriptRendering {
 				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
 				'@phan-var PropertyId $propertyId';
-				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+				$data['isDeletedProperty'] = !( $this->propertyExistence[$propertyId->getSerialization()] ?? false );
 				$data['statements'] = array_map(
 					$this->statementSerializer->serialize( ... ),
 					$allStatements->getByPropertyId( $propertyId )->toArray()
@@ -190,12 +199,15 @@ class VueNoScriptRendering {
 			'wbui2025-property-name',
 			'components/propertyName.vue',
 			function ( array $data ): array {
+				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
 					->parse( $data['propertyId'] );
+				'@phan-var PropertyId $propertyId';
 
 				$data['propertyLinkHtml'] = $this->entityIdFormatterFactory
 					->getEntityIdFormatter( $this->language )
 					->formatEntityId( $propertyId );
+				$data['isDeletedProperty'] = !( $this->propertyExistence[$propertyId->getSerialization()] ?? false );
 				return $data;
 			}
 		);
@@ -240,8 +252,11 @@ class VueNoScriptRendering {
 				$propertyId = $this->entityIdParser
 					->parse( $data['snak']['property'] );
 				'@phan-var PropertyId $propertyId';
-				$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-
+				try {
+					$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+				} catch ( PropertyDataTypeLookupException ) {
+					$dataType = null;
+				}
 				$data['snakValueClass'] = [
 					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
 					'wikibase-wbui2025-globe-coordinate-value' => $dataType == 'globe-coordinate',

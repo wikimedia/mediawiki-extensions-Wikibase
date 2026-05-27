@@ -1102,6 +1102,7 @@ final class RepoHooks implements
 					'wikibase-statementview-rank-preferred',
 					'wikibase-statementview-rank-deprecated',
 					'wikibase-statementview-references-counter',
+					'wikibase-wbui2025-deleted-property-label',
 					'wikibase-wbui2025-editable-snak-value-preview-label',
 					'wikibase-wbui2025-globecoordinateinput-precision-automatic',
 					'wikibase-wbui2025-timeinput-precision-automatic',

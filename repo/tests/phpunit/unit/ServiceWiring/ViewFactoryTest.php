@@ -18,6 +18,7 @@ use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\EntityIdLabelFormatterFactory;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -47,6 +48,8 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 			] ) );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			new InMemoryDataTypeLookup() );
+		$this->mockService( 'WikibaseRepo.EntityExistenceChecker',
+			$this->createMock( EntityExistenceChecker::class ) );
 		$this->mockService( 'WikibaseRepo.StatementGuidParser',
 			new StatementGuidParser( new ItemIdParser() ) );
 		$this->mockService( 'WikibaseRepo.BaseDataModelSerializerFactory',

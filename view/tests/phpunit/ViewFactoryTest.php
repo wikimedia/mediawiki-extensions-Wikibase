@@ -17,6 +17,7 @@ use Wikibase\Lib\Formatters\NumberLocalizerFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LocalizedTextProviderFactory;
@@ -81,6 +82,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			new NullStatementGrouper(),
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( PropertyDataTypeLookup::class ),
+			$this->createMock( EntityExistenceChecker::class ),
 			$this->createMock( PropertyOrderProvider::class ),
 			new HashSiteStore(),
 			new DataTypeFactory( [] ),
