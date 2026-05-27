@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Notifications;
 use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use Wikibase\DataModel\Entity\Item;
@@ -241,11 +240,9 @@ class WikiPageActionEntityChangeFactoryTest extends \MediaWikiIntegrationTestCas
 	}
 
 	private function newMinimalRevisionRecordWithContent( EntityContent $content ): MutableRevisionRecord {
-		$revRecord = new MutableRevisionRecord( Title::makeTitle( NS_MAIN, 'Required workaround' ) );
-		$revRecord->setContent( SlotRecord::MAIN, $content );
-		$revRecord->setUser( $this->getTestUser()->getUserIdentity() );
-
-		return $revRecord;
+		return MutableRevisionRecord::newFromContent(
+			Title::makeTitle( NS_MAIN, 'Required workaround' ), $content
+		)->setUser( $this->getTestUser()->getUserIdentity() );
 	}
 
 }
