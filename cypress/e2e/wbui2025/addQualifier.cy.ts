@@ -59,8 +59,7 @@ describe( 'wbui2025 add qualifiers', () => {
 				} );
 		} );
 
-		// (T413394) Flaky, disabled for now.
-		it.skip( 'is possible to add and edit a qualifier', () => {
+		it( 'is possible to add and edit a qualifier', () => {
 			itemViewPage.open();
 			itemViewPage.editLinks().first().click();
 			const editStatementFormPage = new EditStatementFormPage();
@@ -102,10 +101,11 @@ describe( 'wbui2025 add qualifiers', () => {
 
 			/* The publish button should be visible right away - it should not
 			 * be covered by, for example, the success message from the previous publish.
-			 * We give it 1000ms to be ready because we still need parseValue to run
-			 * (until which time the button is in the disabled state)
+			 * We give the visibility check only 1000ms: if it is not visible quickly, something is wrong.
+			 * The click() uses the default timeout, and Cypress will wait for the button to be enabled.
 			 */
-			editStatementFormPage.publishButton().click( { timeout: 1000 } );
+			editStatementFormPage.publishButton().should( 'be.visible', { timeout: 1000 } );
+			editStatementFormPage.publishButton().click();
 
 			/* Wait for the form to close, and check the value is changed */
 			editStatementFormPage.formRoot().should( 'not.exist' );
