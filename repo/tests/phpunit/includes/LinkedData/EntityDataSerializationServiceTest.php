@@ -51,6 +51,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 	private const URI_BASE_PROPS = 'http://prop.test/';
 	public const URI_DATA = 'http://data.acme.test/';
 	private const URI_DATA_PROPS = 'http://data.prop.test/';
+	private const ENTITY_FIXTURES_FOLDER = __DIR__ . '/../../data/rdf/entities/';
+	private const JSON_FORMAT_FIXTURES_FOLDER = __DIR__ . '/../../data/jsonEntities/';
 
 	/**
 	 * Returns a MockRepository. The following entities are defined:
@@ -67,6 +69,10 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$p5 = new Property( new NumericPropertyId( 'P5' ), null, 'wikibase-item' );
 		$p5->setLabel( 'en', 'Label5' );
 		$mockRepo->putEntity( $p5 );
+
+		$p2 = new Property( new NumericPropertyId( 'P2' ), null, 'wikibase-item' );
+		$p2->setLabel( 'en', 'Label2' );
+		$mockRepo->putEntity( $p2 );
 
 		$q23 = new Item( new ItemId( 'Q23' ) );
 		$q23->setLabel( 'en', 'Label23' );
@@ -106,14 +112,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			->method( 'newFromEntity' );
 
 		$serializerFactory = new SerializerFactory(
-			new DataValueSerializer(),
-			SerializerFactory::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH +
-			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
+			new DataValueSerializer()
 		);
-
-		// Note: We are testing with the actual RDF bindings. These should not change for well
-		// known data types. Mocking the bindings would be nice, but is complex and not needed.
-		$rdfBuilder = WikibaseRepo::getValueSnakRdfBuilderFactory();
 
 		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
@@ -153,7 +153,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			$dataTypeLookup,
 			new EntityDataFormatProvider(),
 			$serializerFactory,
-			$serializerFactory->newItemSerializer(),
+			$serializerFactory->newEntitySerializer(),
 			new HashSiteStore(),
 			$rdfBuilderFactory,
 			WikibaseRepo::getEntityIdParser()
@@ -448,6 +448,55 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		foreach ( $unexpectedDataExpressions as $key => $unexpectedDataRegex ) {
 			$this->assertDoesNotMatchRegularExpression( $unexpectedDataRegex, $data, "unexpected: $key" );
 		}
+	}
+
+	public static function provideJsonFixtures(): iterable {
+		return [
+			'Q1' => [ 'Q1' ],
+			'Q2' => [ 'Q2' ],
+			'Q3' => [ 'Q3' ],
+			'Q4' => [ 'Q4' ],
+			'Q5' => [ 'Q5' ],
+			'Q6' => [ 'Q6' ],
+			'Q7' => [ 'Q7' ],
+			'Q8' => [ 'Q8' ],
+			'P2' => [ 'P2' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideJsonFixtures
+	 */
+	public function testJsonSerialization( string $fixture ): void {
+		$service = $this->newService();
+		$mockRepo = $this->getMockRepository();
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $this->getMockPropertyDataTypeLookup() );
+		$inMemoryTermLookup = new InMemoryPrefetchingTermLookup();
+		$p5 = new NumericPropertyId( 'P5' );
+		$p2 = new NumericPropertyId( 'P2' );
+		$q23 = new ItemId( 'Q23' );
+		$inMemoryTermLookup->setData( [ $mockRepo->getEntity( $p5 ) ] );
+		$inMemoryTermLookup->setData( [ $mockRepo->getEntity( $p2 ) ] );
+		$inMemoryTermLookup->setData( [ $mockRepo->getEntity( $q23 ) ] );
+		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $inMemoryTermLookup );
+		$entityJson = file_get_contents( self::ENTITY_FIXTURES_FOLDER . $fixture . '.json' );
+		$entityDocument = WikibaseRepo::getEntityContentDataCodec()->decodeEntity(
+			$entityJson,
+			CONTENT_FORMAT_JSON
+		);
+		$entityId = str_contains( $fixture, 'Q' ) ? new ItemId( $fixture ) : new NumericPropertyId( $fixture );
+		$mockRepo->putEntity( $entityDocument, 0, 1779955112 );
+		$entityRev = $mockRepo->getEntityRevision( $entityId );
+		[ $data, $mimeType ] = $service->getSerializedData(
+			'json',
+			$entityRev,
+			null,
+			[],
+			'application/json'
+		);
+		$this->assertEquals( 'application/json', $mimeType );
+		$expectedJson = file_get_contents( self::JSON_FORMAT_FIXTURES_FOLDER . $fixture . '-formatted.json' );
+		$this->assertEquals( $expectedJson, $data );
 	}
 
 	private function getMockPropertyDataTypeLookup(): PropertyDataTypeLookup {
