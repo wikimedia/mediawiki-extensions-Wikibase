@@ -13,6 +13,8 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikimedia\Assert\InvariantException;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -26,7 +28,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 
 	private LinkBatchFactory $linkBatchFactory;
 
-	private EntitySearchHelper $entitySearchHelper;
+	private DispatchingWbSearchEntitiesController $searchController;
 
 	private EntityTitleLookup $titleLookup;
 
@@ -50,7 +52,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		ApiQuery $apiQuery,
 		string $moduleName,
 		LinkBatchFactory $linkBatchFactory,
-		EntitySearchHelper $entitySearchHelper,
+		DispatchingWbSearchEntitiesController $searchController,
 		EntityTitleLookup $titleLookup,
 		ContentLanguages $termsLanguages,
 		array $entityTypes,
@@ -59,7 +61,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		parent::__construct( $apiQuery, $moduleName, 'wbs' );
 
 		$this->linkBatchFactory = $linkBatchFactory;
-		$this->entitySearchHelper = $entitySearchHelper;
+		$this->searchController = $searchController;
 		$this->titleLookup = $titleLookup;
 		$this->termsLanguages = $termsLanguages;
 		$this->entityTypes = $entityTypes;
@@ -70,8 +72,8 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		ApiQuery $apiQuery,
 		string $moduleName,
 		LinkBatchFactory $linkBatchFactory,
+		DispatchingWbSearchEntitiesController $searchController,
 		array $enabledEntityTypes,
-		array $entitySearchHelperCallbacks,
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
@@ -80,10 +82,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			$apiQuery,
 			$moduleName,
 			$linkBatchFactory,
-			new TypeDispatchingEntitySearchHelper(
-				$entitySearchHelperCallbacks,
-				$apiQuery->getRequest()
-			),
+			$searchController,
 			$entityTitleLookup,
 			$termsLanguages,
 			$enabledEntityTypes,
@@ -148,14 +147,16 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 */
 	private function getSearchResults( array $params ): array {
 		try {
-			return $this->entitySearchHelper->getRankedSearchResults(
-				$params['search'],
-				$params['language'] ?: $this->getLanguage()->getCode(),
-				$params['type'],
-				$params['limit'],
-				$params['strictlanguage'],
-				$this->searchProfiles[$params['profile']]
-			);
+			return $this->searchController
+				->getControllerForEntityType( $params['type'] )
+				->search( new WbSearchEntitiesRequest(
+					$params['search'],
+					$params['language'] ?: $this->getLanguage()->getCode(),
+					$this->getLanguageCode()->toBcp47Code(),
+					$params['limit'],
+					$params['strictlanguage'],
+					$this->searchProfiles[$params['profile']],
+				) );
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
 

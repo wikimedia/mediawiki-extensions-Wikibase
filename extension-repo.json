@@ -298,8 +298,8 @@
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
 				"LinkBatchFactory",
+				"WbSearch.DispatchingWbSearchEntitiesController",
 				"WikibaseRepo.EnabledEntityTypes",
-				"WikibaseRepo.EntitySearchHelperCallbacks",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
