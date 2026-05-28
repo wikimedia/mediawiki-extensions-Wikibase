@@ -19,6 +19,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} wax ka badal",
 	"pageswithbadges-summary": "Boggan wuxuu taxayaa bogagga leh calaamado (tusaale maqaal wanaagsan ama maqaal la soo xulay). Liisku wuxuu u kala hormarayaa aqoonsiga bogga oo hoos u dhacaya, si bogagga cusub marka hore loo muujiyo.",
 	"wikibase-pageinfo-entity-id": "Aqoonsiga shayga {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id-none": "Midna",
 	"wikibase-pageinfo-description-local": "Sharaxaad maxalli ah",
 	"wikibase-pageinfo-description-central": "Sharaxaad dhexe",
 	"wikibase-pageinfo-entity-usage": "Qaybaha {{WBREPONAME}} ee lagu isticmaalay boggan",

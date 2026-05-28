@@ -203,6 +203,7 @@
 	"wikibase-validator-page-not-exists": "La pagina \"$1\" non esiste.",
 	"wikibase-validator-not-a-language": "\"$1\" non è un codice di lingua conosciuto.",
 	"wikibase-item-reference-edit-placeholder": "Inserisci ID elemento, ad esempio Q10",
+	"wikibase-wbui2025-deleted-property-label": "(Proprietà cancellata)",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "Automatico",
 	"wikibase-wbui2025-timeinput-precision-automatic": "automatico",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" non è un ID elemento valido.",
