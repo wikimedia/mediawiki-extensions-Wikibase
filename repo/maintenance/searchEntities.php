@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Maintenance\OrderedStreamingForkController;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\WikibaseRepo;
 
 // @codeCoverageIgnoreStart
@@ -141,8 +142,13 @@ class SearchEntities extends Maintenance {
 	 * @return EntitySearchHelper
 	 */
 	private function getSearchHelper( $engine ) {
+		$entityType = $this->getOption( 'entity-type' );
 		$engines = [
-			'sql' => WikibaseRepo::getEntitySearchHelper( ... ),
+			'sql' => fn() => match ( $entityType ) {
+				'item' => WbSearch::getItemSearchHelper(),
+				'property' => WbSearch::getPropertySearchHelper(),
+				default => throw new InvalidArgumentException( "Unknown entity type: $entityType, valid values: item, property" ),
+			},
 		];
 
 		if ( !isset( $engines[$engine] ) ) {
