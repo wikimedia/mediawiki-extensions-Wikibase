@@ -86,7 +86,6 @@ return [
 	'entityDataFormats' => [
 		// using the API
 		'json', // default
-		'php',
 
 		// using purtle
 		'rdfxml',

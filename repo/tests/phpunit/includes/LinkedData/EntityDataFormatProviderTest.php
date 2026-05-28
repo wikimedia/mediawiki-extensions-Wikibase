@@ -19,17 +19,14 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 
 	private static array $apiMimeTypes = [
-		'application/vnd.php.serialized',
 		'application/json',
 	];
 
 	private static array $apiExtensions = [
-		'php',
 		'json',
 	];
 
 	private static array $apiFormats = [
-		'php',
 		'json',
 	];
 
@@ -98,7 +95,6 @@ class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 			[
 				// using the API
 				'json', // default
-				'php',
 
 				// using purtle
 				'rdfxml',
