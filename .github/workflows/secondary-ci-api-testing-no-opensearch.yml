@@ -94,7 +94,7 @@ jobs:
             - name: Start MediaWiki web server
               working-directory: ../mediawiki
               run: |
-                  nohup env PHP_CLI_SERVER_WORKERS=4 php -S 127.0.0.1:8080 -t . >/tmp/php-server.log 2>&1 &
+                  nohup env PHP_CLI_SERVER_WORKERS=8 php -S 127.0.0.1:8080 -t . >/tmp/php-server.log 2>&1 &
                   echo $! > /tmp/php-server.pid
                   sleep 2
                   ps -p "$(cat /tmp/php-server.pid)" || (cat /tmp/php-server.log && exit 1)
