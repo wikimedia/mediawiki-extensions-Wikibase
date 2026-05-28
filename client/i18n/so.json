@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Abdullahi",
-			"Abshirdheere"
+			"Abshirdheere",
+			"AhmedG612"
 		]
 	},
 	"tooltip-t-wikibase": "kula xiriiri shayga kaydka xogta ku xiran",
@@ -11,8 +12,17 @@
 	"wikibase-editlinks": "Bedel linkiga",
 	"wikibase-editlinkstitle": "Wax ka badal linkyada luuqadaha",
 	"wikibase-linkitem-addlinks": "Ku dar linkiyada",
+	"wikibase-linkitem-input-site": "Luqada:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-show": "i tus",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} wax ka badal"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} wax ka badal",
+	"pageswithbadges-summary": "Boggan wuxuu taxayaa bogagga leh calaamado (tusaale maqaal wanaagsan ama maqaal la soo xulay). Liisku wuxuu u kala hormarayaa aqoonsiga bogga oo hoos u dhacaya, si bogagga cusub marka hore loo muujiyo.",
+	"wikibase-pageinfo-entity-id": "Aqoonsiga shayga {{WBREPONAME}}",
+	"wikibase-pageinfo-description-local": "Sharaxaad maxalli ah",
+	"wikibase-pageinfo-description-central": "Sharaxaad dhexe",
+	"wikibase-pageinfo-entity-usage": "Qaybaha {{WBREPONAME}} ee lagu isticmaalay boggan",
+	"wikibase-pageinfo-entity-usage-S": "Xiriir bog",
+	"wikibase-pageinfo-entity-usage-D": "Sharaxaadyo qaar",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Digniin:</strong> Ma aadan soo gelin. Cinwaankaaga IP-ga ayaa si guud loo arki doonaa haddii aad sameyso wax ka beddel. Haddii aad <strong>gasho</strong> ama <strong>sameysato akoon</strong>, wax ka beddeladaada waxaa lagu xiriirin doonaa magacaaga isticmaale, iyo faa’iidooyin kale."
 }

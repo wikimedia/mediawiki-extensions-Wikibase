@@ -23,7 +23,8 @@
 			"පසිඳු කාවින්ද",
 			"아라",
 			"Penyuwangi",
-			"Argo Carpathians"
+			"Argo Carpathians",
+			"Bayahiu"
 		]
 	},
 	"wikibase-desc": "Penyimpanan data terstruktur",
@@ -91,7 +92,7 @@
 	"wikibase-entitytermsview-input-help-message": "Masukkan label dari entitas ini, deskripsi singkat, dan nama lain untuk masing-masing bahasa.",
 	"wikibase-statementsection-statements": "Pernyataan",
 	"wikibase-statementsection-identifiers": "Penanda",
-	"wikibase-sitelinks": "Pranala interwiki",
+	"wikibase-sitelinks": "Pranala antarwiki",
 	"wikibase-sitelinkgroupview-input-help-message": "Tambah sebuah pranala interwiki dengan menentukan sebuah situs dan sebuah laman dari situs tersebut, sunting atau hapus pranala antarwiki yang ada.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entri}}",
 	"wikibase-sitelinks-empty": "Tidak ada halaman yang memiliki pranala menuju Butir ini.",
@@ -321,7 +322,7 @@
 	"wikibase-listproperties-all": "Semua jenis data",
 	"wikibase-listproperties-submit": "Temukan",
 	"wikibase-listproperties-invalid-datatype": "\"$1\" bukanlah jenis data yang sahih.",
-	"special-itemswithoutsitelinks": "Butir tanpa interwiki",
+	"special-itemswithoutsitelinks": "Butir tanpa pranala antarwiki",
 	"special-entitydata": "Data entitas",
 	"wikibase-entitydata-not-found": "Entitas dengan penanda $1 tidak ditemukan.",
 	"wikibase-entitydata-not-acceptable": "Tidak ditemukan format yang sesuai. Jenis MIME yang didukung: $1",

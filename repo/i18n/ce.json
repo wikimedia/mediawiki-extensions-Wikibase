@@ -175,7 +175,7 @@
 	"wikibase-validator-sitelink-conflict-redirects-supported": "$1 хьажорг хӀинцале а лелош йу $2 элементо. $2 тӀера дӀадаккха мегар ду, нагахь санна цигахь оьшуш дацахь, йа элементаш цхьаьнатоха мегар ду, нагахь санна уьш цхьана теманах лаьцна йелахь. Кхин чолхечу хьолашка хьажа [https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sitelinks#Linking_to_Wikimedia_site_pages Help:Sitelinks].",
 	"wikibase-validator-sitelink-conflict-unknown": "$1 хьажорг лелайо кхин цхьана Элементо а, иза карарчу хенахь Ӏалашйеш йу.",
 	"wikibase-validator-label-conflict": "«$3» билгалонан «$1» цӀе йолуш йу, «$2» меттан кодаца.",
-	"wikibase-validator-label-with-description-conflict": "«$3» элементан «$1» цӀе йолуш йу, иза йу «$2» кодаца, цуо лелош ду иза текст хаам сана.",
+	"wikibase-validator-label-with-description-conflict": "«$3» элементан «$1» цӀе йолуш йу, иза йу «$2» кодаца, цуо лелош йу иза текст хаам сана.",
 	"wikibase-validator-label-equals-description": "Меттан кодан $1 билгало а, цуьнах хаам а цхьатерра маьӀна долуш хила йиш йац.",
 	"wikibase-validator-label-no-entityid": "ЦӀе цхьатерра хила ца йеза нийсачу билгалонан идентификаторца.",
 	"wikibase-validator-illegal-string-chars": "МогӀа дӀаболабала а, чекхбала а ца беза кӀайдаргца, цу чохь хила ца деза вертикалан кӀайдаргаш йа таблицаш: $1",
