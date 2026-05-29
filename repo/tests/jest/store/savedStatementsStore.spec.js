@@ -23,6 +23,7 @@ const {
 	useSavedStatementsStore
 } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
+const { snakValueStrategyFactory } = require( '../../../resources/wikibase.wbui2025/store/snakValueStrategyFactory.js' );
 const { api } = require( '../../../resources/wikibase.wbui2025/api/api.js' );
 
 const testSnakHash = '1a97f9d234d412c3daae7fc5e2a6a8ade8742638';
@@ -232,6 +233,22 @@ describe( 'Statements Store', () => {
 
 			expect( fullContent.slice( 1 ) ).toEqual( content );
 			expect( fullContent[ 0 ] ).toEqual( { bodyHtml: errorHtml } );
+		} );
+
+		it( 'uses registered error popover formatter when datatype has one', () => {
+			const statementId = 'Q28053831$c1d2e3f4-5678-9abc-def0-1234567890ab';
+			const hash = 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0';
+			const errorHtml = '<div class="cdx-message--error">test error</div>';
+			const formattedResult = { title: 'Test Title', iconClass: 'test-icon', bodyHtml: 'formatted body' };
+			snakValueStrategyFactory.registerErrorPopoverFormatter( 'test-datatype', () => formattedResult );
+			updateSnakValueHtmlForHash( hash, errorHtml );
+			useSavedStatementsStore().populateWithClaims( {
+				P999: [ { id: statementId, mainsnak: { hash, datatype: 'test-datatype' } } ]
+			} );
+
+			const fullContent = getPopoverContentForMainSnak( statementId );
+
+			expect( fullContent[ 0 ] ).toEqual( formattedResult );
 		} );
 
 	} );
