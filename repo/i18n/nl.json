@@ -542,7 +542,7 @@
 	"wikibase-shortcopyrightwarning-heading": "Licentieverlening",
 	"wikibase-entity-save-error-heading": "Er is iets misgegaan",
 	"wikibase-entity-save-error-message": "Uw wijziging kan niet worden gepubliceerd. U kunt nogmaals proberen op de knop Publiceren te klikken.",
-	"wikibase-tainted-ref-popper-text": "De waarde van deze verklaring is gewijzigd, maar de referentie is hetzelfde gebleven. Je kunt deze waarschuwing verwijderen als de referentie nog steeds correct is.",
+	"wikibase-tainted-ref-popper-text": "De waarde van deze verklaring is gewijzigd, maar de referentie is hetzelfde gebleven. U kunt deze waarschuwing verwijderen als de referentie nog steeds correct is.",
 	"wikibase-tainted-ref-popper-title": "Referentie/waarde komt mogelijk niet overeen",
 	"wikibase-tainted-ref-popper-help-link-title": "Hulppagina voor dit type beperking",
 	"wikibase-tainted-ref-popper-help-link-text": "Hulp",
