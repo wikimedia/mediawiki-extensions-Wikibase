@@ -184,7 +184,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
 			"services": [
 				"LinkBatchFactory",
-				"WbSearch.DispatchingWbSearchEntitiesController",
+				"WbSearch.WbSearchEntitiesControllerDispatcher",
 				"WikibaseRepo.ApiHelperFactory",
 				"WikibaseRepo.EnabledEntityTypesForSearch",
 				"WikibaseRepo.EntityArticleIdLookup",
@@ -298,7 +298,7 @@
 			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory",
 			"services": [
 				"LinkBatchFactory",
-				"WbSearch.DispatchingWbSearchEntitiesController",
+				"WbSearch.WbSearchEntitiesControllerDispatcher",
 				"WikibaseRepo.EnabledEntityTypes",
 				"WikibaseRepo.EntityTitleLookup",
 				"WikibaseRepo.Settings",

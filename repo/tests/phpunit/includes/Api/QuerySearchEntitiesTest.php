@@ -24,8 +24,8 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\QuerySearchEntities;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 
 /**
  * @covers \Wikibase\Repo\Api\QuerySearchEntities
@@ -75,11 +75,11 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		return $mock;
 	}
 
-	private function getMockSearchController(
+	private function getMockSearchControllerDispatcher(
 		array $params,
 		array $matches,
 		?Status $failureStatus
-	): DispatchingWbSearchEntitiesController {
+	): WbSearchEntitiesControllerDispatcher {
 		$controller = $this->createMock( WbSearchEntitiesController::class );
 		$invocation = $controller->expects( $this->atLeastOnce() )
 			->method( 'search' )
@@ -93,12 +93,12 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			$invocation->willReturn( $matches );
 		}
 
-		$dispatchingController = $this->createMock( DispatchingWbSearchEntitiesController::class );
-		$dispatchingController->method( 'getControllerForEntityType' )
+		$dispatcher = $this->createMock( WbSearchEntitiesControllerDispatcher::class );
+		$dispatcher->method( 'getControllerForEntityType' )
 			->with( $params['wbstype'] )
 			->willReturn( $controller );
 
-		return $dispatchingController;
+		return $dispatcher;
 	}
 
 	/**
@@ -145,7 +145,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 			$this->getApiQuery( $params ),
 			'wbsearch',
 			$this->createMock( LinkBatchFactory::class ),
-			$this->getMockSearchController( $params, $matches, $failureStatus ),
+			$this->getMockSearchControllerDispatcher( $params, $matches, $failureStatus ),
 			$this->getMockTitleLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
