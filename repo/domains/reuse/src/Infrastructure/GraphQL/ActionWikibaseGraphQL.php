@@ -52,13 +52,6 @@ class ActionWikibaseGraphQL extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isInternal() {
-		return true;
-	}
-
-	/**
-	 * @inheritDoc
-	 */
 	public function mustBePosted() {
 		return true;
 	}
