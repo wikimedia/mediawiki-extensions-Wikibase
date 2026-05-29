@@ -18,7 +18,6 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStat
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
@@ -66,7 +65,6 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
-				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => RequestPreconditionCheck::getSubjectIdPrefixFromStatementId(
 						$request->getPathParam( self::STATEMENT_ID_PATH_PARAM )

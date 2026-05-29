@@ -6,9 +6,7 @@ use LogicException;
 use MediaWiki\Api\IApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Permissions\PermissionManager;
-use MediaWiki\User\User;
 use Psr\Log\LoggerInterface;
-use RuntimeException;
 use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
@@ -94,7 +92,6 @@ class EntityUpdater {
 		EditMetadata $editMetadata,
 		int $newOrUpdateFlag
 	): EntityRevision {
-		$this->checkBotRightIfProvided( $this->context->getUser(), $editMetadata->isBot() );
 		$editEntity = $this->editEntityFactory->newEditEntity( $this->context, $entity->getId() );
 
 		if ( $newOrUpdateFlag === EDIT_NEW ) {
@@ -114,10 +111,11 @@ class EntityUpdater {
 			$this->generateStatementIds( $entity );
 		}
 
+		$markAsBotEdit = $editMetadata->isBot() && $this->permissionManager->userHasRight( $this->context->getUser(), 'bot' );
 		$status = $editEntity->attemptSave(
 			$entity,
 			$this->summaryFormatter->format( $editMetadata->getSummary() ),
-			$newOrUpdateFlag | ( $editMetadata->isBot() ? EDIT_FORCE_BOT : 0 ),
+			$newOrUpdateFlag | ( $markAsBotEdit ? EDIT_FORCE_BOT : 0 ),
 			false,
 			false,
 			$editMetadata->getTags()
@@ -150,13 +148,6 @@ class EntityUpdater {
 			if ( $message instanceof IApiMessage ) {
 				throw new EditPrevented( $message->getApiCode(), $message->getApiData() );
 			}
-		}
-	}
-
-	private function checkBotRightIfProvided( User $user, bool $isBot ): void {
-		// This is only a low-level safeguard and should be checked and handled properly before using this service.
-		if ( $isBot && !$this->permissionManager->userHasRight( $user, 'bot' ) ) {
-			throw new RuntimeException( 'Attempted bot edit with insufficient rights' );
 		}
 	}
 

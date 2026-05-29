@@ -19,7 +19,6 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemStatement\AddItemStat
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\BotRightCheckMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
@@ -67,7 +66,6 @@ class AddItemStatementRouteHandler extends SimpleHandler {
 				WbCrud::getUnexpectedErrorHandlerMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
-				new BotRightCheckMiddleware( MediaWikiServices::getInstance()->getPermissionManager(), $responseFactory ),
 				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
 					fn( RequestInterface $request ): string => $request->getPathParam( self::ITEM_ID_PATH_PARAM )
 				),

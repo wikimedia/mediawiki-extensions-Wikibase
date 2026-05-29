@@ -69,17 +69,6 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 	} );
 
 	describe( 'Authorization', () => {
-		describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
-			it( 'Unauthorized bot edit', async () => {
-				assertValidError(
-					await newRequestBuilder().withJsonBodyParam( 'bot', true ).makeRequest(),
-					403,
-					'permission-denied',
-					{ denial_reason: 'unauthorized-bot-edit' }
-				);
-			} );
-		} );
-
 		describe( 'Blocked user', () => {
 			before( async () => {
 				await root.action( 'block', {
