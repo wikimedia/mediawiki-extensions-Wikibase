@@ -74,7 +74,11 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->mockTitle = $this->createMock( Title::class );
 
 		$this->skin = $this->createMock( Skin::class );
-		$this->skin->method( 'msg' )->willReturn( $this->createMock( Message::class ) );
+		$this->skin->method( 'msg' )->willReturnCallback( function ( $key ) {
+			$msg = $this->createMock( Message::class );
+			$msg->method( 'text' )->willReturn( $key );
+			return $msg;
+		} );
 		$this->skin->method( 'getTitle' )->willReturn( $this->mockTitle );
 
 		$this->logger = $this->createMock( LoggerInterface::class );
@@ -144,19 +148,19 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$matchingProject1 = [
 			'propertyIds' => [ 'P1', 'P2', 'P3' ],
 			'href' => 'project-url-1',
-			'text' => 'WikiProject First',
+			'msg' => 'WikiProject First',
 		];
 
 		$matchingProject2 = [
 			'propertyIds' => [ 'P222' ],
 			'href' => 'project-url-2',
-			'text' => 'WikiProject Second',
+			'msg' => 'WikiProject Second',
 		];
 
 		$nonmatchingProject = [
 			'propertyIds' => [ 'P4' ],
 			'href' => 'project-url-3',
-			'text' => 'WikiProject Third',
+			'msg' => 'WikiProject Third',
 		];
 
 		$matchingStatementProject = [
@@ -164,7 +168,7 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 				'P2539' => [ 'Q2592' ],
 			],
 			'href' => 'project-url-statement',
-			'text' => 'WikiProject Statement Match',
+			'msg' => 'WikiProject Statement Match',
 		];
 
 		$nonmatchingStatementProject = [
@@ -172,7 +176,7 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 				'P2539' => [ 'Q999' ],
 			],
 			'href' => 'project-url-statement-no-match',
-			'text' => 'WikiProject Statement No Match',
+			'msg' => 'WikiProject Statement No Match',
 		];
 
 		$propertyMatchWithInvalidStatementProject = [
@@ -181,7 +185,7 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 				'not-a-property-id' => [ 'Q1' ],
 			],
 			'href' => 'project-url-short-circuit',
-			'text' => 'WikiProject Short Circuit',
+			'msg' => 'WikiProject Short Circuit',
 		];
 
 		return [
