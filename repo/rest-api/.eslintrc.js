@@ -1,16 +1,9 @@
 'use strict';
 
-/* eslint-disable quote-props, quotes */
+/* eslint-disable quotes */
 module.exports = {
 	root: true,
-	extends: [
-		"wikimedia",
-		"wikimedia/node",
-		"wikimedia/language/es2022"
-	],
-	env: {
-		node: true,
-	},
+	extends: [ "../../reuse-team-shared.eslintrc.js" ],
 	ignorePatterns: [
 		"node_modules/",
 		"vendor",
@@ -23,20 +16,7 @@ module.exports = {
 		"src/openapi.json"
 	],
 	rules: {
-		"max-len": [ "warn", { "code": 130 } ],
 		"no-unused-expressions": "off",
 		"prefer-arrow-callback": "off",
-		"template-curly-spacing": "off",
-		"camelcase": "off",
-		"comma-dangle": "off",
-		"no-implicit-coercion": [ "error", { "disallowTemplateShorthand": true } ]
-	},
-	overrides: [
-		{
-			files: [ "*.json" ],
-			rules: {
-				"max-len": "off",
-			}
-		}
-	]
+	}
 };
