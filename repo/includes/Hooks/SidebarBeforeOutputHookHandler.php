@@ -80,7 +80,7 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 		}
 
 		$this->addConceptUriLink( $skin, $sidebar, $entityId );
-		$this->addWikiProjectLinks( $sidebar, $entityId );
+		$this->addWikiProjectLinks( $skin, $sidebar, $entityId );
 	}
 
 	/**
@@ -103,10 +103,11 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 	 * Determines which WikiProjects are relevant to the given Entity and if there are any, adds links to
 	 * them in the sidebar.
 	 *
+	 * @param Skin $skin
 	 * @param array &$sidebar
 	 * @param EntityId $entityId
 	 */
-	private function addWikiProjectLinks( array &$sidebar, EntityId $entityId ): void {
+	private function addWikiProjectLinks( Skin $skin, array &$sidebar, EntityId $entityId ): void {
 		$wikiProjectsConfig = $this->wikibaseRepoSettings->getSetting( 'tmpWikiProjectsLinking' );
 		if ( !$wikiProjectsConfig ) {
 			return;
@@ -121,7 +122,7 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 		$links = [];
 		foreach ( $wikiProjectsConfig as $projectConfig ) {
 			if (
-				!isset( $projectConfig[ 'text' ] ) ||
+				!isset( $projectConfig[ 'msg' ] ) ||
 				!isset( $projectConfig[ 'href' ] )
 			) {
 				continue;
@@ -136,8 +137,8 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 				$this->itemMatchesWikiProject( $entity, $projectConfig )
 			) {
 				$links[] = [
-					// TODO determine if/how to use translated titles rather than monolingual text from the config T425437
-					'text' => $projectConfig[ 'text' ],
+					// TODO: determine if/how to handle translations of titles without requiring every one to have a message T425437
+					'text' => $skin->msg( $projectConfig[ 'msg' ] )->text(),
 					'href' => $projectConfig[ 'href' ],
 					'data' => [
 						'mw-tracking-link-type' => 'wikiproject',
