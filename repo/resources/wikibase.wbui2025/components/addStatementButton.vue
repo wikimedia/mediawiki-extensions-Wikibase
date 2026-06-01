@@ -39,7 +39,7 @@
 
 <script>
 const { mapState, mapActions } = require( 'pinia' );
-const { defineComponent } = require( 'vue' );
+const { defineComponent, nextTick } = require( 'vue' );
 
 const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 const { cdxIconAdd } = require( '../icons.json' );
@@ -120,11 +120,17 @@ module.exports = exports = defineComponent( {
 			this.createNewStatement();
 		},
 		submitForm() {
+			const propertyId = this.propertyId;
 			// eslint-disable-next-line vue/no-undef-properties
-			this.submitFormWithElementRef( this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef );
+			this.submitFormWithElementRef( this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef )
+				.then( ( { success } ) => {
+					if ( success ) {
+						nextTick( () => wbui2025.util.scrollToStatementWithPropertyId( propertyId ) );
+					}
+				} );
 			wbui2025.store.setStatementSectionForPropertyId( this.propertyId, this.sectionKey );
 			wbui2025.api.renderPropertyLinkHtml( [ this.propertyId ] )
-					.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( this.propertyId, result ) );
+					.then( ( result ) => wbui2025.store.updatePropertyLinkHtml( result ) );
 		},
 		reset() {
 			this.disposeOfEditableStatementStores();

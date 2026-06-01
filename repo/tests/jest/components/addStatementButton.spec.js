@@ -98,6 +98,24 @@ describe( 'wikibase.wbui2025.references', () => {
 				expect( snakValueInput.exists() ).toBe( true );
 			} );
 
+			it( 'scrolls to new statement after publishing succeeds', async () => {
+				await addButton.vm.$emit( 'click' );
+				propertyLookup = wrapper.findComponent( propertyLookupComponent );
+				await propertyLookup.vm.$emit( 'update:selected', 'P23', { datatype: 'string' } );
+
+				const wbui2025 = require( 'wikibase.wbui2025.lib' );
+				jest.spyOn( wbui2025.api, 'renderPropertyLinkHtml' ).mockResolvedValue( {} );
+				const scrollToStatementSpy = jest.spyOn( wbui2025.util, 'scrollToStatementWithPropertyId' );
+
+				jest.spyOn( wrapper.vm, 'submitFormWithElementRef' )
+					.mockResolvedValue( { success: true } );
+
+				await wrapper.vm.submitForm();
+				await wrapper.vm.$nextTick();
+
+				expect( scrollToStatementSpy ).toHaveBeenCalledWith( 'P23' );
+			} );
+
 		} );
 
 	} );

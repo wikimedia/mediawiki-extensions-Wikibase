@@ -8,6 +8,7 @@ import { ValueForm } from '../../support/pageObjects/ValueForm';
 describe( 'wbui2025 item view publish statement changes', () => {
 	context( 'mobile view', () => {
 		let propertyName: string;
+		let propertyId: string;
 		const initialPropertyValue: string = 'ExampleString';
 		let itemId: string;
 
@@ -15,6 +16,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 			propertyName = Util.getTestString( 'property' );
 			cy.task( 'MwApi:CreateProperty', { label: propertyName, data: { datatype: 'string' } } )
 				.then( ( newPropertyId: string ) => {
+					propertyId = newPropertyId;
 					const exampleSnak = {
 						snaktype: 'value',
 						property: newPropertyId,
@@ -97,6 +99,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 			/* Wait for the form to close, and check the value is changed */
 			editFormPage.formRoot().should( 'not.exist' );
+			itemViewPage.assertStatementIsInViewport( propertyId );
 
 			itemViewPage.mainSnakValues().first().should( 'have.text', newPropertyValue );
 

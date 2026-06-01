@@ -59,11 +59,12 @@
 			</transition>
 			<div ref="editFormActionsRef" class="wikibase-wbui2025-edit-statement-footer">
 				<transition name="fade">
-					<cdx-progress-bar
-						v-if="showProgress"
-						inline
-						:aria-label="$i18n( 'wikibase-publishing-progress' )"
-					></cdx-progress-bar>
+					<div v-if="showProgress">
+						<cdx-progress-bar
+							inline
+							:aria-label="$i18n( 'wikibase-publishing-progress' )"
+						></cdx-progress-bar>
+					</div>
 				</transition>
 
 				<div class="wikibase-wbui2025-edit-form-actions">
@@ -239,8 +240,14 @@ module.exports = exports = defineComponent( {
 			this.$emit( 'hide' );
 		},
 		submitForm() {
+			const propertyId = this.propertyId;
 			// eslint-disable-next-line vue/no-undef-properties
-			this.submitFormWithElementRef( this.$refs.editFormActionsRef );
+			this.submitFormWithElementRef( this.$refs.editFormActionsRef )
+				.then( ( { success } ) => {
+					if ( success ) {
+						nextTick( () => wbui2025.util.scrollToStatementWithPropertyId( propertyId ) );
+					}
+				} );
 		},
 		cancelForm() {
 			this.showAddValueModal = false;

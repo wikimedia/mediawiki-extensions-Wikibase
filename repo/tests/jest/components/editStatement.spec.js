@@ -32,6 +32,8 @@ jest.mock(
 	} )
 );
 
+Object.defineProperty( window, 'scrollTo', { value: jest.fn(), configurable: true } );
+
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const languageCode = 'de';

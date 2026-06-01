@@ -65,6 +65,15 @@ module.exports = exports = {
 		return fallbackMessage;
 	},
 
+	scrollToStatementWithPropertyId( propertyId ) {
+		const el = document.getElementById(
+			'wikibase-wbui2025-statementwrapper-' + propertyId
+		);
+		if ( el ) {
+			el.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+		}
+	},
+
 	initKartographerPreview( rootElement ) {
 		if ( !rootElement ) {
 			return;
