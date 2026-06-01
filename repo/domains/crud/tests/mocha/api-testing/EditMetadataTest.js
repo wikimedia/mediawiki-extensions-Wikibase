@@ -10,6 +10,7 @@ const {
 	getPropertyCreateRequest
 } = require( '../helpers/happyPathRequestBuilders' );
 const { assertValidError } = require( '../helpers/responseValidator' );
+const { getLatestEditMetadata } = require( '../helpers/entityHelper' );
 
 describeWithTestData( 'Edit metadata requests', (
 	itemRequestInputs,
@@ -22,7 +23,7 @@ describeWithTestData( 'Edit metadata requests', (
 		getItemCreateRequest( itemRequestInputs ),
 		getPropertyCreateRequest( propertyRequestInputs )
 	];
-	describeEachRouteWithReset( allRoutes, ( newRequestBuilder ) => {
+	describeEachRouteWithReset( allRoutes, ( newRequestBuilder, requestInputs ) => {
 		it( 'comment too long', async () => {
 			const response = await newRequestBuilder()
 				.withJsonBodyParam( 'comment', 'x'.repeat( 501 ) )
@@ -60,6 +61,18 @@ describeWithTestData( 'Edit metadata requests', (
 			expect( response ).to.have.status( 400 );
 			assert.strictEqual( response.body.code, 'invalid-value' );
 			assert.deepEqual( response.body.context, { path: '/bot' } );
+		} );
+
+		it( 'bot flag is accepted without bot right and edit is not marked as bot', async () => {
+			const response = await newRequestBuilder()
+				.withJsonBodyParam( 'bot', true )
+				.makeRequest();
+
+			expect( response ).status.to.be.within( 200, 299 );
+
+			const entityId = requestInputs?.mainTestSubject || response.body.id;
+			const editMetadata = await getLatestEditMetadata( entityId );
+			assert.notProperty( editMetadata, 'bot' );
 		} );
 
 		it( 'invalid comment', async () => {

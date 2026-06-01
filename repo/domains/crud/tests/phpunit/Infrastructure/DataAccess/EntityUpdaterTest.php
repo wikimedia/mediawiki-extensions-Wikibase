@@ -12,7 +12,6 @@ use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use RuntimeException;
 use StatusValue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -342,17 +341,35 @@ class EntityUpdaterTest extends TestCase {
 		);
 	}
 
-	public function testGivenUserWithoutBotRight_throwsForBotEdit(): void {
+	public function testGivenUserWithoutBotRight_botFlagIsIgnored(): void {
+		$entityToUpdate = NewItem::withId( new ItemId( 'Q1' ) )->build();
+
 		$this->permissionManager = $this->createMock( PermissionManager::class );
 		$this->permissionManager->expects( $this->once() )
 			->method( 'userHasRight' )
 			->with( $this->context->getUser(), 'bot' )
 			->willReturn( false );
 
-		$this->expectException( RuntimeException::class );
+		$editEntity = $this->createMock( EditEntity::class );
+		$editEntity->expects( $this->once() )
+			->method( 'attemptSave' )
+			->with(
+				$entityToUpdate,
+				$this->anything(),
+				EDIT_UPDATE, // not marked as bot edit
+				false,
+				false,
+				$this->anything()
+			)
+			->willReturn( EditEntityStatus::newGood( [
+				'revision' => new EntityRevision( $entityToUpdate, 1, '20221111070707' ),
+			] ) );
+
+		$this->editEntityFactory = $this->createStub( MediaWikiEditEntityFactory::class );
+		$this->editEntityFactory->method( 'newEditEntity' )->willReturn( $editEntity );
 
 		$this->newEntityUpdater()->update(
-			$this->createStub( EntityDocument::class ),
+			$entityToUpdate,
 			new EditMetadata( [], true, $this->createStub( EditSummary::class ) )
 		);
 	}
