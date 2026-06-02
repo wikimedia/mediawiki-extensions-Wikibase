@@ -11,6 +11,8 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\ItemResolver;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers\SearchItemsResolver;
 use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\GraphQL\SearchEnabledTestTrait;
 
@@ -37,7 +39,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new FacetedItemSearchResponse( new ItemSearchResultSet( [], 0 ) ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
-			->resolve( [ 'property' => 'P1' ], 50, $cursor );
+			->resolve( [ 'property' => 'P1' ], 50, $cursor, new QueryContext() );
 
 		$this->assertSame( [
 			'edges' => [],
@@ -56,7 +58,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 			->willReturn( new FacetedItemSearchResponse( new ItemSearchResultSet( [], 0 ) ) );
 
 		$result = $this->newResolver( $facetedItemSearch )
-			->resolve( [ 'property' => 'P1' ], 50, $cursor );
+			->resolve( [ 'property' => 'P1' ], 50, $cursor, new QueryContext );
 
 		$this->assertSame( [
 			'edges' => [],
@@ -74,7 +76,7 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( GraphQLError::class );
 		$this->expectExceptionMessage( 'Invalid search query: some reason' );
 
-		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );
+		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null, new QueryContext() );
 	}
 
 	public function testHandlesSearchNotAvailable(): void {
@@ -87,13 +89,13 @@ class SearchItemsResolverTest extends MediaWikiIntegrationTestCase {
 		$this->expectException( GraphQLError::class );
 		$this->expectExceptionMessage( 'Search is not available due to insufficient server configuration' );
 
-		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null );
+		$this->newResolver( $facetedItemSearch )->resolve( [ 'property' => 'P1' ], 50, null, new QueryContext() );
 	}
 
 	private function newResolver( FacetedItemSearch $facetedItemSearch ): SearchItemsResolver {
 		return new SearchItemsResolver(
 			$facetedItemSearch,
-			$this->getServiceContainer()->getExtensionRegistry()
+			$this->createStub( ItemResolver::class )
 		);
 	}
 

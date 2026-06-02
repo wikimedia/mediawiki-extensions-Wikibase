@@ -73,6 +73,7 @@ return [
 					),
 					WbReuse::getFacetedItemSearchEngine( $services ),
 				),
+				$itemResolver
 			),
 			new ItemBySitelinkResolver(
 				new LookUpItemBySitelink(

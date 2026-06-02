@@ -260,18 +260,10 @@ type ItemSearchResultConnection {
 "An edge in the search result containing a matched item and its pagination cursor."
 type ItemSearchResultEdge {
   "The matched result item."
-  node: ItemSearchResultNode!
+  node: Item!
 
   "Cursor identifying this result within the result set, used for pagination."
   cursor: String!
-}
-
-"The matched item returned by the search."
-type ItemSearchResultNode implements LabelProvider & DescriptionProvider {
-  id: ItemId!
-  label(languageCode: LanguageCode!): String
-  labelWithLanguageFallback(languageCode: LanguageCode!): LabelWithLanguage
-  description(languageCode: LanguageCode!): String
 }
 
 "Pagination information about the current page of results."
