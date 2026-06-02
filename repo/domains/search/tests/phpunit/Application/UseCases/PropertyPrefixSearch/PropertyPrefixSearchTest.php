@@ -46,7 +46,6 @@ class PropertyPrefixSearchTest extends TestCase {
 				$offset,
 				$disableLanguageFallback,
 				$resultLanguage,
-				null
 			) )->results
 		);
 	}

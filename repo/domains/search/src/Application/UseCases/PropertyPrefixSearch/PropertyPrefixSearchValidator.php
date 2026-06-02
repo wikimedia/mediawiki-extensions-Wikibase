@@ -39,7 +39,7 @@ class PropertyPrefixSearchValidator {
 	}
 
 	private function validateLimitAndOffset( PropertyPrefixSearchRequest $request ): void {
-		if ( $request->limit < 0 || $request->limit > self::MAX_LIMIT ) {
+		if ( !$request->disableLimitValidation && ( $request->limit < 0 || $request->limit > self::MAX_LIMIT ) ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );
 		}
 
