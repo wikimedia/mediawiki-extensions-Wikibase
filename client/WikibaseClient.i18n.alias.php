@@ -164,6 +164,13 @@ $specialPageAliases['tr'] = [
 	'UnconnectedPages' => [ 'BağlanmamışSayfalar', 'Bağlantısız', 'SiteBağlantısız' ],
 ];
 
+/** Ukrainian (Українська) */
+$specialPageAliases['uk'] = [
+	'EntityUsage' => [ 'Використання_сутності' ],
+	'PagesWithBadges' => [ 'Сторінки_з_позначками' ],
+	'UnconnectedPages' => [ 'Непов\'язані_сторінки' ],
+];
+
 /** Urdu (اردو) */
 $specialPageAliases['ur'] = [
 	'EntityUsage' => [ 'استعمال_وجود', 'استعمال_وجود_ڈیٹا' ],
