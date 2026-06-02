@@ -60,8 +60,6 @@ The entity types repository is an associative array mapping entity type identifi
   * A callable that returns a [EntityStubRdfBuilder] instance. See [EntityStubRdfBuilderFactory::getEntityStubRdfBuilders] for arguments in the callback
 * rdf-builder-label-predicates (repo only)
   * List on pairs [ns,local] specifying predicates for RDF export of labels for this entity.
-* entity-search-callback (repo only)
-  * A callable that returns [EntitySearchHelper] instance. Takes WebRequest as an argument. This defines how the completion search (wbsearchentities) for the entity type works.
 * link-formatter-callback
   * A callable that returns [EntityLinkFormatter] instance. Takes a Language object as argument.
 * entity-id-html-link-formatter-callback

@@ -21,7 +21,6 @@ use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
 use MediaWiki\Language\MessageLocalizer;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Request\WebRequest;
 use MediaWiki\Site\SiteLookup;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -53,7 +52,6 @@ use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
 use Wikibase\Repo\Diff\ItemDiffVisualizer;
-use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
@@ -210,9 +208,6 @@ return [
 				$entityIdFormatter,
 				$basicEntityDiffVisualizer
 			);
-		},
-		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			return WbSearch::getItemSearchHelper();
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$services = MediaWikiServices::getInstance();
@@ -388,9 +383,6 @@ return [
 				$dataTypes,
 				$labelPredicates
 			);
-		},
-		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			return WbSearch::getPropertySearchHelper();
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$services = MediaWikiServices::getInstance();

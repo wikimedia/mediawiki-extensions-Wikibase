@@ -148,8 +148,6 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\AnonymousEditWarningBuilder;
 use Wikibase\Repo\Api\ApiHelperFactory;
-use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
@@ -631,10 +629,7 @@ return [
 	},
 
 	'WikibaseRepo.EnabledEntityTypesForSearch' => function ( MediaWikiServices $services ): array {
-		return array_merge(
-			array_keys( WikibaseRepo::getEntitySearchHelperCallbacks( $services ) ),
-			array_keys( WikibaseRepo::getControllerRegistry( $services )->get( ControllerRegistry::WB_SEARCH_ENTITIES_CONTROLLER ) ),
-		);
+		return array_keys( WikibaseRepo::getControllerRegistry( $services )->get( ControllerRegistry::WB_SEARCH_ENTITIES_CONTROLLER ) );
 	},
 
 	'WikibaseRepo.EntityArticleIdLookup' => function ( MediaWikiServices $services ): EntityArticleIdLookup {
@@ -983,20 +978,6 @@ return [
 	'WikibaseRepo.EntityRevisionLookup' => function ( MediaWikiServices $services ): EntityRevisionLookup {
 		return WikibaseRepo::getStore( $services )
 			->getEntityRevisionLookup( Store::LOOKUP_CACHING_ENABLED );
-	},
-
-	'WikibaseRepo.EntitySearchHelper' => function ( MediaWikiServices $services ): EntitySearchHelper {
-		return new TypeDispatchingEntitySearchHelper(
-			WikibaseRepo::getEntitySearchHelperCallbacks( $services ),
-			RequestContext::getMain()->getRequest()
-		);
-	},
-
-	'WikibaseRepo.EntitySearchHelperCallbacks' => function ( MediaWikiServices $services ): array {
-		$callbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
-			->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
-
-		return $callbacks;
 	},
 
 	'WikibaseRepo.EntitySourceAndTypeDefinitions' => function ( MediaWikiServices $services ): EntitySourceAndTypeDefinitions {
