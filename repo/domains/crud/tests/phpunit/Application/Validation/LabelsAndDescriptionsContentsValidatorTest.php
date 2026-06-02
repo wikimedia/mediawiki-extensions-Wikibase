@@ -45,12 +45,12 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 		] );
 		$termsToCompareWith = new TermList( [ new Term( 'en', 'some other term' ) ] );
 
-		$matcher = $this->exactly( count( $termsToValidate ) );
-		$singleTermValidator->expects( $matcher )
+		$expectedValidateParameters = iterator_to_array( $termsToValidate );
+		$singleTermValidator->expects( $this->exactly( count( $expectedValidateParameters ) ) )
 			->method( 'validate' )
 			->willReturnCallback(
-				function ( $language, $text, $otherTerms ) use ( $matcher, $termsToValidate, $termsToCompareWith ) {
-					$termBeingValidated = array_values( iterator_to_array( $termsToValidate ) )[$matcher->getInvocationCount() - 1];
+				function ( $language, $text, $otherTerms ) use ( &$expectedValidateParameters, $termsToCompareWith ) {
+					$termBeingValidated = array_shift( $expectedValidateParameters );
 
 					$this->assertSame( $termBeingValidated->getLanguageCode(), $language );
 					$this->assertSame( $termBeingValidated->getText(), $text );
@@ -81,12 +81,11 @@ class LabelsAndDescriptionsContentsValidatorTest extends TestCase {
 		] );
 		$termsToCompareWith = new TermList( [ new Term( 'en', 'some other term' ) ] );
 
-		$matcher = $this->exactly( count( $languagesToValidate ) );
-		$singleTermValidator->expects( $matcher )
+		$singleTermValidator->expects( $this->exactly( count( $languagesToValidate ) ) )
 			->method( 'validate' )
 			->willReturnCallback(
-				function ( $language, $text, $otherTerms ) use ( $matcher, $languagesToValidate, $inputTerms, $termsToCompareWith ) {
-					$languageBeingValidated = $languagesToValidate[$matcher->getInvocationCount() - 1];
+				function ( $language, $text, $otherTerms ) use ( &$languagesToValidate, $inputTerms, $termsToCompareWith ) {
+					$languageBeingValidated = array_shift( $languagesToValidate );
 
 					$this->assertSame( $languageBeingValidated, $language );
 					$this->assertSame( $inputTerms->getByLanguage( $languageBeingValidated )->getText(), $text );
