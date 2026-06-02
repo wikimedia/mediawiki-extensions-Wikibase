@@ -7,8 +7,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Site\Site;
 use MediaWiki\User\ExternalUserNames;
-use Psr\Log\LogLevel;
-use TestLogger;
+use Psr\Log\Test\TestLogger;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 
@@ -40,15 +39,12 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore( /* empty */ ) );
 		$this->mockItemAndPropertySource();
-		$logger = new TestLogger( true );
+		$logger = new TestLogger();
 		$this->mockService( 'WikibaseClient.Logger',
 			$logger );
 
 		$this->assertNull( $this->getService( 'WikibaseClient.ExternalUserNames' ) );
-		$this->assertTrue(
-			(bool)array_filter( $logger->getBuffer(), static fn ( array $e ) => $e[0] === LogLevel::WARNING ),
-			'logged warning'
-		);
+		$this->assertTrue( $logger->hasWarningRecords(), 'logged warning' );
 	}
 
 	public function testConstructionWithSiteWithoutInterwikiIds(): void {
@@ -58,15 +54,12 @@ class ExternalUserNamesTest extends ServiceWiringTestCase {
 			->method( 'getSiteLookup' )
 			->willReturn( new HashSiteStore( [ $site ] ) );
 		$this->mockItemAndPropertySource();
-		$logger = new TestLogger( true );
+		$logger = new TestLogger();
 		$this->mockService( 'WikibaseClient.Logger',
 			$logger );
 
 		$this->assertNull( $this->getService( 'WikibaseClient.ExternalUserNames' ) );
-		$this->assertTrue(
-			(bool)array_filter( $logger->getBuffer(), static fn ( array $e ) => $e[0] === LogLevel::WARNING ),
-			'logged warning'
-		);
+		$this->assertTrue( $logger->hasWarningRecords(), 'logged warning' );
 	}
 
 	public function testConstructionWithSiteWithInterwikiIds(): void {
