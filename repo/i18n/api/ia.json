@@ -89,7 +89,7 @@
 	"apihelp-wbgetentities-example-11": "Obtener le elemento pro le pagina \"<var>Berlin</var>\" sur le sito \"<var>enwiki</var>\" post normalisar le titulo desde \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Obtener le ligamines de sito pro le elemento <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Obtener entitates con ID <samp>Q42</samp> monstrante solmente le ligamines de sito de \"<var>enwiki</var>\"",
-	"apihelp-wbgraphql-summary": "Modulo GraphQL experimental.",
+	"apihelp-wbgraphql-summary": "Modulo GraphQL.",
 	"apihelp-wblinktitles-summary": "Associa duo paginas sur duo wikis differente a un elemento Wikibase.",
 	"apihelp-wblinktitles-param-tosite": "Un identificator pro le sito in le qual le pagina reside.\nUsa insimul con <var>totitle</var> pro facer un ligamine de sito complete.",
 	"apihelp-wblinktitles-param-totitle": "Titulo del pagina a associar.\nUsa insimul con <var>tosite</var> pro facer un ligamine de sito complete.",

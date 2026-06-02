@@ -166,6 +166,7 @@
 	"wikibase-item-reference-edit-placeholder": "توکي پېژند دننه کړئ د بېلگې په توگه Q10",
 	"wikibase-item-reference-edit-invalid-format": "د دننه شوي توکي پېژند ناسمه بڼه لري",
 	"wikibase-item-reference-edit-nonexistent-item": "د دې پېژند سره هيڅ توکی نشته",
+	"wikibase-wbui2025-deleted-property-label": "(ړنگه شوې ځانتيا)",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "په لاندې توگه ښودل کېږي:",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "خپلکاره",
 	"wikibase-wbui2025-timeinput-precision-automatic": "خپلکاره",

@@ -93,7 +93,7 @@
 	"apihelp-wbgetentities-example-11": "<var>enwiki</var> 사이트의 \"<var>Berlin</var>\" 문서에 대한 항목을 \"<var>berlin</var>\"에서 제목을 정규화한 후 가져옵니다",
 	"apihelp-wbgetentities-example-12": "항목 <samp>Q42</samp>의 사이트링크를 가져옵니다",
 	"apihelp-wbgetentities-example-13": "ID가 <samp>Q42</samp>인 개체들을 \"<var>enwiki</var>\"로부터의 사이트링크만 표시한 채 가져옵니다",
-	"apihelp-wbgraphql-summary": "실험적인 GraphQL 모듈입니다.",
+	"apihelp-wbgraphql-summary": "GraphQL 모듈입니다.",
 	"apihelp-wblinktitles-summary": "서로 다른 두 위키의 두 문서를 위키베이스 항목과 연결합니다.",
 	"apihelp-wblinktitles-param-tosite": "문서가 있는 사이트를 식별하는 식별자입니다.\n<var>totitle</var>과 함께 사용하면 완전한 사이트링크가 됩니다.",
 	"apihelp-wblinktitles-param-totitle": "연결한 문서의 제목입니다.\n<var>tosite</var>과 함께 사용하면 완전한 사이트링크가 됩니다.",

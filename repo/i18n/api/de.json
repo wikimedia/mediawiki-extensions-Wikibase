@@ -85,6 +85,7 @@
 	"apihelp-wbgetentities-example-8": "Ruft Objekte mit der Kennung <samp>Q42</samp> ab, die alle Aliasse in deutscher Sprache zeigen.",
 	"apihelp-wbgetentities-example-12": "Ruft die Websitelinks für das Objekt <samp>Q42</samp> ab",
 	"apihelp-wbgetentities-example-13": "Ruft Objekte mit der Kennung <samp>Q42</samp> ab, die nur Websitelinks von „<var>enwiki</var>“ anzeigen.",
+	"apihelp-wbgraphql-summary": "GraphQL-Modul.",
 	"apihelp-wblinktitles-summary": "Verknüpft zwei Seiten auf zwei verschiedenen Wikis mit einem Wikibase-Objekt.",
 	"apihelp-wblinktitles-param-tosite": "Die Kennung für die Website, auf der die Seite liegt.\nIst zusammen mit <var>totitle</var> zu verwenden, um einen vollständigen Websitelink zu erzeugen.",
 	"apihelp-wblinktitles-param-totitle": "Titel der zuzuordnenden Seite.\nIst zusammen mit <var>tosite</var> zu verwenden, um einen vollständigen Websitelink zu erzeugen.",
