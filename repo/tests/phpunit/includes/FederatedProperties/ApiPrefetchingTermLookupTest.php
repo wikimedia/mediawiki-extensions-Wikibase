@@ -5,7 +5,8 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\Test\TestLogger;
+use Psr\Log\LogLevel;
+use TestLogger;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
@@ -305,7 +306,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			->method( 'get' )
 			->with( $this->getRequestParameters( [ 'P18' ] ) )
 			->willThrowException( $federatedPropertiesException );
-		$logger = new TestLogger();
+		$logger = new TestLogger( true );
 
 		$apiLookup = new ApiPrefetchingTermLookup(
 			new ApiEntityLookup( $api ),
@@ -317,7 +318,13 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 			[ 'en', 'de' ]
 		);
 
-		$logger->hasWarningThatContains( 'Prefetching failed for federated properties:' );
+		$this->assertTrue(
+			(bool)array_filter(
+				$logger->getBuffer(),
+				static fn ( array $e ) => $e[0] === LogLevel::WARNING
+					&& str_contains( $e[1], 'Prefetching failed for federated properties:' )
+			)
+		);
 	}
 
 	private function getRequestParameters( $ids ) {

@@ -41,7 +41,6 @@
 		"webonyx/graphql-php": "^15.20"
 	},
 	"require-dev": {
-		"fig/log-test": "^1.0",
 		"mediawiki/mediawiki-codesniffer": "50.0.0",
 		"mediawiki/mediawiki-phan-config": "0.20.0",
 		"mediawiki/minus-x": "2.0.1",
