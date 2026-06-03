@@ -34,7 +34,7 @@
 	"apihelp-query+pageterms-param-language": "용어를 가져올 언어 코드입니다. 지정하지 않으면 사용자의 언어가 사용됩니다.",
 	"apihelp-query+pageterms-param-terms": "반환할 용어의 유형을 지정합니다 (예: 'description'). 각 유형은 해당 유형을 키로 하는 문자열 배열로 반환됩니다(예: {\"description\": [\"foo\"]}). 유형을 지정하지 않으면 모든 유형이 반환됩니다.",
 	"apihelp-query+description-summary": "대상 문서가 무엇인지를 설명하는 짧은 설명, 즉 부제를 가져옵니다.",
-	"apihelp-query+description-extended-description": "설명은 한 줄짜리 일반 텍스트로 작성되지만, 임의이기는 합니다(HTML 태그를 포함할 수도 있으며, 이 또한 일반 텍스트로 해석되어야 함). 이 설명은 이스케이프 처리되지 않은 HTML에 사용해서는 안 됩니다!",
+	"apihelp-query+description-extended-description": "설명은 한 줄짜리 일반 텍스트로 작성되지만, 임의이기는 합니다(원본 HTML 태그를 포함할 수도 있으며, 이 또한 일반 텍스트로 해석되어야 함). 이 설명은 이스케이프 처리되지 않은 HTML에 사용해서는 안 됩니다!",
 	"apihelp-query+description-param-prefersource": "설명 소스가 있는 경우 어떤 소스를 우선적으로 사용할 것인지:",
 	"apihelp-query+description-paramvalue-prefersource-local": "문서의 위키텍스트 내의 <code><nowiki>{{SHORTDESC:...}}</nowiki></code> 파서 함수를 통한 로컬 설명입니다.",
 	"apihelp-query+description-paramvalue-prefersource-central": "관련 {{WBREPONAME}} 항목의 중앙 저장소 설명입니다.",
