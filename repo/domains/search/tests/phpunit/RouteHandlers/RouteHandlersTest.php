@@ -189,11 +189,12 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 			$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
 				->willReturnCallback( fn( string $extensionName ) => $extensionName === 'WikibaseCirrusSearch' );
 		} else {
-			$extensionRegistry->expects( $this->once() )->method( 'isLoaded' )
-				->willReturn( false );
+			// $wgWBCSUseCirrus = false short-circuits the AND in isCirrusSearchEnabled(),
+			// so isLoaded() should never be reached.
+			$extensionRegistry->expects( $this->never() )->method( 'isLoaded' );
 		}
 
-		$this->setMwGlobals( 'wgSearchType', $enabled ? 'CirrusSearch' : null );
+		$this->setMwGlobals( 'wgWBCSUseCirrus', $enabled );
 		$this->setService( 'ExtensionRegistry', $extensionRegistry );
 	}
 }

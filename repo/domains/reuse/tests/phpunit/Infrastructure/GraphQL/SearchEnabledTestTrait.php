@@ -20,6 +20,7 @@ trait SearchEnabledTestTrait {
 			}
 		);
 
+		$this->setMwGlobals( 'wgWBCSUseCirrus', $enabled );
 		$this->setMwGlobals( 'wgSearchType', $enabled ? 'CirrusSearch' : null );
 		$this->setService( 'ExtensionRegistry', $extensionRegistry );
 	}
