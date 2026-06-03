@@ -33,6 +33,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 					0,
 					$request->strictLanguage,
 					$request->resultLanguage,
+					disableLimitValidation: true
 				)
 			);
 		} catch ( UseCaseError $e ) {

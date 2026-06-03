@@ -18,6 +18,7 @@ class PropertyPrefixSearchRequest {
 		public readonly int $offset = self::DEFAULT_OFFSET,
 		public readonly bool $disableLanguageFallback = false,
 		?string $resultLanguage = null,
+		public readonly bool $disableLimitValidation = false
 	) {
 		$this->resultLanguage = $resultLanguage ?? $language;
 	}

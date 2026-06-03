@@ -33,7 +33,8 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 					0,
 					$request->strictLanguage,
 					$request->resultLanguage,
-					$request->profileContext
+					$request->profileContext,
+					disableLimitValidation: true
 				)
 			);
 		} catch ( UseCaseError $e ) {
