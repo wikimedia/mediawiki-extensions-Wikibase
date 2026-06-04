@@ -1,7 +1,7 @@
 const { scrollToStatementWithPropertyId } = require( '../../../resources/wikibase.wbui2025/utils.js' );
 
 describe( 'scrollToStatementWithPropertyId', () => {
-	const WRAPPER_ID = 'wikibase-wbui2025-statementwrapper-P1';
+	const WRAPPER_ID = 'P1';
 
 	let el;
 	beforeEach( () => {

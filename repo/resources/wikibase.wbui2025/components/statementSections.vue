@@ -8,7 +8,7 @@
 		<div class="wikibase-wbui2025-statement-section-content">
 			<div
 				v-for="propertyId in propertyIds"
-				:id="concat( 'wikibase-wbui2025-statementwrapper-', propertyId )"
+				:id="propertyId"
 				:key="propertyId">
 				<wbui2025-statement-group-view
 					:property-id="propertyId"
@@ -66,7 +66,6 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	methods: {
-		concat: wbui2025.util.concat,
 		implode: wbui2025.util.implode
 	},
 	beforeMount: function () {

@@ -67,7 +67,7 @@ module.exports = exports = {
 
 	scrollToStatementWithPropertyId( propertyId ) {
 		const el = document.getElementById(
-			'wikibase-wbui2025-statementwrapper-' + propertyId
+			propertyId
 		);
 		if ( el ) {
 			el.scrollIntoView( { behavior: 'smooth', block: 'start' } );

@@ -81,7 +81,7 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 
 		it( 'adds an element to contain the statements for a property', async () => {
 			expect( wrapper.exists() ).toBeTruthy();
-			expect( wrapper.findAll( '#wikibase-wbui2025-statementwrapper-P1' ) ).toHaveLength( 1 );
+			expect( wrapper.findAll( '#P1' ) ).toHaveLength( 1 );
 		} );
 
 		it( 'sets the right content on claim elements', async () => {
