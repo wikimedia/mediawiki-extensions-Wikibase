@@ -6,12 +6,12 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\InMemoryPrefetchingTermLookup;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -100,6 +100,8 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		$dataTypeLookup->method( 'getDataTypeIdForProperty' )
 			->willReturn( 'wikibase-item' );
 
+		$entityIdParser = new BasicEntityIdParser();
+
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $id ) {
@@ -110,10 +112,6 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		// should also be unused since we configure no page props
 		$entityContentFactory->expects( $this->never() )
 			->method( 'newFromEntity' );
-
-		$serializerFactory = new SerializerFactory(
-			new DataValueSerializer()
-		);
 
 		$rdfBuilderFactory = new RdfBuilderFactory(
 			new RdfVocabulary(
@@ -148,15 +146,16 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			$this->getMockRepository()
 		);
 
+		$serializerFactory = new SerializerFactory(
+			new DataValueSerializer(), SerializerFactory::OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS
+		);
 		return new EntityDataSerializationService(
+			$serializerFactory->newEntitySerializer(),
+			new EntityDataFormatProvider(),
+			$rdfBuilderFactory,
 			$entityTitleStoreLookup,
 			$dataTypeLookup,
-			new EntityDataFormatProvider(),
-			$serializerFactory,
-			$serializerFactory->newEntitySerializer(),
-			new HashSiteStore(),
-			$rdfBuilderFactory,
-			WikibaseRepo::getEntityIdParser()
+			$entityIdParser,
 		);
 	}
 

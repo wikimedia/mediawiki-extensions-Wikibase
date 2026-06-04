@@ -14,16 +14,15 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
-use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -116,6 +115,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				return Title::newFromTextThrow( $id->getEntityType() . ':' . $id->getSerialization() );
 			} );
 
+		$entityIdParser = $this->createMock( EntityIdParser::class );
+
 		$entityContentFactory = $this->createMock( EntityContentFactory::class );
 		// should also be unused since we configure no page props
 		$entityContentFactory->expects( $this->never() )
@@ -156,14 +157,12 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$service = new EntityDataSerializationService(
-			$entityTitleStoreLookup,
-			new InMemoryDataTypeLookup(),
-			$entityDataFormatProvider,
-			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
-			new HashSiteStore(),
+			$entityDataFormatProvider,
 			$rdfBuilderFactory,
-			WikibaseRepo::getEntityIdParser()
+			$entityTitleStoreLookup,
+			$dataTypeLookup,
+			$entityIdParser,
 		);
 
 		$entityDataFormatProvider->setAllowedFormats(

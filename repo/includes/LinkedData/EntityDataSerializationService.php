@@ -5,23 +5,19 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\LinkedData;
 
 use InvalidArgumentException;
-use MediaWiki\Api\ApiFormatBase;
-use MediaWiki\Api\ApiMain;
-use MediaWiki\Api\ApiResult;
-use MediaWiki\Context\DerivativeContext;
-use MediaWiki\Context\RequestContext;
-use MediaWiki\Request\DerivativeRequest;
-use MediaWiki\Site\SiteLookup;
+use MediaWiki\Json\FormatJson;
 use RuntimeException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\Serialization\CallbackFactory;
+use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\RedirectRevision;
-use Wikibase\Repo\Api\ResultBuilder;
+use Wikibase\Repo\AddPageInfo;
+use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfBuilderFactory;
@@ -46,23 +42,10 @@ use Wikimedia\Purtle\RdfWriterFactory;
  */
 class EntityDataSerializationService {
 
-	/** @var EntityTitleStoreLookup */
-	private $entityTitleStoreLookup;
-
-	/**
-	 * @var SerializerFactory
-	 */
-	private $serializerFactory;
-
 	/**
 	 * @var Serializer
 	 */
-	private $entitySerializer;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyLookup;
+	private $serializer;
 
 	/**
 	 * @var EntityDataFormatProvider
@@ -75,39 +58,39 @@ class EntityDataSerializationService {
 	private $rdfWriterFactory;
 
 	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
-
-	/**
 	 * @var RdfBuilderFactory
 	 */
 	private $rdfBuilderFactory;
 
 	/**
-	 * @var EntityIdParser
+	 * @var EntityTitleStoreLookup
 	 */
-	private $entityIdParser;
+	private $entityTitleStoreLookup;
+
+	/**
+	 * @var JsonDataTypeInjector
+	 */
+	private $dataTypeInjector;
 
 	public function __construct(
-		EntityTitleStoreLookup $entityTitleStoreLookup,
-		PropertyDataTypeLookup $propertyLookup,
+		Serializer $serializer,
 		EntityDataFormatProvider $entityDataFormatProvider,
-		SerializerFactory $serializerFactory,
-		Serializer $entitySerializer,
-		SiteLookup $siteLookup,
 		RdfBuilderFactory $rdfBuilderFactory,
-		EntityIdParser $entityIdParser
+		EntityTitleStoreLookup $entityTitleStoreLookup,
+		PropertyDataTypeLookup $dataTypeLookup,
+		EntityIdParser $entityIdParser,
 	) {
-		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
-		$this->propertyLookup = $propertyLookup;
+		$this->serializer = $serializer;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
-		$this->serializerFactory = $serializerFactory;
-		$this->entitySerializer = $entitySerializer;
-		$this->siteLookup = $siteLookup;
 		$this->rdfBuilderFactory = $rdfBuilderFactory;
-		$this->entityIdParser = $entityIdParser;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 
+		$this->dataTypeInjector = new JsonDataTypeInjector(
+			new SerializationModifier(),
+			new CallbackFactory(),
+			$dataTypeLookup,
+			$entityIdParser
+		);
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
 
@@ -137,11 +120,25 @@ class EntityDataSerializationService {
 			throw new InvalidArgumentException( "Unsupported format: $format" );
 		}
 
-		$serializer = $this->createApiSerializer( $formatName );
-
-		if ( $serializer !== null ) {
-			$data = $this->getApiSerialization( $entityRevision, $serializer );
-			$contentType = $serializer->getIsHtml() ? 'text/html' : $serializer->getMimeType();
+		if ( $formatName === 'json' ) {
+			/** In the interests of avoiding the Api result formatters (T98035) we need to
+			 * reproduce the subset of the functionality of ResultBuilder that SpecialEntityData
+			 * uses. @see \Wikibase\Repo\Api\ResultBuilder::getModifiedEntityArray
+			 */
+			$serializedEntity = [];
+			$pageInfoAdder = new AddPageInfo( $this->entityTitleStoreLookup );
+			$serializedEntity = $pageInfoAdder->add( $serializedEntity, $entityRevision );
+			$serializedEntity = array_merge(
+				$serializedEntity,
+				$this->serializer->serialize( $entityRevision->getEntity() )
+			);
+			$serializedEntity = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $serializedEntity );
+			$data = FormatJson::encode( [
+				'entities' => [
+					$entityRevision->getEntity()->getId()->getSerialization() => $serializedEntity,
+				],
+			], false, FormatJson::XMLMETA_OK );
+			$contentType = 'application/json';
 		} else {
 			$rdfBuilder = $this->createRdfBuilder( $formatName, $flavor );
 
@@ -241,47 +238,6 @@ class EntityDataSerializationService {
 	}
 
 	/**
-	 * Returns an ApiMain module that acts as a context for the formatting and serialization.
-	 *
-	 * @param string $format The desired output format, as a format name that ApiBase understands.
-	 */
-	private function newApiMain( string $format ): ApiMain {
-		// Fake request params to ApiMain, with forced format parameters.
-		// We can override additional parameters here, as needed.
-		$params = [
-			'format' => $format,
-		];
-
-		$context = new DerivativeContext( RequestContext::getMain() ); //XXX: ugly
-
-		$req = new DerivativeRequest( $context->getRequest(), $params );
-		$context->setRequest( $req );
-
-		$api = new ApiMain( $context );
-		return $api;
-	}
-
-	/**
-	 * Creates an API printer that can generate the given output format.
-	 *
-	 * @param string $formatName The desired serialization format,
-	 *           as a format name understood by ApiBase or RdfWriterFactory.
-	 *
-	 * @return ApiFormatBase|null A suitable result printer, or null
-	 *           if the given format is not supported by the API.
-	 */
-	private function createApiSerializer( string $formatName ): ?ApiFormatBase {
-		//MediaWiki formats
-		$api = $this->newApiMain( $formatName );
-		$formatNames = $api->getModuleManager()->getNames( 'format' );
-		if ( in_array( $formatName, $formatNames ) ) {
-			return $api->createPrinterByName( $formatName );
-		}
-
-		return null;
-	}
-
-	/**
 	 * Get the producer setting for current data format
 	 *
 	 * @throws UnknownFlavorException
@@ -337,76 +293,6 @@ class EntityDataSerializationService {
 		$rdfWriter = $this->rdfWriterFactory->getWriter( $format );
 
 		return $this->rdfBuilderFactory->getRdfBuilder( $this->getFlavor( $flavorName ), new HashDedupeBag(), $rdfWriter );
-	}
-
-	/**
-	 * Pushes the given $entity into the ApiResult held by the ApiMain module
-	 * returned by newApiMain(). Calling $printer->execute() later will output this
-	 * result, if $printer was generated from that same ApiMain module, as
-	 * createApiPrinter() does.
-	 *
-	 * @param EntityRevision $entityRevision The entity to convert ot an ApiResult
-	 * @param ApiFormatBase $printer The output printer that will be used for serialization.
-	 *   Used to provide context for generating the ApiResult, and may also be manipulated
-	 *   to fine-tune the output.
-	 */
-	private function generateApiResult( EntityRevision $entityRevision, ApiFormatBase $printer ): ApiResult {
-		$res = $printer->getResult();
-
-		// Make sure result is empty. May still be full if this
-		// function gets called multiple times during testing, etc.
-		$res->reset();
-
-		$resultBuilder = new ResultBuilder(
-			$res,
-			$this->entityTitleStoreLookup,
-			$this->serializerFactory,
-			$this->entitySerializer,
-			$this->siteLookup,
-			$this->propertyLookup,
-			$this->entityIdParser,
-			true // include metadata for the API result printer
-		);
-		$resultBuilder->addEntityRevision( null, $entityRevision );
-
-		return $res;
-	}
-
-	/**
-	 * Serialize the entity data using the provided format.
-	 *
-	 * Note that we are using the API's serialization facility to ensure a consistent external
-	 * representation of data entities. Using the ContentHandler to serialize the entity would
-	 * expose internal implementation details.
-	 *
-	 * @param EntityRevision $entityRevision the entity to output.
-	 * @param ApiFormatBase $printer the printer to use to generate the output
-	 *
-	 * @return string the serialized data
-	 */
-	private function getApiSerialization(
-		EntityRevision $entityRevision,
-		ApiFormatBase $printer
-	): string {
-		// NOTE: The way the ApiResult is provided to $printer is somewhat
-		//       counter-intuitive. Basically, the relevant ApiResult object
-		//       is owned by the ApiMain module provided by newApiMain().
-
-		// Pushes $entity into the ApiResult held by the ApiMain module
-		// TODO: where to put the followed redirect?
-		// TODO: where to put the incoming redirects? See T98039
-		$this->generateApiResult( $entityRevision, $printer );
-
-		$printer->initPrinter();
-
-		// Outputs the ApiResult held by the ApiMain module, which is hopefully the one we added the entity data to.
-		//NOTE: this can and will mess with the HTTP response!
-		$printer->execute();
-		$data = $printer->getBuffer();
-
-		$printer->disable();
-
-		return $data;
 	}
 
 }

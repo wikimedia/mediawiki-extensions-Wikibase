@@ -284,6 +284,19 @@ return [
 		return new DispatchingSerializer( $serializers );
 	},
 
+	'WikibaseRepo.AllTypesJsonFriendlyEntitySerializer' => function ( MediaWikiServices $services ): Serializer {
+		$serializerFactoryCallbacks = WikibaseRepo::getEntityTypeDefinitions( $services )
+			->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
+		$baseSerializerFactory = WikibaseRepo::getJsonFriendlyDataModelSerializerFactory( $services );
+		$serializers = [];
+
+		foreach ( $serializerFactoryCallbacks as $callback ) {
+			$serializers[] = $callback( $baseSerializerFactory );
+		}
+
+		return new DispatchingSerializer( $serializers );
+	},
+
 	'WikibaseRepo.AnonymousEditWarningBuilder' => function ( MediaWikiServices $services ): AnonymousEditWarningBuilder {
 		return new AnonymousEditWarningBuilder(
 			$services->getSpecialPageFactory(),
@@ -720,14 +733,12 @@ return [
 
 	'WikibaseRepo.EntityDataSerializationService' => function ( MediaWikiServices $services ): EntityDataSerializationService {
 		return new EntityDataSerializationService(
+			WikibaseRepo::getAllTypesJsonFriendlyEntitySerializer( $services ),
+			WikibaseRepo::getEntityDataFormatProvider( $services ),
+			WikibaseRepo::getRdfBuilderFactory( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
-			WikibaseRepo::getEntityDataFormatProvider( $services ),
-			WikibaseRepo::getBaseDataModelSerializerFactory( $services ),
-			WikibaseRepo::getAllTypesEntitySerializer( $services ),
-			$services->getSiteLookup(),
-			WikibaseRepo::getRdfBuilderFactory( $services ),
-			WikibaseRepo::getEntityIdParser( $services )
+			WikibaseRepo::getEntityIdParser( $services ),
 		);
 	},
 
@@ -1364,6 +1375,13 @@ return [
 		}
 
 		return $itemSource->getConceptBaseUri();
+	},
+
+	'WikibaseRepo.JsonFriendlyDataModelSerializerFactory' => function ( MediaWikiServices $services ): SerializerFactory {
+		return new SerializerFactory(
+			new DataValueSerializer(),
+			SerializerFactory::OPTION_SERIALIZE_USE_OBJECTS_FOR_EMPTY_MAPS
+		);
 	},
 
 	'WikibaseRepo.KartographerEmbeddingHandler' => function ( MediaWikiServices $services ): ?CachingKartographerEmbeddingHandler {
