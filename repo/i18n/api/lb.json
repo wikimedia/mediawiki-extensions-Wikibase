@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"GilPe",
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"apihelp-wbcreateclaim-param-bot": "Dës Ännerung als Bot markéieren. Dës Markéierung vun der URL gëtt nëmme respektéiert wann de Benotzer zum Grupp \"{{int:group-bot}}\" gehéiert.",

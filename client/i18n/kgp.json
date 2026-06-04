@@ -4,5 +4,15 @@
 			"Arcstur"
 		]
 	},
-	"wikibase-dataitem": "Rá sĩ ge {{WBREPONAME}}"
+	"wikibase-dataitem": "Rá sĩ ge {{WBREPONAME}}",
+	"wikibase-addlinkstitle": "Ag vĩ ũ link nĩm ra",
+	"wikibase-linkitem-addlinks": "Rĩgke ũ vin",
+	"wikibase-linkitem-title": "Rĩgke pajinỹ mré",
+	"wikibase-linkitem-linkpage": "Link tĩ pajinỹ mré",
+	"wikibase-linkitem-selectlink": "Inh mỹ hej ke kỹ, kuprẽg sajte ũ ã tỹ pajinỹ veja kija nẽ ja ti pajinỹ tag ti",
+	"wikibase-linkitem-input-site": "Vĩ:",
+	"wikibase-linkitem-input-page": "Pajinỹ:",
+	"wikibase-rc-hide-wikidata-hide": "Péju",
+	"wikibase-rc-hide-wikidata-show": "Ven ge",
+	"wikibase-otherprojects": "Vẽnh jykre ũ"
 }

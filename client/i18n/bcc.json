@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Moshtank"
+			"Moshtank",
+			"Yasirkhan"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}ءِ آیٹم",
 	"wikibase-editlinks": "لینکانءِ ٹگلݔنگ",
+	"wikibase-addlinkstitle": "میان زبانی ھمگرنچاں ھوار بہ کن اِت",
 	"wikibase-linkitem-addlinks": "لینکانءِ ھۏر کنگ",
 	"wikibase-linkitem-title": "لینک کنگ گۏن تاک",
 	"wikibase-linkitem-linkpage": "گۏن تاکئی لینک کن",

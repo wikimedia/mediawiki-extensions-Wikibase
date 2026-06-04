@@ -4,5 +4,9 @@
 			"Arcstur"
 		]
 	},
-	"wikibase-edit": "rán mãn"
+	"wikibase-edit": "rán mãn",
+	"wikibase-add": "kãnĩm",
+	"wikibase-label-empty": "Pénĩn saj ke rán kỹ nĩ tũ",
+	"wikibase-description-empty": "Nénũ ki hã ke tũ",
+	"wikibase-sitelinks-special": "Vẽn vĩ ũ"
 }
