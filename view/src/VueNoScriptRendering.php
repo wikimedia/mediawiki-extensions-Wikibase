@@ -65,8 +65,13 @@ class VueNoScriptRendering {
 
 	public function loadStatementData( StatementList $allStatements ): void {
 		$this->snakValueHtmlLookup = [];
+		$allPropertyIds = [];
+		foreach ( $allStatements->getAllSnaks() as $snak ) {
+			$propId = $snak->getPropertyId();
+			$allPropertyIds[$propId->getSerialization()] = $propId;
+		}
 		$this->propertyExistence = $this->entityExistenceChecker->existsBatch(
-			$allStatements->getPropertyIds()
+			array_values( $allPropertyIds )
 		);
 		$this->app = new App( $this->globalTemplateFunctions() );
 		$this->registerTemplates( $allStatements );
