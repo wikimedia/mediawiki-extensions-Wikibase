@@ -65,9 +65,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 			],
 
 			'old label not in ChangeOpResult - no collisions detected' => [
-				'getLabelMock' => function () {
-					return 'old label';
-				},
+				'getLabelMock' => static fn () => 'old label',
 				'getDescriptionMock' => null,
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) {
 					self::assertEquals( 'en', $lang );
@@ -83,9 +81,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 
 			'old description not in ChangeOpResult - no collisions detected' => [
 				'getLabelMock' => null,
-				'getDescriptionMock' => function () {
-					return 'old description';
-				},
+				'getDescriptionMock' => static fn () => 'old description',
 				'detectLabelAndDescriptionCollisionMock' => function ( $lang, $label, $description ) {
 					self::assertEquals( 'en', $lang );
 					self::assertEquals( 'new label', $label );

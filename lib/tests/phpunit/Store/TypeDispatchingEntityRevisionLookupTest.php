@@ -25,11 +25,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 	 */
 	public function testGivenInvalidCallback_getEntityRevisionFails() {
 		$lookup = new TypeDispatchingEntityRevisionLookup(
-			[
-				'property' => function ( EntityRevisionLookup $defaultService ) {
-					return (object)[];
-				},
-			],
+			[ 'property' => static fn () => (object)[] ],
 			$this->newDefaultService( 'getEntityRevision' )
 		);
 

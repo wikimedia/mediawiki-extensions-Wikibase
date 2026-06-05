@@ -135,9 +135,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		$this->setTemporaryHook(
 			'WikibaseTextForSearchIndex',
-			static function () {
-				return false;
-			}
+			static fn () => false
 		);
 
 		$text = $entityContent->getTextForSearchIndex();

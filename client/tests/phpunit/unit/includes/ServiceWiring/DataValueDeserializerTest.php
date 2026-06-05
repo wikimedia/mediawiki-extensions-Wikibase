@@ -33,9 +33,7 @@ class DataValueDeserializerTest extends ServiceWiringTestCase {
 			'wikibase-entityid',
 		];
 
-		yield from array_map( function ( $dataValue ) {
-			return [ $dataValue ];
-		}, $dataValues );
+		yield from array_map( static fn ( $s ) => [ $s ], $dataValues );
 	}
 
 	/**

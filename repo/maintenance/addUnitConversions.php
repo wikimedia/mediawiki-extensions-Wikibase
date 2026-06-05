@@ -287,10 +287,7 @@ QUERY;
 	 * @param string[] $map Map old id -> normalized id
 	 */
 	private function processStatements( $values, $map ) {
-		$shortValues = array_map( function ( $str ) {
-			return 'wdv:' . $str;
-		}, $values );
-		$valuesStr = implode( ' ', $shortValues );
+		$valuesStr = implode( ' ', array_map( static fn ( $s ) => "wdv:$s", $values ) );
 		$query = <<<QUERY
 SELECT ?s ?p ?v WHERE {
 	VALUES ?v { $valuesStr }

@@ -32,17 +32,10 @@ class ItemChangeTest extends EntityChangeTest {
 	public static function itemChangeProvider() {
 		$changes = array_filter(
 			TestChanges::getChanges(),
-			function( EntityChange $change ) {
-				return ( $change instanceof ItemChange );
-			}
+			static fn ( EntityChange $change ) => $change instanceof ItemChange
 		);
 
-		$cases = array_map( function( ItemChange $change ) {
-			return [ $change ];
-		},
-		$changes );
-
-		return $cases;
+		return array_map( static fn ( ItemChange $change ) => [ $change ], $changes );
 	}
 
 	/**

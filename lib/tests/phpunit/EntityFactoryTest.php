@@ -20,16 +20,10 @@ class EntityFactoryTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
 
 	private function getEntityFactory() {
-		$instantiators = [
-			'item' => function() {
-				return new Item();
-			},
-			'property' => function() {
-				return Property::newFromType( 'string' );
-			},
-		];
-
-		return new EntityFactory( $instantiators );
+		return new EntityFactory( [
+			'item' => static fn () => new Item(),
+			'property' => static fn () => Property::newFromType( 'string' ),
+		] );
 	}
 
 	public static function provideNewEmpty() {

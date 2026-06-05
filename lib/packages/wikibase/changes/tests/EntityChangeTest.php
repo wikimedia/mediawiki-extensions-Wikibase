@@ -42,18 +42,10 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$changes = array_filter(
 			TestChanges::getChanges(),
-			function( EntityChange $change ) use ( $rowClass ) {
-				return is_a( $change, $rowClass );
-			}
+			static fn ( EntityChange $change ) => $change instanceof $rowClass
 		);
 
-		$cases = array_map(
-			function( EntityChange $change ) {
-				return [ $change ];
-			},
-			$changes );
-
-		return $cases;
+		return array_map( static fn ( EntityChange $change ) => [ $change ], $changes );
 	}
 
 	/**

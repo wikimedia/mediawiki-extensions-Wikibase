@@ -50,9 +50,7 @@ class EntityIdComposerTest extends TestCase {
 
 	public function testGivenInvalidCallback_buildFails() {
 		$composer = new EntityIdComposer( [
-			'item' => static function() {
-				return null;
-			},
+			'item' => static fn () => null,
 		] );
 		$this->expectException( UnexpectedValueException::class );
 		$composer->composeEntityId( 'item', 1 );

@@ -25,12 +25,8 @@ class PropertyServicesTest extends TestCase {
 		$serviceName = 'some-service';
 		$definitions = [
 			$serviceName => [
-				ApiEntitySource::TYPE => function () {
-					return 'api service';
-				},
-				DatabaseEntitySource::TYPE => function () {
-					return 'db service';
-				},
+				ApiEntitySource::TYPE => static fn () => 'api service',
+				DatabaseEntitySource::TYPE => static fn () => 'db service',
 			],
 		];
 

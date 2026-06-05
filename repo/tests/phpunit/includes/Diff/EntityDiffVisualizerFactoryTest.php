@@ -54,9 +54,7 @@ class EntityDiffVisualizerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenInstantiatorDoesReturnDiffVisualizer_factoryThrowsException() {
 		$factory = $this->newFactory( [
-			'item' => function () {
-				return 'WOOO';
-			},
+			'item' => static fn () => 'WOOO',
 		] );
 
 		$this->expectException( \LogicException::class );

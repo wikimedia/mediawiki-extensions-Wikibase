@@ -49,9 +49,7 @@ class ValueParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewParser_withInvalidReturnValue() {
-		$factory = new ValueParserFactory( [ 'id' => function () {
-			return 'invalid';
-		} ] );
+		$factory = new ValueParserFactory( [ 'id' => static fn () => 'invalid' ] );
 
 		$this->expectException( LogicException::class );
 		$factory->newParser( 'id', new ParserOptions() );

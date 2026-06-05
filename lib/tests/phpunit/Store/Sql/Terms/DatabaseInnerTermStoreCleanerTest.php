@@ -202,9 +202,7 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			->select( $field )
 			->from( $table )
 			->assertResultSet( array_map(
-				function( $element ) {
-					return [ $element ];
-				},
+				static fn ( $element ) => [ $element ],
 				$elements
 			) );
 	}

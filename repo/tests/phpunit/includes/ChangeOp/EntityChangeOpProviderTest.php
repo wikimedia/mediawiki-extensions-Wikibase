@@ -61,9 +61,7 @@ class EntityChangeOpProviderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenCallbackNotReturningChangeOpDeserializer_exceptionIsThrown() {
 		$changeOpProvider = new EntityChangeOpProvider( [
-			'entity-type' => function() {
-				return (object)[];
-			},
+			'entity-type' => static fn () => (object)[],
 		] );
 
 		$this->expectException( LogicException::class );

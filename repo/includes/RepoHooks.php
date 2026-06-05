@@ -1194,9 +1194,7 @@ final class RepoHooks implements
 	public function onParserOptionsRegister( &$defaults, &$inCacheKey, &$lazyLoad ) {
 		$defaults['wb'] = null;
 		$inCacheKey['wb'] = true;
-		$lazyLoad['wb'] = function () {
-			return EntityHandler::PARSER_VERSION;
-		};
+		$lazyLoad['wb'] = static fn () => EntityHandler::PARSER_VERSION;
 		$defaults['termboxVersion'] = null;
 		$inCacheKey['termboxVersion'] = true;
 		$lazyLoad['termboxVersion'] = function () {

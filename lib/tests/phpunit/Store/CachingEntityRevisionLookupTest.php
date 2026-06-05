@@ -257,9 +257,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		return $result->onNonexistentEntity( $shouldNotBeCalled )
 			->onRedirect( $shouldNotBeCalled )
-			->onConcreteRevision( function ( $revId ) {
-				return $revId;
-			} )
+			->onConcreteRevision( static fn ( $revId ) => $revId )
 			->map();
 	}
 

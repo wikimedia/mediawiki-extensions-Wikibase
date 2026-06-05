@@ -171,12 +171,9 @@ class EditEntity extends ModifyEntity {
 					LookupConstants::LATEST_FROM_MASTER
 				);
 
-				$returnFalse = function () {
-					return false;
-				};
-				$latestRevision = $latestRevisionResult->onConcreteRevision( function ( $revId ) {
-					return $revId;
-				} )
+				$returnFalse = static fn () => false;
+				$latestRevision = $latestRevisionResult
+					->onConcreteRevision( static fn ( $revId ) => $revId )
 					->onRedirect( $returnFalse )
 					->onNonexistentEntity( $returnFalse )
 					->map();

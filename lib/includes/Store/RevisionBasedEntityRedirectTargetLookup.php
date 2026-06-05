@@ -20,9 +20,7 @@ class RevisionBasedEntityRedirectTargetLookup implements EntityRedirectTargetLoo
 	 * @inheritDoc
 	 */
 	public function getRedirectForEntityId( EntityId $entityId, $forUpdate = '' ): ?EntityId {
-		$returnNull = function () {
-			return null;
-		};
+		$returnNull = static fn () => null;
 
 		$lookupMode = $forUpdate === EntityRedirectTargetLookup::FOR_UPDATE
 			? LookupConstants::LATEST_FROM_MASTER

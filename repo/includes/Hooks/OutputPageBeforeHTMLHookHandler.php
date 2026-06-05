@@ -173,9 +173,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		}
 
 		$injector = new TextInjector( $placeholders );
-		$getHtmlCallback = static function () {
-			return '';
-		};
+		$getHtmlCallback = static fn () => '';
 
 		$entity = $this->getEntity( $out );
 		if ( $entity instanceof EntityDocument ) {
