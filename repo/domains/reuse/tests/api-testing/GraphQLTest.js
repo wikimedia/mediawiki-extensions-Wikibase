@@ -235,6 +235,13 @@ describe( 'Wikibase GraphQL', () => {
 							node {
 								id
 								label(languageCode: "en")
+								statements(propertyId: "${ property1.id }") {
+									value {
+										... on ItemValue {
+											id
+										}
+									}
+								}
 							}
 						}
 					}
@@ -249,7 +256,14 @@ describe( 'Wikibase GraphQL', () => {
 								{
 									node: {
 										id: item2.id,
-										label: item2label
+										label: item2label,
+										statements: [
+											{
+												value: {
+													id: item1.id
+												}
+											}
+										]
 									}
 								}
 							]

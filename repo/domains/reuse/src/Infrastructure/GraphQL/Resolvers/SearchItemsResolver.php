@@ -11,6 +11,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 
 /**
  * @license GPL-2.0-or-later
@@ -21,13 +22,14 @@ class SearchItemsResolver {
 
 	public function __construct(
 		private readonly FacetedItemSearch $searchUseCase,
+		private readonly ItemResolver $itemResolver,
 	) {
 	}
 
 	/**
 	 * @throws GraphQLError
 	 */
-	public function resolve( array $query, int $limit, ?string $cursor ): array {
+	public function resolve( array $query, int $limit, ?string $cursor, QueryContext $context ): array {
 		if ( !self::isCirrusSearchEnabled() ) {
 			throw GraphQLError::searchNotAvailable();
 		}
@@ -46,15 +48,15 @@ class SearchItemsResolver {
 		}
 
 		return [
-			'edges' => $this->resolveEdges( $searchResults->results, $offset ),
+			'edges' => $this->resolveEdges( $searchResults->results, $offset, $context ),
 			'pageInfo' => $this->resolvePageInfo( $searchResults, $offset ),
 		];
 	}
 
-	private function resolveEdges( array $searchResults, int $offset ): array {
+	private function resolveEdges( array $searchResults, int $offset, QueryContext $context ): array {
 		return array_map(
 			fn( ItemSearchResult $result, int $key ) => [
-				'node' => $result,
+				'node' => $this->itemResolver->resolveItem( $result->itemId->getSerialization(), $context ),
 				'cursor' => $this->encodeOffsetAsCursor( $offset + $key + 1 ),
 			],
 			$searchResults,

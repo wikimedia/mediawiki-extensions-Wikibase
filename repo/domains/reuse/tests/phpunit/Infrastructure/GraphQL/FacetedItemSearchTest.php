@@ -68,7 +68,11 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						->withSomeGuid()
 						->withValue( $itemUsedAsStatementValue->getId() )
 				)
-				->andStatement( NewStatement::forProperty( $stringProperty->getId() )->withValue( 'potato' ) )
+				->andStatement(
+					NewStatement::forProperty( $stringProperty->getId() )
+						->withSomeGuid()
+						->withValue( 'potato' )
+				)
 		);
 		$item2 = self::createItem(
 			NewItem::withLabel( 'en', 'item 2' )
@@ -225,6 +229,33 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 								[ 'labelWithLanguageFallback' => [
 									'languageCode' => 'en',
 									'value' => $item->getLabels()->getByLanguage( 'en' )->getText(),
+								] ],
+							],
+						],
+					],
+				],
+			],
+		];
+
+		yield 'searchItems with statement value in search result' => [
+			"{  searchItems( query: {
+				property: \"{$itemProperty->getId()}\",
+			} ) { edges { node { statements(propertyId: \"{$itemProperty->getId()}\") {
+			   value {
+            		... on ItemValue {
+              			id
+            		}
+          		} 
+			} } } } }",
+			[
+				'data' => [
+					'searchItems' => [
+						'edges' => [
+							[ 'node' =>
+								[ 'statements' => [
+									[
+										'value' => [ 'id' => $itemUsedAsStatementValue->getId() ],
+									],
 								] ],
 							],
 						],

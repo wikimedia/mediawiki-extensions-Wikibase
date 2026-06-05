@@ -13,7 +13,6 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
-use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValuePair;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statement;
@@ -297,7 +296,7 @@ class Types {
 			'description' => 'An edge in the search result containing a matched item and its pagination cursor.',
 			'fields' => [
 				'node' => [
-					'type' => Type::nonNull( $this->getItemSearchResultNodeType() ),
+					'type' => Type::nonNull( $this->getItemType() ),
 					'description' => 'The matched result item.',
 				],
 				'cursor' => [
@@ -305,43 +304,6 @@ class Types {
 					'description' => 'Cursor identifying this result within the result set, used for pagination.',
 				],
 			],
-		] );
-	}
-
-	public function getItemSearchResultNodeType(): ObjectType {
-		$labelProviderType = $this->getLabelProviderType();
-		$labelField = self::copyFieldDefinition(
-			$labelProviderType->getField( 'label' ),
-			fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemLabelsResolver
-				->resolve( $itemSearchResult->itemId, $args['languageCode'] ),
-		);
-
-		$labelWithLanguageFallbackField = self::copyFieldDefinition(
-			$labelProviderType->getField( 'labelWithLanguageFallback' ),
-			fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemLabelsWithLanguageFallbackResolver
-				->resolve( $itemSearchResult->itemId, $args['languageCode'] ),
-		);
-
-		$descriptionProviderType = $this->getDescriptionProviderType();
-		$descriptionField = self::copyFieldDefinition(
-			$descriptionProviderType->getField( 'description' ),
-			fn( ItemSearchResult $itemSearchResult, array $args ) => $this->itemDescriptionsResolver
-				->resolve( $itemSearchResult->itemId, $args['languageCode'] )
-		);
-
-		return $this->itemSearchResultNodeType ??= new ObjectType( [
-			'name' => 'ItemSearchResultNode',
-			'description' => 'The matched item returned by the search.',
-			'fields' => [
-				'id' => [
-					'type' => Type::nonNull( $this->getItemIdType() ),
-					'resolve' => fn( ItemSearchResult $itemSearchResult ) => $itemSearchResult->itemId->getSerialization(),
-				],
-				$labelField,
-				$labelWithLanguageFallbackField,
-				$descriptionField,
-			],
-			'interfaces' => [ $labelProviderType, $descriptionProviderType ],
 		] );
 	}
 

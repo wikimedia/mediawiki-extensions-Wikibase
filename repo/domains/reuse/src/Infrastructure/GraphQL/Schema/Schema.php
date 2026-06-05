@@ -86,10 +86,11 @@ class Schema extends GraphQLSchema {
 						'description' => 'Cursor that defines the position after which results should be returned. Usually the value of endCursor from the previous request',
 					],
 				],
-				'resolve' => fn( $rootValue, array $args ) => $searchItemsResolver->resolve(
+				'resolve' => fn( $rootValue, array $args, $context ) => $searchItemsResolver->resolve(
 					$args['query'],
 					$args['first'],
 					$args['after'] ?? null,
+					$context
 				),
 				'complexity' => fn() => GraphQLService::SEARCH_ITEMS_COMPLEXITY,
 			],
