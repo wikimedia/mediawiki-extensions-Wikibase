@@ -47,7 +47,6 @@
 							<transition name="fade">
 								<cdx-progress-bar
 									v-if="showProgress"
-									:value="100"
 									inline
 									:aria-label="progressBarLabel"
 								></cdx-progress-bar>
