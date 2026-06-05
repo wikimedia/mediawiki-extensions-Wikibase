@@ -1310,11 +1310,19 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 		$redirectTarget1 = new Item( $redirectTargetId1 );
 		$redirectTarget2 = new Item( $redirectTargetId2 );
 
+		$expectedEntityData = [
+			[ $itemId, $item ],
+			[ $redirectSource1, $redirectTarget1 ],
+			[ $redirectSource2, $redirectTarget2 ],
+		];
 		$lookupMock = $this->createStub( EntityLookup::class );
-		$lookupMock->expects( $this->exactly( 3 ) )
+		$lookupMock->expects( $this->exactly( count( $expectedEntityData ) ) )
 			->method( 'getEntity' )
-			->withConsecutive( [ $itemId ], [ $redirectSource1 ], [ $redirectSource2 ] )
-			->willReturnOnConsecutiveCalls( $item, $redirectTarget1, $redirectTarget2 );
+			->willReturnCallback( function( $entityId ) use ( &$expectedEntityData ) {
+				[ $expectedEntityId, $expectedReturn ] = array_shift( $expectedEntityData );
+				$this->assertEquals( $expectedEntityId, $entityId );
+				return $expectedReturn;
+			} );
 
 		$query = "{ itemsById(ids: [ \"$itemId\", \"$redirectSource1\", \"$redirectSource2\" ] ) { id } }";
 		$expectedResult = [
