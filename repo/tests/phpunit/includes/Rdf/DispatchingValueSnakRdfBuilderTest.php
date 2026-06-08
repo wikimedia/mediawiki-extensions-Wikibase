@@ -3,8 +3,7 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\StringValue;
-use Psr\Log\LogLevel;
-use TestLogger;
+use Psr\Log\Test\TestLogger;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
@@ -59,15 +58,13 @@ class DispatchingValueSnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$propertyId = new NumericPropertyId( 'P123' );
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'xyz' ) );
 
-		$logger = new TestLogger( true );
+		$logger = new TestLogger();
 		$dispatchingBuilder = new DispatchingValueSnakRdfBuilder( [], $logger );
 
 		$writer->about( 'subject' );
 		$dispatchingBuilder->addValue( $writer, $namespace, $lname, 'foo', 'v', $snak );
 
-		$this->assertTrue(
-			(bool)array_filter( $logger->getBuffer(), static fn ( array $e ) => $e[0] === LogLevel::WARNING )
-		);
+		$this->assertTrue( $logger->hasWarningRecords() );
 		$writer->finish(); // assert writer is in a finishable state, not with the subject left hanging
 	}
 

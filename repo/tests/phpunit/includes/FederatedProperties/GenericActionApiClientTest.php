@@ -6,9 +6,8 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Http\MWHttpRequest;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\LogLevel;
 use Psr\Log\NullLogger;
-use TestLogger;
+use Psr\Log\Test\TestLogger;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 
@@ -68,7 +67,7 @@ class GenericActionApiClientTest extends TestCase {
 			->method( 'create' )
 			->willReturn( $this->newMockResponseWithHeaders() );
 
-		$logger = new TestLogger( true );
+		$logger = new TestLogger();
 
 		$api = new GenericActionApiClient(
 			$requestFactory,
@@ -78,13 +77,7 @@ class GenericActionApiClientTest extends TestCase {
 		);
 		$api->get( $params );
 
-		$this->assertTrue(
-			(bool)array_filter(
-				$logger->getBuffer(),
-				static fn ( array $e ) => $e[0] === LogLevel::DEBUG
-					&& str_contains( $e[1], 'https://wikidata.org/w/api.php' )
-			)
-		);
+		$logger->hasDebugThatContains( 'https://wikidata.org/w/api.php' );
 	}
 
 	public function testGivenRequestHitsTimeout_throwsException() {
