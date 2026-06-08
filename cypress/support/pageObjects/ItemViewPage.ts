@@ -32,6 +32,8 @@ export class ItemViewPage {
 
 	public static ADD_STATEMENT_BUTTON = '.wikibase-wbui2025-add-statement-button>.cdx-button';
 
+	public static STATEMENT_WRAPPER = '#wikibase-wbui2025-statementwrapper-';
+
 	public static COMMONS_MEDIA_THUMBNAIL_LINK = 'span.snakValue div.thumb a.image';
 
 	public static COMMONS_MEDIA_THUMBNAIL_IMAGE = 'span.snakValue div.thumb a.image span img';
@@ -109,6 +111,18 @@ export class ItemViewPage {
 
 	public addStatementButton(): Chainable {
 		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.ADD_STATEMENT_BUTTON );
+	}
+
+	public statementWrapper( propertyId: string ): Chainable {
+		return cy.get( `${ ItemViewPage.STATEMENT_WRAPPER }${ propertyId }` );
+	}
+
+	public assertStatementIsInViewport( propertyId: string ): void {
+		this.statementWrapper( propertyId ).should( ( $el ) => {
+			const rect = $el[ 0 ].getBoundingClientRect();
+			const vpHeight = $el[ 0 ].ownerDocument.defaultView!.innerHeight;
+			expect( rect.top, 'statement top is within viewport' ).to.be.within( 0, vpHeight - 1 );
+		} );
 	}
 
 	public getClassForRank( rank: string ): string {

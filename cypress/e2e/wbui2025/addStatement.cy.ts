@@ -66,6 +66,9 @@ describe( 'wbui2025 item view add statement', () => {
 			addStatementFormPage.setSnakValue( 'some string' );
 			addStatementFormPage.publishButton().click();
 			addStatementFormPage.form().should( 'not.exist' );
+			cy.get( '@propertyId' ).then( ( pid ) => {
+				itemViewPage.assertStatementIsInViewport( pid );
+			} );
 			itemViewPage.mainSnakValues().eq( 1 ).should( 'have.text', 'some string' );
 
 			itemViewPage.addStatementButton().click();
@@ -76,6 +79,7 @@ describe( 'wbui2025 item view add statement', () => {
 			addStatementFormPage.setSnakValue( 'some other string' );
 			addStatementFormPage.publishButton().click();
 			addStatementFormPage.form().should( 'not.exist' );
+			itemViewPage.assertStatementIsInViewport( secondPropertyId );
 			itemViewPage.mainSnakValues().eq( 2 ).should( 'have.text', 'some other string' );
 		} );
 

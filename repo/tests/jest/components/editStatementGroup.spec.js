@@ -260,5 +260,44 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			await jest.advanceTimersByTime( 300 );
 			expect( wrapper.vm.showProgress ).toBe( false );
 		} );
+
+		it( 'scrolls to statement after publishing succeeds', async () => {
+			const { publishButton, wrapper } = await mountAndGetParts();
+
+			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
+			const editStatementsStore = wbui2025.store.useEditStatementsStore();
+			editStatementsStore.saveChangedStatements = jest.fn(
+				() => new Promise( ( resolve ) => {
+					setTimeout( resolve, 500 );
+				} )
+			);
+
+			const scrollToStatementSpy = jest.spyOn( wbui2025.util, 'scrollToStatementWithPropertyId' );
+
+			await updateStatementValue( publishButton, wrapper );
+			await jest.advanceTimersByTimeAsync( 500 );
+
+			expect( scrollToStatementSpy ).toHaveBeenCalledWith( 'P1' );
+		} );
+
+		it( 'does not scroll if publishing fails', async () => {
+			const { publishButton, wrapper } = await mountAndGetParts();
+
+			useParsedValueStore().populateWithStatements( { P1: [ testStatement ] } );
+			const editStatementsStore = wbui2025.store.useEditStatementsStore();
+			editStatementsStore.saveChangedStatements = jest.fn(
+				() => new Promise( ( _, reject ) => {
+					setTimeout( () => reject( new Error( 'Save failed' ) ), 500 );
+				} )
+			);
+
+			const scrollToStatementSpy = jest.spyOn( wbui2025.util, 'scrollToStatementWithPropertyId' );
+
+			await updateStatementValue( publishButton, wrapper );
+			await jest.advanceTimersByTimeAsync( 500 );
+			await Promise.resolve();
+
+			expect( scrollToStatementSpy ).not.toHaveBeenCalled();
+		} );
 	} );
 } );

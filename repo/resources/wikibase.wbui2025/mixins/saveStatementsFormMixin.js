@@ -25,6 +25,7 @@ const saveStatementsFormMixin = {
 						} );
 						clearTimeout( progressTimeout );
 						this.showProgress = false;
+						return { success: true };
 					} )
 					.catch( ( errorObj ) => {
 						const errorHtml = errorObj &&
@@ -48,6 +49,7 @@ const saveStatementsFormMixin = {
 						clearTimeout( progressTimeout );
 						this.showProgress = false;
 						this.formSubmitted = false;
+						return { success: false };
 					} );
 			}
 		}

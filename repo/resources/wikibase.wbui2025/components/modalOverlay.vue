@@ -45,11 +45,12 @@
 					<slot name="footer">
 						<div v-if="!hideFooter" class="wikibase-wbui2025-modal-overlay__footer">
 							<transition name="fade">
-								<cdx-progress-bar
-									v-if="showProgress"
-									inline
-									:aria-label="progressBarLabel"
-								></cdx-progress-bar>
+								<div v-if="showProgress">
+									<cdx-progress-bar
+										inline
+										:aria-label="progressBarLabel"
+									></cdx-progress-bar>
+								</div>
 							</transition>
 							<!-- eslint-disable vue/no-unused-refs -->
 							<div ref="modalOverlayActionsRef" class="wikibase-wbui2025-modal-overlay__footer__actions">
@@ -85,6 +86,7 @@ const { CdxButton, CdxIcon, CdxProgressBar } = require( '../../../codex.js' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const modalStack = [];
+let savedScrollY = 0;
 
 function onPopState() {
 	const topModal = modalStack[ modalStack.length - 1 ];
@@ -167,6 +169,10 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	mounted() {
+		if ( !document.body.classList.contains( 'wikibase-wbui2025-modal-open' ) ) {
+			savedScrollY = window.scrollY;
+			document.body.style.top = '-' + savedScrollY + 'px';
+		}
 		document.body.classList.add( 'wikibase-wbui2025-modal-open' );
 		wbui2025.store.useMessageStore().clearStatusMessages();
 		modalStack.push( this.modalStackEntry );
@@ -188,7 +194,10 @@ module.exports = exports = defineComponent( {
 		}
 		const target = document.getElementById( 'mw-teleport-target' );
 		if ( target && target.querySelectorAll( '.wikibase-wbui2025-modal-overlay' ).length === 0 ) {
+			const scrollY = savedScrollY;
+			document.body.style.top = '';
 			document.body.classList.remove( 'wikibase-wbui2025-modal-open' );
+			window.scrollTo( 0, scrollY );
 		}
 	}
 } );
