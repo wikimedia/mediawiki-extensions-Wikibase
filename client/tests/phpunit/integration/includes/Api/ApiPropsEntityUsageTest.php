@@ -122,7 +122,7 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 
 		$pageSet = $this->getMockBuilder( ApiPageSet::class )
 			->setConstructorArgs( [ $main ] )
-			->setMethodsExcept( [ 'encodeParamName', 'extractRequestParams', 'getAllowedParams', 'getFinalParams', 'getMain' ] )
+			->onlyMethods( [ 'getGoodPages' ] )
 			->getMock();
 
 		$pageSet->method( 'getGoodPages' )
