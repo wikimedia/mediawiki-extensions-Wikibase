@@ -23,5 +23,6 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|чыганак}}",
 	"special-newitem": "Яңа элемент ясау",
 	"wikibase-newitem-fieldset": "Яңа элемент ясау",
-	"wikibase-api-inconsistent-language": "Туры килмәгән \"$1\" тел табылды (\"$2\" көтелгән иде)."
+	"wikibase-api-inconsistent-language": "Туры килмәгән \"$1\" тел табылды (\"$2\" көтелгән иде).",
+	"wikibase-search-namespace-mix": "Эзләүдә беръюлы Wikidata элементы һәм мәкалә исемараларын куллану әлегә эшләми. Эзләү бары тик Wikidata элементы исемаралары өчен генә башкарылачак."
 }
