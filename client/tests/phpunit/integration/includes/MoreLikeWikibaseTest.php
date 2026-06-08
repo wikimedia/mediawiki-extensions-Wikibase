@@ -3,11 +3,13 @@
 namespace Wikibase\Client\Tests\Integration;
 
 use CirrusSearch\HashSearchConfig;
+use CirrusSearch\Search\Filters;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\MatchAll;
 use Elastica\Query\MoreLikeThis;
+use Elastica\Query\Term;
 use LinkCacheTestTrait;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
@@ -47,7 +49,12 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 			'single page morelike w/wikibase' => [
 				'morelikewithwikibase:Some page',
 				( new BoolQuery() )
-					->addFilter( new Exists( 'wikibase_item' ) )
+					->addFilter( Filters::unify(
+						// must
+						[ new Exists( 'wikibase_item' ) ],
+						// must_not
+						[ new Term( [ 'page_type' => 'redirect' ] ) ]
+					) )
 					->addMust( ( new MoreLikeThis() )
 						->setParams( [
 							'min_doc_freq' => 2,
@@ -72,8 +79,6 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider applyProvider
 	 */
 	public function testApply( $term, $expectedQuery, $mltUsed ) {
-		$this->markTestSkipped();
-
 		// Inject fake pages for MoreLikeFeature::collectTitles() to find
 		$this->addGoodLinkObject( 12345, Title::makeTitle( NS_MAIN, 'Some page' ) );
 		$this->addGoodLinkObject( 23456, Title::makeTitle( NS_MAIN, 'Other page' ) );
