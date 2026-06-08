@@ -1,6 +1,7 @@
 <?php declare( strict_types=1 );
 
 use CirrusSearch\CirrusDebugOptions;
+use MediaWiki\Api\ApiBase;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Rest\Reporter\ErrorReporter;
@@ -24,6 +25,7 @@ use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperPre
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\InLabelSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\PropertySearchHelperFactory;
 use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\TermsTablesEntitySearchHelperFactory;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\UserFactoryPermissionChecker;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Search\RouteHandlers\SearchExceptionMiddleware;
 use Wikibase\Repo\Domains\Search\WbSearch;
@@ -78,7 +80,12 @@ return [
 	'WbSearch.ItemPrefixSearch' => function( MediaWikiServices $services ): ItemPrefixSearch {
 		$searchProfiles = WikibaseRepo::getSettings( $services )->getSetting( 'searchProfiles' );
 		return new ItemPrefixSearch(
-			new ItemPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
+			new ItemPrefixSearchValidator(
+				WbSearch::getLanguageCodeValidator( $services ),
+				new UserFactoryPermissionChecker( $services->getUserFactory() ),
+				ApiBase::LIMIT_SML1,
+				ApiBase::LIMIT_SML2
+			),
 			new EntitySearchHelperPrefixSearchEngine(
 				WbSearch::getEntitySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),
@@ -115,7 +122,11 @@ return [
 	'WbSearch.PropertyPrefixSearch' => function( MediaWikiServices $services ): PropertyPrefixSearch {
 		$searchProfiles = WikibaseRepo::getSettings( $services )->getSetting( 'searchProfiles' );
 		return new PropertyPrefixSearch(
-			new PropertyPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ) ),
+			new PropertyPrefixSearchValidator( WbSearch::getLanguageCodeValidator( $services ),
+				new UserFactoryPermissionChecker( $services->getUserFactory() ),
+				ApiBase::LIMIT_SML1,
+				ApiBase::LIMIT_SML2
+			),
 			new EntitySearchHelperPrefixSearchEngine(
 				WbSearch::getPropertySearchHelperFactory( $services ),
 				$services->getLanguageFactory(),

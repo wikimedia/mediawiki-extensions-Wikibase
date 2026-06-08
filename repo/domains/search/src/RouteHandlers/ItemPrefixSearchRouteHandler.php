@@ -10,6 +10,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -53,6 +54,7 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
 				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_LIMIT,
 				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_OFFSET,
+				$this->getUser()->getUsername(),
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );
@@ -116,6 +118,12 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 
 	public function needsWriteAccess(): bool {
 		return false;
+	}
+
+	private function getUser(): User {
+		$mwUser = $this->getAuthority()->getUser();
+
+		return $mwUser->isRegistered() ? User::withUsername( $mwUser->getName() ) : User::newAnonymous();
 	}
 
 }

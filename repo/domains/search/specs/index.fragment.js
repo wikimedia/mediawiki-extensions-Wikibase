@@ -66,7 +66,7 @@ const openapi = {
 						"example": "pota"
 					},
 					{ "$ref": "#/components/parameters/SearchLanguage" },
-					{ "$ref": "#/components/parameters/Limit" },
+					{ "$ref": "#/components/parameters/SuggestLimit" },
 					{ "$ref": "#/components/parameters/Offset" },
 				],
 				"responses": {
@@ -86,7 +86,7 @@ const openapi = {
 						"example": "taxon"
 					},
 					{ "$ref": "#/components/parameters/SearchLanguage" },
-					{ "$ref": "#/components/parameters/Limit" },
+					{ "$ref": "#/components/parameters/SuggestLimit" },
 					{ "$ref": "#/components/parameters/Offset" },
 				],
 				"responses": {

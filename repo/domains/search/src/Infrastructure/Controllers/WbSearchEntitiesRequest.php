@@ -15,6 +15,7 @@ class WbSearchEntitiesRequest {
 		public readonly int $limit,
 		public readonly bool $strictLanguage,
 		public readonly ?string $profileContext,
+		public readonly ?string $username,
 	) {
 	}
 }

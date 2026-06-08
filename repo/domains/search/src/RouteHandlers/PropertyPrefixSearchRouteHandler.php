@@ -10,6 +10,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\Prope
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\WbSearch;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -52,7 +53,8 @@ class PropertyPrefixSearchRouteHandler extends SimpleHandler {
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
 				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
 				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_LIMIT,
-				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_OFFSET
+				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? PropertyPrefixSearchRequest::DEFAULT_OFFSET,
+				$this->getUser()->getUsername(),
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );
@@ -118,4 +120,10 @@ class PropertyPrefixSearchRouteHandler extends SimpleHandler {
 		return false;
 	}
 
+	private function getUser(): User {
+		$mwUser = $this->getAuthority()->getUser();
+
+		return $mwUser->isRegistered() ? User::withUsername( $mwUser->getName() ) :
+			User::newAnonymous();
+	}
 }

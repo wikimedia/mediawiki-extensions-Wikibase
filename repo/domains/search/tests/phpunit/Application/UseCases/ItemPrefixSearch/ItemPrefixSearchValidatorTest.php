@@ -9,6 +9,8 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
+use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
@@ -33,7 +35,8 @@ class ItemPrefixSearchValidatorTest extends TestCase {
 	 */
 	public function testValidate_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new ItemPrefixSearchRequest( 'search term', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
+			->validate( new ItemPrefixSearchRequest( 'search term', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
+			User::newAnonymous() );
 	}
 
 	/**
@@ -41,13 +44,15 @@ class ItemPrefixSearchValidatorTest extends TestCase {
 	 */
 	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
 		$this->newUseCaseValidator()
-			->validate( new ItemPrefixSearchRequest( 'search term', 'en' ) );
+			->validate( new ItemPrefixSearchRequest( 'search term', 'en' ),
+			User::newAnonymous() );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new ItemPrefixSearchRequest( 'search term', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
+				->validate( new ItemPrefixSearchRequest( 'search term', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
+				User::newAnonymous() );
 
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
@@ -70,7 +75,8 @@ class ItemPrefixSearchValidatorTest extends TestCase {
 	): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new ItemPrefixSearchRequest( 'search term', 'en', $limit, $offset ) );
+				->validate( new ItemPrefixSearchRequest( 'search term', 'en', $limit, $offset ),
+				User::newAnonymous() );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -84,9 +90,9 @@ class ItemPrefixSearchValidatorTest extends TestCase {
 			self::DEFAULT_OFFSET,
 		];
 
-		yield 'invalid limit - limit exceeds max (500)' => [
+		yield 'invalid limit - limit exceeds max (50)' => [
 			UseCaseError::invalidQueryParameter( 'limit' ),
-			501,
+			51,
 			self::DEFAULT_OFFSET,
 		];
 
@@ -97,8 +103,16 @@ class ItemPrefixSearchValidatorTest extends TestCase {
 		];
 	}
 
-	private function newUseCaseValidator(): ItemPrefixSearchValidator {
-		return new ItemPrefixSearchValidator( $this->newSearchLanguageValidator() );
+	private function newUseCaseValidator( bool $hasApiHighLimits = false ): ItemPrefixSearchValidator {
+		$permissionChecker = $this->createStub( PermissionChecker::class );
+		$permissionChecker->method( 'hasApiHighLimits' )->willReturn( $hasApiHighLimits );
+
+		return new ItemPrefixSearchValidator(
+			$this->newSearchLanguageValidator(),
+			$permissionChecker,
+			50,
+			500
+		);
 	}
 
 	private function newSearchLanguageValidator(): SearchLanguageValidator {

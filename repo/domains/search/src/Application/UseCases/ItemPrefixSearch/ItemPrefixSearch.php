@@ -30,7 +30,7 @@ class ItemPrefixSearch {
 			$itemRequest->offset,
 			$itemRequest->disableLanguageFallback,
 			$itemRequest->resultLanguage,
-			$itemRequest->profile
+			$itemRequest->profile,
 		) );
 	}
 }

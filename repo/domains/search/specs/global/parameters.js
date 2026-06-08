@@ -34,6 +34,20 @@ const Limit = {
 	"example": 20
 };
 
+const SuggestLimit = {
+	"in": "query",
+	"name": "limit",
+	"description": "The maximum number of results to return. (Max is 50, for users with apihighlimits max is 500)",
+	"required": false,
+	"schema": {
+		"type": "integer",
+		"minimum": 1,
+		"maximum": 50,
+		"default": 10
+	},
+	"example": 20
+};
+
 const Offset = {
 	"in": "query",
 	"name": "offset",
@@ -51,10 +65,12 @@ module.exports = {
 	SearchQuery,
 	SearchLanguage,
 	Limit,
+	SuggestLimit,
 	Offset,
 	components: {
 		SearchLanguage,
 		Limit,
+		SuggestLimit,
 		Offset,
 	}
 };
