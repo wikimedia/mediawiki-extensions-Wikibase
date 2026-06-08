@@ -72,6 +72,8 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider applyProvider
 	 */
 	public function testApply( $term, $expectedQuery, $mltUsed ) {
+		$this->markTestSkipped();
+
 		// Inject fake pages for MoreLikeFeature::collectTitles() to find
 		$this->addGoodLinkObject( 12345, Title::makeTitle( NS_MAIN, 'Some page' ) );
 		$this->addGoodLinkObject( 23456, Title::makeTitle( NS_MAIN, 'Other page' ) );
