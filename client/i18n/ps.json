@@ -50,7 +50,7 @@
 	"wikibase-rc-hide-wikidata-hide": "پټول",
 	"wikibase-rc-hide-wikidata-show": "ښکاره کول",
 	"wikibase-rc-show-wikidata-pref": "په وروستي بدلونونو کې د {{WBREPONAME}} سمونونه ښکاره کول",
-	"wikibase-rc-wikibase-edit-letter": "اومتوک سمون",
+	"wikibase-rc-wikibase-edit-letter": "اومتوک سمون‌",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} سمون",
 	"wikibase-rcfilters-hide-wikibase-label": "د {{WBREPONAME}} سمونونه",
 	"wikibase-rcfilters-hide-wikibase-description": "سمونونه چې په {{WBREPONAME}} کې سرچينې لري.",
@@ -179,6 +179,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "تاسو کولی شئ، خپل بدلونونه پرته له ننوتلو خپاره کړئ. ستاسو وېب‌پته به د مخ د سمون پېښليک کې خوندي شي. تاسو کولی شئ، بېرته غونډال ته ننوځئ او د خپرولو بياځلي هڅه وکړئ.",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "غونډال ته له ننوتلو پرته خپرول",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "غونډال ته له ننوتلو پرته خوندي کول",
-	"wikibase-client-data-bridge-saving-error-assertuser-login": "ننوتل (نوې کړکۍ کې پرانيستل کېږي)",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "ننوتل (نوې کړکۍ کې پرانېستل کېږي)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "سمون ته دوام ورکول"
 }
