@@ -11,7 +11,6 @@ if ( process.env.MW_SERVER === undefined || process.env.MW_SCRIPT_PATH === undef
 process.env.REST_BASE_URL = process.env.MW_SERVER + process.env.MW_SCRIPT_PATH + '/';
 
 import { mwApiCommands } from 'cypress-wikibase-api';
-import { clientFactory } from 'api-testing';
 
 const compressedVideoPath = function ( uncompressedPath: string ): string {
 	const lastDot = uncompressedPath.lastIndexOf( '.' );
@@ -38,19 +37,6 @@ export default defineConfig( {
 				},
 				table( message ) {
 					console.table( message );
-					return null;
-				},
-				/* eslint-enable */
-				// TODO: T427277 (follow-up) we might want to add this cypress task implementation to 'cypress-wikibase-api` library and call it from the test directly.
-				async 'MwApi:DeletePage'( { title }: { title: string } ) {
-					const client = clientFactory.getActionClient( null );
-					await client.login( process.env.MEDIAWIKI_USER, process.env.MEDIAWIKI_PASSWORD );
-					await client.loadTokens( [ 'csrf' ] );
-					await client.action( 'delete', {
-						title,
-						reason: 'Cypress test cleanup',
-						token: await client.token( 'csrf' ),
-					}, 'POST' );
 					return null;
 				},
 				// eslint-disable-next-line es-x/no-rest-spread-properties
