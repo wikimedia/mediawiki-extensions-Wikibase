@@ -37,10 +37,6 @@ const { storeWithStatements } = require( '../piniaHelpers.js' );
 const { useEditStatementsStore, useEditStatementStore, useEditSnakStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
 
-// TODO: remove this workaround after fixing tests that rely on it (T419592)
-const { debounce } = require( 'lodash' );
-mw.util.debounce = debounce;
-
 describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 	it( 'defines component', async () => {
 		expect( typeof editableTimeSnakValueComponent ).toBe( 'object' );
@@ -84,6 +80,7 @@ describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 		beforeEach( async () => {
 			mockRenderSnakValueText.mockResolvedValueOnce( '4234' );
 			mockParseValue.mockResolvedValueOnce( parsedValue );
+			mockRenderSnakValueHtml.mockResolvedValue( '4234 CE <sup>Gregorian</sup>' );
 
 			const testingPinia = storeWithStatements( [ testStatement ] );
 			const editStatementsStore = useEditStatementsStore();
@@ -104,6 +101,11 @@ describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 				// Use 'attachTo' so that focus events get fired
 				attachTo: document.body
 			} );
+			// await two microticks for the initial formatValue, then clear the mock for subsequent assertions
+			await Promise.resolve();
+			await Promise.resolve();
+			expect( mockRenderSnakValueHtml ).toHaveBeenCalledTimes( 1 );
+			mockRenderSnakValueHtml.mockClear();
 
 			textInput = wrapper.findComponent( CdxTextInput );
 			closeButton = wrapper.findComponent( CdxButton );
@@ -159,13 +161,14 @@ describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 			// The form opens with the calendar settings from the previous input. We nevertheless want the parses
 			// for newly-typed values to be sent with default options (unless a precision / calendarmodel is explicitly
 			// selected)
-			await textInput.setValue( '12' );
-			expect( textInput.props( 'modelValue' ) ).toBe( '12' );
+
 			mockParseValue.mockImplementation( ( value, parseOptions ) => {
 				expect( value ).toBe( '12' );
 				expect( parseOptions ).toStrictEqual( { property: 'P1' } );
 				return Promise.resolve( parsedValue );
 			} );
+			await textInput.setValue( '12' );
+			expect( textInput.props( 'modelValue' ) ).toBe( '12' );
 			const editSnakStoreGetter = useEditSnakStore( snakKey );
 			await editSnakStoreGetter().valueStrategy.getParsedValue();
 			expect( mockParseValue ).toHaveBeenCalledTimes( 2 );

@@ -23,6 +23,7 @@ const { CdxButton, CdxMenuButton, CdxTextArea, CdxTextInput } = require( '../../
 const { mount } = require( '@vue/test-utils' );
 const { storeWithStatements } = require( '../piniaHelpers.js' );
 const { useEditStatementsStore, useEditStatementStore } = require( '../../../resources/wikibase.wbui2025/store/editStatementsStore.js' );
+const { useParsedValueStore } = require( '../../../resources/wikibase.wbui2025/store/parsedValueStore.js' );
 
 describe( 'wikibase.wbui2025.editableSnakValue', () => {
 	it( 'defines component', async () => {
@@ -39,6 +40,7 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		const testStatement = {
 			id: testStatementId,
 			mainsnak: {
+				property: testPropertyId,
 				snaktype: 'value',
 				datavalue: {
 					value: 'example string',
@@ -53,14 +55,12 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 		};
 
 		beforeEach( async () => {
-			// TODO: remove this workaround after fixing tests that rely on it (T419592)
-			const { debounce } = require( 'lodash' );
-			mw.util.debounce = debounce;
-
 			const testingPinia = storeWithStatements( [ testStatement ] );
 			const editStatementsStore = useEditStatementsStore();
 			await editStatementsStore.initializeFromStatementStore( [ testStatement.id ], testPropertyId );
 			const editStatementStore = useEditStatementStore( testStatementId )();
+			const parsedValueStore = useParsedValueStore();
+			parsedValueStore.preloadParsedValue( testPropertyId, testStatement.mainsnak.datavalue );
 
 			snakKey = editStatementStore.mainSnakKey;
 			wrapper = await mount( editableAnyDatatypeSnakValueComponent, {
@@ -99,12 +99,12 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 
 		it( 'allows changing snak type and restores value', async () => {
 			expect( textarea.exists() ).toBe( true );
+			expect( textarea.classes() ).not.toContain( 'cdx-text-input--status-error' );
 			expect( textarea.props( 'modelValue' ) ).toBe( 'example string' );
 
 			// Empty the string input
 			await textarea.vm.$emit( 'update:modelValue', '' );
 			expect( textarea.props( 'modelValue' ) ).toBe( '' );
-			expect( textarea.classes() ).not.toContain( 'cdx-text-area--status-error' );
 			// After a blur on the input, the field should indicate an error
 			await textarea.vm.$emit( 'blur' );
 			expect( textarea.classes() ).toContain( 'cdx-text-area--status-error' );
@@ -121,9 +121,6 @@ describe( 'wikibase.wbui2025.editableSnakValue', () => {
 			textarea = wrapper.findComponent( CdxTextArea );
 			expect( textarea.exists() ).toBe( true );
 			expect( textarea.props( 'modelValue' ) ).toBe( 'example string' );
-			// this expectation somehow relies on debounce being mocked with lodash. This has been
-			// changed in jest.setup.js, but is overridden with the old behavior in this file.
-			// TODO: fix this test so it doesn't require the debounce override (T419592)
 			expect( textarea.classes() ).not.toContain( 'cdx-text-area--status-error' );
 		} );
 
