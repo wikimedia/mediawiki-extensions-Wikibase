@@ -20,6 +20,8 @@
 		wbui2025.store.useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 		wbui2025.store.useMessageStore( pinia );
 
+		mw.hook( 'wikibase.wbui2025.piniaCreated' ).fire( pinia );
+
 		const StatusMessage = require( './components/statusMessage.vue' );
 		const StatementSectionsView = require( './components/statementSections.vue' );
 
