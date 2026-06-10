@@ -68,6 +68,7 @@ use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\View\VueStylesModule;
 use Wikibase\View\ViewHooks;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\Rdbms\IDBAccessObject;
@@ -948,13 +949,8 @@ final class RepoHooks implements
 			$settings->getSetting( 'tmpEnableMobileEditingUIBetaFeature' )
 		) {
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
+				'class' => VueStylesModule::class,
 				'styles' => [
-					'resources/wikibase.wbui2025/components/qualifiers.less',
-					'resources/wikibase.wbui2025/components/statementSections.less',
-					'resources/wikibase.wbui2025/components/statementGroupView.less',
-					'resources/wikibase.wbui2025/components/references.less',
-					'resources/wikibase.wbui2025/components/snakValue.less',
-					'resources/wikibase.wbui2025/components/mainSnak.less',
 					'../view/resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				],
 			];

@@ -19,6 +19,7 @@ use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
@@ -59,6 +60,7 @@ class StatementSectionsViewTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( SerializerFactory::class ),
 			$this->createMock( SnakFormatter::class ),
 			$this->createMock( Wbui2025FeatureFlag::class ),
+			new Wbui2025ComponentsFactory(),
 		);
 
 		return new StatementSectionsView(

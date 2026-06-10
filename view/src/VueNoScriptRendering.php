@@ -26,8 +26,6 @@ use WMDE\VueJsTemplating\App;
  */
 class VueNoScriptRendering {
 
-	private const VUE_TEMPLATE_FOLDER = __DIR__ . '/../../repo/resources/wikibase.wbui2025/';
-
 	private EntityIdFormatterFactory $entityIdFormatterFactory;
 	private EntityIdParser $entityIdParser;
 	private Language $language;
@@ -39,6 +37,7 @@ class VueNoScriptRendering {
 	private array $snakValueHtmlLookup;
 	private array $propertyExistence;
 	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
+	private Wbui2025ComponentsFactory $componentsFactory;
 	private App $app;
 
 	public function __construct(
@@ -51,6 +50,7 @@ class VueNoScriptRendering {
 		SerializerFactory $serializerFactory,
 		SnakFormatter $snakFormatter,
 		Wbui2025FeatureFlag $wbui2025FeatureFlag,
+		Wbui2025ComponentsFactory $componentsFactory,
 	) {
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -61,6 +61,7 @@ class VueNoScriptRendering {
 		$this->statementSerializer = $serializerFactory->newStatementSerializer();
 		$this->snakFormatter = $snakFormatter;
 		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
+		$this->componentsFactory = $componentsFactory;
 	}
 
 	public function loadStatementData( StatementList $allStatements ): void {
@@ -102,17 +103,16 @@ class VueNoScriptRendering {
 
 	private function registerComponentTemplate(
 		string $componentName,
-		string $templateFile,
 		?callable $computedFunctions = null
 	): void {
-		$templateFilePath = self::VUE_TEMPLATE_FOLDER . $templateFile;
 		$this->app->registerComponentTemplate(
 			$componentName,
-			fn () => file_get_contents( $templateFilePath ),
+			$this->componentsFactory->getTemplateCallable( $componentName ),
 			$computedFunctions
 		);
 	}
 
+	// TODO: T429596 - Refactoring is needed since we've introduced the factory Wbui2025ComponentsFactory.
 	private function registerTemplates( StatementList $allStatements ): void {
 		$this->registerStatementSectionsView();
 		$this->registerMainSnakView();
@@ -127,8 +127,7 @@ class VueNoScriptRendering {
 	private function registerStatementSectionsView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-sections',
-			'components/statementSections.vue',
-			function ( array $data ) {
+			function ( array $data ): array {
 				$data[ 'propertyIds' ] = $data[ 'propertyList' ];
 				$data[ 'javaScriptLoaded' ] = false;
 				return $data;
@@ -139,8 +138,7 @@ class VueNoScriptRendering {
 	private function registerMainSnakView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-main-snak',
-			'components/mainSnak.vue',
-			function( array $data ) {
+			function( array $data ): array {
 				$data['rankTitleString'] = $this->textProvider->get(
 					// messages that can be used here:
 					// * wikibase-statementview-rank-normal
@@ -156,7 +154,6 @@ class VueNoScriptRendering {
 	private function registerStatementGroupView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-group-view',
-			'components/statementGroupView.vue',
 			function( array $data ) use ( $allStatements ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
@@ -176,7 +173,6 @@ class VueNoScriptRendering {
 	private function registerStatementView( StatementList $allStatements ): void {
 		$this->registerComponentTemplate(
 			'wbui2025-statement-view',
-			'components/statementView.vue',
 			function ( array $data ) use ( $allStatements ): array {
 				$statementId = $data['statementId'];
 				$statementById = $allStatements->getFirstStatementWithGuid( $statementId );
@@ -202,7 +198,6 @@ class VueNoScriptRendering {
 	private function registerPropertyNameView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-property-name',
-			'components/propertyName.vue',
 			function ( array $data ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser
@@ -221,7 +216,6 @@ class VueNoScriptRendering {
 	private function registerReferencesView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-references',
-			'components/references.vue',
 			function ( array $data ): array {
 				$data['referenceCount'] = count( $data['references'] );
 				$data['hasReferences'] = $data['referenceCount'] > 0;
@@ -239,7 +233,6 @@ class VueNoScriptRendering {
 	private function registerQualifiersView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-qualifiers',
-			'components/qualifiers.vue',
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
 				$data['hasQualifiers'] = $qualifierCount > 0;
@@ -251,7 +244,6 @@ class VueNoScriptRendering {
 	private function registerSnakValueView(): void {
 		$this->registerComponentTemplate(
 			'wbui2025-snak-value',
-			'components/snakValue.vue',
 			function ( array $data ): array {
 				/** @var PropertyId $propertyId */
 				$propertyId = $this->entityIdParser

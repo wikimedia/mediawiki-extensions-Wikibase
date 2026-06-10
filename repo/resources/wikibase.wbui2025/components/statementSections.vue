@@ -73,3 +73,13 @@ module.exports = exports = defineComponent( {
 	}
 } );
 </script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-wbui2025-statement-section-heading {
+	h2 {
+		padding-bottom: 0;
+	}
+}
+</style>

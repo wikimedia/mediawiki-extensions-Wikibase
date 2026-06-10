@@ -133,6 +133,7 @@ use Wikibase\Repo\View\ScopedTypeaheadSearchConfig;
 use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
@@ -285,6 +286,11 @@ class WikibaseRepo {
 	public static function getMobileSite( ?ContainerInterface $services = null ): bool {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseRepo.MobileSite' );
+	}
+
+	public static function getWbui2025ComponentsFactory( ?ContainerInterface $services = null ): Wbui2025ComponentsFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.Wbui2025ComponentsFactory' );
 	}
 
 	public static function getWbui2025FeatureFlag( ?ContainerInterface $services = null ): Wbui2025FeatureFlag {
