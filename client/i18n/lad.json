@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"Menachem.Moreira",
-			"WikiiiTranslator"
+			"WikiiiTranslator",
+			"Maor X"
 		]
 	},
 	"wikibase-dataitem": "''ítem'' {{WBREPONAME}}",
-	"wikibase-editlinks": "Trocar enlases",
+	"wikibase-editlinks": "Trokar enlases",
 	"wikibase-editlinkstitle": "Trocar enlases intervikis",
 	"wikibase-linkitem-addlinks": "Agregar enlases",
-	"wikibase-linkitem-input-site": "Lengua:",
+	"wikibase-linkitem-input-site": "Lingua:",
 	"wikibase-linkitem-input-page": "Pajina:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "okultar",
