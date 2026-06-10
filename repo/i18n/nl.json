@@ -513,7 +513,7 @@
 	"wikibase-concept-uri": "Concept-URI",
 	"wikibase-concept-uri-tooltip": "URI dat het concept beschreven door dit item identificeert",
 	"wikibase-pageimage-helptext": "Deze weergave is samengesteld met verklaringen over dit item. U kunt de weergave aanpassen door de verklaring te wijzigen.",
-	"datatypes-type-url": "URL",
+	"datatypes-type-url": "Url",
 	"content-model-wikibase-item": "Wikibaseitem",
 	"content-model-wikibase-property": "Wikibase-eigenschap",
 	"content-model-wikibase-query": "Wikibasezoekopdracht",
