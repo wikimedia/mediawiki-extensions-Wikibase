@@ -12,12 +12,14 @@ trait CirrusSearchEnabledTrait {
 	public static function isCirrusSearchEnabled(): bool {
 		global $wgSearchType, $wgWBCSUseCirrus;
 
-		$isWikibaseCirrusSearchEnabled = MediaWikiServices::getInstance()
-			->getExtensionRegistry()
-			->isLoaded( 'WikibaseCirrusSearch' );
-		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch' || $wgWBCSUseCirrus;
-
-		return $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
+		// $wgSearchType === 'CirrusSearch' is required here in addition to $wgWBCSUseCirrus:
+		// haswbstatement: query syntax (used by CirrusSearchFacetedSearchEngine) is only
+		// registered when CirrusSearch is the active MW search engine.
+		return $wgWBCSUseCirrus
+			&& $wgSearchType === 'CirrusSearch'
+			&& MediaWikiServices::getInstance()
+				->getExtensionRegistry()
+				->isLoaded( 'WikibaseCirrusSearch' );
 	}
 
 }

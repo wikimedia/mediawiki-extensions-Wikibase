@@ -10,13 +10,12 @@ use MediaWiki\MediaWikiServices;
 trait CirrusSearchEnabledTrait {
 
 	public static function isCirrusSearchEnabled(): bool {
-		global $wgSearchType, $wgWBCSUseCirrus;
+		global $wgWBCSUseCirrus;
 
-		$isWikibaseCirrusSearchEnabled = MediaWikiServices::getInstance()
+		// $wgWBCSUseCirrus is sufficient here: InLabelSearch and EntitySearchHelper are
+		// provided directly by WikibaseCirrusSearch regardless of the MW search engine.
+		return $wgWBCSUseCirrus && MediaWikiServices::getInstance()
 			->getExtensionRegistry()
 			->isLoaded( 'WikibaseCirrusSearch' );
-		$isCirrusSearchEnabled = $wgSearchType === 'CirrusSearch' || $wgWBCSUseCirrus;
-
-		return $isCirrusSearchEnabled && $isWikibaseCirrusSearchEnabled;
 	}
 }
