@@ -184,7 +184,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 			return true;
 		}
 
-		$revisionTimestamp = $outputPage->getRevisionTimestamp();
+		$revisionTimestamp = $outputPage->getMetadata()->getRevisionTimestamp();
 		$firstRevisionTimestamp = $outputPage->getProperty( 'first_revision_timestamp' );
 		$description = $outputPage->getProperty( 'wikibase_item_description' );
 		$html .= $this->createSchemaElement(
