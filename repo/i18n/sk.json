@@ -8,7 +8,8 @@
 			"Luky001",
 			"Macofe",
 			"Sudo77(new)",
-			"TomášPolonec"
+			"TomášPolonec",
+			"Wizzard"
 		]
 	},
 	"wikibase-desc": "Štruktúrované úložisko dát",
@@ -79,7 +80,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencia|referencie|referencií}}",
 	"wikibase-snakview-property-input-placeholder": "Vlastnosť",
 	"wikibase-snakview-choosesnaktype": "Vyberte typ hodnoty.",
-	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ potvrdzujete súhlas s [[$2|podmienkami použitia]] a neodvolateľne zverejňujete svoj príspevok za podmienok [$3 $4].",
+	"wikibase-shortcopyrightwarning": "Kliknutím na „$1“ súhlasíte s [[$2|podmienkami použitia]] a neodvolateľne súhlasíte so zverejnením svojho príspevku za podmienok [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Prijímam tieto podmienky pre svoje budúce úpravy. Túto správu už nabudúce nezobrazovať.",
 	"wikibase-copyrighttooltip-acknowledge": "Prijímam tieto podmienky pre svoje budúce úpravy. Túto správu už nabudúce nezobrazovať.",
 	"wikibase-entityselector-more": "viac",
@@ -103,7 +104,7 @@
 	"wikibase-itemdisambiguation-description": "Hodnoty použité na vyhľadávanie musia byť kompletné. Identifikátorom je jazyk, napr. „sk“.",
 	"wikibase-newproperty-datatype": "Typ údaju:",
 	"special-newitem": "Vytvoriť novú položku",
-	"wikibase-newitem-summary": "Nezabudnite [[Special:Search|skontrolovať, či položka už neexistuje]]!<br />{{GENDER:|Mali}} by ste vytvoriť [[{{int:Wikibase-label-helppage}}|štítok]] a [[{{int:Wikibase-description-helppage}}|popis]] pre všetky nové položky.",
+	"wikibase-newitem-summary": "Nezabudnite [[Special:Search|skontrolovať, či položka už neexistuje]]!<br />Pre všetky nové položky by ste {{GENDER:|mali}} vytvoriť {{int:Wikibase-label-helppage|štítok}} a {{int:Wikibase-description-helppage|popis}}.",
 	"wikibase-newitem-fieldset": "Vytvoriť novú položku",
 	"wikibase-newentity-submit": "Vytvoriť",
 	"wikibase-modifyterm-language": "Kód jazyka:",

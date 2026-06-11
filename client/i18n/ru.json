@@ -94,7 +94,7 @@
 	"wikibase-error-deserialize-error": "Не удалось десериализовать данные.",
 	"wikibase-error-serialize-error": "Не удалось сериализовать данные.",
 	"wikibase-error-invalid-entity-id": "Идентификатор «$2» неизвестен системе. Используйте один из действующих идентификаторов сущностей.",
-	"wikibase-error-exceeded-entity-access-limit": "Получено слишком много сущностей из {{WBREPONAME}}. Количество загруженных сущностей: $2/$3.",
+	"wikibase-error-exceeded-entity-access-limit": "Получено слишком много сущностей из {{GRAMMAR:genitive|{{WBREPONAME}}}}. Количество загруженных сущностей: $2/$3.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "Слишком много вызовов \"mw.wikibase.getReferencedEntityId\", {{PLURAL:$2|разрешено}} не более $2.",
 	"unconnectedpages": "Страницы, не связанные с элементами",
 	"unconnectedpages-summary": "Эта страница содержит список страниц, которые не соединены с элементами данных (в пространствах имён, которые поддерживают связи с элементам).",
