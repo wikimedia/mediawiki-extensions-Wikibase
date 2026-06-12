@@ -176,6 +176,11 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		position: relative;
 		padding: 0;
 		display: inline-block;
+
+		&.ui-state-default {
+			background: none;
+			border: none;
+		}
 	}
 }
 </style>
