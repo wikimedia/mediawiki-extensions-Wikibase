@@ -71,7 +71,7 @@ class UsageDeduplicator {
 			) !== [];
 			if ( $containsQualOrReference ) {
 				$deduplicatedStatementUsage = $this->deduplicateStatementUsages(
-					$usagesPerEntity[EntityUsage::STATEMENT_USAGE],
+					$usagesPerEntity[EntityUsage::STATEMENT_USAGE] ?? [], // `?? []` is a hotfix for T428620
 					$usagesPerEntity[EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE]
 				);
 				$usagesPerEntity[EntityUsage::STATEMENT_USAGE] = $deduplicatedStatementUsage[EntityUsage::STATEMENT_USAGE];
