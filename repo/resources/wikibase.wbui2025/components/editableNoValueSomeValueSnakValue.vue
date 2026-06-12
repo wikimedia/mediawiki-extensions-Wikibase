@@ -141,6 +141,7 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		// this with a gradient. These styles are unnecessary in edit mode, and cause problems
 		overflow-x: revert;
 		mask: revert;
+		padding-inline-end: revert;
 
 		.cdx-text-input, .cdx-text-area {
 			width: 100%;
