@@ -15,6 +15,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}-objekt",
 	"wikibase-editlinks": "Verwysingen bewarken",
 	"wikibase-editlinkstitle": "Verwysingen vöär andere språken bewarken",
+	"wikibase-addlinkstitle": "Språkverwysingen tovogen",
 	"wikibase-linkitem-addlinks": "Verwysingen tovogen",
 	"wikibase-linkitem-close": "Vinster slüten en de syde upny laden",
 	"wikibase-linkitem-title": "Koppelen mid syde",
@@ -48,6 +49,6 @@
 	"wikibase-otherprojects": "In andere projekten",
 	"wikibase-otherprojects-beta-message": "Andere projekten-sydbalke",
 	"wikibase-otherprojects-beta-description": "Voogt een \"{{int:wikibase-otherprojects}}\"-sekty to an de sydbalke dee togang givt tot andere Wikimedia-projekten up basis van gegeavens van {{WBREPONAME}}.",
-	"wikibase-sitelinks-sitename-columnheading": "Taal",
+	"wikibase-sitelinks-sitename-columnheading": "Språke",
 	"connected-redirect-category": "Döärverwysingen verbünden mid een {{WBREPONAME}}-objekt"
 }
