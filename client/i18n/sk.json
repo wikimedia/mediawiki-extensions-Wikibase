@@ -14,7 +14,8 @@
 			"Teslaton",
 			"TomášPolonec",
 			"Vegetator",
-			"Yardom78"
+			"Yardom78",
+			"Wizzard"
 		]
 	},
 	"wikibase-client-desc": "Klient pre rozšírenie Wikibase",
@@ -85,7 +86,7 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Štítok: $1",
 	"wikibase-pageinfo-entity-usage-T": "Názov",
 	"wikibase-pageinfo-entity-usage-X": "Všetky údaje entity",
-	"wikibase-pageinfo-entity-usage-O": "Iné (tvrdenia)",
+	"wikibase-pageinfo-entity-usage-O": "Rôzne (napr. existencia entity)",
 	"wikibase-property-render-error": "Nepodarilo sa zobraziť vlastnosť $1: $2",
 	"wikibase-otherprojects": "V iných projektoch",
 	"wikibase-otherprojects-beta-message": "Panel Iné projekty",

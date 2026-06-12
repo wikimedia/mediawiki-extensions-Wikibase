@@ -4,7 +4,8 @@
 			"Daud I.F. Argana",
 			"Kandar",
 			"RXerself",
-			"Uchup19"
+			"Uchup19",
+			"Deepturquoise"
 		]
 	},
 	"tooltip-t-wikibase": "Tutumbu ka item gudang data anu nyambung",
@@ -13,6 +14,7 @@
 	"wikibase-dataitem": "Butir di {{WBREPONAME}}",
 	"wikibase-editlinks": "Édit tutumbu",
 	"wikibase-editlinkstitle": "Édit tutumbu antarbasa",
+	"wikibase-addlinkstitle": "Tambahkeun tutumbu antarbasa",
 	"wikibase-linkitem-addlinks": "Nambah tutumbu",
 	"wikibase-linkitem-title": "Tutumbu kana kaca",
 	"wikibase-linkitem-linkpage": "Tutumbu kana kaca",

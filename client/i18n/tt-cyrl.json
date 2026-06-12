@@ -43,6 +43,7 @@
 	"pageswithbadges": "Махсус тамгалы битләр",
 	"wikibase-pageswithbadges-badge": "Билге:",
 	"wikibase-pageswithbadges-submit": "Битләрне күрсәтү",
+	"entityusage": "Wikidata элементын куллану",
 	"wikibase-entityusage-entity": "Асылы:",
 	"wikibase-entityusage-submit": "Битләрне күрсәтү",
 	"wikibase-pageinfo-entity-id": "{{grammar:genitive|{{WBREPONAME}}}} ID элементы",
