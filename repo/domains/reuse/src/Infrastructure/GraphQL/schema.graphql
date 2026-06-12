@@ -46,6 +46,7 @@ type Item implements LabelProvider & DescriptionProvider {
   aliases(languageCode: LanguageCode!): [String]!
   sitelink(siteId: SiteId!): Sitelink
   statements(propertyId: PropertyId!): [Statement]!
+  bestStatements(propertyId: PropertyId!): [Statement]!
 }
 
 interface LabelProvider {

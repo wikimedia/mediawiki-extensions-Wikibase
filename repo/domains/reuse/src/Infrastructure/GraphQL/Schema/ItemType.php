@@ -42,6 +42,8 @@ class ItemType extends ObjectType {
 				->getDescriptionInLanguage( $args['languageCode'] )?->text,
 		);
 
+		$statementType = $this->statementType();
+
 		parent::__construct( [
 			'fields' => [
 				'id' => [
@@ -79,12 +81,20 @@ class ItemType extends ObjectType {
 					},
 				],
 				'statements' => [
-					'type' => Type::nonNull( Type::listOf( $this->statementType() ) ),
+					'type' => Type::nonNull( Type::listOf( $statementType ) ),
 					'args' => [
 						'propertyId' => Type::nonNull( $types->getPropertyIdType() ),
 					],
 					'resolve' => fn( Item $item, array $args ) => $item->statements
 						->getStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
+				],
+				'bestStatements' => [
+					'type' => Type::nonNull( Type::listOf( $statementType ) ),
+					'args' => [
+						'propertyId' => Type::nonNull( $types->getPropertyIdType() ),
+					],
+					'resolve' => fn( Item $item, array $args ) => $item->statements
+						->getBestStatementsByPropertyId( new NumericPropertyId( $args[ 'propertyId' ] ) ),
 				],
 			],
 			'interfaces' => [ $labelProviderType, $descriptionProviderType ],
