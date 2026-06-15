@@ -144,6 +144,7 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 
 		.cdx-text-input, .cdx-text-area {
 			width: 100%;
+			min-width: revert;
 		}
 
 		textarea {
