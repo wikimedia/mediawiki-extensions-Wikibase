@@ -2,6 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\Usage;
 
+use Psr\Log\LogLevel;
+use Psr\Log\NullLogger;
+use TestLogger;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\ItemId;
@@ -112,7 +115,24 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 			EntityUsage::LABEL_USAGE => 3,
 		];
 
-		$this->assertEquals( $expected, ( new UsageDeduplicator( $usageModifierLimits ) )->deduplicate( $usages ) );
+		$this->assertEquals( $expected, ( new UsageDeduplicator( $usageModifierLimits, new NullLogger() ) )->deduplicate( $usages ) );
+	}
+
+	public function testDeduplicate_logsMissingCUsage() {
+		$logger = new TestLogger( true );
+
+		$deduplicator = new UsageDeduplicator( [ EntityUsage::STATEMENT_USAGE => 2 ], $logger );
+
+		$usage = new EntityUsage( new ItemId( 'Q1' ), EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, 'P15' );
+
+		$result = $deduplicator->deduplicate( [ $usage ] );
+
+		$expected = [ $usage->getIdentityString() => $usage ];
+		$this->assertEquals( $expected, $result );
+
+		$logs = $logger->getBuffer();
+		$this->assertCount( 1, $logs );
+		$this->assertSame( LogLevel::WARNING, $logs[0][0] );
 	}
 
 }

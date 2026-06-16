@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
+use Psr\Log\LoggerInterface;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -30,6 +31,9 @@ class UsageAccumulatorFactoryTest extends ServiceWiringTestCase {
 				'entityUsageModifierLimits' => [],
 			] )
 		);
+
+		$this->mockService( 'WikibaseClient.Logger',
+			$this->createStub( LoggerInterface::class ) );
 
 		$this->assertInstanceOf(
 			UsageAccumulatorFactory::class,

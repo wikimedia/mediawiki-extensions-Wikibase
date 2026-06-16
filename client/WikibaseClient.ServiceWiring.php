@@ -1053,7 +1053,7 @@ return [
 		);
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
-			new UsageDeduplicator( $usageModifierLimits ),
+			new UsageDeduplicator( $usageModifierLimits, WikibaseClient::getLogger( $services ) ),
 			new RevisionBasedEntityRedirectTargetLookup(
 				WikibaseClient::getEntityRevisionLookup( $services )
 			)

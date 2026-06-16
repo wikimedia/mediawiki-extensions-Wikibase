@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Unit\Usage;
 
 use MediaWiki\Parser\ParserOutput;
+use Psr\Log\NullLogger;
 use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Tests\Mocks\Usage\UsageAccumulatorContractTester;
 use Wikibase\Client\Usage\EntityUsage;
@@ -37,7 +38,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$acc = new ParserOutputUsageAccumulator(
 			$parserOutputProvider,
 			$this->newEntityUsageFactory(),
-			new UsageDeduplicator( [] )
+			new UsageDeduplicator( [], new NullLogger() )
 		);
 		$tester = new UsageAccumulatorContractTester( $acc );
 
