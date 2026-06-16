@@ -7,7 +7,8 @@ import { AddQualifierFormPage } from '../../support/pageObjects/AddQualifierForm
 import { interceptCommonsSearch } from '../../support/apiMockHelpers';
 import { ValueForm } from '../../support/pageObjects/ValueForm';
 
-describe( 'wbui2025 add qualifiers', () => {
+// Flaky since March 2026. https://phabricator.wikimedia.org/T418778
+describe.skip( 'wbui2025 add qualifiers', () => {
 	let testUsername: string;
 	let testPassword: string;
 
