@@ -6,26 +6,32 @@
 		@hide="$emit( 'hide' )">
 		<template #content>
 			<div class="wikibase-wbui2025-add-reference-form">
-				<cdx-button
-					action="default"
-					:disabled="addButtonDisabled"
-					@click="submitSnakData"
-				>
-					<cdx-icon :icon="cdxIconCheck"></cdx-icon>
-					{{ $i18n( 'wikibase-add' ) }}
-				</cdx-button>
-				<wikibase-wbui2025-property-lookup
-					ref="propertyLookup"
-					@update:selected="onPropertySelection"
-				>
-				</wikibase-wbui2025-property-lookup>
-				<wikibase-wbui2025-editable-any-datatype-snak-value
-					v-if="snakKey"
-					ref="snakInput"
-					:snak-key="snakKey"
-					:removable="false"
-					class-name="wikibase-wbui2025-add-reference-value"
-				></wikibase-wbui2025-editable-any-datatype-snak-value>
+				<div class="wikibase-wbui2025-add-reference-form-property">
+					<div class="wikibase-wbui2025-add-reference-button">
+						<cdx-button
+							action="default"
+							:disabled="addButtonDisabled"
+							@click="submitSnakData"
+						>
+							<cdx-icon :icon="cdxIconCheck"></cdx-icon>
+							{{ $i18n( 'wikibase-add' ) }}
+						</cdx-button>
+					</div>
+					<wikibase-wbui2025-property-lookup
+						ref="propertyLookup"
+						@update:selected="onPropertySelection"
+					>
+					</wikibase-wbui2025-property-lookup>
+				</div>
+				<div class="wikibase-wbui2025-add-reference-form-value">
+					<wikibase-wbui2025-editable-any-datatype-snak-value
+						v-if="snakKey"
+						ref="snakInput"
+						:snak-key="snakKey"
+						:removable="false"
+						class-name="wikibase-wbui2025-add-reference-value"
+					></wikibase-wbui2025-editable-any-datatype-snak-value>
+				</div>
 			</div>
 		</template>
 	</wikibase-wbui2025-modal-overlay>
@@ -115,8 +121,22 @@ module.exports = exports = defineComponent( {
 	align-self: stretch;
 	display: flex;
 	flex-direction: column;
-	gap: @spacing-150;
-	align-items: flex-end;
+
+	.wikibase-wbui2025-add-reference-form-property {
+		display: flex;
+		flex-direction: column;
+		gap: @spacing-150;
+
+		.wikibase-wbui2025-add-reference-button {
+			flex-direction: column;
+			display: flex;
+			align-items: flex-end;
+		}
+	}
+
+	.wikibase-wbui2025-add-reference-form-value {
+		padding: @spacing-150 0;
+	}
 }
 
 .wikibase-wbui2025-add-reference-value {
