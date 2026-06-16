@@ -100,7 +100,7 @@
 	"apihelp-wbgetentities-example-11": "الحصول على العنصر للصفحة \"<var>Berlin</var>\" على الموقع \"<var>enwiki</var>\" بعد تسوية العنوان من \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "الحصول على وصلات الموقع للعنصر <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "الحصول على الكيانات بالرقم <samp>Q42</samp> مع عرض وصلات الموقع فقط من \"<var>enwiki</var>\"",
-	"apihelp-wbgraphql-summary": "وحدة GraphQL تجريبية.",
+	"apihelp-wbgraphql-summary": "وحدة GraphQL.",
 	"apihelp-wblinktitles-summary": "يجعل صفحتين على ويكيين مختلفين مقترنين مع عنصر Wikibase.",
 	"apihelp-wblinktitles-param-tosite": "معرف للموقع حيث توجد الصفحة.\nاستخدم مع <var>totitle</var> لصنع وصلة موقع كاملة.",
 	"apihelp-wblinktitles-param-totitle": "عنوان الصفحة للاقتران.\nاستخدم مع <var>tosite</var> لصنع وصلة موقع كاملة.",
