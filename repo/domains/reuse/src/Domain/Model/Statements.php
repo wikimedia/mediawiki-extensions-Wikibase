@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Domains\Reuse\Domain\Model;
 
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\Statement as StatementDataModel;
 
 /**
  * @license GPL-2.0-or-later
@@ -25,4 +26,18 @@ class Statements {
 		) );
 	}
 
+	public function getBestStatementsByPropertyId( PropertyId $id ): array {
+		$statements = $this->getStatementsByPropertyId( $id );
+		$preferred = array_values( array_filter(
+			$statements,
+			fn( Statement $s ) => $s->rank->asInt() === StatementDataModel::RANK_PREFERRED
+		) );
+		if ( count( $preferred ) > 0 ) {
+			return $preferred;
+		}
+		return array_values( array_filter(
+			$statements,
+			fn( Statement $s ) => $s->rank->asInt() === StatementDataModel::RANK_NORMAL
+		) );
+	}
 }

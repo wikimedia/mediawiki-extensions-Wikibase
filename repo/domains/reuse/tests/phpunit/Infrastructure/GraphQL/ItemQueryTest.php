@@ -232,6 +232,94 @@ class ItemQueryTest extends MediaWikiIntegrationTestCase {
 			],
 		];
 
+		$bestStatementProperty = self::createProperty( 'string', 'best statement property' );
+		$pid = $bestStatementProperty->getId();
+		$preferredStatement = NewStatement::forProperty( $pid )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withPreferredRank()
+			->withValue( 'preferred rank' )
+			->build();
+		$normalStatement = NewStatement::forProperty( $pid )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withNormalRank()
+			->withValue( 'normal rank' )
+			->build();
+		$deprecatedStatement = NewStatement::forProperty( $pid )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withDeprecatedRank()
+			->withValue( 'deprecated rank' )
+			->build();
+		$item->getStatements()->addStatement( $preferredStatement );
+		$item->getStatements()->addStatement( $normalStatement );
+		$item->getStatements()->addStatement( $deprecatedStatement );
+		yield 'bestStatements only returns preferred if preferred exists' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$pid\") {
+					rank
+				}
+				bestStatements(propertyId: \"$pid\") {
+					rank
+				}
+			}}",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[ 'rank' => 'PREFERRED' ],
+							[ 'rank' => 'NORMAL' ],
+							[ 'rank' => 'DEPRECATED' ],
+						],
+						'bestStatements' => [
+							[ 'rank' => 'PREFERRED' ],
+						],
+					],
+				],
+			],
+		];
+
+		$normalStatementProperty = self::createProperty( 'string', 'normal statement property' );
+		$normalPid = $normalStatementProperty->getId();
+		$normalStatementValue = NewStatement::forProperty( $normalPid )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withNormalRank()
+			->withValue( 'normal rank' )
+			->build();
+		$deprecatedStatementValue = NewStatement::forProperty( $normalPid )
+			->withSubject( $itemId )
+			->withSomeGuid()
+			->withDeprecatedRank()
+			->withValue( 'deprecated rank' )
+			->build();
+		$item->getStatements()->addStatement( $normalStatementValue );
+		$item->getStatements()->addStatement( $deprecatedStatementValue );
+		yield 'bestStatements returns normal if no preferred exists' => [
+			"{ item(id: \"$itemId\") {
+				statements(propertyId: \"$normalPid\") {
+					rank
+				}
+				bestStatements(propertyId: \"$normalPid\") {
+					rank
+				}
+			}}",
+			[
+				'data' => [
+					'item' => [
+						'statements' => [
+							[ 'rank' => 'NORMAL' ],
+							[ 'rank' => 'DEPRECATED' ],
+						],
+						'bestStatements' => [
+							[ 'rank' => 'NORMAL' ],
+						],
+					],
+				],
+			],
+		];
+
 		$itemProperty = self::createProperty( 'wikibase-item' );
 		$itemUsedAsStatementValue = self::createItem(
 			NewItem::withLabel( 'en', 'statement value item label' )
