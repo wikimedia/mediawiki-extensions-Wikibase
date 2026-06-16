@@ -315,7 +315,7 @@
 	"wikibase-listdatavaluetypes-name-quantity": "څومره‌والی",
 	"wikibase-listdatavaluetypes-name-time": "وخت",
 	"datatypes-type-url": "وېبتړ",
-	"content-model-wikibase-item": "د ويکيبېز توکی",
+	"content-model-wikibase-item": "د ويکي‌اډانې توکی",
 	"content-model-wikibase-property": "ويکي‌بنسټ ځانتيا",
 	"content-model-wikibase-query": "ويکي‌بنسټ پوښتنه",
 	"action-item-term": "د توکي گړنې بدلول (نښکې، څرگنداوي، بل‌نومونه)",
@@ -346,5 +346,7 @@
 	"wikibase-federated-properties-edit-request-failed-notice-header": "سمون نابريالی شو",
 	"special-setaliases-parameterized": "$1 بل‌نومونه اوڼل",
 	"special-setlabel-parameterized": "د $1 نښه ټاکل",
-	"special-setdescription-parameterized": "د $1 سپيناوی ټاکل"
+	"special-setdescription-parameterized": "د $1 سپيناوی ټاکل",
+	"special-parameterized-description-separator": "/",
+	"wikibase-federated-properties-federated-property-api-error-message": "تاسو نشئ کولی د دې ای‌پي‌آی په کارولو سره د يوځای‌شويو ځانتياوو سره اړيکه ونيسئ."
 }
