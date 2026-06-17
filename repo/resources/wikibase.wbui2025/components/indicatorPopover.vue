@@ -7,6 +7,7 @@
 		]"
 		:render-in-place="true"
 		placement="bottom-end"
+		:anchor="anchor"
 		@update:open="$emit( 'close' )"
 	>
 		<template #header>
@@ -93,6 +94,10 @@ module.exports = exports = defineComponent( {
 		Wbui2025Stepper
 	},
 	props: {
+		anchor: {
+			type: Object,
+			required: true
+		},
 		snakHash: {
 			type: String,
 			required: true

@@ -146,6 +146,7 @@ class VueNoScriptRendering {
 					// * wikibase-statementview-rank-deprecated
 				'wikibase-statementview-rank-' . $data['rank']
 				);
+				$data['showIndicators'] = false;
 				return $data;
 			}
 		);
@@ -225,6 +226,7 @@ class VueNoScriptRendering {
 					],
 				);
 				$data['showReferences'] = false;
+				$data['showIndicators'] = false;
 				return $data;
 			}
 		);
@@ -236,6 +238,7 @@ class VueNoScriptRendering {
 			function ( array $data ): array {
 				$qualifierCount = count( $data['qualifiers'] );
 				$data['hasQualifiers'] = $qualifierCount > 0;
+				$data['showIndicators'] = false;
 				return $data;
 			}
 		);
@@ -258,9 +261,12 @@ class VueNoScriptRendering {
 					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
 					'wikibase-wbui2025-globe-coordinate-value' => $dataType == 'globe-coordinate',
 					'wikibase-wbui2025-time-value' => $dataType == 'time',
+					'wikibase-wbui2025-tabular-data-value' => $dataType == 'tabular-data',
+					'wikibase-wbui2025-geo-shape-value' => $dataType == 'geo-shape',
+					'wikibase-wbui2025-musical-notation-value' => $dataType == 'musical-notation',
+					'wikibase-wbui2025-math-value' => $dataType == 'math',
+					'wikibase-wbui2025-quantity-value' => $dataType == 'quantity',
 				];
-				$data['indicatorsHtml'] = '';
-				$data['popoverVisible'] = false;
 
 				return $data;
 			}

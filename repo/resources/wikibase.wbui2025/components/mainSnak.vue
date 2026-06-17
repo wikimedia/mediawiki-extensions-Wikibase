@@ -5,8 +5,12 @@
 		</div>
 		<wbui2025-snak-value
 			:snak="mainSnak"
-			:statement-id="statementId"
 		></wbui2025-snak-value>
+		<wbui2025-indicators
+			v-if="showIndicators"
+			:snak-hash="mainSnak.hash"
+			:statement-id="statementId"
+		></wbui2025-indicators>
 	</div>
 </template>
 
@@ -14,12 +18,13 @@
 const { defineComponent } = require( 'vue' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025SnakValue = require( './snakValue.vue' );
-
+const Wbui2025Indicators = require( './indicators.vue' );
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025MainSnak',
 	components: {
-		Wbui2025SnakValue
+		Wbui2025SnakValue,
+		Wbui2025Indicators
 	},
 	props: {
 		mainSnak: {
@@ -40,6 +45,11 @@ module.exports = exports = defineComponent( {
 			concat: wbui2025.util.concat
 		};
 	},
+	data() {
+		return {
+			showIndicators: true
+		};
+	},
 	computed: {
 		rankTitleString() {
 			// messages that can be used here:
@@ -58,7 +68,10 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-main-snak {
 	display: flex;
 	align-items: center;
-	padding: @spacing-75 @spacing-50;
+	padding: @spacing-75 @spacing-75 @spacing-75 @spacing-50;
+	&:has(.wikibase-wbui2025-indicators) {
+		padding-right: 0;
+	}
 
 	.wikibase-wbui2025-rankselector {
 		display: flex;

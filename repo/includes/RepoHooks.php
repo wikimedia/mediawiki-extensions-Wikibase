@@ -1006,6 +1006,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/propertyLookup.vue',
 					'resources/wikibase.wbui2025/components/propertySelector.vue',
 					'resources/wikibase.wbui2025/components/modalOverlay.vue',
+					'resources/wikibase.wbui2025/components/indicators.vue',
 					'resources/wikibase.wbui2025/components/indicatorPopover.vue',
 					'resources/wikibase.wbui2025/components/editableQualifiers.vue',
 					'resources/wikibase.wbui2025/components/editableReference.vue',

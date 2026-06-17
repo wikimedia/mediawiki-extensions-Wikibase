@@ -40,7 +40,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
 			const testStatement = {
 				id: testStatementId,
-				mainsnak: { snaktype: 'somevalue' },
+				mainsnak: { snaktype: 'somevalue', hash: '3ab28b81d81a4d2ec1227cf068e09850d6d8b2e3' },
 				rank: 'normal'
 			};
 			const wrapper = mount( statementViewComponent, {
@@ -119,7 +119,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
 			const testStatement = {
 				id: testStatementId,
-				mainsnak: { snaktype: 'somevalue' },
+				mainsnak: { snaktype: 'somevalue', hash: '3ab28b81d81a4d2ec1227cf068e09850d6d8b2e3' },
 				rank: 'normal'
 			};
 			const wrapper = mount( statementViewComponent, {
@@ -138,7 +138,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
 			const testStatement = {
 				id: testStatementId,
-				mainsnak: { snaktype: 'somevalue' },
+				mainsnak: { snaktype: 'somevalue', hash: '3ab28b81d81a4d2ec1227cf068e09850d6d8b2e3' },
 				rank: 'preferred'
 			};
 			const wrapper = mount( statementViewComponent, {
@@ -157,7 +157,7 @@ describe( 'wikibase.wbui2025.statementView', () => {
 			const testStatementId = 'Q1$0784b3b5-3391-4508-ac16-cbae771e45a9';
 			const testStatement = {
 				id: testStatementId,
-				mainsnak: { snaktype: 'somevalue' },
+				mainsnak: { snaktype: 'somevalue', hash: '3ab28b81d81a4d2ec1227cf068e09850d6d8b2e3' },
 				rank: 'deprecated'
 			};
 			const wrapper = mount( statementViewComponent, {
