@@ -85,6 +85,7 @@ class StatementSectionsView {
 			);
 		}
 		$rendered .= '<div id="wikibase-wbui2025-status-message-mount-point" aria-live="polite"></div>';
+		$rendered .= '<div id="wikibase-wbui2025-add-statement-floating-button"></div>';
 		return $rendered;
 	}
 

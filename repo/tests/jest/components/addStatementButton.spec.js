@@ -9,6 +9,8 @@ jest.mock(
 	{ virtual: true }
 );
 
+Object.defineProperty( window, 'scrollTo', { value: jest.fn(), configurable: true } );
+
 const crypto = require( 'crypto' );
 
 // eslint-disable-next-line no-undef
@@ -32,6 +34,7 @@ const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 
 const addStatementButtonComponent = require( '../../../resources/wikibase.wbui2025/components/addStatementButton.vue' );
+const addStatementModalComponent = require( '../../../resources/wikibase.wbui2025/components/addStatementModal.vue' );
 const propertyLookupComponent = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
 const { CdxButton, CdxTextArea } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
@@ -49,7 +52,7 @@ describe( 'wikibase.wbui2025.references', () => {
 	};
 
 	describe( 'the mounted component', () => {
-		let wrapper, addButton, propertyLookup, publishButton;
+		let wrapper, addButton, addStatementModal, propertyLookup, publishButton;
 		beforeEach( async () => {
 			wrapper = await mount( addStatementButtonComponent, {
 				props: {
@@ -65,6 +68,7 @@ describe( 'wikibase.wbui2025.references', () => {
 				}
 			} );
 			addButton = wrapper.findComponent( CdxButton );
+			addStatementModal = wrapper.findComponent( addStatementModalComponent );
 			propertyLookup = wrapper.findComponent( propertyLookupComponent );
 		} );
 
@@ -72,6 +76,7 @@ describe( 'wikibase.wbui2025.references', () => {
 			expect( wrapper.exists() ).toBe( true );
 			expect( addButton.exists() ).toBe( true );
 			expect( propertyLookup.exists() ).toBe( false );
+			expect( addStatementModal.exists() ).toBe( false );
 		} );
 
 		it( 'sets the initial properties on the CdxButton component', () => {
@@ -101,17 +106,19 @@ describe( 'wikibase.wbui2025.references', () => {
 			it( 'scrolls to new statement after publishing succeeds', async () => {
 				await addButton.vm.$emit( 'click' );
 				propertyLookup = wrapper.findComponent( propertyLookupComponent );
+				addStatementModal = wrapper.findComponent( addStatementModalComponent );
+				expect( addStatementModal.exists() ).toBe( true );
 				await propertyLookup.vm.$emit( 'update:selected', 'P23', { datatype: 'string' } );
 
 				const wbui2025 = require( 'wikibase.wbui2025.lib' );
 				jest.spyOn( wbui2025.api, 'renderPropertyLinkHtml' ).mockResolvedValue( {} );
 				const scrollToStatementSpy = jest.spyOn( wbui2025.util, 'scrollToStatementWithPropertyId' );
 
-				jest.spyOn( wrapper.vm, 'submitFormWithElementRef' )
+				jest.spyOn( addStatementModal.vm, 'submitFormWithElementRef' )
 					.mockResolvedValue( { success: true } );
 
-				await wrapper.vm.submitForm();
-				await wrapper.vm.$nextTick();
+				await addStatementModal.vm.submitForm();
+				await addStatementModal.vm.$nextTick();
 
 				expect( scrollToStatementSpy ).toHaveBeenCalledWith( 'P23' );
 			} );
