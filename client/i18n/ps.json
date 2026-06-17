@@ -28,7 +28,7 @@
 	"wikibase-editlinks": "وېبتړنې سمول",
 	"wikibase-editlinkstitle": "د ژبو خپلمنځي تړنې سمول",
 	"wikibase-addlinkstitle": "ژبو خپلمنځي وېبتړنې ورگډول",
-	"wikibase-linkitem-addlinks": "وېبتړنې ورگډول",
+	"wikibase-linkitem-addlinks": "تړوني ورگډول",
 	"wikibase-linkitem-alreadylinked": "هغه مخ چې تاسو ورسره وېبتړنه غواړئ، دمخه د منځني اومتوکو خونديځ کې د [$1 توکي] سره تړل شوی دی چې د دې وېبځي له [[$2]] سره تړل شوی دی. توکي په هر وېبځي کې يوازې يو مخ سره تړل کېدای شي. مهرباني وکړئ وېبتړنې لپاره يو بل مخ وټاکئ.",
 	"wikibase-linkitem-close": "کړکۍ بندول او مخ بياتاندول",
 	"wikibase-linkitem-failure": "د ورکړل شوي مخ وېبتړنې پرمهال ناڅرگنده تېروتنه رامنځه شوه.",
