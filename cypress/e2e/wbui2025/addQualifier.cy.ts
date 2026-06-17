@@ -181,7 +181,7 @@ describe( 'wbui2025 add qualifiers', () => {
 		afterEach( function () {
 			if ( this.currentTest.state === 'failed' ) {
 				return cy.get( '#mw-content-text' ).then( ( $content ) => {
-					cy.task( 'log', $content.html() );
+					cy.task( 'log', `T418778: test failed, #mw-content-text HTML is: ${ $content.html() }` );
 				} );
 			}
 		} );
@@ -211,6 +211,17 @@ describe( 'wbui2025 add qualifiers', () => {
 			} );
 
 			itemViewPage.open();
+			cy.window().then( ( win ) => {
+				try {
+					win.mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
+						win.mw.notify( `T418778: wikibase.entityPage.entityLoaded called with: ${ JSON.stringify( data ) }` );
+					} );
+					const state = win.mw.loader.getState( 'wikibase.wbui2025.entityViewInit' );
+					win.mw.notify( `T418778: wikibase.wbui2025.entityViewInit state is: ${ state }` );
+				} catch ( e ) { // eslint-disable-line @typescript-eslint/no-unused-vars
+					// ignore, win.mw might not be ready yet
+				}
+			} );
 			itemViewPage.editLinks().first().click();
 			const editStatementFormPage = new EditStatementFormPage();
 			editStatementFormPage.addQualifierButton().click();
