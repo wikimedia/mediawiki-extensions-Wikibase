@@ -81,7 +81,7 @@ describe( 'wikibase.wbui2025.references', () => {
 
 		it( 'sets the initial properties on the CdxButton component', () => {
 			expect( addButton.props( 'action' ) ).toBe( 'progressive' );
-			expect( addButton.props( 'weight' ) ).toBe( 'normal' );
+			expect( addButton.props( 'weight' ) ).toBe( 'primary' );
 		} );
 
 		it( 'shows a property lookup on click', async () => {

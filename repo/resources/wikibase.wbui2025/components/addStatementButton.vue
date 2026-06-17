@@ -8,6 +8,8 @@
 		</wbui2025-add-statement-modal>
 		<cdx-button
 			action="progressive"
+			weight="primary"
+			size="large"
 			@click="addStatementModalVisible = true"
 		>
 			<cdx-icon :icon="cdxIconAdd"></cdx-icon>
@@ -52,7 +54,8 @@ module.exports = exports = defineComponent( {
 @import 'mediawiki.skin.variables.less';
 
 .wikibase-wbui2025-add-statement-button {
-	margin-top: 1em;
+	margin-top: 20px;
+	margin-bottom: 32px;
 }
 
 .wikibase-wbui2025-add-statement-form {
