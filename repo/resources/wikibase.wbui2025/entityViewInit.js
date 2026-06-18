@@ -24,6 +24,7 @@
 
 		const StatusMessage = require( './components/statusMessage.vue' );
 		const StatementSectionsView = require( './components/statementSections.vue' );
+		const AddStatementFloatingButton = require( './components/addStatementFloatingButton.vue' );
 
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
 			const savedStatementStore = wbui2025.store.useSavedStatementsStore( pinia );
@@ -46,6 +47,10 @@
 			Vue.createMwApp( StatusMessage, {} )
 				.use( pinia )
 				.mount( statusMessageContainer );
+			const addStatementFloatingButtonContainer = document.getElementById( 'wikibase-wbui2025-add-statement-floating-button' );
+			Vue.createMwApp( AddStatementFloatingButton, { entityId: data.id } )
+				.use( pinia )
+				.mount( addStatementFloatingButtonContainer );
 		} );
 	} else {
 		mw.error( 'Unable to find statement list placeholder element to mount mobile statement view' );

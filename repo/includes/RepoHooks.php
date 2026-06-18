@@ -1001,6 +1001,8 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/statusMessage.vue',
 					'resources/wikibase.wbui2025/components/propertyName.vue',
 					'resources/wikibase.wbui2025/components/addStatementButton.vue',
+					'resources/wikibase.wbui2025/components/addStatementFloatingButton.vue',
+					'resources/wikibase.wbui2025/components/addStatementModal.vue',
 					'resources/wikibase.wbui2025/components/addStatementValue.vue',
 					'resources/wikibase.wbui2025/components/addQualifier.vue',
 					'resources/wikibase.wbui2025/components/addReference.vue',
