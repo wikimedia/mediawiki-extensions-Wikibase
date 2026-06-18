@@ -18,6 +18,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\ItemWbSearchEntitiesController;
@@ -42,7 +43,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'Douglas', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'Douglas', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertEquals(
@@ -67,7 +68,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertNull( $results[0]->getDisplayLabel() );
@@ -83,7 +84,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'Q42', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'Q42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertSame( 'qid', $results[0]->getMatchedTerm()->getLanguageCode() );
@@ -92,7 +93,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 
 	public function testEmptyResults(): void {
 		$controller = $this->newController( new ItemSearchResults() );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertSame( [], $results );
 	}
@@ -107,7 +108,8 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$useCase = new ItemPrefixSearch(
-			new ItemPrefixSearchValidator( $rejectingValidator,
+			new ItemPrefixSearchValidator(
+				$rejectingValidator,
 				$this->createStub( PermissionChecker::class ),
 				50,
 				500
@@ -121,7 +123,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$this->expectException( EntitySearchException::class );
-		$controller->search( new WbSearchEntitiesRequest( 'test', 'xyz', 'xyz', 5, false, null, null ) );
+		$controller->search( new WbSearchEntitiesRequest( 'test', 'xyz', 'xyz', 5, false, null, User::newAnonymous() ) );
 	}
 
 	private function newController( ItemSearchResults $searchResults ): ItemWbSearchEntitiesController {
@@ -134,13 +136,11 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		$entitySourceLookup = $this->createStub( EntitySourceLookup::class );
 		$entitySourceLookup->method( 'getEntitySourceById' )->willReturn( $entitySource );
 
-		$permissionChecker = $this->createStub( PermissionChecker::class );
-
 		return new ItemWbSearchEntitiesController(
 			new ItemPrefixSearch(
 				new ItemPrefixSearchValidator(
 					$this->newAllowingLanguageValidator(),
-					$permissionChecker,
+					$this->createStub( PermissionChecker::class ),
 					50,
 					500
 				),

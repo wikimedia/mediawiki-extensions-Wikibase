@@ -8,6 +8,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\Prope
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchRequest;
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 
 /**
@@ -22,11 +23,11 @@ class PropertyPrefixSearchTest extends TestCase {
 	public function testCanExecute(): void {
 		$query = 'subcla';
 		$language = 'en';
+		$user = User::newAnonymous();
 		$limit = 10;
 		$offset = 0;
 		$resultLanguage = 'de';
 		$disableLanguageFallback = false;
-		$username = null;
 		$expectedResults = $this->createStub( PropertyPrefixSearchResults::class );
 
 		$searchEngine = $this->createMock( PropertyPrefixSearchEngine::class );
@@ -43,9 +44,9 @@ class PropertyPrefixSearchTest extends TestCase {
 			)->execute( new PropertyPrefixSearchRequest(
 				$query,
 				$language,
+				$user,
 				$limit,
 				$offset,
-				$username,
 				$disableLanguageFallback,
 				$resultLanguage,
 			) )->results

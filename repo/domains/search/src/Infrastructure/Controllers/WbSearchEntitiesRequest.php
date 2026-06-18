@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Search\Infrastructure\Controllers;
 
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -15,7 +17,7 @@ class WbSearchEntitiesRequest {
 		public readonly int $limit,
 		public readonly bool $strictLanguage,
 		public readonly ?string $profileContext,
-		public readonly ?string $username,
+		public readonly User $user,
 	) {
 	}
 }

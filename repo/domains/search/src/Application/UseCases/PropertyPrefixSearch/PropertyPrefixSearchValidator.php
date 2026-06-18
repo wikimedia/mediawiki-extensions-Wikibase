@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch
 use LogicException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
-use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 
 /**
@@ -16,19 +15,13 @@ class PropertyPrefixSearchValidator {
 	public const LANGUAGE_QUERY_PARAM = 'language';
 	public const LIMIT_QUERY_PARAM = 'limit';
 	public const OFFSET_QUERY_PARAM = 'offset';
-	private PermissionChecker $permissionChecker;
-	private int $maxLimit;
-	private int $maxApiHighLimitsLimit;
 
 	public function __construct(
 		private SearchLanguageValidator $languageValidator,
-		PermissionChecker $permissionChecker,
-		int $maxLimit,
-		int $maxApiHighLimitsLimit
+		private PermissionChecker $permissionChecker,
+		private int $maxLimit,
+		private int $maxApiHighLimitsLimit
 	) {
-		$this->maxLimit = $maxLimit;
-		$this->maxApiHighLimitsLimit = $maxApiHighLimitsLimit;
-		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -36,6 +29,7 @@ class PropertyPrefixSearchValidator {
 	 * @throws UseCaseError
 	 */
 	public function validate( PropertyPrefixSearchRequest $request ): void {
+
 		$validationError = $this->languageValidator->validate( $request->language );
 
 		if ( $validationError ) {
@@ -46,12 +40,12 @@ class PropertyPrefixSearchValidator {
 					throw new LogicException( 'unknown validation error code ' . $validationError->getCode() );
 			}
 		}
-		$user = $request->username === null ? User::newAnonymous() : User::withUsername( $request->username );
-		$this->validateLimitAndOffset( $request, $user );
+
+		$this->validateLimitAndOffset( $request );
 	}
 
-	private function validateLimitAndOffset( PropertyPrefixSearchRequest $request, User $user ): void {
-		$maxLimit = $this->permissionChecker->hasApiHighLimits( $user )
+	private function validateLimitAndOffset( PropertyPrefixSearchRequest $request ): void {
+		$maxLimit = $this->permissionChecker->hasApiHighLimits( $request->user )
 			? $this->maxApiHighLimitsLimit : $this->maxLimit;
 		if ( !$request->disableLimitValidation && ( $request->limit < 0 || $request->limit > $maxLimit ) ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );

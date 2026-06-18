@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
@@ -163,7 +164,7 @@ class SearchEntities extends ApiBase {
 					$params['continue'] + $params['limit'] + 1,
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
-					$this->getUsername()
+					$this->getApiUser()
 				) );
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -453,9 +454,9 @@ class SearchEntities extends ApiBase {
 		];
 	}
 
-	private function getUsername(): ?string {
+	private function getApiUser(): User {
 		$mwUser = $this->getAuthority()->getUser();
-		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+		return $mwUser->isRegistered() ? User::withUsername( $mwUser->getName() ) : User::newAnonymous();
 	}
 
 }
