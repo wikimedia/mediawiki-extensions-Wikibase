@@ -16,18 +16,18 @@ describe( 'wbui2025 item view add statement', () => {
 				.then( ( propertyId: string ) => {
 					cy.wrap( propertyId ).as( 'propertyId' );
 					const statementData = {
-						claims: [ {
+						claims: Array.from( Array( 20 ).keys() ).reduce( ( acc, i ) => acc.concat( [ {
 							mainsnak: {
 								snaktype: 'value',
 								property: propertyId,
 								datavalue: {
-									value: 'example string value',
+									value: 'example string ' + i,
 									type: 'string',
 								},
 							},
 							type: 'statement',
 							rank: 'normal',
-						} ],
+						} ] ), [] ),
 					};
 					cy.task( 'MwApi:CreateItem', { label: Util.getTestString( 'item' ), data: statementData } )
 						.then( ( itemId: string ) => {
@@ -51,10 +51,11 @@ describe( 'wbui2025 item view add statement', () => {
 			} );
 		} );
 
-		it( 'loads the item view and shows property selector', () => {
+		it( 'loads the item view and shows property selector, then scroll up to add a statement with floating button', { scrollBehavior: false }, () => {
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
-			itemViewPage.addStatementButton().click();
+			itemViewPage.addStatementFloatingDisc().should( 'not.exist' );
+			itemViewPage.addStatementButton().scrollIntoView().click();
 
 			const addStatementFormPage = new AddStatementFormPage();
 			addStatementFormPage.propertyLookup().should( 'exist' );
@@ -69,9 +70,9 @@ describe( 'wbui2025 item view add statement', () => {
 			cy.get( '@propertyId' ).then( ( pid ) => {
 				itemViewPage.assertStatementIsInViewport( pid );
 			} );
-			itemViewPage.mainSnakValues().eq( 1 ).should( 'have.text', 'some string' );
+			itemViewPage.mainSnakValues().eq( 20 ).should( 'have.text', 'some string' );
 
-			itemViewPage.addStatementButton().click();
+			itemViewPage.addStatementButton().scrollIntoView().click();
 			addStatementFormPage.propertyLookup().should( 'exist' );
 			addStatementFormPage.setProperty( secondPropertyId );
 			addStatementFormPage.publishButton().should( 'be.disabled' );
@@ -79,8 +80,21 @@ describe( 'wbui2025 item view add statement', () => {
 			addStatementFormPage.setSnakValue( 'some other string' );
 			addStatementFormPage.publishButton().click();
 			addStatementFormPage.form().should( 'not.exist' );
-			itemViewPage.assertStatementIsInViewport( secondPropertyId );
-			itemViewPage.mainSnakValues().eq( 2 ).should( 'have.text', 'some other string' );
+			itemViewPage.mainSnakValues().eq( 21 ).should( 'have.text', 'some other string' );
+			itemViewPage.notificationDismissButton().click();
+
+			// Scroll to see the floating add statement button and click it twice, then dismiss the form
+			itemViewPage.statementsHeading().scrollIntoView();
+			itemViewPage.scrollToTopOfStatementWrapper( secondPropertyId );
+			itemViewPage.addStatementFloatingDisc().click();
+			itemViewPage.addStatementFloatingButton().click();
+			addStatementFormPage.cancelButton().click();
+
+			// Click the floating add statement button then cancel it back to a disc
+			itemViewPage.addStatementFloatingDisc().click();
+			itemViewPage.addStatementFloatingDisc().should( 'not.exist' );
+			itemViewPage.addStatementFloatingButtonCloseIcon().click();
+			itemViewPage.addStatementFloatingDisc().should( 'be.visible' );
 		} );
 
 	} );

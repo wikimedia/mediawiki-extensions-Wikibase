@@ -11,6 +11,7 @@
 	>
 		<cdx-icon
 			:icon="cdxIconClose"
+			class="wikibase-wbui2025-add-statement-float-button-close-icon"
 			@click="expanded = false"
 		></cdx-icon>
 		<cdx-button
@@ -64,11 +65,11 @@ module.exports = exports = defineComponent( {
 			this.addStatementModalVisible = false;
 			this.expanded = false;
 		},
+		elementOnScreen( element ) {
+			const boundingRect = element.getBoundingClientRect();
+			return boundingRect.bottom > 0 && boundingRect.top < window.innerHeight;
+		},
 		scrollPositionUpdated() {
-			const elementOnScreen = function ( element ) {
-				const boundingRect = element.getBoundingClientRect();
-				return boundingRect.bottom > 0 && boundingRect.top < window.innerHeight;
-			};
 			const addStatementButtons = document.getElementsByClassName( 'wikibase-wbui2025-add-statement-button' );
 			const statementsHeader = document.getElementById( 'claims' );
 			const identifiersHeader = document.getElementById( 'identifiers' );
@@ -78,7 +79,7 @@ module.exports = exports = defineComponent( {
 				this.sectionKey = 'statements';
 			}
 			const allElements = [ statementsHeader ].concat( Array.from( addStatementButtons ) );
-			this.visible = !allElements.reduce( ( acc, el ) => acc || elementOnScreen( el ), false );
+			this.visible = !allElements.reduce( ( acc, el ) => acc || this.elementOnScreen( el ), false );
 		}
 	},
 	mounted: function () {
