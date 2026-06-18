@@ -358,6 +358,25 @@ describe( 'Wikibase GraphQL', () => {
 		} );
 	} );
 
+	it( 'property value pair match with "not"', async function () {
+		const response = await queryGraphQL( { query: `
+					{
+						searchItems(
+							query: {
+								not:
+									{ property: "${ property3.id }", value: "${ item2Property3StatementValue }" }
+							}
+						) {
+							edges {
+								node { id }
+							}
+						}
+					}` } );
+
+		const results = response.body.data.searchItems.edges;
+		expect( results ).to.not.deep.include( { node: { id: item2.id } } );
+	} );
+
 	it( 'can look up items by sitelink', async () => {
 		const sitelinkTitle = item1.sitelinks[ siteId ].title;
 		const response = await queryGraphQL( { query: `

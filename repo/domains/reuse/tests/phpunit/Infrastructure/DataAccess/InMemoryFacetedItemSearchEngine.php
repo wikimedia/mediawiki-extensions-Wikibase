@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\NotOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
@@ -55,6 +56,8 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 	private function matchesQuery( ItemSearchFilter $query, Item $item ): bool {
 		if ( $query instanceof PropertyValueFilter ) {
 			return $this->matchesPropertyValueFilter( $query, $item );
+		} elseif ( $query instanceof NotOperation ) {
+			return !$this->matchesPropertyValueFilter( $query->filter, $item );
 		} elseif ( $query instanceof OrOperation ) {
 			foreach ( $query->filters as $filter ) {
 				if ( $this->matchesPropertyValueFilter( $filter, $item ) ) {
@@ -78,7 +81,6 @@ class InMemoryFacetedItemSearchEngine implements FacetedItemSearchEngine {
 	private function matchesPropertyValueFilter( PropertyValueFilter $filter, Item $item ): bool {
 		$filterValue = $filter->value;
 		$statements = $item->getStatements()->getByPropertyId( $filter->propertyId );
-
 		if ( $filterValue === null ) {
 			return $statements->count() > 0;
 		}

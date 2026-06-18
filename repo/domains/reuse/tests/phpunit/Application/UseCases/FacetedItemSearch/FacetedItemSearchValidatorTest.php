@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\NotOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\WikibaseRepo;
@@ -73,6 +74,16 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			"'or' fields must contain at least two elements",
 		];
 
+		yield 'empty "not"' => [
+			[ 'not' => [] ],
+			"'not' field must contain a single property/value condition",
+		];
+
+		yield '"not" with missing "property" field' => [
+			[ 'not' => [ 'value' => 'potato' ] ],
+			"'not' field must contain a single property/value condition",
+		];
+
 		yield 'both "property" and "and"' => [
 			[ 'property' => 'P1', 'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ] ],
 			'Query filters must only contain a single operator field or a property/value condition',
@@ -87,6 +98,22 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			[
 				'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
 				'or' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
+			],
+			'Query filters must only contain a single operator field or a property/value condition',
+		];
+
+		yield 'both "and" and "not"' => [
+			[
+				'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
+				'not' => [ 'property' => 'P2' ],
+			],
+			'Query filters must only contain a single operator field or a property/value condition',
+		];
+
+		yield 'both "or" and "not"' => [
+			[
+				'or' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ],
+				'not' => [ 'property' => 'P2' ],
 			],
 			'Query filters must only contain a single operator field or a property/value condition',
 		];
@@ -174,6 +201,13 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			] ),
 		];
 
+		yield 'simple "not" query' => [
+			[ 'not' => [
+				'property' => self::STRING_PROPERTY, 'value' => 'potato',
+			] ],
+			new NotOperation( new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ) ),
+		];
+
 		yield 'query with "or" nested in "and"' => [
 			[ 'and' => [
 				[ 'property' => self::ITEM_PROPERTY ],
@@ -188,6 +222,21 @@ class FacetedItemSearchValidatorTest extends TestCase {
 					new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
 					new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'tomato' ),
 				] ),
+			] ),
+		];
+
+		yield 'query with "not" nested in "and"' => [
+			[ 'and' => [
+				[ 'property' => self::ITEM_PROPERTY ],
+				[ 'not' => [
+					'property' => self::STRING_PROPERTY, 'value' => 'potato',
+				] ],
+			] ],
+			new AndOperation( [
+				new PropertyValueFilter( new NumericPropertyId( self::ITEM_PROPERTY ) ),
+				new NotOperation(
+					new PropertyValueFilter( new NumericPropertyId( self::STRING_PROPERTY ), 'potato' ),
+				),
 			] ),
 		];
 

@@ -11,6 +11,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResult;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchResultSet;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\NotOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 use Wikibase\Repo\Domains\Reuse\Domain\Services\FacetedItemSearchEngine;
@@ -62,6 +63,10 @@ class CirrusSearchFacetedSearchEngine implements FacetedItemSearchEngine {
 					$criteria->filters
 				)
 			) . '"';
+		} elseif ( $criteria instanceof NotOperation ) {
+			return $criteria->filter->value === null
+				? "-haswbstatement:{$criteria->filter->propertyId}"
+				: "-haswbstatement:\"{$criteria->filter->propertyId}={$criteria->filter->value}\"";
 		}
 
 		/** @var AndOperation $criteria */
