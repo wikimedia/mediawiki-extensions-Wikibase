@@ -100,13 +100,13 @@ module.exports = exports = defineComponent( {
 
 #wikibase-wbui2025-add-statement-floating-button {
 	position: fixed;
-	right: @spacing-125;
+	right: @spacing-100;
 	bottom: 0;
 	display: flex;
 	width: 10.5rem;
 	height: 9.875rem;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: right;
 	align-items: center;
 	gap: @spacing-65;
 }
@@ -138,7 +138,7 @@ module.exports = exports = defineComponent( {
 	.cdx-icon {
 		cursor: pointer;
 		position: absolute;
-		right: 0.875rem;
+		right: 0;
 		top: 1.6875rem;
 	}
 
@@ -149,7 +149,7 @@ module.exports = exports = defineComponent( {
 		max-width: @size-2800;
 		min-height: 2.125rem;
 		max-height: 2.125rem;
-		padding: @spacing-25 @spacing-50 @spacing-25 @spacing-75;
+		padding: @spacing-30 @spacing-50;
 		justify-content: center;
 		align-items: center;
 		gap: @spacing-25;
