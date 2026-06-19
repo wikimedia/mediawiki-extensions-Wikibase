@@ -10,7 +10,7 @@
 
 	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
-	if ( wbui2025StatementList !== undefined ) {
+	if ( wbui2025StatementList !== null ) {
 		const pinia = Pinia.createPinia();
 
 		// This initialization code runs when the Resource Loader loads the module. Other modules are
