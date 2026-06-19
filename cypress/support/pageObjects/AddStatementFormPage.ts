@@ -8,6 +8,8 @@ export class AddStatementFormPage {
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-edit-statement-snak-value input, .wikibase-wbui2025-edit-statement-snak-value textarea',
 		FORM: '.wikibase-wbui2025-add-statement-form',
 		TIME_OPTION_SELECT: '.time-options .option-and-select select',
+		DUPLICATE_WARNING: '.wikibase-wbui2025-add-statement-duplicate-warning .cdx-message',
+		EDIT_EXISTING_BUTTON: '.wikibase-wbui2025-add-statement-duplicate-warning .cdx-button',
 	};
 
 	public propertyLookup(): Chainable {
@@ -70,6 +72,14 @@ export class AddStatementFormPage {
 	public selectFirstSnakValueLookupItem(): this {
 		cy.get( '.wikibase-wbui2025-snak-value .cdx-menu-item:first' ).click();
 		return this;
+	}
+
+	public duplicateWarning(): Chainable {
+		return cy.get( AddStatementFormPage.SELECTORS.DUPLICATE_WARNING );
+	}
+
+	public editExistingStatementButton(): Chainable {
+		return cy.get( AddStatementFormPage.SELECTORS.EDIT_EXISTING_BUTTON );
 	}
 
 }

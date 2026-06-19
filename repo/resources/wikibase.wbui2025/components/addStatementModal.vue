@@ -17,6 +17,21 @@
 					</wikibase-wbui2025-property-lookup>
 				</div>
 			</div>
+			<div
+				v-if="isDuplicate"
+				class="wikibase-wbui2025-add-statement-duplicate-warning"
+			>
+				<cdx-message type="warning">
+					{{ $i18n( 'wikibase-wbui2025-duplicate-statement-warning' ).text() }}
+				</cdx-message>
+				<cdx-button
+					action="progressive"
+					@click="goToExistingStatement"
+				>
+					<cdx-icon :icon="cdxIconEdit"></cdx-icon>
+					{{ duplicateStatementEditButtonLabel }}
+				</cdx-button>
+			</div>
 			<template v-for="statementGuid in createdStatementGuids" :key="statementGuid">
 				<wikibase-wbui2025-edit-statement
 					hide-remove-button
@@ -25,15 +40,24 @@
 			</template>
 		</template>
 	</wbui2025-modal-overlay>
+	<wikibase-wbui2025-edit-statement-group
+		v-if="showEditExistingGroup"
+		:property-id="propertyId"
+		:entity-id="entityId"
+		@hide="onEditExistingGroupHide"
+	></wikibase-wbui2025-edit-statement-group>
 </template>
 
 <script>
 const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent, nextTick } = require( 'vue' );
 
+const { CdxButton, CdxIcon, CdxMessage } = require( '../../../codex.js' );
+const { cdxIconEdit } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025ModalOverlay = require( './modalOverlay.vue' );
 const WikibaseWbui2025EditStatement = require( './editStatement.vue' );
+const WikibaseWbui2025EditStatementGroup = require( './editStatementGroup.vue' );
 const WikibaseWbui2025PropertyLookup = require( './propertyLookup.vue' );
 const saveStatementsFormMixin = require( '../mixins/saveStatementsFormMixin.js' );
 
@@ -41,9 +65,13 @@ const saveStatementsFormMixin = require( '../mixins/saveStatementsFormMixin.js' 
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025AddStatementModal',
 	components: {
+		CdxButton,
+		CdxIcon,
+		CdxMessage,
 		Wbui2025ModalOverlay,
 		WikibaseWbui2025PropertyLookup,
-		WikibaseWbui2025EditStatement
+		WikibaseWbui2025EditStatement,
+		WikibaseWbui2025EditStatementGroup
 	},
 	mixins: [ saveStatementsFormMixin ],
 	props: {
@@ -60,8 +88,11 @@ module.exports = exports = defineComponent( {
 	data: () => ( {
 		propertyId: null,
 		propertyData: null,
+		isDuplicate: false,
+		showEditExistingGroup: false,
 		formSubmitted: false,
-		showProgress: false
+		showProgress: false,
+		cdxIconEdit
 	} ),
 	computed: Object.assign( mapState( wbui2025.store.useEditStatementsStore, {
 		createdStatementGuids: 'createdStatementIds',
@@ -72,12 +103,13 @@ module.exports = exports = defineComponent( {
 			return this.propertyData ? this.propertyData.datatype : null;
 		},
 		canSubmit() {
-			return !this.formSubmitted && this.fullyParsed && this.hasChanges;
+			return !this.formSubmitted && !this.isDuplicate && this.fullyParsed && this.hasChanges;
 		},
-		saveMessage() {
-			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
-				? mw.msg( 'wikibase-publish' )
-				: mw.msg( 'wikibase-save' );
+		duplicateStatementEditButtonLabel() {
+			if ( !this.isDuplicate ) {
+				return '';
+			}
+			return mw.msg( 'wikibase-wbui2025-duplicate-statement-edit-button', this.propertyData.label );
 		}
 	} ),
 	methods: Object.assign( mapActions( wbui2025.store.useEditStatementsStore, {
@@ -99,10 +131,26 @@ module.exports = exports = defineComponent( {
 				// eslint-disable-next-line vue/no-undef-properties
 				this.reset();
 			}
+			this.isDuplicate = false;
 			this.propertyId = propertyId;
 			this.propertyData = propertyData;
+			if ( !propertyId ) {
+				return;
+			}
+			if ( wbui2025.store.hasStatementsForProperty( propertyId ) ) {
+				this.isDuplicate = true;
+				return;
+			}
 			// eslint-disable-next-line vue/no-undef-properties
 			this.createNewStatement();
+		},
+		goToExistingStatement() {
+			this.showEditExistingGroup = true;
+		},
+		onEditExistingGroupHide() {
+			this.showEditExistingGroup = false;
+			// eslint-disable-next-line vue/no-undef-properties
+			this.cancelForm();
 		},
 		submitForm() {
 			const propertyId = this.propertyId;
@@ -124,6 +172,7 @@ module.exports = exports = defineComponent( {
 			this.initializeEditStatementStoreFromStatementStore( [], null );
 			this.propertyId = null;
 			this.propertyData = null;
+			this.isDuplicate = false;
 		},
 		cancelForm() {
 			this.reset();
@@ -143,6 +192,19 @@ module.exports = exports = defineComponent( {
 	.wikibase-wbui2025-add-statement-form_property-selector {
 		padding: @spacing-250 @spacing-100;
 		background: @background-color-progressive-subtle;
+	}
+}
+
+.wikibase-wbui2025-add-statement-duplicate-warning {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: @spacing-100;
+	padding: @spacing-100;
+
+	.cdx-button {
+		white-space: normal;
+		text-align: inherit;
 	}
 }
 </style>

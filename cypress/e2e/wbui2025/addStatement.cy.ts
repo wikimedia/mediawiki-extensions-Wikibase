@@ -3,6 +3,7 @@ import { Util } from 'cypress-wikibase-api';
 import { checkA11y } from '../../support/checkA11y';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { AddStatementFormPage } from '../../support/pageObjects/AddStatementFormPage';
+import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { LoginPage } from '../../support/pageObjects/LoginPage';
 
 describe( 'wbui2025 item view add statement', () => {
@@ -51,7 +52,7 @@ describe( 'wbui2025 item view add statement', () => {
 			} );
 		} );
 
-		it( 'loads the item view and shows property selector, then scroll up to add a statement with floating button', { scrollBehavior: false }, () => {
+		it( 'adds a statement, shows a duplicate warning for an existing property, and tests the floating add statement button', { scrollBehavior: false }, () => {
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
 			itemViewPage.addStatementFloatingDisc().should( 'not.exist' );
@@ -59,29 +60,28 @@ describe( 'wbui2025 item view add statement', () => {
 
 			const addStatementFormPage = new AddStatementFormPage();
 			addStatementFormPage.propertyLookup().should( 'exist' );
-			cy.get<string>( '@propertyId' ).then( ( propertyId ) => {
-				addStatementFormPage.setProperty( propertyId );
-			} );
+			addStatementFormPage.setProperty( secondPropertyId );
 			addStatementFormPage.publishButton().should( 'be.disabled' );
 			addStatementFormPage.snakValueInput().should( 'exist' );
 			addStatementFormPage.setSnakValue( 'some string' );
 			addStatementFormPage.publishButton().click();
 			addStatementFormPage.form().should( 'not.exist' );
-			cy.get( '@propertyId' ).then( ( pid ) => {
-				itemViewPage.assertStatementIsInViewport( pid );
-			} );
+			itemViewPage.assertStatementIsInViewport( secondPropertyId );
 			itemViewPage.mainSnakValues().eq( 20 ).should( 'have.text', 'some string' );
 
 			itemViewPage.addStatementButton().scrollIntoView().click();
 			addStatementFormPage.propertyLookup().should( 'exist' );
-			addStatementFormPage.setProperty( secondPropertyId );
+			cy.get( '@propertyId' ).then( ( propertyId ) => {
+				addStatementFormPage.setProperty( propertyId );
+			} );
+			addStatementFormPage.duplicateWarning().should( 'exist' );
+			addStatementFormPage.snakValueInput().should( 'not.exist' );
 			addStatementFormPage.publishButton().should( 'be.disabled' );
-			addStatementFormPage.snakValueInput().should( 'exist' );
-			addStatementFormPage.setSnakValue( 'some other string' );
-			addStatementFormPage.publishButton().click();
-			addStatementFormPage.form().should( 'not.exist' );
-			itemViewPage.mainSnakValues().eq( 21 ).should( 'have.text', 'some other string' );
-			itemViewPage.notificationDismissButton().click();
+			addStatementFormPage.editExistingStatementButton().click();
+
+			const editStatementFormPage = new EditStatementFormPage();
+			editStatementFormPage.formRoot().should( 'exist' );
+			editStatementFormPage.cancelButton().click();
 
 			// Scroll to see the floating add statement button and click it twice, then dismiss the form
 			itemViewPage.statementsHeading().scrollIntoView();

@@ -20,6 +20,7 @@ const {
 	getPopoverContentForQualifier,
 	setPopoverContentForReferenceSnak,
 	getPopoverContentForReferenceSnak,
+	hasStatementsForProperty,
 	useSavedStatementsStore
 } = require( '../../../resources/wikibase.wbui2025/store/savedStatementsStore.js' );
 const { updateSnakValueHtmlForHash } = require( '../../../resources/wikibase.wbui2025/store/serverRenderedHtml.js' );
@@ -307,5 +308,18 @@ describe( 'Statements Store', () => {
 			expect( fullContent[ 0 ] ).toEqual( { bodyHtml: errorHtml } );
 		} );
 
+	} );
+
+	describe( 'hasStatementsForProperty', () => {
+		it( 'returns true when the property has statements', () => {
+			const savedStatementsStore = useSavedStatementsStore();
+			savedStatementsStore.statements.set( testStatementId, testStatement );
+			savedStatementsStore.properties.set( 'P5', [ testStatementId ] );
+			expect( hasStatementsForProperty( 'P5' ) ).toBe( true );
+		} );
+
+		it( 'returns false when the property has no statements', () => {
+			expect( hasStatementsForProperty( 'P999' ) ).toBe( false );
+		} );
 	} );
 } );

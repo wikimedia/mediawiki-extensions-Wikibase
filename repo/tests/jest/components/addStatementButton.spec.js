@@ -5,8 +5,16 @@ jest.mock(
 );
 jest.mock(
 	'../../../resources/wikibase.wbui2025/icons.json',
-	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close', cdxIconArrowPrevious: 'arrowPrevious' } ),
+	() => ( { cdxIconAdd: 'add', cdxIconCheck: 'check', cdxIconClose: 'close', cdxIconArrowPrevious: 'arrowPrevious', cdxIconEdit: 'edit', cdxIconTrash: 'trash' } ),
 	{ virtual: true }
+);
+
+jest.mock(
+	'../../../resources/wikibase.wbui2025/api/editEntity.js',
+	() => Object.assign(
+		jest.requireActual( '../../../resources/wikibase.wbui2025/api/editEntity.js' ),
+		{ renderSnakValueText: jest.fn() }
+	)
 );
 
 Object.defineProperty( window, 'scrollTo', { value: jest.fn(), configurable: true } );
@@ -35,10 +43,11 @@ mockLibWbui2025();
 
 const addStatementButtonComponent = require( '../../../resources/wikibase.wbui2025/components/addStatementButton.vue' );
 const addStatementModalComponent = require( '../../../resources/wikibase.wbui2025/components/addStatementModal.vue' );
+const editStatementGroupComponent = require( '../../../resources/wikibase.wbui2025/components/editStatementGroup.vue' );
 const propertyLookupComponent = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
-const { CdxButton, CdxTextArea } = require( '../../../codex.js' );
+const { CdxButton, CdxMessage, CdxTextArea } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
-const { storeWithStatements } = require( '../piniaHelpers.js' );
+const { storeWithStatements, storeWithStatementsAndProperties } = require( '../piniaHelpers.js' );
 
 describe( 'wikibase.wbui2025.references', () => {
 	it( 'defines component', async () => {
@@ -123,6 +132,72 @@ describe( 'wikibase.wbui2025.references', () => {
 				expect( scrollToStatementSpy ).toHaveBeenCalledWith( 'P23' );
 			} );
 
+		} );
+
+		describe( 'when a property is selected that already has statements', () => {
+			const existingStatement = {
+				id: 'Q123$abc-123',
+				mainsnak: {
+					snaktype: 'value',
+					property: 'P23',
+					datatype: 'string',
+					datavalue: { value: 'test string', type: 'string' }
+				},
+				rank: 'normal'
+			};
+			let duplicateWrapper, duplicateAddButton;
+
+			beforeEach( async () => {
+				duplicateWrapper = await mount( addStatementButtonComponent, {
+					props: {
+						entityId: 'Q123',
+						sectionKey: 'statements'
+					},
+					global: {
+						plugins: [
+							storeWithStatementsAndProperties( { P23: [ existingStatement ] } )
+						],
+						disableTeleport: true
+					}
+				} );
+				duplicateAddButton = duplicateWrapper.findComponent( CdxButton );
+				await duplicateAddButton.vm.$emit( 'click' );
+				const dupPropertyLookup = duplicateWrapper.findComponent( propertyLookupComponent );
+				await dupPropertyLookup.vm.$emit( 'update:selected', 'P23', { datatype: 'string' } );
+			} );
+
+			it( 'shows a duplicate warning message', () => {
+				const warning = duplicateWrapper.findComponent( CdxMessage );
+				expect( warning.exists() ).toBe( true );
+			} );
+
+			it( 'does not show a value input when duplicate is detected', () => {
+				const snakValueInput = duplicateWrapper.findComponent( CdxTextArea );
+				expect( snakValueInput.exists() ).toBe( false );
+			} );
+
+			it( 'disables the publish button when duplicate is detected', () => {
+				const dupPublishButton = duplicateWrapper.findAllComponents( CdxButton )
+					.find( ( b ) => b.props( 'weight' ) === 'primary' );
+				expect( dupPublishButton ).toBeDefined();
+				expect( dupPublishButton.attributes( 'disabled' ) ).not.toBe( undefined );
+			} );
+
+			it( 'hides the warning when the user re-enters the property field', async () => {
+				const dupPropertyLookup = duplicateWrapper.findComponent( propertyLookupComponent );
+				await dupPropertyLookup.vm.$emit( 'update:selected', null, null );
+				const warning = duplicateWrapper.findComponent( CdxMessage );
+				expect( warning.exists() ).toBe( false );
+			} );
+
+			it( 'shows the editStatementGroup when the edit button is clicked', async () => {
+				const editButton = duplicateWrapper.findAllComponents( CdxButton )
+					.find( ( b ) => b.text().includes( 'wikibase-wbui2025-duplicate-statement-edit-button' ) );
+				expect( editButton ).toBeDefined();
+				await editButton.vm.$emit( 'click' );
+				const editGroup = duplicateWrapper.findComponent( editStatementGroupComponent );
+				expect( editGroup.exists() ).toBe( true );
+			} );
 		} );
 
 	} );

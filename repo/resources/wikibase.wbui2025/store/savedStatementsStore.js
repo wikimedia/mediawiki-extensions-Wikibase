@@ -167,6 +167,16 @@ const getStatementById = function ( statementId ) {
 	return statementsStore.statements.get( statementId );
 };
 
+/**
+ * @param{string} propertyId
+ * @returns {boolean}
+ */
+const hasStatementsForProperty = function ( propertyId ) {
+	const statementsStore = useSavedStatementsStore();
+	const statementIds = statementsStore.properties.get( propertyId );
+	return Array.isArray( statementIds ) && statementIds.length > 0;
+};
+
 const setStatementIdsForProperty = function ( propertyId, statementIds ) {
 	const statementsStore = useSavedStatementsStore();
 	statementsStore.properties.set( propertyId, statementIds );
@@ -309,6 +319,7 @@ const clearPopoverContentAndIndicatorForReferenceSnak = function ( statementId, 
 module.exports = {
 	useSavedStatementsStore,
 	getPropertyIds,
+	hasStatementsForProperty,
 	getPropertyIdsForStatementSection,
 	setStatementSectionForPropertyId,
 	getStatementsForProperty,
