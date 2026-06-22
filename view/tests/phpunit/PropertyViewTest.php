@@ -31,6 +31,7 @@ use Wikibase\View\StatementGroupListView;
 use Wikibase\View\StatementSectionsView;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\VueNoScriptRendering;
+use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
@@ -133,6 +134,7 @@ class PropertyViewTest extends EntityViewTestCase {
 			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
 			$snakFormatter,
 			$this->createMock( Wbui2025FeatureFlag::class ),
+			new Wbui2025ComponentsFactory(),
 		);
 		$statementSectionsView = new StatementSectionsView(
 			$templateFactory,

@@ -85,3 +85,83 @@ module.exports = exports = defineComponent( {
 	}
 } );
 </script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-wbui2025-statement-group {
+	border-color: @border-color-subtle;
+	border-width: 1px;
+	border-style: solid;
+	margin-top: 1em;
+
+	.wikibase-wbui2025-link() {
+		.cdx-mixin-link();
+	}
+
+	.wikibase-wbui2025-link {
+		.wikibase-wbui2025-link();
+
+		&-heavy {
+			font-weight: 500;
+			font-size: 0.85rem;
+		}
+	}
+
+	.wikibase-wbui2025-property-name :link {
+		.wikibase-wbui2025-link();
+	}
+
+	.wikibase-wbui2025-statement-heading {
+		display: table;
+		background-color: @background-color-neutral;
+		width: 100%;
+
+		&-row {
+			display: table-row;
+		}
+
+		.wikibase-wbui2025-property-name {
+			display: table-cell;
+			padding: @spacing-35 0 @spacing-35 @spacing-75;
+			vertical-align: middle;
+		}
+
+		.wikibase-wbui2025-edit-link {
+			display: table-cell;
+			width: 1px;
+			white-space: nowrap;
+			padding-right: @spacing-75;
+			vertical-align: middle;
+			cursor: pointer;
+
+			.wikibase-wbui2025-link-heavy {
+				font-size: 1rem;
+			}
+
+			.cdx-icon {
+				vertical-align: inherit;
+			}
+
+			&--deleted-property {
+				color: @color-disabled;
+				cursor: default;
+
+				.wikibase-wbui2025-icon-edit-small {
+					.cdx-mixin-css-icon( @cdx-icon-edit, @color-disabled, @param-size-icon: @size-icon-small );
+				}
+			}
+		}
+	}
+}
+
+.wikibase-wbui2025-property-name--deleted .wikibase-wbui2025-property-name-link :link,
+.wikibase-wbui2025-property-name--deleted .wikibase-wbui2025-property-name-link :visited {
+	color: @color-error;
+}
+
+.wikibase-wbui2025-icon-edit-small {
+	.cdx-mixin-css-icon( @cdx-icon-edit, @param-size-icon: @size-icon-small );
+	padding: 3px 0 3px 0;
+}
+</style>

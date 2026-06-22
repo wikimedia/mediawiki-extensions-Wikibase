@@ -25,6 +25,7 @@ use Wikibase\Repo\LocalizedTextProviderFactory;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\ObjectCache\BagOStuff;
 
@@ -106,6 +107,10 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.Wbui2025FeatureFlag',
 			$this->createMock( Wbui2025FeatureFlag::class ),
+		);
+		$this->mockService(
+			'WikibaseRepo.Wbui2025ComponentsFactory',
+			$this->createMock( Wbui2025ComponentsFactory::class ),
 		);
 		$this->serviceContainer->expects( $this->once() )
 			->method( 'getLanguageFactory' );

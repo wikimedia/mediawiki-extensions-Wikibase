@@ -142,6 +142,8 @@ class ViewFactory {
 	 */
 	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
 
+	private Wbui2025ComponentsFactory $wbui2025ComponentsFactory;
+
 	/**
 	 * @param EntityIdFormatterFactory $htmlIdFormatterFactory
 	 * @param EntityIdFormatterFactory $plainTextIdFormatterFactory
@@ -165,6 +167,7 @@ class ViewFactory {
 	 * @param LanguageFactory $languageFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param Wbui2025FeatureFlag $wbui2025FeatureFlag
+	 * @param Wbui2025ComponentsFactory $wbui2025ComponentsFactory
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -191,6 +194,7 @@ class ViewFactory {
 		LanguageFactory $languageFactory,
 		EntityIdParser $entityIdParser,
 		Wbui2025FeatureFlag $wbui2025FeatureFlag,
+		Wbui2025ComponentsFactory $wbui2025ComponentsFactory,
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
 			|| !$this->hasValidOutputFormat( $plainTextIdFormatterFactory, 'text/plain' )
@@ -220,6 +224,7 @@ class ViewFactory {
 		$this->languageFactory = $languageFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
+		$this->wbui2025ComponentsFactory = $wbui2025ComponentsFactory;
 	}
 
 	/**
@@ -364,6 +369,7 @@ class ViewFactory {
 			$this->serializerFactory,
 			$snakFormatter,
 			$this->wbui2025FeatureFlag,
+			$this->wbui2025ComponentsFactory,
 		);
 
 		return new StatementSectionsView(

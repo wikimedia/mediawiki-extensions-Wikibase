@@ -249,6 +249,7 @@ use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
+use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\ObjectFactory\ObjectFactory;
@@ -2187,7 +2188,12 @@ return [
 			$services->getLanguageFactory(),
 			WikibaseRepo::getEntityIdParser( $services ),
 			WikibaseRepo::getWbui2025FeatureFlag( $services ),
+			WikibaseRepo::getWbui2025ComponentsFactory( $services ),
 		);
+	},
+
+	'WikibaseRepo.Wbui2025ComponentsFactory' => function (): Wbui2025ComponentsFactory {
+		return new Wbui2025ComponentsFactory();
 	},
 
 	'WikibaseRepo.Wbui2025FeatureFlag' => function ( MediaWikiServices $services ): Wbui2025FeatureFlag {
