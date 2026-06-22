@@ -51,7 +51,11 @@ export class ItemViewPage {
 		// about texts (especially, for example, selecting items from a Codex MenuButton
 		// menu) without needing to modify Codex components or introduce translation
 		// support to Cypress.
-		cy.visitTitleMobile( { title: 'Item:' + this.itemId, qs: { uselang: lang } } );
+		cy.visitTitleMobile( { title: 'Item:' + this.itemId, qs: { uselang: lang } } )
+			// turn ResourceLoader exceptions into unhandled Promise rejections so Cypress will make them visible
+			.invoke( 'mw.trackSubscribe',
+				'resourceloader.exception',
+				( _topic, data ) => Promise.reject( data.exception || data ) );
 		return this;
 	}
 
