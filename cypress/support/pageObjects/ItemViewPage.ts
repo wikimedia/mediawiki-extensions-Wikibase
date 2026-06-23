@@ -4,6 +4,8 @@ export class ItemViewPage {
 
 	public static STATEMENTS = '#wikibase-wbui2025-statementgrouplistview';
 
+	public static STATEMENTS_HEADING = '#claims';
+
 	public static VUE_CLIENTSIDE_RENDERED = '[data-v-app]';
 
 	public static EDIT_LINKS = '.wikibase-wbui2025-edit-link';
@@ -32,9 +34,17 @@ export class ItemViewPage {
 
 	public static ADD_STATEMENT_BUTTON = '.wikibase-wbui2025-add-statement-button>.cdx-button';
 
+	public static ADD_STATEMENT_FLOATING_DISC = '.wikibase-wbui2025-add-statement-float-disc';
+
+	public static ADD_STATEMENT_FLOATING_BUTTON = '.wikibase-wbui2025-add-statement-float-button';
+
+	public static ADD_STATEMENT_FLOATING_BUTTON_CLOSE = '.wikibase-wbui2025-add-statement-float-button-close-icon';
+
 	public static COMMONS_MEDIA_THUMBNAIL_LINK = 'span.snakValue div.thumb a.image';
 
 	public static COMMONS_MEDIA_THUMBNAIL_IMAGE = 'span.snakValue div.thumb a.image span img';
+
+	public static NOTIFICATION_DISMISS_BUTTON = '.cdx-message button.cdx-button';
 
 	private itemId: string;
 
@@ -61,6 +71,10 @@ export class ItemViewPage {
 
 	public statementsSection(): Chainable {
 		return cy.get( ItemViewPage.STATEMENTS );
+	}
+
+	public statementsHeading(): Chainable {
+		return cy.get( ItemViewPage.STATEMENTS_HEADING );
 	}
 
 	public editLinks(): Chainable {
@@ -115,8 +129,32 @@ export class ItemViewPage {
 		return cy.get( ItemViewPage.VUE_CLIENTSIDE_RENDERED + ' ' + ItemViewPage.ADD_STATEMENT_BUTTON );
 	}
 
+	public addStatementFloatingDisc(): Chainable {
+		return cy.get( ItemViewPage.ADD_STATEMENT_FLOATING_DISC );
+	}
+
+	public addStatementFloatingButton(): Chainable {
+		return cy.get( ItemViewPage.ADD_STATEMENT_FLOATING_BUTTON );
+	}
+
+	public addStatementFloatingButtonCloseIcon(): Chainable {
+		return cy.get( ItemViewPage.ADD_STATEMENT_FLOATING_BUTTON_CLOSE );
+	}
+
+	public notificationDismissButton(): Chainable {
+		return cy.get( ItemViewPage.NOTIFICATION_DISMISS_BUTTON );
+	}
+
 	public statementWrapper( propertyId: string ): Chainable {
 		return cy.get( `#${ propertyId }` );
+	}
+
+	public scrollToTopOfStatementWrapper( propertyId: string ): Chainable {
+		return this.statementWrapper( propertyId ).then( ( $el ) => {
+			const rect = $el[ 0 ].getBoundingClientRect();
+			const vpHeight = $el[ 0 ].ownerDocument.defaultView!.innerHeight;
+			return cy.scrollTo( 0, rect.top - vpHeight );
+		} );
 	}
 
 	public assertStatementIsInViewport( propertyId: string ): void {
