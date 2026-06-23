@@ -30,7 +30,7 @@ class FallbackEntitySearchHelperControllerTest extends TestCase {
 			$this->createStub( EntitySourceLookup::class )
 		);
 
-		$controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, true, 'default' ) );
+		$controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, true, 'default', null ) );
 	}
 
 }

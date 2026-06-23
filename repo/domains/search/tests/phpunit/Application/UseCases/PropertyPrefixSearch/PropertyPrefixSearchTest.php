@@ -26,6 +26,7 @@ class PropertyPrefixSearchTest extends TestCase {
 		$offset = 0;
 		$resultLanguage = 'de';
 		$disableLanguageFallback = false;
+		$username = null;
 		$expectedResults = $this->createStub( PropertyPrefixSearchResults::class );
 
 		$searchEngine = $this->createMock( PropertyPrefixSearchEngine::class );
@@ -44,6 +45,7 @@ class PropertyPrefixSearchTest extends TestCase {
 				$language,
 				$limit,
 				$offset,
+				$username,
 				$disableLanguageFallback,
 				$resultLanguage,
 			) )->results

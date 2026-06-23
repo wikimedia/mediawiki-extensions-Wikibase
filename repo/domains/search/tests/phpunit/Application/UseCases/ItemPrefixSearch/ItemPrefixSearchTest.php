@@ -8,6 +8,7 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefi
 use Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch\ItemPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 
 /**
@@ -26,6 +27,7 @@ class ItemPrefixSearchTest extends TestCase {
 		$offset = 0;
 		$resultLanguage = 'de';
 		$disableLanguageFallback = false;
+		$username = null;
 		$expectedResults = $this->createStub( ItemSearchResults::class );
 
 		$searchEngine = $this->createMock( ItemPrefixSearchEngine::class );
@@ -44,6 +46,7 @@ class ItemPrefixSearchTest extends TestCase {
 				$language,
 				$limit,
 				$offset,
+				$username,
 				$disableLanguageFallback,
 				$resultLanguage,
 				null
@@ -52,6 +55,7 @@ class ItemPrefixSearchTest extends TestCase {
 	}
 
 	public function testCanExecute_AndForwardsProfileContext(): void {
+		$user = User::newAnonymous();
 		$expectedResults = $this->createStub( ItemSearchResults::class );
 
 		$searchEngine = $this->createMock( ItemPrefixSearchEngine::class );
@@ -65,7 +69,7 @@ class ItemPrefixSearchTest extends TestCase {
 			$this->newUseCase(
 				$this->createStub( ItemPrefixSearchValidator::class ),
 				$searchEngine,
-			)->execute( new ItemPrefixSearchRequest( 'potat', 'en', 10, 0, false, 'en', 'custom' ) )->results
+			)->execute( new ItemPrefixSearchRequest( 'potat', 'en', 10, 0, null, false, 'en', 'custom' ) )->results
 		);
 	}
 
@@ -79,8 +83,9 @@ class ItemPrefixSearchTest extends TestCase {
 			->with( $request )
 			->willThrowException( $expectedException );
 
+		$user = User::newAnonymous();
 		try {
-			$this->newUseCase( $validator, $this->createStub( ItemPrefixSearchEngine::class ) )->execute( $request );
+			$this->newUseCase( $validator, $this->createStub( ItemPrefixSearchEngine::class ) )->execute( $request, $user );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertSame( $expectedException, $e );

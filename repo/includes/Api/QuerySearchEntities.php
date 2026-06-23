@@ -156,6 +156,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 					$params['limit'],
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
+					$this->getUsername()
 				) );
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -227,6 +228,11 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			'action=query&list=wbsearch&wbssearch=alphabet&wbslanguage=en&wbstype=property' => 'apihelp-query+wbsearch-example-3',
 			'action=query&generator=wbsearch&gwbssearch=alphabet&gwbslanguage=en' => 'apihelp-query+wbsearch-example-4',
 		];
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

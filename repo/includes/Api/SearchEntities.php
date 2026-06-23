@@ -163,6 +163,7 @@ class SearchEntities extends ApiBase {
 					$params['continue'] + $params['limit'] + 1,
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
+					$this->getUsername()
 				) );
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -450,6 +451,11 @@ class SearchEntities extends ApiBase {
 			'action=wbsearchentities&search=Q1234&language=en' =>
 				'apihelp-wbsearchentities-example-6',
 		];
+	}
+
+	private function getUsername(): ?string {
+		$mwUser = $this->getAuthority()->getUser();
+		return $mwUser->isRegistered() ? $mwUser->getName() : null;
 	}
 
 }

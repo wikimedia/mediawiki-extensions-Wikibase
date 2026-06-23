@@ -9,6 +9,8 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\Prope
 use Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch\PropertyPrefixSearchValidator;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
+use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Domains\Search\Infrastructure\LanguageCodeValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
@@ -33,7 +35,8 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 	 */
 	public function testValidate_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new PropertyPrefixSearchRequest( 'q', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
+			->validate( new PropertyPrefixSearchRequest( 'q', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
+			User::newAnonymous() );
 	}
 
 	/**
@@ -41,13 +44,14 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 	 */
 	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
 		$this->newUseCaseValidator()
-			->validate( new PropertyPrefixSearchRequest( 'q', 'en' ) );
+			->validate( new PropertyPrefixSearchRequest( 'q', 'en' ), User::newAnonymous() );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new PropertyPrefixSearchRequest( 'q', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ) );
+				->validate( new PropertyPrefixSearchRequest( 'q', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
+				User::newAnonymous() );
 
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
@@ -70,7 +74,8 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 	): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new PropertyPrefixSearchRequest( 'q', 'en', $limit, $offset ) );
+				->validate( new PropertyPrefixSearchRequest( 'q', 'en', $limit, $offset ),
+				User::newAnonymous() );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -84,9 +89,9 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 			self::DEFAULT_OFFSET,
 		];
 
-		yield 'invalid limit - limit exceeds max (500)' => [
+		yield 'invalid limit - limit exceeds max (50)' => [
 			UseCaseError::invalidQueryParameter( 'limit' ),
-			501,
+			51,
 			self::DEFAULT_OFFSET,
 		];
 
@@ -97,8 +102,16 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 		];
 	}
 
-	private function newUseCaseValidator(): PropertyPrefixSearchValidator {
-		return new PropertyPrefixSearchValidator( $this->newSearchLanguageValidator() );
+	private function newUseCaseValidator( bool $hasApiHighLimits = false ): PropertyPrefixSearchValidator {
+		$permissionChecker = $this->createStub( PermissionChecker::class );
+		$permissionChecker->method( 'hasApiHighLimits' )->willReturn( $hasApiHighLimits );
+
+		return new PropertyPrefixSearchValidator(
+			$this->newSearchLanguageValidator(),
+			$permissionChecker,
+			50,
+			500
+		);
 	}
 
 	private function newSearchLanguageValidator(): SearchLanguageValidator {

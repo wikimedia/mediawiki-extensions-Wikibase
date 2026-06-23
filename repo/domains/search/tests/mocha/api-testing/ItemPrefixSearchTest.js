@@ -1,6 +1,6 @@
 'use strict';
 
-const { assert, utils, wiki } = require( 'api-testing' );
+const { action, assert, utils, wiki } = require( 'api-testing' );
 const { RequestBuilder } = require( '../../../../../rest-api/tests/mocha/helpers/RequestBuilder' );
 const { expect } = require( '../../../../../rest-api/tests/mocha/helpers/chaiHelper' );
 const { assertValidError } = require( '../helpers/responseValidator' );
@@ -23,6 +23,7 @@ describe( 'Item prefix search', () => {
 	let item1;
 	let itemWithoutDescription;
 	let itemWithoutLabel;
+	let apiHighLimitsUser;
 
 	const englishTermMatchingAllItems = 'label-' + utils.uniq();
 	const item1Label = englishTermMatchingAllItems + ' some suffix';
@@ -46,6 +47,8 @@ describe( 'Item prefix search', () => {
 			descriptions: { en: item3Description },
 			aliases: { en: [ item3Alias ] }
 		} );
+
+		apiHighLimitsUser = await action.user( 'ApiHighLimitsUser', [ 'bot' ] );
 
 		await wiki.runAllJobs();
 		await new Promise( ( resolve ) => {
@@ -158,6 +161,15 @@ describe( 'Item prefix search', () => {
 			assert.lengthOf( results, 0 );
 		} );
 
+		it( 'allows users with apihighlimits to use a higher limit', async () => {
+			const response = await newSearchRequest( 'en', englishTermMatchingAllItems )
+				.withUser( apiHighLimitsUser )
+				.withQueryParam( 'limit', 150 ) // number between 50 and 500
+				.makeRequest();
+
+			expect( response ).to.have.status( 200 );
+		} );
+
 		describe( 'pagination', () => {
 			let allMatchingResults;
 			const searchLanguage = 'en';
@@ -219,10 +231,19 @@ describe( 'Item prefix search', () => {
 			assertValidError( response, 400, 'missing-user-agent' );
 		} );
 
+		it( 'invalid limit parameter - exceeds max limit 500 for apihighlimits users', async () => {
+			const response = await newSearchRequest( 'en', 'search term' )
+				.withUser( apiHighLimitsUser )
+				.withQueryParam( 'limit', 501 )
+				.makeRequest();
+
+			assertValidError( response, 400, 'invalid-query-parameter', { parameter: 'limit' } );
+		} );
+
 		Object.entries( {
-			'invalid limit parameter - exceeds max limit 500': {
+			'invalid limit parameter - exceeds max limit 50': {
 				parameter: 'limit',
-				value: 501
+				value: 51
 			},
 			'invalid limit parameter - negative limit': {
 				parameter: 'limit',

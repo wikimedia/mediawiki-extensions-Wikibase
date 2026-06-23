@@ -27,13 +27,14 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 		try {
 			$response = $this->itemPrefixSearch->execute(
 				new ItemPrefixSearchRequest(
-					$request->text,
-					$request->searchLanguageCode,
-					$request->limit,
-					0,
-					$request->strictLanguage,
-					$request->resultLanguage,
-					$request->profileContext,
+					query: $request->text,
+					language: $request->searchLanguageCode,
+					limit: $request->limit,
+					offset: 0,
+					username: $request->username,
+					disableLanguageFallback: $request->strictLanguage,
+					resultLanguage: $request->resultLanguage,
+					profile: $request->profileContext,
 					disableLimitValidation: true
 				)
 			);
