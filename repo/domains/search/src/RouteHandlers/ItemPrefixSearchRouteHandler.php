@@ -52,9 +52,9 @@ class ItemPrefixSearchRouteHandler extends SimpleHandler {
 			$useCaseResponse = $this->useCase->execute( new ItemPrefixSearchRequest(
 				$this->getValidatedParams()[self::SEARCH_QUERY_PARAM],
 				$this->getValidatedParams()[self::LANGUAGE_QUERY_PARAM],
+				$this->getUser(),
 				$this->getValidatedParams()[self::LIMIT_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_LIMIT,
 				$this->getValidatedParams()[self::OFFSET_QUERY_PARAM] ?? ItemPrefixSearchRequest::DEFAULT_OFFSET,
-				$this->getUser()->getUsername(),
 			) );
 		} catch ( UseCaseError $e ) {
 			return $this->responseFactory->newUseCaseErrorResponse( $e );

@@ -5,33 +5,22 @@ namespace Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch;
 use LogicException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Application\Validation\SearchLanguageValidator;
-use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 
 /**
  * @license GPL-2.0-or-later
  */
 class ItemPrefixSearchValidator {
-
 	public const LANGUAGE_QUERY_PARAM = 'language';
 	public const LIMIT_QUERY_PARAM = 'limit';
 	public const OFFSET_QUERY_PARAM = 'offset';
 
-	private SearchLanguageValidator $languageValidator;
-	private PermissionChecker $permissionChecker;
-	private int $maxLimit;
-	private int $maxApiHighLimitsLimit;
-
 	public function __construct(
-		SearchLanguageValidator $languageValidator,
-		PermissionChecker $permissionChecker,
-		int $maxLimit,
-		int $maxApiHighLimitsLimit
+		private SearchLanguageValidator $languageValidator,
+		private PermissionChecker $permissionChecker,
+		private int $maxLimit,
+		private int $maxApiHighLimitsLimit
 	) {
-		$this->languageValidator = $languageValidator;
-		$this->permissionChecker = $permissionChecker;
-		$this->maxLimit = $maxLimit;
-		$this->maxApiHighLimitsLimit = $maxApiHighLimitsLimit;
 	}
 
 	/**
@@ -49,12 +38,12 @@ class ItemPrefixSearchValidator {
 					throw new LogicException( 'unknown validation error code ' . $validationError->getCode() );
 			}
 		}
-		$user = $request->username === null ? User::newAnonymous() : User::withUsername( $request->username );
-		$this->validateLimitAndOffset( $request, $user );
+
+		$this->validateLimitAndOffset( $request );
 	}
 
-	private function validateLimitAndOffset( ItemPrefixSearchRequest $request, User $user ): void {
-		$maxLimit = $this->permissionChecker->hasApiHighLimits( $user )
+	private function validateLimitAndOffset( ItemPrefixSearchRequest $request ): void {
+		$maxLimit = $this->permissionChecker->hasApiHighLimits( $request->user )
 			? $this->maxApiHighLimitsLimit : $this->maxLimit;
 		if ( !$request->disableLimitValidation && ( $request->limit < 0 || $request->limit > $maxLimit ) ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );

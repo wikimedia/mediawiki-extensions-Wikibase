@@ -13,6 +13,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikimedia\Assert\InvariantException;
@@ -156,7 +157,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 					$params['limit'],
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
-					$this->getUsername()
+					$this->getApiUser()
 				) );
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
@@ -230,9 +231,9 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		];
 	}
 
-	private function getUsername(): ?string {
+	private function getApiUser(): User {
 		$mwUser = $this->getAuthority()->getUser();
-		return $mwUser->isRegistered() ? $mwUser->getName() : null;
+		return $mwUser->isRegistered() ? User::withUsername( $mwUser->getName() ) : User::newAnonymous();
 	}
 
 }

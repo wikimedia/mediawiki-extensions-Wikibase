@@ -29,9 +29,9 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 				new ItemPrefixSearchRequest(
 					query: $request->text,
 					language: $request->searchLanguageCode,
+					user: $request->user,
 					limit: $request->limit,
 					offset: 0,
-					username: $request->username,
 					disableLanguageFallback: $request->strictLanguage,
 					resultLanguage: $request->resultLanguage,
 					profile: $request->profileContext,

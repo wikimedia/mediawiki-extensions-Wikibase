@@ -29,29 +29,89 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 
 	private const DEFAULT_LIMIT = 10;
 	private const DEFAULT_OFFSET = 0;
+	private bool $hasApiHighLimits = false;
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->hasApiHighLimits = false;
+	}
 
 	/**
 	 * @doesNotPerformAssertions
 	 */
 	public function testValidate_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new PropertyPrefixSearchRequest( 'q', 'en', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
-			User::newAnonymous() );
+			->validate( new PropertyPrefixSearchRequest(
+				'q',
+				'en',
+				User::newAnonymous(),
+				self::DEFAULT_LIMIT,
+				self::DEFAULT_OFFSET
+			) );
 	}
 
 	/**
 	 * @doesNotPerformAssertions
 	 */
-	public function testValidateWithoutLimitAndOffsetParams_passe(): void {
+	public function testValidateWithoutLimitAndOffsetParams_passes(): void {
 		$this->newUseCaseValidator()
-			->validate( new PropertyPrefixSearchRequest( 'q', 'en' ), User::newAnonymous() );
+			->validate( new PropertyPrefixSearchRequest( 'q', 'en', User::newAnonymous() ) );
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testValidateWithLimitAtMax_passes(): void {
+		$this->newUseCaseValidator()
+			->validate( new PropertyPrefixSearchRequest(
+				'q',
+				'en',
+				User::newAnonymous(),
+				50,
+				self::DEFAULT_OFFSET
+			) );
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testValidateWithApiHighLimits_passes(): void {
+		$this->hasApiHighLimits = true;
+		$this->newUseCaseValidator()
+		->validate( new PropertyPrefixSearchRequest(
+			'q',
+			'en',
+			User::withUsername( 'myUser' ),
+			500,
+			self::DEFAULT_OFFSET,
+		) );
+	}
+
+	/**
+	 * @doesNotPerformAssertions
+	 */
+	public function testValidateWithDisableLimitValidation_passes(): void {
+		$this->newUseCaseValidator()
+			->validate( new PropertyPrefixSearchRequest(
+				'q',
+				'en',
+				User::newAnonymous(),
+				1000,
+				self::DEFAULT_OFFSET,
+				disableLimitValidation: true
+			) );
 	}
 
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
-				->validate( new PropertyPrefixSearchRequest( 'q', 'xyz', self::DEFAULT_LIMIT, self::DEFAULT_OFFSET ),
-				User::newAnonymous() );
+				->validate( new PropertyPrefixSearchRequest(
+					'q',
+					'xyz',
+					User::newAnonymous(),
+					self::DEFAULT_LIMIT,
+					self::DEFAULT_OFFSET
+				) );
 
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
@@ -70,12 +130,14 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 	public function testGivenInvalidLimitAndOffset_throws(
 		UseCaseError $expectedError,
 		int $limit,
-		int $offset
+		int $offset,
+		bool $hasApiHighLimits
 	): void {
+		$this->hasApiHighLimits = $hasApiHighLimits;
 		try {
+			$this->hasApiHighLimits = $hasApiHighLimits;
 			$this->newUseCaseValidator()
-				->validate( new PropertyPrefixSearchRequest( 'q', 'en', $limit, $offset ),
-				User::newAnonymous() );
+				->validate( new PropertyPrefixSearchRequest( 'q', 'en', $this->createStub( User::class ), $limit, $offset ) );
 			$this->fail( 'Expected exception was not thrown' );
 		} catch ( UseCaseError $e ) {
 			$this->assertEquals( $expectedError, $e );
@@ -87,24 +149,34 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 			UseCaseError::invalidQueryParameter( 'limit' ),
 			-1,
 			self::DEFAULT_OFFSET,
+			false,
 		];
 
 		yield 'invalid limit - limit exceeds max (50)' => [
 			UseCaseError::invalidQueryParameter( 'limit' ),
 			51,
 			self::DEFAULT_OFFSET,
+			false,
+		];
+
+		yield 'invalid limit - limit exceeds max api high limits (500)' => [
+			UseCaseError::invalidQueryParameter( 'limit' ),
+			501,
+			self::DEFAULT_OFFSET,
+			true,
 		];
 
 		yield 'invalid offset - negative offset' => [
 			UseCaseError::invalidQueryParameter( 'offset' ),
 			self::DEFAULT_LIMIT,
 			-2,
+			false,
 		];
 	}
 
-	private function newUseCaseValidator( bool $hasApiHighLimits = false ): PropertyPrefixSearchValidator {
+	private function newUseCaseValidator(): PropertyPrefixSearchValidator {
 		$permissionChecker = $this->createStub( PermissionChecker::class );
-		$permissionChecker->method( 'hasApiHighLimits' )->willReturn( $hasApiHighLimits );
+		$permissionChecker->method( 'hasApiHighLimits' )->willReturn( $this->hasApiHighLimits );
 
 		return new PropertyPrefixSearchValidator(
 			$this->newSearchLanguageValidator(),

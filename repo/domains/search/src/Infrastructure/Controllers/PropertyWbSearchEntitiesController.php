@@ -27,13 +27,13 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 		try {
 			$response = $this->propertyPrefixSearch->execute(
 				new PropertyPrefixSearchRequest(
-					$request->text,
-					$request->searchLanguageCode,
-					$request->limit,
-					0,
-					$request->username,
-					$request->strictLanguage,
-					$request->resultLanguage,
+					query: $request->text,
+					language: $request->searchLanguageCode,
+					limit: $request->limit,
+					offset: 0,
+					user: $request->user,
+					disableLanguageFallback: $request->strictLanguage,
+					resultLanguage: $request->resultLanguage,
 					disableLimitValidation: true
 				)
 			);

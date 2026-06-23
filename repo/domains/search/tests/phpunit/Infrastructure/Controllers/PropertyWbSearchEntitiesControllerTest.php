@@ -17,6 +17,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\Label;
 use Wikibase\Repo\Domains\Search\Domain\Model\MatchedData;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResults;
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PropertyConceptUriBuilder;
@@ -43,7 +44,7 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'instance', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'instance', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertEquals(
@@ -72,7 +73,7 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertNull( $results[0]->getDisplayLabel() );
@@ -89,7 +90,7 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'P42', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'P42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertCount( 1, $results );
 		$this->assertSame( 'pid', $results[0]->getMatchedTerm()->getLanguageCode() );
@@ -121,12 +122,12 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$this->expectException( EntitySearchException::class );
-		$controller->search( new WbSearchEntitiesRequest( 'test', 'xyz', 'xyz', 5, false, null, null ) );
+		$controller->search( new WbSearchEntitiesRequest( 'test', 'xyz', 'xyz', 5, false, null, User::newAnonymous() ) );
 	}
 
 	public function testEmptyResults(): void {
 		$controller = $this->newController( new PropertyPrefixSearchResults() );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, null ) );
+		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
 		$this->assertSame( [], $results );
 	}
@@ -139,13 +140,11 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		$propertyConceptUriBuilder->method( 'buildConceptUri' )
 			->willReturnCallback( fn( $id ) => 'http://www.wikidata.org/entity/' . $id->getSerialization() );
 
-		$permissionChecker = $this->createStub( PermissionChecker::class );
-
 		return new PropertyWbSearchEntitiesController(
 			new PropertyPrefixSearch(
 				new PropertyPrefixSearchValidator(
 					$this->newAllowingLanguageValidator(),
-					$permissionChecker,
+					$this->createStub( PermissionChecker::class ),
 					50,
 					500
 				),

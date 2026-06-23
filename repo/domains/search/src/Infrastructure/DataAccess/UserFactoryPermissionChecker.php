@@ -11,10 +11,7 @@ use Wikibase\Repo\Domains\Search\Domain\Services\PermissionChecker;
  */
 class UserFactoryPermissionChecker implements PermissionChecker {
 
-	private UserFactory $userFactory;
-
-	public function __construct( UserFactory $userFactory ) {
-		$this->userFactory = $userFactory;
+	public function __construct( private UserFactory $userFactory ) {
 	}
 
 	public function hasApiHighLimits( User $user ): bool {

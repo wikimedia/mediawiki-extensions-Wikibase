@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch;
 
+use Wikibase\Repo\Domains\Search\Domain\Model\User;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -14,9 +16,9 @@ class ItemPrefixSearchRequest {
 	public function __construct(
 		public readonly string $query,
 		public readonly string $language,
+		public readonly User $user,
 		public readonly int $limit = self::DEFAULT_LIMIT,
 		public readonly int $offset = self::DEFAULT_OFFSET,
-		public readonly ?string $username = null,
 		public readonly bool $disableLanguageFallback = false,
 		?string $resultLanguage = null,
 		public readonly ?string $profile = null,
