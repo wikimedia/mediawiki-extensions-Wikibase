@@ -142,7 +142,8 @@ describe( 'wbui2025 add qualifiers', () => {
 		} );
 	} );
 
-	context( 'mobile view (wbui2025) - tabular-data qualifier', () => {
+	// Test skipped in favor of T418778
+	context.skip( 'mobile view (wbui2025) - tabular-data qualifier', () => {
 		let itemViewPage: ItemViewPage;
 		let tabularPropertyId: string;
 
