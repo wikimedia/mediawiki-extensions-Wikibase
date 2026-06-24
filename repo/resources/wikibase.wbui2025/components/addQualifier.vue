@@ -132,6 +132,7 @@ module.exports = exports = defineComponent( {
 	align-self: stretch;
 	display: flex;
 	flex-direction: column;
+	gap: @spacing-25;
 
 	.wikibase-wbui2025-add-qualifier-form-property {
 		display: flex;
@@ -146,7 +147,10 @@ module.exports = exports = defineComponent( {
 	}
 
 	.wikibase-wbui2025-add-qualifier-form-value {
-		padding: @spacing-150 0;
+		padding: @spacing-100 0;
+		display: flex;
+		flex-direction: column;
+		gap: @spacing-75;
 	}
 }
 

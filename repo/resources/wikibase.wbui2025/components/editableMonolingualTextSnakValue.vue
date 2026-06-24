@@ -22,7 +22,7 @@
 		<template #secondary-input>
 			<div>
 				<div class="wikibase-wbui2025-secondary-input-label">
-					<p>{{ $i18n( 'wikibase-monolingualtextcode-mandatory' ) }}:</p>
+					{{ $i18n( 'wikibase-monolingualtextcode-mandatory' ) }}:
 				</div>
 				<wikibase-wbui2025-api-item-lookup
 					:lookup-source="lookupSource"
@@ -180,14 +180,3 @@ module.exports = exports = defineComponent( {
 	} }
 );
 </script>
-
-<style lang="less">
-@import 'mediawiki.skin.variables.less';
-
-.wikibase-wbui2025-secondary-input-label {
-	p {
-		padding-bottom: 0;
-		margin-top: @spacing-25;
-	}
-}
-</style>

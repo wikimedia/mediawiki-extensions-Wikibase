@@ -204,7 +204,7 @@ module.exports = exports = defineComponent( {
 	flex-grow: 1;
 	align-items: center;
 	margin: 0;
-	padding: @spacing-0 @spacing-0 @spacing-0 @spacing-30;
+	padding: @spacing-0;
 
 	// In cases of long, non-wrapping snak values, make them horizontally-scrollable
 	// and contained within the parent element

@@ -133,6 +133,7 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 	justify-content: center;
 	width: 100%;
 	display: flex;
+	gap: @spacing-75;
 
 	div.wikibase-wbui2025-snak-value {
 		width: 100%;
@@ -176,6 +177,10 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		position: relative;
 		padding: 0;
 		display: inline-block;
+
+		button {
+			padding: 0;
+		}
 
 		&.ui-state-default {
 			background: none;
