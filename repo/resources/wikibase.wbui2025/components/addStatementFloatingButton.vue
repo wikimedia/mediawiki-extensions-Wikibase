@@ -70,7 +70,7 @@ module.exports = exports = defineComponent( {
 			return boundingRect.bottom > 0 && boundingRect.top < window.innerHeight;
 		},
 		scrollPositionUpdated() {
-			const addStatementButtons = document.getElementsByClassName( 'wikibase-wbui2025-add-statement-button' );
+			const addStatementButtons = Array.from( document.getElementsByClassName( 'wikibase-wbui2025-add-statement-button' ) );
 			const statementsHeader = document.getElementById( 'claims' );
 			const identifiersHeader = document.getElementById( 'identifiers' );
 			if ( identifiersHeader && identifiersHeader.getBoundingClientRect().top < window.innerHeight ) {
@@ -78,8 +78,11 @@ module.exports = exports = defineComponent( {
 			} else {
 				this.sectionKey = 'statements';
 			}
-			const allElements = [ statementsHeader ].concat( Array.from( addStatementButtons ) );
-			this.visible = !allElements.reduce( ( acc, el ) => acc || this.elementOnScreen( el ), false );
+			const headerRect = statementsHeader ? statementsHeader.getBoundingClientRect() : null;
+			const headerScrolledPast = headerRect ? headerRect.bottom < 0 : true;
+			const allScrolledPast = addStatementButtons.length > 0 && addStatementButtons.every( ( el ) => el.getBoundingClientRect().bottom < 0 );
+			const anyOnScreen = addStatementButtons.some( ( el ) => this.elementOnScreen( el ) );
+			this.visible = headerScrolledPast && !allScrolledPast && !anyOnScreen;
 		}
 	},
 	mounted: function () {
