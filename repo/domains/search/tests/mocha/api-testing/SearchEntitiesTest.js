@@ -371,6 +371,20 @@ describe( 'wbsearchentities', () => {
 				assert.equal( result.display.label.language, 'de' );
 				assert.equal( result.display.label.value, ITEM_DE_LABEL );
 			} );
+
+			it( 'supports fallback to languages other than english for the result language', async () => {
+				const response = await api.action( 'wbsearchentities', {
+					search: ITEM_EN_LABEL,
+					language: 'en',
+					type: 'item',
+					uselang: 'de-ch',
+				} );
+
+				const result = response.search.find( ( r ) => r.id === testItemId );
+				assert.isOk( result, 'item should appear in search results' );
+				assert.equal( result.display.label.language, 'de' );
+				assert.equal( result.display.label.value, ITEM_DE_LABEL );
+			} );
 		} );
 	} );
 

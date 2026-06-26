@@ -153,7 +153,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 				->search( new WbSearchEntitiesRequest(
 					$params['search'],
 					$params['language'] ?: $this->getLanguage()->getCode(),
-					$this->getLanguageCode()->toBcp47Code(),
+					$this->getLanguage()->getCode(),
 					$params['limit'],
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
