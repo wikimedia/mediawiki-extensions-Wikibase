@@ -26,6 +26,7 @@
 				</cdx-message>
 				<cdx-button
 					action="progressive"
+					size="large"
 					@click="goToExistingStatement"
 				>
 					<cdx-icon :icon="cdxIconEdit"></cdx-icon>
