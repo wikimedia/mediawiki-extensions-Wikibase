@@ -6,7 +6,7 @@ namespace Wikibase\Client\Hooks;
 
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Language\Language;
-use MediaWiki\Linker\Hook\LinkerMakeExternalLinkWithContextHook;
+use MediaWiki\Linker\Hook\LinkerMakeExternalLinkHook;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Hooks\Formatter\ClientEntityLinkFormatter;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -20,18 +20,18 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
-use Wikimedia\Parsoid\Core\LinkTarget;
 
 /**
  * @license GPL-2.0-or-later
  */
-class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithContextHook {
+class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 	private Language $contentLanguage;
 	private EntityIdParser $entityIdParser;
 	private string $repoUrlHost;
 	private bool $isRepoEntityNamespaceMain;
 	private ClientEntityLinkFormatter $clientEntityLinkFormatter;
 	private FallbackLabelDescriptionLookup $labelDescriptionLookup;
+	private ?Title $currentPageTitle;
 
 	public function __construct(
 		Language $contentLanguage,
@@ -40,6 +40,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithCon
 		bool $isRepoEntityNamespaceMain,
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		string $repoUrlHost,
+		?Title $currentPageTitle,
 	) {
 		$this->contentLanguage = $contentLanguage;
 		$this->entityIdParser = $entityIdParser;
@@ -47,6 +48,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithCon
 		$this->clientEntityLinkFormatter = $clientEntityLinkFormatter;
 		$this->repoUrlHost = $repoUrlHost;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->currentPageTitle = $currentPageTitle;
 	}
 
 	public static function factory(
@@ -63,6 +65,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithCon
 		$terms = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 		$labelDescriptionLookup = $fallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language, [], $terms );
 		$isRepoEntityNamespaceMain = $entityNamespaceLookup->isEntityNamespace( 0 );
+		$currentPageTitle = $context->hasTitle() ? $context->getTitle() : null;
 		return new self(
 			$language,
 			$clientEntityLinkFormatter,
@@ -70,6 +73,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithCon
 			$isRepoEntityNamespaceMain,
 			$labelDescriptionLookup,
 			$repoUrlHost,
+			$currentPageTitle,
 		);
 	}
 
@@ -82,25 +86,23 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkWithCon
 		return $parsedUrlHost === $this->repoUrlHost;
 	}
 
-	public function isRecentChangeOrWatchlist( Title $currentPageTitle ): bool {
-		return $currentPageTitle->isSpecialPage() &&
-			( $currentPageTitle->isSpecial( 'Recentchanges' ) || $currentPageTitle->isSpecial( 'Watchlist' ) );
+	public function isRecentChangeOrWatchlist(): bool {
+		return $this->currentPageTitle && $this->currentPageTitle->isSpecialPage() &&
+			( $this->currentPageTitle->isSpecial( 'Recentchanges' ) || $this->currentPageTitle->isSpecial( 'Watchlist' ) );
 	}
 
 	/**
 	 * @param ?string &$url Link URL
 	 * @param string &$text Link text
+	 * @param string &$link New link HTML (if returning false)
 	 * @param string[] &$attribs Attributes to be applied
 	 * @param string $linkType External link type
-	 * @param LinkTarget $contextTitle The page on which this link appears
 	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public function onLinkerMakeExternalLinkWithContext(
-		?string &$url, string &$text, array &$attribs, string $linkType,
-		LinkTarget $contextTitle
+	public function onLinkerMakeExternalLink(
+		&$url, &$text, &$link, &$attribs, $linkType
 	) {
-		$contextTitle = Title::newFromLinkTarget( $contextTitle );
-		if ( !$this->isRecentChangeOrWatchlist( $contextTitle ) || !$this->isRepoUrl( $url ) ) {
+		if ( !$this->isRecentChangeOrWatchlist() || !$this->isRepoUrl( $url ) ) {
 			return;
 		}
 
