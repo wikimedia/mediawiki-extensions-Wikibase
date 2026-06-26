@@ -1,0 +1,99 @@
+@startuml
+
+skinparam componentStyle rectangle
+
+actor Client
+
+package "REST API" {
+
+    [ /suggest/items ] as SuggestItemsRoute
+    [ /suggest/properties ] as SuggestPropertiesRoute
+
+    [ItemPrefixSearchRouteHandler]
+    [PropertyPrefixSearchRouteHandler]
+}
+
+package "Action API" {
+
+    [ ?action=wbsearchentities&type=item ] as ItemWbSearchEntitiesRoute
+    [ ?action=wbsearchentities&type=property ] as PropertyWbSearchEntitiesRoute
+    [ ?action=wbsearchentities&type=lexeme ] as LexemeWbSearchEntitiesRoute
+    [ ?action=query&list=wbsearch ] as QuerySearchEntitiesRoute
+
+    [SearchEntities]
+    [QuerySearchEntities]
+
+    [TypeDispatchingEntitySearchHelper]
+    [CombinedEntitySearchHelper]
+
+    [PropertyDataTypeSearchHelper]
+
+    [LexemeSearchHelper]
+    [EntitySchemaSearchHelper]
+
+    [EntitySearchHelper]
+
+[QuerySearchEntities] --> [TypeDispatchingEntitySearchHelper]
+
+SearchEntities --> [TypeDispatchingEntitySearchHelper]
+
+[TypeDispatchingEntitySearchHelper] --> [CombinedEntitySearchHelper] : item
+[TypeDispatchingEntitySearchHelper] --> [PropertyDataTypeSearchHelper] : property
+[PropertyDataTypeSearchHelper] --> [CombinedEntitySearchHelper]
+[TypeDispatchingEntitySearchHelper] --> [LexemeSearchHelper] : lexeme
+[TypeDispatchingEntitySearchHelper] --> [EntitySchemaSearchHelper] : entityschema
+
+    CombinedEntitySearchHelper ..|> [EntitySearchHelper]
+    TypeDispatchingEntitySearchHelper ..|> [EntitySearchHelper]
+    PropertyDataTypeSearchHelper ..|> EntitySearchHelper
+    LexemeSearchHelper ..|> EntitySearchHelper
+    EntitySchemaSearchHelper ..|> EntitySearchHelper
+}
+
+package "Use Cases" {
+
+    [ItemPrefixSearch]
+    [PropertyPrefixSearch]
+
+    [ItemPrefixSearchEngine]
+    [PropertyPrefixSearchEngine]
+}
+
+package "CirrusSearch" {
+    [EntitySearchElastic]
+
+    '[EntitySearchElastic] ..> [EntitySearchHelper]
+}
+
+Client --> SuggestItemsRoute : item
+Client --> SuggestPropertiesRoute : property
+Client --> QuerySearchEntitiesRoute
+
+SuggestItemsRoute --> [ItemPrefixSearchRouteHandler]
+SuggestPropertiesRoute --> [PropertyPrefixSearchRouteHandler]
+
+QuerySearchEntitiesRoute --> [QuerySearchEntities]
+
+[ItemPrefixSearchRouteHandler] --> [ItemPrefixSearch]
+[ItemPrefixSearch] --> [ItemPrefixSearchEngine]
+[ItemPrefixSearchEngine] --> [EntitySearchElastic]
+
+[PropertyPrefixSearchRouteHandler] --> [PropertyPrefixSearch]
+[PropertyPrefixSearch] --> [PropertyPrefixSearchEngine]
+[PropertyPrefixSearchEngine] --> [EntitySearchElastic]
+
+[ItemPrefixSearchEngine]
+
+
+Client --> ItemWbSearchEntitiesRoute
+Client --> PropertyWbSearchEntitiesRoute
+Client --> LexemeWbSearchEntitiesRoute
+
+ItemWbSearchEntitiesRoute --> [SearchEntities]
+PropertyWbSearchEntitiesRoute --> [SearchEntities]
+LexemeWbSearchEntitiesRoute --> [SearchEntities]
+
+
+
+
+@enduml
