@@ -32,7 +32,7 @@
 			mw.loader.using( 'ext.uls.rewrite.entrypoints' ).then( ( require ) => {
 				const EntrypointRegistry = require( 'ext.uls.rewrite.entrypoints' );
 				const { ENTRYPOINT_TYPE, ULS_MODE } = EntrypointRegistry;
-				EntrypointRegistry.register( ENTRYPOINT_TYPE.QUICK_ACTIONS, {
+				const quickAction = {
 					id: 'wikibase-connected-sitelink',
 					shouldShow: () => true,
 					getConfig: () => ( {
@@ -40,7 +40,12 @@
 						icon: cdxIconEdit,
 						url: itemUrl
 					} )
-				}, ULS_MODE.CONTENT );
+				};
+				EntrypointRegistry.register( ENTRYPOINT_TYPE.QUICK_ACTIONS, quickAction, ULS_MODE.CONTENT );
+
+				const emptyListAction = Object.assign( {}, quickAction );
+				emptyListAction.id = 'wikibase-connected-sitelink-emptylist';
+				EntrypointRegistry.register( ENTRYPOINT_TYPE.EMPTY_LIST, emptyListAction, ULS_MODE.CONTENT );
 			} );
 		} else {
 			mw.uls.ActionsMenuItemsRegistry.register( {
