@@ -12,9 +12,13 @@
 				<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				<wbui2025-snak-value
 					:snak="snak"
+				></wbui2025-snak-value>
+				<wbui2025-indicators
+					v-if="showIndicators"
+					:snak-hash="snak.hash"
 					:statement-id="statementId"
 					:is-qualifier="true"
-				></wbui2025-snak-value>
+				></wbui2025-indicators>
 			</div>
 		</template>
 	</div>
@@ -24,13 +28,15 @@
 const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './propertyName.vue' );
 const Wbui2025SnakValue = require( './snakValue.vue' );
+const Wbui2025Indicators = require( './indicators.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025Qualifiers',
 	components: {
 		Wbui2025PropertyName,
-		Wbui2025SnakValue
+		Wbui2025SnakValue,
+		Wbui2025Indicators
 	},
 	props: {
 		qualifiers: {
@@ -45,6 +51,11 @@ module.exports = exports = defineComponent( {
 			type: String,
 			required: true
 		}
+	},
+	data() {
+		return {
+			showIndicators: true
+		};
 	},
 	computed: {
 		qualifierCount() {
@@ -73,6 +84,10 @@ module.exports = exports = defineComponent( {
 	padding: @spacing-25 @spacing-75 @spacing-25 @spacing-200;
 	gap: @spacing-75;
 	align-self: stretch;
+
+	&:has(.wikibase-wbui2025-indicators) {
+		padding-right: 0;
+	}
 
 	.wikibase-wbui2025-property-name {
 		width: @size-800;

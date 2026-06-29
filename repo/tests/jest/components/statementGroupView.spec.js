@@ -49,7 +49,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 	describe( 'the mounted component', () => {
 		let wrapper;
 		const mockStatement2 = {
-			mainsnak: { snaktype: 'somevalue', datavalue: { type: 'string', value: '' }, datatype: 'string' },
+			mainsnak: { snaktype: 'somevalue', datavalue: { type: 'string', value: '' }, datatype: 'string', hash: 'fake-snak-hash' },
 			type: 'statement',
 			id: 'Q1$18ed80a7-62a8-4779-a7dd-3876e835979a',
 			rank: 'normal'

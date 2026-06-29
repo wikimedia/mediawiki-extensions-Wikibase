@@ -13,14 +13,13 @@ jest.mock(
 	{ virtual: true }
 );
 
-const { ref } = require( 'vue' );
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const wbui2025 = require( '../../../resources/wikibase.wbui2025/lib.js' );
 const indicatorPopoverVue = require( '../../../resources/wikibase.wbui2025/components/indicatorPopover.vue' );
 const Wbui2025Stepper = require( '../../../resources/wikibase.wbui2025/components/stepper.vue' );
 const { CdxPopover, CdxButton } = require( '../../../codex.js' );
-const { mount } = require( '@vue/test-utils' );
+const { mount, shallowMount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
 let pinia;
@@ -30,15 +29,16 @@ describe( 'wikibase.wbui2025.indicatorPopover', () => {
 		const snakHash = 'ad11db2dbfd7099ea788fc26a68dac40',
 			statementId = 'Q1$789eef0c-4108-cdda-1a63-505cdd324564',
 			referenceHash = '1e638f52eb8d0d3a9453aa05143fa059657dd9d3';
+		const AnchorComponent = { template: '<span></span>' };
 
 		beforeEach( () => {
 			pinia = createTestingPinia();
 		} );
 
 		function mountIndicatorPopover( props = {} ) {
-			const anchor = ref();
+			const $anchorEl = shallowMount( AnchorComponent ).vm.$el;
 			return mount( indicatorPopoverVue, {
-				props: Object.assign( { anchor }, props ),
+				props: Object.assign( { anchor: $anchorEl }, props ),
 				global: {
 					plugins: [ pinia ]
 				}

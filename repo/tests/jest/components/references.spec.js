@@ -16,6 +16,7 @@ mockLibWbui2025();
 const propertyNameComponent = require( '../../../resources/wikibase.wbui2025/components/propertyName.vue' );
 const snakValueComponent = require( '../../../resources/wikibase.wbui2025/components/snakValue.vue' );
 const referencesComponent = require( '../../../resources/wikibase.wbui2025/components/references.vue' );
+const indicatorsComponent = require( '../../../resources/wikibase.wbui2025/components/indicators.vue' );
 const { mount } = require( '@vue/test-utils' );
 const { createTestingPinia } = require( '@pinia/testing' );
 
@@ -27,12 +28,17 @@ describe( 'wikibase.wbui2025.references', () => {
 	} );
 
 	describe( 'the mounted component', () => {
+		const firstReferenceHash = '47ea15a2782fccb33280d0fce23c22bbaca4cdf4';
+		const secondReferenceHash = '1232648d9ff007972d6651fcda7eeb85c9bb2e18';
+		const statementId = 'Q1$789eef0c-4108-cdda-1a63-505cdd324564';
+
 		let wrapper;
 		beforeEach( async () => {
 			wrapper = await mount( referencesComponent, {
 				props: {
 					references: [
 						{
+							hash: firstReferenceHash,
 							snaks: {
 								P1: [
 									{
@@ -63,6 +69,7 @@ describe( 'wikibase.wbui2025.references', () => {
 							'snaks-order': [ 'P2', 'P1' ]
 						},
 						{
+							hash: secondReferenceHash,
 							snaks: {
 								P3: [
 									{
@@ -77,7 +84,7 @@ describe( 'wikibase.wbui2025.references', () => {
 							'snaks-order': [ 'P3' ]
 						}
 					],
-					statementId: 'Q1$789eef0c-4108-cdda-1a63-505cdd324564'
+					statementId
 				},
 				global: {
 					plugins: [
@@ -110,6 +117,36 @@ describe( 'wikibase.wbui2025.references', () => {
 			expect( snakValues[ 3 ].props( 'snak' ) )
 				.toHaveProperty( [ 'datavalue', 'value' ], 'reference30' );
 			// TODO assert that the two references are in separate wrapper elements (T400237)
+		} );
+
+		it( 'mounts an indicators component for each reference', () => {
+			const indicators = wrapper.findAllComponents( indicatorsComponent );
+
+			expect( indicators ).toHaveLength( 4 );
+			expect( indicators[ 0 ].props() ).toEqual( {
+				referenceHash: firstReferenceHash,
+				isQualifier: false,
+				snakHash: 'ed7b027c838c304a0d455dc0b9c99a75a1ca7751',
+				statementId
+			} );
+			expect( indicators[ 1 ].props() ).toEqual( {
+				referenceHash: firstReferenceHash,
+				isQualifier: false,
+				snakHash: '3ab28b81d81a4d2ec1227cf068e09850d6d8b2e3',
+				statementId
+			} );
+			expect( indicators[ 2 ].props() ).toEqual( {
+				referenceHash: firstReferenceHash,
+				isQualifier: false,
+				snakHash: '24f38d18cb3c564dc39dc73abc54acaf38194666',
+				statementId
+			} );
+			expect( indicators[ 3 ].props() ).toEqual( {
+				referenceHash: secondReferenceHash,
+				isQualifier: false,
+				snakHash: '16b2c8d03729480fd64a1c34c40a0aa0b8f7d823',
+				statementId
+			} );
 		} );
 	} );
 } );

@@ -23,9 +23,14 @@
 							<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 							<wbui2025-snak-value
 								:snak="snak"
+							></wbui2025-snak-value>
+							<wbui2025-indicators
+								v-if="showIndicators"
+								:snak-hash="snak.hash"
 								:statement-id="statementId"
 								:reference-hash="reference.hash"
-							></wbui2025-snak-value>
+							>
+							</wbui2025-indicators>
 						</div>
 					</template>
 				</div>
@@ -38,13 +43,15 @@
 const { defineComponent } = require( 'vue' );
 const Wbui2025PropertyName = require( './propertyName.vue' );
 const Wbui2025SnakValue = require( './snakValue.vue' );
+const Wbui2025Indicators = require( './indicators.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025References',
 	components: {
 		Wbui2025PropertyName,
-		Wbui2025SnakValue
+		Wbui2025SnakValue,
+		Wbui2025Indicators
 	},
 	props: {
 		references: {
@@ -57,7 +64,10 @@ module.exports = exports = defineComponent( {
 		}
 	},
 	data() {
-		return { showReferences: false };
+		return {
+			showReferences: false,
+			showIndicators: true
+		};
 	},
 	computed: {
 		referenceCount() {
@@ -116,10 +126,14 @@ module.exports = exports = defineComponent( {
 
 	.wikibase-wbui2025-reference-snak {
 		display: flex;
-		padding: @spacing-75 @spacing-100;
+		padding: @spacing-75 @spacing-75 @spacing-75 @spacing-100;
 		align-items: flex-start;
 		gap: @spacing-75;
 		align-self: stretch;
+
+		&:has(.wikibase-wbui2025-indicators) {
+			padding-right: 0;
+		}
 
 		.wikibase-wbui2025-property-name-link {
 			padding: 0;
