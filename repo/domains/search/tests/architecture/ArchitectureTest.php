@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Domains\Search\Architecture;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
+use Wikibase\Repo\Api\EntitySearchException;
 
 /**
  * @coversNothing
@@ -71,11 +72,13 @@ class ArchitectureTest {
 	 * Domain services may depend on:
 	 *  - the domain model namespace and everything it depends on
 	 *  - other classes from their own namespace
+	 *  - EntitySearchException
 	 */
 	private function allowedDomainServicesDependencies(): array {
 		return [
 			...$this->allowedDomainModelDependencies(),
 			Selector::inNamespace( self::DOMAIN_SERVICES ),
+			Selector::classname( EntitySearchException::class ), // T400715
 		];
 	}
 

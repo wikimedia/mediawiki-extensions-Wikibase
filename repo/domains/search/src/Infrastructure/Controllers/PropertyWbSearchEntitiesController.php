@@ -23,6 +23,9 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 	) {
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function search( WbSearchEntitiesRequest $request ): array {
 		try {
 			$response = $this->propertyPrefixSearch->execute(

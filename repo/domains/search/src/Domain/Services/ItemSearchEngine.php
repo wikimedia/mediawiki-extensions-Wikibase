@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Domain\Services;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 
 /**
@@ -9,6 +10,9 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
  */
 interface ItemSearchEngine {
 
+	/**
+	 * @throws EntitySearchException
+	 */
 	public function searchItemByLabel(
 		string $searchTerm,
 		string $languageCode,

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\ItemPrefixSearch;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemPrefixSearchEngine;
 
@@ -18,6 +19,7 @@ class ItemPrefixSearch {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws EntitySearchException
 	 * TODO validation of resultLanguage is in SearchEntities not ItemPrefixSearchValidator (see T422899)
 	 */
 	public function execute( ItemPrefixSearchRequest $itemRequest ): ItemPrefixSearchResponse {

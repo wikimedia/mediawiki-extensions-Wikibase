@@ -29,6 +29,9 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		$this->inLabelSearch = $inLabelSearch;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function searchItemByLabel(
 		string $searchTerm,
 		string $languageCode,
@@ -44,6 +47,9 @@ class InLabelSearchEngine implements ItemSearchEngine, PropertySearchEngine {
 		);
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function searchPropertyByLabel(
 		string $searchTerm,
 		string $languageCode,

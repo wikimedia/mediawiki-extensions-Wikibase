@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\SimplePropertySearch;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertySearchEngine;
 
@@ -23,6 +24,7 @@ class SimplePropertySearch {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws EntitySearchException
 	 */
 	public function execute( SimplePropertySearchRequest $propertyRequest ): SimplePropertySearchResponse {
 		$this->validator->validate( $propertyRequest );

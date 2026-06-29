@@ -2,12 +2,17 @@
 
 namespace Wikibase\Repo\Domains\Search\Domain\Services;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResults;
 
 /**
  * @license GPL-2.0-or-later
  */
 interface ItemPrefixSearchEngine {
+
+	/**
+	 * @throws EntitySearchException
+	 */
 	public function suggestItems(
 		string $searchTerm,
 		string $languageCode,

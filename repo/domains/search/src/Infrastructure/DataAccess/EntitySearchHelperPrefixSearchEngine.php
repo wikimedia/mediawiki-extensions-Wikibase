@@ -31,6 +31,9 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 	) {
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function suggestItems(
 		string $searchTerm,
 		string $languageCode,
@@ -59,6 +62,9 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		) );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function suggestProperties(
 		string $searchTerm,
 		string $languageCode,
