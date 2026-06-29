@@ -356,25 +356,28 @@ describe( 'Wikibase GraphQL', () => {
 			expect( results ).to.deep.include( { node: { id: item1.id } } );
 			expect( results ).to.deep.include( { node: { id: item2.id } } );
 		} );
-	} );
 
-	it( 'property value pair match with "not"', async function () {
-		const response = await queryGraphQL( { query: `
-					{
-						searchItems(
-							query: {
-								not:
-									{ property: "${ property3.id }", value: "${ item2Property3StatementValue }" }
-							}
-						) {
-							edges {
-								node { id }
-							}
+		it( 'property value pair match with "not"', async function () {
+			const response = await queryGraphQL( { query: `
+				{
+					searchItems(
+						query: { and: [
+							# includes item1 and item2
+							{ property: "${ property2.id }" },
+							# excludes item2
+							{ not: { property: "${ property3.id }", value: "${ item2Property3StatementValue }" } }
+						] }
+					) {
+						edges {
+							node { id }
 						}
-					}` } );
+					}
+				}` } );
 
-		const results = response.body.data.searchItems.edges;
-		expect( results ).to.not.deep.include( { node: { id: item2.id } } );
+			const results = response.body.data.searchItems.edges;
+			expect( results ).to.deep.include( { node: { id: item1.id } } );
+			expect( results ).to.not.deep.include( { node: { id: item2.id } } );
+		} );
 	} );
 
 	it( 'can look up items by sitelink', async () => {
