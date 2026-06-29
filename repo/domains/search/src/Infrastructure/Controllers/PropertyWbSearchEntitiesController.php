@@ -29,9 +29,9 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 				new PropertyPrefixSearchRequest(
 					query: $request->text,
 					language: $request->searchLanguageCode,
+					user: $request->user,
 					limit: $request->limit,
 					offset: 0,
-					user: $request->user,
 					disableLanguageFallback: $request->strictLanguage,
 					resultLanguage: $request->resultLanguage,
 					disableLimitValidation: true
