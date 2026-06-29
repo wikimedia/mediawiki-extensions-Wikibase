@@ -17,6 +17,11 @@ class ItemSearchFilterType extends InputObjectType {
 			// phpcs:ignore Generic.Files.LineLength.TooLong
 			'description' => 'Combine multiple conditions using OR operator. Requires at least two conditions, one of which must match. Cannot be used together with any other field.',
 		];
+		$notFieldDefinition = [
+			'type' => $searchCondition,
+			// phpcs:ignore Generic.Files.LineLength.TooLong
+			'description' => 'Search for items that do not have a certain statement using NOT operator. Supports a single property/value condition. Cannot be used together with any other field.',
+		];
 
 		parent::__construct( [
 			// phpcs:ignore Generic.Files.LineLength.TooLong
@@ -29,6 +34,7 @@ class ItemSearchFilterType extends InputObjectType {
 						'description' => 'A condition within an AND operation used in item search. Supports simple property/value matching or combining multiple filters with OR.',
 						'fields' => [
 							'or' => $orFieldDefinition,
+							'not' => $notFieldDefinition,
 							$searchCondition->getField( 'property' ),
 							$searchCondition->getField( 'value' ),
 						],
@@ -37,6 +43,7 @@ class ItemSearchFilterType extends InputObjectType {
 					'description' => 'Combine multiple conditions using AND operator. Requires at least two conditions, all of which must match. Cannot be used together with any other field.',
 				],
 				'or' => $orFieldDefinition,
+				'not' => $notFieldDefinition,
 				$searchCondition->getField( 'property' ),
 				$searchCondition->getField( 'value' ),
 			],

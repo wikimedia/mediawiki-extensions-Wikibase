@@ -231,6 +231,9 @@ input ItemSearchFilter {
 
   "Combine multiple conditions using OR operator. Requires at least two conditions, one of which must match. Cannot be used together with any other field."
   or: [ItemSearchCondition!]
+
+  "Search for items that do not have a certain statement using NOT operator. Supports a single property/value condition. Cannot be used together with any other field."
+  not: ItemSearchCondition
   property: PropertyId
   value: String
 }
@@ -239,6 +242,9 @@ input ItemSearchFilter {
 input AndOperationCondition {
   "Combine multiple conditions using OR operator. Requires at least two conditions, one of which must match. Cannot be used together with any other field."
   or: [ItemSearchCondition!]
+
+  "Search for items that do not have a certain statement using NOT operator. Supports a single property/value condition. Cannot be used together with any other field."
+  not: ItemSearchCondition
   property: PropertyId
   value: String
 }

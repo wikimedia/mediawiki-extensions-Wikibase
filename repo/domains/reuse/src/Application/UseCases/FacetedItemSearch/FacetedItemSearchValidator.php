@@ -10,6 +10,7 @@ use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseErrorType;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\AndOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemSearchFilter;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\NotOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\OrOperation;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\PropertyValueFilter;
 
@@ -46,10 +47,10 @@ class FacetedItemSearchValidator {
 	 * @throws UseCaseError
 	 */
 	private function constructQuery( array $filter ): ItemSearchFilter {
-		if ( !isset( $filter['property'] ) && !isset( $filter['and'] ) && !isset( $filter['or'] ) ) {
+		if ( !isset( $filter['property'] ) && !isset( $filter['and'] ) && !isset( $filter['or'] ) && !isset( $filter['not'] ) ) {
 			$this->throwInvalidQuery( 'Query filters must contain either an operator field or a property/value condition' );
 		}
-		if ( count( array_intersect( [ 'property', 'and', 'or' ], array_keys( $filter ) ) ) > 1 ) {
+		if ( count( array_intersect( [ 'property', 'and', 'or', 'not' ], array_keys( $filter ) ) ) > 1 ) {
 			$this->throwInvalidQuery( 'Query filters must only contain a single operator field or a property/value condition' );
 		}
 		if ( isset( $filter['and'] ) && count( $filter['and'] ) < 2 ) {
@@ -57,6 +58,9 @@ class FacetedItemSearchValidator {
 		}
 		if ( isset( $filter['or'] ) && count( $filter['or'] ) < 2 ) {
 			$this->throwInvalidQuery( "'or' fields must contain at least two elements" );
+		}
+		if ( isset( $filter['not'] ) && !isset( $filter['not']['property'] ) ) {
+			$this->throwInvalidQuery( "'not' field must contain a single property/value condition" );
 		}
 
 		if ( isset( $filter['property'] ) ) {
@@ -69,6 +73,12 @@ class FacetedItemSearchValidator {
 					$this->constructPropertyValueFilter( ... ),
 					$filter['or']
 				)
+			);
+		}
+
+		if ( isset( $filter['not'] ) ) {
+			return new NotOperation(
+				$this->constructPropertyValueFilter( $filter['not'] )
 			);
 		}
 

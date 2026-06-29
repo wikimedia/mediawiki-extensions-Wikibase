@@ -168,6 +168,16 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			] ] ] ],
 		];
 
+		yield 'searchItems with "not"' => [
+			"{ searchItems( query: {
+				not:
+					{ property: \"{$stringProperty->getId()}\" }
+			} ) { edges { node { id } } } }",
+			[ 'data' => [ 'searchItems' => [ 'edges' => [
+				[ 'node' => [ 'id' => $itemUsedAsStatementValue->getId() ] ],
+			] ] ] ],
+		];
+
 		yield 'searchItems with "and" and "or"' => [
 			"{ searchItems( query: {
 				and: [
@@ -176,6 +186,20 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 						{ property: \"{$stringProperty->getId()}\" },
 						{ property: \"{$otherItemProperty->getId()}\" }
 					] }
+				]
+			} ) { edges { node { id } } } }",
+			[ 'data' => [ 'searchItems' => [ 'edges' => [
+				[ 'node' => [ 'id' => $item->getId() ] ],
+			] ] ] ],
+		];
+
+		yield 'searchItems with "and" and "not"' => [
+			"{ searchItems( query: {
+				and: [
+					{ property: \"{$itemProperty->getId()}\" }
+					{ not:
+						{ property: \"{$otherItemProperty->getId()}\", value: \"{$itemUsedAsStatementValue->getId()}\" },
+					}
 				]
 			} ) { edges { node { id } } } }",
 			[ 'data' => [ 'searchItems' => [ 'edges' => [
@@ -245,7 +269,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
             		... on ItemValue {
               			id
             		}
-          		} 
+          		}
 			} } } } }",
 			[
 				'data' => [
@@ -422,6 +446,17 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 			"{
 				searchItems(query: {
 					and: [ { property: \"{$stringProperty->getId()}\" } ],
+					property: \"{$stringProperty->getId()}\"
+				} ) { edges { node { id } } }
+			}",
+			'Invalid search query: Query filters must only contain a single operator field or a property/value condition',
+		];
+
+		$stringProperty = self::createProperty( 'string' );
+		yield 'invalid search query: "not" and "property"' => [
+			"{
+				searchItems(query: {
+					not: { property: \"{$stringProperty->getId()}\" },
 					property: \"{$stringProperty->getId()}\"
 				} ) { edges { node { id } } }
 			}",
