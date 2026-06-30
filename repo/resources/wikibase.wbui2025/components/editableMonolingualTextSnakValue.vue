@@ -15,6 +15,7 @@
 			:class="className"
 			:status="status"
 			@blur="onBlur"
+			@focus="resizeTextarea"
 			@input="removeNewLines"
 			@keydown.enter.prevent
 		></cdx-text-area>
@@ -40,6 +41,7 @@ const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const { CdxTextArea } = require( '../../../codex.js' );
 const WikibaseWbui2025EditableNoValueSomeValueSnakValue = require( './editableNoValueSomeValueSnakValue.vue' );
 const WikibaseWbui2025ApiItemLookup = require( './apiItemLookup.vue' );
+const resizeTextareaMixin = require( '../mixins/resizeTextareaMixin.js' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
@@ -49,6 +51,7 @@ module.exports = exports = defineComponent( {
 		WikibaseWbui2025ApiItemLookup,
 		WikibaseWbui2025EditableNoValueSomeValueSnakValue
 	},
+	mixins: [ resizeTextareaMixin ],
 	props: {
 		removable: {
 			type: Boolean,
@@ -157,6 +160,8 @@ module.exports = exports = defineComponent( {
 
 		removeNewLines( inputEvent ) {
 			this.textvalue = inputEvent.target.value.replace( /\r?\n/g, '' );
+			// eslint-disable-next-line vue/no-undef-properties
+			this.resizeTextarea();
 		}
 	},
 	watch: {
@@ -173,10 +178,8 @@ module.exports = exports = defineComponent( {
 	},
 	mounted() {
 		if ( this.textvalue ) {
-			// when editing an existing value, fix the height to show the full text
-			const textarea = this.$refs.inputElement.$refs.textarea;
-			textarea.style.height = `${ textarea.scrollHeight }px`;
+			this.resizeTextarea();
 		}
-	} }
-);
+	}
+} );
 </script>
