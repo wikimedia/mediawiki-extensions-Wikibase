@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\PropertyPrefixSearch;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\PropertyPrefixSearchEngine;
 
@@ -18,6 +19,7 @@ class PropertyPrefixSearch {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws EntitySearchException
 	 */
 	public function execute( PropertyPrefixSearchRequest $searchRequest ): PropertyPrefixSearchResponse {
 		$this->validator->validate( $searchRequest );

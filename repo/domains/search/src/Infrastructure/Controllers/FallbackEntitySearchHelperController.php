@@ -21,6 +21,9 @@ class FallbackEntitySearchHelperController implements WbSearchEntitiesController
 		$this->searchHelper = new ConceptUriSearchHelper( $searchHelper, $entitySourceLookup );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function search( WbSearchEntitiesRequest $request ): array {
 		// $request->resultLanguage is not used here. The underlying EntitySearchHelper is expected to get the result language from global
 		// state instead. Any entity type specific controller should make use of $request->resultLanguage directly. See T423217.

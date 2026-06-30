@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Search\Application\UseCases\SimpleItemSearch;
 
+use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Search\Domain\Services\ItemSearchEngine;
 
@@ -23,6 +24,7 @@ class SimpleItemSearch {
 
 	/**
 	 * @throws UseCaseError
+	 * @throws EntitySearchException
 	 */
 	public function execute( SimpleItemSearchRequest $itemRequest ): SimpleItemSearchResponse {
 		$this->validator->validate( $itemRequest );

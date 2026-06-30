@@ -23,6 +23,9 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 	) {
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	public function search( WbSearchEntitiesRequest $request ): array {
 		try {
 			$response = $this->itemPrefixSearch->execute(
