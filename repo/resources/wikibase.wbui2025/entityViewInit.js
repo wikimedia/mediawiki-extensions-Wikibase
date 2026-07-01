@@ -12,6 +12,9 @@
 
 	if ( wbui2025StatementList !== null ) {
 		const pinia = Pinia.createPinia();
+		// T422838: Make pinia globally active immediately so store calls outside of Vue component
+		// context (for example: from the WikibaseQualityConstraints gadget).
+		Pinia.setActivePinia( pinia );
 
 		// This initialization code runs when the Resource Loader loads the module. Other modules are
 		// also loaded around the same time. If any of those (most notably, the Kartographer extension's
