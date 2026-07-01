@@ -386,13 +386,10 @@ QUERY;
 
 	/**
 	 * @param string $err
-	 * @param int $die If > 0, go ahead and die out using this int as the code
 	 */
-	protected function error( $err, $die = 0 ) {
+	protected function error( $err ) {
 		if ( !$this->silent ) {
-			parent::error( $err, $die );
-		} elseif ( $die > 0 ) {
-			die( $die );
+			parent::error( $err );
 		}
 	}
 
