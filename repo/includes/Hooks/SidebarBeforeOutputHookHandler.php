@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\SettingsArray;
@@ -113,7 +114,17 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 			return;
 		}
 
-		$entity = $this->entityLookup->getEntity( $entityId );
+		try {
+			$entity = $this->entityLookup->getEntity( $entityId );
+		} catch ( UnresolvedEntityRedirectException ) {
+			return;
+		} catch ( EntityLookupException $error ) {
+			$this->logger->warning( 'Could not load entity for WikiProject links {id}: {exception}', [
+				'id' => $entityId->getSerialization(),
+				'exception' => $error,
+			] );
+			return;
+		}
 		if ( !( $entity instanceof StatementListProvider ) ) {
 			return;
 		}

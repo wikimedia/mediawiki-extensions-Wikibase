@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -378,6 +379,57 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertNull(
 			TestingAccessWrapper::newFromObject( $this->getHookHandler() )->getValidEntityId( $this->mockTitle )
 		);
+	}
+
+	public function test_addWikiProjectLinks_WhenEntityRedirectSkipsLinksSilently() {
+		$this->entityLookup = $this->createMock( EntityLookup::class );
+		$this->entityLookup->method( 'hasEntity' )->willReturn( true );
+		$this->entityLookup->method( 'getEntity' )
+			->willThrowException( new UnresolvedEntityRedirectException(
+				$this->mockEntityId,
+				new ItemId( 'Q2' )
+			) );
+
+		$this->logger
+			->expects( $this->never() )
+			->method( 'warning' );
+
+		$sidebar = [];
+		$this->getHookHandler(
+			[ 'tmpWikiProjectsLinking' => [ [ 'propertyIds' => [ 'P1' ], 'href' => 'url', 'msg' => 'msg' ] ] ]
+		)->onSidebarBeforeOutput( $this->skin, $sidebar );
+
+		$this->assertArrayNotHasKey( 'wikibase-wikiprojects-sidebar-section', $sidebar );
+	}
+
+	public function test_addWikiProjectLinks_WhenEntityLookupThrowsSkipsLinks() {
+		$this->entityLookup = $this->createMock( EntityLookup::class );
+		$this->entityLookup->method( 'hasEntity' )->willReturn( true );
+		$this->entityLookup->method( 'getEntity' )
+			->willThrowException( new EntityLookupException( $this->mockEntityId ) );
+
+		$sidebar = [];
+		$this->getHookHandler(
+			[ 'tmpWikiProjectsLinking' => [ [ 'propertyIds' => [ 'P1' ], 'href' => 'url', 'msg' => 'msg' ] ] ]
+		)->onSidebarBeforeOutput( $this->skin, $sidebar );
+
+		$this->assertArrayNotHasKey( 'wikibase-wikiprojects-sidebar-section', $sidebar );
+	}
+
+	public function test_addWikiProjectLinks_WhenEntityLookupThrowsLogsWarning() {
+		$this->entityLookup = $this->createMock( EntityLookup::class );
+		$this->entityLookup->method( 'hasEntity' )->willReturn( true );
+		$this->entityLookup->method( 'getEntity' )
+			->willThrowException( new EntityLookupException( $this->mockEntityId ) );
+
+		$this->logger
+			->expects( $this->once() )
+			->method( 'warning' );
+
+		$sidebar = [];
+		$this->getHookHandler(
+			[ 'tmpWikiProjectsLinking' => [ [ 'propertyIds' => [ 'P1' ], 'href' => 'url', 'msg' => 'msg' ] ] ]
+		)->onSidebarBeforeOutput( $this->skin, $sidebar );
 	}
 
 	private function getHookHandler( $settings = [] ): SidebarBeforeOutputHookHandler {
