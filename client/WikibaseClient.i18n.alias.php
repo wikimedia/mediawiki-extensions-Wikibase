@@ -145,6 +145,12 @@ $specialPageAliases['pt'] = [
 	'UnconnectedPages' => [ 'Páginas_sem_conexões' ],
 ];
 
+/** Slovak (slovenčina) */
+$specialPageAliases['sk'] = [
+	'EntityUsage' => [ 'PoužitieEntity' ],
+	'PagesWithBadges' => [ 'StránkySMedailou' ],
+];
+
 /** Serbian Cyrillic (српски (ћирилица)) */
 $specialPageAliases['sr-ec'] = [
 	'EntityUsage' => [ 'УпотребаЕнтитета', 'Подаци_о_употреби_ентитета' ],
