@@ -255,31 +255,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 	/**
-	 * @see Content::getNativeData
-	 *
-	 * @note Avoid relying on this method! It bypasses EntityContentCodec, and does
-	 *       not make any guarantees about the structure of the array returned.
-	 *
-	 * @return string[]|EntityDocument An undefined data structure representing the content. This is
-	 *  not guaranteed to conform to any serialization structure used in the database or externally.
-	 * @deprecated since 1.33 Use ::getEntity() instead.
-	 */
-	public function getNativeData() {
-		wfDeprecated( __METHOD__, '1.33' );
-		if ( $this->isRedirect() ) {
-			return $this->getRedirectData();
-		}
-
-		// NOTE: this may or may not be consistent with what EntityContentCodec does!
-		$serializer = WikibaseRepo::getAllTypesEntitySerializer();
-		try {
-			return $serializer->serialize( $this->getEntity() );
-		} catch ( SerializationException ) {
-			return $this->getEntity();
-		}
-	}
-
-	/**
 	 * returns the content's nominal size in bogo-bytes.
 	 *
 	 * @return int
