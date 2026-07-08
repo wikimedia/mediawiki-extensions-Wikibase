@@ -23,6 +23,7 @@
 			"Siglite3",
 			"Sujiniku",
 			"TKsdik8900",
+			"Tensama0415",
 			"Yusuke1109",
 			"にょきにょき"
 		]
@@ -99,7 +100,7 @@
 	"wikibase-pageinfo-entity-usage-T": "タイトル",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "文: $1",
 	"wikibase-pageinfo-entity-usage-X": "すべてのエンティティのデータ",
-	"wikibase-pageinfo-entity-usage-O": "その他",
+	"wikibase-pageinfo-entity-usage-O": "その他（例：エンティティの存在）",
 	"wikibase-property-render-error": "プロパティ $1 のレンダリングに失敗しました: $2",
 	"wikibase-otherprojects": "他のプロジェクト",
 	"wikibase-otherprojects-beta-message": "サイドバーに他のプロジェクト",

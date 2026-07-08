@@ -253,6 +253,7 @@
 	"wikibase-item-reference-edit-placeholder": "输入项目ID，例如Q10",
 	"wikibase-item-reference-edit-invalid-format": "输入的项目ID格式无效",
 	"wikibase-item-reference-edit-nonexistent-item": "此ID的项不存在",
+	"wikibase-wbui2025-deleted-property-label": "（已删除的属性）",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "将显示为：",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "自动",
 	"wikibase-wbui2025-timeinput-precision-automatic": "自动化",
@@ -608,5 +609,6 @@
 	"wikibase-stepper-progress": "第$1/$2页",
 	"wikibase-indicator-popover-multiple-issue-title": "反馈与建议",
 	"wikibase-indicator-popover-multiple-issue-previous": "上一步",
-	"wikibase-indicator-popover-multiple-issue-next": "下一步"
+	"wikibase-indicator-popover-multiple-issue-next": "下一步",
+	"wikibase-wikiprojects-sidebar-section": "相关维基专题"
 }

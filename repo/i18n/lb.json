@@ -180,6 +180,7 @@
 	"wikibase-item-reference-edit-invalid-format": "D'Element-ID, déi agi gouf, huet en ongültegt Format",
 	"wikibase-item-reference-edit-nonexistent-item": "Et gëtt keen Element mat dëser ID",
 	"wikibase-wbui2025-deleted-property-label": "(Geläscht Eegenschaft)",
+	"wikibase-wbui2025-duplicate-statement-warning": "Et gëtt schonn eng Ausso mat dëser Eegenschaft. Wielt eng aner Eegenschaft oder klickt ënnen, fir se z'änneren.",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "Automatesch",
 	"wikibase-wbui2025-timeinput-precision-automatic": "automatesch",
 	"wikibase-wikibaserepopage-not-itemid": "„$1“ ass keng gülteg Element-ID.",

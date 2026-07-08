@@ -210,6 +210,9 @@
 	"wikibase-item-reference-edit-placeholder": "נא להזין מזהה פריט, למשל Q10",
 	"wikibase-item-reference-edit-invalid-format": "הפריט הוזן בתסדיר בלתי־תקין",
 	"wikibase-item-reference-edit-nonexistent-item": "פריט עם מזהה כזה אינו קיים",
+	"wikibase-wbui2025-deleted-property-label": "(מאפיין מחוק)",
+	"wikibase-wbui2025-duplicate-statement-warning": "כבר קיימת קביעה עם המאפיין הזה. נא לבחור מאפיין אחר או ללחוץ למטה כדי לערוך אותו.",
+	"wikibase-wbui2025-duplicate-statement-edit-button": "עריכת $1",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "יוצג בתור:",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "אוטומטי",
 	"wikibase-wbui2025-timeinput-precision-automatic": "אוטומטי",
@@ -563,5 +566,6 @@
 	"wikibase-stepper-progress": "$1 מתוך $2",
 	"wikibase-indicator-popover-multiple-issue-title": "בעיות והצעות",
 	"wikibase-indicator-popover-multiple-issue-previous": "הקודם",
-	"wikibase-indicator-popover-multiple-issue-next": "הבא"
+	"wikibase-indicator-popover-multiple-issue-next": "הבא",
+	"wikibase-wikiprojects-sidebar-section": "מיזמים קשורים"
 }

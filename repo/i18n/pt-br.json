@@ -463,7 +463,7 @@
 	"wikibase-pageinfo-wb-identifiers": "Número de declarações de identificador externo nesta entidade",
 	"wikibase-search-bad-entity-type": "Tipo da entidade incorreto: $1",
 	"wikibase-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
-	"wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
+	"wikibase-search-namespace-mix": "No momento, a mistura de espaços nominais de entidades e artigos na pesquisa é incompatível. Apenas espaços nominais de entidade serão pesquisados.",
 	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
 	"wikibase-refresh-for-missing-datatype": "O tipo de dados $1 não foi encontrado no script do cliente local. Isso pode ser resultado de um script em cache desatualizado. Tente atualizar seu navegador, ignorando o cache local (Ctrl-Shift-R ou Cmd-Shift-R na maioria dos navegadores) para resolver o problema.",

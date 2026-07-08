@@ -216,6 +216,7 @@
 	"wikibase-item-reference-edit-invalid-format": "Annettu kohteen tunniste on virheellisessä muodossa",
 	"wikibase-item-reference-edit-nonexistent-item": "Kohdetta tällä tunnisteella ei ole olemassa",
 	"wikibase-wbui2025-deleted-property-label": "(Poistettu ominaisuus)",
+	"wikibase-wbui2025-duplicate-statement-edit-button": "Muokkaa ominaisuutta $1",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "näytetään muodossa:",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "Automaattinen",
 	"wikibase-wbui2025-timeinput-precision-automatic": "automaattinen",

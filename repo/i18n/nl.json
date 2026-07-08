@@ -226,6 +226,8 @@
 	"wikibase-item-reference-edit-invalid-format": "Ingevoegd identificatienummer heeft een onjuiste opmaak",
 	"wikibase-item-reference-edit-nonexistent-item": "Er bestaat geen item met dit ID",
 	"wikibase-wbui2025-deleted-property-label": "(Verwijderde eigenschap)",
+	"wikibase-wbui2025-duplicate-statement-warning": "Er is al een verklaring met deze eigenschap. Kies een andere eigenschap of klik hieronder om deze te bewerken.",
+	"wikibase-wbui2025-duplicate-statement-edit-button": "$1 bewerken",
 	"wikibase-wbui2025-editable-snak-value-preview-label": "wordt weergegeven als:",
 	"wikibase-wbui2025-globecoordinateinput-precision-automatic": "Automatisch",
 	"wikibase-wbui2025-timeinput-precision-automatic": "automatisch",
