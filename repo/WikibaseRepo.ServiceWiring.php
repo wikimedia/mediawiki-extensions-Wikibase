@@ -251,6 +251,7 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\Wbui2025ComponentsFactory;
 use Wikibase\View\Wbui2025FeatureFlag;
+use Wikimedia\ArrayUtils\ArrayUtils;
 use Wikimedia\ObjectCache\HashBagOStuff;
 use Wikimedia\ObjectFactory\ObjectFactory;
 
@@ -494,7 +495,7 @@ return [
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
 
-		$dataTypes = wfArrayPlus2d(
+		$dataTypes = ArrayUtils::arrayPlus2d(
 			$repoDataTypes,
 			$baseDataTypes
 		);
@@ -1107,7 +1108,7 @@ return [
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
 
-		$entityTypes = wfArrayPlus2d(
+		$entityTypes = ArrayUtils::arrayPlus2d(
 			$repoEntityTypes,
 			$baseEntityTypes
 		);

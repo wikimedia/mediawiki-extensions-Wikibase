@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo;
 
-use function wfArrayPlus2d;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /**
  * Service that modifies entity type definitions for federated properties.
@@ -27,7 +27,7 @@ class EntityTypesConfigFeddyPropsAugmenter {
 	 * @return array Map from entity types to entity definitions
 	 */
 	public function override( array $existingEntityTypes ) {
-		return wfArrayPlus2d(
+		return ArrayUtils::arrayPlus2d(
 			$this->fedPropsEntityTypeDefinitions,
 			$existingEntityTypes
 		);
