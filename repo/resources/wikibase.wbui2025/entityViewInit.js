@@ -56,7 +56,7 @@
 				.mount( addStatementFloatingButtonContainer );
 		} );
 	} else {
-		mw.error( 'Unable to find statement list placeholder element to mount mobile statement view' );
+		mw.log.error( 'Unable to find statement list placeholder element to mount mobile statement view' );
 	}
 }(
 	wikibase
