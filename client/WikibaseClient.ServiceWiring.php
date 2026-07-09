@@ -135,6 +135,7 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /** @phpcs-require-sorted-array */
 return [
@@ -257,7 +258,7 @@ return [
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$clientDataTypes = require __DIR__ . '/WikibaseClient.datatypes.php';
 
-		$dataTypes = wfArrayPlus2d(
+		$dataTypes = ArrayUtils::arrayPlus2d(
 			$clientDataTypes,
 			$baseDataTypes
 		);
@@ -455,7 +456,7 @@ return [
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$clientEntityTypes = require __DIR__ . '/WikibaseClient.entitytypes.php';
 
-		$entityTypes = wfArrayPlus2d(
+		$entityTypes = ArrayUtils::arrayPlus2d(
 			$clientEntityTypes,
 			$baseEntityTypes
 		);

@@ -4,6 +4,7 @@ namespace Wikibase\Lib;
 
 use LogicException;
 use MediaWiki\Registration\ExtensionRegistry;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /**
  * WikibaseSettings is a static access point to Wikibase settings defined as global state
@@ -140,7 +141,7 @@ class WikibaseSettings {
 		array $falseMeansRemove
 	): array {
 		if ( in_array( $key, $twoDArrayMerge ) ) {
-			return wfArrayPlus2d( $value, $defaultValue );
+			return ArrayUtils::arrayPlus2d( $value, $defaultValue );
 		}
 		if ( in_array( $key, $overrideArrays ) ) {
 			return $value;

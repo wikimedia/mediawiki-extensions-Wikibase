@@ -40,6 +40,7 @@ use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /**
  * @covers \Wikibase\Repo\Content\EntityHandler
@@ -111,7 +112,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * Mind that in the real world this is done by the WikibaseRepoEntityTypes hook.
 	 */
 	protected static function getEntityTypeDefinitionsConfiguration(): array {
-		return wfArrayPlus2d(
+		return ArrayUtils::arrayPlus2d(
 			require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php',
 			require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php'
 		);
