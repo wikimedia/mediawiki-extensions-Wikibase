@@ -46,5 +46,6 @@
 	"wikibase-newentity-language": "Кӣлл:",
 	"wikibase-setdescription-submit": "Оа̄нтшаһтҍмуж пыйе",
 	"wikibase-listproperties-datatype": "Да̄ннэ на̄лль:",
-	"wikibase-concept-uri": "Концэпт URI"
+	"wikibase-concept-uri": "Концэпт URI",
+	"wikibase-scoped-search-item-scope-name": "Эльмент"
 }

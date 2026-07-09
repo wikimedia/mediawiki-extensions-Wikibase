@@ -10,7 +10,8 @@
 			"SaldırganSincap",
 			"Vlad5250",
 			"Ypryima",
-			"Ата"
+			"Ата",
+			"Movses"
 		]
 	},
 	"apihelp-wbavailablebadges-summary": "Подає запити щодо доступних елементів значків.",
@@ -157,6 +158,8 @@
 	"apihelp-wbsearchentities-param-props": "Вивести ці властивості для кожної сутності.",
 	"apihelp-wbsearchentities-param-limit": "Максимальна кількість результатів",
 	"apihelp-wbsearchentities-param-continue": "Зміщення, з якого продовжити пошук",
+	"apihelp-wbsearchentities-param-profile": "Профіль пошуку, який слід використовувати.",
+	"apihelp-wbsearchentities-paramvalue-profile-default": "Профіль за замовчуванням, підходить для більшості цілей.",
 	"apihelp-wbsearchentities-example-1": "Шукати «abc» англійською мовою, зі значеннями за замовчуванням для типу та ліміту",
 	"apihelp-wbsearchentities-example-2": "Шукати «abc» англійською мовою, зі значенням ліміту 50",
 	"apihelp-wbsearchentities-example-3": "Шукати «alphabet» англійською мовою лише серед властивостей",
@@ -186,6 +189,8 @@
 	"apihelp-query+wbsearch-param-strictlanguage": "Чи вимкнути мовний фолбек",
 	"apihelp-query+wbsearch-param-type": "Шукати цей тип сутності.",
 	"apihelp-query+wbsearch-param-limit": "Максимальна кількість результатів",
+	"apihelp-query+wbsearch-param-profile": "Профіль пошуку, який слід використовувати.",
+	"apihelp-query+wbsearch-paramvalue-profile-default": "Профіль за замовчуванням, підходить для більшості цілей.",
 	"apihelp-query+wbsearch-example-1": "Шукати «abc» англійською мовою, зі значеннями за замовчуванням для типу та ліміту",
 	"apihelp-query+wbsearch-example-2": "Шукати «abc» англійською мовою, зі значенням ліміту 50",
 	"apihelp-query+wbsearch-example-3": "Шукати «alphabet» англійською мовою лише серед властивостей",
@@ -306,6 +311,7 @@
 	"apihelp-wbformatentities-summary": "Форматує ID сутностей у HTML або простим текстом.",
 	"apihelp-wbformatentities-extended-description": "Мову можна задати глобальним параметром <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "ID сутностей для форматування",
+	"apihelp-wbformatentities-param-generate": "Бажаний формат виводу для генерування.",
 	"apihelp-wbformatentities-example-1": "Форматувати ідентифікатор окремого елемента в HTML.",
 	"apihelp-wbformatentities-example-2": "Форматувати ідентифікатори елемента і властивості.",
 	"apihelp-wbformatentities-example-3": "Форматувати ідентифікатори елемента, властивості та лексеми.",

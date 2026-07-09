@@ -33,6 +33,7 @@
 	"wikibase-statementlistview-add-tooltip": "Lisa uus väärtus",
 	"wikibase-statementgrouplistview-add": "lisa avaldus",
 	"wikibase-statementgrouplistview-add-tooltip": "Lisa uus avaldus",
+	"wikibase-statementgrouplistview-edit": "{{PLURAL:$1|Avalduse|Avalduste}} muutmine",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Teistes keeltes",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Häälesta",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Näita silte, rööpkujusid ja kirjeldusi kõigis minu keeltes",

@@ -101,6 +101,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Başlıq",
 	"wikibase-pageinfo-entity-usage-C": "Bəzi ifadələr:",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "İfadə: $1",
+	"wikibase-pageinfo-entity-usage-CQR": "Bəzi müddəalar (təsnifatlar və istinadlarla)",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Müddəa (təsnifat və istinadla birlikdə): $1",
 	"wikibase-pageinfo-entity-usage-X": "Bütün element datası",
 	"wikibase-pageinfo-entity-usage-O": "Müxtəlif (məsələn, elementin mövcudluğu)",
 	"wikibase-property-render-error": "$1 parametrini göstərmək alınmadı: $2",
