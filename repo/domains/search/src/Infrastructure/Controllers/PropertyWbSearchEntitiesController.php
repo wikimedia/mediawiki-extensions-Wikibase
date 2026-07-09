@@ -15,7 +15,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyWbSearchEntitiesController implements PaginatingWbSearchEntitiesController {
+class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 
 	public function __construct(
 		private readonly PropertyPrefixSearch $propertyPrefixSearch,

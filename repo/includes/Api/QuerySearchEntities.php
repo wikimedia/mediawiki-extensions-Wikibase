@@ -16,7 +16,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Domains\Search\Domain\Model\User;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
 use Wikimedia\Assert\InvariantException;
 use Wikimedia\ParamValidator\ParamValidator;
 
@@ -149,7 +148,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 */
 	private function getSearchResults( array $params ): array {
 		try {
-			$results = $this->searchControllerDispatcher
+			return $this->searchControllerDispatcher
 				->getControllerForEntityType( $params['type'] )
 				->search( new WbSearchEntitiesRequest(
 					$params['search'],
@@ -159,8 +158,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
 					$this->getApiUser()
-				) );
-			return $results instanceof WbSearchEntitiesResponse ? $results->results : $results;
+				) )->results;
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
 

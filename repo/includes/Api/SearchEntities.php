@@ -22,7 +22,6 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\Domains\Search\Domain\Model\User;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PaginatingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
@@ -145,10 +144,8 @@ class SearchEntities extends ApiBase {
 	}
 
 	/**
-	 * Populates the search result returning the number of requested matches plus one additional
-	 * item for being able to determine if there would be any more results.
-	 * If there are not enough exact matches, the list of returned entries will be additionally
-	 * filled with prefixed matches.
+	 * Fetches the requested page of search results together with whether more results
+	 * exist beyond it (used to emit the search-continue cursor).
 	 *
 	 * @param array $params
 	 *
@@ -157,9 +154,9 @@ class SearchEntities extends ApiBase {
 	 */
 	private function getSearchResults( array $params ): WbSearchEntitiesResponse {
 		try {
-			$controller = $this->searchControllerDispatcher->getControllerForEntityType( $params['type'] );
-			if ( $controller instanceof PaginatingWbSearchEntitiesController ) {
-				return $controller->search( new WbSearchEntitiesRequest(
+			return $this->searchControllerDispatcher
+				->getControllerForEntityType( $params['type'] )
+				->search( new WbSearchEntitiesRequest(
 					$params['search'],
 					$params['language'],
 					$this->getLanguage()->getCode(),
@@ -169,24 +166,6 @@ class SearchEntities extends ApiBase {
 					$this->getApiUser(),
 					$params['continue']
 				) );
-			}
-
-			// Transitional legacy path for array-returning controllers:
-			// over-fetch, then slice off the continuation window and detect "more" here.
-			$results = $controller->search( new WbSearchEntitiesRequest(
-				$params['search'],
-				$params['language'],
-				$this->getLanguage()->getCode(),
-				$params['continue'] + $params['limit'] + 1,
-				$params['strictlanguage'],
-				$this->searchProfiles[$params['profile']],
-				$this->getApiUser()
-			) );
-			$results = $results instanceof WbSearchEntitiesResponse ? $results->results : $results;
-			return new WbSearchEntitiesResponse(
-				array_slice( $results, $params['continue'], $params['limit'] ),
-				count( $results ) > $params['continue'] + $params['limit']
-			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
 

@@ -20,12 +20,12 @@ The `wbsearchentities-controller` (entry point for the `wbsearchentities` Action
 
 ### 1. Controller interface
 
-The interface defines the feature contract without committing to a specific entity type. See [WbSearchEntitiesController](@ref Wikibase::Repo::Domains::Search::Infrastructure::Controllers::WbSearchEntitiesController):
+The interface defines the feature contract without committing to a specific entity type. See [WbSearchEntitiesController](@ref Wikibase::Repo::Domains::Search::Infrastructure::Controllers::WbSearchEntitiesController). It returns a [WbSearchEntitiesResponse](@ref Wikibase::Repo::Domains::Search::Infrastructure::Controllers::WbSearchEntitiesResponse) value object — the requested page of results plus a `hasMore` flag — so pagination lives in the domain rather than in the API module:
 
 ```php
 interface WbSearchEntitiesController {
-    /** @return TermSearchResult[] */
-    public function search( WbSearchEntitiesRequest $request ): array;
+    /** @throws EntitySearchException */
+    public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse;
 }
 ```
 
@@ -40,9 +40,12 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
         private readonly EntitySourceLookup $entitySourceLookup
     ) {}
 
-    public function search( WbSearchEntitiesRequest $request ): array {
+    public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse {
         $response = $this->itemPrefixSearch->execute( /* ... */ );
-        return array_map( fn ( $r ) => $this->convertResult( $r ), iterator_to_array( $response->results ) );
+        return new WbSearchEntitiesResponse(
+            array_map( fn ( $r ) => $this->convertResult( $r ), iterator_to_array( $response->results ) ),
+            $response->results->hasMore()
+        );
     }
     // ...
 }
