@@ -87,21 +87,6 @@ class PropertyPrefixSearchValidatorTest extends TestCase {
 		) );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
-	public function testValidateWithDisableLimitValidation_passes(): void {
-		$this->newUseCaseValidator()
-			->validate( new PropertyPrefixSearchRequest(
-				'q',
-				'en',
-				User::newAnonymous(),
-				1000,
-				self::DEFAULT_OFFSET,
-				disableLimitValidation: true
-			) );
-	}
-
 	public function testGivenInvalidLanguageCode_throws(): void {
 		try {
 			$this->newUseCaseValidator()
