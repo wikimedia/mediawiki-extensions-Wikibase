@@ -11,9 +11,9 @@ use Wikibase\Repo\Api\EntitySearchException;
 interface WbSearchEntitiesController {
 
 	/**
-	 * @return TermSearchResult[]
+	 * @return TermSearchResult[]|WbSearchEntitiesResponse
 	 * @throws EntitySearchException
 	 */
-	public function search( WbSearchEntitiesRequest $request ): array;
+	public function search( WbSearchEntitiesRequest $request ): array|WbSearchEntitiesResponse;
 
 }

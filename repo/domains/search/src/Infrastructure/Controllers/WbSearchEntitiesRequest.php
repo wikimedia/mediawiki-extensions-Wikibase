@@ -18,6 +18,7 @@ class WbSearchEntitiesRequest {
 		public readonly bool $strictLanguage,
 		public readonly ?string $profileContext,
 		public readonly User $user,
+		public readonly int $offset = 0,
 	) {
 	}
 }
