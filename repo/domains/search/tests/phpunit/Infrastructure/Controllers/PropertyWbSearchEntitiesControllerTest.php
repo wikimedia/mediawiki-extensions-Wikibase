@@ -43,10 +43,17 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 			'wikibase-item',
 		);
 
-		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'instance', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$searchEngine = $this->createMock( PropertyPrefixSearchEngine::class );
+		$searchEngine->expects( $this->once() )
+			->method( 'suggestProperties' )
+			->with( 'instance', 'en', 5, 3, false, 'en' )
+			->willReturn( new PropertyPrefixSearchResults( $searchResult ) );
 
-		$this->assertCount( 1, $results );
+		$response = $this->newControllerWithEngine( $searchEngine )
+			->search( new WbSearchEntitiesRequest( 'instance', 'en', 'en', 5, false, null, User::newAnonymous(), 3 ) );
+
+		$this->assertCount( 1, $response->results );
+		$this->assertFalse( $response->hasMore );
 		$this->assertEquals(
 			new TermSearchResult(
 				new Term( 'en', 'instance of' ),
@@ -59,7 +66,7 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => 'wikibase-item',
 				]
 			),
-			$results[0]
+			$response->results[0]
 		);
 	}
 
@@ -73,11 +80,11 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertCount( 1, $results );
-		$this->assertNull( $results[0]->getDisplayLabel() );
-		$this->assertNull( $results[0]->getDisplayDescription() );
+		$this->assertCount( 1, $response->results );
+		$this->assertNull( $response->results[0]->getDisplayLabel() );
+		$this->assertNull( $response->results[0]->getDisplayDescription() );
 	}
 
 	public function testEntityIdMatch(): void {
@@ -90,11 +97,11 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new PropertyPrefixSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'P42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'P42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertCount( 1, $results );
-		$this->assertSame( 'pid', $results[0]->getMatchedTerm()->getLanguageCode() );
-		$this->assertSame( 'P42', $results[0]->getMatchedTerm()->getText() );
+		$this->assertCount( 1, $response->results );
+		$this->assertSame( 'pid', $response->results[0]->getMatchedTerm()->getLanguageCode() );
+		$this->assertSame( 'P42', $response->results[0]->getMatchedTerm()->getText() );
 	}
 
 	public function testInvalidLanguageThrowsEntitySearchException(): void {
@@ -127,15 +134,35 @@ class PropertyWbSearchEntitiesControllerTest extends TestCase {
 
 	public function testEmptyResults(): void {
 		$controller = $this->newController( new PropertyPrefixSearchResults() );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertSame( [], $results );
+		$this->assertSame( [], $response->results );
+		$this->assertFalse( $response->hasMore );
+	}
+
+	public function testSurfacesHasMore(): void {
+		$searchResult = new PropertyPrefixSearchResult(
+			new NumericPropertyId( 'P42' ),
+			null,
+			null,
+			new MatchedData( 'label', 'en', 'test' ),
+			'string',
+		);
+
+		$controller = $this->newController( PropertyPrefixSearchResults::withHasMore( true, $searchResult ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+
+		$this->assertTrue( $response->hasMore );
 	}
 
 	private function newController( PropertyPrefixSearchResults $searchResults ): PropertyWbSearchEntitiesController {
 		$searchEngine = $this->createStub( PropertyPrefixSearchEngine::class );
 		$searchEngine->method( 'suggestProperties' )->willReturn( $searchResults );
 
+		return $this->newControllerWithEngine( $searchEngine );
+	}
+
+	private function newControllerWithEngine( PropertyPrefixSearchEngine $searchEngine ): PropertyWbSearchEntitiesController {
 		$propertyConceptUriBuilder = $this->createStub( PropertyConceptUriBuilder::class );
 		$propertyConceptUriBuilder->method( 'buildConceptUri' )
 			->willReturnCallback( fn( $id ) => 'http://www.wikidata.org/entity/' . $id->getSerialization() );

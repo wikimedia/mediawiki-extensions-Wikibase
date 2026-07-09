@@ -136,7 +136,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$potatoList
 			),
-			new ItemSearchResults(
+			ItemSearchResults::withHasMore(
+				true,
 				...array_map(
 					fn( array $potato ) => new ItemSearchResult(
 						new ItemId( $potato['id'] ),
@@ -162,7 +163,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$potatoList
 			),
-			new ItemSearchResults(
+			ItemSearchResults::withHasMore(
+				true,
 				...array_map(
 					fn( array $potato ) => new ItemSearchResult(
 						new ItemId( $potato['id'] ),
@@ -296,7 +298,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertyPrefixSearchResults(
+			PropertyPrefixSearchResults::withHasMore(
+				true,
 				...array_map(
 					fn( array $property ) => new PropertyPrefixSearchResult(
 						new NumericPropertyId( $property['id'] ),
@@ -324,7 +327,8 @@ class EntitySearchHelperPrefixSearchEngineTest extends TestCase {
 				),
 				$propertyList
 			),
-			new PropertyPrefixSearchResults(
+			PropertyPrefixSearchResults::withHasMore(
+				true,
 				...array_map(
 					fn( array $property ) => new PropertyPrefixSearchResult(
 						new NumericPropertyId( $property['id'] ),
