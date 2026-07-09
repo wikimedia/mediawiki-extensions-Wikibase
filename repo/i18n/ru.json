@@ -572,5 +572,6 @@
 	"wikibase-scoped-search-property-scope-name": "Свойства",
 	"wikibase-mobile-editing-ui-beta-feature-message": "Редактирование элементов Викиданных на мобильных устройствах",
 	"wikibase-mobile-editing-ui-beta-feature-description": "Включите эту функцию для редактирования Викиданных с мобильного устройства! Этот проект, разрабатываемый командой Викиданных, позволяет редактировать элементы со смартфона с использованием интерфейса, оптимизированного для мобильных устройств.",
-	"wikibase-stepper-progress": "$1 из $2"
+	"wikibase-stepper-progress": "$1 из $2",
+	"wikibase-wikiprojects-sidebar-section": "Связанные вики-проекты"
 }
