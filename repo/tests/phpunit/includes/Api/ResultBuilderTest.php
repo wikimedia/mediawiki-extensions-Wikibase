@@ -101,19 +101,13 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Removes all metadata keys as recognised by the MW Api.
 	 * These all start with a '_' character.
-	 *
-	 * @param array $array
-	 *
-	 * @return array
 	 */
-	private static function removeMetaData( array $array ) {
+	private static function removeMetaData( array $array ): array {
 		foreach ( $array as $key => &$value ) {
-			if ( substr( (string)$key, 0, 1 ) === '_' ) {
+			if ( str_starts_with( (string)$key, '_' ) ) {
 				unset( $array[$key] );
-			} else {
-				if ( is_array( $value ) ) {
-					$value = self::removeMetaData( $value );
-				}
+			} elseif ( is_array( $value ) ) {
+				$value = self::removeMetaData( $value );
 			}
 		}
 		return $array;

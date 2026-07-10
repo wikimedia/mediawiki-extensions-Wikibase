@@ -126,14 +126,14 @@ abstract class NoBadUsageTestBase extends TestCase {
 
 			foreach ( $dirPatterns as $pattern => $dirs ) {
 				foreach ( $dirs as $dir => $allowed ) {
-					if ( strpos( $relativePath, $dir ) === 0 ) {
+					if ( str_starts_with( $relativePath, $dir ) ) {
 						self::assertTrue( $allowed,
 							'Only allowed value for directories is `true`' );
 						continue 2; // next pattern
 					}
 				}
 
-				if ( substr( $pattern, 0, 1 ) === '/' ) {
+				if ( str_starts_with( $pattern, '/' ) ) {
 					$matches = preg_match_all( $pattern, $text );
 				} else {
 					$matches = substr_count( $text, $pattern );

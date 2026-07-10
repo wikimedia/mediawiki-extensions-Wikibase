@@ -115,7 +115,7 @@ class ErrorHandlingSnakFormatter implements SnakFormatter {
 		$format = $this->getFormat();
 
 		//NOTE: format identifiers are MIME types, so we can just check the prefix.
-		if ( strpos( $format, SnakFormatter::FORMAT_HTML ) === 0 ) {
+		if ( str_starts_with( $format, SnakFormatter::FORMAT_HTML ) ) {
 			$text = $warning->parse();
 			$text = Html::rawElement( 'span', $attributes, $text );
 

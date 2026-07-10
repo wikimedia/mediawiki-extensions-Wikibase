@@ -36,11 +36,11 @@ class NoReverseDependencyTest extends \PHPUnit\Framework\TestCase {
 		 * @var SplFileInfo $fileInfo
 		 */
 		foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
-			if ( $fileInfo->isFile() && substr( $fileInfo->getFilename(), -4 ) === '.php' ) {
+			if ( $fileInfo->isFile() && str_ends_with( $fileInfo->getFilename(), '.php' ) ) {
 				$text = file_get_contents( $fileInfo->getPathname() );
 				$text = preg_replace( '@/\*.*?\*/@s', '', $text );
 
-				if ( strpos( $text, $string ) !== false ) {
+				if ( str_contains( $text, $string ) ) {
 					$paths[] = str_replace( $dir, '', $fileInfo->getPathname() );
 				}
 			}

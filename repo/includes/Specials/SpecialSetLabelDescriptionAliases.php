@@ -425,14 +425,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 * @return bool
 	 */
 	private function assertNoPipeCharacterInAliases( Fingerprint $fingerprint ) {
-		if ( $this->aliases ) {
-			if ( $fingerprint->hasAliasGroup( $this->languageCode ) ) {
-				$aliasesInLang = $fingerprint->getAliasGroup( $this->languageCode )->getAliases();
-				foreach ( $aliasesInLang as $alias ) {
-					if ( strpos( $alias, '|' ) !== false ) {
-						return true;
-
-					}
+		if ( $this->aliases && $fingerprint->hasAliasGroup( $this->languageCode ) ) {
+			foreach ( $fingerprint->getAliasGroup( $this->languageCode )->getAliases() as $alias ) {
+				if ( str_contains( $alias, '|' ) ) {
+					return true;
 				}
 			}
 		}

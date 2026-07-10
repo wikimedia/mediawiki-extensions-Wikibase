@@ -28,7 +28,7 @@ class EntityUsageFactory {
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromIdentity( string $identity ): EntityUsage {
-		if ( strpos( $identity, '#' ) === false ) {
+		if ( !str_contains( $identity, '#' ) ) {
 			throw new InvalidArgumentException(
 				'Invalid identity string passed, must be obtained from EntityUsage::getIdentityString.'
 			);

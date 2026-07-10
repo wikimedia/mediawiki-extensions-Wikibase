@@ -181,7 +181,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		$aliasesInLang = $entity->getAliasGroups()->getByLanguage( $languageCode )->getAliases();
 
 		foreach ( $aliasesInLang as $alias ) {
-			if ( strpos( $alias, '|' ) !== false ) {
+			if ( str_contains( $alias, '|' ) ) {
 				$logger = LoggerFactory::getInstance( 'Wikibase' );
 				$logger->error( 'Special:SetAliases attempt to save pipes in aliases' );
 				throw new UserInputException(

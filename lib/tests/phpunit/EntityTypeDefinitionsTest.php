@@ -51,7 +51,7 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 	public function testFieldDocumented( string $fieldName ) {
 		$documentation = $this->getEntityTypesDocumentation();
 		// don’t use $this->assertStringContainsString(), it prints the whole haystack each time
-		if ( strpos( $documentation, $fieldName ) === false ) {
+		if ( !str_contains( $documentation, $fieldName ) ) {
 			$this->fail( "No documentation found in entitytypes.md for '$fieldName'" );
 		} else {
 			$this->addToAssertionCount( 1 );

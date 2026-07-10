@@ -27,7 +27,7 @@ class CommonsMediaExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )
 			->willReturnCallback( function( $fileName ) {
-				return strpos( $fileName, 'NOT-FOUND' ) === false ? $fileName : null;
+				return str_contains( $fileName, 'NOT-FOUND' ) ? null : $fileName;
 			} );
 
 		return $fileNameLookup;

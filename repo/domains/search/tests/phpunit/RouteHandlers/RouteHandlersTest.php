@@ -154,7 +154,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 		$useCaseName = end( $classNameParts );
 
 		foreach ( self::$searchRoutesData as $route ) {
-			if ( strpos( $route['factory'], "\\{$useCaseName}RouteHandler" ) ) {
+			if ( str_contains( $route['factory'], "\\{$useCaseName}RouteHandler" ) ) {
 				return $route;
 			}
 		}

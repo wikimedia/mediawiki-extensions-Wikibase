@@ -85,7 +85,7 @@ class DataTypeDefinitions {
 
 		foreach ( $dataTypeDefinitions as $id => $def ) {
 			Assert::parameter(
-				strpos( $id, ':' ),
+				strpos( $id, ':' ) > 0,
 				"\$dataTypeDefinitions[$id]",
 				'Key must start with a prefix like "PT:" or "VT:".'
 			);
@@ -109,7 +109,7 @@ class DataTypeDefinitions {
 	 */
 	private function filterDisabledDataTypes( array $dataTypeDefinitions, array $disabledTypes ) {
 		foreach ( $dataTypeDefinitions as $id => $def ) {
-			if ( strpos( $id, 'PT' ) === 0 ) {
+			if ( str_starts_with( $id, 'PT' ) ) {
 				if ( in_array( substr( $id, 3 ), $disabledTypes ) ) {
 					unset( $dataTypeDefinitions[$id] );
 				}
@@ -130,9 +130,8 @@ class DataTypeDefinitions {
 		$filtered = [];
 
 		foreach ( $map as $key => $value ) {
-			$ofs = strlen( $prefix );
-			if ( strpos( $key, $prefix ) === 0 ) {
-				$key = substr( $key, $ofs );
+			if ( str_starts_with( $key, $prefix ) ) {
+				$key = substr( $key, strlen( $prefix ) );
 				$filtered[$key] = $value;
 			}
 		}
