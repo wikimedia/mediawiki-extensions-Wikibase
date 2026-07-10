@@ -8,18 +8,23 @@
 	const Pinia = require( 'pinia' );
 	const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
-	const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
+	const pinia = Pinia.createPinia();
+	// T422838: Make pinia globally active immediately so store calls outside of Vue component
+	// context (for example: from the WikibaseQualityConstraints gadget).
+	Pinia.setActivePinia( pinia );
 
-	if ( wbui2025StatementList !== null ) {
-		const pinia = Pinia.createPinia();
-		// T422838: Make pinia globally active immediately so store calls outside of Vue component
-		// context (for example: from the WikibaseQualityConstraints gadget).
-		Pinia.setActivePinia( pinia );
+	// T418778: wait for DOM ready; this module can execute before the page is fully parsed
+	$( () => {
+		const wbui2025StatementList = document.getElementById( 'wikibase-wbui2025-statementgrouplistview' );
 
-		// This initialization code runs when the Resource Loader loads the module. Other modules are
-		// also loaded around the same time. If any of those (most notably, the Kartographer extension's
-		// frontend code) run before this one and modify the DOM, what's being imported may not actually
-		// be the untouched, server-rendered HTML.
+		if ( wbui2025StatementList === null ) {
+			mw.log.error( 'Unable to find statement list placeholder element to mount mobile statement view' );
+			return;
+		}
+
+		// Other modules are loaded around the same time as this one. If any of those (most notably,
+		// the Kartographer extension's frontend code) run before this one and modify the DOM, what's
+		// being imported may not actually be the untouched, server-rendered HTML.
 		wbui2025.store.useServerRenderedHtml( pinia ).importFromElement( wbui2025StatementList );
 		wbui2025.store.useMessageStore( pinia );
 
@@ -55,9 +60,7 @@
 				.use( pinia )
 				.mount( addStatementFloatingButtonContainer );
 		} );
-	} else {
-		mw.log.error( 'Unable to find statement list placeholder element to mount mobile statement view' );
-	}
+	} );
 }(
 	wikibase
 ) );
