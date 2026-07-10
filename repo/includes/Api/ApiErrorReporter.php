@@ -11,6 +11,7 @@ use MediaWiki\Api\ApiErrorFormatter_BackCompat;
 use MediaWiki\Api\ApiMessage;
 use MediaWiki\Api\ApiResult;
 use MediaWiki\Api\ApiUsageException;
+use MediaWiki\Message\Message;
 use StatusValue;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikimedia\Message\MessageSpecifier;
@@ -194,11 +195,7 @@ class ApiErrorReporter {
 	 * @throws LogicException
 	 */
 	public function dieWithError( $msg, $errorCode, $httpRespCode = 0, $extraData = [] ) {
-		if ( !( $msg instanceof MessageSpecifier ) ) {
-			$params = (array)$msg;
-			$messageKey = array_shift( $params );
-			$msg = wfMessage( $messageKey, $params );
-		}
+		$msg = Message::newFromSpecifier( $msg );
 
 		$this->addMessageToResult( $msg, $extraData );
 

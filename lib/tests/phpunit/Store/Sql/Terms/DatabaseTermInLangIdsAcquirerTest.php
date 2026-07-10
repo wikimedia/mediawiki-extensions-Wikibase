@@ -222,24 +222,8 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 		// one occurence of the term id for en label "same" that already existed in db,
 		// and two occurences of the term id for en alias "same" that already existed
 		// in db.
-		$this->assertCount(
-			1,
-			array_filter(
-				$acquiredTermIds,
-				function ( $id ) use ( $labelEnSameTermInLangId ) {
-					return $id === $labelEnSameTermInLangId;
-				}
-			)
-		);
-		$this->assertCount(
-			2,
-			array_filter(
-				$acquiredTermIds,
-				function ( $id ) use ( $aliasEnSameTermInLangId ) {
-					return $id === $aliasEnSameTermInLangId;
-				}
-			)
-		);
+		$this->assertCount( 1, array_keys( $acquiredTermIds, $labelEnSameTermInLangId ) );
+		$this->assertCount( 2, array_keys( $acquiredTermIds, $aliasEnSameTermInLangId ) );
 	}
 
 	public function testRestoresAcquiredIdsWhenDeletedInParallelBeforeReturn() {

@@ -62,13 +62,10 @@ class UsageDeduplicator {
 	 */
 	private function deduplicateStructuredUsages( array $structuredUsages ) {
 		foreach ( $structuredUsages as &$usagesPerEntity ) {
-			$containsQualOrReference = array_filter(
-				$usagesPerEntity,
-				function ( $value, $key ) {
-					return $key === EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE;
-				},
-				ARRAY_FILTER_USE_BOTH
-			) !== [];
+			$containsQualOrReference = array_key_exists(
+				EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE,
+				$usagesPerEntity
+			);
 			if ( $containsQualOrReference ) {
 				$deduplicatedStatementUsage = $this->deduplicateStatementUsages(
 					// `?? []` is a temporary fix for T428620

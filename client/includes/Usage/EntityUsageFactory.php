@@ -37,12 +37,9 @@ class EntityUsageFactory {
 		[ $entityIdSerialization, $aspectKey ] = explode( '#', $identity, 2 );
 		$entityId = $this->entityIdParser->parse( $entityIdSerialization );
 
-		if ( strpos( $aspectKey, '.' ) !== false ) {
-			[ $aspect, $modifier ] = explode( '.', $aspectKey, 2 );
-		} else {
-			$aspect = $aspectKey;
-			$modifier = null;
-		}
+		$parts = explode( '.', $aspectKey, 2 );
+		$aspect = $parts[0];
+		$modifier = $parts[1] ?? null;
 
 		return new EntityUsage( $entityId, $aspect, $modifier );
 	}
