@@ -133,9 +133,7 @@ class UpdateUnits extends Maintenance {
 
 		// Sort units by Q-id, as number, to have predictable order
 		uksort( $convertUnits,
-			function ( $x, $y ) {
-				return (int)substr( $x, 1 ) - (int)substr( $y, 1 );
-			}
+			static fn ( $x, $y ) => (int)substr( $x, 1 ) <=> (int)substr( $y, 1 )
 		);
 
 		switch ( strtolower( $format ) ) {

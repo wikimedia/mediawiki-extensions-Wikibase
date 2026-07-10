@@ -73,15 +73,8 @@ class SiteLinkTable implements SiteLinkStore {
 		return array_udiff(
 			$siteLinks1,
 			$siteLinks2,
-			function( SiteLink $a, SiteLink $b ) {
-				$result = strcmp( $a->getSiteId(), $b->getSiteId() );
-
-				if ( $result === 0 ) {
-					$result = strcmp( $a->getPageName(), $b->getPageName() );
-				}
-
-				return $result;
-			}
+			static fn ( SiteLink $a, SiteLink $b ) => $a->getSiteId() <=> $b->getSiteId() ?:
+				$a->getPageName() <=> $b->getPageName()
 		);
 	}
 

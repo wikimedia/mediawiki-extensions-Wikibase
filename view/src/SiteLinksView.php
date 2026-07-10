@@ -241,9 +241,9 @@ class SiteLinksView {
 		usort(
 			$siteLinksForTable,
 			function( array $a, array $b ) {
-				/** @var SiteLink[] $a */
-				/** @var SiteLink[] $b */
-				return strcmp( $a['siteLink']->getSiteId(), $b['siteLink']->getSiteId() );
+				/** @var array{siteLink:SiteLink} $a */
+				/** @var array{siteLink:SiteLink} $b */
+				return $a['siteLink']->getSiteId() <=> $b['siteLink']->getSiteId();
 			}
 		);
 
