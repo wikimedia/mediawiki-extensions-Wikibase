@@ -1,0 +1,97 @@
+@startuml
+
+skinparam componentStyle rectangle
+
+actor Client
+
+package "REST API" {
+
+    [ /suggest/items ] as SuggestItemsRoute
+    [ /suggest/properties ] as SuggestPropertiesRoute
+
+    [ItemPrefixSearchRouteHandler]
+    [PropertyPrefixSearchRouteHandler]
+}
+
+package "Action API" {
+
+    [ ?action=wbsearchentities&type=item ] as ItemWbSearchEntitiesRoute
+    [ ?action=wbsearchentities&type=property ] as PropertyWbSearchEntitiesRoute
+    [ ?action=wbsearchentities&type=lexeme ] as LexemeWbSearchEntitiesRoute
+    [ ?action=query&list=wbsearch ] as QuerySearchEntitiesRoute
+
+    [SearchEntities]
+    [QuerySearchEntities]
+
+    [WbSearchEntitiesControllerDispatcher]
+
+    [ItemWbSearchEntitiesController]
+    [PropertyWbSearchEntitiesController]
+    [EntitySchemaWbSearchEntitiesController]
+    [FallbackEntitySearchHelperController (Lexeme, ...)] as FallbackController
+}
+
+package "Use Cases" {
+
+    [ItemPrefixSearch]
+    [PropertyPrefixSearch]
+
+	[ItemPrefixSearchEngine]
+	[PropertyPrefixSearchEngine]
+}
+
+package "CirrusSearch" {
+    [EntitySearchElastic]
+}
+
+package "Legacy Search" {
+
+    [EntitySearchHelper]
+    [LexemeSearchHelper]
+    [EntitySchemaSearchHelper]
+}
+
+Client --> SuggestItemsRoute
+Client --> SuggestPropertiesRoute
+Client --> QuerySearchEntitiesRoute
+
+SuggestItemsRoute --> [ItemPrefixSearchRouteHandler]
+SuggestPropertiesRoute --> [PropertyPrefixSearchRouteHandler]
+
+QuerySearchEntitiesRoute --> [QuerySearchEntities]
+
+[ItemPrefixSearchRouteHandler] --> [ItemPrefixSearch]
+[ItemPrefixSearch] --> [ItemPrefixSearchEngine]
+[ItemPrefixSearchEngine] --> [EntitySearchElastic]
+
+[PropertyPrefixSearchRouteHandler] --> [PropertyPrefixSearch]
+[PropertyPrefixSearch] --> [PropertyPrefixSearchEngine]
+[PropertyPrefixSearchEngine] --> [EntitySearchElastic]
+
+Client --> ItemWbSearchEntitiesRoute
+Client --> PropertyWbSearchEntitiesRoute
+Client --> LexemeWbSearchEntitiesRoute
+
+ItemWbSearchEntitiesRoute --> [SearchEntities]
+PropertyWbSearchEntitiesRoute --> [SearchEntities]
+LexemeWbSearchEntitiesRoute --> [SearchEntities]
+
+[SearchEntities] --> [WbSearchEntitiesControllerDispatcher]
+[QuerySearchEntities] --> [WbSearchEntitiesControllerDispatcher]
+
+[WbSearchEntitiesControllerDispatcher] --> [ItemWbSearchEntitiesController] : item
+[WbSearchEntitiesControllerDispatcher] --> [PropertyWbSearchEntitiesController] : property
+[WbSearchEntitiesControllerDispatcher] --> [EntitySchemaWbSearchEntitiesController] : entityschema
+[WbSearchEntitiesControllerDispatcher] --> [FallbackController] : lexeme
+
+[ItemWbSearchEntitiesController] --> [ItemPrefixSearch]
+[PropertyWbSearchEntitiesController] --> [PropertyPrefixSearch]
+
+[EntitySchemaWbSearchEntitiesController] --> [EntitySchemaSearchHelper]
+[FallbackController] --> [LexemeSearchHelper]
+    [LexemeSearchHelper] ..> [EntitySearchHelper]
+    [EntitySchemaSearchHelper] ..> [EntitySearchHelper]
+    '[EntitySearchElastic] ..> [EntitySearchHelper]
+
+
+@enduml

@@ -16,7 +16,7 @@ Examples can be found by exploring usages of the [ControllerRegistry::get()](@re
 
 ## Example: `wbsearchentities-controller`
 
-The `wbsearchentities-controller` (entry point for the `wbsearchentities` Action API module) illustrates what each of the four component types looks like in practice.
+The `wbsearchentities-controller` (entry point for the `wbsearchentities` Action API module) illustrates what each of the four component types looks like in practice. (See also: @subpage controllers_refactoring_learnings)
 
 ### 1. Controller interface
 
