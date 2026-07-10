@@ -4,6 +4,14 @@
 			"شاه زمان پټان"
 		]
 	},
+	"apihelp-query+wbentityusage-summary": "په ورکړل شويو مخونو کې کارول شوي ټول شونتيا پېژند بېرته راگرځوي.",
+	"apihelp-query+wbentityusage-param-aspect": "يوازې هغه شونتيا پېژند بېرته راگرځوي چې دا اړخ يې کارولی وي.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-S": "د شونتيا وېبځي‌تړوني کارول کېږي",
+	"apihelp-query+wbentityusage-paramvalue-aspect-L": "د شونتيا نښکه کارول کېږي",
+	"apihelp-query+wbentityusage-paramvalue-aspect-D": "د د شونتيا څرگنداوی کارول کېږي",
+	"apihelp-query+wbentityusage-paramvalue-aspect-T": "د هغ ځايي مخ سرليک چې شونتيا سره سمون خوري، کارول کېږي",
+	"apihelp-query+wbentityusage-paramvalue-aspect-C": "د شونتيا پرېکړه‌ليکونه کارول کېږي",
+	"apihelp-query+wbentityusage-paramvalue-aspect-X": "د يوې شونتيا ټول اړخونه کارېږي يا کارېدای شي",
 	"apihelp-query+wikibase-paramvalue-prop-siteid": "د دې وېبځي وېبځي‌پېژند.",
 	"apihelp-wbformatreference-summary": "کارنانو ته د ښکاره‌کولو لپاره سرچينه بڼي."
 }

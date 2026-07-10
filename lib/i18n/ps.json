@@ -28,5 +28,6 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 کال|$1 کالونه}} عيسوي وخت",
 	"wikibase-time-precision-millennium": "$1. زرۍ",
 	"wikibase-time-precision-century": "$1. پېړۍ",
-	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 کال|$1 کالونه}} عيسوي وخت دمخه"
+	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 کال|$1 کالونه}} عيسوي وخت دمخه",
+	"wikibase-entity-summary-wbsetclaim-update-references": "د {{PLURAL:$3|غوښتنې|غوښتنو}} {{PLURAL:$4|يو سرچينه بدله شوه|$4 سرچينې بدلې شوې}}"
 }
