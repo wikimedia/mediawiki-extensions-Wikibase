@@ -85,9 +85,7 @@ class PropertyStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 	private function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		$mockDataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$mockDataTypeLookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function( NumericPropertyId $id ) {
-				return 'string';
-			} );
+			->willReturn( 'string' );
 		return $mockDataTypeLookup;
 	}
 

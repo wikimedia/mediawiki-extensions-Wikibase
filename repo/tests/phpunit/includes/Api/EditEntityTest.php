@@ -1295,11 +1295,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$this->doApiRequestWithToken( $params );
 			$this->fail( 'Read only error did not happen but should' );
 		} catch ( ReadOnlyError $e ) {
-			$message = $e->getMessageObject();
-			$this->assertEquals( 'readonlytext', $message->getKey() );
-			$this->assertEquals(
+			$this->assertSame(
 				[ 'Editing of entity type: item is currently disabled. It will be enabled soon.' ],
-				$message->getParams()
+				(array)$e->params
 			);
 		}
 

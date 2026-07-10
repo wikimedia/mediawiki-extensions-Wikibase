@@ -416,7 +416,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenEntityIdContainsUriUnsafeCharacters_conceptUriContainsEncodedCharacters() {
 		$nyanId = $this->createStub( EntityId::class );
-		$nyanId->method( $this->logicalOr( 'getSerialization', 'getLocalPart' ) )
+		$nyanId->method( 'getSerialization' )
 			->willReturn( '[,,_,,];3' );
 		$nyanId->method( 'getEntityType' )
 			->willReturn( 'kitten' );
