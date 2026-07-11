@@ -57,7 +57,6 @@ class ResubmitChanges extends Maintenance {
 			$numberOfChanges = count( $changes );
 			$stats->getCounter( 'resubmit_changes_number_of_changes_total' )
 			->setLabel( "db", $statsPrefix )
-			->copyToStatsdAt( "$statsPrefix.wikibase.repo.ResubmitChanges.numberOfChanges" )
 			->incrementBy( $numberOfChanges );
 
 			$this->log( 'Resubmitting ' . $numberOfChanges . ' changes older than ' . $minimumAge . ' seconds.' );

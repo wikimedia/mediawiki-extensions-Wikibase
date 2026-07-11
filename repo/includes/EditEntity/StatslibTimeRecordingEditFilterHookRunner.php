@@ -53,7 +53,6 @@ class StatslibTimeRecordingEditFilterHookRunner implements EditFilterHookRunner 
 			$this->statsFactory
 			->getTiming( 'EditEntity_EditFilterHookRunner_run_duration_seconds' )
 			->setLabel( 'type', $entityType )
-			->copyToStatsdAt( "wikibase.repo.EditEntity.timing.EditFilterHookRunner.run.{$entityType}" )
 			->observe( ( $attemptSaveFilterEnd - $attemptSaveFilterStart ) * 1000 );
 		}
 

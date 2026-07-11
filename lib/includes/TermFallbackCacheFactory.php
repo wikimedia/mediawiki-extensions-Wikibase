@@ -101,10 +101,6 @@ class TermFallbackCacheFactory {
 		return $this->serviceFactory->newStatslibRecordingCache(
 			$cache,
 			$this->statsFactory,
-			[
-				'miss' => 'wikibase.repo.formatterCache.miss',
-				'hit' => 'wikibase.repo.formatterCache.hit',
-			],
 			'formatterCache_total'
 		);
 	}

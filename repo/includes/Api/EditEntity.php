@@ -208,10 +208,10 @@ class EditEntity extends ModifyEntity {
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
 			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_clear' );
-			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.clear' )->increment();
+			$metric->increment();
 		} else {
 			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_no_clear' );
-			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.no-clear' )->increment();
+			$metric->increment();
 		}
 
 		if ( !$exists ) {
@@ -221,7 +221,7 @@ class EditEntity extends ModifyEntity {
 			}
 
 			$metric = $this->statsFactory->getCounter( 'edit_entity_modify_entity_create' );
-			$metric->copyToStatsdAt( 'wikibase.api.EditEntity.modifyEntity.create' )->increment();
+			$metric->increment();
 		}
 
 		$oldEntity = clone $entity;

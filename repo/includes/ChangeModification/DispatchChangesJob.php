@@ -176,13 +176,11 @@ class DispatchChangesJob extends Job {
 		$this->statsFactory
 			->getTiming( 'dispatchChangesJob_numberOfChangesInJob_total' )
 			->setLabel( "db", $this->statsPrefix )
-			->copyToStatsdAt( "$this->statsPrefix.wikibase.repo.dispatchChangesJob.NumberOfChangesInJob" )
 			->observe( count( $changes ) );
 
 		$this->statsFactory
 			->getTiming( 'dispatchChangesJob_numberOfWikisForChange_total' )
 			->setLabel( "db", $this->statsPrefix )
-			->copyToStatsdAt( "$this->statsPrefix.wikibase.repo.dispatchChangesJob.numberOfWikisForChange" )
 			->observe( count( $dispatchingClientSites ) );
 
 		$this->logger->info( __METHOD__ . ': dispatching changes for {entity} to {numberOfWikis} clients: {listOfWikis}', [
@@ -208,8 +206,7 @@ class DispatchChangesJob extends Job {
 			$metric = $this->statsFactory->getCounter(
 				"dispatchChangesJob_SitelinkAdditionDispatched_total"
 			)->setLabels( [ "db" => $this->statsPrefix, "wikiId" => $wikiId ] );
-			$metric->copyToStatsdAt( "$this->statsPrefix.wikibase.repo.dispatchChangesJob.sitelinkAdditionDispatched.{$wikiId}" )
-				->increment();
+			$metric->increment();
 		}
 	}
 
@@ -257,8 +254,7 @@ class DispatchChangesJob extends Job {
 					'dispatchChangesJob_clientWikiWithoutConfig_total'
 				)
 				->setLabels( [ "db" => $this->statsPrefix, "siteId" => $siteID ] );
-				$metric->copyToStatsdAt( "$this->statsPrefix.wikibase.repo.dispatchChangesJob.clientWikiWithoutConfig" )
-					->increment();
+				$metric->increment();
 				$this->logger->warning(
 					__METHOD__ . ': No client wiki with site ID {siteID} configured in \$wgWBRepoSettings["localClientDatabases"]!',
 					[

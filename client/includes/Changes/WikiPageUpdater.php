@@ -141,11 +141,9 @@ class WikiPageUpdater implements PageUpdater {
 		if ( $this->statsFactory !== null ) {
 			$this->statsFactory
 				->getCounter( 'PageUpdates_WebCache_jobs_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.WebCache.jobs' )
 				->incrementBy( count( $jobs ) );
 			$this->statsFactory
 				->getCounter( 'PageUpdates_WebCache_titles_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.WebCache.titles' )
 				->incrementBy( count( $titles ) );
 		}
 	}
@@ -183,11 +181,9 @@ class WikiPageUpdater implements PageUpdater {
 		if ( $this->statsFactory !== null ) {
 			$this->statsFactory
 				->getCounter( 'PageUpdates_RefreshLinks_jobs_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.RefreshLinks.jobs' )
 				->incrementBy( $jobCount );
 			$this->statsFactory
 				->getCounter( 'PageUpdates_RefreshLinks_titles_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.RefreshLinks.titles' )
 				->incrementBy( count( $titles ) );
 		}
 	}
@@ -247,23 +243,19 @@ class WikiPageUpdater implements PageUpdater {
 		if ( $this->statsFactory !== null ) {
 			$this->statsFactory
 				->getCounter( 'PageUpdates_InjectRCRecords_jobs_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.jobs' )
 				->incrementBy( count( $jobs ) );
 			$this->statsFactory
 				->getCounter( 'PageUpdates_InjectRCRecords_titles_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.titles' )
 				->incrementBy( $titleCount );
 
 			// tracking fallout of the hacky fix for T177707
 			$delta = count( $titles ) - $titleCount;
 			$this->statsFactory
 				->getCounter( 'PageUpdates_InjectRCRecords_discardedTitles_total' )
-				->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.discardedTitles' )
 				->incrementBy( $delta );
 			if ( $delta !== 0 ) {
 				$this->statsFactory
 					->getCounter( 'PageUpdates_InjectRCRecords_incompleteChanges_total' )
-					->copyToStatsdAt( 'wikibase.client.pageupdates.InjectRCRecords.incompleteChanges' )
 					->increment();
 			}
 		}

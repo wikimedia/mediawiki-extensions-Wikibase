@@ -247,7 +247,7 @@ class FormatSnakValue extends ApiBase {
 				foreach ( $options as $name => $value ) {
 					$metric = $this->statsFactory->getCounter( "formatvalue_options" )
 						->setLabel( "name", $name );
-					$metric->copyToStatsdAt( "wikibase.repo.api.formatvalue.options.$name" )->increment();
+					$metric->increment();
 					$this->setValidOption( $formatterOptions, $name, $value );
 				}
 			}

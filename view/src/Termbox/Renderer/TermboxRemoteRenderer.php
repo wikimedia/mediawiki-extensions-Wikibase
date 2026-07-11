@@ -89,7 +89,6 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 					]
 				);
 				$this->statsFactory->getCounter( 'termbox_remote_renderer_unsuccessful_response_total' )
-					->copyToStatsdAt( 'wikibase.view.TermboxRemoteRenderer.unsuccessfulResponse' )
 					->increment();
 			}
 
@@ -109,7 +108,6 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		}
 		$this->logger->error( '{class}: Problem requesting from the remote server', $context );
 		$this->statsFactory->getCounter( 'termbox_remote_renderer_request_error_total' )
-			->copyToStatsdAt( 'wikibase.view.TermboxRemoteRenderer.requestError' )
 			->increment();
 	}
 

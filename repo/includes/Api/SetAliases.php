@@ -145,10 +145,10 @@ class SetAliases extends ModifyEntity {
 		// we will also have two ChangeOps updating the same edit summary.
 		// This will cause the edit summary to be overwritten by the last ChangeOp being applied.
 		$metric = $this->statsFactory->getCounter( 'wbsetaliases_total' );
-		$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetaliases.total' )->increment();
+		$metric->increment();
 		if ( !empty( $preparedParameters['add'] ) && !empty( $preparedParameters['remove'] ) ) {
 			$metric = $this->statsFactory->getCounter( 'wbsetaliases_addremove' );
-			$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetaliases.addremove' )->increment();
+			$metric->increment();
 		}
 
 		$summary = $this->createSummary( $preparedParameters );

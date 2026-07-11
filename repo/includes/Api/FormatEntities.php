@@ -133,9 +133,7 @@ class FormatEntities extends ApiBase {
 		$entityIds = $this->getEntityIdsFromIdParam( $params );
 
 		$metric = $this->statsFactory->getCounter( 'formatentities_entities_total' );
-		$metric->copyToStatsdAt(
-			'wikibase.repo.api.formatentities.entities'
-		)->incrementBy( count( $entityIds ) );
+		$metric->incrementBy( count( $entityIds ) );
 
 		foreach ( $entityIds as $entityId ) {
 			$formatted = $entityIdFormatter->formatEntityId( $entityId );

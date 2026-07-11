@@ -61,7 +61,7 @@ class TermFallbackServiceFactoryTest extends TestCase {
 		$sut = $this->createSUT();
 		$this->assertInstanceOf(
 			StatslibRecordingSimpleCache::class,
-			$sut->newStatslibRecordingCache( $cache, $statsFactory, [ 'miss' => 'sad', 'hit' => 'hey' ], 'cacheKey_total' )
+			$sut->newStatslibRecordingCache( $cache, $statsFactory, 'cacheKey_total' )
 		);
 	}
 

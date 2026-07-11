@@ -62,10 +62,6 @@ return [
 			$cache = new StatslibRecordingSimpleCache(
 				$cache,
 				$mwServices->getStatsFactory()->withComponent( 'WikibaseClient' ),
-				[
-					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
-					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit',
-				],
 				'prefetchingPropertyTermLookupCache_total'
 			);
 

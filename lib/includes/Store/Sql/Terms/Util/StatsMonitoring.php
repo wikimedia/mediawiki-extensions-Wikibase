@@ -21,14 +21,12 @@ trait StatsMonitoring {
 			->withComponent( 'WikibaseLib' )
 			->getCounter( 'termStore_total' )
 			->setLabels( [ 'query_type' => $queryType, 'query_context' => $queryContext ] )
-			->copyToStatsdAt( "wikibase.repo.term_store.$queryType" )
 			->increment();
 
 		MediaWikiServices::getInstance()->getStatsFactory()
 			->withComponent( 'WikibaseLib' )
 			->getCounter( 'termStore_queryContexts_total' )
 			->setLabels( [ 'query_type' => $queryType, 'query_context' => $queryContext ] )
-			->copyToStatsdAt( "wikibase.query_contexts.$queryContext.term_store.$queryType" )
 			->increment();
 	}
 }

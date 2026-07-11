@@ -279,17 +279,10 @@ class InjectRCRecordsJob extends Job {
 			$this->statsFactory
 				->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
 				->setLabel( 'DBname', $this->dbName )
-				->copyToStatsdAt( [
-					'wikibase.client.pageupdates.InjectRCRecords.run.titles',
-				] )
 				->incrementBy( count( $titles ) );
 			$this->statsFactory
 				->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
 				->setLabel( 'DBname', $this->dbName )
-				->copyToStatsdAt( [
-					'wikibase.client.pageupdates.InjectRCRecords.delay',
-					"{$this->dbName}.wikibase.client.pageupdates.InjectRCRecords.delay",
-				] )
 				->observe( $change->getAge() * 1000 );
 		}
 

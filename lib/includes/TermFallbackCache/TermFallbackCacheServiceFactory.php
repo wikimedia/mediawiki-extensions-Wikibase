@@ -39,9 +39,8 @@ class TermFallbackCacheServiceFactory {
 	public function newStatslibRecordingCache(
 		CacheInterface $inner,
 		StatsFactory $statsFactory,
-		array $statsdKeys,
 		string $statsKey
 	): StatslibRecordingSimpleCache {
-		return new StatslibRecordingSimpleCache( $inner, $statsFactory, $statsdKeys, $statsKey );
+		return new StatslibRecordingSimpleCache( $inner, $statsFactory, $statsKey );
 	}
 }

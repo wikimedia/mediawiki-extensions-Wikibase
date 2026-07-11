@@ -30,8 +30,7 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			->with( 'nonexistingkey' )
 			->willReturnArgument( 1 );
 
-		$statsKeys = [ 'miss' => 'statsKey', 'hit' => 'statsHit' ];
-		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, 'statsKey_total' );
 		$result = $sot->get( 'nonexistingkey', 'my default' );
 		$this->assertEquals( 'my default', $result );
 	}
@@ -49,8 +48,7 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 				return [ 'key' => 'cachedValue', 'key1' => $default, 'key2' => $default ];
 			} );
 
-		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, 'statsKey_total' );
 		$result = $sot->getMultiple( [ 'key', 'key1', 'key2' ], 'd1' );
 		$this->assertEquals( [ 'key1' => 'd1', 'key2' => 'd1', 'key' => 'cachedValue' ], $result );
 	}
@@ -66,8 +64,7 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 			->with( 'key' )
 			->willReturn( 'cached value' );
 
-		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, 'statsKey_total' );
 		$result = $sot->get( 'key', 'default value' );
 		$this->assertEquals( 'cached value', $result );
 	}
@@ -90,8 +87,7 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 				return [ 'key1' => 'cachehit', 'key2' => $default ];
 			} );
 
-		$statsKeys = [ 'miss' => 'statsKeyMiss', 'hit' => 'statsKeyHit' ];
-		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );
+		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, 'statsKey_total' );
 		$result = $sot->getMultiple( [ 'key1', 'key2' ], 'd1' );
 		$this->assertEquals( [ 'key1' => 'cachehit', 'key2' => 'd1' ], $result );
 	}

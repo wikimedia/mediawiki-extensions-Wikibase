@@ -222,10 +222,10 @@ class SetClaim extends ApiBase {
 		$this->resultBuilder->addTempUser( $status, fn( $user ) => $this->getTempUserRedirectUrl( $params, $user ) );
 
 		$metric = $this->statsFactory->getCounter( 'wbsetclaim_total' );
-		$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetclaim.total' )->increment();
+		$metric->increment();
 		if ( $index !== null ) {
 			$metric = $this->statsFactory->getCounter( 'wbsetclaim_index' );
-			$metric->copyToStatsdAt( 'wikibase.repo.api.wbsetclaim.index' )->increment();
+			$metric->increment();
 		}
 	}
 

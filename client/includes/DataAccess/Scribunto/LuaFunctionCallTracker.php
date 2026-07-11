@@ -81,7 +81,6 @@ class LuaFunctionCallTracker {
 			return;
 		}
 
-		$prefixedKeys = $this->getPrefixedKeys( $key, $module );
 		$count = intval( 1 / $this->sampleRate );
 
 		$counter = $this->statsFactory->withComponent( 'WikibaseClient' )
@@ -92,27 +91,7 @@ class LuaFunctionCallTracker {
 		$counter->setLabel( 'site', $this->trackLuaFunctionCallsPerWiki ? $this->siteId : 'not_tracked' );
 		$counter->setLabel( 'site_group', $this->trackLuaFunctionCallsPerSiteGroup ? $this->siteGroup : 'not_tracked' );
 
-		$counter->copyToStatsdAt( $prefixedKeys )
-		->incrementBy( $count );
-	}
-
-	/**
-	 * @param string $key
-	 * @param string $module
-	 * @return string[]
-	 */
-	private function getPrefixedKeys( $key, $module ) {
-		$prefixedKeys = [];
-		$statsdKey = "wikibase.client.scribunto.$module.$key.call";
-
-		if ( $this->trackLuaFunctionCallsPerWiki ) {
-			$prefixedKeys[] = "$this->siteId.$statsdKey";
-		}
-		if ( $this->trackLuaFunctionCallsPerSiteGroup ) {
-			$prefixedKeys[] = "$this->siteGroup.$statsdKey";
-		}
-
-		return $prefixedKeys;
+		$counter->incrementBy( $count );
 	}
 
 }

@@ -339,7 +339,7 @@ class ParseValue extends ApiBase {
 			foreach ( $options as $name => $value ) {
 				$metric = $this->statsFactory->getCounter( "parsevalue_options" )
 					->setLabel( "name", $name );
-				$metric->copyToStatsdAt( "wikibase.repo.api.parsevalue.options.$name" )->increment();
+				$metric->increment();
 				$parserOptions->setOption( $name, $value );
 			}
 		}

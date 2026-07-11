@@ -76,10 +76,6 @@ class TermFallbackCacheFactoryTest extends TestCase {
 			->with(
 				$mockCache,
 				$this->statsFactory,
-				[
-					'miss' => 'wikibase.repo.formatterCache.miss',
-					'hit' => 'wikibase.repo.formatterCache.hit',
-				],
 				'formatterCache_total'
 			)
 			->willReturn( $mockStatslibRecordingSimpleCache );
@@ -130,10 +126,6 @@ class TermFallbackCacheFactoryTest extends TestCase {
 			->with(
 				$mockCache,
 				$this->statsFactory,
-				[
-					'miss' => 'wikibase.repo.formatterCache.miss',
-					'hit' => 'wikibase.repo.formatterCache.hit',
-				],
 				'formatterCache_total'
 			)
 			->willReturn( $mockStatslibRecordingSimpleCache );

@@ -35,37 +35,15 @@ class StatslibRecordingSimpleCache implements CacheInterface {
 	private $statsFactory;
 
 	/**
-	 * @var string[]
-	 */
-	private $statsdKeys;
-
-	/**
 	 * @var string
 	 */
 	private $statsKey;
 
-	/**
-	 * @param CacheInterface $inner
-	 * @param StatsFactory $statsFactory
-	 * @param string[] $statsdKeys
-	 * @param string $statsKey
-	 */
 	public function __construct(
 		CacheInterface $inner,
 		StatsFactory $statsFactory,
-		array $statsdKeys,
 		string $statsKey
 	) {
-		Assert::parameter(
-			array_key_exists( 'miss', $statsdKeys ),
-			'$statsdKeys',
-			'$statsdKeys needs to have a \'miss\' value'
-		);
-		Assert::parameter(
-			array_key_exists( 'hit', $statsdKeys ),
-			'$statsdKeys',
-			'$statsdKeys needs to have a \'hit\' value'
-		);
 		Assert::parameter(
 			$statsKey !== '',
 			'$statsKey',
@@ -73,7 +51,6 @@ class StatslibRecordingSimpleCache implements CacheInterface {
 		);
 		$this->inner = $inner;
 		$this->statsFactory = $statsFactory;
-		$this->statsdKeys = $statsdKeys;
 		$this->statsKey = $statsKey;
 	}
 
@@ -81,7 +58,6 @@ class StatslibRecordingSimpleCache implements CacheInterface {
 		$this->statsFactory
 			->getCounter( $this->statsKey )
 			->setLabel( 'status', 'miss' )
-			->copyToStatsdAt( $this->statsdKeys['miss'] )
 			->incrementBy( $count );
 	}
 
@@ -89,7 +65,6 @@ class StatslibRecordingSimpleCache implements CacheInterface {
 		$this->statsFactory
 			->getCounter( $this->statsKey )
 			->setLabel( 'status', 'hit' )
-			->copyToStatsdAt( $this->statsdKeys['hit'] )
 			->incrementBy( $count );
 	}
 

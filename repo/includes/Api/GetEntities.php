@@ -179,11 +179,8 @@ class GetEntities extends ApiBase {
 			$this->validateAlteringEntityById( $entityId );
 		}
 
-		$getEntitiesKey = 'wikibase.repo.api.getentities.entities';
 		$metric = $this->statsFactory->getCounter( 'get_entities_total' );
-		$metric->copyToStatsdAt(
-				$getEntitiesKey,
-			)->incrementBy( count( $entityIds ) );
+		$metric->incrementBy( count( $entityIds ) );
 
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 
