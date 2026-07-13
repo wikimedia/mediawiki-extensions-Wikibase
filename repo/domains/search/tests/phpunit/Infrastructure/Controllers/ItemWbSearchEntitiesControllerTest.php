@@ -42,10 +42,17 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 			new MatchedData( 'label', 'en', 'Douglas Adams' )
 		);
 
-		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'Douglas', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$searchEngine = $this->createMock( ItemPrefixSearchEngine::class );
+		$searchEngine->expects( $this->once() )
+			->method( 'suggestItems' )
+			->with( 'Douglas', 'en', 5, 3, false, 'en', null )
+			->willReturn( new ItemSearchResults( $searchResult ) );
 
-		$this->assertCount( 1, $results );
+		$response = $this->newControllerWithEngine( $searchEngine )
+			->search( new WbSearchEntitiesRequest( 'Douglas', 'en', 'en', 5, false, null, User::newAnonymous(), 3 ) );
+
+		$this->assertCount( 1, $response->results );
+		$this->assertFalse( $response->hasMore );
 		$this->assertEquals(
 			new TermSearchResult(
 				new Term( 'en', 'Douglas Adams' ),
@@ -55,7 +62,7 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 				new Term( 'en', 'Author' ),
 				[ TermSearchResult::CONCEPTURI_META_DATA_KEY => 'http://www.wikidata.org/entity/Q42' ]
 			),
-			$results[0]
+			$response->results[0]
 		);
 	}
 
@@ -68,11 +75,11 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertCount( 1, $results );
-		$this->assertNull( $results[0]->getDisplayLabel() );
-		$this->assertNull( $results[0]->getDisplayDescription() );
+		$this->assertCount( 1, $response->results );
+		$this->assertNull( $response->results[0]->getDisplayLabel() );
+		$this->assertNull( $response->results[0]->getDisplayDescription() );
 	}
 
 	public function testEntityIdMatch(): void {
@@ -84,18 +91,33 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		);
 
 		$controller = $this->newController( new ItemSearchResults( $searchResult ) );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'Q42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'Q42', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertCount( 1, $results );
-		$this->assertSame( 'qid', $results[0]->getMatchedTerm()->getLanguageCode() );
-		$this->assertSame( 'Q42', $results[0]->getMatchedTerm()->getText() );
+		$this->assertCount( 1, $response->results );
+		$this->assertSame( 'qid', $response->results[0]->getMatchedTerm()->getLanguageCode() );
+		$this->assertSame( 'Q42', $response->results[0]->getMatchedTerm()->getText() );
 	}
 
 	public function testEmptyResults(): void {
 		$controller = $this->newController( new ItemSearchResults() );
-		$results = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'foo', 'en', 'en', 5, false, null, User::newAnonymous() ) );
 
-		$this->assertSame( [], $results );
+		$this->assertSame( [], $response->results );
+		$this->assertFalse( $response->hasMore );
+	}
+
+	public function testSurfacesHasMore(): void {
+		$searchResult = new ItemSearchResult(
+			new ItemId( 'Q42' ),
+			null,
+			null,
+			new MatchedData( 'label', 'en', 'test' )
+		);
+
+		$controller = $this->newController( ItemSearchResults::withHasMore( true, $searchResult ) );
+		$response = $controller->search( new WbSearchEntitiesRequest( 'test', 'en', 'en', 5, false, null, User::newAnonymous() ) );
+
+		$this->assertTrue( $response->hasMore );
 	}
 
 	public function testInvalidLanguageThrowsEntitySearchException(): void {
@@ -130,6 +152,10 @@ class ItemWbSearchEntitiesControllerTest extends TestCase {
 		$searchEngine = $this->createStub( ItemPrefixSearchEngine::class );
 		$searchEngine->method( 'suggestItems' )->willReturn( $searchResults );
 
+		return $this->newControllerWithEngine( $searchEngine );
+	}
+
+	private function newControllerWithEngine( ItemPrefixSearchEngine $searchEngine ): ItemWbSearchEntitiesController {
 		$entitySource = $this->createStub( EntitySource::class );
 		$entitySource->method( 'getConceptBaseUri' )->willReturn( 'http://www.wikidata.org/entity/' );
 

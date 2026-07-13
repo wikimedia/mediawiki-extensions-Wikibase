@@ -22,8 +22,10 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\Domains\Search\Domain\Model\User;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PaginatingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\InvariantException;
@@ -150,22 +152,41 @@ class SearchEntities extends ApiBase {
 	 *
 	 * @param array $params
 	 *
-	 * @return TermSearchResult[]
+	 * @return WbSearchEntitiesResponse
 	 * @throws ApiUsageException
 	 */
-	private function getSearchResults( array $params ): array {
+	private function getSearchResults( array $params ): WbSearchEntitiesResponse {
 		try {
-			return $this->searchControllerDispatcher
-				->getControllerForEntityType( $params['type'] )
-				->search( new WbSearchEntitiesRequest(
+			$controller = $this->searchControllerDispatcher->getControllerForEntityType( $params['type'] );
+			if ( $controller instanceof PaginatingWbSearchEntitiesController ) {
+				return $controller->search( new WbSearchEntitiesRequest(
 					$params['search'],
 					$params['language'],
 					$this->getLanguage()->getCode(),
-					$params['continue'] + $params['limit'] + 1,
+					$params['limit'],
 					$params['strictlanguage'],
 					$this->searchProfiles[$params['profile']],
-					$this->getApiUser()
+					$this->getApiUser(),
+					$params['continue']
 				) );
+			}
+
+			// Transitional legacy path for array-returning controllers:
+			// over-fetch, then slice off the continuation window and detect "more" here.
+			$results = $controller->search( new WbSearchEntitiesRequest(
+				$params['search'],
+				$params['language'],
+				$this->getLanguage()->getCode(),
+				$params['continue'] + $params['limit'] + 1,
+				$params['strictlanguage'],
+				$this->searchProfiles[$params['profile']],
+				$this->getApiUser()
+			) );
+			$results = $results instanceof WbSearchEntitiesResponse ? $results->results : $results;
+			return new WbSearchEntitiesResponse(
+				array_slice( $results, $params['continue'], $params['limit'] ),
+				count( $results ) > $params['continue'] + $params['limit']
+			);
 		} catch ( EntitySearchException $ese ) {
 			$this->dieStatus( $ese->getStatus() );
 
@@ -320,7 +341,7 @@ class SearchEntities extends ApiBase {
 
 		$params = $this->extractRequestParams();
 
-		$results = $this->getSearchResults( $params );
+		$response = $this->getSearchResults( $params );
 
 		$this->getResult()->addValue(
 			null,
@@ -336,12 +357,7 @@ class SearchEntities extends ApiBase {
 			[]
 		);
 
-		// getSearchResults returns one more item than requested in order to determine if there
-		// would be any more results coming up.
-		$hits = count( $results );
-
-		// slice off the extra results at the beginning that $params['continue'] "skips" over
-		$returnedResults = array_slice( $results, $params['continue'], $params['limit'] );
+		$returnedResults = $response->results;
 
 		// prefetch page IDs
 		$this->linkBatchFactory->newLinkBatch( array_map(
@@ -362,7 +378,7 @@ class SearchEntities extends ApiBase {
 
 		// Only pass search-continue param if there are more results and the maximum continuation
 		// limit is not exceeded.
-		if ( $hits > $nextContinuation && $nextContinuation <= self::CONTINUE_SOFT_LIMIT ) {
+		if ( $response->hasMore && $nextContinuation <= self::CONTINUE_SOFT_LIMIT ) {
 			$this->getResult()->addValue(
 				null,
 				'search-continue',

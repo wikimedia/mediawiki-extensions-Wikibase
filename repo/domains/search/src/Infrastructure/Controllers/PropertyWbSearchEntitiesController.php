@@ -15,7 +15,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\PropertyPrefixSearchResult;
 /**
  * @license GPL-2.0-or-later
  */
-class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
+class PropertyWbSearchEntitiesController implements PaginatingWbSearchEntitiesController {
 
 	public function __construct(
 		private readonly PropertyPrefixSearch $propertyPrefixSearch,
@@ -26,7 +26,7 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 	/**
 	 * @inheritDoc
 	 */
-	public function search( WbSearchEntitiesRequest $request ): array {
+	public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse {
 		try {
 			$response = $this->propertyPrefixSearch->execute(
 				new PropertyPrefixSearchRequest(
@@ -34,17 +34,19 @@ class PropertyWbSearchEntitiesController implements WbSearchEntitiesController {
 					language: $request->searchLanguageCode,
 					user: $request->user,
 					limit: $request->limit,
-					offset: 0,
+					offset: $request->offset,
 					disableLanguageFallback: $request->strictLanguage,
 					resultLanguage: $request->resultLanguage,
-					disableLimitValidation: true
 				)
 			);
 		} catch ( UseCaseError $e ) {
 			throw new EntitySearchException( $this->useCaseErrorToStatus( $e ) );
 		}
 
-		return array_map( $this->convertResult( ... ), iterator_to_array( $response->results ) );
+		return new WbSearchEntitiesResponse(
+			array_map( $this->convertResult( ... ), iterator_to_array( $response->results ) ),
+			$response->results->hasMore()
+		);
 	}
 
 	private function useCaseErrorToStatus( UseCaseError $e ): Status {

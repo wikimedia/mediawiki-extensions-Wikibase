@@ -47,18 +47,20 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		// @phan-suppress-next-line PhanTypeMismatchDimFetchNullable searchProfiles always has at least one entry
 		$profileContext = $this->searchProfiles[$profileName] ?? null;
 
-		return new ItemSearchResults( ...array_map(
+		[ $results, $hasMore ] = $this->suggestEntities(
+			Item::ENTITY_TYPE,
+			$searchTerm,
+			$languageCode,
+			$limit,
+			$offset,
+			$disableLanguageFallback,
+			$resultLanguageCode,
+			$profileContext
+		);
+
+		return ItemSearchResults::withHasMore( $hasMore, ...array_map(
 			$this->convertResult( ItemSearchResult::class ),
-			$this->suggestEntities(
-				Item::ENTITY_TYPE,
-				$searchTerm,
-				$languageCode,
-				$limit,
-				$offset,
-				$disableLanguageFallback,
-				$resultLanguageCode,
-				$profileContext
-			)
+			$results
 		) );
 	}
 
@@ -73,17 +75,19 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		bool $disableLanguageFallback,
 		string $resultLanguageCode
 	): PropertyPrefixSearchResults {
-		return new PropertyPrefixSearchResults( ...array_map(
+		[ $results, $hasMore ] = $this->suggestEntities(
+			Property::ENTITY_TYPE,
+			$searchTerm,
+			$languageCode,
+			$limit,
+			$offset,
+			$disableLanguageFallback,
+			$resultLanguageCode
+		);
+
+		return PropertyPrefixSearchResults::withHasMore( $hasMore, ...array_map(
 			$this->convertPropertyResult( ... ),
-			$this->suggestEntities(
-				Property::ENTITY_TYPE,
-				$searchTerm,
-				$languageCode,
-				$limit,
-				$offset,
-				$disableLanguageFallback,
-				$resultLanguageCode
-			)
+			$results
 		) );
 	}
 
@@ -110,6 +114,9 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		);
 	}
 
+	/**
+	 * @return array{0: TermSearchResult[], 1: bool} the requested page of results and whether more exist beyond it
+	 */
 	private function suggestEntities(
 		string $entityType,
 		string $searchTerm,
@@ -120,22 +127,23 @@ class EntitySearchHelperPrefixSearchEngine implements ItemPrefixSearchEngine, Pr
 		string $resultLanguageCode,
 		?string $profileContext = null
 	): array {
-		return array_slice(
-			$this->searchHelperFactory->newEntitySearchHelper(
-				$entityType,
-				$this->languageFactory->getLanguage( $resultLanguageCode ),
-				$this->request
-			)->getRankedSearchResults(
-				$searchTerm,
-				$languageCode,
-				$entityType,
-				$limit + $offset + 1,
-				$disableLanguageFallback,
-				$profileContext
-			),
-			$offset,
-			$limit
+		$results = $this->searchHelperFactory->newEntitySearchHelper(
+			$entityType,
+			$this->languageFactory->getLanguage( $resultLanguageCode ),
+			$this->request
+		)->getRankedSearchResults(
+			$searchTerm,
+			$languageCode,
+			$entityType,
+			$limit + $offset + 1,
+			$disableLanguageFallback,
+			$profileContext
 		);
+
+		return [
+			array_slice( $results, $offset, $limit ),
+			count( $results ) > $offset + $limit,
+		];
 	}
 
 	private function convertResult( string $resultClass ): callable {

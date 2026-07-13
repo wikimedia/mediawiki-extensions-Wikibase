@@ -15,7 +15,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
+class ItemWbSearchEntitiesController implements PaginatingWbSearchEntitiesController {
 
 	public function __construct(
 		private readonly ItemPrefixSearch $itemPrefixSearch,
@@ -26,7 +26,7 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 	/**
 	 * @inheritDoc
 	 */
-	public function search( WbSearchEntitiesRequest $request ): array {
+	public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse {
 		try {
 			$response = $this->itemPrefixSearch->execute(
 				new ItemPrefixSearchRequest(
@@ -34,19 +34,21 @@ class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 					language: $request->searchLanguageCode,
 					user: $request->user,
 					limit: $request->limit,
-					offset: 0,
+					offset: $request->offset,
 					disableLanguageFallback: $request->strictLanguage,
 					resultLanguage: $request->resultLanguage,
 					profile: $request->profileContext,
-					disableLimitValidation: true
 				)
 			);
 		} catch ( UseCaseError $e ) {
 			throw new EntitySearchException( $this->useCaseErrorToStatus( $e ) );
 		}
-		return array_map(
-			fn( ItemSearchResult $r ) => $this->convertResult( $r ),
-			iterator_to_array( $response->results )
+		return new WbSearchEntitiesResponse(
+			array_map(
+				fn( ItemSearchResult $r ) => $this->convertResult( $r ),
+				iterator_to_array( $response->results )
+			),
+			$response->results->hasMore()
 		);
 	}
 

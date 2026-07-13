@@ -9,7 +9,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 /**
  * @license GPL-2.0-or-later
  */
-class FallbackEntitySearchHelperController implements WbSearchEntitiesController {
+class FallbackEntitySearchHelperController implements PaginatingWbSearchEntitiesController {
 
 	private readonly EntitySearchHelper $searchHelper;
 
@@ -24,16 +24,21 @@ class FallbackEntitySearchHelperController implements WbSearchEntitiesController
 	/**
 	 * @inheritDoc
 	 */
-	public function search( WbSearchEntitiesRequest $request ): array {
+	public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse {
 		// $request->resultLanguage is not used here. The underlying EntitySearchHelper is expected to get the result language from global
 		// state instead. Any entity type specific controller should make use of $request->resultLanguage directly. See T423217.
-		return $this->searchHelper->getRankedSearchResults(
+		$results = $this->searchHelper->getRankedSearchResults(
 			$request->text,
 			$request->searchLanguageCode,
 			$this->entityType,
-			$request->limit,
+			$request->offset + $request->limit + 1,
 			$request->strictLanguage,
 			$request->profileContext
+		);
+
+		return new WbSearchEntitiesResponse(
+			array_slice( $results, $request->offset, $request->limit ),
+			count( $results ) > $request->offset + $request->limit
 		);
 	}
 
