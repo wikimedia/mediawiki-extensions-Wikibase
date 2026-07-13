@@ -108,8 +108,8 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 		return $revision->getEntity()->getId();
 	}
 
-	private function registerModuleFixture( string $filename, string $moduleName ) {
-		$templateText = file_get_contents( implode( DIRECTORY_SEPARATOR, [ __DIR__, "fixtures", $filename ] ) );
+	private function registerModuleFixture( string $filename, string $moduleName ): void {
+		$templateText = file_get_contents( __DIR__ . "/fixtures/$filename" );
 		$this->registerModule( $moduleName, $templateText );
 	}
 

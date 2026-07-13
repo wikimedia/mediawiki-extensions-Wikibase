@@ -175,10 +175,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 				$res = $realDB->select( ...$args );
 
 				// Return the real result minus the first row
-				$data = [];
-				foreach ( $res as $row ) {
-					$data[] = $row;
-				}
+				$data = iterator_to_array( $res );
 
 				return new FakeResultWrapper( array_slice( $data, 1 ) );
 			} );

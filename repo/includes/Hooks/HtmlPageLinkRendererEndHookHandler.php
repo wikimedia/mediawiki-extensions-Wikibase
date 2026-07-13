@@ -343,12 +343,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	 * Remove the new class from a space separated list of classes.
 	 */
 	private function removeNewClass( string $classes ): string {
-		return implode( ' ', array_filter(
-			preg_split( '/\s+/', $classes ),
-			function ( $class ) {
-				return $class !== 'new';
-			}
-		) );
+		return implode( ' ', array_diff( preg_split( '/\s+/', $classes ), [ 'new' ] ) );
 	}
 
 	/**
