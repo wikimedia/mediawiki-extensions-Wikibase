@@ -85,7 +85,7 @@ class MwEraParser extends EraParser {
 	 * @return string|null The value with the era stripped (if it can be parsed).
 	 */
 	private function parseEraWithMessage( string $value, string $msgText ): ?string {
-		if ( strpos( $msgText, '$1' ) === false || $msgText === '$1' ) {
+		if ( !str_contains( $msgText, '$1' ) || $msgText === '$1' ) {
 			return null;
 		}
 

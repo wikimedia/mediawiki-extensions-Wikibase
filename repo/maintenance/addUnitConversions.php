@@ -224,7 +224,7 @@ QUERY;
 		}
 		$map = [];
 		foreach ( $values as $value ) {
-			if ( substr_compare( $value['v'], $this->valueURI, 0, strlen( $this->valueURI ) ) !== 0 ) {
+			if ( !str_starts_with( $value['v'], $this->valueURI ) ) {
 				$this->error( "Invalid value: {$value['v']}!" );
 				continue;
 			}

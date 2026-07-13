@@ -79,7 +79,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 		$pageNormalizer->method( 'normalizePageName' )
 			->willReturnCallback( function( $pageName ) {
-				return strpos( $pageName, 'NOT-FOUND' ) === false ? $pageName : false;
+				return str_contains( $pageName, 'NOT-FOUND' ) ? false : $pageName;
 			} );
 
 		return $pageNormalizer;
@@ -91,7 +91,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$fileNameLookup->method( 'lookupFileName' )
 			->with( $this->isType( 'string' ) )
 			->willReturnCallback( function( $fileName ) {
-				return strpos( $fileName, 'NOT-FOUND' ) === false ? $fileName : null;
+				return str_contains( $fileName, 'NOT-FOUND' ) ? null : $fileName;
 			} );
 
 		return $fileNameLookup;

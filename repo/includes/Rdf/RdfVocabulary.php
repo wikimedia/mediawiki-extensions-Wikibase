@@ -324,7 +324,7 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	private function getConceptUriBase( $baseUri ) {
-		if ( substr( $baseUri, -7 ) === 'entity/' ) {
+		if ( str_ends_with( $baseUri, 'entity/' ) ) {
 			return substr( $baseUri, 0, -7 );
 		}
 		return $baseUri;

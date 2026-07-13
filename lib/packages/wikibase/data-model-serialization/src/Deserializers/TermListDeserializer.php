@@ -52,7 +52,7 @@ class TermListDeserializer implements Deserializer {
 
 		foreach ( $serialization as $requestedLanguage => $termSerialization ) {
 			$this->assertAttributeIsArray( $serialization, $requestedLanguage );
-			$this->assertRequestedAndActualLanguageMatch( $termSerialization, $requestedLanguage );
+			$this->assertRequestedAndActualLanguageMatch( $termSerialization, (string)$requestedLanguage );
 
 			/** @var Term $term */
 			$term = $this->termDeserializer->deserialize( $termSerialization );
@@ -70,7 +70,7 @@ class TermListDeserializer implements Deserializer {
 		array $serialization,
 		$requestedLanguage
 	) {
-		if ( strcmp( $serialization['language'], $requestedLanguage ) !== 0 ) {
+		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'
 					. ' that is not matching the language key (requested) is not supported: '

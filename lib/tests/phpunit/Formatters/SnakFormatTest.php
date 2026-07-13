@@ -39,10 +39,9 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 		$refSnakFormatter = new ReflectionClass( SnakFormatter::class );
 
 		foreach ( $refSnakFormatter->getConstants() as $cname => $cvalue ) {
-			if ( strpos( $cname, 'FORMAT_' ) !== 0 ) {
-				continue;
+			if ( str_starts_with( $cname, 'FORMAT_' ) ) {
+				$this->assertIsString( $snakFormatHelper->getBaseFormat( $cvalue ) );
 			}
-			$this->assertIsString( $snakFormatHelper->getBaseFormat( $cvalue ) );
 		}
 	}
 

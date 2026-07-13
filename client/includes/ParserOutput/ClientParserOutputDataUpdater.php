@@ -178,7 +178,7 @@ class ClientParserOutputDataUpdater {
 
 		// first reset all badges in case one got removed
 		foreach ( $parserOutputProvider->getParserOutput()->getPageProperties() as $name => $property ) {
-			if ( strpos( $name, 'wikibase-badge-' ) === 0 ) {
+			if ( str_starts_with( $name, 'wikibase-badge-' ) ) {
 				$parserOutputProvider->getParserOutput()->unsetPageProperty( $name );
 			}
 		}

@@ -65,7 +65,7 @@ class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 			if ( $fileInfo->isFile() && str_ends_with( $fileInfo->getFilename(), 'Test.php' ) ) {
 				$text = file_get_contents( $fileInfo->getPathname() );
 
-				if ( strpos( $text, 'abstract class' ) !== false ) {
+				if ( str_contains( $text, 'abstract class' ) ) {
 					// Ignore abstract base classes.
 					continue;
 				}

@@ -456,11 +456,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$titleFactory = $this->createMock( TitleFactory::class );
 		$titleFactory->method( 'newFromDBkey' )
 			->willReturnCallback( function ( $pageName ) {
-				if ( strpos( $pageName, 'Page ' ) === 0 ) {
-					$pageId = (int)substr( $pageName, 5 );
-				} else {
-					$pageId = 0;
-				}
+				$pageId = str_starts_with( $pageName, 'Page ' ) ? (int)substr( $pageName, 5 ) : 0;
 				$title = $this->createMock( Title::class );
 				$title->method( 'getArticleID' )
 					->willReturn( $pageId );

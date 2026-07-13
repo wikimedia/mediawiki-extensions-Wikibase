@@ -49,15 +49,12 @@ class SuffixEntityIdParser implements EntityIdParser {
 	 *         or the remaining suffix is not a valid entity ID string.
 	 */
 	public function parse( string $idSerialization ): EntityId {
-		$prefixLength = strlen( $this->prefix );
-
-		if ( strncmp( $idSerialization, $this->prefix, $prefixLength ) !== 0 ) {
+		if ( !str_starts_with( $idSerialization, $this->prefix ) ) {
 			throw new EntityIdParsingException( 'Missing expected prefix "' . $this->prefix
 				. '" in "' . $idSerialization . '"' );
 		}
 
-		$idSerialization = substr( $idSerialization, $prefixLength );
-		return $this->idParser->parse( $idSerialization );
+		return $this->idParser->parse( substr( $idSerialization, strlen( $this->prefix ) ) );
 	}
 
 }

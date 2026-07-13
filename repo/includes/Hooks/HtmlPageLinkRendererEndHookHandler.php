@@ -405,11 +405,10 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	private function extractForeignIdStringSpecialNs( LinkTarget $linkTarget ): ?string {
 		// FIXME: This encodes knowledge from EntityContentFactory::getTitleForId
 		$prefix = 'EntityPage/';
-		$prefixLength = strlen( $prefix );
 		$pageName = $linkTarget->getText();
 
-		if ( $linkTarget->getNamespace() === NS_SPECIAL && strncmp( $pageName, $prefix, $prefixLength ) === 0 ) {
-			return substr( $pageName, $prefixLength );
+		if ( $linkTarget->getNamespace() === NS_SPECIAL && str_starts_with( $pageName, $prefix ) ) {
+			return substr( $pageName, strlen( $prefix ) );
 		}
 
 		return null;

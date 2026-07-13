@@ -85,11 +85,11 @@ class CachingCommonsMediaFileNameLookupTest extends \PHPUnit\Framework\TestCase 
 			->willReturnCallback( function( $fileName, $apiUrl ) {
 				$this->assertSame( 'https://commons.wikimedia.org/w/api.php', $apiUrl );
 
-				if ( strpos( $fileName, 'NOT-FOUND' ) !== false ) {
+				if ( str_contains( $fileName, 'NOT-FOUND' ) ) {
 					return false;
 				}
 
-				if ( strpos( $fileName, 'REDIRECT' ) !== false ) {
+				if ( str_contains( $fileName, 'REDIRECT' ) ) {
 					return 'File:TARGET.png';
 				}
 

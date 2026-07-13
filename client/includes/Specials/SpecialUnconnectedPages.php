@@ -179,7 +179,7 @@ class SpecialUnconnectedPages extends QueryPage {
 
 		$titleInputHtml = '';
 		$articlePath = $this->getConfig()->get( 'ArticlePath' );
-		if ( strpos( $articlePath, '?' ) !== false ) {
+		if ( str_contains( $articlePath, '?' ) ) {
 			// Adopted from HTMLForm::getHiddenFields
 			$titleInputHtml = Html::hidden( 'title', $this->getFullTitle()->getPrefixedText() ) . "\n";
 		}

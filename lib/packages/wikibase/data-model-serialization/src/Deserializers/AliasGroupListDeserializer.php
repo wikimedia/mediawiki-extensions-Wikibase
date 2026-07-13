@@ -46,7 +46,7 @@ class AliasGroupListDeserializer implements Deserializer {
 			$this->assertAttributeIsArray( $serialization, $languageCode );
 
 			$aliasGroupList->setGroup(
-				$this->deserializeAliasGroup( $aliasGroupSerialization, $languageCode )
+				$this->deserializeAliasGroup( $aliasGroupSerialization, (string)$languageCode )
 			);
 		}
 
@@ -124,7 +124,7 @@ class AliasGroupListDeserializer implements Deserializer {
 		array $serialization,
 		$requestedLanguage
 	) {
-		if ( strcmp( $serialization['language'], $requestedLanguage ) !== 0 ) {
+		if ( $serialization['language'] !== $requestedLanguage ) {
 			throw new DeserializationException(
 				'Deserialization of a value of the attribute language (actual)'
 					. ' that is not matching the language key (requested) is not supported: '

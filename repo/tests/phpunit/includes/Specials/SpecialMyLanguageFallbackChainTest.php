@@ -37,7 +37,7 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 		[ $output ] = $this->executeSpecialPage( '', null, $languageCode );
 
 		$expectedString = $languageCode . ' - ';
-		$this->assertIsInt( stripos( $output, $expectedString ),
+		$this->assertStringContainsStringIgnoringCase( $expectedString, $output,
 			"Cannot find '$expectedString' in the list of fallback languages in '$output'." );
 	}
 

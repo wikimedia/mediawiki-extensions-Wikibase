@@ -91,7 +91,7 @@ class MessageSnakFormatter implements SnakFormatter {
 			return $this->message->plain();
 		} elseif ( $this->format === SnakFormatter::FORMAT_WIKI ) {
 			return $this->message->text();
-		} elseif ( strpos( $this->format, SnakFormatter::FORMAT_HTML ) === 0 ) {
+		} elseif ( str_starts_with( $this->format, SnakFormatter::FORMAT_HTML ) ) {
 			$html = $this->message->parse();
 
 			if ( array_key_exists( $this->snakType, self::$snakTypeCssClasses ) ) {
