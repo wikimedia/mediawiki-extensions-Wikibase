@@ -28,9 +28,7 @@ class StatslibRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 		$innerCache->expects( $this->once() )
 			->method( 'get' )
 			->with( 'nonexistingkey' )
-			->willReturnCallback( function( $a, $default ) {
-				return $default;
-			} );
+			->willReturnArgument( 1 );
 
 		$statsKeys = [ 'miss' => 'statsKey', 'hit' => 'statsHit' ];
 		$sot = new StatslibRecordingSimpleCache( $innerCache, $statsFactory, $statsKeys, 'statsKey_total' );

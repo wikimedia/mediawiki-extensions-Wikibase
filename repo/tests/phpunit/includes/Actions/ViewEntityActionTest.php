@@ -33,9 +33,10 @@ class ViewEntityActionTest extends ActionTestCase {
 		// NOTE: use a language here for which we actually have labels etc
 		$this->setUserLang( 'de' );
 
-		// Remove handlers for the "OutputPageParserOutput" and "DifferenceEngineViewHeader" hooks
-		$this->clearHook( 'OutputPageParserOutput' );
-		$this->clearHook( 'DifferenceEngineViewHeader' );
+		$this->clearHooks( [
+			'OutputPageParserOutput',
+			'DifferenceEngineViewHeader',
+		] );
 	}
 
 	public function testActionForPage() {

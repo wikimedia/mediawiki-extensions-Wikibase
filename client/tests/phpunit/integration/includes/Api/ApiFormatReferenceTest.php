@@ -54,9 +54,12 @@ class ApiFormatReferenceTest extends ApiTestCase {
 			$this->doApiRequest( $this->decorateParamsAsModernApiRequest( $params ) );
 			$this->fail( 'Exception expected but not thrown' );
 		} catch ( ApiUsageException $e ) {
-			$message = $e->getMessageObject();
-			$this->assertEquals( $expectedError, $message->getKey() );
-			$this->assertEquals( $expectedParams, $message->getParams() );
+			$status = $e->getStatusValue();
+			$this->assertStatusError( $expectedError, $status );
+			if ( $expectedParams ) {
+				$message = $status->getErrors()[0]['message'];
+				$this->assertEquals( $expectedParams, $message->getParams() );
+			}
 		}
 	}
 

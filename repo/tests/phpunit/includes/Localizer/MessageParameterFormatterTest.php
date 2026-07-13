@@ -9,7 +9,6 @@ use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use MediaWikiLangTestCase;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\SiteLink;
@@ -100,11 +99,7 @@ class MessageParameterFormatterTest extends MediaWikiLangTestCase {
 	private function getMockIdFormatter() {
 		$mock = $this->createMock( EntityIdFormatter::class );
 		$mock->method( 'formatEntityId' )
-			->willReturnCallback(
-				function ( EntityId $id ) {
-					return '[[ENTITYID]]';
-				}
-			);
+			->willReturn( '[[ENTITYID]]' );
 
 		return $mock;
 	}
