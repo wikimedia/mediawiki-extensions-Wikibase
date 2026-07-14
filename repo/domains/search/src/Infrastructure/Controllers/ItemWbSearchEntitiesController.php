@@ -15,7 +15,7 @@ use Wikibase\Repo\Domains\Search\Domain\Model\ItemSearchResult;
 /**
  * @license GPL-2.0-or-later
  */
-class ItemWbSearchEntitiesController implements PaginatingWbSearchEntitiesController {
+class ItemWbSearchEntitiesController implements WbSearchEntitiesController {
 
 	public function __construct(
 		private readonly ItemPrefixSearch $itemPrefixSearch,

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Search\Infrastructure\Controllers;
 
-use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchException;
 
 /**
@@ -11,9 +10,8 @@ use Wikibase\Repo\Api\EntitySearchException;
 interface WbSearchEntitiesController {
 
 	/**
-	 * @return TermSearchResult[]|WbSearchEntitiesResponse
 	 * @throws EntitySearchException
 	 */
-	public function search( WbSearchEntitiesRequest $request ): array|WbSearchEntitiesResponse;
+	public function search( WbSearchEntitiesRequest $request ): WbSearchEntitiesResponse;
 
 }

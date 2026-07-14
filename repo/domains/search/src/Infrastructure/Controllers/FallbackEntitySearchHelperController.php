@@ -9,7 +9,7 @@ use Wikibase\Repo\Api\EntitySearchHelper;
 /**
  * @license GPL-2.0-or-later
  */
-class FallbackEntitySearchHelperController implements PaginatingWbSearchEntitiesController {
+class FallbackEntitySearchHelperController implements WbSearchEntitiesController {
 
 	private readonly EntitySearchHelper $searchHelper;
 

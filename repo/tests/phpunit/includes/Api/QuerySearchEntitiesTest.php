@@ -26,6 +26,7 @@ use Wikibase\Repo\Api\EntitySearchException;
 use Wikibase\Repo\Api\QuerySearchEntities;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
 
 /**
  * @covers \Wikibase\Repo\Api\QuerySearchEntities
@@ -90,7 +91,7 @@ class QuerySearchEntitiesTest extends MediaWikiIntegrationTestCase {
 		if ( $failureStatus !== null ) {
 			$invocation->willThrowException( new EntitySearchException( $failureStatus ) );
 		} else {
-			$invocation->willReturn( $matches );
+			$invocation->willReturn( new WbSearchEntitiesResponse( $matches, false ) );
 		}
 
 		$dispatcher = $this->createMock( WbSearchEntitiesControllerDispatcher::class );
