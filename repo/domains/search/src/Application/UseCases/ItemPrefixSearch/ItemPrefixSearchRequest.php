@@ -22,7 +22,6 @@ class ItemPrefixSearchRequest {
 		public readonly bool $disableLanguageFallback = false,
 		?string $resultLanguage = null,
 		public readonly ?string $profile = null,
-		public readonly bool $disableLimitValidation = false,
 	) {
 		$this->resultLanguage = $resultLanguage ?? $language;
 	}

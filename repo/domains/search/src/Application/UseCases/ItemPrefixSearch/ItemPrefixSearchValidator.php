@@ -45,7 +45,7 @@ class ItemPrefixSearchValidator {
 	private function validateLimitAndOffset( ItemPrefixSearchRequest $request ): void {
 		$maxLimit = $this->permissionChecker->hasApiHighLimits( $request->user )
 			? $this->maxApiHighLimitsLimit : $this->maxLimit;
-		if ( !$request->disableLimitValidation && ( $request->limit < 0 || $request->limit > $maxLimit ) ) {
+		if ( $request->limit < 0 || $request->limit > $maxLimit ) {
 			throw UseCaseError::invalidQueryParameter( self::LIMIT_QUERY_PARAM );
 		}
 
