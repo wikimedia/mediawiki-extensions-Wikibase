@@ -24,7 +24,8 @@
 			"TKsdik8900",
 			"Yusuke1109",
 			"にょきにょき",
-			"FlatLanguage"
+			"FlatLanguage",
+			"Tensama0415"
 		]
 	},
 	"wikibase-client-desc": "ウィキベース拡張機能のクライアント",
@@ -91,6 +92,7 @@
 	"wikibase-entityusage-submit": "ページを表示",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目 ID",
 	"wikibase-pageinfo-entity-id-none": "なし",
+	"wikibase-pageinfo-description-local": "ローカルの説明",
 	"wikibase-pageinfo-description-central": "中央の説明",
 	"wikibase-pageinfo-entity-usage": "このページで使われている{{WBREPONAME}}エンティティ",
 	"wikibase-pageinfo-entity-usage-S": "サイトリンク",

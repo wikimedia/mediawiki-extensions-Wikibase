@@ -13,7 +13,7 @@
 	},
 	"wikibase-client-desc": "Arval evit an astenn Wikibase",
 	"tooltip-t-wikibase": "Liamm war-zu elfenn gevreet kavlec'h ar roadennoù",
-	"wikibase-after-page-move": "Bremañ e tlefe liamm yezh [$1 {{WBREPONAME}} an elfenn] bezañ bet kemmet evit klotañ gant ho dilec’hiadenn. Gwiriit ha graet eo bet mar plij.",
+	"wikibase-after-page-move": "Bremañ e tlefe liamm yezh [$1 an elfenn {{WBREPONAME}}] bezañ bet kemmet evit klotañ gant ho tilec’hiadenn. Goulenn a reomp diganeoc’h gwiriañ ha graet eo bet mar plij.",
 	"wikibase-after-page-delete": "Dleoat a rafe liammoù war-du ar bajenn-mañ bezañ bet dilamet eus [$1 an elfenn {{WBREPONAME}} liammet]. Gwiriit ha graet eo bet mar plij.",
 	"wikibase-comment-add": "Savet ez eus bet un elfenn {{WBREPONAME}}.",
 	"wikibase-comment-remove": "Diverket eo bet an elfenn {{WBREPONAME}}. Dilamet eo bet al liammoù yezh.",
