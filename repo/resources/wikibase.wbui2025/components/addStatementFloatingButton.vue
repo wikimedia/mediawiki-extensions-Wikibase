@@ -105,7 +105,7 @@ module.exports = exports = defineComponent( {
 #wikibase-wbui2025-add-statement-floating-button {
 	position: fixed;
 	right: @spacing-100;
-	bottom: 0;
+	bottom: 10px;
 	display: flex;
 	width: 10.5rem;
 	height: 9.875rem;
@@ -128,6 +128,7 @@ module.exports = exports = defineComponent( {
 	border-radius: @border-radius-pill;
 	border: 2px solid @border-color-progressive--focus;
 	background: @background-color-progressive-subtle;
+	box-shadow: 0 1px 2px 0 #a2a9b1;
 	backdrop-filter: blur(6px);
 
 	.cdx-icon {
