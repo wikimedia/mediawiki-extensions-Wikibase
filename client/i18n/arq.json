@@ -12,11 +12,18 @@
 	"wikibase-dataitem": "عنصر بيانات",
 	"wikibase-editlinks": "تبديل الوصيله",
 	"wikibase-editlinkstitle": "تبديلت الوصيلات ما بين اللوغات",
+	"wikibase-addlinkstitle": "زيد روَابِطْ ما بين اللّغَاتْ",
+	"wikibase-linkitem-addlinks": "زيد روابط",
+	"wikibase-linkitem-title": "اربط مع الصفحة",
+	"wikibase-linkitem-linkpage": "اربط مع الباج",
+	"wikibase-linkitem-selectlink": "خيّر سيت وباج حاب تربطهم مع هاد الباج.",
+	"wikibase-linkitem-input-site": "لوغه:",
+	"wikibase-linkitem-input-page": "الباجه:",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "خبّي",
+	"wikibase-rc-hide-wikidata-hide": "تخبية",
 	"wikibase-rc-hide-wikidata-show": "ورّي",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تبدبل {{WBREPONAME}}",
 	"wikibase-unconnectedpages-submit": "وري الصفحة",
-	"wikibase-otherprojects": "في مشارع اخرى"
+	"wikibase-otherprojects": "في مشاريع وحد اخرى"
 }
