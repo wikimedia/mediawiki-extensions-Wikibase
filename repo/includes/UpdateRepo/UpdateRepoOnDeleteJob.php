@@ -34,10 +34,10 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	/**
 	 * Constructs a UpdateRepoOnMoveJob propagating a page move to the repo
 	 *
-	 * @note This is for use by Job::factory, don't call it directly;
+	 * @note This is for use by JobFactory::newJob, don't call it directly;
 	 *           use newFrom*() instead.
 	 *
-	 * @see Job::factory
+	 * @see JobFactory::newJob
 	 * @see UpdateRepoJob::__construct
 	 */
 	public function __construct(
