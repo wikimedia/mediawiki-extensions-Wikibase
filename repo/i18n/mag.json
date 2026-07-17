@@ -322,7 +322,7 @@
 	"wikibase-api-target-not-empty": "अनुप्रेषणके कौनो खाली या फेर हटावल इकाई के ऊपरहीँ बनावल जा सकहे ।",
 	"wikibase-api-target-is-redirect": "पुनर्निर्दशनके लक्ष्य पुनर्निर्दशन न हो सकत ।",
 	"wikibase-api-target-is-incompatible": "दोसर प्रकारके इकाई पर पुनर्निर्दशन नै कैल जा सकत ।",
-	"wikibase-api-cant-redirect": "पुनर्निर्दशन नै बनावल जा सकल (सम्भवतः ईसभ प्रकारके बीचे पुनर्निर्दशनके अनुमति न हे) ।",
+	"wikibase-api-cant-redirect": "पुनर्निर्दशन नै बनावल जा सकल (सम्भवतः काहेकि ईसभ प्रकारके बीचे पुनर्निर्दशनके समर्थित न हे) ।",
 	"wikibase-restoreold": "पुनर्स्थापित करी",
 	"wikibase-listdatatypes-wikibase-item-head": "बस्तु",
 	"wikibase-listdatatypes-wikibase-property-head": "गुणधर्म",
