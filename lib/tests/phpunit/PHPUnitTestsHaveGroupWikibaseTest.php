@@ -43,6 +43,7 @@ class PHPUnitTestsHaveGroupWikibaseTest extends \PHPUnit\Framework\TestCase {
 			[ 'repo/domains/crud' ],
 			[ 'repo/domains/search' ],
 			[ 'repo/domains/reuse' ],
+			[ 'repo/domains/statements' ],
 			[ 'view' ],
 		];
 	}

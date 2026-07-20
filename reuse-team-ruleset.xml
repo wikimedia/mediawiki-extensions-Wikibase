@@ -42,6 +42,9 @@
 				<element key="repo/domains/reuse/src" value="Wikibase\Repo\Domains\Reuse"/>
 				<element key="repo/domains/reuse/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Reuse"/>
 				<element key="repo/domains/reuse/tests/architecture" value="Wikibase\Repo\Tests\Domains\Reuse\Architecture"/>
+				<element key="repo/domains/statements/src" value="Wikibase\Repo\Domains\Statements"/>
+				<element key="repo/domains/statements/tests/phpunit" value="Wikibase\Repo\Tests\Domains\Statements"/>
+				<element key="repo/domains/statements/tests/architecture" value="Wikibase\Repo\Tests\Domains\Statements\Architecture"/>
 			</property>
 		</properties>
 	</rule>
@@ -63,6 +66,7 @@
 	<file>repo/domains/crud</file>
 	<file>repo/domains/search</file>
 	<file>repo/domains/reuse</file>
+	<file>repo/domains/statements</file>
 	<arg name="tab-width" value="4" />
 	<arg name="extensions" value="php" />
 	<exclude-pattern>node_modules/</exclude-pattern>
