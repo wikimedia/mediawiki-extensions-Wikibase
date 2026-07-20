@@ -10,10 +10,10 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyRevision;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyCreator;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyUpdater;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later

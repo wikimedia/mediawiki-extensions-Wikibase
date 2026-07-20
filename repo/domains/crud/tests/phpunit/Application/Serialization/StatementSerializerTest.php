@@ -11,9 +11,9 @@ use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**

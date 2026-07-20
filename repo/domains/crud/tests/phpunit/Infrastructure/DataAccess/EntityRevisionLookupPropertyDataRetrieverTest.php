@@ -22,8 +22,8 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel;
 
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\StatementReadModelHelper;
 
 /**

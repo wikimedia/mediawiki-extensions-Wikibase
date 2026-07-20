@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Domains\Crud\Domain\ReadModel;
 
 use LogicException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later

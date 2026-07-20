@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyStatements;
 
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later

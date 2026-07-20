@@ -7,10 +7,10 @@ use DataValues\StringValue;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value
+ * @covers \Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value
  *
  * @group Wikibase
  *

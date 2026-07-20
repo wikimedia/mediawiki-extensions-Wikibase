@@ -12,9 +12,9 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer

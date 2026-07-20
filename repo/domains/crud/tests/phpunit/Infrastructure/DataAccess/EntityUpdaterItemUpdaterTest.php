@@ -21,11 +21,11 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**

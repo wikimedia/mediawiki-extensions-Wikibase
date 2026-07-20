@@ -23,9 +23,9 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemPartsBuilder;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever

@@ -26,6 +26,7 @@ class ArchitectureTest {
 	private const VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\Validation';
 	private const USE_CASES = 'Wikibase\Repo\Domains\Crud\Application\UseCases';
 	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation';
+	private const STATEMENTS_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
@@ -40,6 +41,7 @@ class ArchitectureTest {
 	/**
 	 * Domain models may depend on:
 	 *  - DataModel namespaces containing entities and their parts
+	 *  - the shared Statements domain read models
 	 *  - other classes from their own namespace
 	 */
 	private function allowedDomainModelDependencies(): array {
@@ -47,6 +49,7 @@ class ArchitectureTest {
 			...$this->dataModelNamespaces(),
 			Selector::inNamespace( self::DOMAIN_MODEL ),
 			Selector::inNamespace( self::DOMAIN_READMODEL ),
+			Selector::inNamespace( self::STATEMENTS_READMODEL ),
 		];
 	}
 

@@ -6,12 +6,12 @@ use LogicException;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementRevision;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementWriteModelRetriever;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later

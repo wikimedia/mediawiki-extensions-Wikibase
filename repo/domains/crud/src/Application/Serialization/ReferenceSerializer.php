@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Reference;
 
 /**
  * @license GPL-2.0-or-later

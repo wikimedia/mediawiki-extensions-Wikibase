@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
  * @license GPL-2.0-or-later

@@ -11,8 +11,8 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\GetItemStatements\GetItemSta
 use Wikibase\Repo\Domains\Crud\Application\UseCases\GetLatestItemRevisionMetadata;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseException;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Domain\Services\ItemStatementsRetriever;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 

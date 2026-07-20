@@ -6,8 +6,8 @@ use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Tests\Domains\Crud\Domain\ReadModel\NewStatementReadModel;
 
 /**

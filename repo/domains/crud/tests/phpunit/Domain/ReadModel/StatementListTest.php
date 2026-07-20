@@ -6,16 +6,16 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Statement\StatementGuid;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Qualifiers;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Rank;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\References;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Qualifiers;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Rank;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\References;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList
+ * @covers \Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList
  *
  * @group Wikibase
  *

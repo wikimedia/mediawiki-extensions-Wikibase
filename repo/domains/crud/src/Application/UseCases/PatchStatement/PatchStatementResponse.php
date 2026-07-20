@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement;
 
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later

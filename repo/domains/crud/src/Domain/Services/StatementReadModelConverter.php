@@ -12,14 +12,14 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Qualifiers;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Rank;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\References;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Qualifiers;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Rank;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\References;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
  * @license GPL-2.0-or-later

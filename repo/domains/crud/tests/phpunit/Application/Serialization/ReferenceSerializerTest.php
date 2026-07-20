@@ -7,10 +7,10 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PredicateProperty;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Value;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PredicateProperty;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer

@@ -12,12 +12,12 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyPartsRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyStatementsRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyWriteModelRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @license GPL-2.0-or-later

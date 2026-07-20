@@ -19,7 +19,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Serialization\ItemSerializer

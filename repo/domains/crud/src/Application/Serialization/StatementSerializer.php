@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use Wikibase\DataModel\Statement\Statement as StatementWriteModel;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyValuePair;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Reference;
-use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Statement;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\PropertyValuePair;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Reference;
+use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Statement;
 
 /**
  * @license GPL-2.0-or-later
