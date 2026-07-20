@@ -27,10 +27,10 @@ class VueStylesModule extends FileModule {
 		$styles = parent::getStyles( $context );
 		$factory = $this->getComponentsFactory();
 		$app = new App( [] );
+		$factory->registerComponentTemplates( $app );
 
 		foreach ( $factory->getTemplateFiles() as $componentName => $relPath ) {
 			$this->localFileRefs[] = $this->getLocalPath( $relPath );
-			$app->registerComponentTemplate( $componentName, $factory->getTemplateCallable( $componentName ) );
 			foreach ( $app->getComponentStyles( $componentName ) as $styleData ) {
 				$styles['all'] = ( $styles['all'] ?? '' ) . "\n" .
 					$this->processStyle( $styleData['content'], $styleData['lang'], $relPath, $context );

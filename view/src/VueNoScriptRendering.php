@@ -6,16 +6,13 @@ namespace Wikibase\View;
 
 use MediaWiki\Language\Language;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Serializers\StatementSerializer;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\EntityExistenceChecker;
-use Wikimedia\Assert\Assert;
 use WMDE\VueJsTemplating\App;
 
 /**
@@ -75,7 +72,17 @@ class VueNoScriptRendering {
 			array_values( $allPropertyIds )
 		);
 		$this->app = new App( $this->globalTemplateFunctions() );
-		$this->registerTemplates( $allStatements );
+		$this->componentsFactory->registerTemplates(
+			$this->app,
+			$allStatements,
+			$this->propertyExistence,
+			$this->textProvider,
+			$this->entityIdParser,
+			$this->statementSerializer,
+			$this->entityIdFormatterFactory,
+			$this->language,
+			$this->propertyDataTypeLookup
+		);
 	}
 
 	/**
@@ -99,178 +106,6 @@ class VueNoScriptRendering {
 				return $this->textProvider->get( $messageKey, $params );
 			},
 		];
-	}
-
-	private function registerComponentTemplate(
-		string $componentName,
-		?callable $computedFunctions = null
-	): void {
-		$this->app->registerComponentTemplate(
-			$componentName,
-			$this->componentsFactory->getTemplateCallable( $componentName ),
-			$computedFunctions
-		);
-	}
-
-	// TODO: T429596 - Refactoring is needed since we've introduced the factory Wbui2025ComponentsFactory.
-	private function registerTemplates( StatementList $allStatements ): void {
-		$this->registerStatementSectionsView();
-		$this->registerMainSnakView();
-		$this->registerStatementGroupView( $allStatements );
-		$this->registerStatementView( $allStatements );
-		$this->registerPropertyNameView();
-		$this->registerReferencesView();
-		$this->registerQualifiersView();
-		$this->registerSnakValueView();
-	}
-
-	private function registerStatementSectionsView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-statement-sections',
-			function ( array $data ): array {
-				$data[ 'propertyIds' ] = $data[ 'propertyList' ];
-				$data[ 'javaScriptLoaded' ] = false;
-				return $data;
-			}
-		);
-	}
-
-	private function registerMainSnakView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-main-snak',
-			function( array $data ): array {
-				$data['rankTitleString'] = $this->textProvider->get(
-					// messages that can be used here:
-					// * wikibase-statementview-rank-normal
-					// * wikibase-statementview-rank-preferred
-					// * wikibase-statementview-rank-deprecated
-				'wikibase-statementview-rank-' . $data['rank']
-				);
-				$data['showIndicators'] = false;
-				return $data;
-			}
-		);
-	}
-
-	private function registerStatementGroupView( StatementList $allStatements ): void {
-		$this->registerComponentTemplate(
-			'wbui2025-statement-group-view',
-			function( array $data ) use ( $allStatements ): array {
-				/** @var PropertyId $propertyId */
-				$propertyId = $this->entityIdParser
-					->parse( $data['propertyId'] );
-				'@phan-var PropertyId $propertyId';
-				$data['isDeletedProperty'] = !( $this->propertyExistence[$propertyId->getSerialization()] ?? false );
-				$data['statements'] = array_map(
-					$this->statementSerializer->serialize( ... ),
-					$allStatements->getByPropertyId( $propertyId )->toArray()
-				);
-				$data['showModalEditForm'] = false;
-				return $data;
-			}
-		);
-	}
-
-	private function registerStatementView( StatementList $allStatements ): void {
-		$this->registerComponentTemplate(
-			'wbui2025-statement-view',
-			function ( array $data ) use ( $allStatements ): array {
-				$statementId = $data['statementId'];
-				$statementById = $allStatements->getFirstStatementWithGuid( $statementId );
-				Assert::invariant( $statementById !== null, "Statement $statementId not found" );
-				$data['statement'] = $this->statementSerializer->serialize( $statementById );
-				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
-				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
-				$data['qualifiersOrder'] =
-					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
-				$data['activeClasses'] = [ 'wikibase-wbui2025-statement-view' ];
-				if ( array_key_exists( 'rank', $data['statement'] ) ) {
-					if ( $data['statement']['rank'] === 'preferred' ) {
-						$data['activeClasses'][] = 'wb-preferred';
-					} elseif ( $data['statement']['rank'] === 'deprecated' ) {
-						$data['activeClasses'][] = 'wb-deprecated';
-					}
-				}
-				return $data;
-			}
-		);
-	}
-
-	private function registerPropertyNameView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-property-name',
-			function ( array $data ): array {
-				/** @var PropertyId $propertyId */
-				$propertyId = $this->entityIdParser
-					->parse( $data['propertyId'] );
-				'@phan-var PropertyId $propertyId';
-
-				$data['propertyLinkHtml'] = $this->entityIdFormatterFactory
-					->getEntityIdFormatter( $this->language )
-					->formatEntityId( $propertyId );
-				$data['isDeletedProperty'] = !( $this->propertyExistence[$propertyId->getSerialization()] ?? false );
-				return $data;
-			}
-		);
-	}
-
-	private function registerReferencesView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-references',
-			function ( array $data ): array {
-				$data['referenceCount'] = count( $data['references'] );
-				$data['hasReferences'] = $data['referenceCount'] > 0;
-				$data['referencesMessage'] = $this->textProvider->getEscaped(
-					'wikibase-statementview-references-counter', [
-						strval( $data[ 'referenceCount' ] ),
-					],
-				);
-				$data['showReferences'] = false;
-				$data['showIndicators'] = false;
-				return $data;
-			}
-		);
-	}
-
-	private function registerQualifiersView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-qualifiers',
-			function ( array $data ): array {
-				$qualifierCount = count( $data['qualifiers'] );
-				$data['hasQualifiers'] = $qualifierCount > 0;
-				$data['showIndicators'] = false;
-				return $data;
-			}
-		);
-	}
-
-	private function registerSnakValueView(): void {
-		$this->registerComponentTemplate(
-			'wbui2025-snak-value',
-			function ( array $data ): array {
-				/** @var PropertyId $propertyId */
-				$propertyId = $this->entityIdParser
-					->parse( $data['snak']['property'] );
-				'@phan-var PropertyId $propertyId';
-				try {
-					$dataType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
-				} catch ( PropertyDataTypeLookupException ) {
-					$dataType = null;
-				}
-				$data['snakValueClass'] = [
-					'wikibase-wbui2025-media-value' => $dataType == 'commonsMedia',
-					'wikibase-wbui2025-globe-coordinate-value' => $dataType == 'globe-coordinate',
-					'wikibase-wbui2025-time-value' => $dataType == 'time',
-					'wikibase-wbui2025-tabular-data-value' => $dataType == 'tabular-data',
-					'wikibase-wbui2025-geo-shape-value' => $dataType == 'geo-shape',
-					'wikibase-wbui2025-musical-notation-value' => $dataType == 'musical-notation',
-					'wikibase-wbui2025-math-value' => $dataType == 'math',
-					'wikibase-wbui2025-quantity-value' => $dataType == 'quantity',
-				];
-
-				return $data;
-			}
-		);
 	}
 
 	private function populateReferenceSnakValueHtml(

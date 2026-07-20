@@ -8,6 +8,7 @@ use MediaWiki\ResourceLoader\Context;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\View\VueStylesModule;
 use Wikibase\View\Wbui2025ComponentsFactory;
+use WMDE\VueJsTemplating\App;
 
 /**
  * @covers \Wikibase\Repo\View\VueStylesModule
@@ -28,8 +29,12 @@ class VueStylesModuleTest extends TestCase {
 
 		$factory = $this->createMock( Wbui2025ComponentsFactory::class );
 		$factory->method( 'getTemplateFiles' )->willReturn( array_combine( array_keys( $components ), $relPaths ) );
-		$factory->method( 'getTemplateCallable' )->willReturnCallback(
-			fn( $name ) => fn() => $components[$name]
+		$factory->method( 'registerComponentTemplates' )->willReturnCallback(
+			function ( App $app ) use ( $components ): void {
+				foreach ( $components as $name => $content ) {
+					$app->registerComponentTemplate( $name, fn() => $content );
+				}
+			}
 		);
 
 		$module = $this->getMockBuilder( VueStylesModule::class )
