@@ -285,9 +285,7 @@ describe( 'wbsearchentities', () => {
 				assert.equal( result.match.language, 'en' );
 			} );
 
-			// Disabled: Pending T421912
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( 'does not return items via language fallback when strictlanguage is set', async () => {
+			it( 'does not return items via language fallback when strictlanguage is set', async () => {
 				const response = await api.action( 'wbsearchentities', {
 					search: FALLBACK_LABEL,
 					language: 'fr',
@@ -335,9 +333,7 @@ describe( 'wbsearchentities', () => {
 				);
 			} );
 
-			// Disabled: Pending T421912
-			// eslint-disable-next-line mocha/no-skipped-tests
-			it.skip( 'return only the requested language when strictlanguage is set', async () => {
+			it( 'return only the requested language when strictlanguage is set', async () => {
 				const response = await api.action( 'wbsearchentities', {
 					search: FALLBACK_LABEL,
 					language: 'de',
