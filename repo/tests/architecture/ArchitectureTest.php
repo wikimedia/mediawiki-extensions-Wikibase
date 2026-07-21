@@ -18,6 +18,7 @@ class ArchitectureTest {
 	private const REGEX_DOMAIN_USE_CASES = '/^Wikibase\\\\Repo\\\\Domains\\\\.+\\\\Application\\\\UseCases/';
 	private const REGEX_DOMAIN_READMODEL = '/^Wikibase\\\\Repo\\\\Domains\\\\.+\\\\Domain\\\\ReadModel/';
 	private const STATEMENTS_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
+	private const STATEMENTS_SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
 
 	private function domainNamespaces(): array {
 		return array_filter(
@@ -41,10 +42,11 @@ class ArchitectureTest {
 				->classes( Selector::inNamespace( self::DOMAINS_NAMESPACE ) )
 				->excluding(
 					Selector::inNamespace( $domain ),
-					// the Statements domain read models are a shared kernel any domain may depend on
-					Selector::inNamespace( self::STATEMENTS_READMODEL )
+					// the Statements domain read models and serializers are a shared kernel any domain may depend on
+					Selector::inNamespace( self::STATEMENTS_READMODEL ),
+					Selector::inNamespace( self::STATEMENTS_SERIALIZATION )
 				)
-				->because( 'Core classes can only depend on their own domain or the shared Statements read models.' );
+				->because( 'Core classes can only depend on their own domain or the shared Statements read models and serializers.' );
 		}
 	}
 

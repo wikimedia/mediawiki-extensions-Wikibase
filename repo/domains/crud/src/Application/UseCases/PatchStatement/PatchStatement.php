@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement;
 
 use Wikibase\DataModel\Exception\PropertyChangedException;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertStatementSubjectExists;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\AssertUserIsAuthorized;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ItemRedirect;
@@ -14,6 +13,7 @@ use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Model\StatementEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 
 /**
  * @license GPL-2.0-or-later

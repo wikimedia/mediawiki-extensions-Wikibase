@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 
 /**
  * @license GPL-2.0-or-later

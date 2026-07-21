@@ -9,6 +9,7 @@ use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidField
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 
 /**
  * @license GPL-2.0-or-later

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
 
 use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Item;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 
 /**
  * @license GPL-2.0-or-later

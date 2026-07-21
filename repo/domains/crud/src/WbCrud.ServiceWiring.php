@@ -20,15 +20,11 @@ use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertySerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinksSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\FieldsFilterValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\ItemAliasesInLanguageEditRequestValidatingDeserializer;
@@ -193,6 +189,10 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattabl
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\WbCrud;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePairSerializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceSerializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 

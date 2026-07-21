@@ -9,7 +9,6 @@ use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertySerializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\AliasesInLanguage;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Description;
@@ -17,6 +16,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**

@@ -27,6 +27,7 @@ class ArchitectureTest {
 	private const USE_CASES = 'Wikibase\Repo\Domains\Crud\Application\UseCases';
 	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation';
 	private const STATEMENTS_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
+	private const STATEMENTS_SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
@@ -85,12 +86,14 @@ class ArchitectureTest {
 	 * Serialization may depend on:
 	 *  - the domain services namespace and everything it depends on
 	 *  - the DataValues namespace
+	 *  - the shared Statements domain serializers
 	 *  - other classes from its own namespace
 	 */
 	private function allowedSerializationDependencies(): array {
 		return [
 			...$this->allowedDomainServicesDependencies(),
 			Selector::inNamespace( self::SERIALIZATION ),
+			Selector::inNamespace( self::STATEMENTS_SERIALIZATION ),
 		];
 	}
 

@@ -10,12 +10,12 @@ use Wikibase\Repo\Domains\Crud\Application\Serialization\AliasesSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\DescriptionsSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\LabelsSerializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyPartsSerializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyPartsBuilder;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 
 /**
