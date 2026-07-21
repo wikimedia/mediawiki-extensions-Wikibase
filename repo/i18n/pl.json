@@ -23,7 +23,8 @@
 			"Vivaelcelta",
 			"WTM",
 			"Wizardist",
-			"Woytecr"
+			"Woytecr",
+			"PanWor"
 		]
 	},
 	"wikibase-desc": "Repozytorium danych strukturalnych",
@@ -325,7 +326,7 @@
 	"wikibase-itemmerge-cant-create-temp-user": "Nie udało się utworzyć konta tymczasowego",
 	"wikibase-tokencheck-missingtoken": "Wymagany jest token edycji.",
 	"wikibase-tokencheck-mustposttoken": "Edycja jest możliwa tylko przy użyciu żądań POST.",
-	"wikibase-tokencheck-badtoken": "Błędny token edycji (być może twoja sesja wygasła).",
+	"wikibase-tokencheck-badtoken": "Błędny token edycji (być może Twoja sesja wygasła).",
 	"special-dispatchstats": "Statystyki wysyłki zmian",
 	"wikibase-dispatchstats-intro": "Ta strona zawiera statystyki dotyczące wysyłki zmian do klientów.\nWiki klienta jest powiadamiana o zmianie w {{grammar:MS.lp|{{SITENAME}}}}, gdy zmiana została wysłana do danej wiki, a kolejka zadań na tamtej wiki przetworzyła to powiadomienie.",
 	"wikibase-dispatchstats-empty-queue": "W kolejce rozgłaszania zmian nie ma żadnych zmian.",
