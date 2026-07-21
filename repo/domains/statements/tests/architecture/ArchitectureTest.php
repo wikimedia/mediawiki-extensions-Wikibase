@@ -14,6 +14,7 @@ use PHPat\Test\PHPat;
 class ArchitectureTest {
 
 	private const DOMAIN_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
+	private const SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
 
 	public function testDomainReadModel(): Rule {
 		return PHPat::rule()
@@ -31,6 +32,25 @@ class ArchitectureTest {
 		return [
 			...$this->dataModelNamespaces(),
 			Selector::inNamespace( self::DOMAIN_READMODEL ),
+		];
+	}
+
+	public function testSerialization(): Rule {
+		return PHPat::rule()
+			->classes( Selector::inNamespace( self::SERIALIZATION ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedSerializationDependencies() );
+	}
+
+	/**
+	 * Serialization may depend on:
+	 *  - the domain read models namespace and everything it depends on
+	 *  - other classes from its own namespace
+	 */
+	private function allowedSerializationDependencies(): array {
+		return [
+			...$this->allowedDomainReadModelDependencies(),
+			Selector::inNamespace( self::SERIALIZATION ),
 		];
 	}
 
