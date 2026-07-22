@@ -8,11 +8,11 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Tests\Integration\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Integration\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\SqlUsageTracker
@@ -47,8 +47,8 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 
 		$this->sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
-			new SessionConsistentConnectionManager(
-				$this->getServiceContainer()->getDBLoadBalancer()
+			new EntityUsageDomainDb(
+				$this->getServiceContainer()->getDBLoadBalancerFactory()
 			),
 			[],
 			100
@@ -89,8 +89,8 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
-			new SessionConsistentConnectionManager(
-				$this->getServiceContainer()->getDBLoadBalancer()
+			new EntityUsageDomainDb(
+				$this->getServiceContainer()->getDBLoadBalancerFactory()
 			),
 			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE =>
 				EntityUsage::OTHER_USAGE ],
@@ -119,10 +119,10 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 		];
 
-		$lb = $this->getServiceContainer()->getDBLoadBalancer();
+		$lbFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
-			new SessionConsistentConnectionManager( $lb ),
+			new EntityUsageDomainDb( $lbFactory ),
 			[],
 			100
 		);
@@ -131,7 +131,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 
 		$sqlUsageTrackerWithDisabledUsageAspects = new SqlUsageTracker(
 			new ItemIdParser(),
-			new SessionConsistentConnectionManager( $lb ),
+			new EntityUsageDomainDb( $lbFactory ),
 			[ EntityUsage::STATEMENT_USAGE ],
 			100
 		);

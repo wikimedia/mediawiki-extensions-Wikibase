@@ -13,7 +13,6 @@ use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * An SQL based usage tracker implementation.
@@ -25,7 +24,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 	private EntityIdParser $idParser;
 
-	private SessionConsistentConnectionManager $connectionManager;
+	private EntityUsageDomainDb $entityUsageDb;
 
 	/**
 	 * Usage aspects in this array won't be persisted. If string keys are used, this
@@ -47,20 +46,20 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 	/**
 	 * @param EntityIdParser $idParser
-	 * @param SessionConsistentConnectionManager $connectionManager
+	 * @param EntityUsageDomainDb $entityUsageDb
 	 * @param string[] $disabledUsageAspects
 	 * @param int $entityUsagePerPageLimit
 	 * @param int $addEntityUsagesBatchSize
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
-		SessionConsistentConnectionManager $connectionManager,
+		EntityUsageDomainDb $entityUsageDb,
 		array $disabledUsageAspects,
 		int $entityUsagePerPageLimit,
 		int $addEntityUsagesBatchSize = 500
 	) {
 		$this->idParser = $idParser;
-		$this->connectionManager = $connectionManager;
+		$this->entityUsageDb = $entityUsageDb;
 		$this->disabledUsageAspects = $disabledUsageAspects;
 		$this->entityUsagePerPageLimit = $entityUsagePerPageLimit;
 		$this->addEntityUsagesBatchSize = $addEntityUsagesBatchSize;
@@ -149,7 +148,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->entityUsageDb->getWriteConnection();
 		$usageTable = $this->newUsageTable( $db );
 		// queryUsages guarantees this to be identity string => EntityUsage
 		$oldUsages = $usageTable->queryUsages( $pageId );
@@ -207,7 +206,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function replaceUsedEntities( int $pageId, array $usages ): array {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->entityUsageDb->getWriteConnection();
 		$usageTable = $this->newUsageTable( $db );
 		// queryUsages guarantees this to be identity string => EntityUsage
 		$oldUsages = $usageTable->queryUsages( $pageId );
@@ -233,7 +232,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	public function pruneUsages( int $pageId ): array {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
-		$db = $this->connectionManager->getWriteConnection();
+		$db = $this->entityUsageDb->getWriteConnection();
 		$usageTable = $this->newUsageTable( $db );
 		$pruned = $usageTable->pruneUsages( $pageId );
 
