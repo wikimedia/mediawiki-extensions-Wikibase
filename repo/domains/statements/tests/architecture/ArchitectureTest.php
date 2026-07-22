@@ -5,6 +5,9 @@ namespace Wikibase\Repo\Tests\Domains\Statements\Architecture;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 
 /**
  * @coversNothing
@@ -14,6 +17,7 @@ use PHPat\Test\PHPat;
 class ArchitectureTest {
 
 	private const DOMAIN_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
+	private const DOMAIN_SERVICES = 'Wikibase\Repo\Domains\Statements\Domain\Services';
 	private const SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
 
 	public function testDomainReadModel(): Rule {
@@ -35,6 +39,27 @@ class ArchitectureTest {
 		];
 	}
 
+	public function testDomainServices(): Rule {
+		return PHPat::rule()
+			->classes( Selector::inNamespace( self::DOMAIN_SERVICES ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedDomainServicesDependencies() );
+	}
+
+	/**
+	 * Domain services may depend on:
+	 *  - the domain read models namespace and everything it depends on
+	 *  - some hand-picked DataModel services
+	 *  - other classes from their own namespace
+	 */
+	private function allowedDomainServicesDependencies(): array {
+		return [
+			...$this->allowedDomainReadModelDependencies(),
+			...$this->allowedDataModelServices(),
+			Selector::inNamespace( self::DOMAIN_SERVICES ),
+		];
+	}
+
 	public function testSerialization(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::SERIALIZATION ) )
@@ -51,6 +76,14 @@ class ArchitectureTest {
 		return [
 			...$this->allowedDomainReadModelDependencies(),
 			Selector::inNamespace( self::SERIALIZATION ),
+		];
+	}
+
+	private function allowedDataModelServices(): array {
+		return [
+			Selector::classname( PropertyDataTypeLookup::class ),
+			Selector::classname( PropertyDataTypeLookupException::class ),
+			Selector::classname( StatementGuidParser::class ),
 		];
 	}
 

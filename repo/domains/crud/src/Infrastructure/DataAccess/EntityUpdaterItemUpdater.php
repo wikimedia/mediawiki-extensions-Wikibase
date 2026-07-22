@@ -13,9 +13,9 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemRevision;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\Services\ItemCreator;
 use Wikibase\Repo\Domains\Crud\Domain\Services\ItemUpdater;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later

@@ -17,11 +17,11 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\StatementSubjectRetriever;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterStatementUpdater

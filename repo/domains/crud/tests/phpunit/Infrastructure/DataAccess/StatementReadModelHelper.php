@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
