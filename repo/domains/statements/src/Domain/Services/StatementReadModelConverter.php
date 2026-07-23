@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Crud\Domain\Services;
+namespace Wikibase\Repo\Domains\Statements\Domain\Services;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Reference as ReferenceWriteModel;

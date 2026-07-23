@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\Domain\Services;
+namespace Wikibase\Repo\Tests\Domains\Statements\Domain\Services;
 
 use DataValues\StringValue;
 use PHPUnit\Framework\TestCase;
@@ -12,11 +12,11 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter
+ * @covers \Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter
  *
  * @group Wikibase
  *

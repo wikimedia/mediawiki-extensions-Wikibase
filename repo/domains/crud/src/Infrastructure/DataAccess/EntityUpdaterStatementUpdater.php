@@ -7,10 +7,10 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\StatementRevision;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\EntityUpdateFailed;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\Exceptions\StatementSubjectDisappeared;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later

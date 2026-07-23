@@ -22,9 +22,9 @@ use Wikibase\Repo\Domains\Crud\Domain\Services\ItemStatementsRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\ItemWriteModelRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinkRetriever;
 use Wikibase\Repo\Domains\Crud\Domain\Services\SitelinksRetriever;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 
 /**
  * @license GPL-2.0-or-later

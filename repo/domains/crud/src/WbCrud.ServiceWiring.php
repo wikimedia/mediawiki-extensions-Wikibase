@@ -148,7 +148,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\ItemParts;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
-use Wikibase\Repo\Domains\Crud\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\ChangeTagsStoreTagsRetriever;
@@ -193,6 +192,7 @@ use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePair
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceSerializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 
