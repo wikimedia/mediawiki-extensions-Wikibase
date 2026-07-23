@@ -347,6 +347,7 @@
 	"wikibase-api-not-recognized-datatype": "Et gouf een Datentyp erwaart, mee e feelt oder gouf net erkannt.",
 	"wikibase-api-not-recognized": "Et gouf eppes net erkannt.",
 	"wikibase-api-not-recognized-language": "De genannte Sproochcode „$1“ gouf net erkannt.",
+	"wikibase-api-permissiondenied": "Dir hutt net déi néideg Rechter, fir dës Aktioun duerchzeféieren.",
 	"wikibase-api-target-not-empty": "D'Viruleedung ka just uewen an enger eideler oder enger geläschter Eenheet stoen.",
 	"wikibase-api-target-is-redirect": "D'Zil vun der Viruleedung däerf keng Viruleedung sinn.",
 	"wikibase-api-target-is-incompatible": "Versuch fir op eng Eenheet vun engem aneren Typ virunzeleeden.",
