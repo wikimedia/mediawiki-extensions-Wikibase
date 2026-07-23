@@ -29,7 +29,7 @@ mw.config = {
 };
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
-const { CdxButton, CdxTextArea } = require( '../../../codex.js' );
+const { CdxButton, CdxTextArea, CdxMenuButton } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const Wbui2025AddReference = require( '../../../resources/wikibase.wbui2025/components/addReference.vue' );
 const Wbui2025PropertyLookup = require( '../../../resources/wikibase.wbui2025/components/propertyLookup.vue' );
@@ -85,10 +85,12 @@ describe( 'wikibase.wbui2025.addReference', () => {
 
 		describe( 'when a property with string datatype is selected', () => {
 			let snakValueInput;
+			let snakTypeSelector;
 
 			beforeEach( async () => {
 				await propertyLookup.vm.$emit( 'update:selected', 'P23', { datatype: 'string' } );
 				snakValueInput = wrapper.findComponent( CdxTextArea );
+				snakTypeSelector = wrapper.findComponent( CdxMenuButton );
 			} );
 
 			it( 'mounts a text input when a property with string datatype is selected', async () => {
@@ -132,6 +134,21 @@ describe( 'wikibase.wbui2025.addReference', () => {
 						}
 					}
 					expect( wrapper.emitted( 'reference-added' )[ 0 ] ).toEqual( [] );
+				} );
+			} );
+
+			describe( 'with a novalue snak', () => {
+				beforeEach( async () => {
+					await snakTypeSelector.vm.$emit( 'update:selected', 'novalue' );
+				} );
+
+				it( 'the add button should always be active', () => {
+					expect( addButton.isDisabled() ).toBe( false );
+				} );
+
+				it( 'emits an event when the add button is clicked', async () => {
+					await addButton.trigger( 'click' );
+					expect( wrapper.emitted( 'reference-added' )[ 0 ] ).toEqual( [ ] );
 				} );
 			} );
 		} );

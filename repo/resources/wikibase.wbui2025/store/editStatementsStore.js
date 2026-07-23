@@ -89,14 +89,17 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		if ( textvalue.value === '' || selectionvalue.value === null ) {
 			return true;
 		}
-		if ( snaktype.value === 'value' && valueStrategy.value ) {
-			const parsed = valueStrategy.value.peekDataValue();
-			if ( parsed === null ) {
-				return true;
-			}
-		}
-		return false;
+		return snaktype.value === 'value' && valueStrategy.value && valueStrategy.value.peekDataValue() === null;
 	} );
+
+	/**
+	 * @return {boolean} True if the value can be submitted - either it is a novalue/somevalue
+	 * snak, or the datavalue is specified (i.e. not null and not undefined)
+	 */
+	const isSubmittable = computed( () => snaktype.value !== 'value' || (
+		valueStrategy.value && valueStrategy.value.peekDataValue() )
+	);
+
 	// Actions
 
 	async function initializeWithSnak( snak ) {
@@ -205,6 +208,7 @@ const useEditSnakStore = ( snakKey ) => defineStore( 'editSnak-' + snakKey, () =
 		monolingualtextlanguagecodeText,
 		valueStrategy,
 		isIncomplete,
+		isSubmittable,
 		initializeWithSnak,
 		buildSnakJson,
 		setNewPropertyAndDatatype,
@@ -303,9 +307,8 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			}
 			this.qualifiers[ editSnakStore.property ].push( snakKey );
 
-			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property ).then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
-
 			if ( editSnakStore.snaktype === 'value' ) {
+				renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property ).then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 				editSnakStore.valueStrategy.getParsedValue();
 			}
 		},
@@ -313,8 +316,6 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			const editSnakStore = useEditSnakStore( snakKey )();
 
 			renderPropertyLinkHtml( [ editSnakStore.property ] ).then( ( result ) => updatePropertyLinkHtml( result ) );
-			renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property )
-				.then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 
 			const newReference = {
 				hash: snakKey,
@@ -324,6 +325,8 @@ const useEditStatementStore = ( statementId ) => defineStore( 'editStatement-' +
 			this.references.push( newReference );
 
 			if ( editSnakStore.snaktype === 'value' ) {
+				renderSnakValueHtml( editSnakStore.currentDataValue(), editSnakStore.property )
+					.then( ( result ) => updateSnakValueHtmlForHash( snakKey, result ) );
 				editSnakStore.valueStrategy.getParsedValue();
 			}
 		},

@@ -74,7 +74,7 @@ module.exports = exports = defineComponent( {
 			if ( !this.snakKey ) {
 				return true;
 			}
-			return !wbui2025.store.useEditSnakStore( this.snakKey )().valueStrategy.peekDataValue();
+			return !wbui2025.store.useEditSnakStore( this.snakKey )().isSubmittable;
 		}
 	},
 	methods: {
