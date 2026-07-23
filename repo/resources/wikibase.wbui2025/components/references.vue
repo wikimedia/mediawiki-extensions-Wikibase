@@ -103,8 +103,9 @@ module.exports = exports = defineComponent( {
 			vertical-align: middle;
 		}
 
-		&.wikibase-wbui2025-reference-link {
+		.wikibase-wbui2025-link {
 			padding-top: 0;
+			padding-bottom: @spacing-35;
 		}
 	}
 
