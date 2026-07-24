@@ -4,8 +4,8 @@
 			"ऐक्टिवेटेड्"
 		]
 	},
-	"specialpages-group-wikibase": "विकिबेस्",
-	"wikibase-deletedentity-item": "हटावल बस्तु",
+	"specialpages-group-wikibase": "विकिबेस",
+	"wikibase-deletedentity-item": "हटावल वस्तु",
 	"wikibase-deletedentity-property": "हटावल गुणधर्म",
 	"wikibase-deletedentity-query": "हटावल क्वेरी",
 	"wikibase-error-unexpected": "त्रुटि: $1 ।",
@@ -35,16 +35,16 @@
 	"datatypes-type-number": "सङ्ख्या",
 	"datatypes-type-mediawiki-title": "मीडियाविकि शीर्षक",
 	"datatypes-type-unknown": "अनिर्दिष्ट",
-	"datatypes-type-boolean": "बूलियन्",
+	"datatypes-type-boolean": "बूलियन",
 	"datatypes-type-globe-coordinate": "भौगोलिक नियामक",
 	"datatypes-type-time": "समयमे बिन्दु",
-	"datatypes-type-wikibase-item": "बस्तु",
+	"datatypes-type-wikibase-item": "वस्तु",
 	"datatypes-type-wikibase-property": "गुणधर्म",
-	"datatypes-type-commonsMedia": "कॉमन्स् मीडिया सञ्चिका",
+	"datatypes-type-commonsMedia": "कामन्स मीडिया सञ्चिका",
 	"datatypes-type-geo-shape": "भौगोलिक आकार",
-	"datatypes-type-tabular-data": "तालिकागत दत्तान्स",
+	"datatypes-type-tabular-data": "तालिकागत डेटा",
 	"datatypes-type-external-id": "बाहरी पहचानकर्ता",
-	"version-wikibase": "विकिबेस्",
+	"version-wikibase": "विकिबेस",
 	"wikibase-time-calendar-gregorian": "ग्रेगोरीय",
 	"wikibase-time-calendar-julian": "जूलीय"
 }
