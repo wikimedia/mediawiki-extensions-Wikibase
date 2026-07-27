@@ -65,6 +65,7 @@
 	"apihelp-wbformatvalue-param-property": "Ідентифікатор властивості, до якої належить значення даних, має використовуватись замість параметра <var>datatype</var>",
 	"apihelp-wbformatvalue-example-1": "Форматувати просте рядкове значення.",
 	"apihelp-wbformatvalue-example-2": "Форматувати рядкове значення як URL у HTML.",
+	"apihelp-wbformatvalue-example-3": "Форматувати значення часу як звичайний текст, автоматично відображаючи календар, якщо потрібно.",
 	"apihelp-wbgetclaims-summary": "Отримує записи з Вікібази.",
 	"apihelp-wbgetclaims-param-entity": "Ідентифікатор сутності, з якої мають бути отримані записи. Необхідно, якщо не вказано GUID запису.",
 	"apihelp-wbgetclaims-param-property": "Необов'язковий фільтр, призначений для виведення лише записів з головною подробицею, що має вказану властивість.",
@@ -316,5 +317,6 @@
 	"apihelp-wbformatentities-example-1": "Форматувати ідентифікатор окремого елемента в HTML.",
 	"apihelp-wbformatentities-example-2": "Форматувати ідентифікатори елемента і властивості.",
 	"apihelp-wbformatentities-example-3": "Форматувати ідентифікатори елемента, властивості та лексеми.",
-	"apihelp-wbformatentities-example-4": "Формувати три ідентифікатори елемента французькою мовою."
+	"apihelp-wbformatentities-example-4": "Формувати три ідентифікатори елемента французькою мовою.",
+	"apihelp-wbformatentities-example-5": "Форматування трьох ідентифікаторів та ідентифікатору властивості у вигляді звичайного тексту."
 }
