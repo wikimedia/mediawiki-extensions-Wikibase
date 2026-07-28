@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Babanwalia",
+			"Bgo eiu",
 			"Cabal",
 			"Kuldeepburjbhalaike"
 		]
@@ -49,7 +50,7 @@
 	"datatypes-type-boolean": "ਬੂਲੀਅਨ (ਸੱਚ/ਝੂਠ ਕਿਸਮ)",
 	"datatypes-type-globe-coordinate": "ਭੂਗੋਲਿਕ ਗੁਣਕ",
 	"datatypes-type-time": "ਸਮੇਂ ਦਾ ਨੁਕਤਾ",
-	"datatypes-type-wikibase-item": "ਚੀਜ਼ਾਂ",
+	"datatypes-type-wikibase-item": "ਆਈਟਮ",
 	"datatypes-type-wikibase-property": "ਜਾਇਦਾਦ",
 	"datatypes-type-commonsMedia": "ਕਾਮਨਜ਼ ਮੀਡੀਆ ਫਾਈਲ",
 	"datatypes-type-geo-shape": "ਭੂਗੋਲਿਕ ਸ਼ਕਲ",
@@ -63,14 +64,14 @@
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 ਸਾਲ|$1 ਵਰ੍ਹੇ}} ਈਸਵੀ",
 	"wikibase-time-precision-millennium": "$1. ਹਜ਼ਾਰ ਸਾਲ",
 	"wikibase-time-precision-century": "$1. ਸਦੀ",
-	"wikibase-time-precision-10annum": "$1 ਸਕਿੰਟ",
+	"wikibase-time-precision-10annum": "$1 ਦਾ ਦਹਾਕਾ",
 	"wikibase-time-precision-BCE": "$1 ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-time-precision-BCE-Gannum": "$1 ਅਰਬ ਸਾਲ ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-time-precision-BCE-Mannum": "$1 ਮਿਲੀਅਨ(10 ਲੱਖ) ਸਾਲ ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 ਵਰ੍ਹਾ|$1 ਵਰ੍ਹੇ}} ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-time-precision-BCE-millennium": "$1. ਹਜ਼ਾਰ ਸਾਲ ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-time-precision-BCE-century": "$1. ਸਦੀ ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
-	"wikibase-time-precision-BCE-10annum": "$1s ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
+	"wikibase-time-precision-BCE-10annum": "$1 ਦਾ ਦਹਾਕਾ ਈਸਾ ਤੋਂ ਪਹਿਲਾਂ",
 	"wikibase-snakformatter-valuetype-mismatch": "ਮੁੱਲ ਦੀ ਕਿਸਮ \"$1\", ਵਿਸ਼ੇਸ਼ਤਾ ਦੀ ਕਿਸਮ \"$2\" ਨਾਲ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ।",
 	"wikibase-snakformatter-property-not-found": "ਵਿਸ਼ੇਸ਼ਤਾ $1 ਨਹੀਂ ਲੱਭੀ, ਵਰਤੋਂ ਲਈ ਡਾਟਾ ਕਿਸਮ ਦਾ ਪਤਾ ਨਹੀਂ ਲੱਗ ਸਕਿਆ।",
 	"wikibase-snakformatter-formatting-exception": "ਤਰਤੀਬ ਗਲਤੀ: $1।",

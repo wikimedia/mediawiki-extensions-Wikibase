@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Albinfo",
+			"Bild-Sprache",
 			"Terfili"
 		]
 	},
 	"wikibase-edit": "modifitgar",
 	"wikibase-add": "agiuntar",
-	"wikibase-label-empty": "Betg fixà ina denominaziun",
-	"wikibase-description-empty": "Definì nagina descripziun",
+	"wikibase-label-empty": "I n'è vegni fixà nagina denominaziun",
+	"wikibase-description-empty": "I n'exista nagina descripziun",
 	"wikibase-sitelinks-special": "autras paginas"
 }
