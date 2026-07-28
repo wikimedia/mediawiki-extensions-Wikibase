@@ -12,8 +12,8 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetProperty
 use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabelRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\GetPropertyLabel\GetPropertyLabelResponse;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
+use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;

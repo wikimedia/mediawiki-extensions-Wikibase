@@ -18,9 +18,9 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks\PatchSitelink
 use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks\PatchSitelinksRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\PatchSitelinks\PatchSitelinksResponse;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
+use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;

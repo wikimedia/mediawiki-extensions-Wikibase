@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use MediaWiki\Permissions\Authority;
 use MediaWiki\Rest\Handler;
@@ -8,10 +8,10 @@ use MediaWiki\Rest\Response;
 use MediaWiki\User\UserIdentityUtils;
 use MediaWiki\User\UserIdentityValue;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\AuthenticationMiddleware
+ * @covers \Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware
  *
  * @group Wikibase
  *
