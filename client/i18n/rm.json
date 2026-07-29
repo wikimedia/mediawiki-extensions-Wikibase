@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Albinfo",
+			"Bild-Sprache",
 			"Kazu89",
 			"Terfili"
 		]
@@ -14,6 +15,7 @@
 	"wikibase-linkitem-addlinks": "Agiunscher colliaziuns",
 	"wikibase-linkitem-title": "Agiuntar il link a la pagina",
 	"wikibase-linkitem-linkpage": "Agiuntar il link a la pagina",
+	"wikibase-linkitem-selectlink": "Tscherna ina pagina ed una website che dai vegnir colliada cun questa pagina.",
 	"wikibase-linkitem-input-site": "Lingua:",
 	"wikibase-linkitem-input-page": "Pagina",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
