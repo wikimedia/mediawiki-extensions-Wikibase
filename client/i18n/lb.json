@@ -85,6 +85,7 @@
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Ausso: $1",
 	"wikibase-pageinfo-entity-usage-X": "All d'Donnéeë vun der Entitéit",
 	"wikibase-pageinfo-entity-usage-O": "Verschiddenes (z.&nbsp;B. Aliasen, Existenz vun Entitéiten)",
+	"wikibase-property-render-error": "D'Eegenschaft $1 konnt net gerendert ginn: $2",
 	"wikibase-otherprojects": "An anere Projeten",
 	"wikibase-sitelinks-sitename-columnheading": "Sprooch",
 	"wikibase-sitelinks-link-columnheading": "Verlinkt Säit",
