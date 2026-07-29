@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use MediaWiki\Rest\ConditionalHeaderUtil;
 use MediaWiki\Rest\Handler;
@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
+use Wikibase\Repo\RestApi\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

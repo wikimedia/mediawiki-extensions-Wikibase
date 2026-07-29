@@ -1,10 +1,9 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\RestApi\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
-use Wikibase\Repo\RestApi\Middleware\Middleware;
 
 /**
  * @license GPL-2.0-or-later

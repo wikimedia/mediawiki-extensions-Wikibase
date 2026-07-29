@@ -86,9 +86,9 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterItemUpdate
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
+use Wikibase\Repo\RestApi\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 
 /**

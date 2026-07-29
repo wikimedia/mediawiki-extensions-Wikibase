@@ -185,7 +185,6 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryPropertyLabelV
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer as VRD;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\WholeEntityEditSummaryToFormattableSummaryConverter;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
 use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePairSerializer;
@@ -193,6 +192,7 @@ use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceSerializ
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter;
+use Wikibase\Repo\RestApi\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
 use Wikibase\Repo\WikibaseRepo;
 
