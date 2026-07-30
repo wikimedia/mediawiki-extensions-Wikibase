@@ -84,6 +84,14 @@ class FacetedItemSearchValidatorTest extends TestCase {
 			"'not' field must contain a single property/value condition",
 		];
 
+		yield '"or" with missing "property" field in one element' => [
+			[ 'or' => [
+				[ 'property' => self::STRING_PROPERTY, 'value' => 'potato' ],
+				[ 'value' => 'carrot' ],
+			] ],
+			"'or' fields must each contain a property/value condition",
+		];
+
 		yield 'both "property" and "and"' => [
 			[ 'property' => 'P1', 'and' => [ [ 'property' => 'P2' ], [ 'property' => 'P3' ] ] ],
 			'Query filters must only contain a single operator field or a property/value condition',
