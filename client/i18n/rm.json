@@ -2,14 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Kazu89",
-			"Terfili"
+			"Terfili",
+			"Albinfo",
+			"Bild-Sprache"
 		]
 	},
 	"wikibase-comment-update": "Il object {{WBREPONAME}} è vegnì midà",
 	"wikibase-dataitem": "{{WBREPONAME}} object",
 	"wikibase-editlinks": "Modifitgar colliaziuns",
 	"wikibase-editlinkstitle": "Modifitgar las colliaziuns tar autras linguas",
+	"wikibase-addlinkstitle": "Agiuntar colliaziuns sin paginas en autras linguas.",
 	"wikibase-linkitem-addlinks": "Agiunscher colliaziuns",
+	"wikibase-linkitem-title": "Agiuntar il link a la pagina",
+	"wikibase-linkitem-linkpage": "Agiuntar il link a la pagina",
+	"wikibase-linkitem-selectlink": "Tscherna ina pagina ed una website che dai vegnir colliada cun questa pagina.",
 	"wikibase-linkitem-input-site": "Lingua:",
 	"wikibase-linkitem-input-page": "Pagina",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
