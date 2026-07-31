@@ -1,14 +1,14 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\ResponseFactory;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddleware;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult;
+use Wikibase\Repo\RestApi\Middleware\PreconditionMiddleware;
+use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck;
+use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheckResult;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\PreconditionMiddleware

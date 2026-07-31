@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use Generator;
 use MediaWiki\Rest\ConditionalHeaderUtil;
@@ -11,15 +11,15 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\Domains\Crud\Domain\Services\ItemRevisionMetadataRetriever;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult;
+use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck;
+use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheckResult;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use Wikimedia\Timestamp\TimestampFormat as TS;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck
- * @covers \Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheckResult
+ * @covers \Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck
+ * @covers \Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheckResult
  *
  * @group Wikibase
  *

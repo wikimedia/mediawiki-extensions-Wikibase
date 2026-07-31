@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware;
+namespace Wikibase\Repo\RestApi\Middleware;
 
 /**
  * @license GPL-2.0-or-later

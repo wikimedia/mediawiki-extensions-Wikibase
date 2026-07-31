@@ -16,12 +16,12 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStat
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStatementRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\ReplaceStatement\ReplaceStatementResponse;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
+use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
