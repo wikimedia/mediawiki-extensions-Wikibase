@@ -13,7 +13,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		return {
 			op: 'add',
 			path: '/de',
-			value: [ `test-alias-${utils.uniq()}` ]
+			value: [ `test-alias-${ utils.uniq() }` ]
 		};
 	}
 

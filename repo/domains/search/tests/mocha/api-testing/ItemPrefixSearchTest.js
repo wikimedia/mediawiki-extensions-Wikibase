@@ -197,7 +197,7 @@ describe( 'Item prefix search', () => {
 					expectedResults: () => [ allMatchingResults[ 2 ] ]
 				}
 			} ).forEach( ( [ title, { params, expectedResults } ] ) => {
-				it( `finds items matching the search term ${title}`, async () => {
+				it( `finds items matching the search term ${ title }`, async () => {
 					const request = newSearchRequest( searchLanguage, englishTermMatchingAllItems );
 
 					Object.entries( params ).forEach( ( [ key, value ] ) => {

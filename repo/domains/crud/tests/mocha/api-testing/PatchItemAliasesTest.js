@@ -25,8 +25,8 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		testAlias = 'English Alias';
 
 		testItemId = ( await newCreateItemRequestBuilder( {
-			labels: { [ testLanguage ]: `English Label ${utils.uniq()}` },
-			descriptions: { [ testLanguage ]: `English Description ${utils.uniq()}` },
+			labels: { [ testLanguage ]: `English Label ${ utils.uniq() }` },
+			descriptions: { [ testLanguage ]: `English Description ${ utils.uniq() }` },
 			aliases: { en: [ testAlias ] }
 		} ).makeRequest() ).body.id;
 
@@ -62,7 +62,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			const alias = 'spacey alias';
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: '/en/-', value: ` \t${alias}  ` } ]
+				[ { op: 'add', path: '/en/-', value: ` \t${ alias }  ` } ]
 			).makeRequest();
 
 			expect( response ).to.have.status( 200 );
@@ -71,7 +71,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch aliases providing edit metadata', async () => {
-			const newDeAlias = `de-alias-${utils.uniq()}`;
+			const newDeAlias = `de-alias-${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
@@ -99,7 +99,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add a "mul" alias', async () => {
-			const alias = `mul-alias-${utils.uniq()}`;
+			const alias = `mul-alias-${ utils.uniq() }`;
 			const response = await newPatchItemAliasesRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: [ alias ] } ]
@@ -187,10 +187,10 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		it( 'empty alias', async () => {
 			const language = 'de';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ '' ] }
+				{ op: 'add', path: `/${ language }`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/${language}/0`, value: '' };
+			const context = { path: `/${ language }/0`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -201,10 +201,10 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
+				{ op: 'add', path: `/${ language }`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/${language}/0`, limit: maxLength };
+			const context = { path: `/${ language }/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
@@ -212,24 +212,24 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		it( 'alias contains invalid characters', async () => {
 			const alias = 'tab\t tab\t tab';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${testLanguage}`, value: [ alias ] }
+				{ op: 'add', path: `/${ testLanguage }`, value: [ alias ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/${testLanguage}/0`, value: alias }
+				{ path: `/${ testLanguage }/0`, value: alias }
 			);
 		} );
 
 		it( 'aliases in language is not a list', async () => {
 			const invalidAliasesInLanguage = { object: 'not a list' };
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${testLanguage}`, value: invalidAliasesInLanguage }
+				{ op: 'add', path: `/${ testLanguage }`, value: invalidAliasesInLanguage }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/${testLanguage}`, value: invalidAliasesInLanguage };
+			const context = { path: `/${ testLanguage }`, value: invalidAliasesInLanguage };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -246,7 +246,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 		it( 'invalid language code', async () => {
 			const invalidLanguage = 'not-a-valid-language';
 			const response = await newPatchItemAliasesRequestBuilder( testItemId, [
-				{ op: 'add', path: `/${invalidLanguage}`, value: [ 'alias' ] }
+				{ op: 'add', path: `/${ invalidLanguage }`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );

@@ -19,7 +19,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	function makeReplaceExistingSitelinkOp() {
 		return {
 			op: 'replace',
-			path: `/${siteId}`,
+			path: `/${ siteId }`,
 			value: sitelink
 		};
 	}
@@ -65,7 +65,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	it( '409 - patch test failed', async () => {
 		const response = await newPatchSitelinksRequestBuilder(
 			testItemId,
-			[ { op: 'test', path: `/${siteId}`, value: 'unexpected value!' } ]
+			[ { op: 'test', path: `/${ siteId }`, value: 'unexpected value!' } ]
 		).makeRequest();
 
 		expect( response ).to.have.status( 409 );
@@ -86,7 +86,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	it( '422 - empty title', async () => {
 		const response = await newPatchSitelinksRequestBuilder(
 			testItemId,
-			[ { op: 'replace', path: `/${siteId}`, value: { title: '' } } ]
+			[ { op: 'replace', path: `/${ siteId }`, value: { title: '' } } ]
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );

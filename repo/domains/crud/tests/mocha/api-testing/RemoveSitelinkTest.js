@@ -66,7 +66,7 @@ describe( newRemoveSitelinkRequestBuilder().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				`/* wbsetsitelink-remove:1|${siteId} */ ${linkedArticle}, ${comment}`
+				`/* wbsetsitelink-remove:1|${ siteId } */ ${ linkedArticle }, ${ comment }`
 			);
 		} );
 	} );

@@ -28,7 +28,7 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, 'English science fiction writer and humourist' );
-		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testItemCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
@@ -89,7 +89,7 @@ describe( newGetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/descriptions/en` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/descriptions/en` )
 		);
 	} );
 } );

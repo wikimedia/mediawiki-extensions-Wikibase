@@ -27,7 +27,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, [ 'Douglas Noël Adams', 'DNA' ] );
-		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testItemCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
@@ -42,7 +42,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/aliases/en` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/aliases/en` )
 		);
 	} );
 

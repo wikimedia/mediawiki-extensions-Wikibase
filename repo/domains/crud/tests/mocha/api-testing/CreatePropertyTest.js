@@ -27,7 +27,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			expect( response ).to.have.status( 201 );
-			assert.header( response, 'Location', `${response.request.url}/${response.body.id}` );
+			assert.header( response, 'Location', `${ response.request.url }/${ response.body.id }` );
 			assert.deepEqual( response.body.data_type, property.data_type );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( response.body.id );
@@ -85,7 +85,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				`/* wbeditentity-create-property:0| */ ${editSummary}`
+				`/* wbeditentity-create-property:0| */ ${ editSummary }`
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
@@ -111,7 +111,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'missing-field',
-				{ path: `/property/statements/${predicatePropertyId}/0`, field: 'value' }
+				{ path: `/property/statements/${ predicatePropertyId }/0`, field: 'value' }
 			);
 		} );
 
@@ -129,7 +129,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				invalidFieldPath: '/property/aliases/en/0'
 			}
 		} ).forEach( ( [ field, { property, invalidFieldPath } ] ) => {
-			it( `value too long: ${field}`, async () => {
+			it( `value too long: ${ field }`, async () => {
 				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
 
 				assertValidError( response, 400, 'value-too-long', { path: invalidFieldPath, limit: maxLabelLength } );
@@ -151,7 +151,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				invalidFieldPath: '/property/aliases'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
-			it( `invalid-key: ${reason}`, async () => {
+			it( `invalid-key: ${ reason }`, async () => {
 				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
 
 				assertValidError( response, 400, 'invalid-key', { path: invalidFieldPath, key: 'invalidLanguageCode' } );
@@ -240,7 +240,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				invalidFieldPath: '/property/aliases/en/1'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
-			it( `invalid value: ${reason}`, async () => {
+			it( `invalid value: ${ reason }`, async () => {
 				const response = await newCreatePropertyRequestBuilder( property ).makeRequest();
 
 				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath } );
@@ -256,14 +256,14 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 						value: { type: 'value', content: 'some-value' }
 					} } }
 				} ),
-				invalidFieldPath: () => `/property/statements/${predicatePropertyId}`
+				invalidFieldPath: () => `/property/statements/${ predicatePropertyId }`
 			},
 			'invalid statement type': {
 				property: () => ( {
 					data_type: 'string',
 					statements: { [ predicatePropertyId ]: [ 'invalid-statement-type' ] }
 				} ),
-				invalidFieldPath: () => `/property/statements/${predicatePropertyId}/0`
+				invalidFieldPath: () => `/property/statements/${ predicatePropertyId }/0`
 			},
 			'invalid statement field': {
 				property: () => ( {
@@ -276,7 +276,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				invalidFieldPath: () => '/property/statements/' + predicatePropertyId + '/0/value/type'
 			}
 		} ).forEach( ( [ reason, { property, invalidFieldPath } ] ) => {
-			it( `invalid value: ${reason}`, async () => {
+			it( `invalid value: ${ reason }`, async () => {
 				const response = await newCreatePropertyRequestBuilder( property() ).makeRequest();
 
 				assertValidError( response, 400, 'invalid-value', { path: invalidFieldPath() } );
@@ -298,7 +298,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				400,
 				'statement-group-property-id-mismatch',
 				{
-					path: `/property/statements/${propertyIdKey}/0/property/id`,
+					path: `/property/statements/${ propertyIdKey }/0/property/id`,
 					statement_group_property_id: propertyIdKey,
 					statement_property_id: predicatePropertyId
 				}
@@ -319,7 +319,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'referenced-resource-not-found',
-				{ path: `/property/statements/${nonExistentProperty}/0/property/id` }
+				{ path: `/property/statements/${ nonExistentProperty }/0/property/id` }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -349,7 +349,7 @@ describe( newCreatePropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'responds with data-policy-violation error when property with the same label already exists', async () => {
 			const languageCode = 'en';
-			const label = `test-label-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
 
 			const property = { data_type: 'string', labels: { [ languageCode ]: label } };
 

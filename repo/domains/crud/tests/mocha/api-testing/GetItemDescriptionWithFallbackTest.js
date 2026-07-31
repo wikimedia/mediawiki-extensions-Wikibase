@@ -12,7 +12,7 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let itemId;
 	const languageWithDescription = 'de';
-	const itemDeDescription = `item-description-${utils.uniq()}`;
+	const itemDeDescription = `item-description-${ utils.uniq() }`;
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
@@ -31,7 +31,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, itemDeDescription );
-		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testItemCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
@@ -43,7 +43,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 		expect( response ).to.have.status( 307 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `entities/items/${itemId}/descriptions/${languageWithDescription}` )
+				.endsWith( `entities/items/${ itemId }/descriptions/${ languageWithDescription }` )
 		);
 	} );
 
@@ -57,7 +57,7 @@ describe( newGetItemDescriptionWithFallbackRequestBuilder().getRouteDescription(
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `entities/items/${redirectTarget}/descriptions_with_language_fallback/en` )
+				.endsWith( `entities/items/${ redirectTarget }/descriptions_with_language_fallback/en` )
 		);
 	} );
 

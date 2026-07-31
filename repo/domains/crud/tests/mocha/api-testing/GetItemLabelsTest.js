@@ -24,7 +24,7 @@ describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, { en: 'potato' } );
-		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testItemCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
@@ -63,7 +63,7 @@ describe( newGetItemLabelsRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/labels` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/labels` )
 		);
 	} );
 } );

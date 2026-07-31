@@ -178,7 +178,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 		describe( 'sitelinks to redirects', () => {
 			const redirectTitle = utils.title( 'Redirect-title-' );
 			before( async () => {
-				await entityHelper.createWikiPage( redirectTitle, `#REDIRECT [[${testTitle1}]]` );
+				await entityHelper.createWikiPage( redirectTitle, `#REDIRECT [[${ testTitle1 }]]` );
 			} );
 
 			it( 'resolves title redirects without a redirect badge', async () => {
@@ -295,7 +295,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			const path = '/sitelink/badges';
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'badge is not an item ID', async () => {
@@ -305,7 +305,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			const path = '/sitelink/badges/0';
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'not an allowed badge', async () => {
@@ -314,7 +314,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			const path = '/sitelink/badges/0';
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'badge item does not exist', async () => {
@@ -326,7 +326,7 @@ describe( newSetSitelinkRequestBuilder().getRouteDescription(), () => {
 
 			const path = '/sitelink/badges/0';
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'sitelink title does not exist', async () => {

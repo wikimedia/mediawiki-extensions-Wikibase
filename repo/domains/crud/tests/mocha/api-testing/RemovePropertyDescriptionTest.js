@@ -24,7 +24,7 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 	describe( '200 success response', () => {
 		it( 'can remove a description without edit metadata', async () => {
 			const languageCode = 'en';
-			const description = `english description ${utils.uniq()}`;
+			const description = `english description ${ utils.uniq() }`;
 			await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description ).makeRequest();
 
 			const response = await newRemovePropertyDescriptionRequestBuilder( testPropertyId, languageCode )
@@ -42,7 +42,7 @@ describe( newRemovePropertyDescriptionRequestBuilder().getRouteDescription(), ()
 
 		it( 'can remove a description with metadata', async () => {
 			const languageCode = 'en';
-			const description = `english description ${utils.uniq()}`;
+			const description = `english description ${ utils.uniq() }`;
 			await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description ).makeRequest();
 
 			const user = await getOrCreateBotUser();

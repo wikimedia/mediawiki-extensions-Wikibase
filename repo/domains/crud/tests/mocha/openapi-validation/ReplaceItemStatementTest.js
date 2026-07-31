@@ -55,7 +55,7 @@ describe( 'validate PUT endpoints for item statements against OpenAPI definition
 
 			it( '404 - statement does not exist', async () => {
 				const response = await newReplaceRequestBuilder(
-					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					`${ testItemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					newStatementWithRandomStringValue( statementPropertyId )
 				).makeRequest();
 

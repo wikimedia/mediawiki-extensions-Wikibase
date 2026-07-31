@@ -129,7 +129,7 @@ describe( newGetItemStatementsRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/statements` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/statements` )
 		);
 	} );
 

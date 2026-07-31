@@ -38,7 +38,7 @@ async function getItemId() {
 async function deleteProperty( propertyId ) {
 	const admin = await action.root();
 	const response = await admin.action( 'delete', {
-		title: `Property:${propertyId}`,
+		title: `Property:${ propertyId }`,
 		token: await admin.token()
 	}, 'POST' );
 	assert.property( response, 'delete' );
@@ -47,7 +47,7 @@ async function deleteProperty( propertyId ) {
 async function createUniqueStringProperty() {
 	return await newCreatePropertyRequestBuilder( {
 		data_type: 'string',
-		labels: { en: `string-property-${utils.uniq()}` }
+		labels: { en: `string-property-${ utils.uniq() }` }
 	} ).makeRequest();
 }
 
@@ -58,7 +58,7 @@ async function createUniqueStringProperty() {
  */
 async function createItemWithStatements( statements ) {
 	return ( await newCreateItemRequestBuilder( {
-		labels: { en: `item with statements ${utils.uniq()}` },
+		labels: { en: `item with statements ${ utils.uniq() }` },
 		statements: Array.isArray( statements ) ? statementListToStatementGroups( statements ) : statements
 	} ).makeRequest() ).body;
 }
@@ -100,7 +100,7 @@ async function createRedirectForItem( redirectTarget ) {
 }
 
 async function getLatestEditMetadata( entityId ) {
-	const entityTitle = ( entityId.charAt( 0 ) === 'P' ) ? `Property:${entityId}` : `Item:${entityId}`;
+	const entityTitle = ( entityId.charAt( 0 ) === 'P' ) ? `Property:${ entityId }` : `Item:${ entityId }`;
 	const editMetadata = ( await action.getAnon().action( 'query', {
 		list: 'recentchanges',
 		rctitle: entityTitle,
@@ -118,9 +118,9 @@ async function changeEntityProtectionStatus( entityId, allowedUserGroup ) {
 	const admin = await action.root();
 	const pageNamespace = entityId.startsWith( 'Q' ) ? 'Item' : 'Property';
 	await admin.action( 'protect', {
-		title: `${pageNamespace}:${entityId}`,
+		title: `${ pageNamespace }:${ entityId }`,
 		token: await admin.token(),
-		protections: `edit=${allowedUserGroup}`,
+		protections: `edit=${ allowedUserGroup }`,
 		expiry: 'infinite'
 	}, 'POST' );
 }

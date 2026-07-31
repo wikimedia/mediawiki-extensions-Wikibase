@@ -12,12 +12,12 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
-	const propertyEnDescription = `string-property-description-${utils.uniq()}`;
+	const propertyEnDescription = `string-property-description-${ utils.uniq() }`;
 
 	before( async () => {
 		const testProperty = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { en: `string-property-${utils.uniq()}` },
+			labels: { en: `string-property-${ utils.uniq() }` },
 			descriptions: { en: propertyEnDescription }
 		} ).makeRequest();
 		propertyId = testProperty.body.id;
@@ -30,7 +30,7 @@ describe( newGetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 		expect( response ).to.have.status( 200 );
 		assert.strictEqual( response.body, propertyEnDescription );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 

@@ -14,8 +14,7 @@ module.exports = {
 		"camelcase": "off",
 		"comma-dangle": "off",
 		"max-len": [ "warn", { code: 130 } ],
-		"no-implicit-coercion": [ "error", { disallowTemplateShorthand: true } ],
-		"template-curly-spacing": "off"
+		"no-implicit-coercion": [ "error", { disallowTemplateShorthand: true } ]
 	},
 	overrides: [
 		{

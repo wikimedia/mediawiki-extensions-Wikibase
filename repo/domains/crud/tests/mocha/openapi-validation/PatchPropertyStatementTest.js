@@ -55,7 +55,7 @@ describe( 'validate PATCH endpoints for property statements against OpenAPI defi
 
 			it( '404 - statement does not exist', async () => {
 				const response = await newPatchRequestBuilder(
-					`${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					`${ testPropertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					[
 						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]

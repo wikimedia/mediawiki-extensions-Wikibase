@@ -185,7 +185,7 @@ describe( 'Property prefix search', () => {
 					expectedResults: () => [ allMatchingResults[ 1 ] ]
 				}
 			} ).forEach( ( [ title, { params, expectedResults } ] ) => {
-				it( `finds properties matching the search term ${title}`, async () => {
+				it( `finds properties matching the search term ${ title }`, async () => {
 					const request = newSearchRequest( searchLanguage, englishTermMatchingTwoProperties );
 
 					Object.entries( params ).forEach( ( [ key, value ] ) => {

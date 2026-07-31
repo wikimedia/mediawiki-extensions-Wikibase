@@ -13,12 +13,12 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
 	const fallbackLanguageWithDescription = 'de';
-	const propertyDeDescription = `string-property-description-${utils.uniq()}`;
+	const propertyDeDescription = `string-property-description-${ utils.uniq() }`;
 
 	before( async () => {
 		const testProperty = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { en: `string-property-${utils.uniq()}` },
+			labels: { en: `string-property-${ utils.uniq() }` },
 			descriptions: { [ fallbackLanguageWithDescription ]: propertyDeDescription }
 		} ).makeRequest();
 		propertyId = testProperty.body.id;
@@ -31,7 +31,7 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 
 		expect( response ).to.have.status( 200 );
 		assert.strictEqual( response.body, propertyDeDescription );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
@@ -44,7 +44,7 @@ describe( newGetPropertyDescriptionWithFallbackRequestBuilder().getRouteDescript
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
 				.endsWith(
-					`rest.php/wikibase/v1/entities/properties/${propertyId}/descriptions/${fallbackLanguageWithDescription}`
+					`rest.php/wikibase/v1/entities/properties/${ propertyId }/descriptions/${ fallbackLanguageWithDescription }`
 				)
 		);
 	} );

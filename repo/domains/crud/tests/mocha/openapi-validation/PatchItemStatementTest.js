@@ -52,7 +52,7 @@ describe( 'validate PATCH endpoints for item statements against OpenAPI definiti
 
 			it( '404 - statement does not exist', async () => {
 				const response = await newPatchRequestBuilder(
-					`${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					`${ testItemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					[
 						{ op: 'replace', path: '/value/content', value: 'no patchy :(' }
 					]

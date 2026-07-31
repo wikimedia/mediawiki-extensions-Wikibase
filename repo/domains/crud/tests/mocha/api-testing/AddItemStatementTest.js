@@ -96,7 +96,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a statement with a globecoordinate value in new format', async () => {
 			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'globe-coordinate',
-				labels: { en: `globe-coordinate-property-${utils.uniq()}` }
+				labels: { en: `globe-coordinate-property-${ utils.uniq() }` }
 			} ).makeRequest();
 			const propertyId = createPropertyResponse.body.id;
 			const globecoordinate = {
@@ -119,7 +119,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a statement with a time value in new format', async () => {
 			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'time',
-				labels: { en: `time-property-${utils.uniq()}` }
+				labels: { en: `time-property-${ utils.uniq() }` }
 			} ).makeRequest();
 			const propertyId = createPropertyResponse.body.id;
 			const time = {
@@ -141,7 +141,7 @@ describe( newAddItemStatementRequestBuilder().getRouteDescription(), () => {
 		it( 'can add a statement with a wikibase-entityid value in new format', async () => {
 			const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'wikibase-item',
-				labels: { en: `wikibase-item-property-${utils.uniq()}` }
+				labels: { en: `wikibase-item-property-${ utils.uniq() }` }
 			} ).makeRequest();
 			const propertyId = createPropertyResponse.body.id;
 			const statement = {

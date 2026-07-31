@@ -10,7 +10,7 @@ async function createPropertyWithAllFields() {
 
 	return ( await newCreatePropertyRequestBuilder( {
 		data_type: 'string',
-		labels: { en: `non-empty-string-property-${utils.uniq()}` },
+		labels: { en: `non-empty-string-property-${ utils.uniq() }` },
 		descriptions: { en: 'non-empty-string-property-description' },
 		aliases: { en: [ 'non-empty-string-property-alias' ] },
 		statements: { [ statementPropertyId ]: [

@@ -51,7 +51,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 			const sitelink = { title: linkedArticle, badges: [ allowedBadges[ 0 ] ] };
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
+				[ { op: 'add', path: `/${ siteId }`, value: sitelink } ]
 			).makeRequest();
 
 			assertValidResponse( response, 200, sitelink.title, sitelink.badges );
@@ -65,7 +65,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${siteId}`, value: sitelink } ]
+				[ { op: 'add', path: `/${ siteId }`, value: sitelink } ]
 			).withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
@@ -140,7 +140,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( '"from" field target does not exist', async () => {
-			const operation = { op: 'copy', from: '/path/does/not/exist', path: `/${siteId}` };
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: `/${ siteId }` };
 
 			const response = await newPatchSitelinksRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest()
@@ -152,7 +152,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'patch test condition failed', async () => {
-			const operation = { op: 'test', path: `/${siteId}/title`, value: 'potato' };
+			const operation = { op: 'test', path: `/${ siteId }/title`, value: 'potato' };
 			const response = await newPatchSitelinksRequestBuilder( testItemId, [ operation ] )
 				.assertValidRequest()
 				.makeRequest();
@@ -166,7 +166,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 	describe( '422 error response', () => {
 		const makeReplaceExistingSitelinkPatchOperation = ( newSitelink ) => ( {
 			op: 'replace',
-			path: `/${siteId}`,
+			path: `/${ siteId }`,
 			value: newSitelink
 		} );
 
@@ -175,10 +175,10 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${siteId}`, value: invalidSitelinkType } ]
+				[ { op: 'add', path: `/${ siteId }`, value: invalidSitelinkType } ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}`, value: invalidSitelinkType };
+			const context = { path: `/${ siteId }`, value: invalidSitelinkType };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -202,7 +202,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${invalidSiteId}`, value: sitelink } ]
+				[ { op: 'add', path: `/${ invalidSiteId }`, value: sitelink } ]
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidSiteId } );
@@ -216,7 +216,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}`, field: 'title' };
+			const context = { path: `/${ siteId }`, field: 'title' };
 			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
@@ -228,7 +228,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/title`, value: '' };
+			const context = { path: `/${ siteId }/title`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -240,7 +240,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( { title } ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/title`, value: title };
+			const context = { path: `/${ siteId }/title`, value: title };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -254,7 +254,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/title`, value: title };
+			const context = { path: `/${ siteId }/title`, value: title };
 			assertValidError( response, 422, 'patch-result-referenced-resource-not-found', context );
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -268,7 +268,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/badges/0`, value: badge };
+			const context = { path: `/${ siteId }/badges/0`, value: badge };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -282,7 +282,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/badges/0`, value: notBadgeItemId };
+			const context = { path: `/${ siteId }/badges/0`, value: notBadgeItemId };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -295,7 +295,7 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingSitelinkPatchOperation( sitelink ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${siteId}/badges`, value: badgesWithInvalidFormat };
+			const context = { path: `/${ siteId }/badges`, value: badgesWithInvalidFormat };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -303,13 +303,13 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 		it( 'sitelink conflict', async () => {
 			await newPatchSitelinksRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
+				[ { op: 'add', path: `/${ siteId }`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
 			const newItem = await newCreateItemRequestBuilder( {} ).makeRequest();
 			const response = await newPatchSitelinksRequestBuilder(
 				newItem.body.id,
-				[ { op: 'add', path: `/${siteId}`, value: { title: linkedArticle } } ]
+				[ { op: 'add', path: `/${ siteId }`, value: { title: linkedArticle } } ]
 			).assertValidRequest().makeRequest();
 
 			const context = {
@@ -327,13 +327,13 @@ describe( newPatchSitelinksRequestBuilder().getRouteDescription(), () => {
 				[
 					{
 						op: 'add',
-						path: `/${siteId}`,
+						path: `/${ siteId }`,
 						value: { title: linkedArticle, url: 'https://en.wikipedia.org/wiki/Example.com' }
 					}
 				]
 			).assertValidRequest().makeRequest();
 
-			const path = `/${siteId}/url`;
+			const path = `/${ siteId }/url`;
 			assertValidError( response, 422, 'patch-result-modified-read-only-value', { path } );
 			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );

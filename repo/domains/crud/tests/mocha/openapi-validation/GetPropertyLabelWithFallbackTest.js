@@ -34,7 +34,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetPropertyLabelWithFallbackRequestBuilder( propertyId, languageCode )
-			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${ lastRevisionId }"` )
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );
@@ -65,7 +65,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		async () => {
 			const propertyWithoutFallback = await newCreatePropertyRequestBuilder( {
 				data_type: 'string',
-				labels: { de: `de-label-${utils.uniq()}` }
+				labels: { de: `de-label-${ utils.uniq() }` }
 			} ).makeRequest();
 
 			const response = await newGetPropertyLabelWithFallbackRequestBuilder(

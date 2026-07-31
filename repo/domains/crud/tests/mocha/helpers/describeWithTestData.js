@@ -45,12 +45,12 @@ function describeWithTestData( testName, runAllTests, createNewItem = false ) {
 		const isItem = id.startsWith( 'Q' );
 		const patchEntity = isItem ? newPatchItemRequestBuilder : newPatchPropertyRequestBuilder;
 		const patchEntityResponse = await patchEntity( id, [
-			{ op: 'add', path: '/labels/en', value: `entity-with-statements-${utils.uniq()}` },
-			{ op: 'add', path: '/descriptions/en', value: `entity-with-statements-${utils.uniq()}` },
+			{ op: 'add', path: '/labels/en', value: `entity-with-statements-${ utils.uniq() }` },
+			{ op: 'add', path: '/descriptions/en', value: `entity-with-statements-${ utils.uniq() }` },
 			{ op: 'add', path: '/aliases/en', value: [ 'entity', 'thing' ] },
 			{
 				op: 'add',
-				path: `/statements/${statementPropertyId}`,
+				path: `/statements/${ statementPropertyId }`,
 				value: [ newStatementWithRandomStringValue( statementPropertyId ) ]
 			}
 		] ).makeRequest();

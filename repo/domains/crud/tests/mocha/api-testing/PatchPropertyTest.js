@@ -36,8 +36,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 	before( async function () {
 		testPropertyId = ( await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { [ languageWithExistingLabel ]: `some-label-${utils.uniq()}` },
-			descriptions: { [ languageWithExistingDescription ]: `some-description-${utils.uniq()}` },
+			labels: { [ languageWithExistingLabel ]: `some-label-${ utils.uniq() }` },
+			descriptions: { [ languageWithExistingDescription ]: `some-description-${ utils.uniq() }` },
 			aliases: { en: [ existingEnAlias ], fr: [ 'croissant' ] }
 		} ).makeRequest() ).body.id;
 
@@ -55,8 +55,8 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can patch a property', async () => {
-			const newLabel = `neues deutsches label ${utils.uniq()}`;
-			const updatedDescription = `changed description ${utils.uniq()}`;
+			const newLabel = `neues deutsches label ${ utils.uniq() }`;
+			const updatedDescription = `changed description ${ utils.uniq() }`;
 			const newStatementValue = 'new statement';
 			const editSummary = 'I made a patch';
 
@@ -70,7 +70,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 					{ op: 'remove', path: '/aliases/fr' },
 					{
 						op: 'add',
-						path: `/statements/${predicatePropertyId}`,
+						path: `/statements/${ predicatePropertyId }`,
 						value: [ {
 							property: { id: predicatePropertyId },
 							value: { type: 'value', content: newStatementValue }
@@ -87,7 +87,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			assert.match(
 				response.body.statements[ predicatePropertyId ][ 0 ].id,
 				// eslint-disable-next-line security/detect-non-literal-regexp
-				new RegExp( `^${testPropertyId}\\$[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}$`, 'i' )
+				new RegExp( `^${ testPropertyId }\\$[A-Z0-9]{8}(-[A-Z0-9]{4}){3}-[A-Z0-9]{12}$`, 'i' )
 			);
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -107,7 +107,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			await entityHelper.deleteProperty( propertyToDelete );
 			await runAllJobs(); // wait for secondary data to catch up after deletion
 
-			const label = `some-label-${utils.uniq()}`;
+			const label = `some-label-${ utils.uniq() }`;
 
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
@@ -222,7 +222,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
 			op: 'replace',
-			path: `/labels/${languageWithExistingLabel}`,
+			path: `/labels/${ languageWithExistingLabel }`,
 			value: newLabel
 		} );
 
@@ -247,7 +247,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/labels/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/labels/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -260,7 +260,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( invalidLabel ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/labels/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/labels/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -271,7 +271,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingLabelPatchOp( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/labels/${languageWithExistingLabel}`, value: '' };
+			const context = { path: `/labels/${ languageWithExistingLabel }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -297,7 +297,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				testPropertyId,
 				[ {
 					op: 'add',
-					path: `/labels/${invalidLanguage}`,
+					path: `/labels/${ invalidLanguage }`,
 					value: 'potato'
 				} ]
 			).assertValidRequest().makeRequest();
@@ -306,7 +306,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'property with same label already exists', async () => {
-			const label = `test-label-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
 
 			const existingEntityResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'string', labels: { [ languageWithExistingLabel ]: label } }
@@ -331,7 +331,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
 			op: 'replace',
-			path: `/descriptions/${languageWithExistingDescription}`,
+			path: `/descriptions/${ languageWithExistingDescription }`,
 			value: newDescription
 		} );
 
@@ -356,7 +356,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/descriptions/${languageWithExistingDescription}`, value: invalidDescription };
+			const context = { path: `/descriptions/${ languageWithExistingDescription }`, value: invalidDescription };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -373,7 +373,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/descriptions/${languageWithExistingDescription}`, value: invalidDescription }
+				{ path: `/descriptions/${ languageWithExistingDescription }`, value: invalidDescription }
 			);
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -384,7 +384,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/descriptions/${languageWithExistingDescription}`, value: '' };
+			const context = { path: `/descriptions/${ languageWithExistingDescription }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -394,7 +394,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/descriptions/${languageWithExistingDescription}`, value: '' };
+			const context = { path: `/descriptions/${ languageWithExistingDescription }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -418,7 +418,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: `/descriptions/${invalidLanguage}`, value: 'potato' } ]
+				[ { op: 'add', path: `/descriptions/${ invalidLanguage }`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/descriptions', key: invalidLanguage } );
@@ -426,7 +426,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 
 		it( 'label-description-same-value', async () => {
 			const language = languageWithExistingLabel;
-			const text = `label-and-description-text-${utils.uniq()}`;
+			const text = `label-and-description-text-${ utils.uniq() }`;
 
 			const response = await newPatchPropertyRequestBuilder(
 				testPropertyId,
@@ -449,10 +449,10 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const language = 'de';
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ '' ] }
+				{ op: 'add', path: `/aliases/${ language }`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/aliases/${language}/0`, value: '' };
+			const context = { path: `/aliases/${ language }/0`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -464,10 +464,10 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const maxLength = 250;
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
+				{ op: 'add', path: `/aliases/${ language }`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/aliases/${language}/0`, limit: maxLength };
+			const context = { path: `/aliases/${ language }/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
@@ -477,14 +477,14 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const invalidAliasesValue = { 'aliases in language': 'not a list' };
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${language}`, value: invalidAliasesValue }
+				{ op: 'add', path: `/aliases/${ language }`, value: invalidAliasesValue }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/aliases/${language}`, value: invalidAliasesValue }
+				{ path: `/aliases/${ language }`, value: invalidAliasesValue }
 			);
 		} );
 
@@ -504,14 +504,14 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const invalidAlias = 'tab\t tab\t tab';
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${language}`, value: [ invalidAlias ] }
+				{ op: 'add', path: `/aliases/${ language }`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/aliases/${language}/0`, value: invalidAlias }
+				{ path: `/aliases/${ language }/0`, value: invalidAlias }
 			);
 		} );
 
@@ -519,7 +519,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const invalidLanguage = 'not-a-valid-language';
 
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/aliases/${invalidLanguage}`, value: [ 'alias' ] }
+				{ op: 'add', path: `/aliases/${ invalidLanguage }`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '/aliases', key: invalidLanguage } );
@@ -544,7 +544,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}`, value: validStatement };
+			const context = { path: `/statements/${ predicatePropertyId }`, value: validStatement };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 
@@ -560,7 +560,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}/0`, value: invalidStatement };
+			const context = { path: `/statements/${ predicatePropertyId }/0`, value: invalidStatement };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -585,7 +585,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}/0/rank`, value: invalidRankValue };
+			const context = { path: `/statements/${ predicatePropertyId }/0/rank`, value: invalidRankValue };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -598,7 +598,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}/0`, field: 'property' };
+			const context = { path: `/statements/${ predicatePropertyId }/0`, field: 'property' };
 			assertValidError( response, 422, 'patch-result-missing-field', context );
 		} );
 
@@ -614,7 +614,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest().makeRequest();
 
 			const context = {
-				path: `/statements/${propertyIdKey}/0/property/id`,
+				path: `/statements/${ propertyIdKey }/0/property/id`,
 				statement_group_property_id: propertyIdKey,
 				statement_property_id: predicatePropertyId
 			};
@@ -636,7 +636,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}/0/id` };
+			const context = { path: `/statements/${ predicatePropertyId }/0/id` };
 			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
 			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
@@ -657,7 +657,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${predicatePropertyId}/0/id` };
+			const context = { path: `/statements/${ predicatePropertyId }/0/id` };
 			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
 			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
@@ -679,7 +679,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const response = await newPatchPropertyRequestBuilder( testPropertyId, patch )
 				.assertValidRequest().makeRequest();
 
-			const context = { path: `/statements/${newPropertyId}/0/property/id` };
+			const context = { path: `/statements/${ newPropertyId }/0/property/id` };
 			assertValidError( response, 422, 'patch-result-modified-read-only-value', context );
 			assert.strictEqual( response.body.message, 'Read only value in patch result cannot be modified' );
 		} );
@@ -688,7 +688,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const nonExistentProperty = 'P9999999';
 			const patch = [ {
 				op: 'add',
-				path: `/statements/${nonExistentProperty}`,
+				path: `/statements/${ nonExistentProperty }`,
 				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
 			} ];
 
@@ -699,7 +699,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				422,
 				'patch-result-referenced-resource-not-found',
-				{ path: `/statements/${nonExistentProperty}/0/property/id`, value: nonExistentProperty }
+				{ path: `/statements/${ nonExistentProperty }/0/property/id`, value: nonExistentProperty }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -713,7 +713,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const nonExistentProperty = 'P9999999';
 			const patch = [ {
 				op: 'add',
-				path: `/statements/${predicatePropertyId}/0/qualifiers`,
+				path: `/statements/${ predicatePropertyId }/0/qualifiers`,
 				value: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ]
 			} ];
 
@@ -724,7 +724,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				422,
 				'patch-result-referenced-resource-not-found',
-				{ path: `/statements/${predicatePropertyId}/0/qualifiers/0/property/id`, value: nonExistentProperty }
+				{ path: `/statements/${ predicatePropertyId }/0/qualifiers/0/property/id`, value: nonExistentProperty }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -738,7 +738,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 			const nonExistentProperty = 'P9999999';
 			const patch = [ {
 				op: 'add',
-				path: `/statements/${predicatePropertyId}/0/references/0`,
+				path: `/statements/${ predicatePropertyId }/0/references/0`,
 				value: { parts: [ { property: { id: nonExistentProperty }, value: { type: 'novalue' } } ] }
 			} ];
 
@@ -749,7 +749,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 				response,
 				422,
 				'patch-result-referenced-resource-not-found',
-				{ path: `/statements/${predicatePropertyId}/0/references/0/parts/0/property/id`, value: nonExistentProperty }
+				{ path: `/statements/${ predicatePropertyId }/0/references/0/parts/0/property/id`, value: nonExistentProperty }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );

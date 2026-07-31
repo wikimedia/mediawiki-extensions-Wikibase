@@ -91,7 +91,7 @@ describe( newRequest().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				`/* wbsetaliases-add:1|${language} */ ${newAlias}, ${editSummary}`
+				`/* wbsetaliases-add:1|${ language } */ ${ newAlias }, ${ editSummary }`
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );

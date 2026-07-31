@@ -22,8 +22,8 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	const languageWithExistingLabel = 'en';
 
 	before( async function () {
-		testEnLabel = `English Label ${utils.uniq()}`;
-		testEnDescription = `English Description ${utils.uniq()}`;
+		testEnLabel = `English Label ${ utils.uniq() }`;
+		testEnDescription = `English Description ${ utils.uniq() }`;
 		testItemId = ( await newCreateItemRequestBuilder( {
 			labels: { [ languageWithExistingLabel ]: testEnLabel },
 			descriptions: { [ languageWithExistingLabel ]: testEnDescription }
@@ -41,7 +41,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a label', async () => {
-			const label = `neues deutsches label ${utils.uniq()}`;
+			const label = `neues deutsches label ${ utils.uniq() }`;
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[
@@ -57,11 +57,11 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'trims whitespace around the label', async () => {
-			const label = `spacey ${utils.uniq()}`;
+			const label = `spacey ${ utils.uniq() }`;
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[
-					{ op: 'add', path: '/de', value: `  ${label}  ` }
+					{ op: 'add', path: '/de', value: `  ${ label }  ` }
 				]
 			).makeRequest();
 
@@ -70,7 +70,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch labels with edit metadata', async () => {
-			const label = `new arabic label ${utils.uniq()}`;
+			const label = `new arabic label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
@@ -105,7 +105,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add a "mul" label', async () => {
-			const label = `mul-label-${utils.uniq()}`;
+			const label = `mul-label-${ utils.uniq() }`;
 			const response = await newPatchItemLabelsRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/mul', value: label } ]
@@ -119,7 +119,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	describe( '422 error response', () => {
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
 			op: 'replace',
-			path: `/${languageWithExistingLabel}`,
+			path: `/${ languageWithExistingLabel }`,
 			value: newLabel
 		} );
 
@@ -160,7 +160,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -174,7 +174,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -187,7 +187,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: '' };
+			const context = { path: `/${ languageWithExistingLabel }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -199,7 +199,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: '' };
+			const context = { path: `/${ languageWithExistingLabel }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -227,7 +227,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				testItemId,
 				[ {
 					op: 'add',
-					path: `/${invalidLanguage}`,
+					path: `/${ invalidLanguage }`,
 					value: 'potato'
 				} ]
 			)
@@ -239,14 +239,14 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 
 		it( 'patched label and description already exists in a different item', async () => {
 			const languageCode = 'en';
-			const label = `test-label-${utils.uniq()}`;
-			const description = `test-description-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
+			const description = `test-description-${ utils.uniq() }`;
 			const existingEntityResponse = await newCreateItemRequestBuilder(
 				{ labels: { [ languageCode ]: label }, descriptions: { [ languageCode ]: description } }
 			).makeRequest();
 			const existingItemId = existingEntityResponse.body.id;
 			const createEntityResponse = await newCreateItemRequestBuilder( {
-				labels: { [ languageCode ]: `label-to-be-replaced-${utils.uniq()}` },
+				labels: { [ languageCode ]: `label-to-be-replaced-${ utils.uniq() }` },
 				descriptions: { [ languageCode ]: description }
 			} ).makeRequest();
 			const itemIdToBePatched = createEntityResponse.body.id;
@@ -255,7 +255,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 				itemIdToBePatched,
 				[ {
 					op: 'replace',
-					path: `/${languageCode}`,
+					path: `/${ languageCode }`,
 					value: label
 				} ]
 			).assertValidRequest().makeRequest();

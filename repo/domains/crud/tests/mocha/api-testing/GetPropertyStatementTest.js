@@ -163,7 +163,7 @@ describe( 'GET statement', () => {
 
 		it( 'responds statement not found if property and subject prefix exist but statement does not', async () => {
 			const requestedPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
-			const statementId = `${requestedPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ requestedPropertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetPropertyStatementRequestBuilder( requestedPropertyId, statementId )
 				.assertValidRequest()
 				.makeRequest();

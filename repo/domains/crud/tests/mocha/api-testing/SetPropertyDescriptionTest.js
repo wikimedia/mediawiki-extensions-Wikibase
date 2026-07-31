@@ -19,11 +19,11 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 	let originalRevisionId;
 
 	before( async () => {
-		testEnLabel = `some-label-${utils.uniq()}`;
+		testEnLabel = `some-label-${ utils.uniq() }`;
 		const createEntityResponse = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
 			labels: { en: testEnLabel },
-			descriptions: { en: `some-description-${utils.uniq()}` }
+			descriptions: { en: `some-description-${ utils.uniq() }` }
 		} ).makeRequest();
 		testPropertyId = createEntityResponse.body.id;
 
@@ -55,7 +55,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 	describe( '20x success', () => {
 		it( 'can add a description with edit metadata omitted', async () => {
-			const description = `neue Beschreibung ${utils.uniq()}`;
+			const description = `neue Beschreibung ${ utils.uniq() }`;
 			const languageCode = 'de';
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description )
 				.assertValidRequest()
@@ -65,7 +65,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'can add a description with edit metadata provided', async () => {
-			const description = `new US English description ${utils.uniq()}`;
+			const description = `new US English description ${ utils.uniq() }`;
 			const languageCode = 'en-us';
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
@@ -97,7 +97,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'can replace a description with edit metadata omitted', async () => {
-			const description = `new description ${utils.uniq()}`;
+			const description = `new description ${ utils.uniq() }`;
 			const languageCode = 'en';
 			const response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, description )
 				.assertValidRequest()
@@ -107,7 +107,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 		} );
 
 		it( 'can replace a description with edit metadata provided', async () => {
-			const description = `new description ${utils.uniq()}`;
+			const description = `new description ${ utils.uniq() }`;
 			const languageCode = 'en';
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
@@ -140,7 +140,7 @@ describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () =>
 
 		it( 'idempotency check: can set the same description twice', async () => {
 			const languageCode = 'en';
-			const newDescription = `new English description ${utils.uniq()}`;
+			const newDescription = `new English description ${ utils.uniq() }`;
 			const comment = 'omg look, i can set a new description';
 			let response = await newSetPropertyDescriptionRequestBuilder( testPropertyId, languageCode, newDescription )
 				.withJsonBodyParam( 'comment', comment )

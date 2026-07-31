@@ -55,7 +55,7 @@ describe( 'validate PUT endpoints for property statements against OpenAPI defini
 
 			it( '404 - statement does not exist', async () => {
 				const response = await newReplaceRequestBuilder(
-					`${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
+					`${ testPropertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`,
 					newStatementWithRandomStringValue( statementPropertyId )
 				).makeRequest();
 

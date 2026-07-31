@@ -141,7 +141,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
 		editRoutes.forEach( ( { newRequestBuilder, requestInputs } ) => {
-			describe( `Protected entity page - ${newRequestBuilder().getRouteDescription()}`, () => {
+			describe( `Protected entity page - ${ newRequestBuilder().getRouteDescription() }`, () => {
 				before( async () => {
 					await changeEntityProtectionStatus( requestInputs.mainTestSubject, 'sysop' ); // protect
 				} );
@@ -151,7 +151,7 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 					await runAllJobs();
 				} );
 
-				it( `Permission denied - ${newRequestBuilder().getRouteDescription()}`, async function () {
+				it( `Permission denied - ${ newRequestBuilder().getRouteDescription() }`, async function () {
 					// this test often hits a race condition where this request is made before the entity is protected
 					this.retries( 3 );
 

@@ -346,7 +346,7 @@ describe( 'PUT statement tests', () => {
 
 		it( 'responds 404 item-not-found for nonexistent item', async () => {
 			const itemId = 'Q9999999';
-			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ itemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const statement = entityHelper.newStatementWithRandomStringValue( predicatePropertyId );
 			const response = await newReplaceItemStatementRequestBuilder( itemId, statementId )
 				.withJsonBodyParam( 'statement', statement )

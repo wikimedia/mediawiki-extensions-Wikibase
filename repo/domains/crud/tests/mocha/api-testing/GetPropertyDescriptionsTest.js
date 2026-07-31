@@ -17,10 +17,10 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 	before( async () => {
 		const testProperty = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { en: `string-property-${utils.uniq()}` },
+			labels: { en: `string-property-${ utils.uniq() }` },
 			descriptions: {
-				en: `string-property-description-${utils.uniq()}`,
-				de: `string-Eigenschaft-Beschreibung-${utils.uniq()}`
+				en: `string-property-description-${ utils.uniq() }`,
+				de: `string-Eigenschaft-Beschreibung-${ utils.uniq() }`
 			}
 		} ).makeRequest();
 		propertyId = testProperty.body.id;
@@ -37,7 +37,7 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 			response.body,
 			propertyDescriptions
 		);
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 

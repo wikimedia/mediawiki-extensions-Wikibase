@@ -8,7 +8,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeUnique( text ) {
-	return `${text}-${utils.uniq()}`;
+	return `${ text }-${ utils.uniq() }`;
 }
 
 describe( newSetPropertyDescriptionRequestBuilder().getRouteDescription(), () => {

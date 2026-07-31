@@ -11,7 +11,7 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let itemId;
-	const itemArLabel = `بطاطا-${utils.uniq()}`;
+	const itemArLabel = `بطاطا-${ utils.uniq() }`;
 	const fallbackLanguageWithExistingLabel = 'ar';
 
 	async function makeRequestWithMulHeader( requestBuilder ) {
@@ -22,7 +22,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 
 	before( async () => {
 		itemId = ( await makeRequestWithMulHeader( newCreateItemRequestBuilder(
-			{ labels: { [ fallbackLanguageWithExistingLabel ]: itemArLabel, mul: `mul-label-${utils.uniq()}` } }
+			{ labels: { [ fallbackLanguageWithExistingLabel ]: itemArLabel, mul: `mul-label-${ utils.uniq() }` } }
 		) ) ).body.id;
 	} );
 
@@ -35,7 +35,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, itemArLabel );
-		assert.strictEqual( response.header.etag, `"${testItemCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testItemCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testItemCreationMetadata.timestamp );
 	} );
 
@@ -45,7 +45,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 307 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${itemId}/labels/ar` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ itemId }/labels/ar` )
 		);
 	} );
 
@@ -55,7 +55,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v1/entities/items/${itemId}/labels/mul`
+			`rest.php/wikibase/v1/entities/items/${ itemId }/labels/mul`
 		) );
 	} );
 
@@ -70,7 +70,7 @@ describe( newGetItemLabelWithFallbackRequestBuilder().getRouteDescription(), () 
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/labels_with_language_fallback/en` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/labels_with_language_fallback/en` )
 		);
 	} );
 

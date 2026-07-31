@@ -8,7 +8,7 @@ const { newGetItemRequestBuilder, newCreateItemRequestBuilder } = require( '../h
 async function createItemWithAllFields() {
 	const statementPropertyId = await entityHelper.getStringPropertyId();
 	const itemId = ( await newCreateItemRequestBuilder( {
-		labels: { en: `non-empty-item-${utils.uniq()}` },
+		labels: { en: `non-empty-item-${ utils.uniq() }` },
 		descriptions: { en: 'non-empty-item-description' },
 		aliases: { en: [ 'non-empty-item-alias' ] },
 		statements: {
@@ -73,7 +73,7 @@ describe( newGetItemRequestBuilder().getRouteDescription(), () => {
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetItemRequestBuilder( itemId )
-			.withHeader( 'If-None-Match', `"${latestRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${ latestRevisionId }"` )
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );

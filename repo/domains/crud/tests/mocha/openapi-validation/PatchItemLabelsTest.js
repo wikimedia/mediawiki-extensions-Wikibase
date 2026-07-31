@@ -15,14 +15,14 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	function makeReplaceExistingLabelOp() {
 		return {
 			op: 'replace',
-			path: `/${langWithExistingLabel}`,
-			value: `test-label-${utils.uniq()}`
+			path: `/${ langWithExistingLabel }`,
+			value: `test-label-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
-			labels: { [ langWithExistingLabel ]: `test-label-${utils.uniq()}` }
+			labels: { [ langWithExistingLabel ]: `test-label-${ utils.uniq() }` }
 		} ).makeRequest();
 
 		itemId = createItemResponse.body.id;
@@ -77,7 +77,7 @@ describe( newPatchItemLabelsRequestBuilder().getRouteDescription(), () => {
 	it( '422 - empty label', async () => {
 		const response = await newPatchItemLabelsRequestBuilder(
 			itemId,
-			[ { op: 'replace', path: `/${langWithExistingLabel}`, value: '' } ]
+			[ { op: 'replace', path: `/${ langWithExistingLabel }`, value: '' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 422 );
 		expect( response ).to.satisfyApiSchema;

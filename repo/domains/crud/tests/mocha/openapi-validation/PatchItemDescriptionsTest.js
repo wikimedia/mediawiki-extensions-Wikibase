@@ -15,14 +15,14 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	function makeReplaceExistingDescriptionOp() {
 		return {
 			op: 'replace',
-			path: `/${langWithExistingDescription}`,
-			value: `test-description-${utils.uniq()}`
+			path: `/${ langWithExistingDescription }`,
+			value: `test-description-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
-			descriptions: { [ langWithExistingDescription ]: `test-description-${utils.uniq()}` }
+			descriptions: { [ langWithExistingDescription ]: `test-description-${ utils.uniq() }` }
 		} ).makeRequest();
 		itemId = createItemResponse.body.id;
 	} );
@@ -81,7 +81,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	it( '422 - empty description', async () => {
 		const response = await newPatchItemDescriptionsRequestBuilder(
 			itemId,
-			[ { op: 'replace', path: `/${langWithExistingDescription}`, value: '' } ]
+			[ { op: 'replace', path: `/${ langWithExistingDescription }`, value: '' } ]
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );

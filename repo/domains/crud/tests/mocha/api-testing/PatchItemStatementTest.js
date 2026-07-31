@@ -66,7 +66,7 @@ describe( 'PATCH statement tests', () => {
 					const response = await newReplaceStatementRequestBuilder(
 						testStatementId, testStatement
 					).makeRequest();
-					const errMsg = `Cleanup failed with error code: '${response.body.code}'`;
+					const errMsg = `Cleanup failed with error code: '${ response.body.code }'`;
 					expect( response ).to.have.status( 200, errMsg );
 					assert.deepStrictEqual( response.body, testStatement );
 
@@ -94,7 +94,7 @@ describe( 'PATCH statement tests', () => {
 					const user = await getOrCreateBotUser();
 					const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 					const editSummary = 'i made a patch';
-					const expectedValue = `${user.username} was here`;
+					const expectedValue = `${ user.username } was here`;
 					const response = await newPatchRequestBuilder( testStatementId, [
 						{
 							op: 'replace',
@@ -158,7 +158,7 @@ describe( 'PATCH statement tests', () => {
 
 			describe( '404 statement not found', () => {
 				it( 'responds 404 statement not found for nonexistent statement', async () => {
-					const statementId = `${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+					const statementId = `${ testItemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 					const response = await newPatchRequestBuilder( statementId, [] )
 						.assertValidRequest()
 						.makeRequest();
@@ -293,7 +293,7 @@ describe( 'PATCH statement tests', () => {
 					const patch = [ {
 						op: 'replace',
 						path: '/id',
-						value: `${testItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`
+						value: `${ testItemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`
 					} ];
 					const response = await newPatchRequestBuilder( testStatementId, patch )
 						.assertValidRequest().makeRequest();

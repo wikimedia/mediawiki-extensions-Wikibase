@@ -15,7 +15,7 @@ describe( 'Route Coverage Tests', () => {
 	};
 
 	function routeToString( route ) {
-		return `${route.method} ${route.path}`;
+		return `${ route.method } ${ route.path }`;
 	}
 
 	function getFlattenedRoutes( moduleInfo ) {
@@ -75,7 +75,7 @@ describe( 'Route Coverage Tests', () => {
 
 		assert.ok(
 			!missingRoutes.length > 0,
-			`Found ${missingRoutes.length} production routes not covered in happy path builders:\n\n` +
+			`Found ${ missingRoutes.length } production routes not covered in happy path builders:\n\n` +
 			missingRoutes.join( '\n' )
 		);
 	} );

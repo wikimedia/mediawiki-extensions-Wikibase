@@ -18,7 +18,7 @@ function assertResourceTooLargeResponse( response, maxSizeInKb ) {
 	);
 	assert.strictEqual(
 		response.body.message,
-		`Edit resulted in a resource that exceeds the size limit of ${maxSizeInKb.toString()} kB`
+		`Edit resulted in a resource that exceeds the size limit of ${ maxSizeInKb.toString() } kB`
 	);
 }
 
@@ -46,7 +46,7 @@ describe( 'resource too large', () => {
 	it( 'resource (item) is too large', async () => {
 		const response = await newPatchItemRequestBuilder(
 			itemId,
-			[ { op: 'add', path: `/statements/${propertyId}`, value: fiveThousandStatements } ]
+			[ { op: 'add', path: `/statements/${ propertyId }`, value: fiveThousandStatements } ]
 		)
 			.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
 			.assertValidRequest()
@@ -58,7 +58,7 @@ describe( 'resource too large', () => {
 	it( 'resource (property) is too large', async () => {
 		const response = await newPatchPropertyRequestBuilder(
 			propertyId,
-			[ { op: 'add', path: `/statements/${propertyId}`, value: fiveThousandStatements } ]
+			[ { op: 'add', path: `/statements/${ propertyId }`, value: fiveThousandStatements } ]
 		)
 			.withConfigOverride( 'wgWBRepoSettings', { maxSerializedEntitySize: maxSizeInKb } )
 			.assertValidRequest()

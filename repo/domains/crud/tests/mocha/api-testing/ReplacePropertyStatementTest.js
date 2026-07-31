@@ -406,7 +406,7 @@ describe( 'PUT statement tests', () => {
 
 		it( 'responds 404 property-not-found for nonexistent property', async () => {
 			const propertyId = 'P9999999';
-			const statementId = `${propertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ propertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newReplacePropertyStatementRequestBuilder( propertyId, statementId )
 				.withJsonBodyParam( 'statement', entityHelper.newStatementWithRandomStringValue(
 					testStatementPropertyId

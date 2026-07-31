@@ -178,7 +178,7 @@ describe( 'DELETE statement', () => {
 
 		it( 'responds 404 item-not-found for nonexistent item', async () => {
 			const itemId = 'Q999999';
-			const statementId = `${itemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ itemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newRemoveItemStatementRequestBuilder( itemId, statementId )
 				.assertValidRequest()
 				.makeRequest();

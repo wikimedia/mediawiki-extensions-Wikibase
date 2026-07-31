@@ -21,7 +21,7 @@ describe( 'Spam blacklist', () => {
 
 		testPropertyId = ( await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { en: `some-label-${utils.uniq()}` }
+			labels: { en: `some-label-${ utils.uniq() }` }
 		} ).makeRequest() ).body.id;
 
 		propertyWithUrlDataType = ( await newCreatePropertyRequestBuilder( { data_type: 'url' } ).makeRequest() ).body.id;

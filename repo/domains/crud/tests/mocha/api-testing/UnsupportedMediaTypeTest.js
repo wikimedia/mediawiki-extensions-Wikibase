@@ -20,7 +20,7 @@ describeWithTestData(
 			getPropertyCreateRequest( propertyRequestInputs )
 		];
 		describeEachRouteWithReset( requestsToTest, ( newRequestBuilder ) => {
-			it( `${newRequestBuilder().getRouteDescription()} responds 415 for an unsupported media type`, async () => {
+			it( `${ newRequestBuilder().getRouteDescription() } responds 415 for an unsupported media type`, async () => {
 				const response = await newRequestBuilder()
 					// The following line is here to ensure a non-empty body for DELETE requests.
 					.withJsonBodyParam( 'comment', '...' )

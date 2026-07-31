@@ -2,6 +2,6 @@
 
 module.exports = {
 	makeEtag( ...revisionIds ) {
-		return revisionIds.map( ( revId ) => `"${revId}"` ).join( ',' );
+		return revisionIds.map( ( revId ) => `"${ revId }"` ).join( ',' );
 	}
 };

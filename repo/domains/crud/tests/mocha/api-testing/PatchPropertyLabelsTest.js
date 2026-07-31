@@ -31,7 +31,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	before( async function () {
 		testPropertyId = ( await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { [ languageWithExistingLabel ]: `some-label-${utils.uniq()}` }
+			labels: { [ languageWithExistingLabel ]: `some-label-${ utils.uniq() }` }
 		} ).makeRequest() ).body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -46,7 +46,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can add a label', async () => {
-			const label = `neues deutsches label ${utils.uniq()}`;
+			const label = `neues deutsches label ${ utils.uniq() }`;
 			const response = await newPatchPropertyLabelsRequestBuilder(
 				testPropertyId,
 				[
@@ -59,7 +59,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch labels with edit metadata', async () => {
-			const label = `new arabic label ${utils.uniq()}`;
+			const label = `new arabic label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
@@ -115,7 +115,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				[
 					{
 						op: 'replace',
-						path: `/${languageWithExistingLabel}`,
+						path: `/${ languageWithExistingLabel }`,
 						value: utils.uniq()
 					}
 				]
@@ -139,7 +139,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( '"from" field target does not exist', async () => {
-			const operation = { op: 'copy', from: '/path/does/not/exist', path: `/${languageWithExistingLabel}` };
+			const operation = { op: 'copy', from: '/path/does/not/exist', path: `/${ languageWithExistingLabel }` };
 
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
 				.assertValidRequest().makeRequest();
@@ -150,7 +150,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'patch test condition failed', async () => {
-			const operation = { op: 'test', path: `/${languageWithExistingLabel}`, value: 'instance of' };
+			const operation = { op: 'test', path: `/${ languageWithExistingLabel }`, value: 'instance of' };
 			const enLabel = ( await newGetPropertyLabelRequestBuilder( testPropertyId, 'en' ).makeRequest() ).body;
 
 			const response = await newPatchPropertyLabelsRequestBuilder( testPropertyId, [ operation ] )
@@ -164,7 +164,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	describe( '422 error response', () => {
 		const makeReplaceExistingLabelPatchOp = ( newLabel ) => ( {
 			op: 'replace',
-			path: `/${languageWithExistingLabel}`,
+			path: `/${ languageWithExistingLabel }`,
 			value: newLabel
 		} );
 
@@ -205,7 +205,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -219,7 +219,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: invalidLabel };
+			const context = { path: `/${ languageWithExistingLabel }`, value: invalidLabel };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -232,7 +232,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/${languageWithExistingLabel}`, value: '' };
+			const context = { path: `/${ languageWithExistingLabel }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -260,7 +260,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				testPropertyId,
 				[ {
 					op: 'add',
-					path: `/${invalidLanguage}`,
+					path: `/${ invalidLanguage }`,
 					value: 'potato'
 				} ]
 			)
@@ -272,11 +272,11 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 		it( 'label-description-same-value', async () => {
 			const language = languageWithExistingLabel;
-			const descriptionText = `description-text-${utils.uniq()}`;
+			const descriptionText = `description-text-${ utils.uniq() }`;
 
 			const createEntityResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'string',
-				labels: { [ language ]: `label-text-${utils.uniq()}` },
+				labels: { [ language ]: `label-text-${ utils.uniq() }` },
 				descriptions: { [ language ]: descriptionText }
 			} ).makeRequest();
 			testPropertyId = createEntityResponse.body.id;
@@ -298,7 +298,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'property with same label already exists', async () => {
-			const label = `test-label-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
 
 			const existingEntityResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'string',
@@ -308,7 +308,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 
 			const createEntityResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'string',
-				labels: { [ languageWithExistingLabel ]: `label-to-be-replaced-${utils.uniq()}` }
+				labels: { [ languageWithExistingLabel ]: `label-to-be-replaced-${ utils.uniq() }` }
 			} ).makeRequest();
 			testPropertyId = createEntityResponse.body.id;
 
@@ -316,7 +316,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 				testPropertyId,
 				[ {
 					op: 'replace',
-					path: `/${languageWithExistingLabel}`,
+					path: `/${ languageWithExistingLabel }`,
 					value: label
 				} ]
 			)

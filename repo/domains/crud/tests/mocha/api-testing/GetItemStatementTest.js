@@ -186,7 +186,7 @@ describe( 'GET statement', () => {
 
 		it( 'responds statement not found if item and subject prefix exist but statement does not', async () => {
 			const requestedItemId = await entityHelper.getItemId();
-			const statementId = `${requestedItemId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ requestedItemId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newGetItemStatementRequestBuilder( requestedItemId, statementId )
 				.assertValidRequest()
 				.makeRequest();

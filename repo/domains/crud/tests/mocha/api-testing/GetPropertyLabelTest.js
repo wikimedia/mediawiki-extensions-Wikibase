@@ -11,7 +11,7 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
-	const propertyEnLabel = `en-label-${utils.uniq()}`;
+	const propertyEnLabel = `en-label-${ utils.uniq() }`;
 
 	before( async () => {
 		const testProperty = await newCreatePropertyRequestBuilder(
@@ -27,7 +27,7 @@ describe( newGetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 		assert.strictEqual( response.body, propertyEnLabel );
 
 		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 

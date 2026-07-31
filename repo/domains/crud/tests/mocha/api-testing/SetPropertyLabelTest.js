@@ -36,7 +36,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 	before( async () => {
 		const createEntityResponse = await newCreatePropertyRequestBuilder( {
-			data_type: 'string', labels: { en: `english label ${utils.uniq()}` } }
+			data_type: 'string', labels: { en: `english label ${ utils.uniq() }` } }
 		).makeRequest();
 		testPropertyId = createEntityResponse.body.id;
 
@@ -53,7 +53,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 	describe( '20x success response ', () => {
 		it( 'can add a label with edit metadata omitted', async () => {
 			const languageCode = 'de';
-			const newLabel = `neues deutsches Label ${utils.uniq()}`;
+			const newLabel = `neues deutsches Label ${ utils.uniq() }`;
 			const comment = 'omg look, i added a new label';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, newLabel )
 				.withJsonBodyParam( 'comment', comment )
@@ -77,7 +77,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can add a label with edit metadata provided', async () => {
 			const languageCode = 'en-us';
-			const newLabel = `new us-english label ${utils.uniq()}`;
+			const newLabel = `new us-english label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
@@ -109,7 +109,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can replace a label with edit metadata omitted', async () => {
 			const languageCode = 'en';
-			const newLabel = `new label ${utils.uniq()}`;
+			const newLabel = `new label ${ utils.uniq() }`;
 			const comment = 'omg look, i replaced a new label';
 			const response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, newLabel )
 				.withJsonBodyParam( 'comment', comment )
@@ -133,7 +133,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can replace a label with edit metadata provided', async () => {
 			const languageCode = 'en';
-			const newLabel = `new english label ${utils.uniq()}`;
+			const newLabel = `new english label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
@@ -165,7 +165,7 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'idempotency check: can set the same label twice', async () => {
 			const languageCode = 'en';
-			const newLabel = `new English Label ${utils.uniq()}`;
+			const newLabel = `new English Label ${ utils.uniq() }`;
 			const comment = 'omg look, i can set a new label';
 			let response = await newSetPropertyLabelRequestBuilder( testPropertyId, languageCode, newLabel )
 				.withJsonBodyParam( 'comment', comment )
@@ -261,13 +261,13 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'property with same label already exists', async () => {
 			const languageCode = 'en';
-			const label = `test-label-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
 			const existingEntityResponse = await newCreatePropertyRequestBuilder(
 				{ data_type: 'string', labels: { [ languageCode ]: label } }
 			).makeRequest();
 			const existingPropertyId = existingEntityResponse.body.id;
 			const createEntityResponse = await newCreatePropertyRequestBuilder(
-				{ data_type: 'string', labels: { [ languageCode ]: `label-to-be-replaced-${utils.uniq()}` } }
+				{ data_type: 'string', labels: { [ languageCode ]: `label-to-be-replaced-${ utils.uniq() }` } }
 			).makeRequest();
 			testPropertyId = createEntityResponse.body.id;
 
@@ -287,10 +287,10 @@ describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'label equals description', async () => {
 			const language = 'en';
-			const description = `some-description-${utils.uniq()}`;
+			const description = `some-description-${ utils.uniq() }`;
 			const createEntityResponse = await newCreatePropertyRequestBuilder( {
 				data_type: 'string',
-				labels: { [ language ]: `some-label-${utils.uniq()}` },
+				labels: { [ language ]: `some-label-${ utils.uniq() }` },
 				descriptions: { [ language ]: description }
 			} ).makeRequest();
 			testPropertyId = createEntityResponse.body.id;

@@ -15,14 +15,14 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	function makeReplaceExistingLabelOp() {
 		return {
 			op: 'replace',
-			path: `/labels/${langWithExistingLabel}`,
-			value: `test-label-${utils.uniq()}`
+			path: `/labels/${ langWithExistingLabel }`,
+			value: `test-label-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
-			labels: { [ langWithExistingLabel ]: `test-label-${utils.uniq()}` }
+			labels: { [ langWithExistingLabel ]: `test-label-${ utils.uniq() }` }
 		} ).makeRequest();
 		itemId = createItemResponse.body.id;
 	} );
@@ -57,7 +57,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 	it( '409 - patch test failed', async () => {
 		const response = await newPatchItemRequestBuilder(
 			itemId,
-			[ { op: 'test', path: `/labels/${langWithExistingLabel}`, value: 'unexpected label!' } ]
+			[ { op: 'test', path: `/labels/${ langWithExistingLabel }`, value: 'unexpected label!' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 409 );
 		expect( response ).to.satisfyApiSchema;

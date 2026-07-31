@@ -27,7 +27,7 @@ describe( newGetPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, { en: [ 'en-alias1', 'en-alias2' ] } );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 

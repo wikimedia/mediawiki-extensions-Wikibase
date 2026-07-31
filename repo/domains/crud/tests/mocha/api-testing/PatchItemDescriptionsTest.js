@@ -23,8 +23,8 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	const testLanguage = 'en';
 
 	before( async function () {
-		testLabel = `English Label ${utils.uniq()}`;
-		testDescription = `English Description ${utils.uniq()}`;
+		testLabel = `English Label ${ utils.uniq() }`;
+		testDescription = `English Description ${ utils.uniq() }`;
 		testItemId = ( await newCreateItemRequestBuilder(
 			{ labels: { [ testLanguage ]: testLabel }, descriptions: { [ testLanguage ]: testDescription } }
 		).makeRequest() ).body.id;
@@ -41,7 +41,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 
 	describe( '200 OK', () => {
 		it( 'can add a description', async () => {
-			const description = `Neues Deutsches Beschreibung ${utils.uniq()}`;
+			const description = `Neues Deutsches Beschreibung ${ utils.uniq() }`;
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				testItemId,
 				[ { op: 'add', path: '/de', value: description } ]
@@ -55,10 +55,10 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		it( 'trims whitespace around the description', async () => {
-			const description = `spacey ${utils.uniq()}`;
+			const description = `spacey ${ utils.uniq() }`;
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				testItemId,
-				[ { op: 'add', path: '/de', value: ` \t${description}  ` } ]
+				[ { op: 'add', path: '/de', value: ` \t${ description }  ` } ]
 			).makeRequest();
 
 			expect( response ).to.have.status( 200 );
@@ -66,7 +66,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		it( 'can patch descriptions with edit metadata', async () => {
-			const description = `${utils.uniq()} وصف عربي جديد`;
+			const description = `${ utils.uniq() } وصف عربي جديد`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'I made a patch';
@@ -180,7 +180,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 	describe( '422 error response', () => {
 		const makeReplaceExistingDescriptionPatchOperation = ( newDescription ) => ( {
 			op: 'replace',
-			path: `/${testLanguage}`,
+			path: `/${ testLanguage }`,
 			value: newDescription
 		} );
 
@@ -215,7 +215,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${testLanguage}`, value: invalidDescription };
+			const context = { path: `/${ testLanguage }`, value: invalidDescription };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -227,7 +227,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${testLanguage}`, value: invalidDescription };
+			const context = { path: `/${ testLanguage }`, value: invalidDescription };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -238,7 +238,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${testLanguage}`, value: '' };
+			const context = { path: `/${ testLanguage }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -248,7 +248,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${testLanguage}`, value: '' };
+			const context = { path: `/${ testLanguage }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -267,10 +267,10 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		[ 'invalid-language-code', 'mul' ].forEach( ( invalidLanguage ) => {
-			it( `invalid language code: "${invalidLanguage}"`, async () => {
+			it( `invalid language code: "${ invalidLanguage }"`, async () => {
 				const response = await newPatchItemDescriptionsRequestBuilder(
 					testItemId,
-					[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
+					[ { op: 'add', path: `/${ invalidLanguage }`, value: 'potato' } ]
 				).withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } ).assertValidRequest().makeRequest();
 
 				assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );
@@ -278,20 +278,20 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 		} );
 
 		it( 'patched label and description already exists in a different item', async () => {
-			const label = `test-label-${utils.uniq()}`;
-			const description = `test-description-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
+			const description = `test-description-${ utils.uniq() }`;
 			const existingItemId = ( await newCreateItemRequestBuilder( {
 				labels: { [ testLanguage ]: label },
 				descriptions: { [ testLanguage ]: description }
 			} ).makeRequest() ).body.id;
 			const itemIdToBePatched = ( await newCreateItemRequestBuilder( {
 				labels: { [ testLanguage ]: label },
-				descriptions: { [ testLanguage ]: `description-to-be-replaced-${utils.uniq()}` }
+				descriptions: { [ testLanguage ]: `description-to-be-replaced-${ utils.uniq() }` }
 			} ).makeRequest() ).body.id;
 
 			const response = await newPatchItemDescriptionsRequestBuilder(
 				itemIdToBePatched,
-				[ { op: 'replace', path: `/${testLanguage}`, value: description } ]
+				[ { op: 'replace', path: `/${ testLanguage }`, value: description } ]
 			).assertValidRequest().makeRequest();
 
 			const context = {

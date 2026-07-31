@@ -13,7 +13,7 @@ const {
 describe( 'Too Many Requests', () => {
 	before( async () => {
 		// ensure one temp user is created
-		await newCreateItemRequestBuilder( { labels: { en: `en-label-${utils.uniq()}` } } )
+		await newCreateItemRequestBuilder( { labels: { en: `en-label-${ utils.uniq() }` } } )
 			.withConfigOverride( 'wgAutoCreateTempUser', { enabled: true } )
 			.withConfigOverride( 'wgTempAccountCreationThrottle', [ { count: 1, seconds: 86400 } ] )
 			.makeRequest();
@@ -25,7 +25,7 @@ describe( 'Too Many Requests', () => {
 			...getPropertyEditRequests( propertyRequestInputs ),
 			getItemCreateRequest( itemRequestInputs )
 		].forEach( ( { newRequestBuilder } ) => {
-			it( `${newRequestBuilder().getRouteDescription()} responds with a valid 429 response`, async () => {
+			it( `${ newRequestBuilder().getRouteDescription() } responds with a valid 429 response`, async () => {
 				const response = await newRequestBuilder()
 					// -1 means CACHE_ANYTHING. This is needed because the throttler relies on the cache.
 					.withConfigOverride( 'wgMainCacheType', -1 )

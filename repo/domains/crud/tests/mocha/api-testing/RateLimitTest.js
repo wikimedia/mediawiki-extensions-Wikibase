@@ -16,7 +16,7 @@ describeWithTestData( 'Rate Limiting', ( itemRequestInputs, propertyRequestInput
 		getItemCreateRequest( itemRequestInputs ),
 		getPropertyCreateRequest( propertyRequestInputs )
 	].forEach( ( { newRequestBuilder } ) => {
-		it( `${newRequestBuilder().getRouteDescription()} responds 429 when the edit rate limit is reached`, async () => {
+		it( `${ newRequestBuilder().getRouteDescription() } responds 429 when the edit rate limit is reached`, async () => {
 			const response = await newRequestBuilder()
 				.withConfigOverride( 'wgRateLimits', { edit: { anon: [ 0, 60 ] } } )
 				.makeRequest();

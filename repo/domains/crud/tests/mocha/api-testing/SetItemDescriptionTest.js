@@ -19,10 +19,10 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 	let originalRevisionId;
 
 	before( async () => {
-		testEnLabel = `some-label-${utils.uniq()}`;
+		testEnLabel = `some-label-${ utils.uniq() }`;
 		const createEntityResponse = await newCreateItemRequestBuilder( {
 			labels: { en: testEnLabel },
-			descriptions: { en: `some-description-${utils.uniq()}` }
+			descriptions: { en: `some-description-${ utils.uniq() }` }
 		} ).makeRequest();
 		testItemId = createEntityResponse.body.id;
 
@@ -54,7 +54,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 	describe( '20x success', () => {
 		it( 'can add a description with edit metadata omitted', async () => {
-			const description = `neue Beschreibung ${utils.uniq()}`;
+			const description = `neue Beschreibung ${ utils.uniq() }`;
 			const languageCode = 'de';
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, description )
 				.assertValidRequest()
@@ -64,7 +64,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can add a description with edit metadata provided', async () => {
-			const description = `new US English description ${utils.uniq()}`;
+			const description = `new US English description ${ utils.uniq() }`;
 			const languageCode = 'en-us';
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
@@ -96,7 +96,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can replace a description with edit metadata omitted', async () => {
-			const description = `new description ${utils.uniq()}`;
+			const description = `new description ${ utils.uniq() }`;
 			const languageCode = 'en';
 			const response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, description )
 				.assertValidRequest()
@@ -106,7 +106,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can replace a description with edit metadata provided', async () => {
-			const description = `new description ${utils.uniq()}`;
+			const description = `new description ${ utils.uniq() }`;
 			const languageCode = 'en';
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
@@ -139,7 +139,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 		it( 'idempotency check: can set the same description twice', async () => {
 			const languageCode = 'en';
-			const newDescription = `new English description ${utils.uniq()}`;
+			const newDescription = `new English description ${ utils.uniq() }`;
 			const comment = 'omg look, i can set a new description';
 			let response = await newSetItemDescriptionRequestBuilder( testItemId, languageCode, newDescription )
 				.withJsonBodyParam( 'comment', comment )
@@ -174,7 +174,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		[ 'xyz', 'mul' ].forEach( ( invalidLanguage ) => {
-			it( `invalid language code: "${invalidLanguage}"`, async () => {
+			it( `invalid language code: "${ invalidLanguage }"`, async () => {
 				const response = await newSetItemDescriptionRequestBuilder( testItemId, invalidLanguage, 'description' )
 					.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 					.assertValidRequest()
@@ -244,7 +244,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 
 		it( 'item with same label and description already exists', async () => {
 			const language = 'en';
-			const description = `some-description-${utils.uniq()}`;
+			const description = `some-description-${ utils.uniq() }`;
 			const createEntityResponse = await newCreateItemRequestBuilder( {
 				labels: { [ language ]: testEnLabel },
 				descriptions: { [ language ]: description }
@@ -294,7 +294,7 @@ describe( newSetItemDescriptionRequestBuilder().getRouteDescription(), () => {
 		it( 'item is a redirect and item label+description collision', async () => {
 			const redirectTarget = testItemId;
 			const redirectSource = await entityHelper.createRedirectForItem( redirectTarget );
-			const description = `some-description-${utils.uniq()}`;
+			const description = `some-description-${ utils.uniq() }`;
 			await newCreateItemRequestBuilder(
 				{ labels: { en: testEnLabel }, descriptions: { en: description } }
 			).makeRequest();

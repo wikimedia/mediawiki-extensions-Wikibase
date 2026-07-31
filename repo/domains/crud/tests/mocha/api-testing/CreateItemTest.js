@@ -26,7 +26,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const response = await newCreateItemRequestBuilder( {} ).assertValidRequest().makeRequest();
 
 			expect( response ).to.have.status( 201 );
-			assert.header( response, 'Location', `${response.request.url}/${response.body.id}` );
+			assert.header( response, 'Location', `${ response.request.url }/${ response.body.id }` );
 
 			const editMetadata = await entityHelper.getLatestEditMetadata( response.body.id );
 			assert.header( response, 'etag', makeEtag( editMetadata.revid ) );
@@ -34,8 +34,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can create an item with all fields', async () => {
-			const labels = { en: `potato ${utils.uniq()}` };
-			const descriptions = { en: `root vegetable ${utils.uniq()}` };
+			const labels = { en: `potato ${ utils.uniq() }` };
+			const descriptions = { en: `root vegetable ${ utils.uniq() }` };
 			const aliases = { en: [ 'spud', 'tater', 'spud' ] };
 
 			const statementPropertyId = ( await entityHelper.createUniqueStringProperty() ).body.id;
@@ -71,7 +71,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'omg look i made an edit';
 
-			const response = await newCreateItemRequestBuilder( { labels: { en: `test ${utils.uniq()}` } } )
+			const response = await newCreateItemRequestBuilder( { labels: { en: `test ${ utils.uniq() }` } } )
 				.withJsonBodyParam( 'tags', [ tag ] )
 				.withJsonBodyParam( 'bot', true )
 				.withJsonBodyParam( 'comment', editSummary )
@@ -85,7 +85,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 			assert.property( editMetadata, 'bot' );
 			assert.strictEqual(
 				editMetadata.comment,
-				`/* wbeditentity-create-item:0| */ ${editSummary}`
+				`/* wbeditentity-create-item:0| */ ${ editSummary }`
 			);
 			assert.strictEqual( editMetadata.user, user.username );
 		} );
@@ -119,9 +119,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			const response = await newCreateItemRequestBuilder( invalidItem ).assertInvalidRequest().makeRequest();
 
-			const context = { path: `/item/${fieldWithInvalidValue}` };
+			const context = { path: `/item/${ fieldWithInvalidValue }` };
 			assertValidError( response, 400, 'invalid-value', context );
-			assert.strictEqual( response.body.message, `Invalid value at '/item/${fieldWithInvalidValue}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '/item/${ fieldWithInvalidValue }'` );
 		} );
 
 		it( 'invalid labels field', async () => {
@@ -280,8 +280,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 		it( 'item with same label and description already exists', async () => {
 			const languageCode = 'en';
-			const label = `test-label-${utils.uniq()}`;
-			const description = `test-description-${utils.uniq()}`;
+			const label = `test-label-${ utils.uniq() }`;
+			const description = `test-description-${ utils.uniq() }`;
 
 			const existingEntityResponse = await newCreateItemRequestBuilder( {
 				labels: { [ languageCode ]: label },
@@ -358,7 +358,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 
 			const path = '/item/aliases/en';
 			assertValidError( response, 400, 'invalid-value', { path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'alias too long', async () => {
@@ -419,7 +419,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
 			} ).assertInvalidRequest().makeRequest();
 
-			const path = `/item/statements/${predicatePropertyId}/0`;
+			const path = `/item/statements/${ predicatePropertyId }/0`;
 
 			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.include( response.body.message, path );
@@ -436,7 +436,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				statements: { [ predicatePropertyId ]: [ invalidStatement ] }
 			} ).assertInvalidRequest().makeRequest();
 
-			const path = `/item/statements/${predicatePropertyId}/0/value/type`;
+			const path = `/item/statements/${ predicatePropertyId }/0/value/type`;
 			assertValidError( response, 400, 'invalid-value', { path } );
 			assert.include( response.body.message, path );
 		} );
@@ -464,7 +464,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.assertValidRequest()
 				.makeRequest();
 
-			const context = { path: `/item/statements/${predicatePropertyId}/0/value`, field: 'content' };
+			const context = { path: `/item/statements/${ predicatePropertyId }/0/value`, field: 'content' };
 			assertValidError( response, 400, 'missing-field', context );
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
@@ -485,7 +485,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				400,
 				'statement-group-property-id-mismatch',
 				{
-					path: `/item/statements/${propertyIdKey}/0/property/id`,
+					path: `/item/statements/${ propertyIdKey }/0/property/id`,
 					statement_group_property_id: propertyIdKey,
 					statement_property_id: predicatePropertyId
 				}
@@ -505,7 +505,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'referenced-resource-not-found',
-				{ path: `/item/statements/${nonExistentProperty}/0/property/id` }
+				{ path: `/item/statements/${ nonExistentProperty }/0/property/id` }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -527,7 +527,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'referenced-resource-not-found',
-				{ path: `/item/statements/${predicatePropertyId}/0/qualifiers/0/property/id` }
+				{ path: `/item/statements/${ predicatePropertyId }/0/qualifiers/0/property/id` }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -550,7 +550,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'referenced-resource-not-found',
-				{ path: `/item/statements/${predicatePropertyId}/0/references/0/parts/0/property/id` }
+				{ path: `/item/statements/${ predicatePropertyId }/0/references/0/parts/0/property/id` }
 			);
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );
@@ -565,7 +565,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.makeRequest();
 
 			assertValidError( response, 400, 'invalid-key', { path: '/item/sitelinks', key: invalidSiteId } );
-			assert.strictEqual( response.body.message, `Invalid key '${invalidSiteId}' in '/item/sitelinks'` );
+			assert.strictEqual( response.body.message, `Invalid key '${ invalidSiteId }' in '/item/sitelinks'` );
 		} );
 
 		it( 'sitelinks not an object', async () => {
@@ -585,8 +585,8 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: 'not an object' }
 			} ).makeRequest();
 
-			assertValidError( response, 400, 'invalid-value', { path: `/item/sitelinks/${localWikiId}` } );
-			assert.strictEqual( response.body.message, `Invalid value at '/item/sitelinks/${localWikiId}'` );
+			assertValidError( response, 400, 'invalid-value', { path: `/item/sitelinks/${ localWikiId }` } );
+			assert.strictEqual( response.body.message, `Invalid value at '/item/sitelinks/${ localWikiId }'` );
 		} );
 
 		it( 'title is empty', async () => {
@@ -594,7 +594,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: '' } }
 			} ).makeRequest();
-			const path = `/item/sitelinks/${localWikiId}/title`;
+			const path = `/item/sitelinks/${ localWikiId }/title`;
 
 			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.include( response.body.message, path );
@@ -610,7 +610,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				response,
 				400,
 				'missing-field',
-				{ path: `/item/sitelinks/${localWikiId}`, field: 'title' }
+				{ path: `/item/sitelinks/${ localWikiId }`, field: 'title' }
 			);
 			assert.strictEqual( response.body.message, 'Required field missing' );
 		} );
@@ -620,7 +620,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: 'invalid title%00' } }
 			} ).makeRequest();
-			const path = `/item/sitelinks/${localWikiId}/title`;
+			const path = `/item/sitelinks/${ localWikiId }/title`;
 
 			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.include( response.body.message, path );
@@ -631,7 +631,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				labels: { en: 'en-label' },
 				sitelinks: { [ localWikiId ]: { title: [ 'array', 'not', 'allowed' ] } }
 			} ).makeRequest();
-			const path = `/item/sitelinks/${localWikiId}/title`;
+			const path = `/item/sitelinks/${ localWikiId }/title`;
 
 			assertValidError( response, 400, 'invalid-value', { path: path } );
 			assert.include( response.body.message, path );
@@ -643,9 +643,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: 'Q123' } }
 			} ).makeRequest();
 
-			const path = `/item/sitelinks/${localWikiId}/badges`;
+			const path = `/item/sitelinks/${ localWikiId }/badges`;
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'badge is not an item ID', async () => {
@@ -655,9 +655,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ invalidBadge ] } }
 			} ).makeRequest();
 
-			const path = `/item/sitelinks/${localWikiId}/badges/0`;
+			const path = `/item/sitelinks/${ localWikiId }/badges/0`;
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'provided item is not an allowed badge', async () => {
@@ -667,9 +667,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title: testWikiPage, badges: [ badge ] } }
 			} ).makeRequest();
 
-			const path = `/item/sitelinks/${localWikiId}/badges/0`;
+			const path = `/item/sitelinks/${ localWikiId }/badges/0`;
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'badge item does not exist', async () => {
@@ -681,9 +681,9 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				.withConfigOverride( 'wgWBRepoSettings', { badgeItems: { [ badge ]: '' } } )
 				.makeRequest();
 
-			const path = `/item/sitelinks/${localWikiId}/badges/0`;
+			const path = `/item/sitelinks/${ localWikiId }/badges/0`;
 			assertValidError( response, 400, 'invalid-value', { path: path } );
-			assert.strictEqual( response.body.message, `Invalid value at '${path}'` );
+			assert.strictEqual( response.body.message, `Invalid value at '${ path }'` );
 		} );
 
 		it( 'sitelink title does not exist', async () => {
@@ -693,7 +693,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 				sitelinks: { [ localWikiId ]: { title } }
 			} ).makeRequest();
 
-			const context = { path: `/item/sitelinks/${localWikiId}/title` };
+			const context = { path: `/item/sitelinks/${ localWikiId }/title` };
 			assertValidError( response, 400, 'referenced-resource-not-found', context );
 			assert.strictEqual( response.body.message, 'The referenced resource does not exist' );
 		} );

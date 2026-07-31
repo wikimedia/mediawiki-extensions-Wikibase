@@ -15,15 +15,15 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 	function makeReplaceExistingDescriptionOp() {
 		return {
 			op: 'replace',
-			path: `/${langWithExistingDescription}`,
-			value: `test-description-${utils.uniq()}`
+			path: `/${ langWithExistingDescription }`,
+			value: `test-description-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			descriptions: { [ langWithExistingDescription ]: `test-description-${utils.uniq()}`
+			descriptions: { [ langWithExistingDescription ]: `test-description-${ utils.uniq() }`
 			}
 		} ).makeRequest();
 		propertyId = createPropertyResponse.body.id;
@@ -83,7 +83,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 	it( '422 - empty description', async () => {
 		const response = await newPatchPropertyDescriptionsRequestBuilder(
 			propertyId,
-			[ { op: 'replace', path: `/${langWithExistingDescription}`, value: '' } ]
+			[ { op: 'replace', path: `/${ langWithExistingDescription }`, value: '' } ]
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );

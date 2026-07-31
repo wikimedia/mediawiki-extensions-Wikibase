@@ -30,7 +30,7 @@ describe( newGetItemAliasesInLanguageRequestBuilder().getRouteDescription(), () 
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetItemAliasesInLanguageRequestBuilder( itemId, languageCode )
-			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${ lastRevisionId }"` )
 			.makeRequest();
 		expect( response ).to.have.status( 304 );
 		expect( response ).to.satisfyApiSchema;

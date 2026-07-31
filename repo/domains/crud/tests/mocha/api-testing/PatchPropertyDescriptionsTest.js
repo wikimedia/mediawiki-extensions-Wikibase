@@ -20,7 +20,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 	let originalLastModified;
 	let originalRevisionId;
 	const languageWithExistingDescription = 'en';
-	const testEnLabel = `some-label-${utils.uniq()}`;
+	const testEnLabel = `some-label-${ utils.uniq() }`;
 
 	function assertValid200Response( response ) {
 		expect( response ).to.have.status( 200 );
@@ -33,7 +33,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		testPropertyId = ( await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
 			labels: { en: testEnLabel },
-			descriptions: { [ languageWithExistingDescription ]: `some-description-${utils.uniq()}` }
+			descriptions: { [ languageWithExistingDescription ]: `some-description-${ utils.uniq() }` }
 		} ).makeRequest() ).body.id;
 
 		const testPropertyCreationMetadata = await entityHelper.getLatestEditMetadata( testPropertyId );
@@ -48,7 +48,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 
 	describe( '200 OK', () => {
 		it( 'can add a description', async () => {
-			const description = `neues deutsches description ${utils.uniq()}`;
+			const description = `neues deutsches description ${ utils.uniq() }`;
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
 				[ { op: 'add', path: '/de', value: description } ]
@@ -59,7 +59,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 
 		it( 'can patch labels with edit metadata', async () => {
-			const description = `new arabic label ${utils.uniq()}`;
+			const description = `new arabic label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'I made a patch';
@@ -85,10 +85,10 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 		} );
 
 		it( 'trims whitespace around the description', async () => {
-			const description = `spacey ${utils.uniq()}`;
+			const description = `spacey ${ utils.uniq() }`;
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: '/de', value: `\t${description}  ` } ]
+				[ { op: 'add', path: '/de', value: `\t${ description }  ` } ]
 			).makeRequest();
 
 			assertValid200Response( response );
@@ -197,7 +197,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( invalidDescription ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${languageWithExistingDescription}`, value: invalidDescription };
+			const context = { path: `/${ languageWithExistingDescription }`, value: invalidDescription };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -213,7 +213,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/${languageWithExistingDescription}`, value: invalidDescription }
+				{ path: `/${ languageWithExistingDescription }`, value: invalidDescription }
 			);
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -224,7 +224,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( '' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${languageWithExistingDescription}`, value: '' };
+			const context = { path: `/${ languageWithExistingDescription }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -234,7 +234,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 				[ makeReplaceExistingDescriptionPatchOperation( ' \t ' ) ]
 			).assertValidRequest().makeRequest();
 
-			const context = { path: `/${languageWithExistingDescription}`, value: '' };
+			const context = { path: `/${ languageWithExistingDescription }`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 		} );
 
@@ -256,7 +256,7 @@ describe( newPatchPropertyDescriptionsRequestBuilder().getRouteDescription(), ()
 			const invalidLanguage = 'invalid-language-code';
 			const response = await newPatchPropertyDescriptionsRequestBuilder(
 				testPropertyId,
-				[ { op: 'add', path: `/${invalidLanguage}`, value: 'potato' } ]
+				[ { op: 'add', path: `/${ invalidLanguage }`, value: 'potato' } ]
 			).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );

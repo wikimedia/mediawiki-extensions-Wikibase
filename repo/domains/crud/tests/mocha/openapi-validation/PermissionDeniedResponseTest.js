@@ -22,7 +22,7 @@ describeWithTestData( '403 for all edit routes', ( itemRequestInputs, propertyRe
 		...getPropertyEditRequests( propertyRequestInputs ),
 		getItemCreateRequest( itemRequestInputs )
 	].forEach( ( { newRequestBuilder } ) => {
-		it( `${newRequestBuilder().getRouteDescription()} responds with a valid 403 response`, async () => {
+		it( `${ newRequestBuilder().getRouteDescription() } responds with a valid 403 response`, async () => {
 			const response = await newRequestBuilder()
 				.withUser( blockedUser )
 				.makeRequest();

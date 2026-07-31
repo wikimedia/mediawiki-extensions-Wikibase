@@ -37,7 +37,7 @@ describe( 'validate GET property statement responses', () => {
 
 			it( '304 Not Modified response is valid', async () => {
 				const response = await newRequestBuilder( testStatementId )
-					.withHeader( 'If-None-Match', `"${lastRevId}"` )
+					.withHeader( 'If-None-Match', `"${ lastRevId }"` )
 					.makeRequest();
 
 				expect( response ).to.have.status( 304 );
@@ -53,7 +53,7 @@ describe( 'validate GET property statement responses', () => {
 			} );
 
 			it( '404 Not Found response is valid for a non-existing statement', async () => {
-				const nonexistentStatement = `${testPropertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+				const nonexistentStatement = `${ testPropertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 
 				const response = await newRequestBuilder( nonexistentStatement ).makeRequest();
 

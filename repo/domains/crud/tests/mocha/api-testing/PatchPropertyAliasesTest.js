@@ -19,7 +19,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 	let originalLastModified;
 	let originalRevisionId;
 	const languageWithExistingAlias = 'en';
-	const existingEnAlias = `en-alias-${utils.uniq()}`;
+	const existingEnAlias = `en-alias-${ utils.uniq() }`;
 
 	function assertValid200Response( response ) {
 		expect( response ).to.have.status( 200 );
@@ -45,9 +45,9 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 
 	describe( '200 OK', () => {
 		it( 'can patch aliases', async () => {
-			const newDeAlias = `de-alias-${utils.uniq()}`;
-			const newEnAlias = `en-alias-${utils.uniq()}`;
-			const newEnAliasWithTrailingWhitespace = `\t  ${newEnAlias}  `;
+			const newDeAlias = `de-alias-${ utils.uniq() }`;
+			const newEnAlias = `en-alias-${ utils.uniq() }`;
+			const newEnAliasWithTrailingWhitespace = `\t  ${ newEnAlias }  `;
 			const response = await newPatchPropertyAliasesRequestBuilder(
 				testPropertyId,
 				[
@@ -63,7 +63,7 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'can patch aliases providing edit metadata', async () => {
-			const newDeAlias = `de-alias-${utils.uniq()}`;
+			const newDeAlias = `de-alias-${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const editSummary = 'I made a patch';
@@ -109,10 +109,10 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 		it( 'empty alias', async () => {
 			const language = 'de';
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/${language}`, value: [ '' ] }
+				{ op: 'add', path: `/${ language }`, value: [ '' ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/${language}/0`, value: '' };
+			const context = { path: `/${ language }/0`, value: '' };
 			assertValidError( response, 422, 'patch-result-invalid-value', context );
 			assert.strictEqual( response.body.message, 'Invalid value in patch result' );
 		} );
@@ -123,10 +123,10 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			// may fail if $wgWBRepoSettings['string-limits']['multilang']['length'] is overwritten
 			const maxLength = 250;
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/${language}`, value: [ 'x'.repeat( maxLength + 1 ) ] }
+				{ op: 'add', path: `/${ language }`, value: [ 'x'.repeat( maxLength + 1 ) ] }
 			] ).assertValidRequest().makeRequest();
 
-			const context = { path: `/${language}/0`, limit: maxLength };
+			const context = { path: `/${ language }/0`, limit: maxLength };
 			assertValidError( response, 422, 'patch-result-value-too-long', context );
 			assert.strictEqual( response.body.message, 'Patched value is too long' );
 		} );
@@ -135,21 +135,21 @@ describe( newPatchPropertyAliasesRequestBuilder().getRouteDescription(), () => {
 			const language = 'en';
 			const invalidAlias = 'tab\t tab\t tab';
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/${language}`, value: [ invalidAlias ] }
+				{ op: 'add', path: `/${ language }`, value: [ invalidAlias ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError(
 				response,
 				422,
 				'patch-result-invalid-value',
-				{ path: `/${language}/0`, value: invalidAlias }
+				{ path: `/${ language }/0`, value: invalidAlias }
 			);
 		} );
 
 		it( 'invalid language code', async () => {
 			const invalidLanguage = 'not-a-valid-language';
 			const response = await newPatchPropertyAliasesRequestBuilder( testPropertyId, [
-				{ op: 'add', path: `/${invalidLanguage}`, value: [ 'alias' ] }
+				{ op: 'add', path: `/${ invalidLanguage }`, value: [ 'alias' ] }
 			] ).assertValidRequest().makeRequest();
 
 			assertValidError( response, 422, 'patch-result-invalid-key', { path: '', key: invalidLanguage } );

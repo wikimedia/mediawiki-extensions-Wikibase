@@ -27,12 +27,12 @@ async function createAbuseFilter( description, rules ) {
 	const rootClient = await action.root();
 	const client = clientFactory.getHttpClient( rootClient );
 
-	const abuseFilterFormRequest = await client.get( `${config.base_uri}index.php?title=Special:AbuseFilter/new` );
+	const abuseFilterFormRequest = await client.get( `${ config.base_uri }index.php?title=Special:AbuseFilter/new` );
 	const editToken = abuseFilterFormRequest.text
 		.match( /value="[a-z0-9]+\+\\"/ )[ 0 ] // the token is in the value attribute of an input field and ends with +\
 		.slice( 'value="'.length, -1 ); // remove parts that were matched that aren't part of the token
 
-	const createFilterResponse = await client.post( `${config.base_uri}index.php` ).type( 'form' ).send( {
+	const createFilterResponse = await client.post( `${ config.base_uri }index.php` ).type( 'form' ).send( {
 		title: 'Special:AbuseFilter/new',
 		wpEditToken: editToken,
 		wpFilterDescription: description,
@@ -56,7 +56,7 @@ async function createAbuseFilter( description, rules ) {
 describe( 'Abuse Filter', () => {
 
 	const filterTriggerWord = utils.title( 'ABUSE-FILTER-TRIGGER-' );
-	const filterDescription = `Filter: ${filterTriggerWord}`;
+	const filterDescription = `Filter: ${ filterTriggerWord }`;
 	let filterId;
 	let testItemId;
 	let testPropertyId;
@@ -64,7 +64,7 @@ describe( 'Abuse Filter', () => {
 	before( async function () {
 		await requireExtensions( [ 'Abuse Filter' ] ).call( this );
 
-		filterId = await createAbuseFilter( filterDescription, `"${filterTriggerWord}" in new_wikitext` );
+		filterId = await createAbuseFilter( filterDescription, `"${ filterTriggerWord }" in new_wikitext` );
 		testItemId = ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 		testPropertyId = ( await createUniqueStringProperty() ).body.id;
 	} );
@@ -86,7 +86,7 @@ describe( 'Abuse Filter', () => {
 			{ property: { id: testPropertyId }, value: { type: 'value', content: filterTriggerWord } }
 		)
 	].forEach( ( newRequestBuilder ) => {
-		it( `${newRequestBuilder().getRouteDescription()} rejects edits matching an abuse filter`, async () => {
+		it( `${ newRequestBuilder().getRouteDescription() } rejects edits matching an abuse filter`, async () => {
 			const response = await newRequestBuilder().makeRequest();
 
 			assertValidError( response, 403, 'permission-denied', {

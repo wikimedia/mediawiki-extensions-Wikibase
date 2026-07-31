@@ -17,8 +17,8 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
 			descriptions: {
-				en: `english-property-description-${utils.uniq()}`,
-				de: `german-property-description-${utils.uniq()}`
+				en: `english-property-description-${ utils.uniq() }`,
+				de: `german-property-description-${ utils.uniq() }`
 			}
 		} ).makeRequest();
 
@@ -35,7 +35,7 @@ describe( newGetPropertyDescriptionsRequestBuilder().getRouteDescription(), () =
 
 	it( '304 Not Modified response is valid', async () => {
 		const response = await newGetPropertyDescriptionsRequestBuilder( testPropertyId )
-			.withHeader( 'If-None-Match', `"${lastRevisionId}"` )
+			.withHeader( 'If-None-Match', `"${ lastRevisionId }"` )
 			.makeRequest();
 
 		expect( response ).to.have.status( 304 );

@@ -33,9 +33,9 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	}
 
 	before( async () => {
-		testEnDescription = `english description ${utils.uniq()}`;
+		testEnDescription = `english description ${ utils.uniq() }`;
 		const createEntityResponse = await newCreateItemRequestBuilder( {
-			labels: { en: `english label ${utils.uniq()}`, fr: `étiquette française ${utils.uniq()}` },
+			labels: { en: `english label ${ utils.uniq() }`, fr: `étiquette française ${ utils.uniq() }` },
 			descriptions: { en: testEnDescription } }
 		).makeRequest();
 		testItemId = createEntityResponse.body.id;
@@ -53,7 +53,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	describe( '20x success response ', () => {
 		it( 'can add a label with edit metadata omitted', async () => {
 			const languageCode = 'de';
-			const newLabel = `neues deutsches Label ${utils.uniq()}`;
+			const newLabel = `neues deutsches Label ${ utils.uniq() }`;
 			const comment = 'omg look, i added a new label';
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
 				.withJsonBodyParam( 'comment', comment )
@@ -77,7 +77,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can replace a label with edit metadata provided', async () => {
 			const languageCode = 'en';
-			const newLabel = `new english label ${utils.uniq()}`;
+			const newLabel = `new english label ${ utils.uniq() }`;
 			const user = await getOrCreateBotUser();
 			const tag = await action.makeTag( 'e2e test tag', 'Created during e2e test', true );
 			const comment = 'omg look, an edit i made';
@@ -109,7 +109,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'can add a "mul" label', async () => {
 			const languageCode = 'mul';
-			const newLabel = `new mul label ${utils.uniq()}`;
+			const newLabel = `new mul label ${ utils.uniq() }`;
 			const response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
 				.withConfigOverride( 'wgWBRepoSettings', { enableMulLanguageCode: true } )
 				.assertValidRequest()
@@ -121,7 +121,7 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 	it( 'idempotency check: can set the same label twice', async () => {
 		const languageCode = 'en';
-		const newLabel = `new English Label ${utils.uniq()}`;
+		const newLabel = `new English Label ${ utils.uniq() }`;
 		const comment = 'omg look, i can set a new label';
 		let response = await newSetItemLabelRequestBuilder( testItemId, languageCode, newLabel )
 			.withJsonBodyParam( 'comment', comment )
@@ -217,9 +217,9 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 
 		it( 'label equals description', async () => {
 			const language = 'en';
-			const description = `some-description-${utils.uniq()}`;
+			const description = `some-description-${ utils.uniq() }`;
 			const createEntityResponse = await newCreateItemRequestBuilder( {
-				labels: { [ language ]: `some-label-${utils.uniq()}` },
+				labels: { [ language ]: `some-label-${ utils.uniq() }` },
 				descriptions: { [ language ]: description }
 			} ).makeRequest();
 			testItemId = createEntityResponse.body.id;
@@ -242,14 +242,14 @@ describe( newSetItemLabelRequestBuilder().getRouteDescription(), () => {
 	} );
 	it( 'item with same label and description already exists', async () => {
 		const language = 'en';
-		const label = `test-label-${utils.uniq()}`;
-		const description = `test-description-${utils.uniq()}`;
+		const label = `test-label-${ utils.uniq() }`;
+		const description = `test-description-${ utils.uniq() }`;
 		const existingEntityResponse = await newCreateItemRequestBuilder( {
 			labels: { [ language ]: label }, descriptions: { [ language ]: description } }
 		).makeRequest();
 		const existingItemId = existingEntityResponse.body.id;
 		const createEntityResponse = await newCreateItemRequestBuilder(
-			{ labels: { [ language ]: `label-to-be-replaced-${utils.uniq()}` }, descriptions: { [ language ]: description } }
+			{ labels: { [ language ]: `label-to-be-replaced-${ utils.uniq() }` }, descriptions: { [ language ]: description } }
 		).makeRequest();
 		testItemId = createEntityResponse.body.id;
 

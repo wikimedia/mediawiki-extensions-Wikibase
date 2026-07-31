@@ -13,7 +13,7 @@ describe( newPatchPropertyRequestBuilder().getRouteDescription(), () => {
 		return {
 			op: 'add',
 			path: '/labels/de',
-			value: `test-label-${utils.uniq()}`
+			value: `test-label-${ utils.uniq() }`
 		};
 	}
 

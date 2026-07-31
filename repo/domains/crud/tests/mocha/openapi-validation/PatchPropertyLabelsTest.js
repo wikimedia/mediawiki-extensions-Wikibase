@@ -15,15 +15,15 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	function makeReplaceExistingLabelOp() {
 		return {
 			op: 'replace',
-			path: `/${langWithExistingLabel}`,
-			value: `test-label-${utils.uniq()}`
+			path: `/${ langWithExistingLabel }`,
+			value: `test-label-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createPropertyResponse = await newCreatePropertyRequestBuilder( {
 			data_type: 'string',
-			labels: { [ langWithExistingLabel ]: `test-label-${utils.uniq()}` }
+			labels: { [ langWithExistingLabel ]: `test-label-${ utils.uniq() }` }
 		} ).makeRequest();
 
 		propertyId = createPropertyResponse.body.id;
@@ -78,7 +78,7 @@ describe( newPatchPropertyLabelsRequestBuilder().getRouteDescription(), () => {
 	it( '422 - empty label', async () => {
 		const response = await newPatchPropertyLabelsRequestBuilder(
 			propertyId,
-			[ { op: 'replace', path: `/${langWithExistingLabel}`, value: '' } ]
+			[ { op: 'replace', path: `/${ langWithExistingLabel }`, value: '' } ]
 		).makeRequest();
 		expect( response ).to.have.status( 422 );
 		expect( response ).to.satisfyApiSchema;

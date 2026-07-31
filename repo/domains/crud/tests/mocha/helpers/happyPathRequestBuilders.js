@@ -152,7 +152,7 @@ module.exports.getItemEditRequests = ( requestInputs ) => ( [
 		requestInputs.itemId,
 		[ {
 			op: 'remove',
-			path: `/${requestInputs.siteId}/badges`
+			path: `/${ requestInputs.siteId }/badges`
 		} ]
 
 	),

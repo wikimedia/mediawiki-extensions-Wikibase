@@ -13,7 +13,7 @@ function getExistingCredentials() {
 }
 
 async function createUser( purpose, groups ) {
-	const name = utils.title( `${purpose}-user-` );
+	const name = utils.title( `${ purpose }-user-` );
 	const password = utils.title( 'very-secret-' );
 
 	const root = await action.root();
@@ -50,7 +50,7 @@ async function getOrCreateUser( purpose, groups = [] ) {
 				}
 			} );
 			throw new Error(
-				`Failed to log in the "${purpose}" user, likely due to outdated credentials.` +
+				`Failed to log in the "${ purpose }" user, likely due to outdated credentials.` +
 				' The credentials file was now deleted, which should fix the issue. Please try again.'
 			);
 		}

@@ -15,15 +15,15 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 	function makeAddNewAliasOp() {
 		return {
 			op: 'add',
-			path: `/${langWithExistingAliases}/-`,
-			value: `test-alias-${utils.uniq()}`
+			path: `/${ langWithExistingAliases }/-`,
+			value: `test-alias-${ utils.uniq() }`
 		};
 	}
 
 	before( async () => {
 		const createItemResponse = await newCreateItemRequestBuilder( {
 			aliases: {
-				[ langWithExistingAliases ]: [ `test-aliases-${utils.uniq()}`, `test-aliases-${utils.uniq()}` ]
+				[ langWithExistingAliases ]: [ `test-aliases-${ utils.uniq() }`, `test-aliases-${ utils.uniq() }` ]
 			}
 		} ).makeRequest();
 
@@ -78,7 +78,7 @@ describe( newPatchItemAliasesRequestBuilder().getRouteDescription(), () => {
 	it( '422 - empty alias', async () => {
 		const response = await newPatchItemAliasesRequestBuilder(
 			itemId,
-			[ { op: 'add', path: `/${langWithExistingAliases}/-`, value: '' } ]
+			[ { op: 'add', path: `/${ langWithExistingAliases }/-`, value: '' } ]
 		).makeRequest();
 
 		expect( response ).to.have.status( 422 );

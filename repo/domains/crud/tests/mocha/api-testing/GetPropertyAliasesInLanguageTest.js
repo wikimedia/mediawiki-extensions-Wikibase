@@ -28,7 +28,7 @@ describe( newGetPropertyAliasesInLanguageRequestBuilder().getRouteDescription(),
 
 		expect( response ).to.have.status( 200 );
 		assert.deepEqual( response.body, [ 'example of', 'is a' ] );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 

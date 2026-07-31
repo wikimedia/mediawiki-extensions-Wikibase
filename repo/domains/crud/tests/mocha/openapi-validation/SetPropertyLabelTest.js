@@ -8,7 +8,7 @@ const {
 } = require( '../helpers/RequestBuilderFactory' );
 
 function makeLabel( text ) {
-	return `${text}-${utils.uniq()}`;
+	return `${ text }-${ utils.uniq() }`;
 }
 
 describe( newSetPropertyLabelRequestBuilder().getRouteDescription(), () => {

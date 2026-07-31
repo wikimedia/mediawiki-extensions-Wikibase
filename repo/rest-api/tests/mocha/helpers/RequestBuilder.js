@@ -6,7 +6,7 @@ const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
 const basePath = 'rest.php/wikibase';
-const openapiSchema = JSON.parse( readFileSync( `${__dirname}/../../../src/openapi.json` ) );
+const openapiSchema = JSON.parse( readFileSync( `${ __dirname }/../../../src/openapi.json` ) );
 
 class RequestBuilder {
 
@@ -100,7 +100,7 @@ class RequestBuilder {
 	async makeRequest() {
 		const XDEBUG_SESSION = process.env.XDEBUG_SESSION;
 		if ( XDEBUG_SESSION ) {
-			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
+			this.withHeader( 'Cookie', `XDEBUG_SESSION=${ XDEBUG_SESSION }` );
 		}
 
 		if ( this.routeValidation ) {
@@ -123,7 +123,7 @@ class RequestBuilder {
 			case undefined:
 				break;
 			default:
-				throw new Error( `${this.constructor.name} doesn't support Content-Type '${contentType}'` );
+				throw new Error( `${ this.constructor.name } doesn't support Content-Type '${ contentType }'` );
 		}
 
 		for ( const setting in this.configOverrides ) {
@@ -147,7 +147,7 @@ class RequestBuilder {
 					.query( this.queryParams )
 					.send( body );
 			default:
-				throw new Error( `The "${this.method}" method is not supported by ${this.constructor.name}` );
+				throw new Error( `The "${ this.method }" method is not supported by ${ this.constructor.name }` );
 		}
 
 	}
@@ -160,22 +160,22 @@ class RequestBuilder {
 			throw new Error( 'No route provided.' );
 		}
 		if ( !spec.paths[ this.route ] ) {
-			throw new Error( `The route "${this.route}" does not exist in the spec.` );
+			throw new Error( `The route "${ this.route }" does not exist in the spec.` );
 		}
 		if ( !spec.paths[ this.route ][ this.method.toLowerCase() ] ) {
-			throw new Error( `The route "${this.route}" does not allow method "${this.method}".` );
+			throw new Error( `The route "${ this.route }" does not allow method "${ this.method }".` );
 		}
 	}
 
 	makePath() {
 		let path = this.route;
 		Object.keys( this.pathParams ).forEach( ( param ) => {
-			path = path.replace( `{${param}}`, this.pathParams[ param ] );
+			path = path.replace( `{${ param }}`, this.pathParams[ param ] );
 		} );
 
 		if ( path.includes( '{' ) ) { // feels a bit hacky but should be ok?!
 			throw new Error(
-				`Path params "${JSON.stringify( this.pathParams )}" do not set all params in "${this.route}".`
+				`Path params "${ JSON.stringify( this.pathParams ) }" do not set all params in "${ this.route }".`
 			);
 		}
 
@@ -203,7 +203,7 @@ class RequestBuilder {
 
 			if ( typeof errors !== 'undefined' ) {
 				const error = errors.errors[ 0 ];
-				errorMessage = `[${error.errorCode}] ${error.path} ${error.message} in '${error.location}'`;
+				errorMessage = `[${ error.errorCode }] ${ error.path } ${ error.message } in '${ error.location }'`;
 			}
 			assert.isUndefined( errors, errorMessage );
 		} else {

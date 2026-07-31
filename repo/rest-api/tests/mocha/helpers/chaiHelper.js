@@ -7,7 +7,7 @@ const { readFileSync } = require( 'fs' );
 
 function compileSchemaAndValidator() {
 	const openApiSchema = JSON.parse(
-		readFileSync( `${__dirname}/../../../src/openapi.json` )
+		readFileSync( `${ __dirname }/../../../src/openapi.json` )
 	);
 
 	const schemaValidator = new Ajv( { strictTypes: false } );
@@ -17,14 +17,14 @@ function compileSchemaAndValidator() {
 			Object.entries( methodData.responses ).forEach( ( [ status, responseData ] ) => {
 				if ( responseData.content ) {
 					Object.entries( responseData.content ).forEach( ( [ contentType, content ] ) => {
-						schemaValidator.addSchema( content.schema, `${path}|${method}|${status}|${contentType}` );
+						schemaValidator.addSchema( content.schema, `${ path }|${ method }|${ status }|${ contentType }` );
 					} );
 				}
 				if ( responseData.headers ) {
 					Object.entries( responseData.headers ).forEach( ( [ header, headerData ] ) => {
 						schemaValidator.addSchema(
 							headerData.schema,
-							`${path}|${method}|${status}|header|${header.toLowerCase()}`
+							`${ path }|${ method }|${ status }|header|${ header.toLowerCase() }`
 						);
 					} );
 				}
@@ -36,15 +36,15 @@ function compileSchemaAndValidator() {
 }
 
 function purple( str ) {
-	return `\x1b[38;5;99m${str}`;
+	return `\x1b[38;5;99m${ str }`;
 }
 
 function normal( str ) {
-	return `\x1b[0m${str}`;
+	return `\x1b[0m${ str }`;
 }
 
 function saveAndRestoreColor( str ) {
-	return `\x1b7${str}\x1b8`;
+	return `\x1b7${ str }\x1b8`;
 }
 
 function format( obj ) {
@@ -95,9 +95,9 @@ Assertion.addChainableMethod(
 		utils.flag( this, 'object', response.status );
 		utils.flag( this, 'response', response );
 		const formattedResponseBody = saveAndRestoreColor(
-			`${purple( 'Response body:' )} ${format( response.body )}`
+			`${ purple( 'Response body:' ) } ${ format( response.body ) }`
 		);
-		utils.flag( this, 'message', `\n${formattedResponseBody}\nInvalid status` );
+		utils.flag( this, 'message', `\n${ formattedResponseBody }\nInvalid status` );
 	}
 );
 
@@ -115,30 +115,33 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 
 		if ( Object.keys( response.body ).length > 0 ) {
 			const contentType = response.headers[ 'content-type' ];
-			const schemaKey = `${pathInSchema}|${requestMethod}|${responseStatus}|${contentType}`;
+			const schemaKey = `${ pathInSchema }|${ requestMethod }|${ responseStatus }|${ contentType }`;
 
 			const validateBody = schemaValidator.getSchema( schemaKey );
 			if ( !validateBody ) {
-				throw new Error( `Schema not found for ${schemaKey} in OpenAPI document.` );
+				throw new Error( `Schema not found for ${ schemaKey } in OpenAPI document.` );
 			}
 
 			if ( !validateBody( response.body ) ) {
 				const error = validateBody.errors[ 0 ];
 				const formattedResponseBody = saveAndRestoreColor(
-					`${purple( 'Response body:' )} ${format( response.body )}`
+					`${ purple( 'Response body:' ) } ${ format( response.body ) }`
 				);
-				const schemaPath = `${schemaKey}${error.schemaPath}`;
-				this.assert( false, `${schemaPath} ${error.message} at '${error.instancePath}'\n${formattedResponseBody}` );
+				const schemaPath = `${ schemaKey }${ error.schemaPath }`;
+				this.assert(
+					false,
+					`${ schemaPath } ${ error.message } at '${ error.instancePath }'\n${ formattedResponseBody }`
+				);
 			}
 		}
 
 		if ( 'headers' in openApiResponse ) {
 			for ( const [ header, openApiHeader ] of Object.entries( openApiResponse.headers ) ) {
-				const headerKey = `${pathInSchema}|${requestMethod}|${responseStatus}|header|${header.toLowerCase()}`;
+				const headerKey = `${ pathInSchema }|${ requestMethod }|${ responseStatus }|header|${ header.toLowerCase() }`;
 
 				const validateHeader = schemaValidator.getSchema( headerKey );
 				if ( !validateHeader ) {
-					throw new Error( `Schema not found for ${headerKey} in OpenAPI document.` );
+					throw new Error( `Schema not found for ${ headerKey } in OpenAPI document.` );
 				}
 
 				if ( header.toLowerCase() in response.headers ) {
@@ -146,11 +149,11 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 						const error = validateHeader.errors[ 0 ];
 						this.assert(
 							false,
-							`'${header.toLowerCase()}' header doesn't match schema: ${error.message}`
+							`'${ header.toLowerCase() }' header doesn't match schema: ${ error.message }`
 						);
 					}
 				} else if ( openApiHeader.required ) {
-					this.assert( false, `response does not contain required header '${header}'` );
+					this.assert( false, `response does not contain required header '${ header }'` );
 				}
 			}
 		}

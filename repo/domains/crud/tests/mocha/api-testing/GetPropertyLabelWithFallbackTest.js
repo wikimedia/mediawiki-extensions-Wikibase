@@ -12,7 +12,7 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(), () => {
 	let propertyId;
-	const propertyDeLabel = `de-label-${utils.uniq()}`;
+	const propertyDeLabel = `de-label-${ utils.uniq() }`;
 	const fallbackLanguageWithExistingLabel = 'de';
 
 	async function makeRequestWithMulHeader( requestBuilder ) {
@@ -37,7 +37,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		assert.strictEqual( response.body, propertyDeLabel );
 
 		const testPropertyCreationMetadata = await getLatestEditMetadata( propertyId );
-		assert.strictEqual( response.header.etag, `"${testPropertyCreationMetadata.revid}"` );
+		assert.strictEqual( response.header.etag, `"${ testPropertyCreationMetadata.revid }"` );
 		assert.strictEqual( response.header[ 'last-modified' ], testPropertyCreationMetadata.timestamp );
 	} );
 
@@ -51,19 +51,19 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v1/entities/properties/${propertyId}/labels/de`
+			`rest.php/wikibase/v1/entities/properties/${ propertyId }/labels/de`
 		) );
 	} );
 
 	it( '307 - language fallback redirect mul', async () => {
-		await makeRequestWithMulHeader( newSetPropertyLabelRequestBuilder( propertyId, 'mul', `mul-label-${utils.uniq()}` ) );
+		await makeRequestWithMulHeader( newSetPropertyLabelRequestBuilder( propertyId, 'mul', `mul-label-${ utils.uniq() }` ) );
 
 		const response = await makeRequestWithMulHeader( newGetPropertyLabelWithFallbackRequestBuilder( propertyId, 'en' ) );
 
 		expect( response ).to.have.status( 307 );
 
 		assert.isTrue( new URL( response.headers.location ).pathname.endsWith(
-			`rest.php/wikibase/v1/entities/properties/${propertyId}/labels/mul`
+			`rest.php/wikibase/v1/entities/properties/${ propertyId }/labels/mul`
 		) );
 	} );
 
@@ -106,7 +106,7 @@ describe( newGetPropertyLabelWithFallbackRequestBuilder().getRouteDescription(),
 
 	it( '404 - in case label does not exist in the requested or any fallback languages', async () => {
 		const propertyWithoutMulFallbackId = ( await newCreatePropertyRequestBuilder(
-			{ data_type: 'string', labels: { ar: `ar-label-${utils.uniq()}` } }
+			{ data_type: 'string', labels: { ar: `ar-label-${ utils.uniq() }` } }
 		).makeRequest() ).body.id;
 
 		const response = await makeRequestWithMulHeader(

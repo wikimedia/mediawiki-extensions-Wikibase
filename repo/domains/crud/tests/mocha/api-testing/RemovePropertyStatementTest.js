@@ -177,7 +177,7 @@ describe( 'DELETE statement', () => {
 
 		it( 'responds 404 property-not-found for nonexistent property', async () => {
 			const propertyId = 'P999999';
-			const statementId = `${propertyId}$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
+			const statementId = `${ propertyId }$AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE`;
 			const response = await newRemovePropertyStatementRequestBuilder( propertyId, statementId )
 				.assertValidRequest()
 				.makeRequest();

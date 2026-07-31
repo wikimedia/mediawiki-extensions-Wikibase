@@ -28,7 +28,7 @@ describeWithTestData( 'IP masking', ( itemRequestInputs, propertyRequestInputs, 
 	function withTempUsersEnabled( requestBuilder ) {
 		return requestBuilder.withConfigOverride( 'wgAutoCreateTempUser', {
 			enabled: true,
-			genPattern: `${tempUserPrefix} $1`
+			genPattern: `${ tempUserPrefix } $1`
 		} );
 	}
 

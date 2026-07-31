@@ -100,7 +100,7 @@ describe( newGetSitelinkRequestBuilder().getRouteDescription(), () => {
 		expect( response ).to.have.status( 308 );
 		assert.isTrue(
 			new URL( response.headers.location ).pathname
-				.endsWith( `rest.php/wikibase/v1/entities/items/${redirectTarget}/sitelinks/${siteId}` )
+				.endsWith( `rest.php/wikibase/v1/entities/items/${ redirectTarget }/sitelinks/${ siteId }` )
 		);
 	} );
 
