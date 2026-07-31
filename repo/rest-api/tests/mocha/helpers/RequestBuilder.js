@@ -21,7 +21,6 @@ class RequestBuilder {
 		this.configOverrides = {};
 		this.validate = false;
 		this.assertValid = false;
-		this.validateRoute = true;
 	}
 
 	/**
@@ -103,9 +102,7 @@ class RequestBuilder {
 			this.withHeader( 'Cookie', `XDEBUG_SESSION=${XDEBUG_SESSION}` );
 		}
 
-		if ( this.routeValidation ) {
-			this.validateRouteAndMethod( openapiSchema );
-		}
+		this.validateRouteAndMethod( openapiSchema );
 		if ( this.validate ) {
 			this.validateRequest( openapiSchema );
 		}
