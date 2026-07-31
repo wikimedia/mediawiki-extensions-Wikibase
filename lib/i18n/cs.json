@@ -46,6 +46,7 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "neznámá hodnota",
 	"wikibase-snakview-snaktypeselector-novalue": "bez hodnoty",
 	"wikibase-undeserializable-value": "Hodnota je neplatná a nelze ji zobrazit.",
+	"wikibase-undisplayable-value": "Hodnotu nelze zobrazit",
 	"datatypes-type-string": "Řetězec",
 	"datatypes-type-quantity": "Množství",
 	"datatypes-type-monolingualtext": "Jednojazyčný text",
