@@ -340,7 +340,7 @@
 	"wikibase-setaliases-intro": "Ce formulaire vous permet de donner les alias d’une entité. Vous devez fournir l’ID de l’entité (par ex. « Q23 »), un code de langue (par ex. « en ») et les alias à fixer. Plusieurs alias sont séparés par un caractère trait vertical (<code>|</code>).",
 	"wikibase-setaliases-label": "Alias :",
 	"wikibase-setaliases-submit": "Définir les alias",
-	"special-setlabeldescriptionaliases": "Définir le libellé, la description et les alias de l’élément ou de la propriété",
+	"special-setlabeldescriptionaliases": "Définir le libellé, la description et les alias de l’élément/propriété",
 	"wikibase-setlabeldescriptionaliases-introfull": "Vous définissez le libellé, la description et les alias en $2 pour [[:$1]]. Plusieurs alias sont séparés par un caractère barre verticale (<code>|</code>).",
 	"wikibase-setlabeldescriptionaliases-intro": "Ce formulaire vous permet de fixer le libellé, la description et les alias d’une entité. Vous devez d’abord fournir l’id de l’entité (par ex. « Q23 ») et un code de langue (par ex. « en »).",
 	"wikibase-setlabeldescriptionaliases-label-label": "Libellé :",
