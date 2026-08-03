@@ -59,6 +59,15 @@ class FacetedItemSearchValidator {
 		if ( isset( $filter['or'] ) && count( $filter['or'] ) < 2 ) {
 			$this->throwInvalidQuery( "'or' fields must contain at least two elements" );
 		}
+
+		if ( isset( $filter['or'] ) ) {
+			foreach ( $filter['or'] as $condition ) {
+				if ( !isset( $condition['property'] ) ) {
+					$this->throwInvalidQuery( "'or' fields must each contain a property/value condition" );
+				}
+			}
+		}
+
 		if ( isset( $filter['not'] ) && !isset( $filter['not']['property'] ) ) {
 			$this->throwInvalidQuery( "'not' field must contain a single property/value condition" );
 		}
