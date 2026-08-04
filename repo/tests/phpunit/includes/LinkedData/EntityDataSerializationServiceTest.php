@@ -6,6 +6,8 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
+use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -152,6 +154,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 		return new EntityDataSerializationService(
 			$serializerFactory->newEntitySerializer(),
 			new EntityDataFormatProvider(),
+			new HashSiteStore( TestSites::getSites() ),
 			$rdfBuilderFactory,
 			$entityTitleStoreLookup,
 			$dataTypeLookup,

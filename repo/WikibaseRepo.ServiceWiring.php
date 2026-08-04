@@ -737,6 +737,7 @@ return [
 		return new EntityDataSerializationService(
 			WikibaseRepo::getAllTypesJsonFriendlyEntitySerializer( $services ),
 			WikibaseRepo::getEntityDataFormatProvider( $services ),
+			$services->getSiteLookup(),
 			WikibaseRepo::getRdfBuilderFactory( $services ),
 			WikibaseRepo::getEntityTitleStoreLookup( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),

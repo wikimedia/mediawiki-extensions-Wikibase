@@ -6,6 +6,7 @@ namespace Wikibase\Repo\LinkedData;
 
 use InvalidArgumentException;
 use MediaWiki\Json\FormatJson;
+use MediaWiki\Site\SiteLookup;
 use RuntimeException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityId;
@@ -41,40 +42,24 @@ use Wikimedia\Purtle\RdfWriterFactory;
  * @author Anja Jentzsch < anja.jentzsch@wikimedia.de >
  */
 class EntityDataSerializationService {
+	private Serializer $serializer;
 
-	/**
-	 * @var Serializer
-	 */
-	private $serializer;
+	private EntityDataFormatProvider $entityDataFormatProvider;
 
-	/**
-	 * @var EntityDataFormatProvider
-	 */
-	private $entityDataFormatProvider;
+	private RdfWriterFactory $rdfWriterFactory;
 
-	/**
-	 * @var RdfWriterFactory
-	 */
-	private $rdfWriterFactory;
+	private SiteLookup $siteLookup;
 
-	/**
-	 * @var RdfBuilderFactory
-	 */
-	private $rdfBuilderFactory;
+	private RdfBuilderFactory $rdfBuilderFactory;
 
-	/**
-	 * @var EntityTitleStoreLookup
-	 */
-	private $entityTitleStoreLookup;
+	private EntityTitleStoreLookup $entityTitleStoreLookup;
 
-	/**
-	 * @var JsonDataTypeInjector
-	 */
-	private $dataTypeInjector;
+	private JsonDataTypeInjector $dataTypeInjector;
 
 	public function __construct(
 		Serializer $serializer,
 		EntityDataFormatProvider $entityDataFormatProvider,
+		SiteLookup $siteLookup,
 		RdfBuilderFactory $rdfBuilderFactory,
 		EntityTitleStoreLookup $entityTitleStoreLookup,
 		PropertyDataTypeLookup $dataTypeLookup,
@@ -82,6 +67,7 @@ class EntityDataSerializationService {
 	) {
 		$this->serializer = $serializer;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
+		$this->siteLookup = $siteLookup;
 		$this->rdfBuilderFactory = $rdfBuilderFactory;
 		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 
@@ -133,6 +119,8 @@ class EntityDataSerializationService {
 				$this->serializer->serialize( $entityRevision->getEntity() )
 			);
 			$serializedEntity = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $serializedEntity );
+			$serializedEntity = $this->injectSiteLinks( $serializedEntity );
+
 			$data = FormatJson::encode( [
 				'entities' => [
 					$entityRevision->getEntity()->getId()->getSerialization() => $serializedEntity,
@@ -293,6 +281,27 @@ class EntityDataSerializationService {
 		$rdfWriter = $this->rdfWriterFactory->getWriter( $format );
 
 		return $this->rdfBuilderFactory->getRdfBuilder( $this->getFlavor( $flavorName ), new HashDedupeBag(), $rdfWriter );
+	}
+
+	private function injectSiteLinks( array $serializedEntity ): array {
+		if ( isset( $serializedEntity[ 'sitelinks' ] ) && is_array( $serializedEntity[ 'sitelinks' ] ) ) {
+			$siteLookup = $this->siteLookup;
+			$serializationModifier = new SerializationModifier();
+
+			$addUrlCallback = function( $array ) use ( $siteLookup ) {
+				$site = $siteLookup->getSite( $array[ 'site' ] );
+				if ( $site !== null ) {
+					$array[ 'url' ] = $site->getPageUrl( $array[ 'title' ] );
+				}
+				return $array;
+			};
+
+			$serializedEntity[ 'sitelinks' ] = $serializationModifier->modifyUsingCallbacks(
+				$serializedEntity[ 'sitelinks' ],
+				[ '*' => $addUrlCallback ],
+			);
+		}
+		return $serializedEntity;
 	}
 
 }

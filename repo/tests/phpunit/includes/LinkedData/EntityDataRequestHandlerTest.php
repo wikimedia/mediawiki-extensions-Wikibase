@@ -14,6 +14,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
@@ -159,6 +160,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$service = new EntityDataSerializationService(
 			$serializerFactory->newItemSerializer(),
 			$entityDataFormatProvider,
+			new HashSiteStore(),
 			$rdfBuilderFactory,
 			$entityTitleStoreLookup,
 			$dataTypeLookup,

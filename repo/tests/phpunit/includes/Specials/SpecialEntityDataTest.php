@@ -11,6 +11,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Tests\Specials\SpecialPageTestBase;
 use MediaWiki\Title\Title;
@@ -123,6 +124,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$serializationService = new EntityDataSerializationService(
 			$serializerFactory->newEntitySerializer(),
 			$entityDataFormatProvider,
+			new HashSiteStore(),
 			$rdfBuilderFactory,
 			$entityTitleStoreLookup,
 			$dataTypeLookup,

@@ -32,6 +32,8 @@ class EntityDataSerializationServiceTest extends ServiceWiringTestCase {
 			$this->createMock( EntityTitleStoreLookup::class ) );
 		$this->mockService( 'WikibaseRepo.PropertyDataTypeLookup',
 			$this->createMock( PropertyDataTypeLookup::class ) );
+		$this->serviceContainer->expects( $this->once() )
+			->method( 'getSiteLookup' );
 		$this->mockService( 'WikibaseRepo.EntityIdParser',
 			$this->createMock( EntityIdParser::class ) );
 
