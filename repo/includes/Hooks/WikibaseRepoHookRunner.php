@@ -16,6 +16,7 @@ use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\ParserOutput\StatementDataUpdater;
+use Wikibase\Repo\RestApi\OpenApiDocFragmentJoiner;
 
 /**
  * Partial implementation of a hook runner for WikibaseRepo.
@@ -34,6 +35,7 @@ class WikibaseRepoHookRunner implements
 	WikibaseRepoEntityNamespacesHook,
 	WikibaseRepoEntityTypesHook,
 	WikibaseRepoOnParserOutputUpdaterConstructionHook,
+	WikibaseRepoOpenApiDocFragmentsHook,
 	WikibaseRepoSearchableEntityScopesMessagesHook,
 	WikibaseRepoSearchableEntityScopesHook,
 	WikibaseTextForSearchIndexHook
@@ -138,6 +140,14 @@ class WikibaseRepoHookRunner implements
 			'WikibaseRepoOnParserOutputUpdaterConstruction',
 			[ $statementUpdater, &$entityUpdaters ],
 			[ 'abortable' => false ]
+		);
+	}
+
+	public function onWikibaseRepoOpenApiDocFragments( OpenApiDocFragmentJoiner $joiner ): void {
+		$this->hookContainer->run(
+			'WikibaseRepoOpenApiDocFragments',
+			[ $joiner ],
+			[ 'abortable' => false ],
 		);
 	}
 

@@ -42,6 +42,9 @@ See @ref Wikibase::Repo::Hooks::GetEntityByLinkedTitleLookupHook.
 #### WikibaseRepoControllers {#WikibaseRepoControllers}
 See @ref Wikibase::Repo::Hooks::WikibaseRepoControllersHook.
 
+#### WikibaseRepoOpenApiDocFragments {#WikibaseRepoOpenApiDocFragments}
+See @ref Wikibase::Repo::Hooks::WikibaseRepoOpenApiDocFragmentsHook.
+
 Client
 ------------------------------------------------------------
 

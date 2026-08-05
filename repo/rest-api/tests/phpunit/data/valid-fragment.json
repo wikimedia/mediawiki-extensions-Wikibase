@@ -1,0 +1,33 @@
+{
+	"openapi": "3.1.0",
+	"info": { "title": "Example extension REST API fragment", "version": "0.1" },
+	"tags": [ { "name": "examples", "description": "Example resources" } ],
+	"paths": {
+		"/v0/examples/{example_id}": {
+			"get": {
+				"operationId": "getExample",
+				"tags": [ "examples" ],
+				"summary": "Retrieve a single example resource by ID",
+				"responses": {
+					"200": {
+						"description": "A single example resource",
+						"content": { "application/json": { "schema": { "type": "object" } } }
+					}
+				}
+			}
+		},
+		"/v0/examples/{example_id}/parts": {
+			"get": {
+				"operationId": "getExampleParts",
+				"tags": [ "examples" ],
+				"summary": "Retrieve the parts of an example resource",
+				"responses": {
+					"200": {
+						"description": "The example resource's parts",
+						"content": { "application/json": { "schema": { "type": "object" } } }
+					}
+				}
+			}
+		}
+	}
+}

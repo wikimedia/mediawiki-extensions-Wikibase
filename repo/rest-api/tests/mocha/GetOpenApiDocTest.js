@@ -16,7 +16,19 @@ describe( 'GET /openapi.json', () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response.body ).to.deep.equal( schema );
+
+		// Installed extensions may register spec fragments that add paths and
+		// tags to the served document, so assert exact equality of the
+		// Wikibase-owned surface rather than of the whole document.
+		const { paths, tags, ...rest } = schema;
+		const { paths: servedPaths, tags: servedTags, ...servedRest } = response.body;
+		expect( servedRest ).to.deep.equal( rest );
+		for ( const [ path, pathSpec ] of Object.entries( paths ) ) {
+			expect( servedPaths[ path ] ).to.deep.equal( pathSpec );
+		}
+		for ( const tag of tags ) {
+			expect( servedTags ).to.deep.include( tag );
+		}
 	} );
 
 } );
