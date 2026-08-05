@@ -6,11 +6,13 @@
 			"Macofe",
 			"SolidBlock",
 			"StephDC",
-			"Ouclie"
+			"Ouclie",
+			"XiaoAnIsMe"
 		]
 	},
 	"wikibase-edit": "纂",
 	"wikibase-add": "增",
+	"wikibase-label-empty": "無義之籤",
 	"wikibase-description-empty": "無述定矣",
 	"wikibase-sitelinks-special": "他站",
 	"wikibase-itemdisambiguation-lookup-language": "語言之碼：",
