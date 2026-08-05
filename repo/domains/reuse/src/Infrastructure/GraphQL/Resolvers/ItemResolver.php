@@ -6,8 +6,13 @@ use GraphQL\Deferred;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItems;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\BatchGetItems\BatchGetItemsRequest;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Aliases;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Descriptions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 
@@ -21,13 +26,17 @@ class ItemResolver {
 	public function __construct( private readonly BatchGetItems $batchGetItems ) {
 	}
 
-	public function resolveItem( string $itemId, QueryContext $context ): Deferred {
+	public function resolveItem( string $itemId, QueryContext $context, bool $throwForMissingItems = true ): Deferred {
 		$this->itemsToFetch[] = $itemId;
 
 		/**
 		 * @throws GraphQLError
 		 */
-		return new Deferred( function() use ( $itemId, $context ): Item {
+		return new Deferred( function() use (
+			$itemId,
+			$context,
+			$throwForMissingItems
+			): Item {
 			if ( !$this->itemsBatch ) {
 				$this->itemsBatch = $this->batchGetItems
 					->execute( new BatchGetItemsRequest( $this->itemsToFetch ) )
@@ -36,7 +45,11 @@ class ItemResolver {
 
 			$item = $this->itemsBatch->getItem( new ItemId( $itemId ) );
 			if ( !$item ) {
-				throw GraphQLError::itemNotFound( $itemId );
+				if ( $throwForMissingItems ) {
+					throw GraphQLError::itemNotFound( $itemId );
+				}
+				$context->missingItemIds[] = $itemId;
+				return $this->createStubItem( $itemId );
 			}
 
 			$resultId = $item->id->getSerialization();
@@ -47,10 +60,21 @@ class ItemResolver {
 		} );
 	}
 
-	public function resolveItems( array $ids, QueryContext $context ): array {
+	public function resolveItems( array $ids, QueryContext $context, bool $throwForMissingItems = true ): array {
 		return array_map(
-			fn( $id ) => $this->resolveItem( $id, $context ),
+			fn( $id ) => $this->resolveItem( $id, $context, $throwForMissingItems ),
 			$ids
+		);
+	}
+
+	private function createStubItem( string $itemId ): Item {
+		return new Item(
+			new ItemId( $itemId ),
+			new Labels(),
+			new Descriptions(),
+			new Aliases(),
+			new Sitelinks(),
+			new Statements()
 		);
 	}
 }

@@ -56,7 +56,7 @@ class SearchItemsResolver {
 	private function resolveEdges( array $searchResults, int $offset, QueryContext $context ): array {
 		return array_map(
 			fn( ItemSearchResult $result, int $key ) => [
-				'node' => $this->itemResolver->resolveItem( $result->itemId->getSerialization(), $context ),
+				'node' => $this->itemResolver->resolveItem( $result->itemId->getSerialization(), $context, throwForMissingItems: false ),
 				'cursor' => $this->encodeOffsetAsCursor( $offset + $key + 1 ),
 			],
 			$searchResults,

@@ -12,6 +12,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Model\Aliases;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Descriptions;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Item;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\ItemsBatch;
+use Wikibase\Repo\Domains\Reuse\Domain\Model\Label;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Labels;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Sitelinks;
 use Wikibase\Repo\Domains\Reuse\Domain\Model\Statements;
@@ -55,7 +56,7 @@ class ItemResolverTest extends TestCase {
 
 	public function testGivenRequestedItemDoesNotExist_throwsItemNotFound(): void {
 		$requestedItem = 'Q99999';
-		$batchGetItems = $this->createStub( BatchGetItems::class );
+		$batchGetItems = $this->createMock( BatchGetItems::class );
 		$batchGetItems->expects( $this->once() )
 			->method( 'execute' )
 			->willReturn( new BatchGetItemsResponse( new ItemsBatch( [ $requestedItem => null ] ) ) );
@@ -67,6 +68,47 @@ class ItemResolverTest extends TestCase {
 
 		$this->assertInstanceOf( GraphQLError::class, $promise->result );
 		$this->assertSame( "Item \"$requestedItem\" does not exist.", $promise->result->getMessage() );
+	}
+
+	public function testResolvesItemsReturnsStubsforMissingItems(): void {
+		$context = new QueryContext();
+		$availableItemIds = [ 'Q1', 'Q2', 'Q3' ];
+		$missingItemId = 'Q999';
+		$requestedItemIds = [ ...$availableItemIds, $missingItemId ];
+		$items = [];
+		foreach ( $requestedItemIds as $id ) {
+			$items[$id] = new Item(
+				new ItemId( $id ),
+				new Labels( new Label( 'en', 'potato' ) ),
+				new Descriptions(),
+				new Aliases(),
+				new Sitelinks(),
+				new Statements(),
+			);
+		}
+		$itemsBatch = new ItemsBatch( [ ...$items, $missingItemId => null ] );
+
+		$batchGetItems = $this->createMock( BatchGetItems::class );
+		$batchGetItems->expects( $this->once() )
+			->method( 'execute' )
+			->with( new BatchGetItemsRequest( $requestedItemIds ) )
+			->willReturn( new BatchGetItemsResponse( $itemsBatch ) );
+
+		$resolver = new ItemResolver( $batchGetItems );
+		$resolvedItems = $resolver->resolveItems( $requestedItemIds, $context, throwForMissingItems: false );
+
+		SyncPromiseQueue::run();
+
+		$this->assertCount( 4, $resolvedItems );
+
+		foreach ( $availableItemIds as $key => $id ) {
+			$this->assertSame( $items[$id], $resolvedItems[$key]->result );
+			$this->assertSame( 'potato', $resolvedItems[$key]->result->labels->getLabelInLanguage( 'en' )->text );
+		}
+		// check that the missing item is a stub item with the correct id
+		$this->assertSame( $missingItemId, $resolvedItems[3]->result->id->getSerialization() );
+		$this->assertEquals( new Labels(), $resolvedItems[3]->result->labels );
+		$this->assertSame( [ $missingItemId ], $context->missingItemIds );
 	}
 
 	private function newItemsBatchForIds( array $itemIds ): ItemsBatch {
