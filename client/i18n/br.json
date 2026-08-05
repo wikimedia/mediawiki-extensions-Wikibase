@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Adriendelucca",
+			"Ar choler",
 			"Fohanno",
 			"Fulup",
 			"Gwenn-Ael",
@@ -28,7 +29,7 @@
 	"wikibase-dataitem": "Elfenn {{WBREPONAME}}",
 	"wikibase-editlinks": "Kemmañ al liammoù",
 	"wikibase-editlinkstitle": "Kemmañ al liammoù etreyezhel",
-	"wikibase-addlinkstitle": "Ouzhpennañ al liammoù etreyezhel",
+	"wikibase-addlinkstitle": "Ouzhpennañ liammoù etreyezhel",
 	"wikibase-linkitem-addlinks": "Ouzhpennañ liammoù",
 	"wikibase-linkitem-alreadylinked": "Stag eo c'hoazh ar bajenn a fell deoc'h bezañ liammet outi ouzh un [$1 elfenn] all eus ar c'havlec'h roadennoù kreiz hag a zo liammet ouzh [[$2]] war al lec'hienn-mañ. Ne c'hall an elfennoù bezañ staget nemet ouzh ur bajenn dre lec'hienn. Dibabit ur bajenn all da vezañ liammet outi neuze.",
 	"wikibase-linkitem-close": "Serriñ ar prenestr hag adkargañ ar bajenn",
