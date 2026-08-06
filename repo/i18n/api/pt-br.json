@@ -301,7 +301,7 @@
 	"apihelp-wbformatentities-summary": "Formata IDs de entidade para HTML.",
 	"apihelp-wbformatentities-extended-description": "A linguagem pode ser especificada com o parâmetro global <var>uselang</var>.",
 	"apihelp-wbformatentities-param-ids": "Os IDs da entidade a serem formatados.",
-	"apihelp-wbformatentities-example-1": "Formate um ID de item único.",
+	"apihelp-wbformatentities-example-1": "Formate um ID de item único para HTML.",
 	"apihelp-wbformatentities-example-2": "Formate um ID de item e um ID de propriedade.",
 	"apihelp-wbformatentities-example-3": "Formate um ID de item, um ID de propriedade e um ID de lexema.",
 	"apihelp-wbformatentities-example-4": "Formate três IDs de item em francês."
