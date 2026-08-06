@@ -873,6 +873,7 @@ return [
 	},
 
 	'WikibaseClient.SidebarLinkBadgeDisplay' => function ( MediaWikiServices $services ): SidebarLinkBadgeDisplay {
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgLang
 		global $wgLang; // TODO don’t use user language in a service (cf. T344050)
 		StubObject::unstub( $wgLang );
 

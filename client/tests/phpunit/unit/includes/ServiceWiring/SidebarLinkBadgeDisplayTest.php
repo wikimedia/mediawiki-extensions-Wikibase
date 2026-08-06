@@ -26,6 +26,7 @@ class SidebarLinkBadgeDisplayTest extends ServiceWiringTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgLang
 		global $wgLang;
 
 		$this->cachedLang = clone $wgLang;
@@ -34,12 +35,14 @@ class SidebarLinkBadgeDisplayTest extends ServiceWiringTestCase {
 	protected function tearDown(): void {
 		parent::tearDown();
 
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgLang
 		global $wgLang;
 
 		$wgLang = $this->cachedLang;
 	}
 
 	public function testConstruction() {
+		// phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgLang
 		global $wgLang;
 
 		$this->mockService(

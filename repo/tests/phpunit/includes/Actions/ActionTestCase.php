@@ -160,14 +160,12 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 * @return Action
 	 */
 	protected function createAction( string $actionName, WikiPage $page, ?array $params = null, $wasPosted = false ) {
-		global $wgLang;
-
 		$params ??= [];
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, $wasPosted ) );
 		$context->setUser( $this->user );     // determined by setUser()
-		$context->setLanguage( $wgLang ); // qqx as per setUp()
+		$context->setLanguage( RequestContext::getMain()->getLanguage() ); // as set via setUserLang()
 		$context->setWikiPage( $page );
 		$article = Article::newFromWikiPage( $page, $context );
 
