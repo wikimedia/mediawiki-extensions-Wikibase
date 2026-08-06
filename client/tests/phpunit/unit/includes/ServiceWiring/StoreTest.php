@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit\ServiceWiring;
 
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Tests\Unit\ServiceWiringTestCase;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -68,7 +69,7 @@ class StoreTest extends ServiceWiringTestCase {
 			->method( 'newLocalDb' );
 		$this->mockService( 'WikibaseClient.ClientDomainDbFactory',
 			$clientDomainDbFactory );
-
+		$this->mockService( 'WikibaseClient.EntityUsageDomainDb', $this->createMock( EntityUsageDomainDb::class ) );
 		$this->assertInstanceOf(
 			DirectSqlStore::class,
 			$this->getService( 'WikibaseClient.Store' )

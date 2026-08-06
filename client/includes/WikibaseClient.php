@@ -25,6 +25,7 @@ use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -522,6 +523,11 @@ final class WikibaseClient {
 	public static function getTermsDomainDbFactory( ?ContainerInterface $services = null ): TermsDomainDbFactory {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WikibaseClient.TermsDomainDbFactory' );
+	}
+
+	public static function getEntityUsageDomainDb( ?ContainerInterface $services = null ): EntityUsageDomainDb {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseClient.EntityUsageDomainDb' );
 	}
 
 	public static function getEntitySourceAndTypeDefinitions( ?ContainerInterface $services = null ): EntitySourceAndTypeDefinitions {
