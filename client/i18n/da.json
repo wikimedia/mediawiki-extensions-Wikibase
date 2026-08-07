@@ -124,7 +124,7 @@
 	"notification-subject-page-connection": "En side på {{SITENAME}}, som du {{GENDER:$3|oprettede}}, var {{GENDER:$2|forbundet}} til et {{WBREPONAME}}-emne",
 	"unresolved-property-category": "Sider med uløste egenskaber",
 	"unresolved-property-category-desc": "Denne kategori viser sider, der refererer til {{WBREPONAME}}-egenskaber, som hverken kan findes via deres egenskab-ID eller etiket.",
-	"connected-redirect-category": "Omdirigeringer forbundet til et Wikidata-emne",
+	"connected-redirect-category": "Omdirigeringer forbundet til et {{WBREPONAME}}-emne",
 	"connected-redirect-category-desc": "Denne kategori viser omdirigeringssider, der er forbundet til et {{WBREPONAME}}-emne.",
 	"wikibase-client-data-bridge-dialog-title": "Rediger $1",
 	"wikibase-client-data-bridge-permissions-error": "Du har ikke rettigheder til at redigere denne værdi af følgende {{PLURAL:$1|årsag|årsager}}:",
