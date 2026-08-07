@@ -1,10 +1,10 @@
 import SwaggerUI from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
 
-import spec from '../src/openapi.json';
-
 const ui = SwaggerUI( {
-	spec,
+	// Injected at build time; see webpack.config.js for how the documented
+	// wiki is chosen.
+	url: process.env.OPENAPI_DOC_URL,
 	dom_id: '#swagger', // eslint-disable-line camelcase
 	deepLinking: true,
 	showCommonExtensions: true,
