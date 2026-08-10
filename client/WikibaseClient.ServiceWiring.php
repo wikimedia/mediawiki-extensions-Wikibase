@@ -45,6 +45,7 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\Client\WikibaseClient;
@@ -979,7 +980,8 @@ return [
 			WikibaseClient::getTermBuffer( $services ),
 			WikibaseClient::getRepoDomainDbFactory( $services )
 				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) ),
-			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb()
+			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
+			new EntityUsageDomainDb( $services->getDBLoadBalancerFactory() )
 		);
 	},
 

@@ -29,10 +29,12 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 			'Wikibase\\\\Repo\\\\' => [],
 			// don’t use MediaWiki RDBMS – use our RDBMS instead (DomainDb etc.)
 			'/\b(get|I|)LBFactory(?:;)/' => [
+				'includes/Usage/Sql/EntityUsageDomainDb.php' => true,
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
 			],
 			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
-				'WikibaseClient.ServiceWiring.php' => 3, // RepoDomainDbFactory+ClientDomainDbFactory+TermsDomainDbFactory service wiring
+				// RepoDomainDbFactory+ClientDomainDbFactory+TermsDomainDbFactory+EntityUsageDomainDb service wiring
+				'WikibaseClient.ServiceWiring.php' => 4,
 				'tests/phpunit/integration/includes/RecentChanges/RecentChangesFinderTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlSubscriptionManagerTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => true, // TODO migrate?

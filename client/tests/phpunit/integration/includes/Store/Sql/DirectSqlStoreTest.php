@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -55,7 +56,8 @@ class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 			new ClientDomainDb(
 				LBFactorySingle::newFromConnection( $this->db ),
 				$this->getDb()->getDomainID()
-			)
+			),
+			$this->createStub( EntityUsageDomainDb::class )
 		);
 	}
 

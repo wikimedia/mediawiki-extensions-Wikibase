@@ -10,6 +10,7 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\Client\Usage\SubscriptionManager;
@@ -60,6 +61,11 @@ class DirectSqlStore implements ClientStore {
 	 * @var ClientDomainDb
 	 */
 	private $clientDb;
+
+	/**
+	 * @var EntityUsageDomainDb
+	 */
+	private $entityUsageDb;
 
 	/**
 	 * @var string
@@ -149,7 +155,8 @@ class DirectSqlStore implements ClientStore {
 		SettingsArray $settings,
 		TermBuffer $termBuffer,
 		RepoDomainDb $repoDb,
-		ClientDomainDb $clientDb
+		ClientDomainDb $clientDb,
+		EntityUsageDomainDb $entityUsageDb,
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdLookup = $entityIdLookup;
@@ -157,6 +164,7 @@ class DirectSqlStore implements ClientStore {
 		$this->termBuffer = $termBuffer;
 		$this->repoDb = $repoDb;
 		$this->clientDb = $clientDb;
+		$this->entityUsageDb = $entityUsageDb;
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
@@ -225,10 +233,9 @@ class DirectSqlStore implements ClientStore {
 
 	public function getUsageTracker(): SqlUsageTracker {
 		if ( $this->usageTracker === null ) {
-			$connectionManager = $this->getClientConnectionManager();
 			$this->usageTracker = new SqlUsageTracker(
 				$this->entityIdParser,
-				$connectionManager,
+				$this->entityUsageDb,
 				$this->disabledUsageAspects,
 				$this->entityUsagePerPageLimit,
 				$this->addEntityUsagesBatchSize
