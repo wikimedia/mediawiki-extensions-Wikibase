@@ -18,6 +18,7 @@ const config = require( 'api-testing/lib/config' );
  * AbuseFilter doesn't have an API to create filters. This is a very hacky way around the issue:
  * - get the edit token (a CSRF token salted for the AbuseFilter form)
  * - make a POST request that looks like it's coming from said form
+ * - look up the new filter's ID
  *
  * @param {string} description
  * @param {string} rules
@@ -32,7 +33,7 @@ async function createAbuseFilter( description, rules ) {
 		.match( /value="[a-z0-9]+\+\\"/ )[ 0 ] // the token is in the value attribute of an input field and ends with +\
 		.slice( 'value="'.length, -1 ); // remove parts that were matched that aren't part of the token
 
-	const createFilterResponse = await client.post( `${ config.base_uri }index.php` ).type( 'form' ).send( {
+	await client.post( `${ config.base_uri }index.php` ).type( 'form' ).send( {
 		title: 'Special:AbuseFilter/new',
 		wpEditToken: editToken,
 		wpFilterDescription: description,
@@ -50,7 +51,8 @@ async function createAbuseFilter( description, rules ) {
 		wpFilterTags: ''
 	} );
 
-	return new URL( createFilterResponse.headers.location, config.base_uri ).searchParams.get( 'changedfilter' );
+	const filters = await rootClient.list( 'abusefilters', { abfprop: 'id|description' } );
+	return filters.find( ( filter ) => filter.description === description ).id;
 }
 
 describe( 'Abuse Filter', () => {
@@ -92,7 +94,7 @@ describe( 'Abuse Filter', () => {
 			assertValidError( response, 403, 'permission-denied', {
 				denial_reason: 'abusefilter-disallowed',
 				denial_context: { abusefilter: {
-					id: filterId,
+					id: filterId.toString(),
 					description: filterDescription,
 					actions: [ 'disallow' ]
 				} }
