@@ -981,7 +981,7 @@ return [
 			WikibaseClient::getRepoDomainDbFactory( $services )
 				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) ),
 			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
-			new EntityUsageDomainDb( $services->getDBLoadBalancerFactory() )
+			new EntityUsageDomainDb( $services->getConnectionProvider() )
 		);
 	},
 
