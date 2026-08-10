@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Dušan Kreheľ",
+			"KormiSK",
 			"KuboF",
 			"Ladsgroup",
 			"Lexected",
@@ -40,6 +41,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Jazyk",
 	"wikibase-entitytermsforlanguagelistview-more": "Všetky zadané jazyky",
 	"wikibase-entitytermsforlanguagelistview-less": "Menej jazykov",
+	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Znovu už nezobrazovať",
 	"wikibase-label-empty": "Menovka zatiaľ nebola definovaná",
 	"wikibase-label-edit-placeholder": "zadaj menovku",
 	"wikibase-label-edit-placeholder-language-aware": "zadajte štítok v jazyku $1",
