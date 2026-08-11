@@ -413,7 +413,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		try {
 			return $this->applyChangeOpList( $changeOps, $entity );
 		} catch ( ChangeOpException $ex ) {
-			$this->showErrorHTML( $ex->getMessage() );
+			$this->showErrorHTML( htmlspecialchars( $ex->getMessage() ) );
 			return false;
 		}
 	}
