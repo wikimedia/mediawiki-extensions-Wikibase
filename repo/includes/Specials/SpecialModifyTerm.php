@@ -183,7 +183,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		try {
 			$summary = $this->setValue( $entity, $this->languageCode, $this->value );
 		} catch ( ChangeOpException | UserInputException $e ) {
-			$this->showErrorHTML( $e->getMessage() );
+			$this->showErrorHTML( htmlspecialchars( $e->getMessage() ) );
 			return false;
 		}
 

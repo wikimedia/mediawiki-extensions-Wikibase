@@ -250,7 +250,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		try {
 			$status = $this->setSiteLink( $entity, $this->site, $this->page, $this->badges, $summary );
 		} catch ( ChangeOpException $e ) {
-			$this->showErrorHTML( $e->getMessage() );
+			$this->showErrorHTML( htmlspecialchars( $e->getMessage() ) );
 			return false;
 		}
 
