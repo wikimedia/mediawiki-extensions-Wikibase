@@ -140,4 +140,18 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 		) ) ) );
 	}
 
+	public function testEscapesLanguageAndValue(): void {
+		$id = $this->createNewItemWithTerms( 'en', 'foo' );
+
+		$request = new FauxRequest( [
+			'id' => $id,
+			'language' => '<script>alert("language")</script>',
+			'value' => '<script>alert("value")</script>',
+		], true );
+
+		[ $output ] = $this->executeSpecialPage( '', $request );
+
+		$this->assertStringNotContainsString( '<script>alert', $output );
+	}
+
 }
