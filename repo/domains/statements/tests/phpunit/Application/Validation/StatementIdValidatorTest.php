@@ -1,15 +1,15 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Statements\Application\Validation;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementIdValidator;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\StatementIdValidator
+ * @covers \Wikibase\Repo\Domains\Statements\Application\Validation\StatementIdValidator
  *
  * @group Wikibase
  *

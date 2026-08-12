@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementIdValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementIdValidator;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementIdRequestValidatingDeserializer

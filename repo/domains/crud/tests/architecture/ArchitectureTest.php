@@ -28,6 +28,7 @@ class ArchitectureTest {
 	private const USE_CASE_REQUEST_VALIDATION = 'Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation';
 	private const STATEMENTS_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
 	private const STATEMENTS_SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
+	private const STATEMENTS_VALIDATION = 'Wikibase\Repo\Domains\Statements\Application\Validation';
 
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
@@ -107,12 +108,14 @@ class ArchitectureTest {
 	/**
 	 * Validation may depend on:
 	 *  - the serialization namespace and everything it depends on
+	 *  - the shared Statements domain validators
 	 *  - other classes from its own namespace
 	 */
 	private function allowedValidationDependencies(): array {
 		return [
 			...$this->allowedSerializationDependencies(),
 			Selector::inNamespace( self::VALIDATION ),
+			Selector::inNamespace( self::STATEMENTS_VALIDATION ),
 		];
 	}
 

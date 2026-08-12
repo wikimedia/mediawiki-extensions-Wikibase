@@ -19,6 +19,7 @@ class ArchitectureTest {
 	private const REGEX_DOMAIN_READMODEL = '/^Wikibase\\\\Repo\\\\Domains\\\\.+\\\\Domain\\\\ReadModel/';
 	private const STATEMENTS_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
 	private const STATEMENTS_SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
+	private const STATEMENTS_VALIDATION = 'Wikibase\Repo\Domains\Statements\Application\Validation';
 	private const STATEMENTS_SERVICES = 'Wikibase\Repo\Domains\Statements\Domain\Services';
 
 	private function domainNamespaces(): array {
@@ -43,9 +44,11 @@ class ArchitectureTest {
 				->classes( Selector::inNamespace( self::DOMAINS_NAMESPACE ) )
 				->excluding(
 					Selector::inNamespace( $domain ),
-					// the Statements read models, serializers and services are a shared kernel any domain may depend on
+					// the Statements read models, serializers, validators and services are a shared kernel
+					// any domain may depend on
 					Selector::inNamespace( self::STATEMENTS_READMODEL ),
 					Selector::inNamespace( self::STATEMENTS_SERIALIZATION ),
+					Selector::inNamespace( self::STATEMENTS_VALIDATION ),
 					Selector::inNamespace( self::STATEMENTS_SERVICES )
 				)
 				->because( 'Core classes may only depend on their own domain or the shared Statements kernel.' );
@@ -81,6 +84,9 @@ class ArchitectureTest {
 			Selector::inNamespace( 'Wikibase\Repo\Domains\Reuse\Domain\Model' ),
 			// the shared Statements domain services (e.g. StatementReadModelConverter)
 			Selector::inNamespace( self::STATEMENTS_SERVICES ),
+			// the shared Statements domain serializers and validators
+			Selector::inNamespace( self::STATEMENTS_SERIALIZATION ),
+			Selector::inNamespace( self::STATEMENTS_VALIDATION ),
 		];
 	}
 

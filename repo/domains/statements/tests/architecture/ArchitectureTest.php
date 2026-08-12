@@ -8,6 +8,7 @@ use PHPat\Test\PHPat;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 
 /**
  * @coversNothing
@@ -19,6 +20,7 @@ class ArchitectureTest {
 	private const DOMAIN_READMODEL = 'Wikibase\Repo\Domains\Statements\Domain\ReadModel';
 	private const DOMAIN_SERVICES = 'Wikibase\Repo\Domains\Statements\Domain\Services';
 	private const SERIALIZATION = 'Wikibase\Repo\Domains\Statements\Application\Serialization';
+	private const VALIDATION = 'Wikibase\Repo\Domains\Statements\Application\Validation';
 
 	public function testDomainReadModel(): Rule {
 		return PHPat::rule()
@@ -81,11 +83,31 @@ class ArchitectureTest {
 		];
 	}
 
+	public function testValidation(): Rule {
+		return PHPat::rule()
+			->classes( Selector::inNamespace( self::VALIDATION ) )
+			->canOnlyDependOn()
+			->classes( ...$this->allowedValidationDependencies() );
+	}
+
+	/**
+	 * Validation may depend on:
+	 *  - the serialization namespace and everything it depends on
+	 *  - other classes from its own namespace
+	 */
+	private function allowedValidationDependencies(): array {
+		return [
+			...$this->allowedSerializationDependencies(),
+			Selector::inNamespace( self::VALIDATION ),
+		];
+	}
+
 	private function allowedDataModelServices(): array {
 		return [
 			Selector::classname( PropertyDataTypeLookup::class ),
 			Selector::classname( PropertyDataTypeLookupException::class ),
 			Selector::classname( StatementGuidParser::class ),
+			Selector::classname( StatementGuidValidator::class ),
 		];
 	}
 

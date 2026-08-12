@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Domains\Crud\Application\Validation;
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
 
 /**
  * @license GPL-2.0-or-later
@@ -60,7 +61,7 @@ class ItemValidator {
 
 		$validationError = $this->validateLabelsAndDescriptions( $serialization, $basePath ) ??
 			$this->aliasesValidator->validate( $serialization['aliases'], "$basePath/aliases" ) ??
-			$this->itemStatementsValidator->validateNewStatements( $serialization['statements'], "$basePath/statements" ) ??
+			$this->validateStatements( $serialization['statements'], "$basePath/statements" ) ??
 			$this->sitelinksValidator->validate( null, $serialization['sitelinks'], null, "$basePath/sitelinks" );
 		if ( $validationError ) {
 			return $validationError;
@@ -85,6 +86,15 @@ class ItemValidator {
 			throw new LogicException( 'getValidatedItem() called before validate()' );
 		}
 		return $this->deserializedItem;
+	}
+
+	private function validateStatements( array $statementsSerialization, string $basePath ): ?ValidationError {
+		$statementsError = $this->itemStatementsValidator->validateNewStatements( $statementsSerialization, $basePath );
+
+		return $statementsError
+			// converting the statement domain validation error this domain's
+			? new ValidationError( $statementsError->getCode(), $statementsError->getContext() )
+			: null;
 	}
 
 	private function validateLabelsAndDescriptions( array $itemSerialization, string $basePath ): ?ValidationError {

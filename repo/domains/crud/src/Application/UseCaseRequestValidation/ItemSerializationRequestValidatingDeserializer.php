@@ -16,9 +16,9 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\LanguageCodeValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinkValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later

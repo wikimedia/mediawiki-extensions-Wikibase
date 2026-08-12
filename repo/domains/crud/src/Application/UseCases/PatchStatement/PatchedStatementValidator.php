@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Domains\Crud\Application\UseCases\PatchStatement;
 use LogicException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later

@@ -39,8 +39,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedDescript
 use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Aliases;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
@@ -55,6 +53,8 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\TermValidatorFactoryAliasesInLangu
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidator;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList as Statements;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;

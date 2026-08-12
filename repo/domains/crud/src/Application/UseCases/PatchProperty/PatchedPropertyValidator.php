@@ -20,9 +20,9 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsConten
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 
 /**
  * @license GPL-2.0-or-later

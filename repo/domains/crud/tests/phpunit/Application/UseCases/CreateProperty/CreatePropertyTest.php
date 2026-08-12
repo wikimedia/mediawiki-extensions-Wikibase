@@ -25,8 +25,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionsConten
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyDescriptionValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelsContentsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PropertyLabelValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Domain\Model\CreatePropertyEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Services\PropertyCreator;
@@ -36,6 +34,8 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\ValueValidatorLanguageCodeValidato
 use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializerServiceContainer;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\InMemoryPropertyRepository;
