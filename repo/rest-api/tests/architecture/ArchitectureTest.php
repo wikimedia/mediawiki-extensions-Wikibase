@@ -16,7 +16,8 @@ class ArchitectureTest {
 	public function testRestApiCannotDependOnDomains(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( 'Wikibase\Repo\RestApi' ) )
-			->shouldNotDependOn()
+			->shouldNot()
+			->dependOn()
 			->classes( Selector::inNamespace( 'Wikibase\Repo\Domains' ) )
 			->because( 'The REST API must not depend on classes from any Domains namespace' );
 	}

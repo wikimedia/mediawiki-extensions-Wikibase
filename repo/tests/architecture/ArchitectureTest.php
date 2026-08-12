@@ -39,7 +39,8 @@ class ArchitectureTest {
 				->classes( Selector::inNamespace( $domain ) )
 				// excluded here, see infrastructure dependency rules below
 				->excluding( Selector::inNamespace( $domain . self::INFRASTRUCTURE ) )
-				->shouldNotDependOn()
+				->shouldNot()
+				->dependOn()
 				->classes( Selector::inNamespace( self::DOMAINS_NAMESPACE ) )
 				->excluding(
 					Selector::inNamespace( $domain ),
@@ -59,7 +60,8 @@ class ArchitectureTest {
 		foreach ( $this->domainNamespaces() as $domain ) {
 			yield PHPat::rule()
 				->classes( Selector::inNamespace( $domain . self::INFRASTRUCTURE ) )
-				->shouldNotDependOn()
+				->shouldNot()
+				->dependOn()
 				->classes( Selector::inNamespace( self::DOMAINS_NAMESPACE ) )
 				->excluding(
 					// own domain

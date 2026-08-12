@@ -23,7 +23,8 @@ class ArchitectureTest {
 	public function testDomainReadModel(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::DOMAIN_READMODEL ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainReadModelDependencies() );
 	}
 
@@ -42,7 +43,8 @@ class ArchitectureTest {
 	public function testDomainServices(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::DOMAIN_SERVICES ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainServicesDependencies() );
 	}
 
@@ -63,7 +65,8 @@ class ArchitectureTest {
 	public function testSerialization(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::SERIALIZATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedSerializationDependencies() );
 	}
 
