@@ -58,6 +58,14 @@ class GraphQLService {
 			$result->extensions[ QueryContext::KEY_REDIRECTS ] = $context->redirects;
 		}
 
+		if ( $context->missingItemIds ) {
+			$result->extensions[ QueryContext::KEY_MISSING_ITEMS ] = $context->missingItemIds;
+			$result->extensions[ QueryContext::KEY_MESSAGE ] = sprintf(
+				QueryContext::MESSAGE_MISSING_ITEMS,
+				implode( ', ', $context->missingItemIds )
+			);
+		}
+
 		$this->transformErrors( $result );
 		$this->tracking->recordQueryMetrics( $result, $parsedQuery, $operationName );
 		$this->errorLogger->logUnexpectedErrors( $result->errors );

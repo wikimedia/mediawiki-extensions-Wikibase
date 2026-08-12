@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\GraphQLService;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\PaginationCursorCodec;
+use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\QueryContext;
 use Wikibase\Repo\Domains\Reuse\WbReuse;
 use Wikibase\Repo\Tests\Domains\Reuse\Infrastructure\DataAccess\InMemoryFacetedItemSearchEngine;
 
@@ -534,6 +535,44 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expectedErrorMessage, $result['errors'][0]['message'] );
 	}
 
+	public function testHandlesMissingItems(): void {
+		$property = self::createProperty( 'string' );
+		$existingItem = self::createItem( NewItem::withLabel( 'en', 'potato' )
+			->andStatement( NewStatement::someValueFor( $property->getId() )->withSomeGuid() )
+		);
+
+		$search = new InMemoryFacetedItemSearchEngine();
+		$graphQLService = $this->newGraphQLService( $search );
+
+		// simulate a stale search index: item is indexed in search but no longer exists in the entity lookup
+		$missingItemId = new ItemId( 'Q999' );
+		$missingItem = NewItem::withId( $missingItemId )
+			->andStatement( NewStatement::someValueFor( $property->getId() )->withSomeGuid() )
+			->build();
+		$search->addItem( $missingItem );
+
+		$query = "{ searchItems( query: { property: \"{$property->getId()}\" } ) {
+		edges { node { id label(languageCode: \"en\") } }
+		} }";
+
+		$result = $graphQLService->query( $query );
+
+		$this->assertEquals( [
+			'data' => [
+				'searchItems' => [
+					'edges' => [
+						[ 'node' => [ 'id' => $existingItem->getId(), 'label' => 'potato' ] ],
+						[ 'node' => [ 'id' => $missingItemId, 'label' => null ] ],
+					],
+				],
+			],
+			'extensions' => [
+				QueryContext::KEY_MISSING_ITEMS => [ "$missingItemId" ],
+				QueryContext::KEY_MESSAGE => sprintf( QueryContext::MESSAGE_MISSING_ITEMS, $missingItemId ),
+			],
+		], $result );
+	}
+
 	private static function createProperty( string $dataType, ?string $enLabel = null ): Property {
 		// assign the ID here so that we don't have to worry about collisions
 		$nextId = empty( self::$properties ) ? 'P1' : 'P' . self::getNextNumericId( self::$properties );
@@ -560,7 +599,9 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		return (int)substr( $latestEntity->getId()->getSerialization(), 1 ) + 1;
 	}
 
-	private function newGraphQLService(): GraphQLService {
+	private function newGraphQLService(
+		?InMemoryFacetedItemSearchEngine $search = null,
+	): GraphQLService {
 		$termLookup = new InMemoryPrefetchingTermLookup();
 		$termLookup->setData( self::$items );
 		$this->setService( 'WikibaseRepo.PrefetchingTermLookup', $termLookup );
@@ -574,7 +615,7 @@ class FacetedItemSearchTest extends MediaWikiIntegrationTestCase {
 		);
 		$this->setService( 'WikibaseRepo.EntityRevisionLookup', $revisionLookup );
 
-		$search = new InMemoryFacetedItemSearchEngine();
+		$search ??= new InMemoryFacetedItemSearchEngine();
 		$this->setService( 'WbReuse.FacetedItemSearchEngine', $search );
 
 		foreach ( self::$items as $item ) {
