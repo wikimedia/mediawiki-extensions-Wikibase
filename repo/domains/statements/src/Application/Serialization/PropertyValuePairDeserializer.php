@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Crud\Application\Serialization;
+namespace Wikibase\Repo\Domains\Statements\Application\Serialization;
 
 use Exception;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -11,9 +11,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\InvalidFieldException;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\PropertyNotFoundException;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\InvalidFieldException;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\Value;
 
 /**

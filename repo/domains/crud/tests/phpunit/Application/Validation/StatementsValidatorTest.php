@@ -9,13 +9,13 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\Exceptions\MissingFieldException;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\PropertyValuePairDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\MissingFieldException;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePairDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator

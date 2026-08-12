@@ -70,11 +70,13 @@ class ArchitectureTest {
 	/**
 	 * Serialization may depend on:
 	 *  - the domain read models namespace and everything it depends on
+	 *  - some hand-picked DataModel services
 	 *  - other classes from its own namespace
 	 */
 	private function allowedSerializationDependencies(): array {
 		return [
 			...$this->allowedDomainReadModelDependencies(),
+			...$this->allowedDataModelServices(),
 			Selector::inNamespace( self::SERIALIZATION ),
 		];
 	}

@@ -5,13 +5,13 @@ namespace Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
-use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Tests\Domains\Statements\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer

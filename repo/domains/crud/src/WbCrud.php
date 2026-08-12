@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Domains\Crud;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemAliasesInLanguage\AddItemAliasesInLanguage;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\AddItemStatement\AddItemStatement;
@@ -87,6 +86,7 @@ use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterPropertyUp
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\TermLookupEntityTermsRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\StatementRedirectMiddlewareFactory;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Middleware\PreconditionMiddlewareFactory;
 use Wikibase\Repo\RestApi\Middleware\UnexpectedErrorHandlerMiddleware;
