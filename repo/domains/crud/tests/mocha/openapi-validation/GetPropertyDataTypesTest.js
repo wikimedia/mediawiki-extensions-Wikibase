@@ -10,6 +10,6 @@ describe( 'GET /v1/property-data-types', () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 } );

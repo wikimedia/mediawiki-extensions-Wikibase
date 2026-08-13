@@ -16,7 +16,6 @@ module.exports = {
 		"src/openapi.json"
 	],
 	rules: {
-		"no-unused-expressions": "off",
 		"prefer-arrow-callback": "off",
 	}
 };

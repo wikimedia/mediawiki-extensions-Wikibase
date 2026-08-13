@@ -160,6 +160,6 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 	};
 }
 
-Assertion.addProperty( 'satisfyApiSchema', buildSatisfyApiSchema( compileSchemaAndValidator() ) );
+Assertion.addMethod( 'satisfyApiSchema', buildSatisfyApiSchema( compileSchemaAndValidator() ) );
 
 module.exports = { expect };

@@ -30,7 +30,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} ).makeRequest();
 
 		expect( response ).to.have.status( 201 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 
 	it( '400 - invalid field', async () => {
@@ -39,7 +39,7 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} ).makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 
 	it( '422 ', async () => {
@@ -56,6 +56,6 @@ describe( newCreateItemRequestBuilder().getRouteDescription(), () => {
 		} ).makeRequest();
 
 		expect( response ).to.have.status( 422 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 } );
