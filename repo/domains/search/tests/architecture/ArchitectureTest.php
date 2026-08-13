@@ -23,7 +23,8 @@ class ArchitectureTest {
 	public function testDomainModel(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::DOMAIN_MODEL ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainModelDependencies() );
 	}
 
@@ -64,7 +65,8 @@ class ArchitectureTest {
 	public function testDomainServices(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::DOMAIN_SERVICES ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainServicesDependencies() );
 	}
 
@@ -85,7 +87,8 @@ class ArchitectureTest {
 	public function testValidation(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::VALIDATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedValidationDependencies() );
 	}
 
@@ -104,7 +107,8 @@ class ArchitectureTest {
 	public function testUseCases(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::USE_CASES ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedUseCasesDependencies() );
 	}
 

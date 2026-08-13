@@ -35,7 +35,8 @@ class ArchitectureTest {
 				Selector::inNamespace( self::DOMAIN_MODEL ),
 				Selector::inNamespace( self::DOMAIN_READMODEL )
 			)
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainModelDependencies() );
 	}
 
@@ -57,7 +58,8 @@ class ArchitectureTest {
 	public function testDomainServices(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::DOMAIN_SERVICES ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedDomainServicesDependencies() );
 	}
 
@@ -78,7 +80,8 @@ class ArchitectureTest {
 	public function testSerialization(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::SERIALIZATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedSerializationDependencies() );
 	}
 
@@ -100,7 +103,8 @@ class ArchitectureTest {
 	public function testValidation(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::VALIDATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedValidationDependencies() );
 	}
 
@@ -119,7 +123,8 @@ class ArchitectureTest {
 	public function testUseCases(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::USE_CASES ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedUseCasesDependencies() );
 	}
 
@@ -140,7 +145,8 @@ class ArchitectureTest {
 	public function testUseCaseRequestValidation(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::USE_CASE_REQUEST_VALIDATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedUseCaseRequestValidationDependencies() );
 	}
 
