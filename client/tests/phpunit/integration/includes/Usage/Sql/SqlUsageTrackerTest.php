@@ -90,7 +90,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new EntityUsageDomainDb(
-				$this->getServiceContainer()->getDBLoadBalancerFactory()
+				$this->getServiceContainer()->getConnectionProvider()
 			),
 			[ EntityUsage::STATEMENT_USAGE, EntityUsage::DESCRIPTION_USAGE =>
 				EntityUsage::OTHER_USAGE ],
@@ -119,10 +119,10 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 			new EntityUsage( $q4, EntityUsage::LABEL_USAGE, 'de' ),
 		];
 
-		$lbFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
+		$dbProvider = $this->getServiceContainer()->getConnectionProvider();
 		$sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
-			new EntityUsageDomainDb( $lbFactory ),
+			new EntityUsageDomainDb( $dbProvider ),
 			[],
 			100
 		);
@@ -131,7 +131,7 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 
 		$sqlUsageTrackerWithDisabledUsageAspects = new SqlUsageTracker(
 			new ItemIdParser(),
-			new EntityUsageDomainDb( $lbFactory ),
+			new EntityUsageDomainDb( $dbProvider ),
 			[ EntityUsage::STATEMENT_USAGE ],
 			100
 		);

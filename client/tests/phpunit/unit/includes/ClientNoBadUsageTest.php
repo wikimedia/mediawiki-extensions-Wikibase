@@ -33,14 +33,20 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
 			],
 			'/\b((get)?(DB)?|I|)LoadBalancer(Factory)?(?!::|;)/' => [
-				// RepoDomainDbFactory+ClientDomainDbFactory+TermsDomainDbFactory+EntityUsageDomainDb service wiring
-				'WikibaseClient.ServiceWiring.php' => 4,
+				'WikibaseClient.ServiceWiring.php' => 3, // RepoDomainDbFactory+ClientDomainDbFactory+TermsDomainDbFactory service wiring
 				'tests/phpunit/integration/includes/RecentChanges/RecentChangesFinderTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlSubscriptionManagerTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => true, // TODO migrate?
 				'tests/phpunit/integration/includes/ChangeModification/ChangeDeletionNotificationJobTest.php' => 1, // make DomainDb
 				'tests/phpunit/integration/includes/ChangeModification/ChangeVisibilityNotificationJobTest.php' => 1, // make DomainDb
 				'tests/phpunit/unit/includes/ServiceWiringTestCase.php' => true, // mock
+			],
+			'/\b(get|I|)ConnectionProvider(?!::|;)/' => [
+				'WikibaseClient.ServiceWiring.php' => 1, // EntityUsageDomainDb service wiring
+				'tests/phpunit/integration/includes/Specials/SpecialUnconnectedPagesTest.php' => 2,
+				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => 2,
+				'includes/Usage/Sql/EntityUsageDomainDb.php' => 1,
+				'includes/Specials/SpecialUnconnectedPages.php' => 1,
 			],
 		];
 	}
