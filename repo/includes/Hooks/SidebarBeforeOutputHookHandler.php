@@ -148,7 +148,6 @@ class SidebarBeforeOutputHookHandler implements SidebarBeforeOutputHook {
 				$this->itemMatchesWikiProject( $entity, $projectConfig )
 			) {
 				$links[] = [
-					// TODO: determine if/how to handle translations of titles without requiring every one to have a message T425437
 					'text' => $skin->msg( $projectConfig[ 'msg' ] )->text(),
 					'href' => $projectConfig[ 'href' ],
 					'data' => [
