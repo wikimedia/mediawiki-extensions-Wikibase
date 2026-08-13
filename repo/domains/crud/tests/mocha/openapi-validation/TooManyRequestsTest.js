@@ -34,7 +34,7 @@ describe( 'Too Many Requests', () => {
 					.makeRequest();
 
 				expect( response ).to.have.status( 429 );
-				expect( response ).to.satisfyApiSchema;
+				expect( response ).to.satisfyApiSchema();
 			} );
 		} );
 	} );

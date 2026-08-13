@@ -38,7 +38,7 @@ describe( 'Simple item search', () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.lengthOf( response.body.results, 1 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 
 	it( '200 - empty search response', async () => {
@@ -48,7 +48,7 @@ describe( 'Simple item search', () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.lengthOf( response.body.results, 0 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 
 	it( '200 - search response by ID (without language match)', async () => {
@@ -58,7 +58,7 @@ describe( 'Simple item search', () => {
 
 		expect( response ).to.have.status( 200 );
 		assert.lengthOf( response.body.results, 1 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 
 	it( '400 - invalid language code', async () => {
@@ -67,6 +67,6 @@ describe( 'Simple item search', () => {
 			.makeRequest();
 
 		expect( response ).to.have.status( 400 );
-		expect( response ).to.satisfyApiSchema;
+		expect( response ).to.satisfyApiSchema();
 	} );
 } );
