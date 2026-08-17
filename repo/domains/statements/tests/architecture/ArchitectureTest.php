@@ -89,7 +89,8 @@ class ArchitectureTest {
 	public function testValidation(): Rule {
 		return PHPat::rule()
 			->classes( Selector::inNamespace( self::VALIDATION ) )
-			->canOnlyDependOn()
+			->canOnly()
+			->dependOn()
 			->classes( ...$this->allowedValidationDependencies() );
 	}
 
