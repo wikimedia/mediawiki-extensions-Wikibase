@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Statements\Application\Validation;
 
 use Generator;
 use LogicException;
@@ -9,16 +9,16 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Tests\NewStatement;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePairDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator
+ * @covers \Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator
  *
  * @group Wikibase
  *

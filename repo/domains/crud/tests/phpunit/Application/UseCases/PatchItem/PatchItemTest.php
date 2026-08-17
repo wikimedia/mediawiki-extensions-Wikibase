@@ -40,8 +40,6 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\LabelLanguageCodeValidator
 use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Model\PatchItemEditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Model\User;
@@ -63,6 +61,8 @@ use Wikibase\Repo\Domains\Statements\Application\Serialization\PropertyValuePair
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementListSerializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
 use Wikibase\Repo\Tests\Domains\Crud\Application\UseCaseRequestValidation\TestValidatingRequestDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;

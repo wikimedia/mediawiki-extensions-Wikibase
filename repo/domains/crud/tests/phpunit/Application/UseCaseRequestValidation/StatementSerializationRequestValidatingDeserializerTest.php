@@ -8,9 +8,9 @@ use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequest;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\StatementSerializationRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
 use Wikibase\Repo\Tests\Domains\Statements\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**

@@ -23,8 +23,9 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\LabelsSyntaxValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedDescriptions;
 use Wikibase\Repo\Domains\Crud\Application\Validation\PartiallyValidatedLabels;
 use Wikibase\Repo\Domains\Crud\Application\Validation\SitelinksValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementsValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementsValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\ValidationError as StatementsValidationError;
 
 /**
  * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\ItemValidator
@@ -230,13 +231,20 @@ class ItemValidatorTest extends TestCase {
 			'statements' => [ 'invalid' => 'statement' ],
 		];
 
-		$expectedError = $this->createStub( ValidationError::class );
+		$errorContext = [ StatementsValidator::CONTEXT_PATH => '/statements' ];
 		$this->itemStatementsValidator = $this->createMock( StatementsValidator::class );
 		$this->itemStatementsValidator->method( 'validateNewStatements' )
 			->with( $invalidSerialization[ 'statements' ] )
-			->willReturn( $expectedError );
+			->willReturn( new StatementsValidationError(
+				StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE,
+				$errorContext
+			) );
 
-		$this->assertEquals( $expectedError, $this->newValidator()->validate( $invalidSerialization ) );
+		// the Statements domain has its own ValidationError, which ItemValidator converts to the CRUD one
+		$this->assertEquals(
+			new ValidationError( StatementsValidator::CODE_STATEMENTS_NOT_ASSOCIATIVE, $errorContext ),
+			$this->newValidator()->validate( $invalidSerialization )
+		);
 	}
 
 	public function testGivenInvalidField_validateReturnsValidationError(): void {

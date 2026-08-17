@@ -1,22 +1,22 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Tests\Domains\Crud\Application\Validation;
+namespace Wikibase\Repo\Tests\Domains\Statements\Application\Validation;
 
 use Generator;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
-use Wikibase\Repo\Domains\Crud\Application\Validation\ValidationError;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\InvalidFieldException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\InvalidFieldTypeException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\MissingFieldException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\PropertyNotFoundException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\Exceptions\SerializationException;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator;
+use Wikibase\Repo\Domains\Statements\Application\Validation\ValidationError;
 
 /**
- * @covers \Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator
+ * @covers \Wikibase\Repo\Domains\Statements\Application\Validation\StatementValidator
  *
  * @group Wikibase
  *

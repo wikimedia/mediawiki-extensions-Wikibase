@@ -1,6 +1,6 @@
 <?php declare( strict_types=1 );
 
-namespace Wikibase\Repo\Domains\Crud\Application\Validation;
+namespace Wikibase\Repo\Domains\Statements\Application\Validation;
 
 use LogicException;
 use Wikibase\DataModel\Statement\StatementList;
