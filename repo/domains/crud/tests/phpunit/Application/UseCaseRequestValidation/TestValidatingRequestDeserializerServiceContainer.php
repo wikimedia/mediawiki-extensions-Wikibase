@@ -6,9 +6,7 @@ use LogicException;
 use MediaWiki\MediaWikiServices;
 use Psr\Container\ContainerInterface;
 use Wikibase\Lib\Store\HashSiteLinkStore;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\ReferenceDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\Serialization\SitelinkDeserializer;
-use Wikibase\Repo\Domains\Crud\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\EditMetadataRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SiteIdRequestValidatingDeserializer;
 use Wikibase\Repo\Domains\Crud\Application\UseCaseRequestValidation\SitelinkEditRequestValidatingDeserializer;
@@ -18,11 +16,13 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\SiteIdValidator;
 use Wikibase\Repo\Domains\Crud\Application\Validation\StatementValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SiteLinkLookupSitelinkValidator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\ValidatingRequestDeserializer as VRD;
-use Wikibase\Repo\Tests\Domains\Crud\Helpers\TestPropertyValuePairDeserializerFactory;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\ReferenceDeserializer;
+use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementDeserializer;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyAllowedTagsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyItemRevisionMetaDataRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\DummyValidSiteIdsRetriever;
 use Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess\SameTitleSitelinkTargetResolver;
+use Wikibase\Repo\Tests\Domains\Statements\Helpers\TestPropertyValuePairDeserializerFactory;
 
 /**
  * @license GPL-2.0-or-later
