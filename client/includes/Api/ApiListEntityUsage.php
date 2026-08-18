@@ -178,16 +178,6 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		$this->setVirtualDomain( EntityUsageDomainDb::VIRTUAL_DOMAIN_ID );
 		$this->addTables( 'wbc_entity_usage' );
-
-		if ( $resultPageSet === null ) {
-			$this->addFields( [ 'page_id', 'page_title', 'page_namespace' ] );
-		} else {
-			$this->addFields( $resultPageSet->getPageTableFields() );
-		}
-
-		$this->addTables( [ 'page' ] );
-		$this->addJoinConds( [ 'wbc_entity_usage' => [ 'LEFT JOIN', 'eu_page_id=page_id' ] ] );
-
 		$this->addWhereFld( 'eu_entity_id', $params['entities'] );
 
 		if ( $params['continue'] !== null ) {
@@ -203,9 +193,10 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		}
 
 		$this->addOption( 'ORDER BY', $orderBy );
-
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
+
 		$euRes = $this->select( __METHOD__ );
+		$this->resetVirtualDomain();
 
 		$euResArr = iterator_to_array( $euRes ); # we convert to be able to loop over more than once. a db cursor wouldn't allow that
 		$pageIds = [];
@@ -215,11 +206,10 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			}
 		}
 
-		$this->resetVirtualDomain();
-
 		if ( !$pageIds ) {
 			return new FakeResultWrapper( $euResArr );
 		}
+
 		$fields = $resultPageSet === null ? [ 'page_id', 'page_title', 'page_namespace' ] :
 			$resultPageSet->getPageTableFields();
 
@@ -230,11 +220,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			->caller( __METHOD__ )
 			->fetchResultSet();
 
-		$grouped = [];
-		foreach ( $pageRes as $row ) {
-			$grouped[(int)$row->page_id] = $row;
-		}
-		$joinedRes = $this->mergeResults( $euResArr, $grouped, $fields );
+		$joinedRes = $this->joinedResults( $euResArr, $pageRes, $fields );
 		return new FakeResultWrapper( $joinedRes );
 	}
 
@@ -292,11 +278,11 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	protected function getExamplesMessages(): array {
 		return [
 			'action=query&list=wblistentityusage&wbleuentities=Q2'
-				=> 'apihelp-query+wblistentityusage-example-simple',
+			=> 'apihelp-query+wblistentityusage-example-simple',
 			'action=query&list=wblistentityusage&wbleuentities=Q2&wbleuprop=url'
-				=> 'apihelp-query+wblistentityusage-example-url',
+			=> 'apihelp-query+wblistentityusage-example-url',
 			'action=query&list=wblistentityusage&wbleuentities=Q2&wbleuaspect=S|O'
-				=> 'apihelp-query+wblistentityusage-example-aspect',
+			=> 'apihelp-query+wblistentityusage-example-aspect',
 		];
 	}
 
@@ -308,24 +294,31 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * Merge page table fields into entity usage rows.
 	 *
 	 * @param \stdClass[] $euData
-	 * @param \stdClass[] $pageData
-	 * @param string[] $fields
+	 * @param IResultWrapper $pageData
+	 * @param string[] $fieldsToCopy
 	 */
-	private function mergeResults( array $euData, array $pageData, array $fields ): array {
-		foreach ( $euData as $eu_row ) {
-			$pageId = (int)$eu_row->eu_page_id;
-			foreach ( $fields as $field ) {
-				$eu_row->$field = null;
+	private function joinedResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
+		$pagesGroupedByPageId = [];
+		$joinedQueryRes = array_map( fn( object $row ): object => clone $row, $euData );
+
+		foreach ( $pageData as $row ) {
+			$pagesGroupedByPageId[(int)$row->page_id] = $row;
+		}
+
+		foreach ( $joinedQueryRes as $euRow ) {
+			$pageId = (int)$euRow->eu_page_id;
+			foreach ( $fieldsToCopy as $field ) {
+				$euRow->$field = null;
 			}
 
-			if ( isset( $pageData[$pageId] ) ) {
-				$pageRow = $pageData[$pageId];
-				foreach ( $fields as $field ) {
-					$eu_row->$field = $pageRow->$field;
+			if ( isset( $pagesGroupedByPageId[$pageId] ) ) {
+				$pageRow = $pagesGroupedByPageId[$pageId];
+				foreach ( $fieldsToCopy as $field ) {
+					$euRow->$field = $pageRow->$field;
 				}
 			}
 		}
-		return $euData;
+		return $joinedQueryRes;
 	}
 
 }
