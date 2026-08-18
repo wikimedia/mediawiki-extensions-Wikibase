@@ -207,7 +207,9 @@ class EntityContentDataCodec {
 				break;
 			case CONTENT_FORMAT_SERIALIZED:
 				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-				$data = @unserialize( $blob );
+				$data = @unserialize( $blob, [
+					'allowed_classes' => false, // only nested arrays and primitives expected
+				] );
 				break;
 			default:
 				throw new InvalidArgumentException( "Unsupported decoding format: $format" );
