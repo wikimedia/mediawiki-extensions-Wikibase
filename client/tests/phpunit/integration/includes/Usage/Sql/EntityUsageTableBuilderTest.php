@@ -26,6 +26,8 @@ use Wikimedia\Rdbms\LBFactorySingle;
  */
 class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 
+	use LocalEntityUsageDbTestHelper;
+
 	public function testFillUsageTable(): void {
 		$this->putWikidataItemPageProps( [
 			11 => 'Q11',
@@ -39,10 +41,12 @@ class EntityUsageTableBuilderTest extends MediaWikiIntegrationTestCase {
 		$domainDbFactory = new ClientDomainDbFactory(
 			LBFactorySingle::newFromConnection( $this->db )
 		);
-
+		$entityUsageDomainDb = $this->getEntityUsageDomainDb( $this->getDb() );
+		$this->setService( 'WikibaseClient.EntityUsageDomainDb', $entityUsageDomainDb );
 		$primer = new EntityUsageTableBuilder(
 			new ItemIdParser(),
 			$domainDbFactory->newLocalDb(),
+			$entityUsageDomainDb,
 			2
 		);
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 3 ) ) );

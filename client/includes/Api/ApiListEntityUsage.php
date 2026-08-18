@@ -12,8 +12,10 @@ use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -174,6 +176,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			'eu_aspect',
 		] );
 
+		$this->setVirtualDomain( EntityUsageDomainDb::VIRTUAL_DOMAIN_ID );
 		$this->addTables( 'wbc_entity_usage' );
 
 		if ( $resultPageSet === null ) {
@@ -192,16 +195,47 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		}
 
 		$orderBy = [ 'eu_page_id', 'eu_entity_id' ];
+
 		if ( isset( $params['aspect'] ) ) {
 			$this->addWhereFld( 'eu_aspect', $params['aspect'] );
 		} else {
 			$orderBy[] = 'eu_aspect';
 		}
+
 		$this->addOption( 'ORDER BY', $orderBy );
 
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
-		$res = $this->select( __METHOD__ );
-		return $res;
+		$euRes = $this->select( __METHOD__ );
+
+		$euResArr = iterator_to_array( $euRes ); # we convert to be able to loop over more than once. a db cursor wouldn't allow that
+		$pageIds = [];
+		foreach ( $euResArr as $eu_row ) {
+			if ( isset( $eu_row->eu_page_id ) ) {
+				$pageIds[] = $eu_row->eu_page_id;
+			}
+		}
+
+		$this->resetVirtualDomain();
+
+		if ( !$pageIds ) {
+			return new FakeResultWrapper( $euResArr );
+		}
+		$fields = $resultPageSet === null ? [ 'page_id', 'page_title', 'page_namespace' ] :
+			$resultPageSet->getPageTableFields();
+
+		$pageRes = $this->getDB()->newSelectQueryBuilder()
+			->select( $fields )
+			->from( 'page' )
+			->where( [ 'page_id' => array_unique( $pageIds ) ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$grouped = [];
+		foreach ( $pageRes as $row ) {
+			$grouped[(int)$row->page_id] = $row;
+		}
+		$joinedRes = $this->mergeResults( $euResArr, $grouped, $fields );
+		return new FakeResultWrapper( $joinedRes );
 	}
 
 	public function getAllowedParams(): array {
@@ -268,6 +302,30 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 	public function getHelpUrls(): string {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API';
+	}
+
+	/**
+	 * Merge page table fields into entity usage rows.
+	 *
+	 * @param \stdClass[] $euData
+	 * @param \stdClass[] $pageData
+	 * @param string[] $fields
+	 */
+	private function mergeResults( array $euData, array $pageData, array $fields ): array {
+		foreach ( $euData as $eu_row ) {
+			$pageId = (int)$eu_row->eu_page_id;
+			foreach ( $fields as $field ) {
+				$eu_row->$field = null;
+			}
+
+			if ( isset( $pageData[$pageId] ) ) {
+				$pageRow = $pageData[$pageId];
+				foreach ( $fields as $field ) {
+					$eu_row->$field = $pageRow->$field;
+				}
+			}
+		}
+		return $euData;
 	}
 
 }
