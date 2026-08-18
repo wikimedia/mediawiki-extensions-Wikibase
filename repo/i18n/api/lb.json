@@ -40,6 +40,7 @@
 	"apihelp-wbsetaliases-param-tags": "Ännerungsmarkéierunge fir op d'Versioun z'applizéieren.",
 	"apihelp-wbsetclaim-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"{{int:group-bot}}\" gehéiert.",
 	"apihelp-wbsetclaim-param-tags": "Ännerungsmarkéierunge fir op d'Versioun z'applizéieren.",
+	"apihelp-wbsetclaimvalue-summary": "Definéiert de Wäert vun enger Wikibase-Angab.",
 	"apihelp-wbsetclaimvalue-param-bot": "Dës Ännerung als Bot markéieren. Dës URL-Markéierung gëtt nëmme respektéiert wann de Benotzer zu der Grupp \"{{int:group-bot}}\" gehéiert.",
 	"apihelp-wbsetclaimvalue-param-tags": "Ännerungsmarkéierunge fir op d'Versioun z'applizéieren.",
 	"apihelp-wbsetdescription-param-summary": "Resümmee fir d'Ännerung.\nEng automatesch generéiert Bemierkung gëtt virdru gesat. D'Limitt vun der Längt vun der automatescher Bemierkung zesumme mam Resümmee ass 260 Zeechen. Denkt drun, datt alles wat iwwer déi Limite erausgeet automatesch ofgeschnidde gëtt.",

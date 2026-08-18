@@ -34,6 +34,7 @@
 	"wikibase-error-serialize-error": "Malümat serializatsiya etilip olamadı.",
 	"wikibase-error-invalid-entity-id": "“$2” degen ID sistemağa belli degil. Keçerli ID-lerden birini qullansañız.",
 	"unconnectedpages": "Elementlerge bağlanmağan saifeler",
+	"wikibase-pageinfo-entity-usage": "Bu saifede qullanılğan {{WBREPONAME}} obyektleri",
 	"wikibase-otherprojects": "Başqa leyhalarda",
 	"wikibase-sitelinks-link-columnheading": "Bağlanğan saife",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile {{PLURAL:$1|alâqalandırma|alâqalandırmalar}}",
