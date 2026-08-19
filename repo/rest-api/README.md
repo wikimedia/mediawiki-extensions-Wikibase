@@ -58,13 +58,31 @@ Autodocs can be generated from the API specification using the npm `build:docs` 
 npm run build:docs
 ```
 
-The base URL of the API can be configured by passing an `API_URL` environment variable:
+The built page fetches the wiki's served OpenAPI document (`/w/rest.php/wikibase/v1/openapi.json`) at runtime. The host it fetches from can be configured by passing an `OPENAPI_DOC_HOST` environment variable (default: `https://www.wikidata.org`):
 
 ```
-API_URL='https://wikidata.org/w/rest.php' npm run build:docs
+OPENAPI_DOC_HOST='https://wikibase.example' npm run build:docs
 ```
 
-The autodocs and the bundled OpenAPI specification files are generated in the `../../docs/rest-api/` directory.
+Note that wikis send no CORS headers by default, so a page built for a third-party host may need CORS configuration on that wiki. Setting `OPENAPI_DOC_HOST` to an empty string instead produces a server-relative URL for docs hosted on the wiki's own origin, which needs no CORS configuration. This is also the way to view the local wiki's document during development: build with the host empty and open the generated page through the wiki's own web server, e.g. `http://localhost:8080/w/extensions/Wikibase/docs/rest-api/index.html`:
+
+```
+OPENAPI_DOC_HOST='' npm run build:docs
+```
+
+Alternatively, `npm run serve:docs` starts a webpack dev server on port 7000 that shows the local wiki's document through a proxy, if that port is reachable from your browser.
+
+The autodocs are generated in the `../../docs/rest-api/` directory.
+
+### Working with mwcli
+
+In an [mwcli](https://www.mediawiki.org/wiki/Cli) development environment, run the npm scripts through the fresh container:
+
+```
+mw dev mw fresh -- bash -c "cd extensions/Wikibase/repo/rest-api && OPENAPI_DOC_HOST='' npm run build:docs"
+```
+
+The built page is then served by the wiki itself, e.g. at `http://default.mediawiki.local.wmftest.net:8080/w/extensions/Wikibase/docs/rest-api/index.html`. The `serve:docs` proxy defaults follow mwcli's conventions and need no configuration, but the fresh container does not publish port 7000, so the dev server is not reachable from a browser on the host — use the static build above instead.
 
 ## Versioning
 
