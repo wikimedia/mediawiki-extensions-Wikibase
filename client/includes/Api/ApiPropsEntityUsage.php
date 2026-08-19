@@ -10,6 +10,7 @@ use MediaWiki\Api\ApiQueryBase;
 use MediaWiki\Api\ApiResult;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -120,6 +121,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 			'eu_aspect',
 		] );
 
+		$this->setVirtualDomain( EntityUsageDomainDb::VIRTUAL_DOMAIN_ID );
 		$this->addTables( 'wbc_entity_usage' );
 		$this->addWhereFld( 'eu_page_id', array_keys( $pages ) );
 
@@ -141,6 +143,8 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
 		$res = $this->select( __METHOD__ );
+		$this->resetVirtualDomain();
+
 		return $res;
 	}
 
