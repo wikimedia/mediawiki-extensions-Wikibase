@@ -33,7 +33,8 @@
 			"Zolo",
 			"ZxxZxxZ",
 			"درفش کاویانی",
-			"Mohammad ebz"
+			"Mohammad ebz",
+			"LProfo"
 		]
 	},
 	"wikibase-desc": "مخزن داده‌های ساختاریافته",
@@ -146,7 +147,7 @@
 	"wikibase-snakview-snaktypeselector-value": "مقدار موجود",
 	"wikibase-snakformat-invalid-value": "مقدار نامعتبر.",
 	"wikibase-snakformat-propertynotfound": "ویژگی یافت نشد.",
-	"wikibase-shortcopyrightwarning": "با کلیک کردن بر روی «$1»، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و به‌طور غیرقابل بازگشت اجازه می‌دهید ویرایش‌هایتان با اجازه‌نامهٔ [$3 $4] منتشر شوند.",
+	"wikibase-shortcopyrightwarning": "با کلیک‌کردن بر روی «$1»، شما با [[$2|قوانین استفاده]] موافقت می‌کنید، و به‌طور بازگشت‌ناپذیری اجازه می‌دهید ویرایش‌هایتان با اجازه‌نامهٔ [$3 $4] منتشر شوند.",
 	"wikibase-copyrighttooltip-acknowledge": "این شرایط را برای ویرایش‌های بعدی‌ام قبول می‌کنم. این پیام را دوباره نشان ندهید.",
 	"wikibase-entityselector-more": "بیشتر",
 	"wikibase-entityselector-notfound": "هیچ نتیجه‌ای یافت نشد",
