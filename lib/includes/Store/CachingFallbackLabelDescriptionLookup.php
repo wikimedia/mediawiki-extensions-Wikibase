@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
@@ -106,12 +107,20 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	}
 
 	private function getTerm( EntityId $entityId, string $languageCode, string $termName = self::LABEL ): ?TermFallback {
-		$resolutionResult = $this->redirectResolvingRevisionLookup->lookupLatestRevisionResolvingRedirect( $entityId );
-		if ( $resolutionResult === null ) {
-			return null;
-		}
+		// For Property terms, we cache all revisions to the same cache line and use a revision id
+		// of 0, to avoid having to hit the database to resolve the latest revision (T434204).
+		// We also know that properties cannot be redirected, so we do not need to resolve any redirects.
+		$revisionId = 0;
+		$targetEntityId = $entityId;
+		if ( !( $entityId instanceof PropertyId ) ) {
+			// For non-property terms, we resolve the latest revisionId and one level of redirects
+			$resolutionResult = $this->redirectResolvingRevisionLookup->lookupLatestRevisionResolvingRedirect( $entityId );
+			if ( $resolutionResult === null ) {
+				return null;
+			}
 
-		[ $revisionId, $targetEntityId ] = $resolutionResult;
+			[ $revisionId, $targetEntityId ] = $resolutionResult;
+		}
 
 		$termFallback = $this->cache->get( $targetEntityId, $revisionId, $languageCode, $termName );
 		if ( $termFallback === TermFallbackCacheFacade::NO_VALUE ) {

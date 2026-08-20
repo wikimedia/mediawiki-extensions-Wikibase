@@ -85,4 +85,26 @@ class TermFallbackCacheFacade {
 
 		$this->cache->set( $cacheKey, $serialization, $this->cacheTtlInSeconds );
 	}
+
+	/**
+	 * @param array<string,?TermFallback> $languageCodesToTermFallbacks
+	 * @param EntityId $targetEntityId
+	 * @param int $revisionId
+	 * @param string $termType
+	 */
+	public function setMultiple(
+		array $languageCodesToTermFallbacks,
+		EntityId $targetEntityId,
+		int $revisionId,
+		string $termType
+	): void {
+		$cacheKeyMap = [];
+		foreach ( $languageCodesToTermFallbacks as $languageCode => $termFallback ) {
+			$cacheKeyMap[
+				$this->buildCacheKey( $targetEntityId, $revisionId, $languageCode, $termType )
+			] = $this->serialize( $termFallback );
+		}
+
+		$this->cache->setMultiple( $cacheKeyMap, $this->cacheTtlInSeconds );
+	}
 }

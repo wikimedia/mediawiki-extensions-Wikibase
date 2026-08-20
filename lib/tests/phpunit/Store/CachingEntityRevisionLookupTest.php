@@ -175,7 +175,7 @@ class CachingEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$rev12 = $mock->putEntity( $item, 12 );
 
 		// now, notify the cache
-		$lookup->entityUpdated( $rev12 );
+		$lookup->entityUpdated( $rev12, 1 );
 
 		// make sure we get the new revision now
 		$revId = $this->extractConcreteRevision( $lookup->getLatestRevisionId( $id ) );

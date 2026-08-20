@@ -377,7 +377,7 @@ final class RepoHooks implements
 				$content->getEntity(),
 				$revision->getId(),
 				$revision->getTimestamp()
-			) );
+			), $revision->getParentId() );
 		}
 	}
 

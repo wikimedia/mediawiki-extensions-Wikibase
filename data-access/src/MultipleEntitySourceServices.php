@@ -107,10 +107,10 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	/**
 	 * @inheritDoc
 	 */
-	public function entityUpdated( EntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId ) {
 		$source = $this->entitySourceDefinitions->getDatabaseSourceForEntityType( $entityRevision->getEntity()->getType() );
 		if ( $source !== null ) {
-			$this->singleSourceServices[$source->getSourceName()]->entityUpdated( $entityRevision );
+			$this->singleSourceServices[$source->getSourceName()]->entityUpdated( $entityRevision, $parentId );
 		}
 	}
 

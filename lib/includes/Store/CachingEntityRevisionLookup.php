@@ -124,7 +124,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	/**
 	 * Notifies the cache that an Entity was created or updated.
 	 */
-	public function entityUpdated( EntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId ) {
 		$this->entityRevisionCache->set( $entityRevision );
 	}
 

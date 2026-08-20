@@ -315,6 +315,8 @@ class SqlStore implements Store {
 			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb()
 		);
 		$store->registerWatcher( $this->getEntityStoreWatcher() );
+		// Add a watcher for the TermFallbackCache so that it can be updated when entities are updated
+		$store->registerWatcher( WikibaseRepo::getTermFallbackCacheEntityStoreWatcher( $services ) );
 
 		$store = new TypeDispatchingEntityStore(
 			WikibaseRepo::getEntityTypeDefinitions() // TODO inject
