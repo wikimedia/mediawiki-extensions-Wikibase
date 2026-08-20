@@ -457,7 +457,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 			123
 		);
 
-		$this->purgeMethodTest( 'entityUpdated', [ $entityRevision ] );
+		$this->purgeMethodTest( 'entityUpdated', [ $entityRevision, 1 ] );
 	}
 
 	public function testRedirectUpdated() {

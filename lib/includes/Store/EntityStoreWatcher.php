@@ -16,8 +16,10 @@ interface EntityStoreWatcher {
 	/**
 	 * Called when an entity is updated, created, or replaces a redirect.
 	 * This is not called when an entity is deleted or replaced by a redirect.
+	 * We include the parent revision ID here so that callees can reconstruct
+	 * the update by comparing revisions.
 	 */
-	public function entityUpdated( EntityRevision $entityRevision );
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId );
 
 	/**
 	 * Called when a redirect is updated, created, or replaces an entity.

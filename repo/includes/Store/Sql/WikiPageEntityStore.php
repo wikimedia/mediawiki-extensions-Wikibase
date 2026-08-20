@@ -278,7 +278,7 @@ class WikiPageEntityStore implements EntityStore {
 			$revision->getTimestamp()
 		);
 
-		$this->dispatcher->dispatch( 'entityUpdated', $entityRevision );
+		$this->dispatcher->dispatch( 'entityUpdated', $entityRevision, $revision->getParentId() );
 
 		return $entityRevision;
 	}

@@ -165,7 +165,7 @@ class MultipleEntitySourceServicesTest extends TestCase {
 
 		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
 
-		$services->entityUpdated( $itemRevision );
+		$services->entityUpdated( $itemRevision, 0 );
 	}
 
 	public function testEntityFromKnownSourceDeleted_entityDeletedPassedToRelevantServiceContainer() {

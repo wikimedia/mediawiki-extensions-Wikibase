@@ -13,6 +13,8 @@ trait TermCacheKeyBuilder {
 		return str_replace(
 			[ '{', '}', '(', ')', '/', '\\', '@', ':' ],
 			'_',
+			// For property cache entries, $revision here will always be 0, since we want to avoid
+			// looking up revision ids for properties (T434204)
 			"{$id->getSerialization()}_{$revision}_{$language}_{$termType}"
 		);
 	}

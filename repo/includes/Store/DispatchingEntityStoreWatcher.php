@@ -25,8 +25,8 @@ class DispatchingEntityStoreWatcher extends GenericEventDispatcher implements En
 	 *
 	 * @param EntityRevision $entityRevision
 	 */
-	public function entityUpdated( EntityRevision $entityRevision ) {
-		$this->dispatch( 'entityUpdated', $entityRevision );
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId ) {
+		$this->dispatch( 'entityUpdated', $entityRevision, $parentId );
 	}
 
 	/**
