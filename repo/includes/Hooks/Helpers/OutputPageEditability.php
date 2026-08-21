@@ -23,18 +23,13 @@ class OutputPageEditability {
 	 * @see \Wikibase\Repo\Actions\ViewEntityAction::isEditable()
 	 */
 	private function isEditView( OutputPage $out ): bool {
-		return $this->isLatestRevision( $out )
+		return $out->isRevisionCurrent()
 			&& !$this->isDiff( $out )
 			&& !$out->isPrintable();
 	}
 
 	private function isDiff( OutputPage $out ): bool {
 		return $out->getRequest()->getCheck( 'diff' );
-	}
-
-	private function isLatestRevision( OutputPage $out ): bool {
-		return !$out->getRevisionId() // the revision id can be null on a ParserCache hit, but only for the latest revision
-			|| $out->getRevisionId() === $out->getTitle()->getLatestRevID();
 	}
 
 }
