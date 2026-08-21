@@ -8,6 +8,7 @@ use MediaWiki\Actions\ViewAction;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\SpecialPage\SpecialPage;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -31,6 +32,7 @@ class ViewEntityAction extends ViewAction {
 	/**
 	 * @return bool False for older revisions, or if this is for sure not a plain view (e.g. diff or
 	 *  print view).
+	 * @see OutputPageEditability::isEditView() for a near duplicate of this method.
 	 */
 	private function isEditable() {
 		return $this->getArticle()->isCurrent()
