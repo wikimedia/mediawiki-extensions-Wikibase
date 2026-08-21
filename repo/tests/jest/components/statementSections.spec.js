@@ -18,6 +18,7 @@ jest.mock(
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const statementSections = require( '../../../resources/wikibase.wbui2025/components/statementSections.vue' );
+const addStatementButton = require( '../../../resources/wikibase.wbui2025/components/addStatementButton.vue' );
 const { mount } = require( '@vue/test-utils' );
 const {
 	storeWithHtmlAndStatements,
@@ -52,7 +53,8 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 					sectionHeadingHtml: '<h2>Heading</h2>',
 					sectionKey: 'statements',
 					propertyList: [ 'P1' ],
-					entityId: 'Q1'
+					entityId: 'Q1',
+					isEditable: true
 				},
 				global: {
 					plugins: [
@@ -92,5 +94,31 @@ describe( 'wikibase.wbui2025.statementSections', () => {
 
 			expect( statement.find( '.wikibase-wbui2025-snak-value' ).text() ).toBe( mockStatement.mainsnak.datavalue.value );
 		} );
+	} );
+
+	it.each( [
+		[ true ],
+		[ false ]
+	] )( 'isEditable=%s controls add button presence', async ( isEditable ) => {
+		const wrapper = await mount( statementSections, {
+			props: {
+				sectionHeadingHtml: '<h2>Heading</h2>',
+				sectionKey: 'statements',
+				propertyList: [],
+				entityId: 'Q1',
+				isEditable
+			},
+			global: {
+				plugins: [
+					storeWithHtmlAndStatements(
+						storeContentsWithServerRenderedHtml( {}, {} ),
+						storeContentWithStatementsAndProperties( {} )
+					)
+				]
+			}
+		} );
+
+		expect( wrapper.findAllComponents( addStatementButton ) )
+			.toHaveLength( isEditable ? 1 : 0 );
 	} );
 } );
