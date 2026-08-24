@@ -58,7 +58,7 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 		ContentMetadataCollector $contentMetadataCollector
 	): string {
 		$dataAccess = $this->getServiceContainer()->getParsoidDataAccess();
-		return $dataAccess->parseWikitext(
+		return $dataAccess->parseWikitextWithTitle(
 			$this->getPageConfig(),
 			$contentMetadataCollector,
 			$text
@@ -234,7 +234,7 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 
 		// First parse
 		$contentMetadataCollector = $this->getContentMetadataCollector();
-		$parseResult = $dataAccess->parseWikitext(
+		$parseResult = $dataAccess->parseWikitextWithTitle(
 			$pageConfig,
 			$contentMetadataCollector,
 			"{{Character Information}}"
@@ -247,7 +247,7 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 
 		// Second parse
 		$contentMetadataCollector = $this->getContentMetadataCollector();
-		$parseResult = $dataAccess->parseWikitext(
+		$parseResult = $dataAccess->parseWikitextWithTitle(
 			$pageConfig,
 			$contentMetadataCollector,
 			"{{Character Details}}"
