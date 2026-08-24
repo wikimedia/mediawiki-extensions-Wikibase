@@ -118,6 +118,10 @@ module.exports = exports = defineComponent( {
 	.wikibase-kartographer-caption {
 		order: 1;
 		line-height: 1.25rem;
+		/* @noflip */
+		direction: ltr;
+		/* @noflip */
+		text-align: left;
 	}
 
 	.mw-parser-output {

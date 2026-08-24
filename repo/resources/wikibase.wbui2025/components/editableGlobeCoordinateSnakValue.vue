@@ -304,6 +304,13 @@ module.exports = exports = defineComponent( {
 		margin: 0;
 	}
 
+	.wikibase-kartographer-caption {
+		/* @noflip */
+		direction: ltr;
+		/* @noflip */
+		text-align: left;
+	}
+
 	.mw-kartographer-map.floatleft,
 	a.mw-kartographer-map.floatleft {
 		float: none !important;
