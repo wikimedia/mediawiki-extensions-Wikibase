@@ -7,6 +7,7 @@ namespace Wikibase\Client\Store\Sql;
 use InvalidArgumentException;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
@@ -24,39 +25,25 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class BulkSubscriptionUpdater {
 
-	/**
-	 * @var SessionConsistentConnectionManager
-	 */
-	private $localConnectionManager;
-
-	/**
-	 * @var SessionConsistentConnectionManager
-	 */
-	private $repoConnectionManager;
+	private SessionConsistentConnectionManager $repoConnectionManager;
 
 	/**
 	 * @var string The local wiki's global ID, to be used as the subscriber ID in the repo's subscription table.
 	 */
 	private $subscriberWikiId;
 
-	/**
-	 * @var RepoDomainDb
-	 */
-	private $repoDb;
+	private RepoDomainDb $repoDb;
 
-	/**
-	 * @var int
-	 */
-	private $batchSize;
+	private EntityUsageDomainDb $entityUsageDb;
 
-	/**
-	 * @var MessageReporter
-	 */
-	private $progressReporter;
+	private int $batchSize;
+
+	private MessageReporter $progressReporter;
 
 	/**
 	 * @param ClientDomainDb $clientDb DB manager for DB connections to the local wiki.
 	 * @param RepoDomainDb $repoDb DB manager for DB connections to the repo.
+	 * @param EntityUsageDomainDb $entityUsageDb DB manager for DB connections to the entity usage domain.
 	 * @param string $subscriberWikiId The local wiki's global ID, to be used as the subscriber ID
 	 * in the repo's subscription table.
 	 * @param int $batchSize
@@ -66,6 +53,7 @@ class BulkSubscriptionUpdater {
 	public function __construct(
 		ClientDomainDb $clientDb,
 		RepoDomainDb $repoDb,
+		EntityUsageDomainDb $entityUsageDb,
 		string $subscriberWikiId,
 		int $batchSize = 1000
 	) {
@@ -73,9 +61,9 @@ class BulkSubscriptionUpdater {
 			throw new InvalidArgumentException( '$batchSize must be an integer >= 1' );
 		}
 
-		$this->localConnectionManager = $clientDb->sessionConsistentConnections();
 		$this->repoConnectionManager = $repoDb->sessionConsistentConnections();
 		$this->repoDb = $repoDb;
+		$this->entityUsageDb = $entityUsageDb;
 
 		$this->subscriberWikiId = $subscriberWikiId;
 		$this->batchSize = $batchSize;
@@ -157,7 +145,7 @@ class BulkSubscriptionUpdater {
 	 * @return string[] A list of entity id strings.
 	 */
 	private function getUpdateBatch( ?array &$continuation ) {
-		$dbr = $this->localConnectionManager->getReadConnection();
+		$dbr = $this->entityUsageDb->getReadConnection();
 		$queryBuilder = $dbr->newSelectQueryBuilder();
 		$queryBuilder->distinct()
 			->select( 'eu_entity_id' )

@@ -69,9 +69,11 @@ class UpdateSubscriptions extends Maintenance {
 
 		$clientDb = WikibaseClient::getClientDomainDbFactory()->newLocalDb();
 		$repoDb = WikibaseClient::getRepoDomainDbFactory()->newRepoDb();
+		$entityUsageDb = WikibaseClient::getEntityUsageDomainDb();
 		$updater = new BulkSubscriptionUpdater(
 			$clientDb,
 			$repoDb,
+			$entityUsageDb,
 			$clientId,
 			$this->mBatchSize
 		);
