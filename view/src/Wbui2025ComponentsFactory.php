@@ -117,7 +117,6 @@ class Wbui2025ComponentsFactory {
 			'wbui2025-statement-sections',
 			function ( array $data ): array {
 				$data['propertyIds'] = $data['propertyList'];
-				$data['javaScriptLoaded'] = false;
 				return $data;
 			}
 		);

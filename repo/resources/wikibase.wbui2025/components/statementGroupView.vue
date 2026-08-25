@@ -13,6 +13,7 @@
 					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				</p>
 				<div
+					v-if="isEditable"
 					class="wikibase-wbui2025-edit-link"
 					:class="{
 						'wikibase-wbui2025-link': !isDeletedProperty,
@@ -57,6 +58,10 @@ module.exports = exports = defineComponent( {
 		},
 		propertyId: {
 			type: String,
+			required: true
+		},
+		isEditable: {
+			type: Boolean,
 			required: true
 		}
 	},

@@ -13,10 +13,11 @@
 				<wbui2025-statement-group-view
 					:property-id="propertyId"
 					:entity-id="entityId"
+					:is-editable="isEditable"
 				></wbui2025-statement-group-view>
 			</div>
 			<wbui2025-add-statement-button
-				v-if="javaScriptLoaded"
+				v-if="isEditable"
 				:entity-id="entityId"
 				:section-key="sectionKey"
 			></wbui2025-add-statement-button>
@@ -53,12 +54,11 @@ module.exports = exports = defineComponent( {
 		entityId: {
 			type: String,
 			required: true
+		},
+		isEditable: {
+			type: Boolean,
+			required: true
 		}
-	},
-	data() {
-		return {
-			javaScriptLoaded: true
-		};
 	},
 	computed: {
 		propertyIds() {

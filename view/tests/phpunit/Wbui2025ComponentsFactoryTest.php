@@ -222,7 +222,6 @@ class Wbui2025ComponentsFactoryTest extends TestCase {
 		$result = $setup( [ 'propertyList' => [ 'P1', 'P2' ] ] );
 
 		$this->assertSame( [ 'P1', 'P2' ], $result['propertyIds'] );
-		$this->assertFalse( $result['javaScriptLoaded'] );
 	}
 
 	public function testMainSnakSetup_looksUpRankMessageByKey(): void {

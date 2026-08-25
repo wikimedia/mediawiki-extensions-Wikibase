@@ -40,12 +40,16 @@
 			const parsedValueStore = wbui2025.store.useParsedValueStore( pinia );
 			parsedValueStore.populateWithStatements( data.claims );
 
+			const isEditable = mw.config.get( 'wbIsEditView' ) &&
+				mw.config.get( 'wgRelevantPageIsProbablyEditable' );
+
 			for ( const statementSection of wbui2025StatementList.querySelectorAll( '.wikibase-wbui2025-statement-section' ) ) {
 				const sectionProps = {
 					sectionHeadingHtml: statementSection.getElementsByClassName( 'wikibase-wbui2025-statement-section-heading' )[ 0 ].innerHTML,
 					sectionKey: statementSection.dataset.sectionKey,
 					entityId: data.id,
-					propertyList: statementSection.dataset.props.split( ',' )
+					propertyList: statementSection.dataset.props.split( ',' ),
+					isEditable
 				};
 				Vue.createMwApp( StatementSectionsView, sectionProps )
 					.use( pinia )
@@ -55,10 +59,12 @@
 			Vue.createMwApp( StatusMessage, {} )
 				.use( pinia )
 				.mount( statusMessageContainer );
-			const addStatementFloatingButtonContainer = document.getElementById( 'wikibase-wbui2025-add-statement-floating-button' );
-			Vue.createMwApp( AddStatementFloatingButton, { entityId: data.id } )
-				.use( pinia )
-				.mount( addStatementFloatingButtonContainer );
+			if ( isEditable ) {
+				const addStatementFloatingButtonContainer = document.getElementById( 'wikibase-wbui2025-add-statement-floating-button' );
+				Vue.createMwApp( AddStatementFloatingButton, { entityId: data.id } )
+					.use( pinia )
+					.mount( addStatementFloatingButtonContainer );
+			}
 		} );
 	} );
 }(

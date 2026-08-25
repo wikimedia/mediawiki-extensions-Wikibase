@@ -58,7 +58,8 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			wrapper = await mount( statementGroupViewComponent, {
 				props: {
 					propertyId: 'P1',
-					entityId: 'Q1'
+					entityId: 'Q1',
+					isEditable: true
 				},
 				global: {
 					plugins: [
@@ -121,7 +122,8 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 			deletedWrapper = await mount( statementGroupViewComponent, {
 				props: {
 					propertyId: 'P1',
-					entityId: 'Q1'
+					entityId: 'Q1',
+					isEditable: true
 				},
 				global: {
 					plugins: [
@@ -154,6 +156,41 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		it( 'does not open modal edit form when clicking edit link', async () => {
 			await deletedWrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
 			expect( deletedWrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( false );
+		} );
+	} );
+
+	describe( 'not editable', () => {
+		it( 'shows statement but no edit link', async () => {
+			const wrapper = await mount( statementGroupViewComponent, {
+				props: {
+					propertyId: 'P1',
+					entityId: 'Q1',
+					isEditable: false
+				},
+				global: {
+					plugins: [
+						storeWithHtmlAndStatements(
+							storeContentsWithServerRenderedHtml(
+								{ ee6053a6982690ba0f5227d587394d9111eea401: '<span>p1</span>' },
+								{ P1: '<a href="mock-property-url">P1</a>' }
+							),
+							storeContentWithStatementsAndProperties( {
+								P1: [ mockStatement ]
+							} )
+						)
+					]
+				}
+			} );
+
+			expect( wrapper.exists() ).toBe( true );
+			expect( wrapper.findAll( '.wikibase-wbui2025-statement-group' ) ).toHaveLength( 1 );
+			const propertyNames = wrapper.findAllComponents( propertyNameComponent );
+			expect( propertyNames ).toHaveLength( 1 );
+			expect( propertyNames[ 0 ].props( 'propertyId' ) ).toBe( 'P1' );
+			const statementViews = wrapper.findAllComponents( statementViewComponent );
+			expect( statementViews ).toHaveLength( 1 );
+			expect( statementViews[ 0 ].props( 'statementId' ) ).toEqual( mockStatement.id );
+			expect( wrapper.findAll( '.wikibase-wbui2025-edit-link' ) ).toHaveLength( 0 );
 		} );
 	} );
 } );

@@ -183,6 +183,7 @@ class VueNoScriptRendering {
 			'sectionKey' => $sectionKey,
 			'propertyList' => $propertyList,
 			'entityId' => $entityId,
+			'isEditable' => false,
 		] );
 	}
 }
