@@ -61,12 +61,7 @@ class EntityUsageTableBuilder {
 	/**
 	 * @var ClientDomainDb
 	 */
-	private ClientDomainDb $domainDb;
-
-	/**
-	 * @var EntityUsageDomainDb
-	 */
-	private EntityUsageDomainDb $entityUsageDb;
+	private $domainDb;
 
 	/**
 	 * @throws InvalidArgumentException
@@ -74,7 +69,6 @@ class EntityUsageTableBuilder {
 	public function __construct(
 		EntityIdParser $idParser,
 		ClientDomainDb $domainDb,
-		EntityUsageDomainDb $entityUsageDb,
 		int $batchSize = 1000,
 		?string $usageTableName = null
 	) {
@@ -89,7 +83,6 @@ class EntityUsageTableBuilder {
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
-		$this->entityUsageDb = $entityUsageDb;
 	}
 
 	public function setProgressReporter( MessageReporter $progressReporter ): void {
@@ -122,15 +115,14 @@ class EntityUsageTableBuilder {
 		$this->domainDb->autoReconfigure();
 
 		$connections = $this->domainDb->connections();
-		$dbr = $connections->getReadConnection();
+		$dbw = $connections->getWriteConnection();
 
-		$entityPerPage = $this->getUsageBatch( $dbr, $fromPageId );
+		$entityPerPage = $this->getUsageBatch( $dbw, $fromPageId );
 
 		if ( !$entityPerPage ) {
 			return 0;
 		}
 
-		$dbw = $this->entityUsageDb->getWriteConnection();
 		$count = $this->insertUsageBatch( $dbw, $entityPerPage );
 
 		// Update $fromPageId to become the first page ID of the next batch.

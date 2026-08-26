@@ -467,10 +467,6 @@ return [
 		return new EntityTypeDefinitions( $entityTypes );
 	},
 
-	'WikibaseClient.EntityUsageDomainDb' => function ( MediaWikiServices $services ): EntityUsageDomainDb {
-		return new EntityUsageDomainDb( $services->getConnectionProvider() );
-	},
-
 	'WikibaseClient.ExternalUserNames' => function ( MediaWikiServices $services ): ?ExternalUserNames {
 		$databaseName = WikibaseClient::getItemAndPropertySource( $services )->getDatabaseName();
 		if ( $databaseName !== false ) {
@@ -985,7 +981,7 @@ return [
 			WikibaseClient::getRepoDomainDbFactory( $services )
 				->newForEntitySource( WikibaseClient::getItemAndPropertySource( $services ) ),
 			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
-			WikibaseClient::getEntityUsageDomainDb( $services )
+			new EntityUsageDomainDb( $services->getConnectionProvider() )
 		);
 	},
 

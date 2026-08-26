@@ -53,7 +53,6 @@ class PopulateEntityUsage extends LoggedUpdateMaintenance {
 		$builder = new EntityUsageTableBuilder(
 			WikibaseClient::getEntityIdParser(),
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
-			WikibaseClient::getEntityUsageDomainDb(),
 			$this->mBatchSize
 		);
 
