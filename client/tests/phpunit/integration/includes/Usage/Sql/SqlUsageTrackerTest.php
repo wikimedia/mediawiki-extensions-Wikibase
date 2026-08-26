@@ -11,7 +11,6 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 
@@ -27,8 +26,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @author Daniel Kinzler
  */
 class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
-
-	use LocalEntityUsageDbTestHelper;
 
 	/**
 	 * @var SqlUsageTracker
@@ -48,13 +45,10 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		$euDb = $this->getEntityUsageDomainDb( $this->getDb() );
-		$this->setService( 'WikibaseClient.EntityUsageDomainDb', $euDb );
-
 		$this->sqlUsageTracker = new SqlUsageTracker(
 			new ItemIdParser(),
 			new EntityUsageDomainDb(
-				$this->getServiceContainer()->getConnectionProvider()
+				$this->getServiceContainer()->getDBLoadBalancerFactory()
 			),
 			[],
 			100
@@ -65,14 +59,12 @@ class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function getUsages( int $pageId ): array {
-		$updater = new EntityUsageTable( new ItemIdParser(), WikibaseClient::getEntityUsageDomainDb(),
-			$this->getDb() );
+		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->queryUsages( $pageId );
 	}
 
 	public function putUsages( int $pageId, array $usages ): int {
-		$updater = new EntityUsageTable( new ItemIdParser(), WikibaseClient::getEntityUsageDomainDb(),
-			$this->getDb() );
+		$updater = new EntityUsageTable( new ItemIdParser(), $this->db );
 		return $updater->addUsages( $pageId, $usages );
 	}
 

@@ -44,7 +44,7 @@ class ClientNoBadUsageTest extends NoBadUsageTestBase {
 			'/\b(get|I|)ConnectionProvider(?!::|;)/' => [
 				'WikibaseClient.ServiceWiring.php' => 1, // EntityUsageDomainDb service wiring
 				'tests/phpunit/integration/includes/Specials/SpecialUnconnectedPagesTest.php' => 2,
-				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => 3,
+				'tests/phpunit/integration/includes/Usage/Sql/SqlUsageTrackerTest.php' => 2,
 				'includes/Usage/Sql/EntityUsageDomainDb.php' => 1,
 				'includes/Specials/SpecialUnconnectedPages.php' => 1,
 			],

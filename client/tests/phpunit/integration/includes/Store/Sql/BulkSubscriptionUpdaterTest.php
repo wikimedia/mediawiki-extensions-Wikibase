@@ -44,7 +44,6 @@ class BulkSubscriptionUpdaterTest extends MediaWikiIntegrationTestCase {
 		return new BulkSubscriptionUpdater(
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
 			WikibaseClient::getRepoDomainDbFactory()->newRepoDb(),
-			WikibaseClient::getEntityUsageDomainDb(),
 			'testwiki',
 			$batchSize
 		);

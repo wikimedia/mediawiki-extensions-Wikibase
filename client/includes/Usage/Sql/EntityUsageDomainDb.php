@@ -26,12 +26,4 @@ class EntityUsageDomainDb {
 	public function getReadConnection( ?array $groups = null ): IReadableDatabase {
 		return $this->dbProvider->getReplicaDatabase( self::VIRTUAL_DOMAIN_ID );
 	}
-
-	public function waitForReplication( ?int $timeout = null ): void {
-		$ticket = $this->dbProvider->getEmptyTransactionTicket( __METHOD__ );
-		$this->dbProvider->commitAndWaitForReplication( __METHOD__, $ticket, array_filter( [
-			'domain' => self::VIRTUAL_DOMAIN_ID,
-			'timeout' => $timeout,
-		] ) );
-	}
 }
