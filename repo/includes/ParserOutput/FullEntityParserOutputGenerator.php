@@ -15,6 +15,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\ViewPlaceHolderEmitter;
 use Wikibase\View\Wbui2025FeatureFlag;
+use Wikimedia\HtmlArmor\HtmlArmor;
 
 /**
  * Creates the parser output for an entity.
@@ -163,7 +164,10 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 		// Set the display title to display the label together with the item's id
 		$titleHtml = $entityView->getTitleHtml( $entity );
-		$parserOutput->setTitleText( $titleHtml ?? '' );
+		$titleHtmlArmor = new HtmlArmor( $titleHtml ?? '' );
+		$parserOutput->setDisplayTitleParts(
+			'', '', $titleHtmlArmor, $titleHtmlArmor
+		);
 
 		// split parser cache by desktop/mobile/wbui2025 (T344362, T394291, T394291)
 		$parserOutput->recordOption( Wbui2025FeatureFlag::PARSER_OPTION_NAME );
