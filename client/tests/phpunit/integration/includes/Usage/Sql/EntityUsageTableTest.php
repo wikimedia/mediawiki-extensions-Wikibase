@@ -6,6 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -23,6 +24,15 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @author Marius Hoch
  */
 class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
+
+	use LocalEntityUsageDbTestHelper;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$euDb = $this->getEntityUsageDomainDb( $this->getDb() );
+		$this->setService( 'WikibaseClient.EntityUsageDomainDb', $euDb );
+	}
 
 	/**
 	 * @param int $pageId
@@ -49,7 +59,8 @@ class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getEntityUsageTable( $batchSize = 1000 ) {
-		return new EntityUsageTable( new ItemIdParser(), $this->getDb(), $batchSize );
+		return new EntityUsageTable( new ItemIdParser(), WikibaseClient::getEntityUsageDomainDb(),
+			$this->getDb(), $batchSize );
 	}
 
 	public function testAddUsages() {

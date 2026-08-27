@@ -13,11 +13,9 @@ use RuntimeException;
 use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\SelectQueryBuilder;
@@ -37,9 +35,9 @@ class EntityUsageTable {
 
 	private EntityIdParser $idParser;
 
-	private ?IDatabase $writeConnection;
+	private EntityUsageDomainDb $db;
 
-	private ClientDomainDb $db;
+	private ?IDatabase $writeConnection;
 
 	private int $batchSize;
 
@@ -51,6 +49,7 @@ class EntityUsageTable {
 
 	/**
 	 * @param EntityIdParser $idParser
+	 * @param EntityUsageDomainDb $entityUsageDb DB manager for DB connections to the entity usage table.
 	 * @param IDatabase|null $writeConnection If null, this instance can only be used for “read” queries.
 	 * @param int $batchSize Batch size for database queries on the entity usage table, including
 	 *  INSERTs, SELECTs, and DELETEs. Defaults to 100.
@@ -61,6 +60,7 @@ class EntityUsageTable {
 	 */
 	public function __construct(
 		EntityIdParser $idParser,
+		EntityUsageDomainDb $entityUsageDb,
 		?IDatabase $writeConnection,
 		int $batchSize = 100,
 		?string $tableName = null,
@@ -79,9 +79,9 @@ class EntityUsageTable {
 		$this->batchSize = $batchSize;
 		$this->tableName = $tableName ?: self::DEFAULT_TABLE_NAME;
 		$this->addUsagesBatchSize = $addUsagesBatchSize;
+		$this->db = $entityUsageDb;
 
 		//TODO: Inject
-		$this->db = WikibaseClient::getClientDomainDbFactory()->newLocalDb();
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
 	}
 
@@ -187,9 +187,6 @@ class EntityUsageTable {
 				->rows( $rows )
 				->caller( __METHOD__ )->execute();
 			$c += $writeConnection->affectedRows();
-
-			// Wait for all database replicas to be updated, but only for the affected client wiki.
-			$this->db->replication()->wait();
 		}
 
 		return $c;
@@ -202,7 +199,7 @@ class EntityUsageTable {
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
 	 */
 	public function queryUsages( int $pageId ): array {
-		$res = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+		$res = $this->db->getReadConnection()->newSelectQueryBuilder()
 			->select( [ 'eu_aspect', 'eu_entity_id' ] )
 			->from( $this->tableName )
 			->where( [ 'eu_page_id' => $pageId ] )
@@ -306,7 +303,7 @@ class EntityUsageTable {
 			return new ArrayIterator();
 		}
 
-		$queryBuilder = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+		$queryBuilder = $this->db->getReadConnection()->newSelectQueryBuilder()
 			->select( [ 'eu_page_id', 'eu_entity_id', 'eu_aspect' ] )
 			->from( $this->tableName )
 			->where( [
@@ -393,7 +390,7 @@ class EntityUsageTable {
 	private function getUsedEntityIdStrings( array $idStrings ): array {
 		// Note: We need to use one (sub)query per entity here, per T116404
 		$subQueries = $this->getUsedEntityIdStringsQueries( $idStrings );
-		$readConnection = $this->db->connections()->getReadConnection();
+		$readConnection = $this->db->getReadConnection();
 
 		if ( $readConnection->getType() === 'mysql' ) {
 			return $this->getUsedEntityIdStringsMySql( $subQueries, $readConnection );
@@ -417,7 +414,7 @@ class EntityUsageTable {
 	 */
 	private function getUsedEntityIdStringsQueries( array $idStrings ): array {
 		$subQueries = [];
-		$readConnection = $this->db->connections()->getReadConnection();
+		$readConnection = $this->db->getReadConnection();
 
 		foreach ( $idStrings as $idString ) {
 			$subQueries[] = $readConnection->newSelectQueryBuilder()
@@ -439,7 +436,7 @@ class EntityUsageTable {
 	 * @return int[]
 	 */
 	private function getPrimaryKeys( array $where, string $method ): array {
-		$rowIds = $this->db->connections()->getReadConnection()->newSelectQueryBuilder()
+		$rowIds = $this->db->getReadConnection()->newSelectQueryBuilder()
 			->select( [ 'eu_row_id' ] )
 			->from( $this->tableName )
 			->where( $where )

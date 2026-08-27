@@ -66,7 +66,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	}
 
 	private function newUsageTable( ?IDatabase $db = null ): EntityUsageTable {
-		$entityUsageTable = new EntityUsageTable( $this->idParser, $db );
+		$entityUsageTable = new EntityUsageTable( $this->idParser, $this->entityUsageDb, $db );
 		$entityUsageTable->setAddUsagesBatchSize( $this->addEntityUsagesBatchSize );
 		return $entityUsageTable;
 	}
