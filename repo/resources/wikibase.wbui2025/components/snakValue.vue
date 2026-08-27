@@ -104,19 +104,26 @@ module.exports = exports = defineComponent( {
 }
 
 .wikibase-wbui2025-globe-coordinate-value {
+	padding-right: 0;
+	overflow-x: visible;
+	mask-image: none;
+
 	> .snakValue {
 		flex: 1 1 auto;
 		display: block;
 		min-width: 0;
+		width: 100%;
 	}
 
 	> .snakValue > div {
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 	}
 
 	.wikibase-kartographer-caption {
-		order: 1;
+		order: 0;
+		font-size: @font-size-medium;
 		line-height: 1.25rem;
 		/* @noflip */
 		direction: ltr;
@@ -125,12 +132,13 @@ module.exports = exports = defineComponent( {
 	}
 
 	.mw-parser-output {
-		order: 0;
+		order: 1;
+		width: 100%;
 	}
 
 	a.mw-kartographer-map {
 		width: 100%;
-		max-width: 310px;
+		max-width: none;
 	}
 }
 
