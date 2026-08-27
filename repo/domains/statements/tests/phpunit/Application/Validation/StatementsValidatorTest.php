@@ -190,6 +190,24 @@ class StatementsValidatorTest extends TestCase {
 		];
 	}
 
+	public function testGivenNumericStatementGroupKey_propertyIdKeyContextIsAString(): void {
+		// PHP casts numeric string array keys to int, e.g. from a `{ "1": [ ... ] }` request body
+		$error = $this->newValidator()->validateNewStatements(
+			[ '1' => [ self::newSomeValueSerialization( 'P567' ) ] ],
+			'/statements'
+		);
+
+		$this->assertSame( StatementsValidator::CODE_PROPERTY_ID_MISMATCH, $error->getCode() );
+		$this->assertSame(
+			[
+				StatementsValidator::CONTEXT_PATH => '/statements/1/0/property/id',
+				StatementsValidator::CONTEXT_PROPERTY_ID_KEY => '1',
+				StatementsValidator::CONTEXT_PROPERTY_ID_VALUE => 'P567',
+			],
+			$error->getContext()
+		);
+	}
+
 	/**
 	 * @dataProvider modifiedStatementsProvider
 	 */
