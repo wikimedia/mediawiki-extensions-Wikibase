@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
 use GraphQL\Deferred;
-use LogicException;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\LookUpItemByExternalId\LookUpItemByExternalId;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\LookUpItemByExternalId\LookUpItemByExternalIdRequest;
@@ -39,7 +38,6 @@ class ItemByExternalIdResolver {
 		} catch ( UseCaseError $e ) {
 			throw match ( $e->type ) {
 				UseCaseErrorType::INVALID_EXTERNAL_ID_PROPERTY => GraphQLError::invalidExternalIdProperty( $e->getMessage() ),
-				default => new LogicException( "Unexpected error type: '{$e->type->name}'" ),
 			};
 		}
 

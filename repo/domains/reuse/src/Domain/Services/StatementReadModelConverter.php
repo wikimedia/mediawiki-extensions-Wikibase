@@ -46,7 +46,7 @@ class StatementReadModelConverter {
 			$this->convertReferences( $inputStatement->getReferences() ),
 			$mainPropertyValuePair->property,
 			$mainPropertyValuePair->value,
-			ValueType::fromString( $inputStatement->getMainSnak()->getType() ),
+			ValueType::from( $inputStatement->getMainSnak()->getType() ),
 		);
 	}
 
@@ -86,7 +86,7 @@ class StatementReadModelConverter {
 		return new PropertyValuePair(
 			new PredicateProperty( $snak->getPropertyId(), $dataType ),
 			$snak instanceof PropertyValueSnak ? $snak->getDataValue() : null,
-			ValueType::fromString( $snak->getType() ),
+			ValueType::from( $snak->getType() ),
 		);
 	}
 

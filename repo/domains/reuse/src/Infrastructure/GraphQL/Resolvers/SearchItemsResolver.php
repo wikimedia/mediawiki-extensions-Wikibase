@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Resolvers;
 
-use LogicException;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearch;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\FacetedItemSearch\FacetedItemSearchRequest;
 use Wikibase\Repo\Domains\Reuse\Application\UseCases\UseCaseError;
@@ -43,7 +42,6 @@ class SearchItemsResolver {
 				UseCaseErrorType::INVALID_SEARCH_QUERY => GraphQLError::invalidSearchQuery( $e->getMessage() ),
 				UseCaseErrorType::INVALID_SEARCH_LIMIT => GraphQLError::invalidSearchLimit(),
 				UseCaseErrorType::INVALID_SEARCH_OFFSET => GraphQLError::invalidSearchCursor(),
-				default => new LogicException( "Unexpected error type: '{$e->type->name}'" ),
 			};
 		}
 
