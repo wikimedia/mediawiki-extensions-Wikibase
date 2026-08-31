@@ -71,7 +71,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$this->overrideConfigValue( 'WBRepoSettings', $customRepoSettings );
 
 		$siteStore = new HashSiteStore( TestSites::getSites() );
-		$this->setService( 'SiteStore', $siteStore );
 		$this->setService( 'SiteLookup', $siteStore );
 	}
 
