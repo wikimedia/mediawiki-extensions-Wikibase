@@ -61,7 +61,12 @@ class EntityUsageTableBuilder {
 	/**
 	 * @var ClientDomainDb
 	 */
-	private $domainDb;
+	private ClientDomainDb $domainDb;
+
+	/**
+	 * @var EntityUsageDomainDb
+	 */
+	private EntityUsageDomainDb $entityUsageDb;
 
 	/**
 	 * @throws InvalidArgumentException
@@ -69,6 +74,7 @@ class EntityUsageTableBuilder {
 	public function __construct(
 		EntityIdParser $idParser,
 		ClientDomainDb $domainDb,
+		EntityUsageDomainDb $entityUsageDb,
 		int $batchSize = 1000,
 		?string $usageTableName = null
 	) {
@@ -83,6 +89,7 @@ class EntityUsageTableBuilder {
 
 		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
+		$this->entityUsageDb = $entityUsageDb;
 	}
 
 	public function setProgressReporter( MessageReporter $progressReporter ): void {
@@ -115,14 +122,15 @@ class EntityUsageTableBuilder {
 		$this->domainDb->autoReconfigure();
 
 		$connections = $this->domainDb->connections();
-		$dbw = $connections->getWriteConnection();
+		$dbr = $connections->getReadConnection();
 
-		$entityPerPage = $this->getUsageBatch( $dbw, $fromPageId );
+		$entityPerPage = $this->getUsageBatch( $dbr, $fromPageId );
 
 		if ( !$entityPerPage ) {
 			return 0;
 		}
 
+		$dbw = $this->entityUsageDb->getWriteConnection();
 		$count = $this->insertUsageBatch( $dbw, $entityPerPage );
 
 		// Update $fromPageId to become the first page ID of the next batch.
@@ -192,8 +200,8 @@ class EntityUsageTableBuilder {
 					$ex,
 					'badEntityId',
 					__METHOD__ . ': ' . 'Failed to parse entity ID: ' .
-						$row->pp_value . ' at page ' .
-						$row->pp_page
+					$row->pp_value . ' at page ' .
+					$row->pp_page
 				);
 			}
 		}

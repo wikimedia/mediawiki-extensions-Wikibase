@@ -51,7 +51,8 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$primer = new EntityUsageTableBuilder(
 			$idParser,
 			// TODO: Would be nice to pass in $dbUpdater->getDB().
-			WikibaseClient::getClientDomainDbFactory()->newLocalDb()
+			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
+			WikibaseClient::getEntityUsageDomainDb()
 		);
 
 		$primer->setProgressReporter(
