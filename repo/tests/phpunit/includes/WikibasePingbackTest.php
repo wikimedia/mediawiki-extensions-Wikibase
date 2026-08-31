@@ -19,6 +19,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\WikibasePingback;
+use Wikimedia\LockManager\ILockManager;
 
 /**
  * @covers \Wikibase\Repo\WikibasePingback
@@ -152,6 +153,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			$requestFactory,
 			null,
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() ),
+			null,
 			self::TEST_KEY
 		);
 	}
@@ -200,4 +202,41 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		// Clear stale cache
 		SiteStats::unload();
 	}
+
+	protected static function pingbackWithRequestExpectationProvider() {
+		return [
+			[ true ],
+			[ false ],
+		];
+	}
+
+	/**
+	 * @dataProvider pingbackWithRequestExpectationProvider
+	 */
+	public function testPingbackWithRequestExpectation( bool $lockAcquired ) {
+		$lockManager = $this->createMock( ILockManager::class );
+		$lockManager->expects( $this->once() )
+			->method( 'lockKey' )
+			->with( self::TEST_KEY )
+			->willReturn( $lockAcquired );
+
+		$requestFactory = $this->createMock( HTTPRequestFactory::class );
+		$requestFactory->expects( $this->exactly( $lockAcquired ? 1 : 0 ) )
+			->method( 'post' )
+			->willReturn( true );
+
+		$pingBack = new WikibasePingback(
+			null,
+			null,
+			null,
+			null,
+			$requestFactory,
+			null,
+			null,
+			$lockManager,
+			self::TEST_KEY
+		);
+		$pingBack->sendPingback();
+	}
+
 }
