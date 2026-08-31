@@ -30,7 +30,7 @@ return call_user_func( function() {
 				return new CurrentSiteModule(
 					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
-					MediaWikiServices::getInstance()->getSiteStore(),
+					MediaWikiServices::getInstance()->getSiteLookup(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 					new LanguageNameLookupFactory(
 						MediaWikiServices::getInstance()->getLanguageNameUtils(),
@@ -45,7 +45,7 @@ return call_user_func( function() {
 				return new SitesModule(
 					WikibaseSettings::isClientEnabled() ? WikibaseClient::getSettings() : null,
 					WikibaseSettings::isRepoEnabled() ? WikibaseRepo::getSettings() : null,
-					MediaWikiServices::getInstance()->getSiteStore(),
+					MediaWikiServices::getInstance()->getSiteLookup(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 					new LanguageNameLookupFactory(
 						MediaWikiServices::getInstance()->getLanguageNameUtils(),
