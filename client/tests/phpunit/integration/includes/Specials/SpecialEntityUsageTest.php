@@ -151,6 +151,25 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->assertSame( $expected, $values );
 	}
 
+	public function testReallyDoQueryUnsedSpecialEntity() {
+		if ( $this->getDb()->getType() === 'mysql' &&
+			$this->usesTemporaryTables()
+		) {
+			$this->markTestSkipped( 'MySQL does not allow self-joins on temporary tables' );
+		}
+
+		$this->addReallyDoQueryData();
+		$special = new SpecialEntityUsage(
+			$this->languageConverterFactory(),
+			WikibaseClient::getClientDomainDbFactory(),
+			WikibaseClient::getEntityIdParser()
+		);
+
+		$special->prepareParams( 'Q5' );
+		$res = $special->reallyDoQuery( 50 );
+		$this->assertSame( 0, $res->numRows() );
+	}
+
 	private function assertUsageAspects( $expected, $aspectsString ) {
 		// The aspects are not ordered, so don't take this into account when asserting
 		$this->assertArrayEquals( $expected, explode( '|', $aspectsString ), false );

@@ -10,12 +10,16 @@ use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Title\Title;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikibase\Lib\Rdbms\ClientDomainDbFactory;
 use Wikimedia\HtmlArmor\HtmlArmor;
+use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\IReadableDatabase;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * A special page that lists client wiki pages that use a given entity ID from the repository, and
@@ -132,26 +136,52 @@ class SpecialEntityUsage extends QueryPage {
 	 * @return array[]
 	 */
 	public function getQueryInfo() {
-		$dbr = $this->db->connections()->getReadConnection();
 		$conds = [ 'eu_entity_id' => $this->entityId->getSerialization() ];
-		return $dbr->newSelectQueryBuilder()
-			->select( [
-				'value' => 'page_id',
-				'namespace' => 'page_namespace',
-				'title' => 'page_title',
-				'aspects' => $dbr->newSelectQueryBuilder()
-					->table( 'wbc_entity_usage' )
-					->field( 'eu_aspect' )
-					->where( [ 'eu_page_id = page_id' ] )
-					->andWhere( $conds )
-					->buildGroupConcatField( '|' ),
-				'eu_page_id',
-			] )
-			->from( 'page' )
-			->join( 'wbc_entity_usage', null, [ 'page_id = eu_page_id' ] )
-			->where( $conds )
+		$euDb = WikibaseClient::getEntityUsageDomainDb()->getReadConnection();
+
+		return $euDb->newSelectQueryBuilder()
+			->select(
+				[
+					'value' => 'eu_page_id',
+					'aspects' => $euDb->buildGroupConcat( 'eu_aspect', '|' ),
+					'eu_page_id',
+				]
+			)
+			->table( 'wbc_entity_usage' )
+			->andWhere( $conds )
 			->groupBy( 'eu_page_id' )
 			->getQueryInfo();
+	}
+
+	/**
+	 * This method overrides the parent method to execute two queries instead of previous join:
+	 * @param int|false $limit Numerical limit or false for no limit
+	 * @param int|false $offset Numerical offset or false for no offset
+	 * @return IResultWrapper
+	 * @since 1.18
+	 */
+	public function reallyDoQuery( $limit, $offset = false ): IResultWrapper {
+		$result = parent::reallyDoQuery( $limit, $offset );
+		if ( $this->usesExternalSource() ) {
+			return $result;
+		}
+
+		$euResultArr = iterator_to_array( $result );
+		$pageIds = [];
+
+		foreach ( $euResultArr as $page ) {
+			$pageIds[] = $page->eu_page_id;
+		}
+
+		if ( count( $pageIds ) === 0 ) {
+			return new FakeResultWrapper( [] );
+		}
+
+		$pages = $this->fetchPagesWithEntity( $pageIds );
+
+		$fields = [ 'value', 'namespace', 'title' ];
+		$joinedQueryRes = $this->joinResults( $euResultArr, $pages, $fields );
+		return new FakeResultWrapper( $joinedQueryRes );
 	}
 
 	/**
@@ -180,9 +210,9 @@ class SpecialEntityUsage extends QueryPage {
 		$languageConverter = $this->languageConverterFactory->getLanguageConverter();
 		$linkText = $languageConverter->convert( htmlspecialchars( $title->getPrefixedText() ) );
 		return $this->getLinkRenderer()->makeLink(
-			$title,
-			new HtmlArmor( $linkText )
-		) . $this->msg( 'colon-separator' )->escaped() . $this->formatAspects( $row->aspects );
+				$title,
+				new HtmlArmor( $linkText )
+			) . $this->msg( 'colon-separator' )->escaped() . $this->formatAspects( $row->aspects );
 	}
 
 	/**
@@ -253,4 +283,52 @@ class SpecialEntityUsage extends QueryPage {
 		return 'pages';
 	}
 
+	/**
+	 * @param array $pageIds
+	 * @return IResultWrapper
+	 */
+	private function fetchPagesWithEntity( array $pageIds ): IResultWrapper {
+		$db = $this->db->connections()->getReadConnection();
+		$pageIds = array_unique( $pageIds );
+		return $db->newSelectQueryBuilder()
+			->select( [
+				'value' => 'page_id',
+				'namespace' => 'page_namespace',
+				'title' => 'page_title',
+			] )
+			->from( 'page' )
+			->where( [ 'page_id' => $pageIds ] )
+			->caller( __METHOD__ . '::reallyDoQueryInternal' )
+			->fetchResultSet();
+	}
+
+	/**
+	 * @param array $euData
+	 * @param IResultWrapper $pageData
+	 * @param array $fieldsToCopy
+	 * @return array
+	 */
+	private function joinResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
+		$groupedByPageId = [];
+		$joinedQueryRes = array_map( fn( object $row ): object => clone $row, $euData );
+
+		foreach ( $pageData as $row ) {
+			$groupedByPageId[(int)$row->value] = $row;
+		}
+
+		foreach ( $joinedQueryRes as $euRow ) {
+			$pageId = (int)$euRow->eu_page_id;
+			if ( isset( $groupedByPageId[$pageId] ) ) {
+				$pageRow = $groupedByPageId[$pageId];
+				foreach ( $fieldsToCopy as $field ) {
+					$euRow->$field = $pageRow->$field;
+				}
+			}
+		}
+		return $joinedQueryRes;
+	}
+
+	protected function getRecacheDB(): IReadableDatabase {
+		return WikibaseClient::getEntityUsageDomainDb()->getReadConnection( [ 'vslow' ] );
+	}
 }
