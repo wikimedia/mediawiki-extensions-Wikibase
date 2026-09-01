@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @covers Wikibase\InternalSerialization\DeserializerFactory
+ * @covers \Wikibase\InternalSerialization\DeserializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

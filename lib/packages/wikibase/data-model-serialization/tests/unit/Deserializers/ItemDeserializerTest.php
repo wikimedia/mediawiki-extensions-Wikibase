@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\ItemDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\ItemDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

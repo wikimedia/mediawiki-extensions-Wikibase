@@ -19,7 +19,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
  *
  * @group Wikibase
  *
- * @covers Wikibase\Client\Usage\UsageAccumulatorFactory
+ * @covers \Wikibase\Client\Usage\UsageAccumulatorFactory
  */
 class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 

@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\InternalSerialization\SerializerFactory;
 
 /**
- * @covers Wikibase\InternalSerialization\SerializerFactory
+ * @covers \Wikibase\InternalSerialization\SerializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

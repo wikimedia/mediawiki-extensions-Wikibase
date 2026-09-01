@@ -8,7 +8,7 @@ use Deserializers\Exceptions\DeserializationException;
 use Wikibase\InternalSerialization\Deserializers\StatementDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\StatementDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\StatementDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz

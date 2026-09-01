@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Serializers\SnakSerializer
+ * @covers \Wikibase\DataModel\Serializers\SnakSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

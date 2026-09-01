@@ -13,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers DataValues\Deserializers\DataValueDeserializer
+ * @covers \DataValues\Deserializers\DataValueDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

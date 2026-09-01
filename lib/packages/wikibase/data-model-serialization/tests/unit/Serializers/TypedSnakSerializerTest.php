@@ -11,7 +11,7 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\TypedSnak;
 
 /**
- * @covers Wikibase\DataModel\Serializers\TypedSnakSerializer
+ * @covers \Wikibase\DataModel\Serializers\TypedSnakSerializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Serializers\SiteLinkSerializer;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @covers Wikibase\DataModel\Serializers\SiteLinkSerializer
+ * @covers \Wikibase\DataModel\Serializers\SiteLinkSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

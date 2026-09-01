@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
  *
  * @group Wikibase
  *
- * @covers Wikibase\Client\Usage\RedirectTrackingUsageAccumulator
+ * @covers \Wikibase\Client\Usage\RedirectTrackingUsageAccumulator
  */
 class RedirectTrackingUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 

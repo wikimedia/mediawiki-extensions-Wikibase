@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 
 /**
- * @covers DataValues\Deserializers\DataValueDeserializer
+ * @covers \DataValues\Deserializers\DataValueDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

@@ -14,7 +14,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

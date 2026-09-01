@@ -10,7 +10,7 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\ReferenceListDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\ReferenceListDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

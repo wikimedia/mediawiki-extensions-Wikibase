@@ -15,7 +15,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers DataValues\Serializers\DataValueSerializer
+ * @covers \DataValues\Serializers\DataValueSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

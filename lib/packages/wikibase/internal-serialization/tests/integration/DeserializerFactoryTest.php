@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 
 /**
- * @covers Wikibase\InternalSerialization\DeserializerFactory
+ * @covers \Wikibase\InternalSerialization\DeserializerFactory
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

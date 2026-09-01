@@ -12,7 +12,7 @@ use Wikibase\DataModel\Serializers\ReferenceListSerializer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ReferenceListSerializer
+ * @covers \Wikibase\DataModel\Serializers\ReferenceListSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

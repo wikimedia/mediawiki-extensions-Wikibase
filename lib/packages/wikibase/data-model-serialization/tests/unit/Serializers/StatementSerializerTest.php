@@ -16,7 +16,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\DataModel\Serializers\StatementSerializer
+ * @covers \Wikibase\DataModel\Serializers\StatementSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

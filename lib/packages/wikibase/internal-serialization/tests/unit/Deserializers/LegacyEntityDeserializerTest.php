@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\LegacyEntityDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

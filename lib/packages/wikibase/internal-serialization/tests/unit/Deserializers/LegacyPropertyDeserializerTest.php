@@ -12,7 +12,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

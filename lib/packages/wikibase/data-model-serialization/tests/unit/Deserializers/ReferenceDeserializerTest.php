@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\ReferenceDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\ReferenceDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

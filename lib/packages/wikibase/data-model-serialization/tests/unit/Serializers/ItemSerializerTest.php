@@ -19,7 +19,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\ItemSerializer
+ * @covers \Wikibase\DataModel\Serializers\ItemSerializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

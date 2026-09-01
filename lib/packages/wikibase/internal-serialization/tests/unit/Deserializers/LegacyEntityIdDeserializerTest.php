@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

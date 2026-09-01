@@ -8,7 +8,7 @@ use Wikibase\DataModel\Deserializers\TermDeserializer;
 use Wikibase\DataModel\Term\Term;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\TermDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\TermDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Addshore

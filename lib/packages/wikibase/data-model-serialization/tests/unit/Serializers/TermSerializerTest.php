@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**
- * @covers Wikibase\DataModel\Serializers\TermSerializer
+ * @covers \Wikibase\DataModel\Serializers\TermSerializer
  *
  * @license GPL-2.0-or-later
  * @author Addshore
