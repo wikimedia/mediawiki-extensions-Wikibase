@@ -12,8 +12,10 @@ use MediaWiki\Api\ApiResult;
 use MediaWiki\Title\Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\Usage\Sql\EntityUsageDomainDb;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\ParamValidator\TypeDef\IntegerDef;
+use Wikimedia\Rdbms\FakeResultWrapper;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -174,17 +176,8 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			'eu_aspect',
 		] );
 
+		$this->setVirtualDomain( EntityUsageDomainDb::VIRTUAL_DOMAIN_ID );
 		$this->addTables( 'wbc_entity_usage' );
-
-		if ( $resultPageSet === null ) {
-			$this->addFields( [ 'page_id', 'page_title', 'page_namespace' ] );
-		} else {
-			$this->addFields( $resultPageSet->getPageTableFields() );
-		}
-
-		$this->addTables( [ 'page' ] );
-		$this->addJoinConds( [ 'wbc_entity_usage' => [ 'LEFT JOIN', 'eu_page_id=page_id' ] ] );
-
 		$this->addWhereFld( 'eu_entity_id', $params['entities'] );
 
 		if ( $params['continue'] !== null ) {
@@ -192,16 +185,43 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		}
 
 		$orderBy = [ 'eu_page_id', 'eu_entity_id' ];
+
 		if ( isset( $params['aspect'] ) ) {
 			$this->addWhereFld( 'eu_aspect', $params['aspect'] );
 		} else {
 			$orderBy[] = 'eu_aspect';
 		}
-		$this->addOption( 'ORDER BY', $orderBy );
 
+		$this->addOption( 'ORDER BY', $orderBy );
 		$this->addOption( 'LIMIT', $params['limit'] + 1 );
-		$res = $this->select( __METHOD__ );
-		return $res;
+
+		$euRes = $this->select( __METHOD__ );
+		$this->resetVirtualDomain();
+
+		$euResArr = iterator_to_array( $euRes );
+		$pageIds = [];
+		foreach ( $euResArr as $eu_row ) {
+			if ( isset( $eu_row->eu_page_id ) ) {
+				$pageIds[] = $eu_row->eu_page_id;
+			}
+		}
+
+		if ( !$pageIds ) {
+			return new FakeResultWrapper( $euResArr );
+		}
+
+		$fields = $resultPageSet === null ? [ 'page_id', 'page_title', 'page_namespace' ] :
+			$resultPageSet->getPageTableFields();
+
+		$pageRes = $this->getDB()->newSelectQueryBuilder()
+			->select( $fields )
+			->from( 'page' )
+			->where( [ 'page_id' => array_unique( $pageIds ) ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$joinedRes = $this->joinedResults( $euResArr, $pageRes, $fields );
+		return new FakeResultWrapper( $joinedRes );
 	}
 
 	public function getAllowedParams(): array {
@@ -258,16 +278,44 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	protected function getExamplesMessages(): array {
 		return [
 			'action=query&list=wblistentityusage&wbleuentities=Q2'
-				=> 'apihelp-query+wblistentityusage-example-simple',
+			=> 'apihelp-query+wblistentityusage-example-simple',
 			'action=query&list=wblistentityusage&wbleuentities=Q2&wbleuprop=url'
-				=> 'apihelp-query+wblistentityusage-example-url',
+			=> 'apihelp-query+wblistentityusage-example-url',
 			'action=query&list=wblistentityusage&wbleuentities=Q2&wbleuaspect=S|O'
-				=> 'apihelp-query+wblistentityusage-example-aspect',
+			=> 'apihelp-query+wblistentityusage-example-aspect',
 		];
 	}
 
 	public function getHelpUrls(): string {
 		return 'https://www.mediawiki.org/wiki/Special:MyLanguage/Wikibase/API';
+	}
+
+	/**
+	 * Merge page table fields into entity usage rows.
+	 *
+	 * @param \stdClass[] $euData
+	 * @param IResultWrapper $pageData
+	 * @param string[] $fieldsToCopy
+	 */
+	private function joinedResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
+		$pagesGroupedByPageId = [];
+		$joinedQueryRes = array_map( fn( object $row ): object => clone $row, $euData );
+
+		foreach ( $pageData as $row ) {
+			$pagesGroupedByPageId[(int)$row->page_id] = $row;
+		}
+
+		foreach ( $joinedQueryRes as $euRow ) {
+			$pageId = (int)$euRow->eu_page_id;
+
+			$pageRow = $pagesGroupedByPageId[$pageId];
+			if ( $pageRow ) {
+				foreach ( $fieldsToCopy as $field ) {
+					$euRow->$field = $pageRow->$field;
+				}
+			}
+		}
+		return $joinedQueryRes;
 	}
 
 }

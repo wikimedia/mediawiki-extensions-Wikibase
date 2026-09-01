@@ -13,6 +13,7 @@ use MediaWiki\Request\FauxRequest;
 use MediaWiki\Title\Title;
 use MediaWikiLangTestCase;
 use Wikibase\Client\Api\ApiListEntityUsage;
+use Wikibase\Client\Tests\Integration\Usage\Sql\LocalEntityUsageDbTestHelper;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -28,6 +29,8 @@ use Wikibase\Client\WikibaseClient;
  * @author Amir Sarabadani
  */
 class ApiListEntityUsageTest extends MediaWikiLangTestCase {
+
+	use LocalEntityUsageDbTestHelper;
 
 	public function addDBData(): void {
 		$this->insertPages();
@@ -84,9 +87,12 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 				],
 			],
 		];
+		$euDb = $this->getEntityUsageDomainDb( $this->getDb() );
+		$this->setService( 'WikibaseClient.EntityUsageDomainDb', $euDb );
+		$db = $euDb->getWriteConnection();
 
 		foreach ( $dump as $table => $rows ) {
-			$this->getDb()->newInsertQueryBuilder()
+			$db->newInsertQueryBuilder()
 				->insertInto( $table )
 				->rows( $rows )
 				->caller( __METHOD__ )
@@ -276,6 +282,14 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			'wbleuentities' => 'Q3|Q5',
 			'wbleucontinue' => '-',
 		] );
+	}
+
+	public function testEntityUsageWithNoResults(): void {
+		$result = $this->callApiModule( [
+			'wbleuentities' => 'Q333',
+		] );
+
+		$this->assertArrayEquals( [], $result );
 	}
 
 }
