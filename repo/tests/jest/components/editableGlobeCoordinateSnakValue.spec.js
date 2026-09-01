@@ -184,6 +184,28 @@ describe( 'wikibase.wbui2025.editableGlobeCoordinateSnakValue', () => {
 				expect( wrapper.vm.parsedPrecision ).toEqual( null );
 				expect( wrapper.find( '.wikibase-coordinate-popover__malformed' ).exists() ).toBe( true );
 			} );
+
+			it( 'does not show a malformed value when the input is empty', async () => {
+				mockParseValue.mockResolvedValueOnce( null );
+				await textInput.setValue( 'not a coordinate' );
+				await flushPromises();
+
+				expect( wrapper.find( '.wikibase-coordinate-popover__malformed' ).exists() ).toBe( true );
+
+				await textInput.setValue( '' );
+				await flushPromises();
+
+				expect( wrapper.find( '.wikibase-coordinate-popover__malformed' ).exists() ).toBe( false );
+				expect( wrapper.find( '.wikibase-coordinate-popover__loading' ).exists() ).toBe( false );
+			} );
+
+			it( 'does not show a malformed value or loading state for whitespace-only input', async () => {
+				await textInput.setValue( '   ' );
+				await flushPromises();
+
+				expect( wrapper.find( '.wikibase-coordinate-popover__malformed' ).exists() ).toBe( false );
+				expect( wrapper.find( '.wikibase-coordinate-popover__loading' ).exists() ).toBe( false );
+			} );
 		} );
 	} );
 } );

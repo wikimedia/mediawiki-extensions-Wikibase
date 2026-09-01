@@ -49,7 +49,10 @@
 						></div>
 					</div>
 
-					<div v-else class="wikibase-coordinate-popover__loading"></div>
+					<div
+						v-else-if="textvalue && textvalue.trim()"
+						class="wikibase-coordinate-popover__loading"
+					></div>
 				</div>
 
 				<div class="wikibase-coordinate-popover__precision">
@@ -123,7 +126,15 @@ module.exports = exports = defineComponent( {
 		] );
 		const parsedPrecision = ref( null );
 		const inputElement = ref();
+		const textvalue = computed( computedProperties.textvalue );
 		const formatValue = () => {
+			if ( !textvalue.value || !textvalue.value.trim() ) {
+				parseError.value = false;
+				parsedPrecision.value = null;
+				formattedValue.value = '';
+				return;
+			}
+
 			editSnakStoreGetter().valueStrategy.getParsedValue().then( ( value ) => {
 				if ( value === null ) {
 					parseError.value = true;
@@ -144,7 +155,7 @@ module.exports = exports = defineComponent( {
 			formattedValue,
 			parseError,
 			parsedPrecision,
-			textvalue: computed( computedProperties.textvalue ),
+			textvalue,
 			precision: computed( computedProperties.precision ),
 			debouncedTriggerFormatAndParse: mw.util.debounce( formatValue, 300 )
 		};
