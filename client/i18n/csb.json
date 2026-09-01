@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Iketsi",
 			"Kaszeba",
 			"Kirsan",
 			"Orbitminis",
@@ -26,5 +27,6 @@
 	"wikibase-rc-wikibase-edit-title": "Edicëjô w Wikipòdôwkach",
 	"wikibase-rcfilters-hide-wikibase-label": "Edicje w Wikipòdôwkach",
 	"wikibase-pageinfo-entity-usage": "Òbiektë z Wikipòdôwków ùżëté na ti starnie",
-	"wikibase-otherprojects": "W jinnych ùdbach"
+	"wikibase-otherprojects": "W jinnych ùdbach",
+	"connected-redirect-category": "Przeczerowania sparłãczoné z elementã Wikipòdôwków"
 }
