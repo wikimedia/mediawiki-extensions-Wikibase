@@ -39,7 +39,10 @@
 				</div>
 			</template>
 			<div class="time-options">
-				<p v-html="formattedValue"></p>
+				<p
+					class="formatted-time-value"
+					v-html="formattedValue"
+				></p>
 				<p class="option-and-select">
 					<b>{{ $i18n( 'valueview-expert-timeinput-precision' ).text() }}</b>{{ currentPrecision }}
 					<select v-model="selectedPrecision">
@@ -200,6 +203,10 @@ module.exports = exports = defineComponent( {
 		] );
 		const inputElement = ref();
 		const formatValue = () => {
+			if ( editSnakStoreGetter().textvalue === '' ) {
+				formattedValue.value = '';
+				return;
+			}
 			editSnakStoreGetter().valueStrategy.getParsedValue().then( ( value ) => {
 				if ( value === null ) {
 					formattedValue.value = mw.msg( 'wikibase-parse-error-time' );
@@ -314,10 +321,7 @@ module.exports = exports = defineComponent( {
 
 	.wikibase-wbui2025-snak-value {
 		.time-value-popover {
-			// Fallback property for browsers without CSS 'min' support
-			min-width: 90%;
-			// Pass 'min' verbatim through less, since less's min requires values of the same unit
-			min-width: ~"min( 90%, 280px )";
+			width: 100%;
 			padding: 0.75rem @spacing-100 @spacing-50 @spacing-100;
 		}
 
@@ -336,6 +340,11 @@ module.exports = exports = defineComponent( {
 		}
 
 		div.time-options {
+			.formatted-time-value {
+				font-weight: @font-weight-bold;
+				margin-top: @spacing-75;
+				margin-bottom: @spacing-75;
+			}
 			p.option-and-select {
 				justify-content: space-between;
 				display: flex;

@@ -174,6 +174,15 @@ describe( 'wikibase.wbui2025.editableTimeSnakValue', () => {
 			expect( mockParseValue ).toHaveBeenCalledTimes( 2 );
 		} );
 
+		it( 'does not show a malformed value when the input is empty', async () => {
+			await textInput.find( 'input' ).trigger( 'focus' );
+
+			await textInput.setValue( '' );
+
+			expect( popover.find( '.formatted-time-value' ).text() ).toBe( '' );
+			expect( mockParseValue ).toHaveBeenCalledTimes( 1 );
+		} );
+
 		it( 'should close the popup if the close button is clicked', async () => {
 			await textInput.find( 'input' ).trigger( 'focus' );
 			expect( popover.props( 'open' ) ).toBe( true );
