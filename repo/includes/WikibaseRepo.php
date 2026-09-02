@@ -124,6 +124,7 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\Store\TermFallbackCacheEntityStoreWatcher;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -1130,6 +1131,12 @@ class WikibaseRepo {
 
 	public static function getSnakValueDeserializer( ?ContainerInterface $services = null ): SnakValueDeserializer {
 		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WikibaseRepo.SnakValueDeserializer' );
+	}
+
+	public static function getTermFallbackCacheEntityStoreWatcher(
+		?ContainerInterface $services = null
+	): TermFallbackCacheEntityStoreWatcher {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WikibaseRepo.TermFallbackCacheEntityStoreWatcher' );
 	}
 
 }

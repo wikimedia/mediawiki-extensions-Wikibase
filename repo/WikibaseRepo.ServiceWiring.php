@@ -230,6 +230,7 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\Store\TermFallbackCacheEntityStoreWatcher;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -1999,6 +2000,16 @@ return [
 		return new TermFallbackCacheFacade(
 			WikibaseRepo::getTermFallbackCacheFactory( $services )->getTermFallbackCache(),
 			WikibaseRepo::getSettings( $services )->getSetting( 'sharedCacheDuration' )
+		);
+	},
+
+	'WikibaseRepo.TermFallbackCacheEntityStoreWatcher' => function ( MediaWikiServices $services ): TermFallbackCacheEntityStoreWatcher {
+		return new TermFallbackCacheEntityStoreWatcher(
+			WikibaseRepo::getEntityRevisionLookup( $services ),
+			WikibaseRepo::getTermFallbackCache( $services ),
+			WikibaseRepo::getWikibaseContentLanguages( $services ),
+			$services->getLocalServerObjectCache(),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services )
 		);
 	},
 

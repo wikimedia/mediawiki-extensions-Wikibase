@@ -91,4 +91,24 @@ class TermFallbackCacheFacadeTest extends TestCase {
 		$this->assertEquals( $value, $actual );
 	}
 
+	public function testSetMultiple() {
+		$facade = $this->getTermFallbackCacheFacade();
+		$entityId = new ItemId( 'Q1' );
+
+		$enValue = new TermFallback( 'en', 'label', 'en', null );
+		$frValue = new TermFallback( 'fr', 'lable', 'fr', null );
+		$languagesToFallbacks = [
+			'en' => $enValue,
+			'fr' => $frValue,
+		];
+		$this->cache->expects( $this->once() )
+			->method( 'setMultiple' )
+			->with( [
+				'Q1_1_en_label' => $this->serialize( $enValue ),
+				'Q1_1_fr_label' => $this->serialize( $frValue ),
+			], self::CACHE_TTL );
+
+		$facade->setMultiple( $languagesToFallbacks, $entityId, self::REVISION_ID, TermTypes::TYPE_LABEL );
+	}
+
 }

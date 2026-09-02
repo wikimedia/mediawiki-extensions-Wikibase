@@ -285,14 +285,14 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		return $this->propertyInfoLookup;
 	}
 
-	public function entityUpdated( EntityRevision $entityRevision ): void {
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId ): void {
 		// TODO: should this become more "generic" and somehow enumerate all services and
 		// update all of these which are instances of EntityStoreWatcher?
 
 		// Only notify entityMetaDataAccessor if the service is created, as the EntityStoreWatcher
 		// is only used for purging of an in process cache.
 		if ( $this->entityMetaDataAccessor !== null ) {
-			$this->entityMetaDataAccessor->entityUpdated( $entityRevision );
+			$this->entityMetaDataAccessor->entityUpdated( $entityRevision, $parentId );
 		}
 	}
 

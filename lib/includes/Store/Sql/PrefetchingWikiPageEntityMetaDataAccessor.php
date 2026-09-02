@@ -140,7 +140,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	 *
 	 * @param EntityRevision $entityRevision
 	 */
-	public function entityUpdated( EntityRevision $entityRevision ) {
+	public function entityUpdated( EntityRevision $entityRevision, int $parentId ) {
 		$this->purge( $entityRevision->getEntity()->getId() );
 	}
 
