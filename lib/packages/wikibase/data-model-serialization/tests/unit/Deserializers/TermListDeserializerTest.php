@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\TermListDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\TermListDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Addshore

@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\SnakListDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\SnakListDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

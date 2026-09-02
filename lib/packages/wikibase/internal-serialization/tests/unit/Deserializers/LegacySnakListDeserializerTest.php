@@ -11,7 +11,7 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

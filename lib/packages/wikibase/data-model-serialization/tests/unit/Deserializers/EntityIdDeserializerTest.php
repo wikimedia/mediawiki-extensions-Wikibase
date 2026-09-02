@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers Wikibase\DataModel\Deserializers\EntityIdDeserializer
+ * @covers \Wikibase\DataModel\Deserializers\EntityIdDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon

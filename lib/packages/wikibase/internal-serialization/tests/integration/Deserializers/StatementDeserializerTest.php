@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 
 /**
- * @covers Wikibase\InternalSerialization\Deserializers\StatementDeserializer
+ * @covers \Wikibase\InternalSerialization\Deserializers\StatementDeserializer
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

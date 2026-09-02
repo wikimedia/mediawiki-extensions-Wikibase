@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\AliasGroupListSerializer
+ * @covers \Wikibase\DataModel\Serializers\AliasGroupListSerializer
  *
  * @license GPL-2.0-or-later
  * @author Addshore

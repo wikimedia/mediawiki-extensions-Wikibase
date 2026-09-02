@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermList;
 
 /**
- * @covers Wikibase\DataModel\Serializers\TermListSerializer
+ * @covers \Wikibase\DataModel\Serializers\TermListSerializer
  *
  * @license GPL-2.0-or-later
  * @author Addshore
