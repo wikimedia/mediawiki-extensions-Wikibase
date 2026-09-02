@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWiki\Content\WikitextContent;
 use MediaWiki\Page\WikiPage;
-use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
@@ -50,16 +49,6 @@ class ItemMoveTest extends MediaWikiIntegrationTestCase {
 	 */
 	protected function setUp(): void {
 		parent::setUp();
-
-		//TODO: remove global TestSites DB setup once we can inject sites sanely.
-		static $hasSites = false;
-
-		if ( !$hasSites ) {
-			$sitesTable = $this->getServiceContainer()->getSiteStore();
-			$sitesTable->clear();
-			$sitesTable->saveSites( TestSites::getSites() );
-			$hasSites = true;
-		}
 
 		$item = new Item();
 		$this->entityRevision = WikibaseRepo::getEntityStore()->saveEntity( $item, '', $this->getTestUser()->getUser(), EDIT_NEW );

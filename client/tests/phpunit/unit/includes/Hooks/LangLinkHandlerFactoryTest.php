@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use MediaWiki\Site\SiteStore;
+use MediaWiki\Site\SiteLookup;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
@@ -30,7 +30,7 @@ class LangLinkHandlerFactoryTest extends \MediaWikiUnitTestCase {
 			$this->createMock( NamespaceChecker::class ),
 			$this->createMock( SiteLinkLookup::class ),
 			$this->createMock( EntityLookup::class ),
-			$this->createMock( SiteStore::class ),
+			$this->createMock( SiteLookup::class ),
 			$this->createMock( WikibaseClientHookRunner::class ),
 			new NullLogger(),
 			'srwiki',

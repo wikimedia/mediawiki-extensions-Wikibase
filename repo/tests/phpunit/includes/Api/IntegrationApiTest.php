@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Tests\Api\ApiTestCase;
 use MediaWiki\Tests\Site\TestSites;
 
@@ -27,9 +28,7 @@ class IntegrationApiTest extends ApiTestCase {
 
 		$this->setupSiteLinkGroups();
 
-		$sitesTable = $this->getServiceContainer()->getSiteStore();
-		$sitesTable->clear();
-		$sitesTable->saveSites( TestSites::getSites() );
+		$this->setService( 'SiteLookup', new HashSiteStore( TestSites::getSites() ) );
 	}
 
 	private function setupSitelinkGroups() {

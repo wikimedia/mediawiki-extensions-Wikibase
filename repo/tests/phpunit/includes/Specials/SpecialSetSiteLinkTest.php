@@ -6,6 +6,7 @@ use Hamcrest\Matcher;
 use HamcrestPHPUnitIntegration;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
+use MediaWiki\Site\HashSiteStore;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWiki\Tests\Specials\SpecialPageTestBase;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -67,9 +68,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	public function addDBDataOnce(): void {
 		self::$matchers = self::createMatchers();
-		$sitesTable = $this->getServiceContainer()->getSiteStore();
-		$sitesTable->clear();
-		$sitesTable->saveSites( TestSites::getSites() );
 
 		$this->createItems();
 		$this->addBadgeMatcher();
@@ -124,6 +122,8 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$settings = clone WikibaseRepo::getSettings();
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 		$this->setService( 'WikibaseRepo.Settings', $settings );
+
+		$this->setService( 'SiteLookup', new HashSiteStore( TestSites::getSites() ) );
 	}
 
 	private function createItems() {
