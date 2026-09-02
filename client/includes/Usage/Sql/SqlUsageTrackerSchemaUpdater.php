@@ -23,23 +23,30 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 * @param DatabaseUpdater $updater DatabaseUpdater subclass
 	 */
 	public function onLoadExtensionSchemaUpdates( $updater ): void {
-		$table = EntityUsageTable::DEFAULT_TABLE_NAME;
-		$db = $updater->getDB();
+		$dbType = $updater->getDB()->getType();
 
-		if ( !$updater->tableExists( $table ) ) {
-			$script = $this->getScriptPath( 'entity_usage', $db->getType() );
-			$updater->addExtensionTable( $table, $script );
+		$updater->addExtensionUpdateOnVirtualDomain( [
+			EntityUsageDomainDb::VIRTUAL_DOMAIN_ID,
+			'addTable',
+			EntityUsageTable::DEFAULT_TABLE_NAME,
+			$this->getScriptPath( 'entity_usage', $dbType ),
+			true,
+		] );
 
-			// Register function for populating the table.
-			// Note that this must be done with a static function,
-			// for reasons that do not need explaining at this juncture.
-			$updater->addExtensionUpdate( [
-				[ __CLASS__, 'fillUsageTable' ],
-			] );
-		} else {
-			$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched', $db->getType() );
-			$updater->dropExtensionField( $table, 'eu_touched', $script );
-		}
+		// Register function for populating the table.
+		// TODO: Should this be guarded behind updateRowExists?
+		$updater->addExtensionUpdate( [
+			[ __CLASS__, 'fillUsageTable' ],
+		] );
+
+		$updater->addExtensionUpdateOnVirtualDomain( [
+			EntityUsageDomainDb::VIRTUAL_DOMAIN_ID,
+			'dropField',
+			EntityUsageTable::DEFAULT_TABLE_NAME,
+			'eu_touched',
+			$this->getUpdateScriptPath( 'entity_usage-drop-touched', $dbType ),
+			true,
+		] );
 	}
 
 	/**
