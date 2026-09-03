@@ -18,6 +18,7 @@ use MediaWiki\Utils\MWTimestamp;
 use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\LockManager\ILockManager;
 use Wikimedia\Rdbms\ConnectionManager;
 
 /**
@@ -84,6 +85,11 @@ class WikibasePingback {
 	private $repoConnections;
 
 	/**
+	 * @var ILockManager
+	 */
+	private $lockManager;
+
+	/**
 	 * @param Config|null $config
 	 * @param LoggerInterface|null $logger
 	 * @param ExtensionRegistry|null $extensionRegistry
@@ -91,6 +97,7 @@ class WikibasePingback {
 	 * @param HttpRequestFactory|null $requestFactory
 	 * @param ObjectCacheFactory|null $objectCacheFactory
 	 * @param RepoDomainDb|null $repoDomainDb
+	 * @param ILockManager|null $lockManager
 	 * @param string|null $key
 	 */
 	public function __construct(
@@ -101,6 +108,7 @@ class WikibasePingback {
 		?HTTPRequestFactory $requestFactory = null,
 		?ObjectCacheFactory $objectCacheFactory = null,
 		?RepoDomainDb $repoDomainDb = null,
+		?ILockManager $lockManager = null,
 		?string $key = null
 	) {
 		$this->config = $config ?? RequestContext::getMain()->getConfig();
@@ -111,6 +119,7 @@ class WikibasePingback {
 		$this->objectCacheFactory = $objectCacheFactory ?? MediaWikiServices::getInstance()->getObjectCacheFactory();
 		$this->repoConnections = $repoDomainDb?->connections() ??
 			WikibaseRepo::getRepoDomainDbFactory()->newRepoDb()->connections();
+		$this->lockManager = $lockManager ?? MediaWikiServices::getInstance()->getLockManager();
 
 		$this->key = $key ?: 'WikibasePingback-' . MW_VERSION;
 		$this->host = $this->wikibaseRepoSettings->getSetting( 'pingbackHost' );
@@ -181,9 +190,7 @@ class WikibasePingback {
 			return false;  // throttled
 		}
 
-		$dbw = $this->repoConnections->getWriteConnection();
-
-		if ( !$dbw->lock( $this->key, __METHOD__, 0 ) ) {
+		if ( !$this->lockManager->lockKey( $this->key, 0 ) ) {
 			return false;  // already in progress
 		}
 
