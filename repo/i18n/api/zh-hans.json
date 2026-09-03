@@ -182,6 +182,8 @@
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "实体的用语（标签、描述、别名）。",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "声明中的单语文本值。",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "语言代码。",
+	"apihelp-query+wbdatabridgeconfig-summary": "返回[[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]功能所需的信息。",
+	"apihelp-query+wbdatabridgeconfig-extended-description": "这是一个内部模块，请勿使用。",
 	"apihelp-query+wbsearch-summary": "使用标签和别名搜索实体。",
 	"apihelp-query+wbsearch-extended-description": "这可以用作其他查询的生成器。返回要显示的匹配的搜索词。",
 	"apihelp-query+wbsearch-param-search": "搜索此文本。",
