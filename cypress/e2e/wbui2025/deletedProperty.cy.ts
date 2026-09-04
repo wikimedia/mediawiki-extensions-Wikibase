@@ -3,7 +3,8 @@ import { Util } from 'cypress-wikibase-api';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 
-describe( 'wbui2025 deleted property', () => {
+// Flaky since June 2026. https://phabricator.wikimedia.org/T429005
+describe.skip( 'wbui2025 deleted property', () => {
 	context( 'mobile view', () => {
 		let propertyId: string;
 		let itemId: string;
