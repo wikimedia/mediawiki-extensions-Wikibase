@@ -30,9 +30,18 @@
 	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Anang ngayanka tu agi",
 	"wikibase-label-empty": "Nadai label",
 	"wikibase-label-edit-placeholder": "pasukka label",
+	"wikibase-label-edit-placeholder-language-aware": "pasukka label dalam $1",
 	"wikibase-description-empty": "Nadai penerang",
+	"wikibase-description-edit-placeholder-language-aware": "pasukka penerang dalam $1",
+	"wikibase-content-language-edit-label": "Jaku:",
+	"wikibase-diffview-label": "label",
 	"wikibase-diffview-link-name": "nama",
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "lambar",
-	"wikibase-sitelinks-special": "Laman web bukai"
+	"wikibase-sitelinks-special": "Laman web bukai",
+	"wikibase-itembytitle-submit": "Giga",
+	"wikibase-itemdisambiguation-lookup-language": "Kod jaku:",
+	"wikibase-newentity-language": "Jaku:",
+	"wikibase-modifyterm-language": "Kod jaku:",
+	"wikibase-monolingualtextcode-mandatory": "Jaku (wajib)"
 }
