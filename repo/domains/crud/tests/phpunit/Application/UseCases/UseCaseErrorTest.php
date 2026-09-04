@@ -29,9 +29,8 @@ class UseCaseErrorTest extends TestCase {
 
 	public static function provideValidUseCaseErrorData(): Generator {
 		yield 'valid error without context' => [
-			UseCaseError::RESOURCE_NOT_FOUND,
-			'The requested resource does not exist',
-			[ UseCaseError::CONTEXT_RESOURCE_TYPE => 'aliases' ],
+			UseCaseError::PERMISSION_DENIED_UNKNOWN_REASON,
+			'Permission denied',
 		];
 
 		yield 'valid error with context' => [
