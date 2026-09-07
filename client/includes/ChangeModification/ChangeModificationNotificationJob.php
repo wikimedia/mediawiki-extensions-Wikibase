@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\ChangeModification;
 
 use MediaWiki\JobQueue\Job;
+use MediaWiki\Logging\LogEntryBase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
@@ -138,7 +139,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 		}
 
 		return $dbr->newSelectQueryBuilder()
-			->select( [ 'rc_id', 'rc_params' ] )
+			->select( [ 'rc_id', 'rc_params', 'rc_log_type', 'rc_log_action' ] )
 			->from( 'recentchanges' )
 			->where( [
 				'rc_timestamp' => $timestamps,
@@ -166,7 +167,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 
 		$results = [];
 		foreach ( $candidateResults as $rc ) {
-			$metadata = $this->readRecentChangeParams( $rc->rc_params );
+			$metadata = $this->readRecentChangeParams( $rc->rc_params, $rc->rc_log_type, $rc->rc_log_action );
 
 			$rev_id = $metadata[ 'rev_id' ];
 
@@ -195,12 +196,13 @@ abstract class ChangeModificationNotificationJob extends Job {
 	 * Extracts the metadata array from the value of an rc_params field.
 	 *
 	 * @param array|string $rc_params
-	 *
+	 * @param string $rc_log_type
+	 * @param string $rc_log_action
 	 * @return array
 	 */
-	private function readRecentChangeParams( $rc_params ): array {
+	private function readRecentChangeParams( $rc_params, $rc_log_type, $rc_log_action ): array {
 		if ( is_string( $rc_params ) ) {
-			$rc_params = unserialize( $rc_params );
+			$rc_params = LogEntryBase::extractParams( $rc_params, $rc_log_type . '/' . $rc_log_action );
 		}
 
 		if ( is_array( $rc_params ) && array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
