@@ -58,15 +58,6 @@ class NoLangLinkHandler {
 		$property = $parserOutput->getExtensionData(
 			self::EXTENSION_DATA_KEY
 		);
-		if ( $property === null ) {
-			// BACKWARD COMPATIBILITY: remove after the ParserCache expires
-			// This property used to be stored as a page property, so check
-			// there as well.
-			$old = $parserOutput->getPageProperty( 'noexternallanglinks' );
-			if ( is_string( $old ) ) {
-				return unserialize( $old );
-			}
-		}
 
 		return array_keys( $property ?? [] );
 	}

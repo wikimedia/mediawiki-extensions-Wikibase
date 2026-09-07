@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\RecentChanges;
 
+use MediaWiki\Logging\LogEntryBase;
 use MediaWiki\RecentChanges\RecentChange;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -35,7 +36,7 @@ class RecentChangesFinder {
 		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->newSelectQueryBuilder()
-			->select( [ 'rc_id', 'rc_params' ] )
+			->select( [ 'rc_id', 'rc_params', 'rc_log_type', 'rc_log_action' ] )
 			->from( 'recentchanges' )
 			->where( [
 				'rc_namespace' => $attribs['rc_namespace'],
@@ -50,13 +51,13 @@ class RecentChangesFinder {
 			return null;
 		}
 
-		$changeMetadata = $this->getMetadata( $attribs['rc_params'] );
+		$changeMetadata = $this->getMetadata( $attribs['rc_params'], $attribs['rc_log_type'], $attribs['rc_log_action'] );
 
 		$changeRevId = $changeMetadata[ 'rev_id' ];
 		$changeParentId = $changeMetadata[ 'parent_id' ];
 
 		foreach ( $res as $rc ) {
-			$metadata = $this->getMetadata( $rc->rc_params );
+			$metadata = $this->getMetadata( $rc->rc_params, $rc->rc_log_type, $rc->rc_log_action );
 
 			$parent_id = $metadata[ 'parent_id' ];
 			$rev_id = $metadata[ 'rev_id' ];
@@ -74,12 +75,13 @@ class RecentChangesFinder {
 	 * Extracts the metadata array from the value of an rc_params field.
 	 *
 	 * @param array|string $rc_params
-	 *
+	 * @param string $rc_log_type
+	 * @param string $rc_log_action
 	 * @return array
 	 */
-	private function getMetadata( $rc_params ) {
+	private function getMetadata( $rc_params, $rc_log_type, $rc_log_action ) {
 		if ( is_string( $rc_params ) ) {
-			$rc_params = unserialize( $rc_params );
+			$rc_params = LogEntryBase::extractParams( $rc_params, $rc_log_type . '/' . $rc_log_action );
 		}
 
 		if ( is_array( $rc_params ) && array_key_exists( 'wikibase-repo-change', $rc_params ) ) {
