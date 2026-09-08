@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"咽頭べさ"
+		]
+	},
+	"wikibase-dataitem": "{{WBREPONAME}} दब्ब",
+	"wikibase-editlinks": "सोधन लिंक",
+	"wikibase-addlinkstitle": "अन्तराभासायोजन लिंक",
+	"wikibase-linkitem-addlinks": "योजन लिंक",
+	"wikibase-linkitem-title": "लिंक पिट्ठेन सम्बन्धेतु",
+	"wikibase-linkitem-linkpage": "लिंक पिट्ठेन सम्बन्धेतु",
+	"wikibase-linkitem-selectlink": "इमिना पिट्ठेन सम्बन्धितुं इच्छितं ठानञ्च पिट्ठञ्च चिनोतु॥",
+	"wikibase-linkitem-input-site": "भाषा:",
+	"wikibase-linkitem-input-page": "पिट्ठक:",
+	"wikibase-rc-hide-wikidata-hide": "गोपेतु",
+	"wikibase-rc-hide-wikidata-show": "दस्सेतु"
+}
