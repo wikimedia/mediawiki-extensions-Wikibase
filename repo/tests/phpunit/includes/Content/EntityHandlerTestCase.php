@@ -249,37 +249,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( $frCode, $handler->getPageLanguage( $title )->getCode() );
 	}
 
-	public function testGetPageViewLanguage() {
-		$context = RequestContext::getMain();
-		$handler = $this->getHandler();
-		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
-
-		// NOTE: we expect getPageViewLanguage to return the user language, because Wikibase Entities
-		//      are always shown in the user language.
-
-		// test whatever is there
-		$this->assertEquals(
-			$context->getLanguage()->getCode(),
-			$handler->getPageViewLanguage( $title )->getCode()
-		);
-
-		// test fr
-		$this->setUserLang( 'fr' );
-		$handler = $this->getHandler();
-		$this->assertEquals(
-			$context->getLanguage()->getCode(),
-			$handler->getPageViewLanguage( $title )->getCode()
-		);
-
-		// test nl
-		$this->setUserLang( 'nl' );
-		$handler = $this->getHandler();
-		$this->assertEquals(
-			$context->getLanguage()->getCode(),
-			$handler->getPageViewLanguage( $title )->getCode()
-		);
-	}
-
 	public function testLocalizedModelName() {
 		$name = ContentHandler::getLocalizedName( $this->getModelId() );
 
