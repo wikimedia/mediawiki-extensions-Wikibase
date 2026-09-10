@@ -1,6 +1,7 @@
 # 11) Exception Handling and \@throws Annotations in PHP Doc Blocks {#rest_adr_0011}
 
 Date: 2023-05-31
+Updated: 2026-09-10
 
 ## Status
 
@@ -16,3 +17,4 @@ The team has agreed on the following guideline for annotating exceptions in `@th
  * Exceptions that are directly thrown by a method should always be annotated in the doc block, unless they are not expected to be caught (e.g. LogicExceptions or some InvalidArgumentExceptions).
  * Generally, exceptions emitted from lower-level layers should either be handled by the calling method, or caught and re-thrown to make them more meaningful by placing them into their new context. This also avoids unnecessary disclosure of information about underlying layers.
  * If an exception is still relevant to the class's level of abstraction, it can pass through without being modified. In this situation, the calling method's doc block should also include a `@throws` annotation.
+ * Exceptions emitted from a lower level, that are not relevant to the domain's application code and are handled by the generic `UnexpectedErrorHandlerMiddleware`, are allowed to pass through without being handled or declared via `@throws` annotation (examples: `StorageException`, `EntityUpdateFailed`, `ReadOnlyError`). Those exceptions also do not need to be caught and wrapped if they are originating from another domain.
