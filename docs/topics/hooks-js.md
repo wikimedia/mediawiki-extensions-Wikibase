@@ -22,11 +22,16 @@ This file describes JavaScript [hooks] defined by the Wikibase extensions.
     * statement ID (string)
     * old statement ([Javascript Wikibase DataModel][] [Statement][] or null in case of a new statement)
     * new statement ([Statement][])
+    * revision ID after the change (integer)
 
 [View source][StatementsChanger.js]
 
 #### wikibase.statement.removed
-  * Called after a statement has been removed. Entity ID and statement ID are passed as arguments.
+  * Called after a statement has been removed.
+  * Passed arguments:
+    * Entity ID (string)
+    * statement ID (string)
+    * revision ID after the change (integer)
 
 [View source][StatementsChanger.js]
 
