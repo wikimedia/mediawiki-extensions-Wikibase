@@ -68,7 +68,7 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-main-snak {
 	display: flex;
 	align-items: center;
-	padding: @spacing-75 @spacing-75 @spacing-75 @spacing-50;
+	padding: @spacing-50 @spacing-75 @spacing-50 @spacing-50;
 	&:has(.wikibase-wbui2025-indicators) {
 		padding-right: 0;
 	}

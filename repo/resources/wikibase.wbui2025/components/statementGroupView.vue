@@ -9,9 +9,7 @@
 		</div>
 		<div class="wikibase-wbui2025-statement-heading">
 			<div class="wikibase-wbui2025-statement-heading-row">
-				<p>
-					<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-				</p>
+				<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
 				<div
 					v-if="isEditable"
 					class="wikibase-wbui2025-edit-link"
@@ -141,7 +139,9 @@ module.exports = exports = defineComponent( {
 			cursor: pointer;
 
 			.wikibase-wbui2025-link-heavy {
-				font-size: 1rem;
+				font-size: @font-size-medium;
+				line-height: 1.6rem;
+				font-weight: @font-weight-normal;
 			}
 
 			.cdx-icon {
