@@ -68,9 +68,10 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getChangeHandler(
-		array $pageNamesPerItemId = [],
-		?PageUpdater $updater = null,
-		array $hooks = []
+		array $pageNamesPerItemId,
+		?PageUpdater $updater,
+		array $hooks,
+		bool $suppressOtherLanguageLinkUpdates
 	) {
 		$siteLinkLookup = $this->getSiteLinkLookup( $pageNamesPerItemId );
 		$usageLookup = $this->getUsageLookup( $siteLinkLookup );
@@ -86,7 +87,9 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
 			new WikibaseClientHookRunner( $this->createHookContainer( $hooks ) ),
-			true
+			true,
+			'enwiki',
+			$suppressOtherLanguageLinkUpdates
 		);
 
 		return $handler;
@@ -177,7 +180,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			},
 		];
 
-		$changeHandler = $this->getChangeHandler( [], null, $testHooks );
+		$changeHandler = $this->getChangeHandler( [], null, $testHooks, false );
 		$changeHandler->handleChanges( $changes );
 
 		$this->assertSame( count( $changes ), $spy->handleChangeCallCount );
@@ -431,86 +434,102 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #0
 				$changes['property-creation'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty,
 			],
 			[ // #1
 				$changes['property-deletion'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty,
 			],
 			[ // #2
 				$changes['property-set-label'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty,
 			],
 
 			[ // #3
 				$changes['item-creation'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty,
 			],
 			[ // #4
 				$changes['item-deletion'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty,
 			],
 			[ // #5
 				$changes['item-deletion-linked'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmy2UpdateAll,
 			],
 
 			[ // #6
 				$changes['set-de-label'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty, // For the dummy page, only label and sitelink usage is defined.
 			],
 			[ // #7
 				$changes['set-en-label'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmy2PurgeParser,
 			],
 			[ // #8
 				$changes['set-en-label'],
 				[ 'Q100' => [ 'enwiki' => $userEmmy2 ] ], // user namespace
+				false, // $suppressOtherLanguageLinkUpdates
 				$userEmmy2PurgeParser,
 			],
 			[ // #9
 				$changes['set-en-aliases'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty, // For the dummy page, only label and sitelink usage is defined.
 			],
 
 			[ // #10
 				$changes['add-claim'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty, // statements are ignored
 			],
 			[ // #11
 				$changes['remove-claim'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty, // statements are ignored
 			],
 
 			[ // #12
 				$changes['set-dewiki-sitelink'],
 				[ 'Q100' => [] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$empty, // not yet linked
 			],
 			[ // #13
 				$changes['set-enwiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmyUpdateLinks,
 			],
 
 			[ // #14
 				$changes['change-dewiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmyUpdateLinks,
 			],
 			[ // #15
 				$changes['change-enwiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy' ], 'Q200' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				[
 					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
 					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
@@ -520,17 +539,144 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			[ // #16
 				$changes['change-enwiki-sitelink-badges'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmy2UpdateLinks,
 			],
 
 			[ // #17
 				$changes['remove-dewiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
 				$emmy2UpdateLinks,
 			],
 			[ // #18
 				$changes['remove-enwiki-sitelink'],
 				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				false, // $suppressOtherLanguageLinkUpdates
+				$emmy2UpdateLinks,
+			],
+			[ // #19
+				$changes['property-creation'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #20
+				$changes['property-deletion'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #21
+				$changes['property-set-label'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+
+			[ // #22
+				$changes['item-creation'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #23
+				$changes['item-deletion'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #24
+				$changes['item-deletion-linked'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$emmy2UpdateAll,
+			],
+
+			[ // #25
+				$changes['set-de-label'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #26
+				$changes['set-en-label'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$emmy2PurgeParser,
+			],
+			[ // #27
+				$changes['set-en-label'],
+				[ 'Q100' => [ 'enwiki' => $userEmmy2 ] ], // user namespace
+				true, // $suppressOtherLanguageLinkUpdates
+				$userEmmy2PurgeParser,
+			],
+			[ // #28
+				$changes['set-en-aliases'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty, // For the dummy page, only label and sitelink usage is defined.
+			],
+
+			[ // #29
+				$changes['add-claim'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty, // statements are ignored
+			],
+			[ // #30
+				$changes['remove-claim'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty, // statements are ignored
+			],
+
+			[ // #31
+				$changes['set-dewiki-sitelink'],
+				[ 'Q100' => [] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty, // not yet linked
+			],
+			[ // #32
+				$changes['set-enwiki-sitelink'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$emmyUpdateLinks,
+			],
+
+			[ // #33
+				$changes['change-dewiki-sitelink'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #34
+				$changes['change-enwiki-sitelink'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy' ], 'Q200' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				[
+					'scheduleRefreshLinks' => [ 'Emmy' => true, 'Emmy2' => true ],
+					'purgeWebCache' => [ 'Emmy' => true, 'Emmy2' => true ],
+					'injectRCRecord' => [ 'Emmy' => true, 'Emmy2' => true ],
+				],
+			],
+			[ // #35
+				$changes['change-enwiki-sitelink-badges'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$emmy2UpdateLinks,
+			],
+
+			[ // #36
+				$changes['remove-dewiki-sitelink'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
+				$empty,
+			],
+			[ // #37
+				$changes['remove-enwiki-sitelink'],
+				[ 'Q100' => [ 'enwiki' => 'Emmy2' ] ],
+				true, // $suppressOtherLanguageLinkUpdates
 				$emmy2UpdateLinks,
 			],
 		];
@@ -539,9 +685,14 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideHandleChange
 	 */
-	public function testHandleChange( EntityChange $change, array $pageNamesPerItemId, array $expected ) {
+	public function testHandleChange(
+		EntityChange $change,
+		array $pageNamesPerItemId,
+		bool $suppressOtherLanguageLinkUpdates,
+		array $expected
+	) {
 		$updater = new MockPageUpdater();
-		$handler = $this->getChangeHandler( $pageNamesPerItemId, $updater );
+		$handler = $this->getChangeHandler( $pageNamesPerItemId, $updater, [], $suppressOtherLanguageLinkUpdates );
 
 		$handler->handleChange( $change );
 		$updates = $updater->getUpdates();
@@ -658,7 +809,10 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			$updater,
 			$this->getChangeRunCoalescer(),
 			new NullLogger(),
-			new WikibaseClientHookRunner( $this->createHookContainer() )
+			new WikibaseClientHookRunner( $this->createHookContainer() ),
+			true,
+			'enwiki',
+			true
 		);
 
 		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];

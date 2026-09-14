@@ -196,7 +196,9 @@ return [
 			$changeListTransformer,
 			$logger,
 			WikibaseClient::getHookRunner( $services ),
-			$settings->getSetting( 'injectRecentChanges' )
+			$settings->getSetting( 'injectRecentChanges' ),
+			$settings->getSetting( 'siteGlobalID' ),
+			$settings->getSetting( 'suppressOtherLanguageLinkUpdates' )
 		);
 	},
 

@@ -45,6 +45,7 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 				'recentChangesBatchSize' => 300,
 				'siteGlobalID' => 'test',
 				'injectRecentChanges' => true,
+				'suppressOtherLanguageLinkUpdates' => false,
 			] )
 		);
 

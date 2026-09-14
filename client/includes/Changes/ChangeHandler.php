@@ -12,6 +12,8 @@ use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\ItemChange;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -32,7 +34,9 @@ class ChangeHandler {
 		private ChangeRunCoalescer $changeRunCoalescer,
 		private LoggerInterface $logger,
 		private WikibaseClientHookRunner $hookRunner,
-		private bool $injectRecentChanges = true
+		private bool $injectRecentChanges,
+		private string $localSiteId,
+		private bool $suppressOtherLanguageLinkUpdates
 	) {
 	}
 
@@ -75,6 +79,17 @@ class ChangeHandler {
 				'changeType' => $change->getType(),
 			]
 		);
+
+		if ( $this->suppressOtherLanguageLinkUpdates && $this->isOtherWikiLanguageLinkChange( $change ) ) {
+			$this->logger->debug(
+				'{method}: dropping change #{changeId} as an other-language sitelink',
+				[
+					'method' => __METHOD__,
+					'changeId' => $changeId,
+				]
+			);
+			return;
+		}
 
 		$usagesPerPage = $this->affectedPagesFinder->getAffectedUsagesByPage( $change );
 
@@ -219,4 +234,37 @@ class ChangeHandler {
 		return (string)$change->getId();
 	}
 
+	/**
+	 * Returns true when the change is a language link update which doesn't
+	 * directly affect the current client wiki.
+	 */
+	private function isOtherWikiLanguageLinkChange( EntityChange $change ): bool {
+		// Only test Item changes.
+		if ( !( $change instanceof ItemChange ) ) {
+			return false;
+		}
+
+		// Don't suppress any change other than sitelinks.
+		$aspects = $change->getCompactDiff();
+		if ( !( $aspects instanceof EntityDiffChangedAspects ) ||
+			$aspects->getAliasChanges() !== [] ||
+			$aspects->getDescriptionChanges() !== [] ||
+			$aspects->getLabelChanges() !== [] ||
+			$aspects->getStatementChanges() !== [] ||
+			$aspects->hasOtherChanges()
+		) {
+			return false;
+		}
+
+		// There must be a sitelink change.
+		$siteLinkDiff = $change->getSiteLinkDiff();
+		if ( $siteLinkDiff->isEmpty() ) {
+			return false;
+		}
+
+		// Now test whether the changes include the sitelink to this wiki, or else
+		// they are "other".
+		$diffOps = $siteLinkDiff->getOperations();
+		return !array_key_exists( $this->localSiteId, $diffOps );
+	}
 }

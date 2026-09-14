@@ -161,6 +161,12 @@ return call_user_func( function() {
 		 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
 		 */
 		'enableWikidataIconsInClientWatchlist' => false,
+
+		/**
+		 * @var bool If true, suppress recent changes injection for edits to
+		 * sitelinks to other clients.
+		 */
+		'suppressOtherLanguageLinkUpdates' => false,
 	];
 
 	// Some defaults depend on information not available at this time.
