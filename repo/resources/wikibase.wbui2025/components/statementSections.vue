@@ -78,6 +78,7 @@ module.exports = exports = defineComponent( {
 @import 'mediawiki.skin.variables.less';
 
 .wikibase-wbui2025-statement-section-heading {
+	margin-top: @spacing-150;
 	h2 {
 		padding-bottom: 0;
 	}
