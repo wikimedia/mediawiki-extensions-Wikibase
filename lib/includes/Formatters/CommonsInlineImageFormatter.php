@@ -99,8 +99,10 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 			return htmlspecialchars( $fileName );
 		}
 
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+		$defaultThumbSize = $userOptionsLookup->getDefaultOption( 'thumbsize' );
 		$transformOptions = [
-			'width' => $this->getThumbWidth( $this->parserOptions->getThumbSize() ),
+			'width' => $this->getThumbWidth( $defaultThumbSize ),
 			'height' => 1000,
 		];
 
