@@ -4,7 +4,7 @@ module.exports = {
 	"ItemId": {
 		"in": "path",
 		"name": "item_id",
-		"description": "The ID of the required Item",
+		"description": "The ID of the Item",
 		"required": true,
 		"schema": {
 			"type": "string",
@@ -15,7 +15,7 @@ module.exports = {
 	"PropertyId": {
 		"in": "path",
 		"name": "property_id",
-		"description": "The ID of the required Property",
+		"description": "The ID of the Property",
 		"required": true,
 		"schema": {
 			"type": "string",
@@ -70,7 +70,7 @@ module.exports = {
 	"SiteId": {
 		"in": "path",
 		"name": "site_id",
-		"description": "The ID of the required Site",
+		"description": "The ID of the Site",
 		"required": true,
 		"schema": {
 			"type": "string"

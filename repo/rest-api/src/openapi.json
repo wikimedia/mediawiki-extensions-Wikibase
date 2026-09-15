@@ -1322,7 +1322,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -2072,7 +2072,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -3210,7 +3210,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -3511,7 +3511,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -4210,7 +4210,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -4221,7 +4221,7 @@
           {
             "in": "path",
             "name": "site_id",
-            "description": "The ID of the required Site",
+            "description": "The ID of the Site",
             "required": true,
             "schema": {
               "type": "string"
@@ -4511,7 +4511,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -4522,7 +4522,7 @@
           {
             "in": "path",
             "name": "site_id",
-            "description": "The ID of the required Site",
+            "description": "The ID of the Site",
             "required": true,
             "schema": {
               "type": "string"
@@ -5143,7 +5143,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -5154,7 +5154,7 @@
           {
             "in": "path",
             "name": "site_id",
-            "description": "The ID of the required Site",
+            "description": "The ID of the Site",
             "required": true,
             "schema": {
               "type": "string"
@@ -5580,7 +5580,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -5855,7 +5855,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -6510,7 +6510,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -6790,7 +6790,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -7361,7 +7361,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -7800,7 +7800,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -8094,7 +8094,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -8369,7 +8369,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -9024,7 +9024,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -9304,7 +9304,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -9866,7 +9866,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -10305,7 +10305,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -10599,7 +10599,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -10882,7 +10882,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -11533,7 +11533,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -11819,7 +11819,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -12352,7 +12352,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -12974,7 +12974,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -13994,7 +13994,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -14559,7 +14559,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -15555,7 +15555,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -16522,7 +16522,7 @@
           {
             "in": "path",
             "name": "item_id",
-            "description": "The ID of the required Item",
+            "description": "The ID of the Item",
             "required": true,
             "schema": {
               "type": "string",
@@ -17863,7 +17863,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -18482,7 +18482,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -19507,7 +19507,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -19770,7 +19770,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -20416,7 +20416,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -20684,7 +20684,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -21210,7 +21210,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -21604,7 +21604,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -21886,7 +21886,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -22149,7 +22149,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -22795,7 +22795,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -23063,7 +23063,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -23579,7 +23579,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -23973,7 +23973,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -24255,7 +24255,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -24527,7 +24527,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -25170,7 +25170,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -25444,7 +25444,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -25932,7 +25932,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -26475,7 +26475,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -27389,7 +27389,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -27923,7 +27923,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -28858,7 +28858,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -29770,7 +29770,7 @@
           {
             "in": "path",
             "name": "property_id",
-            "description": "The ID of the required Property",
+            "description": "The ID of the Property",
             "required": true,
             "schema": {
               "type": "string",
@@ -33910,7 +33910,7 @@
       "ItemId": {
         "in": "path",
         "name": "item_id",
-        "description": "The ID of the required Item",
+        "description": "The ID of the Item",
         "required": true,
         "schema": {
           "type": "string",
@@ -33921,7 +33921,7 @@
       "PropertyId": {
         "in": "path",
         "name": "property_id",
-        "description": "The ID of the required Property",
+        "description": "The ID of the Property",
         "required": true,
         "schema": {
           "type": "string",
@@ -33976,7 +33976,7 @@
       "SiteId": {
         "in": "path",
         "name": "site_id",
-        "description": "The ID of the required Site",
+        "description": "The ID of the Site",
         "required": true,
         "schema": {
           "type": "string"
