@@ -21,6 +21,10 @@
 		<cdx-popover
 			v-model:open="showPopover"
 			class="wikibase-wbui2025-editable-globe-coordinate-popover"
+			:class="{
+				'wikibase-wbui2025-editable-globe-coordinate-popover--empty':
+					!textvalue || !textvalue.trim()
+			}"
 			:use-close-button="true"
 			:title="$i18n( 'wikibase-wbui2025-editable-snak-value-preview-label' ).text()"
 			:anchor="inputElement"
@@ -285,6 +289,8 @@ module.exports = exports = defineComponent( {
 @import 'mediawiki.skin.variables.less';
 
 .wikibase-wbui2025-editable-globe-coordinate-popover {
+	width: 100vw;
+
 	.cdx-popover__header__title {
 		font-weight: @font-weight-normal;
 	}
@@ -296,9 +302,11 @@ module.exports = exports = defineComponent( {
 
 .wikibase-coordinate-popover__malformed {
 	color: @color-base;
-	font-weight: normal;
-	font-size: 24px;
+	font-weight: @font-weight-bold;
+	font-size: @font-size-medium;
 	line-height: 1.2;
+	padding-top: @spacing-50;
+	padding-bottom: @spacing-25;
 }
 
 .wikibase-coordinate-popover__loading {
