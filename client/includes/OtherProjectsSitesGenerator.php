@@ -47,7 +47,7 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 	 * @return string[]
 	 */
 	public function getOtherProjectsSiteIds( array $siteLinkGroups ) {
-		$localSite = $this->getLocalSite();
+		$localSite = $this->siteLookup->getSite( $this->localSiteId );
 
 		if ( $localSite === null ) {
 			wfWarn( 'Site not found for ' . $this->localSiteId );
@@ -109,13 +109,6 @@ class OtherProjectsSitesGenerator implements OtherProjectsSitesProvider {
 
 		$groups = array_diff( $groups, [ 'special' ] );
 		$groups = array_merge( $groups, $this->specialSiteGroups );
-	}
-
-	/**
-	 * @return Site
-	 */
-	private function getLocalSite() {
-		return $this->siteLookup->getSite( $this->localSiteId );
 	}
 
 }
