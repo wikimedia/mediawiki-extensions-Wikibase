@@ -22,8 +22,13 @@ class SiteLinkPageNormalizerSitelinkTargetResolver implements SitelinkTargetTitl
 	}
 
 	public function resolveTitle( string $siteId, string $title, array $badges ): string {
+		$site = $this->siteLookup->getSite( $siteId );
+		if ( !$site ) {
+			throw new SitelinkTargetNotFound();
+		}
+
 		$resolvedTitleTarget = $this->siteLinkPageNormalizer->normalize(
-			$this->siteLookup->getSite( $siteId ),
+			$site,
 			$title,
 			array_map( fn( ItemId $itemId ) => $itemId->getSerialization(), $badges )
 		);

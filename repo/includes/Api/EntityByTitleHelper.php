@@ -134,7 +134,9 @@ class EntityByTitleHelper {
 		if ( $id === null && $normalize === true ) {
 			$siteObj = $this->siteLookup->getSite( $siteId ); // XXX: is this really needed??
 			//XXX: this passes the normalized title back into $title by reference...
-			$this->normalizeTitle( $title, $siteObj );
+			if ( $siteObj ) {
+				$this->normalizeTitle( $title, $siteObj );
+			}
 			$id = $this->entityByLinkedTitleLookup->getEntityIdForLinkedTitle( $siteId, $title );
 		}
 
