@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Client\Changes;
 
-use InvalidArgumentException;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
@@ -25,77 +24,16 @@ use Wikibase\Lib\Changes\EntityChange;
  */
 class ChangeHandler {
 
-	/**
-	 * @var AffectedPagesFinder
-	 */
-	private $affectedPagesFinder;
-
-	/**
-	 * @var TitleFactory
-	 */
-	private $titleFactory;
-
-	/**
-	 * @var PageStore
-	 */
-	private $pageStore;
-
-	/**
-	 * @var PageUpdater
-	 */
-	private $updater;
-
-	/**
-	 * @var ChangeRunCoalescer
-	 */
-	private $changeRunCoalescer;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
-	 * @var WikibaseClientHookRunner
-	 */
-	private $hookRunner;
-
-	/**
-	 * @var bool
-	 */
-	private $injectRecentChanges;
-
-	/**
-	 * @param AffectedPagesFinder $affectedPagesFinder
-	 * @param TitleFactory $titleFactory
-	 * @param PageStore $pageStore
-	 * @param PageUpdater $updater
-	 * @param ChangeRunCoalescer $changeRunCoalescer
-	 * @param LoggerInterface $logger
-	 * @param WikibaseClientHookRunner $hookRunner
-	 * @param bool $injectRecentChanges
-	 *
-	 * @throws InvalidArgumentException
-	 */
 	public function __construct(
-		AffectedPagesFinder $affectedPagesFinder,
-		TitleFactory $titleFactory,
-		PageStore $pageStore,
-		PageUpdater $updater,
-		ChangeRunCoalescer $changeRunCoalescer,
-		LoggerInterface $logger,
-		WikibaseClientHookRunner $hookRunner,
-		bool $injectRecentChanges = true
-
+		private AffectedPagesFinder $affectedPagesFinder,
+		private TitleFactory $titleFactory,
+		private PageStore $pageStore,
+		private PageUpdater $updater,
+		private ChangeRunCoalescer $changeRunCoalescer,
+		private LoggerInterface $logger,
+		private WikibaseClientHookRunner $hookRunner,
+		private bool $injectRecentChanges = true
 	) {
-		$this->affectedPagesFinder = $affectedPagesFinder;
-		$this->titleFactory = $titleFactory;
-		$this->pageStore = $pageStore;
-		$this->updater = $updater;
-		$this->changeRunCoalescer = $changeRunCoalescer;
-		$this->logger = $logger;
-		$this->hookRunner = $hookRunner;
-		$this->injectRecentChanges = $injectRecentChanges;
 	}
 
 	/**
