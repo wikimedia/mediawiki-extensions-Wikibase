@@ -157,6 +157,9 @@ module.exports = exports = defineComponent( {
 	align-items: center;
 	margin: 0;
 	padding: @spacing-0;
+	font-size: @font-size-medium;
+	line-height: 1.6rem;
+	font-weight: @font-weight-normal;
 
 	// In cases of long, non-wrapping snak values, make them horizontally-scrollable
 	// and contained within the parent element
@@ -178,9 +181,9 @@ module.exports = exports = defineComponent( {
 	.wikibase-snakview-variation-somevaluesnak {
 		color: @color-placeholder;
 		font-family: 'Inter', sans-serif;
-		font-weight: 500;
-		font-size: 1rem;
-		line-height: 1.25;
+		font-weight: @font-weight-normal;
+		font-size: @font-size-medium;
+		line-height: 1.6rem;
 	}
 }
 
