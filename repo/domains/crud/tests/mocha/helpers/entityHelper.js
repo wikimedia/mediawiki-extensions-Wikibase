@@ -16,8 +16,9 @@ let localSiteId;
 /**
  * Creates a reusable property on the first call and returns it on subsequent calls.
  * Use this only when the existing property data does not matter.
+ *
+ * @return {Promise<string>} - the id of the property
  */
-
 async function getStringPropertyId() {
 	stringPropertyId = stringPropertyId || ( await createUniqueStringProperty() ).body.id;
 
@@ -27,8 +28,9 @@ async function getStringPropertyId() {
 /**
  * Creates a reusable item on the first call and returns it on subsequent calls.
  * Use this only when the existing item data does not matter.
+ *
+ * @return {Promise<string>} - the id of the item
  */
-
 async function getItemId() {
 	testItemId = testItemId || ( await newCreateItemRequestBuilder( {} ).makeRequest() ).body.id;
 
