@@ -105,6 +105,8 @@
 	"wikibase-client-data-bridge-permissions-error-info": "Viac podrobností",
 	"wikibase-client-data-bridge-references-heading": "Referencie",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Nie ste prihlásený",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Zistený konflikt úprav",
+	"wikibase-client-data-bridge-unknown-error-heading": "Niečo sa pokazilo",
 	"wikibase-client-data-bridge-error-reload-bridge": "Znovu načítať",
 	"wikibase-client-data-bridge-error-reload-page": "Znovu načítať stránku",
 	"wikibase-client-data-bridge-error-go-back": "Späť",
