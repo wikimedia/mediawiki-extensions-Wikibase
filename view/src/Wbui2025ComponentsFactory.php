@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\View;
 
+use FormatJson;
 use MediaWiki\Language\Language;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -50,6 +51,7 @@ class Wbui2025ComponentsFactory {
 		'wbui2025-snak-value' => 'components/snakValue.vue',
 		'wbui2025-statement-view' => 'components/statementView.vue',
 		'wbui2025-property-name' => 'components/propertyName.vue',
+		'wbui2025-reference-view-content' => 'components/referenceViewContent.vue',
 	];
 
 	/**
@@ -96,6 +98,7 @@ class Wbui2025ComponentsFactory {
 		);
 		$this->registerReferencesView( $app, $textProvider );
 		$this->registerQualifiersView( $app );
+		$this->registerReferenceViewContentView( $app );
 		$this->registerSnakValueView( $app, $entityIdParser, $propertyDataTypeLookup );
 	}
 
@@ -108,6 +111,13 @@ class Wbui2025ComponentsFactory {
 			$componentName,
 			$this->getTemplateCallable( $componentName ),
 			$computedFunctions
+		);
+	}
+
+	private function registerReferenceViewContentView( App $app ): void {
+		$this->registerComponentTemplate(
+			$app,
+			'wbui2025-reference-view-content',
 		);
 	}
 
@@ -192,6 +202,8 @@ class Wbui2025ComponentsFactory {
 
 				$data['statement'] = $statementSerializer->serialize( $statementById );
 				$data['references'] = array_key_exists( 'references', $data['statement'] ) ? $data['statement']['references'] : [];
+				$data['referenceDataString'] = FormatJson::encode( $data['references'], false, FormatJson::UTF8_OK );
+				$data['referenceCount'] = count( $data['references'] );
 				$data['qualifiers'] = array_key_exists( 'qualifiers', $data['statement'] ) ? $data['statement']['qualifiers'] : [];
 				$data['qualifiersOrder'] =
 					array_key_exists( 'qualifiers-order', $data['statement'] ) ? $data['statement']['qualifiers-order'] : [];
@@ -248,16 +260,14 @@ class Wbui2025ComponentsFactory {
 			$app,
 			'wbui2025-references',
 			function ( array $data ) use ( $textProvider ): array {
-				$data['referenceCount'] = count( $data['references'] );
 				$data['hasReferences'] = $data['referenceCount'] > 0;
+				$data['showIndicators'] = false;
 				$data['referencesMessage'] = $textProvider->getEscaped(
 					'wikibase-statementview-references-counter',
 					[
 						strval( $data['referenceCount'] ),
 					],
 				);
-				$data['showReferences'] = false;
-				$data['showIndicators'] = false;
 
 				return $data;
 			}

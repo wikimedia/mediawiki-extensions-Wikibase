@@ -260,6 +260,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				'expectedModuleStyles' => [
 					'wikibase.alltargets',
 					'wikibase.wbui2025.entityView.styles',
+					'wikibase.wbui2025.entityView.codexStyles',
 				],
 			],
 		];

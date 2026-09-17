@@ -1,61 +1,52 @@
 <template>
-	<div class="wikibase-wbui2025-references">
-		<p :class="{ 'wikibase-wbui2025-clickable': hasReferences }" @click="showReferences = !showReferences">
-			<span v-if="hasReferences" :class="{ 'wikibase-wbui2025-icon-expand-x-small': !showReferences, 'wikibase-wbui2025-icon-collapse-x-small': showReferences }"></span>
-			<a
-				v-if="hasReferences"
-				href="javascript: void(0)"
-				class="wikibase-wbui2025-link">{{ referencesMessage }}</a>
-			<span v-else>{{ referencesMessage }}</span>
+	<div
+		class="wikibase-wbui2025-references"
+		:data-references="referencesDataString"
+		:data-statement-id="statementId"
+	>
+		<details v-if="hasReferences" class="cdx-accordion">
+			<summary>
+				<h3 class="cdx-accordion__header">
+					<span class="cdx-accordion__header__title">
+						{{ referencesMessage }}
+					</span>
+				</h3>
+			</summary>
+			<div class="cdx-accordion__content">
+				<template v-for="reference in references" :key="reference">
+					<wbui2025-reference-view-content :reference="reference" :show-indicators="false">
+					</wbui2025-reference-view-content>
+				</template>
+			</div>
+		</details>
+		<p v-else>
+			<span>{{ referencesMessage }}</span>
 		</p>
-		<div
-			v-if="hasReferences"
-			class="wikibase-wbui2025-reference-list"
-			:class="{ 'wikibase-wbui2025-references-visible': showReferences }">
-			<template v-for="reference in references" :key="reference">
-				<div class="wikibase-wbui2025-reference">
-					<template v-for="propertyId in reference['snaks-order']" :key="propertyId">
-						<div
-							v-for="snak in reference.snaks[propertyId]"
-							:key="snak"
-							class="wikibase-wbui2025-reference-snak"
-						>
-							<wbui2025-property-name :property-id="propertyId"></wbui2025-property-name>
-							<wbui2025-snak-value
-								:snak="snak"
-							></wbui2025-snak-value>
-							<wbui2025-indicators
-								v-if="showIndicators"
-								:snak-hash="snak.hash"
-								:statement-id="statementId"
-								:reference-hash="reference.hash"
-							>
-							</wbui2025-indicators>
-						</div>
-					</template>
-				</div>
-			</template>
-		</div>
 	</div>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
-const Wbui2025PropertyName = require( './propertyName.vue' );
-const Wbui2025SnakValue = require( './snakValue.vue' );
-const Wbui2025Indicators = require( './indicators.vue' );
+
+const Wbui2025ReferenceViewContent = require( './referenceViewContent.vue' );
 
 // @vue/component
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025References',
 	components: {
-		Wbui2025PropertyName,
-		Wbui2025SnakValue,
-		Wbui2025Indicators
+		Wbui2025ReferenceViewContent
 	},
 	props: {
+		referencesDataString: {
+			type: String,
+			required: true
+		},
+		referenceCount: {
+			type: Number,
+			required: true
+		},
 		references: {
-			type: Array,
+			type: Object,
 			required: true
 		},
 		statementId: {
@@ -63,18 +54,9 @@ module.exports = exports = defineComponent( {
 			required: true
 		}
 	},
-	data() {
-		return {
-			showReferences: false,
-			showIndicators: true
-		};
-	},
 	computed: {
-		referenceCount() {
-			return this.references.length;
-		},
 		hasReferences() {
-			return this.references.length > 0;
+			return this.referenceCount > 0;
 		},
 		referencesMessage() {
 			return mw.msg( 'wikibase-statementview-references-counter', [ this.referenceCount ] );
@@ -114,6 +96,17 @@ module.exports = exports = defineComponent( {
 
 		&.wikibase-wbui2025-references-visible {
 			display: inherit;
+		}
+	}
+
+	.cdx-accordion {
+		h3.cdx-accordion__header {
+			font-weight: @font-weight-normal;
+			color: @color-progressive;
+		}
+
+		.cdx-accordion__content {
+			padding: 0;
 		}
 	}
 
@@ -160,22 +153,6 @@ module.exports = exports = defineComponent( {
 			display: unset;
 			padding-left: unset;
 		}
-	}
-
-	.wikibase-wbui2025-clickable {
-		cursor: pointer;
-	}
-
-	.wikibase-wbui2025-icon-expand-x-small {
-		.cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-x-small );
-		background-origin: content-box;
-		mask-origin: content-box;
-	}
-
-	.wikibase-wbui2025-icon-collapse-x-small {
-		.cdx-mixin-css-icon(@cdx-icon-collapse, @param-size-icon: @size-icon-x-small );
-		background-origin: content-box;
-		mask-origin: content-box;
 	}
 }
 </style>

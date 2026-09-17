@@ -24,7 +24,7 @@ export class ItemViewPage {
 
 	public static REFERENCES_SECTION = '.wikibase-wbui2025-references';
 
-	public static REFERENCES_ACCORDION = '.wikibase-wbui2025-clickable';
+	public static REFERENCES_ACCORDION = 'details.cdx-accordion';
 
 	public static REFERENCES = '.wikibase-wbui2025-reference';
 
