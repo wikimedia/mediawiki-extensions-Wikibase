@@ -3,13 +3,14 @@
 		"authors": [
 			"Chrisportelli",
 			"Leli Forte",
-			"ToniSant"
+			"ToniSant",
+			"JiodoJ"
 		]
 	},
 	"wikibase-client-desc": "Klijent għall-estensjoni Wikibase",
 	"tooltip-t-wikibase": "Ħolqa għall-element konness tal-arkivju tad-dejta",
 	"wikibase-comment-update": "Element ta' {{WBREPONAME}} ġie mmodifikat",
-	"wikibase-dataitem": "Element ta' {{WBREPONAME}}",
+	"wikibase-dataitem": "Oġġett {{WBREPONAME}}",
 	"wikibase-editlinks": "Immodifika l-ħoloq",
 	"wikibase-editlinkstitle": "Immodifika l-ħoloq interlingwi",
 	"wikibase-addlinkstitle": "Żid ħoloq interlingwa",
@@ -27,5 +28,5 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Modifika ta' {{WBREPONAME}}",
 	"unconnectedpages": "Paġni mhux imwaħħda ma' elementi",
-	"wikibase-otherprojects": "Fi proġetti oħra"
+	"wikibase-otherprojects": "F'proġetti oħra"
 }

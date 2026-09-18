@@ -51,7 +51,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-rievdadus",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-rievdadusat",
-	"wikibase-rcfilters-hide-wikibase-description": "Rievdadusat, mat leat {{GRAMMAR:locative|WBREPONAME}} eret.",
+	"wikibase-rcfilters-hide-wikibase-description": "Rievdadusat, mat leat {{WBREPONAME}}:s eret.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Dát silli rihkku ovtta dahje eanet buvttakvalitehta- dahje geavaheaddjiáigumušsilli. Kvalitehta- ja áigumušeinnostusat eai leat olámuttos {{WBREPONAME}} rievdademiin.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "«{{WBREPONAME}}-rievdadeami» silli rihkku ovtta dahje eanet buvttakvalitehta- dahje geavaheaddjiáigumušasilli. Kvalitehta ja áigumušaid einnosteamit eai leat olámuttos rievdademiide {{WBREPNAME}}:s. Dat sillit mat eai soabat, merkejuvvojit «aktiivvalaš silliid» suorgái dás bajábealde.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Čállinkvalitehtaid einnostusat eai leat olámuttos dihto rievdadusšlájaide, nu ahte dát silli rihkku čuovvovaš {{PLURAL:$2|rievdadusšládjasilli|rievdadusšládjasilliid}}: $1",
