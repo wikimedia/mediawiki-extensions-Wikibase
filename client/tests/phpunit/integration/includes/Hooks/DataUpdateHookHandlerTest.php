@@ -13,6 +13,7 @@ use MediaWiki\Permissions\Authority;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\ParserOutput\ParserOutputProvider;
 use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
@@ -174,7 +175,7 @@ class DataUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}

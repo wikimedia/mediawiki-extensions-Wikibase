@@ -10,6 +10,7 @@ use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use Psr\Log\LogLevel;
+use Psr\Log\NullLogger;
 use TestLogger;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -100,7 +101,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}

@@ -10,6 +10,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Title\Title;
+use Psr\Log\NullLogger;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
@@ -250,7 +251,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}

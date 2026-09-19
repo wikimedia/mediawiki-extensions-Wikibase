@@ -8,6 +8,7 @@ use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
+use Psr\Log\NullLogger;
 use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
@@ -78,7 +79,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$this->parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 		return $factory->newFromParserOutputProvider( $this->parserOutputProvider );

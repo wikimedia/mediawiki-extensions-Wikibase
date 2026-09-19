@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Usage;
 
+use Psr\Log\LoggerInterface;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -18,12 +19,19 @@ class UsageDeduplicator {
 	private $usageModifierLimits;
 
 	/**
-	 * @param int[] $usageModifierLimits associative array mapping usage type to the limit
+	 * @var LoggerInterface
 	 */
-	public function __construct( array $usageModifierLimits ) {
+	private $logger;
+
+	/**
+	 * @param int[] $usageModifierLimits associative array mapping usage type to the limit
+	 * @param LoggerInterface $logger
+	 */
+	public function __construct( array $usageModifierLimits, LoggerInterface $logger ) {
 		Assert::parameterElementType( 'integer', $usageModifierLimits, '$usageModifierLimits' );
 
 		$this->usageModifierLimits = $usageModifierLimits;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -67,9 +75,15 @@ class UsageDeduplicator {
 				$usagesPerEntity
 			);
 			if ( $containsQualOrReference ) {
+				if ( !isset( $usagesPerEntity[EntityUsage::STATEMENT_USAGE] ) ) {
+					$this->logger->warning(
+						'UsageDeduplicator: Statement usage (C) is missing while CQR usage is present.',
+						[ 'usagesPerEntity' => $usagesPerEntity ]
+					);
+					$usagesPerEntity[EntityUsage::STATEMENT_USAGE] = [];
+				}
 				$deduplicatedStatementUsage = $this->deduplicateStatementUsages(
-					// `?? []` is a temporary fix for T428620
-					$usagesPerEntity[EntityUsage::STATEMENT_USAGE] ?? [],
+					$usagesPerEntity[EntityUsage::STATEMENT_USAGE],
 					$usagesPerEntity[EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE]
 				);
 				$usagesPerEntity[EntityUsage::STATEMENT_USAGE] = $deduplicatedStatementUsage[EntityUsage::STATEMENT_USAGE];
@@ -102,16 +116,17 @@ class UsageDeduplicator {
 				} );
 			}
 		}
-		// If the combined CQR and C usages with independent modifiers > 33, throw away the QR modifier and remove C usages
-		$combinedStatementUsages = [ ...$statementUsages, ...$statementWithQualOrRefUsages ];
 		$statementUsageLimit = $this->usageModifierLimits[EntityUsage::STATEMENT_USAGE];
 		if ( $statementUsageLimit !== null ) {
+			// If the combined CQR and C usages with independent modifiers is more
+			// than the limit, then throw away the QR modifier and remove C usages
+			$combinedStatementUsages = [ ...$statementUsages, ...$statementWithQualOrRefUsages ];
 			if ( count( $combinedStatementUsages ) > $statementUsageLimit ) {
 				$statementUsages = [];
 				$statementWithQualOrRefUsages = [ new EntityUsage(
 					$statementWithQualOrRefUsages[0]->getEntityId(),
 					EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE
-				// Throw away modifier
+					// Throw away modifier
 				) ];
 			}
 		}

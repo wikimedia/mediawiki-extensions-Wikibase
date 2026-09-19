@@ -6,6 +6,7 @@ namespace Wikibase\Client\Tests\Unit\Usage;
 
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutput;
+use Psr\Log\NullLogger;
 use Wikibase\Client\ParserOutput\ScopedParserOutputProvider;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -26,7 +27,7 @@ class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetParserOutputUsageAccumulator(): void {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 
@@ -42,7 +43,7 @@ class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetParserOutputUsageAccumulatorForParser(): void {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [] ),
+			new UsageDeduplicator( [], new NullLogger() ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 
