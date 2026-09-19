@@ -44,14 +44,6 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 			$expected->getExtensionData( 'kartographer' ),
 			$parserOutput->getExtensionData( 'kartographer' )
 		);
-		$this->assertSame(
-			$expected->getPageProperty( 'kartographer_links' ),
-			$parserOutput->getPageProperty( 'kartographer_links' )
-		);
-		$this->assertSame(
-			$expected->getPageProperty( 'kartographer_frames' ),
-			$parserOutput->getPageProperty( 'kartographer_frames' )
-		);
 		$this->assertEquals(
 			[ 'wikibase', 'kartographer-rl-module1', 'javascript-stuffs' ],
 			$parserOutput->getModules()
@@ -113,8 +105,6 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$parserOutput = new ParserOutput();
 		$parserOutput->addModules( [ 'kartographer-rl-module1', 'javascript-stuffs' ] );
 		$parserOutput->setExtensionData( 'kartographer', [ [ 'whatever' ] ] );
-		$parserOutput->setNumericPageProperty( 'kartographer_links', 34 );
-		$parserOutput->setNumericPageProperty( 'kartographer_frames', 42 );
 		$parserOutput->setJsConfigVar( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
 
 		return $parserOutput;
