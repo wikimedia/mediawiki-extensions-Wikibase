@@ -20,7 +20,7 @@
 			</div>
 		</details>
 		<p v-else>
-			<span>{{ referencesMessage }}</span>
+			<span class="wikibase-wbui2025-no-references">{{ referencesMessage }}</span>
 		</p>
 	</div>
 </template>
@@ -144,6 +144,10 @@ module.exports = exports = defineComponent( {
 		}
 	}
 
+	span.wikibase-wbui2025-no-references {
+		color: @color-subtle;
+	}
+
 	.wikibase-wbui2025-snak-value {
 		div.wikibase-snakview div {
 			display: inherit;
@@ -153,6 +157,7 @@ module.exports = exports = defineComponent( {
 			display: unset;
 			padding-left: unset;
 		}
+
 	}
 }
 </style>
