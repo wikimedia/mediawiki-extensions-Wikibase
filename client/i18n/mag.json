@@ -21,7 +21,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} वस्तु",
 	"wikibase-editlinks": "कड़ी सम्पादित करथिन",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी सम्पादित करथिन",
-	"wikibase-addlinkstitle": "अन्तरभाषा कड़ी जोड़थिन",
+	"wikibase-addlinkstitle": "अन्तःभाषा कड़ी जोड़थिन",
 	"wikibase-linkitem-addlinks": "कड़ी जोड़थिन",
 	"wikibase-linkitem-alreadylinked": "जे पन्ना अपने जोड़ेला चाह हथिन ऊ पहलहीँसे केन्द्रीय डेटा भण्डार पर [$1 वस्तु]के साथे जुटल हे जे ई जालस्थल पर [[$2]] से जुटल हे । वस्तु पर हर जालस्थलला खाली एके कड़ी हो सकहे । कृपया जोड़ेला कौनो अन्य पन्ना चुनथिन ।",
 	"wikibase-linkitem-close": "संवाद बन्द करथिन आउ पन्ना पुनः लोड करथिन",
