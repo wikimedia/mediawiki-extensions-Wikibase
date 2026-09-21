@@ -85,6 +85,12 @@ module.exports = exports = {
 				.find( '.mw-kartographer-map[data-mw-kartographer]' )
 				.get( 0 );
 			if ( mapElement ) {
+				// T429179: Remove bogus elements that are an unwanted side-effect of the late HTML
+				// serialization in wikibase.wbui2025/entityViewInit.js
+				// FIXME: This will be dead code when the original issue is fixed
+				$( rootElement )
+					.find( '.leaflet-map-pane, .leaflet-control-container, p:empty' )
+					.remove();
 				require( 'ext.kartographer.frame' ).initMapframeFromElement( mapElement );
 			}
 		} );
