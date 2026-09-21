@@ -39,6 +39,10 @@ class DefaultStrategy {
 		};
 	}
 
+	isInputAlwaysLtr() {
+		return false;
+	}
+
 	getEditableSnakComponent() {
 		return 'Wbui2025EditableStringSnakValue';
 	}

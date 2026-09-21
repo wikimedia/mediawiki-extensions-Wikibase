@@ -305,6 +305,7 @@ class Wbui2025ComponentsFactory {
 					'wikibase-wbui2025-musical-notation-value' => $dataType == 'musical-notation',
 					'wikibase-wbui2025-math-value' => $dataType == 'math',
 					'wikibase-wbui2025-quantity-value' => $dataType == 'quantity',
+					'wikibase-wbui2025-url-value' => $dataType == 'url',
 				];
 
 				return $data;

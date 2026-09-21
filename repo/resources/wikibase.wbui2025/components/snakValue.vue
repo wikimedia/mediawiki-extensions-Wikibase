@@ -33,7 +33,8 @@ module.exports = exports = defineComponent( {
 				'wikibase-wbui2025-geo-shape-value': this.snak.datatype === 'geo-shape',
 				'wikibase-wbui2025-musical-notation-value': this.snak.datatype === 'musical-notation',
 				'wikibase-wbui2025-math-value': this.snak.datatype === 'math',
-				'wikibase-wbui2025-quantity-value': this.snak.datatype === 'quantity'
+				'wikibase-wbui2025-quantity-value': this.snak.datatype === 'quantity',
+				'wikibase-wbui2025-url-value': this.snak.datatype === 'url'
 			};
 		}
 	},

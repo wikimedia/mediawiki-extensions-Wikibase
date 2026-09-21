@@ -56,6 +56,12 @@ class StringValueStrategy extends DefaultStrategy {
 	}
 }
 
+class UrlValueStrategy extends StringValueStrategy {
+	isInputAlwaysLtr() {
+		return true;
+	}
+}
+
 class LookupStringDatatypeStrategy extends StringValueStrategy {
 	getEditableSnakComponent() {
 		return 'Wbui2025EditableLookupSnakValue';
@@ -267,7 +273,7 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( store ) => new GlobeCoordinateValueStrategy( store )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
-snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new StringValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new UrlValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'math', ( store ) => new StringValueStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'commonsMedia',
 	( store ) => new CommonsMediaValueStrategy( store ),
