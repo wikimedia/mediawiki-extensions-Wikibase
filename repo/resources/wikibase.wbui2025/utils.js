@@ -82,8 +82,7 @@ module.exports = exports = {
 		// and added to preview maps in CachingKartographerEmbeddinghandler::getPreviewHtml()
 		mw.loader.using( 'ext.kartographer.frame' ).then( () => {
 			const mapElement = $( rootElement )
-				// Skip maps that are already initialized, e.g. via the wikipage.content hook
-				.find( '.mw-kartographer-map:not( .leaflet-container )[data-mw-kartographer]' )
+				.find( '.mw-kartographer-map[data-mw-kartographer]' )
 				.get( 0 );
 			if ( mapElement ) {
 				require( 'ext.kartographer.frame' ).initMapframeFromElement( mapElement );
