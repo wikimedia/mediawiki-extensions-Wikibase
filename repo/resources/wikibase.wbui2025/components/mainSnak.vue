@@ -77,6 +77,7 @@ module.exports = exports = defineComponent( {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding-right: 3px;
 
 		span {
 			display: inherit;
