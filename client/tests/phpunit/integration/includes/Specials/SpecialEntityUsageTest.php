@@ -9,7 +9,6 @@ use MediaWiki\Title\Title;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\FakeResultWrapper;
-use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialEntityUsage
@@ -170,6 +169,28 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->assertSame( 0, $res->numRows() );
 	}
 
+	public function testReallyDoQueryForMissingPage() {
+		$this->addReallyDoQueryData();
+
+		# A page can be deleted leaving behind an orphaned EnityUsage. See T437687
+		$this->getDb()->newDeleteQueryBuilder()
+			->deleteFrom( 'page' )
+			->where( [ 'page_id' => 22 ] )
+			->caller( __METHOD__ )
+			->execute();
+
+		$special = new SpecialEntityUsage(
+			$this->languageConverterFactory(),
+			WikibaseClient::getClientDomainDbFactory(),
+			WikibaseClient::getEntityIdParser()
+		);
+
+		$special->prepareParams( 'Q3' );
+		$res = $special->reallyDoQuery( 50 );
+		$this->assertSame( 1, $res->numRows() );
+		$this->assertSame( 'Vienna', $res->fetchObject()->title );
+	}
+
 	private function assertUsageAspects( $expected, $aspectsString ) {
 		// The aspects are not ordered, so don't take this into account when asserting
 		$this->assertArrayEquals( $expected, explode( '|', $aspectsString ), false );
@@ -214,13 +235,6 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		];
 
 		foreach ( $dump as $table => $rows ) {
-			// Clean everything
-			$this->getDb()->newDeleteQueryBuilder()
-				->deleteFrom( $table )
-				->where( IDatabase::ALL_ROWS )
-				->caller( __METHOD__ )
-				->execute();
-
 			if ( $table === 'page' ) {
 				foreach ( $rows as $row ) {
 					$title = Title::makeTitle( $row['page_namespace'], $row['page_title'] );
