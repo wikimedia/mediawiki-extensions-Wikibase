@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requests = require( './requests' );
 const responses = require( './responses' );
 const examples = require( './examples' );
@@ -12,10 +13,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/PropertyFilter" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -33,9 +31,7 @@ module.exports = {
 		"summary": "Add a new Statement to a Property",
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": requests.PropertyStatement,
 		"responses": {

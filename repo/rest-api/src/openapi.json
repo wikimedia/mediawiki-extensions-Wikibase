@@ -2081,9 +2081,9 @@
             "example": "Q24"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -2096,9 +2096,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -3520,9 +3520,9 @@
             "example": "Q24"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -3535,9 +3535,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -4545,16 +4545,6 @@
             ]
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -5175,16 +5165,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -5864,9 +5844,9 @@
             "example": "Q24"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -5879,9 +5859,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -6825,16 +6805,6 @@
             ]
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -7394,16 +7364,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -8378,9 +8338,9 @@
             "example": "Q24"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -8393,9 +8353,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -9339,16 +9299,6 @@
             ]
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -9899,16 +9849,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -10891,9 +10831,9 @@
             "example": "Q24"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -10906,9 +10846,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -11852,16 +11792,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -12983,6 +12913,21 @@
             "example": "Q24"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\".+\"|\\*)$"
+              }
+            },
+            "example": [
+              "\"1276705620\""
+            ]
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -13006,21 +12951,6 @@
               "format": "http-date"
             },
             "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "pattern": "^(?:\".+\"|\\*)$"
-              }
-            },
-            "example": [
-              "\"1276705620\""
-            ]
           }
         ],
         "requestBody": {
@@ -14579,9 +14509,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -14594,9 +14524,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -15575,9 +15505,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -15590,9 +15520,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -16542,9 +16472,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -16557,9 +16487,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -18491,9 +18421,9 @@
             "example": "P694"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -18506,9 +18436,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -19779,9 +19709,9 @@
             "example": "P694"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -19794,9 +19724,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -20719,16 +20649,6 @@
             ]
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -21243,16 +21163,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -22158,9 +22068,9 @@
             "example": "P694"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -22173,9 +22083,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -23098,16 +23008,6 @@
             ]
           },
           {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -23612,16 +23512,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -24536,9 +24426,9 @@
             "example": "P694"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -24551,9 +24441,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -25477,16 +25367,6 @@
             "example": [
               "\"1276705620\""
             ]
-          },
-          {
-            "name": "If-Modified-Since",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified after the specified date",
-            "schema": {
-              "type": "string",
-              "format": "http-date"
-            },
-            "example": "Sat, 06 Jun 2020 16:38:47 GMT"
           },
           {
             "name": "If-Match",
@@ -26484,6 +26364,21 @@
             "example": "P694"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(?:\".+\"|\\*)$"
+              }
+            },
+            "example": [
+              "\"1276705620\""
+            ]
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
@@ -26507,21 +26402,6 @@
               "format": "http-date"
             },
             "example": "Sat, 06 Jun 2020 16:38:47 GMT"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "pattern": "^(?:\".+\"|\\*)$"
-              }
-            },
-            "example": [
-              "\"1276705620\""
-            ]
           }
         ],
         "requestBody": {
@@ -27943,9 +27823,9 @@
             "example": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -27958,9 +27838,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -28878,9 +28758,9 @@
             "example": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -28893,9 +28773,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -29790,9 +29670,9 @@
             "example": "P694$B4C349A2-C504-4FC5-B7D5-8B781C719D71"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -29805,9 +29685,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -30708,9 +30588,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -30723,9 +30603,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -31683,9 +31563,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -31698,9 +31578,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -32629,9 +32509,9 @@
             "example": "Q24$9966A1CA-F3F5-4B1D-A534-7CD5953169DA"
           },
           {
-            "name": "If-Match",
+            "name": "If-None-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {
@@ -32644,9 +32524,9 @@
             ]
           },
           {
-            "name": "If-None-Match",
+            "name": "If-Match",
             "in": "header",
-            "description": "Conditionally perform the request only if the resource has been modified since the specified entity revision numbers",
+            "description": "Conditionally perform the request only if the resource has not been modified since one of the specified entity revision numbers",
             "schema": {
               "type": "array",
               "items": {

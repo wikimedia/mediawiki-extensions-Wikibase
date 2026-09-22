@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requests = require( './requests' );
 const responses = require( './responses' );
 
@@ -11,10 +12,7 @@ module.exports = {
 		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "#/components/parameters/StatementId" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -36,9 +34,7 @@ module.exports = {
 		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "#/components/parameters/StatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": requests.ItemStatement,
 		"responses": {
@@ -61,9 +57,7 @@ module.exports = {
 		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "#/components/parameters/StatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": requests.PatchItemStatement,
 		"responses": {
@@ -88,9 +82,7 @@ module.exports = {
 		"description": "This endpoint is also accessible through `/entities/items/{item_id}/statements/{statement_id}` and `/entities/properties/{property_id}/statements/{statement_id}`",
 		"parameters": [
 			{ "$ref": "#/components/parameters/StatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": { "$ref": "#/components/requestBodies/Delete" },
 		"responses": {

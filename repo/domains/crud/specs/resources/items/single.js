@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requestParts = require( '../../global/request-parts' );
 const responseParts = require( '../../global/response-parts' );
 
@@ -23,10 +24,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/ItemId" },
 			{ "$ref": "#/components/parameters/ItemFields" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -63,9 +61,7 @@ module.exports = {
 		"summary": "Change a single Wikibase Item by ID",
 		"parameters": [
 			{ "$ref": "#/components/parameters/ItemId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": {
 			"required": true,
