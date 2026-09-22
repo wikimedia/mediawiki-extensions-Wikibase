@@ -4,7 +4,7 @@ const { RequestBuilder } = require( '../../../../../rest-api/tests/mocha/helpers
 const { getAllowedBadges } = require( './getAllowedBadges' );
 
 async function badgesConfig() {
-	return { badgeItems: Object.fromEntries( // TODO fix eslint config to allow this
+	return { badgeItems: Object.fromEntries(
 		( await getAllowedBadges() ).map( ( badge ) => [ badge, '' ] )
 	) };
 }

@@ -765,7 +765,7 @@ describe( newPatchItemRequestBuilder().getRouteDescription(), () => {
 		} );
 
 		it( 'item not a badge', async () => {
-			const notBadgeItemId = 'Q113';
+			const notBadgeItemId = 'Q999113';
 			const sitelink = { title: linkedArticle, badges: [ notBadgeItemId ] };
 
 			const response = await newPatchItemRequestBuilder(
