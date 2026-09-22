@@ -111,7 +111,11 @@ module.exports = exports = defineComponent( {
 	},
 	computed: {
 		activeClasses() {
-			return [ { 'cdx-text-input--status-error': this.inputHadFocus && this.isIncomplete }, this.className ];
+			return [
+				{ 'cdx-text-input--status-error': this.inputHadFocus && this.isIncomplete },
+				this.className,
+				'wikibase-wbui2025-quantity-value-input'
+			];
 		}
 	},
 	methods: {
@@ -138,3 +142,14 @@ module.exports = exports = defineComponent( {
 	} }
 );
 </script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-wbui2025-quantity-value-input {
+	input {
+		/* @noflip */
+		direction: ltr;
+	}
+}
+</style>
