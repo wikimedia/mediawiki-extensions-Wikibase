@@ -310,19 +310,21 @@ class SpecialEntityUsage extends QueryPage {
 	 */
 	private function joinResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
 		$groupedByPageId = [];
-		$joinedQueryRes = array_map( fn( object $row ): object => clone $row, $euData );
+		$joinedQueryRes = [];
 
 		foreach ( $pageData as $row ) {
 			$groupedByPageId[(int)$row->value] = $row;
 		}
 
-		foreach ( $joinedQueryRes as $euRow ) {
+		foreach ( $euData as $euRow ) {
 			$pageId = (int)$euRow->eu_page_id;
 			if ( isset( $groupedByPageId[$pageId] ) ) {
 				$pageRow = $groupedByPageId[$pageId];
+				$euRowCopy = clone $euRow;
 				foreach ( $fieldsToCopy as $field ) {
-					$euRow->$field = $pageRow->$field;
+					$euRowCopy->$field = $pageRow->$field;
 				}
+				$joinedQueryRes[] = $euRowCopy;
 			}
 		}
 		return $joinedQueryRes;
