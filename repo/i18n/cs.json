@@ -519,5 +519,6 @@
 	"wikibase-stepper-progress": "$1 z $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problémy a návrhy",
 	"wikibase-indicator-popover-multiple-issue-previous": "Předchozí",
-	"wikibase-indicator-popover-multiple-issue-next": "Další"
+	"wikibase-indicator-popover-multiple-issue-next": "Další",
+	"wikibase-wikiprojects-sidebar-section": "Související WikiProjekty"
 }
