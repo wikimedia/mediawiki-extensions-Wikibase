@@ -56,7 +56,7 @@ class StringValueStrategy extends DefaultStrategy {
 	}
 }
 
-class UrlValueStrategy extends StringValueStrategy {
+class StringValueWithLtrInputStrategy extends StringValueStrategy {
 	isInputAlwaysLtr() {
 		return true;
 	}
@@ -273,8 +273,8 @@ snakValueStrategyFactory.registerStrategyForDatatype(
 	( store ) => new GlobeCoordinateValueStrategy( store )
 );
 snakValueStrategyFactory.registerStrategyForDatatype( 'string', ( store ) => new StringValueStrategy( store ) );
-snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new UrlValueStrategy( store ) );
-snakValueStrategyFactory.registerStrategyForDatatype( 'math', ( store ) => new StringValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'url', ( store ) => new StringValueWithLtrInputStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'math', ( store ) => new StringValueWithLtrInputStrategy( store ) );
 snakValueStrategyFactory.registerStrategyForDatatype( 'commonsMedia',
 	( store ) => new CommonsMediaValueStrategy( store ),
 	( searchTerm, offset ) => searchCommonsMedia( searchTerm, offset )
@@ -284,5 +284,6 @@ snakValueStrategyFactory.registerStrategyForDatatype( 'external-id', ( store ) =
 module.exports = {
 	EntityValueStrategy,
 	StringValueStrategy,
+	StringValueWithLtrInputStrategy,
 	GlobeCoordinateValueStrategy
 };
