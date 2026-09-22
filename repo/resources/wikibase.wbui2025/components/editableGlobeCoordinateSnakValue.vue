@@ -205,7 +205,8 @@ module.exports = exports = defineComponent( {
 		activeClasses() {
 			return [
 				{ 'cdx-text-input--status-error': this.inputHadFocus && this.parseError },
-				this.className
+				this.className,
+				'wikibase-wbui2025-globe-coordinate-value-input'
 			];
 		},
 
@@ -283,6 +284,13 @@ module.exports = exports = defineComponent( {
 
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
+
+.wikibase-wbui2025-globe-coordinate-value-input {
+	input {
+		/* @noflip */
+		direction: ltr;
+	}
+}
 
 .wikibase-wbui2025-editable-globe-coordinate-popover {
 	.cdx-popover__header__title {
