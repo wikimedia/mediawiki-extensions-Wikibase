@@ -11,7 +11,9 @@
 			:statement-id="statementId"
 		></wbui2025-qualifiers>
 		<wbui2025-references
+			:references-data-string="referenceDataString"
 			:references="references"
+			:reference-count="referenceCount"
 			:statement-id="statementId"
 		></wbui2025-references>
 	</div>
@@ -41,6 +43,12 @@ module.exports = exports = defineComponent( {
 	computed: {
 		references() {
 			return this.statement.references ? this.statement.references : [];
+		},
+		referenceCount() {
+			return this.references.length;
+		},
+		referenceDataString() {
+			return JSON.stringify( this.references );
 		},
 		qualifiers() {
 			return this.statement.qualifiers ? this.statement.qualifiers : {};

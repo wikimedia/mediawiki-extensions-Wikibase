@@ -954,6 +954,13 @@ final class RepoHooks implements
 					'../view/resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				],
 			];
+			$modules['wikibase.wbui2025.entityView.codexStyles'] = $moduleTemplate + [
+					'class' => CodexModule::class,
+					'codexStyleOnly' => true,
+					'codexComponents' => [
+						'CdxAccordion',
+					],
+			];
 			$modules['wikibase.wbui2025.lib'] = $moduleTemplate + [
 				'packageFiles' => [
 					'resources/wikibase.wbui2025/lib.js',
@@ -990,6 +997,8 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/entityViewInit.js',
 					'resources/wikibase.wbui2025/components/qualifiers.vue',
 					'resources/wikibase.wbui2025/components/references.vue',
+					'resources/wikibase.wbui2025/components/hydratedReferences.vue',
+					'resources/wikibase.wbui2025/components/referenceViewContent.vue',
 					'resources/wikibase.wbui2025/components/snakValue.vue',
 					'resources/wikibase.wbui2025/components/statementView.vue',
 					'resources/wikibase.wbui2025/components/statementSections.vue',

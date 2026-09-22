@@ -310,7 +310,11 @@ class Wbui2025ComponentsFactoryTest extends TestCase {
 			->with( 'wikibase-statementview-references-counter', [ '2' ] )
 			->willReturn( '2 references' );
 		$setup = $this->captureSetup( 'wbui2025-references' );
-		$result = $setup( [ 'references' => [ 'a', 'b' ] ] );
+		$result = $setup( [
+			'references' => [ 'a', 'b' ],
+			'referenceCount' => 2,
+			'showReferences' => false,
+		] );
 
 		$this->assertSame( 2, $result['referenceCount'] );
 		$this->assertTrue( $result['hasReferences'] );
@@ -321,7 +325,11 @@ class Wbui2025ComponentsFactoryTest extends TestCase {
 
 	public function testReferencesSetup_hasReferencesIsFalseWhenEmpty(): void {
 		$setup = $this->captureSetup( 'wbui2025-references' );
-		$result = $setup( [ 'references' => [] ] );
+		$result = $setup( [
+			'references' => [],
+			'referenceCount' => 0,
+			'showReferences' => false,
+		] );
 		$this->assertSame( 0, $result['referenceCount'] );
 		$this->assertFalse( $result['hasReferences'] );
 	}

@@ -32,6 +32,7 @@
 
 		const StatusMessage = require( './components/statusMessage.vue' );
 		const StatementSectionsView = require( './components/statementSections.vue' );
+		const HydratedReferences = require( './components/hydratedReferences.vue' );
 		const AddStatementFloatingButton = require( './components/addStatementFloatingButton.vue' );
 
 		mw.hook( 'wikibase.entityPage.entityLoaded' ).add( ( data ) => {
@@ -54,6 +55,15 @@
 				Vue.createMwApp( StatementSectionsView, sectionProps )
 					.use( pinia )
 					.mount( statementSection );
+			}
+			for ( const referencesSection of wbui2025StatementList.querySelectorAll( '.wikibase-wbui2025-references' ) ) {
+				const referencesProps = {
+					references: JSON.parse( referencesSection.dataset.references ),
+					statementId: referencesSection.dataset.statementId
+				};
+				Vue.createMwApp( HydratedReferences, referencesProps )
+					.use( pinia )
+					.mount( referencesSection );
 			}
 			const statusMessageContainer = document.getElementById( 'wikibase-wbui2025-status-message-mount-point' );
 			Vue.createMwApp( StatusMessage, {} )
