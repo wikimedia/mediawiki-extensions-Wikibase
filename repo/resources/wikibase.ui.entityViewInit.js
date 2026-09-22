@@ -270,7 +270,8 @@
 					mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
 				} else {
 					var api = new mw.Api();
-					api.saveOption( optionsKey, copyRightVersion );
+					api.saveOption( optionsKey, copyRightVersion )
+					.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
 				}
 			} );
 			return;
@@ -316,7 +317,8 @@
 				mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
 			} else {
 				var api = new mw.Api();
-				api.saveOption( optionsKey, copyRightVersion );
+				api.saveOption( optionsKey, copyRightVersion )
+				.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
 			}
 		} );
 

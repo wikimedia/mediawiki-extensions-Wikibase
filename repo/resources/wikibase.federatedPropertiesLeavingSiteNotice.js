@@ -58,7 +58,8 @@
 					mw.cookie.set( cookieKey, selected, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
 				} else {
 					var api = new mw.Api();
-					api.saveOption( optionsKey, selected );
+					api.saveOption( optionsKey, selected )
+					.done( () => mw.user.options.set( optionsKey, selected ) );
 				}
 			} );
 
