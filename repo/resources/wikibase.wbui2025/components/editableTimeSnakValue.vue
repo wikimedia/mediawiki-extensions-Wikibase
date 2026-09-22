@@ -323,14 +323,13 @@ module.exports = exports = defineComponent( {
 		.time-value-popover {
 			width: 100%;
 			padding: 0.75rem @spacing-100 @spacing-50 @spacing-100;
-		}
 
-		.content .cdx-popover__header p {
-			padding: 0;
-			margin: 0;
-			font-size: 0.875rem;
-			line-height: 1.4rem;
-			letter-spacing: -0.00263rem;
+			.cdx-popover__header p {
+				padding: 0;
+				margin: 0;
+				line-height: 1.4rem;
+				letter-spacing: -0.00263rem;
+			}
 		}
 
 		.cdx-popover__header__button-wrapper {
@@ -342,10 +341,12 @@ module.exports = exports = defineComponent( {
 		div.time-options {
 			.formatted-time-value {
 				font-weight: @font-weight-bold;
-				margin-top: @spacing-75;
-				margin-bottom: @spacing-75;
+				margin: @spacing-25 0 @spacing-75;
+				padding-bottom: 0;
 			}
+
 			p.option-and-select {
+				margin: 0;
 				justify-content: space-between;
 				display: flex;
 				gap: 5px;
