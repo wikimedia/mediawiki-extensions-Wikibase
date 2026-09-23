@@ -279,7 +279,7 @@ snakValueStrategyFactory.registerStrategyForDatatype( 'commonsMedia',
 	( store ) => new CommonsMediaValueStrategy( store ),
 	( searchTerm, offset ) => searchCommonsMedia( searchTerm, offset )
 );
-snakValueStrategyFactory.registerStrategyForDatatype( 'external-id', ( store ) => new StringValueStrategy( store ) );
+snakValueStrategyFactory.registerStrategyForDatatype( 'external-id', ( store ) => new StringValueWithLtrInputStrategy( store ) );
 
 module.exports = {
 	EntityValueStrategy,
