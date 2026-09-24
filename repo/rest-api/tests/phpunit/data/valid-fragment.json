@@ -3,7 +3,7 @@
 	"info": { "title": "Example extension REST API fragment", "version": "0.1" },
 	"tags": [ { "name": "examples", "description": "Example resources" } ],
 	"paths": {
-		"/v0/examples/{example_id}": {
+		"/example/v0/examples/{example_id}": {
 			"get": {
 				"operationId": "getExample",
 				"tags": [ "examples" ],
@@ -16,7 +16,7 @@
 				}
 			}
 		},
-		"/v0/examples/{example_id}/parts": {
+		"/example/v0/examples/{example_id}/parts": {
 			"get": {
 				"operationId": "getExampleParts",
 				"tags": [ "examples" ],

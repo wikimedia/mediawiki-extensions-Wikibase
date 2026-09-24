@@ -20,7 +20,7 @@ class OpenApiDocFragmentJoinerTest extends TestCase {
 		'info' => [ 'title' => 'Wikibase REST API', 'version' => '1.0' ],
 		'tags' => [ [ 'name' => 'items', 'description' => 'Wikibase Items' ] ],
 		'paths' => [
-			'/v1/entities/items/{item_id}' => [ 'get' => [ 'operationId' => 'getItem' ] ],
+			'/wikibase/v1/entities/items/{item_id}' => [ 'get' => [ 'operationId' => 'getItem' ] ],
 		],
 		'components' => [ 'responses' => [ 'ResourceNotFound' => [ 'description' => 'not found' ] ] ],
 	];
@@ -44,7 +44,7 @@ class OpenApiDocFragmentJoinerTest extends TestCase {
 
 		// the routable path is joined, the non-routable one is not
 		$this->assertSame(
-			[ '/v1/entities/items/{item_id}', '/v0/examples/{example_id}' ],
+			[ '/wikibase/v1/entities/items/{item_id}', '/v0/examples/{example_id}' ],
 			array_keys( $joined['paths'] )
 		);
 		$this->assertSame( $examplePath, $joined['paths']['/v0/examples/{example_id}'] );
@@ -82,14 +82,14 @@ class OpenApiDocFragmentJoinerTest extends TestCase {
 	}
 
 	public function testGivenFragmentRedefinesBasePath_throws(): void {
-		$joiner = $this->newJoiner( [ '/v1/entities/items/{item_id}' ] );
+		$joiner = $this->newJoiner( [ '/wikibase/v1/entities/items/{item_id}' ] );
 
 		$this->expectException( RuntimeException::class );
 		$this->expectExceptionMessage(
-			"OpenAPI doc fragment 'ExampleExtension' redefines path '/v1/entities/items/{item_id}'"
+			"OpenAPI doc fragment 'ExampleExtension' redefines path '/wikibase/v1/entities/items/{item_id}'"
 		);
 
-		$joiner->join( [ 'paths' => [ '/v1/entities/items/{item_id}' => [] ] ], 'ExampleExtension' );
+		$joiner->join( [ 'paths' => [ '/wikibase/v1/entities/items/{item_id}' => [] ] ], 'ExampleExtension' );
 	}
 
 	public function testGivenTwoFragmentsDefineSamePath_throws(): void {

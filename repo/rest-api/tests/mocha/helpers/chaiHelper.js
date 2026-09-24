@@ -107,7 +107,7 @@ function buildSatisfyApiSchema( { openApiSchema, schemaValidator } ) {
 		utils.flag( this, 'response', response );
 		const request = response.request;
 
-		const requestPath = new URL( request.url ).pathname.split( 'wikibase' )[ 1 ];
+		const requestPath = new URL( request.url ).pathname.split( 'rest.php' )[ 1 ];
 		const pathInSchema = getMatchingSchemaPath( requestPath, Object.keys( openApiSchema.paths ) );
 		const requestMethod = request.method.toLowerCase();
 		const responseStatus = response.status;

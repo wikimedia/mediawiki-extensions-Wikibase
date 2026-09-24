@@ -38,10 +38,11 @@ describe( 'Route Coverage Tests', () => {
 		return getFlattenedRoutes( repoModuleDefinition ).map(
 			( route ) => ( {
 				method: route.method,
-				path: route.path.split( '/wikibase' )[ 1 ]
+				path: route.path
 			} )
 		).filter(
-			( route ) => route.path.startsWith( '/v1/entities' ) || route.path.startsWith( '/v1/statements' )
+			( route ) => route.path.startsWith( '/wikibase/v1/entities' ) ||
+				route.path.startsWith( '/wikibase/v1/statements' )
 		);
 	}
 

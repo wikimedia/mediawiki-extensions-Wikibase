@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://wikibase.example/w/rest.php/wikibase"
+      "url": "https://wikibase.example/w/rest.php"
     }
   ],
   "tags": [
@@ -112,7 +112,7 @@
     }
   ],
   "paths": {
-    "/v1/openapi.json": {
+    "/wikibase/v1/openapi.json": {
       "get": {
         "operationId": "getOpenApiDoc",
         "tags": [
@@ -142,7 +142,7 @@
         }
       }
     },
-    "/v1/property-data-types": {
+    "/wikibase/v1/property-data-types": {
       "get": {
         "operationId": "getPropertyDataTypes",
         "tags": [
@@ -169,7 +169,7 @@
         }
       }
     },
-    "/v1/entities/items": {
+    "/wikibase/v1/entities/items": {
       "post": {
         "operationId": "addItem",
         "tags": [
@@ -1311,7 +1311,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}": {
+    "/wikibase/v1/entities/items/{item_id}": {
       "get": {
         "operationId": "getItem",
         "tags": [
@@ -3199,7 +3199,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/sitelinks": {
+    "/wikibase/v1/entities/items/{item_id}/sitelinks": {
       "get": {
         "operationId": "getSitelinks",
         "tags": [
@@ -4199,7 +4199,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/sitelinks/{site_id}": {
+    "/wikibase/v1/entities/items/{item_id}/sitelinks/{site_id}": {
       "get": {
         "operationId": "getSitelink",
         "tags": [
@@ -5569,7 +5569,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/labels": {
+    "/wikibase/v1/entities/items/{item_id}/labels": {
       "get": {
         "operationId": "getItemLabels",
         "tags": [
@@ -6499,7 +6499,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/labels/{language_code}": {
+    "/wikibase/v1/entities/items/{item_id}/labels/{language_code}": {
       "get": {
         "operationId": "getItemLabel",
         "tags": [
@@ -7788,7 +7788,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
+    "/wikibase/v1/entities/items/{item_id}/labels_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getItemLabelWithFallback",
         "tags": [
@@ -8083,7 +8083,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/descriptions": {
+    "/wikibase/v1/entities/items/{item_id}/descriptions": {
       "get": {
         "operationId": "getItemDescriptions",
         "tags": [
@@ -9013,7 +9013,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/descriptions/{language_code}": {
+    "/wikibase/v1/entities/items/{item_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getItemDescription",
         "tags": [
@@ -10293,7 +10293,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
+    "/wikibase/v1/entities/items/{item_id}/descriptions_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getItemDescriptionWithFallback",
         "tags": [
@@ -10588,7 +10588,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/aliases": {
+    "/wikibase/v1/entities/items/{item_id}/aliases": {
       "get": {
         "operationId": "getItemAliases",
         "tags": [
@@ -11522,7 +11522,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/aliases/{language_code}": {
+    "/wikibase/v1/entities/items/{item_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getItemAliasesInLanguage",
         "tags": [
@@ -12341,7 +12341,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/statements": {
+    "/wikibase/v1/entities/items/{item_id}/statements": {
       "get": {
         "operationId": "getItemStatements",
         "tags": [
@@ -13982,7 +13982,7 @@
         }
       }
     },
-    "/v1/entities/items/{item_id}/statements/{statement_id}": {
+    "/wikibase/v1/entities/items/{item_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getItemStatement",
         "tags": [
@@ -16895,7 +16895,7 @@
         }
       }
     },
-    "/v1/entities/properties": {
+    "/wikibase/v1/entities/properties": {
       "post": {
         "operationId": "addProperty",
         "tags": [
@@ -17852,7 +17852,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}": {
+    "/wikibase/v1/entities/properties/{property_id}": {
       "get": {
         "operationId": "getProperty",
         "tags": [
@@ -19496,7 +19496,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/labels": {
+    "/wikibase/v1/entities/properties/{property_id}/labels": {
       "get": {
         "operationId": "getPropertyLabels",
         "tags": [
@@ -20405,7 +20405,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/labels/{language_code}": {
+    "/wikibase/v1/entities/properties/{property_id}/labels/{language_code}": {
       "get": {
         "operationId": "getPropertyLabel",
         "tags": [
@@ -21592,7 +21592,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
+    "/wikibase/v1/entities/properties/{property_id}/labels_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getPropertyLabelWithFallback",
         "tags": [
@@ -21875,7 +21875,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/descriptions": {
+    "/wikibase/v1/entities/properties/{property_id}/descriptions": {
       "get": {
         "operationId": "getPropertyDescriptions",
         "tags": [
@@ -22784,7 +22784,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/descriptions/{language_code}": {
+    "/wikibase/v1/entities/properties/{property_id}/descriptions/{language_code}": {
       "get": {
         "operationId": "getPropertyDescription",
         "tags": [
@@ -23961,7 +23961,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
+    "/wikibase/v1/entities/properties/{property_id}/descriptions_with_language_fallback/{language_code}": {
       "get": {
         "operationId": "getPropertyDescriptionWithFallback",
         "tags": [
@@ -24244,7 +24244,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/aliases": {
+    "/wikibase/v1/entities/properties/{property_id}/aliases": {
       "get": {
         "operationId": "getPropertyAliases",
         "tags": [
@@ -25159,7 +25159,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/aliases/{language_code}": {
+    "/wikibase/v1/entities/properties/{property_id}/aliases/{language_code}": {
       "get": {
         "operationId": "getPropertyAliasesInLanguage",
         "tags": [
@@ -25921,7 +25921,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/statements": {
+    "/wikibase/v1/entities/properties/{property_id}/statements": {
       "get": {
         "operationId": "getPropertyStatements",
         "tags": [
@@ -27377,7 +27377,7 @@
         }
       }
     },
-    "/v1/entities/properties/{property_id}/statements/{statement_id}": {
+    "/wikibase/v1/entities/properties/{property_id}/statements/{statement_id}": {
       "get": {
         "operationId": "getPropertyStatement",
         "tags": [
@@ -30143,7 +30143,7 @@
         }
       }
     },
-    "/v1/statements/{statement_id}": {
+    "/wikibase/v1/statements/{statement_id}": {
       "get": {
         "operationId": "getStatement",
         "tags": [
@@ -32972,7 +32972,7 @@
         }
       }
     },
-    "/v1/search/items": {
+    "/wikibase/v1/search/items": {
       "get": {
         "operationId": "simpleItemSearch",
         "tags": [
@@ -33205,7 +33205,7 @@
         }
       }
     },
-    "/v1/search/properties": {
+    "/wikibase/v1/search/properties": {
       "get": {
         "operationId": "simplePropertySearch",
         "tags": [
@@ -33438,7 +33438,7 @@
         }
       }
     },
-    "/v1/suggest/items": {
+    "/wikibase/v1/suggest/items": {
       "get": {
         "operationId": "suggestItems",
         "tags": [
@@ -33671,7 +33671,7 @@
         }
       }
     },
-    "/v1/suggest/properties": {
+    "/wikibase/v1/suggest/properties": {
       "get": {
         "operationId": "suggestProperties",
         "tags": [
