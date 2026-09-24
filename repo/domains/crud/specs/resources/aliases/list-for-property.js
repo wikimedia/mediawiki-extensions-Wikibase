@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requestParts = require( '../../global/request-parts' );
 
 const PatchPropertyAliasesRequestContent = {
@@ -39,10 +40,7 @@ module.exports = {
 		"summary": "Retrieve a Property's aliases",
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -60,9 +58,7 @@ module.exports = {
 		"summary": "Change a Property's aliases",
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": {
 			"description": "Payload containing a JSON Patch document to be applied to a Property's aliases and edit metadata",

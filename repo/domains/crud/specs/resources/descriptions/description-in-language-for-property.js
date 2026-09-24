@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requests = require( './requests' );
 const responses = require( './responses' );
 
@@ -11,10 +12,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/LanguageCode" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -33,10 +31,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/LanguageCode" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.EditConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"requestBody": {
@@ -79,10 +74,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/LanguageCode" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.EditConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"requestBody": { "$ref": "#/components/requestBodies/Delete" },

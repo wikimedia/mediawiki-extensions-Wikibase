@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const responses = require( './responses' );
 
 module.exports = {
@@ -11,10 +12,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/ItemId" },
 			{ "$ref": "#/components/parameters/LanguageCode" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {

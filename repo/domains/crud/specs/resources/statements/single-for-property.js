@@ -1,5 +1,6 @@
 'use strict';
 
+const parameterSets = require( '../../global/parameter-sets' );
 const requests = require( './requests' );
 const responses = require( './responses' );
 
@@ -12,10 +13,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/PropertyStatementId" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfModifiedSince" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" },
+			...parameterSets.ReadConditionalHeaders,
 			{ "$ref": "#/components/parameters/Authorization" }
 		],
 		"responses": {
@@ -38,9 +36,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/PropertyStatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": requests.PropertyStatement,
 		"responses": {
@@ -61,9 +57,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/PropertyStatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": requests.PatchPropertyStatement,
 		"responses": {
@@ -86,9 +80,7 @@ module.exports = {
 		"parameters": [
 			{ "$ref": "#/components/parameters/PropertyId" },
 			{ "$ref": "#/components/parameters/PropertyStatementId" },
-			{ "$ref": "#/components/parameters/IfMatch" },
-			{ "$ref": "#/components/parameters/IfNoneMatch" },
-			{ "$ref": "#/components/parameters/IfUnmodifiedSince" }
+			...parameterSets.EditConditionalHeaders
 		],
 		"requestBody": { "$ref": "#/components/requestBodies/Delete" },
 		"responses": {
