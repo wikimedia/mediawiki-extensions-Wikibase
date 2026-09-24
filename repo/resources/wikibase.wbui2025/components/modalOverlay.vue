@@ -192,6 +192,9 @@ module.exports = exports = defineComponent( {
 		if ( modalStack.length === 0 ) {
 			window.removeEventListener( 'popstate', onPopState );
 		}
+		// Clear any active error messages when we exit a modal context, per T429153
+		// For now we continue to maintain a map of messages. We will clear that up in T439118
+		wbui2025.store.useMessageStore().clearErrorMessages();
 		const target = document.getElementById( 'mw-teleport-target' );
 		if ( target && target.querySelectorAll( '.wikibase-wbui2025-modal-overlay' ).length === 0 ) {
 			const scrollY = savedScrollY;

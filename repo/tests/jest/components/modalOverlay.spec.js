@@ -21,6 +21,7 @@ const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
 const modalOverlayComponent = require( '../../../resources/wikibase.wbui2025/components/modalOverlay.vue' );
 const { mount } = require( '@vue/test-utils' );
+const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 describe( 'wikibase.wbui2025.modalOverlay', () => {
 	it( 'defines component', async () => {
@@ -129,6 +130,28 @@ describe( 'wikibase.wbui2025.modalOverlay', () => {
 			const modal = await mountModalComponent();
 			await modal.vm.requestHide();
 			expect( backSpy ).toHaveBeenCalled();
+		} );
+
+		describe( 'message interactions', () => {
+			it( 'clears messages when it opens, errors when it closes', async () => {
+				const clearStatusMock = jest.fn();
+				const clearErrorMock = jest.fn();
+				wbui2025.store.useMessageStore = function () {
+					return {
+						clearStatusMessages: clearStatusMock,
+						clearErrorMessages: clearErrorMock
+					};
+				};
+				expect( document.body.className ).toEqual( '' );
+				const modal = await mountModalComponent();
+				expect( clearStatusMock ).toHaveBeenCalledTimes( 1 );
+				expect( clearErrorMock ).not.toHaveBeenCalled();
+				expect( document.body.className ).toEqual( 'wikibase-wbui2025-modal-open' );
+				await modal.unmount();
+				expect( clearStatusMock ).toHaveBeenCalledTimes( 1 );
+				expect( clearErrorMock ).toHaveBeenCalled();
+				expect( document.body.className ).toEqual( '' );
+			} );
 		} );
 	} );
 } );

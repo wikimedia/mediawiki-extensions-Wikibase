@@ -9,6 +9,10 @@ const useMessageStore = defineStore( 'message', {
 		addStatusMessage( messageData ) {
 			const newCount = this.messageCounter + 1;
 			this.messageCounter = newCount;
+			// Clear any active messages when we get a new message, per T429153
+			// For now we continue to maintain a map of messages. We will clear
+			// that up in T439118
+			this.clearStatusMessages();
 			this.messages.set( newCount, messageData );
 			return newCount;
 		},
@@ -20,6 +24,16 @@ const useMessageStore = defineStore( 'message', {
 		},
 		clearStatusMessages() {
 			this.messages.clear();
+		},
+		clearErrorMessages() {
+			if ( this.messages.size > 0 ) {
+				// As of T429153 there is only one message (or none)
+				const onlyMessageKey = this.messages.keys().next().value;
+				const message = this.messages.get( onlyMessageKey );
+				if ( message.type === 'error' ) {
+					this.clearStatusMessage( onlyMessageKey );
+				}
+			}
 		}
 	}
 } );
