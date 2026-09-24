@@ -41,3 +41,13 @@ module.exports = exports = defineComponent( {
 	}
 } );
 </script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+.wikibase-wbui2025-editable-snak-holder {
+	display: flex;
+	flex-direction: column;
+	gap: @spacing-75;
+}
+</style>
