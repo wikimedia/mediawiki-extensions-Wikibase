@@ -13,7 +13,7 @@ use Wikibase\Lib\Sites\SiteMatrixParser;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteMatrixParserTest extends \PHPUnit\Framework\TestCase {
+class SiteMatrixParserTest extends \MediaWikiUnitTestCase {
 
 	/**
 	 * @dataProvider sitesFromJsonProvider

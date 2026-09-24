@@ -15,7 +15,7 @@ use Wikibase\Lib\Sites\SitesBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SitesBuilderTest extends \PHPUnit\Framework\TestCase {
+class SitesBuilderTest extends \MediaWikiUnitTestCase {
 
 	/**
 	 * @dataProvider buildSitesProvider
