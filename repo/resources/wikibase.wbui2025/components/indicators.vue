@@ -1,13 +1,30 @@
 <template>
 	<div v-if="indicatorsHtml">
-		<span
-			ref="indicatorAnchor"
-			class="indicators wikibase-wbui2025-indicators"
-			@click="popoverVisible = !popoverVisible"
-			v-html="indicatorsHtml"
-		></span>
+		<!-- Jest (`indicators.spec.js`) doesn't like setting the anchor to be a component,
+					for some reason, so we set the anchor here to a 'div' containing the button
+					component -->
+		<div ref="indicatorAnchor">
+			<cdx-toggle-button
+				:id="indicatorKey"
+				ref="indicatorAnchor"
+				v-model="popoverVisible"
+				size="small"
+				aria-haspopup="dialog"
+				aria-owns="wbui2025-inidicator-popover"
+				quiet
+				class="wikibase-wbui2025-indicator-popover-toggle"
+			>
+				<span
+					class="indicators wikibase-wbui2025-indicators"
+					v-html="indicatorsHtml"
+				></span>
+			</cdx-toggle-button>
+		</div>
 		<wbui2025-indicator-popover
 			v-if="popoverVisible"
+			id="wbui2025-inidicator-popover"
+			:aria-describedby="indicatorKey"
+			role="dialog"
 			:snak-hash="snakHash"
 			:statement-id="statementId"
 			:is-qualifier="isQualifier"
@@ -21,6 +38,7 @@
 
 <script>
 const { defineComponent } = require( 'vue' );
+const { CdxToggleButton } = require( '../../../codex.js' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const Wbui2025IndicatorPopover = require( './indicatorPopover.vue' );
 
@@ -28,6 +46,7 @@ const Wbui2025IndicatorPopover = require( './indicatorPopover.vue' );
 module.exports = exports = defineComponent( {
 	name: 'WikibaseWbui2025Indicators',
 	components: {
+		CdxToggleButton,
 		Wbui2025IndicatorPopover
 	},
 	props: {
@@ -54,6 +73,9 @@ module.exports = exports = defineComponent( {
 		};
 	},
 	computed: {
+		indicatorKey() {
+			return wbui2025.store.getIndicatorKey( this.statementId, this.referenceHash, this.snakHash, this.isQualifier );
+		},
 		indicatorsHtml() {
 			if ( this.referenceHash !== null ) {
 				return wbui2025.store.getIndicatorHtmlForReferenceSnak(
@@ -79,15 +101,26 @@ module.exports = exports = defineComponent( {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-indicators {
-	display: inline-block;
+.wikibase-wbui2025-indicator-popover-toggle{
 	margin-left: @spacing-50;
-	padding: 0 @spacing-75;
-	cursor: pointer;
+	margin-right: calc( @spacing-75 - 3px );
+	padding: 0 3px;
 
-	.wikibase-wbui2025-indicator-icon--error {
-		.cdx-mixin-css-icon( @cdx-icon-error, @color-icon-error );
-		padding: 3px 0 3px 0;
+	&.cdx-toggle-button--quiet:enabled.cdx-toggle-button--toggled-on {
+		background-color: @background-color-interactive-subtle--active;
+	}
+
+	.wikibase-wbui2025-indicators {
+		display: inline-block;
+
+		span {
+			height: @spacing-150;
+		}
+
+		.wikibase-wbui2025-indicator-icon--error {
+			.cdx-mixin-css-icon( @cdx-icon-error, @color-icon-error );
+			padding: 3px 0 3px 0;
+		}
 	}
 }
 </style>

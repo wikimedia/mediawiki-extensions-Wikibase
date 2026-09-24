@@ -1139,6 +1139,7 @@ final class RepoHooks implements
 					'CdxSelect',
 					'CdxTextArea',
 					'CdxTextInput',
+					'CdxToggleButton',
 					'CdxProgressBar',
 				],
 			];
