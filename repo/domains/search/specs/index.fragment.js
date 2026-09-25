@@ -15,7 +15,7 @@ const openapi = {
 		}
 	],
 	"paths": {
-		"/v1/search/items": {
+		"/wikibase/v1/search/items": {
 			"get": {
 				"operationId": "simpleItemSearch",
 				"tags": [ "item search" ],
@@ -35,7 +35,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v1/search/properties": {
+		"/wikibase/v1/search/properties": {
 			"get": {
 				"operationId": "simplePropertySearch",
 				"tags": [ "property search" ],
@@ -55,7 +55,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v1/suggest/items": {
+		"/wikibase/v1/suggest/items": {
 			"get": {
 				"operationId": "suggestItems",
 				"tags": [ "item search" ],
@@ -75,7 +75,7 @@ const openapi = {
 				}
 			}
 		},
-		"/v1/suggest/properties": {
+		"/wikibase/v1/suggest/properties": {
 			"get": {
 				"operationId": "suggestProperties",
 				"tags": [ "property search" ],

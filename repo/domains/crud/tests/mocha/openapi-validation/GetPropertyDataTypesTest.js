@@ -6,7 +6,7 @@ const { RequestBuilder } = require( '../../../../../rest-api/tests/mocha/helpers
 describe( 'GET /v1/property-data-types', () => {
 	it( '200 OK response is valid', async () => {
 		const response = await new RequestBuilder()
-			.withRoute( 'GET', '/v1/property-data-types' )
+			.withRoute( 'GET', '/wikibase/v1/property-data-types' )
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );

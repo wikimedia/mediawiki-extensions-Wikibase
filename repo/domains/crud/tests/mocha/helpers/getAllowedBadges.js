@@ -14,7 +14,7 @@ async function getAllowedBadges() {
 
 async function newBadgeItem( labelPrefix ) {
 	return new RequestBuilder()
-		.withRoute( 'POST', '/v1/entities/items' )
+		.withRoute( 'POST', '/wikibase/v1/entities/items' )
 		.withJsonBodyParam( 'item', { labels: { en: labelPrefix } } )
 		.makeRequest();
 }

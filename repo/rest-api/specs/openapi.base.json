@@ -14,7 +14,7 @@
 		}
 	},
 	"paths": {
-		"/v1/openapi.json": {
+		"/wikibase/v1/openapi.json": {
 			"get": {
 				"operationId": "getOpenApiDoc",
 				"tags": [ "OpenAPI document" ],
@@ -55,6 +55,6 @@
 		}
 	],
 	"servers": [
-		{ "url": "https://wikibase.example/w/rest.php/wikibase" }
+		{ "url": "https://wikibase.example/w/rest.php" }
 	]
 }

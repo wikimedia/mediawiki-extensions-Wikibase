@@ -2,5 +2,5 @@
 # See https://redocly.com/docs/cli/ for more information.
 specs/openapi-joined.json:
   operation-4xx-response:
-    - '#/paths/~1v1~1openapi.json/get/responses'
-    - '#/paths/~1v1~1property-data-types/get/responses'
+    - '#/paths/~1wikibase~1v1~1openapi.json/get/responses'
+    - '#/paths/~1wikibase~1v1~1property-data-types/get/responses'

@@ -12,7 +12,7 @@ describe( 'GET /openapi.json', () => {
 		const config = await loadConfig( { configPath: 'redocly.yaml' } );
 		const schema = ( await bundle( { ref: './specs/openapi-joined.json', config, dereference: true } ) ).bundle.parsed;
 		const response = await new RequestBuilder()
-			.withRoute( 'GET', '/v1/openapi.json' )
+			.withRoute( 'GET', '/wikibase/v1/openapi.json' )
 			.makeRequest();
 
 		expect( response ).to.have.status( 200 );

@@ -24,8 +24,8 @@ class GetOpenApiDocRouteHandlerTest extends MediaWikiIntegrationTestCase {
 	use HandlerTestTrait;
 
 	private const OPENAPI_FILE = __DIR__ . '/../../src/openapi.json';
-	private const EXAMPLE_PATH = '/v0/examples/{example_id}';
-	private const EXAMPLE_PARTS_PATH = '/v0/examples/{example_id}/parts';
+	private const EXAMPLE_PATH = '/example/v0/examples/{example_id}';
+	private const EXAMPLE_PARTS_PATH = '/example/v0/examples/{example_id}/parts';
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -47,7 +47,7 @@ class GetOpenApiDocRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->joinFragment( __DIR__ . '/data/valid-fragment.json' );
 
 		$handler = $this->newHandler( $this->newRouterWithRoutes( [
-			'' => [ '/wikibase' . self::EXAMPLE_PATH, '/wikibase' . self::EXAMPLE_PARTS_PATH ],
+			'' => [ self::EXAMPLE_PATH, self::EXAMPLE_PARTS_PATH ],
 		] ) );
 		$served = json_decode( (string)$handler->execute()->getBody(), true );
 		$baseDoc = json_decode( file_get_contents( self::OPENAPI_FILE ), true );
@@ -70,7 +70,7 @@ class GetOpenApiDocRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->joinFragment( __DIR__ . '/data/valid-fragment.json' );
 
 		$handler = $this->newHandler( $this->newRouterWithRoutes( [
-			'' => [ '/wikibase' . self::EXAMPLE_PATH ],
+			'' => [ self::EXAMPLE_PATH ],
 		] ) );
 		$served = json_decode( (string)$handler->execute()->getBody(), true );
 
@@ -93,7 +93,7 @@ class GetOpenApiDocRouteHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->joinFragment( __DIR__ . '/data/duplicate-path-fragment.json' );
 
 		$this->expectException( RuntimeException::class );
-		$this->expectExceptionMessage( "redefines path '/v1/openapi.json'" );
+		$this->expectExceptionMessage( "redefines path '/wikibase/v1/openapi.json'" );
 
 		$this->newHandler( $this->newRouterWithRoutes( [
 			'wikibase/v1' => [ '/wikibase/v1/openapi.json' ],

@@ -7,14 +7,14 @@ const { assertValidError } = require( '../helpers/responseValidator' );
 
 async function createProperty( property ) {
 	return ( await new RequestBuilder()
-		.withRoute( 'POST', '/v1/entities/properties' )
+		.withRoute( 'POST', '/wikibase/v1/entities/properties' )
 		.withJsonBodyParam( 'property', property )
 		.makeRequest() ).body;
 }
 
 function newSearchRequest( language, searchTerm ) {
 	return new RequestBuilder()
-		.withRoute( 'GET', '/v1/suggest/properties' )
+		.withRoute( 'GET', '/wikibase/v1/suggest/properties' )
 		.withQueryParam( 'language', language )
 		.withQueryParam( 'q', searchTerm );
 }

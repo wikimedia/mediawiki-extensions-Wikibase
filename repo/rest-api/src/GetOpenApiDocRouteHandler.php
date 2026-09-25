@@ -16,9 +16,6 @@ class GetOpenApiDocRouteHandler extends SimpleHandler {
 
 	private const OPENAPI_FILE = __DIR__ . '/openapi.json';
 
-	// the document's paths are relative to the ".../rest.php/wikibase" server
-	private const SERVER_PREFIX = '/wikibase';
-
 	private WikibaseRepoHookRunner $hookRunner;
 
 	public function __construct( WikibaseRepoHookRunner $hookRunner ) {
@@ -50,7 +47,8 @@ class GetOpenApiDocRouteHandler extends SimpleHandler {
 
 	/**
 	 * The paths the wiki's REST router can actually serve, relative to the
-	 * document's server. Restricting the join to these is what lets
+	 * document's ".../rest.php" server, i.e. including their module prefix.
+	 * Restricting the join to these is what lets
 	 * extensions register their fragments unconditionally: the served
 	 * document never describes a route the wiki cannot serve, however the
 	 * extensions' routes are registered.
@@ -68,10 +66,7 @@ class GetOpenApiDocRouteHandler extends SimpleHandler {
 			}
 			$modulePrefix = $moduleId === '' ? '' : '/' . $moduleId;
 			foreach ( $module->getDefinedPaths() as $path => $_methods ) {
-				$fullPath = $modulePrefix . $path;
-				if ( str_starts_with( $fullPath, self::SERVER_PREFIX . '/' ) ) {
-					$paths[] = substr( $fullPath, strlen( self::SERVER_PREFIX ) );
-				}
+				$paths[] = $modulePrefix . $path;
 			}
 		}
 

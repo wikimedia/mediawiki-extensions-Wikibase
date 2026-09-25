@@ -6,14 +6,14 @@ const { expect } = require( '../../../../../rest-api/tests/mocha/helpers/chaiHel
 
 async function createItem( item ) {
 	return ( await new RequestBuilder()
-		.withRoute( 'POST', '/v1/entities/items' )
+		.withRoute( 'POST', '/wikibase/v1/entities/items' )
 		.withJsonBodyParam( 'item', item )
 		.makeRequest() ).body;
 }
 
 function newSearchRequest( language, searchTerm ) {
 	return new RequestBuilder()
-		.withRoute( 'GET', '/v1/suggest/items' )
+		.withRoute( 'GET', '/wikibase/v1/suggest/items' )
 		.withQueryParam( 'language', language )
 		.withQueryParam( 'q', searchTerm );
 }

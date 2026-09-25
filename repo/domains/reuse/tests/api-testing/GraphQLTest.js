@@ -7,14 +7,14 @@ const { RequestBuilder } = require( '../../../../rest-api/tests/mocha/helpers/Re
 
 async function createItem( item ) {
 	return ( await new RequestBuilder()
-		.withRoute( 'POST', '/v1/entities/items' )
+		.withRoute( 'POST', '/wikibase/v1/entities/items' )
 		.withJsonBodyParam( 'item', item )
 		.makeRequest() ).body;
 }
 
 async function createProperty( property ) {
 	return ( await new RequestBuilder()
-		.withRoute( 'POST', '/v1/entities/properties' )
+		.withRoute( 'POST', '/wikibase/v1/entities/properties' )
 		.withJsonBodyParam( 'property', property )
 		.makeRequest() ).body;
 }

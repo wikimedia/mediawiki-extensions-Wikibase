@@ -13,6 +13,8 @@ use Wikibase\Repo\RestApi\OpenApiDocFragmentJoiner;
  * Joining may be unconditional: of each fragment, only the paths the wiki's
  * REST router can actually serve end up in the served document. Each joined
  * fragment must be self-contained: nothing resolves `$ref`s at runtime.
+ * Paths are relative to the document's ".../rest.php" server, so they
+ * include the route's module prefix (e.g. "/wikibase/v1/entities/items").
  *
  * @license GPL-2.0-or-later
  */
