@@ -108,6 +108,15 @@ module.exports = exports = defineComponent( {
 	overflow-x: visible;
 	mask-image: none;
 
+	&.wikibase-wbui2025-snak-value {
+		// Override the behaviour for long snak-values - we want
+		// coordinate values to wrap if the screen is narrow (T431787),
+		// and we do not want the fade out and gutter.
+		overflow-x: inherit;
+		mask-image: none;
+		padding-right: 0;
+	}
+
 	> .snakValue {
 		flex: 1 1 auto;
 		display: block;
