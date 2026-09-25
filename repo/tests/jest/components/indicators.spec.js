@@ -129,7 +129,7 @@ describe( 'wikibase.wbui2025.indicators', () => {
 					expect( popover.exists() ).toBeFalsy();
 
 					expect( wrapper.findAllComponents( indicatorPopoverComponent ) ).toHaveLength( 0 );
-					await indicatorSpan.trigger( 'click' );
+					await indicatorSpan.find( 'button' ).trigger( 'click' );
 
 					popover = wrapper.findComponent( indicatorPopoverComponent );
 					expect( popover.exists() ).toBeTruthy();
@@ -145,7 +145,7 @@ describe( 'wikibase.wbui2025.indicators', () => {
 					await wrapper.setData( { popoverVisible: true } );
 					expect( wrapper.findComponent( indicatorPopoverComponent ).exists() ).toBeTruthy();
 
-					await indicatorSpan.trigger( 'click' );
+					await indicatorSpan.find( 'button' ).trigger( 'click' );
 					expect( wrapper.findComponent( indicatorPopoverComponent ).exists() ).toBeFalsy();
 				} );
 			} );

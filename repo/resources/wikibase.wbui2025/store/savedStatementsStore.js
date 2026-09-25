@@ -222,6 +222,16 @@ const setIndicatorHtmlForReferenceSnak = function ( statementId, referenceHash, 
 	statementsStore.indicatorHtmlForReferenceSnaks.set( `${ statementId }|${ referenceHash }|${ snakHash }`, indicatorHtml );
 };
 
+const getIndicatorKey = function ( statementId, referenceHash, snakHash, isQualifier ) {
+	if ( referenceHash !== null ) {
+		return `reference-indicator-${ statementId }-${ referenceHash }-${ snakHash }`;
+	}
+	if ( isQualifier ) {
+		return `qualifier-indicator-${ statementId }-${ snakHash }`;
+	}
+	return `mainSnak-indicator-${ statementId }`;
+};
+
 function findSnakDatatypeByHash( statement, snakHash ) {
 	if ( !statement ) {
 		return undefined;
@@ -331,6 +341,7 @@ module.exports = {
 	setIndicatorHtmlForQualifier,
 	getIndicatorHtmlForReferenceSnak,
 	setIndicatorHtmlForReferenceSnak,
+	getIndicatorKey,
 	setPopoverContentForMainSnak,
 	getPopoverContentForMainSnak,
 	clearPopoverContentAndIndicatorForMainSnak,
