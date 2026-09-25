@@ -288,6 +288,7 @@ return call_user_func( function() {
 	// The limit to turn the usage into a general one when there is too many modifiers
 	$defaults['entityUsageModifierLimits'] = [
 		EntityUsage::DESCRIPTION_USAGE => 30,
+		EntityUsage::ALIAS_USAGE => 10,
 		EntityUsage::LABEL_USAGE => 30,
 		EntityUsage::STATEMENT_USAGE => 10,
 	];
