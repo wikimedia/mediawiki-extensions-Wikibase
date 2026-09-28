@@ -120,8 +120,8 @@ class ShortDescHandlerTest extends TestCase {
 		$parserOutput->method( 'getPageProperty' )
 			->willReturn( 'bogus' );
 		$parserOutput->method( 'setUnsortedPageProperty' )
-			->willReturnCallback( function ( $name, $value ) use ( &$shortDesc ) {
-				$this->assertSame( 'wikibase-shortdesc', $name );
+			->with( DescriptionLookup::LOCAL_PROPERTY_NAME, $this->isType( 'string' ) )
+			->willReturnCallback( function ( $propName, $value ) use ( &$shortDesc ) {
 				$shortDesc = $value;
 			} );
 
