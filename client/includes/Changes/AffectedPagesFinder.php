@@ -5,14 +5,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Changes;
 
 use ArrayIterator;
-use InvalidArgumentException;
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageRecord;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Traversable;
 use UnexpectedValueException;
 use Wikibase\Client\Usage\EntityUsage;
@@ -31,56 +29,14 @@ use Wikibase\Lib\Changes\ItemChange;
  */
 class AffectedPagesFinder {
 
-	/**
-	 * @var UsageLookup
-	 */
-	private $usageLookup;
-
-	/**
-	 * @var TitleFactory
-	 */
-	private $titleFactory;
-
-	/** @var PageStore */
-	private $pageStore;
-
-	/** @var LinkBatchFactory */
-	private $linkBatchFactory;
-
-	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
-	 * @param UsageLookup $usageLookup
-	 * @param TitleFactory $titleFactory
-	 * @param PageStore $pageStore
-	 * @param LinkBatchFactory $linkBatchFactory
-	 * @param string $siteId
-	 * @param LoggerInterface|null $logger
-	 *
-	 * @throws InvalidArgumentException
-	 */
 	public function __construct(
-		UsageLookup $usageLookup,
-		TitleFactory $titleFactory,
-		PageStore $pageStore,
-		LinkBatchFactory $linkBatchFactory,
-		string $siteId,
-		?LoggerInterface $logger = null
+		private UsageLookup $usageLookup,
+		private TitleFactory $titleFactory,
+		private PageStore $pageStore,
+		private LinkBatchFactory $linkBatchFactory,
+		private string $siteId,
+		private LoggerInterface $logger
 	) {
-		$this->usageLookup = $usageLookup;
-		$this->titleFactory = $titleFactory;
-		$this->pageStore = $pageStore;
-		$this->linkBatchFactory = $linkBatchFactory;
-		$this->siteId = $siteId;
-		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**
