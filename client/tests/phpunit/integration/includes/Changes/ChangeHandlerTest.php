@@ -27,6 +27,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\Changes\ChangeHandler
@@ -89,7 +90,8 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			new WikibaseClientHookRunner( $this->createHookContainer( $hooks ) ),
 			true,
 			'enwiki',
-			$suppressOtherLanguageLinkUpdates
+			$suppressOtherLanguageLinkUpdates,
+			StatsFactory::newNull()
 		);
 
 		return $handler;
@@ -812,7 +814,8 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			new WikibaseClientHookRunner( $this->createHookContainer() ),
 			true,
 			'enwiki',
-			true
+			true,
+			StatsFactory::newNull()
 		);
 
 		$inputRootJobParams = [ 'rootJobTimestamp' => '20171122040506' ];

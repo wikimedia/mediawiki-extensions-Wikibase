@@ -8,12 +8,14 @@ use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\Client\Hooks\WikibaseClientHookRunner;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Interface for change handling. Whenever a change is detected,
@@ -36,7 +38,8 @@ class ChangeHandler {
 		private WikibaseClientHookRunner $hookRunner,
 		private bool $injectRecentChanges,
 		private string $localSiteId,
-		private bool $suppressOtherLanguageLinkUpdates
+		private bool $suppressOtherLanguageLinkUpdates,
+		private StatsFactory $stats
 	) {
 	}
 
@@ -106,6 +109,8 @@ class ChangeHandler {
 		if ( $usagesPerPage === [] ) {
 			return;
 		}
+
+		$this->trackUsageMetrics( $usagesPerPage );
 
 		// Run all updates on all affected pages
 		$titlesToUpdate = $this->getTitlesForUsages( $usagesPerPage );
@@ -266,5 +271,28 @@ class ChangeHandler {
 		// they are "other".
 		$diffOps = $siteLinkDiff->getOperations();
 		return !array_key_exists( $this->localSiteId, $diffOps );
+	}
+
+	private function trackUsageMetrics( array $usages ): void {
+		$countPageByBundledUsage = array_fill_keys( [ 0, 1 ], 0 );
+		foreach ( $usages as $usagesForPage ) {
+			$isAnyUsageBundled = array_any(
+				$usagesForPage->getUsages(),
+				static fn ( EntityUsage $usage ) => $usage->getModifier() === null
+			);
+			$countPageByBundledUsage[(int)$isAnyUsageBundled]++;
+		}
+
+		foreach ( $countPageByBundledUsage as $sense => $count ) {
+			if ( $count > 0 ) {
+				$this->stats
+					->getCounter( 'WikibaseClient_ChangeHandler_page_bundled_usage_total' )
+					->setLabels( [
+						'wiki' => $this->localSiteId,
+						'has_bundled_usage' => $sense ? 'true' : 'false',
+					] )
+					->incrementBy( (float)$count );
+			}
+		}
 	}
 }
