@@ -16,7 +16,7 @@
 			</div>
 		</cdx-accordion>
 		<p v-else>
-			<span>{{ referencesMessage }}</span>
+			<span class="wikibase-wbui2025-no-references">{{ referencesMessage }}</span>
 		</p>
 	</div>
 </template>
