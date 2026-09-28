@@ -344,7 +344,7 @@ return [
 			$entityTitleLookup,
 			WikibaseClient::getKartographerEmbeddingHandler( $services ),
 			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
-			$services->getMainConfig()->get( 'ThumbLimits' )
+			$services->getMainConfig()->get( MainConfigNames::ThumbLimits )
 		);
 	},
 
@@ -1014,7 +1014,7 @@ return [
 			$settings->getSetting( 'sharedCacheType' ),
 			WikibaseClient::getLogger( $services ),
 			$services->getStatsFactory()->withComponent( 'WikibaseClient' ),
-			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
+			hash( 'sha256', $services->getMainConfig()->get( MainConfigNames::SecretKey ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' ),
 			$services->getObjectCacheFactory()

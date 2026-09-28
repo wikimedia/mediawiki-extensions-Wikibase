@@ -6,6 +6,7 @@ namespace Wikibase\Repo;
 
 use MediaWiki\Cache\HTMLCacheUpdater;
 use MediaWiki\JobQueue\Job;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\Utils\BatchRowIterator;
@@ -58,7 +59,7 @@ class PurgeEntityDataJob extends Job {
 			WikibaseRepo::getEntityDataUriManager( $services ),
 			WikibaseRepo::getRepoDomainDbFactory( $services )->newRepoDb(),
 			$services->getHTMLCacheUpdater(),
-			$services->getMainConfig()->get( 'UpdateRowsPerQuery' ),
+			$services->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery ),
 			$params
 		);
 	}

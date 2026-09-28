@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\ChangeModification;
 
 use MediaWiki\JobQueue\JobSpecification;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\Utils\BatchRowIterator;
@@ -50,7 +51,7 @@ class DispatchChangeDeletionNotificationJob extends DispatchChangeModificationNo
 	protected function initFromGlobalState( MediaWikiServices $mwServices ): void {
 		parent::initFromGlobalState( $mwServices );
 
-		$this->batchSize = $mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' );
+		$this->batchSize = $mwServices->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery );
 		$this->db = WikibaseRepo::getRepoDomainDbFactory( $mwServices )->newRepoDb();
 	}
 

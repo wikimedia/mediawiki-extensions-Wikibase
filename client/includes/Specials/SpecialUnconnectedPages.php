@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Specials;
 
 use MediaWiki\Html\Html;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\QueryPage;
 use MediaWiki\Title\NamespaceInfo;
@@ -178,7 +179,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );
 
 		$titleInputHtml = '';
-		$articlePath = $this->getConfig()->get( 'ArticlePath' );
+		$articlePath = $this->getConfig()->get( MainConfigNames::ArticlePath );
 		if ( str_contains( $articlePath, '?' ) ) {
 			// Adopted from HTMLForm::getHiddenFields
 			$titleInputHtml = Html::hidden( 'title', $this->getFullTitle()->getPrefixedText() ) . "\n";

@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
@@ -108,7 +109,7 @@ return call_user_func( function() {
 			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
 			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' )
 				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
-				: $mainConfig->get( 'UpdateRowsPerJob' );
+				: $mainConfig->get( MainConfigNames::UpdateRowsPerJob );
 		},
 
 		// Batch size for InjectRCRecordsJob
@@ -116,7 +117,7 @@ return call_user_func( function() {
 			$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
 			return $settings->hasSetting( 'wikiPageUpdaterDbBatchSize' )
 				? $settings->getSetting( 'wikiPageUpdaterDbBatchSize' )
-				: $mainConfig->get( 'UpdateRowsPerJob' );
+				: $mainConfig->get( MainConfigNames::UpdateRowsPerJob );
 		},
 
 		'useKartographerGlobeCoordinateFormatter' => false,

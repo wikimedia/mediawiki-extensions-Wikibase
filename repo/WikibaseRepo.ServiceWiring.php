@@ -600,7 +600,7 @@ return [
 			WikibaseRepo::getEntityTitleLookup( $services ),
 			WikibaseRepo::getKartographerEmbeddingHandler( $services ),
 			$settings->getSetting( 'useKartographerMaplinkInWikitext' ),
-			$services->getMainConfig()->get( 'ThumbLimits' )
+			$services->getMainConfig()->get( MainConfigNames::ThumbLimits )
 		);
 	},
 
@@ -967,7 +967,7 @@ return [
 			WikibaseRepo::getEntityNamespaceLookup( $services ),
 			WikibaseRepo::getEntityTitleLookup( $services ),
 			$services->getPermissionManager(),
-			$services->getMainConfig()->get( 'AvailableRights' )
+			$services->getMainConfig()->get( MainConfigNames::AvailableRights )
 		);
 	},
 
@@ -1196,7 +1196,7 @@ return [
 			$entitySourceDefinition,
 			WikibaseRepo::getLogger( $services ),
 			$settings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-			$services->getMainConfig()->get( 'ServerName' )
+			$services->getMainConfig()->get( MainConfigNames::ServerName )
 		);
 	},
 
@@ -1722,7 +1722,7 @@ return [
 	'WikibaseRepo.RdfVocabulary' => function ( MediaWikiServices $services ): RdfVocabulary {
 		$repoSettings = WikibaseRepo::getSettings( $services );
 		$languageCodes = array_merge(
-			$services->getMainConfig()->get( 'DummyLanguageCodes' ),
+			$services->getMainConfig()->get( MainConfigNames::DummyLanguageCodes ),
 			$repoSettings->getSetting( 'canonicalLanguageCodes' )
 		);
 
@@ -1798,7 +1798,7 @@ return [
 	'WikibaseRepo.SiteLinkGlobalIdentifiersProvider' => function (
 		MediaWikiServices $services
 	): SiteLinkGlobalIdentifiersProvider {
-		$cacheSecret = hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) );
+		$cacheSecret = hash( 'sha256', $services->getMainConfig()->get( MainConfigNames::SecretKey ) );
 		return new SiteLinkGlobalIdentifiersProvider(
 			WikibaseRepo::getSiteLinkTargetProvider( $services ),
 			new SimpleCacheWithBagOStuff(
@@ -2019,7 +2019,7 @@ return [
 			$settings->getSetting( 'sharedCacheType' ),
 			WikibaseRepo::getLogger( $services ),
 			$services->getStatsFactory()->withComponent( 'WikibaseRepo' ),
-			hash( 'sha256', $services->getMainConfig()->get( 'SecretKey' ) ),
+			hash( 'sha256', $services->getMainConfig()->get( MainConfigNames::SecretKey ) ),
 			new TermFallbackCacheServiceFactory(),
 			$settings->getSetting( 'termFallbackCacheVersion' ),
 			$services->getObjectCacheFactory()

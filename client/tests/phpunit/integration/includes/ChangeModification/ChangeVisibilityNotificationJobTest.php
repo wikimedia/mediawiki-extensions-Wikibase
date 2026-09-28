@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 namespace Wikibase\Client\Tests\Integration\ChangeModification;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\Title\Title;
 use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -38,7 +39,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 
 		$job = new ChangeVisibilityNotificationJob(
 			$this->getClientDomainDb(),
-			$this->getServiceContainer()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
+			$this->getServiceContainer()->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers ),
 				'visibilityBitFlag' => $visibilityBitFlag,
@@ -83,7 +84,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 
 		$job = new ChangeVisibilityNotificationJob(
 			$this->getClientDomainDb(),
-			$this->getServiceContainer()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
+			$this->getServiceContainer()->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'P42', '20161111111111', 342, 343 ),
@@ -138,7 +139,7 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 	public function testToString() {
 		$job = new ChangeVisibilityNotificationJob(
 			$this->getClientDomainDb(),
-			$this->getServiceContainer()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
+			$this->getServiceContainer()->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'Q1', '1', 1, 1 ),

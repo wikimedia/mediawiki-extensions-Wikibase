@@ -7,6 +7,7 @@ use GraphQL\Error\Error;
 use GraphQL\Executor\ExecutionResult;
 use GraphQL\GraphQL;
 use MediaWiki\Config\Config;
+use MediaWiki\MainConfigNames;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Errors\GraphQLError;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Schema\Schema;
 use Wikibase\Repo\Domains\Reuse\Infrastructure\GraphQL\Validation\ValidResult;
@@ -72,7 +73,7 @@ class GraphQLService {
 
 		$includeDebugInfo = DebugFlag::INCLUDE_TRACE | DebugFlag::INCLUDE_DEBUG_MESSAGE;
 		return $result->toArray(
-			$this->config->get( 'ShowExceptionDetails' ) ? $includeDebugInfo : DebugFlag::NONE
+			$this->config->get( MainConfigNames::ShowExceptionDetails ) ? $includeDebugInfo : DebugFlag::NONE
 		);
 	}
 

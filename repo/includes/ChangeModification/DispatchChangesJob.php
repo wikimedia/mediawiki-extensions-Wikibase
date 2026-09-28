@@ -289,7 +289,7 @@ class DispatchChangesJob extends Job {
 		if ( WikibaseSettings::isClientEnabled() ) {
 			$clientSettings = WikibaseClient::getSettings();
 			$repoName = $clientSettings->getSetting( 'repoSiteId' );
-			$repoDb = MediaWikiServices::getInstance()->getMainConfig()->get( 'DBname' );
+			$repoDb = MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::DBname );
 
 			if ( !isset( $clientWikis[$repoName] ) ) {
 				$clientWikis[$repoName] = $repoDb;

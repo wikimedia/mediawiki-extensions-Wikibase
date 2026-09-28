@@ -17,6 +17,7 @@ declare( strict_types=1 );
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -41,7 +42,7 @@ return [
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function ( DatabaseEntitySource $entitySource ) {
 			$mwServices = MediaWikiServices::getInstance();
 
-			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( 'SecretKey' ) );
+			$cacheSecret = hash( 'sha256', $mwServices->getMainConfig()->get( MainConfigNames::SecretKey ) );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 			$termIdsResolver = WikibaseClient::getTermInLangIdsResolverFactory()
 				->getResolverForEntitySource( $entitySource );
