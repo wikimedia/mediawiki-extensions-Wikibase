@@ -167,7 +167,7 @@ final class RepoHooks implements
 		}
 
 		if ( $isEntityTitle && WikibaseRepo::getMobileSite() ) {
-			$out->addModules( 'wikibase.mobile' );
+			$out->addModuleStyles( 'wikibase.mobile' );
 
 			$useNewTermbox = $settings->getSetting( 'termboxEnabled' );
 			$entityType = $entityNamespaceLookup->getEntityType( $namespace );
