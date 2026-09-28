@@ -118,8 +118,7 @@ class LabelDescriptionPrefetchHookHandler implements ChangesListInitRowsHook {
 		}
 
 		if ( $revisionRow instanceof RevisionRecord ) {
-			$comment = $revisionRow->getComment();
-			return $comment === null ? null : $comment->text;
+			return $revisionRow->getComment()?->text;
 		}
 
 		if ( property_exists( $revisionRow, 'rc_comment_text' ) ) {

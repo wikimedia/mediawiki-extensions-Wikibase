@@ -144,8 +144,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		);
 
 		foreach ( $usageAspectsByEntity as $entityId => $aspects ) {
-			$label = $labelLookup->getLabel( $entityIds[$entityId] );
-			$text = $label === null ? $entityId : $label->getText();
+			$text = $labelLookup->getLabel( $entityIds[$entityId] )?->getText() ?? $entityId;
 
 			$aspectContent = $this->formatAspects( $aspects, $context );
 			$colon = $context->msg( 'colon-separator' )->escaped();

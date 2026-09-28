@@ -40,7 +40,7 @@ class Wbui2025FeatureFlag {
 
 	public static function wbui2025EnabledForParserOutput( ParserOutput $parserOutput ): bool {
 		$wbuiFlag = $parserOutput->getExtensionData( self::EXTENSION_DATA_KEY );
-		return self::wbui2025EnabledForWbMobileValue( $wbuiFlag === null ? false : $wbuiFlag );
+		return self::wbui2025EnabledForWbMobileValue( $wbuiFlag ?? false );
 	}
 
 	public static function wbui2025EnabledForViewOptions( array $viewOptions ): bool {

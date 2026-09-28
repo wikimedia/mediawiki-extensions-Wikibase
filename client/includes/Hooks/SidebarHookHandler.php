@@ -122,8 +122,7 @@ class SidebarHookHandler implements
 	 */
 	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
 		// Add the 'In other projects' section
-		$otherProjectsSidebar = $this->buildOtherProjectsSidebar( $skin );
-		$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar === null ? [] : $otherProjectsSidebar;
+		$sidebar['wikibase-otherprojects'] = $this->buildOtherProjectsSidebar( $skin ) ?? [];
 
 		// Add 'Wikidata item' to the toolbox
 		$wikidataItemLink = $this->buildWikidataItemLink( $skin );

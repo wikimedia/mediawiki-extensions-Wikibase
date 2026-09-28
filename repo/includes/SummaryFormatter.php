@@ -265,7 +265,7 @@ class SummaryFormatter {
 		return $this->assembleSummaryString(
 			$this->formatAutoComment( $summary ),
 			$this->formatAutoSummary( $summary ),
-			$userSummary === null ? '' : $userSummary
+			$userSummary ?? ''
 		);
 	}
 

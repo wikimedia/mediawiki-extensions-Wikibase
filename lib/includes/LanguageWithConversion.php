@@ -104,7 +104,7 @@ class LanguageWithConversion {
 			$sourceLanguageCode = $sourceLanguage->getCode();
 		}
 
-		$sourceLanguageKey = $sourceLanguageCode === null ? '' : $sourceLanguageCode;
+		$sourceLanguageKey = $sourceLanguageCode ?? '';
 		if ( isset( self::$objectCache[$languageCode][$sourceLanguageKey] ) ) {
 			return self::$objectCache[$languageCode][$sourceLanguageKey];
 		}

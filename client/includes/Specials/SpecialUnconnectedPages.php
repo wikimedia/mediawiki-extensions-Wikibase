@@ -194,7 +194,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		$titleInputHtml .
 		( $limit === null ? '' : Html::hidden( 'limit', $limit ) ) .
 		Html::namespaceSelector( [
-			'selected' => $ns === null ? '' : $ns,
+			'selected' => $ns ?? '',
 			'all' => '',
 			'exclude' => $excludeNamespaces,
 			'label' => $this->msg( 'namespace' )->text(),

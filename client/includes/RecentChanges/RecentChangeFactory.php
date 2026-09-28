@@ -355,7 +355,7 @@ class RecentChangeFactory {
 		if ( $siteLinkDiff !== null && !$siteLinkDiff->isEmpty() ) {
 			$action = $change->getAction();
 			$siteLinkComment = $this->siteLinkCommentCreator->getEditComment( $siteLinkDiff, $action, $target );
-			$editComment = $siteLinkComment === null ? '' : $siteLinkComment;
+			$editComment = $siteLinkComment ?? '';
 		}
 
 		if ( $editComment === '' ) {

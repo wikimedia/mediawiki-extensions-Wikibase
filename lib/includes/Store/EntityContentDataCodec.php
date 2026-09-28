@@ -100,7 +100,7 @@ class EntityContentDataCodec {
 	 * @return string The format to actually use.
 	 */
 	private function sanitizeFormat( $format ) {
-		return $format === null ? $this->getDefaultFormat() : $format;
+		return $format ?? $this->getDefaultFormat();
 	}
 
 	/**
