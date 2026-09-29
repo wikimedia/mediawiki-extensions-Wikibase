@@ -23,51 +23,6 @@ use Wikibase\View\Template\TemplateFactory;
 class SiteLinksView {
 
 	/**
-	 * @var EntityIdFormatter
-	 */
-	private $entityIdFormatter;
-
-	/**
-	 * @var TemplateFactory
-	 */
-	private $templateFactory;
-
-	/**
-	 * @var SiteList
-	 */
-	private $sites;
-
-	/**
-	 * @var EditSectionGenerator
-	 */
-	private $sectionEditLinkGenerator;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
-	 * @var NumberLocalizer
-	 */
-	private $numberLocalizer;
-
-	/**
-	 * @var string[]
-	 */
-	private $badgeItems;
-
-	/**
-	 * @var string[]
-	 */
-	private $specialSiteLinkGroups;
-
-	/**
-	 * @var LocalizedTextProvider
-	 */
-	private $textProvider;
-
-	/**
 	 * @param TemplateFactory $templateFactory
 	 * @param SiteList $sites
 	 * @param EditSectionGenerator $sectionEditLinkGenerator
@@ -79,25 +34,16 @@ class SiteLinksView {
 	 * @param LocalizedTextProvider $textProvider
 	 */
 	public function __construct(
-		TemplateFactory $templateFactory,
-		SiteList $sites,
-		EditSectionGenerator $sectionEditLinkGenerator,
-		EntityIdFormatter $entityIdFormatter,
-		LanguageNameLookup $languageNameLookup,
-		NumberLocalizer $numberLocalizer,
-		array $badgeItems,
-		array $specialSiteLinkGroups,
-		LocalizedTextProvider $textProvider
+		private readonly TemplateFactory $templateFactory,
+		private readonly SiteList $sites,
+		private readonly EditSectionGenerator $sectionEditLinkGenerator,
+		private readonly EntityIdFormatter $entityIdFormatter,
+		private readonly LanguageNameLookup $languageNameLookup,
+		private readonly NumberLocalizer $numberLocalizer,
+		private readonly array $badgeItems,
+		private readonly array $specialSiteLinkGroups,
+		private readonly LocalizedTextProvider $textProvider,
 	) {
-		$this->templateFactory = $templateFactory;
-		$this->sites = $sites;
-		$this->sectionEditLinkGenerator = $sectionEditLinkGenerator;
-		$this->entityIdFormatter = $entityIdFormatter;
-		$this->languageNameLookup = $languageNameLookup;
-		$this->numberLocalizer = $numberLocalizer;
-		$this->badgeItems = $badgeItems;
-		$this->specialSiteLinkGroups = $specialSiteLinkGroups;
-		$this->textProvider = $textProvider;
 	}
 
 	/**
@@ -109,7 +55,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	public function getHtml( array $siteLinks, ?ItemId $itemId, array $groups ) {
+	public function getHtml( array $siteLinks, ?ItemId $itemId, array $groups ): string {
 		$html = '';
 
 		if ( !$groups ) {
@@ -120,31 +66,14 @@ class SiteLinksView {
 			$html .= $this->getHtmlForSiteLinkGroup( $siteLinks, $itemId, $group );
 		}
 
-		$html = $this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
-			$this->templateFactory->render( 'wikibase-listview', $html )
-		);
-
-		$sectionHeading = $this->getHtmlForSectionHeading( 'wikibase-sitelinks' );
-
-		return $sectionHeading . $html;
-	}
-
-	/**
-	 * Returns the HTML for the heading of the sitelinks section
-	 *
-	 * @param string $heading message key of the heading; also used as css class
-	 *
-	 * @return string HTML
-	 */
-	private function getHtmlForSectionHeading( $heading ) {
-		$html = $this->templateFactory->render(
-			'wb-section-heading',
-			$this->textProvider->getEscaped( $heading ),
-			'sitelinks', // ID - TODO: should not be added if output page is not the entity's page
-			$heading
-		);
-
-		return $html;
+		return $this->templateFactory->render( 'wb-section-heading',
+				$this->textProvider->getEscaped( 'wikibase-sitelinks' ),
+				'sitelinks', // ID - TODO: should not be added if output page is not the entity's page
+				'wikibase-sitelinks'
+			) .
+			$this->templateFactory->render( 'wikibase-sitelinkgrouplistview',
+				$this->templateFactory->render( 'wikibase-listview', $html )
+			);
 	}
 
 	/**
@@ -156,7 +85,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForSiteLinkGroup( array $siteLinks, ?ItemId $itemId, $group ) {
+	private function getHtmlForSiteLinkGroup( array $siteLinks, ?ItemId $itemId, $group ): string {
 		$siteLinksForTable = $this->getSiteLinksForTable(
 			$this->getSitesForGroup( $group ),
 			$siteLinks
@@ -190,12 +119,8 @@ class SiteLinksView {
 	/**
 	 * Get all sites for a given site group, with special handling for the
 	 * "special" site group.
-	 *
-	 * @param string $group
-	 *
-	 * @return SiteList
 	 */
-	private function getSitesForGroup( $group ) {
+	private function getSitesForGroup( string $group ): SiteList {
 		$siteList = new SiteList();
 
 		if ( $group === 'special' ) {
@@ -218,9 +143,10 @@ class SiteLinksView {
 	 * @param SiteList $sites
 	 * @param SiteLink[] $itemSiteLinks
 	 *
-	 * @return array[]
+	 * @return array<array{siteLink: SiteLink, site: Site}>
 	 */
-	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ) {
+	private function getSiteLinksForTable( SiteList $sites, array $itemSiteLinks ): array {
+		/** @var array<array{siteLink: SiteLink, site: Site}> $siteLinksForTable */
 		$siteLinksForTable = []; // site links of the currently handled site group
 
 		foreach ( $itemSiteLinks as $siteLink ) {
@@ -251,12 +177,12 @@ class SiteLinksView {
 	}
 
 	/**
-	 * @param array[] $siteLinksForTable
+	 * @param array<array{siteLink: SiteLink, site: Site}> $siteLinksForTable
 	 * @param bool $isSpecialGroup
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForSiteLinks( array $siteLinksForTable, $isSpecialGroup ) {
+	private function getHtmlForSiteLinks( array $siteLinksForTable, bool $isSpecialGroup ): string {
 		$html = '';
 
 		foreach ( $siteLinksForTable as $siteLinkForTable ) {
@@ -267,17 +193,13 @@ class SiteLinksView {
 	}
 
 	/**
-	 * @param array $siteLinkForTable
+	 * @param array{siteLink: SiteLink, site: Site} $siteLinkForTable
 	 * @param bool $isSpecialGroup
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForSiteLink( array $siteLinkForTable, $isSpecialGroup ) {
-		/** @var Site $site */
-		$site = $siteLinkForTable['site'];
-
-		/** @var SiteLink $siteLink */
-		$siteLink = $siteLinkForTable['siteLink'];
+	private function getHtmlForSiteLink( array $siteLinkForTable, bool $isSpecialGroup ): string {
+		[ 'siteLink' => $siteLink, 'site' => $site ] = $siteLinkForTable;
 
 		if ( $site->getDomain() === '' ) {
 			return $this->getHtmlForUnknownSiteLink( $siteLink );
@@ -310,7 +232,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForPage( SiteLink $siteLink, Site $site ) {
+	private function getHtmlForPage( SiteLink $siteLink, Site $site ): string {
 		$pageName = $siteLink->getPageName();
 
 		return $this->templateFactory->render( 'wikibase-sitelinkview-pagename',
@@ -327,7 +249,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForUnknownSiteLink( SiteLink $siteLink ) {
+	private function getHtmlForUnknownSiteLink( SiteLink $siteLink ): string {
 		// FIXME: No need for separate template; Use 'wikibase-sitelinkview' template.
 		return $this->templateFactory->render( 'wikibase-sitelinkview-unknown',
 			htmlspecialchars( $siteLink->getSiteId() ),
@@ -340,7 +262,7 @@ class SiteLinksView {
 	 *
 	 * @return string HTML
 	 */
-	private function getHtmlForBadges( array $badges ) {
+	private function getHtmlForBadges( array $badges ): string {
 		$html = '';
 
 		foreach ( $badges as $badge ) {
