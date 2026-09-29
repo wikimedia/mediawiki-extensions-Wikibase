@@ -15,6 +15,7 @@ use MediaWiki\Page\PageStoreRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use MediaWikiIntegrationTestCase;
+use Psr\Log\NullLogger;
 use Traversable;
 use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Usage\EntityUsage;
@@ -134,7 +135,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			null
+			new NullLogger()
 		);
 
 		return $affectedPagesFinder;
@@ -597,7 +598,7 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			null
+			new NullLogger()
 		);
 
 		$itemId = new ItemId( 'Q1' );
