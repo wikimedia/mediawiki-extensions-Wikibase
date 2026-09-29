@@ -256,7 +256,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		?string &$html = null
 	): bool {
 		$foreignEntityId = $this->parseForeignEntityId( $target );
-		$isLocalEntityNamespace = $target->getInterwiki() === ''
+		$isLocalEntityNamespace = !$target->isExternal()
 			&& $this->localEntityNamespaceLookup->isEntityNamespace( $target->getNamespace() );
 		if ( !$foreignEntityId && !$isLocalEntityNamespace ) {
 			return true;
