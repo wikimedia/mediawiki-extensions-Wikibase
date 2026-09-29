@@ -10,7 +10,7 @@
 				<div class="wikibase-wbui2025-add-qualifier-form-property">
 					<div class="wikibase-wbui2025-add-qualifier-button">
 						<cdx-button
-							action="default"
+							action="progressive"
 							:disabled="addButtonDisabled"
 							@click="submitSnakData"
 						>

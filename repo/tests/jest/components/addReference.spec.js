@@ -70,7 +70,7 @@ describe( 'wikibase.wbui2025.addReference', () => {
 
 			expect( closeButton.props( 'action' ) ).toBe( 'default' );
 			expect( closeButton.props( 'weight' ) ).toBe( 'quiet' );
-			expect( addButton.props( 'action' ) ).toBe( 'default' );
+			expect( addButton.props( 'action' ) ).toBe( 'progressive' );
 			expect( addButton.props( 'weight' ) ).toBe( 'normal' );
 			expect( addButton.isDisabled() ).toBe( true );
 
