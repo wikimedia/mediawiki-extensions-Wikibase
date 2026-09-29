@@ -14,6 +14,7 @@
 			"Rsocol",
 			"Stelistcristi",
 			"Strainu",
+			"Vellion Eagle",
 			"Wintereu",
 			"XXN"
 		]
@@ -32,6 +33,7 @@
 	"wikibase-addreference": "adaugă referință",
 	"wikibase-save-inprogress": "Se salvează...",
 	"wikibase-publish-inprogress": "Se publică...",
+	"wikibase-publishing-succeeded": "Modificările dvs. au fost publicate!",
 	"wikibase-remove-inprogress": "Se elimină...",
 	"wikibase-statementlistview-add": "adăugați o valoare",
 	"wikibase-statementlistview-add-tooltip": "Adăugați o valoare nouă",
