@@ -21,6 +21,7 @@ use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\Hooks\SidebarHookHandler
@@ -247,13 +248,9 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$context->setOutput( $output );
 		$skin = $this->newSkin( $context );
 
-		$sidebar = [];
-
-		$handler = $this->newSidebarHookHandler();
-
-		$sidebar = $handler->buildOtherProjectsSidebar( $skin );
-
-		return $sidebar;
+		/** @var SidebarHookHandler $handler */
+		$handler = TestingAccessWrapper::newFromObject( $this->newSidebarHookHandler() );
+		return $handler->buildOtherProjectsSidebar( $skin );
 	}
 
 	public function testBuildOtherProjectsSidebar() {

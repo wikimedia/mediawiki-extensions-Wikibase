@@ -149,7 +149,7 @@ class SidebarHookHandler implements
 	 *
 	 * @return null|array[] Array of 'In other projects' contents or null if there are none
 	 */
-	public function buildOtherProjectsSidebar( Skin $skin ): ?array {
+	private function buildOtherProjectsSidebar( Skin $skin ): ?array {
 		$outputPage = $skin->getContext()->getOutput();
 
 		$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
