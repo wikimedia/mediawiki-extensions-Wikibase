@@ -12,7 +12,7 @@
 			autosize
 			rows="1"
 			:disabled="disabled"
-			:class="className"
+			:class="inputClasses"
 			:status="status"
 			@blur="onBlur"
 			@focus="resizeTextarea"
@@ -71,7 +71,8 @@ module.exports = exports = defineComponent( {
 			'textvalue'
 		] );
 		const computedEditSnakStoreGetters = mapState( editSnakStoreGetter, [
-			'isIncomplete'
+			'isIncomplete',
+			'valueStrategy'
 		] );
 		const valueStrategy = editSnakStoreGetter().valueStrategy;
 		const inputHadFocus = ref( false );
@@ -79,12 +80,20 @@ module.exports = exports = defineComponent( {
 			textvalue: computed( computedProperties.textvalue ),
 			debouncedTriggerParse: mw.util.debounce( valueStrategy.triggerParse.bind( valueStrategy ), 300 ),
 			isIncomplete: computed( computedEditSnakStoreGetters.isIncomplete ),
+			valueStrategy: computed( computedEditSnakStoreGetters.valueStrategy ),
 			inputHadFocus
 		};
 	},
 	computed: {
 		status() {
 			return this.inputHadFocus && this.isIncomplete ? 'error' : 'default';
+		},
+		inputClasses() {
+			const inputClasses = [ this.className ];
+			if ( this.valueStrategy.isInputAlwaysLtr() ) {
+				inputClasses.push( 'wikibase-wbui2025-editable-snak-value-input-ltr' );
+			}
+			return inputClasses;
 		}
 	},
 	methods: {
@@ -122,3 +131,14 @@ module.exports = exports = defineComponent( {
 	}
 } );
 </script>
+
+<style lang="less">
+@import 'mediawiki.skin.variables.less';
+
+div.wikibase-wbui2025-editable-snak-value-input-ltr {
+	textarea {
+		/* @noflip */
+		direction: ltr;
+	}
+}
+</style>
