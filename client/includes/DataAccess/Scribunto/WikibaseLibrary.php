@@ -361,7 +361,6 @@ class WikibaseLibrary extends LibraryBase implements ParserOutputProvider {
 			'formatValues' => [ $this, 'formatValues' ],
 			'getEntityId' => [ $this, 'getEntityId' ],
 			'getReferencedEntityId' => [ $this, 'getReferencedEntityId' ],
-			'getUserLang' => [ $this, 'getUserLang' ],
 			'getDescription' => [ $this, 'getDescription' ],
 			'resolvePropertyId' => [ $this, 'resolvePropertyId' ],
 			'getSiteLinkPageName' => [ $this, 'getSiteLinkPageName' ],
