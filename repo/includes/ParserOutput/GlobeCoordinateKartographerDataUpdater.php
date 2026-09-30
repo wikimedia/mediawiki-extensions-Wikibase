@@ -67,10 +67,15 @@ class GlobeCoordinateKartographerDataUpdater implements StatementDataUpdater {
 			$language = MediaWikiServices::getInstance()->getContentLanguage();
 		}
 
+		$wbui2025Enabled = Wbui2025FeatureFlag::wbui2025EnabledForParserOutput( $parserOutput );
+		if ( $wbui2025Enabled ) {
+			$parserOutput->setJsConfigVar( 'wgKartographerSkipContentHook', true );
+		}
+
 		$kartographerParserOutput = $this->kartographerHandler->getParserOutput(
 			$this->globeCoordinateValues,
 			$language,
-			Wbui2025FeatureFlag::wbui2025EnabledForParserOutput( $parserOutput ),
+			$wbui2025Enabled,
 		);
 		// Transfer kartographer-related metadata (jsconfigvars, modules,
 		// modulestyles, extensiondata, page properties) to our own
