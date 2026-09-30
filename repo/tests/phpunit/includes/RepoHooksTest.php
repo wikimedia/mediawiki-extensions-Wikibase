@@ -72,8 +72,8 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public static function onBeforePageDisplayProvider(): iterable {
-		$wikibaseMobileNewTermbox = [ 'wikibase.mobile', 'wikibase.termbox' ];
-		$wikibaseMobileNewTermboxStyles = [ 'wikibase.termbox.styles' ];
+		$wikibaseMobileNewTermbox = [ 'wikibase.termbox' ];
+		$wikibaseMobileNewTermboxStyles = [ 'wikibase.mobile', 'wikibase.termbox.styles' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];
 
 		$entityNamespaces = WikibaseRepo::getEntityNamespaceLookup()
@@ -81,8 +81,8 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$itemNamespace = $entityNamespaces['item'];
 
 		yield 'mobile entity page' => [
-			'expectedModules' => $wikibaseMobile,
-			'expectedModuleStyles' => [],
+			'expectedModules' => [],
+			'expectedModuleStyles' => $wikibaseMobile,
 			'namespace' => $itemNamespace,
 			'useNewTermbox' => false,
 		];
@@ -115,8 +115,8 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			'useNewTermbox' => true,
 		];
 		yield 'non-termbox entity page' => [
-			'expectedModules' => $wikibaseMobile,
-			'expectedModuleStyles' => [],
+			'expectedModules' => [],
+			'expectedModuleStyles' => $wikibaseMobile,
 			'namespace' => self::FAKE_NS_ID,
 			'useNewTermbox' => true,
 		];
