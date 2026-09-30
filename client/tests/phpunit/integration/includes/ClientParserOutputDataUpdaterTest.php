@@ -30,6 +30,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater
@@ -101,7 +102,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}
