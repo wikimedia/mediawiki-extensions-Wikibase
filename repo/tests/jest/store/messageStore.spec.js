@@ -11,6 +11,8 @@ describe( 'Message Store', () => {
 		expect( messageStore.messages.size ).toBe( 0 );
 	} );
 
+	// We expect there only ever to be one message in the store (T429153). When we
+	// implement that change fully (T439118), this test should also be updated.
 	it( 'adds messages to the store', () => {
 		const messageStore = useMessageStore();
 		let messageId = messageStore.addStatusMessage( { text: 'something' } );
@@ -18,7 +20,7 @@ describe( 'Message Store', () => {
 		expect( messageStore.messages.size ).toBe( 1 );
 		messageId = messageStore.addStatusMessage( { text: 'something else' } );
 		expect( messageId ).toBe( 2 );
-		expect( messageStore.messages.size ).toBe( 2 );
+		expect( messageStore.messages.size ).toBe( 1 );
 	} );
 
 	it( 'can remove a message from the store', () => {

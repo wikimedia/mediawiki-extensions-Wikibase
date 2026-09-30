@@ -6,6 +6,8 @@
 				class="wikibase-wbui2025-status-message-container"
 				:style="{ bottom: bottom + 'px' }"
 			>
+				<!-- Since T429153, messageList will either contain 0 or 1 messages.
+						In T439118 we will remove support for multiple messages. -->
 				<template
 					v-for="[ messageId, message ] in messageList"
 					:key="messageId"
@@ -13,8 +15,7 @@
 					<cdx-message
 						:type="message.type || 'success'"
 						allow-user-dismiss
-						:auto-dismiss="message.type !== 'error'"
-						:display-time="4000"
+						:auto-dismiss="message.type === 'error' ? false : 3000"
 						@user-dismissed="deleteMessage( messageId )"
 						@auto-dismissed="deleteMessage( messageId )"
 					>
@@ -64,6 +65,7 @@ module.exports = exports = defineComponent( {
 	},
 	watch: {
 		messageList: {
+			// After T439118, this should no longer be a list.
 			handler( messages ) {
 				for ( const message of messages.values() ) {
 					if ( message.attachTo ) {
