@@ -105,6 +105,20 @@ module.exports = exports = defineComponent( {
 			color: @color-progressive;
 		}
 
+		summary {
+			&:active {
+				background: inherit;
+			}
+
+			&:hover {
+				background: inherit;
+			}
+
+			&:focus {
+				background: inherit;
+			}
+		}
+
 		.cdx-accordion__content {
 			padding: 0;
 		}
