@@ -40,6 +40,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory
@@ -251,7 +252,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 	private function newUsageAccumulatorFactory(): UsageAccumulatorFactory {
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 	}

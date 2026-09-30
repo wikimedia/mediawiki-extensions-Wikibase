@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Simple integration test for the {{#property:…}} parser function.
@@ -79,7 +80,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 		$this->parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 		return $factory->newFromParserOutputProvider( $this->parserOutputProvider );

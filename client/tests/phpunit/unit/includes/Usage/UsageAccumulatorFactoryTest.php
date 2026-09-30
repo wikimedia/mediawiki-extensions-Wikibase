@@ -14,6 +14,7 @@ use Wikibase\Client\Usage\UsageAccumulatorFactory;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,7 +28,7 @@ class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetParserOutputUsageAccumulator(): void {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 
@@ -43,7 +44,7 @@ class UsageAccumulatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetParserOutputUsageAccumulatorForParser(): void {
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 

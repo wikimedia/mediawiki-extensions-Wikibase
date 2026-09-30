@@ -3,7 +3,9 @@
 namespace Wikibase\Client\Usage;
 
 use Psr\Log\LoggerInterface;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikimedia\Assert\Assert;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * This class de-duplicates entity usages for performance and storage reasons
@@ -12,26 +14,19 @@ use Wikimedia\Assert\Assert;
  * @author Amir Sarabadani
  */
 class UsageDeduplicator {
+	private const array HISTOGRAM_BUCKETS = [ 1, 10, 25, 40, 70, 100, 150, 300, 500, 800 ];
 
 	/**
-	 * @var int[]
-	 */
-	private $usageModifierLimits;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
-	 * @param int[] $usageModifierLimits associative array mapping usage type to the limit
+	 * @param int[] $usageModifierLimits associative array mapping a usage type to the limit
 	 * @param LoggerInterface $logger
+	 * @param StatsFactory $stats
+	 * @param string $wiki
 	 */
-	public function __construct( array $usageModifierLimits, LoggerInterface $logger ) {
+	public function __construct(
+		private readonly array $usageModifierLimits, private readonly LoggerInterface $logger,
+		private readonly StatsFactory $stats, private readonly string $wiki
+	) {
 		Assert::parameterElementType( 'integer', $usageModifierLimits, '$usageModifierLimits' );
-
-		$this->usageModifierLimits = $usageModifierLimits;
-		$this->logger = $logger;
 	}
 
 	/**
@@ -103,6 +98,7 @@ class UsageDeduplicator {
 	/**
 	 * @param EntityUsage[] $statementUsages
 	 * @param EntityUsage[] $statementWithQualOrRefUsages
+	 * @return array
 	 */
 	private function deduplicateStatementUsages( array $statementUsages, array $statementWithQualOrRefUsages ): array {
 		foreach ( $statementWithQualOrRefUsages as $statementWithQualOrRefUsage ) {
@@ -121,7 +117,13 @@ class UsageDeduplicator {
 			// If the combined CQR and C usages with independent modifiers is more
 			// than the limit, then throw away the QR modifier and remove C usages
 			$combinedStatementUsages = [ ...$statementUsages, ...$statementWithQualOrRefUsages ];
-			if ( count( $combinedStatementUsages ) > $statementUsageLimit ) {
+			$usageCount = count( $combinedStatementUsages );
+			$exceedsLimit = $usageCount > $statementUsageLimit;
+			$aspect = EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE;
+			$this->collectBundleUsagesLimitStats(
+				$usageCount, $aspect, $exceedsLimit, $combinedStatementUsages[0]->getEntityId()
+			);
+			if ( $exceedsLimit ) {
 				$statementUsages = [];
 				$statementWithQualOrRefUsages = [ new EntityUsage(
 					$statementWithQualOrRefUsages[0]->getEntityId(),
@@ -136,15 +138,55 @@ class UsageDeduplicator {
 	}
 
 	/**
+	 * @param int $count
+	 * @param string $aspect
+	 * @param bool $exceedsLimit
+	 * @param EntityId $entityId
+	 * @return void
+	 */
+	private function collectBundleUsagesLimitStats(
+		int $count, string $aspect, bool $exceedsLimit, EntityId $entityId
+	): void {
+		$this->stats->getHistogram(
+			'WikibaseClient_UsageDeduplicator_bundled_entity_usages',
+			self::HISTOGRAM_BUCKETS
+		)
+			->setLabel( 'wiki', $this->wiki )
+			->setLabel( 'exceeds_limit', $exceedsLimit ? 'true' : 'false' )
+			->setLabel( 'aspect', $aspect )
+			->observe( $count );
+
+		if ( $exceedsLimit ) {
+			$this->logger->info(
+				"Exceeded entity usage aspect bundling for aspect {aspect}",
+				[
+					'count' => $count,
+					'aspect' => $aspect,
+					'entity_id' => $entityId->getSerialization(),
+					'wiki' => $this->wiki,
+				]
+			);
+		}
+	}
+
+	/**
 	 * @param string $aspect
 	 * @param EntityUsage[] &$usages
 	 */
-	private function limitPerAspect( $aspect, array &$usages ) {
+	private function limitPerAspect( string $aspect, array &$usages ) {
 		if ( !isset( $this->usageModifierLimits[$aspect] ) ) {
 			return;
 		}
+		$usageCount = count( $usages );
+		if ( $usageCount === 0 ) {
+			return;
+		}
 
-		if ( count( $usages ) > $this->usageModifierLimits[$aspect] ) {
+		$exceedsLimit = $usageCount > $this->usageModifierLimits[$aspect];
+		$this->collectBundleUsagesLimitStats(
+			$usageCount, $aspect, $exceedsLimit, $usages[0]->getEntityId()
+		);
+		if ( $exceedsLimit ) {
 			$usages = [
 				new EntityUsage(
 					$usages[0]->getEntityId(),
