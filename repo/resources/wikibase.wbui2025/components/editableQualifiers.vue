@@ -61,7 +61,7 @@ module.exports = exports = defineComponent( {
 
 div.wikibase-wbui2025-edit-qualifier {
 	background-color: @background-color-neutral-subtle;
-	padding: @spacing-25 @spacing-75 @spacing-25 @spacing-25;
+	padding: @spacing-75 @spacing-50;
 	gap: @spacing-75;
 	align-self: stretch;
 }

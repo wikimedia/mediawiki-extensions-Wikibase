@@ -19,8 +19,8 @@
 				</template>
 			</div>
 		</details>
-		<p v-else>
-			<span class="wikibase-wbui2025-no-references">{{ referencesMessage }}</span>
+		<p v-else class="wikibase-wbui2025-no-references">
+			<span>{{ referencesMessage }}</span>
 		</p>
 	</div>
 </template>
@@ -68,110 +68,70 @@ module.exports = exports = defineComponent( {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-references,
-.wikibase-wbui2025-editable-references-section {
-	p {
-		padding-top: @spacing-35;
-		padding-bottom: @spacing-35;
-		margin: 0;
+.wikibase-wbui2025-references {
+	summary {
+		color: @color-progressive;
+		&::before {
+			background-color: @color-progressive;
+		}
+
+		&:active, &:hover, &:focus {
+			background: inherit;
+		}
+	}
+
+	.cdx-accordion__header {
+		font-weight: @font-weight-normal;
+	}
+
+	.cdx-accordion__content {
+		padding: 0;
+	}
+}
+
+.wikibase-wbui2025-reference {
+	background-color: @background-color-neutral-subtle;
+
+	&:not( :last-child ) {
+		margin-bottom: @spacing-125;
+	}
+}
+
+.wikibase-wbui2025-reference-snak {
+	display: flex;
+	padding: @spacing-75 @spacing-75 @spacing-75 @spacing-100;
+	align-items: flex-start;
+	gap: @spacing-75;
+	align-self: stretch;
+
+	&:has(.wikibase-wbui2025-indicators) {
+		padding-right: 0;
+	}
+
+	.wikibase-wbui2025-property-name-link {
+		padding: 0;
+		width: @size-800;
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
+		gap: 6px;
 
-		span {
-			padding: @spacing-35 @spacing-30 @spacing-35 @spacing-75;
-		}
-
-		.cdx-icon {
-			vertical-align: middle;
-		}
-
-		.wikibase-wbui2025-link {
-			padding-top: 0;
-			padding-bottom: @spacing-35;
+		& > a {
+			overflow: hidden;
+			text-overflow: @text-overflow-ellipsis;
+			white-space: nowrap;
 		}
 	}
+}
 
-	div.wikibase-wbui2025-reference-list {
-		display: none;
+p.wikibase-wbui2025-no-references {
+	color: @color-subtle;
+	padding-top: @spacing-35;
+	padding-bottom: @spacing-35;
+	margin: 0;
 
-		&.wikibase-wbui2025-references-visible {
-			display: inherit;
-		}
-	}
-
-	.cdx-accordion {
-		h3.cdx-accordion__header {
-			font-weight: @font-weight-normal;
-			color: @color-progressive;
-		}
-
-		summary {
-			&:active {
-				background: inherit;
-			}
-
-			&:hover {
-				background: inherit;
-			}
-
-			&:focus {
-				background: inherit;
-			}
-		}
-
-		.cdx-accordion__content {
-			padding: 0;
-		}
-	}
-
-	.wikibase-wbui2025-reference {
-		background-color: @background-color-neutral-subtle;
-
-		&:not( :last-child ) {
-			margin-bottom: @spacing-125;
-		}
-	}
-
-	.wikibase-wbui2025-reference-snak {
-		display: flex;
-		padding: @spacing-75 @spacing-75 @spacing-75 @spacing-100;
-		align-items: flex-start;
-		gap: @spacing-75;
-		align-self: stretch;
-
-		&:has(.wikibase-wbui2025-indicators) {
-			padding-right: 0;
-		}
-
-		.wikibase-wbui2025-property-name-link {
-			padding: 0;
-			width: @size-800;
-			display: flex;
-			align-items: flex-end;
-			gap: 6px;
-
-			& > a {
-				overflow: hidden;
-				text-overflow: @text-overflow-ellipsis;
-				white-space: nowrap;
-			}
-		}
-	}
-
-	span.wikibase-wbui2025-no-references {
-		color: @color-subtle;
-	}
-
-	.wikibase-wbui2025-snak-value {
-		div.wikibase-snakview div {
-			display: inherit;
-		}
-
-		>a {
-			display: unset;
-			padding-left: unset;
-		}
-
+	span {
+		display: block;
+		padding: @spacing-35 @spacing-30 @spacing-35 @spacing-75;
 	}
 }
 </style>

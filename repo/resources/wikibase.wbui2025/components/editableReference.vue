@@ -112,7 +112,7 @@ module.exports = exports = defineComponent( {
 }
 
 .wikibase-wbui2025-editable-reference-snaks {
-	padding: @spacing-75;
+	padding: @spacing-75 @spacing-50;
 	background-color: @background-color-interactive;
 	display: flex;
 	flex-direction: column;
