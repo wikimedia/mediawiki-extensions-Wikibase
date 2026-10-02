@@ -403,4 +403,12 @@ module.exports = exports = defineComponent( {
 		background-position: 0.125rem 0;
 	}
 }
+
+// T439669: Disable sticky heading (~90px) and footer (~100px) on small viewports
+@media ( max-height: 600px ) {
+	.wikibase-wbui2025-edit-statement {
+		display: block;
+		overflow: auto;
+	}
+}
 </style>
