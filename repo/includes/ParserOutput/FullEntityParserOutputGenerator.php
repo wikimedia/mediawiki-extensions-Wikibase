@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\EntityDocumentView;
+use Wikibase\View\EntityView;
 use Wikibase\View\ViewPlaceHolderEmitter;
 use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\HtmlArmor\HtmlArmor;
@@ -125,7 +126,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 		//@todo: record sitelinks as iwlinks
 
-		$this->addModules( $parserOutput );
+		$this->addModules( $parserOutput, $entityView );
 
 		//FIXME: some places, like Special:NewItem, don't want to override the page title.
 		//	 But we still want to use OutputPage::addParserOutput to apply the modules etc from the ParserOutput.
@@ -185,7 +186,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		}
 	}
 
-	private function addModules( ParserOutput $parserOutput ): void {
+	private function addModules( ParserOutput $parserOutput, EntityDocumentView $entityView ): void {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( [
 			'wikibase.alltargets',
@@ -204,8 +205,9 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			// fire the entityLoaded hook which got configured through $this->configBuilder
 			'wikibase.entityPage.entityLoaded',
 		] );
-		// T324991
-		if ( !$this->isMobileView ) {
+		// Not on mobile (T324991) and only EntityView, which renders the .wikibase-entityview
+		// initialized by this module. MediaInfo builds its own interface (T321532)
+		if ( !$this->isMobileView && $entityView instanceof EntityView ) {
 			// make sure required client-side resources will be loaded
 			// FIXME: Separate the JavaScript that is also needed in read-only mode from
 			// the JavaScript that is only necessary for editing.
