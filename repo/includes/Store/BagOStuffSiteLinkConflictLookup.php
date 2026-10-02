@@ -69,6 +69,7 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 			'sitePage' => $siteLink->getPageName(),
 			'itemId' => null,
 		];
+		$watchPoint = $this->bagOStuff->watchErrors();
 
 		if ( $this->bagOStuff->add( $key, $itemId, $ttl ) ) {
 			return null;
@@ -78,6 +79,9 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		if ( $otherItemId === false ) {
 			// now key doesn’t exist? try the add() again…
 			if ( $this->bagOStuff->add( $key, $itemId, $ttl ) ) {
+				return null;
+			} elseif ( $this->bagOStuff->getLastError( $watchPoint ) !== BagOStuff::ERR_NONE ) {
+				// the failures were (probably) caused by cache errors rather than a conflict
 				return null;
 			} else {
 				return $conflict; // with unknown itemId
