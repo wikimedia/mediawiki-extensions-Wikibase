@@ -91,7 +91,11 @@ module.exports = exports = {
 				$( rootElement )
 					.find( '.leaflet-map-pane, .leaflet-control-container, p:empty' )
 					.remove();
-				require( 'ext.kartographer.frame' ).initMapframeFromElement( mapElement );
+				require( 'ext.kartographer.frame' ).initMapframeFromElement( mapElement, {
+					// T439949: Kartographer's fullscreen router was never initialized; the button
+					// wouldn't work and is not useful anyway in a mobile context
+					allowFullScreen: false
+				} );
 			}
 		} );
 	}
