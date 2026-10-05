@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
-use MediaWiki\Hook\SidebarBeforeOutputHook;
+use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Skin\Skin;
 use MediaWiki\Title\Title;
 use Psr\Log\LoggerInterface;

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\View;
 
-use FormatJson;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\Language\Language;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
