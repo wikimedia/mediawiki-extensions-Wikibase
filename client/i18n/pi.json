@@ -4,6 +4,7 @@
 			"咽頭べさ"
 		]
 	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|विपरिणामं|विपरिणामानि}}",
 	"wikibase-dataitem": "{{WBREPONAME}} दब्ब",
 	"wikibase-editlinks": "सोधन लिंक",
 	"wikibase-addlinkstitle": "अन्तराभासायोजन लिंक",
@@ -13,7 +14,10 @@
 	"wikibase-linkitem-selectlink": "इमिना पिट्ठेन सम्बन्धितुं इच्छितं ठानञ्च पिट्ठञ्च चिनोतु॥",
 	"wikibase-linkitem-input-site": "भाषा:",
 	"wikibase-linkitem-input-page": "पिट्ठक:",
+	"wikibase-linkitem-confirmitem-text": "त्वं यं पिट्ठं चिनि तं [$1 अम्हेहं मज्झिम दत्त सन्निचये वत्थुना] सह पुब्बेव सम्बद्धं होति॥ देसित {{PLURAL:$2|पिट्ठं|पिट्ठानि}} तव एतेन पिट्ठेन सह सम्बन्धितुं इच्छित {{PLURAL:$2|सम्बन्धितुं|इच्छित}} {{PLURAL:$2|एकं|एकानि}} होन्ति मञ्ञे करुणाय सन्निट्ठाहि॥",
+	"wikibase-linkitem-success-link": "पिट्ठानि सम्बद्धानि होन्ति॥ त्वं सम्बन्धानि सन्निविट्ठं वत्थुं अम्हेहं [$1 मज्झिम दत्त सन्निचये] लभितुं सक्कोसि॥",
 	"wikibase-rc-hide-wikidata-hide": "गोपेतु",
 	"wikibase-rc-hide-wikidata-show": "दस्सेतु",
+	"wikibase-replicationnote": "सब्ब विकीसु विपरिणामानं पाकटानि होतुं कतिपय मेनुटा कालो गण्हितुं सक्कोति। सरहि॥",
 	"wikibase-otherprojects": "अञ्ञेसु प्रोजेक्ट लोकेतु"
 }

@@ -20,6 +20,7 @@
 	"wikibase-publish": "प्रकाशित करथिन",
 	"wikibase-cancel": "निरस्त करथिन",
 	"wikibase-add": "जोड़थिन",
+	"wikibase-addstatement": "कथन जोड़थिन",
 	"wikibase-addqualifier": "विशेषण जोड़थिन",
 	"wikibase-addreference": "सन्दर्भ जोड़थिन",
 	"wikibase-save-inprogress": "सहेजित…",
