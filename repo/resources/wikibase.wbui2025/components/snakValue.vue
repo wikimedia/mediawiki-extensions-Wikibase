@@ -134,7 +134,8 @@ module.exports = exports = defineComponent( {
 	.wikibase-kartographer-caption {
 		order: 0;
 		font-size: @font-size-medium;
-		line-height: 1.25rem;
+		line-height: @line-height-x-small;
+		margin-bottom: @spacing-50;
 		/* @noflip */
 		direction: ltr;
 		/* @noflip */
@@ -144,6 +145,11 @@ module.exports = exports = defineComponent( {
 	.mw-parser-output {
 		order: 1;
 		width: 100%;
+
+		// Reset styles MediaWiki sets for wikitext pages, but aren't needed here
+		p {
+			margin: 0;
+		}
 	}
 
 	a.mw-kartographer-map {

@@ -325,28 +325,21 @@ module.exports = exports = defineComponent( {
 	min-height: 180px;
 	border: 1px solid @border-color-subtle;
 	background: @background-color-interactive-subtle;
-	width: 99%;
+	padding: @spacing-25;
 
-	.mw-parser-output {
+	// Reset styles MediaWiki and Kartographer set for wikitext pages, but aren't needed here
+	.mw-parser-output p,
+	.mw-parser-output .floatleft {
+		float: none;
 		margin: 0;
 	}
 
 	.wikibase-kartographer-caption {
+		margin-top: @spacing-50;
 		/* @noflip */
 		direction: ltr;
 		/* @noflip */
 		text-align: left;
-	}
-
-	.mw-kartographer-map.floatleft,
-	a.mw-kartographer-map.floatleft {
-		float: none !important;
-	}
-
-	.mw-kartographer-map,
-	a.mw-kartographer-map {
-		display: block;
-		max-width: 100%;
 	}
 }
 
