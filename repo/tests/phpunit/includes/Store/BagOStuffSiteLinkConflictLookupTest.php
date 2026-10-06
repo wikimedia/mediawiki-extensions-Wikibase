@@ -90,6 +90,47 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site2', 'Two' ) ) );
 	}
 
+	public function testGetConflictsForItem_primary_ignoresCacheErrors(): void {
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+		] );
+
+		$bagOStuff = new class extends HashBagOStuff {
+			protected function doAdd( $key, $value, $exptime = 0, $flags = 0 ) {
+				$this->setLastError( self::ERR_UNEXPECTED );
+				return false;
+			}
+		};
+		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
+
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+
+		$this->assertSame( [], $conflicts );
+	}
+
+	public function testGetConflictsForItem_primary_unknownConflictWithoutCacheErrors(): void {
+		$itemId = new ItemId( 'Q1' );
+		$sitelinkList = new SiteLinkList( [
+			new SiteLink( 'site1', 'One' ),
+		] );
+
+		$bagOStuff = new class extends HashBagOStuff {
+			protected function doAdd( $key, $value, $exptime = 0, $flags = 0 ) {
+				return false;
+			}
+		};
+		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
+
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+
+		$this->assertSame( [ [
+			'siteId' => 'site1',
+			'sitePage' => 'One',
+			'itemId' => null,
+		] ], $conflicts );
+	}
+
 	public function testGetConflictsForItem_replica_noConflicts(): void {
 		$itemId = new ItemId( 'Q1' );
 		$sitelinkList = new SiteLinkList( [
