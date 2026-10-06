@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\DataBridge;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\FileModule;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
@@ -81,7 +82,7 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 				'getconfigvalueprovider' => function () use ( $clientSettings ) {
 					return new DataBridgeConfigValueProvider(
 						$clientSettings,
-						MediaWikiServices::getInstance()->getMainConfig()->get( 'EditSubmitButtonLabelPublish' )
+						MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::EditSubmitButtonLabelPublish )
 					);
 				},
 			]

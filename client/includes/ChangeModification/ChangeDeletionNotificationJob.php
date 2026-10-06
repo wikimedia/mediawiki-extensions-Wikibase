@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\ChangeModification;
 
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Wikibase\Client\WikibaseClient;
@@ -42,7 +43,7 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 
 		return new self(
 			WikibaseClient::getClientDomainDbFactory()->newLocalDb(),
-			$mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' ),
+			$mwServices->getMainConfig()->get( MainConfigNames::UpdateRowsPerQuery ),
 			$params
 		);
 	}

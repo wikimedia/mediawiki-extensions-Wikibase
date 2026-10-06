@@ -9,6 +9,7 @@ use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Json\FormatJson;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ObjectCache\ObjectCacheFactory;
 use MediaWiki\Registration\ExtensionRegistry;
@@ -247,7 +248,7 @@ class WikibasePingback {
 		$hasEntities = SiteStats::pages() > self::MINIMUM_NUMBER_OF_ENTITIES;
 
 		$event = [
-			'database'   => $this->config->get( 'DBtype' ),
+			'database'   => $this->config->get( MainConfigNames::DBtype ),
 			'mediawiki'  => MW_VERSION,
 			'hasEntities'  => $hasEntities,
 			'federation'  => $federation,

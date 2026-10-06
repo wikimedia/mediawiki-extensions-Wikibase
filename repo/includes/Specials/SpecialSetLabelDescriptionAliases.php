@@ -8,6 +8,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Language\LanguageNameUtils;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\FingerprintProvider;
@@ -145,7 +146,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$termsLanguages,
 			$entityPermissionChecker,
 			$languageNameUtils,
-			$mwConfig->get( 'EditSubmitButtonLabelPublish' ) ? self::BUTTON_MESSAGE_PUBLISH : self::BUTTON_MESSAGE_SAVE
+			$mwConfig->get( MainConfigNames::EditSubmitButtonLabelPublish ) ? self::BUTTON_MESSAGE_PUBLISH : self::BUTTON_MESSAGE_SAVE
 		);
 	}
 
