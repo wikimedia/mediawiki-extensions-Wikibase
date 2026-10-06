@@ -24,8 +24,7 @@ class OutputPageEditability {
 	 */
 	private function isEditView( OutputPage $out ): bool {
 		return $out->isRevisionCurrent()
-			&& !$this->isDiff( $out )
-			&& !$out->isPrintable();
+			&& !$this->isDiff( $out );
 	}
 
 	private function isDiff( OutputPage $out ): bool {
