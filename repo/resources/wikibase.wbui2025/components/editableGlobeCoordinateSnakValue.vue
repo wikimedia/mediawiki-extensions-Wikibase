@@ -373,6 +373,6 @@ module.exports = exports = defineComponent( {
 }
 
 .wikibase-coordinate-popover__precision-select {
-	font-size: 12px;
+	font-size: 16px;
 }
 </style>
