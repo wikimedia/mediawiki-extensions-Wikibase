@@ -54,7 +54,7 @@ class Wbui2025FeatureFlag {
 		return $wbMobile === 'wbui2025';
 	}
 
-	public function shouldRenderAsWbui2025( ?UserIdentity $userIdentity ): bool {
+	public function shouldRenderAsWbui2025( ?UserIdentity $userIdentity = null ): bool {
 		if ( $this->wbui2025Enabled ) {
 			return true;
 		}
