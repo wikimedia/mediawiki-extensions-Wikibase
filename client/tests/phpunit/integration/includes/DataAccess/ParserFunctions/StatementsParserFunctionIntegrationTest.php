@@ -29,6 +29,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * Simple integration test for the {{#statements:…}} parser function.
@@ -94,7 +95,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 		$this->parserOutputProvider = new ScopedParserOutputProvider( $parserOutput );
 		$factory = new UsageAccumulatorFactory(
 			new EntityUsageFactory( new BasicEntityIdParser() ),
-			new UsageDeduplicator( [], new NullLogger() ),
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' ),
 			$this->createStub( EntityRedirectTargetLookup::class )
 		);
 		return $factory->newFromParserOutputProvider( $this->parserOutputProvider );

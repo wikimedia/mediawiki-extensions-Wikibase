@@ -1055,7 +1055,12 @@ return [
 		);
 		return new UsageAccumulatorFactory(
 			new EntityUsageFactory( WikibaseClient::getEntityIdParser( $services ) ),
-			new UsageDeduplicator( $usageModifierLimits, WikibaseClient::getLogger( $services ) ),
+			new UsageDeduplicator(
+				$usageModifierLimits,
+				WikibaseClient::getLogger( $services ),
+				$services->getStatsFactory(),
+				WikiMap::getCurrentWikiId()
+			),
 			new RevisionBasedEntityRedirectTargetLookup(
 				WikibaseClient::getEntityRevisionLookup( $services )
 			)

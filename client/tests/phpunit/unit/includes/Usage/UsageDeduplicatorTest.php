@@ -8,6 +8,7 @@ use TestLogger;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\Usage\UsageDeduplicator
@@ -115,13 +116,25 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 			EntityUsage::LABEL_USAGE => 3,
 		];
 
-		$this->assertEquals( $expected, ( new UsageDeduplicator( $usageModifierLimits, new NullLogger() ) )->deduplicate( $usages ) );
+		$this->assertEquals(
+			$expected,
+			(
+				new UsageDeduplicator( $usageModifierLimits,
+					new NullLogger(), StatsFactory::newNull(), 'testwiki'
+				)
+			)->deduplicate( $usages )
+		);
 	}
 
 	public function testDeduplicate_logsMissingCUsage() {
 		$logger = new TestLogger( true );
 
-		$deduplicator = new UsageDeduplicator( [ EntityUsage::STATEMENT_USAGE => 2 ], $logger );
+		$deduplicator = new UsageDeduplicator(
+			[ EntityUsage::STATEMENT_USAGE => 2 ],
+			$logger,
+			StatsFactory::newNull(),
+			'testwiki'
+		);
 
 		$usage = new EntityUsage( new ItemId( 'Q1' ), EntityUsage::STATEMENT_WITH_QUAL_OR_REF_USAGE, 'P15' );
 

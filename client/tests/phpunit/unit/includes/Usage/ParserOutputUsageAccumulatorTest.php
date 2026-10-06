@@ -14,6 +14,7 @@ use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageDeduplicator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @covers \Wikibase\Client\Usage\ParserOutputUsageAccumulator
@@ -38,7 +39,7 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$acc = new ParserOutputUsageAccumulator(
 			$parserOutputProvider,
 			$this->newEntityUsageFactory(),
-			new UsageDeduplicator( [], new NullLogger() )
+			new UsageDeduplicator( [], new NullLogger(), StatsFactory::newNull(), 'testwiki' )
 		);
 		$tester = new UsageAccumulatorContractTester( $acc );
 
