@@ -4,7 +4,7 @@
 			<template #title>
 				{{ referencesMessage }}
 			</template>
-			<div class="wikibase-wbui2025-reference-list wikibase-wbui2025-references-visible">
+			<div class="wikibase-wbui2025-reference-list">
 				<template v-for="reference in references" :key="reference">
 					<wbui2025-reference-view-content
 						:reference="reference"
@@ -15,8 +15,8 @@
 				</template>
 			</div>
 		</cdx-accordion>
-		<p v-else>
-			<span class="wikibase-wbui2025-no-references">{{ referencesMessage }}</span>
+		<p v-else class="wikibase-wbui2025-no-references">
+			<span>{{ referencesMessage }}</span>
 		</p>
 	</div>
 </template>

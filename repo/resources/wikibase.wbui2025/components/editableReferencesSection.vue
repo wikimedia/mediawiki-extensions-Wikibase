@@ -1,7 +1,6 @@
 <template>
-	<div class="wikibase-wbui2025-editable-references-section">
+	<div v-if="hasReferences" class="wikibase-wbui2025-editable-references-section">
 		<cdx-accordion
-			v-if="hasReferences"
 			v-model="showReferences"
 			separation="minimal"
 		>
@@ -18,9 +17,6 @@
 				@remove-new-reference-snak="removeNewReferenceSnak"
 			></wbui2025-editable-reference>
 		</cdx-accordion>
-		<p v-else>
-			{{ referencesMessage }}
-		</p>
 	</div>
 </template>
 
@@ -83,10 +79,6 @@ module.exports = exports = defineComponent( {
 @import 'mediawiki.skin.variables.less';
 
 .wikibase-wbui2025-editable-references-section {
-	display: flex;
-	flex-direction: column;
-	gap: @spacing-125;
-
 	summary {
 		color: @color-progressive;
 		&::before {
@@ -98,7 +90,6 @@ module.exports = exports = defineComponent( {
 		display: flex;
 		flex-direction: column;
 		gap: @spacing-125;
-		padding-top: @spacing-125;
 	}
 }
 
