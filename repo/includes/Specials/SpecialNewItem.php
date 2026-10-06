@@ -296,10 +296,8 @@ class SpecialNewItem extends SpecialNewEntity {
 
 		foreach ( $badgeItemIds as $badgeId ) {
 			$idSerialization = $badgeId->getSerialization();
-
-			$label = $labelLookup->getLabel( $badgeId );
-			$label = $label === null ? $idSerialization : $label->getText();
-
+			$label = $labelLookup->getLabel( $badgeId )?->getText() ?? $idSerialization;
+			// @phan-suppress-next-line PhanTypeMismatchDimAssignment False positive
 			$badgesOptions[$label] = $idSerialization;
 		}
 

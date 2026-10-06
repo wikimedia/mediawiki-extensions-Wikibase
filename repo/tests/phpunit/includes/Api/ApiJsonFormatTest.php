@@ -51,7 +51,7 @@ class ApiJsonFormatTest extends ApiFormatTestCase {
 					}
 				}
 				if ( $newKey !== null ) {
-					$array[$newKey] = $newVal === null ? $val : $newVal;
+					$array[$newKey] = $newVal ?? $val;
 					unset( $array[$key] );
 				} elseif ( $newVal !== null ) {
 					$array[$key] = $newVal;

@@ -156,16 +156,12 @@ class SpecialPagesWithBadges extends QueryPage {
 		);
 
 		$options = [];
-
 		foreach ( $this->badgeIds as $badgeId ) {
-			$label = $labelLookup->getLabel( new ItemId( $badgeId ) );
-
+			$label = $labelLookup->getLabel( new ItemId( $badgeId ) )?->getText();
 			// show plain id if no label has been found
-			$label = $label === null ? $badgeId : $label->getText();
-
+			$label ??= $badgeId;
 			$options[$label] = $badgeId;
 		}
-
 		return $options;
 	}
 

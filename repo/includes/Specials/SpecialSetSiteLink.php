@@ -377,10 +377,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 		foreach ( $badgeItemIds as $badgeId ) {
 			$idSerialization = $badgeId->getSerialization();
-
-			$label = $labelLookup->getLabel( $badgeId );
-			$label = $label === null ? $idSerialization : $label->getText();
-
+			$label = $labelLookup->getLabel( $badgeId )?->getText() ?? $idSerialization;
+			// @phan-suppress-next-line PhanTypeMismatchDimAssignment False positive
 			$options[$label] = $idSerialization;
 			if ( in_array( $idSerialization, $this->badges ) ) {
 				$default[] = $idSerialization;

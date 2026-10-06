@@ -97,9 +97,7 @@ class MockRepository implements
 	}
 
 	public function getEntity( EntityId $entityId ): ?EntityDocument {
-		$revision = $this->getEntityRevision( $entityId );
-
-		return $revision === null ? null : $revision->getEntity()->copy();
+		return $this->getEntityRevision( $entityId )?->getEntity()->copy();
 	}
 
 	/** @inheritDoc */

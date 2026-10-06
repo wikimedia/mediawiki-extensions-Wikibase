@@ -254,8 +254,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		);
 
 		foreach ( $usageAspectsByEntity as $entityId => $aspects ) {
-			$label = $labelLookup->getLabel( $entityIds[$entityId] );
-			$text = $label === null ? $entityId : $label->getText();
+			$text = $labelLookup->getLabel( $entityIds[$entityId] )?->getText() ?? $entityId;
 
 			$output .= Html::rawElement( 'li', [],
 				$this->repoLinker->buildEntityLink(

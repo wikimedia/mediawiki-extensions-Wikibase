@@ -324,7 +324,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 				'label-message' => 'wikibase-modifyentity-id',
 				'type' => 'text',
 				'id' => $id,
-				'default' => $entity === null ? '' : $entity->getId(),
+				'default' => $entity?->getId() ?? '',
 			],
 		];
 	}
