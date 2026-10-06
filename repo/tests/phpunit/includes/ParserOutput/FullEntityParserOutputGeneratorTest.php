@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\User\Options\UserOptionsLookup;
-use MediaWiki\User\User;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -274,10 +272,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		array $expectedModuleStyles
 	): void {
 		$featureFlag = new Wbui2025FeatureFlag(
-			$this->createMock( UserOptionsLookup::class ),
 			new SettingsArray( [
 				'tmpMobileEditingUI' => $tmpMobileEditingUI,
-				'tmpEnableMobileEditingUIBetaFeature' => false,
 			] ),
 		);
 		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
@@ -286,7 +282,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 			->method( 'getParserOutputOptions' )
 			->willReturn( [
 				Wbui2025FeatureFlag::EXTENSION_DATA_KEY =>
-					$featureFlag->generateWbMobileFlagValue( $isMobileView, $this->createMock( User::class ) ),
+					$featureFlag->generateWbMobileFlagValue( $isMobileView ),
 			] );
 
 		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );

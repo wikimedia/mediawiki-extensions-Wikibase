@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use MediaWiki\User\Options\UserOptionsLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\Wbui2025FeatureFlag;
@@ -19,13 +18,9 @@ use Wikibase\View\Wbui2025FeatureFlag;
 class Wbui2025FeatureFlagTest extends ServiceWiringTestCase {
 
 	public function testConstruction() {
-		$this->serviceContainer->expects( $this->once() )
-			->method( 'getUserOptionsLookup' )
-			->willReturn( $this->createMock( UserOptionsLookup::class ) );
 		$this->mockService( 'WikibaseRepo.Settings',
 			new SettingsArray( [
 				'tmpMobileEditingUI' => false,
-				'tmpEnableMobileEditingUIBetaFeature' => false,
 			] ) );
 
 		/** @var Wbui2025FeatureFlag $wbui2025FeatureFlag */

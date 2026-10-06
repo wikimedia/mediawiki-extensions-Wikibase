@@ -2211,7 +2211,6 @@ return [
 
 	'WikibaseRepo.Wbui2025FeatureFlag' => function ( MediaWikiServices $services ): Wbui2025FeatureFlag {
 		return new Wbui2025FeatureFlag(
-			$services->getUserOptionsLookup(),
 			WikibaseRepo::getSettings( $services )
 		);
 	},
