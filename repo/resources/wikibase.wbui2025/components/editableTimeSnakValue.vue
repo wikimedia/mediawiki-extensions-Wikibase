@@ -352,6 +352,7 @@ module.exports = exports = defineComponent( {
 				gap: 5px;
 
 				select {
+					font-size: 16px;
 					margin-left: auto;
 					width: 6rem;
 					overflow: hidden;
