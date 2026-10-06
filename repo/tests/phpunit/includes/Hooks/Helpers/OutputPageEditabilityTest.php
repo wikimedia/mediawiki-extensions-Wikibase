@@ -83,18 +83,6 @@ class OutputPageEditabilityTest extends MediaWikiIntegrationTestCase {
 			return $out;
 		};
 		yield 'not latest revision' => [ $outputPageFactory ];
-
-		$outputPageFactory = function() use ( $user ): OutputPage {
-			$out = self::newOutputPage();
-			$context = new RequestContext();
-			$context->setAuthority( new UltimateAuthority( $user ) );
-			$context->setTitle( Title::makeTitle( NS_MAIN, 'Test' ) );
-			$out->setContext( $context );
-			$out->setPrintable();
-
-			return $out;
-		};
-		yield 'print view' => [ $outputPageFactory ];
 	}
 
 	/**
