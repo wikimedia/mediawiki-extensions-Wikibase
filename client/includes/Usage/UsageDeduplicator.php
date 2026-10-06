@@ -102,6 +102,9 @@ class UsageDeduplicator {
 	 */
 	private function deduplicateStatementUsages( array $statementUsages, array $statementWithQualOrRefUsages ): array {
 		foreach ( $statementWithQualOrRefUsages as $statementWithQualOrRefUsage ) {
+			if ( $statementUsages === [] ) {
+				break;
+			}
 			if ( $statementWithQualOrRefUsage->getModifier() === null ) {
 				$statementUsages = [];
 			} else {
