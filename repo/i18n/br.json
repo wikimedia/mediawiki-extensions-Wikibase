@@ -12,7 +12,8 @@
 			"MuratTheTurkish",
 			"Pymouss",
 			"VIGNERON",
-			"Y-M D"
+			"Y-M D",
+			"Ar choler"
 		]
 	},
 	"wikibase-desc": "Kavlec'h roadennoù frammet",
@@ -418,7 +419,7 @@
 	"wikibase-refresh-for-missing-datatype": "N'eo ket bet kavet ar seurt roadennoù $1 e skript an arval lec'hel. Marteze a-walc'h peogwir eo dispredet unan eus ar skiptoù krubuilhet. Klaskit freskaat ho merdeer, en ur vont hebiou d'ar c'hrubuilh lec'hel (Ctrl-Shift-R pe Cmd-Shift-R er pep brasañ eus ar merdeerioù) evit diskoulmañ ar gudenn.",
 	"wikibase-outdated-client-script": "Hopala, un tamm freskaat zo ret plijet pe get !",
 	"wikibase-shortcopyrightwarning-heading": "Gratadur aotre",
-	"wikibase-entity-save-error-heading": "Un dra bennak a-dreuz a zo bet",
+	"wikibase-entity-save-error-heading": "Un dra bennak zo aet a-dreuz",
 	"wikibase-entity-save-error-message": "N'eus ket bet gallet embann ho kemm. Gallout a rit klak klikañ war ar bouton embann en-dro.",
 	"wikibase-tainted-ref-popper-text": "Kemmet eo bet talvoud an diskêriadur-mañ hogen chomet eo bet heñvel an daveenn. Gallout a rit lemel kuit ar c'hemenn-diwall-mañ mard eo reizh an daveenn c'hoazh.",
 	"wikibase-tainted-ref-popper-title": "Danvez disklotadur dave / talvoud",
