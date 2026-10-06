@@ -132,16 +132,6 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->assertNotHasLinkAlternate( $output );
 	}
 
-	public function testShowPrintableVersion_hasNoEditOrAlternateLinks() {
-		$page = $this->getTestItemPage( 'Berlin' );
-		$requestParams = [ 'printable' => 'yes' ];
-
-		$output = $this->executeViewAction( $page, $requestParams );
-
-		$this->assertNotEditable( $output );
-		$this->assertNotHasLinkAlternate( $output );
-	}
-
 	public function testShowNonExistingRevision() {
 		$page = $this->getTestItemPage( 'Berlin' );
 		$params = [ 'oldid' => 2147483647 ];

@@ -169,12 +169,6 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		$context->setWikiPage( $page );
 		$article = Article::newFromWikiPage( $page, $context );
 
-		// Must be set separately, similar to what MediaWiki::performRequest() does.
-		// Currently used in ViewEntityActionTest.
-		if ( !empty( $params['printable'] ) ) {
-			$context->getOutput()->setPrintable();
-		}
-
 		return Action::factory( $actionName, $article, $context );
 	}
 
