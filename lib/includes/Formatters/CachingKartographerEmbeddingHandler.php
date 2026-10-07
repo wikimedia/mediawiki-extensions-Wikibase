@@ -95,10 +95,10 @@ class CachingKartographerEmbeddingHandler {
 
 		$containerDivId = 'wb-globeCoordinateValue-preview-' . base_convert( (string)mt_rand( 1, PHP_INT_MAX ), 10, 36 );
 
-		$html = Html::rawElement( 'div', [
-			'id' => $containerDivId,
-			'class' => 'wb-globe-preview',
-		], $parserOutput->getContentHolderText() );
+		// Add an id="…" attribute to the existing <div class="mw-parser-output"> wrapper
+		$html = preg_replace( '/^\s*(<\w+)/', "\$1 id=\"$containerDivId\"",
+			$parserOutput->getContentHolderText()
+		);
 		$html .= $this->getMapframeInitJS(
 			$containerDivId,
 			$parserOutput->getModules(),

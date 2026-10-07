@@ -142,9 +142,6 @@ module.exports = exports = defineComponent( {
 		text-align: left;
 	}
 
-	// T440285: Preview HTML from GlobeCoordinateKartographerFormatter does have this extra <div>,
-	// non-preview HTML doesn't
-	.wb-globe-preview,
 	.mw-parser-output {
 		order: 1;
 		width: 100%;
