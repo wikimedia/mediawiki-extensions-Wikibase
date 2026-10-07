@@ -107,9 +107,9 @@ class UsageDeduplicator {
 			} else {
 					// If CQR does have a modifier, remove C usages with that modifier
 				$modifier = $statementWithQualOrRefUsage->getModifier();
-				$statementUsages = array_filter( $statementUsages, function ( $usage ) use ( $modifier ) {
+				$statementUsages = array_values( array_filter( $statementUsages, function ( $usage ) use ( $modifier ) {
 					return $usage->getModifier() !== $modifier;
-				} );
+				} ) );
 			}
 		}
 		$statementUsageLimit = $this->usageModifierLimits[EntityUsage::STATEMENT_USAGE];
