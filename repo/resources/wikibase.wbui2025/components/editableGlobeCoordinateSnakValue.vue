@@ -326,6 +326,7 @@ module.exports = exports = defineComponent( {
 	border: 1px solid @border-color-subtle;
 	background: @background-color-interactive-subtle;
 	padding: @spacing-25;
+	overflow: clip;
 
 	// Reset styles MediaWiki and Kartographer set for wikitext pages, but aren't needed here
 	.mw-parser-output p,
