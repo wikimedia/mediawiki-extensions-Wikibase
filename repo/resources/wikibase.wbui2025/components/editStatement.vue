@@ -225,7 +225,7 @@ module.exports = exports = defineComponent( {
 	gap: @spacing-150;
 	align-self: stretch;
 	padding: @spacing-125 @spacing-100;
-	border-bottom: 1px solid @border-color-muted;
+	border-bottom: @border-width-base @border-style-base @border-color-muted;
 
 	.wikibase-wbui2025-value-input-fields {
 		display: flex;
@@ -235,7 +235,7 @@ module.exports = exports = defineComponent( {
 		align-self: stretch;
 
 		.wikibase-wbui2025-edit-statement-value-input {
-			width: 100%;
+			width: @size-full;
 			display: flex;
 			flex-direction: column;
 			gap: @spacing-75;
@@ -275,7 +275,7 @@ module.exports = exports = defineComponent( {
 		div.wikibase-wbui2025-button-holder {
 
 			& > button.cdx-button {
-				width: 100%;
+				width: @size-full;
 				justify-content: flex-start;
 			}
 		}

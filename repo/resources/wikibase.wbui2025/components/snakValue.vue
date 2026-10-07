@@ -83,7 +83,7 @@ module.exports = exports = defineComponent( {
 	.thumb {
 		margin: 0;
 		padding: 0;
-		width: 100%;
+		width: @size-full;
 
 		img {
 			max-height: 13.4375rem;
@@ -122,13 +122,13 @@ module.exports = exports = defineComponent( {
 		flex: 1 1 auto;
 		display: block;
 		min-width: 0;
-		width: 100%;
+		width: @size-full;
 	}
 
 	> .snakValue > div {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
+		width: @size-full;
 	}
 
 	.wikibase-kartographer-caption {
@@ -144,7 +144,7 @@ module.exports = exports = defineComponent( {
 
 	.mw-parser-output {
 		order: 1;
-		width: 100%;
+		width: @size-full;
 
 		// Reset styles MediaWiki sets for wikitext pages, but aren't needed here
 		p {
@@ -153,7 +153,7 @@ module.exports = exports = defineComponent( {
 	}
 
 	a.mw-kartographer-map {
-		width: 100%;
+		width: @size-full;
 		max-width: none;
 	}
 }

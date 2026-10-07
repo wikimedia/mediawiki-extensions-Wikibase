@@ -119,14 +119,14 @@ module.exports = exports = defineComponent( {
 	position: absolute;
 	right: 0;
 	display: flex;
-	cursor: pointer;
+	cursor: @cursor-base--hover;
 	width: @size-200;
 	height: @size-200;
 	padding: @spacing-75 @spacing-75;
 	justify-content: center;
 	align-items: center;
 	border-radius: @border-radius-pill;
-	border: 2px solid @border-color-progressive--focus;
+	border: @border-width-thick @border-style-base @border-color-progressive--focus;
 	background: @background-color-progressive-subtle;
 	box-shadow: 0 1px 2px 0 #a2a9b1;
 	backdrop-filter: blur(6px);
@@ -141,7 +141,7 @@ module.exports = exports = defineComponent( {
 
 .wikibase-wbui2025-add-statement-float-button-container {
 	.cdx-icon {
-		cursor: pointer;
+		cursor: @cursor-base--hover;
 		position: absolute;
 		right: 0;
 		top: 1.6875rem;
@@ -161,7 +161,7 @@ module.exports = exports = defineComponent( {
 
 		&.cdx-button:enabled {
 			border-radius: @border-radius-pill;
-			border: 2px solid @border-color-progressive;
+			border: @border-width-thick @border-style-base @border-color-progressive;
 			background: @background-color-progressive-subtle;
 			color: @color-progressive;
 		}

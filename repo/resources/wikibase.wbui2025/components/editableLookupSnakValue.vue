@@ -69,7 +69,7 @@ module.exports = exports = defineComponent( {
 div.wikibase-wbui2025-edit-statement-snak-value {
 
 	div.cdx-lookup {
-		width: 100%;
+		width: @size-full;
 	}
 
 }

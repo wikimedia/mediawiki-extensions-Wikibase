@@ -218,7 +218,7 @@ module.exports = exports = defineComponent( {
 	display: flex;
 	flex-direction: column;
 	width: @size-viewport-width-full;
-	height: 100%;
+	height: @size-full;
 
 	ul {
 		padding-left: 0;
@@ -245,7 +245,7 @@ module.exports = exports = defineComponent( {
 		align-items: center;
 		gap: @spacing-25;
 		align-self: stretch;
-		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		box-shadow: 0 2px 11.8px 0 @box-shadow-color-alpha-base;
 		justify-content: center;
 
 		.cdx-button{
@@ -289,7 +289,7 @@ module.exports = exports = defineComponent( {
 		display: flex;
 		flex: 0 0 auto;
 		flex-direction: column;
-		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		box-shadow: 0 2px 11.8px 0 @box-shadow-color-alpha-base;
 
 		.wikibase-wbui2025-modal-overlay__footer__actions {
 			padding: @spacing-125 @spacing-400 @spacing-300 @spacing-400;
@@ -305,13 +305,13 @@ module.exports = exports = defineComponent( {
 	.wikibase-wbui2025-modal-overlay__header {
 		align-self: stretch;
 		padding: @spacing-75 @spacing-75 @spacing-100;
-		border-bottom: @border-width-base @border-style-base @border-color-subtle;
+		border-bottom: @border-subtle;
 		flex-direction: column;
 		box-shadow: unset;
 		gap: @spacing-12;
 
 		&__close-button {
-			width: 100%;
+			width: @size-full;
 			text-align: right;
 			.cdx-button {
 				position: relative;

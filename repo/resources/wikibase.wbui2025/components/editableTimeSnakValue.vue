@@ -321,7 +321,7 @@ module.exports = exports = defineComponent( {
 
 	.wikibase-wbui2025-snak-value {
 		.time-value-popover {
-			width: 100%;
+			width: @size-full;
 			padding: 0.75rem @spacing-100 @spacing-50 @spacing-100;
 
 			.cdx-popover__header p {

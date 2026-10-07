@@ -114,7 +114,7 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-add-qualifier-heading {
 	align-self: stretch;
 	padding: @spacing-100 @spacing-100 @spacing-200;
-	border-bottom: @border-width-base @border-style-base @border-color-subtle;
+	border-bottom: @border-subtle;
 
 	h2 {
 		padding: @spacing-0;

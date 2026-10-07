@@ -93,9 +93,7 @@ module.exports = exports = defineComponent( {
 @import 'mediawiki.skin.variables.less';
 
 .wikibase-wbui2025-statement-group {
-	border-color: @border-color-subtle;
-	border-width: 1px;
-	border-style: solid;
+	border: @border-subtle;
 	margin-top: 1em;
 
 	.wikibase-wbui2025-link() {
@@ -118,7 +116,7 @@ module.exports = exports = defineComponent( {
 	.wikibase-wbui2025-statement-heading {
 		display: table;
 		background-color: @background-color-neutral;
-		width: 100%;
+		width: @size-full;
 
 		&-row {
 			display: table-row;
@@ -136,7 +134,7 @@ module.exports = exports = defineComponent( {
 			white-space: nowrap;
 			padding-right: @spacing-75;
 			vertical-align: middle;
-			cursor: pointer;
+			cursor: @cursor-base--hover;
 
 			.wikibase-wbui2025-link-heavy {
 				font-size: @font-size-medium;
@@ -150,7 +148,7 @@ module.exports = exports = defineComponent( {
 
 			&--deleted-property {
 				color: @color-disabled;
-				cursor: default;
+				cursor: @cursor-base;
 
 				.wikibase-wbui2025-icon-edit-small {
 					.cdx-mixin-css-icon( @cdx-icon-edit, @color-disabled, @param-size-icon: @size-icon-small );
