@@ -90,12 +90,13 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$value = $this->newSampleCoordinate();
 
-		$plainHtml = $handler->getHtml( $value, $language, new FormatterOptions( [] ) );
 		$result = $handler->getPreviewHtml( $value, $language, new FormatterOptions( [] ) );
 
 		// Preview HTML should contain the regular html
-		$this->assertStringContainsString( $plainHtml, $result );
+		$this->assertStringContainsString( 'data-mw-kartographer="mapframe"', $result );
 		$this->assertStringStartsWith( '<div id="wb-globeCoordinateValue-preview-', $result );
+		// T440285: No extra wrapper, only the <div class="mw-parser-output">
+		$this->assertSame( 1, substr_count( $result, '<div' ) );
 		$this->assertStringContainsString( 'wgKartographerLiveData', $result );
 		$this->assertStringContainsString( 'initMapframeFromElement', $result );
 	}
@@ -106,19 +107,12 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 		$language = $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' );
 		$value = $this->newSampleCoordinate();
 
-		$plainHtml = $handler->getHtml( $value, $language, new FormatterOptions( [
-			CachingKartographerEmbeddingHandler::OPT_KARTOGRAPHER_VARIABLE_WIDTH => true,
-		] ) );
 		$result = $handler->getPreviewHtml( $value, $language, new FormatterOptions( [
 			CachingKartographerEmbeddingHandler::OPT_KARTOGRAPHER_VARIABLE_WIDTH => true,
 		] ) );
 
-		// Preview HTML should contain the regular html
-		$this->assertStringContainsString( $plainHtml, $result );
 		$this->assertStringStartsWith( '<div id="wb-globeCoordinateValue-preview-', $result );
 		$this->assertStringContainsString( 'width: 100%;', $result );
-		$this->assertStringContainsString( 'wgKartographerLiveData', $result );
-		$this->assertStringContainsString( 'initMapframeFromElement', $result );
 	}
 
 	public function testGetPreviewHtml_marsCoordinate() {
