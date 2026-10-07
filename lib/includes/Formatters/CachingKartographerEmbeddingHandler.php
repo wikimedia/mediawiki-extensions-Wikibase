@@ -174,13 +174,13 @@ class CachingKartographerEmbeddingHandler {
 		$rlModulesArr = array_unique( $rlModules );
 
 		$rlModulesJson = FormatJson::encode( $rlModulesArr );
-		$jsMapPreviewId = FormatJson::encode( '#' . $mapPreviewId );
+		$selector = FormatJson::encode( "#$mapPreviewId .mw-kartographer-map[data-mw-kartographer]" );
 
 		// Require all needed RL modules, then call initMapframeFromElement with the injected mapframe HTML
 		// Note: this inline JS code is used as a model for the `mounted` handler in snakValue.vue
 		$javaScript .= "mw.loader.using( $rlModulesJson ).then( " .
 				"function( require ) { require( 'ext.kartographer.frame' ).initMapframeFromElement( " .
-				"\$( $jsMapPreviewId ).find( '.mw-kartographer-map[data-mw-kartographer]' ).get( 0 ) ); } );";
+				"\$( $selector ).get( 0 ) ); } );";
 
 		return Html::inlineScript( $javaScript );
 	}

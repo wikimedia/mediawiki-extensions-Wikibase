@@ -216,7 +216,7 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 			$html
 		);
 		$this->assertStringContainsString( '["rl-module-1","another-rl-module","ext.kartographer.frame"]', $html );
-		$this->assertStringContainsString( '( "#foo" )', $html );
+		$this->assertStringContainsString( '( "#foo .mw-kartographer-map[data-mw-kartographer]" )', $html );
 	}
 
 	public function testGetMapframeInitJS_escaping() {
@@ -233,12 +233,17 @@ class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCa
 		$this->assertStringStartsWith( '<script>', $html );
 		$this->assertStringEndsWith( '</script>', $html );
 
-		$stringsToEscape = [ '#f"o"o', 'rl-"mo"dule', 'm"a"ps', 'awe"s"ome' ];
+		$stringsToEscape = [ 'rl-"mo"dule', 'm"a"ps', 'awe"s"ome' ];
 
 		foreach ( $stringsToEscape as $str ) {
 			$this->assertStringNotContainsString( $str, $html );
 			$this->assertStringContainsString( Html::encodeJsVar( $str ), $html );
 		}
+		$this->assertStringNotContainsString( 'f"o"o', $html );
+		$this->assertStringContainsString(
+			Html::encodeJsVar( '#f"o"o .mw-kartographer-map[data-mw-kartographer]' ),
+			$html
+		);
 	}
 
 	private function newSampleCoordinate() {
