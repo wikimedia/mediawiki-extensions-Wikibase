@@ -97,6 +97,10 @@ class UsageDeduplicatorTest extends \PHPUnit\Framework\TestCase {
 				[ $q1LabelEn, $q1Statement, $q1Statement1QR ],
 				[ $q1LabelEn, $q1Statement, $q1Statement1QR ],
 			],
+			[
+				[ $q1Statement1, $q1Statement2, $q1Statement1QR ],
+				[ $q1Statement2, $q1Statement1QR ],
+			],
 		];
 	}
 
