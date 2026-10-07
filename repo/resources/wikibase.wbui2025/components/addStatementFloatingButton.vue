@@ -149,9 +149,8 @@ module.exports = exports = defineComponent( {
 
 	.wikibase-wbui2025-add-statement-float-button {
 		display: flex;
-		width: 8.5rem;
 		min-width: 2.125rem;
-		max-width: @size-2800;
+		max-width: @size-1600;
 		min-height: 2.125rem;
 		max-height: 2.125rem;
 		padding: @spacing-30 @spacing-50;
