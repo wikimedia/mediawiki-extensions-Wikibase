@@ -2,6 +2,7 @@ import Chainable = Cypress.Chainable;
 
 export class AddReferenceFormPage {
 	public static SELECTORS = {
+		MODAL_ROOT: '.wikibase-wbui2025-add-reference-modal',
 		HEADING: 'h2.wikibase-wbui2025-modal-overlay__header__title',
 		PROPERTY_INPUT: '.wikibase-wbui2025-property-lookup input',
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-add-reference-value input, .wikibase-wbui2025-add-reference-value textarea',
@@ -11,28 +12,28 @@ export class AddReferenceFormPage {
 	};
 
 	public heading(): Chainable {
-		return cy.get( AddReferenceFormPage.SELECTORS.HEADING );
+		return this.root().find( AddReferenceFormPage.SELECTORS.HEADING );
 	}
 
 	public propertyInput(): Chainable {
-		return cy.get( AddReferenceFormPage.SELECTORS.PROPERTY_INPUT );
+		return this.root().find( AddReferenceFormPage.SELECTORS.PROPERTY_INPUT );
 	}
 
 	public snakValueInput(): Chainable {
-		return cy.get( AddReferenceFormPage.SELECTORS.SNAK_VALUE_INPUT );
+		return this.root().find( AddReferenceFormPage.SELECTORS.SNAK_VALUE_INPUT );
 	}
 
 	public addButton(): Chainable {
-		return cy.get( AddReferenceFormPage.SELECTORS.ADD_BUTTON );
+		return this.root().find( AddReferenceFormPage.SELECTORS.ADD_BUTTON );
 	}
 
 	public menuItems(): Chainable {
-		return cy.get( AddReferenceFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
+		return this.root().find( AddReferenceFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
 	public setProperty( searchTerm: string ): this {
 		this.propertyInput().type( searchTerm );
-		cy.get( AddReferenceFormPage.SELECTORS.PROPERTY_OPTIONS ).first().click();
+		this.root().find( AddReferenceFormPage.SELECTORS.PROPERTY_OPTIONS ).first().click();
 		return this;
 	}
 
@@ -41,5 +42,9 @@ export class AddReferenceFormPage {
 		this.snakValueInput().click();
 		this.snakValueInput().type( inputText );
 		return this;
+	}
+
+	private root(): Chainable {
+		return cy.get( AddReferenceFormPage.SELECTORS.MODAL_ROOT );
 	}
 }

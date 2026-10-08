@@ -98,7 +98,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 			editFormPage.publishButton().should( 'be.disabled' );
 
 			/* Wait for the form to close, and check the value is changed */
-			editFormPage.formRoot().should( 'not.exist' );
+			editFormPage.root().should( 'not.exist' );
 			itemViewPage.assertStatementIsInViewport( propertyId );
 
 			itemViewPage.mainSnakValues().first().should( 'have.text', newPropertyValue );

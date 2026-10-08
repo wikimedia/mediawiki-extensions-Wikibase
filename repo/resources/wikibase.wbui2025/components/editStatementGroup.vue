@@ -1,42 +1,35 @@
 <template>
 	<wikibase-wbui2025-modal-overlay
+		ref="modalOverlayRef"
 		modal-class="wikibase-wbui2025-edit-statement-group-modal"
-		@hide="onModalHide">
-		<div v-if="editStatementDataLoaded" class="wikibase-wbui2025-edit-statement">
-			<div class="wikibase-wbui2025-edit-statement-heading">
-				<cdx-icon :icon="cdxIconArrowPrevious" @click="cancelForm"></cdx-icon>
-				<div class="wikibase-wbui2025-edit-statement-headline">
-					<p class="heading">
-						{{ $i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length ) }}
-					</p>
-				</div>
-				<div
-					class="wikibase-wbui2025-property-name"
-					:class="{ 'wikibase-wbui2025-property-name--deleted': isDeletedProperty }"
-					v-html="propertyLinkHtml"
-				></div>
-				<span
-					v-if="isDeletedProperty"
-					class="wikibase-wbui2025-deleted-property-label"
-				>{{ $i18n( 'wikibase-wbui2025-deleted-property-label' ) }}</span>
-			</div>
+		:header="$i18n( 'wikibase-statementgrouplistview-edit', editableStatementGuids.length )"
+		:save-button-disabled="!canSubmit"
+		:show-progress="showProgress"
+		:progress-bar-label="$i18n( 'wikibase-publishing-progress' )"
+		@save="submitForm"
+		@hide="cancelForm">
+		<template v-if="editStatementDataLoaded" #subtitle>
+			<div
+				class="wikibase-wbui2025-property-name"
+				:class="{ 'wikibase-wbui2025-property-name--deleted': isDeletedProperty }"
+				v-html="propertyLinkHtml"
+			></div>
+			<span
+				v-if="isDeletedProperty"
+				class="wikibase-wbui2025-deleted-property-label"
+			>{{ $i18n( 'wikibase-wbui2025-deleted-property-label' ) }}</span>
+		</template>
+		<template v-if="editStatementDataLoaded" #content>
 			<div class="wikibase-wbui2025-edit-form-body">
-				<template v-if="editStatementDataLoaded">
-					<template
-						v-for="statementGuid in editableStatementGuidsWithoutNewStatement"
-						:key="statementGuid"
-					>
-						<wikibase-wbui2025-edit-statement
-							:statement-id="statementGuid"
-							@remove="removeStatement"
-						></wikibase-wbui2025-edit-statement>
-					</template>
-				</template>
-				<div
-					v-else
-					class="wikibase-wbui2025-edit-statement-value-form loading-placeholder"
+				<template
+					v-for="statementGuid in editableStatementGuidsWithoutNewStatement"
+					:key="statementGuid"
 				>
-				</div>
+					<wikibase-wbui2025-edit-statement
+						:statement-id="statementGuid"
+						@remove="removeStatement"
+					></wikibase-wbui2025-edit-statement>
+				</template>
 				<div class="wikibase-wbui2025-add-value">
 					<cdx-button
 						action="progressive"
@@ -47,46 +40,7 @@
 					</cdx-button>
 				</div>
 			</div>
-			<transition name="fade">
-				<div v-if="showProgress" class="wikibase-wbui2025-message-container">
-					<cdx-message
-						type="notice"
-						class="wikibase-wbui2025-message"
-					>
-						{{ $i18n( 'wikibase-publishing-progress' ) }}
-					</cdx-message>
-				</div>
-			</transition>
-			<div ref="editFormActionsRef" class="wikibase-wbui2025-edit-statement-footer">
-				<transition name="fade">
-					<div v-if="showProgress">
-						<cdx-progress-bar
-							inline
-							:aria-label="$i18n( 'wikibase-publishing-progress' )"
-						></cdx-progress-bar>
-					</div>
-				</transition>
-
-				<div class="wikibase-wbui2025-edit-form-actions">
-					<cdx-button
-						weight="quiet"
-						@click="cancelForm"
-					>
-						<cdx-icon :icon="cdxIconClose"></cdx-icon>
-						{{ $i18n( 'wikibase-cancel' ) }}
-					</cdx-button>
-					<cdx-button
-						action="progressive"
-						weight="primary"
-						:disabled="!canSubmit"
-						@click="submitForm"
-					>
-						<cdx-icon :icon="cdxIconCheck"></cdx-icon>
-						{{ saveMessage }}
-					</cdx-button>
-				</div>
-			</div>
-		</div>
+		</template>
 	</wikibase-wbui2025-modal-overlay>
 	<wikibase-wbui2025-add-statement-value
 		v-if="showAddValueModal"
@@ -102,15 +56,10 @@ const { mapState, mapActions } = require( 'pinia' );
 const { defineComponent } = require( 'vue' );
 const {
 	CdxButton,
-	CdxIcon,
-	CdxMessage,
-	CdxProgressBar
+	CdxIcon
 } = require( '../../../codex.js' );
 const {
-	cdxIconAdd,
-	cdxIconArrowPrevious,
-	cdxIconCheck,
-	cdxIconClose
+	cdxIconAdd
 } = require( '../icons.json' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
@@ -125,8 +74,6 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxMessage,
-		CdxProgressBar,
 		WikibaseWbui2025EditStatement,
 		WikibaseWbui2025ModalOverlay,
 		WikibaseWbui2025AddStatementValue
@@ -146,14 +93,10 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			cdxIconAdd,
-			cdxIconArrowPrevious,
-			cdxIconCheck,
-			cdxIconClose,
 			showProgress: false,
 			formSubmitted: false,
 			editStatementDataLoaded: false,
 			newStatementId: null,
-			showEditStatementModal: true,
 			showAddValueModal: false
 		};
 	},
@@ -168,11 +111,6 @@ module.exports = exports = defineComponent( {
 		},
 		isDeletedProperty() {
 			return wbui2025.store.isDeletedProperty( this.propertyId );
-		},
-		saveMessage() {
-			return mw.config.get( 'wgEditSubmitButtonLabelPublish' )
-				? mw.msg( 'wikibase-publish' )
-				: mw.msg( 'wikibase-save' );
 		},
 		statements() {
 			return wbui2025.store.getStatementsForProperty( this.propertyId );
@@ -214,14 +152,12 @@ module.exports = exports = defineComponent( {
 				// eslint-disable-next-line vue/no-undef-properties
 				this.propertyDatatype
 			).then( () => {
-				this.showEditStatementModal = false;
 				this.showAddValueModal = true;
 			} );
 		},
 		finishAddValue() {
 			this.newStatementId = null;
 			this.showAddValueModal = false;
-			this.showEditStatementModal = true;
 		},
 		cancelAddValue() {
 			if ( this.newStatementId ) {
@@ -229,20 +165,11 @@ module.exports = exports = defineComponent( {
 			}
 			this.newStatementId = null;
 			this.showAddValueModal = false;
-			this.showEditStatementModal = true;
-		},
-		onModalHide() {
-			if ( this.showAddValueModal ) {
-				// eslint-disable-next-line vue/no-undef-properties
-				this.cancelAddValue();
-				return;
-			}
-			this.$emit( 'hide' );
 		},
 		submitForm() {
 			const propertyId = this.propertyId;
 			// eslint-disable-next-line vue/no-undef-properties
-			this.submitFormWithElementRef( this.$refs.editFormActionsRef )
+			this.submitFormWithElementRef( this.$refs.modalOverlayRef.$refs.modalOverlayActionsRef )
 				.then( ( { success } ) => {
 					if ( success ) {
 						nextTick( () => wbui2025.util.scrollToStatementWithPropertyId( propertyId ) );
@@ -250,9 +177,6 @@ module.exports = exports = defineComponent( {
 				} );
 		},
 		cancelForm() {
-			this.showAddValueModal = false;
-			this.showEditStatementModal = false;
-
 			this.$emit( 'hide' );
 
 			nextTick( () => {
@@ -276,60 +200,17 @@ module.exports = exports = defineComponent( {
 <style lang="less">
 @import 'mediawiki.skin.variables.less';
 
-.wikibase-wbui2025-edit-statement {
-	position: relative;
-	background-color: @background-color-base;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	height: @size-full;
-	width: @size-full;
-
-	ul {
-		padding-left: 0;
-	}
-
-	li {
-		margin-bottom: 0;
-	}
-
-	.wikibase-wbui2025-edit-statement-heading {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+.wikibase-wbui2025-edit-statement-group-modal {
+	.wikibase-wbui2025-modal-overlay__header {
 		padding: @spacing-125 @spacing-75;
-		box-shadow: 0 2px 11.8px 0 @box-shadow-color-alpha-base;
-		gap: @spacing-25;
+	}
 
-		.cdx-icon {
-			position: absolute;
-			left: @spacing-75;
-			top: 50%;
-			transform: translateY(-50%);
-			cursor: @cursor-base--hover;
-		}
-
-		.wikibase-wbui2025-edit-statement-headline {
-			text-align: center;
-
-			p.heading {
-				margin: 0;
-				font-weight: 700;
-				font-size: 1.25rem;
-				line-height: 1.5625rem;
-				padding: 0;
-				color: @color-emphasized;
-			}
-		}
-
-		.wikibase-wbui2025-property-name {
-			font-weight: 700;
-			color: @color-progressive--focus;
-			font-size: 1rem;
-			line-height: 1.6rem;
-			text-align: center;
-		}
+	.wikibase-wbui2025-property-name {
+		font-weight: @font-weight-bold;
+		color: @color-progressive--focus;
+		font-size: @font-size-medium;
+		line-height: 1.6rem;
+		text-align: center;
 	}
 
 	.wikibase-wbui2025-edit-form-body {
@@ -340,59 +221,18 @@ module.exports = exports = defineComponent( {
 		align-items: flex-start;
 		gap: 0.625rem;
 		align-self: stretch;
-
-		.wikibase-wbui2025-add-value {
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			gap: @spacing-150;
-			align-self: stretch;
-			padding: @spacing-125 @spacing-100;
-
-			button.cdx-button {
-				width: @size-full;
-				justify-content: flex-start;
-			}
-		}
 	}
 
-	.wikibase-wbui2025-message-container {
+	.wikibase-wbui2025-add-value {
 		display: flex;
-		justify-content: center;
-		padding: @spacing-150;
-	}
-
-	.wikibase-wbui2025-message {
-		display: flex;
-		width: 343px;
-		max-width: 90%;
-		padding: @spacing-100 @spacing-100 @spacing-100 @spacing-150;
-		justify-content: flex-end;
-		align-items: center;
-		gap: @spacing-50;
-	}
-	.cdx-progress-bar {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-	}
-
-	.wikibase-wbui2025-edit-statement-footer {
-		flex: 0 0 auto;
-		display: flex;
-		padding: @spacing-125 @spacing-400 @spacing-200;
 		flex-direction: column;
-		align-items: center;
-		gap: 0.625rem;
-		box-shadow: 0 -2px 11.8px 0 @box-shadow-color-alpha-base;
-		justify-content: center;
-		position: relative;
-
-		.wikibase-wbui2025-edit-form-actions {
-			display: flex;
-			align-items: center;
-			gap: @spacing-200;
+		align-items: flex-start;
+		gap: @spacing-150;
+		align-self: stretch;
+		padding: @spacing-125 @spacing-100;
+		button.cdx-button {
+			width: @size-full;
+			justify-content: flex-start;
 		}
 	}
 
@@ -406,7 +246,7 @@ module.exports = exports = defineComponent( {
 
 // T439669: Disable sticky heading (~90px) and footer (~100px) on small viewports
 @media ( max-height: 600px ) {
-	.wikibase-wbui2025-edit-statement {
+	.wikibase-wbui2025-edit-statement-group-modal {
 		display: block;
 		overflow: auto;
 	}

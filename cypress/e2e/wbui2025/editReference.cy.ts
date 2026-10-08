@@ -127,27 +127,25 @@ describe( 'wbui2025 edit references', () => {
 				// Second reference: edit the first snak, add a new snak
 				const editedSnakValue = Util.getTestString( 'edited-snak' );
 				const newSnakValue = Util.getTestString( 'new-snak' );
-				editFormPage.valueForms().first().within( () => {
-					editFormPage.references().eq( 1 ).within( ( element ) => {
-						const valueForm = new ValueForm( element );
-						valueForm.textInput().first().type( '{selectAll}{backspace}' + editedSnakValue );
+				editFormPage.references().eq( 1 ).within( ( element ) => {
+					const valueForm = new ValueForm( element );
+					valueForm.textInput().first().type( '{selectAll}{backspace}' + editedSnakValue );
 
-						valueForm.addSnakButton().first().click();
-						valueForm.textInput().eq( 3 ).should( 'be.disabled' );
-						valueForm.selectPropertyFromLookup( propertyName2 );
-						valueForm.textInput().eq( 3 ).type( newSnakValue );
+					valueForm.addSnakButton().first().click();
+					valueForm.textInput().eq( 3 ).should( 'be.disabled' );
+					valueForm.selectPropertyFromLookup( propertyName2 );
+					valueForm.textInput().eq( 3 ).type( newSnakValue );
 
-					} );
+				} );
 
-					editFormPage.references().first().within( ( element ) => {
-						( new ValueForm( element ) ).removeSnakButton().first().click();
-					} );
+				editFormPage.references().first().within( ( element ) => {
+					( new ValueForm( element ) ).removeSnakButton().first().click();
 				} );
 
 				editFormPage.publishButton().click();
 
 				// Verify the edits
-				editFormPage.formRoot().should( 'not.exist' );
+				editFormPage.root().should( 'not.exist' );
 				itemViewPage.referencesSections().first().then( ( element ) => {
 					itemViewPage.referencesAccordion( element ).click();
 					itemViewPage.references( element )
@@ -185,7 +183,7 @@ describe( 'wbui2025 edit references', () => {
 				editFormPage.publishButton().click();
 
 				// Verify the edits
-				editFormPage.formRoot().should( 'not.exist' );
+				editFormPage.root().should( 'not.exist' );
 				itemViewPage.statementsSection().should( 'contain.text', '0 references' );
 
 				cy.task( 'MwApi:GetEntityData', { entityId: itemId } ).then( ( data ) => {

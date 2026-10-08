@@ -67,7 +67,7 @@ describe( 'wbui2025 item view add additional value to existing statement', () =>
 			modal.textInput().clear().type( 'Weather' );
 			modal.confirmButton().click();
 			modal.modal().should( 'not.exist' );
-			edit.formRoot().should( 'exist' );
+			edit.root().should( 'exist' );
 			edit.valueForms().should( 'have.length.at.least', 2 );
 		} );
 	} );
@@ -84,7 +84,7 @@ describe( 'wbui2025 item view add additional value to existing statement', () =>
 			modal.modal().should( 'be.visible' );
 			modal.cancelButton().click();
 			cy.get( AddValueModal.SELECTORS.ROOT ).should( 'not.exist' );
-			edit.formRoot().should( 'be.visible' );
+			edit.root().should( 'be.visible' );
 			edit.publishButton().should( 'be.disabled' );
 		} );
 	} );

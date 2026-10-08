@@ -31,10 +31,12 @@
 								<h2 class="wikibase-wbui2025-modal-overlay__header__title">
 									{{ header }}
 								</h2>
-								<div
-									v-if="subtitleHtml"
-									class="wikibase-wbui2025-modal-overlay__header__subtitle"
-									v-html="subtitleHtml"></div>
+								<slot name="subtitle">
+									<div
+										v-if="subtitleHtml"
+										class="wikibase-wbui2025-modal-overlay__header__subtitle"
+										v-html="subtitleHtml"></div>
+								</slot>
 							</div>
 						</div>
 					</slot>
@@ -228,7 +230,7 @@ module.exports = exports = defineComponent( {
 		margin-bottom: 0;
 	}
 
-	.sd{
+	.sd {
 		display: flex;
 		width: 375px;
 		min-width: 375px;
@@ -267,6 +269,7 @@ module.exports = exports = defineComponent( {
 			padding: 0;
 			color: @color-emphasized;
 			font-family: @font-family-system-sans;
+			text-align: center;
 		}
 
 		&__subtitle {

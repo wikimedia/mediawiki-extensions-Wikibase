@@ -4,12 +4,12 @@ export class EditStatementFormPage {
 
 	public static SELECTORS = {
 		MODAL_ROOT: '.wikibase-wbui2025-edit-statement-group-modal',
-		FORM: '.wikibase-wbui2025-edit-statement',
-		FORM_HEADING: '.wikibase-wbui2025-edit-statement-heading',
+		MODAL_CONTENT: '.wikibase-wbui2025-modal-overlay__content',
+		MODAL_HEADER: '.wikibase-wbui2025-modal-overlay__header',
 		PROPERTY_NAME: '.wikibase-wbui2025-property-name > a',
 		REMOVE_VALUE_BUTTONS: '.wikibase-wbui2025-remove-value > .cdx-button',
 		ADD_VALUE_BUTTONS: '.wikibase-wbui2025-add-value > .cdx-button',
-		SUBMIT_BUTTONS: '.wikibase-wbui2025-edit-form-actions > .cdx-button',
+		FOOTER_BUTTONS: '.wikibase-wbui2025-modal-overlay__footer__actions > .cdx-button',
 		ADD_QUALIFIER_BUTTON: '.wikibase-wbui2025-add-qualifier-button',
 		TEXT_INPUT:
 			'.wikibase-wbui2025-edit-statement-value-input .cdx-text-input input, .wikibase-wbui2025-edit-statement-value-input textarea',
@@ -32,75 +32,75 @@ export class EditStatementFormPage {
 	}
 
 	public formHeading(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.FORM_HEADING );
+		return this.root().find( EditStatementFormPage.SELECTORS.MODAL_HEADER );
 	}
 
 	public addQualifierButton(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.ADD_QUALIFIER_BUTTON );
+		return this.root().find( EditStatementFormPage.SELECTORS.ADD_QUALIFIER_BUTTON );
 	}
 
 	public textInput(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.TEXT_INPUT ).first();
+		return this.root().find( EditStatementFormPage.SELECTORS.TEXT_INPUT ).first();
 	}
 
 	public publishButton(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).last();
+		return this.root().find( EditStatementFormPage.SELECTORS.FOOTER_BUTTONS ).last();
 	}
 
 	public cancelButton(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.SUBMIT_BUTTONS ).first();
+		return this.root().find( EditStatementFormPage.SELECTORS.FOOTER_BUTTONS ).first();
 	}
 
 	public lookupInput(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.LOOKUP_INPUT );
+		return this.root().find( EditStatementFormPage.SELECTORS.LOOKUP_INPUT );
 	}
 
 	public lookupComponent(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT );
+		return this.root().find( EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT );
 	}
 
 	public menu(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.MENU );
+		return this.root().find( EditStatementFormPage.SELECTORS.MENU );
 	}
 
 	public rankSelect(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.RANK_SELECT );
+		return this.root().find( EditStatementFormPage.SELECTORS.RANK_SELECT );
 	}
 
 	public snakTypeSelect(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.SNAK_TYPE_SELECT );
+		return this.root().find( EditStatementFormPage.SELECTORS.SNAK_TYPE_SELECT );
 	}
 
 	public menuItems(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
+		return this.root().find( EditStatementFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
 	public menuItemByName( name: string ): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM )
+		return this.root().find( EditStatementFormPage.SELECTORS.MENU_ITEM )
 			.filter( ':visible' ).contains( name ).first();
 	}
 
 	public menuItemThumbnails(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.MENU_ITEM_THUMBNAIL );
+		return this.root().find( EditStatementFormPage.SELECTORS.MENU_ITEM_THUMBNAIL );
 	}
 
 	public references(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES );
+		return this.root().find( EditStatementFormPage.SELECTORS.REFERENCES );
 	}
 
 	public referenceSnaks(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.REFERENCE_SNAKS );
+		return this.root().find( EditStatementFormPage.SELECTORS.REFERENCE_SNAKS );
 	}
 
 	public referencesAccordion(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.REFERENCES_ACCORDION );
+		return this.root().find( EditStatementFormPage.SELECTORS.REFERENCES_ACCORDION );
 	}
 
 	public addReferenceButton(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.ADD_REFERENCE_BUTTON );
+		return this.root().find( EditStatementFormPage.SELECTORS.ADD_REFERENCE_BUTTON );
 	}
 
-	private root(): Chainable {
+	public root(): Chainable {
 		return cy.get( EditStatementFormPage.SELECTORS.MODAL_ROOT );
 	}
 
@@ -114,18 +114,6 @@ export class EditStatementFormPage {
 
 	public removeValueButtons(): Chainable {
 		return this.root().find( EditStatementFormPage.SELECTORS.REMOVE_VALUE_BUTTONS );
-	}
-
-	public getLookupInputSelector(): string {
-		return EditStatementFormPage.SELECTORS.LOOKUP_INPUT;
-	}
-
-	public getLookupComponentSelector(): string {
-		return EditStatementFormPage.SELECTORS.LOOKUP_COMPONENT;
-	}
-
-	public formRoot(): Chainable {
-		return cy.get( EditStatementFormPage.SELECTORS.FORM );
 	}
 
 }

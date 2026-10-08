@@ -74,7 +74,7 @@ describe( 'wbui2025 time datatypes', () => {
 			editFormPage.publishButton().click();
 
 			/* Wait for the form to close, and check the value is changed */
-			editFormPage.formHeading().should( 'not.exist' );
+			editFormPage.root().should( 'not.exist' );
 			itemViewPage.mainSnakValues().first().should(
 				'have.html',
 				'12 CE<sup class="wb-calendar-name">Gregorian</sup>',
@@ -90,7 +90,7 @@ describe( 'wbui2025 time datatypes', () => {
 			editFormPage.publishButton().click();
 
 			/* Wait for the form to close, and check the value is changed */
-			editFormPage.formHeading().should( 'not.exist' );
+			editFormPage.root().should( 'not.exist' );
 			itemViewPage.mainSnakValues().first().should( 'have.html', '2. century' );
 		} );
 	} );

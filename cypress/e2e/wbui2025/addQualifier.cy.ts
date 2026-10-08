@@ -86,7 +86,7 @@ describe( 'wbui2025 add qualifiers', () => {
 			editStatementFormPage.publishButton().click();
 
 			/* Wait for the form to close, and check the value is changed */
-			editStatementFormPage.formRoot().should( 'not.exist' );
+			editStatementFormPage.root().should( 'not.exist' );
 			itemViewPage.qualifiersSections().first().then( ( element ) => {
 				itemViewPage.qualifiers( element ).should( 'contain.text', qualifierSnakValue );
 			} );
@@ -108,7 +108,7 @@ describe( 'wbui2025 add qualifiers', () => {
 			editStatementFormPage.publishButton().click();
 
 			/* Wait for the form to close, and check the value is changed */
-			editStatementFormPage.formRoot().should( 'not.exist' );
+			editStatementFormPage.root().should( 'not.exist' );
 			itemViewPage.qualifiersSections().first().then( ( element ) => {
 				itemViewPage.qualifiers( element ).should( 'contain.text', updatedQualifierSnakValue );
 			} );
@@ -121,7 +121,7 @@ describe( 'wbui2025 add qualifiers', () => {
 			} );
 			editStatementFormPage.publishButton().click();
 			/* Wait for the form to close, and check the value is gone */
-			editStatementFormPage.formRoot().should( 'not.exist' );
+			editStatementFormPage.root().should( 'not.exist' );
 			itemViewPage.qualifiersSections().should( 'not.exist' );
 
 			/*

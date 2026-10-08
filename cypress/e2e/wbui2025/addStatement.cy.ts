@@ -80,7 +80,7 @@ describe( 'wbui2025 item view add statement', () => {
 			addStatementFormPage.editExistingStatementButton().click();
 
 			const editStatementFormPage = new EditStatementFormPage();
-			editStatementFormPage.formRoot().should( 'exist' );
+			editStatementFormPage.root().should( 'exist' );
 			editStatementFormPage.cancelButton().click();
 
 			// Scroll to see the floating add statement button and click it twice, then dismiss the form

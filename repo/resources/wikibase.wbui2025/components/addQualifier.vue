@@ -1,5 +1,6 @@
 <template>
 	<wikibase-wbui2025-modal-overlay
+		modal-class="wikibase-wbui2025-add-qualifier-modal"
 		:header="$i18n( 'wikibase-addqualifier' )"
 		minimal-style
 		hide-footer

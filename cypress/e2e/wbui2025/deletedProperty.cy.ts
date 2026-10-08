@@ -67,7 +67,7 @@ describe.skip( 'wbui2025 deleted property', () => {
 				.click();
 
 			const editForm = new EditStatementFormPage();
-			editForm.formRoot().should( 'not.exist' );
+			editForm.root().should( 'not.exist' );
 		} );
 	} );
 } );

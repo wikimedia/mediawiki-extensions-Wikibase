@@ -1,5 +1,6 @@
 <template>
 	<wikibase-wbui2025-modal-overlay
+		modal-class="wikibase-wbui2025-add-reference-modal"
 		:header="$i18n( 'wikibase-addreference' )"
 		minimal-style
 		hide-footer
