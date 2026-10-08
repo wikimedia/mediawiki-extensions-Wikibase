@@ -13,7 +13,6 @@ use MediaWiki\Content\ValidationParams;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
-use MediaWiki\Language\Language;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\WikiPage;
@@ -527,21 +526,6 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
-	 * @see ContentHandler::getPageViewLanguage
-	 *
-	 * This implementation returns the user language, because entities get rendered in
-	 * the user's language. The PageContentLanguage hook is bypassed.
-	 *
-	 * @param Title $title the page to determine the language for.
-	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
-	 *
-	 * @return Language The page's language
-	 */
-	public function getPageViewLanguage( Title $title, ?Content $content = null ) {
-		return RequestContext::getMain()->getLanguage();
-	}
-
-	/**
 	 * @see ContentHandler::getPageLanguage
 	 *
 	 * This implementation unconditionally returns the wiki's content language.
@@ -550,13 +534,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @note Ideally, this would return 'mul' to indicate multilingual content. But MediaWiki
 	 * currently doesn't support that.
 	 *
-	 * @note in several places in mediawiki, most importantly the parser cache, getPageLanguage
-	 * is used in places where getPageViewLanguage would be more appropriate.
-	 *
-	 * @param Title $title the page to determine the language for.
-	 * @param Content|null $content the page's content, if you have it handy, to avoid reloading it.
-	 *
-	 * @return Language The page's language
+	 * @inheritDoc
 	 */
 	public function getPageLanguage( Title $title, ?Content $content = null ) {
 		return MediaWikiServices::getInstance()->getContentLanguage();
@@ -823,7 +801,7 @@ abstract class EntityHandler extends ContentHandler {
 		// And we need to include EntityHandler::PARSER_VERSION in the cache key too
 		$parserOutput->recordOption( 'wb' );
 		if ( $generateHtml ) {
-			$language = $this->getPageViewLanguage( $target );
+			$language = RequestContext::getMain()->getLanguage();
 			$services = MediaWikiServices::getInstance();
 			$html = $services->getLinkRenderer()->makeRedirectHeader(
 				$language, $target, false
