@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Villager-bloc-h"
+		]
+	},
+	"wikibase-edit": "编辑",
+	"wikibase-add": "添加",
+	"wikibase-label-empty": "没定义标签",
+	"wikibase-description-empty": "没定义个描述",
+	"wikibase-sitelinks-special": "别个网站"
+}
