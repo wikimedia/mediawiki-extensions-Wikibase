@@ -290,9 +290,9 @@ module.exports = exports = defineComponent( {
 		flex: 0 0 auto;
 		flex-direction: column;
 		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
-		padding: @spacing-125 0 @spacing-200;
 
 		.wikibase-wbui2025-modal-overlay__footer__actions {
+			padding: @spacing-125 0 @spacing-200;
 			align-items: center;
 			justify-content: center;
 			display: flex;
