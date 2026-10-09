@@ -5,7 +5,7 @@ const { assert, clientFactory } = require( 'api-testing' );
 const { default: OpenAPIRequestCoercer } = require( 'openapi-request-coercer' );
 const { default: OpenAPIRequestValidator } = require( 'openapi-request-validator' );
 
-const basePath = 'rest.php';
+const basePath = '/rest.php';
 const openapiSchema = JSON.parse( readFileSync( `${ __dirname }/../../../src/openapi.json` ) );
 
 class RequestBuilder {

@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@redocly/cli": "^1.25.11",
 		"ajv": "^8.17.1",
-		"api-testing": "^1.7.0",
+		"api-testing": "1.8.1",
 		"clean-webpack-plugin": "^4.0.0",
 		"copy-webpack-plugin": "^10.2.4",
 		"css-loader": "^6.7.1",

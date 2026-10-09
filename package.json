@@ -58,7 +58,7 @@
 		"@wdio/mocha-framework": "^9.32.0",
 		"@wdio/spec-reporter": "^9.32.0",
 		"@wikimedia/codex": "2.3.1",
-		"api-testing": "1.7.2",
+		"api-testing": "1.8.1",
 		"apollo-boost": "^0.4.9",
 		"axe-core": "^4.10.3",
 		"cross-fetch": "^3.1.5",
