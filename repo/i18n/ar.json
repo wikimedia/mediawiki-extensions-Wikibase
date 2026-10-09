@@ -370,7 +370,7 @@
 	"wikibase-listproperties-legend": "الحصول على قائمة بالخاصيات حسب نوع البيانات",
 	"wikibase-listproperties-datatype": "نوع البيانات:",
 	"wikibase-listproperties-all": "أنواع البيانات كلِّها",
-	"wikibase-listproperties-submit": "جد",
+	"wikibase-listproperties-submit": "ابحث",
 	"wikibase-listproperties-invalid-datatype": "\"$1\" ليس نوع بيانات صحيحاً.",
 	"special-itemswithoutsitelinks": "عناصر بلا وصلات مواقع",
 	"special-entitydata": "بيانات الكائن",
