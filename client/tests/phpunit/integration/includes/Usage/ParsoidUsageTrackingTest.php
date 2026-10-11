@@ -47,8 +47,10 @@ class ParsoidUsageTrackingTest extends \MediaWikiIntegrationTestCase {
 	private function getPageConfig(): IPageConfig {
 		$pageConfigFactory = $this->getServiceContainer()->getParsoidPageConfigFactory();
 		$pageIdentity = $this->getNonexistingTestPage(); // arbitrary
+		$parserOptions = ParserOptions::newFromAnon();
+		$parserOptions->setUseParsoid();
 		return $pageConfigFactory->createFromParserOptions(
-			ParserOptions::newFromAnon(),
+			$parserOptions,
 			$pageIdentity
 		);
 	}
