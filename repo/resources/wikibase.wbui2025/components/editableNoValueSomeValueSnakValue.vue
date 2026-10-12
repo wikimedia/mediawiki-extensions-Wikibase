@@ -131,11 +131,11 @@ module.exports = exports = defineComponent( {
 
 div.wikibase-wbui2025-edit-statement-snak-value {
 	justify-content: center;
-	width: 100%;
+	width: @size-full;
 	display: flex;
 
 	div.wikibase-wbui2025-snak-value {
-		width: 100%;
+		width: @size-full;
 
 		// The base style for the reading-mode makes long values scrollable, and indicates
 		// this with a gradient. These styles are unnecessary in edit mode, and cause problems
@@ -144,7 +144,7 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 		padding-right: revert;
 
 		.cdx-text-input, .cdx-text-area {
-			width: 100%;
+			width: @size-full;
 			min-width: revert;
 		}
 
@@ -155,7 +155,7 @@ div.wikibase-wbui2025-edit-statement-snak-value {
 	}
 
 	div.wikibase-wbui2025-novalue-somevalue-holder {
-		width: 100%;
+		width: @size-full;
 		display: flex;
 		align-items: center;
 		padding-left: @spacing-12;

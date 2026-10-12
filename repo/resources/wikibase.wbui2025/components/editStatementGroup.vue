@@ -282,8 +282,8 @@ module.exports = exports = defineComponent( {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
-	height: 100%;
-	width: 100%;
+	height: @size-full;
+	width: @size-full;
 
 	ul {
 		padding-left: 0;
@@ -299,7 +299,7 @@ module.exports = exports = defineComponent( {
 		flex-direction: column;
 		align-items: center;
 		padding: @spacing-125 @spacing-75;
-		box-shadow: 0 2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		box-shadow: 0 2px 11.8px 0 @box-shadow-color-alpha-base;
 		gap: @spacing-25;
 
 		.cdx-icon {
@@ -307,7 +307,7 @@ module.exports = exports = defineComponent( {
 			left: @spacing-75;
 			top: 50%;
 			transform: translateY(-50%);
-			cursor: pointer;
+			cursor: @cursor-base--hover;
 		}
 
 		.wikibase-wbui2025-edit-statement-headline {
@@ -350,7 +350,7 @@ module.exports = exports = defineComponent( {
 			padding: @spacing-125 @spacing-100;
 
 			button.cdx-button {
-				width: 100%;
+				width: @size-full;
 				justify-content: flex-start;
 			}
 		}
@@ -385,7 +385,7 @@ module.exports = exports = defineComponent( {
 		flex-direction: column;
 		align-items: center;
 		gap: 0.625rem;
-		box-shadow: 0 -2px 11.8px 0 rgba(0, 0, 0, 0.10);
+		box-shadow: 0 -2px 11.8px 0 @box-shadow-color-alpha-base;
 		justify-content: center;
 		position: relative;
 

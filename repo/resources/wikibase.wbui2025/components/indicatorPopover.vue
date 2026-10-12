@@ -188,7 +188,7 @@ module.exports = exports = defineComponent( {
 .wikibase-wbui2025-indicator-popover-header-row {
 	display: flex;
 	gap: @spacing-50;
-	width: 100%;
+	width: @size-full;
 }
 
 .wikibase-wbui2025-indicator-popover--multiple-issues {
@@ -199,7 +199,7 @@ module.exports = exports = defineComponent( {
 	}
 
 	.wikibase-wbui2025-stepper {
-		width: 100%;
+		width: @size-full;
 		margin-bottom: @spacing-100;
 	}
 

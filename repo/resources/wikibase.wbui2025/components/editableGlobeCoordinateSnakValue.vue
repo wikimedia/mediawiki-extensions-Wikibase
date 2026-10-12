@@ -323,7 +323,7 @@ module.exports = exports = defineComponent( {
 
 .wikibase-coordinate-popover__map-placeholder {
 	min-height: 180px;
-	border: 1px solid @border-color-subtle;
+	border: @border-subtle;
 	background: @background-color-interactive-subtle;
 	padding: @spacing-25;
 	overflow: clip;

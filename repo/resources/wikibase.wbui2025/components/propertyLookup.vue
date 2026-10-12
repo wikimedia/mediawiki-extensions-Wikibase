@@ -153,6 +153,6 @@ module.exports = exports = defineComponent( {
 
 .wikibase-wbui2025-property-lookup {
 	min-width: @size-1600;
-	width: 100%;
+	width: @size-full;
 }
 </style>
