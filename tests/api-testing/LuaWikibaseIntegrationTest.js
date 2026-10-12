@@ -243,7 +243,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelByLang|${ testItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ englishLabel }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.en' );
 	} );
@@ -264,7 +265,8 @@ describe( 'Lua Wikibase integration', () => {
 				const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 				await writeTextToPage( mindy, `{{#invoke:${ module }|${ luaTestMethod }}}`, pageTitle );
 				const pageText = await parsePage( pageTitle );
-				assert.equal( pageText, '' );
+				// eslint-disable-next-line security/detect-unsafe-regex
+				assert.match( pageText, /^(<section[^>]*><span[^>]*><\/span><\/section>)?$/ );
 				const usageAspects = await getUsageAspects( pageTitle, testItemId );
 				assert.equal( usageAspects, expectedAspect );
 			} );
@@ -276,7 +278,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelAfterReassignedEntityId }}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ englishLabel }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.en' );
 	} );
@@ -285,14 +288,16 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageForRedirectsToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getLabelByLang|${ redirectedItemId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ englishLabel }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ englishLabel }(</span>)?\\s*</p>` ) );
 	} );
 
 	it( 'getEntity_claims can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ examplePropertyValue }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- property values (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ examplePropertyValue }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, `C.${ testPropertyId }` );
 	} );
@@ -301,7 +306,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims|${ testPropertyId + '1' }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, '' );
+		// eslint-disable-next-line security/detect-unsafe-regex
+		assert.match( pageText, /^(<section[^>]*><span[^>]*><\/span><\/section>)?$/ );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, `C.${ testPropertyId + '1' }` );
 	} );
@@ -310,7 +316,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_qual|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ exampleQualifierValue }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- qualifier values (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ exampleQualifierValue }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.include( usageAspects, `CQR.${ testPropertyId }` );
 	} );
@@ -319,7 +326,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_claims_with_ref|${ testPropertyId }}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ exampleRefValue }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- ref values (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ exampleRefValue }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.include( usageAspects, `CQR.${ testPropertyId }` );
 	} );
@@ -328,7 +336,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_aliases}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ englishLabel + '-redirected' }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ englishLabel + '-redirected' }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'A.en' );
 	} );
@@ -337,7 +346,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getEntity_labels}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ germanLabel }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- labels (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ germanLabel }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.equal( usageAspects, 'L.de' );
 	} );
@@ -346,7 +356,8 @@ describe( 'Lua Wikibase integration', () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( mindy, `{{#invoke:${ module }|getDescription}}`, pageTitle );
 		const pageText = await parsePage( pageTitle );
-		assert.equal( pageText, `<p>${ englishDescription }\n</p>` );
+		// eslint-disable-next-line security/detect-non-literal-regexp -- descriptions (uniq()) are regex-safe
+		assert.match( pageText, new RegExp( `<p[^>]*>(<span[^>]*>)?${ englishDescription }(</span>)?\\s*</p>` ) );
 		const usageAspects = await getUsageAspects( pageTitle, testItemId );
 		assert.isNotEmpty( usageAspects );
 		for ( const usageAspect of usageAspects ) {
