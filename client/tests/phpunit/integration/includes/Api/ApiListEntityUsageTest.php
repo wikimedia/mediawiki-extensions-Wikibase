@@ -85,6 +85,11 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					'eu_entity_id' => 'Q5',
 					'eu_aspect' => 'S',
 				],
+				[
+					'eu_page_id' => 33,
+					'eu_entity_id' => 'Q6',
+					'eu_aspect' => 'S',
+				],
 			],
 		];
 		$euDb = $this->getEntityUsageDomainDb( $this->getDb() );
@@ -233,6 +238,21 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 					],
 				],
 			],
+			'entity usage with missing page is skipped' => [
+				[
+					'wbleuentities' => 'Q3|Q6',
+				],
+				[
+					[
+						"ns" => 0,
+						'title' => "Vienna",
+						"pageid" => 11,
+						"entityusage" => [
+							"Q3" => [ "aspects" => [ "O", "S" ] ],
+						],
+					],
+				],
+			],
 		];
 	}
 
@@ -292,4 +312,12 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 		$this->assertArrayEquals( [], $result );
 	}
 
+	public function testEntityUsageWithMissingPage() {
+		$result = $this->callApiModule( [
+			'wbleuentities' => 'Q6',
+		] );
+
+		$this->assertArrayNotHasKey( "warnings", $result );
+		$this->assertArrayEquals( [], $result );
+	}
 }

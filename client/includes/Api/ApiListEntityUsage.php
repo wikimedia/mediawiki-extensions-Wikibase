@@ -220,7 +220,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 			->caller( __METHOD__ )
 			->fetchResultSet();
 
-		$joinedRes = $this->joinedResults( $euResArr, $pageRes, $fields );
+		$joinedRes = $this->joinResults( $euResArr, $pageRes, $fields );
 		return new FakeResultWrapper( $joinedRes );
 	}
 
@@ -297,22 +297,26 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 	 * @param IResultWrapper $pageData
 	 * @param string[] $fieldsToCopy
 	 */
-	private function joinedResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
+	private function joinResults( array $euData, IResultWrapper $pageData, array $fieldsToCopy ): array {
 		$pagesGroupedByPageId = [];
-		$joinedQueryRes = array_map( fn( object $row ): object => clone $row, $euData );
+		$joinedQueryRes = [];
 
 		foreach ( $pageData as $row ) {
 			$pagesGroupedByPageId[(int)$row->page_id] = $row;
 		}
 
-		foreach ( $joinedQueryRes as $euRow ) {
+		foreach ( $euData as $euRow ) {
 			$pageId = (int)$euRow->eu_page_id;
 
-			$pageRow = $pagesGroupedByPageId[$pageId];
-			if ( $pageRow ) {
+			if ( isset( $pagesGroupedByPageId[$pageId] ) ) {
+				$pageRow = $pagesGroupedByPageId[$pageId];
+				$euRowCopy = clone $euRow;
+
 				foreach ( $fieldsToCopy as $field ) {
-					$euRow->$field = $pageRow->$field;
+					$euRowCopy->$field = $pageRow->$field;
 				}
+
+				$joinedQueryRes[] = $euRowCopy;
 			}
 		}
 		return $joinedQueryRes;
