@@ -28,7 +28,8 @@
 			"Themasterriot",
 			"Vivaelcelta",
 			"Yupik",
-			"Aleator"
+			"Aleator",
+			"Ovruni"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -106,6 +107,7 @@
 	"wikibase-pageinfo-entity-usage-D": "Algunas descripciones",
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descripción: $1",
 	"wikibase-pageinfo-entity-usage-T": "Título",
+	"wikibase-pageinfo-entity-usage-C": "Algunas declaraciones",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declaración: $1",
 	"wikibase-pageinfo-entity-usage-X": "Todos los datos de la entidad",
 	"wikibase-pageinfo-entity-usage-O": "Otros (p. ej.: alias, existencia de entidades)",
