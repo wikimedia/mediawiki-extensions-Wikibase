@@ -2,6 +2,7 @@ import Chainable = Cypress.Chainable;
 
 export class AddQualifierFormPage {
 	public static SELECTORS = {
+		MODAL_ROOT: '.wikibase-wbui2025-add-qualifier-modal',
 		HEADING: '.wikibase-wbui2025-modal-overlay__header__title-group h2',
 		PROPERTY_INPUT: '.wikibase-wbui2025-property-lookup input',
 		SNAK_VALUE_INPUT: '.wikibase-wbui2025-add-qualifier-value input, .wikibase-wbui2025-add-qualifier-value textarea',
@@ -15,45 +16,49 @@ export class AddQualifierFormPage {
 		PROPERTY_OPTIONS: '.wikibase-wbui2025-property-lookup .cdx-menu-item',
 	};
 
+	public root(): Chainable {
+		return cy.get( AddQualifierFormPage.SELECTORS.MODAL_ROOT );
+	}
+
 	public heading(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.HEADING );
+		return this.root().find( AddQualifierFormPage.SELECTORS.HEADING );
 	}
 
 	public propertyInput(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.PROPERTY_INPUT );
+		return this.root().find( AddQualifierFormPage.SELECTORS.PROPERTY_INPUT );
 	}
 
 	public menuItems(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
+		return this.root().find( AddQualifierFormPage.SELECTORS.MENU_ITEM ).filter( ':visible' );
 	}
 
 	public snakValueInput(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.SNAK_VALUE_INPUT );
+		return this.root().find( AddQualifierFormPage.SELECTORS.SNAK_VALUE_INPUT );
 	}
 
 	public snakValueLookup(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.SNAK_VALUE_LOOKUP );
+		return this.root().find( AddQualifierFormPage.SELECTORS.SNAK_VALUE_LOOKUP );
 	}
 
 	public snakValueLookupInput(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.SNAK_VALUE_LOOKUP_INPUT );
+		return this.root().find( AddQualifierFormPage.SELECTORS.SNAK_VALUE_LOOKUP_INPUT );
 	}
 
 	public snakValueMenuItems(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.SNAK_VALUE_MENU_ITEMS );
+		return this.root().find( AddQualifierFormPage.SELECTORS.SNAK_VALUE_MENU_ITEMS );
 	}
 
 	public menu(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.MENU );
+		return this.root().find( AddQualifierFormPage.SELECTORS.MENU );
 	}
 
 	public addButton(): Chainable {
-		return cy.get( AddQualifierFormPage.SELECTORS.ADD_BUTTON );
+		return this.root().find( AddQualifierFormPage.SELECTORS.ADD_BUTTON );
 	}
 
 	public setProperty( searchTerm: string ): this {
 		this.propertyInput().type( searchTerm );
-		cy.get( AddQualifierFormPage.SELECTORS.PROPERTY_OPTIONS ).first().click();
+		this.root().find( AddQualifierFormPage.SELECTORS.PROPERTY_OPTIONS ).first().click();
 		return this;
 	}
 

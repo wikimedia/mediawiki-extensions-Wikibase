@@ -234,7 +234,7 @@ describe( 'wbui2025 add reference', () => {
 			} );
 
 			editStatementFormPage.publishButton().click();
-			editStatementFormPage.formRoot().should( 'not.exist' );
+			editStatementFormPage.root().should( 'not.exist' );
 
 			itemViewPage.referencesSections().first().then( ( element ) => {
 				itemViewPage.referencesAccordion( element ).click();

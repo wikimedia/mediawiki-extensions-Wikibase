@@ -151,7 +151,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				editFormPage.publishButton().click();
 
 				/* Wait for the form to close, and check the value is changed */
-				editFormPage.formHeading().should( 'not.exist' );
+				editFormPage.root().should( 'not.exist' );
 				itemViewPage.mainSnakValues().first().should( 'contain.text', newLinkedEntityLabel );
 
 				/* Edit the value again, changing it to be 'novalue' */
@@ -165,7 +165,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				editFormPage.publishButton().click();
 
 				/* Wait for the form to close, and check the value is changed */
-				editFormPage.formHeading().should( 'not.exist' );
+				editFormPage.root().should( 'not.exist' );
 				itemViewPage.mainSnakValues().first().should( 'contain.text', 'no value' );
 
 				/* Edit the value again, changing back to the original */
@@ -181,7 +181,7 @@ describe( 'wbui2025 entityId datatypes (item, property)', () => {
 				editFormPage.publishButton().click();
 
 				/* Wait for the form to close, and check the value is changed */
-				editFormPage.formHeading().should( 'not.exist' );
+				editFormPage.root().should( 'not.exist' );
 				itemViewPage.mainSnakValues().first().should( 'contain.text', linkedEntityLabel );
 			} );
 		} );

@@ -56,6 +56,7 @@ const {
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 const editStatementGroupComponent = require( '../../../resources/wikibase.wbui2025/components/editStatementGroup.vue' );
 const editStatementComponent = require( '../../../resources/wikibase.wbui2025/components/editStatement.vue' );
+const modalOverlayComponent = require( '../../../resources/wikibase.wbui2025/components/modalOverlay.vue' );
 const { CdxButton, CdxIcon } = require( '../../../codex.js' );
 const { mount } = require( '@vue/test-utils' );
 const { storeWithStatementsAndProperties } = require( '../piniaHelpers.js' );
@@ -129,7 +130,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			const closeButton = buttons[ buttons.length - 2 ];
 			const publishButton = buttons[ buttons.length - 1 ];
 			const backIcon = wrapper.findComponent( CdxIcon );
-			return { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon };
+			const modalOverlay = wrapper.findComponent( modalOverlayComponent );
+			return { wrapper, statementForm, addValueButton, closeButton, publishButton, backIcon, modalOverlay };
 		}
 
 		it( 'mount its child components correctly', async () => {
@@ -152,16 +154,11 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 			expect( publishButton.text() ).toContain( 'wikibase-publish' );
 		} );
 
-		it( 'emits a hide event when close button is clicked', async () => {
-			const { wrapper, closeButton } = await mountAndGetParts();
-			await closeButton.trigger( 'click' );
-			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
-			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
-		} );
-
-		it( 'emits a hide event when back icon is clicked', async () => {
-			const { wrapper, backIcon } = await mountAndGetParts();
-			await backIcon.trigger( 'click' );
+		// this happens when clicking the back button in the header, the cancel button
+		// or the browser's back button
+		it( 'emits a hide event after receiving one from the modalOverlay', async () => {
+			const { wrapper, modalOverlay } = await mountAndGetParts();
+			await modalOverlay.vm.$emit( 'hide' );
 			expect( wrapper.emitted() ).toHaveProperty( 'hide' );
 			expect( wrapper.emitted( 'hide' ).length ).toBe( 1 );
 		} );

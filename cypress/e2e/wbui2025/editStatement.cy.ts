@@ -62,7 +62,7 @@ describe( 'wbui2025 item view edit statements', () => {
 			editFormPage.removeValueButtons().click();
 			editFormPage.publishButton().click();
 			// The edit form/modal is hidden
-			editFormPage.formRoot().should( 'not.exist' );
+			editFormPage.root().should( 'not.exist' );
 			// The statement values for this property are gone in the item view
 			itemViewPage.statementsSection().should( 'not.contain', 'ExampleString' );
 		} );

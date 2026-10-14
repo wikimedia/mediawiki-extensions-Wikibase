@@ -423,7 +423,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 
 			cy.wait( '@saveStatement' );
 
-			editFormPage.formHeading().should( 'not.exist' );
+			editFormPage.root().should( 'not.exist' );
 		} );
 	} );
 } );
