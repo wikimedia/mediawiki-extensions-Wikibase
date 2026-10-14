@@ -489,6 +489,14 @@ return [
 	'tmpEnableGraphQL' => false,
 
 	/**
+	 * @note Temporary, will be removed in the future.
+	 *
+	 * @var bool Whether to enable hCaptcha (ConfirmEdit/hCaptcha) support in Wikibase editing interfaces.
+	 * @see https://phabricator.wikimedia.org/T440832
+	 */
+	'tmpEnableHCaptchaIntegration' => false,
+
+	/**
 	 * @var bool Whether to enable the icons for changes coming from Wikibase displayed in Recent Changes (T397258)
 	 */
 	'enableWikidataIconsInClientWatchlist' => false,
