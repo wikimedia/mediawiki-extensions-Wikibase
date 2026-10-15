@@ -18,9 +18,7 @@ use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Skin\SkinTemplate;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleValue;
-use MediaWiki\User\Options\UserOptionsLookup;
 use MediaWiki\User\User;
-use MediaWiki\User\UserIdentity;
 use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\DataAccess\DatabaseEntitySource;
@@ -359,12 +357,9 @@ XML
 	}
 
 	public static function provideWbUi2025Setting() {
-		yield 'wbUi2025 disabled mobile site enabled' => [ true, false, false, null, true ];
-		yield 'wbUi2025 enabled mobile site disabled' => [ false, true, false, null, false ];
-		yield 'wbUi2025 enabled mobile site enabled' => [ true, true, false, null, 'wbui2025' ];
-		yield 'wbUi2025 disabled mobile site enabled beta feature enabled' => [ true, false, true, "1", 'wbui2025' ];
-		yield 'wbUi2025 disabled mobile site enabled beta feature enabled user opted out' => [ true, false, true, "0", true ];
-		yield 'wbUi2025 disabled mobile site enabled beta feature disabled user opted in' => [ true, false, false, "1", true ];
+		yield 'wbUi2025 disabled mobile site enabled' => [ true, false, true ];
+		yield 'wbUi2025 enabled mobile site disabled' => [ false, true, false ];
+		yield 'wbUi2025 enabled mobile site enabled' => [ true, true, 'wbui2025' ];
 	}
 
 	/**
@@ -373,21 +368,14 @@ XML
 	public function testOnParserOptionsRegister(
 		bool $mobileSite,
 		bool $tmpMobileEditingUI,
-		bool $tmpEnableMobileEditingUIBetaFeature,
-		?string $userBetaOptionValue,
 		bool|string $expectedWbMobileValue
 	) {
 		$defaults = [];
 		$inCacheKey = [];
 		$lazyOptions = [];
-		$this->setService( 'UserOptionsLookup', $this->createConfiguredMock(
-			UserOptionsLookup::class,
-			[ 'getOption' => $userBetaOptionValue ]
-		) );
 		$this->setService( 'WikibaseRepo.MobileSite', fn() => $mobileSite );
 		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( [
 			'tmpMobileEditingUI' => $tmpMobileEditingUI,
-			'tmpEnableMobileEditingUIBetaFeature' => $tmpEnableMobileEditingUIBetaFeature,
 			'disabledDataTypes' => [],
 			'enableMulLanguageCode' => false,
 		] ) );
@@ -410,9 +398,7 @@ XML
 			'termboxVersion',
 			Wbui2025FeatureFlag::PARSER_OPTION_NAME,
 		], array_keys( $lazyOptions ) );
-		$parserOptions = $this->createConfiguredMock( ParserOptions::class, [
-			'getUserIdentity' => $this->createMock( UserIdentity::class ),
-		] );
+		$parserOptions = $this->createMock( ParserOptions::class );
 		$this->assertIsCallable( $lazyOptions[ 'wb' ] );
 		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
 		$this->assertIsCallable( $lazyOptions[ 'termboxVersion' ] );

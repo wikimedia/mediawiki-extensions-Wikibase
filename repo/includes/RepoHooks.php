@@ -29,7 +29,6 @@ use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Page\Hook\RevisionFromEditCompleteHook;
 use MediaWiki\Parser\Hook\ParserFirstCallInitHook;
 use MediaWiki\Parser\Hook\ParserOptionsRegisterHook;
-use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\ResourceLoader\CodexModule;
@@ -1217,10 +1216,9 @@ final class RepoHooks implements
 		};
 		$defaults[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = null;
 		$inCacheKey[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = true;
-		$lazyLoad[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = function ( ParserOptions $parserOptions ) {
+		$lazyLoad[Wbui2025FeatureFlag::PARSER_OPTION_NAME] = function () {
 			return WikibaseRepo::getWbui2025FeatureFlag()->generateWbMobileFlagValue(
 				WikibaseRepo::getMobileSite(),
-				$parserOptions->getUserIdentity(),
 			);
 		};
 	}
