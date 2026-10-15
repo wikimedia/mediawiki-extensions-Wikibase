@@ -943,10 +943,7 @@ final class RepoHooks implements
 		// temporarily register this RL module only if the feature flag for mobile editing or its beta feature are
 		// enabled, so that wikis without either feature flag don't even pay the small cost of loading the module
 		// *definition* (when the feature stabilizes, this should move into repo/resources/Resources.php: T395783)
-		if (
-			$settings->getSetting( 'tmpMobileEditingUI' ) ||
-			$settings->getSetting( 'tmpEnableMobileEditingUIBetaFeature' )
-		) {
+		if ( $settings->getSetting( 'tmpMobileEditingUI' ) ) {
 			$modules['wikibase.wbui2025.entityView.styles'] = $moduleTemplate + [
 				'class' => VueStylesModule::class,
 				'styles' => [
