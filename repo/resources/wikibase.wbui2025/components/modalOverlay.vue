@@ -304,6 +304,18 @@ module.exports = exports = defineComponent( {
 	}
 }
 
+// T439669: Enable sticky heading and footer only on viewports that have enough space. Note this
+// isn't the screen but the viewport height without address bar, on-screen keyboard, etc.
+@media ( max-height: 600px ) {
+	.wikibase-wbui2025-modal-overlay {
+		overflow: auto;
+
+		.wikibase-wbui2025-modal-overlay__content {
+			flex-shrink: 0;
+		}
+	}
+}
+
 .wikibase-wbui2025-modal-overlay--minimal {
 	.wikibase-wbui2025-modal-overlay__header {
 		align-self: stretch;
