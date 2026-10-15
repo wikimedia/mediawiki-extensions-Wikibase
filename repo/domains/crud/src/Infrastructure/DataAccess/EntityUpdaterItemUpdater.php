@@ -23,15 +23,18 @@ use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter
 class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 
 	private EntityUpdater $entityUpdater;
+	private EntityIdAllocator $entityIdAllocator;
 	private SitelinksReadModelConverter $sitelinksReadModelConverter;
 	private StatementReadModelConverter $statementReadModelConverter;
 
 	public function __construct(
 		EntityUpdater $entityUpdater,
+		EntityIdAllocator $entityIdAllocator,
 		SitelinksReadModelConverter $sitelinksReadModelConverter,
 		StatementReadModelConverter $statementReadModelConverter
 	) {
 		$this->entityUpdater = $entityUpdater;
+		$this->entityIdAllocator = $entityIdAllocator;
 		$this->sitelinksReadModelConverter = $sitelinksReadModelConverter;
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
@@ -40,6 +43,8 @@ class EntityUpdaterItemUpdater implements ItemUpdater, ItemCreator {
 		if ( $item->getId() ) {
 			throw new InvalidArgumentException( 'new item cannot have an ID' );
 		}
+		$this->entityIdAllocator->allocateId( $item );
+
 		return $this->convertToItemRevision( $this->entityUpdater->create( $item, $editMetadata ) );
 	}
 

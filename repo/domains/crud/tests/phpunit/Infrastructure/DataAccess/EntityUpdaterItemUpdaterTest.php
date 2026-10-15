@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\Site\Site;
 use MediaWiki\Site\SiteLookup;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\Item as ItemWriteModel;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
@@ -21,6 +22,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelinks;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityIdAllocator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterItemUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\SitelinksReadModelConverter;
@@ -43,6 +45,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 	private const DE_WIKI_URL_PREFIX = 'https://de.wikipedia.org/wiki/';
 
 	private EntityUpdater $entityUpdater;
+	private EntityIdAllocator $entityIdAllocator;
 	private StatementReadModelConverter $statementReadModelConverter;
 
 	protected function setUp(): void {
@@ -50,6 +53,7 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 
 		$this->statementReadModelConverter = $this->newStatementReadModelConverter();
 		$this->entityUpdater = $this->createStub( EntityUpdater::class );
+		$this->entityIdAllocator = $this->createStub( EntityIdAllocator::class );
 	}
 
 	public function testCreate(): void {
@@ -62,20 +66,30 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 			->andSiteLink( 'enwiki', 'Title', [ 'Q789' ] )
 			->build();
 
+		$expectedItemId = new ItemId( 'Q123' );
+
+		$this->entityIdAllocator = $this->createMock( EntityIdAllocator::class );
+		$this->entityIdAllocator->expects( $this->once() )
+			->method( 'allocateId' )
+			->with( $itemToCreate )
+			->willReturnCallback( fn( ItemWriteModel $item ) => $item->setId( $expectedItemId ) );
+
 		$this->entityUpdater = $this->createMock( EntityUpdater::class );
 		$this->entityUpdater->expects( $this->once() )
 			->method( 'create' )
 			->with( $itemToCreate, $editMetaData )
-			->willReturnCallback( function () use ( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) {
-				$itemToCreate->setId( new ItemId( 'Q123' ) );
-				return new EntityRevision( $itemToCreate, $expectedRevisionId, $expectedRevisionTimestamp );
-			} );
+			->willReturnCallback(
+				function ( ItemWriteModel $item ) use ( $expectedItemId, $expectedRevisionId, $expectedRevisionTimestamp ) {
+					$this->assertEquals( $expectedItemId, $item->getId() );
+					return new EntityRevision( $item, $expectedRevisionId, $expectedRevisionTimestamp );
+				}
+			);
 
 		$itemRevision = $this->newItemUpdater()->create( $itemToCreate, $editMetaData );
 
 		$this->assertEquals(
 			new Item(
-				$itemRevision->getItem()->getId(),
+				$expectedItemId,
 				new Labels( new Label( 'en', 'English Label' ) ),
 				new Descriptions( new Description( 'en', 'English Description' ) ),
 				new Aliases( new AliasesInLanguage( 'en', [ 'English alias', 'alias in English' ] ) ),
@@ -152,7 +166,12 @@ class EntityUpdaterItemUpdaterTest extends TestCase {
 	}
 
 	private function newItemUpdater(): EntityUpdaterItemUpdater {
-		return new EntityUpdaterItemUpdater( $this->entityUpdater, $this->newSitelinkConverter(), $this->statementReadModelConverter );
+		return new EntityUpdaterItemUpdater(
+			$this->entityUpdater,
+			$this->entityIdAllocator,
+			$this->newSitelinkConverter(),
+			$this->statementReadModelConverter
+		);
 	}
 
 	private function newSitelinkConverter(): SitelinksReadModelConverter {
