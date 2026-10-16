@@ -1,7 +1,7 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
+    branches: [ master,debug ]
 
 env:
   COMPOSER_HOME: ${{ github.workspace }}/.composer
@@ -15,6 +15,7 @@ jobs:
         include:
         - env:
             MW_BRANCH: master
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: ru
             WB: both
@@ -22,6 +23,7 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: en
             WB: client
@@ -29,6 +31,7 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_CURL_VERBOSE: 1
             DBTYPE: mysql
             LANG: en
             WB: repo
@@ -36,6 +39,7 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: ar
             WB: both
@@ -43,6 +47,7 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_CURL_VERBOSE: 1
             DBTYPE: mysql
             LANG: en
             WB: both
