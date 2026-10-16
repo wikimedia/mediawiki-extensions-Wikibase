@@ -1,7 +1,7 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
+    branches: [ master,github-clone ]
 
 env:
   COMPOSER_HOME: ${{ github.workspace }}/.composer
@@ -68,6 +68,22 @@ jobs:
       with:
         path: ${{ env.COMPOSER_HOME }}/cache
         key: composer-cache-php${{ matrix.php-versions }}
+    - name: configure Git to prefer GitHub over Wikimedia Gerrit to avoid clone errors (403/429)
+      run: |
+        cat >> ~/.gitconfig << 'EOF'
+
+        [url "https://github.com/wikimedia/mediawiki.git"]
+        insteadOf = "https://gerrit.wikimedia.org/r/mediawiki/core.git"
+
+        [url "https://github.com/wikimedia/mediawiki-extensions-"]
+        insteadOf = "https://gerrit.wikimedia.org/r/mediawiki/extensions/"
+
+        [url "https://github.com/wikimedia/mediawiki-skins-"]
+        insteadOf = "https://gerrit.wikimedia.org/r/mediawiki/skins/"
+
+        [url "https://github.com/wikimedia/wikibase-termbox.git"]
+        insteadOf = "https://gerrit.wikimedia.org/r/wikibase/termbox"
+        EOF
     - name: install.sh
       env: ${{ matrix.env }}
       run: |
