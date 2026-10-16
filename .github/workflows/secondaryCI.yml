@@ -1,7 +1,7 @@
 name: Wikibase Secondary CI
 on:
   push:
-    branches: [ master ]
+    branches: [ master,useragent ]
 
 env:
   COMPOSER_HOME: ${{ github.workspace }}/.composer
@@ -15,6 +15,8 @@ jobs:
         include:
         - env:
             MW_BRANCH: master
+            GIT_USER_AGENT: GitHubActions/0.0 (https://github.com/wikimedia/mediawiki-extensions-Wikibase/; arthur.taylor@wikimedia.de)
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: ru
             WB: both
@@ -22,6 +24,8 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_USER_AGENT: GitHubActions/0.0 (https://github.com/wikimedia/mediawiki-extensions-Wikibase/; arthur.taylor@wikimedia.de)
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: en
             WB: client
@@ -29,6 +33,8 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_USER_AGENT: GitHubActions/0.0 (https://github.com/wikimedia/mediawiki-extensions-Wikibase/; arthur.taylor@wikimedia.de)
+            GIT_CURL_VERBOSE: 1
             DBTYPE: mysql
             LANG: en
             WB: repo
@@ -36,6 +42,8 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_USER_AGENT: GitHubActions/0.0 (https://github.com/wikimedia/mediawiki-extensions-Wikibase/; arthur.taylor@wikimedia.de)
+            GIT_CURL_VERBOSE: 1
             DBTYPE: sqlite
             LANG: ar
             WB: both
@@ -43,6 +51,8 @@ jobs:
           php-versions: '8.3.30'
         - env:
             MW_BRANCH: master
+            GIT_USER_AGENT: GitHubActions/0.0 (https://github.com/wikimedia/mediawiki-extensions-Wikibase/; arthur.taylor@wikimedia.de)
+            GIT_CURL_VERBOSE: 1
             DBTYPE: mysql
             LANG: en
             WB: both
