@@ -476,7 +476,5 @@
 	"wikibase-scoped-search-search-entities": "Tìm kiếm thực thể",
 	"wikibase-scoped-search-search-entities-description": "Tìm các kiểu thực thể {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Khoản mục",
-	"wikibase-scoped-search-property-scope-name": "Thuộc tính",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Giao diện sửa đổi di động",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Kích hoạt giao diện sửa đổi di động mới đang được thử nghiệm."
+	"wikibase-scoped-search-property-scope-name": "Thuộc tính"
 }

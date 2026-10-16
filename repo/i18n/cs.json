@@ -514,8 +514,6 @@
 	"wikibase-scoped-search-search-entities-description": "Hledat různé typy entit na {{grammar:6sg|{{SITENAME}}}}",
 	"wikibase-scoped-search-item-scope-name": "Položky",
 	"wikibase-scoped-search-property-scope-name": "Vlastnosti",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Editace položek Wikidat na mobilních zařízeních",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Zapnutím této funkce můžete editovat Wikidata z mobilního zařízení!\nTento projekt vyvíjeným týmem Wikidat umožňuje editaci položek z chytrého telefonu pomocí funkčností optimalizovaných pro mobily.",
 	"wikibase-stepper-progress": "$1 z $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problémy a návrhy",
 	"wikibase-indicator-popover-multiple-issue-previous": "Předchozí",

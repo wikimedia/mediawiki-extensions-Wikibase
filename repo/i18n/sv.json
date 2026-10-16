@@ -559,8 +559,6 @@
 	"wikibase-scoped-search-search-entities-description": "Hitta olika typer av {{SITENAME}}-entitet",
 	"wikibase-scoped-search-item-scope-name": "Objekt",
 	"wikibase-scoped-search-property-scope-name": "Egenskaper",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Redigera Wikidata-objekt på mobila enheter",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Aktivera den här funktionen för att redigera Wikidata från din mobila enhet! Detta projekt, som är under utveckling, av Wikidata-teamet gör det möjligt att redigera objekt från din smartphone med en mobiloptimerad upplevelse.",
 	"wikibase-stepper-progress": "$1 av $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problem och förslag",
 	"wikibase-indicator-popover-multiple-issue-previous": "Föregående",

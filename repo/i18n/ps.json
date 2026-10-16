@@ -382,8 +382,6 @@
 	"wikibase-scoped-search-search-entities-description": "د {{SITENAME}} ځانتياوو بېلابېل ډولونه ومومئ",
 	"wikibase-scoped-search-item-scope-name": "توکي",
 	"wikibase-scoped-search-property-scope-name": "ځانتياوې",
-	"wikibase-mobile-editing-ui-beta-feature-message": "ويکي‌اومتوک وتوکي په موبايل وسيلو کې سمول",
-	"wikibase-mobile-editing-ui-beta-feature-description": "د خپل موبايل وسيلې څخه د ويکي‌اومتوک سمولو دا ځانگړنه چارن کړئ د ويکي‌اومتوک ډله دا په پراختيا پروژه کې ستاسو د ځيرک موبايل څخه د غوره شوې تجربې سره د توکو سمول چارنوي.",
 	"wikibase-stepper-progress": "$1 د $2",
 	"wikibase-indicator-popover-multiple-issue-title": "ستونزې او وړانديزونه",
 	"wikibase-indicator-popover-multiple-issue-previous": "پخوانی",

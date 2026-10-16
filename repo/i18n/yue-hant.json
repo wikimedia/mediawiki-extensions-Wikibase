@@ -538,7 +538,5 @@
 	"wikibase-scoped-search-search-entities": "搵實體",
 	"wikibase-scoped-search-search-entities-description": "搵唔同類型嘅{{SITENAME}}實體",
 	"wikibase-scoped-search-item-scope-name": "項目",
-	"wikibase-scoped-search-property-scope-name": "屬性",
-	"wikibase-mobile-editing-ui-beta-feature-message": "流動編輯用戶介面",
-	"wikibase-mobile-editing-ui-beta-feature-description": "啟用全新嘅實驗性流動編輯用戶介面。"
+	"wikibase-scoped-search-property-scope-name": "屬性"
 }

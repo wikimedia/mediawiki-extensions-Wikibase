@@ -544,8 +544,6 @@
 	"wikibase-scoped-search-search-entities-description": "Hel noocyo kala duwan oo shayada {{SITENAME}} ah",
 	"wikibase-scoped-search-item-scope-name": "Shayada",
 	"wikibase-scoped-search-property-scope-name": "Guryaha",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Tafatir Shayada Wikidata ee aaladaha moobilka",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Daar astaantan si aad uga tafatirto Wikidata aaladdaada moobilka! Mashruucan horumarintiisu socoto ee ka socda Kooxda Wikidata wuxuu awood kuu siinayaa inaad Shayada kaga tafatirto taleefankaaga casriga ah adigoo helaya khibrad ku habboon moobilka.",
 	"wikibase-stepper-progress": "$1 ee $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Arrimaha iyo Talooyinka",
 	"wikibase-indicator-popover-multiple-issue-previous": "Kii hore",

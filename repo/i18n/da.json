@@ -558,8 +558,6 @@
 	"wikibase-scoped-search-search-entities-description": "Find forskellige typer af {{SITENAME}}-enheder",
 	"wikibase-scoped-search-item-scope-name": "Emner",
 	"wikibase-scoped-search-property-scope-name": "Egenskaber",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Rediger Wikidata-emner på mobile enheder",
-	"wikibase-mobile-editing-ui-beta-feature-description": "Slå denne funktion til for at redigere Wikidata fra din mobilenhed! Dette projekt, der er under udvikling fra Wikidata-teamet, gør det muligt at redigere emner fra din smartphone med en mobiloptimeret oplevelse.",
 	"wikibase-stepper-progress": "$1 af $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problemer og forslag",
 	"wikibase-indicator-popover-multiple-issue-previous": "Forrige",

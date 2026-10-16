@@ -564,8 +564,6 @@
 	"wikibase-scoped-search-search-entities-description": "{{SITENAME}} 개체의 다른 유형들을 검색",
 	"wikibase-scoped-search-item-scope-name": "항목",
 	"wikibase-scoped-search-property-scope-name": "속성",
-	"wikibase-mobile-editing-ui-beta-feature-message": "모바일 기기에서 위키데이터 항목을 편집",
-	"wikibase-mobile-editing-ui-beta-feature-description": "모바일 기기에서 위키데이터를 편집하려면 이 기능을 켜세요! 위키데이터 팀에서 개발 중인 이 프로젝트는 모바일 기기에 최적화된 환경에서 스마트폰으로 항목을 편집할 수 있도록 지원합니다.",
 	"wikibase-stepper-progress": "$1 / $2",
 	"wikibase-indicator-popover-multiple-issue-title": "이슈 및 제안",
 	"wikibase-indicator-popover-multiple-issue-previous": "이전",

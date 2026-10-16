@@ -540,8 +540,6 @@
 	"wikibase-scoped-search-search-entities-description": "Encuentra diferentes tipos de entidades {{SITENAME}}",
 	"wikibase-scoped-search-item-scope-name": "Elementos",
 	"wikibase-scoped-search-property-scope-name": "Propiedades",
-	"wikibase-mobile-editing-ui-beta-feature-message": "Edita elementos de Wikidata en dispositivos móviles",
-	"wikibase-mobile-editing-ui-beta-feature-description": "¡Activa esta función para editar Wikidata desde tu dispositivo móvil! Este proyecto en desarrollo del equipo de Wikidata permite editar elementos desde tu smartphone con una experiencia optimizada para móviles.",
 	"wikibase-stepper-progress": "$1 de $2",
 	"wikibase-indicator-popover-multiple-issue-title": "Problemas y sugerencias",
 	"wikibase-indicator-popover-multiple-issue-previous": "Anterior",
