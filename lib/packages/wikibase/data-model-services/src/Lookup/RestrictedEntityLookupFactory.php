@@ -24,7 +24,7 @@ class RestrictedEntityLookupFactory {
 	private int $entityAccessLimit;
 
 	/**
-	 * @var WeakMap<Parser, EntityLookup>
+	 * @var WeakMap<Parser, RestrictedEntityLookup>
 	 */
 	private WeakMap $restrictedEntityLookupMap;
 
