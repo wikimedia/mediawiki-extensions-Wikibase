@@ -145,6 +145,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\PropertyParts;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\ChangeTagsStoreTagsRetriever;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityIdAllocator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
@@ -537,6 +538,10 @@ return [
 		);
 	},
 
+	'WbCrud.EntityIdAllocator' => function( MediaWikiServices $services ): EntityIdAllocator {
+		return new EntityIdAllocator( WikibaseRepo::getEntityStore( $services ) );
+	},
+
 	'WbCrud.EntityUpdater' => function( MediaWikiServices $services ): EntityUpdater {
 		return new EntityUpdater(
 			RequestContext::getMain(),
@@ -548,7 +553,6 @@ return [
 				new WholeEntityEditSummaryToFormattableSummaryConverter()
 			),
 			$services->getPermissionManager(),
-			WikibaseRepo::getEntityStore( $services ),
 			new GuidGenerator(),
 			WikibaseRepo::getSettings( $services )
 		);
@@ -816,6 +820,7 @@ return [
 	'WbCrud.ItemUpdater' => function( MediaWikiServices $services ): EntityUpdaterItemUpdater {
 		return new EntityUpdaterItemUpdater(
 			WbCrud::getEntityUpdater( $services ),
+			WbCrud::getEntityIdAllocator( $services ),
 			new SitelinksReadModelConverter( $services->getSiteLookup() ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
@@ -1146,6 +1151,7 @@ return [
 	'WbCrud.PropertyUpdater' => function( MediaWikiServices $services ): EntityUpdaterPropertyUpdater {
 		return new EntityUpdaterPropertyUpdater(
 			WbCrud::getEntityUpdater( $services ),
+			WbCrud::getEntityIdAllocator( $services ),
 			new StatementReadModelConverter(
 				WikibaseRepo::getStatementGuidParser( $services ),
 				WikibaseRepo::getPropertyDataTypeLookup( $services )

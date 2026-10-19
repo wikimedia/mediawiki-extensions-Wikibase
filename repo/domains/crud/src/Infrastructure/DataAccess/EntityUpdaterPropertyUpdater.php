@@ -21,14 +21,22 @@ use Wikibase\Repo\Domains\Statements\Domain\Services\StatementReadModelConverter
 class EntityUpdaterPropertyUpdater implements PropertyUpdater, PropertyCreator {
 
 	private EntityUpdater $entityUpdater;
+	private EntityIdAllocator $entityIdAllocator;
 	private StatementReadModelConverter $statementReadModelConverter;
 
-	public function __construct( EntityUpdater $entityUpdater, StatementReadModelConverter $statementReadModelConverter ) {
+	public function __construct(
+		EntityUpdater $entityUpdater,
+		EntityIdAllocator $entityIdAllocator,
+		StatementReadModelConverter $statementReadModelConverter
+	) {
 		$this->entityUpdater = $entityUpdater;
+		$this->entityIdAllocator = $entityIdAllocator;
 		$this->statementReadModelConverter = $statementReadModelConverter;
 	}
 
 	public function create( PropertyWriteModel $property, EditMetadata $editMetadata ): PropertyRevision {
+		$this->entityIdAllocator->allocateId( $property );
+
 		return $this->convertToPropertyRevision( $this->entityUpdater->create( $property, $editMetadata ) );
 	}
 

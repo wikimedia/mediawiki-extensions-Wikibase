@@ -36,10 +36,10 @@ use Wikibase\Repo\WikibaseRepo;
 class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 	public function testCreateItem(): void {
-		$newRevision = $this->newEntityUpdater()->create(
-			NewItem::withLabel( 'en', 'New Item' )->build(),
-			$this->createStub( EditMetadata::class )
-		);
+		$item = NewItem::withLabel( 'en', 'New Item' )->build();
+		WbCrud::getEntityIdAllocator()->allocateId( $item );
+
+		$newRevision = $this->newEntityUpdater()->create( $item, $this->createStub( EditMetadata::class ) );
 
 		$createdItem = $newRevision->getEntity();
 		$this->assertNotEmpty( $createdItem->getId() );
@@ -52,12 +52,12 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 
 	public function testCreateItemWithStatement(): void {
 		$propertyId = new NumericPropertyId( 'P123' );
-		$newRevision = $this->newEntityUpdater()->create(
-			NewItem::withLabel( 'en', 'New Item' )
-				->andStatement( NewStatement::noValueFor( $propertyId ) )
-				->build(),
-			$this->createStub( EditMetadata::class )
-		);
+		$item = NewItem::withLabel( 'en', 'New Item' )
+			->andStatement( NewStatement::noValueFor( $propertyId ) )
+			->build();
+		WbCrud::getEntityIdAllocator()->allocateId( $item );
+
+		$newRevision = $this->newEntityUpdater()->create( $item, $this->createStub( EditMetadata::class ) );
 
 		/** @var Item $createdItem */
 		$createdItem = $newRevision->getEntity();
@@ -166,7 +166,6 @@ class EntityUpdaterIntegrationTest extends MediaWikiIntegrationTestCase {
 			new NullLogger(),
 			$this->createStub( EditSummaryFormatter::class ),
 			$permissionManager,
-			WikibaseRepo::getEntityStore(),
 			new GuidGenerator(),
 			new SettingsArray()
 		);

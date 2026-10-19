@@ -19,6 +19,7 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Descriptions;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Label;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Labels;
 use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Property;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityIdAllocator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdater;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityUpdaterPropertyUpdater;
 use Wikibase\Repo\Domains\Statements\Domain\ReadModel\StatementList;
@@ -37,6 +38,7 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 	use StatementReadModelHelper;
 
 	private EntityUpdater $entityUpdater;
+	private EntityIdAllocator $entityIdAllocator;
 	private StatementReadModelConverter $statementReadModelConverter;
 
 	protected function setUp(): void {
@@ -44,6 +46,7 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 
 		$this->statementReadModelConverter = $this->newStatementReadModelConverter();
 		$this->entityUpdater = $this->createStub( EntityUpdater::class );
+		$this->entityIdAllocator = $this->createStub( EntityIdAllocator::class );
 	}
 
 	public function testCreate(): void {
@@ -52,15 +55,24 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 		$editMetaData = new EditMetadata( [], true, $this->createStub( EditSummary::class ) );
 		[ $propertyToCreate, $expectedResultingProperty ] = $this->newEquivalentWriteAndReadModelProperty();
 		$propertyToCreate->setId( null );
+		$expectedPropertyId = new NumericPropertyId( 'P123' );
+
+		$this->entityIdAllocator = $this->createMock( EntityIdAllocator::class );
+		$this->entityIdAllocator->expects( $this->once() )
+			->method( 'allocateId' )
+			->with( $propertyToCreate )
+			->willReturnCallback( fn( PropertyWriteModel $property ) => $property->setId( $expectedPropertyId ) );
 
 		$this->entityUpdater = $this->createMock( EntityUpdater::class );
 		$this->entityUpdater->expects( $this->once() )
 			->method( 'create' )
 			->with( $propertyToCreate, $editMetaData )
-			->willReturnCallback( function () use ( $propertyToCreate, $expectedRevisionId, $expectedRevisionTimestamp ) {
-				$propertyToCreate->setId( new NumericPropertyId( 'P123' ) );
-				return new EntityRevision( $propertyToCreate, $expectedRevisionId, $expectedRevisionTimestamp );
-			} );
+			->willReturnCallback(
+				function ( PropertyWriteModel $property ) use ( $expectedPropertyId, $expectedRevisionId, $expectedRevisionTimestamp ) {
+					$this->assertEquals( $expectedPropertyId, $property->getId() );
+					return new EntityRevision( $property, $expectedRevisionId, $expectedRevisionTimestamp );
+				}
+			);
 
 		$propertyRevision = $this->newPropertyUpdater()->create( $propertyToCreate, $editMetaData );
 
@@ -123,7 +135,7 @@ class EntityUpdaterPropertyUpdaterTest extends TestCase {
 	}
 
 	private function newPropertyUpdater(): EntityUpdaterPropertyUpdater {
-		return new EntityUpdaterPropertyUpdater( $this->entityUpdater, $this->statementReadModelConverter );
+		return new EntityUpdaterPropertyUpdater( $this->entityUpdater, $this->entityIdAllocator, $this->statementReadModelConverter );
 	}
 
 }

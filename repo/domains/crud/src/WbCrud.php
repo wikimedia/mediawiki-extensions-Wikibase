@@ -77,6 +77,7 @@ use Wikibase\Repo\Domains\Crud\Application\Validation\DescriptionLanguageCodeVal
 use Wikibase\Repo\Domains\Crud\Application\Validation\LabelLanguageCodeValidator;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementRemover;
 use Wikibase\Repo\Domains\Crud\Domain\Services\StatementUpdater;
+use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityIdAllocator;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupItemDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupPropertyDataRetriever;
 use Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess\EntityRevisionLookupStatementRetriever;
@@ -275,6 +276,10 @@ class WbCrud {
 	public static function getPatchPropertyDescriptions( ?ContainerInterface $services = null ): PatchPropertyDescriptions {
 		return ( $services ?: MediaWikiServices::getInstance() )
 			->get( 'WbCrud.PatchPropertyDescriptions' );
+	}
+
+	public static function getEntityIdAllocator( ?ContainerInterface $services = null ): EntityIdAllocator {
+		return ( $services ?: MediaWikiServices::getInstance() )->get( 'WbCrud.EntityIdAllocator' );
 	}
 
 	public static function getEntityUpdater( ?ContainerInterface $services = null ): EntityUpdater {

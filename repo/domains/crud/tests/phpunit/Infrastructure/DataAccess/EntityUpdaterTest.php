@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Domains\Crud\Infrastructure\DataAccess;
 
 use Exception;
 use Generator;
+use LogicException;
 use MediaWiki\Api\ApiMessage;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Message\Message;
@@ -27,8 +28,6 @@ use Wikibase\DataModel\Tests\NewItem;
 use Wikibase\DataModel\Tests\NewStatement;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
@@ -57,7 +56,6 @@ class EntityUpdaterTest extends TestCase {
 	private LoggerInterface $logger;
 	private EditSummaryFormatter $summaryFormatter;
 	private PermissionManager $permissionManager;
-	private EntityStore $entityStore;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -69,18 +67,12 @@ class EntityUpdaterTest extends TestCase {
 		$this->summaryFormatter = $this->createStub( EditSummaryFormatter::class );
 		$this->permissionManager = $this->createStub( PermissionManager::class );
 		$this->permissionManager->method( 'userHasRight' )->willReturn( true );
-		$this->entityStore = $this->createStub( EntityStore::class );
-		$this->entityStore->method( 'assignFreshId' )->willReturnCallback(
-			fn( EntityDocument $entity ) => $entity->setId(
-				$entity->getType() === Item::ENTITY_TYPE
-					? new ItemId( 'Q123' )
-					: new NumericPropertyId( 'P123' )
-			)
-		);
 	}
 
 	public function testCreate(): void {
-		$entityToCreate = NewItem::withLabel( 'en', 'English Label' )
+		$expectedItemId = new ItemId( 'Q64' );
+		$entityToCreate = NewItem::withId( $expectedItemId )
+			->andLabel( 'en', 'English Label' )
 			->andDescription( 'en', 'English Description' )
 			->andStatement( NewStatement::noValueFor( 'P777' ) )
 			->build();
@@ -89,7 +81,6 @@ class EntityUpdaterTest extends TestCase {
 		$expectedRevisionId = 234;
 		$expectedRevisionTimestamp = '20221111070707';
 		$expectedFormattedSummary = 'FORMATTED SUMMARY';
-		$expectedAssignedId = new ItemId( 'Q64' );
 
 		$this->summaryFormatter = $this->createMock( EditSummaryFormatter::class );
 		$this->summaryFormatter->expects( $this->once() )
@@ -108,8 +99,7 @@ class EntityUpdaterTest extends TestCase {
 				false,
 				$editMetadata->getTags()
 			)
-			->willReturnCallback( function ( Item $item ) use ( $expectedAssignedId, $expectedRevisionId, $expectedRevisionTimestamp ) {
-				$this->assertEquals( $expectedAssignedId, $item->getId() );
+			->willReturnCallback( function ( Item $item ) use ( $expectedRevisionId, $expectedRevisionTimestamp ) {
 				$statementId = $item->getStatements()->toArray()[0]->getGuid();
 				$this->assertNotNull( $statementId );
 				$this->assertStringStartsWith( (string)$item->getId(), $statementId );
@@ -122,19 +112,23 @@ class EntityUpdaterTest extends TestCase {
 		$this->editEntityFactory = $this->createMock( MediaWikiEditEntityFactory::class );
 		$this->editEntityFactory->expects( $this->once() )
 			->method( 'newEditEntity' )
-			->with( $this->context, $entityToCreate->getId() )
+			->with( $this->context, $expectedItemId )
 			->willReturn( $editEntity );
-
-		$this->entityStore = $this->createStub( EntityStore::class );
-		$this->entityStore->method( 'assignFreshId' )->willReturnCallback(
-			fn( Item $item ) => $item->setId( $expectedAssignedId )
-		);
 
 		$entityRevision = $this->newEntityUpdater()->create( $entityToCreate, $editMetadata );
 
 		$this->assertEquals( $entityToCreate, $entityRevision->getEntity() );
 		$this->assertSame( $expectedRevisionId, $entityRevision->getRevisionId() );
 		$this->assertSame( $expectedRevisionTimestamp, $entityRevision->getTimestamp() );
+	}
+
+	public function testGivenEntityWithoutId_createThrows(): void {
+		$this->expectException( LogicException::class );
+
+		$this->newEntityUpdater()->create(
+			NewItem::withLabel( 'en', 'English Label' )->build(),
+			$this->createStub( EditMetadata::class )
+		);
 	}
 
 	/**
@@ -280,18 +274,6 @@ class EntityUpdaterTest extends TestCase {
 		}
 	}
 
-	/**
-	 * @dataProvider provideEntity
-	 */
-	public function testGivenRateLimitedCreateRequest_throwsCorrespondingException( EntityDocument $entity ): void {
-		$this->entityStore = $this->createStub( EntityStore::class );
-		$this->entityStore->method( 'assignFreshId' )
-			->willThrowException( new StorageException( EditEntityStatus::newFatal( 'actionthrottledtext' ) ) );
-
-		$this->expectException( RateLimitReached::class );
-		$this->newEntityUpdater()->create( $entity, $this->createStub( EditMetadata::class ) );
-	}
-
 	public static function provideEntity(): Generator {
 		$itemId = new ItemId( 'Q123' );
 		$statementId = new StatementGuid( $itemId, 'AAAAAAAA-BBBB-CCCC-DDDD-EEEEEEEEEEEE' );
@@ -381,7 +363,6 @@ class EntityUpdaterTest extends TestCase {
 			$this->logger,
 			$this->summaryFormatter,
 			$this->permissionManager,
-			$this->entityStore,
 			new GuidGenerator(),
 			new SettingsArray( [ 'maxSerializedEntitySize' => self::MAX_ENTITY_SIZE ] )
 		);
