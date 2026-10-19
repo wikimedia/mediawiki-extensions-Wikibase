@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Domains\Crud\Infrastructure\DataAccess;
 
-use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Api\IApiMessage;
 use MediaWiki\Context\IContextSource;
@@ -14,7 +13,6 @@ use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
@@ -37,40 +35,22 @@ class EntityUpdater {
 	private GuidGenerator $statementIdGenerator;
 	private SettingsArray $repoSettings;
 
-	// backwards compatibility code; will be removed in a follow-up
-	private ?EntityIdAllocator $bcEntityIdAllocator = null;
-
 	public function __construct(
 		IContextSource $context,
 		MediaWikiEditEntityFactory $editEntityFactory,
 		LoggerInterface $logger,
 		EditSummaryFormatter $summaryFormatter,
 		PermissionManager $permissionManager,
-		EntityStore|GuidGenerator $entityStoreOrStatementIdGenerator,
-		GuidGenerator|SettingsArray $statementIdGeneratorOrRepoSettings,
-		?SettingsArray $repoSettings = null
+		GuidGenerator $statementIdGenerator,
+		SettingsArray $repoSettings
 	) {
 		$this->context = $context;
 		$this->editEntityFactory = $editEntityFactory;
 		$this->logger = $logger;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->permissionManager = $permissionManager;
-
-		// backwards compatibility code; will be removed in a follow-up
-		if ( $entityStoreOrStatementIdGenerator instanceof EntityStore ) {
-			if ( !( $statementIdGeneratorOrRepoSettings instanceof GuidGenerator ) || $repoSettings === null ) {
-				throw new InvalidArgumentException( 'Invalid arguments for the deprecated EntityUpdater constructor signature' );
-			}
-			$this->bcEntityIdAllocator = new EntityIdAllocator( $entityStoreOrStatementIdGenerator );
-			$this->statementIdGenerator = $statementIdGeneratorOrRepoSettings;
-			$this->repoSettings = $repoSettings;
-		} else {
-			if ( !( $statementIdGeneratorOrRepoSettings instanceof SettingsArray ) || $repoSettings !== null ) {
-				throw new InvalidArgumentException( 'Invalid arguments for the EntityUpdater constructor' );
-			}
-			$this->statementIdGenerator = $entityStoreOrStatementIdGenerator;
-			$this->repoSettings = $statementIdGeneratorOrRepoSettings;
-		}
+		$this->statementIdGenerator = $statementIdGenerator;
+		$this->repoSettings = $repoSettings;
 	}
 
 	/**
@@ -109,10 +89,6 @@ class EntityUpdater {
 		EditMetadata $editMetadata,
 		int $newOrUpdateFlag
 	): EntityRevision {
-		// backwards compatibility code; will be removed in a follow-up
-		if ( $newOrUpdateFlag === EDIT_NEW && $entity->getId() === null && $this->bcEntityIdAllocator ) {
-			$this->bcEntityIdAllocator->allocateId( $entity );
-		}
 		if ( $entity->getId() === null ) {
 			throw new LogicException( 'The entity to be saved should have an ID at this point' );
 		}
