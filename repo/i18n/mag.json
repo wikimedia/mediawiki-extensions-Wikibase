@@ -116,6 +116,8 @@
 	"wikibase-snakview-snaktypeselector-value": "अनुकूलित मूल्य",
 	"wikibase-snakformat-invalid-value": "अमान्य मूल्य।",
 	"wikibase-snakformat-propertynotfound": "गुणधर्म न भेटलै ।",
+	"wikibase-shortcopyrightwarning-minimal": "\"$1\" पर क्लिक करके अपने [[$2|उपयोगके शर्त]]से सहमत होव हथिन ।",
+	"wikibase-shortcopyrightwarning": "\"$1\" पर क्लिक करके अपने [[$2|उपयोगके शर्त]]से सहमत हो हथिन आउ अपरिवर्तनीय रूपसे अपन योगदानके [$3 $4] के अन्तर्गत प्रकाशित करेला सहमत होव हथिन ।",
 	"wikibase-entityselector-more": "आउ",
 	"wikibase-entityselector-notfound": "कौनो मेल खाइत परिणाम न भेटलै",
 	"wikibase-anonymouseditwarning-heading": "अपने प्रवेश न करलथिन",
