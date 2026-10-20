@@ -893,7 +893,7 @@ return [
 		$labelDescriptionLookupFactory = WikibaseClient::getFallbackLabelDescriptionLookupFactory( $services );
 
 		return new SidebarLinkBadgeDisplay(
-			$labelDescriptionLookupFactory->newLabelDescriptionLookup( $wgLang ),
+			$labelDescriptionLookupFactory,
 			is_array( $badgeClassNames ) ? $badgeClassNames : [],
 			$wgLang
 		);

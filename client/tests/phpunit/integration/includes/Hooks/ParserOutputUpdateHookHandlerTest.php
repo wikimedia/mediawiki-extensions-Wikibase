@@ -37,7 +37,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectTargetLookup;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
@@ -47,6 +46,8 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikimedia\Stats\StatsFactory;
@@ -200,14 +201,14 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getBadgeDisplay() {
-		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$labelDescriptionLookup->method( 'getLabel' )
 			->willReturn( new Term( 'en', 'featured' ) );
 
 		return new LanguageLinkBadgeDisplay(
 			new SidebarLinkBadgeDisplay(
-				$labelDescriptionLookup,
+				$this->newLabelDescriptionLookupFactory( $labelDescriptionLookup ),
 				[ 'Q17' => 'featured' ],
 				$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 			)
@@ -232,7 +233,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 		array $siteLinkData
 	) {
 		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
-			$this->createMock( LabelDescriptionLookup::class ),
+			$this->createMock( FallbackLabelDescriptionLookupFactory::class ),
 			[],
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' )
 		);
@@ -634,6 +635,14 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $contentHandler );
 
 		return $content;
+	}
+
+	private function newLabelDescriptionLookupFactory(
+		FallbackLabelDescriptionLookup $labelDescriptionLookup
+	): FallbackLabelDescriptionLookupFactory {
+		$factory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$factory->method( 'newLabelDescriptionLookup' )->willReturn( $labelDescriptionLookup );
+		return $factory;
 	}
 
 }

@@ -11,9 +11,10 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Hooks\LanguageLinkBadgeDisplay
@@ -30,7 +31,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 	 * @return LanguageLinkBadgeDisplay
 	 */
 	private function getLanguageLinkBadgeDisplay() {
-		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$labelLookup->method( 'getLabel' )
 			->willReturnCallback( function( EntityId $entityId ) {
@@ -46,7 +47,7 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 
 		$badgeClassNames = [ 'Q4' => 'foo', 'Q3' => 'bar' ];
 
-		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay( $labelLookup,
+		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay( $this->newLabelDescriptionLookupFactory( $labelLookup ),
 			$badgeClassNames,
 			MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( 'de' )
 		);
@@ -122,6 +123,14 @@ class LanguageLinkBadgeDisplayTest extends \PHPUnit\Framework\TestCase {
 		$languageLinkBadgeDisplay->applyBadges( $link, $languageLinkTitle, $output );
 
 		$this->assertEquals( $expected, $link );
+	}
+
+	private function newLabelDescriptionLookupFactory(
+		FallbackLabelDescriptionLookup $labelDescriptionLookup
+	): FallbackLabelDescriptionLookupFactory {
+		$factory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$factory->method( 'newLabelDescriptionLookup' )->willReturn( $labelDescriptionLookup );
+		return $factory;
 	}
 
 }

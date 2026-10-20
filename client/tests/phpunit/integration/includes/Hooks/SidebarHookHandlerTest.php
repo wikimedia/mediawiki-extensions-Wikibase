@@ -19,8 +19,9 @@ use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -36,10 +37,10 @@ use Wikimedia\TestingAccessWrapper;
 class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @return LabelDescriptionLookup
+	 * @return FallbackLabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelLookup = $this->createMock( LabelDescriptionLookup::class );
+		$labelLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$labelLookup->method( 'getLabel' )
 			  ->willReturn( 'o' );
@@ -72,7 +73,7 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$badgeDisplay = new LanguageLinkBadgeDisplay(
 			new SidebarLinkBadgeDisplay(
-				$this->getLabelDescriptionLookup(),
+				$this->newLabelDescriptionLookupFactory( $this->getLabelDescriptionLookup() ),
 				[ 'Q17' => 'featured' ],
 				$en
 			)
@@ -278,6 +279,14 @@ class SidebarHookHandlerTest extends MediaWikiIntegrationTestCase {
 		foreach ( $props as $key => $value ) {
 			$this->assertEquals( $value, $outputPage->getProperty( $key ), 'OutputProperty: ' . $key );
 		}
+	}
+
+	private function newLabelDescriptionLookupFactory(
+		FallbackLabelDescriptionLookup $labelDescriptionLookup
+	): FallbackLabelDescriptionLookupFactory {
+		$factory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$factory->method( 'newLabelDescriptionLookup' )->willReturn( $labelDescriptionLookup );
+		return $factory;
 	}
 
 }

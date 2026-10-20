@@ -7,6 +7,7 @@ use MediaWiki\Parser\Sanitizer;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * Basic display logic to output badges in the sidebar
@@ -16,9 +17,17 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 class SidebarLinkBadgeDisplay {
 
 	/**
-	 * @var LabelDescriptionLookup
+	 * @var FallbackLabelDescriptionLookupFactory
 	 */
-	private $labelDescriptionLookup;
+	private $labelDescriptionLookupFactory;
+
+	/**
+	 * Created on first use, building it requires the language fallback chain
+	 * and labels are rarely needed (only for badges, at parse time).
+	 *
+	 * @var LabelDescriptionLookup|null
+	 */
+	private $labelDescriptionLookup = null;
 
 	/**
 	 * @var string[]
@@ -31,16 +40,16 @@ class SidebarLinkBadgeDisplay {
 	private $language;
 
 	/**
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param string[] $badgeClassNames
 	 * @param Language $language
 	 */
 	public function __construct(
-		LabelDescriptionLookup $labelDescriptionLookup,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeClassNames,
 		Language $language
 	) {
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeClassNames = $badgeClassNames;
 		$this->language = $language;
 	}
@@ -124,6 +133,9 @@ class SidebarLinkBadgeDisplay {
 	 * @return string|null
 	 */
 	private function getLabel( ItemId $badgeId ) {
+		$this->labelDescriptionLookup ??=
+			$this->labelDescriptionLookupFactory->newLabelDescriptionLookup( $this->language );
+
 		try {
 			$term = $this->labelDescriptionLookup->getLabel( $badgeId );
 		} catch ( LabelDescriptionLookupException ) {

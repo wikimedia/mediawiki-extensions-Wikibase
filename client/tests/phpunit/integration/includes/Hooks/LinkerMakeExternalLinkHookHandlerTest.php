@@ -21,6 +21,7 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\FederatedProperties\FederatedPropertyId;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Hooks\LinkerMakeExternalLinkHookHandler
@@ -74,7 +75,7 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 			new ClientEntityLinkFormatter( $languageFactory ),
 			$this->mockParser,
 			$this->isRepoEntityNamespaceMain,
-			$this->mockLookup,
+			$this->newLabelDescriptionLookupFactory(),
 			parse_url( $this->settings->getSetting( 'repoUrl' ), PHP_URL_HOST ),
 			$this->context->getTitle(),
 		);
@@ -298,6 +299,14 @@ class LinkerMakeExternalLinkHookHandlerTest extends TestCase {
 		$this->assertFalse( $myHookHandler->isRepoUrl( "http://default.mediawiki.mwdd.localhost:8080/wiki/Item:Q1" ) );
 		$this->assertFalse( $myHookHandler->isRepoUrl( "https://en.wikipedia.org/wiki/Main_Page" ) );
 		$this->assertFalse( $myHookHandler->isRepoUrl( "wikidata.org" ) );
+	}
+
+	private function newLabelDescriptionLookupFactory(): FallbackLabelDescriptionLookupFactory {
+		$factory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		// Use a callback, some tests replace $this->mockLookup after creating the handler
+		$factory->method( 'newLabelDescriptionLookup' )
+			->willReturnCallback( fn () => $this->mockLookup );
+		return $factory;
 	}
 
 }

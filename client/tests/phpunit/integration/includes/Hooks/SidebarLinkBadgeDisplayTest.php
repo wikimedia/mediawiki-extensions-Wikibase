@@ -6,8 +6,9 @@ use Error;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 
 /**
  * @covers \Wikibase\Client\Hooks\SidebarLinkBadgeDisplay
@@ -21,10 +22,10 @@ use Wikibase\DataModel\Term\Term;
 class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 
 	/**
-	 * @return LabelDescriptionLookup
+	 * @return FallbackLabelDescriptionLookup
 	 */
 	private function getLabelDescriptionLookup() {
-		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$labelDescriptionLookup->method( 'getLabel' )
 			->willReturnCallback( static function ( ItemId $itemId ) {
@@ -49,7 +50,7 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 		$badgeClassNames = [ 'Q4' => 'foo', 'Q3' => 'bar' ];
 
 		return new SidebarLinkBadgeDisplay(
-			$this->getLabelDescriptionLookup(),
+			$this->newLabelDescriptionLookupFactory( $this->getLabelDescriptionLookup() ),
 			$badgeClassNames,
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'de' )
 		);
@@ -109,6 +110,14 @@ class SidebarLinkBadgeDisplayTest extends MediaWikiIntegrationTestCase {
 		$sidebarLinkBadgeDisplay->applyBadgeToLink( $link, $badgeInfo );
 
 		$this->assertEquals( $expected, $link );
+	}
+
+	private function newLabelDescriptionLookupFactory(
+		FallbackLabelDescriptionLookup $labelDescriptionLookup
+	): FallbackLabelDescriptionLookupFactory {
+		$factory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
+		$factory->method( 'newLabelDescriptionLookup' )->willReturn( $labelDescriptionLookup );
+		return $factory;
 	}
 
 }

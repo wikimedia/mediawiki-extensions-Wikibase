@@ -30,7 +30,9 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 	private string $repoUrlHost;
 	private bool $isRepoEntityNamespaceMain;
 	private ClientEntityLinkFormatter $clientEntityLinkFormatter;
-	private FallbackLabelDescriptionLookup $labelDescriptionLookup;
+	private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory;
+	/** Created on first use, most external links don't point to repo entities */
+	private ?FallbackLabelDescriptionLookup $labelDescriptionLookup = null;
 	private ?Title $currentPageTitle;
 
 	public function __construct(
@@ -38,7 +40,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		ClientEntityLinkFormatter $clientEntityLinkFormatter,
 		EntityIdParser $entityIdParser,
 		bool $isRepoEntityNamespaceMain,
-		FallbackLabelDescriptionLookup $labelDescriptionLookup,
+		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		string $repoUrlHost,
 		?Title $currentPageTitle,
 	) {
@@ -47,7 +49,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		$this->isRepoEntityNamespaceMain = $isRepoEntityNamespaceMain;
 		$this->clientEntityLinkFormatter = $clientEntityLinkFormatter;
 		$this->repoUrlHost = $repoUrlHost;
-		$this->labelDescriptionLookup = $labelDescriptionLookup;
+		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->currentPageTitle = $currentPageTitle;
 	}
 
@@ -62,8 +64,6 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		$context = RequestContext::getMain();
 		$repoUrlHost = parse_url( $settings->getSetting( 'repoUrl' ), PHP_URL_HOST );
 		$language = $context->getUser()->isSafeToLoad() ? $context->getLanguage() : $contentLanguage;
-		$terms = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
-		$labelDescriptionLookup = $fallbackLabelDescriptionLookupFactory->newLabelDescriptionLookup( $language, [], $terms );
 		$isRepoEntityNamespaceMain = $entityNamespaceLookup->isEntityNamespace( 0 );
 		$currentPageTitle = $context->hasTitle() ? $context->getTitle() : null;
 		return new self(
@@ -71,7 +71,7 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 			$clientEntityLinkFormatter,
 			$entityIdParser,
 			$isRepoEntityNamespaceMain,
-			$labelDescriptionLookup,
+			$fallbackLabelDescriptionLookupFactory,
 			$repoUrlHost,
 			$currentPageTitle,
 		);
@@ -128,6 +128,12 @@ class LinkerMakeExternalLinkHookHandler implements LinkerMakeExternalLinkHook {
 		if ( !$hasExplicitNamespace && !$this->isRepoEntityNamespaceMain ) {
 			return;
 		}
+
+		$this->labelDescriptionLookup ??= $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
+			$this->contentLanguage,
+			[],
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ]
+		);
 
 		try {
 			$labelData = $this->termFallbackToTermData( $this->labelDescriptionLookup->getLabel( $parsedEntityId ) );
