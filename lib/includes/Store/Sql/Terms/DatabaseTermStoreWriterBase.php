@@ -81,7 +81,7 @@ abstract class DatabaseTermStoreWriterBase {
 
 		$this->getDbw()->onTransactionCommitOrIdle( function() use ( $termInLangIdsToClean ) {
 			foreach ( $termInLangIdsToClean as $termInLangId ) {
-				$this->jobQueueGroup->push(
+				$this->jobQueueGroup->lazyPush(
 					CleanTermsIfUnusedJob::getJobSpecificationNoTitle( [
 						CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => [ $termInLangId ],
 					] )
