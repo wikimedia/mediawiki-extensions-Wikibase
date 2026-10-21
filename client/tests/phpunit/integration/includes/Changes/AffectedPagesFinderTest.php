@@ -12,6 +12,11 @@ use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageSelectQueryBuilder;
 use MediaWiki\Page\PageStore;
 use MediaWiki\Page\PageStoreRecord;
+use MediaWiki\Page\ParserOutputAccess;
+use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\WikiPageFactory;
+use MediaWiki\Parser\ParserOptions;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use MediaWikiIntegrationTestCase;
@@ -135,7 +140,10 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			new NullLogger()
+			new NullLogger(),
+			$this->getServiceContainer()->getWikiPageFactory(),
+			$this->getNullParserOutputAccess(),
+			$this->getServiceContainer()->getStatsFactory()
 		);
 
 		return $affectedPagesFinder;
@@ -593,12 +601,15 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$pageTitle = 'RandomKitten-2x5jsg8j3bvmpm4!5';
 
 		$affectedPagesFinder = new AffectedPagesFinder(
-			$this->getSiteLinkUsageLookup( $pageTitle ),
+			$this->getSiteLinkUsageLookup(),
 			$this->getTitleFactory(),
 			$this->getPageStore(),
 			$this->getLinkBatchFactory(),
 			'enwiki',
-			new NullLogger()
+			new NullLogger(),
+			$this->getServiceContainer()->getWikiPageFactory(),
+			$this->getNullParserOutputAccess(),
+			$this->getServiceContainer()->getStatsFactory()
 		);
 
 		$itemId = new ItemId( 'Q1' );
@@ -614,6 +625,95 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 		$usages = $affectedPagesFinder->getAffectedUsagesByPage( $change );
 
 		$this->assertSame( [], $usages );
+	}
+
+	private function getNullParserOutputAccess(): ParserOutputAccess {
+		$mockParserOutputAccess = $this->createMock( ParserOutputAccess::class );
+		$mockParserOutputAccess->method( 'getCachedParserOutput' )
+			->willReturn( null );
+		return $mockParserOutputAccess;
+	}
+
+	public function provideGetAffectedUsagesByPage_withCachedParserOutput() {
+		$q1 = new ItemId( 'Q1' );
+		$q1BundledStatementUsage = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE );
+		$q1p5StatementUsage = new EntityUsage( $q1, EntityUsage::STATEMENT_USAGE, 'P5' );
+
+		return [
+			'ParserCache miss' => [
+				'databaseUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage ] ) ],
+				'parserEntityUsages' => null,
+				'expectedUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage, $q1p5StatementUsage ] ) ],
+			],
+			'ParserCache hit, no intersection' => [
+				'databaseUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage ] ) ],
+				'parserEntityUsages' => [
+					'Q1#C.P1' => true,
+				],
+				'expectedUsages' => [],
+			],
+			'ParserCache hit, has intersection' => [
+				'databaseUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage ] ) ],
+				'parserEntityUsages' => [
+					'Q1#C.P5' => true,
+				],
+				'expectedUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage, $q1p5StatementUsage ] ) ],
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetAffectedUsagesByPage_withCachedParserOutput
+	 */
+	public function testGetAffectedUsagesByPage_withCachedParserOutput(
+		array $databaseUsages,
+		?array $parserEntityUsages,
+		array $expectedUsages
+	) {
+		$usageLookup = $this->createMock( UsageLookup::class );
+		$usageLookup->method( 'getPagesUsing' )
+			->willReturn( new ArrayIterator( $databaseUsages ) );
+
+		$mockParserOutput = $this->createMock( ParserOutput::class );
+		$mockParserOutput->method( 'getExtensionData' )->willReturn( $parserEntityUsages );
+
+		$mockParserOutputAccess = $this->createMock( ParserOutputAccess::class );
+		$mockParserOutputAccess->method( 'getCachedParserOutput' )
+			->willReturn( $parserEntityUsages === null ? null : $mockParserOutput );
+
+		$mockWikiPage = $this->createMock( WikiPage::class );
+		$mockWikiPage->method( 'makeParserOptions' )
+			->willReturn( $this->createMock( ParserOptions::class ) );
+
+		$mockWikiPageFactory = $this->createMock( WikiPageFactory::class );
+		$mockWikiPageFactory->method( 'newFromID' )
+			->with( 1 )
+			->willReturn( $mockWikiPage );
+
+		$affectedPagesFinder = new AffectedPagesFinder(
+			$usageLookup,
+			$this->getTitleFactory(),
+			$this->getPageStore(),
+			$this->getLinkBatchFactory(),
+			'testwiki',
+			new NullLogger(),
+			$mockWikiPageFactory,
+			$mockParserOutputAccess,
+			$this->getServiceContainer()->getStatsFactory()
+		);
+
+		$changeFactory = TestChanges::getEntityChangeFactory();
+
+		$q1 = new ItemId( 'Q1' );
+		$change = $changeFactory->newFromUpdate(
+			EntityChange::UPDATE,
+			static::getItemWithStatement( $q1, new NumericPropertyId( 'P5' ), new StringValue( 'Hello' ) ),
+			new Item( $q1 )
+		);
+
+		$usages = $affectedPagesFinder->getAffectedUsagesByPage( $change );
+
+		$this->assertPageEntityUsages( $expectedUsages, $usages );
 	}
 
 	private function getSiteLinkUsageLookup() {

@@ -8,6 +8,9 @@ use ArrayIterator;
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Page\PageRecord;
 use MediaWiki\Page\PageStore;
+use MediaWiki\Page\ParserOutputAccess;
+use MediaWiki\Page\WikiPage;
+use MediaWiki\Page\WikiPageFactory;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use Psr\Log\LoggerInterface;
@@ -15,12 +18,14 @@ use Traversable;
 use UnexpectedValueException;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikimedia\Stats\StatsFactory;
 
 /**
  * @license GPL-2.0-or-later
@@ -35,7 +40,10 @@ class AffectedPagesFinder {
 		private PageStore $pageStore,
 		private LinkBatchFactory $linkBatchFactory,
 		private string $siteId,
-		private LoggerInterface $logger
+		private LoggerInterface $logger,
+		private WikiPageFactory $wikiPageFactory,
+		private ParserOutputAccess $parserOutputAccess,
+		private StatsFactory $stats
 	) {
 	}
 
@@ -199,14 +207,16 @@ class AffectedPagesFinder {
 		$entityId = $change->getEntityId();
 		$changedAspects = $this->getChangedAspects( $change );
 
-		$usages = $this->usageLookup->getPagesUsing(
+		$usagesFromDb = $this->usageLookup->getPagesUsing(
 			// @todo: more than one entity at once!
 			[ $entityId ],
 			// Look up pages that are marked as either using one of the changed or all aspects
 			array_merge( $changedAspects, [ EntityUsage::ALL_USAGE ] )
 		);
 
-		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
+		$filteredUsagesFromDb = $this->filterPagesByParserOutputUsages( $usagesFromDb, $entityId, $changedAspects );
+
+		$usages = $this->transformAllPageEntityUsages( $filteredUsagesFromDb, $entityId, $changedAspects );
 
 		// if title changed, add virtual usages for both old and new title
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
@@ -231,6 +241,71 @@ class AffectedPagesFinder {
 		}
 
 		return $usages;
+	}
+
+	/**
+	 * Remove pages according to the latest parsed entity usage
+	 *
+	 * Currently, this is redundant with the "aspect" split in wbc_entity_usage
+	 * except in the case of bundled aspects: these will be correctly filtered out
+	 * if the parsed page shows entity usages matching the wikibase diff's changed
+	 * aspects.
+	 *
+	 * @param iterable<PageEntityUsages> $usagesFromDb
+	 * @param EntityId $entityId
+	 * @param array $changedAspects
+	 * @return iterable<PageEntityUsages>
+	 */
+	private function filterPagesByParserOutputUsages( iterable $usagesFromDb, EntityId $entityId, array $changedAspects ): iterable {
+		$euIdentifiers = array_map(
+			static function ( $fullAspect ) use ( $entityId ) {
+				[ $aspect, $modifier ] = EntityUsage::splitAspectKey( $fullAspect );
+				return ( new EntityUsage( $entityId, $aspect, $modifier ) )->getIdentityString();
+			},
+			$changedAspects
+		);
+
+		return array_filter(
+			(array)$usagesFromDb,
+			fn ( $pageEntityUsages ) => $this->comparePageUsageFromParser(
+				$this->wikiPageFactory->newFromID( $pageEntityUsages->getPageId() ),
+				$euIdentifiers
+			)
+		);
+	}
+
+	/**
+	 * Return false if the actual page entity usage from ParserOutput doesn't
+	 * overlap with the entity usage keys coming from the wikibase change.
+	 *
+	 * Falls back to true when this comparison cannot be made.
+	 */
+	private function comparePageUsageFromParser( ?WikiPage $page, array $euIdentifiers ): bool {
+		if ( $page === null ) {
+			return true;
+		}
+
+		// This will get the latest revision's EntityUsage records if it can be
+		// found in the ParserCache, otherwise null is returned and the parser does
+		// not run.
+		$euData = $this->parserOutputAccess
+			->getCachedParserOutput( $page, $page->makeParserOptions( 'canonical' ) )
+			?->getExtensionData( ParserOutputUsageAccumulator::EXTENSION_DATA_KEY );
+
+		$hasIntersection = $euData ?
+			array_intersect( array_keys( $euData ), $euIdentifiers ) !== [] :
+			true;
+
+		$this->stats
+			->getCounter( 'WikibaseClient_AffectedPagesFinder_parser_cache_total' )
+			->setLabels( [
+				'wiki' => $this->siteId,
+				'cache_miss' => $euData === null ? 'true' : 'false',
+				'has_intersection' => $hasIntersection ? 'true' : 'false',
+			] )
+			->increment();
+
+		return $hasIntersection;
 	}
 
 	/**

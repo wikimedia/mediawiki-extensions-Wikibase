@@ -147,7 +147,10 @@ return [
 			$services->getPageStore(),
 			$services->getLinkBatchFactory(),
 			WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' ),
-			WikibaseClient::getLogger( $services )
+			WikibaseClient::getLogger( $services ),
+			$services->getWikiPageFactory(),
+			$services->getParserOutputAccess(),
+			$services->getStatsFactory()->withComponent( 'WikibaseClient' )
 		);
 	},
 
@@ -1058,7 +1061,7 @@ return [
 			new UsageDeduplicator(
 				$usageModifierLimits,
 				WikibaseClient::getLogger( $services ),
-				$services->getStatsFactory(),
+				$services->getStatsFactory()->withComponent( 'WikibaseClient' ),
 				WikiMap::getCurrentWikiId()
 			),
 			new RevisionBasedEntityRedirectTargetLookup(
