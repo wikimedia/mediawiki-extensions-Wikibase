@@ -4,7 +4,8 @@ import 'cypress-axe';
 declare namespace Cypress {
 	interface Chainable {
 		visitTitle( args: string|object, qsDefaults: object ): Chainable<Window>;
-		visitTitleMobile( args: string|object ): Chainable<void>;
+		visitTitleMobile( args: string|object ): Chainable<Window>;
+		setTermsAcceptanceCookie(): Chainable<void>;
 	}
 }
 
@@ -35,3 +36,10 @@ Cypress.Commands.add( 'visitTitle', ( args, qsDefaults = {} ) => {
 } );
 
 Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { useformat: 'mobile' } ) );
+
+// This requires that a page is already loaded, in which the global `mw` object is available
+Cypress.Commands.add(
+	'setTermsAcceptanceCookie',
+	() => cy.window().its( 'mw' )
+		.invoke( 'cookie.set', 'wikibase.acknowledgedcopyrightversion', 'wikibase-1' ),
+);

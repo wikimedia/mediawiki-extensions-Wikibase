@@ -18,5 +18,6 @@ wbui2025.store = Object.assign(
 	require( './store/serverRenderedHtml.js' ),
 	require( './store/parsedValueStore.js' )
 );
+wbui2025.copyright = require( './copyright.js' );
 
 module.exports = wbui2025;

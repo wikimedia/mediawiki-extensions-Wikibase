@@ -51,6 +51,8 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 	/** @var bool */
 	private $taintedReferencesEnabled;
 
+	private bool $mobileEditing;
+
 	public function __construct(
 		OutputPageEntityViewChecker $entityViewChecker,
 		OutputPageJsConfigBuilder $outputPageJsConfigBuilder,
@@ -61,7 +63,8 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		string $dataRightsText,
 		array $badgeItems,
 		int $stringLimit,
-		bool $taintedReferencesEnabled
+		bool $taintedReferencesEnabled,
+		bool $mobileEditing
 	) {
 		$this->entityViewChecker = $entityViewChecker;
 		$this->outputPageJsConfigBuilder = $outputPageJsConfigBuilder;
@@ -73,11 +76,13 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 		$this->badgeItems = $badgeItems;
 		$this->stringLimit = $stringLimit;
 		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
+		$this->mobileEditing = $mobileEditing;
 	}
 
 	public static function factory(
 		Language $contentLanguage,
 		EntityContentFactory $entityContentFactory,
+		bool $mobileSite,
 		SettingsArray $repoSettings,
 		ContentLanguages $termsLanguages
 	): self {
@@ -97,7 +102,8 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 			$repoSettings->getSetting( 'dataRightsText' ),
 			$repoSettings->getSetting( 'badgeItems' ),
 			$repoSettings->getSetting( 'string-limits' )['multilang']['length'],
-			$repoSettings->getSetting( 'taintedReferencesEnabled' )
+			$repoSettings->getSetting( 'taintedReferencesEnabled' ),
+			$mobileSite
 		);
 	}
 
@@ -130,7 +136,8 @@ class MakeGlobalVariablesScriptHookHandler implements MakeGlobalVariablesScriptH
 			$this->dataRightsText,
 			$this->badgeItems,
 			$this->stringLimit,
-			$this->taintedReferencesEnabled
+			$this->taintedReferencesEnabled,
+			$this->mobileEditing
 		);
 	}
 

@@ -67,7 +67,7 @@
 									action="progressive"
 									weight="primary"
 									:disabled="saveButtonDisabled"
-									@click="$emit( 'save' )"
+									@click="saveOrPromptConfirmation"
 								>
 									<cdx-icon :icon="cdxIconCheck"></cdx-icon>
 									{{ saveMessage }}
@@ -79,12 +79,18 @@
 			</div>
 		</transition>
 	</teleport>
+	<wikibase-wbui2025-copyright-dialog
+		:open="showCopyrightDialog"
+		@confirm="confirmSave"
+		@hide="showCopyrightDialog = false"
+	></wikibase-wbui2025-copyright-dialog>
 </template>
 
 <script>
 const { defineComponent } = require( 'vue' );
 const { cdxIconArrowPrevious, cdxIconCheck, cdxIconClose } = require( '../icons.json' );
 const { CdxButton, CdxIcon, CdxProgressBar } = require( '../../../codex.js' );
+const WikibaseWbui2025CopyrightDialog = require( './copyrightDialog.vue' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
 
 const modalStack = [];
@@ -103,7 +109,8 @@ module.exports = exports = defineComponent( {
 	components: {
 		CdxButton,
 		CdxIcon,
-		CdxProgressBar
+		CdxProgressBar,
+		WikibaseWbui2025CopyrightDialog
 	},
 	props: {
 		header: {
@@ -145,6 +152,11 @@ module.exports = exports = defineComponent( {
 			type: [ String, Object ],
 			required: false,
 			default: ''
+		},
+		copyrightAcceptanceRequired: {
+			type: Boolean,
+			required: false,
+			default: false
 		}
 	},
 	emits: [ 'hide', 'save' ],
@@ -155,7 +167,8 @@ module.exports = exports = defineComponent( {
 			cdxIconClose,
 			modalStackEntry: {
 				hide: () => this.$emit( 'hide' )
-			}
+			},
+			showCopyrightDialog: false
 		};
 	},
 	computed: {
@@ -168,6 +181,17 @@ module.exports = exports = defineComponent( {
 	methods: {
 		requestHide() {
 			window.history.back();
+		},
+		saveOrPromptConfirmation() {
+			if ( this.copyrightAcceptanceRequired && !wbui2025.copyright.isAccepted() ) {
+				this.showCopyrightDialog = true;
+			} else {
+				this.$emit( 'save' );
+			}
+		},
+		confirmSave() {
+			this.showCopyrightDialog = false;
+			this.$emit( 'save' );
 		}
 	},
 	mounted() {

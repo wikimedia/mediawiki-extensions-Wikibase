@@ -74,7 +74,8 @@ describe( 'wikibase.wbui2025.editStatementGroup', () => {
 		wgEditSubmitButtonLabelPublish: false
 	};
 	mw.config = {
-		get: jest.fn( ( key ) => mockConfig[ key ] )
+		get: jest.fn( ( key ) => mockConfig[ key ] ),
+		exists: jest.fn( ( key ) => key in mockConfig )
 	};
 
 	describe( 'the mounted component', () => {
