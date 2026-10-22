@@ -138,9 +138,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 		$this->displayBeforeForm( $out );
 
-		if ( $this->captchaFailed ) {
-			$out->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
-			$form->addHeaderHtml( Html::errorBox( $this->msg( 'wikibase-newentity-hcaptcha-fail' )->parse() ) );
+		if ( $submitStatus && !$submitStatus->isOK() ) {
+			$errors = $this->captchaFailed
+				? [ 'wikibase-newentity-hcaptcha-fail' ]
+				: $submitStatus->getMessages( 'error' );
+			$out->addModuleStyles( [ 'mediawiki.codex.messagebox.styles', 'wikibase.special.newEntity.styles' ] );
+			foreach ( $errors as $error ) {
+				$form->addHeaderHtml( Html::errorBox( $this->msg( $error )->parse() ) );
+			}
 			$submitStatus = false;
 		}
 
@@ -217,7 +222,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		if ( $captcha === null ) {
 			return;
 		}
-		$this->getOutput()->addModuleStyles( 'wikibase.special.newEntity.captcha.styles' );
+		$this->getOutput()->addModuleStyles( 'wikibase.special.newEntity.styles' );
 		$formFields['captcha'] = [
 			'type' => 'info',
 			// Rendered after submit so the widget can show a failed attempt.
