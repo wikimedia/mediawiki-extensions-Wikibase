@@ -55,6 +55,7 @@ class MakeGlobalVariablesScriptHookHandlerTest extends MediaWikiIntegrationTestC
 		$badgeItems = [ 'Q1' => 'first-item' ];
 		$stringLimit = 42;
 		$taintedReferencesEnabled = false;
+		$mobileEditing = false;
 		$handler = new MakeGlobalVariablesScriptHookHandler(
 			$entityViewChecker,
 			new OutputPageJsConfigBuilder(),
@@ -65,7 +66,8 @@ class MakeGlobalVariablesScriptHookHandlerTest extends MediaWikiIntegrationTestC
 			'',
 			$badgeItems,
 			$stringLimit,
-			$taintedReferencesEnabled
+			$taintedReferencesEnabled,
+			$mobileEditing
 		);
 		$vars = $badgeItems;
 		$handler->onMakeGlobalVariablesScript( $vars, $outputPage );
@@ -98,7 +100,7 @@ class MakeGlobalVariablesScriptHookHandlerTest extends MediaWikiIntegrationTestC
 			new StaticContentLanguages( [] ),
 			$userLanguageLookup,
 			$userPreferredContentLanguagesLookup,
-			'', '', [], 42, false
+			'', '', [], 42, false, false
 		);
 		$vars = [];
 		$handler->onMakeGlobalVariablesScript( $vars, $outputPage );

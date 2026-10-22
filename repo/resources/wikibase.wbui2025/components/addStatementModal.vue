@@ -5,6 +5,7 @@
 		:save-button-disabled="!canSubmit"
 		:show-progress="showProgress"
 		:progress-bar-label="$i18n( 'wikibase-publishing-progress' )"
+		:copyright-acceptance-required="true"
 		@save="submitForm"
 		@hide="cancelForm"
 	>

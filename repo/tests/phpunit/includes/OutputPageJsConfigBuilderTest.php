@@ -21,7 +21,7 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
 class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideBooleans */
-	public function testBuild( bool $publish, bool $taintedRefs ) {
+	public function testBuild( bool $publish, bool $taintedRefs, bool $mobileEditing ) {
 		$this->overrideConfigValue( MainConfigNames::EditSubmitButtonLabelPublish, $publish );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
@@ -35,11 +35,28 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 				'Q42' => 'wb-badge-featuredarticle',
 			],
 			250,
-			$taintedRefs
+			$taintedRefs,
+			$mobileEditing
 		);
 
 		$expectedKey = $publish ? 'wikibase-publish' : 'wikibase-save';
-		$expected = [
+		$expectedMobile = [
+			'wbCopyright' => [
+				'version' => 'wikibase-1',
+				'messageHtml' => '(wikibase-copyrightdialog-warning: ' .
+					wfMessage( 'copyrightpage' )->inContentLanguage()->text() .
+					', <a rel="nofollow" class="external free" href="' . $url .
+					'">' . $url . '</a>, CC-0)',
+			],
+			'wbBadgeItems' => [
+				'Q12' => 'wb-badge-goodarticle',
+				'Q42' => 'wb-badge-featuredarticle',
+			],
+			'wbMultiLingualStringLimit' => 250,
+			'wbTaintedReferencesEnabled' => $taintedRefs,
+		];
+
+		$expectedDesktop = [
 			'wbCopyright' => [
 				'version' => 'wikibase-1',
 				'messageHtml' =>
@@ -56,14 +73,18 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			'wbTaintedReferencesEnabled' => $taintedRefs,
 		];
 
-		$this->assertEquals( $expected, $configVars );
+		$this->assertEquals(
+			$mobileEditing ? $expectedMobile : $expectedDesktop,
+			$configVars
+		);
 	}
 
 	public static function provideBooleans(): iterable {
-		yield 'save, no tainted refs' => [ false, false ];
-		yield 'save, tainted refs' => [ false, true ];
-		yield 'publish, no tainted refs' => [ true, false ];
-		yield 'publish, tainted refs' => [ true, true ];
+		yield 'save, no tainted refs, desktop' => [ false, false, false ];
+		yield 'save, tainted refs, desktop' => [ false, true, false ];
+		yield 'publish, no tainted refs, desktop' => [ true, false, false ];
+		yield 'publish, tainted refs, desktop' => [ true, true, false ];
+		yield 'publish, no tainted refs, mobile' => [ false, false, false ];
 	}
 
 	/**

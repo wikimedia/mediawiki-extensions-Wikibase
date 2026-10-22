@@ -26,21 +26,23 @@ export class LoginPage {
 		return cy.visitTitle( 'Special:UserLogin' );
 	}
 
-	public login( username: string, password: string ): Chainable {
+	public login( username: string, password: string, setTermsAccepted = true ): Chainable {
 		return this.open()
+			.then( () => {
+				if ( setTermsAccepted ) {
+					cy.setTermsAcceptanceCookie();
+				}
+			} )
 			.then( () => this.setUsername( username ) )
 			.then( () => this.setPassword( password ) )
 			.then( () => this.getLoginButton().click() );
 	}
 
-	public loginWithSession( username: string, password: string ): Chainable {
+	public loginWithSession( username: string, password: string, setTermsAccepted = true ): Chainable {
 		return cy.session(
 			[ username, password ],
 			() => {
-				this.open()
-					.then( () => this.setUsername( username ) )
-					.then( () => this.setPassword( password ) )
-					.then( () => this.getLoginButton().click() );
+				this.login( username, password, setTermsAccepted );
 			},
 			{ cacheAcrossSpecs: true },
 		);

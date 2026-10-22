@@ -26,7 +26,8 @@ const mockConfig = {
 	wgUserLanguage: 'en'
 };
 mw.config = {
-	get: jest.fn( ( key ) => mockConfig[ key ] )
+	get: jest.fn( ( key ) => mockConfig[ key ] ),
+	exists: jest.fn( ( key ) => key in mockConfig )
 };
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();

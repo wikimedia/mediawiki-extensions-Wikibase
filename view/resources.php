@@ -966,16 +966,13 @@ return call_user_func( function() {
 				[
 					'name' => 'termbox.config.js',
 					'callback' => function ( Context $context ) {
-						global $wgEditSubmitButtonLabelPublish;
 
-						$saveMessageKey = ( $wgEditSubmitButtonLabelPublish ) ? 'wikibase-publish' : 'wikibase-save';
 						$repoSettings = WikibaseRepo::getSettings();
 						$language = MediaWikiServices::getInstance()->getLanguageFactory()->getLanguage( $context->getLanguage() );
 						$copyrightMessage = ( new CopyrightMessageBuilder )->build(
 							$repoSettings->getSetting( 'dataRightsUrl' ),
 							$repoSettings->getSetting( 'dataRightsText' ),
-							$language,
-							$saveMessageKey
+							$language
 						);
 						return 'mw.config.set('
 								. $context->encodeJson( [
