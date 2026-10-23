@@ -54,5 +54,6 @@
 	"wikibase-pageinfo-entity-usage": "Na tutej stronje wužiwane {{WBREPONAME}}-objekty",
 	"wikibase-otherprojects": "W druhich projektach",
 	"wikibase-sitelinks-sitename-columnheading": "Rěč",
-	"wikibase-sitelinks-link-columnheading": "Wotkazana strona"
+	"wikibase-sitelinks-link-columnheading": "Wotkazana strona",
+	"notification-header-page-connection": "Strona <strong>$3</strong> je so zwjazała z {{PLURAL:$4|-1=objektom {{WBREPONAME}}|objektom na {{WBREPONAME}} $4}}, hdźež so relewantne daty wo tutej temje zběraja."
 }
