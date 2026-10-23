@@ -3,41 +3,6 @@
 const requestParts = require( '../../global/request-parts' );
 const examples = require( './examples' );
 
-const PropertyValuePairRequestRequired = {
-	"properties": {
-		"property": {
-			"required": [ "id" ]
-		},
-		"value": {
-			"required": [ "type" ]
-		}
-	},
-	"required": [ "property", "value" ]
-};
-
-const StatementRequestRequired = {
-	"allOf": [
-		PropertyValuePairRequestRequired,
-		{
-			"properties": {
-				"qualifiers": {
-					"items": PropertyValuePairRequestRequired
-				},
-				"references": {
-					"items": {
-						"properties": {
-							"parts": {
-								"items": PropertyValuePairRequestRequired
-							}
-						},
-						"required": [ "parts" ]
-					}
-				}
-			}
-		}
-	]
-};
-
 const StatementRequest = {
 	"allOf": [
 		{
@@ -46,7 +11,7 @@ const StatementRequest = {
 				"statement": {
 					"allOf": [
 						{ "$ref": "#/components/schemas/Statement" },
-						StatementRequestRequired
+						requestParts.StatementRequestRequired
 					]
 				}
 			},

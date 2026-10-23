@@ -50,7 +50,44 @@ const PatchRequest = {
 	"required": [ "patch" ]
 };
 
+const PropertyValuePairRequestRequired = {
+	"properties": {
+		"property": {
+			"required": [ "id" ]
+		},
+		"value": {
+			"required": [ "type" ]
+		}
+	},
+	"required": [ "property", "value" ]
+};
+
+const StatementRequestRequired = {
+	"allOf": [
+		PropertyValuePairRequestRequired,
+		{
+			"properties": {
+				"qualifiers": {
+					"items": PropertyValuePairRequestRequired
+				},
+				"references": {
+					"items": {
+						"properties": {
+							"parts": {
+								"items": PropertyValuePairRequestRequired
+							}
+						},
+						"required": [ "parts" ]
+					}
+				}
+			}
+		}
+	]
+};
+
 module.exports = {
 	MediawikiEdit,
 	PatchRequest,
+	StatementRequestRequired,
+	shared: { StatementRequestRequired },
 };

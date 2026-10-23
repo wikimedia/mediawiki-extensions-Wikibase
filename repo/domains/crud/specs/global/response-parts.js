@@ -96,4 +96,5 @@ module.exports = {
 	ReferenceResponseRequired,
 	PropertyValueResponseRequired,
 	ErrorSchema,
+	shared: { StatementResponseRequired },
 };
