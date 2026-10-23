@@ -6,6 +6,7 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
+use MediaWikiIntegrationTestCase;
 use UnexpectedValueException;
 use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\NamespaceChecker;
@@ -29,7 +30,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
+class InfoActionHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideTestOnInfoActionData

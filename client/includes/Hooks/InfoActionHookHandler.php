@@ -13,6 +13,8 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
+use Wikibase\DataModel\Services\Lookup\LabelLookup;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -23,57 +25,15 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  */
 class InfoActionHookHandler implements InfoActionHook {
 
-	/**
-	 * @var NamespaceChecker
-	 */
-	private $namespaceChecker;
-
-	/**
-	 * @var RepoLinker
-	 */
-	private $repoLinker;
-
-	/**
-	 * @var SiteLinkLookup
-	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
-	 * @var UsageLookup
-	 */
-	private $usageLookup;
-
-	/**
-	 * @var FallbackLabelDescriptionLookupFactory
-	 */
-	private $labelDescriptionLookupFactory;
-
-	/**
-	 * @var DescriptionLookup
-	 */
-	private $descriptionLookup;
-
 	public function __construct(
-		NamespaceChecker $namespaceChecker,
-		RepoLinker $repoLinker,
-		SiteLinkLookup $siteLinkLookup,
-		string $siteId,
-		UsageLookup $usageLookup,
-		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		DescriptionLookup $descriptionLookup
+		private NamespaceChecker $namespaceChecker,
+		private RepoLinker $repoLinker,
+		private SiteLinkLookup $siteLinkLookup,
+		private string $siteId,
+		private UsageLookup $usageLookup,
+		private FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
+		private DescriptionLookup $descriptionLookup
 	) {
-		$this->namespaceChecker = $namespaceChecker;
-		$this->repoLinker = $repoLinker;
-		$this->siteLinkLookup = $siteLinkLookup;
-		$this->siteId = $siteId;
-		$this->usageLookup = $usageLookup;
-		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
-		$this->descriptionLookup = $descriptionLookup;
 	}
 
 	public static function factory(
@@ -199,7 +159,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	 * @param IContextSource $context
 	 * @return string
 	 */
-	private function formatAspects( array $aspects, IContextSource $context ) {
+	private function formatAspects( array $aspects, IContextSource $context, LabelLookup $labelLookup ) {
 		$aspectContent = '';
 		foreach ( $aspects as $aspect ) {
 			// Possible messages:
@@ -219,13 +179,41 @@ class InfoActionHookHandler implements InfoActionHook {
 			if ( $aspect[1] !== null ) {
 				$msgKey .= '-with-modifier';
 			}
+
+			$msg = $context->msg( $msgKey );
+
+			if ( $aspect[0] === 'C' && $aspect[1] !== null ) {
+				$msg->rawParams( $this->buildModifierLink( $aspect[1], $labelLookup ) );
+			}
+
 			$aspectContent .= Html::rawElement(
 				'li',
 				[],
-				$context->msg( $msgKey, $aspect[1] )->parse()
+				$msg->parse()
 			);
 		}
 		return $aspectContent;
+	}
+
+	/**
+	 * Statement entity usages with modifiers will be resolved
+	 * into their label and turned into a link.
+	 *
+	 * @param string $modifier
+	 * @param LabelLookup $labelLookup
+	 * @return string
+	 */
+	private function buildModifierLink( string $modifier, LabelLookup $labelLookup ) {
+		$aspectPropertyId = new NumericPropertyId( $modifier );
+		$aspectLabel = $labelLookup->getLabel( $aspectPropertyId );
+
+		$text = $aspectLabel === null ? $modifier : $aspectLabel->getText() . " ($modifier)";
+
+		return $this->repoLinker->buildEntityLink(
+			$aspectPropertyId,
+			[ 'external' ],
+			$text
+		);
 	}
 
 	/**
@@ -264,7 +252,7 @@ class InfoActionHookHandler implements InfoActionHook {
 				)
 			);
 
-			$aspectContent = $this->formatAspects( $aspects, $context );
+			$aspectContent = $this->formatAspects( $aspects, $context, $labelLookup );
 			$output .= Html::rawElement( 'ul', [], $aspectContent );
 		}
 		$output = Html::rawElement( 'ul', [], $output );
