@@ -25,11 +25,6 @@ abstract class DomainDb {
 	private string $domainId;
 	private ReplicationWaiter $replicationWaiter;
 
-	/**
-	 * @var string[]
-	 */
-	private array $loadGroups;
-
 	private ?SessionConsistentConnectionManager $sessionConsistentConnectionManager = null;
 	private ?ConnectionManager $connectionManager = null;
 
