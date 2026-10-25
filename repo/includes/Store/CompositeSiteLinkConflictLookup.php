@@ -25,9 +25,9 @@ class CompositeSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$this->lookups = $lookups;
 	}
 
-	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, ?int $db = null ): array {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, bool $forWrite = false ): array {
 		foreach ( $this->lookups as $lookup ) {
-			$conflicts = $lookup->getConflictsForItem( $itemId, $siteLinkList, $db );
+			$conflicts = $lookup->getConflictsForItem( $itemId, $siteLinkList, $forWrite );
 			if ( $conflicts !== [] ) {
 				return $conflicts;
 			}

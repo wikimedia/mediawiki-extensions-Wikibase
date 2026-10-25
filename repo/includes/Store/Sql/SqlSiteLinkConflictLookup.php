@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use InvalidArgumentException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -40,23 +39,21 @@ class SqlSiteLinkConflictLookup implements SiteLinkConflictLookup {
 	 *
 	 * @param ItemId $itemId
 	 * @param SiteLinkList $siteLinkList
-	 * @param int|null $db
+	 * @param bool $forWrite
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, ?int $db = null ) {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, bool $forWrite = false ) {
 		if ( $siteLinkList->isEmpty() ) {
 			return [];
 		}
 
-		if ( !$db || $db === DB_REPLICA ) {
-			$dbr = $this->db->connections()->getReadConnection();
-		} elseif ( $db === DB_PRIMARY ) {
+		if ( $forWrite ) {
 			// CONN_TRX_AUTOCOMMIT: ensure we can read rows (i.e. get conflicts)
 			// that were committed after the main transaction started (T291377)
 			$dbr = $this->db->connections()->getWriteConnection( ILoadBalancer::CONN_TRX_AUTOCOMMIT );
 		} else {
-			throw new InvalidArgumentException( '$db must be either DB_REPLICA or DB_PRIMARY' );
+			$dbr = $this->db->connections()->getReadConnection();
 		}
 
 		$linkConds = [];
