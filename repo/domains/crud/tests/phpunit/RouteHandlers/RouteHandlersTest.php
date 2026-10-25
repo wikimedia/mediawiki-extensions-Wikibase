@@ -276,7 +276,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'AddPropertyStatement' => [ [
@@ -612,7 +612,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'PatchItemDescriptions' => [ [
@@ -627,7 +627,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'PatchItemAliases' => [ [
@@ -642,7 +642,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					UseCaseError::newResourceNotFound( 'item' ),
 					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'PatchItemStatement' => [ [
@@ -699,7 +699,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'RemovePropertyLabel' => [ [
@@ -728,7 +728,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'RemovePropertyDescription' => [ [
@@ -846,7 +846,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'SetItemDescription' => [ [
@@ -866,7 +866,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'SetPropertyLabel' => [ [
@@ -948,7 +948,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'AddPropertyAliasesInLanguage' => [ [
@@ -992,7 +992,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'SetSitelink' => [ [
@@ -1012,7 +1012,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'PatchSitelinks' => [ [
@@ -1031,7 +1031,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					new UseCaseError( UseCaseError::INVALID_PATH_PARAMETER, '', [ 'parameter' => 'item_id' ] ),
 					$hasErrorCode ( UseCaseError::INVALID_PATH_PARAMETER ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		yield 'CreateItem' => [ [
@@ -1138,7 +1138,7 @@ class RouteHandlersTest extends MediaWikiIntegrationTestCase {
 					UseCaseError::newResourceNotFound( 'item' ),
 					$hasErrorCode( UseCaseError::RESOURCE_NOT_FOUND ),
 				],
-				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::ITEM_REDIRECTED ) ],
+				[ new ItemRedirect( 'Q123' ), $hasErrorCode( UseCaseError::RESOURCE_REDIRECTED ) ],
 			],
 		] ];
 		// phpcs:enable

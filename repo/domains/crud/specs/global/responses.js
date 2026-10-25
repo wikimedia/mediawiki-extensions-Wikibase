@@ -4,13 +4,13 @@ const schemaParts = require( './schema-parts' );
 const responseParts = require( './response-parts' );
 
 module.exports = {
-	"ItemRedirected": {
-		"description": "The specified Item was redirected",
+	"ResourceRedirected": {
+		"description": "The specified resource was redirected",
 		"content": {
 			"application/json": {
 				"schema": responseParts.ErrorSchema,
 				"examples": {
-					"redirected-item": { "$ref": "#/components/examples/RedirectedItemExample" }
+					"resource-redirected": { "$ref": "#/components/examples/ResourceRedirectedExample" }
 				}
 			}
 		},
@@ -312,7 +312,7 @@ module.exports = {
 			"application/json": {
 				"schema": responseParts.ErrorSchema,
 				"examples": {
-					"redirected-item": { "$ref": "#/components/examples/RedirectedItemExample" },
+					"resource-redirected": { "$ref": "#/components/examples/ResourceRedirectedExample" },
 					"patch-test-failed": { "$ref": "#/components/examples/PatchTestFailedExample" },
 					"patch-target-not-found": { "$ref": "#/components/examples/PatchTargetNotFoundExample" }
 				}

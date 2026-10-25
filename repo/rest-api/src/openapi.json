@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Wikibase REST API",
-    "version": "1.5",
+    "version": "1.6",
     "description": "OpenAPI definition of Wikibase REST API",
     "contact": {
       "name": "Wikimedia Deutschland - Wikibase Reuse Team",
@@ -2951,10 +2951,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -3972,10 +3972,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -4943,7 +4943,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -4965,10 +4965,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -5416,7 +5416,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -5438,10 +5438,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -6271,10 +6271,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -7141,7 +7141,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -7163,10 +7163,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -7615,7 +7615,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -7637,10 +7637,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -8765,10 +8765,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -9626,7 +9626,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -9648,10 +9648,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -10100,7 +10100,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -10122,10 +10122,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -11266,10 +11266,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -12138,7 +12138,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -12160,10 +12160,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -13779,7 +13779,7 @@
             }
           },
           "409": {
-            "description": "The specified Item was redirected",
+            "description": "The specified resource was redirected",
             "content": {
               "application/json": {
                 "schema": {
@@ -13801,10 +13801,10 @@
                   ]
                 },
                 "examples": {
-                  "redirected-item": {
+                  "resource-redirected": {
                     "value": {
-                      "code": "redirected-item",
-                      "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                      "code": "resource-redirected",
+                      "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                       "context": {
                         "redirect_target": "{redirect_target_id}"
                       }
@@ -34063,8 +34063,8 @@
       }
     },
     "responses": {
-      "ItemRedirected": {
-        "description": "The specified Item was redirected",
+      "ResourceRedirected": {
+        "description": "The specified resource was redirected",
         "content": {
           "application/json": {
             "schema": {
@@ -34086,10 +34086,10 @@
               ]
             },
             "examples": {
-              "redirected-item": {
+              "resource-redirected": {
                 "value": {
-                  "code": "redirected-item",
-                  "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                  "code": "resource-redirected",
+                  "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                   "context": {
                     "redirect_target": "{redirect_target_id}"
                   }
@@ -35011,10 +35011,10 @@
               ]
             },
             "examples": {
-              "redirected-item": {
+              "resource-redirected": {
                 "value": {
-                  "code": "redirected-item",
-                  "message": "Item {item_id} has been redirected to {redirect_target_id}",
+                  "code": "resource-redirected",
+                  "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
                   "context": {
                     "redirect_target": "{redirect_target_id}"
                   }
@@ -38087,10 +38087,10 @@
           }
         }
       },
-      "RedirectedItemExample": {
+      "ResourceRedirectedExample": {
         "value": {
-          "code": "redirected-item",
-          "message": "Item {item_id} has been redirected to {redirect_target_id}",
+          "code": "resource-redirected",
+          "message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
           "context": {
             "redirect_target": "{redirect_target_id}"
           }

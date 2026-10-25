@@ -137,7 +137,7 @@ describe( newPatchItemDescriptionsRequestBuilder().getRouteDescription(), () => 
 				[ { op: 'replace', path: '/en', value: utils.uniq() } ]
 			).assertValidRequest().makeRequest();
 
-			assertValidError( response, 409, 'redirected-item', { redirect_target: redirectTarget } );
+			assertValidError( response, 409, 'resource-redirected', { redirect_target: redirectTarget } );
 			assert.include( response.body.message, redirectSource );
 			assert.include( response.body.message, redirectTarget );
 		} );

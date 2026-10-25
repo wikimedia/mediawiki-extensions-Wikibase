@@ -15,7 +15,6 @@ class UseCaseError extends UseCaseException {
 	public const INVALID_PATH_PARAMETER = 'invalid-path-parameter';
 	public const INVALID_QUERY_PARAMETER = 'invalid-query-parameter';
 	public const INVALID_VALUE = 'invalid-value';
-	public const ITEM_REDIRECTED = 'redirected-item';
 	public const ITEM_STATEMENT_ID_MISMATCH = 'item-statement-id-mismatch';
 	public const MISSING_FIELD = 'missing-field';
 	public const PATCH_RESULT_INVALID_KEY = 'patch-result-invalid-key';
@@ -42,6 +41,7 @@ class UseCaseError extends UseCaseException {
 	public const REQUEST_LIMIT_REASON_RATE_LIMIT = 'rate-limit-reached';
 	public const REQUEST_LIMIT_REASON_TEMP_ACCOUNT_CREATION_LIMIT = 'temp-account-creation-limit-reached';
 	public const RESOURCE_NOT_FOUND = 'resource-not-found';
+	public const RESOURCE_REDIRECTED = 'resource-redirected';
 	public const RESOURCE_TOO_LARGE = 'resource-too-large';
 	public const STATEMENT_GROUP_PROPERTY_ID_MISMATCH = 'statement-group-property-id-mismatch';
 	public const VALUE_TOO_LONG = 'value-too-long';
@@ -81,7 +81,6 @@ class UseCaseError extends UseCaseException {
 		self::INVALID_PATH_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_QUERY_PARAMETER => [ self::CONTEXT_PARAMETER ],
 		self::INVALID_VALUE => [ self::CONTEXT_PATH ],
-		self::ITEM_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::ITEM_STATEMENT_ID_MISMATCH => [ self::CONTEXT_ITEM_ID, self::CONTEXT_STATEMENT_ID ],
 		self::MISSING_FIELD => [ self::CONTEXT_PATH, self::CONTEXT_FIELD ],
 		self::PATCHED_STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
@@ -103,6 +102,7 @@ class UseCaseError extends UseCaseException {
 		self::REFERENCED_RESOURCE_NOT_FOUND => [ self::CONTEXT_PATH ],
 		self::REQUEST_LIMIT_REACHED => [ self::CONTEXT_REASON ],
 		self::RESOURCE_NOT_FOUND => [ self::CONTEXT_RESOURCE_TYPE ],
+		self::RESOURCE_REDIRECTED => [ self::CONTEXT_REDIRECT_TARGET ],
 		self::RESOURCE_TOO_LARGE => [ self::CONTEXT_LIMIT ],
 		self::STATEMENT_GROUP_PROPERTY_ID_MISMATCH => [
 			self::CONTEXT_PATH,

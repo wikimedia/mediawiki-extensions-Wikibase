@@ -88,8 +88,8 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 			return $this->newSuccessHttpResponse( $useCaseResponse );
 		} catch ( ItemRedirect $e ) {
 			return $this->responseFactory->newErrorResponse(
-				UseCaseError::ITEM_REDIRECTED,
-				"Item $itemId has been redirected to {$e->getRedirectTargetId()}.",
+				UseCaseError::RESOURCE_REDIRECTED,
+				"Resource $itemId has been redirected to {$e->getRedirectTargetId()}.",
 				[ UseCaseError::CONTEXT_REDIRECT_TARGET => $e->getRedirectTargetId() ]
 			);
 		} catch ( UseCaseError $e ) {

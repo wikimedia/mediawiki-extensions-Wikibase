@@ -122,10 +122,10 @@ module.exports = {
 			}
 		}
 	},
-	"RedirectedItemExample": {
+	"ResourceRedirectedExample": {
 		"value": {
-			"code": "redirected-item",
-			"message": "Item {item_id} has been redirected to {redirect_target_id}",
+			"code": "resource-redirected",
+			"message": "Resource {redirect_source_id} has been redirected to {redirect_target_id}",
 			"context": {
 				"redirect_target": "{redirect_target_id}"
 			}

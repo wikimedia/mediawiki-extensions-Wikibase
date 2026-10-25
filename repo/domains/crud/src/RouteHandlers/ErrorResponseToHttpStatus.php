@@ -32,7 +32,7 @@ class ErrorResponseToHttpStatus {
 		UseCaseError::RESOURCE_NOT_FOUND => 404,
 
 		// 409 errors:
-		UseCaseError::ITEM_REDIRECTED => 409,
+		UseCaseError::RESOURCE_REDIRECTED => 409,
 		UseCaseError::PATCH_TARGET_NOT_FOUND => 409,
 		UseCaseError::PATCH_TEST_FAILED => 409,
 

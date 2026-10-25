@@ -74,7 +74,7 @@ module.exports = {
 			"400": { "$ref": "#/components/responses/InvalidSetLabelInput" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
-			"409": { "$ref": "#/components/responses/ItemRedirected" },
+			"409": { "$ref": "#/components/responses/ResourceRedirected" },
 			"412": { "$ref": "#/components/responses/PreconditionFailedError" },
 			"422": { "$ref": "#/components/responses/DataPolicyViolation" },
 			"429": { "$ref": "#/components/responses/RequestLimitReached" },
@@ -97,7 +97,7 @@ module.exports = {
 			"400": { "$ref": "#/components/responses/InvalidRemoveLabelInput" },
 			"403": { "$ref": "#/components/responses/PermissionDenied" },
 			"404": { "$ref": "#/components/responses/ResourceNotFound" },
-			"409": { "$ref": "#/components/responses/ItemRedirected" },
+			"409": { "$ref": "#/components/responses/ResourceRedirected" },
 			"412": { "$ref": "#/components/responses/PreconditionFailedError" },
 			"429": { "$ref": "#/components/responses/RequestLimitReached" },
 			"500": { "$ref": "#/components/responses/UnexpectedError" }

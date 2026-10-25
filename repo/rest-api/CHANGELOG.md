@@ -1,5 +1,10 @@
 # CHANGELOG {#wb_rest_api_changelog}
 
+## Version 1.6
+
+* Renamed the `redirected-item` error to `resource-redirected` ([T437014](https://phabricator.wikimedia.org/T437014))
+  * Changed message to `Resource {redirect_source_id} has been redirected to {redirect_target_id}`
+
 ## Version 1.5
 
 * Wikibase REST API search endpoints v1 released
