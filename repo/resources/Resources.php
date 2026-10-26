@@ -297,9 +297,9 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.special.newEntity.captcha.styles' => $moduleTemplate + [
+		'wikibase.special.newEntity.styles' => $moduleTemplate + [
 			'styles' => [
-				'wikibase.special/wikibase.special.newEntity.captcha.less',
+				'wikibase.special/wikibase.special.newEntity.less',
 			],
 		],
 
