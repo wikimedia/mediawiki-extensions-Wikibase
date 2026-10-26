@@ -272,6 +272,21 @@ class SetClaimTest extends WikibaseApiTestCase {
             }', true );
 		$cases['invalid datavalue id'] = [ $q17, $statement, 'modification-failed' ];
 
+		// T442280: Statement with a datavalue missing type
+		$statement = json_decode( '{
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "' . $p11->getSerialization() . '",
+                    "datavalue": {
+                        "value": "incomplete or invalid serialization"
+                    }
+                },
+                "type": "statement",
+                "id": "' . $q17->getSerialization() . '$151fed00-42f6-4125-0316-736e56a12026",
+                "rank": "normal"
+            }', true );
+		$cases['missing datavalue type'] = [ $q17, $statement, 'invalid-claim' ];
+
 		return $cases;
 	}
 
@@ -436,13 +451,13 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$error
 		);
 
-		if ( !( $statement instanceof Statement ) ) {
-			$statementDeserializer = WikibaseRepo::getExternalFormatStatementDeserializer();
-			$statement = $statementDeserializer->deserialize( $statement );
-		}
-
 		if ( $resultArray ) {
 			$this->assertValidResponse( $resultArray );
+
+			if ( !( $statement instanceof Statement ) ) {
+				$statementDeserializer = WikibaseRepo::getExternalFormatStatementDeserializer();
+				$statement = $statementDeserializer->deserialize( $statement );
+			}
 			$this->assertStatementWasSet( $statement, $entityId, $expectedCount, $requestLabel );
 		}
 	}
