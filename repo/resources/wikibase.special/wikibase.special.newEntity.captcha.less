@@ -1,0 +1,24 @@
+@import 'mediawiki.skin.variables.less';
+
+#mw-newentity-form1 .mw-confirmedit-captcha-fail:not( [ data-size='invisible' ] ) {
+	display: inline-block;
+	border: @border-width-thick @border-style-base @border-color-error;
+	border-radius: @border-radius-base;
+	line-height: 0;
+}
+
+#mw-newentity-form1 .h-captcha-privacy-policy {
+	margin-top: @spacing-50;
+	font-size: @font-size-small;
+	color: @color-subtle;
+}
+
+// Match the width of the OOUI inputs
+#mw-newentity-form1 .mw-htmlform-ooui-header .oo-ui-labelWidget {
+	display: block;
+
+	.cdx-message {
+		max-width: 50em;
+		box-sizing: border-box;
+	}
+}

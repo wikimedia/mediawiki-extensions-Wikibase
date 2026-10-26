@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Status\Status;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -65,7 +66,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		TermValidatorFactory $termValidatorFactory,
 		TermsCollisionDetector $termsCollisionDetector,
 		ValidatorErrorLocalizer $errorLocalizer,
-		bool $isMobileView
+		bool $isMobileView,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'NewProperty',
@@ -75,7 +77,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
-			$isMobileView
+			$isMobileView,
+			$captchaFactory
 		);
 
 		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
@@ -96,7 +99,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
 		TermValidatorFactory $termValidatorFactory,
-		ValidatorErrorLocalizer $errorLocalizer
+		ValidatorErrorLocalizer $errorLocalizer,
+		?CaptchaFactory $captchaFactory = null
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -116,7 +120,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$termValidatorFactory,
 			$propertyTermsCollisionDetector,
 			$errorLocalizer,
-			$isMobileView
+			$isMobileView,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

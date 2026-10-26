@@ -275,6 +275,7 @@
 	"wikibase-newentity-label": "Label:",
 	"wikibase-newentity-description": "Description:",
 	"wikibase-newentity-submit": "Create",
+	"wikibase-newentity-hcaptcha-fail": "Please confirm you are human",
 	"special-setlabel": "Set Item/Property label",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|statement|statements}}, $2 {{PLURAL:$2|sitelink|sitelinks}}",
 	"wikibase-setlabel-introfull": "You are setting the label in $2 for [[:$1]].",

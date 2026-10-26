@@ -3,15 +3,21 @@
 namespace Wikibase\Repo\Specials;
 
 use MediaWiki\Exception\UserBlockedError;
+use MediaWiki\Extension\ConfirmEdit\CaptchaTriggers;
+use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
+use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Message\Message;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Status\Status;
+use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\EditEntityStatus;
 use Wikibase\Repo\EditEntity\MediaWikiEditEntityFactory;
 use Wikibase\Repo\SummaryFormatter;
@@ -37,6 +43,10 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 	private bool $isMobileView;
 
+	private ?SimpleCaptcha $captcha = null;
+
+	private bool $captchaFailed = false;
+
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
 	 * @param string[] $tags List of tags to add to edits
@@ -46,6 +56,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 * @param bool $isMobileView
+	 * @param CaptchaFactory|null $captchaFactory Null when ConfirmEdit is not installed.
 	 */
 	public function __construct(
 		$name,
@@ -55,7 +66,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
-		bool $isMobileView
+		bool $isMobileView,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			$name,
@@ -63,7 +75,8 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			$copyrightView,
 			$summaryFormatter,
 			$entityTitleLookup,
-			$editEntityFactory
+			$editEntityFactory,
+			$captchaFactory
 		);
 
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
@@ -125,6 +138,12 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 
 		$this->displayBeforeForm( $out );
 
+		if ( $this->captchaFailed ) {
+			$out->addModuleStyles( 'mediawiki.codex.messagebox.styles' );
+			$form->addHeaderHtml( Html::errorBox( $this->msg( 'wikibase-newentity-hcaptcha-fail' )->parse() ) );
+			$submitStatus = false;
+		}
+
 		$form->displayForm( $submitStatus ?: Status::newGood() );
 	}
 
@@ -147,10 +166,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	 * @return HTMLForm
 	 */
 	private function createForm() {
-		return HTMLForm::factory( 'ooui', $this->getFormFields(), $this->getContext() )
+		$formFields = $this->getFormFields();
+		$this->maybeAddCaptchaField( $formFields );
+
+		return HTMLForm::factory( 'ooui', $formFields, $this->getContext() )
 			->setId( 'mw-newentity-form1' )
 			->setSubmitID( 'wb-newentity-submit' )
-			->setSubmitName( 'submit' )
+			// name="submit" shadows HTMLFormElement.submit() in JS (T426089).
+			->setSubmitName( 'wikibase-newentity-submit' )
 			->setSubmitTextMsg( 'wikibase-newentity-submit' )
 			->setWrapperLegendMsg( $this->getLegend() )
 			->setSubmitCallback(
@@ -165,14 +188,51 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 					$summary = $this->createSummary( $entity );
 
 					$this->prepareEditEntity();
-					return $this->saveEntity(
+					$status = $this->saveEntity(
 						$entity,
 						$summary,
 						$form->getRequest()->getRawVal( 'wpEditToken' ) ?? '',
 						EDIT_NEW
 					);
+					// ConfirmEdit fails CREATE without a message, so show our own.
+					$this->captchaFailed = $this->captcha !== null && !$status->isOK()
+						&& $this->getEditEntity()->hasError( EditEntity::FILTERED_ERROR )
+						&& !$status->hasMessagesExcept( 'captcha-edit-fail' );
+					return $status;
 				}
 			);
+	}
+
+	/** Render a captcha widget so users hit by EditFilterMergedContent can solve it. */
+	private function maybeAddCaptchaField( array &$formFields ): void {
+		if ( !$this->hasCaptchaFactory() ) {
+			return;
+		}
+		// Reuse the fake title the save path builds in
+		// MediaWikiEditFilterHookRunner::getContextForEditFilter().
+		$namespace = $this->entityNamespaceLookup->getEntityNamespace( $this->getEntityType() );
+		$title = Title::makeTitle( $namespace, 'New' . ucfirst( $this->getEntityType() ) );
+		$captcha = $this->getTriggeredCaptcha( CaptchaTriggers::CREATE, $title );
+		$this->captcha = $captcha;
+		if ( $captcha === null ) {
+			return;
+		}
+		$this->getOutput()->addModuleStyles( 'wikibase.special.newEntity.captcha.styles' );
+		$formFields['captcha'] = [
+			'type' => 'info',
+			// Rendered after submit so the widget can show a failed attempt.
+			'nodata' => true,
+			'default' => function () use ( $captcha ): string {
+				$html = $this->renderCaptcha( $captcha, CaptchaTriggers::CREATE, 'new entity' );
+				// ConfirmEdit only adds the privacy notice in invisible mode, so we force it.
+				if ( $captcha instanceof HCaptcha && !str_contains( $html, 'h-captcha-privacy-policy' ) ) {
+					$html .= Html::rawElement( 'div', [ 'class' => 'h-captcha-privacy-policy' ],
+						$this->msg( 'hcaptcha-privacy-policy' )->parse() );
+				}
+				return $html;
+			},
+			'raw' => true,
+		];
 	}
 
 	/**
