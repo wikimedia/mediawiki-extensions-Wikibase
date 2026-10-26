@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Language\LanguageNameUtils;
 use MediaWiki\Logger\LoggerFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -38,7 +39,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityPermissionChecker $entityPermissionChecker,
 		ContentLanguages $termsLanguages,
-		LanguageNameUtils $languageNameUtils
+		LanguageNameUtils $languageNameUtils,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'SetAliases',
@@ -51,7 +53,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
-			$languageNameUtils
+			$languageNameUtils,
+			$captchaFactory
 		);
 	}
 
@@ -64,7 +67,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		?CaptchaFactory $captchaFactory
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -82,7 +86,8 @@ class SpecialSetAliases extends SpecialModifyTerm {
 			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
-			$languageNameUtils
+			$languageNameUtils,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

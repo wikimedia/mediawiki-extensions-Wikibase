@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Language\LanguageNameUtils;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
@@ -36,7 +37,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityPermissionChecker $entityPermissionChecker,
 		ContentLanguages $termsLanguages,
-		LanguageNameUtils $languageNameUtils
+		LanguageNameUtils $languageNameUtils,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'SetLabel',
@@ -49,7 +51,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
-			$languageNameUtils
+			$languageNameUtils,
+			$captchaFactory
 		);
 	}
 
@@ -62,7 +65,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		?CaptchaFactory $captchaFactory
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -80,7 +84,8 @@ class SpecialSetLabel extends SpecialModifyTerm {
 			$anonymousEditWarningBuilder,
 			$entityPermissionChecker,
 			$termsLanguages,
-			$languageNameUtils
+			$languageNameUtils,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
 use MediaWiki\Config\Config;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Language\LanguageNameUtils;
@@ -98,7 +99,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		ContentLanguages $termsLanguages,
 		EntityPermissionChecker $permissionChecker,
 		LanguageNameUtils $languageNameUtils,
-		string $submitButtonMessage
+		string $submitButtonMessage,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'SetLabelDescriptionAliases',
@@ -108,6 +110,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$anonymousEditWarningBuilder,
+			$captchaFactory
 		);
 
 		$this->changeOpFactory = $changeOpFactory;
@@ -127,7 +130,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		EntityTitleLookup $entityTitleLookup,
 		SettingsArray $repoSettings,
 		SummaryFormatter $summaryFormatter,
-		ContentLanguages $termsLanguages
+		ContentLanguages $termsLanguages,
+		?CaptchaFactory $captchaFactory
 	): self {
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
@@ -146,7 +150,8 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			$termsLanguages,
 			$entityPermissionChecker,
 			$languageNameUtils,
-			$mwConfig->get( MainConfigNames::EditSubmitButtonLabelPublish ) ? self::BUTTON_MESSAGE_PUBLISH : self::BUTTON_MESSAGE_SAVE
+			$mwConfig->get( MainConfigNames::EditSubmitButtonLabelPublish ) ? self::BUTTON_MESSAGE_PUBLISH : self::BUTTON_MESSAGE_SAVE,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

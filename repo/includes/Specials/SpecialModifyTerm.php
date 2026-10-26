@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Language\LanguageNameUtils;
@@ -76,7 +77,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
 		EntityPermissionChecker $permissionChecker,
 		ContentLanguages $termsLanguages,
-		LanguageNameUtils $languageNameUtils
+		LanguageNameUtils $languageNameUtils,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			$title,
@@ -85,7 +87,8 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
-			$anonymousEditWarningBuilder
+			$anonymousEditWarningBuilder,
+			$captchaFactory
 		);
 
 		$this->termChangeOpFactory = $changeOpFactoryProvider->getFingerprintChangeOpFactory();

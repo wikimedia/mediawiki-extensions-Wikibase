@@ -2,8 +2,14 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\CaptchaTriggers;
+use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
+use OOUI\FieldLayout;
+use OOUI\HtmlSnippet;
+use OOUI\Widget;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
@@ -31,6 +37,7 @@ use Wikibase\Repo\SummaryFormatter;
 abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 
 	private AnonymousEditWarningBuilder $anonymousEditWarningBuilder;
+	private ?CaptchaFactory $captchaFactory;
 
 	/**
 	 * @var EntityDocument|null
@@ -50,6 +57,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param MediaWikiEditEntityFactory $editEntityFactory
 	 * @param AnonymousEditWarningBuilder $anonymousEditWarningBuilder
+	 * @param CaptchaFactory|null $captchaFactory
 	 */
 	public function __construct(
 		$title,
@@ -58,7 +66,8 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediaWikiEditEntityFactory $editEntityFactory,
-		AnonymousEditWarningBuilder $anonymousEditWarningBuilder
+		AnonymousEditWarningBuilder $anonymousEditWarningBuilder,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			$title,
@@ -69,6 +78,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			$editEntityFactory
 		);
 		$this->anonymousEditWarningBuilder = $anonymousEditWarningBuilder;
+		$this->captchaFactory = $captchaFactory;
 	}
 
 	/** @inheritDoc */
@@ -299,7 +309,9 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			) );
 		}
 
-		$this->getForm( $entity )
+		$form = $this->getForm( $entity );
+		$this->addCaptcha( $form );
+		$form
 			->setId( 'wb-' . strtolower( $this->getName() ) . '-form1' )
 			->setSubmitID( 'wb-' . strtolower( $this->getName() ) . '-submit' )
 			->setSubmitName( $submitKey )
@@ -308,6 +320,44 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 			->setSubmitCallback( function () {
 				// no-op
 			} )->show();
+	}
+
+	private function addCaptcha( HTMLForm $form ): void {
+		if ( $this->captchaFactory === null ) {
+			return;
+		}
+
+		$captcha = $this->captchaFactory->getGlobalInstance( CaptchaTriggers::EDIT );
+		// A solved CAPTCHA cannot be reused after another edit check rejects the save.
+		$captcha->clearCaptchaSolved();
+		$title = $this->entityId === null ? null : $this->getEntityTitle( $this->entityId );
+		if ( $captcha->shouldSkipCaptcha( $this->getUser() )
+			|| !$captcha->triggersCaptcha( CaptchaTriggers::EDIT, $title )
+		) {
+			return;
+		}
+
+		$captcha->setAction( CaptchaTriggers::EDIT );
+		$captcha->setTrigger( strtolower( $this->getName() ) );
+		$formInformation = $captcha->getFormInformation( 1, $this->getOutput() );
+		$html = $formInformation['html'];
+		unset( $formInformation['html'] );
+		$captcha->addFormInformationToOutput( $this->getOutput(), $formInformation );
+		if ( $captcha instanceof HCaptcha && !$this->getConfig()->get( 'HCaptchaInvisibleMode' ) ) {
+			$html .= Html::rawElement(
+				'div',
+				[ 'class' => 'h-captcha-privacy-policy' ],
+				$this->msg( 'hcaptcha-privacy-policy' )->parse()
+			);
+		}
+		// rawrow keeps the captcha out of the info field's <label>, as captchas bring their own labels and inputs.
+		$form->addFields( [ 'captcha' => [
+			'type' => 'info',
+			'rawrow' => true,
+			'default' => new FieldLayout( new Widget( [
+				'content' => new HtmlSnippet( Html::rawElement( 'div', [ 'class' => 'captcha' ], $html ) ),
+			] ) ),
+		] ] );
 	}
 
 	/**

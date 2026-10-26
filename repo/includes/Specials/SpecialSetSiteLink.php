@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Specials;
 
 use InvalidArgumentException;
+use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
 use MediaWiki\Site\Site;
@@ -89,6 +90,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 	 * @param string[] $badgeItems
 	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+	 * @param CaptchaFactory|null $captchaFactory Null disables the CAPTCHA.
 	 */
 	public function __construct(
 		array $tags,
@@ -101,7 +103,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SiteLinkTargetProvider $siteLinkTargetProvider,
 		array $badgeItems,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		SiteLinkChangeOpFactory $siteLinkChangeOpFactory
+		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
+		?CaptchaFactory $captchaFactory = null
 	) {
 		parent::__construct(
 			'SetSiteLink',
@@ -110,7 +113,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$summaryFormatter,
 			$entityTitleLookup,
 			$editEntityFactory,
-			$anonymousEditWarningBuilder
+			$anonymousEditWarningBuilder,
+			$captchaFactory
 		);
 
 		$this->siteLinkPageNormalizer = $siteLinkPageNormalizer;
@@ -129,7 +133,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		SettingsArray $repoSettings,
 		SiteLinkPageNormalizer $siteLinkPageNormalizer,
 		SiteLinkTargetProvider $siteLinkTargetProvider,
-		SummaryFormatter $summaryFormatter
+		SummaryFormatter $summaryFormatter,
+		?CaptchaFactory $captchaFactory
 	): self {
 		$siteLinkChangeOpFactory = $changeOpFactoryProvider->getSiteLinkChangeOpFactory();
 
@@ -150,7 +155,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$siteLinkTargetProvider,
 			$repoSettings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
-			$siteLinkChangeOpFactory
+			$siteLinkChangeOpFactory,
+			$repoSettings->getSetting( 'tmpEnableHCaptchaIntegration' ) ? $captchaFactory : null
 		);
 	}
 

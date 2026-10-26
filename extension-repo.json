@@ -427,6 +427,9 @@
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"SetDescription": {
@@ -442,6 +445,9 @@
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"SetAliases": {
@@ -457,6 +463,9 @@
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"SetLabelDescriptionAliases": {
@@ -473,6 +482,9 @@
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.SummaryFormatter",
 				"WikibaseRepo.TermsLanguages"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"SetSiteLink": {
@@ -488,6 +500,9 @@
 				"WikibaseRepo.SiteLinkPageNormalizer",
 				"WikibaseRepo.SiteLinkTargetProvider",
 				"WikibaseRepo.SummaryFormatter"
+			],
+			"optional_services": [
+				"ConfirmEditCaptchaFactory"
 			]
 		},
 		"ListDatatypes": {
@@ -871,6 +886,12 @@
 				"WikibaseRepo.LocalEntityNamespaceLookup"
 			]
 		},
+		"ConfirmEditGetGlobalInstanceFromContextHookHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\ConfirmEditGetGlobalInstanceFromContextHookHandler",
+			"services": [
+				"WikibaseRepo.Settings"
+			]
+		},
 		"DatabaseSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater"
 		},
@@ -1034,6 +1055,7 @@
 		"BeforePageDisplay": "RepoHooks",
 		"ChangesListInitRows": "LabelPrefetch",
 		"ContentModelCanBeUsedOn": "RepoHooks",
+		"ConfirmEditGetGlobalInstanceFromContext": "ConfirmEditGetGlobalInstanceFromContextHookHandler",
 		"DifferenceEngineViewHeader": "DifferenceEngineViewHeaderHookHandler",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "RepoHooks",
