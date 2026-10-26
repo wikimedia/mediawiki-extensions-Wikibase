@@ -31,7 +31,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$bagOStuff = new HashBagOStuff();
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, true );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -52,7 +52,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$bagOStuff->set( $this->cacheKey( 'site4', 'Four' ), 'Q2' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, true );
 
 		$this->assertCount( 2, $conflicts );
 		$this->assertContainsEquals( [
@@ -83,7 +83,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$bagOStuff->set( $this->cacheKey( 'site1', 'One' ), 'Q1' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, true );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertTrue( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -104,7 +104,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		};
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, true );
 
 		$this->assertSame( [], $conflicts );
 	}
@@ -122,7 +122,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		};
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_PRIMARY );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, true );
 
 		$this->assertSame( [ [
 			'siteId' => 'site1',
@@ -141,7 +141,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$bagOStuff = new HashBagOStuff();
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_REPLICA );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, false );
 
 		$this->assertSame( [], $conflicts );
 		$this->assertFalse( $bagOStuff->hasKey( $this->cacheKey( 'site1', 'One' ) ) );
@@ -159,7 +159,7 @@ class BagOStuffSiteLinkConflictLookupTest extends TestCase {
 		$bagOStuff->set( $this->cacheKey( 'site1', 'One' ), 'Q2' );
 		$conflictLookup = new BagOStuffSiteLinkConflictLookup( $bagOStuff );
 
-		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, DB_REPLICA );
+		$conflicts = $conflictLookup->getConflictsForItem( $itemId, $sitelinkList, false );
 
 		$this->assertEquals( [ [
 			'siteId' => 'site1',

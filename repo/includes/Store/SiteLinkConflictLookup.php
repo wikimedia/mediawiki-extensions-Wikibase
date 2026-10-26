@@ -24,11 +24,11 @@ interface SiteLinkConflictLookup {
 	 *
 	 * @param ItemId $item
 	 * @param SiteLinkList $siteLinkList
-	 * @param int|null $db The database flag to use (optional).
-	 *        Use one of DB_PRIMARY or DB_REPLICA. DB_PRIMARY can be used when you need the most recent data.
+	 * @param bool $forWrite Whether to look up conflicts in write mode (optional).
+	 *        Use true when you need the most recent data, e.g. before saving the item.
 	 *
 	 * @return array[] An array of arrays, each with the keys "siteId", "itemId" and "sitePage".
 	 */
-	public function getConflictsForItem( ItemId $item, SiteLinkList $siteLinkList, ?int $db = null );
+	public function getConflictsForItem( ItemId $item, SiteLinkList $siteLinkList, bool $forWrite = false );
 
 }

@@ -43,7 +43,7 @@ class SiteLinkUniquenessValidator implements EntityValidator {
 		$errors = [];
 
 		if ( $entity instanceof Item ) {
-			$conflicts = $this->siteLinkConflictLookup->getConflictsForItem( $entity->getId(), $entity->getSiteLinkList(), DB_PRIMARY );
+			$conflicts = $this->siteLinkConflictLookup->getConflictsForItem( $entity->getId(), $entity->getSiteLinkList(), true );
 
 			foreach ( $conflicts as $conflict ) {
 				$errors[] = $this->getConflictError( $conflict );

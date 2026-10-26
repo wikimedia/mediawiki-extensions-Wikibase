@@ -13,7 +13,7 @@ use Wikimedia\ObjectCache\BagOStuff;
 /**
  * Short-term sitelink conflict lookup using a BagOStuff (e.g. memcached).
  *
- * When {@link getConflictsForItem} is called in write mode (with DB_PRIMARY),
+ * When {@link getConflictsForItem} is called in write mode (with $forWrite = true),
  * then the lookup will attempt to write each sitelink to the BagOStuff;
  * any sitelink already present there will be reported as a conflict.
  * The written sitelinks can later be removed by calling {@link clearConflictsForItem}.
@@ -35,17 +35,17 @@ class BagOStuffSiteLinkConflictLookup implements SiteLinkConflictLookup {
 		$this->bagOStuff = $bagOStuff;
 	}
 
-	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, ?int $db = null ): array {
+	public function getConflictsForItem( ItemId $itemId, SiteLinkList $siteLinkList, bool $forWrite = false ): array {
 		$conflicts = [];
 		$siteLinksToClear = [];
 
 		foreach ( $siteLinkList->toArray() as $siteLink ) {
-			if ( $db === DB_PRIMARY ) { // write mode
+			if ( $forWrite ) { // write mode
 				$conflict = $this->getConflictForSiteLink( "$itemId", $siteLink );
 				if ( $conflict !== null ) {
 					$conflicts[] = $conflict;
 					$this->clearConflictsForSiteLinks( $siteLinksToClear );
-					$db = null; // continue in read mode
+					$forWrite = false; // continue in read mode
 				} else {
 					$siteLinksToClear[] = $siteLink;
 				}
