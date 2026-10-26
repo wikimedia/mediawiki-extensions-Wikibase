@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Oujon",
 			"Некто участник",
 			"ОйЛ"
 		]
@@ -8,6 +9,7 @@
 	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} вєщь",
 	"wikibase-editlinks": "исправи съвѧꙁи",
 	"wikibase-editlinkstitle": "мєждоуѩꙁꙑчьнъ съвѧꙁии исправлѥниѥ",
+	"wikibase-addlinkstitle": "Приложи междѫѨꙁꙑчьнꙑѧ съвѧзи",
 	"wikibase-linkitem-addlinks": "множае съвѧꙁиѥ сътворити",
 	"wikibase-linkitem-title": "съвѧꙁь съ страницої",
 	"wikibase-linkitem-linkpage": "съвѧꙁь съ страницої",
