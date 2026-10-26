@@ -53,7 +53,6 @@ class Types {
 	private ?ItemSearchFilterType $itemSearchFilterType = null;
 	private ?ItemSearchConditionType $itemSearchConditionType = null;
 	private ?ObjectType $itemSearchResultConnectionType = null;
-	private ?ObjectType $itemSearchResultNodeType = null;
 	private ?ObjectType $itemSearchResultEdgeType = null;
 	private ?ObjectType $pageInfoType = null;
 	private ?UnionType $itemByExternalIdResultType = null;
