@@ -15,7 +15,8 @@
 			"Protnet",
 			"Xaris333",
 			"ZaDiak",
-			"Warudo"
+			"Warudo",
+			"Jimkats"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -24,10 +25,10 @@
 	"wikibase-deletedentity-query": "Διαγεγραμμένο ερώτημα",
 	"wikibase-error-unexpected": "Σφάλμα: $1",
 	"wikibase-error-unknown": "Συνέβη σφάλμα.",
-	"wikibase-error-save-generic": "Δεν μπορούσε να αποθηκευτεί λόγω σφάλματος.",
-	"wikibase-error-remove-generic": "Δεν μποροόυσε να αφαιρεθεί λόγω σφάλματος.",
-	"wikibase-error-save-timeout": "Αντιμετωπίζουμε τεχνικές δυσκολίες.\nΠαρακαλούμε προσπαθήστε ξανά.",
-	"wikibase-error-remove-timeout": "Αντιμετωπίζουμε τεχνικές δυσκολίες.\nΠαρακαλούμε προσπαθήστε ξανά.",
+	"wikibase-error-save-generic": "Δεν μπόρεσε να αποθηκευτεί λόγω σφάλματος.",
+	"wikibase-error-remove-generic": "Δεν μπόρεσε να αφαιρεθεί λόγω σφάλματος.",
+	"wikibase-error-save-timeout": "Αντιμετωπίζουμε τεχνικές δυσκολίες. Παρακαλούμε προσπαθήστε ξανά.",
+	"wikibase-error-remove-timeout": "Αντιμετωπίζουμε τεχνικές δυσκολίες. Παρακαλούμε προσπαθήστε ξανά.",
 	"wikibase-error-ui-no-external-page": "Δεν βρέθηκε σελίδα «$2» στο «$1».",
 	"wikibase-error-ui-edit-conflict": "Η ίδια τιμή τροποποιήθηκε στο μεταξύ, προκαλώντας σύγκρουση επεξεργασίας. Παρακαλούμε επαναφορτώστε την σελίδα.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (μεταγραμμένο)",
@@ -60,7 +61,7 @@
 	"datatypes-type-unknown": "Αδιευκρίνιστο",
 	"datatypes-type-boolean": "Δυαδική τιμή",
 	"datatypes-type-globe-coordinate": "Γεωγραφικές συντεταγμένες",
-	"datatypes-type-time": "Σημείο στο χρόνο",
+	"datatypes-type-time": "Σημείο στον χρόνο",
 	"datatypes-type-wikibase-item": "Αντικείμενο",
 	"datatypes-type-wikibase-property": "Ιδιότητα",
 	"datatypes-type-commonsMedia": "Αρχείο πολυμέσων των Commons",

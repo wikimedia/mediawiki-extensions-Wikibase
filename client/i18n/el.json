@@ -13,7 +13,8 @@
 			"Protnet",
 			"Sofia Chiali",
 			"Xaris333",
-			"Warudo"
+			"Warudo",
+			"Jimkats"
 		]
 	},
 	"wikibase-client-desc": "Πελάτης για την επέκταση Wikibase",
@@ -80,7 +81,7 @@
 	"pageswithbadges-summary": "Αυτή η σελίδα παραθέτει σελίδες με εμβλήματα (π.χ. καλό λήμμα ή επιλεγμένο λήμμα). Η λίστα ταξινομείται κατά φθίνουσα ταυτότητα σελίδας, έτσι ώστε να εμφανίζονται πρώτες οι νεότερες σελίδες.",
 	"wikibase-pageswithbadges-invalid-id": "Το $1 δεν είναι έγκυρο αναγνωριστικό αντικειμένου",
 	"wikibase-pageswithbadges-legend": "Κατάλογος σελίδων με δοσμένη σήμανση",
-	"wikibase-pageswithbadges-badge": "Σήμανση:",
+	"wikibase-pageswithbadges-badge": "Σήμα:",
 	"wikibase-pageswithbadges-submit": "Εμφάνιση σελίδων",
 	"entityusage": "Χρήση οντότητας",
 	"entityusage-summary": "Αυτή η σελίδα καταγράφει τις σελίδες που χρησιμοποιούν το εκάστοτε αντικείμενο (π.χ. Q42). Η λίστα είναι ταξινομημένη με φθίνον αναγνωριστικό σελίδας, ώστε οι νεότερες σελίδες καταγράφονται πρώτες.",
@@ -101,7 +102,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Τίτλος",
 	"wikibase-pageinfo-entity-usage-C": "Μερικές δηλώσεις",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Δήλωση: $1",
-	"wikibase-pageinfo-entity-usage-X": "Όλα τα δεδομένα αντικειμένου",
+	"wikibase-pageinfo-entity-usage-X": "Όλα τα δεδομένα οντότητας",
 	"wikibase-pageinfo-entity-usage-O": "Διάφορα (π.χ. αλλώνυμα, ύπαρξη οντότητας)",
 	"wikibase-property-render-error": "Αποτυχία απόδοσης της ιδιότητας $1: $2",
 	"wikibase-otherprojects": "Σε άλλα εγχειρήματα",
@@ -141,8 +142,8 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Η προηγούμενη τιμή δεν ήταν σωστή και δεν ήταν ποτέ.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ενημέρωσα</strong> μια παλιά τιμή",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Η προηγούμενη τιμή ήταν σωστή αλλά τώρα είναι ξεπερασμένη.",
-	"wikibase-client-data-bridge-references-heading": "Αναφορές",
-	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Δεν είστε συνδεδεμένος",
+	"wikibase-client-data-bridge-references-heading": "Παραπομπές",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Δεν είστε συνδεδεμένοι",
 	"wikibase-client-data-bridge-anonymous-edit-warning-tempuser-message": "Δεν είστε συνδεδεμένοι. Εάν <strong>συνδεθείτε</strong> ή <strong>δημιουργήσετε λογαριασμό</strong>, οι επεξεργασίες σας θα αποδοθούν στο όνομα χρήστη σας, μαζί με άλλα προνόμια.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Προειδοποίηση:</strong> Δεν είσαστε συνδεδεμένοι. Η διεύθυνση IP σας θα είναι δημόσια ορατή εάν κάνετε επεξεργασίες. Εάν <strong>συνδεθείτε</strong> ή <strong>δημιουργήσετε ένα λογαριασμό</strong>, οι επεξεργασίες σας θα αποδοθούν στο όνομα χρήστη σας, μαζί με άλλα προνόμια.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Επεξεργαστείτε χωρίς να συνδεθείτε",
@@ -183,6 +184,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "Μπορείτε να δημοσιεύσετε τις αλλαγές σας χωρίς να συνδεθείτε. Η διεύθυνση IP σας θα καταγραφεί στο ιστορικό επεξεργασίας της σελίδας. Μπορείτε επίσης να συνδεθείτε ξανά και να δοκιμάσετε ξανά τη δημοσίευση.",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Δημοσιεύσετε χωρίς να συνδεθείτε",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Αποθηκεύστε χωρίς να συνδεθείτε",
-	"wikibase-client-data-bridge-saving-error-assertuser-login": "Συνδεθείτε (Ανοίγει σε μία νέα καρτέλα)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Συνέχεια επεξεργασίας"
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Συνδεθείτε (Ανοίγει σε νέα καρτέλα)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Συνέχιση επεξεργασίας"
 }

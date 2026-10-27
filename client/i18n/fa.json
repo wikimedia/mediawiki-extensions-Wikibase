@@ -149,7 +149,7 @@
 	"wikibase-client-data-bridge-saving-error-message": "تغییرات شما به دلیل یک خطا نمی‌تواند ذخیره شود . لطفاً دوباره برای ذخیره‌کردن تلاش کنید.",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "تعارض ویرایشی شناسایی شد",
 	"wikibase-client-data-bridge-unknown-error-heading": "مشکلی وجود دارد",
-	"wikibase-client-data-bridge-unknown-error-message": "یک خطا رخ داد و مقدار انتخاب شده نمی‌تواند در این لحظه ویرایش شود. لطفاً برای بارگیری‌کردن مجدد تلاش کنید.",
+	"wikibase-client-data-bridge-unknown-error-message": "خطایی رخ داد و مقدار انتخاب‌شده نمی‌تواند در این لحظه ویرایش شود. لطفاً بارگیری دوباره را بیازمایید.",
 	"wikibase-client-data-bridge-error-reload-bridge": "بارگیری دوباره",
 	"wikibase-client-data-bridge-error-reload-page": "بارگیری دوبارهٔ صفحه",
 	"wikibase-client-data-bridge-error-go-back": "برگرد",
