@@ -224,6 +224,11 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 		$status = Status::newFatal( 'wikibase-api-no-such-sitelink' );
 		$status->fatal( 'wikibase-noentity', 'Q123' );
 
+		$captchaStatus = Status::newFatal( 'wikibase-api-no-such-sitelink' );
+		$captchaStatus->statusData = [
+			'captcha' => [ 'type' => 'hcaptcha', 'key' => 'test-sitekey' ],
+		];
+
 		return [
 			// Using an (existing) message, the message should be included in the extra data.
 			// The code string should be unchanged.
@@ -251,6 +256,19 @@ class ApiErrorReporterTest extends MediaWikiIntegrationTestCase {
 				'code' => 'errorreporter-test-ugh',
 				'infoPattern' => null,
 				'expectedData' => [],
+			],
+
+			// Data attached to Status::$statusData by an edit-filter extension (e.g.
+			// ConfirmEdit's CAPTCHA descriptor) must be included in the API error data
+			// (T426089).
+			'statusData is included in the API error' => [
+				'status' => $captchaStatus,
+				'code' => 'failed-save',
+				'infoPattern' => null,
+				'expectedData' => [
+					'captcha/type' => 'hcaptcha',
+					'captcha/key' => 'test-sitekey',
+				],
 			],
 		];
 	}
