@@ -4,6 +4,10 @@ module.exports = {
 		'js',
 		'vue'
 	],
+	moduleNameMapper: {
+		// Resolve the wikibase.captcha ResourceLoader alias to its source file.
+		'^wikibase\\.captcha$': '<rootDir>/../../../view/resources/wikibase/captcha/resolveCaptcha.js'
+	},
 	setupFiles: [
 		'./jest.setup.js'
 	],

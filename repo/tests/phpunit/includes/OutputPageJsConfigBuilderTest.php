@@ -21,7 +21,15 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
 class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/** @dataProvider provideBooleans */
-	public function testBuild( bool $publish, bool $taintedRefs, bool $mobileEditing ) {
+	public function testBuild( bool $publish, bool $taintedRefs, bool $mobileEditing, bool $hCaptchaExpected ) {
+		$checkUserLoaded = $this->getServiceContainer()->getExtensionRegistry()->isLoaded( 'CheckUser' );
+		if ( $hCaptchaExpected && !$checkUserLoaded ) {
+			$this->overrideConfigValue( MainConfigNames::UseDatabaseMessages, true );
+			$this->insertPage(
+				'MediaWiki:hcaptcha-privacy-policy',
+				'(hcaptcha-privacy-policy)',
+			);
+		}
 		$this->overrideConfigValue( MainConfigNames::EditSubmitButtonLabelPublish, $publish );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
@@ -72,19 +80,22 @@ class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			'wbMultiLingualStringLimit' => 250,
 			'wbTaintedReferencesEnabled' => $taintedRefs,
 		];
+		$expected = $mobileEditing ? $expectedMobile : $expectedDesktop;
+		if ( $hCaptchaExpected || $checkUserLoaded ) {
+			$expected['wbHCaptchaPrivacyPolicyHtml'] = '(hcaptcha-privacy-policy)';
+		}
 
-		$this->assertEquals(
-			$mobileEditing ? $expectedMobile : $expectedDesktop,
-			$configVars
-		);
+		$this->assertEquals( $expected, $configVars );
 	}
 
 	public static function provideBooleans(): iterable {
-		yield 'save, no tainted refs, desktop' => [ false, false, false ];
-		yield 'save, tainted refs, desktop' => [ false, true, false ];
-		yield 'publish, no tainted refs, desktop' => [ true, false, false ];
-		yield 'publish, tainted refs, desktop' => [ true, true, false ];
-		yield 'publish, no tainted refs, mobile' => [ false, false, false ];
+		yield 'save, no tainted refs, desktop' => [ false, false, false, false ];
+		yield 'save, tainted refs, desktop' => [ false, true, false, false ];
+		yield 'publish, no tainted refs, desktop' => [ true, false, false, false ];
+		yield 'publish, tainted refs, desktop' => [ true, true, false, false ];
+		yield 'publish, no tainted refs, mobile' => [ false, false, false, false ];
+		yield 'publish, tainted refs, desktop, hcaptcha' => [ true, true, false, true ];
+		yield 'publish, no tainted refs, mobile, hcaptcha' => [ false, false, false, true ];
 	}
 
 	/**

@@ -85,4 +85,6 @@ describe( 'wikibase.wbui2025.copyrightDialog', () => {
 			} );
 		} );
 	} );
+
+	// TODO: T443895 Add tests here of the hCaptcha privacy policy display behaviour.
 } );

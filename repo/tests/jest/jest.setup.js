@@ -51,6 +51,9 @@ global.mw = {
 		get: jest.fn(),
 		exists: jest.fn()
 	},
+	loader: {
+		getState: jest.fn()
+	},
 	util: {
 		debounce: jest.fn( ( callback ) => callback )
 	},

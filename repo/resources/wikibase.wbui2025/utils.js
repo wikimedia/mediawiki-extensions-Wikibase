@@ -57,6 +57,9 @@ module.exports = exports = {
 		if ( apiError.errors && Array.isArray( apiError.errors ) && apiError.errors.length > 0 ) {
 			const firstError = apiError.errors[ 0 ];
 
+			if ( apiError.errors.map( ( e ) => e.code ).includes( 'captcha-edit-fail' ) ) {
+				return mw.msg( 'wikibase-captcha-failed' );
+			}
 			if ( firstError.text ) {
 				return mw.msg( 'wikibase-error-save-generic' ) + '\n' + firstError.text;
 			}

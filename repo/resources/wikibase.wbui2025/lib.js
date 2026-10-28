@@ -19,5 +19,6 @@ wbui2025.store = Object.assign(
 	require( './store/parsedValueStore.js' )
 );
 wbui2025.copyright = require( './copyright.js' );
+wbui2025.hcaptcha = require( './hcaptcha.js' );
 
 module.exports = wbui2025;
