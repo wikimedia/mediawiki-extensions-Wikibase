@@ -51,7 +51,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
-	public function get( $key, $default = null ) {
+	public function get( $key, $default = null ): mixed {
 		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 
@@ -77,7 +77,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
-	public function set( $key, $value, $ttl = null ) {
+	public function set( $key, $value, $ttl = null ): bool {
 		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 		$ttl = $this->normalizeTtl( $ttl );
@@ -97,7 +97,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
-	public function delete( $key ) {
+	public function delete( $key ): bool {
 		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 
@@ -109,7 +109,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return bool True on success and false on failure.
 	 */
-	public function clear() {
+	public function clear(): bool {
 		//Cannot be implemented
 		return false;
 	}
@@ -126,7 +126,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if $keys is neither an array nor a Traversable,
 	 *   or if any of the $keys are not a legal value.
 	 */
-	public function getMultiple( $keys, $default = null ) {
+	public function getMultiple( $keys, $default = null ): iterable {
 		$keys = $this->toArray( $keys );
 		$this->assertKeysAreValid( $keys );
 		$prefixedKeys = array_map(
@@ -168,7 +168,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if $values is neither an array nor a Traversable,
 	 *   or if any of the $values are not a legal value.
 	 */
-	public function setMultiple( $values, $ttl = null ) {
+	public function setMultiple( $values, $ttl = null ): bool {
 		$values = $this->toAssociativeArray( $values );
 
 		$ttl = $this->normalizeTtl( $ttl );
@@ -192,7 +192,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if $keys is neither an array nor a Traversable,
 	 *   or if any of the $keys are not a legal value.
 	 */
-	public function deleteMultiple( $keys ) {
+	public function deleteMultiple( $keys ): bool {
 		$keys = $this->toArray( $keys );
 		$this->assertKeysAreValid( $keys );
 		$result = true;
@@ -217,7 +217,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
-	public function has( $key ) {
+	public function has( $key ): bool {
 		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 		$result = $this->inner->get( $key );
