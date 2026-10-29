@@ -289,6 +289,7 @@
 	"wikibase-newentity-label": "Bezeichnung:",
 	"wikibase-newentity-description": "Beschreibung:",
 	"wikibase-newentity-submit": "Erstellen",
+	"wikibase-newentity-hcaptcha-fail": "Bitte bestätige, dass du ein Mensch bist.",
 	"special-setlabel": "Eine Objekt-/Eigenschaftsbezeichnung festlegen",
 	"wikibase-search-result-stats": "{{PLURAL:$1|Eine Aussage|$1 Aussagen}}, {{PLURAL:$2|ein Websitelink|$2 Websitelinks}}",
 	"wikibase-setlabel-introfull": "{{#FORMAL:Du legst|Sie legen}} die Bezeichnung für [[:$1]] in der Sprache $2 fest.",

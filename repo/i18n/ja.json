@@ -293,6 +293,7 @@
 	"wikibase-newentity-label": "ラベル:",
 	"wikibase-newentity-description": "説明:",
 	"wikibase-newentity-submit": "作成",
+	"wikibase-newentity-hcaptcha-fail": "あなたが人間であることを確認してください",
 	"special-setlabel": "ラベルの設定",
 	"wikibase-search-result-stats": "{{PLURAL:$1|文：}}$1、{{PLURAL:$2|サイトリンク：}}$2",
 	"wikibase-setlabel-introfull": "[[:$1]] に対する$2のラベルを設定しています。",
