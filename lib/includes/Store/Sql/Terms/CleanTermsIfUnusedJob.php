@@ -73,4 +73,11 @@ class CleanTermsIfUnusedJob extends Job {
 		$this->termInLangIdsCleaner->cleanTermInLangIds( $termInLangIds );
 		return true;
 	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function ignoreDuplicates() {
+		return true;
+	}
 }
