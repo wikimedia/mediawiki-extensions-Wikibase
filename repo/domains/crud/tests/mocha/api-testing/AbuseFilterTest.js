@@ -51,7 +51,7 @@ async function createAbuseFilter( description, rules ) {
 		wpFilterTags: ''
 	} );
 
-	const filters = await rootClient.list( 'abusefilters', { abfprop: 'id|description' } );
+	const filters = await rootClient.list( 'abusefilters', { abfprop: 'id|description', abfdir: 'older' } );
 	return filters.find( ( filter ) => filter.description === description ).id;
 }
 
