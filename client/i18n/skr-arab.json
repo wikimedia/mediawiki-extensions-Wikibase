@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Saraiki"
+			"Saraiki",
+			"Tauqeerkhansurani"
 		]
 	},
 	"tooltip-t-wikibase": "متعلقہ ڈیٹا نال منسلک کرو",
@@ -13,6 +14,7 @@
 	"wikibase-linkitem-addlinks": "لنک شامل کرو",
 	"wikibase-linkitem-title": "ورقے نال لنک کرو",
 	"wikibase-linkitem-linkpage": "ورقے نال لنک کرو",
+	"wikibase-linkitem-selectlink": "براہ کرم ہک سائٹ تے ہک ورقہ چݨو جیہڑا تساں ایں ورقے نال جوڑݨا چاہندے ہو۔",
 	"wikibase-linkitem-input-site": "زبان:",
 	"wikibase-linkitem-input-page": "ورقہ:",
 	"wikibase-linkitem-confirmitem-button": "تصدیق",

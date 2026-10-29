@@ -6,5 +6,8 @@
 		]
 	},
 	"wikibase-edit": "ᠵᠠᠰᠠᠪᠤᠷᠢᠯᠠᠬᠤ",
-	"wikibase-add": "ᠨᠡᠮᠡᠬᠦ"
+	"wikibase-add": "ᠨᠡᠮᠡᠬᠦ",
+	"wikibase-label-empty": "ᠲᠣᠳᠣᠷᠬᠠᠢᠯᠠᠯᠲᠠ᠎ᠦᠭᠡᠢ ᠱᠣᠰᠢᠭ᠎ᠠ",
+	"wikibase-description-empty": "ᠲᠣᠳᠣᠷᠬᠠᠢᠯᠠᠯᠲᠠ ᠪᠠᠢᠬᠤ᠎ᠦᠭᠡᠢ",
+	"wikibase-sitelinks-special": "ᠪᠤᠰᠤᠳ ᠴᠠᠬᠢᠮ ᠬᠠᠭᠤᠳᠠᠰᠤ᠎ᠨᠤᠭᠤᠳ"
 }
