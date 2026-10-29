@@ -29,8 +29,8 @@ class MockJobQueueFactory {
 
 		if ( $expectedTermInLangIdsToClean != null ) {
 			$jobQueueGroupMock
-				->expects( $this->test->atMost( count( $expectedTermInLangIdsToClean ) ) )
-				->method( 'push' )
+				->expects( $this->test->exactly( count( $expectedTermInLangIdsToClean ) ) )
+				->method( 'lazyPush' )
 				->willReturnCallback( function ( IJobSpecification $jobSpec ) use ( &$expectedTermInLangIdsToClean ) {
 					$termInLangId = array_shift( $expectedTermInLangIdsToClean );
 					$this->test->assertInstanceOf( CleanTermsIfUnusedJob::class, $jobSpec );
