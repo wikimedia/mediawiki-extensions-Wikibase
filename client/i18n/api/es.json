@@ -8,6 +8,7 @@
 			"Jackiezelaya",
 			"Jakeukalane",
 			"Macofe",
+			"Ovruni",
 			"Tiberius1701"
 		]
 	},
@@ -19,7 +20,7 @@
 	"apihelp-query+wbentityusage-paramvalue-aspect-T": "Se utiliza el título de la página local correspondiente a la entidad",
 	"apihelp-query+wbentityusage-paramvalue-aspect-C": "Se usan instrucciones de la entidad",
 	"apihelp-query+wbentityusage-paramvalue-aspect-X": "Todos los aspectos de una entidad son o pueden usarse",
-	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Se usa algo más sobre la entidad. Esto implica actualmente el uso de instrucciones y alias y comprobaciones explícitas de la existencia de la entidad.",
+	"apihelp-query+wbentityusage-paramvalue-aspect-O": "Se usa algo más sobre la entidad. Esto implica actualmente el uso de alias y comprobaciones explícitas de la existencia de la entidad.",
 	"apihelp-query+wbentityusage-param-prop": "Propiedades que añadir al resultado.",
 	"apihelp-query+wbentityusage-paramvalue-prop-url": "Si está activado, se añadirá el URL de la entidad",
 	"apihelp-query+wbentityusage-param-entities": "Devolver solo la página que utilizó estas entidades.",
@@ -48,5 +49,15 @@
 	"apihelp-query+description-example-central": "Obtener la descripción de la página «Londres», con preferencia a la descripción central, si existe.",
 	"apihelp-query+wikibase-summary": "Obtener información sobre el cliente de Wikibase y el repositorio Wikibase asociado.",
 	"apihelp-query+wikibase-example": "Obtener la ruta de URL y otra información acerca del cliente y repositorio de Wikibase.",
-	"apihelp-query+wikibase-param-prop": "Qué propiedades se obtendrán:\n;<kbd>url</kbd>: URL de base, ruta de secuencia de órdenes y ruta de artículo del repositorio de Wikibase.\n;<kbd>siteid</kbd>: el identificador de este sitio."
+	"apihelp-query+wikibase-param-prop": "Qué propiedades se obtendrán:",
+	"apihelp-query+wikibase-paramvalue-prop-url": "URL base, ruta del script y ruta del artículo del repositorio de Wikibase.",
+	"apihelp-query+wikibase-paramvalue-prop-siteid": "El siteid de este sitio.",
+	"apihelp-wbformatreference-summary": "Da formato a una referencia para mostrarla a los usuarios.",
+	"apihelp-wbformatreference-example-1": "Da formato a una referencia vacía utilizando el estilo Data Bridge en HTML.",
+	"apihelp-wbformatreference-example-2": "Da formato a una referencia que contenga una cadena utilizando el estilo Data Bridge en HTML.",
+	"apihelp-wbformatreference-param-reference": "La referencia como objeto JSON.",
+	"apihelp-wbformatreference-param-style": "El estilo en el que se debe dar formato a la referencia.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "El estilo utilizado por [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. No está pensado para uso general.",
+	"apihelp-wbformatreference-param-outputformat": "El formato en el que debe devolverse el resultado.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "Marcado HTML."
 }

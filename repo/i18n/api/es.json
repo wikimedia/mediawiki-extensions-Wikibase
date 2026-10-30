@@ -10,13 +10,17 @@
 			"Lemondoge",
 			"Macofe",
 			"Matiia",
+			"Ovruni",
 			"Tiberius1701"
 		]
 	},
 	"apihelp-wbavailablebadges-example-1": "Consulta todos elementos de insignias disponibles",
 	"apihelp-wbcreateclaim-summary": "Crea afirmaciones de Wikibase.",
+	"apihelp-wbcreateclaim-param-baserevid": "El identificador numérico de la revisión en la que se basará la modificación.\nSe utiliza para detectar conflictos al guardar.",
 	"apihelp-wbcreateclaim-param-bot": "Marca esta edición como realizada por un bot. Esta marca de URL solo se respetará si el usuario pertenece al grupo \"{{int:group-bot}}\".",
+	"apihelp-wbcreateclaim-param-entity": "ID de la entidad a la que se añade la reclamación",
 	"apihelp-wbcreateclaim-param-snaktype": "El tipo de snak",
+	"apihelp-wbcreateclaim-param-summary": "Resumen de la edición.\nSe le añadirá al principio un comentario generado automáticamente. El límite de longitud del comentario automático, junto con el resumen, es de 260 caracteres. Ten en cuenta que todo lo que supere ese límite se recortará.",
 	"apihelp-wbcreateredirect-param-from": "Identificador de entidad para hacer una redirección",
 	"apihelp-wbcreateredirect-param-to": "Identificador de entidad al que apuntar la redirección",
 	"apihelp-wbcreateredirect-param-bot": "Marcar esta edición como hecha por un robot. Este parámetro funcionará solo si el usuario pertenece al grupo «{{int:group-bot}}».",

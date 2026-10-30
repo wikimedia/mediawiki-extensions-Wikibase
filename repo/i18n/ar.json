@@ -296,6 +296,7 @@
 	"wikibase-newentity-label": "التسمية:",
 	"wikibase-newentity-description": "الوصف:",
 	"wikibase-newentity-submit": "إنشاء",
+	"wikibase-newentity-hcaptcha-fail": "يرجى التأكد من أنك إنسان",
 	"special-setlabel": "تعيين تسمية عنصر/خاصية",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|بيان}}، $2 {{PLURAL:$2|وصلة موقع}}",
 	"wikibase-setlabel-introfull": "أنت تقوم بتحديد التسمية بـ$2 من أجل [[:$1]].",
