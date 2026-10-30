@@ -4,7 +4,6 @@ namespace Wikibase\Repo\ParserOutput;
 
 use MediaWiki\Page\LinkBatchFactory;
 use MediaWiki\Parser\ParserOutput;
-use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractor;
@@ -59,19 +58,22 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 		$linkBatch = $this->linkBatchFactory->newLinkBatch();
 		$linkBatch->setCaller( __METHOD__ );
 
+		$titles = [];
 		foreach ( $entityIds as $entityId ) {
-			$linkBatch->addObj( $this->entityTitleLookup->getTitleForId( $entityId ) );
+			$title = $this->entityTitleLookup->getTitleForId( $entityId );
+			if ( $title !== null ) {
+				$linkBatch->addObj( $title );
+				$titles[] = $title;
+			}
 		}
 
-		$pages = $linkBatch->doQuery();
+		$linkBatch->execute();
 
-		if ( $pages === false ) {
-			return;
-		}
-
-		foreach ( $pages as $page ) {
-			$title = Title::makeTitle( $page->page_namespace, $page->page_title );
-			$parserOutput->addLink( $title, $page->page_id );
+		foreach ( $titles as $title ) {
+			$pageId = $title->getArticleID();
+			if ( $pageId ) {
+				$parserOutput->addLink( $title, $pageId );
+			}
 		}
 	}
 
