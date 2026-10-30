@@ -4,6 +4,7 @@ import { checkA11y } from '../../support/checkA11y';
 import { ItemViewPage } from '../../support/pageObjects/ItemViewPage';
 import { EditStatementFormPage } from '../../support/pageObjects/EditStatementFormPage';
 import { ValueForm } from '../../support/pageObjects/ValueForm';
+import { CopyrightDialog } from '../../support/pageObjects/CopyrightDialog';
 
 describe( 'wbui2025 item view publish statement changes', () => {
 	context( 'mobile view', () => {
@@ -58,7 +59,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 		it( 'loads the item view and shows a statement, which can be edited', () => {
 			const itemViewPage = new ItemViewPage( itemId );
-			itemViewPage.open().statementsSection();
+			itemViewPage.open( 'en', false ).statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
 
 			/* Check that the rank is normal initially */
@@ -95,7 +96,11 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 			/* Save changes by clicking 'publish' */
 			editFormPage.publishButton().click();
-			editFormPage.publishButton().should( 'be.disabled' );
+
+			const dialog = new CopyrightDialog();
+			dialog.clickCheckbox();
+			dialog.confirmButton().click();
+			dialog.root().should( 'not.exist' );
 
 			/* Wait for the form to close, and check the value is changed */
 			editFormPage.root().should( 'not.exist' );

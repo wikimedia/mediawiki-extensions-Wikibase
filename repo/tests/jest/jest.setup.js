@@ -34,6 +34,7 @@ function ApiMock() {}
 ApiMock.prototype.get = jest.fn();
 ApiMock.prototype.assertCurrentUser = jest.fn();
 ApiMock.prototype.postWithEditToken = jest.fn();
+ApiMock.prototype.saveOption = jest.fn();
 
 function TitleMock() {}
 TitleMock.prototype.getMainText = jest.fn();
@@ -46,8 +47,17 @@ global.mw = {
 	msg: jest.fn( ( key ) => key ),
 	message: $i18nMock,
 	Title: TitleMock,
-	config: new Map(),
+	config: {
+		get: jest.fn(),
+		exists: jest.fn()
+	},
 	util: {
 		debounce: jest.fn( ( callback ) => callback )
+	},
+	cookie: new Map(),
+	user: {
+		isAnon: jest.fn(),
+		isTemp: jest.fn(),
+		options: new Map()
 	}
 };

@@ -963,6 +963,7 @@
 			"services": [
 				"ContentLanguage",
 				"WikibaseRepo.EntityContentFactory",
+				"WikibaseRepo.MobileSite",
 				"WikibaseRepo.Settings",
 				"WikibaseRepo.TermsLanguages"
 			]

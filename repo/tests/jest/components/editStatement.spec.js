@@ -41,7 +41,8 @@ const mockConfig = {
 	wgUserLanguage: languageCode
 };
 mw.config = {
-	get: jest.fn( ( key ) => mockConfig[ key ] )
+	get: jest.fn( ( key ) => mockConfig[ key ] ),
+	exists: jest.fn( ( key ) => key in mockConfig )
 };
 const editStatementComponent = require( '../../../resources/wikibase.wbui2025/components/editStatement.vue' );
 const { CdxSelect, CdxTextArea } = require( '../../../codex.js' );

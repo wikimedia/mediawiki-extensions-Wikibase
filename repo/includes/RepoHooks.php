@@ -972,6 +972,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/store/savedStatementsStore.js',
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
+					'resources/wikibase.wbui2025/copyright.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
 						'content' => [
@@ -982,6 +983,7 @@ final class RepoHooks implements
 					],
 				],
 				'dependencies' => [
+					'mediawiki.cookie',
 					'mediawiki.ForeignApi',
 					'pinia',
 					'wikibase',
@@ -1030,6 +1032,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/components/mainSnak.vue',
 					'resources/wikibase.wbui2025/components/newReferenceSnak.vue',
 					'resources/wikibase.wbui2025/components/stepper.vue',
+					'resources/wikibase.wbui2025/components/copyrightDialog.vue',
 					'resources/wikibase.wbui2025/mixins/saveStatementsFormMixin.js',
 					'resources/wikibase.wbui2025/mixins/resizeTextareaMixin.js',
 					[
@@ -1123,6 +1126,10 @@ final class RepoHooks implements
 					'wikibase-indicator-popover-multiple-issue-next',
 					'wikibase-undisplayable-value',
 					'wikibase-error-save-generic',
+					'wikibase-copyrightdialog-heading',
+					'wikibase-copyrighttooltip-acknowledge',
+					'wikibase-copyrightdialog-confirm-publish',
+					'wikibase-copyrightdialog-confirm-save',
 				],
 				'codexComponents' => [
 					'CdxAccordion',
@@ -1137,6 +1144,8 @@ final class RepoHooks implements
 					'CdxTextInput',
 					'CdxToggleButton',
 					'CdxProgressBar',
+					'CdxDialog',
+					'CdxCheckbox',
 				],
 			];
 			MediaWikiServices::getInstance()->getHookContainer()->run(

@@ -19,9 +19,12 @@ Object.defineProperty( window, 'scrollTo', { value: jest.fn(), configurable: tru
 const { createTestingPinia } = require( '@pinia/testing' );
 const { mockLibWbui2025 } = require( '../libWbui2025Helpers.js' );
 mockLibWbui2025();
+const { CdxButton } = require( '../../../codex.js' );
 const modalOverlayComponent = require( '../../../resources/wikibase.wbui2025/components/modalOverlay.vue' );
+const copyrightDialogComponent = require( '../../../resources/wikibase.wbui2025/components/copyrightDialog.vue' );
 const { mount } = require( '@vue/test-utils' );
 const wbui2025 = require( 'wikibase.wbui2025.lib' );
+wbui2025.copyright.isAccepted = jest.fn();
 
 describe( 'wikibase.wbui2025.modalOverlay', () => {
 	it( 'defines component', async () => {
@@ -33,7 +36,8 @@ describe( 'wikibase.wbui2025.modalOverlay', () => {
 	async function mountModalComponent() {
 		return mount( modalOverlayComponent, {
 			global: {
-				plugins: [ createTestingPinia() ]
+				plugins: [ createTestingPinia() ],
+				stubs: { WikibaseWbui2025CopyrightDialog: true }
 			}
 		} );
 	}
@@ -151,6 +155,64 @@ describe( 'wikibase.wbui2025.modalOverlay', () => {
 				expect( clearStatusMock ).toHaveBeenCalledTimes( 1 );
 				expect( clearErrorMock ).toHaveBeenCalled();
 				expect( document.body.className ).toEqual( '' );
+			} );
+		} );
+
+		describe( 'when copyright acceptance is required to save', () => {
+			let wrapper, copyrightDialog, saveButton;
+
+			beforeEach( async () => {
+				wrapper = await mountModalComponent();
+				await wrapper.setProps( { copyrightAcceptanceRequired: true } );
+				copyrightDialog = wrapper.findComponent( copyrightDialogComponent );
+				[ , , saveButton ] = wrapper.findAllComponents( CdxButton );
+			} );
+
+			it( 'does not immediately show the copyright dialog', () => {
+				expect( copyrightDialog.props( 'open' ) ).toBe( false );
+			} );
+
+			describe( 'the user has not accepted for all edits', () => {
+				beforeEach( () => {
+					wbui2025.copyright.isAccepted.mockReturnValue( false );
+				} );
+
+				it( 'clicking save shows the dialog', async () => {
+					await saveButton.vm.$emit( 'click' );
+					expect( copyrightDialog.props( 'open' ) ).toBe( true );
+					expect( wrapper.emitted( 'save' ) ).toBeFalsy();
+				} );
+
+				describe( 'the dialog is open', () => {
+					beforeEach( async () => {
+						await wrapper.setData( { showCopyrightDialog: true } );
+						expect( copyrightDialog.props( 'open' ) ).toBe( true );
+					} );
+
+					it( 'closes the dialog and emits "save" when confirmed', async () => {
+						await copyrightDialog.vm.$emit( 'confirm' );
+						expect( copyrightDialog.props( 'open' ) ).toBe( false );
+						expect( wrapper.emitted( 'save' ) ).toHaveLength( 1 );
+					} );
+
+					it( 'closes the dialog and emits nothing when acceptance is cancelled', async () => {
+						await copyrightDialog.vm.$emit( 'hide' );
+						expect( copyrightDialog.props( 'open' ) ).toBe( false );
+						expect( wrapper.emitted() ).toEqual( {} );
+					} );
+				} );
+			} );
+
+			describe( 'the user has already accepted for future edits', () => {
+				beforeEach( () => {
+					wbui2025.copyright.isAccepted.mockReturnValue( true );
+				} );
+
+				it( 'clicking save emits "save" and does not show the dialog', async () => {
+					await saveButton.vm.$emit( 'click' );
+					expect( copyrightDialog.props( 'open' ) ).toBe( false );
+					expect( wrapper.emitted( 'save' ) ).toHaveLength( 1 );
+				} );
 			} );
 		} );
 	} );
