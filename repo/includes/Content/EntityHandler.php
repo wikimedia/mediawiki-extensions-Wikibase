@@ -704,6 +704,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function getParserOutputForIndexing( WikiPage $page, ?ParserCache $cache = null, ?RevisionRecord $revision = null ) {
 		$parserOptions = $page->makeParserOptions( 'canonical' );
+		$parserOptions->setUseParsoidForLinksUpdate();
 
 		$renderer = MediaWikiServices::getInstance()->getRevisionRenderer();
 		$revisionRecord = $this->latestRevision( $page );
