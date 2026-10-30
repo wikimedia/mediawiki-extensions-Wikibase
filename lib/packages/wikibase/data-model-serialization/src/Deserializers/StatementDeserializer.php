@@ -22,7 +22,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementDeserializer implements DispatchableDeserializer {
 
-	private static array $rankIds = [
+	private const array RANK_IDS = [
 		'deprecated' => Statement::RANK_DEPRECATED,
 		'normal' => Statement::RANK_NORMAL,
 		'preferred' => Statement::RANK_PREFERRED,
@@ -151,13 +151,13 @@ class StatementDeserializer implements DispatchableDeserializer {
 	}
 
 	private function setRankFromSerialization( array $serialization, Statement $statement ) {
-		if ( !array_key_exists( $serialization['rank'], self::$rankIds ) ) {
+		if ( !array_key_exists( $serialization['rank'], self::RANK_IDS ) ) {
 			throw new DeserializationException(
 				'The rank ' . $serialization['rank'] . ' is not a valid rank.'
 			);
 		}
 
-		$statement->setRank( self::$rankIds[$serialization['rank']] );
+		$statement->setRank( self::RANK_IDS[$serialization['rank']] );
 	}
 
 	private function setReferencesFromSerialization( array $serialization, Statement $statement ) {

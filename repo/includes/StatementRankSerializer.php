@@ -17,10 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementRankSerializer implements Serializer, Deserializer {
 
-	/**
-	 * @var string[]
-	 */
-	private static $rankMap = [
+	private const RANK_MAP = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred',
@@ -32,7 +29,7 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	 * @return string[]
 	 */
 	public static function getRanks() {
-		return array_values( self::$rankMap );
+		return array_values( self::RANK_MAP );
 	}
 
 	/**
@@ -45,7 +42,7 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	 * @suppress PhanParamSignatureMismatch
 	 */
 	public function deserialize( $serializedRank ) {
-		$ranks = array_flip( self::$rankMap );
+		$ranks = array_flip( self::RANK_MAP );
 
 		if ( !array_key_exists( $serializedRank, $ranks ) ) {
 			throw new DeserializationException( 'Invalid rank serialization' );
@@ -63,11 +60,11 @@ class StatementRankSerializer implements Serializer, Deserializer {
 	 * @return string
 	 */
 	public function serialize( $rank ) {
-		if ( !array_key_exists( $rank, self::$rankMap ) ) {
+		if ( !array_key_exists( $rank, self::RANK_MAP ) ) {
 			throw new SerializationException( 'Invalid rank' );
 		}
 
-		return self::$rankMap[$rank];
+		return self::RANK_MAP[$rank];
 	}
 
 }

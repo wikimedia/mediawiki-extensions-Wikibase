@@ -10,15 +10,15 @@ use Wikibase\Repo\Domains\Search\Application\UseCases\UseCaseError;
  */
 class ErrorResponseToHttpStatus {
 
-	private static array $lookupTable = [
+	private const array LOOKUP_TABLE = [
 		// 400 errors:
 		UseCaseError::INVALID_QUERY_PARAMETER => 400,
 	];
 
 	public static function lookup( string $errorCode ): int {
-		if ( !array_key_exists( $errorCode, self::$lookupTable ) ) {
+		if ( !array_key_exists( $errorCode, self::LOOKUP_TABLE ) ) {
 			throw new LogicException( "Error code '$errorCode' not found in lookup table" );
 		}
-		return self::$lookupTable[$errorCode];
+		return self::LOOKUP_TABLE[$errorCode];
 	}
 }

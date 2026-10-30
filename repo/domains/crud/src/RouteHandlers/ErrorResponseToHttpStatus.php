@@ -10,7 +10,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
  */
 class ErrorResponseToHttpStatus {
 
-	private static array $lookupTable = [
+	private const array LOOKUP_TABLE = [
 		// 400 errors:
 		UseCaseError::CANNOT_MODIFY_READ_ONLY_VALUE => 400,
 		UseCaseError::INVALID_KEY => 400,
@@ -51,9 +51,9 @@ class ErrorResponseToHttpStatus {
 	];
 
 	public static function lookup( string $errorCode ): int {
-		if ( !array_key_exists( $errorCode, self::$lookupTable ) ) {
+		if ( !array_key_exists( $errorCode, self::LOOKUP_TABLE ) ) {
 			throw new LogicException( "Error code '$errorCode' not found in lookup table" );
 		}
-		return self::$lookupTable[$errorCode];
+		return self::LOOKUP_TABLE[$errorCode];
 	}
 }

@@ -97,7 +97,7 @@ class EntityUsage {
 	 *
 	 * @var null[]
 	 */
-	private static $aspects = [
+	private const ASPECTS = [
 		self::SITELINK_USAGE => null,
 		self::LABEL_USAGE => null,
 		self::DESCRIPTION_USAGE => null,
@@ -138,7 +138,7 @@ class EntityUsage {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityId $entityId, string $aspect, ?string $modifier = null ) {
-		if ( !array_key_exists( $aspect, self::$aspects ) ) {
+		if ( !array_key_exists( $aspect, self::ASPECTS ) ) {
 			throw new InvalidArgumentException( '$aspect must use one of the XXX_USAGE constants, "' . $aspect . '" given!' );
 		}
 
