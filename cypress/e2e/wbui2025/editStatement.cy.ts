@@ -43,6 +43,7 @@ describe( 'wbui2025 item view edit statements', () => {
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
+			cy.setTermsAcceptanceCookie();
 			itemViewPage.editLinks().first().click();
 			const editFormPage = new EditStatementFormPage();
 			editFormPage.propertyName().should( 'have.text', propertyName );

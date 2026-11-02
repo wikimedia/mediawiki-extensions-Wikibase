@@ -120,6 +120,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
+			cy.setTermsAcceptanceCookie();
 
 			itemViewPage.editLinks().first().should( 'exist' ).should( 'be.visible' );
 			itemViewPage.editLinks().first().click();
@@ -244,6 +245,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
+			cy.setTermsAcceptanceCookie();
 
 			checkA11y( ItemViewPage.STATEMENTS );
 
@@ -375,6 +377,7 @@ describe( 'wbui2025 string datatypes (tabular-data, geo-shape, commonsMedia)', (
 
 			const itemViewPage = new ItemViewPage( itemId );
 			itemViewPage.open().statementsSection();
+			cy.setTermsAcceptanceCookie();
 
 			checkA11y( { include: [ ItemViewPage.STATEMENTS ], exclude: [
 				ItemViewPage.COMMONS_MEDIA_THUMBNAIL_LINK,

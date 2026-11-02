@@ -4,10 +4,12 @@ jest.mock(
 	{ virtual: true }
 );
 
+const copyrightVersion = 'wikibase-1';
+const messageHtml = 'copyright message with <a>license link</a>';
 const mockConfig = {
 	wbCopyright: {
-		version: 'wikibase-1',
-		messageHtml: 'copyright message with <a>license link</a>'
+		version: copyrightVersion,
+		messageHtml
 	}
 };
 mw.config = {
@@ -34,7 +36,12 @@ describe( 'wikibase.wbui2025.copyrightDialog', () => {
 		let wrapper, cdxDialog, cdxCheckbox;
 
 		beforeEach( async () => {
-			wrapper = await mount( Wbui2025CopyrightDialog, { props: { open: true } } );
+			wrapper = await mount( Wbui2025CopyrightDialog, {
+				props: { open: true },
+				global: {
+					stubs: { teleport: true }
+				}
+			} );
 			cdxDialog = wrapper.findComponent( CdxDialog );
 			cdxCheckbox = wrapper.findComponent( CdxCheckbox );
 		} );
@@ -42,6 +49,7 @@ describe( 'wikibase.wbui2025.copyrightDialog', () => {
 		it( 'exists and mounts child components correctly', () => {
 			expect( wrapper.exists() ).toBe( true );
 			expect( cdxDialog.exists() ).toBe( true );
+			expect( cdxDialog.html() ).toContain( messageHtml );
 			expect( cdxCheckbox.exists() ).toBe( true );
 			expect( cdxCheckbox.props( 'modelValue' ) ).toBe( false );
 		} );

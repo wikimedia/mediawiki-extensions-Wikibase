@@ -56,8 +56,7 @@ global.mw = {
 	},
 	cookie: new Map(),
 	user: {
-		isAnon: jest.fn(),
-		isTemp: jest.fn(),
+		isNamed: jest.fn(),
 		options: new Map()
 	}
 };

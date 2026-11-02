@@ -24,12 +24,12 @@ function setCookie() {
 }
 
 function persistAcceptance() {
-	if ( mw.user.isAnon() || mw.user.isTemp() ) {
-		setCookie();
-	} else {
+	if ( mw.user.isNamed() ) {
 		api.saveOption( optionsKey, version )
 			.done( () => mw.user.options.set( optionsKey, version ) )
 			.fail( setCookie );
+	} else {
+		setCookie();
 	}
 }
 

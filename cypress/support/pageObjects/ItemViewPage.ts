@@ -56,22 +56,17 @@ export class ItemViewPage {
 		return this.itemId;
 	}
 
-	public open( lang: string = 'en', setTermsAccepted: boolean = true ): this {
+	public open( lang: string = 'en' ): this {
 		// We force tests to be in English be default, to be able to make assertions
 		// about texts (especially, for example, selecting items from a Codex MenuButton
 		// menu) without needing to modify Codex components or introduce translation
 		// support to Cypress.
-		cy.visitTitleMobile( { title: 'Item:' + this.itemId, qs: { uselang: lang } } );
+		cy.visitTitleMobile( { title: 'Item:' + this.itemId, qs: { uselang: lang } } )
+		// turn ResourceLoader exceptions into unhandled Promise rejections so Cypress will make them visible
+			.invoke( 'mw.trackSubscribe',
+				'resourceloader.exception',
+				( _topic, data ) => Promise.reject( data.exception || data ) );
 
-		// TODO: fix whatever is wrong with this and re-enable it (T442916)
-		// // turn ResourceLoader exceptions into unhandled Promise rejections so Cypress will make them visible
-		// .invoke( 'mw.trackSubscribe',
-		// 'resourceloader.exception',
-		// ( _topic, data ) => Promise.reject( data.exception || data ) );
-
-		if ( setTermsAccepted ) {
-			cy.setTermsAcceptanceCookie();
-		}
 		return this;
 	}
 
