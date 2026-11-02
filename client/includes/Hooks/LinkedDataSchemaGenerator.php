@@ -178,7 +178,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		if (
 			!$entityId ||
 			!$title ||
-			!in_array( $title->getNamespace(), $this->pageSchemaNamespaces ) ||
+			!$title->inNamespaces( $this->pageSchemaNamespaces ) ||
 			!$title->exists()
 		) {
 			return true;

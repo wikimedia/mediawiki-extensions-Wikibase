@@ -98,7 +98,7 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 	private function makeUser( $name ) {
 		$user = $this->getServiceContainer()->getUserFactory()->newFromName( $name );
 
-		if ( $user->getId() === 0 ) {
+		if ( !$user->isRegistered() ) {
 			$user->addToDatabase();
 		}
 

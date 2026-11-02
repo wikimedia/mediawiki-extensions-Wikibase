@@ -126,7 +126,7 @@ class SummaryFormatter {
 		$parts = $this->formatArgList( $summary->getAutoSummaryArgs() );
 		// @phan-suppress-next-line PhanTypeMismatchArgumentInternal
 		$parts = array_filter( $parts, strlen( ... ) );
-		return $parts ? $this->language->commaList( $parts ) : '';
+		return $this->language->commaList( $parts );
 	}
 
 	/**

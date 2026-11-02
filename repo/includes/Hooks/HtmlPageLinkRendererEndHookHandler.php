@@ -407,7 +407,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		$prefix = 'EntityPage/';
 		$pageName = $linkTarget->getText();
 
-		if ( $linkTarget->getNamespace() === NS_SPECIAL && str_starts_with( $pageName, $prefix ) ) {
+		if ( $linkTarget->inNamespace( NS_SPECIAL ) && str_starts_with( $pageName, $prefix ) ) {
 			return substr( $pageName, strlen( $prefix ) );
 		}
 
