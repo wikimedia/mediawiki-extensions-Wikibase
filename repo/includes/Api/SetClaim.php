@@ -6,6 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
+use Deserializers\Exceptions\DeserializationException;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
 use InvalidArgumentException;
@@ -291,14 +292,9 @@ class SetClaim extends ApiBase {
 				throw new IllegalValueException( 'Failed to get statement from Serialization' );
 			}
 			return $statement;
-		} catch ( InvalidArgumentException $invalidArgumentException ) {
+		} catch ( InvalidArgumentException | OutOfBoundsException | DeserializationException $exception ) {
 			$this->errorReporter->dieError(
-				'Failed to get claim from claim Serialization ' . $invalidArgumentException->getMessage(),
-				'invalid-claim'
-			);
-		} catch ( OutOfBoundsException $outOfBoundsException ) {
-			$this->errorReporter->dieError(
-				'Failed to get claim from claim Serialization ' . $outOfBoundsException->getMessage(),
+				'Failed to get claim from claim Serialization ' . $exception->getMessage(),
 				'invalid-claim'
 			);
 		}
