@@ -89,5 +89,5 @@ module.exports = {
 	MediawikiEdit,
 	PatchRequest,
 	StatementRequestRequired,
-	shared: { StatementRequestRequired },
+	shared: { StatementRequestRequired, PatchRequest },
 };
