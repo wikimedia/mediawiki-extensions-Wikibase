@@ -159,20 +159,16 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getPingback( ?HttpRequestFactory $requestFactory = null ): WikibasePingback {
-		$extensions = $this->createMock( ExtensionRegistry::class );
-		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );
-		$requestFactory ??= $this->createMock( HttpRequestFactory::class );
 		$lbFactory = new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->getDb() ] ) ] );
 
-		$wikibaseRepoSettings
-			->method( 'getSetting' )
-			->willReturnMap( [
-				[ 'pingbackHost', 'http://localhost' ],
-				[ 'federatedPropertiesEnabled', true ],
-				[ 'termboxEnabled', true ],
-			] );
+		$wikibaseRepoSettings = new SettingsArray( [
+			'pingbackHost' => 'http://localhost',
+			'federatedPropertiesEnabled' => true,
+			'termboxEnabled' => true,
+		] );
 
-		$extensions->method( 'getAllThings' )
+		$extensionRegistry = $this->createMock( ExtensionRegistry::class );
+		$extensionRegistry->method( 'getAllThings' )
 			->willReturn( [
 				'Babel' => [],
 				'VisualEditor' => [],
@@ -181,9 +177,9 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		return new WikibasePingback(
 			new HashConfig( [ MainConfigNames::DBtype => '' ] ),
 			new NullLogger(),
-			$extensions,
+			$extensionRegistry,
 			$wikibaseRepoSettings,
-			$requestFactory,
+			$requestFactory ?? $this->createMock( HttpRequestFactory::class ),
 			null,
 			new RepoDomainDb( $lbFactory, $lbFactory->getLocalDomainID() )
 		);

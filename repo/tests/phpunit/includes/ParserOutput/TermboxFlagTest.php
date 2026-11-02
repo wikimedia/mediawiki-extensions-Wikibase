@@ -22,7 +22,7 @@ class TermboxFlagTest extends \MediaWikiIntegrationTestCase {
 
 	public function testGivenFeatureFlagSetFalse_shouldRenderTermboxReturnsFalse() {
 		$flag = new TermboxFlag(
-			$this->newSettingsWithFeatureFlag( false ),
+			new SettingsArray( [ TermboxFlag::TERMBOX_FLAG => false ] ),
 			$this->createMock( ExtensionRegistry::class )
 		);
 		$this->assertFalse( $flag->shouldRenderTermbox() );
@@ -30,7 +30,7 @@ class TermboxFlagTest extends \MediaWikiIntegrationTestCase {
 
 	public function testGivenMobileExtensionNotLoaded_shouldRenderTermboxReturnsFalse() {
 		$flag = new TermboxFlag(
-			$this->newSettingsWithFeatureFlag( true ),
+			new SettingsArray( [ TermboxFlag::TERMBOX_FLAG => true ] ),
 			$this->newExtensionRegistryWithMobileExtension( false )
 		);
 		$this->assertFalse( $flag->shouldRenderTermbox() );
@@ -39,20 +39,10 @@ class TermboxFlagTest extends \MediaWikiIntegrationTestCase {
 	public function testAllTrue_shouldRenderTermboxReturnsTrue() {
 		$this->markTestSkippedIfExtensionNotLoaded( 'MobileFrontend' );
 		$flag = new TermboxFlag(
-			$this->newSettingsWithFeatureFlag( true ),
+			new SettingsArray( [ TermboxFlag::TERMBOX_FLAG => true ] ),
 			$this->newExtensionRegistryWithMobileExtension( true )
 		);
 		$this->assertSame( MobileContext::singleton()->shouldDisplayMobileView(), $flag->shouldRenderTermbox() );
-	}
-
-	private function newSettingsWithFeatureFlag( $setting ) {
-		$settings = $this->createMock( SettingsArray::class );
-		$settings->expects( $this->once() )
-			->method( 'getSetting' )
-			->with( TermboxFlag::TERMBOX_FLAG )
-			->willReturn( $setting );
-
-		return $settings;
 	}
 
 	private function newExtensionRegistryWithMobileExtension( $isEnabled ) {
