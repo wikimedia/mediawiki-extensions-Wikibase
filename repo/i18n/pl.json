@@ -157,6 +157,8 @@
 	"wikibase-shortcopyrightwarning": "Klikając „$1”, zgadzasz się na [[$2|warunki użytkowania]] oraz wyrażasz nieodwołalną zgodę na udostępnianie Twojego wkładu na warunkach [$3 $4].",
 	"wikibase-shortcopyrightwarning-accept-persist": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
 	"wikibase-copyrighttooltip-acknowledge": "Przyjmuję te warunki dla moich przyszłych edycji. Nie pokazuj więcej tego komunikatu.",
+	"wikibase-copyrightdialog-heading": "Warunki korzystania i licencja",
+	"wikibase-copyrightdialog-confirm-publish": "potwierdź i opublikuj",
 	"wikibase-entityselector-more": "więcej",
 	"wikibase-entityselector-notfound": "Brak wyników",
 	"wikibase-anonymouseditwarning": "Ostrzeżenie: Nie zalogowano się. Jeśli wykonasz jakąkolwiek zmianę, Twój [https://pl.wikipedia.org/wiki/Adres_IP adres IP] będzie widoczny publicznie. Jeśli <strong>[$1 zalogujesz się]</strong> lub <strong>[$2 utworzysz konto]</strong>, Twoje zmiany zostaną przypisane do nazwy użytkownika, wraz z innymi korzyściami z założenia konta.",
