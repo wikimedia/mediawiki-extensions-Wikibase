@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use MediaWiki\FileRepo\File\File;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Media\MediaTransformOutput;
-use MediaWiki\Parser\ParserOptions;
 use MediaWikiIntegrationTestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -90,7 +89,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testFormat_whenThumbsizeNotAvailable_usesFallback() {
-		$formatter = $this->newSubjectInstance( 1, [ 0 => 120 ] );
+		$formatter = $this->newSubjectInstance( [ 0 => 120 ] );
 		$html = $formatter->format( new StringValue( 'example.jpg' ) );
 
 		// fallback to using CommonsInLineImageFormatter::FALLBACK_THUMBNAIL_WIDTH
@@ -108,7 +107,6 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$formatter = new CommonsInlineImageFormatter(
-			ParserOptions::newFromAnon(),
 			[ 120 ],
 			$this->getServiceContainer()->getLanguageFactory(),
 			$this->newFormatterOptions(),
@@ -121,18 +119,13 @@ class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function newSubjectInstance(
-		$thumbSize = 0,
 		$thumbLimits = [ 120 ]
 	): CommonsInlineImageFormatter {
 		if ( !$this->getServiceContainer()->getRepoGroup()->findFile( 'Example.jpg' ) ) {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
-		$parserOptions = ParserOptions::newFromAnon();
-		$parserOptions->setThumbSize( $thumbSize );
-
 		return new CommonsInlineImageFormatter(
-			$parserOptions,
 			$thumbLimits,
 			$this->getServiceContainer()->getLanguageFactory(),
 			$this->newFormatterOptions()
