@@ -725,7 +725,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 		$user = $this->getTestUser()->getUser();
 
-		if ( $user->getId() === 0 ) {
+		if ( !$user->isRegistered() ) {
 			$user->addToDatabase();
 		}
 
@@ -755,7 +755,7 @@ class MediaWikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 		$user = $this->getTestUser()->getUser();
 
-		if ( $user->getId() === 0 ) {
+		if ( !$user->isRegistered() ) {
 			$user->addToDatabase();
 		}
 
