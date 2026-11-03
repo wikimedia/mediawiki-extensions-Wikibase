@@ -58,7 +58,6 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		$specialPage = new SpecialPagesWithBadges(
 			$this->getLabelDescriptionLookupFactory(),
 			[ 'Q123', 'Q456' ],
-			'enwiki'
 		);
 
 		return $specialPage;

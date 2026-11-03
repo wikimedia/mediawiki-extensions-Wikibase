@@ -31,11 +31,6 @@ class SpecialPagesWithBadges extends QueryPage {
 	private $badgeIds;
 
 	/**
-	 * @var string
-	 */
-	private $siteId;
-
-	/**
 	 * @var ItemId|null
 	 */
 	private $badgeId;
@@ -45,18 +40,15 @@ class SpecialPagesWithBadges extends QueryPage {
 	 *
 	 * @param FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param string[] $badgeIds
-	 * @param string $siteId
 	 */
 	public function __construct(
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		array $badgeIds,
-		$siteId
 	) {
 		parent::__construct( 'PagesWithBadges' );
 
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeIds = $badgeIds;
-		$this->siteId = $siteId;
 	}
 
 	public static function factory(
@@ -66,7 +58,6 @@ class SpecialPagesWithBadges extends QueryPage {
 		return new self(
 			$labelDescriptionLookupFactory,
 			array_keys( $clientSettings->getSetting( 'badgeClassNames' ) ),
-			$clientSettings->getSetting( 'siteGlobalID' )
 		);
 	}
 
