@@ -10,7 +10,8 @@
 			"Lloffiwr",
 			"Macofe",
 			"MuratTheTurkish",
-			"Robin Owain"
+			"Robin Owain",
+			"GwennoG"
 		]
 	},
 	"wikibase-entity": "Endid",
@@ -18,7 +19,7 @@
 	"wikibase-entity-property": "Priodwedd",
 	"wikibase-entity-query": "chwiliad",
 	"nstab-item": "Eitem",
-	"tooltip-ca-nstab-item": "Gweld yr Eitem",
+	"tooltip-ca-nstab-item": "Gweld yr eitem",
 	"nstab-property": "Priodwedd",
 	"tooltip-ca-nstab-property": "Gweld y Priodwedd",
 	"nstab-query": "Ymholiad",
@@ -32,6 +33,7 @@
 	"wikibase-addreference": "ychwanegu cyfeiriad",
 	"wikibase-save-inprogress": "Wrthi'n cadw…",
 	"wikibase-publish-inprogress": "Wrthi'n cyhoeddi…",
+	"wikibase-publishing-succeeded": "Mae eich newidiau wedi'i cadw!",
 	"wikibase-remove-inprogress": "Wrthi'n dileu…",
 	"wikibase-statementlistview-add": "ychwanegu gwerth",
 	"wikibase-statementlistview-add-tooltip": "Ychwanegu gwerth newydd",
@@ -45,9 +47,11 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Iaith",
 	"wikibase-entitytermsforlanguagelistview-more": "Pob iaith â chofnod",
 	"wikibase-entitytermsforlanguagelistview-less": "Llai o ieithoedd",
+	"wikibase-entityterms-languagelistview-mul-popup-dont-show-again": "Peidiwch â dangos eto",
 	"wikibase-label-empty": "Ni phenwyd label eto",
 	"wikibase-label-edit-placeholder": "gosod label",
 	"wikibase-label-edit-placeholder-language-aware": "mewnosod label $1",
+	"wikibase-label-edit-placeholder-mul": "rhowch label rhagosodedig",
 	"wikibase-description-empty": "Ni phenwyd unrhyw ddisgrifiad eto",
 	"wikibase-description-edit-placeholder": "gosod disgrifiad",
 	"wikibase-description-edit-placeholder-language-aware": "gosod disgrifiad $1",
