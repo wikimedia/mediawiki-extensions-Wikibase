@@ -1094,7 +1094,6 @@ return [
 			WikibaseClient::getDataValueDeserializer( $services ),
 			$services->getNameTableStoreFactory(),
 			WikibaseClient::getDataAccessSettings( $services ),
-			WikibaseClient::getLanguageFallbackChainFactory( $services ),
 			new ForbiddenSerializer( 'Entity serialization is not supported on the client!' ),
 			WikibaseClient::getEntityTypeDefinitions( $services ),
 			WikibaseClient::getRepoDomainDbFactory( $services ),
