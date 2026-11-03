@@ -11,7 +11,6 @@ use MediaWiki\Language\Language;
 use MediaWiki\Language\LanguageFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Parser\ParserOptions;
 use MediaWiki\Title\Title;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -40,11 +39,6 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	private $repoGroup;
 
 	/**
-	 * @var ParserOptions
-	 */
-	private $parserOptions;
-
-	/**
 	 * @var array
 	 */
 	private $thumbLimits;
@@ -55,14 +49,12 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 	private $options;
 
 	/**
-	 * @param ParserOptions $parserOptions Options for thumbnail size
 	 * @param array $thumbLimits Mapping of thumb number to the limit like [ 0 => 120, 1 => 240, ...]
 	 * @param LanguageFactory $languageFactory
 	 * @param FormatterOptions|null $options
 	 * @param RepoGroup|null $repoGroup
 	 */
 	public function __construct(
-		ParserOptions $parserOptions,
 		array $thumbLimits,
 		LanguageFactory $languageFactory,
 		?FormatterOptions $options = null,
@@ -73,7 +65,6 @@ class CommonsInlineImageFormatter implements ValueFormatter {
 		$languageCode = $this->options->getOption( ValueFormatter::OPT_LANG );
 		$this->language = $languageFactory->getLanguage( $languageCode );
 		$this->repoGroup = $repoGroup ?? MediaWikiServices::getInstance()->getRepoGroup();
-		$this->parserOptions = $parserOptions;
 		$this->thumbLimits = $thumbLimits;
 	}
 
