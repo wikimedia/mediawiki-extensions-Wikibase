@@ -206,7 +206,6 @@
 			"class": "\\Wikibase\\Client\\Hooks\\LabelDescriptionPrefetchHookHandler",
 			"services": [
 				"WikibaseClient.LanguageFallbackChainFactory",
-				"WikibaseClient.Settings",
 				"WikibaseClient.TermBuffer"
 			]
 		},

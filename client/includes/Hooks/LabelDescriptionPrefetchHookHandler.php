@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\IResultWrapper;
@@ -33,7 +32,6 @@ class LabelDescriptionPrefetchHookHandler implements ChangesListInitRowsHook {
 	private array $termTypes;
 	private LanguageFallbackChainFactory $languageFallbackChainFactory;
 	private BasicEntityIdParser $entityIdParser;
-	private SettingsArray $settings;
 	/**
 	 * Matching links to properties in edit summaries, such as "[[Q23]]", "[[Property:P123]]"
 	 * or "[[wdbeta:Special:EntityPage/P123]]".
@@ -43,19 +41,16 @@ class LabelDescriptionPrefetchHookHandler implements ChangesListInitRowsHook {
 
 	/**
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
-	 * @param SettingsArray $settings
 	 * @param TermBuffer $termBuffer
 	 */
 	public function __construct(
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		SettingsArray $settings,
 		TermBuffer $termBuffer,
 	) {
 		$this->termBuffer = $termBuffer;
 		$this->entityIdParser = new BasicEntityIdParser();
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
-		$this->settings = $settings;
 	}
 
 	/**
