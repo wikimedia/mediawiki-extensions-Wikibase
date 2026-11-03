@@ -19,7 +19,6 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
@@ -42,7 +41,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private OutputPageEditability $editability;
 	private string $uiLanguageCode;
-	private EntityRevisionLookup $entityRevisionLookup;
 	private OutputPageEntityIdReader $outputPageEntityIdReader;
 	private EntityFactory $entityFactory;
 	private ItemId $itemId;
@@ -62,7 +60,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->itemId = new ItemId( 'Q1' );
 		$this->uiLanguageCode = 'en';
 
-		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 		$this->languageNameLookup = $this->createMock( LanguageNameLookup::class );
 		$this->outputPageEntityIdReader = $this->createMock( OutputPageEntityIdReader::class );
 		$this->entityFactory = $this->createMock( EntityFactory::class );
@@ -104,7 +101,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			StatsFactory::newNull(),
 			$this->settings,
 			TemplateFactory::getDefaultInstance(),
-			$this->entityRevisionLookup,
 			$this->createConfiguredMock( LanguageNameLookupFactory::class,
 				[ 'getForLanguage' => $this->languageNameLookup ] ),
 			$this->outputPageEntityIdReader,
@@ -129,7 +125,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'getName' );
 
 		$this->outputPageEntityIdReader = $this->getOutputPageEntityIdReaderReturningEntity( $this->itemId );
-		$this->entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
 
 		$this->preferredLanguageLookup->method( 'getLanguages' )
 			->with( $this->uiLanguageCode, $out->getUser() ); // return value already mocked in setUp

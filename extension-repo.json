@@ -979,7 +979,6 @@
 				"WikibaseRepo.EntityContentFactory",
 				"WikibaseRepo.EntityFactory",
 				"WikibaseRepo.EntityIdParser",
-				"WikibaseRepo.EntityRevisionLookup",
 				"WikibaseRepo.LanguageDirectionalityLookup",
 				"WikibaseRepo.LanguageFallbackChainFactory",
 				"WikibaseRepo.LanguageNameLookupFactory",

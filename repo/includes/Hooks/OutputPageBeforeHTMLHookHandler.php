@@ -22,7 +22,6 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
@@ -55,7 +54,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	private StatsFactory $statsFactory;
 	private SettingsArray $repoSettings;
 	private TemplateFactory $templateFactory;
-	private EntityRevisionLookup $entityRevisionLookup;
 	private LanguageNameLookupFactory $languageNameLookupFactory;
 	private OutputPageEntityIdReader $outputPageEntityIdReader;
 	private EntityFactory $entityFactory;
@@ -73,7 +71,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		StatsFactory $statsFactory,
 		SettingsArray $repoSettings,
 		TemplateFactory $templateFactory,
-		EntityRevisionLookup $entityRevisionLookup,
 		LanguageNameLookupFactory $languageNameLookupFactory,
 		OutputPageEntityIdReader $outputPageEntityIdReader,
 		EntityFactory $entityFactory,
@@ -90,7 +87,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->statsFactory = $statsFactory;
 		$this->repoSettings = $repoSettings;
 		$this->templateFactory = $templateFactory;
-		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->languageNameLookupFactory = $languageNameLookupFactory;
 		$this->outputPageEntityIdReader = $outputPageEntityIdReader;
 		$this->entityFactory = $entityFactory;
@@ -112,7 +108,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		EntityContentFactory $entityContentFactory,
 		EntityFactory $entityFactory,
 		EntityIdParser $entityIdParser,
-		EntityRevisionLookup $entityRevisionLookup,
 		LanguageDirectionalityLookup $languageDirectionalityLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		LanguageNameLookupFactory $languageNameLookupFactory,
@@ -127,7 +122,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$statsFactory,
 			$settings,
 			TemplateFactory::getDefaultInstance(),
-			$entityRevisionLookup,
 			$languageNameLookupFactory,
 			new OutputPageEntityIdReader(
 				$entityViewChecker,
