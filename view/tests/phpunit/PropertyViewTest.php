@@ -133,7 +133,6 @@ class PropertyViewTest extends EntityViewTestCase {
 			$this->createMock( EntityExistenceChecker::class ),
 			new SerializerFactory( new DataValueSerializer(), SerializerFactory::OPTION_DEFAULT ),
 			$snakFormatter,
-			$this->createMock( Wbui2025FeatureFlag::class ),
 			new Wbui2025ComponentsFactory(),
 		);
 		$statementSectionsView = new StatementSectionsView(

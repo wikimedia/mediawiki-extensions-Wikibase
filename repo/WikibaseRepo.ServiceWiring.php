@@ -2200,7 +2200,6 @@ return [
 			new RepoSpecialPageLinker(),
 			$services->getLanguageFactory(),
 			WikibaseRepo::getEntityIdParser( $services ),
-			WikibaseRepo::getWbui2025FeatureFlag( $services ),
 			WikibaseRepo::getWbui2025ComponentsFactory( $services ),
 		);
 	},

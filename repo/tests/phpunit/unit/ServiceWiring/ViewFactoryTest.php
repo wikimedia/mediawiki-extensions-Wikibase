@@ -26,7 +26,6 @@ use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\Wbui2025ComponentsFactory;
-use Wikibase\View\Wbui2025FeatureFlag;
 use Wikimedia\ObjectCache\BagOStuff;
 
 /**
@@ -103,10 +102,6 @@ class ViewFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityIdParser',
 			$this->createMock( EntityIdParser::class )
-		);
-		$this->mockService(
-			'WikibaseRepo.Wbui2025FeatureFlag',
-			$this->createMock( Wbui2025FeatureFlag::class ),
 		);
 		$this->mockService(
 			'WikibaseRepo.Wbui2025ComponentsFactory',

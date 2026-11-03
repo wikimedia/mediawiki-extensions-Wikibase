@@ -33,7 +33,6 @@ class VueNoScriptRendering {
 	private SnakFormatter $snakFormatter;
 	private array $snakValueHtmlLookup;
 	private array $propertyExistence;
-	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
 	private Wbui2025ComponentsFactory $componentsFactory;
 	private App $app;
 
@@ -46,7 +45,6 @@ class VueNoScriptRendering {
 		EntityExistenceChecker $entityExistenceChecker,
 		SerializerFactory $serializerFactory,
 		SnakFormatter $snakFormatter,
-		Wbui2025FeatureFlag $wbui2025FeatureFlag,
 		Wbui2025ComponentsFactory $componentsFactory,
 	) {
 		$this->entityIdFormatterFactory = $entityIdFormatterFactory;
@@ -57,7 +55,6 @@ class VueNoScriptRendering {
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->statementSerializer = $serializerFactory->newStatementSerializer();
 		$this->snakFormatter = $snakFormatter;
-		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
 		$this->componentsFactory = $componentsFactory;
 	}
 

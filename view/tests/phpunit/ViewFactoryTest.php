@@ -34,7 +34,6 @@ use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 use Wikibase\View\ViewFactory;
 use Wikibase\View\Wbui2025ComponentsFactory;
-use Wikibase\View\Wbui2025FeatureFlag;
 
 /**
  * @covers \Wikibase\View\ViewFactory
@@ -98,7 +97,6 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( SpecialPageLinker::class ),
 			$this->createMock( LanguageFactory::class ),
 			$this->createMock( EntityIdParser::class ),
-			$this->createMock( Wbui2025FeatureFlag::class ),
 			new Wbui2025ComponentsFactory(),
 		);
 	}

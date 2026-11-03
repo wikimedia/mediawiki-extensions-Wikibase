@@ -137,11 +137,6 @@ class ViewFactory {
 	 */
 	private $entityIdParser;
 
-	/**
-	 * @var Wbui2025FeatureFlag
-	 */
-	private Wbui2025FeatureFlag $wbui2025FeatureFlag;
-
 	private Wbui2025ComponentsFactory $wbui2025ComponentsFactory;
 
 	/**
@@ -166,7 +161,6 @@ class ViewFactory {
 	 * @param SpecialPageLinker $specialPageLinker
 	 * @param LanguageFactory $languageFactory
 	 * @param EntityIdParser $entityIdParser
-	 * @param Wbui2025FeatureFlag $wbui2025FeatureFlag
 	 * @param Wbui2025ComponentsFactory $wbui2025ComponentsFactory
 	 *
 	 * @throws InvalidArgumentException
@@ -193,7 +187,6 @@ class ViewFactory {
 		SpecialPageLinker $specialPageLinker,
 		LanguageFactory $languageFactory,
 		EntityIdParser $entityIdParser,
-		Wbui2025FeatureFlag $wbui2025FeatureFlag,
 		Wbui2025ComponentsFactory $wbui2025ComponentsFactory,
 	) {
 		if ( !$this->hasValidOutputFormat( $htmlIdFormatterFactory, 'text/html' )
@@ -223,7 +216,6 @@ class ViewFactory {
 		$this->specialPageLinker = $specialPageLinker;
 		$this->languageFactory = $languageFactory;
 		$this->entityIdParser = $entityIdParser;
-		$this->wbui2025FeatureFlag = $wbui2025FeatureFlag;
 		$this->wbui2025ComponentsFactory = $wbui2025ComponentsFactory;
 	}
 
@@ -368,7 +360,6 @@ class ViewFactory {
 			$this->entityExistenceChecker,
 			$this->serializerFactory,
 			$snakFormatter,
-			$this->wbui2025FeatureFlag,
 			$this->wbui2025ComponentsFactory,
 		);
 
