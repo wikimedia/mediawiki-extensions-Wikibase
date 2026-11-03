@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use MediaWikiIntegrationTestCase;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -78,7 +77,6 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 				},
 			] ),
 			$this->dbFactory,
-			new NullLogger()
 		);
 
 		$itemSource = $this->createMock( DatabaseEntitySource::class );

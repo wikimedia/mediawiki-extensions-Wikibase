@@ -3,7 +3,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\Unit\ServiceWiring;
 
-use Psr\Log\NullLogger;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
@@ -22,11 +21,6 @@ class MatchingTermsLookupFactoryTest extends ServiceWiringTestCase {
 		$this->mockService(
 			'WikibaseRepo.EntityIdComposer',
 			$this->createMock( EntityIdComposer::class )
-		);
-
-		$this->mockService(
-			'WikibaseRepo.Logger',
-			new NullLogger()
 		);
 
 		$this->mockService(

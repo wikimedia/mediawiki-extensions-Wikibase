@@ -1557,7 +1557,6 @@ return [
 		return new MatchingTermsLookupFactory(
 			WikibaseRepo::getEntityIdComposer( $services ),
 			WikibaseRepo::getTermsDomainDbFactory( $services ),
-			WikibaseRepo::getLogger( $services )
 		);
 	},
 
