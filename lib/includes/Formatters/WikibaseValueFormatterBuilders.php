@@ -76,7 +76,7 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @var string[]
 	 */
-	private $unitOneUris = [
+	private const UNIT_ONE_URIS = [
 		'http://www.wikidata.org/entity/Q199',
 		'http://qudt.org/vocab/unit#Unitless',
 	];
@@ -432,7 +432,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function getVocabularyUriFormatter( FormatterOptions $options ) {
 		$labelLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-		return new VocabularyUriFormatter( $this->itemUriParser, $labelLookup, $this->unitOneUris );
+		return new VocabularyUriFormatter( $this->itemUriParser, $labelLookup, self::UNIT_ONE_URIS );
 	}
 
 	/**

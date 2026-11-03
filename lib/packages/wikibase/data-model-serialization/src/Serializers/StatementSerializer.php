@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class StatementSerializer implements DispatchableSerializer {
 
-	private array $rankLabels = [
+	private const array RANK_LABELS = [
 		Statement::RANK_DEPRECATED => 'deprecated',
 		Statement::RANK_NORMAL => 'normal',
 		Statement::RANK_PREFERRED => 'preferred',
@@ -101,7 +101,7 @@ class StatementSerializer implements DispatchableSerializer {
 	}
 
 	private function addRankToSerialization( Statement $statement, array &$serialization ) {
-		$serialization['rank'] = $this->rankLabels[$statement->getRank()];
+		$serialization['rank'] = self::RANK_LABELS[$statement->getRank()];
 	}
 
 	private function addReferencesToSerialization( Statement $statement, array &$serialization ) {

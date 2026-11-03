@@ -19,10 +19,7 @@ use Wikibase\DataModel\Snak\Snak;
  */
 class MessageSnakFormatter implements SnakFormatter {
 
-	/**
-	 * @var string[]
-	 */
-	private static $snakTypeCssClasses = [
+	private const SNAK_TYPE_CSS_CLASSES = [
 		'somevalue' => 'wikibase-snakview-variation-somevaluesnak',
 		'novalue' => 'wikibase-snakview-variation-novaluesnak',
 	];
@@ -94,10 +91,10 @@ class MessageSnakFormatter implements SnakFormatter {
 		} elseif ( str_starts_with( $this->format, SnakFormatter::FORMAT_HTML ) ) {
 			$html = $this->message->parse();
 
-			if ( array_key_exists( $this->snakType, self::$snakTypeCssClasses ) ) {
+			if ( array_key_exists( $this->snakType, self::SNAK_TYPE_CSS_CLASSES ) ) {
 				$html = Html::rawElement(
 					'span',
-					[ 'class' => self::$snakTypeCssClasses[$this->snakType] ],
+					[ 'class' => self::SNAK_TYPE_CSS_CLASSES[$this->snakType] ],
 					$html
 				);
 			}

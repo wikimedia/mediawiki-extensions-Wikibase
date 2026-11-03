@@ -65,9 +65,9 @@ class ValidatorBuilders {
 	 * to hardcode the URI to check them against for now.
 	 *
 	 * @todo use a configurable vocabulary for calendars and reference globes, instead of
-	 * hardcoding wikidata. Then replace usages of $wikidataBaseUri with $vocabularyBaseUri.
+	 * hardcoding wikidata. Then replace usages of self::WIKIDATA_BASE_URI with $vocabularyBaseUri.
 	 */
-	private string $wikidataBaseUri = 'http://www.wikidata.org/entity/';
+	private const string WIKIDATA_BASE_URI = 'http://www.wikidata.org/entity/';
 
 	private ContentLanguages $contentLanguages;
 
@@ -307,7 +307,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see TimeFormatter and TimeParser.
-		$urlValidator = $this->getEntityUriValidator( $this->wikidataBaseUri, 255, 'item' );
+		$urlValidator = $this->getEntityUriValidator( self::WIKIDATA_BASE_URI, 255, 'item' );
 		//TODO: enforce well known calendar models from config
 
 		$validators[] = new DataFieldValidator( 'calendarmodel', $urlValidator );
@@ -353,7 +353,7 @@ class ValidatorBuilders {
 		$validators[] = new TypeValidator( 'array' );
 
 		// Expected to be a short IRI, see GlobeCoordinateValue and GlobeCoordinateParser.
-		$urlValidator = $this->getEntityUriValidator( $this->wikidataBaseUri, 255, 'item' );
+		$urlValidator = $this->getEntityUriValidator( self::WIKIDATA_BASE_URI, 255, 'item' );
 		//TODO: enforce well known reference globes from config
 
 		$validators[] = new DataFieldValidator( 'precision', new NumberValidator() );
