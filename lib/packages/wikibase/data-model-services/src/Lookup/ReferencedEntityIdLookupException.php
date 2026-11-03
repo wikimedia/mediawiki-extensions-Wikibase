@@ -16,21 +16,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 class ReferencedEntityIdLookupException extends RuntimeException {
 
 	/**
-	 * @var EntityId
-	 */
-	private $fromId;
-
-	/**
-	 * @var PropertyId
-	 */
-	private $propertyId;
-
-	/**
-	 * @var EntityId[]
-	 */
-	private $toIds;
-
-	/**
 	 * @param EntityId $fromId
 	 * @param PropertyId $propertyId
 	 * @param EntityId[] $toIds
@@ -44,10 +29,6 @@ class ReferencedEntityIdLookupException extends RuntimeException {
 		$message = null,
 		?Exception $previous = null
 	) {
-		$this->fromId = $fromId;
-		$this->propertyId = $propertyId;
-		$this->toIds = $toIds;
-
 		$targets = array_map(
 			static function ( EntityId $entityId ) {
 				return $entityId->getSerialization();

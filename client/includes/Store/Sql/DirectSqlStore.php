@@ -73,11 +73,6 @@ class DirectSqlStore implements ClientStore {
 	private $cacheKeyPrefix;
 
 	/**
-	 * @var string
-	 */
-	private $cacheKeyGroup;
-
-	/**
 	 * @var int
 	 */
 	private $cacheDuration;
@@ -168,7 +163,6 @@ class DirectSqlStore implements ClientStore {
 
 		// @TODO: split the class so it needs less injection
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
-		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
 		$this->siteId = $settings->getSetting( 'siteGlobalID' );
 		$this->disabledUsageAspects = $settings->getSetting( 'disabledUsageAspects' );

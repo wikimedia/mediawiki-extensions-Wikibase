@@ -29,11 +29,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 */
 	private $cacheRetrievingLookup;
 
-	/**
-	 * @var bool
-	 */
-	private $shouldVerifyRevision = false;
-
 	public function __construct(
 		EntityRevisionCache $entityRevisionCache,
 		EntityRevisionLookup $entityRevisionLookup
@@ -54,7 +49,6 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 * @param bool $shouldVerifyRevision
 	 */
 	public function setVerifyRevision( $shouldVerifyRevision ) {
-		$this->shouldVerifyRevision = $shouldVerifyRevision;
 		$this->cacheRetrievingLookup->setVerifyRevision( $shouldVerifyRevision );
 	}
 

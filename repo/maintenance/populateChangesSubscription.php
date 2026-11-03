@@ -6,7 +6,6 @@ use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
@@ -72,7 +71,6 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 		);
 
 		$builder->setProgressReporter( $reporter );
-		$builder->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 
 		$builder->fillSubscriptionTable( $startItem );
 		return true;

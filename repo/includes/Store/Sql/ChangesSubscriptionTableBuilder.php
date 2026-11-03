@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
-use Wikibase\Lib\Reporting\ExceptionHandler;
-use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -43,11 +41,6 @@ class ChangesSubscriptionTableBuilder {
 	 * @var int
 	 */
 	private $batchSize;
-
-	/**
-	 * @var ExceptionHandler
-	 */
-	private $exceptionHandler;
 
 	/**
 	 * @var MessageReporter
@@ -94,16 +87,11 @@ class ChangesSubscriptionTableBuilder {
 		$this->batchSize = $batchSize;
 		$this->verbosity = $verbosity;
 
-		$this->exceptionHandler = new LogWarningExceptionHandler();
 		$this->progressReporter = new NullMessageReporter();
 	}
 
 	public function setProgressReporter( MessageReporter $progressReporter ) {
 		$this->progressReporter = $progressReporter;
-	}
-
-	public function setExceptionHandler( ExceptionHandler $exceptionHandler ) {
-		$this->exceptionHandler = $exceptionHandler;
 	}
 
 	/**

@@ -6,7 +6,6 @@ use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\MessageReporter;
 use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -50,7 +49,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'standard' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 2 ) ) );
-		$primer->setExceptionHandler( $this->getExceptionHandler( $this->never() ) );
 
 		$primer->fillSubscriptionTable();
 
@@ -77,7 +75,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$primer = $this->getChangesSubscriptionTableBuilder( 3, 'verbose' );
 		$primer->setProgressReporter( $this->getMessageReporter( $this->exactly( 4 ) ) );
-		$primer->setExceptionHandler( $this->getExceptionHandler( $this->never() ) );
 
 		$primer->fillSubscriptionTable( new ItemId( 'Q20' ) );
 
@@ -120,19 +117,6 @@ class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 		}
 
 		return $subscriptions;
-	}
-
-	/**
-	 * @param Invocation $matcher
-	 *
-	 * @return ExceptionHandler
-	 */
-	private function getExceptionHandler( $matcher ) {
-		$mock = $this->createMock( ExceptionHandler::class );
-		$mock->expects( $matcher )
-			->method( 'handleException' );
-
-		return $mock;
 	}
 
 	/**

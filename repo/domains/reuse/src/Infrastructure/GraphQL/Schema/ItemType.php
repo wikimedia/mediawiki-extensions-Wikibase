@@ -18,7 +18,7 @@ use Wikibase\Repo\Domains\Reuse\Domain\Services\LanguageFallbackLabelSelector;
 class ItemType extends ObjectType {
 	public function __construct(
 		private readonly Types $types,
-		private readonly LanguageFallbackLabelSelector $languageFallbackLabelSelector,
+		LanguageFallbackLabelSelector $languageFallbackLabelSelector,
 	) {
 		$labelProviderType = $types->getLabelProviderType();
 		$labelField = Types::copyFieldDefinition(
