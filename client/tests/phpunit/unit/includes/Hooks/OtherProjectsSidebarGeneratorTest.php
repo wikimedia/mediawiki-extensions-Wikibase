@@ -42,7 +42,6 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$sidebarLinkBadgeDisplay = $this->getSidebarLinkBadgeDisplay();
 		$targetTitle = Title::makeTitle( NS_MAIN, 'Nyan Cat' );
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
-			'enwiki',
 			$this->getSiteLinkForDisplayLookup( 'getSiteLinksForPageTitle', $targetTitle ),
 			$this->getSiteLookup(),
 			$sidebarLinkBadgeDisplay,
@@ -65,7 +64,6 @@ class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$sidebarLinkBadgeDisplay = $this->getSidebarLinkBadgeDisplay();
 		$itemId = new ItemId( 'Q1' );
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
-			'enwiki',
 			$this->getSiteLinkForDisplayLookup( 'getSiteLinksForItemId', $itemId ),
 			$this->getSiteLookup(),
 			$sidebarLinkBadgeDisplay,

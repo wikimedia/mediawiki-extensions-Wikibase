@@ -19,11 +19,6 @@ use Wikibase\DataModel\SiteLink;
 class OtherProjectsSidebarGenerator {
 
 	/**
-	 * @var string
-	 */
-	private $localSiteId;
-
-	/**
 	 * @var SiteLinksForDisplayLookup
 	 */
 	private $siteLinksForDisplayLookup;
@@ -44,20 +39,17 @@ class OtherProjectsSidebarGenerator {
 	private $siteIdsToOutput;
 
 	/**
-	 * @param string $localSiteId
 	 * @param SiteLinksForDisplayLookup $siteLinksForDisplayLookup
 	 * @param SiteLookup $siteLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param string[] $siteIdsToOutput
 	 */
 	public function __construct(
-		$localSiteId,
 		SiteLinksForDisplayLookup $siteLinksForDisplayLookup,
 		SiteLookup $siteLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		array $siteIdsToOutput
 	) {
-		$this->localSiteId = $localSiteId;
 		$this->siteLinksForDisplayLookup = $siteLinksForDisplayLookup;
 		$this->siteLookup = $siteLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
