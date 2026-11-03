@@ -134,6 +134,8 @@
 	"wikibase-shortcopyrightwarning": "\"$1\" ক্লিক করার দ্বারা, আপনি [[$2|ব্যবহারের শর্তাবলীর]] সাথে একমত হচ্ছেন, এবং [$3 $4]-এর অধীনে আপনার অবদান প্রকাশে সম্মত হচ্ছেন।",
 	"wikibase-shortcopyrightwarning-accept-persist": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
 	"wikibase-copyrighttooltip-acknowledge": "আমি আমার ভবিষ্যত সম্পাদনাগুলি জন্য এই শর্তাবলী গ্রহণ করলাম। পুনরায় এই বার্তাটি দেখাবেন না।",
+	"wikibase-copyrightdialog-heading": "ব্যবহারের শর্তাবলী ও লাইসেন্স",
+	"wikibase-copyrightdialog-confirm-publish": "নিশ্চিত ও প্রকাশ করুন",
 	"wikibase-entityselector-more": "আরও",
 	"wikibase-entityselector-notfound": "মিলে যায় এমন কিছু পাওয়া যায়নি।",
 	"wikibase-anonymouseditwarning": "সতর্কতা: আপনি প্রবেশ করেন নি। আপনি কোনও সম্পাদনা করলে এই পাতার ইতিহাসে আপনার [https://bn.wikipedia.org/wiki/আইপি_ঠিকানা আইপি ঠিকানা] সার্বজনীনভাবে দৃশ্যমান হবে। আপনি যদি <strong>[$1 প্রবেশ করেন]</strong> বা <strong>[$2 একটি অ্যাকাউন্ট তৈরি করেন]</strong>, তাহলে আপনার সম্পাদনায় আপনার নামকে কৃতিত্ব দেয়া হবে ও আরও অনেক সুবিধা পাবেন।",

@@ -23,6 +23,7 @@
 			"Valtlait",
 			"Veikk0.ma",
 			"VezonThunder",
+			"Wikipeedikko",
 			"Winston Sung",
 			"Zolo",
 			"Тест"
@@ -159,6 +160,7 @@
 	"wikibase-shortcopyrightwarning-accept-persist": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-copyrighttooltip-acknowledge": "Hyväksyn nämä ehdot tulevissa muokkauksissani. Älä näytä tätä viestiä uudelleen.",
 	"wikibase-copyrightdialog-heading": "Käyttöehdot ja lisenssi",
+	"wikibase-copyrightdialog-warning-minimal": "Vahvista ennen muokkauksesi julkaisemista, että hyväksyt [[$1|käyttöehdot]].",
 	"wikibase-copyrightdialog-confirm-publish": "vahvista ja julkaise",
 	"wikibase-copyrightdialog-confirm-save": "vahvista ja tallenna",
 	"wikibase-entityselector-more": "lisää",
