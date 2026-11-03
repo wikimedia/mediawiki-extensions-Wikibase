@@ -254,6 +254,16 @@
 				.appendTo( $message ),
 			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
+		function persistAcceptance() {
+			if ( !mw.user.isNamed() ) {
+				mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
+			} else {
+				var api = new mw.Api();
+				api.saveOption( optionsKey, copyRightVersion )
+				.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
+			}
+		}
+
 		// TODO: Use editableTemplatedWidget's notification system for copyright messages on all widgets
 		if ( editableTemplatedWidget
 			&& !( editableTemplatedWidget instanceof $.wikibase.statementview )
@@ -266,13 +276,7 @@
 			$hideMessage.on( 'click', ( event ) => {
 				event.preventDefault();
 				editableTemplatedWidget.notification();
-				if ( mw.user.isAnon() ) {
-					mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
-				} else {
-					var api = new mw.Api();
-					api.saveOption( optionsKey, copyRightVersion )
-					.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
-				}
+				persistAcceptance();
 			} );
 			return;
 		}
@@ -313,13 +317,7 @@
 			event.preventDefault();
 			$messageAnchor.data( 'wbtooltip' ).degrade( true );
 			$( window ).off( eventNamespace );
-			if ( mw.user.isAnon() ) {
-				mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
-			} else {
-				var api = new mw.Api();
-				api.saveOption( optionsKey, copyRightVersion )
-				.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
-			}
+			persistAcceptance();
 		} );
 
 		$messageAnchor.data( 'wbtooltip' ).show();
