@@ -13,7 +13,6 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -69,12 +68,10 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
-			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			$this->createStub( DeserializerFactory::class ),
 			[ 'strval' ],
-			[],
 			[],
 			[]
 		);
@@ -92,12 +89,10 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
-			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			$this->createStub( DeserializerFactory::class ),
 			[ null ],
-			[],
 			[],
 			[]
 		);
@@ -112,31 +107,9 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( NameTableStore::class ),
 			DataAccessSettingsFactory::anySettings(),
 			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
-			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			$this->createStub( DeserializerFactory::class ),
-			[],
-			[ null ],
-			[],
-			[]
-		);
-	}
-
-	public function testInvalidConstruction_prefetchingTermLookupCallbacks() {
-		$this->expectException( ParameterElementTypeException::class );
-		new SingleEntitySourceServices(
-			new BasicEntityIdParser(),
-			new EntityIdComposer( [] ),
-			new DataValueDeserializer( [] ),
-			$this->createMock( NameTableStore::class ),
-			DataAccessSettingsFactory::anySettings(),
-			new DatabaseEntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
-			new LanguageFallbackChainFactory(),
-			new DispatchingSerializer(),
-			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
-			$this->createStub( DeserializerFactory::class ),
-			[],
 			[],
 			[ null ],
 			[]
@@ -159,11 +132,9 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 				'',
 				''
 			),
-			new LanguageFallbackChainFactory(),
 			new DispatchingSerializer(),
 			new RepoDomainDb( $this->createMock( ILBFactory::class ), 'some domain' ),
 			$this->createStub( DeserializerFactory::class ),
-			[],
 			[],
 			[],
 			[]

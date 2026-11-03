@@ -13,7 +13,6 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 use Wikibase\Lib\SubEntityTypesMapper;
 use Wikibase\Repo\Tests\Unit\ServiceWiringTestCase;
@@ -61,8 +60,6 @@ class WikibaseServicesTest extends ServiceWiringTestCase {
 			->method( 'getNameTableStoreFactory' );
 		$this->mockService( 'WikibaseRepo.DataAccessSettings',
 			new DataAccessSettings( 0 ) );
-		$this->mockService( 'WikibaseRepo.LanguageFallbackChainFactory',
-			$this->createMock( LanguageFallbackChainFactory::class ) );
 		$this->mockService( 'WikibaseRepo.StorageEntitySerializer',
 			$this->createMock( Serializer::class ) );
 		$this->mockService( 'WikibaseRepo.EntityTypeDefinitions',

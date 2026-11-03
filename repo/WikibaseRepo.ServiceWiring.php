@@ -2229,7 +2229,6 @@ return [
 			WikibaseRepo::getDataValueDeserializer( $services ),
 			$services->getNameTableStoreFactory(),
 			WikibaseRepo::getDataAccessSettings( $services ),
-			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getStorageEntitySerializer( $services ),
 			WikibaseRepo::getEntityTypeDefinitions( $services ),
 			WikibaseRepo::getRepoDomainDbFactory( $services ),

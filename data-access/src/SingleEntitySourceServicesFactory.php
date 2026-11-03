@@ -10,7 +10,6 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
@@ -33,10 +32,6 @@ class SingleEntitySourceServicesFactory {
 	 * @var DataAccessSettings
 	 */
 	private $dataAccessSettings;
-	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageFallbackChainFactory;
 	/**
 	 * @var Serializer
 	 */
@@ -65,7 +60,6 @@ class SingleEntitySourceServicesFactory {
 		Deserializer $dataValueDeserializer,
 		NameTableStoreFactory $nameTableStoreFactory,
 		DataAccessSettings $dataAccessSettings,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		RepoDomainDbFactory $repoDomainDbFactory,
@@ -76,7 +70,6 @@ class SingleEntitySourceServicesFactory {
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->nameTableStoreFactory = $nameTableStoreFactory;
 		$this->dataAccessSettings = $dataAccessSettings;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->storageEntitySerializer = $storageEntitySerializer;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->repoDomainDbFactory = $repoDomainDbFactory;
@@ -103,13 +96,11 @@ class SingleEntitySourceServicesFactory {
 			$this->nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 			$this->dataAccessSettings,
 			$source,
-			$this->languageFallbackChainFactory,
 			$this->storageEntitySerializer,
 			$this->repoDomainDbFactory->newForEntitySource( $source ),
 			$this->deserializerFactory,
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
-			$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
 		);
 	}

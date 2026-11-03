@@ -15,7 +15,6 @@ use Wikibase\DataModel\Deserializers\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDbFactory;
 
 /**
@@ -42,7 +41,6 @@ class SingleEntitySourceServicesFactoryTest extends TestCase {
 				Deserializer::class,
 				NameTableStoreFactory::class,
 				DataAccessSettings::class,
-				LanguageFallbackChainFactory::class,
 				Serializer::class,
 				EntityTypeDefinitions::class,
 				RepoDomainDbFactory::class,

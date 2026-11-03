@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Rdbms\RepoDomainDb;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -69,19 +68,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $entitySource;
 
-	/** @var LanguageFallbackChainFactory */
-	private $languageFallbackChainFactory;
-
 	/** @var callable[] */
 	private $deserializerFactoryCallbacks;
 
 	/** @var callable[] */
 	private $entityMetaDataAccessorCallbacks;
-
-	/**
-	 * @var callable[]
-	 */
-	private $prefetchingTermLookupCallbacks;
 
 	/** @var NameTableStore */
 	private $slotRoleStore;
@@ -116,19 +107,16 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		NameTableStore $slotRoleStore,
 		DataAccessSettings $dataAccessSettings,
 		DatabaseEntitySource $entitySource,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		Serializer $storageEntitySerializer,
 		RepoDomainDb $repoDb,
 		DeserializerFactory $deserializerFactory,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
-		array $prefetchingTermLookupCallbacks,
 		array $entityRevisionFactoryLookupCallbacks
 	) {
 		$this->assertCallbackArrayTypes(
 			$deserializerFactoryCallbacks,
 			$entityMetaDataAccessorCallbacks,
-			$prefetchingTermLookupCallbacks,
 			$entityRevisionFactoryLookupCallbacks
 		);
 
@@ -138,20 +126,17 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->slotRoleStore = $slotRoleStore;
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->entitySource = $entitySource;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->storageEntitySerializer = $storageEntitySerializer;
 		$this->repoDb = $repoDb;
 		$this->deserializerFactory = $deserializerFactory;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
-		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
 		$this->entityRevisionLookupFactoryCallbacks = $entityRevisionFactoryLookupCallbacks;
 	}
 
 	private function assertCallbackArrayTypes(
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
-		array $prefetchingTermLookupCallbacks,
 		array $entityRevisionFactoryLookupCallbacks
 	): void {
 		Assert::parameterElementType(
@@ -163,11 +148,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			'callable',
 			$entityMetaDataAccessorCallbacks,
 			'$entityMetaDataAccessorCallbacks'
-		);
-		Assert::parameterElementType(
-			'callable',
-			$prefetchingTermLookupCallbacks,
-			'$prefetchingTermLookupCallbacks'
 		);
 		Assert::parameterElementType(
 			'callable',
