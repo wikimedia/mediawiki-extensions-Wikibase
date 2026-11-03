@@ -219,7 +219,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			$entityTypesWithoutRdfOutput,
 			'json',
 			1800,
-			false,
 			null,
 			new SubEntityTypesMapper( $this->subEntityTypesMap )
 		);

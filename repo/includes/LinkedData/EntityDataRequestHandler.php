@@ -97,11 +97,6 @@ class EntityDataRequestHandler {
 	private $maxAge;
 
 	/**
-	 * @var bool
-	 */
-	private $useCdn;
-
-	/**
 	 * @var string|null
 	 */
 	private $frameOptionsHeader;
@@ -128,7 +123,6 @@ class EntityDataRequestHandler {
 	 * @param string[] $entityTypesWithoutRdfOutput
 	 * @param string $defaultFormat The format as a file extension or MIME type.
 	 * @param int $maxAge number of seconds to cache entity data
-	 * @param bool $useCdn do we have web caches configured?
 	 * @param string|null $frameOptionsHeader for X-Frame-Options
 	 * @param SubEntityTypesMapper $subEntityTypesMap
 	 */
@@ -144,7 +138,6 @@ class EntityDataRequestHandler {
 		array $entityTypesWithoutRdfOutput,
 		$defaultFormat,
 		$maxAge,
-		$useCdn,
 		$frameOptionsHeader,
 		SubEntityTypesMapper $subEntityTypesMap
 	) {
@@ -159,7 +152,6 @@ class EntityDataRequestHandler {
 		$this->entityTypesWithoutRdfOutput = $entityTypesWithoutRdfOutput;
 		$this->defaultFormat = $defaultFormat;
 		$this->maxAge = $maxAge;
-		$this->useCdn = $useCdn;
 		$this->frameOptionsHeader = $frameOptionsHeader;
 		$this->subEntityTypesMap = $subEntityTypesMap;
 	}
@@ -320,7 +312,6 @@ class EntityDataRequestHandler {
 
 	/**
 	 * Purges the entity data identified by the doc parameter from any HTTP caches.
-	 * Does nothing if $wgUseCdn is not set.
 	 *
 	 * @param EntityId $id The entity ID for which to purge all data.
 	 * @param int $revision The revision ID (0 for current/unspecified)
