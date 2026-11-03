@@ -470,6 +470,7 @@
 	"wikibase-search-bad-profile-name": "Chybný název vyhledávacího profilu: $1",
 	"wikibase-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity.",
 	"wikibase-search-config-notfound": "Nenalezena konfigurace plnotextového vyhledávání: $1",
+	"wikibase-search-config-badclass": "Špatná třída pro tvorbu dotazů: $1",
 	"wikibase-refresh-for-missing-datatype": "Datový typ $1 nebyl nalezen v lokálním klientském skriptu. To může být důsledkem zastaralého skriptu v mezipaměti. Zkuste tvrdou aktualizaci prohlížeče s přeskočením lokální mezipaměti (ve většině prohlížečů Ctrl-Shift-R nebo Cmd-Shift-R), aby se problém vyřešil.",
 	"wikibase-outdated-client-script": "Jejda, je potřeba tvrdá aktualizace!",
 	"wikibase-shortcopyrightwarning-heading": "Uvedení licence",

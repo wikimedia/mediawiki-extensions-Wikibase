@@ -19,7 +19,8 @@
 			"Savh",
 			"Vivaelcelta",
 			"YoViajo",
-			"Avengium"
+			"Avengium",
+			"Ovruni"
 		]
 	},
 	"specialpages-group-wikibase": "Wikibase",
@@ -35,7 +36,7 @@
 	"wikibase-error-ui-no-external-page": "No se encontró la página «$2» en «$1».",
 	"wikibase-error-ui-edit-conflict": "En el ínterin se ha editado el mismo valor, lo que ha causado un conflicto de edición. Recarga la página.",
 	"wikibase-language-fallback-transliteration-hint": "$1 (transliterado)",
-	"wikibase-language-name-for-terms-mul": "valores predeterminados para todos los idiomas",
+	"wikibase-language-name-for-terms-mul": "predeterminado para todos los idiomas",
 	"wikibase-quantitydetails-amount": "Cantidad",
 	"wikibase-quantitydetails-upperbound": "Límite superior",
 	"wikibase-quantitydetails-lowerbound": "Límite inferior",
@@ -73,6 +74,7 @@
 	"datatypes-type-external-id": "Identificador externo",
 	"wikibase-time-calendar-gregorian": "Gregoriano",
 	"wikibase-time-calendar-julian": "Juliano",
+	"wikibase-time-precision-CE": "$1 d.C.",
 	"wikibase-time-precision-Gannum": "$1 mil millones de años EC",
 	"wikibase-time-precision-Mannum": "$1 millones de años EC",
 	"wikibase-time-precision-annum": "{{PLURAL:$1|$1 año|$1 años}} EC",
@@ -96,6 +98,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Se creó una entidad nueva",
 	"wikibase-entity-summary-wbeditentity-update": "Se cambió una entidad",
 	"wikibase-entity-summary-wbeditentity-override": "Se vació una entidad",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Se han modificado la etiqueta, la descripción y/o los alias en $3 {{PLURAL:$3|idioma|idiomas}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Se han modificado la etiqueta, la descripción y/o los alias en {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Se han modificado la etiqueta, la descripción y/o los alias en $3 {{PLURAL:$3|idioma|idiomas}}, así como otras partes",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Se han modificado la etiqueta, la descripción y/o los alias en {{#commaseparatedlist: $3}}, así como en otras partes",
 	"wikibase-entity-summary-wbsetreference": "Se estableció una referencia",
 	"wikibase-entity-summary-wbsetreference-add": "Referencia añadida a afirmación",
 	"wikibase-entity-summary-wbsetreference-set": "Referencia cambiada de afirmación",
@@ -126,6 +132,7 @@
 	"wikibase-entity-summary-wbsetclaimvalue": "Se {{PLURAL:$1|definió el valor de una afirmación|definieron los valores de varias afirmaciones}}",
 	"wikibase-entity-summary-wbremoveclaims": "Se {{PLURAL:$1|eliminó una afirmación|eliminaron afirmaciones}}",
 	"wikibase-entity-summary-wbremoveclaims-remove": "Se {{PLURAL:$1|eliminó una afirmación|eliminaron varias afirmaciones}}",
+	"wikibase-entity-summary-wbremoveclaims-update": "Se {{PLURAL:$1|ha|han}} eliminado {{PLURAL:$1|la declaración|las declaraciones}}",
 	"wikibase-entity-summary-special-create-item": "Se ha creado un elemento de [$2] con {{PLURAL:$1|valor|valores}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "Se creó una afirmación",
 	"wikibase-entity-summary-wbsetclaim-update": "Se {{PLURAL:$3|cambió una afirmación|cambiaron afirmaciones}}",
@@ -153,7 +160,9 @@
 	"wikibase-item-summary-wblinktitles-connect": "Se añadió un enlace lingüístico para conectar las páginas",
 	"wikibase-property-summary-wbcreate-new": "Se crea una propiedad nueva",
 	"wikibase-property-summary-wbeditentity-create": "Se creó una nueva propiedad",
+	"wikibase-property-summary-wbeditentity-create-property": "Se ha creado una nueva propiedad",
 	"wikibase-property-summary-wbeditentity-update": "Se cambió una propiedad",
 	"wikibase-property-summary-wbeditentity-override": "Se eliminó una propiedad",
-	"wikibase-property-summary-special-create-property": "Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}"
+	"wikibase-property-summary-special-create-property": "Se ha creado una propiedad de [$2] con {{PLURAL:$1|valor|valores}}",
+	"wikibase-reference-formatter-snak-retrieved": "Se ha recuperado $1"
 }
