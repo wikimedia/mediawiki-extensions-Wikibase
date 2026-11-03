@@ -51,7 +51,6 @@ class TermStoreWriterFactory {
 			$this->termsDb,
 			$this->jobQueueGroup,
 			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $this->logger ),
-			new DatabaseTermInLangIdsResolver( $this->termsDb, $this->logger ),
 			$this->stringNormalizer
 		);
 	}
@@ -65,7 +64,6 @@ class TermStoreWriterFactory {
 			$this->termsDb,
 			$this->jobQueueGroup,
 			new DatabaseTermInLangIdsAcquirer( $this->termsDb, $this->logger ),
-			new DatabaseTermInLangIdsResolver( $this->termsDb, $this->logger ),
 			$this->stringNormalizer
 		);
 	}

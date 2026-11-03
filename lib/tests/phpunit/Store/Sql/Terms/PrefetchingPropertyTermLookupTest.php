@@ -56,7 +56,6 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 			$termsDb,
 			$this->createMock( JobQueueGroup::class ),
 			new DatabaseTermInLangIdsAcquirer( $termsDb ),
-			$termIdsStore,
 			new StringNormalizer()
 		);
 		$this->p1 = new NumericPropertyId( 'P1' );
