@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\View\Template\TemplateFactory;
-use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -134,8 +133,7 @@ class StatementSectionsView {
 	 */
 	public function getHtml( StatementList $statementList, ?EntityId $entityId = null, bool $wbui2025Ready = false ) {
 		$statementLists = $this->statementGrouper->groupStatements( $statementList );
-		if ( $wbui2025Ready && $this->vueStatementsView ) {
-			Assert::invariant( $entityId !== null, 'entityId should be set when wbui2025Ready' );
+		if ( $wbui2025Ready && $entityId !== null && $this->vueStatementsView ) {
 			return $this->getVueStatementsHtml( $entityId, $statementList, $statementLists );
 		}
 
