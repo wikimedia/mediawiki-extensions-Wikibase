@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\LanguageNameUtils;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use UnexpectedValueException;
@@ -173,6 +174,8 @@ class InfoActionHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$localDescription,
 		$centralDescription
 	) {
+		$languageNameUtils = $this->createMock( LanguageNameUtils::class );
+
 		$namespaceChecker = $this->createMock( NamespaceChecker::class );
 
 		$namespaceChecker->method( 'isWikibaseEnabled' )
@@ -226,6 +229,7 @@ class InfoActionHookHandlerTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		return new InfoActionHookHandler(
+			$languageNameUtils,
 			$namespaceChecker,
 			$repoLinker,
 			$siteLinkLookup,

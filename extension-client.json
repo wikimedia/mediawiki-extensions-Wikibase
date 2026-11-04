@@ -194,6 +194,7 @@
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory",
 			"services": [
+				"LanguageNameUtils",
 				"WikibaseClient.DescriptionLookup",
 				"WikibaseClient.FallbackLabelDescriptionLookupFactory",
 				"WikibaseClient.NamespaceChecker",

@@ -5,6 +5,7 @@ namespace Wikibase\Client\Hooks;
 use MediaWiki\Actions\Hook\InfoActionHook;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
+use MediaWiki\Language\LanguageNameUtils;
 use MediaWiki\Title\Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
@@ -26,6 +27,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class InfoActionHookHandler implements InfoActionHook {
 
 	public function __construct(
+		private LanguageNameUtils $languageNameUtils,
 		private NamespaceChecker $namespaceChecker,
 		private RepoLinker $repoLinker,
 		private SiteLinkLookup $siteLinkLookup,
@@ -37,6 +39,7 @@ class InfoActionHookHandler implements InfoActionHook {
 	}
 
 	public static function factory(
+		LanguageNameUtils $languageNameUtils,
 		DescriptionLookup $descriptionLookup,
 		FallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		NamespaceChecker $namespaceChecker,
@@ -47,6 +50,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		$usageLookup = $store->getUsageLookup();
 
 		return new self(
+			$languageNameUtils,
 			$namespaceChecker,
 			$repoLinker,
 			$store->getSiteLinkLookup(),
@@ -182,8 +186,12 @@ class InfoActionHookHandler implements InfoActionHook {
 
 			$msg = $context->msg( $msgKey );
 
-			if ( $aspect[0] === 'C' && $aspect[1] !== null ) {
-				$msg->rawParams( $this->buildModifierLink( $aspect[1], $labelLookup ) );
+			if ( $aspect[1] !== null ) {
+				if ( $aspect[0] === 'C' ) {
+					$msg->rawParams( $this->buildModifierLink( $aspect[1], $labelLookup ) );
+				} else {
+					$msg->params( $this->buildLanguageCode( $aspect[1], $context->getLanguage()->getCode() ) );
+				}
 			}
 
 			$aspectContent .= Html::rawElement(
@@ -193,6 +201,19 @@ class InfoActionHookHandler implements InfoActionHook {
 			);
 		}
 		return $aspectContent;
+	}
+
+	/**
+	 * Resolve entity usage language into their names.
+	 *
+	 * @param string $modifier
+	 * @param string $inLanguage
+	 * @return string
+	 */
+	private function buildLanguageCode( string $modifier, string $inLanguage ) {
+		$languageName = $this->languageNameUtils->getLanguageName( $modifier, $inLanguage );
+
+		return $languageName === '' ? $modifier : $languageName;
 	}
 
 	/**
