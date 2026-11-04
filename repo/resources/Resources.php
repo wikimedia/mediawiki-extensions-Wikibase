@@ -122,7 +122,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase',
-				'web2017-polyfills',
 			],
 		],
 
