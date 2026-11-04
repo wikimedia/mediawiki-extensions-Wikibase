@@ -7,6 +7,9 @@
 ( function ( wb, performance ) {
 	'use strict';
 
+	const withCaptcha = require( '../../view/resources/wikibase/captcha/postCaptcha.js' );
+	const { isCaptchaRequired } = require( 'wikibase.captcha' );
+
 	var getExpertsStore = require( './experts/getStore.js' ),
 		getParserStore = require( './parsers/getStore.js' ),
 		DefaultViewFactoryFactory = require( '../../view/resources/wikibase/view/ViewFactoryFactory.js' ),
@@ -62,7 +65,11 @@
 			repoConfig = mw.config.get( 'wbRepo' ),
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
-			repoApi = new wb.api.RepoApi( mwApi, mw.config.get( 'wgUserLanguage' ), config.tags ),
+			repoApi = new wb.api.RepoApi(
+				withCaptcha( mwApi ),
+				mw.config.get( 'wgUserLanguage' ),
+				config.tags
+			),
 			userLanguages = wb.getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
 			monolingualTextLanguages = wikibase.WikibaseContentLanguages.getMonolingualTextLanguages(),
@@ -229,30 +236,41 @@
 	 * @param {string} viewName
 	 */
 	function showCopyrightTooltip( $entityview, $origin, gravity, viewName ) {
-		if ( !mw.config.exists( 'wbCopyright' ) ) {
-			return;
-		}
-
 		gravity = gravity || 'nw';
 
-		var copyRight = mw.config.get( 'wbCopyright' ),
-			copyRightVersion = copyRight.version,
-			copyRightMessageHtml = copyRight.messageHtml,
-			cookieKey = 'wikibase.acknowledgedcopyrightversion',
-			optionsKey = 'wb-acknowledgedcopyrightversion';
+		const copyRight = mw.config.get( 'wbCopyright' );
+		const copyRightVersion = copyRight && copyRight.version;
+		const cookieKey = 'wikibase.acknowledgedcopyrightversion';
+		const optionsKey = 'wb-acknowledgedcopyrightversion';
+		const showCopyright = copyRight &&
+			mw.cookie.get( cookieKey ) !== copyRightVersion &&
+			mw.user.options.get( optionsKey ) !== copyRightVersion;
+		const showHCaptchaNotice = isCaptchaRequired() &&
+			mw.config.get( 'wgConfirmEditCaptchaNeededForGenericEdit' ) === 'hcaptcha';
 
-		if ( mw.cookie.get( cookieKey ) === copyRightVersion
-			|| mw.user.options.get( optionsKey ) === copyRightVersion
-		) {
+		if ( !showCopyright && !showHCaptchaNotice ) {
 			return;
 		}
 
-		var $message = $( '<span><p>' + copyRightMessageHtml + '</p></span>' )
-				.addClass( 'wikibase-copyrightnotification-container' ),
-			$hideMessage = $( '<a>' )
-				.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
-				.appendTo( $message ),
-			editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
+		const $message = $( '<span>' ).addClass( 'wikibase-copyrightnotification-container' );
+		const $copyrightMessage = $( '<p>' );
+		const $hideMessage = $( '<a>' );
+		const editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
+
+		if ( showCopyright ) {
+			$copyrightMessage.html( copyRight.messageHtml ).appendTo( $message );
+		}
+
+		if ( showHCaptchaNotice ) {
+			$( '<p>' ).append(
+				mw.config.get( 'wbHCaptchaPrivacyPolicyHtml' )
+			).appendTo( $message );
+		}
+
+		if ( showCopyright ) {
+			$hideMessage.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
+				.appendTo( $message );
+		}
 
 		function persistAcceptance() {
 			if ( !mw.user.isNamed() ) {
@@ -275,7 +293,12 @@
 
 			$hideMessage.on( 'click', ( event ) => {
 				event.preventDefault();
-				editableTemplatedWidget.notification();
+				if ( showHCaptchaNotice ) {
+					$copyrightMessage.remove();
+					$hideMessage.remove();
+				} else {
+					editableTemplatedWidget.notification();
+				}
 				persistAcceptance();
 			} );
 			return;
@@ -315,8 +338,13 @@
 
 		$hideMessage.on( 'click', ( event ) => {
 			event.preventDefault();
-			$messageAnchor.data( 'wbtooltip' ).degrade( true );
-			$( window ).off( eventNamespace );
+			if ( showHCaptchaNotice ) {
+				$copyrightMessage.remove();
+				$hideMessage.remove();
+			} else {
+				$messageAnchor.data( 'wbtooltip' ).degrade( true );
+				$( window ).off( eventNamespace );
+			}
 			persistAcceptance();
 		} );
 
