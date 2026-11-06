@@ -31,7 +31,6 @@ use Wikibase\DataModel\Serializers\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StaticContentLanguages;
@@ -161,7 +160,7 @@ return [
 			$termsRdfBuilder = new TermsRdfBuilder(
 				$vocabulary,
 				$writer,
-				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+				$entityTypeDefinitions->get( Def::RDF_LABEL_PREDICATES )
 			);
 
 			return new ItemRdfBuilder(
@@ -177,7 +176,7 @@ return [
 			RdfWriter $writer
 		) {
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
-			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+			$labelPredicates = $entityTypeDefinitions->get( Def::RDF_LABEL_PREDICATES );
 			$termLookup = WikibaseRepo::getPrefetchingTermLookup();
 			$languageFallbackFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$languageCodes = $languageFallbackFactory->newFromContext( RequestContext::getMain() )->getFetchLanguageCodes();
@@ -326,7 +325,7 @@ return [
 			$termsRdfBuilder = new TermsRdfBuilder(
 				$vocabulary,
 				$writer,
-				$entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
+				$entityTypeDefinitions->get( Def::RDF_LABEL_PREDICATES )
 			);
 
 			$truthyStatementRdfBuilderFactory = new TruthyStatementRdfBuilderFactory(
@@ -367,7 +366,7 @@ return [
 			RdfWriter $writer
 		) {
 			$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions();
-			$labelPredicates = $entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES );
+			$labelPredicates = $entityTypeDefinitions->get( Def::RDF_LABEL_PREDICATES );
 			$prefetchingLookup = WikibaseRepo::getPrefetchingTermLookup();
 			$propertyDataLookup = WikibaseRepo::getPropertyDataTypeLookup();
 			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes();
