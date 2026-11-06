@@ -22,16 +22,6 @@ use Wikimedia\Stats\StatsFactory;
 class WikiPageUpdater implements PageUpdater {
 
 	/**
-	 * @var JobQueueGroup
-	 */
-	private $jobQueueGroup;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	/**
 	 * @var int Batch size for UpdateHtmlCacheJob
 	 */
 	private $purgeCacheBatchSize = 300;
@@ -41,19 +31,11 @@ class WikiPageUpdater implements PageUpdater {
 	 */
 	private $rcBatchSize = 300;
 
-	/**
-	 * @var StatsFactory|null
-	 */
-	private $statsFactory;
-
 	public function __construct(
-		JobQueueGroup $jobQueueGroup,
-		LoggerInterface $logger,
-		?StatsFactory $statsFactory = null
+		private JobQueueGroup $jobQueueGroup,
+		private LoggerInterface $logger,
+		private StatsFactory $statsFactory
 	) {
-		$this->jobQueueGroup = $jobQueueGroup;
-		$this->logger = $logger;
-		$this->statsFactory = $statsFactory->withComponent( 'WikibaseClient' );
 	}
 
 	/**
@@ -138,14 +120,12 @@ class WikiPageUpdater implements PageUpdater {
 
 		$this->jobQueueGroup->lazyPush( $jobs );
 
-		if ( $this->statsFactory !== null ) {
-			$this->statsFactory
-				->getCounter( 'PageUpdates_WebCache_jobs_total' )
-				->incrementBy( count( $jobs ) );
-			$this->statsFactory
-				->getCounter( 'PageUpdates_WebCache_titles_total' )
-				->incrementBy( count( $titles ) );
-		}
+		$this->statsFactory
+			->getCounter( 'PageUpdates_WebCache_jobs_total' )
+			->incrementBy( count( $jobs ) );
+		$this->statsFactory
+			->getCounter( 'PageUpdates_WebCache_titles_total' )
+			->incrementBy( count( $titles ) );
 	}
 
 	/**
@@ -178,14 +158,12 @@ class WikiPageUpdater implements PageUpdater {
 			);
 		}
 
-		if ( $this->statsFactory !== null ) {
-			$this->statsFactory
-				->getCounter( 'PageUpdates_RefreshLinks_jobs_total' )
-				->incrementBy( $jobCount );
-			$this->statsFactory
-				->getCounter( 'PageUpdates_RefreshLinks_titles_total' )
-				->incrementBy( count( $titles ) );
-		}
+		$this->statsFactory
+			->getCounter( 'PageUpdates_RefreshLinks_jobs_total' )
+			->incrementBy( $jobCount );
+		$this->statsFactory
+			->getCounter( 'PageUpdates_RefreshLinks_titles_total' )
+			->incrementBy( count( $titles ) );
 	}
 
 	/**
@@ -240,24 +218,22 @@ class WikiPageUpdater implements PageUpdater {
 
 		$this->jobQueueGroup->lazyPush( $jobs );
 
-		if ( $this->statsFactory !== null ) {
-			$this->statsFactory
-				->getCounter( 'PageUpdates_InjectRCRecords_jobs_total' )
-				->incrementBy( count( $jobs ) );
-			$this->statsFactory
-				->getCounter( 'PageUpdates_InjectRCRecords_titles_total' )
-				->incrementBy( $titleCount );
+		$this->statsFactory
+			->getCounter( 'PageUpdates_InjectRCRecords_jobs_total' )
+			->incrementBy( count( $jobs ) );
+		$this->statsFactory
+			->getCounter( 'PageUpdates_InjectRCRecords_titles_total' )
+			->incrementBy( $titleCount );
 
-			// tracking fallout of the hacky fix for T177707
-			$delta = count( $titles ) - $titleCount;
+		// tracking fallout of the hacky fix for T177707
+		$delta = count( $titles ) - $titleCount;
+		$this->statsFactory
+			->getCounter( 'PageUpdates_InjectRCRecords_discardedTitles_total' )
+			->incrementBy( $delta );
+		if ( $delta !== 0 ) {
 			$this->statsFactory
-				->getCounter( 'PageUpdates_InjectRCRecords_discardedTitles_total' )
-				->incrementBy( $delta );
-			if ( $delta !== 0 ) {
-				$this->statsFactory
-					->getCounter( 'PageUpdates_InjectRCRecords_incompleteChanges_total' )
-					->increment();
-			}
+				->getCounter( 'PageUpdates_InjectRCRecords_incompleteChanges_total' )
+				->increment();
 		}
 	}
 

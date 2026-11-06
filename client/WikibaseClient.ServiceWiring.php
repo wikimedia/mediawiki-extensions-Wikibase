@@ -172,7 +172,7 @@ return [
 
 	'WikibaseClient.ChangeHandler' => function ( MediaWikiServices $services ): ChangeHandler {
 		$logger = WikibaseClient::getLogger( $services );
-		$statsFactory = $services->getStatsFactory();
+		$statsFactory = $services->getStatsFactory()->withComponent( 'WikibaseClient' );
 
 		$pageUpdater = new WikiPageUpdater(
 			$services->getJobQueueGroup(),

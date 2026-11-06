@@ -286,7 +286,7 @@ class ChangeHandler {
 		foreach ( $countPageByBundledUsage as $sense => $count ) {
 			if ( $count > 0 ) {
 				$this->stats
-					->getCounter( 'WikibaseClient_ChangeHandler_page_bundled_usage_total' )
+					->getCounter( 'ChangeHandler_page_bundled_usage_total' )
 					->setLabels( [
 						'wiki' => $this->localSiteId,
 						'has_bundled_usage' => $sense ? 'true' : 'false',
