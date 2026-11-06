@@ -133,7 +133,7 @@ class RdfVocabulary {
 	/** @var string */
 	private $licenseUrl;
 
-	/** @var string[] */
+	/** @var array<string,string> */
 	private $sourceNameByEntityType;
 
 	/**
@@ -366,11 +366,7 @@ class RdfVocabulary {
 		return $entityId->getSerialization();
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @return string
-	 */
-	public function getEntityRepositoryName( EntityId $entityId ) {
+	public function getEntityRepositoryName( EntityId $entityId ): string {
 		return $this->sourceNameByEntityType[$entityId->getEntityType()];
 	}
 

@@ -5,8 +5,10 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
+use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Tests\Site\TestSites;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataAccess\DatabaseEntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -168,7 +170,20 @@ class DumpRdfTest extends MediaWikiIntegrationTestCase {
 				new RdfVocabulary(
 					[ '' => 'fooUri/' ],
 					[ '' => 'acme/EntityData/' ],
-					new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
+					new EntitySourceDefinitions( [
+						new DatabaseEntitySource(
+							'',
+							'',
+							[
+								'item' => [ 'namespaceId' => 0, 'slot' => SlotRecord::MAIN ],
+								'property' => [ 'namespaceId' => 120, 'slot' => SlotRecord::MAIN ],
+							],
+							'',
+							'',
+							'',
+							''
+						),
+					], new SubEntityTypesMapper( [] ) ),
 					[ '' => '' ],
 					[ '' => '' ],
 					[], [], [], 'http://creativecommons.org/publicdomain/zero/1.0/'

@@ -4,10 +4,10 @@ declare( strict_types=1 );
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use PHPUnit\Framework\TestCase;
+use MediaWikiIntegrationTestCase;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
-use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Repo\Rdf\ItemStubRdfBuilder;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
@@ -20,38 +20,36 @@ use Wikimedia\Purtle\RdfWriter;
  *
  * @license GPL-2.0-or-later
  */
-class ItemStubRdfBuilderTest extends TestCase {
+class ItemStubRdfBuilderTest extends MediaWikiIntegrationTestCase {
 
-	private RdfWriter $writer;
-	private RdfVocabulary $vocab;
-	private PrefetchingItemTermLookup $termLookup;
-	/** @var string[] */
-	private array $languages;
+	private const array LANGUAGES = [ 'pl', 'en' ];
+
+	private PrefetchingTermLookup $termLookup;
 
 	protected function setUp(): void {
-		$this->termLookup = $this->createMock( PrefetchingItemTermLookup::class );
-		$this->vocab = $this->createMock( RdfVocabulary::class );
-		$this->writer = $this->createMock( RdfWriter::class );
-		$this->languages = [ 'pl', 'en' ];
-		$this->vocab->entityNamespaceNames[''] = 'cat';
+		$this->termLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->termLookup->method( 'getLabels' )->willReturn( [] );
 		$this->termLookup->method( 'getDescriptions' )->willReturn( [] );
 	}
 
 	private function getBuilder(): ItemStubRdfBuilder {
+		$vocab = $this->createMock( RdfVocabulary::class );
+		$vocab->entityNamespaceNames[''] = 'cat';
+		$vocab->method( 'getEntityRepositoryName' )->willReturn( '' );
+
 		return new ItemStubRdfBuilder(
 			$this->termLookup,
-			$this->vocab,
-			$this->writer,
+			$vocab,
+			$this->createNoOpMock( RdfWriter::class ),
 			[],
-			$this->languages
+			self::LANGUAGES
 		);
 	}
 
 	public function testAddEntityStub() {
 		$itemId = new ItemId( 'Q15436' );
-		$this->termLookup->expects( $this->atLeastOnce() )->method( 'getLabels' )->with( $itemId, $this->languages );
-		$this->termLookup->expects( $this->atLeastOnce() )->method( 'getDescriptions' )->with( $itemId, $this->languages );
+		$this->termLookup->expects( $this->atLeastOnce() )->method( 'getLabels' )->with( $itemId, self::LANGUAGES );
+		$this->termLookup->expects( $this->atLeastOnce() )->method( 'getDescriptions' )->with( $itemId, self::LANGUAGES );
 
 		$builder = $this->getBuilder();
 		$builder->addEntityStub( $itemId );
@@ -61,16 +59,16 @@ class ItemStubRdfBuilderTest extends TestCase {
 		$itemId = new ItemId( 'Q15436' );
 		$this->termLookup->expects( $this->atLeastOnce() )
 			->method( 'getLabels' )
-			->with( $itemId, $this->languages );
+			->with( $itemId, self::LANGUAGES );
 		$this->termLookup->expects( $this->atLeastOnce() )
 			->method( 'getDescriptions' )
-			->with( $itemId, $this->languages );
+			->with( $itemId, self::LANGUAGES );
 		$this->termLookup->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
 			->with(
 				[ $itemId ],
 				[ TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_LABEL ],
-				$this->languages
+				self::LANGUAGES
 			);
 
 		$builder = $this->getBuilder();

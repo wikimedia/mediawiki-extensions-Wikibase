@@ -59,9 +59,10 @@ class LiteralValueRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideAddValue
 	 */
 	public function testAddValue(
-		$typeBase, $typeLocal,
+		?string $typeBase,
+		?string $typeLocal,
 		PropertyValueSnak $snak,
-		$expected
+		string $expected
 	) {
 		$builder = new LiteralValueRdfBuilder( $typeBase, $typeLocal );
 

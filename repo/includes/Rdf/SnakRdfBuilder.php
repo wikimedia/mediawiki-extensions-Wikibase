@@ -77,7 +77,13 @@ class SnakRdfBuilder {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addSnak( RdfWriter $writer, $snakNamespace, Snak $snak, $propertyNamespace, string $parentLName ) {
+	public function addSnak(
+		RdfWriter $writer,
+		string $snakNamespace,
+		Snak $snak,
+		string $propertyNamespace,
+		string $parentLName
+	) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value':
@@ -122,9 +128,9 @@ class SnakRdfBuilder {
 	 */
 	private function addSnakValue(
 		RdfWriter $writer,
-		$snakNamespace,
+		string $snakNamespace,
 		PropertyValueSnak $snak,
-		$propertyNamespace
+		string $propertyNamespace
 	) {
 		$propertyId = $snak->getPropertyId();
 		$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
