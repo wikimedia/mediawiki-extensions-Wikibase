@@ -352,6 +352,7 @@
 	"wikibase-api-invalid-snak": "Ongülteg Snak-Donnéeën.",
 	"wikibase-api-invalid-property-id": "Ongülteg Eegenschafts-ID.",
 	"wikibase-api-invalid-entity-id": "Ongülteg Entitéits-ID.",
+	"wikibase-api-no-common-item": "Et gëtt kee gemeinsaamt Element.",
 	"wikibase-api-no-external-page": "Déi extern Websäit „$1“ huet keng Informatioune fir d'Säit „$2“ geliwwert.",
 	"wikibase-api-nosuchrevid": "Keng Versioun mat dëser ID fonnt.",
 	"wikibase-api-no-such-claim": "Esou eng Angab konnt net fonnt ginn.",
