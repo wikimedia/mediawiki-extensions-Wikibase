@@ -297,7 +297,7 @@ class AffectedPagesFinder {
 			true;
 
 		$this->stats
-			->getCounter( 'WikibaseClient_AffectedPagesFinder_parser_cache_total' )
+			->getCounter( 'AffectedPagesFinder_parser_cache_total' )
 			->setLabels( [
 				'wiki' => $this->siteId,
 				'cache_miss' => $euData === null ? 'true' : 'false',
