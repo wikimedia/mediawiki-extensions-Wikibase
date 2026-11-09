@@ -183,7 +183,7 @@ class InfoActionHookHandler implements InfoActionHook {
 			$msg = $context->msg( $msgKey );
 
 			if ( $aspect[1] !== null ) {
-				if ( $aspect[0] === 'C' ) {
+				if ( $aspect[0] === 'C' || $aspect[0] === 'CQR' ) {
 					$msg->rawParams( $this->buildModifierLink( $aspect[1], $labelLookup ) );
 				} else {
 					$msg->params( $aspect[1] );
