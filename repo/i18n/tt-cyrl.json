@@ -10,9 +10,10 @@
 			"Ильнар"
 		]
 	},
-	"wikibase-edit": "үзгәрт",
+	"wikibase-edit": "үзгәртү",
 	"wikibase-add": "өстәү",
-	"wikibase-addreference": "чыганак өстә",
+	"wikibase-addreference": "чыганак өстәү",
+	"wikibase-statementlistview-add": "кыйммәтне өстәү",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Башка телләрдә",
 	"wikibase-label-empty": "Тамга (исем) күрсәтелмәгән",
 	"wikibase-description-empty": "Тасвирлама тутырылмаган",
@@ -24,5 +25,6 @@
 	"special-newitem": "Яңа элемент ясау",
 	"wikibase-newitem-fieldset": "Яңа элемент ясау",
 	"wikibase-api-inconsistent-language": "Туры килмәгән \"$1\" тел табылды (\"$2\" көтелгән иде).",
+	"wikibase-concept-uri": "Концептның URI идентификаторы",
 	"wikibase-search-namespace-mix": "Эзләүдә беръюлы Wikidata элементы һәм мәкалә исемараларын куллану әлегә эшләми. Эзләү бары тик Wikidata элементы исемаралары өчен генә башкарылачак."
 }
