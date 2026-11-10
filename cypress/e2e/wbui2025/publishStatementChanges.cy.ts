@@ -59,7 +59,7 @@ describe( 'wbui2025 item view publish statement changes', () => {
 
 		it( 'loads the item view and shows a statement, which can be edited', () => {
 			const itemViewPage = new ItemViewPage( itemId );
-			itemViewPage.open( 'en', false ).statementsSection();
+			itemViewPage.open( 'en' ).statementsSection();
 			checkA11y( ItemViewPage.STATEMENTS );
 
 			/* Check that the rank is normal initially */

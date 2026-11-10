@@ -40,6 +40,6 @@ Cypress.Commands.add( 'visitTitleMobile', ( args ) => cy.visitTitle( args, { use
 // This requires that a page is already loaded, in which the global `mw` object is available
 Cypress.Commands.add(
 	'setTermsAcceptanceCookie',
-	() => cy.window().its( 'mw' )
-		.invoke( 'cookie.set', 'wikibase.acknowledgedcopyrightversion', 'wikibase-1' ),
+	() => cy.window()
+		.invoke( 'mw.cookie.set', 'wikibase.acknowledgedcopyrightversion', 'wikibase-1' ),
 );

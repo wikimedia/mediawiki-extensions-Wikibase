@@ -46,25 +46,16 @@ describe( 'isAccepted', () => {
 } );
 
 describe( 'persistAcceptance', () => {
-	it( 'sets the cookie if the user is anonymous', () => {
-		mw.user.isAnon.mockReturnValueOnce( true );
+	it( 'sets the cookie it the user is not named (is temp or anon)', () => {
+		mw.user.isNamed.mockReturnValueOnce( false );
 		copyright.persistAcceptance();
 		expect( mw.cookie.set )
 			.toHaveBeenCalledWith( cookieKey, copyrightVersion, { expires: 94608000, path: '/' } );
 	} );
 
-	it( 'sets the cookie it the user is temporary', () => {
-		mw.user.isAnon.mockReturnValueOnce( false );
-		mw.user.isTemp.mockReturnValueOnce( true );
-		copyright.persistAcceptance();
-		expect( mw.cookie.set )
-			.toHaveBeenCalledWith( cookieKey, copyrightVersion, { expires: 94608000, path: '/' } );
-	} );
-
-	describe( 'when the user is not anon or temp', () => {
+	describe( 'when the user is named (not anon or temp)', () => {
 		beforeEach( () => {
-			mw.user.isAnon.mockReturnValueOnce( false );
-			mw.user.isTemp.mockReturnValueOnce( false );
+			mw.user.isNamed.mockReturnValueOnce( true );
 
 			const done = jest.fn().mockReturnValue( { fail: jest.fn() } );
 			api.saveOption = jest.fn().mockReturnValue( { done } );
