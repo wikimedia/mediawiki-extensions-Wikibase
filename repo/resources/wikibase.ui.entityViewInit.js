@@ -7,8 +7,7 @@
 ( function ( wb, performance ) {
 	'use strict';
 
-	const withCaptcha = require( '../../view/resources/wikibase/captcha/postCaptcha.js' );
-	const { isCaptchaRequired } = require( 'wikibase.captcha' );
+	const { isCaptchaRequired, withCaptcha } = require( 'wikibase.captcha' );
 	const copyright = require( 'wikibase.copyright' );
 
 	var getExpertsStore = require( './experts/getStore.js' ),
