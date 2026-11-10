@@ -61,6 +61,12 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.captcha' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase/captcha/resolveCaptcha.js',
+			],
+		],
+
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',

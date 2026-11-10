@@ -120,6 +120,14 @@ class ApiErrorReporter {
 		$status = $extendedStatus;
 
 		$this->addStatusToResult( $status, $extraData );
+		$extraData ??= [];
+
+		// Include data attached by edit-filter extensions (e.g. ConfirmEdit's CAPTCHA
+		// descriptor) in the error. @see \MediaWiki\Api\ApiEditPage
+		if ( $status->statusData !== null ) {
+			$extraData = array_merge( $extraData, (array)$status->statusData );
+		}
+
 		$msg->setApiData( $extraData );
 
 		$this->apiModule->dieStatus( $status );
