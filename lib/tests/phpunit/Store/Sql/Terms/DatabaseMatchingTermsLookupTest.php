@@ -308,7 +308,6 @@ class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 		return new DatabaseMatchingTermsLookup(
 			$this->termsDb,
 			$composer,
-			new NullLogger()
 		);
 	}
 

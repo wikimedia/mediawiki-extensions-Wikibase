@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Rdbms\TermsDomainDb;
@@ -30,18 +29,14 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 	private TermsDomainDb $termsDb;
 
-	private LoggerInterface $logger;
-
 	private EntityIdComposer $entityIdComposer;
 
 	public function __construct(
 		TermsDomainDb $termsDb,
 		EntityIdComposer $entityIdComposer,
-		LoggerInterface $logger
 	) {
 		$this->termsDb = $termsDb;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->logger = $logger;
 	}
 
 	/** @inheritDoc */
