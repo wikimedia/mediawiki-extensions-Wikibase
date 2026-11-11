@@ -64,7 +64,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		Store $store,
 		SubEntityTypesMapper $subEntityTypesMapper
 	): self {
-		global $wgUseCdn, $wgApiFrameOptions;
+		global $wgApiFrameOptions;
 
 		// TODO move EntityRedirectLookup to service container and inject it directly
 		$entityRedirectLookup = $store->getEntityRedirectLookup();
@@ -86,7 +86,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$repoSettings->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,
-			$wgUseCdn,
 			$wgApiFrameOptions,
 			$subEntityTypesMapper
 		);

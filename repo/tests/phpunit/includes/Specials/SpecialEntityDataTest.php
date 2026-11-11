@@ -147,7 +147,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HTMLCacheUpdater::class );
 
-		$useCdn = false;
 		$apiFrameOptions = 'DENY';
 
 		$entityTypesWithRdfOutputAvailable = [ 'property' ];
@@ -164,7 +163,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$entityTypesWithRdfOutputAvailable,
 			$defaultFormat,
 			0,
-			$useCdn,
 			$apiFrameOptions,
 			new SubEntityTypesMapper( [] )
 		);
