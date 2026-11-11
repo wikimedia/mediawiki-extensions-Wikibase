@@ -15,7 +15,7 @@ class EditPrevented extends Exception {
 
 	public function __construct(
 		string $reason,
-		array $context,
+		array $context = [],
 		string $message = '',
 		int $code = 0,
 		?Throwable $previous = null
