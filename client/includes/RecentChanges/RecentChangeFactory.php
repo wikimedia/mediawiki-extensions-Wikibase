@@ -11,6 +11,7 @@ use MediaWiki\User\ExternalUserNames;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Rdbms\ClientDomainDb;
 use Wikimedia\Assert\Assert;
@@ -29,6 +30,8 @@ class RecentChangeFactory {
 	/**
 	 * Classification of Wikibase changes in the rc_source column of the
 	 * recentchanges table.
+	 *
+	 * Revision: All wikibase changes without other language sitelinks
 	 */
 	public const SRC_WIKIBASE = 'wb';
 
@@ -59,6 +62,11 @@ class RecentChangeFactory {
 	private $localDomainId;
 
 	/**
+	 * @var string
+	 */
+	private string $localSiteId;
+
+	/**
 	 * @var CentralIdLookup|null
 	 */
 	private $centralIdLookup;
@@ -73,6 +81,7 @@ class RecentChangeFactory {
 	 * @param SiteLinkCommentCreator $siteLinkCommentCreator
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param ClientDomainDb $clientDomainDb
+	 * @param string $localSiteId Global site ID of the client wiki
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system (see
 	 *   CentralIdLookupFactory::getNonLocalLookup).
@@ -83,6 +92,7 @@ class RecentChangeFactory {
 		SiteLinkCommentCreator $siteLinkCommentCreator,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		ClientDomainDb $clientDomainDb,
+		string $localSiteId,
 		?CentralIdLookup $centralIdLookup = null,
 		?ExternalUserNames $externalUsernames = null
 	) {
@@ -90,6 +100,7 @@ class RecentChangeFactory {
 		$this->siteLinkCommentCreator = $siteLinkCommentCreator;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->localDomainId = $clientDomainDb->domain();  // T294287
+		$this->localSiteId = $localSiteId;
 		$this->centralIdLookup = $centralIdLookup;
 		$this->externalUsernames = $externalUsernames;
 	}
@@ -171,6 +182,8 @@ class RecentChangeFactory {
 			$userText = $this->externalUsernames->addPrefix( $userText );
 		}
 
+		$rcSource = $this->isOtherSitelinkChange( $change ) ? self::SRC_WIKIBASE_OTHER_SITELINKS : self::SRC_WIKIBASE;
+
 		$attribs = [
 			'rc_user' => $clientUserId,
 			'rc_user_text' => $userText,
@@ -183,7 +196,7 @@ class RecentChangeFactory {
 			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
-			'rc_source' => self::SRC_WIKIBASE,
+			'rc_source' => $rcSource,
 			'rc_deleted' => false,
 		];
 
@@ -195,6 +208,31 @@ class RecentChangeFactory {
 		];
 
 		return $attribs;
+	}
+
+	/**
+	 * Returns true if the change is a sitelink change for a different language wiki.
+	 * @param EntityChange $change
+	 * @return bool
+	 */
+	private function isOtherSitelinkChange( EntityChange $change ): bool {
+		if ( !( $change instanceof ItemChange ) ) {
+			return false;
+		}
+
+		$siteLinkDiff = $change->getSiteLinkDiff();
+		if ( $siteLinkDiff->isEmpty() ) {
+			return false;
+		}
+
+		$aspects = $change->getCompactDiff();
+		$aspectIsSiteLink = $aspects instanceof EntityDiffChangedAspects && $aspects->hasOnlySiteLinkChanges();
+		if ( !$aspectIsSiteLink ) {
+			return false;
+		}
+
+		$diffOps = $siteLinkDiff->getOperations();
+		return !array_key_exists( $this->localSiteId, $diffOps );
 	}
 
 	private function isChangeFromLocalDb( EntityChange $change ): bool {

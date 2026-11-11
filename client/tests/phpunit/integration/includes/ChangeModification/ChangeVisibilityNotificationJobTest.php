@@ -58,7 +58,8 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTestB
 			$this->getServiceContainer()->getLanguageFactory()->getLanguage( 'qqx' ),
 			$this->createMock( SiteLinkCommentCreator::class ),
 			new EntitySourceDefinitions( [], new SubEntityTypesMapper( [] ) ),
-			$this->createStub( ClientDomainDb::class )
+			$this->createStub( ClientDomainDb::class ),
+			'client'
 		);
 		$entityChangeFactory = new EntityChangeFactory(
 			$this->createMock( EntityDiffer::class ),

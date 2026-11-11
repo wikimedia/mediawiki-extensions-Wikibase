@@ -628,6 +628,9 @@
 	"RecentChangeSources": {
 		"wb": {
 			"revision": true
+		},
+		"wb.othersitelink": {
+			"revision": true
 		}
 	},
 	"attributes": {

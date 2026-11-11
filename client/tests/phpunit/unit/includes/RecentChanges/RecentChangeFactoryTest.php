@@ -54,6 +54,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 			$siteLinkCommentCreator,
 			$entitySourceDefinitions,
 			$clientDomainDb,
+			'testwiki',
 			$centralIdLookup,
 			new ExternalUserNames( 'repo', false )
 		);
@@ -129,7 +130,6 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public static function provideNewRecentChange() {
-
 		$fields = [
 			'id' => '13',
 			'user_id' => 3,
@@ -594,6 +594,18 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 				'separateRepoDb',
 			],
 		];
+	}
+
+	public function testPrepareChangeAttributesForOtherSitelink() {
+		$oldVersion = new Item( new ItemId( 'Q17' ) );
+		$newVersion = clone $oldVersion;
+		$newVersion->getSiteLinkList()->addNewSitelink( 'lgwiki', 'NicoForPresident' );
+
+		$diff = ( new ItemDiffer() )->diffEntities( $oldVersion, $newVersion );
+		$change = $this->makeItemChangeFromMetaData( 'update', $diff, [], [] );
+
+		$attributes = $this->newRecentChangeFactory()->prepareChangeAttributes( $change );
+		$this->assertSame( RecentChangeFactory::SRC_WIKIBASE_OTHER_SITELINKS, $attributes['rc_source'] );
 	}
 
 }

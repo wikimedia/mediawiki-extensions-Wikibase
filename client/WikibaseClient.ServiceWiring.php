@@ -801,16 +801,18 @@ return [
 	'WikibaseClient.RecentChangeFactory' => function ( MediaWikiServices $services ): RecentChangeFactory {
 		$contentLanguage = $services->getContentLanguage();
 		$siteLookup = $services->getSiteLookup();
+		$siteGlobalID = WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' );
 
 		return new RecentChangeFactory(
 			$contentLanguage,
 			new SiteLinkCommentCreator(
 				$contentLanguage,
 				$siteLookup,
-				WikibaseClient::getSettings( $services )->getSetting( 'siteGlobalID' )
+				$siteGlobalID
 			),
 			WikibaseClient::getEntitySourceDefinitions( $services ),
 			WikibaseClient::getClientDomainDbFactory( $services )->newLocalDb(),
+			$siteGlobalID,
 			$services->getCentralIdLookupFactory()->getNonLocalLookup(),
 			WikibaseClient::getExternalUserNames( $services )
 		);
