@@ -17,7 +17,11 @@ git clone -b $MW_BRANCH https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr
 
 cp -rT $originalDirectory Wikibase
 
-cd ..
+cd Wikibase
+
+git submodule update --init
+
+cd ../..
 
 cp $originalDirectory/build/ci-scripts/composer.local.json composer.local.json
 
