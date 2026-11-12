@@ -51,11 +51,20 @@ class OutputPageJsConfigBuilder {
 
 		$configVars = $this->getCopyrightConfig( $rightsUrl, $rightsText, $lang, $mobileEditing );
 
+		// TODO: Move this to ConfirmEdit using the MakeGlobalVariablesScriptHook (T444575)
+		$hCaptchaMessage = $this->getHCaptchaPrivacyPolicyMessage();
+		if ( $hCaptchaMessage->exists() ) {
+			$configVars['wbHCaptchaPrivacyPolicyHtml'] = $hCaptchaMessage->inLanguage( $lang )->parse();
+		}
 		$configVars['wbBadgeItems'] = $badgeItems;
 		$configVars['wbMultiLingualStringLimit'] = $stringLimit;
 		$configVars['wbTaintedReferencesEnabled'] = $taintedReferencesEnabled;
 
 		return $configVars;
+	}
+
+	private function getHCaptchaPrivacyPolicyMessage(): Message {
+		return wfMessage( 'hcaptcha-privacy-policy' );
 	}
 
 	/**

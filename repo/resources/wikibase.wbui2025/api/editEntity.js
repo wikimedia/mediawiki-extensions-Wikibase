@@ -10,6 +10,11 @@ const {
 const {
 	viewUiTags
 } = require( '../repoSettings.json' );
+const {
+	extractCaptchaData,
+	getCaptchaIfRequired,
+	resolveCaptchaAndResubmit
+} = require( '../hcaptcha.js' );
 
 /**
  * Updating statements and checking for TempUserAccount
@@ -33,9 +38,27 @@ const updateStatements = async function ( entityId, statements ) {
 	// Add return-to parameters for temporary account redirect support (T407335)
 	params = addReturnToParams( params, location );
 
+	// If a "generic" edit needs a CAPTCHA, get its response so the first save carries it;
+	// a CAPTCHA that depends on the edit content, or that the server then asks for, still
+	// comes back as a save failure and is handled below.
+	const captchaParams = await getCaptchaIfRequired( { interfaceName: 'wikibase' } );
+	if ( captchaParams ) {
+		Object.assign( params, captchaParams );
+	}
+
 	const response = await api.postWithEditToken( api.assertCurrentUser( params ) )
 		.then( ( data ) => data )
 		.catch( ( code, data ) => {
+			const captchaData = extractCaptchaData( data );
+			if ( captchaData ) {
+				// Rejects (rethrowing the original error) when ConfirmEdit is unavailable.
+				return resolveCaptchaAndResubmit( params, {
+					interfaceName: 'wikibase',
+					captchaData: captchaData
+				} ).catch( () => {
+					throw new ErrorObject( code, api.getErrorMessage( data ), data );
+				} );
+			}
 			throw new ErrorObject( code, api.getErrorMessage( data ), data );
 		} );
 

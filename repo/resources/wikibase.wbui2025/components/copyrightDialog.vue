@@ -14,6 +14,9 @@
 		<cdx-checkbox v-model="persistAcceptance">
 			{{ $i18n( 'wikibase-copyrighttooltip-acknowledge' ) }}
 		</cdx-checkbox>
+		<template v-if="isCaptchaRequired" #footer-text>
+			<span v-html="dialogFooterHtml"></span>
+		</template>
 	</cdx-dialog>
 </template>
 
@@ -38,7 +41,9 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			persistAcceptance: false,
-			dialogBodyHtml: wbui2025.copyright.messageHtml
+			dialogBodyHtml: wbui2025.copyright.messageHtml,
+			dialogFooterHtml: wbui2025.hcaptcha.privacyPolicyHtml,
+			isCaptchaRequired: wbui2025.hcaptcha.isCaptchaRequired()
 		};
 	},
 	computed: {
@@ -80,6 +85,10 @@ module.exports = exports = defineComponent( {
 		display: flex;
 		flex-direction: column;
 		gap: @spacing-150;
+	}
+
+	.cdx-dialog__footer__text {
+		order: 2;
 	}
 }
 

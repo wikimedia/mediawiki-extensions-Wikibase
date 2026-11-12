@@ -973,6 +973,7 @@ final class RepoHooks implements
 					'resources/wikibase.wbui2025/store/serverRenderedHtml.js',
 					'resources/wikibase.wbui2025/store/snakValueStrategies.js',
 					'resources/wikibase.wbui2025/copyright.js',
+					'resources/wikibase.wbui2025/hcaptcha.js',
 					[
 						'name' => 'resources/wikibase.wbui2025/repoSettings.json',
 						'content' => [
@@ -987,6 +988,7 @@ final class RepoHooks implements
 					'mediawiki.ForeignApi',
 					'pinia',
 					'wikibase',
+					'wikibase.captcha',
 				],
 			];
 			$modules['wikibase.wbui2025.entityViewInit'] = $moduleTemplate + [
