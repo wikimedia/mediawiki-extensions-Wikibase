@@ -11,7 +11,6 @@ use Wikibase\Lib\Rdbms\TermsDomainDbFactory;
 use Wikibase\Lib\Store\MatchingTermsLookupFactory;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
@@ -54,7 +53,6 @@ class MatchingTermsLookupFactoryTest extends MediaWikiIntegrationTestCase {
 			$termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
 			new DatabaseTermInLangIdsAcquirer( $termsDb ),
-			new DatabaseTermInLangIdsResolver( $termsDb ),
 			new StringNormalizer()
 		);
 

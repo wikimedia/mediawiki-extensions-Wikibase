@@ -13,7 +13,6 @@ use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Rdbms\LocalRepoDbTestHelper;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
@@ -84,7 +83,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 		return new DatabaseItemTermStoreWriter( $termsDb, $jobQueue,
 			new DatabaseTermInLangIdsAcquirer( $termsDb ),
-			new DatabaseTermInLangIdsResolver( $termsDb ),
 			new StringNormalizer()
 		);
 	}
@@ -297,7 +295,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $termsDb,
 			$this->getServiceContainer()->getJobQueueGroup(),
 			new DatabaseTermInLangIdsAcquirer( $termsDb ),
-			new DatabaseTermInLangIdsResolver( $termsDb ), new StringNormalizer()
+			new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter->storeTerms( new NumericPropertyId( 'P12' ), new Fingerprint(

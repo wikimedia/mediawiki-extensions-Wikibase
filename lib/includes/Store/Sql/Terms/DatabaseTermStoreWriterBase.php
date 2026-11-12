@@ -30,9 +30,6 @@ abstract class DatabaseTermStoreWriterBase {
 	/** @var TermInLangIdsAcquirer */
 	private $termInLangIdsAcquirer;
 
-	/** @var TermInLangIdsResolver */
-	private $termInLangIdsResolver;
-
 	/** @var StringNormalizer */
 	private $stringNormalizer;
 
@@ -41,12 +38,11 @@ abstract class DatabaseTermStoreWriterBase {
 
 	public function __construct(
 		TermsDomainDb $termsDb, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
-		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer
+		StringNormalizer $stringNormalizer
 	) {
 		$this->termsDb = $termsDb;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
-		$this->termInLangIdsResolver = $termInLangIdsResolver;
 		$this->stringNormalizer = $stringNormalizer;
 	}
 

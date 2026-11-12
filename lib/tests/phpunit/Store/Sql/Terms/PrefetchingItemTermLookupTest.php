@@ -57,7 +57,6 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 			$termsDb,
 			$this->createMock( JobQueueGroup::class ),
 			new DatabaseTermInLangIdsAcquirer( $termsDb ),
-			$termIdsStore,
 			new StringNormalizer()
 		);
 		$this->i1 = new ItemId( 'Q1' );
