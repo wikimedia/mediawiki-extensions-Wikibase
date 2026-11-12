@@ -33,6 +33,12 @@ class RecentChangeFactory {
 	public const SRC_WIKIBASE = 'wb';
 
 	/**
+	 * Classification of Wikibase changes in the rc_source column of the
+	 *  recentchanges table.
+	 */
+	public const SRC_WIKIBASE_OTHER_SITELINKS = 'wb.othersitelink';
+
+	/**
 	 * @var Language
 	 */
 	private $language;

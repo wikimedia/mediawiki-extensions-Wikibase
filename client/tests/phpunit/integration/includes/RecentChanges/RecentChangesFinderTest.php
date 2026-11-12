@@ -41,6 +41,18 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 					],
 				],
 			] ],
+			'non-local sitelink change' => [ true, [
+				'rc_timestamp' => '20111111111111',
+				'rc_namespace' => 0,
+				'rc_title' => 'Test',
+				'rc_source' => RecentChangeFactory::SRC_WIKIBASE_OTHER_SITELINKS,
+				'rc_params' => [
+					'wikibase-repo-change' => [
+						'parent_id' => 1,
+						'rev_id' => 2,
+					],
+				],
+			] ],
 			'irrelevant differences' => [ true, [
 				'rc_id' => 1117,
 				'rc_timestamp' => '20111111111111',
@@ -133,7 +145,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 		);
 		$detector = new RecentChangesFinder( $connectionManager );
 
-		$relevantId = $this->initRecentChanges();
+		$relevantId = $this->initRecentChanges( $changeData['rc_source'] );
 
 		$change = $this->newChange( $changeData );
 
@@ -194,13 +206,13 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 		return $change;
 	}
 
-	private function initRecentChanges() {
+	private function initRecentChanges( string $source ) {
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
 			'rc_namespace' => 0,
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
-			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
+			'rc_source' => $source,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
 			'rc_params' => [
@@ -234,7 +246,7 @@ class RecentChangesFinderTest extends MediaWikiIntegrationTestCase {
 			'rc_namespace' => 0,
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
-			'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
+			'rc_source' => $source,
 			'rc_last_oldid' => 11,
 			'rc_this_oldid' => 12,
 			'rc_params' => [

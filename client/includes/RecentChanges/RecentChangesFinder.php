@@ -32,7 +32,7 @@ class RecentChangesFinder {
 	public function getRecentChangeId( RecentChange $change ) {
 		$attribs = $change->getAttributes();
 
-		//XXX: need to check master?
+		// XXX: need to check master?
 		$db = $this->connectionManager->getReadConnection();
 
 		$res = $db->newSelectQueryBuilder()
@@ -42,7 +42,10 @@ class RecentChangesFinder {
 				'rc_namespace' => $attribs['rc_namespace'],
 				'rc_title' => $attribs['rc_title'],
 				'rc_timestamp' => $db->timestamp( $attribs['rc_timestamp'] ),
-				'rc_source' => RecentChangeFactory::SRC_WIKIBASE,
+				'rc_source' => [
+					RecentChangeFactory::SRC_WIKIBASE,
+					RecentChangeFactory::SRC_WIKIBASE_OTHER_SITELINKS,
+				],
 			] )
 			->caller( __METHOD__ )
 			->fetchResultSet();

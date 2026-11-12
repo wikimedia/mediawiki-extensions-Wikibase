@@ -77,6 +77,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 			// The user-facing hideWikibase is handled by
 			// ChangesListSpecialPageStructuredFilters and connected code.
 			$this->addWikibaseConditions( $this->dbr, $conds );
+			$this->addWikibaseOtherSiteLinkChangesConditions( $this->dbr, $conds );
 		}
 	}
 
@@ -166,6 +167,10 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 
 	public function addWikibaseConditions( IReadableDatabase $dbr, array &$conds ): void {
 		$conds[] = $dbr->expr( 'rc_source', '!=', RecentChangeFactory::SRC_WIKIBASE );
+	}
+
+	public function addWikibaseOtherSiteLinkChangesConditions( IReadableDatabase $dbr, array &$conds ): void {
+		$conds[] = $dbr->expr( 'rc_source', '!=', RecentChangeFactory::SRC_WIKIBASE_OTHER_SITELINKS );
 	}
 
 	protected function hasWikibaseChangesEnabled(): bool {
