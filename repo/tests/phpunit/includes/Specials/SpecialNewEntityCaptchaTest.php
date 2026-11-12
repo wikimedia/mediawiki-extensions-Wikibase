@@ -91,12 +91,16 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( 'data-sitekey', $html );
 	}
 
-	public function testPrivacyPolicyNoticeRendered_WhenHCaptchaTriggers(): void {
+	public function testPrivacyPolicyNoticeRenderedBelowSubmitButton_WhenHCaptchaTriggers(): void {
 		$this->configureHCaptcha( [ 'create' => true ] );
 
 		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertSame( 1, substr_count( $html, self::PRIVACY_POLICY_NOTICE ) );
+		$this->assertGreaterThan(
+			strpos( $html, 'mw-htmlform-submit-buttons' ),
+			strpos( $html, self::PRIVACY_POLICY_NOTICE )
+		);
 	}
 
 	public function testPrivacyPolicyNoticeRenderedOnce_InInvisibleMode(): void {
@@ -165,13 +169,13 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 		) );
 	}
 
-	private function assertCaptchaFailureShown( string $html ): void {
+	private function assertCaptchaFailureShown( string $html, string $messageKey ): void {
 		$this->assertMatchesRegularExpression(
 			'/cdx-message--error[^>]*><span class="cdx-message__icon"><\/span>' .
-				'<div class="cdx-message__content">\(wikibase-newentity-hcaptcha-fail\)/',
+				'<div class="cdx-message__content">\(' . $messageKey . '\)/',
 			$html
 		);
-		$this->assertSame( 1, substr_count( $html, '(wikibase-newentity-hcaptcha-fail)' ) );
+		$this->assertSame( 1, substr_count( $html, "($messageKey)" ) );
 		$this->assertMatchesRegularExpression( '/<div id="h-captcha" class="[^"]*mw-confirmedit-captcha-fail/', $html );
 	}
 
@@ -182,13 +186,13 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 		[ $html, $response ] = $this->executeSpecialPage( '', $this->newSubmitRequest() );
 
 		$this->assertNull( $response->getHeader( 'location' ) );
-		$this->assertCaptchaFailureShown( $html );
+		$this->assertCaptchaFailureShown( $html, 'wikibase-newentity-hcaptcha-fail' );
 		$this->assertStringContainsString( "value='captcha test'", $html );
 		$this->assertStringContainsString( "value='captcha test description'", $html );
 		$this->assertStringContainsString( "value='alias one|alias two'", $html );
 	}
 
-	public function testSubmitWithInvalidCaptcha_DoesNotSave(): void {
+	public function testSubmitWithInvalidCaptcha_DoesNotSaveAndShowsVerificationFailed(): void {
 		$this->configureHCaptcha( [ 'create' => true ] );
 		$this->mockHCaptchaSiteVerify( false );
 
@@ -199,7 +203,7 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 		);
 
 		$this->assertNull( $response->getHeader( 'location' ) );
-		$this->assertCaptchaFailureShown( $html );
+		$this->assertCaptchaFailureShown( $html, 'wikibase-captcha-fail' );
 	}
 
 	public static function provideFeatureFlag(): iterable {

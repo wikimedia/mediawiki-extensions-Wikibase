@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Specials;
 
 use MediaWiki\Extension\ConfirmEdit\CaptchaTriggers;
-use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
 use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\HTMLForm\HTMLForm;
@@ -343,13 +342,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 		$html = $formInformation['html'];
 		unset( $formInformation['html'] );
 		$captcha->addFormInformationToOutput( $this->getOutput(), $formInformation );
-		if ( $captcha instanceof HCaptcha && !$this->getConfig()->get( 'HCaptchaInvisibleMode' ) ) {
-			$html .= Html::rawElement(
-				'div',
-				[ 'class' => 'h-captcha-privacy-policy' ],
-				$this->msg( 'hcaptcha-privacy-policy' )->parse()
-			);
-		}
+		$html .= $this->getCaptchaPrivacyNoticeHtml( $captcha );
 		// rawrow keeps the captcha out of the info field's <label>, as captchas bring their own labels and inputs.
 		$form->addFields( [ 'captcha' => [
 			'type' => 'info',

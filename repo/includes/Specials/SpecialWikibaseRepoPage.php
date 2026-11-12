@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
 use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
 use MediaWiki\Html\Html;
@@ -113,6 +114,15 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 		unset( $formMetainfo['html'] );
 		$captcha->addFormInformationToOutput( $output, $formMetainfo );
 		return Html::rawElement( 'div', [ 'class' => 'captcha' ], $formInformation['html'] );
+	}
+
+	// ConfirmEdit only adds the privacy notice in invisible mode, so we force it.
+	protected function getCaptchaPrivacyNoticeHtml( ?SimpleCaptcha $captcha ): string {
+		if ( !$captcha instanceof HCaptcha || $this->getConfig()->get( 'HCaptchaInvisibleMode' ) ) {
+			return '';
+		}
+		return Html::rawElement( 'div', [ 'class' => 'h-captcha-privacy-policy' ],
+			$this->msg( 'hcaptcha-privacy-policy' )->parse() );
 	}
 
 	/**
