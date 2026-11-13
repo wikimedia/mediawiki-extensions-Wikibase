@@ -190,5 +190,8 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publish without logging in",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Save without logging in",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Log in (Opens in a new tab)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Keep editing"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Keep editing",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-label": "Language link changes from other wikis",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-description": "Edits that add, remove or change a page's connection to another language wiki",
+	"wikibase-rc-hide-wikibase-othersitelinks": "$1 {{WBREPONAME}} changes to other sitelinks"
 }

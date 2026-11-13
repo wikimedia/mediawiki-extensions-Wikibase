@@ -7,6 +7,7 @@ namespace Wikibase\Client\Hooks;
 use MediaWiki\Html\FormOptions;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\RecentChanges\ChangesListBooleanFilter;
+use MediaWiki\RecentChanges\ChangesListFilterGroup;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SpecialPage\ChangesListSpecialPage;
 use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
@@ -36,7 +37,8 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		IReadableDatabase $dbr,
 		bool $showExternalChanges,
 		bool $isMobileView,
-		UserOptionsLookup $userOptionsLookup
+		UserOptionsLookup $userOptionsLookup,
+		private readonly bool $showOtherLanguageLinkFilterOption
 	) {
 		$this->dbr = $dbr;
 		$this->showExternalChanges = $showExternalChanges;
@@ -54,7 +56,8 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 			$dbFactory->newLocalDb()->connections()->getReadConnection(),
 			$clientSettings->getSetting( 'showExternalRecentChanges' ),
 			$isMobileView,
-			$userOptionsLookup
+			$userOptionsLookup,
+			$clientSettings->getSetting( 'showOtherLanguageLinkFilterOption' )
 		);
 	}
 
@@ -77,7 +80,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 			// The user-facing hideWikibase is handled by
 			// ChangesListSpecialPageStructuredFilters and connected code.
 			$this->addWikibaseConditions( $this->dbr, $conds );
-			$this->addWikibaseOtherSiteLinkChangesConditions( $this->dbr, $conds );
+			$this->addOtherSiteLinkConditions( $this->dbr, $conds );
 		}
 	}
 
@@ -104,6 +107,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 
 	protected function addFilter( ChangesListSpecialPage $specialPage ): void {
 		$filterName = $this->getFilterName();
+		$otherSiteLinkFilterName = $this->getOtherSiteLinkFilterName();
 		$changeTypeGroup = $specialPage->getFilterGroup( 'changeType' );
 
 		$out = $specialPage->getOutput();
@@ -132,35 +136,48 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 			},
 		] );
 
+		$filters = [ $wikidataFilter ];
+		if ( $this->showOtherLanguageLinkFilterOption ) {
+			$otherSiteLinkFilter = $this->registerOtherSiteLinksFilter( $otherSiteLinkFilterName, $changeTypeGroup );
+			$filters[] = $otherSiteLinkFilter;
+		}
+
 		$significanceGroup = $specialPage->getFilterGroup( 'significance' );
 		$hideMajorFilter = $significanceGroup->getFilter( 'hidemajor' );
-		$hideMajorFilter->conflictsWith(
-			$wikidataFilter,
-			'wikibase-rcfilters-hide-wikibase-conflicts-major-global',
-			'wikibase-rcfilters-major-conflicts-hide-wikibase',
-			'wikibase-rcfilters-hide-wikibase-conflicts-major'
-		);
+
+		foreach ( $filters as $filter ) {
+			$hideMajorFilter->conflictsWith(
+				$filter,
+				'wikibase-rcfilters-hide-wikibase-conflicts-major-global',
+				'wikibase-rcfilters-major-conflicts-hide-wikibase',
+				'wikibase-rcfilters-hide-wikibase-conflicts-major'
+			);
+		}
 
 		$extensionRegistry = ExtensionRegistry::getInstance();
 		if ( $extensionRegistry->isLoaded( 'ORES' ) ) {
 			$damagingGroup = $specialPage->getFilterGroup( 'damaging' );
 			if ( $damagingGroup ) {
-				$wikidataFilter->conflictsWith(
-					$damagingGroup,
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores',
-					'wikibase-rcfilters-damaging-conflicts-hide-wikibase'
-				);
+				foreach ( $filters as $filter ) {
+					$filter->conflictsWith(
+						$damagingGroup,
+						'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
+						'wikibase-rcfilters-hide-wikibase-conflicts-ores',
+						'wikibase-rcfilters-damaging-conflicts-hide-wikibase'
+					);
+				}
 			}
 
 			$goodfaithGroup = $specialPage->getFilterGroup( 'goodfaith' );
 			if ( $goodfaithGroup ) {
-				$wikidataFilter->conflictsWith(
-					$goodfaithGroup,
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
-					'wikibase-rcfilters-hide-wikibase-conflicts-ores',
-					'wikibase-rcfilters-goodfaith-conflicts-hide-wikibase'
-				);
+				foreach ( $filters as $filter ) {
+					$filter->conflictsWith(
+						$goodfaithGroup,
+						'wikibase-rcfilters-hide-wikibase-conflicts-ores-global',
+						'wikibase-rcfilters-hide-wikibase-conflicts-ores',
+						'wikibase-rcfilters-goodfaith-conflicts-hide-wikibase'
+					);
+				}
 			}
 		}
 	}
@@ -169,7 +186,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		$conds[] = $dbr->expr( 'rc_source', '!=', RecentChangeFactory::SRC_WIKIBASE );
 	}
 
-	public function addWikibaseOtherSiteLinkChangesConditions( IReadableDatabase $dbr, array &$conds ): void {
+	public function addOtherSiteLinkConditions( IReadableDatabase $dbr, array &$conds ): void {
 		$conds[] = $dbr->expr( 'rc_source', '!=', RecentChangeFactory::SRC_WIKIBASE_OTHER_SITELINKS );
 	}
 
@@ -185,12 +202,42 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 		return 'hideWikibase';
 	}
 
+	private function getOtherSiteLinkFilterName(): string {
+		return 'hideWikibaseOtherSiteLinks';
+	}
+
 	private function getOptionName( string $pageName ): string {
 		if ( $pageName === 'Watchlist' ) {
 			return 'wlshowwikibase';
 		}
 
 		return 'rcshowwikidata';
+	}
+
+	private function registerOtherSiteLinksFilter(
+		string $filterName,
+		ChangesListFilterGroup $changeTypeGroup
+	): ChangesListBooleanFilter {
+		return new ChangesListBooleanFilter( [
+			'name' => $filterName,
+			'group' => $changeTypeGroup,
+			'priority' => -4,
+			'label' => 'wikibase-rcfilters-hide-wikibase-othersitelinks-label',
+			'description' => 'wikibase-rcfilters-hide-wikibase-othersitelinks-description',
+			'showHide' => 'wikibase-rc-hide-wikibase-othersitelinks',
+			// Hide by default in every case except when the user has explicitly enabled it.
+			'default' => true,
+			'queryCallable' => function (
+				$specialClassName, $ctx, $dbr, &$tables, &$fields,
+				&$conds, &$query_options, &$join_conds
+			) {
+				$this->addOtherSiteLinkConditions( $dbr, $conds );
+			},
+			'cssClassSuffix' => 'src-mw-wikibase-othersitelinks',
+			'isRowApplicableCallable' => static function ( $ctx, $rc ) {
+				return RecentChangeFactory::isWikibaseOtherSitelinkChange( $rc );
+			},
+		] );
 	}
 
 }

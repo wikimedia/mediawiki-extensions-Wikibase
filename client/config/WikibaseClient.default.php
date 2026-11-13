@@ -168,6 +168,11 @@ return call_user_func( function() {
 		 * sitelinks to other clients.
 		 */
 		'suppressOtherLanguageLinkUpdates' => false,
+
+		/**
+		 * @var bool If true, show other language links filter option in Recent Changes.
+		 */
+		'showOtherLanguageLinkFilterOption' => false,
 	];
 
 	// Some defaults depend on information not available at this time.
