@@ -183,7 +183,8 @@ function resolveCaptchaAndResubmit( originalParams, options ) {
 							hasAlreadyResubmitted = true;
 							return attempt( nextCaptchaData );
 						}
-						return request;
+						// A native promise keeps only the first rejection argument
+						throw data || new Error( code );
 					} );
 				} );
 		}

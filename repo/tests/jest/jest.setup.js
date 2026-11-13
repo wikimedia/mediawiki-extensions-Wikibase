@@ -34,6 +34,7 @@ function ApiMock() {}
 ApiMock.prototype.get = jest.fn();
 ApiMock.prototype.assertCurrentUser = jest.fn();
 ApiMock.prototype.postWithEditToken = jest.fn();
+ApiMock.prototype.postWithToken = jest.fn();
 ApiMock.prototype.saveOption = jest.fn();
 
 function TitleMock() {}
@@ -52,7 +53,8 @@ global.mw = {
 		exists: jest.fn()
 	},
 	loader: {
-		getState: jest.fn()
+		getState: jest.fn(),
+		using: jest.fn()
 	},
 	util: {
 		debounce: jest.fn( ( callback ) => callback )
