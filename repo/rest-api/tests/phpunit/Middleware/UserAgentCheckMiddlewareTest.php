@@ -6,7 +6,7 @@ use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\RequestData;
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
-use MediaWiki\Rest\ResponseFactory;
+use MediaWiki\Tests\Rest\RestTestTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 
@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
  * @license GPL-2.0-or-later
  */
 class UserAgentCheckMiddlewareTest extends TestCase {
+	use RestTestTrait;
 
 	/**
 	 * @dataProvider provideUserAgent
@@ -71,7 +72,7 @@ class UserAgentCheckMiddlewareTest extends TestCase {
 
 	private function newHandlerWithRequest( RequestInterface $request ): Handler {
 		$handler = $this->createStub( Handler::class );
-		$handler->method( 'getResponseFactory' )->willReturn( new ResponseFactory( [] ) );
+		$handler->method( 'getResponseFactory' )->willReturn( $this->newResponseFactory() );
 		$handler->method( 'getRequest' )->willReturn( $request );
 
 		return $handler;
