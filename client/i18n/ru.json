@@ -35,7 +35,8 @@
 			"WindEwriX",
 			"Александр Сигачёв",
 			"Туллук",
-			"Умар"
+			"Умар",
+			"Shabe"
 		]
 	},
 	"wikibase-client-desc": "Клиент для расширения Wikibase",
@@ -124,6 +125,7 @@
 	"wikibase-pageinfo-entity-usage-T": "Заголовок",
 	"wikibase-pageinfo-entity-usage-C": "Некоторые утверждения",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Утверждение: $1",
+	"wikibase-pageinfo-entity-usage-CQR-with-modifier": "Утверждение (с квалификаторами и сносками): $1",
 	"wikibase-pageinfo-entity-usage-X": "Все данные сущности",
 	"wikibase-pageinfo-entity-usage-O": "Другие (например, существование сущностей)",
 	"wikibase-property-render-error": "Ошибка раскрытия свойства «$1»: $2",
