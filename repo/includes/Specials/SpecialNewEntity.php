@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Specials;
 
 use MediaWiki\Exception\UserBlockedError;
 use MediaWiki\Extension\ConfirmEdit\CaptchaTriggers;
-use MediaWiki\Extension\ConfirmEdit\hCaptcha\HCaptcha;
 use MediaWiki\Extension\ConfirmEdit\Services\CaptchaFactory;
 use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
 use MediaWiki\Html\Html;
@@ -44,8 +43,6 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	private bool $isMobileView;
 
 	private ?SimpleCaptcha $captcha = null;
-
-	private bool $captchaFailed = false;
 
 	/**
 	 * @param string $name Name of the special page, as seen in links and URLs.
@@ -139,9 +136,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->displayBeforeForm( $out );
 
 		if ( $submitStatus && !$submitStatus->isOK() ) {
-			$errors = $this->captchaFailed
-				? [ 'wikibase-newentity-hcaptcha-fail' ]
-				: $submitStatus->getMessages( 'error' );
+			$errors = $submitStatus->getMessages( 'error' );
 			$out->addModuleStyles( [ 'mediawiki.codex.messagebox.styles', 'wikibase.special.newEntity.styles' ] );
 			foreach ( $errors as $error ) {
 				$form->addHeaderHtml( Html::errorBox( $this->msg( $error )->parse() ) );
@@ -149,6 +144,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			$submitStatus = false;
 		}
 
+		$form->addFooterHtml( $this->getCaptchaPrivacyNoticeHtml( $this->captcha ) );
 		$form->displayForm( $submitStatus ?: Status::newGood() );
 	}
 
@@ -200,9 +196,14 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 						EDIT_NEW
 					);
 					// ConfirmEdit fails CREATE without a message, so show our own.
-					$this->captchaFailed = $this->captcha !== null && !$status->isOK()
+					if ( $this->captcha !== null && !$status->isOK()
 						&& $this->getEditEntity()->hasError( EditEntity::FILTERED_ERROR )
-						&& !$status->hasMessagesExcept( 'captcha-edit-fail' );
+						&& !$status->hasMessagesExcept( 'captcha-edit-fail' )
+					) {
+						return Status::newFatal( $this->captcha->getError() === 'missing-token'
+							? 'wikibase-newentity-hcaptcha-fail'
+							: 'wikibase-captcha-fail' );
+					}
 					return $status;
 				}
 			);
@@ -227,15 +228,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'type' => 'info',
 			// Rendered after submit so the widget can show a failed attempt.
 			'nodata' => true,
-			'default' => function () use ( $captcha ): string {
-				$html = $this->renderCaptcha( $captcha, CaptchaTriggers::CREATE, 'new entity' );
-				// ConfirmEdit only adds the privacy notice in invisible mode, so we force it.
-				if ( $captcha instanceof HCaptcha && !str_contains( $html, 'h-captcha-privacy-policy' ) ) {
-					$html .= Html::rawElement( 'div', [ 'class' => 'h-captcha-privacy-policy' ],
-						$this->msg( 'hcaptcha-privacy-policy' )->parse() );
-				}
-				return $html;
-			},
+			'default' => fn (): string => $this->renderCaptcha( $captcha, CaptchaTriggers::CREATE, 'new entity' ),
 			'raw' => true,
 		];
 	}
