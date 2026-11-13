@@ -55,6 +55,14 @@ $configOverrides = json_decode( RequestContext::getMain()->getRequest()->getHead
 foreach ( $configOverrides as $name => $value ) {
 	$GLOBALS[$name] = is_array( $value ) ? array_merge( $GLOBALS[$name] ?? [], $value ) : $value;
 }
+// ConfirmEdit turns off all captcha triggers in CI from an extension function, which runs after this file.
+// This re-applies any wgCaptchaTriggers overrides using another extension function.
+if ( isset( $configOverrides['wgCaptchaTriggers'] ) ) {
+	$wgExtensionFunctions[] = static function () use ( $configOverrides ): void {
+		global $wgCaptchaTriggers;
+		$wgCaptchaTriggers = array_merge( $wgCaptchaTriggers, $configOverrides['wgCaptchaTriggers'] );
+	};
+}
 
 // enable GraphQL API
 $wgWBRepoSettings['tmpEnableGraphQL'] = true;
