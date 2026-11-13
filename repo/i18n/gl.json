@@ -274,6 +274,7 @@
 	"wikibase-newentity-description": "Descrición:",
 	"wikibase-newentity-submit": "Crear",
 	"wikibase-newentity-hcaptcha-fail": "Confirma que es humano",
+	"wikibase-captcha-fail": "Fallou a verificación. Por favor, inténtao de novo.",
 	"special-setlabel": "Definir unha etiqueta de elemento ou propiedade",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|declaración|declaracións}}, $2 {{PLURAL:$2|ligazón|ligazóns}} de sitio",
 	"wikibase-setlabel-introfull": "Estás definindo a etiqueta en $2 para [[:$1]].",

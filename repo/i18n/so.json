@@ -264,6 +264,7 @@
 	"wikibase-newentity-description": "Sharaxaad:",
 	"wikibase-newentity-submit": "Abuur",
 	"wikibase-newentity-hcaptcha-fail": "Fadlan xaqiiji inaad tahay aadane",
+	"wikibase-captcha-fail": "Xaqiijintu way fashilantay. Fadlan mar kale isku day",
 	"special-setlabel": "Deji calaamada Shayga/Sifada",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|bayaan|bayaanno}}, $2 {{PLURAL:$2|xiriir goob|xiriirro goobeed}}",
 	"wikibase-setlabel-introfull": "Waxaad dejinaysaa summadda ku jirta $2 ee [[:$1]].",

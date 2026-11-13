@@ -28,7 +28,8 @@
 			"Rtemis",
 			"SaldırganSincap",
 			"ZxxZxxZ",
-			"درفش کاویانی"
+			"درفش کاویانی",
+			"محک"
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌پایه",
@@ -80,7 +81,7 @@
 	"wikibase-error-serialize-error": "سری‌سازی داده‌ها شکست خورد.",
 	"wikibase-error-invalid-entity-id": "شناسهٔ \"$2\" برای سامانه ناشناخته است. لطفاً از یک شناسهٔ هستار معتبر استفاده کنید.",
 	"wikibase-error-exceeded-entity-access-limit": "تعداد زیادی هستارهای {{WBREPONAME}} دسترسی پیدا کردند",
-	"unconnectedpages": "صفحه‌های متصل نشده به آیتم‌ها",
+	"unconnectedpages": "صفحه‌ئونی که ویکی‌دیتا ره وصل نئینه",
 	"unconnectedpages-summary": "این صفحه، صفحه‌هایی (در فضاهای نامی که از از اتصال به آیتم پشتیبانی می‌کنند) را فهرست می‌کند که به هیچ آیتم داده‌ای متصل نیستند.",
 	"wikibase-unconnectedpages-submit": "نمایش صفحه‌ها",
 	"pageswithbadges": "صفحه‌های دارای نشان",

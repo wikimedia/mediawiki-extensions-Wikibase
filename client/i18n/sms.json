@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Miilehti",
 			"Yupik"
 		]
 	},
 	"wikibase-comment-multi": "{{PLURAL:$1|$1 muttsed|0=Ni õhtt muuttâs|1=1 muuttâs|2=2 muttâz|3=3 muttâz|4=4 muttâz|5=5 muttâz|6=6 muttâz}}",
+	"wikibase-dataitem": "{{WBREPONAME}}-elemeʹntt",
 	"wikibase-editlinks": "Muuʹtt liiŋkid",
 	"wikibase-editlinkstitle": "Muuʹtt ǩiõlikõskksaž liiŋkid",
 	"wikibase-addlinkstitle": "Lââʹzzet ǩiõlikõskksaž liiŋkid",
