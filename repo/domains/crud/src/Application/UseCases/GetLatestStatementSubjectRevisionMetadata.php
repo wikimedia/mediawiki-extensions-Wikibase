@@ -10,7 +10,7 @@ use Wikibase\Repo\Domains\Crud\Domain\Services\StatementSubjectRevisionMetaDataR
  */
 class GetLatestStatementSubjectRevisionMetadata {
 
-	private StatementSubjectRevisionMetadataRetriever $metadataRetriever;
+	private StatementSubjectRevisionMetaDataRetriever $metadataRetriever;
 
 	public function __construct( StatementSubjectRevisionMetaDataRetriever $metadataRetriever ) {
 		$this->metadataRetriever = $metadataRetriever;

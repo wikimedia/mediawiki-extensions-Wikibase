@@ -19,7 +19,7 @@ class SitelinksValidator {
 
 	private SiteIdValidator $siteIdValidator;
 	private SitelinkValidator $sitelinkValidator;
-	private ?SitelinkList $deserializedSitelinks = null;
+	private ?SiteLinkList $deserializedSitelinks = null;
 
 	public function __construct( SiteIdValidator $siteIdValidator, SitelinkValidator $sitelinkValidator ) {
 		$this->siteIdValidator = $siteIdValidator;

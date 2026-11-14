@@ -9,19 +9,19 @@ use Wikibase\Repo\Domains\Crud\Domain\ReadModel\Sitelink;
  */
 class SetSitelinkResponse {
 
-	private SiteLink $sitelink;
+	private Sitelink $sitelink;
 	private string $lastModified;
 	private int $revisionId;
 	private bool $replaced;
 
-	public function __construct( SiteLink $sitelink, string $lastModified, int $revisionId, bool $replaced ) {
+	public function __construct( Sitelink $sitelink, string $lastModified, int $revisionId, bool $replaced ) {
 		$this->sitelink = $sitelink;
 		$this->lastModified = $lastModified;
 		$this->revisionId = $revisionId;
 		$this->replaced = $replaced;
 	}
 
-	public function getSitelink(): SiteLink {
+	public function getSitelink(): Sitelink {
 		return $this->sitelink;
 	}
 

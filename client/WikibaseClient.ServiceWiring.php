@@ -258,7 +258,7 @@ return [
 			WikibaseClient::getPropertyDataTypeLookup( $services ),
 			WikibaseClient::getRepoItemUriParser( $services ),
 			WikibaseClient::getFallbackLabelDescriptionLookupFactory( $services ),
-			Wikibaseclient::getSettings( $services )->getSetting( 'allowDataAccessInUserLanguage' )
+			WikibaseClient::getSettings( $services )->getSetting( 'allowDataAccessInUserLanguage' )
 		);
 	},
 

@@ -19,7 +19,7 @@ class PatchItemAliasesResponse {
 		$this->revisionId = $revisionId;
 	}
 
-	public function getAliases(): aliases {
+	public function getAliases(): Aliases {
 		return $this->aliases;
 	}
 

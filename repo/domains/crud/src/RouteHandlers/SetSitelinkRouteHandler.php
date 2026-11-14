@@ -41,14 +41,14 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 	private const COMMENT_BODY_PARAM = 'comment';
 
 	private SetSitelink $useCase;
-	private SiteLinkSerializer $sitelinkSerializer;
+	private SitelinkSerializer $sitelinkSerializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
 		SetSitelink $useCase,
 		ResponseFactory $responseFactory,
-		SiteLinkSerializer $sitelinkSerializer,
+		SitelinkSerializer $sitelinkSerializer,
 		MiddlewareHandler $middlewareHandler
 	) {
 		$this->useCase = $useCase;

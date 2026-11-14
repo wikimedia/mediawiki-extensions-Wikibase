@@ -48,7 +48,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testSendPingback() {
-		$requestFactory = $this->createMock( HTTPRequestFactory::class );
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
 		$requestFactory->expects( $this->once() )
 			->method( 'post' )
 			->willReturn( true );
@@ -216,7 +216,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			->with( self::TEST_KEY )
 			->willReturn( $lockAcquired );
 
-		$requestFactory = $this->createMock( HTTPRequestFactory::class );
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
 		$requestFactory->expects( $this->exactly( $lockAcquired ? 1 : 0 ) )
 			->method( 'post' )
 			->willReturn( true );

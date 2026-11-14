@@ -106,7 +106,7 @@ class WikibasePingback {
 		?LoggerInterface $logger = null,
 		?ExtensionRegistry $extensionRegistry = null,
 		?SettingsArray $wikibaseRepoSettings = null,
-		?HTTPRequestFactory $requestFactory = null,
+		?HttpRequestFactory $requestFactory = null,
 		?ObjectCacheFactory $objectCacheFactory = null,
 		?RepoDomainDb $repoDomainDb = null,
 		?ILockManager $lockManager = null,

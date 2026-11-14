@@ -40,13 +40,13 @@ class PatchSitelinksRouteHandler extends SimpleHandler {
 	private const BOT_BODY_PARAM = 'bot';
 	private const COMMENT_BODY_PARAM = 'comment';
 
-	private PatchSiteLinks $useCase;
+	private PatchSitelinks $useCase;
 	private SitelinksSerializer $serializer;
 	private ResponseFactory $responseFactory;
 	private MiddlewareHandler $middlewareHandler;
 
 	public function __construct(
-		PatchSiteLinks $useCase,
+		PatchSitelinks $useCase,
 		SitelinksSerializer $serializer,
 		ResponseFactory $responseFactory,
 		MiddlewareHandler $middlewareHandler
