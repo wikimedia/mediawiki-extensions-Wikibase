@@ -278,6 +278,7 @@
 	"wikibase-newentity-label": "Etykieta:",
 	"wikibase-newentity-description": "Opis:",
 	"wikibase-newentity-submit": "Utwórz",
+	"wikibase-captcha-fail": "Weryfikacja nie powiodła się. Spróbuj ponownie.",
 	"special-setlabel": "Ustaw etykietę elementu lub właściwości",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|deklaracja|deklaracje|deklaracji}}, $2 {{PLURAL:$2|link do witryny|linki do witryn|linków do witryn}}",
 	"wikibase-setlabel-introfull": "Ustawiasz etykietę $2 dla [[:$1]].",

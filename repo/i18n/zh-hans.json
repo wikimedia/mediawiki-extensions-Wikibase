@@ -326,6 +326,7 @@
 	"wikibase-newentity-description": "描述：",
 	"wikibase-newentity-submit": "创建",
 	"wikibase-newentity-hcaptcha-fail": "请确认您是人类",
+	"wikibase-captcha-fail": "验证失败。请重试",
 	"special-setlabel": "设置项目/属性标签",
 	"wikibase-search-result-stats": "$1个{{PLURAL:$1|陈述}}，$2个{{PLURAL:$2|网站链接}}",
 	"wikibase-setlabel-introfull": "您正在为[[:$1]]设置$2中的标签。",

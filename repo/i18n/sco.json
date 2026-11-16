@@ -6,7 +6,8 @@
 			"CiphriusKane",
 			"John Reid",
 			"Ladsgroup",
-			"MJL"
+			"MJL",
+			"Monospaced"
 		]
 	},
 	"wikibase-desc": "Structurt data repository",
@@ -54,7 +55,7 @@
 	"wikibase-itembytitle-lookup-site": "Steid:",
 	"special-gotolinkedpage": "Gang tae airtit page",
 	"wikibase-itemdisambiguation-lookup-language": "Leid code:",
-	"wikibase-itemdisambiguation-submit": "Rake",
+	"wikibase-itemdisambiguation-submit": "Sairch",
 	"wikibase-itemdisambiguation-search": "Ye can [$1 sairch for the item].",
 	"wikibase-itemdisambiguation-create": "Ye can [$1 create the item].",
 	"wikibase-itemdisambiguation-invalid-langcode": "Sorry, the leid code ye have providit is unkent tae the seestem. Please uise a valid leid code lik \"sco\".",
