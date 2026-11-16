@@ -265,6 +265,12 @@ class EntityUpdaterTest extends TestCase {
 				new ResourceTooLargeException( self::MAX_ENTITY_SIZE ),
 			];
 
+			yield "captcha edit failed ($entityType)" => [
+				$entity,
+				EditEntityStatus::newFatal( 'captcha-edit-fail' ),
+				new EditPrevented( 'captcha-edit-fail' ),
+			];
+
 			$status = EditEntityStatus::newFatal( 'failed to save. sad times.' );
 			yield "unknown failure ($entityType)" => [
 				$entity,

@@ -115,6 +115,8 @@ class EntityUpdater {
 				throw new TempAccountCreationLimitReached();
 			} elseif ( $status->hasMessage( 'actionthrottledtext' ) ) {
 				throw new RateLimitReached();
+			} elseif ( $status->hasMessage( 'captcha-edit-fail' ) ) {
+				throw new EditPrevented( 'captcha-edit-fail' );
 			}
 
 			$this->throwIfPreventedEdit( $status );

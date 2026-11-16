@@ -138,6 +138,26 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 		} );
 
+		describe( 'Captcha edit failed', () => {
+			before( async function () {
+				await requireExtensions( [ 'ConfirmEdit' ] ).call( this );
+			} );
+
+			describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
+				it( 'captcha prevented create/edit', async () => {
+					assertValidError(
+						await newRequestBuilder()
+							.withConfigOverride( 'wgCaptchaClass', 'SimpleCaptcha' )
+							.withConfigOverride( 'wgCaptchaTriggers', { edit: true } )
+							.makeRequest(),
+						403,
+						'permission-denied',
+						{ denial_reason: 'captcha-edit-fail' }
+					);
+				} );
+			} );
+		} );
+
 		// protecting/unprotecting does not always take effect immediately. These tests are isolated here to avoid
 		// accidentally testing against a protected page in the other tests and receiving false positive results.
 		editRoutes.forEach( ( { newRequestBuilder, requestInputs } ) => {
