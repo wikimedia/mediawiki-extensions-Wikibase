@@ -172,12 +172,11 @@ return [
 
 	'WikibaseClient.ChangeHandler' => function ( MediaWikiServices $services ): ChangeHandler {
 		$logger = WikibaseClient::getLogger( $services );
-		$statsFactory = $services->getStatsFactory()->withComponent( 'WikibaseClient' );
 
 		$pageUpdater = new WikiPageUpdater(
 			$services->getJobQueueGroup(),
 			$logger,
-			$statsFactory
+			$services->getStatsFactory()->withComponent( 'WikibaseClient' )
 		);
 
 		$settings = WikibaseClient::getSettings( $services );
@@ -203,7 +202,7 @@ return [
 			$settings->getSetting( 'injectRecentChanges' ),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'suppressOtherLanguageLinkUpdates' ),
-			$statsFactory
+			$services->getStatsFactory()->withComponent( 'WikibaseClient' )
 		);
 	},
 
