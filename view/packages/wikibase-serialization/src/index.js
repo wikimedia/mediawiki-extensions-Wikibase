@@ -15,5 +15,6 @@ module.exports = {
 	SnakSerializer: require( './Serializers/SnakSerializer.js' ),
 	StatementListSerializer: require( './Serializers/StatementListSerializer.js' ),
 	StatementSerializer: require( './Serializers/StatementSerializer.js' ),
-	TermMapSerializer: require( './Serializers/TermMapSerializer.js' )
+	TermMapSerializer: require( './Serializers/TermMapSerializer.js' ),
+	FingerprintDeserializer: require( './Deserializers/FingerprintDeserializer.js' )
 };

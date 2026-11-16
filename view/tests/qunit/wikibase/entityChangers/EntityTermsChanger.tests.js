@@ -35,6 +35,51 @@
 		assert.true( new EntityTermsChanger() instanceof EntityTermsChanger );
 	} );
 
+	QUnit.test( 'save combines term changes into one edit when a captcha is required', function ( assert ) {
+		var done = assert.async();
+		this.sandbox.stub( mw.loader, 'getState' ).returns( 'registered' );
+		mw.config.set( 'wgConfirmEditCaptchaNeededForGenericEdit', 'hcaptcha' );
+		var api = {
+			editEntity: sinon.spy( () => $.Deferred().resolve( {
+				entity: {
+					lastrevid: REVISION_ID,
+					labels: { en: { language: 'en', value: 'Cap' } },
+					descriptions: {},
+					aliases: { en: [ { language: 'en', value: 'Headware' } ] }
+				}
+			} ).promise() )
+		};
+
+		var entityTermsChanger = new EntityTermsChanger(
+			api,
+			stubRevisionStoreForRevision( REVISION_ID ),
+			new Item( 'Q1' )
+		);
+
+		entityTermsChanger.save(
+			newFingerprint()
+				.withLabel( 'en', 'Cap' )
+				.withAliases( 'en', [ 'Headware' ] ),
+			currentFingerprint()
+				.withLabel( 'en', 'Hat' )
+				.withAliases( 'en', [ 'Old Alias' ] )
+				.withDescription( 'en', 'Old description' )
+		).then( () => {
+			assert.true( api.editEntity.calledOnce );
+			sinon.assert.calledWith(
+				api.editEntity,
+				'Q1',
+				REVISION_ID,
+				{
+					labels: { en: { language: 'en', value: 'Cap' } },
+					descriptions: { en: { language: 'en', value: '' } },
+					aliases: { en: [ { language: 'en', value: 'Headware' } ] }
+				}
+			);
+		} ).fail( failOnError( assert ) )
+			.always( done );
+	} );
+
 	QUnit.test( 'save performs correct API calls for new label', ( assert ) => {
 		var done = assert.async();
 		var api = {

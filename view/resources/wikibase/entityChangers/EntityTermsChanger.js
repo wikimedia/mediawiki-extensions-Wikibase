@@ -8,6 +8,9 @@
 	var MODULE = wb.entityChangers,
 		datamodel = require( 'wikibase.datamodel' );
 
+	const { FingerprintDeserializer, TermMapSerializer } = require( 'wikibase.serialization' );
+	const { isCaptchaRequired } = require( 'wikibase.captcha' );
+
 	function chain( tasks ) {
 		return tasks.reduce( ( promise, task ) => promise.then( task ), $.Deferred().resolve().promise() );
 	}
@@ -19,6 +22,9 @@
 		 * @param {datamodel.Entity} entity
 		 */
 		constructor( api, revisionStore, entity ) {
+			this._api = api;
+			this._revisionStore = revisionStore;
+
 			/**
 			 * @type {wikibase.entityChangers.AliasesChanger}
 			 */
@@ -48,6 +54,15 @@
 		 *         - {wikibase.api.RepoApiError}
 		 */
 		save( newFingerprint, oldFingerprint ) {
+			// Bundle only when a captcha is required, since one wbeditentity
+			// edit changes the edit summaries and per-field errors; T445056 tracks bundling in all cases.
+			if ( isCaptchaRequired() ) {
+				return this._saveTogether( newFingerprint, oldFingerprint );
+			}
+			return this._saveSeparately( newFingerprint, oldFingerprint );
+		}
+
+		_saveSeparately( newFingerprint, oldFingerprint ) {
 			var labelsChanger = this._labelsChanger,
 				descriptionsChanger = this._descriptionsChanger,
 				aliasesChanger = this._aliasesChanger,
@@ -105,14 +120,60 @@
 			return chain( changes ).then( () => new MODULE.ValueChangeResult( resultFingerprint, tempUserWatcher ) );
 		}
 
+		_saveTogether( newFingerprint, oldFingerprint ) {
+			const labels = new datamodel.TermMap();
+			const descriptions = new datamodel.TermMap();
+			const aliases = {};
+
+			this._getTermsChanges( newFingerprint.getLabels(), oldFingerprint.getLabels() )
+				.forEach( ( term ) => labels.setItem( term.getLanguageCode(), term ) );
+			this._getTermsChanges( newFingerprint.getDescriptions(), oldFingerprint.getDescriptions() )
+				.forEach( ( term ) => descriptions.setItem( term.getLanguageCode(), term ) );
+			this._getTermsChanges( newFingerprint.getAliases(), oldFingerprint.getAliases() ).forEach( ( multiTerm ) => {
+				const language = multiTerm.getLanguageCode();
+				aliases[ language ] = multiTerm.getTexts().map( ( value ) => ( { language, value } ) );
+			} );
+
+			const tempUserWatcher = new MODULE.TempUserWatcher();
+			if ( labels.isEmpty() && descriptions.isEmpty() && $.isEmptyObject( aliases ) ) {
+				return $.Deferred().resolve(
+					new MODULE.ValueChangeResult( newFingerprint, tempUserWatcher )
+				).promise();
+			}
+
+			const termMapSerializer = new TermMapSerializer();
+			const data = {
+				labels: termMapSerializer.serialize( labels ),
+				descriptions: termMapSerializer.serialize( descriptions ),
+				aliases
+			};
+
+			return this._api.editEntity(
+				this._entity.getId(), this._revisionStore.getLabelRevision(), data
+			).then( ( result ) => {
+				const fingerprint = new FingerprintDeserializer().deserialize( result.entity );
+				const revision = result.entity.lastrevid;
+
+				this._revisionStore.setLabelRevision( revision );
+				this._revisionStore.setDescriptionRevision( revision );
+				this._revisionStore.setAliasesRevision( revision );
+				this._entity.setFingerprint( fingerprint );
+				tempUserWatcher.processApiResult( result );
+
+				return new MODULE.ValueChangeResult( fingerprint, tempUserWatcher );
+			}, ( code, response ) => {
+				throw wb.api.RepoApiError.newFromApiResponse( response, 'save' );
+			} );
+		}
+
 		/**
 		 * @param {datamodel.TermMap|datamodel.MultiTermMap} newTerms
 		 * @param {datamodel.TermMap|datamodel.MultiTermMap} oldTerms
-		 * @param {Function} getChange
-		 * @return {Function[]}
+		 * @param {Function} [getChange]
+		 * @return {Array}
 		 * @private
 		 */
-		_getTermsChanges( newTerms, oldTerms, getChange ) {
+		_getTermsChanges( newTerms, oldTerms, getChange = ( term ) => term ) {
 			var changes = [];
 
 			newTerms.each( ( languageCode, newTerm ) => {

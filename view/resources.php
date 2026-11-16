@@ -165,6 +165,7 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase',
 				'wikibase.api.RepoApi',
+				'wikibase.captcha',
 				'wikibase.datamodel', // for AliasesChanger.js
 				'wikibase.serialization',
 			],
