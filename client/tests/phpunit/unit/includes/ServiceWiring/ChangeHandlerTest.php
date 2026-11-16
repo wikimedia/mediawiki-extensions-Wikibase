@@ -59,7 +59,7 @@ class ChangeHandlerTest extends ServiceWiringTestCase {
 			->method( 'getJobQueueGroup' );
 
 		$this->serviceContainer
-			->expects( $this->once() )
+			->expects( $this->exactly( 2 ) )
 			->method( 'getStatsFactory' );
 
 		$this->serviceContainer
