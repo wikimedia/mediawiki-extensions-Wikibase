@@ -8,6 +8,7 @@ use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
@@ -20,6 +21,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikimedia\Stats\StatsFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -231,6 +233,10 @@ class InjectRCRecordsJobTest extends TestCase {
 			$changeFactory,
 			$rcFactory,
 			$this->getTitleFactoryMock(),
+			null,
+			new NullLogger(),
+			StatsFactory::newNull(),
+			'testwiki',
 			$spec->getParams()
 		) );
 
@@ -313,6 +319,10 @@ class InjectRCRecordsJobTest extends TestCase {
 			$changeFactory,
 			$rcFactory,
 			$this->getTitleFactoryMock(),
+			null,
+			new NullLogger(),
+			StatsFactory::newNull(),
+			'testwiki',
 			$params
 		) );
 
@@ -373,10 +383,12 @@ class InjectRCRecordsJobTest extends TestCase {
 			$changeFactory,
 			$rcFactory,
 			$this->getTitleFactoryMock(),
+			$rcDupeDetector,
+			new NullLogger(),
+			StatsFactory::newNull(),
+			'testwiki',
 			$params
 		);
-
-		$job->setRecentChangesFinder( $rcDupeDetector );
 
 		$job->run();
 	}
