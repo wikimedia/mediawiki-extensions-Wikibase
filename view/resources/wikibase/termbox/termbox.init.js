@@ -2,6 +2,7 @@
  * @type {import("../../../lib/wikibase-termbox/dist/wikibase.termbox.init.d.ts").default}
  */
 const termboxInit = require( 'wikibase.termbox.init' ).default;
+const withCaptcha = require( '../captcha/postCaptcha.js' );
 const RepoApiWritingEntityRepository = require( './RepoApiWritingEntityRepository.js' );
 const EntityLoadedHookEntityRepository = require( './EntityLoadedHookEntityRepository.js' );
 const mountTermbox = require( './mountTermbox.js' );
@@ -18,7 +19,7 @@ termboxInit(
 		),
 		writingEntityRepository: new RepoApiWritingEntityRepository(
 			new wikibase.api.RepoApi(
-				mwApi,
+				withCaptcha( mwApi ),
 				mw.config.get( 'wgUserLanguage' ),
 				tags
 			)

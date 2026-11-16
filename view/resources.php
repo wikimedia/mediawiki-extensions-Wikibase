@@ -944,6 +944,8 @@ return call_user_func( function() {
 		'wikibase.termbox' => [
 			'packageFiles' => [
 				'termbox.init.js',
+				'../captcha/postCaptcha.js',
+				'../captcha/resolveCaptcha.js',
 				'EntityLoadedHookEntityRepository.js',
 				'RepoApiWritingEntityRepository.js',
 				'mountTermbox.js',
@@ -961,6 +963,7 @@ return call_user_func( function() {
 			'localBasePath' => __DIR__ . '/resources/wikibase/termbox',
 			'dependencies' => [
 				'wikibase.termbox.init',
+				'wikibase.captcha',
 				'wikibase.api.RepoApi',
 			],
 		],
