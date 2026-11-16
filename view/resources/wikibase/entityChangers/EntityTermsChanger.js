@@ -9,7 +9,7 @@
 		datamodel = require( 'wikibase.datamodel' );
 
 	const { FingerprintDeserializer, TermMapSerializer } = require( 'wikibase.serialization' );
-	const { isCaptchaRequired } = require( 'wikibase.captcha' );
+	const { isCaptchaRequired, extractCaptchaData } = require( 'wikibase.captcha' );
 
 	function chain( tasks ) {
 		return tasks.reduce( ( promise, task ) => promise.then( task ), $.Deferred().resolve().promise() );
@@ -162,7 +162,11 @@
 
 				return new MODULE.ValueChangeResult( fingerprint, tempUserWatcher );
 			}, ( code, response ) => {
-				throw wb.api.RepoApiError.newFromApiResponse( response, 'save' );
+				const error = wb.api.RepoApiError.newFromApiResponse( response, 'save' );
+				if ( extractCaptchaData( response ) ) {
+					error.code = 'captcha-failed';
+				}
+				throw error;
 			} );
 		}
 

@@ -823,6 +823,7 @@
 			"view/tests/qunit/wikibase/view/ViewFactory.tests.js",
 			"view/tests/qunit/wikibase/view/ToolbarViewController.tests.js",
 			"view/resources/wikibase/view/ToolbarViewController.js",
+			"view/resources/wikibase/view/toast.js",
 			"view/resources/wikibase/view/ViewController.js",
 			"view/tests/qunit/wikibase/utilities/GuidGenerator.tests.js",
 			"view/resources/wikibase/utilities/wikibase.utilities.GuidGenerator.js",

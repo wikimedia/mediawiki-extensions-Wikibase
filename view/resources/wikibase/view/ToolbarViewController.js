@@ -2,7 +2,10 @@ module.exports = ( function ( wb ) {
 	'use strict';
 
 	var ViewController = require( './ViewController.js' ),
+		toast = require( './toast.js' ),
 		ENTITY_CHANGERS = wb.entityChangers;
+
+	const { isCaptchaRequired } = require( 'wikibase.captcha' );
 
 	/**
 	 * A view controller implementation for editing wikibase datamodel values
@@ -23,15 +26,17 @@ module.exports = ( function ( wb ) {
 	 * @param {jQuery.ui.EditableTemplatedWidget} view
 	 * @param {Function} removeView
 	 * @param {Function} startEditingCallback
+	 * @param {boolean} [showCaptchaToasts=false] Show toasts for a passed or failed captcha on save
 	 */
 	var SELF = util.inherit(
 		ViewController,
-		function ( model, toolbar, view, removeView, startEditingCallback ) {
+		function ( model, toolbar, view, removeView, startEditingCallback, showCaptchaToasts = false ) {
 			this._model = model;
 			this._toolbar = toolbar;
 			this._view = view;
 			this._removeView = removeView;
 			this._startEditingCallback = startEditingCallback;
+			this._showCaptchaToasts = showCaptchaToasts;
 		}
 	);
 
@@ -134,6 +139,9 @@ module.exports = ( function ( wb ) {
 
 		this.setError();
 		this._view.disable();
+		if ( this._showCaptchaToasts ) {
+			toast.hide();
+		}
 
 		if ( dropValue ) {
 			this._view.value( this._value );
@@ -155,10 +163,18 @@ module.exports = ( function ( wb ) {
 			self._leaveEditMode( dropValue );
 			if ( valueChangeResult.getTempUserWatcher().getRedirectUrl() ) {
 				window.location.href = valueChangeResult.getTempUserWatcher().getRedirectUrl();
+			} else if ( self._showCaptchaToasts && isCaptchaRequired() ) {
+				toast.show( 'success', mw.msg( 'wikibase-publishing-succeeded' ) );
 			}
 		} ).fail( ( error ) => {
 			self._view.enable();
-			self.setError( error );
+			if ( self._showCaptchaToasts && error && error.code === 'captcha-failed' ) {
+				self._toolbar.enable();
+				self._toolbar.toggleActionMessage();
+				toast.show( 'error', mw.msg( 'wikibase-captcha-fail' ) );
+			} else {
+				self.setError( error );
+			}
 		} );
 	};
 

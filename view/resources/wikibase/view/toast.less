@@ -1,0 +1,16 @@
+@import 'mediawiki.skin.variables.less';
+
+// Sized and placed like the Codex toast.
+.wikibase-toast {
+	position: fixed;
+	bottom: @spacing-100;
+	left: 50%;
+	transform: translateX( -50% );
+	z-index: @z-index-toast-notification;
+	width: calc( 100% - 2 * @spacing-100 );
+
+	@media ( min-width: @min-width-breakpoint-tablet ) {
+		bottom: @spacing-150;
+		width: @size-3200;
+	}
+}
