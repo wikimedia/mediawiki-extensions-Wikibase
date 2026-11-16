@@ -35,29 +35,9 @@ use Wikimedia\Stats\StatsFactory;
 class InjectRCRecordsJob extends Job {
 
 	/**
-	 * @var EntityChangeLookup
-	 */
-	private $changeLookup;
-
-	/**
-	 * @var EntityChangeFactory
-	 */
-	private $changeFactory;
-
-	/**
-	 * @var RecentChangeFactory
-	 */
-	private $rcFactory;
-
-	/**
 	 * @var RecentChangesFinder|null
 	 */
 	private $rcDuplicateDetector = null;
-
-	/**
-	 * @var TitleFactory
-	 */
-	private $titleFactory;
 
 	/**
 	 * @var LoggerInterface
@@ -108,20 +88,16 @@ class InjectRCRecordsJob extends Job {
 	 * Constructs an InjectRCRecordsJob for injecting a change into the recentchanges feed
 	 * for the given pages.
 	 *
-	 * @param EntityChangeLookup $changeLookup
-	 * @param EntityChangeFactory $changeFactory
-	 * @param RecentChangeFactory $rcFactory
-	 * @param TitleFactory $titleFactory
-	 * @param array $params Needs to have two keys: "change": the id of the change,
-	 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
-	 *
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct(
-		EntityChangeLookup $changeLookup,
-		EntityChangeFactory $changeFactory,
-		RecentChangeFactory $rcFactory,
-		TitleFactory $titleFactory,
+		private EntityChangeLookup $changeLookup,
+		private EntityChangeFactory $changeFactory,
+		private RecentChangeFactory $rcFactory,
+		private TitleFactory $titleFactory,
+		/** @param array $params Needs to have two keys: "change": the id of the change,
+		 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
+		 */
 		array $params
 	) {
 		$title = Title::makeTitle( NS_SPECIAL, 'Badtitle/' . __CLASS__ );
@@ -150,10 +126,6 @@ class InjectRCRecordsJob extends Job {
 			'$params[\'pages\']'
 		);
 
-		$this->changeLookup = $changeLookup;
-		$this->changeFactory = $changeFactory;
-		$this->rcFactory = $rcFactory;
-		$this->titleFactory = $titleFactory;
 		$this->logger = new NullLogger();
 	}
 
@@ -275,16 +247,14 @@ class InjectRCRecordsJob extends Job {
 			}
 		}
 
-		if ( $this->statsFactory !== null ) {
-			$this->statsFactory
-				->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
-				->setLabel( 'DBname', $this->dbName )
-				->incrementBy( count( $titles ) );
-			$this->statsFactory
-				->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
-				->setLabel( 'DBname', $this->dbName )
-				->observe( $change->getAge() * 1000 );
-		}
+		$this->statsFactory
+			?->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
+			->setLabel( 'DBname', $this->dbName )
+			->incrementBy( count( $titles ) );
+		$this->statsFactory
+			?->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
+			->setLabel( 'DBname', $this->dbName )
+			->observe( $change->getAge() * 1000 );
 
 		return true;
 	}
