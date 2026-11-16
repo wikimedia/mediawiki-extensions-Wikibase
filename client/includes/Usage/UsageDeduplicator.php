@@ -18,9 +18,6 @@ class UsageDeduplicator {
 
 	/**
 	 * @param int[] $usageModifierLimits associative array mapping a usage type to the limit
-	 * @param LoggerInterface $logger
-	 * @param StatsFactory $stats
-	 * @param string $wiki
 	 */
 	public function __construct(
 		private readonly array $usageModifierLimits, private readonly LoggerInterface $logger,
@@ -151,7 +148,7 @@ class UsageDeduplicator {
 		int $count, string $aspect, bool $exceedsLimit, EntityId $entityId
 	): void {
 		$this->stats->getHistogram(
-			'WikibaseClient_UsageDeduplicator_bundled_entity_usages',
+			'UsageDeduplicator_bundled_entity_usages',
 			self::HISTOGRAM_BUCKETS
 		)
 			->setLabel( 'wiki', $this->wiki )
