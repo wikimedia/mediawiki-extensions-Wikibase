@@ -50,6 +50,7 @@
 	require( '../../../view/tests/qunit/jquery/wikibase/jquery.wikibase.statementview.tests.js' );
 	require( '../../../view/tests/qunit/jquery/jquery.removeClassByRegex.tests.js' );
 	require( '../../../view/tests/qunit/jquery/jquery.util.getDirectionality.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/copyright/copyright.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityChangers/AliasesChanger.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityChangers/StatementsChanger.tests.js' );
 	require( '../../../view/tests/qunit/wikibase/entityChangers/StatementsChangerState.tests.js' );

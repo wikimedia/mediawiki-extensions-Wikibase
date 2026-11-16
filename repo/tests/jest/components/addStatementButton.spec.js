@@ -57,7 +57,8 @@ describe( 'wikibase.wbui2025.references', () => {
 	} );
 
 	mw.config = {
-		get: () => 'en'
+		get: () => 'en',
+		exists: () => false
 	};
 
 	describe( 'the mounted component', () => {
