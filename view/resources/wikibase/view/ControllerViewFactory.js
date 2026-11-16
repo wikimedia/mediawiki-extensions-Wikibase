@@ -95,7 +95,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		} );
 
 		var entityTermsChanger = this._entityChangersFactory.getEntityTermsChanger();
-		controller = this._getController( $container, view, entityTermsChanger, null, value, startEditingCallback );
+		controller = this._getController( $container, view, entityTermsChanger, null, value, startEditingCallback, true );
 		return view;
 	};
 
@@ -156,7 +156,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 		return view;
 	};
 
-	SELF.prototype._getController = function ( $container, view, model, onRemove, value, startEditingCallback ) {
+	SELF.prototype._getController = function ( $container, view, model, onRemove, value, startEditingCallback, showCaptchaToasts ) {
 		var edittoolbar = this._toolbarFactory.getEditToolbar(
 			{
 				$container: $container,
@@ -165,7 +165,7 @@ wikibase.view.ControllerViewFactory = ( function ( wb ) {
 			view.element
 		);
 
-		var controller = new ToolbarViewController( model, edittoolbar, view, onRemove, startEditingCallback );
+		var controller = new ToolbarViewController( model, edittoolbar, view, onRemove, startEditingCallback, showCaptchaToasts );
 		edittoolbar.setController( controller );
 		controller.setValue( value );
 

@@ -218,6 +218,7 @@ return call_user_func( function() {
 				'resources/jquery/ui/jquery.ui.EditableTemplatedWidget.js',
 				'resources/wikibase/view/ViewController.js',
 				'resources/wikibase/view/ToolbarViewController.js',
+				'resources/wikibase/view/toast.js',
 				'resources/wikibase/view/ViewFactory.js',
 				'resources/wikibase/view/termFallbackResolver.js',
 				'resources/wikibase/view/languageFallbackIndicator.js',
@@ -283,6 +284,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
 				'resources/wikibase/utilities/wikibase.utilities.ui.css',
 				'resources/jquery/ui/jquery.ui.closeable.css',
+				'resources/wikibase/view/toast.less',
 			],
 			'dependencies' => [
 				'dataValues.DataValue', // For snakview
@@ -296,6 +298,7 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.wikibase.entityselector',
 				'wikibase.buildErrorOutput',
+				'wikibase.captcha',
 				'wikibase.fallbackchains',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
@@ -363,7 +366,9 @@ return call_user_func( function() {
 				'wikibase-label-edit-placeholder-mul',
 				'wikibase-label-empty',
 				'wikibase-label-input-help-message',
+				'wikibase-captcha-fail',
 				'wikibase-outdated-client-script',
+				'wikibase-publishing-succeeded',
 				'wikibase-referenceview-tabs-manual',
 				'wikibase-refresh-for-missing-datatype',
 				'wikibase-remove',
