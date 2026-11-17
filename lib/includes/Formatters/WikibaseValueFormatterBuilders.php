@@ -211,11 +211,20 @@ class WikibaseValueFormatterBuilders {
 	private function escapeValueFormatter( $format, ValueFormatter $formatter ) {
 		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
 			case SnakFormatter::FORMAT_HTML:
-				return new EscapingValueFormatter( $formatter, static function ( string $string ): string {
-					return htmlspecialchars( $string, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5 );
-				} );
+				return new EscapingValueFormatter( $formatter,
+					static fn ( string $string ): string => htmlspecialchars( $string,
+						// Convert both double and single quotes (default)
+						ENT_QUOTES |
+						// Replace invalid multi-byte sequences with replacement character (default)
+						ENT_SUBSTITUTE |
+						// T442275: Additionally, replace single-byte control characters with replacement character
+						ENT_DISALLOWED |
+						// T319219: Handle code as HTML 5 instead of the default HTML 4.01
+						ENT_HTML5
+					)
+				);
 			case SnakFormatter::FORMAT_WIKI:
-				return new EscapingValueFormatter( $formatter, 'wfEscapeWikiText' );
+				return new EscapingValueFormatter( $formatter, wfEscapeWikiText( ... ) );
 			default:
 				return $formatter;
 		}

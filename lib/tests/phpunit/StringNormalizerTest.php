@@ -131,6 +131,7 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 			[ "\xC3\x85land", 'Åland' ],
 			[ "A\xCC\x8Aland", 'Åland' ],
 			[ "\xE2\x84\xABngstrom (unit)", 'Ångstrom (unit)' ],
+			'Single-byte control characters' => [ "\x00|\x08|\x1A|\x7F", "\u{FFFD}|\u{FFFD}|\u{FFFD}|\x7F" ],
 		];
 	}
 
@@ -174,11 +175,12 @@ class StringNormalizerTest extends \PHPUnit\Framework\TestCase {
 				"",
 			],
 
-			// XXX: this should pass, and it does for some versions of PHP/PCRE
-			//array( // #9: Latin Extended-D: U+0A7AA
-			//	"\xea\x9e\xaa",
-			//	"\xea\x9e\xaa",
-			//),
+			[ // #9: Latin Extended-D: U+0A7AA
+				"\xea\x9e\xaa",
+				"\xea\x9e\xaa",
+			],
+
+			'Single-byte control characters' => [ "\x00|\x08|\x1A|\x7F", '| | |' ],
 		];
 	}
 
