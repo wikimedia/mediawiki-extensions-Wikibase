@@ -88,6 +88,7 @@
 	"wikibase-entity-summary-wbeditentity-update-languages-short": "Зьмененыя метка, апісаньне і/або сынонімы мовамі: {{#commaseparatedlist: $3}}",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Зьмененыя метка, апісаньне і/або сынонімы $3 {{PLURAL:$3|мовай|мовамі}}, а таксама іншыя часткі",
 	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Зьмененыя метка, апісаньне і/або сынонімы мовамі: {{#commaseparatedlist: $3}}, а таксама іншыя часткі",
+	"wikibase-entity-summary-wbeditentity-statements-single-property-update": "{{PLURAL:$3|Зьмененае $3 сьцьверджаньне|Зьмененыя $3 сьцьверджаньні|Зьмененыя $3 сьцьверджаньняў|1=Зьмененае адно сьцьверджаньне}}",
 	"wikibase-entity-summary-wbsetreference": "Пазначаная крыніца",
 	"wikibase-entity-summary-wbsetreference-add": "Дададзеная крыніца сьцьверджаньня",
 	"wikibase-entity-summary-wbsetreference-set": "Зьмененая крыніца сьцьверджаньня",
