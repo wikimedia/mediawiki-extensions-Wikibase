@@ -13,7 +13,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\WikibaseClient;
@@ -33,20 +32,6 @@ use Wikimedia\Stats\StatsFactory;
  * @author Daniel Kinzler
  */
 class InjectRCRecordsJob extends Job {
-
-	/**
-	 * @var RecentChangesFinder|null
-	 */
-	private $rcDuplicateDetector = null;
-
-	/**
-	 * @var LoggerInterface
-	 */
-	private $logger;
-
-	private ?StatsFactory $statsFactory = null;
-
-	private ?string $dbName = null;
 
 	/**
 	 * @param Title[] $titles
@@ -95,6 +80,10 @@ class InjectRCRecordsJob extends Job {
 		private EntityChangeFactory $changeFactory,
 		private RecentChangeFactory $rcFactory,
 		private TitleFactory $titleFactory,
+		private ?RecentChangesFinder $rcDuplicateDetector,
+		private LoggerInterface $logger,
+		private StatsFactory $statsFactory,
+		private string $dbName,
 		/** @param array $params Needs to have two keys: "change": the id of the change,
 		 *     "pages": array of pages, represented as $pageId => [ $namespace, $dbKey ].
 		 */
@@ -125,45 +114,22 @@ class InjectRCRecordsJob extends Job {
 			$params['pages'],
 			'$params[\'pages\']'
 		);
-
-		$this->logger = new NullLogger();
 	}
 
 	public static function newFromGlobalState( Title $unused, array $params ): self {
 		$mwServices = MediaWikiServices::getInstance();
 
-		$store = WikibaseClient::getStore( $mwServices );
-
-		$job = new self(
+		return new self(
 			WikibaseClient::getEntityChangeLookup( $mwServices ),
 			WikibaseClient::getEntityChangeFactory( $mwServices ),
 			WikibaseClient::getRecentChangeFactory( $mwServices ),
 			$mwServices->getTitleFactory(),
+			WikibaseClient::getStore( $mwServices )->getRecentChangesFinder(),
+			WikibaseClient::getLogger( $mwServices ),
+			$mwServices->getStatsFactory()->withComponent( 'WikibaseClient' ),
+			$mwServices->getMainConfig()->get( MainConfigNames::DBname ),
 			$params
 		);
-
-		$job->setRecentChangesFinder( $store->getRecentChangesFinder() );
-
-		$job->setLogger( WikibaseClient::getLogger( $mwServices ) );
-		$job->setStatsFactory(
-			$mwServices->getStatsFactory()->withComponent( 'WikibaseClient' ),
-			$mwServices->getMainConfig()->get( MainConfigNames::DBname )
-		);
-
-		return $job;
-	}
-
-	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ): void {
-		$this->rcDuplicateDetector = $rcDuplicateDetector;
-	}
-
-	public function setLogger( LoggerInterface $logger ): void {
-		$this->logger = $logger;
-	}
-
-	public function setStatsFactory( StatsFactory $statsFactory, string $dbName ): void {
-		$this->statsFactory = $statsFactory;
-		$this->dbName = $dbName;
 	}
 
 	/**
@@ -225,9 +191,7 @@ class InjectRCRecordsJob extends Job {
 
 			$rc = $this->rcFactory->newRecentChange( $change, $title, $rcAttribs );
 
-			if ( $this->rcDuplicateDetector
-				&& $this->rcDuplicateDetector->getRecentChangeId( $rc ) !== null
-			) {
+			if ( $this->rcDuplicateDetector?->getRecentChangeId( $rc ) !== null ) {
 				$this->logger->debug( __METHOD__ . ": skipping duplicate RC entry for " . $title->getFullText() );
 			} else {
 				$this->logger->debug( __METHOD__ . ": saving RC entry for " . $title->getFullText() );
@@ -248,11 +212,11 @@ class InjectRCRecordsJob extends Job {
 		}
 
 		$this->statsFactory
-			?->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
+			->getCounter( 'PageUpdates_InjectRCRecords_run_titles_total' )
 			->setLabel( 'DBname', $this->dbName )
 			->incrementBy( count( $titles ) );
 		$this->statsFactory
-			?->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
+			->getTiming( 'PageUpdates_InjectRCRecords_delay_seconds' )
 			->setLabel( 'DBname', $this->dbName )
 			->observe( $change->getAge() * 1000 );
 
