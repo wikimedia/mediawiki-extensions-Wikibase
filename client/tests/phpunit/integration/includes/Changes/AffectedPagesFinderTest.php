@@ -645,13 +645,6 @@ class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 				'parserEntityUsages' => null,
 				'expectedUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage, $q1p5StatementUsage ] ) ],
 			],
-			'ParserCache hit, no intersection' => [
-				'databaseUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage ] ) ],
-				'parserEntityUsages' => [
-					'Q1#C.P1' => true,
-				],
-				'expectedUsages' => [],
-			],
 			'ParserCache hit, has intersection' => [
 				'databaseUsages' => [ new PageEntityUsages( 1, [ $q1BundledStatementUsage ] ) ],
 				'parserEntityUsages' => [

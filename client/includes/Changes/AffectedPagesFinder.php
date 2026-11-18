@@ -214,9 +214,7 @@ class AffectedPagesFinder {
 			array_merge( $changedAspects, [ EntityUsage::ALL_USAGE ] )
 		);
 
-		$filteredUsagesFromDb = $this->filterPagesByParserOutputUsages( $usagesFromDb, $entityId, $changedAspects );
-
-		$usages = $this->transformAllPageEntityUsages( $filteredUsagesFromDb, $entityId, $changedAspects );
+		$usages = $this->transformAllPageEntityUsages( $usagesFromDb, $entityId, $changedAspects );
 
 		// if title changed, add virtual usages for both old and new title
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
@@ -250,6 +248,8 @@ class AffectedPagesFinder {
 	 * except in the case of bundled aspects: these will be correctly filtered out
 	 * if the parsed page shows entity usages matching the wikibase diff's changed
 	 * aspects.
+	 *
+	 * Disconnected and unused as of 2026-11-18, we need to debug this logic.
 	 *
 	 * @param iterable<PageEntityUsages> $usagesFromDb
 	 * @param EntityId $entityId
