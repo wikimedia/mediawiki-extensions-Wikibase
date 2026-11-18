@@ -195,6 +195,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$itemContent->getItem()->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Berlin' );
 
 		return [
+			[ self::newEmpty(), '' ],
 			[ $itemContent, "cake\nBerlin" ],
 		];
 	}

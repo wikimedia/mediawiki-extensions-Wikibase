@@ -106,6 +106,7 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 		self::setLabel( $entityContent->getEntity(), 'en', "cake" );
 
 		return [
+			[ static::newEmpty(), '' ],
 			[ $entityContent, 'cake' ],
 		];
 	}
@@ -140,6 +141,11 @@ abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 		$text = $entityContent->getTextForSearchIndex();
 		$this->assertSame( '', $text, 'Text for search index should be empty if the hook returned false' );
+	}
+
+	public function testGetTextForFilters_empty() {
+		$this->assertSame( '', $this->newEmpty()->getTextForFilters() );
+		$this->assertSame( '', $this->newBlank()->getTextForFilters() );
 	}
 
 	abstract public static function provideGetEntityId();
