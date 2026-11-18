@@ -1,5 +1,4 @@
-# 33) Federated Items - MVP
- {#adr_0033}
+# 33) Federated Items - MVP {#adr_0033}
 
 Date: 2026-11-11
 
@@ -13,6 +12,11 @@ This ADR defines the Federated Items feature that allows users to select Wikidat
 
 When editing a statement, users can search for items. Remote results from Wikidata appear in the autocomplete drop-down alongside local items. Users can select a remote item and save the statement. The remote item is displayed with a visual indication that it originates from Wikidata. The value renders as a link that, when clicked, opens the source entity page in a new window based on the source’s concept URI.
 
+Further details regarding specific aspects of the MVP implementation have been addressed in the following ADRs:
+
+* Details about the usage of data type registration for modifying the `wikibase-item` data type in [ADR #36 ("Federated Items - Remote Items as Values")](@ref adr_0036)
+* Desicions regarding the handling of Federated Items in various APIs in [ADR #37 ("Federated Items - Programmatic Interaction with Federated Items")](@ref adr_0037)
+* How remote items will be handled by the UI's entity suggesters in [ADR #38 ("Federated Items - Combining Local and Remote Search Results")](@ref adr_0038)
 
 ## Considered Actions
 
