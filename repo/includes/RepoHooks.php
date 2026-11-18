@@ -1060,6 +1060,7 @@ final class RepoHooks implements
 					'wikibase.wbui2025.entityView.styles',
 					'wikibase.utilities.ClaimGuidGenerator',
 					'wikibase.wbui2025.lib',
+					'wikibase.copyright',
 				],
 				'messages' => [
 					'wikibase-parse-error',

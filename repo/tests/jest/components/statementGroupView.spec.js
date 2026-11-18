@@ -99,7 +99,7 @@ describe( 'wikibase.wbui2025.statementGroupView', () => {
 		} );
 
 		it( 'opens modal edit form when clicking edit link', async () => {
-			mw.config = { get: () => false };
+			mw.config = { get: () => false, exists: () => false };
 			await wrapper.find( '.wikibase-wbui2025-edit-link' ).trigger( 'click' );
 			expect( wrapper.find( '.modal-statement-edit-form-anchor' ).exists() ).toBe( true );
 		} );

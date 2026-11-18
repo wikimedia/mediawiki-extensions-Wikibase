@@ -219,6 +219,7 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.api.ValueCaller',
 				'wikibase.captcha',
+				'wikibase.copyright',
 				'wikibase.formatters.ApiValueFormatter',
 				'wikibase.datamodel',
 				'wikibase.entityChangers.EntityChangersFactory',

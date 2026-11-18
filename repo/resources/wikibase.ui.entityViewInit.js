@@ -9,6 +9,7 @@
 
 	const withCaptcha = require( '../../view/resources/wikibase/captcha/postCaptcha.js' );
 	const { isCaptchaRequired } = require( 'wikibase.captcha' );
+	const copyright = require( 'wikibase.copyright' );
 
 	var getExpertsStore = require( './experts/getStore.js' ),
 		getParserStore = require( './parsers/getStore.js' ),
@@ -238,13 +239,7 @@
 	function showCopyrightTooltip( $entityview, $origin, gravity, viewName ) {
 		gravity = gravity || 'nw';
 
-		const copyRight = mw.config.get( 'wbCopyright' );
-		const copyRightVersion = copyRight && copyRight.version;
-		const cookieKey = 'wikibase.acknowledgedcopyrightversion';
-		const optionsKey = 'wb-acknowledgedcopyrightversion';
-		const showCopyright = copyRight &&
-			mw.cookie.get( cookieKey ) !== copyRightVersion &&
-			mw.user.options.get( optionsKey ) !== copyRightVersion;
+		const showCopyright = !copyright.isAccepted();
 		const showHCaptchaNotice = isCaptchaRequired() &&
 			mw.config.get( 'wgConfirmEditCaptchaNeededForGenericEdit' ) === 'hcaptcha';
 
@@ -258,7 +253,7 @@
 		const editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
 		if ( showCopyright ) {
-			$copyrightMessage.html( copyRight.messageHtml ).appendTo( $message );
+			$copyrightMessage.html( copyright.getMessageHtml() ).appendTo( $message );
 		}
 
 		if ( showHCaptchaNotice ) {
@@ -273,13 +268,7 @@
 		}
 
 		function persistAcceptance() {
-			if ( !mw.user.isNamed() ) {
-				mw.cookie.set( cookieKey, copyRightVersion, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
-			} else {
-				var api = new mw.Api();
-				api.saveOption( optionsKey, copyRightVersion )
-				.done( () => mw.user.options.set( optionsKey, copyRightVersion ) );
-			}
+			copyright.persistAcceptance( new mw.Api() )();
 		}
 
 		// TODO: Use editableTemplatedWidget's notification system for copyright messages on all widgets

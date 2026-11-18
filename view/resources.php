@@ -67,6 +67,16 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.copyright' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase/copyright/copyright.js',
+			],
+			'dependencies' => [
+				'mediawiki.user',
+				'mediawiki.cookie',
+			],
+		],
+
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',

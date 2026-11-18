@@ -41,7 +41,7 @@ module.exports = exports = defineComponent( {
 	data() {
 		return {
 			persistAcceptance: false,
-			dialogBodyHtml: wbui2025.copyright.messageHtml,
+			dialogBodyHtml: wbui2025.copyright.getMessageHtml(),
 			dialogFooterHtml: wbui2025.hcaptcha.privacyPolicyHtml,
 			isCaptchaRequired: wbui2025.hcaptcha.isCaptchaRequired()
 		};

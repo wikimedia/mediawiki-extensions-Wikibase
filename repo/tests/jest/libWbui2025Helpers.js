@@ -13,8 +13,23 @@ const mockLibWbui2025 = function () {
 		() => require( '../../resources/wikibase.wbui2025/lib.js' ),
 		{ virtual: true }
 	);
+
+	jest.mock(
+		'wikibase.copyright',
+		() => require( '../../../view/resources/wikibase/copyright/copyright.js' ),
+		{ virtual: true }
+	);
+
+};
+
+const mockConfig = function ( configMap ) {
+	mw.config = {
+		exists: ( key ) => key in configMap,
+		get: ( key ) => configMap[ key ]
+	};
 };
 
 module.exports = {
-	mockLibWbui2025
+	mockLibWbui2025,
+	mockConfig
 };
