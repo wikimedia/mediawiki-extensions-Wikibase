@@ -30,6 +30,7 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditSummary;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\CaptchaChallenge;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\ResourceTooLargeException;
@@ -265,10 +266,21 @@ class EntityUpdaterTest extends TestCase {
 				new ResourceTooLargeException( self::MAX_ENTITY_SIZE ),
 			];
 
+			$captchaChallenge = [ 'type' => 'simple', 'mime' => 'text/plain', 'id' => '123', 'question' => '1+1' ];
+			$captchaStatus = EditEntityStatus::newFatal( 'captcha-edit-fail' );
+			$captchaStatus->statusData = [ 'captcha' => $captchaChallenge ];
 			yield "captcha edit failed ($entityType)" => [
 				$entity,
-				EditEntityStatus::newFatal( 'captcha-edit-fail' ),
-				new EditPrevented( 'captcha-edit-fail' ),
+				$captchaStatus,
+				new CaptchaChallenge( $captchaChallenge ),
+			];
+
+			$captchaStatus = EditEntityStatus::newFatal( 'captcha-edit' );
+			$captchaStatus->statusData = [ 'captcha' => $captchaChallenge ];
+			yield "captcha required via AbuseFilter ($entityType)" => [
+				$entity,
+				$captchaStatus,
+				new CaptchaChallenge( $captchaChallenge ),
 			];
 
 			$status = EditEntityStatus::newFatal( 'failed to save. sad times.' );

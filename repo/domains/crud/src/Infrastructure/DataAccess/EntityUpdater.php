@@ -14,6 +14,7 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Domains\Crud\Domain\Model\EditMetadata;
+use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\CaptchaChallenge;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\EditPrevented;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\RateLimitReached;
 use Wikibase\Repo\Domains\Crud\Domain\Services\Exceptions\ResourceTooLargeException;
@@ -61,6 +62,7 @@ class EntityUpdater {
 	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws CaptchaChallenge
 	 */
 	public function create( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_NEW );
@@ -72,6 +74,7 @@ class EntityUpdater {
 	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws CaptchaChallenge
 	 */
 	public function update( EntityDocument $entity, EditMetadata $editMetadata ): EntityRevision {
 		return $this->createOrUpdate( $entity, $editMetadata, EDIT_UPDATE );
@@ -83,6 +86,7 @@ class EntityUpdater {
 	 * @throws EditPrevented
 	 * @throws RateLimitReached
 	 * @throws TempAccountCreationLimitReached
+	 * @throws CaptchaChallenge
 	 */
 	private function createOrUpdate(
 		EntityDocument $entity,
@@ -115,8 +119,8 @@ class EntityUpdater {
 				throw new TempAccountCreationLimitReached();
 			} elseif ( $status->hasMessage( 'actionthrottledtext' ) ) {
 				throw new RateLimitReached();
-			} elseif ( $status->hasMessage( 'captcha-edit-fail' ) ) {
-				throw new EditPrevented( 'captcha-edit-fail' );
+			} elseif ( isset( $status->statusData['captcha'] ) ) {
+				throw new CaptchaChallenge( $status->statusData['captcha'] );
 			}
 
 			$this->throwIfPreventedEdit( $status );
