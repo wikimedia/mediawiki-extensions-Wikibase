@@ -278,6 +278,7 @@
 	"wikibase-newentity-description": "Beskrivelse:",
 	"wikibase-newentity-submit": "Opret",
 	"wikibase-newentity-hcaptcha-fail": "Bekræft venligst, at du er et menneske",
+	"wikibase-captcha-fail": "Bekræftelse mislykkedes. Prøv igen.",
 	"special-setlabel": "Angiv emne-/egenskabsetiket",
 	"wikibase-search-result-stats": "$1 {{PLURAL:$1|udsagn}}, $2 {{PLURAL:$2|sitelink|sitelinks}}",
 	"wikibase-setlabel-introfull": "Du angiver etiketten på $2 for [[:$1]].",
