@@ -184,7 +184,7 @@ class ItemContent extends EntityContent {
 	 * @inheritDoc
 	 */
 	public function getTextForSearchIndex() {
-		if ( $this->isRedirect() ) {
+		if ( $this->isRedirect() || $this->isEmpty() ) {
 			return '';
 		}
 

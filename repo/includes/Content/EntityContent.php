@@ -135,7 +135,7 @@ abstract class EntityContent extends AbstractContent {
 	 *         search index.
 	 */
 	public function getTextForSearchIndex() {
-		if ( $this->isRedirect() ) {
+		if ( $this->isRedirect() || $this->isEmpty() ) {
 			return '';
 		}
 
@@ -175,6 +175,8 @@ abstract class EntityContent extends AbstractContent {
 	public function getTextForFilters() {
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
+		} elseif ( $this->isEmpty() ) {
+			return '';
 		}
 
 		// @todo this text for filters stuff should be its own class with test coverage!
