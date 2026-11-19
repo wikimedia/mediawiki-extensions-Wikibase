@@ -248,23 +248,20 @@
 		}
 
 		const $message = $( '<span>' ).addClass( 'wikibase-copyrightnotification-container' );
-		const $copyrightMessage = $( '<p>' );
+		const $copyrightMessage = $( '<p>' ).addClass( 'wikibase-copyright-notice' );
 		const $hideMessage = $( '<a>' );
 		const editableTemplatedWidget = $origin.data( 'EditableTemplatedWidget' );
 
 		if ( showCopyright ) {
 			$copyrightMessage.html( copyright.getMessageHtml() ).appendTo( $message );
+			$hideMessage.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
+				.appendTo( $message );
 		}
 
 		if ( showHCaptchaNotice ) {
-			$( '<p>' ).append(
+			$( '<p>' ).addClass( 'wikibase-hcaptcha-notice' ).append(
 				mw.config.get( 'wbHCaptchaPrivacyPolicyHtml' )
 			).appendTo( $message );
-		}
-
-		if ( showCopyright ) {
-			$hideMessage.text( mw.msg( 'wikibase-copyrighttooltip-acknowledge' ) )
-				.appendTo( $message );
 		}
 
 		function persistAcceptance() {
