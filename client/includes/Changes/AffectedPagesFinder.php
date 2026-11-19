@@ -214,7 +214,9 @@ class AffectedPagesFinder {
 			array_merge( $changedAspects, [ EntityUsage::ALL_USAGE ] )
 		);
 
-		$usages = $this->transformAllPageEntityUsages( $usagesFromDb, $entityId, $changedAspects );
+		$filteredUsagesFromDb = $this->filterPagesByParserOutputUsages( $usagesFromDb, $entityId, $changedAspects );
+
+		$usages = $this->transformAllPageEntityUsages( $filteredUsagesFromDb, $entityId, $changedAspects );
 
 		// if title changed, add virtual usages for both old and new title
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
@@ -249,8 +251,6 @@ class AffectedPagesFinder {
 	 * if the parsed page shows entity usages matching the wikibase diff's changed
 	 * aspects.
 	 *
-	 * Disconnected and unused as of 2026-11-18, we need to debug this logic.
-	 *
 	 * @param iterable<PageEntityUsages> $usagesFromDb
 	 * @param EntityId $entityId
 	 * @param array $changedAspects
@@ -266,7 +266,7 @@ class AffectedPagesFinder {
 		);
 
 		return array_filter(
-			(array)$usagesFromDb,
+			iterator_to_array( $usagesFromDb ),
 			fn ( $pageEntityUsages ) => $this->comparePageUsageFromParser(
 				$this->wikiPageFactory->newFromID( $pageEntityUsages->getPageId() ),
 				$euIdentifiers
