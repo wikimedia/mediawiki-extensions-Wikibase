@@ -5,7 +5,8 @@
 			"CiphriusKane",
 			"John Reid",
 			"Kazu89",
-			"MJL"
+			"MJL",
+			"Monospaced"
 		]
 	},
 	"wikibase-client-desc": "Client fer the Wikibase extension",
@@ -23,7 +24,7 @@
 	"wikibase-comment-sitelink-remove": "Leid airtin remuived: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|chynge|chynges}}",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
-	"wikibase-editlinks": "Eedit airtins",
+	"wikibase-editlinks": "Edit airtins",
 	"wikibase-editlinkstitle": "Eedit interleid airtins",
 	"wikibase-addlinkstitle": "Add interleid airtins",
 	"wikibase-linkitem-addlinks": "Eik airtins",
@@ -32,7 +33,7 @@
 	"wikibase-linkitem-failure": "Aen onkent mistak occurred while ettlin tae ait til the gien page.",
 	"wikibase-linkitem-title": "Airt wi page",
 	"wikibase-linkitem-linkpage": "Airt wi page",
-	"wikibase-linkitem-selectlink": "Please select ae steid n ae page that ye want tae airt this page tae.",
+	"wikibase-linkitem-selectlink": "Please select ae steid an ae page that ye want tae airt this page tae.",
 	"wikibase-linkitem-input-site": "Leid:",
 	"wikibase-linkitem-input-page": "Page:",
 	"wikibase-linkitem-confirmitem-text": "The page that ye'v chosen is awreadie associatit wi aen [$1 item oan oor central data reposeeterie]. Please confirm that the {{PLURAL:$2|page|pages}} shawn ablo {{PLURAL:$2|is|ar}} the {{PLURAL:$2|yin|yins}} that ye want tae airt this page tae.",
@@ -43,8 +44,8 @@
 	"limitreport-entityaccesscount": "Nummer o Wikibase entities laidit",
 	"wikibase-property-notfound": "$1 propertie naw foond.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "Skauk",
-	"wikibase-rc-hide-wikidata-show": "Shaw",
+	"wikibase-rc-hide-wikidata-hide": "Hide",
+	"wikibase-rc-hide-wikidata-show": "Show",
 	"wikibase-rc-show-wikidata-pref": "Shaw {{WBREPONAME}} eedits in recent chynges",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} eedit",
