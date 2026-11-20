@@ -41,13 +41,23 @@ class MonolingualHtmlFormatter implements ValueFormatter {
 		$languageCode = $value->getLanguageCode();
 		$languageName = $this->languageNameLookup->getName( $languageCode );
 
-		return Html::element(
+		return Html::rawElement(
 			'span',
 			[
 				'lang' => LanguageCode::bcp47( $languageCode ),
 				'class' => 'wb-monolingualtext-value',
 			],
-			$text
+			// T442275: Same paranoia as in WikibaseValueFormatterBuilders::escapeValueFormatter
+			htmlspecialchars( $text,
+				// No point in escaping quotes in the contents of elements, same as Html::element
+				ENT_NOQUOTES |
+				// Replace invalid multi-byte sequences with replacement character (default)
+				ENT_SUBSTITUTE |
+				// T442275: Additionally, replace single-byte control characters with replacement character
+				ENT_DISALLOWED |
+				// T319219: Handle code as HTML 5 instead of the default HTML 4.01
+				ENT_HTML5
+			)
 		) . wfMessage( 'word-separator' )->escaped() . Html::rawElement(
 		'span',
 			[

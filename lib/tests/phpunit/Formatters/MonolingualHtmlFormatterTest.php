@@ -58,6 +58,10 @@ class MonolingualHtmlFormatterTest extends MediaWikiIntegrationTestCase {
 				'@ onclick="alert|<script|<a @',
 				'not',
 			],
+			'Single-byte control characters' => [
+				new MonolingualTextValue( 'en', "\x00|\x08|\x1A|\x7F" ),
+				'/>\x{FFFD}\|\x{FFFD}\|\x{FFFD}\|\x{FFFD}</u',
+			],
 		];
 	}
 

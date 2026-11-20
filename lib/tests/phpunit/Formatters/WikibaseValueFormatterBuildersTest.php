@@ -279,6 +279,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				new StringValue( 'foo<bar>' ),
 				'@^foo&lt;bar&gt;$@',
 			],
+			'Single-byte control characters in string' => [
+				'String',
+				SnakFormatter::FORMAT_HTML,
+				self::newFormatterOptions(),
+				new StringValue( "\x00|\x08|\x1A|\x7F" ),
+				'/^\x{FFFD}\|\x{FFFD}\|\x{FFFD}\|\x{FFFD}$/u',
+			],
 
 			// UnDeserializableValue
 			'plain bad value' => [
@@ -546,6 +553,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 				self::newFormatterOptions( 'en' ),
 				new MonolingualTextValue( 'de', 'Hallo Welt' ),
 				'/ lang="de".*>Hallo Welt</',
+			],
+			'Single-byte control characters in monolingual' => [
+				'Monolingual',
+				SnakFormatter::FORMAT_HTML,
+				self::newFormatterOptions(),
+				new MonolingualTextValue( 'en', "\x00|\x08|\x1A|\x7F" ),
+				'/>\x{FFFD}\|\x{FFFD}\|\x{FFFD}\|\x{FFFD}</u',
 			],
 		];
 	}
