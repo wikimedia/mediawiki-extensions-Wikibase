@@ -103,12 +103,16 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 		);
 	}
 
-	public function testPrivacyPolicyNoticeRenderedOnce_InInvisibleMode(): void {
+	public function testPrivacyPolicyNoticeRenderedOnceBelowSubmitButton_InInvisibleMode(): void {
 		$this->configureHCaptcha( [ 'create' => true ], [ 'HCaptchaInvisibleMode' => true ] );
 
 		[ $html ] = $this->executeSpecialPage();
 
 		$this->assertSame( 1, substr_count( $html, self::PRIVACY_POLICY_NOTICE ) );
+		$this->assertGreaterThan(
+			strpos( $html, 'mw-htmlform-submit-buttons' ),
+			strpos( $html, self::PRIVACY_POLICY_NOTICE )
+		);
 	}
 
 	public function testPrivacyPolicyNoticeNotRendered_WhenActiveCaptchaIsNotHCaptcha(): void {
@@ -204,6 +208,21 @@ class SpecialNewEntityCaptchaTest extends SpecialPageTestBase {
 
 		$this->assertNull( $response->getHeader( 'location' ) );
 		$this->assertCaptchaFailureShown( $html, 'wikibase-captcha-fail' );
+	}
+
+	public function testSubmitWithForceShowCaptcha_DoesNotShowResubmitError(): void {
+		$this->configureHCaptcha( [ 'create' => [
+			'trigger' => true,
+			'config' => [ 'HCaptchaAlwaysChallengeSiteKey' => 'challenge-key' ],
+		] ] );
+		// As set by AbuseFilter's "showcaptcha".
+		$this->getServiceContainer()->getService( 'ConfirmEditCaptchaFactory' )
+			->getGlobalInstance( 'create' )
+			->setForceShowCaptcha( true );
+		[ $html, $response ] = $this->executeSpecialPage( '', $this->newSubmitRequest() );
+
+		$this->assertNull( $response->getHeader( 'location' ) );
+		$this->assertStringNotContainsString( '(hcaptcha-force-show-captcha-edit)', $html );
 	}
 
 	public static function provideFeatureFlag(): iterable {
