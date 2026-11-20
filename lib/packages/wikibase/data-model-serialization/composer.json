@@ -31,7 +31,7 @@
 		"irc": "irc://irc.libera.chat/wikidata"
 	},
 	"require": {
-		"php": "^7.4|^8.0",
+		"php": ">=8.3.37",
 		"wikibase/data-model": "dev-master",
 		"wikibase/data-model-services": "~5.0",
 		"serialization/serialization": "~4.0|~3.1",
