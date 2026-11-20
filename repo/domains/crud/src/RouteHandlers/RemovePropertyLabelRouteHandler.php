@@ -74,7 +74,7 @@ class RemovePropertyLabelRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			$this->removePropertyLabel->execute(

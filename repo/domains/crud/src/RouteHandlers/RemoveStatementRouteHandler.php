@@ -86,7 +86,7 @@ class RemoveStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 		try {
 			$this->removeStatement->execute(
 				new RemoveStatementRequest(

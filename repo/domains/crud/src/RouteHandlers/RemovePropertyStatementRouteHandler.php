@@ -85,7 +85,7 @@ class RemovePropertyStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			$this->useCase->execute(

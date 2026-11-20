@@ -75,7 +75,7 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			$this->removeItemDescription->execute(

@@ -81,8 +81,7 @@ class SetSitelinkRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $siteId ): Response {
-		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
+		$jsonBody = $this->getValidatedBodyArray();
 
 		try {
 			return $this->newSuccessHttpResponse(

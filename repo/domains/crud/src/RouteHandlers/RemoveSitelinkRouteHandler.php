@@ -70,7 +70,7 @@ class RemoveSitelinkRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $siteId ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			$this->useCase->execute(

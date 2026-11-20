@@ -71,8 +71,7 @@ class SetItemLabelRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $itemId, string $languageCode ): Response {
-		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
+		$jsonBody = $this->getValidatedBodyArray();
 		try {
 			$useCaseResponse = $this->setItemLabel->execute(
 				new SetItemLabelRequest(

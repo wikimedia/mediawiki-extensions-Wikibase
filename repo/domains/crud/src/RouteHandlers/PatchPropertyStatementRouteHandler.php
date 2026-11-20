@@ -91,8 +91,7 @@ class PatchPropertyStatementRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $statementId ): Response {
-		$requestBody = $this->getValidatedBody();
-		'@phan-var array $requestBody'; // guaranteed to be an array per getBodyParamSettings()
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			return $this->newSuccessHttpResponse(

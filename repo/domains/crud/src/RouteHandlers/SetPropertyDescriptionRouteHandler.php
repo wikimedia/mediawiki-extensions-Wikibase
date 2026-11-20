@@ -72,8 +72,7 @@ class SetPropertyDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
-		$jsonBody = $this->getValidatedBody();
-		'@phan-var array $jsonBody'; // guaranteed to be an array per getBodyParamSettings()
+		$jsonBody = $this->getValidatedBodyArray();
 
 		try {
 			return $this->newSuccessHttpResponse(
