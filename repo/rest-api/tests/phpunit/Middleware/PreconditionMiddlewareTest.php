@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
-use MediaWiki\Rest\ResponseFactory;
+use MediaWiki\Tests\Rest\RestTestTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\RestApi\Middleware\PreconditionMiddleware;
 use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck;
@@ -18,6 +18,7 @@ use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheckResult;
  * @license GPL-2.0-or-later
  */
 class PreconditionMiddlewareTest extends TestCase {
+	use RestTestTrait;
 
 	public function testGivenPreconditionCheckReturns412_respondsWith412(): void {
 		$preconditionCheck = $this->createStub( RequestPreconditionCheck::class );
@@ -66,7 +67,7 @@ class PreconditionMiddlewareTest extends TestCase {
 
 	private function newRouteHandler(): Handler {
 		$routeHandler = $this->createStub( Handler::class );
-		$routeHandler->method( 'getResponseFactory' )->willReturn( new ResponseFactory( [] ) );
+		$routeHandler->method( 'getResponseFactory' )->willReturn( $this->newResponseFactory() );
 
 		return $routeHandler;
 	}

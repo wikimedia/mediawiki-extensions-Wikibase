@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Domains\Crud\RouteHandlers\Middleware;
 
 use MediaWiki\Rest\RequestInterface;
 use MediaWiki\Rest\Response;
-use MediaWiki\Rest\ResponseFactory;
 use MediaWiki\Rest\SimpleHandler;
+use MediaWiki\Tests\Rest\RestTestTrait;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
@@ -23,6 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class StatementRedirectMiddlewareTest extends TestCase {
+	use RestTestTrait;
 
 	private const SUBJECT_ID_PATH_PARAM = 'subject_id';
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
@@ -172,7 +173,7 @@ class StatementRedirectMiddlewareTest extends TestCase {
 
 		$routeHandler = $this->createMock( SimpleHandler::class );
 		$routeHandler->method( 'getRequest' )->willReturn( $request );
-		$routeHandler->method( 'getResponseFactory' )->willReturn( new ResponseFactory( [] ) );
+		$routeHandler->method( 'getResponseFactory' )->willReturn( $this->newResponseFactory() );
 
 		return $routeHandler;
 	}
