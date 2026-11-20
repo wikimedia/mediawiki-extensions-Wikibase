@@ -150,6 +150,7 @@ class AddItemAliasesInLanguageRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'string',
 				ParamValidator::PARAM_REQUIRED => false,
 			],
+			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}
 

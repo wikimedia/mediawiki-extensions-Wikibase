@@ -147,6 +147,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => self::COMMENT_PARAM_DEFAULT,
 			],
+			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}
 

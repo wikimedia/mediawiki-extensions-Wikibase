@@ -2,6 +2,8 @@
 
 namespace Wikibase\Repo\Tests\RestApi\Middleware;
 
+use MediaWiki\Context\RequestContext;
+use MediaWiki\Request\FauxRequest;
 use MediaWiki\Rest\Handler;
 use MediaWiki\Rest\Response;
 use MediaWiki\Tests\Rest\RestTestTrait;
@@ -19,6 +21,11 @@ use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 class CaptchaMiddlewareTest extends TestCase {
 
 	use RestTestTrait;
+
+	protected function setUp(): void {
+		parent::setUp();
+		RequestContext::getMain()->setRequest( new FauxRequest() );
+	}
 
 	public function testGivenNoCaptchaChallenge_doesNothing(): void {
 		$expectedResponse = $this->createStub( Response::class );
@@ -46,8 +53,51 @@ class CaptchaMiddlewareTest extends TestCase {
 		$this->assertSame( [ 'captcha' => $captchaChallenge ], $responseBody['context'] );
 	}
 
-	private function newHandler(): Handler {
+	public function testGivenCaptchaSolution_appliesSolutionToRequest(): void {
+		$captchaId = '123';
+		$captchaSolution = 'potato';
+		$expectedResponse = $this->createStub( Response::class );
+
+		$response = ( new CaptchaMiddleware() )->run(
+			$this->newHandler( [ 'captcha' => [ 'id' => $captchaId, 'solution' => $captchaSolution ] ] ),
+			fn() => $expectedResponse,
+		);
+
+		$request = RequestContext::getMain()->getRequest();
+		$this->assertSame( $captchaId, $request->getVal( 'captchaid' ) );
+		$this->assertSame( $captchaSolution, $request->getVal( 'captchaword' ) );
+		$this->assertSame( $expectedResponse, $response );
+	}
+
+	public function testGivenForceShownCaptchaSolution_setsForceShowCaptchaFlag(): void {
+		( new CaptchaMiddleware() )->run(
+			$this->newHandler( [ 'captcha' => [ 'id' => '', 'solution' => 'potato', 'force_shown' => true ] ] ),
+			fn() => $this->createStub( Response::class ),
+		);
+
+		$this->assertNotNull( RequestContext::getMain()->getRequest()->getVal( 'wgConfirmEditForceShowCaptcha' ) );
+	}
+
+	/**
+	 * @dataProvider notForceShownCaptchaProvider
+	 */
+	public function testGivenCaptchaSolutionNotForceShown_doesNotSetForceShowCaptchaFlag( array $captcha ): void {
+		( new CaptchaMiddleware() )->run(
+			$this->newHandler( [ 'captcha' => $captcha ] ),
+			fn() => $this->createStub( Response::class ),
+		);
+
+		$this->assertNull( RequestContext::getMain()->getRequest()->getVal( 'wgConfirmEditForceShowCaptcha' ) );
+	}
+
+	public static function notForceShownCaptchaProvider(): iterable {
+		yield 'force_shown missing' => [ [ 'id' => '123', 'solution' => 'potato' ] ];
+		yield 'force_shown false' => [ [ 'id' => '123', 'solution' => 'potato', 'force_shown' => false ] ];
+	}
+
+	private function newHandler( array $validatedBody = [] ): Handler {
 		$handler = $this->createStub( Handler::class );
+		$handler->method( 'getValidatedBodyArray' )->willReturn( $validatedBody );
 		$handler->method( 'getResponseFactory' )->willReturn( $this->newResponseFactory() );
 
 		return $handler;

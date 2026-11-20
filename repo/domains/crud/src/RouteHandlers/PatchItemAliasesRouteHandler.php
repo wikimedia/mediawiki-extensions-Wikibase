@@ -166,6 +166,7 @@ class PatchItemAliasesRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_REQUIRED => false,
 				ParamValidator::PARAM_DEFAULT => null,
 			],
+			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}
 
