@@ -27,7 +27,7 @@
 	"wikibase-linkitem-alreadylinked": "Laman nang handak Pian tautakan sudah tataut ka [$1 item] di pusat panabunan data nang tahubung ka [[$2]] di situs ini. Item wastu kawa baisi satu laman par situs nang tataut. Silakan pilih laman lain gasan ditautakan.",
 	"wikibase-linkitem-close": "Tukup kutak dialog wan muat imbal laman.",
 	"wikibase-linkitem-failure": "Kasalahan kada dikatahui tajadi wayah mancuba manautakan laman.",
-	"wikibase-linkitem-failed-modify": "Kada kawa manautakan laman: gagal manggabungakan Butir nang barasuk di {{WBREPONAME}}.",
+	"wikibase-linkitem-failed-modify": "Kada kawa manautakan laman: lucung manggabungakan Butir nang barasuk di {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Raitakan lawan laman",
 	"wikibase-linkitem-linkpage": "Raitakan lawan laman",
 	"wikibase-linkitem-selectlink": "Pilih situs wan laman nang handak Pian raitakan lawan laman ngini.",
