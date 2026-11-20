@@ -63,6 +63,8 @@ return call_user_func( function() {
 
 		'wikibase.captcha' => $moduleTemplate + [
 			'packageFiles' => [
+				'wikibase/captcha/lib.js',
+				'wikibase/captcha/postCaptcha.js',
 				'wikibase/captcha/resolveCaptcha.js',
 			],
 		],
@@ -960,8 +962,6 @@ return call_user_func( function() {
 		'wikibase.termbox' => [
 			'packageFiles' => [
 				'termbox.init.js',
-				'../captcha/postCaptcha.js',
-				'../captcha/resolveCaptcha.js',
 				'EntityLoadedHookEntityRepository.js',
 				'RepoApiWritingEntityRepository.js',
 				'mountTermbox.js',

@@ -1,4 +1,4 @@
-const captcha = require( 'wikibase.captcha' );
+const captcha = require( './resolveCaptcha.js' );
 
 /**
  * Submit classic entity edits using the shared CAPTCHA helper.
@@ -59,13 +59,15 @@ function postWithCaptcha( api, tokenType, params ) {
 	return deferred.promise();
 }
 
-/**
- * Wrap an mw.Api so that RepoApi's writes resolve CAPTCHAs with the shared helper.
- *
- * @param {mw.Api} api
- * @return {{get: Function, postWithToken: Function}}
- */
-module.exports = ( api ) => ( {
-	get: ( ...args ) => api.get( ...args ),
-	postWithToken: ( tokenType, params ) => postWithCaptcha( api, tokenType, params )
-} );
+module.exports = {
+	/**
+	 * Wrap an mw.Api so that RepoApi's writes resolve CAPTCHAs with the shared helper.
+	 *
+	 * @param {mw.Api} api
+	 * @return {{get: Function, postWithToken: Function}}
+	 */
+	withCaptcha: ( api ) => ( {
+		get: ( ...args ) => api.get( ...args ),
+		postWithToken: ( tokenType, params ) => postWithCaptcha( api, tokenType, params )
+	} )
+};

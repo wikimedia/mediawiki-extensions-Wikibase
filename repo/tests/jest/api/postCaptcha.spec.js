@@ -1,7 +1,5 @@
 const $ = require( '../../../../lib/resources/packages/wikibase-api/node_modules/jquery/dist/jquery.js' );
-
-const withCaptcha = require( '../../../../view/resources/wikibase/captcha/postCaptcha.js' );
-const captcha = require( '../../../../view/resources/wikibase/captcha/resolveCaptcha.js' );
+const captcha = require( '../../../../view/resources/wikibase/captcha/lib.js' );
 
 describe( 'classic CAPTCHA save handling', () => {
 	let api, widget;
@@ -79,7 +77,7 @@ describe( 'classic CAPTCHA save handling', () => {
 			);
 			api.postWithEditToken.mockReturnValue( success( saved ) );
 
-			const result = await withCaptcha( api ).postWithToken( 'csrf', params );
+			const result = await captcha.withCaptcha( api ).postWithToken( 'csrf', params );
 
 			const originalAndCaptchaParams = Object.assign( {}, params, submission );
 
@@ -104,7 +102,7 @@ describe( 'classic CAPTCHA save handling', () => {
 			);
 
 			const rejection = await new Promise( ( resolve, reject ) => {
-				withCaptcha( api ).postWithToken( 'csrf', params ).then(
+				captcha.withCaptcha( api ).postWithToken( 'csrf', params ).then(
 					() => reject( new Error( 'Expected the save to fail' ) ),
 					( code, details ) => resolve( { code, details } )
 				);
@@ -135,7 +133,7 @@ describe( 'classic CAPTCHA save handling', () => {
 			);
 			api.postWithEditToken.mockReturnValue( success( saved ) );
 
-			const result = await withCaptcha( api ).postWithToken( 'csrf', params );
+			const result = await captcha.withCaptcha( api ).postWithToken( 'csrf', params );
 
 			expect( api.postWithToken ).toHaveBeenCalledWith( 'csrf', params );
 			expect( mw.libs.confirmEdit.CaptchaWidget ).toHaveBeenCalledTimes( 1 );
@@ -154,7 +152,7 @@ describe( 'classic CAPTCHA save handling', () => {
 			api.postWithToken.mockReturnValue( failure( 'editconflict', response ) );
 
 			const rejection = await new Promise( ( resolve, reject ) => {
-				withCaptcha( api ).postWithToken( 'csrf', params ).then(
+				captcha.withCaptcha( api ).postWithToken( 'csrf', params ).then(
 					() => reject( new Error( 'Expected the save to fail' ) ),
 					( code, details ) => resolve( { code, details } )
 				);
