@@ -75,7 +75,7 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getFirstRevision' );
 
 		$actualOutputString = $generatorWrapper->createSchemaElement(
-			$title, $revisionTimestamp, $firstRevisionTimestamp, new ItemId( 'Q42' ), "descr"
+			$title, $revisionTimestamp, $firstRevisionTimestamp, new ItemId( 'Q42' ), null, "descr"
 		);
 		$actualJsonOutput = $this->extractJsonFromScriptTag( $actualOutputString );
 
@@ -106,7 +106,7 @@ class LinkedDataSchemaGeneratorTest extends \PHPUnit\Framework\TestCase {
 		->method( 'getFirstRevision' );
 
 		$actualOutputString = $generatorWrapper->createSchemaElement(
-			$title, $revisionTimestamp, $firstRevisionTimestamp, new ItemId( 'Q42' ), "descr"
+			$title, $revisionTimestamp, $firstRevisionTimestamp, new ItemId( 'Q42' ), null, "descr"
 		);
 		$actualJsonOutput = $this->extractJsonFromScriptTag( $actualOutputString );
 
