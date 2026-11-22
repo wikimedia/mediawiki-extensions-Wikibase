@@ -74,6 +74,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 	 * @param string|null $revisionTimestamp
 	 * @param string|null $firstRevisionTimestamp
 	 * @param EntityId $entityId
+	 * @param File|null $imageFile
 	 * @param string|null $description
 	 *
 	 * @return string
@@ -83,6 +84,7 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		?string $revisionTimestamp,
 		?string $firstRevisionTimestamp,
 		EntityId $entityId,
+		?File $imageFile,
 		?string $description
 	): string {
 		if ( !$firstRevisionTimestamp ) {
@@ -92,7 +94,6 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		}
 
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
-		$imageFile = $this->queryPageImage( $title );
 		$schema = $this->createSchema(
 			$title, $revisionTimestamp, $firstRevisionTimestamp, $entityConceptUri, $imageFile, $description
 		);
@@ -149,21 +150,6 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 	}
 
 	/**
-	 * If available, query the canonical page image injected into the og:image meta tag. It's
-	 * important that the schema image match the page meta image since the schema describes the page.
-	 * @param Title $title
-	 *
-	 * @return File|null
-	 */
-	private function queryPageImage( Title $title ) {
-		if ( !$this->pageImages ) {
-			return null;
-		}
-
-		return $this->pageImages->getImage( $title );
-	}
-
-	/**
 	 * Injects a Wikidata inline JSON-LD script schema for search engine optimization.
 	 *
 	 * @param Skin $skin
@@ -187,11 +173,20 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 		$revisionTimestamp = $outputPage->getMetadata()->getRevisionTimestamp();
 		$firstRevisionTimestamp = $outputPage->getProperty( 'first_revision_timestamp' );
 		$description = $outputPage->getProperty( 'wikibase_item_description' );
+
+		// If PageImages is installed, specify the image used by the og:image meta tag for this page.
+		// It's important that the schema sets the same image, because the schema describes the page.
+		$imageFile = ( $this->pageImages
+			? $this->pageImages->getImage( $title )
+			: null
+		);
+
 		$html .= $this->createSchemaElement(
 			$title,
 			$revisionTimestamp,
 			$firstRevisionTimestamp,
 			$entityId,
+			$imageFile,
 			$description
 		);
 
