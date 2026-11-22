@@ -20,6 +20,7 @@ use Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
+use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityView;
 use Wikibase\View\ViewContent;
 use Wikibase\View\ViewPlaceHolderEmitter;
@@ -219,6 +220,19 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 
 		$parserOutput = $this->newEntityParserOutputGenerator()->getParserOutput( $entityRevision, false );
 		$this->assertSame( 'de', $parserOutput->getLanguage()->toBcp47Code() );
+	}
+
+	public function testGivenNonEntityView_doesNotAddEntityViewInitModule(): void {
+		$this->entityViewFactory = $this->createMock( DispatchingEntityViewFactory::class );
+		$this->entityViewFactory->expects( $this->once() )
+			->method( 'newEntityView' )
+			->willReturn( $this->createMock( EntityDocumentView::class ) );
+
+		$entityRevision = new EntityRevision( $this->newItem(), 4711 );
+
+		$parserOutput = $this->newEntityParserOutputGenerator()->getParserOutput( $entityRevision, false );
+		$this->assertNotContains( 'wikibase.ui.entityViewInit', $parserOutput->getModules() );
+		$this->assertContains( 'wikibase.entityPage.entityLoaded', $parserOutput->getModules() );
 	}
 
 	public static function provideTestMobileEditingUI(): iterable {

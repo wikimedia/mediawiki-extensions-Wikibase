@@ -410,13 +410,19 @@
 	}
 
 	mw.hook( 'wikipage.content' ).add( () => {
+		var $entityview = $( '.wikibase-entityview' );
+		// This module should only be loaded for pages with an entity view (T321532)
+		if ( !$entityview.length ) {
+			mw.log.warn( 'wikibase.ui.entityViewInit: No .wikibase-entityview to initialize' );
+			return;
+		}
+
 		// This is copied from startup.js in MediaWiki core.
 		var mwPerformance = window.performance && performance.mark ? performance : {
 			mark: function () {}
 		};
 		mwPerformance.mark( 'wbInitStart' );
 
-		var $entityview = $( '.wikibase-entityview' );
 		var canEdit = isEditable();
 
 		wb.EntityInitializer.newFromEntityLoadedHook().getEntity().then( ( entity ) => {

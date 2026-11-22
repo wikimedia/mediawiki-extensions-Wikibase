@@ -22,8 +22,8 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
-use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
+use Wikibase\View\EntityView;
 use Wikibase\View\ViewContent;
 
 /**
@@ -102,19 +102,23 @@ class EntityParserOutputGeneratorTestBase extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * @return EntityDocumentView
+	 * @return EntityView
 	 */
 	protected function getEntityView() {
-		$entityView = $this->getMockBuilder( EntityDocumentView::class )
+		$entityView = $this->getMockBuilder( EntityView::class )
 			->onlyMethods( [
 				'getTitleHtml',
 				'getContent',
+				'getParserOutputOptions',
 			] )
 			->disableOriginalConstructor()
 			->getMockForAbstractClass();
 
 		$entityView->method( 'getTitleHtml' )
 			->willReturn( 'EntityParserOutputGeneratorTestBase-TITLE' );
+
+		$entityView->method( 'getParserOutputOptions' )
+			->willReturn( [] );
 
 		$viewContent = new ViewContent(
 			'EntityParserOutputGeneratorTestBase-HTML',
