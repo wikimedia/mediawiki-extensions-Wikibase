@@ -6,9 +6,7 @@ namespace Wikibase\Client\DataBridge;
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\ResourceLoader\FileModule;
 use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
-use MediaWiki\ResourceLoader\Module;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Modules\MediaWikiConfigModule;
@@ -29,24 +27,6 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 
 		$rl->register( [
 			'wikibase.client.data-bridge.init' => [
-				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::initModule',
-			],
-			'wikibase.client.data-bridge.externalModifiers' => [
-				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::externalModifiersModule',
-			],
-			'mw.config.values.wbDataBridgeConfig' => [
-				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::configModule',
-			],
-			'wikibase.client.data-bridge.app' => [
-				'factory' => '\Wikibase\Client\DataBridge\DataBridgeResourceLoaderModules::appModule',
-			],
-		] );
-	}
-
-	public static function initModule(): Module {
-		$clientSettings = WikibaseClient::getSettings();
-		return new FileModule(
-			[
 				'scripts' => [
 					'data-bridge.chunk-vendors.js',
 					'data-bridge.init.js',
@@ -55,50 +35,35 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 					'oojs-ui-windows',
 					'mw.config.values.wbDataBridgeConfig',
 				],
+				'localBasePath' => __DIR__ . '/../../data-bridge/dist',
 				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 			],
-			__DIR__ . '/../../data-bridge/dist'
-		);
-	}
-
-	public static function externalModifiersModule(): Module {
-		$clientSettings = WikibaseClient::getSettings();
-		return new FileModule(
-			[
+			'wikibase.client.data-bridge.externalModifiers' => [
 				'styles' => [
 					'edit-links.css',
 					'box-layout.css',
 				],
+				'localBasePath' => __DIR__ . '/../../data-bridge/modules/externalModifiers',
 				'remoteExtPath' => 'Wikibase/client/data-bridge/modules/externalModifiers',
 			],
-			__DIR__ . '/../../data-bridge/modules/externalModifiers'
-		);
-	}
-
-	public static function configModule(): Module {
-		$clientSettings = WikibaseClient::getSettings();
-		return new MediaWikiConfigModule(
-			[
-				'getconfigvalueprovider' => function () use ( $clientSettings ) {
+			'mw.config.values.wbDataBridgeConfig' => [
+				'class' => MediaWikiConfigModule::class,
+				'getconfigvalueprovider' => function () {
+					$clientSettings = WikibaseClient::getSettings();
 					return new DataBridgeConfigValueProvider(
 						$clientSettings,
 						MediaWikiServices::getInstance()->getMainConfig()->get( MainConfigNames::EditSubmitButtonLabelPublish )
 					);
 				},
-			]
-		);
-	}
-
-	public static function appModule(): Module {
-		$clientSettings = WikibaseClient::getSettings();
-		return new FileModule(
-			[
+			],
+			'wikibase.client.data-bridge.app' => [
 				'scripts' => [
 					'data-bridge.app.js',
 				],
 				'styles' => [
 					'css/data-bridge.app.css',
 				],
+				'localBasePath' => __DIR__ . '/../../data-bridge/dist',
 				'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 				'dependencies' => [
 					'vue',
@@ -178,7 +143,6 @@ class DataBridgeResourceLoaderModules implements ResourceLoaderRegisterModulesHo
 					'emailuser',
 				],
 			],
-			__DIR__ . '/../../data-bridge/dist'
-		);
+		] );
 	}
 }
