@@ -425,6 +425,14 @@ class RecentChangeFactory {
 	}
 
 	/**
+	 * @param RecentChange $rc
+	 * @return bool
+	 */
+	public static function isWikibaseOtherSitelinkChange( RecentChange $rc ) {
+		return $rc->getAttribute( 'rc_source' ) === self::SRC_WIKIBASE_OTHER_SITELINKS;
+	}
+
+	/**
 	 * @param string $key
 	 * @param MessageParam|MessageSpecifier|string|int|float|list<MessageParam|MessageSpecifier|string|int|float> ...$params
 	 *

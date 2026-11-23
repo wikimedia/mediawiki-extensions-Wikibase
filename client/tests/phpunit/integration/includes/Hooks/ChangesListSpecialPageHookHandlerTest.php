@@ -78,7 +78,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$context = new RequestContext();
@@ -129,7 +130,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		);
 
 		$handler->onChangesListSpecialPageQuery(
@@ -157,6 +159,7 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 					true,
 					false,
 					$this->getUserOptionsLookup(),
+					true,
 				]
 			)
 			->onlyMethods( [
@@ -205,7 +208,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$this->assertSame(
@@ -239,7 +243,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$db,
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		);
 
 		$db->expects( $this->once() )
@@ -270,7 +275,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$this->assertSame(
@@ -336,7 +342,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$this->assertSame(
@@ -407,7 +414,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			true,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$this->assertSame(
@@ -465,7 +473,8 @@ class ChangesListSpecialPageHookHandlerTest extends MediaWikiIntegrationTestCase
 			$this->getDatabase(),
 			false,
 			false,
-			MediaWikiServices::getInstance()->getUserOptionsLookup()
+			MediaWikiServices::getInstance()->getUserOptionsLookup(),
+			true
 		) );
 
 		$this->assertSame(
