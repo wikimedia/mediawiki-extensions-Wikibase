@@ -176,10 +176,9 @@ class LinkedDataSchemaGenerator implements OutputPageParserOutputHook, SkinAfter
 
 		// If PageImages is installed, specify the image used by the og:image meta tag for this page.
 		// It's important that the schema sets the same image, because the schema describes the page.
-		$imageFile = ( $this->pageImages
-			? $this->pageImages->getImage( $title )
-			: null
-		);
+		//
+		// Optimization: Avoid DB query by reading page prop from OutputPage (T441896, T347123).
+		$imageFile = $this->pageImages?->getImageForPageview( $outputPage );
 
 		$html .= $this->createSchemaElement(
 			$title,
