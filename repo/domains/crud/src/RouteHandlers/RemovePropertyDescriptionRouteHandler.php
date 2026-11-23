@@ -74,7 +74,7 @@ class RemovePropertyDescriptionRouteHandler extends SimpleHandler {
 	}
 
 	public function runUseCase( string $propertyId, string $languageCode ): Response {
-		$requestBody = $this->getValidatedBody();
+		$requestBody = $this->getValidatedBodyArray();
 
 		try {
 			$this->removePropertyDescription->execute(
