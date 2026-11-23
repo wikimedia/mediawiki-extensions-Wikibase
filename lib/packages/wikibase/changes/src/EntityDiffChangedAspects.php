@@ -242,4 +242,22 @@ class EntityDiffChangedAspects implements Serializable {
 		];
 	}
 
+	public function hasOnlySiteLinkChanges(): bool {
+		$changes = $this->toArray();
+
+		if ( $changes['siteLinkChanges'] === [] ) {
+			return false;
+		}
+
+		unset( $changes['siteLinkChanges'], $changes['arrayFormatVersion'] );
+
+		foreach ( $changes as $change ) {
+			if ( $change !== false && $change !== [] ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

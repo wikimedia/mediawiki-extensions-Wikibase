@@ -129,7 +129,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function getStatementChanges() {
- //combines to get all changes whether qual/ref or not
+ // combines to get all changes whether qual/ref or not
 		$this->assertSame(
 			[ 'c', '3', 'q', '4' ],
 			$this->getEntityDiffChangedAspects()->getStatementChanges()
@@ -246,6 +246,22 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 
 		$this->expectException( Exception::class );
 		unserialize( $entityDiffChangedAspectsSerialization );
+	}
+
+	public function testHasOnlySiteLinkChanges_mixedChanges() {
+		$changes = new EntityDiffChangedAspects(
+			[ 'a', '1' ], [ 'b', '2' ], [], [], [], [ 'd' => [ null, null, true ] ], false
+		);
+		$isSiteLinkChange = $changes->hasOnlySiteLinkChanges();
+		$this->assertFalse( $isSiteLinkChange );
+	}
+
+	public function testHasOnlySiteLinkChanges_onlySiteLinkChanges() {
+		$changes = new EntityDiffChangedAspects(
+			[], [], [], [], [], [ 'd' => [ null, null, true ] ], false
+		);
+		$isSiteLinkChange = $changes->hasOnlySiteLinkChanges();
+		$this->assertTrue( $isSiteLinkChange );
 	}
 
 }
