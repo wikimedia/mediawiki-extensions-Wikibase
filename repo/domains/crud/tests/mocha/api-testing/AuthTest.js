@@ -138,17 +138,38 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 		} );
 
-		describe( 'Captcha edit failed', () => {
+		describe( 'Captcha', () => {
+			const captchaSolution = 'potato';
+			const withCaptchaConfig = ( requestBuilder ) => requestBuilder
+				.withConfigOverride( 'wgCaptchaClass', 'QuestyCaptcha' )
+				.withConfigOverride( 'wgCaptchaQuestions', { [ `Solution: "${ captchaSolution }"` ]: captchaSolution } )
+				// the default session store would require sending the same session cookie in both requests
+				.withConfigOverride(
+					'wgCaptchaStorageClass',
+					'MediaWiki\\Extension\\ConfirmEdit\\Store\\CaptchaCacheStore'
+				)
+				.withConfigOverride( 'wgCaptchaTriggers', { edit: true } )
+				// avoid captcha failure rate limiting
+				.withConfigOverride( 'wgRateLimits', { badcaptcha: { ip: [ 10000, 60 ] } } );
+
 			before( async function () {
 				await requireExtensions( [ 'ConfirmEdit' ] ).call( this );
 			} );
 
 			describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
-				it( 'responds with a captcha challenge', async () => {
-					const response = await newRequestBuilder()
-						.withConfigOverride( 'wgCaptchaClass', 'SimpleCaptcha' )
-						.withConfigOverride( 'wgCaptchaTriggers', { edit: true } )
+				it( 'accepts a valid captcha solution', async () => {
+					const challenge = ( await withCaptchaConfig( newRequestBuilder() ).makeRequest() )
+						.body.context.captcha;
+
+					const response = await withCaptchaConfig( newRequestBuilder() )
+						.withJsonBodyParam( 'captcha', { id: challenge.id, solution: captchaSolution } )
 						.makeRequest();
+
+					expect( response.status ).to.be.within( 200, 299 );
+				} );
+
+				it( 'responds with a captcha challenge', async () => {
+					const response = await withCaptchaConfig( newRequestBuilder() ).makeRequest();
 
 					expect( response ).to.have.status( 403 );
 					assert.header( response, 'Content-Language', 'en' );
