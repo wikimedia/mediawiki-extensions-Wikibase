@@ -18,6 +18,7 @@ use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponse
 use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\Domains\Statements\Application\Serialization\StatementSerializer;
 use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -62,6 +63,7 @@ class AddPropertyStatementRouteHandler extends SimpleHandler {
 			$responseFactory,
 			new MiddlewareHandler( [
 				WbCrud::getUnexpectedErrorHandlerMiddleware(),
+				new CaptchaMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(

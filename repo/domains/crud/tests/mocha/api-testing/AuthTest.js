@@ -144,16 +144,22 @@ describeWithTestData( 'Auth', ( itemRequestInputs, propertyRequestInputs, descri
 			} );
 
 			describeEachRouteWithReset( editAndCreateRoutes, ( newRequestBuilder ) => {
-				it( 'captcha prevented create/edit', async () => {
-					assertValidError(
-						await newRequestBuilder()
-							.withConfigOverride( 'wgCaptchaClass', 'SimpleCaptcha' )
-							.withConfigOverride( 'wgCaptchaTriggers', { edit: true } )
-							.makeRequest(),
-						403,
-						'permission-denied',
-						{ denial_reason: 'captcha-edit-fail' }
+				it( 'responds with a captcha challenge', async () => {
+					const response = await newRequestBuilder()
+						.withConfigOverride( 'wgCaptchaClass', 'SimpleCaptcha' )
+						.withConfigOverride( 'wgCaptchaTriggers', { edit: true } )
+						.makeRequest();
+
+					expect( response ).to.have.status( 403 );
+					assert.header( response, 'Content-Language', 'en' );
+					assert.strictEqual( response.body.code, 'captcha-required' );
+					assert.strictEqual(
+						response.body.message,
+						'A valid CAPTCHA solution is required to perform this edit'
 					);
+
+					const challenge = response.body.context.captcha;
+					assert.hasAllKeys( challenge, [ 'type', 'mime', 'id', 'question' ] );
 				} );
 			} );
 		} );

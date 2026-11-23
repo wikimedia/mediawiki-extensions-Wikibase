@@ -18,6 +18,7 @@ use Wikibase\Repo\Domains\Crud\Application\UseCases\UseCaseError;
 use Wikibase\Repo\Domains\Crud\RouteHandlers\Middleware\TempUserCreationResponseHeaderMiddleware;
 use Wikibase\Repo\Domains\Crud\WbCrud;
 use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
+use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
 use Wikimedia\ParamValidator\ParamValidator;
@@ -58,6 +59,7 @@ class RemoveItemDescriptionRouteHandler extends SimpleHandler {
 		return new self(
 			new MiddlewareHandler( [
 				WbCrud::getUnexpectedErrorHandlerMiddleware(),
+				new CaptchaMiddleware(),
 				new UserAgentCheckMiddleware(),
 				new AuthenticationMiddleware( MediaWikiServices::getInstance()->getUserIdentityUtils() ),
 				WbCrud::getPreconditionMiddlewareFactory()->newPreconditionMiddleware(
