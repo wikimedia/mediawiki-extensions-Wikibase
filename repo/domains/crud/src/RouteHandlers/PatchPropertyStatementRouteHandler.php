@@ -22,6 +22,7 @@ use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\EditMetadataRequestParams;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use Wikimedia\Timestamp\TimestampFormat as TS;
@@ -32,13 +33,11 @@ use Wikimedia\Timestamp\TimestampFormat as TS;
 class PatchPropertyStatementRouteHandler extends SimpleHandler {
 
 	use AssertValidTopLevelFields;
+	use EditMetadataRequestParams;
 
 	private const PROPERTY_ID_PATH_PARAM = 'property_id';
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	private const PATCH_BODY_PARAM = 'patch';
-	private const TAGS_BODY_PARAM = 'tags';
-	private const BOT_BODY_PARAM = 'bot';
-	private const COMMENT_BODY_PARAM = 'comment';
 
 	private PatchPropertyStatement $useCase;
 	private MiddlewareHandler $middlewareHandler;
@@ -145,24 +144,7 @@ class PatchPropertyStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-			self::TAGS_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => [],
-			],
-			self::BOT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => false,
-			],
-			self::COMMENT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => null,
-			],
+			...self::getEditMetadataBodyParamSettings(),
 			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}
