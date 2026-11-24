@@ -4,7 +4,8 @@
 			"Amara-Amaziɣ",
 			"Aslmad mohamed belarhzali",
 			"Brahim-essaidi",
-			"YesIn"
+			"YesIn",
+			"Daoudsfouli"
 		]
 	},
 	"wikibase-edit": "ⵙⵏⴼⵍ",
@@ -16,5 +17,6 @@
 	"wikibase-sitelinks-special": "ⵉⵙⵉⵜⵏ ⵢⴰⴹⵏ",
 	"wikibase-statementview-rank-normal": "ⴰⵏⵎⴰⵍⴰ ⴰⵎⴰⴳⵏⵓ",
 	"wikibase-newentity-language": "ⵜⵓⵜⵍⴰⵢⵜ:",
+	"wikibase-setlabeldescriptionaliases-continue": "ⵣⴷⵉ",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "ⴰⵔⵎ ⴷⴰⵖ"
 }
