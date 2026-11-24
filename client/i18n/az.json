@@ -188,5 +188,7 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Daxil olmadan dərc et",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Daxil olmadan yadda saxla",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Daxil ol (Yeni vərəqədə açılır)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Redaktəni davam etdir"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Redaktəni davam etdir",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-label": "Digər vikilərdən dil bağlantısı dəyişiklikləri",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-description": "Bir səhifənin başqa dil vikisi ilə əlaqəsini əlavə edən, çıxaran və ya dəyişdirən redaktələr"
 }

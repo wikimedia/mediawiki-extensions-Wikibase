@@ -180,5 +180,8 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Daabac adigoon soo gelin",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Kaydi adigoon soo gelin",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Soo gal (waxay ku furmaysaa tab cusub)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Sii wad wax ka beddelka"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Sii wad wax ka beddelka",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-label": "Isbeddellada xiriiriyeyaasha luqadaha ee ka yimaada wiki-yo kale",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-description": "Wax ka beddellada ku dara, ka saara ama beddela xiriirka bogga uu la leeyahay wiki luuqad kale.",
+	"wikibase-rc-hide-wikibase-othersitelinks": "Isbeddellada $1 {{WBREPONAME}} ee xiriiriyeyaasha bogagga kale"
 }
