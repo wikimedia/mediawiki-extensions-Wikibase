@@ -62,7 +62,10 @@ class DispatchChangeVisibilityNotificationJob extends DispatchChangeModification
 		/** @var RepoRevisionIdentifier[][] $revisionsByNewBits */
 		$revisionsByNewBits = [];
 		foreach ( $this->getEligibleRevisionIdentifiersById( $entityId, $this->revisionIds ) as $id => $revision ) {
-			$revisionsByNewBits[$this->visibilityChangeMap[$id]['newBits']][] = $revision;
+			$newBits = $this->visibilityChangeMap[$id]['newBits'] ?? null;
+			if ( $newBits !== null ) {
+				$revisionsByNewBits[$newBits][] = $revision;
+			}
 		}
 
 		$jobSpecifications = [];
