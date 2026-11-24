@@ -12,7 +12,27 @@ const MediawikiEdit = {
 			"type": "boolean",
 			"default": false
 		},
-		"comment": { "type": "string" }
+		"comment": { "type": "string" },
+		"captcha": {
+			"description": "Solution to a CAPTCHA challenge, as received in a `captcha-required` error response",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The ID of the CAPTCHA challenge, if it has one",
+					"type": "string"
+				},
+				"solution": {
+					"description": "The solution to the CAPTCHA challenge",
+					"type": "string"
+				},
+				"force_shown": {
+					"description": "Whether the CAPTCHA was force-shown to the user",
+					"type": "boolean",
+					"default": false
+				}
+			},
+			"required": [ "solution" ]
+		}
 	}
 };
 
