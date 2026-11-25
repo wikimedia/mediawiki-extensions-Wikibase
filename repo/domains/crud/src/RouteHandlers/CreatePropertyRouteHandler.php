@@ -25,6 +25,7 @@ use Wikibase\Repo\RestApi\Middleware\AuthenticationMiddleware;
 use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\EditMetadataRequestParams;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use Wikimedia\Timestamp\TimestampFormat as TS;
@@ -35,11 +36,9 @@ use Wikimedia\Timestamp\TimestampFormat as TS;
 class CreatePropertyRouteHandler extends SimpleHandler {
 
 	use AssertValidTopLevelFields;
+	use EditMetadataRequestParams;
 
 	private const PROPERTY_BODY_PARAM = 'property';
-	private const TAGS_BODY_PARAM = 'tags';
-	private const BOT_BODY_PARAM = 'bot';
-	private const COMMENT_BODY_PARAM = 'comment';
 
 	private CreateProperty $useCase;
 	private PropertyPartsSerializer $propertySerializer;
@@ -92,9 +91,9 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 				$this->useCase->execute(
 					new CreatePropertyRequest(
 						$jsonBody[self::PROPERTY_BODY_PARAM],
-						$jsonBody[self::TAGS_BODY_PARAM] ?? [],
-						$jsonBody[self::BOT_BODY_PARAM] ?? false,
-						$jsonBody[self::COMMENT_BODY_PARAM] ?? null,
+						$jsonBody[self::TAGS_BODY_PARAM],
+						$jsonBody[self::BOT_BODY_PARAM],
+						$jsonBody[self::COMMENT_BODY_PARAM],
 						$this->getUsername()
 					)
 				)
@@ -119,23 +118,7 @@ class CreatePropertyRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-			self::TAGS_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => [],
-			],
-			self::BOT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => false,
-			],
-			self::COMMENT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
+			...self::getEditMetadataBodyParamSettings(),
 			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}

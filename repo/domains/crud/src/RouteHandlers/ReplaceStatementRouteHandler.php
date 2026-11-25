@@ -24,6 +24,7 @@ use Wikibase\Repo\RestApi\Middleware\CaptchaMiddleware;
 use Wikibase\Repo\RestApi\Middleware\MiddlewareHandler;
 use Wikibase\Repo\RestApi\Middleware\RequestPreconditionCheck;
 use Wikibase\Repo\RestApi\Middleware\UserAgentCheckMiddleware;
+use Wikibase\Repo\RestApi\RouteHandlers\EditMetadataRequestParams;
 use Wikimedia\ParamValidator\ParamValidator;
 use Wikimedia\Timestamp\ConvertibleTimestamp;
 use Wikimedia\Timestamp\TimestampFormat as TS;
@@ -33,12 +34,10 @@ use Wikimedia\Timestamp\TimestampFormat as TS;
  */
 class ReplaceStatementRouteHandler extends SimpleHandler {
 	use AssertValidTopLevelFields;
+	use EditMetadataRequestParams;
 
 	private const STATEMENT_ID_PATH_PARAM = 'statement_id';
 	private const STATEMENT_BODY_PARAM = 'statement';
-	private const TAGS_BODY_PARAM = 'tags';
-	private const BOT_BODY_PARAM = 'bot';
-	private const COMMENT_BODY_PARAM = 'comment';
 
 	private ReplaceStatement $useCase;
 	private StatementSerializer $statementSerializer;
@@ -135,23 +134,7 @@ class ReplaceStatementRouteHandler extends SimpleHandler {
 				ParamValidator::PARAM_TYPE => /* object */ 'array',
 				ParamValidator::PARAM_REQUIRED => true,
 			],
-			self::TAGS_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'array',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => [],
-			],
-			self::BOT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'boolean',
-				ParamValidator::PARAM_REQUIRED => false,
-				ParamValidator::PARAM_DEFAULT => false,
-			],
-			self::COMMENT_BODY_PARAM => [
-				self::PARAM_SOURCE => 'body',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
+			...self::getEditMetadataBodyParamSettings(),
 			...CaptchaMiddleware::getBodyParamSettings(),
 		];
 	}
