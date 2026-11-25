@@ -25,7 +25,8 @@
 			"Ата",
 			"Капитан Джон Шепард",
 			"Максим Підліснюк",
-			"Пан Хаунд"
+			"Пан Хаунд",
+			"Repakr"
 		]
 	},
 	"wikibase-desc": "Сховище структурованих даних",
@@ -44,12 +45,14 @@
 	"wikibase-publish": "опублікувати",
 	"wikibase-cancel": "скасувати",
 	"wikibase-add": "додати",
+	"wikibase-addstatement": "додати твердження",
 	"wikibase-addqualifier": "додати уточнення",
 	"wikibase-addreference": "додати посилання на джерело",
 	"wikibase-save-inprogress": "Збереження…",
 	"wikibase-publish-inprogress": "Публікація…",
 	"wikibase-remove-inprogress": "Вилучення…",
 	"wikibase-statementlistview-add": "додати значення",
+	"wikibase-addvalue": "Додати значення",
 	"wikibase-statementlistview-add-tooltip": "Додати нове значення",
 	"wikibase-statementgrouplistview-add": "додати твердження",
 	"wikibase-statementgrouplistview-add-tooltip": "Додати нове твердження",

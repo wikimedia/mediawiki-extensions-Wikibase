@@ -16,7 +16,7 @@
 	},
 	"wikibase-client-desc": "Pelanggan sambungan Wikibase",
 	"tooltip-t-wikibase": "Pautan ke item repositori data yang bersambung",
-	"wikibase-after-page-move": "Pindahan anda sepatutnya [$1 sudah terkemaskini dalam perkara pautan bahasa {{WBREPONAME}}]. Kami meminta anda menyemak jika perkara ini sudah dilakukan.",
+	"wikibase-after-page-move": "Pemindahan anda sepatutnya [$1 sudah terkemas kini dalam butir pautan bahasa {{WBREPONAME}}]. Kami meminta anda menyemak jika perkara ini sudah berlaku.",
 	"wikibase-comment-remove": "Butir {{WBREPONAME}} berkenaan dihapuskan. Pautan-pautan bahasa turut disingkirkan.",
 	"wikibase-comment-linked": "Satu butir {{WBREPONAME}} telah dipautkan ke laman ini.",
 	"wikibase-comment-unlink": "Laman ini telah dinyahpautkan dari butir Wikidata. Pautan bahasa telah dibuang.",
