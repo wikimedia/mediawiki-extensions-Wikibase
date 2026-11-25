@@ -27,9 +27,9 @@ use Wikibase\DataModel\Snak\Snak;
 class ReferenceList implements Countable, IteratorAggregate, Serializable {
 
 	/**
-	 * @var Reference[] Ordered list or references, indexed by SPL object hash.
+	 * @var array<int,Reference> Ordered list of references, indexed by SPL object id
 	 */
-	private $references = [];
+	private array $references = [];
 
 	/**
 	 * @param Reference[]|Traversable $references
@@ -70,15 +70,15 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 			return;
 		}
 
-		$splHash = spl_object_hash( $reference );
+		$splId = spl_object_id( $reference );
 
-		if ( array_key_exists( $splHash, $this->references ) ) {
+		if ( array_key_exists( $splId, $this->references ) ) {
 			return;
 		}
 
 		if ( $index === null || $index >= count( $this->references ) ) {
 			// Append object to the end of the reference list.
-			$this->references[$splHash] = $reference;
+			$this->references[$splId] = $reference;
 		} else {
 			$this->insertReferenceAtIndex( $reference, $index );
 		}
@@ -110,13 +110,11 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 			throw new InvalidArgumentException( '$index must be an integer' );
 		}
 
-		$splHash = spl_object_hash( $reference );
+		$splId = spl_object_id( $reference );
 
-		$this->references = array_merge(
-			array_slice( $this->references, 0, $index ),
-			[ $splHash => $reference ],
-			array_slice( $this->references, $index )
-		);
+		$this->references = array_slice( $this->references, 0, $index, true )
+			+ [ $splId => $reference ]
+			+ array_slice( $this->references, $index, null, true );
 	}
 
 	/**
@@ -194,9 +192,9 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 			return;
 		}
 
-		foreach ( $this->references as $splObjectHash => $ref ) {
+		foreach ( $this->references as $splId => $ref ) {
 			if ( $ref === $reference ) {
-				unset( $this->references[$splObjectHash] );
+				unset( $this->references[$splId] );
 			}
 		}
 	}
@@ -249,7 +247,7 @@ class ReferenceList implements Countable, IteratorAggregate, Serializable {
 	 * @param array $data
 	 */
 	public function __unserialize( array $data ): void {
-		$this->references = $data['references'];
+		$this->__construct( $data['references'] );
 	}
 
 	/**
