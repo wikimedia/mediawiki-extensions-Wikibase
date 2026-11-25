@@ -182,5 +182,8 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicar sen iniciar sesión",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Gardar sen iniciar sesión",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Iniciar sesión (abre un nova lapela)",
-	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Seguir editando"
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Seguir editando",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-label": "Cambios nas ligazóns de lingua doutros wikis",
+	"wikibase-rcfilters-hide-wikibase-othersitelinks-description": "Edicións que engaden, eliminan ou cambian a conexión dunha páxina co wiki noutra lingua",
+	"wikibase-rc-hide-wikibase-othersitelinks": "$1 os cambios de {{WBREPONAME}} noutras ligazóns de sitio"
 }
