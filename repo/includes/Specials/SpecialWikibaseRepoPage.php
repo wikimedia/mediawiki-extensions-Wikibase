@@ -117,8 +117,10 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	}
 
 	// ConfirmEdit only adds the privacy notice in invisible mode, so we force it.
-	protected function getCaptchaPrivacyNoticeHtml( ?SimpleCaptcha $captcha ): string {
-		if ( !$captcha instanceof HCaptcha || $this->getConfig()->get( 'HCaptchaInvisibleMode' ) ) {
+	protected function getCaptchaPrivacyNoticeHtml( ?SimpleCaptcha $captcha, bool $isInvisible = false ): string {
+		if ( !$captcha instanceof HCaptcha
+			|| ( !$isInvisible && $this->getConfig()->get( 'HCaptchaInvisibleMode' ) )
+		) {
 			return '';
 		}
 		return Html::rawElement( 'div', [ 'class' => 'h-captcha-privacy-policy' ],

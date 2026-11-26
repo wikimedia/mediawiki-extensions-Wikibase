@@ -136,7 +136,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 		$this->displayBeforeForm( $out );
 
 		if ( $submitStatus && !$submitStatus->isOK() ) {
-			$errors = $submitStatus->getMessages( 'error' );
+			$errors = $this->captcha?->getError() === 'forceshowcaptcha' ? [] : $submitStatus->getMessages( 'error' );
 			$out->addModuleStyles( [ 'mediawiki.codex.messagebox.styles', 'wikibase.special.newEntity.styles' ] );
 			foreach ( $errors as $error ) {
 				$form->addHeaderHtml( Html::errorBox( $this->msg( $error )->parse() ) );
@@ -144,7 +144,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			$submitStatus = false;
 		}
 
-		$form->addFooterHtml( $this->getCaptchaPrivacyNoticeHtml( $this->captcha ) );
+		$form->addFooterHtml( $this->getCaptchaPrivacyNoticeHtml( $this->captcha, true ) );
 		$form->displayForm( $submitStatus ?: Status::newGood() );
 	}
 
@@ -228,7 +228,9 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 			'type' => 'info',
 			// Rendered after submit so the widget can show a failed attempt.
 			'nodata' => true,
-			'default' => fn (): string => $this->renderCaptcha( $captcha, CaptchaTriggers::CREATE, 'new entity' ),
+			// Drop ConfirmEdit's invisible-mode privacy notice; execute() adds it below the button.
+			'default' => fn (): string => preg_replace( '~<div class="h-captcha-privacy-policy">.*?</div>~s', '',
+				$this->renderCaptcha( $captcha, CaptchaTriggers::CREATE, 'new entity' ) ),
 			'raw' => true,
 		];
 	}
