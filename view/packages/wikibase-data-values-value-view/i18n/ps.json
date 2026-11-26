@@ -2,13 +2,21 @@
 	"@metadata": {
 		"authors": [
 			"Ahmed-Najib-Biabani-Ibrahimkhel",
+			"O.sediqi93",
 			"شاه زمان پټان"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "د \"$1\" ارزښتونو ملاتړ لا تر اوسه نشته.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "د \"$1\" مالوماتي ډول لپاره د ارزښتونو سمبالولو ملاتړ لا تر اوسه نشته.",
 	"valueview-expert-emptyvalue-empty": "تش",
 	"valueview-expert-globecoordinateinput-precision": "بيخي‌سمون:",
 	"valueview-expert-globecoordinateinput-nullprecision": "نامشخص‌شوی",
 	"valueview-expert-globecoordinateinput-customprecision": "ځانگړی ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "تر نږدې قوسي دقیقې پورې",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "د یوې قوسي ثانیې تر کچې",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "د یوې قوسي ثانیې تر لسمې برخې پورې",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "د یوې قوسي ثانیې تر سلمې برخې پورې",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "د یوې قوسي ثانیې تر زر برخې پورې",
 	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "۱/۱۰۰۰۰'",
 	"valueview-expert-timevalue-calendar-gregorian": "گرېگوري",
 	"valueview-expert-timevalue-calendar-julian": "جوليان",
@@ -29,6 +37,7 @@
 	"valueview-expert-timeinput-precision-minute": "دقيقه",
 	"valueview-expert-timeinput-precision-second": "ثانيه",
 	"valueview-expert-timeinput-calendar": "کليز:",
+	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "ژبه (لازمي):",
 	"valueview-expertextender-unitsuggester-label": "يوون (اختياري):",
 	"valueview-preview-label": "په لاندې ډول به ښکاره شي:",

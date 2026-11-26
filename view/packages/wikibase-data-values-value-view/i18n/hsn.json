@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"SolidBlock"
+		]
+	},
+	"valueview-expert-globecoordinateinput-customprecision": "不一样滴（$1）",
+	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）",
+	"valueview-expertextender-languageselector-label": "语言（必填）："
+}

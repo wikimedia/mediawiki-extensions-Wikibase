@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kallmemel"
+		]
+	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "E prosesamentu pa ku balornan di tipo \"$1\" no ta wòrdu sostené ainda.",
+	"valueview-expert-unsupportedvalue-unsupporteddatatype": "E prosesamentu pa ku balornan di dato tipo \"$1\" no ta wòrdu sostené.",
+	"valueview-expert-emptyvalue-empty": "bashí",
+	"valueview-expert-globecoordinateinput-precision": "Eksaktitut:",
+	"valueview-expert-globecoordinateinput-nullprecision": "no spesifiká",
+	"valueview-expert-globecoordinateinput-customprecision": "spesial ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "pa un bogminüt",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "pa un bogsekònde",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "pa 1/10 di un bogsekònde",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "pa 1/100 di un bogsekònde",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "pa 1/1000 di un bogsekònde",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
+	"valueview-expert-timevalue-calendar-gregorian": "gregoriano",
+	"valueview-expert-timevalue-calendar-julian": "juliano",
+	"valueview-expert-timeinput-precision": "Eksaktitut:",
+	"valueview-expert-timeinput-precision-year1g": "bion aña",
+	"valueview-expert-timeinput-precision-year100m": "shen mion aña",
+	"valueview-expert-timeinput-precision-year10m": "dies mion aña",
+	"valueview-expert-timeinput-precision-year1m": "mion aña",
+	"valueview-expert-timeinput-precision-year100k": "100.000 aña",
+	"valueview-expert-timeinput-precision-year10k": "10.000 aña",
+	"valueview-expert-timeinput-precision-year1k": "milenio",
+	"valueview-expert-timeinput-precision-year100": "siglo",
+	"valueview-expert-timeinput-precision-year10": "dékada",
+	"valueview-expert-timeinput-precision-year": "aña",
+	"valueview-expert-timeinput-precision-month": "luna",
+	"valueview-expert-timeinput-precision-day": "dia",
+	"valueview-expert-timeinput-precision-hour": "ora",
+	"valueview-expert-timeinput-precision-minute": "minüt",
+	"valueview-expert-timeinput-precision-second": "sekònde",
+	"valueview-expert-timeinput-calendar": "Kalènder:",
+	"valueview-expertextender-languageselector-label": "Idioma (obligatorio):",
+	"valueview-expertextender-unitsuggester-label": "Unidat (opshonal):",
+	"valueview-preview-label": "lo wòrdu disponé komo:",
+	"valueview-preview-novalue": "no ta rekonosé balor bálido",
+	"valueview-listrotator-manually": "konfigurá manualmente"
+}

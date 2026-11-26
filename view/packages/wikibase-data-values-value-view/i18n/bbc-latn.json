@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Salomo Christian Hutajulu"
+		]
+	},
+	"valueview-expert-emptyvalue-empty": "kosong",
+	"valueview-expert-timevalue-calendar-gregorian": "Parhalaan Masehi",
+	"valueview-expert-timevalue-calendar-julian": "Parhalaan Julius",
+	"valueview-expert-timeinput-precision-year1g": "miliaran taon",
+	"valueview-expert-timeinput-precision-year100m": "ratusan juta taon",
+	"valueview-expert-timeinput-precision-year10m": "sampulu juta taon",
+	"valueview-expert-timeinput-precision-year1m": "jutaan taon",
+	"valueview-expert-timeinput-precision-year100k": "100.000 taon",
+	"valueview-expert-timeinput-precision-year10k": "10.000 taon",
+	"valueview-expert-timeinput-precision-year1k": "ribuan taon",
+	"valueview-expert-timeinput-precision-year100": "abad",
+	"valueview-expert-timeinput-precision-year10": "dekade",
+	"valueview-expert-timeinput-precision-year": "taon",
+	"valueview-expert-timeinput-precision-month": "bulan",
+	"valueview-expert-timeinput-precision-day": "ari",
+	"valueview-listrotator-manually": "atur manual"
+}

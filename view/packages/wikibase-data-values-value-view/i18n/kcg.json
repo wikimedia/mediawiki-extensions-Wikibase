@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kambai Akau"
+		]
+	},
+	"valueview-expert-timeinput-precision-year100k": "ndyia̱ 100,000",
+	"valueview-expert-timeinput-precision-year10k": "ndyia̱ 10,000",
+	"valueview-expert-timeinput-precision-year": "a̱lyia̱",
+	"valueview-expert-timeinput-precision-month": "zwat",
+	"valueview-expert-timeinput-precision-day": "mam",
+	"valueview-expert-timeinput-precision-hour": "awa",
+	"valueview-expert-timeinput-precision-minute": "miti"
+}

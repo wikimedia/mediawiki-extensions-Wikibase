@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Filipinayzd"
+		]
+	},
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "sa usad na arcminuto",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "sa 1/1000 ka usad na arcsegundo"
+}

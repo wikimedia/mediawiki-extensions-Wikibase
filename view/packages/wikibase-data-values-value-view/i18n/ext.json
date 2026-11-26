@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"HackerPunki"
+		]
+	},
+	"valueview-expert-timeinput-precision-year100": "siegru",
+	"valueview-expert-timeinput-precision-year": "añu",
+	"valueview-expert-timeinput-precision-month": "mes",
+	"valueview-expert-timeinput-precision-day": "día",
+	"valueview-expert-timeinput-precision-hour": "ora",
+	"valueview-expert-timeinput-precision-minute": "menutu",
+	"valueview-expert-timeinput-precision-second": "segundu:",
+	"valueview-expert-timeinput-calendar": "Calandariu:"
+}

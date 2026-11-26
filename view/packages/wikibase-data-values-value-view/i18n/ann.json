@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Katelem"
+		]
+	},
+	"valueview-expert-timeinput-precision-year10k": "acha 10,000",
+	"valueview-expert-timeinput-precision-year": "acha",
+	"valueview-expert-timeinput-precision-month": "onyan̄",
+	"valueview-expert-timeinput-precision-day": "usen",
+	"valueview-expert-timeinput-precision-hour": "mbubak mgbọ"
+}
