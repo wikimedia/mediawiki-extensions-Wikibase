@@ -421,7 +421,8 @@ class RecentChangeFactory {
 	 * @return bool
 	 */
 	public static function isWikibaseChange( RecentChange $rc ) {
-		return $rc->getAttribute( 'rc_source' ) === self::SRC_WIKIBASE;
+		return $rc->getAttribute( 'rc_source' ) === self::SRC_WIKIBASE
+			|| $rc->getAttribute( 'rc_source' ) === self::SRC_WIKIBASE_OTHER_SITELINKS;
 	}
 
 	/**
