@@ -106,7 +106,7 @@ class CreateRedirect extends ApiBase {
 
 		$result->addValue( null, 'success', 1 );
 		$result->addValue( null, 'redirect', $status->getRedirect()->getTargetId()->getSerialization() );
-		$savedTempUser = $status->getSavedTempUser();
+		$savedTempUser = $status->getTempUserToAnnounce();
 		if ( $savedTempUser !== null ) {
 			$result->addValue( null, 'tempusercreated', $savedTempUser->getName() );
 			$redirectUrl = $this->getTempUserRedirectUrl( $params, $savedTempUser );

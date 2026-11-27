@@ -10,7 +10,7 @@ const {
 	tabularDataStorageApiEndpointUrl,
 	geoShapeStorageApiEndpointUrl
 } = require( '../repoSettings.json' );
-const { api, foreignApi } = require( './api.js' );
+const { api, assertCurrentUserUnlessAnon, foreignApi } = require( './api.js' );
 const tabularDataSearchTerm = 'contentmodel:Tabular.JsonConfig';
 const geoShapeDataSearchTerm = 'contentmodel:Map.JsonConfig';
 
@@ -44,7 +44,7 @@ const searchTabularData = function ( searchTerm, offset = 0 ) {
  * @return {Promise<Object>} Promise resolving to search results
  */
 const searchLanguages = function ( searchTerm, offset = 0 ) {
-	return api.get( api.assertCurrentUser( {
+	return api.get( assertCurrentUserUnlessAnon( {
 		action: 'languagesearch',
 		search: searchTerm,
 		language: mw.config.get( 'wgUserLanguage' ),
@@ -115,7 +115,7 @@ const searchCommonsMedia = function ( searchTerm, offset ) {
  * @returns {Promise<*>}
  */
 const searchForEntities = async function ( searchTerm, entityType, offset ) {
-	return api.get( api.assertCurrentUser( {
+	return api.get( assertCurrentUserUnlessAnon( {
 		action: 'wbsearchentities',
 		search: searchTerm,
 		type: entityType,

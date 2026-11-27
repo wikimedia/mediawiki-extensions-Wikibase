@@ -14,6 +14,10 @@ function foreignApi( apiUrl ) {
 	}, apiOptions ) );
 }
 
+function assertCurrentUserUnlessAnon( params ) {
+	return mw.config.get( 'wgUserName' ) === null ? params : api.assertCurrentUser( params );
+}
+
 class ErrorObject {
 	constructor( errorCode, errorMessage, errorData ) {
 		this.errorCode = errorCode;
@@ -25,5 +29,6 @@ class ErrorObject {
 module.exports = {
 	ErrorObject,
 	api,
+	assertCurrentUserUnlessAnon,
 	foreignApi
 };

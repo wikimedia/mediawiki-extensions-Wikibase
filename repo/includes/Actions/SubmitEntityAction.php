@@ -324,7 +324,7 @@ class SubmitEntityAction extends EditEntityAction {
 	private function redirectToEntityPage( SubmitEntityStatus $status ): void {
 		Assert::parameter( $status->isOK(), '$status', 'must be OK' );
 		$title = $this->getTitle();
-		$savedTempUser = $status->getSavedTempUser();
+		$savedTempUser = $status->getTempUserToAnnounce();
 		$redirectUrl = '';
 		if ( $savedTempUser !== null ) {
 			$this->getHookRunner()->onTempUserCreatedRedirect(

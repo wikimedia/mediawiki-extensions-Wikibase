@@ -46,6 +46,14 @@ class TempUserStatus extends StatusValue {
 	}
 
 	/**
+	 * Get the temporary user to report to the client, including one an earlier failed attempt created
+	 */
+	public function getTempUserToAnnounce(): ?UserIdentity {
+		$user = $this->getContext()->getUser();
+		return $this->getSavedTempUser() ?? ( $user->isTemp() && $user->getEditCount() === 0 ? $user : null );
+	}
+
+	/**
 	 * Get the context that should be used for any further actions.
 	 * If a temporary user was created, then it will be set in this context.
 	 * (The original context is usually not modified,

@@ -123,7 +123,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		$this->tokenCheck->checkRequestToken( $this->getContext(), 'wpEditToken' );
 
 		$status = $this->interactor->createRedirect( $fromId, $toId, false, [], $this->getContext() );
-		$savedTempUser = $status->getSavedTempUser();
+		$savedTempUser = $status->getTempUserToAnnounce();
 
 		if ( $savedTempUser !== null ) {
 			$redirectUrl = '';

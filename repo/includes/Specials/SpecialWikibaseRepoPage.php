@@ -253,7 +253,7 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	protected function redirectToEntityPage( EditEntityStatus $status ): void {
 		Assert::parameter( $status->isOK(), '$status', 'must be OK' );
 		$title = $this->getEntityTitle( $status->getRevision()->getEntity()->getId() );
-		$savedTempUser = $status->getSavedTempUser();
+		$savedTempUser = $status->getTempUserToAnnounce();
 		$redirectUrl = '';
 		if ( $savedTempUser !== null ) {
 			$this->getHookRunner()->onTempUserCreatedRedirect(
