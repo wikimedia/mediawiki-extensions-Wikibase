@@ -176,7 +176,8 @@ function resolveCaptchaAndResubmit( originalParams, options ) {
 				.then( () => widget.getCaptchaDataForSubmission() )
 				.then( ( submission ) => {
 					const resubmitParams = Object.assign( {}, originalParams, toCaptchaParams( submission ) );
-					const request = api.postWithEditToken( api.assertCurrentUser( resubmitParams ) );
+					// Maybe the blocked save  have created a temp account.
+					const request = api.postWithEditToken( resubmitParams );
 					return request.then( null, ( code, data ) => {
 						const nextCaptchaData = extractCaptchaData( data );
 						if ( nextCaptchaData && !hasAlreadyResubmitted ) {

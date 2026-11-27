@@ -25,6 +25,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\AddPageInfo;
 use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\TempUserStatus;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 
@@ -1100,7 +1101,9 @@ class ResultBuilder {
 		callable $getTempUserRedirectUrl
 	) {
 		/** @var ?UserIdentity $savedTempUser */
-		$savedTempUser = $status->getValue()['savedTempUser'];
+		$savedTempUser = $status instanceof TempUserStatus
+			? $status->getTempUserToAnnounce()
+			: $status->getValue()['savedTempUser'];
 		'@phan-var ?UserIdentity $savedTempUser';
 		if ( $savedTempUser ) {
 			$this->setValue( null, 'tempusercreated', $savedTempUser->getName() );

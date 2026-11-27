@@ -1,5 +1,6 @@
 const {
 	api,
+	assertCurrentUserUnlessAnon,
 	ErrorObject
 } = require( './api.js' );
 const {
@@ -46,7 +47,9 @@ const updateStatements = async function ( entityId, statements ) {
 		Object.assign( params, captchaParams );
 	}
 
-	const response = await api.postWithEditToken( api.assertCurrentUser( params ) )
+	params = assertCurrentUserUnlessAnon( params );
+
+	const response = await api.postWithEditToken( params )
 		.then( ( data ) => data )
 		.catch( ( code, data ) => {
 			const captchaData = extractCaptchaData( data );

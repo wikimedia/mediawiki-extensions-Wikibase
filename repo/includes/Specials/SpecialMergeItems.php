@@ -177,7 +177,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$status = $this->interactor->mergeItems( $fromId, $toId, $this->getContext(), $ignoreConflicts, $summary );
 		$newRevisionFromId = $status->getFromEntityRevision()->getRevisionId();
 		$newRevisionToId = $status->getToEntityRevision()->getRevisionId();
-		$savedTempUser = $status->getSavedTempUser();
+		$savedTempUser = $status->getTempUserToAnnounce();
 		if ( $savedTempUser !== null ) {
 			$redirectUrl = '';
 			$this->getHookRunner()->onTempUserCreatedRedirect(
