@@ -237,6 +237,11 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		$list->addReference( $reference, 0 );
 		$list->addReference( $reference, 0 );
 		$this->assertCount( 1, $list );
+
+		$reference2 = new Reference( [ new PropertyNoValueSnak( 2 ) ] );
+		$list->addReference( $reference2, 0 );
+		$list->addReference( $reference2 );
+		$this->assertCount( 2, $list );
 	}
 
 	public function testAddReferenceAtIndexMovesIdenticalObjects() {
@@ -555,6 +560,10 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $original->equals( $clone ) );
 		$this->assertSame( $original->getValueHash(), $clone->getValueHash() );
 		$this->assertSame( $original->serialize(), $clone->serialize() );
+
+		$reference = iterator_to_array( $clone )[0];
+		$clone->addReference( $reference );
+		$this->assertSame( 1, $clone->count() );
 	}
 
 	public function testUnserializeCreatesNonIdenticalClones() {
